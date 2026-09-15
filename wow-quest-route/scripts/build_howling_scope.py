@@ -17,6 +17,11 @@ STRUCTURAL_EXCLUDE: dict[int, str] = {
     11189: "beta_removed_alliance_quest_not_present_in_live_wotlk",
 }
 
+# Mutually exclusive choices that are individually valid but cannot coexist in one full-clear route.
+ROUTE_EXCLUDE: dict[int, str] = {
+    11411: "mutually_exclusive_breadcrumb_route_prefers_12566",
+}
+
 
 def entity_label(task: dict[str, Any], field: str) -> str:
     entities = task.get(field) or []
@@ -34,6 +39,8 @@ def reason(task: dict[str, Any]) -> tuple[str, list[str]]:
     qid = int(task["quest_id"])
     if qid in STRUCTURAL_EXCLUDE:
         return "exclude_structural", [STRUCTURAL_EXCLUDE[qid]]
+    if qid in ROUTE_EXCLUDE:
+        return "exclude_route_choice", [ROUTE_EXCLUDE[qid]]
     if task.get("assigned_zone_id") != ZONE_ID:
         return "boundary_only", ["not_assigned_to_howling_fjord"]
     if not task.get("race_allowed") or not task.get("npc_faction_allowed"):

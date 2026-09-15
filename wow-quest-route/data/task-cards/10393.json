@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": 10393,
+  "identity": {
+    "name_zhcn": "邪恶的计划",
+    "name_en": "Vile Plans",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "unknown"
+  },
+  "coverage": {
+    "availability": "partial",
+    "objectives": "unknown",
+    "locations": "unknown",
+    "rewards": "unknown",
+    "mechanics": "partial",
+    "fivebox": "unknown",
+    "guide": "unknown"
+  },
+  "availability": {
+    "quest_level": 61,
+    "min_level": 58,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "hidden_requirements": []
+  },
+  "objectives": [],
+  "mechanics": {
+    "starts_from_item_drop": {
+      "kind": "item_starts_quest",
+      "summary": "剃刀电锯自然掉落燃烧军团信件后可接取《邪恶的计划》；任务路线不应把自然掉落机会误写成无条件接取。",
+      "confidence": "partial",
+      "source_refs": [
+        "evidence-legacy-route-condition"
+      ]
+    }
+  },
+  "fivebox": {
+    "stages": [],
+    "status": "pending"
+  },
+  "guide": [],
+  "verification": {
+    "open_questions": []
+  },
+  "evidence": [
+    {
+      "evidence_id": "evidence-legacy-route-condition",
+      "source_type": "legacy_migration",
+      "source_ref": "scripts/build_dk_outland_speed_routes.py#vile-plans-condition",
+      "observed_at": null,
+      "version_scope": "current migrated project data",
+      "confidence": "partial",
+      "supports_fields": [
+        "identity.name_zhcn",
+        "availability.quest_level",
+        "availability.min_level",
+        "mechanics.starts_from_item_drop"
+      ]
+    }
+  ],
+  "presentation": {}
+}

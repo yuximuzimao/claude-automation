@@ -1,0 +1,601 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wow-quest-route/task-card/v1",
+  "title": "WoW Quest Route Task Card v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "identity",
+    "coverage",
+    "availability",
+    "objectives",
+    "mechanics",
+    "fivebox",
+    "guide",
+    "verification",
+    "evidence",
+    "presentation"
+  ],
+  "$defs": {
+    "coverage_status": {
+      "enum": [
+        "unknown",
+        "partial",
+        "verified",
+        "not_applicable"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "verified",
+        "partial",
+        "expected",
+        "unknown"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "task_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name_zhcn",
+        "game_variant_id",
+        "version_scope",
+        "faction",
+        "repeatability"
+      ],
+      "properties": {
+        "name_zhcn": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name_en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "game_variant_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "faction": {
+          "enum": [
+            "horde",
+            "alliance",
+            "both",
+            "unknown"
+          ]
+        },
+        "repeatability": {
+          "enum": [
+            "once",
+            "daily",
+            "repeatable",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "availability",
+        "objectives",
+        "locations",
+        "rewards",
+        "mechanics",
+        "fivebox",
+        "guide"
+      ],
+      "properties": {
+        "availability": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "objectives": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "locations": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "rewards": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "mechanics": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "fivebox": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "guide": {
+          "$ref": "#/$defs/coverage_status"
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quest_level",
+        "min_level",
+        "pre_any",
+        "pre_all",
+        "parent_active",
+        "exclusive_with",
+        "hidden_requirements"
+      ],
+      "properties": {
+        "quest_level": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "min_level": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "pre_any": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "pre_all": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "parent_active": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "exclusive_with": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "required_reputation": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "required_class": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "required_race": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "required_skill": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "hidden_requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "summary",
+              "confidence"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidence": {
+                "$ref": "#/$defs/confidence"
+              },
+              "source_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "rewards": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "locations": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "objective_id",
+          "kind",
+          "required_count",
+          "mechanic_refs",
+          "confidence"
+        ],
+        "properties": {
+          "objective_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "kill",
+              "loot",
+              "interact",
+              "use_item",
+              "escort",
+              "event",
+              "talk",
+              "explore",
+              "vehicle",
+              "other"
+            ]
+          },
+          "target": {
+            "type": [
+              "object",
+              "string",
+              "null"
+            ]
+          },
+          "required_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "source_entities": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "string"
+              ]
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": [
+                "object",
+                "string"
+              ]
+            }
+          },
+          "mechanic_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "confidence": {
+            "$ref": "#/$defs/confidence"
+          }
+        }
+      }
+    },
+    "mechanics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "kind",
+          "summary",
+          "confidence"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "$ref": "#/$defs/confidence"
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "fivebox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "stages"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "shared",
+            "not_shared",
+            "sequential_loot",
+            "pending"
+          ]
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stage_id",
+              "objective_id",
+              "mode",
+              "confidence"
+            ],
+            "properties": {
+              "stage_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "objective_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "mode": {
+                "enum": [
+                  "shared_kill",
+                  "shared_progress",
+                  "personal_progress",
+                  "ffa_loot_pool",
+                  "same_corpse_multi_character_loot",
+                  "personal_drop",
+                  "party_loot",
+                  "per_character_interaction",
+                  "shared_interaction",
+                  "per_character_item_use",
+                  "shared_event",
+                  "escort_party_shared",
+                  "unknown"
+                ]
+              },
+              "summary": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "confidence": {
+                "$ref": "#/$defs/confidence"
+              },
+              "source_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "guide": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "timing_samples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "open_questions"
+      ],
+      "properties": {
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question_id",
+              "variable",
+              "status",
+              "close_condition"
+            ],
+            "properties": {
+              "question_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "variable": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "unknown",
+                  "expected"
+                ]
+              },
+              "reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "close_condition": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "source_type",
+          "source_ref",
+          "observed_at",
+          "confidence",
+          "supports_fields"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_type": {
+            "enum": [
+              "user_live",
+              "questie",
+              "local_db",
+              "public_reference",
+              "derived",
+              "legacy_migration"
+            ]
+          },
+          "source_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observed_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version_scope": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "confidence": {
+            "$ref": "#/$defs/confidence"
+          },
+          "supports_fields": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "note_override": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "text",
+            "scope",
+            "source_ref",
+            "reason"
+          ],
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string",
+              "pattern": "^(all|route_profile:[a-z0-9][a-z0-9-]*)$"
+            },
+            "source_ref": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

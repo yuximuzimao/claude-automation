@@ -4,7 +4,7 @@
 
 - 跨地图/跨批次永久方法 → `docs/rules/`
 - 重复失败模式 → `docs/verified-routes/ERROR-BOOK.md`
-- 单任务机制/地形事实 → `docs/task-library/` 或 `data/observations/`
+- 单任务机制/地形事实 → `data/task-cards/<task_id>.json`；`data/observations/`只保存证据/样本/兼容观测
 - 当前阶段状态、一次性路线判断 → `docs/archive/neat/` NEAT
 - 当前等级/位置/任务状态 → `docs/verified-routes/CURRENT.md`
 

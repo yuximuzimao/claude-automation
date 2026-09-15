@@ -17,7 +17,7 @@
     "assumed_howling_flight_points_open": [],
     "carried_in_quest_ids": []
   },
-  "formal_task_count": 111,
+  "formal_task_count": 110,
   "formal_task_ids": [
     11167,
     11168,
@@ -88,7 +88,6 @@
     11397,
     11398,
     11399,
-    11411,
     11415,
     11417,
     11422,
@@ -132,7 +131,7 @@
     12566
   ],
   "required_level_counts": {
-    "68": 62,
+    "68": 61,
     "69": 46,
     "70": 2,
     "71": 1
@@ -147,7 +146,7 @@
     "shared_kill": 11,
     "single_named_drop": 7,
     "single_named_kill": 11,
-    "travel_dialogue_or_turnin": 28,
+    "travel_dialogue_or_turnin": 27,
     "world_object_item_collection": 7
   },
   "dependency_hard_gap_count": 0,
@@ -1119,17 +1118,6 @@
       "pre_any_formal": [
         11398
       ],
-      "pre_any_external": [],
-      "pre_any_has_reachable_branch": true
-    },
-    {
-      "quest_id": 11411,
-      "name": "冬蹄营地",
-      "pre_any": [],
-      "pre_all": [],
-      "parent_active": [],
-      "missing_mandatory": [],
-      "pre_any_formal": [],
       "pre_any_external": [],
       "pre_any_has_reachable_branch": true
     },
@@ -18229,167 +18217,6 @@
         "status": "estimated",
         "minutes": 0.75,
         "basis": "shared_kill_model"
-      },
-      "scope_status": "include_current_full_clear",
-      "is_primary_candidate": true
-    },
-    {
-      "quest_id": 11411,
-      "name": "冬蹄营地",
-      "english_name": "Camp Winterhoof",
-      "assigned_zone_id": 495,
-      "assigned_zone_name": "嚎风峡湾",
-      "touching_northrend_zone_ids": [
-        495
-      ],
-      "required_level": 68,
-      "quest_level": 70,
-      "required_max_level": null,
-      "required_races": 690,
-      "required_classes": null,
-      "required_skill": null,
-      "required_min_rep": null,
-      "required_max_rep": null,
-      "required_spell": null,
-      "cold_weather_flying_gate": false,
-      "cold_weather_flying_gate_source": null,
-      "required_specialization": null,
-      "required_ranks": null,
-      "available_starting_with": [],
-      "disabled_by_quest": [],
-      "quest_flags": 8,
-      "special_flags": 0,
-      "race_allowed": true,
-      "class_allowed": true,
-      "npc_faction_allowed": true,
-      "faction_reasons": [],
-      "is_repeatable": false,
-      "is_daily": false,
-      "is_weekly": false,
-      "is_monthly": false,
-      "first_run_policy": "one_time",
-      "is_deprecated_or_system": false,
-      "is_dungeon": false,
-      "is_raid_flagged": false,
-      "pvp": {
-        "is_pvp": false,
-        "mode": "not_pvp",
-        "allowed_by_policy": true,
-        "evidence": []
-      },
-      "objective_text_zh": "与冬蹄营地的灰烬图腾酋长谈一谈。",
-      "objective_text_en": "Speak to Chieftain Ashtotem at Camp Winterhoof.",
-      "task_class": "travel_dialogue_or_turnin",
-      "task_flags": [],
-      "objective_review": [],
-      "objectives": [],
-      "extra_objectives": [],
-      "start_entities": [
-        {
-          "entity_type": "npc",
-          "entity_id": 24125,
-          "name": "信使科马斯",
-          "min_level": 70,
-          "max_level": 70,
-          "min_health": 8982,
-          "max_health": 8982,
-          "rank": 0,
-          "spawn_count": 1,
-          "zones": [
-            495
-          ],
-          "representative_by_zone": {
-            "495": {
-              "x": 53.03,
-              "y": 66.0,
-              "spawn_count": 1,
-              "min_x": 53.03,
-              "max_x": 53.03,
-              "min_y": 66.0,
-              "max_y": 66.0
-            }
-          }
-        }
-      ],
-      "finish_entities": [
-        {
-          "entity_type": "npc",
-          "entity_id": 24129,
-          "name": "灰烬图腾酋长",
-          "min_level": 72,
-          "max_level": 72,
-          "min_health": 9610,
-          "max_health": 9610,
-          "rank": 0,
-          "spawn_count": 1,
-          "zones": [
-            495
-          ],
-          "representative_by_zone": {
-            "495": {
-              "x": 48.04,
-              "y": 10.74,
-              "spawn_count": 1,
-              "min_x": 48.04,
-              "max_x": 48.04,
-              "min_y": 10.74,
-              "max_y": 10.74
-            }
-          }
-        }
-      ],
-      "start_zones": [
-        495
-      ],
-      "objective_zones": [],
-      "extra_objective_zones": [],
-      "turnin_zones": [
-        495
-      ],
-      "all_route_zones": [
-        495
-      ],
-      "pre_any": [],
-      "pre_all": [],
-      "parent_active": [],
-      "next_quest": null,
-      "child_quests": [],
-      "exclusive_to": [
-        12566
-      ],
-      "breadcrumb_for": null,
-      "breadcrumbs": [],
-      "xp": {
-        "has_xp": true,
-        "xp_db_level": 70,
-        "xp_db_base": 1250,
-        "server_leveling_multiplier": 2.0,
-        "server_xp_at_earliest_route_level": 2500,
-        "max_level_bonus_money": {
-          "level": 80,
-          "xp_at_level_80_base": 130,
-          "bonus_money_from_xp_copper": 780,
-          "bonus_money_from_xp_gold_decimal": 0.078,
-          "display": "0g 07s 80c",
-          "no_money_from_xp": false,
-          "rate": "6 copper per base XP at level 80",
-          "server_leveling_xp_multiplier_applied": false
-        }
-      },
-      "rewards": {
-        "equipment_rewards": [],
-        "other_reward_items": [],
-        "direct_money_status": "not_yet_globally_audited"
-      },
-      "route_mechanism_note": null,
-      "eligibility": {
-        "status": "eligible_first_run",
-        "reasons": []
-      },
-      "intrinsic_service_time": {
-        "status": "estimated",
-        "minutes": 0.0,
-        "basis": "no_independent_objective_service_hub_time_separate"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true

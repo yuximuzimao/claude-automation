@@ -2,7 +2,7 @@
   "status": "formal_speed_route_first_version",
   "zone": "地狱火半岛",
   "design_rule": "Journey只作首跑事实/耗时证据；正式顺序按任务簇重排。外域优先避开多件个人拾取、随机长尾、高交互低收益任务包，但保留直接装备和短链装备包。",
-  "main_task_count": 60,
+  "main_task_count": 64,
   "main_task_ids": [
     9340,
     9366,
@@ -37,10 +37,14 @@
     10162,
     10208,
     10220,
+    10229,
+    10230,
     10236,
     10238,
     10242,
+    10250,
     10255,
+    10258,
     10286,
     10287,
     10289,
@@ -65,14 +69,10 @@
     10813,
     10834
   ],
-  "main_journey_completed_count": 60,
+  "main_journey_completed_count": 64,
   "main_not_seen_complete_in_first_run": [],
   "conditional_natural_drop_ids": [
     9373,
-    10229,
-    10230,
-    10250,
-    10258,
     10393
   ],
   "optional_equipment_packs": {
@@ -208,12 +208,12 @@
     "10103": "猎鹰岗哨接取；带入赞加，在沼泽鼠岗哨交给祖莱。"
   },
   "coverage": {
-    "covered_main_count": 60,
+    "covered_main_count": 64,
     "missing": [],
     "unexpected": [],
     "accept_missing": [],
     "turn_missing": [],
-    "point_count": 67,
-    "step_group_count": 8
+    "point_count": 71,
+    "step_group_count": 12
   }
 }

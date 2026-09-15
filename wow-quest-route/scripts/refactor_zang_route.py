@@ -17,6 +17,7 @@ from zang_semantic_steps import (
     apply_zang_step11,
     apply_zang_step12,
     apply_zang_step13,
+    split_zang_step1_for_player,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,23 @@ def main() -> None:
     data = json.loads(ROUTES.read_text(encoding="utf-8"))
     route = data["zang"]
     route["sub"] = "从塞纳里奥庇护所开始，完成赞加主体路线后由莉萨奥方向进入纳格兰。"
+
+    # The semantic patch functions below still address the historical 13 logical groups by index.
+    # If a previous run already split the 11-point opening into two player-facing steps, temporarily
+    # merge those two metadata groups back before patching; split_zang_step1_for_player() re-applies
+    # the player-facing split after all index-based patches finish. Points are never reordered here.
+    groups = route["stepGroups"]
+    if (
+        len(groups) >= 2
+        and int(groups[0]["start"]) == 0
+        and int(groups[0]["end"]) == 6
+        and int(groups[1]["start"]) == 7
+        and int(groups[1]["end"]) == 10
+    ):
+        merged = dict(groups[0])
+        merged["end"] = 10
+        groups[:2] = [merged]
+
     apply_zang_step1(route)
     apply_zang_step2(route)
     apply_zang_step3(route)
@@ -40,6 +58,7 @@ def main() -> None:
     apply_zang_step11(route)
     apply_zang_step12(route)
     apply_zang_step13(route)
+    split_zang_step1_for_player(route)
     route["uiStandard"] = "semantic-hud-v45"
     ROUTES.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(

@@ -1,8 +1,8 @@
 # 嚎风峡湾基础层审计（未排正式路线）
 
 - 输入直接来自已清洗的诺森德任务宇宙；本步骤只建立嚎风正式scope、依赖闭包和目标簇。
-- 正式候选：111项；requiredLevel：`{68: 62, 69: 46, 70: 2, 71: 1}`。
-- task class：`{'elite_or_boss_kill': 1, 'item_source_not_in_questie': 6, 'mixed_objectives': 9, 'mixed_with_personal_item': 5, 'multi_creature_personal_drop': 11, 'multi_target_shared_kill': 15, 'shared_kill': 11, 'single_named_drop': 7, 'single_named_kill': 11, 'travel_dialogue_or_turnin': 28, 'world_object_item_collection': 7}`。
+- 正式候选：110项；requiredLevel：`{68: 61, 69: 46, 70: 2, 71: 1}`。
+- task class：`{'elite_or_boss_kill': 1, 'item_source_not_in_questie': 6, 'mixed_objectives': 9, 'mixed_with_personal_item': 5, 'multi_creature_personal_drop': 11, 'multi_target_shared_kill': 15, 'shared_kill': 11, 'single_named_drop': 7, 'single_named_kill': 11, 'travel_dialogue_or_turnin': 27, 'world_object_item_collection': 7}`。
 - 精确目标簇：112；多个任务共享实体簇：8。
 - 强依赖缺口：0。
 - 服务时间仍未知：13。
@@ -15,7 +15,7 @@
 
 ## 强依赖缺口
 
-- 无。111项正式候选在当前scope内依赖闭合。
+- 无。110项正式候选在当前scope内依赖闭合。
 
 ## 下一步
 

@@ -107,6 +107,64 @@ def test_grizzly_is_fully_promoted_to_semantic_hud_and_handoffs_are_locked():
     assert '<span class="ra-task ra-do-task">沃德伦的领主</span>' in html
 
 
+def test_howling_live_calibration_keeps_task_notes_and_local_reorder_locked():
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    howling = routes["howling"]
+    assert len(howling["points"]) == 129
+    assert len(howling["stepGroups"]) == 30
+
+    step4 = howling["stepGroups"][3]
+    step4_notes = step4.get("noteHtml", "")
+    assert step4_notes.count("《绿色的龙卵和龙崽》") == 1
+    assert step4_notes.count("《龙的胃病》") == 1
+    assert step4_notes.count("《亡者复生！》") == 1
+    assert step4_notes.count("《盾牌岭》") == 1
+    assert "任务完成后直接离开，不必再杀吃完后变敌对的幼龙" in step4_notes
+
+    step5_notes = howling["stepGroups"][4].get("noteHtml", "")
+    assert "26.6,62.4附近鹿群较密" in step5_notes
+    assert "伊斯卡尔的复仇" not in step5_notes
+
+    step6_action = howling["stepGroups"][5]["actionHtml"]
+    assert 'ra-accept">斯库德' in step6_action
+    assert 'ra-accept">被遗忘的宝藏' in step6_action
+
+    step7 = howling["stepGroups"][6]
+    assert step7["title"] == "斯库德 / 被遗忘的宝藏 → 赌债 / 嗜酒的杰克"
+    assert step7["timing"]["status"] == "pending_recalibration"
+    assert 'ra-turnin">斯库德' in step7["actionHtml"]
+    assert 'ra-turnin">被遗忘的宝藏' in step7["actionHtml"]
+    assert 'ra-do-task">赌债' in step7["actionHtml"]
+    assert 'ra-accept">嗜酒的杰克' in step7["actionHtml"]
+    assert 'ra-do-task">嗜酒的杰克' in step7["actionHtml"]
+    assert step7.get("noteHtml", "").count("《斯库德》") == 1
+    assert step7.get("noteHtml", "").count("《被遗忘的宝藏》") == 1
+    assert step7.get("noteHtml", "").count("《赌债》") == 1
+    assert step7.get("noteHtml", "").count("《嗜酒的杰克》") == 1
+    assert "有内鬼！ / 嗜酒的杰克 / 塞吉说…… / 死人的债务" not in step7.get("noteHtml", "")
+
+    step8 = howling["stepGroups"][7]
+    assert step8["title"] == "无赖港西侧 → 权力链 → 洞穴双任务"
+    assert 'ra-do-task">取而代之' in step8["actionHtml"]
+    assert 'ra-do-task">伊斯多弗的冰冷之心' in step8["actionHtml"]
+    assert "乔纳·斯特林洞穴" in step8["actionHtml"]
+
+    action_html = "\n".join(group["actionHtml"] for group in howling["stepGroups"])
+    assert "信使科马斯" not in action_html
+    assert 'ra-accept">冬蹄营地' not in action_html
+    assert 'ra-accept">增援冬蹄营地' in action_html
+    assert 'ra-turnin">增援冬蹄营地' in action_html
+
+    for stale_alias in ("计谋落空", "船员叛变", "引导炮火", "拜尔海姆大屠杀", "伤上加辱", "加热并搅拌", "实地试验", "狂野的藤蔓", "生命之种", "精通符文", "磁石"):
+        assert stale_alias not in "\n".join(group.get("noteHtml", "") for group in howling["stepGroups"])
+
+    coverage = json.loads((ROOT / "data/route-atlas/howling-fjord-route-coverage.json").read_text(encoding="utf-8"))
+    assert coverage["expected_world_task_count"] == 110
+    assert coverage["covered_task_count"] == 110
+    assert coverage["missing"] == []
+    assert coverage["unexpected"] == []
+
+
 def test_zuldrak_is_fully_promoted_to_semantic_hud_and_handoffs_are_locked():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     zuldrak = routes["zuldrak"]

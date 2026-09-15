@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wow-quest-route/route-profile/v1",
+  "title": "WoW Quest Route Profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_id",
+    "version",
+    "status",
+    "scope",
+    "entry_state_contract",
+    "exit_state_contract",
+    "goal",
+    "display",
+    "task_ids",
+    "actions",
+    "step_groups",
+    "geometry"
+  ],
+  "$defs": {
+    "state_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active_task_ids"],
+      "properties": {
+        "active_task_ids": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {"enum": ["has_item", "task_active"]},
+        "item_id": {"type": "integer", "minimum": 1},
+        "item_name": {"type": "string", "minLength": 1},
+        "task_id": {"type": "integer", "minimum": 1}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"kind": {"const": "has_item"}}, "required": ["kind"]},
+          "then": {
+            "anyOf": [
+              {"required": ["item_id"]},
+              {"required": ["item_name"]}
+            ]
+          }
+        },
+        {
+          "if": {"properties": {"kind": {"const": "task_active"}}, "required": ["kind"]},
+          "then": {"required": ["task_id"]}
+        }
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "profile_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "version": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["draft", "current", "frozen_reusable", "retired"]},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_scope", "character_profile", "game_variant_id"],
+      "properties": {
+        "route_scope": {"type": "string", "minLength": 1},
+        "character_profile": {"type": "string", "minLength": 1},
+        "game_variant_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "entry_state_contract": {"$ref": "#/$defs/state_contract"},
+    "exit_state_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active_task_ids"],
+      "properties": {
+        "active_task_ids": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "goal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary"],
+      "properties": {
+        "summary": {"type": "string", "minLength": 1}
+      }
+    },
+    "display": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publish_key", "order", "title", "display_name", "subtitle", "footer", "map_image"],
+      "properties": {
+        "publish_key": {"type": "string", "minLength": 1},
+        "order": {"type": "integer"},
+        "title": {"type": "string", "minLength": 1},
+        "display_name": {"type": "string", "minLength": 1},
+        "subtitle": {"type": "string"},
+        "footer": {"type": "string"},
+        "map_image": {"type": "string", "minLength": 1}
+      }
+    },
+    "task_ids": {
+      "type": "array",
+      "items": {"type": "integer", "minimum": 1},
+      "uniqueItems": true
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action_id", "kind"],
+        "properties": {
+          "action_id": {"type": "string", "minLength": 1},
+          "kind": {
+            "enum": [
+              "location",
+              "move",
+              "accept",
+              "objective",
+              "turnin",
+              "open_flight_point",
+              "bind_hearth",
+              "use_hearth",
+              "taxi",
+              "fixed_transport",
+              "quest_transport",
+              "interact"
+            ]
+          },
+          "task_id": {"type": "integer", "minimum": 1},
+          "location_ref": {"type": "string", "minLength": 1},
+          "npc_name": {"type": "string", "minLength": 1},
+          "from_name": {"type": "string", "minLength": 1},
+          "to_name": {"type": "string", "minLength": 1},
+          "target_name": {"type": "string", "minLength": 1},
+          "when": {"$ref": "#/$defs/condition"}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"kind": {"enum": ["accept", "objective", "turnin"]}}, "required": ["kind"]},
+            "then": {"required": ["task_id", "location_ref"]}
+          },
+          {
+            "if": {"properties": {"kind": {"const": "accept"}}, "required": ["kind"]},
+            "then": {
+              "anyOf": [
+                {"required": ["npc_name"]},
+                {"required": ["target_name"]},
+                {"required": ["when"]}
+              ]
+            }
+          },
+          {
+            "if": {"properties": {"kind": {"const": "turnin"}}, "required": ["kind"]},
+            "then": {
+              "anyOf": [
+                {"required": ["npc_name"]},
+                {"required": ["target_name"]}
+              ]
+            }
+          },
+          {
+            "if": {"properties": {"kind": {"const": "location"}}, "required": ["kind"]},
+            "then": {"required": ["location_ref"]}
+          },
+          {
+            "if": {"properties": {"kind": {"enum": ["taxi", "fixed_transport", "quest_transport"]}}, "required": ["kind"]},
+            "then": {"required": ["from_name", "to_name"]}
+          },
+          {
+            "if": {"properties": {"kind": {"enum": ["open_flight_point", "bind_hearth", "use_hearth"]}}, "required": ["kind"]},
+            "then": {"required": ["location_ref", "target_name"]}
+          },
+          {
+            "if": {"properties": {"kind": {"const": "interact"}}, "required": ["kind"]},
+            "then": {
+              "required": ["location_ref"],
+              "anyOf": [
+                {"required": ["npc_name"]},
+                {"required": ["target_name"]}
+              ]
+            }
+          },
+          {
+            "if": {"properties": {"kind": {"const": "move"}}, "required": ["kind"]},
+            "then": {
+              "anyOf": [
+                {"required": ["location_ref"]},
+                {"required": ["to_name"]}
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "step_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step_id", "title", "action_ids"],
+        "properties": {
+          "step_id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "summary": {"type": ["string", "null"]},
+          "action_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locations"],
+      "properties": {
+        "locations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["display_name", "x", "y"],
+            "properties": {
+              "display_name": {"type": "string", "minLength": 1},
+              "x": {"type": "number"},
+              "y": {"type": "number"},
+              "phase": {"type": "string", "minLength": 1},
+              "transport": {"enum": ["ride", "script", "taxi", "hearth", "crossmap"]},
+              "show_map_label": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    },
+    "change_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "kind", "summary"],
+        "properties": {
+          "date": {"type": "string", "minLength": 1},
+          "kind": {"type": "string", "minLength": 1},
+          "summary": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

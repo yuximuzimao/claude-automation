@@ -26,4 +26,4 @@ NEAT每次必须全文审查**当前活跃知识区**，但不重复全文读取
 
 除此之外的旧路线、旧设计稿、旧分析和旧NEAT保持只读，不因每次NEAT重复审计。需要考古时再按主题或关键词进入对应目录。
 
-历史材料不得反向覆盖当前真值：当前状态看 `CURRENT.md`，永久规则看 `../rules/`，当前路线数据看 `../../data/route-atlas/` 与 `../verified-routes/`。
+历史材料不得反向覆盖当前真值：当前状态看`../verified-routes/CURRENT.md`，永久规则看`../rules/`，单任务事实看`../../data/task-cards/`，正式路线看`../../data/route-profiles/`；`../../data/route-atlas/`与HTML仅是生成/兼容产物。

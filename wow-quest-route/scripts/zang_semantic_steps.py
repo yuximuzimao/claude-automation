@@ -284,6 +284,56 @@ def apply_zang_step1(route: dict[str, Any]) -> None:
     _patch_later_handoffs(route)
 
 
+def split_zang_step1_for_player(route: dict[str, Any]) -> None:
+    """Split the oversized 11-point opening after all legacy step-index patches are complete."""
+    groups = route["stepGroups"]
+    group = groups[0]
+    if int(group["start"]) != 0 or int(group["end"]) != 10:
+        raise RuntimeError("Zang step 1 split expects points 0..10")
+
+    marker = point_anchor("沼泽鼠岗哨")
+    action_html = str(group.get("actionHtml", ""))
+    if marker not in action_html:
+        raise RuntimeError("Zang step 1 split anchor missing: 沼泽鼠岗哨")
+    before, after = action_html.split(marker, 1)
+
+    first = dict(group)
+    first.update(
+        {
+            "start": 0,
+            "end": 6,
+            "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所",
+            "summary": "完成塞纳里奥开场、古树祝福、暗泽湖调查与暗泽村护送；回庇护所接出乌鸦飞行和恢复平衡。",
+            "actionHtml": before.rstrip(),
+            "noteHtml": notes_html(
+                note_block("赞加沼泽的植物", "沿后续路线自然累计未鉴定过的植物，不单独刷；后续回塞纳里奥时五号都够10株再交。"),
+                note_block("逃离暗泽村", status_span("共享") + "五号都接好任务后一起护送凯拉返回塞纳里奥庇护所；保持队伍跟随。"),
+                note_block("乌鸦的飞翔", "在伊谢尔·风歌处使用风暴乌鸦护符，任务脚本会自动飞行完成；不要自己跑去调查点。"),
+            ),
+            "timing": {"centerMinutes": 10.0, "rangeMinutes": [8.5, 12.0], "includeInTotal": True},
+            "timingTaskNames": ["暗泽湖的异常", "暗泽部族", "逃离暗泽村", "乌鸦的飞翔", "古树的祝福"],
+        }
+    )
+
+    second = dict(group)
+    second.update(
+        {
+            "start": 7,
+            "end": 10,
+            "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵",
+            "summary": "沼泽鼠岗哨接齐东部任务后，一次扫东部湖区和暗泽南缘，最后处理第一处恢复平衡抽水泵。",
+            "actionHtml": marker + after,
+            "noteHtml": notes_html(
+                note_block("热情的欢迎", "本段只沿路累计纳迦爪子，不要求在第一处抽水泵前完成；第二、第三泵区域继续补。"),
+                note_block("恢复平衡", "到暗泽湖抽水泵控制台旁使用任务给的铁藤种子。"),
+            ),
+            "timing": {"centerMinutes": 5.0, "rangeMinutes": [4.0, 6.5], "includeInTotal": True},
+            "timingTaskNames": ["沼牙的威胁", "崩溃的平衡", "别再提蘑菇了！", "时尚无罪", "厚重多头蛇鳞片", "热情的欢迎", "阴冷之地", "拯救孢子人", "保护观察者", "恢复平衡"],
+        }
+    )
+    groups[:1] = [first, second]
+
+
 def apply_zang_step2(route: dict[str, Any]) -> None:
     group = route["stepGroups"][1]
     start = int(group["start"])
@@ -359,7 +409,7 @@ def apply_zang_step3(route: dict[str, Any]) -> None:
             "水域排水口",
             "↳ 做《下钩钓鱼》《抽水泵结构图》",
             "water",
-            "《下钩钓鱼》：在泥爪水域完成任务目标。\n《抽水泵结构图》：到水下排水口完成调查。两条完成后不要游回岸边，直接在水中使用炉石。",
+            "《抽水泵结构图》：到水下排水口完成调查；两条都完成后直接在水中使用炉石，不游回岸边。",
             "swim",
         ),
         P(

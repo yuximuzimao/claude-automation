@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": 10287,
+  "identity": {
+    "name_zhcn": "\"恋人\"曝光",
+    "name_en": "The Mistress Revealed",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "unknown",
+    "repeatability": "unknown",
+    "game_variant_id": "timewalking-wotlk-cn"
+  },
+  "coverage": {
+    "availability": "partial",
+    "objectives": "unknown",
+    "locations": "unknown",
+    "rewards": "unknown",
+    "mechanics": "unknown",
+    "fivebox": "unknown",
+    "guide": "unknown"
+  },
+  "availability": {
+    "quest_level": 62,
+    "min_level": 60,
+    "pre_any": [
+      10286
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "hidden_requirements": []
+  },
+  "objectives": [],
+  "mechanics": {},
+  "fivebox": {
+    "stages": [],
+    "status": "pending"
+  },
+  "guide": [],
+  "verification": {
+    "open_questions": []
+  },
+  "evidence": [
+    {
+      "evidence_id": "evidence-foundation-migration",
+      "source_type": "legacy_migration",
+      "source_ref": "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json#quest_id=10287",
+      "observed_at": null,
+      "version_scope": "current migrated project data",
+      "confidence": "partial",
+      "supports_fields": [
+        "identity.name_zhcn",
+        "identity.name_en",
+        "availability.quest_level",
+        "availability.min_level",
+        "availability.pre_any",
+        "availability.pre_all"
+      ]
+    }
+  ],
+  "presentation": {}
+}

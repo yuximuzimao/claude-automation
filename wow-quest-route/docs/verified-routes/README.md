@@ -5,10 +5,11 @@
 ## 当前执行入口
 
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续当前项目先读它。
-- 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
+- Route Profile正式路线数据：`../../data/route-profiles/`。
+- 当前Route Atlas聚合数据：`../../data/route-atlas/workbench-routes.json`（生成物/兼容产物，不是路线真源）。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新阶段NEAT：[`../archive/neat/2026-09-11-audit-governance-grizzly-closure-howling-live-neat.md`](../archive/neat/2026-09-11-audit-governance-grizzly-closure-howling-live-neat.md)，记录审计体系逐项治理闭环、灰熊首组完成冻结、嚎风首段实跑/局部重排、固定日常时间采样口径与新阿加曼德恢复点。
-- 上一阶段NEAT：[`../archive/neat/2026-09-08-zuldrak-closure-grizzly-live-neat.md`](../archive/neat/2026-09-08-zuldrak-closure-grizzly-live-neat.md)，记录祖达克首组最终闭环、灰熊80级完整性复审与首段实测。
+- 最新阶段NEAT：[`../archive/neat/2026-09-15-architecture-governance-freeze-neat.md`](../archive/neat/2026-09-15-architecture-governance-freeze-neat.md)，记录Task Card / Route Profile / Rule owner / Generated Product架构治理冻结、双模型最终复审结果及下一会话P1–P7入口。
+- 上一阶段NEAT：[`../archive/neat/2026-09-13-paladin-howling-stop-dk-economic-pivot-neat.md`](../archive/neat/2026-09-13-paladin-howling-stop-dk-economic-pivot-neat.md)，记录首组嚎风止损、第一组兽人双手鲜血DK盈利路线切换、首轮经济实测口径与预购任务物边界。
 - 更早历史统一从[`../archive/README.md`](../archive/README.md)按日期/主题定向查找，不在当前入口维护长链索引。
 
 ## 仍有效的路线与支撑文档
@@ -20,6 +21,7 @@
 - [`ERROR-BOOK.md`](ERROR-BOOK.md)：重复失败模式和发布前对抗复查；只在生成/修订/审计时定向加载。
 - [`FLIGHT-POINTS.md`](FLIGHT-POINTS.md)：首组已确认飞行点与最近明确交通状态。
 - [`PALADIN-COMBAT-NOTES.md`](PALADIN-COMBAT-NOTES.md)：圣骑士战斗、天赋、雕文与圣契记录。
+- [`DK-COMBAT-NOTES.md`](DK-COMBAT-NOTES.md)：当前兽人双手鲜血DK的种族/流派决定，以及已冻结的精确天赋、分等级雕文和70级武器附魔切换流程。
 
 ## 历史资料
 
@@ -32,4 +34,4 @@
 1. 当前执行入口只能有一份：`CURRENT.md`。
 2. 新版本完成玩家视角可执行性复审后才能替换当前入口。
 3. 仍然可信、以后会复用的路线可留在本目录；已经被替代且只剩考古价值的版本移入 `docs/archive/`。
-4. 用户实跑反馈优先于静态模型；确认后先修当前路线/observations，跨地图长期成立的内容再提升到永久规则。
+4. 用户实跑反馈先判断归属：任务事实进Task Card，路线决策进Route Profile，当前状态进CURRENT，跨地图方法才进入永久规则；Generated Product不直接手改。

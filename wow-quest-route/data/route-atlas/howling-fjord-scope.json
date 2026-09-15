@@ -8,10 +8,11 @@
     "exclude_faction": 103,
     "exclude_no_xp": 1,
     "exclude_repeatable_calendar": 1,
+    "exclude_route_choice": 1,
     "exclude_structural": 1,
-    "include_candidate": 111
+    "include_candidate": 110
   },
-  "formal_candidate_count": 111,
+  "formal_candidate_count": 110,
   "formal_candidate_ids": [
     11167,
     11168,
@@ -82,7 +83,6 @@
     11397,
     11398,
     11399,
-    11411,
     11415,
     11417,
     11422,
@@ -126,7 +126,7 @@
     12566
   ],
   "required_level_counts": {
-    "68": 62,
+    "68": 61,
     "69": 46,
     "70": 2,
     "71": 1
@@ -160,7 +160,8 @@
     11567
   ],
   "old_auto_extra_vs_formal": [
-    11179
+    11179,
+    11411
   ],
   "rows": [
     {
@@ -3024,9 +3025,9 @@
       "name": "冬蹄营地",
       "required_level": 68,
       "quest_level": 70,
-      "status": "include_candidate",
+      "status": "exclude_route_choice",
       "reasons": [
-        "one_time_outdoor_horde_paladin"
+        "mutually_exclusive_breadcrumb_route_prefers_12566"
       ],
       "in_old_auto_route": true,
       "pre_any": [],

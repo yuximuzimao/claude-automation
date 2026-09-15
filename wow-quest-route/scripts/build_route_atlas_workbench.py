@@ -23,7 +23,7 @@ LEGACY_PLAINTEXT_ROUTE_KEYS: set[str] = set()
 # existing migration debt. Icecrown is intentionally absent, and every future route key is gated
 # automatically unless it is explicitly added here during a controlled legacy migration.
 CLOSED_ACTION_MIGRATION_EXEMPT_ROUTE_KEYS = {
-    "hellfire", "zang", "nagrand", "borean", "dragonblight", "dalaran", "storm",
+    "hellfire", "zang", "hellfire_dk", "zang_dk", "nagrand", "borean", "dragonblight", "dalaran", "storm",
     "sholazar", "zuldrak", "grizzly", "howling",
 }
 TASK_NAME_RE = re.compile(r"《([^》]+)》")

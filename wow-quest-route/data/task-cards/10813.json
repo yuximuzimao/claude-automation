@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "task_id": 10813,
+  "identity": {
+    "name_zhcn": "格里洛克之眼",
+    "name_en": "The Eyes of Grillok",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "unknown",
+    "repeatability": "unknown",
+    "game_variant_id": "timewalking-wotlk-cn"
+  },
+  "coverage": {
+    "availability": "partial",
+    "objectives": "unknown",
+    "locations": "unknown",
+    "rewards": "unknown",
+    "mechanics": "partial",
+    "fivebox": "partial",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 62,
+    "min_level": 58,
+    "pre_any": [
+      10809
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "hidden_requirements": []
+  },
+  "objectives": [],
+  "mechanics": {
+    "fivebox_observation": {
+      "kind": "special_capture_sharing_unresolved",
+      "summary": "捕获格里洛克之眼的真实共享性尚未确认；第二组按逐号方式完成不能证明不共享。",
+      "confidence": "partial",
+      "source_refs": [
+        "evidence-fivebox-migration"
+      ]
+    }
+  },
+  "fivebox": {
+    "stages": [
+      {
+        "stage_id": "primary",
+        "objective_id": null,
+        "mode": "unknown",
+        "summary": "捕获格里洛克之眼的真实共享性尚未确认；第二组按逐号方式完成不能证明不共享。",
+        "confidence": "partial",
+        "source_refs": [
+          "evidence-fivebox-migration"
+        ]
+      }
+    ],
+    "status": "pending"
+  },
+  "guide": [
+    "向塞萨克取得碎片捕获格里洛克之眼，再带到塞萨克的熔锅使其分离。"
+  ],
+  "verification": {
+    "open_questions": [
+      {
+        "question_id": "fivebox-sharing",
+        "variable": "fivebox.stages[0].mode",
+        "status": "expected",
+        "reason": "第二组执行方式不能证明真实共享性，第三组需专门验证。",
+        "close_condition": "在普通五人小队中由主控单独完成捕获流程并核对其余四号任务进度。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "evidence-foundation-migration",
+      "source_type": "legacy_migration",
+      "source_ref": "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json#quest_id=10813",
+      "observed_at": null,
+      "version_scope": "current migrated project data",
+      "confidence": "partial",
+      "supports_fields": [
+        "identity.name_zhcn",
+        "identity.name_en",
+        "availability.quest_level",
+        "availability.min_level",
+        "availability.pre_any",
+        "availability.pre_all"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-migration",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.10813",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "partial",
+      "supports_fields": [
+        "mechanics.fivebox_observation",
+        "fivebox.stages"
+      ]
+    }
+  ],
+  "presentation": {}
+}

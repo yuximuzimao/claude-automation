@@ -41,6 +41,18 @@
       "evidence": "用户转述老手实测：诺森德68级升到80级最快约14小时。",
       "route_characteristic_inference": "用户当前推测该老手路线几乎不做需要刷怪后拾取任务物品的任务；此项是推测，不当作已确认事实。",
       "role": "升级速度参考基准；只用于判断纯墙钟维度还有多大压缩空间，不是项目最终目标，也不得单独决定任务删留。"
+    },
+    {
+      "id": "dk_first_profit_route_kpi_2026_09_13",
+      "scope": "第一组五兽人双手鲜血DK：55级起步至盈利路线定义终点",
+      "target_minutes": 3900,
+      "target_hours": 65,
+      "target_group_gold": 50000,
+      "target_gold_per_character": 10000,
+      "status": "user_working_kpi_unverified",
+      "evidence": "2026-09-13用户决定停止首组圣骑继续清嚎风，并把第一组DK改为真正的盈利优化首跑；希望约65小时内做到单号约10000G。",
+      "measurement_requirements": ["逐地图真实墙钟", "逐地图实际金币增长", "逐地图泰坦碎片增长", "离图等级/经验", "死亡/重跑/迷路/逐号操作/随机长尾"],
+      "role": "实验KPI；用于衡量第一组DK路线压缩与收益是否接近目标，不是已验证承诺，也不得为了命中数字修改实跑数据。"
     }
   ],
   "runs": [
@@ -994,6 +1006,79 @@
       "clean_actual_minutes": null,
       "current_route_clean_baseline_minutes": null,
       "status": "raw_daily_sample_do_not_recalibrate_final_model"
+    },
+    {
+      "date": "2026-09-13",
+      "route_key": "dk_starting_zone",
+      "run_kind": "first_group_fivebox_orc_dk_starting_zone",
+      "time_precision": "journey_second_plus_user_pause_window",
+      "source": "2026-09-14用户实跑反馈 + 最新Questie Journey。",
+      "effective_start_local": "2026-09-13T22:39:03+08:00",
+      "user_stop_local": "2026-09-14T03:30:00+08:00",
+      "journey_last_event_local": "2026-09-14T03:28:51+08:00",
+      "raw_wall_minutes_to_user_stop": 290.95,
+      "pause_windows": [
+        {
+          "start_local": "2026-09-13T23:03:00+08:00",
+          "end_local": "2026-09-14T00:03:00+08:00",
+          "minutes": 60
+        }
+      ],
+      "effective_active_minutes_to_user_stop": 230.95,
+      "effective_active_display": "约3小时51分",
+      "journey_anchor": {
+        "first_event": "22:39:03 接12593《为巫妖王而战》",
+        "last_event": "03:28:51 完成13189《酋长的祝福》"
+      },
+      "level_milestones": [
+        {"level": 56, "local": "2026-09-13T22:58:49+08:00", "effective_elapsed_minutes": 19.77},
+        {"level": 57, "local": "2026-09-14T00:41:28+08:00", "effective_elapsed_minutes": 62.42},
+        {"level": 58, "local": "2026-09-14T01:34:22+08:00", "effective_elapsed_minutes": 115.32},
+        {"level": 59, "local": "2026-09-14T02:15:33+08:00", "effective_elapsed_minutes": 156.5},
+        {"level": 60, "local": "2026-09-14T02:27:39+08:00", "effective_elapsed_minutes": 168.6}
+      ],
+      "end_state_user_reported": "60级，约12.2万当前等级经验",
+      "route_window": "从创建DK后接第一个出生区任务开始计时；23:03暂停、00:03继续；03:30停止。首组已基本熟悉机制，后续将按本次实际任务顺序制作独立DK出生区HTML路线。",
+      "status": "raw_first_group_complete_starting_zone_sample"
+    },
+    {
+      "date": "2026-09-15",
+      "route_key": "hellfire_dk",
+      "run_kind": "live_in_progress",
+      "time_precision": "pending_journey_anchor_plus_user_pause_window",
+      "source": "用户当前这一次地狱火DK实跑即时反馈；完整Journey尚未提供。以下计时说明只用于用户下一次提交本轮Journey时的一次性结算，不得复用为后续批次或永久路线规则。",
+      "scope": "current_2026_09_15_run_only",
+      "consume_when": "仅在用户下一次提供本轮完整Journey时使用；结算完成后转成该run的历史事实，不继续作为未来run指令。",
+      "timing_anchor_rule": "仅本轮结算：以该Journey中接《跨越黑暗之门》的事件时间作为起点。",
+      "pause_windows_raw": [
+        {
+          "start_local_clock": "00:40",
+          "end_local_clock": "00:43",
+          "minutes_to_exclude": 3
+        },
+        {
+          "start_event": "接《肮脏的工作》",
+          "end_event": null,
+          "status": "open_pause_window",
+          "rule": "仅本轮：从接《肮脏的工作》开始停止有效计时；之后全部视为脏时间，直到用户后续明确恢复。"
+        }
+      ],
+      "excluded_error_practice_windows": [
+        {
+          "start_event": "接《格里洛克之眼》",
+          "end_event": "完成《格里洛克之眼》",
+          "rule": "本轮整段不计入有效墙钟；当前是错误/学习型实践，且按不共享方式执行，不能代表稳定路线耗时。"
+        }
+      ],
+      "partial_mechanic_facts": [
+        "《任务：地狱岩床》共享。",
+        "《格里洛克之眼》本轮按不共享方式完成，但共享性仍未知；用户查到刷新约45秒，第三组专门验证。"
+      ],
+      "temporary_run_incidents": [
+        "《战斗的号角》被用户误删除：仅本轮人为操作，忽略，不视为路线/任务链错误；用户会在暂停后补接回来，相关补救时间不计有效墙钟。"
+      ],
+      "actual_minutes": null,
+      "status": "in_progress_waiting_for_full_journey"
     }
   ]
 }

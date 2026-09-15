@@ -2,9 +2,9 @@
 
 - 输入：已清洗的诺森德任务宇宙；这里生成路线scope，不重新清洗任务数据。
 - 基线：部落血精灵圣骑士、一次性户外任务；副本/团队/专业/不可用阵营/重复日常做结构性排除；不做经济性删减。
-- assigned任务：219；正式候选：111。
-- 状态统计：`{'exclude_deprecated': 2, 'exclude_faction': 103, 'exclude_no_xp': 1, 'exclude_repeatable_calendar': 1, 'exclude_structural': 1, 'include_candidate': 111}`。
-- 旧自动候选：87；正式池新增25，旧自动多出1。
+- assigned任务：219；正式候选：110。
+- 状态统计：`{'exclude_deprecated': 2, 'exclude_faction': 103, 'exclude_no_xp': 1, 'exclude_repeatable_calendar': 1, 'exclude_route_choice': 1, 'exclude_structural': 1, 'include_candidate': 110}`。
+- 旧自动候选：87；正式池新增25，旧自动多出2。
 
 ## 旧自动候选漏召回的正式任务
 
@@ -37,6 +37,7 @@
 ## 旧自动候选中不属于正式池
 
 - 11179《[Temporarily Deprecated Awaiting a New Mob]Finlay Is Gutless》：exclude_deprecated / deprecated_or_system
+- 11411《冬蹄营地》：exclude_route_choice / mutually_exclusive_breadcrumb_route_prefers_12566
 
 ## 正式候选
 
@@ -109,7 +110,6 @@
 - 11397《比鱼人更恶臭……》｜接：药剂师安娜斯塔西娅@(26.2,24.6)｜交：药剂师安娜斯塔西娅@(26.2,24.6)｜起始/独立
 - 11398《天灾装置》｜接：—｜交：药剂师安娜斯塔西娅@(26.2,24.6)｜next=11399
 - 11399《关闭护盾》｜接：药剂师安娜斯塔西娅@(26.2,24.6)｜交：药剂师安娜斯塔西娅@(26.2,24.6)｜pre_any=[11398]
-- 11411《冬蹄营地》｜接：信使科马斯@(53.0,66.0)｜交：灰烬图腾酋长@(48.0,10.7)｜起始/独立
 - 11415《兄弟的背叛》｜接：乌尔芬@(29.7,5.7)｜交：乌尔芬@(29.7,5.7)｜pre_any=[11323]；next=11417
 - 11417《巨鹰之眼》｜接：乌尔芬@(29.7,5.7)｜交：乌尔芬@(29.7,5.7)｜pre_any=[11415]；next=11324
 - 11422《腐鳃的三叉戟》｜接：老冰鳞@(19.8,22.2)｜交：老冰鳞@(19.8,22.2)｜起始/独立

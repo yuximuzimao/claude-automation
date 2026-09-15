@@ -4,7 +4,7 @@
 
 ## 当前方向
 
-当前唯一主线是**先把首组五个血精灵圣骑士连续练到80级**；死亡骑士资料保留但暂缓。
+当前阶段已经从首组五血精灵圣骑实跑切换到**第一组五兽人双手鲜血死亡骑士的重复打金路线验证**；首组圣骑嚎风不再继续清，具体恢复点、实验KPI和开跑前准备统一看`docs/verified-routes/CURRENT.md`。
 
 README不保存具体当前等级、地图和任务进度。继续实跑只读：
 
@@ -23,45 +23,35 @@ README不保存具体当前等级、地图和任务进度。继续实跑只读�
 1. Agent进入项目先读 `SKILL.md`。
 2. 当前待办读 `tasks/todo.md`。
 3. `docs/INDEX.md` 只做文档/数据导航，确定本次最小读取范围。
-4. 当前首组状态读 `docs/verified-routes/CURRENT.md`。
-5. 永久规则从 `docs/rules/README.md` 选择当前需要的子规则。
-6. 真正生成/修订完整路线才读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` 和 `ERROR-BOOK.md`。
-7. 具体任务事实优先复用 `docs/task-library/` 和 `data/observations/`。
-8. 历史资料统一从 `docs/archive/README.md` 定向查；日常不批量加载archive，只有CURRENT/当前问题需要时再读对应历史文件。
+4. 当前批次状态读 `docs/verified-routes/CURRENT.md`。
+5. 永久规则只从 `docs/rules/README.md` 进入对应唯一owner。
+6. 新建、修订、实跑写回、发布或架构迁移按 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` 调度。
+7. 单任务当前事实只改对应 `data/task-cards/<task_id>.json`；旧observations/semantic/foundation只能作为证据或迁移兼容输入，不能继续作为新事实写入口。
+8. 历史资料统一从 `docs/archive/README.md` 定向查；日常不批量加载archive。
 
 ## 主要数据层
 
-- **Questie基础事实**：任务ID、前置、NPC/物体/物品、静态坐标；原始数据不被实跑覆盖。
-- **任务知识**：任务机制、地形、掉落来源、五开共享/个人行为和可复用任务卡。
-- **当前状态**：最低号等级经验、任务进度、当前地图、交通等，只在CURRENT/Journey维护。
-- **Route Atlas路线**：`data/route-atlas/workbench-routes.json` 保存当前有效路线数据。
-- **实测观察**：`data/observations/` 保存本服五开共享、阻断和特殊机制。
-- **历史档案**：`docs/archive/` 保存旧方案、一次性分析、NEAT和视频历史；只在需要考古时定向读取。
+- **Task Card**：`data/task-cards/`，单任务当前事实唯一真源；`docs/task-library/README.md`只定义字段语义。
+- **Route Profile**：`data/route-profiles/`，某一具体正式路线的唯一真源。
+- **CURRENT**：`docs/verified-routes/CURRENT.md`，当前批次runtime overlay / 恢复点，不是第二路线。
+- **Observations**：`data/observations/`，保存实测证据、时间样本和兼容期旧观测；不是Task Card或Route Profile的平行真源。
+- **Generated Product**：`data/route-atlas/workbench-routes.json`与`data/routes/route-atlas-workbench.html`等可删除重建产物，不直接人工维护业务真值。
+- **历史档案**：`docs/archive/`，只用于定向考古。
 
-## 永久规则分层
+## 永久规则
 
-总入口：`docs/rules/README.md`
+唯一注册表：`docs/rules/README.md`。README不复制子规则职责表；具体Mechanics、Selection、XP、Timing、Route Profile、Route Display、Task Presentation和UI规则均从该注册表渐进加载。
 
-- `leveling-and-selection.md`：经验预算、地图轴、任务取舍、随机掉落/护送。
-- `execution-and-mechanics.md`：玩家攻略、任务备注、洞穴/楼层/道具/触发物、五开共享。
-- `state-and-validation.md`：当前状态、完整性、Journey、NEAT/Git边界。
-- `route-atlas-optimization.md`：Route Atlas数据、状态机、插入/裁剪、炉石、求解器。
-- `route-atlas-ui-and-assets.md`：唯一HTML、逻辑步骤、HUD、底图、地图资源和离线复制。
-
-永久规则只从 `docs/rules/README.md` 进入，不维护其它总规则入口。
+`docs/rules/state-and-validation.md`已经退出owner角色，只是旧引用兼容指针。
 
 ## Route Atlas
 
-长期产品契约：
-
-- 唯一正式HTML：`data/routes/route-atlas-workbench.html`。
-- 当前路线数据：`data/route-atlas/workbench-routes.json`。
-- 构建：`scripts/build_route_atlas_workbench.py`。
+- 正式路线真源：`data/route-profiles/`。
+- 聚合路线数据：`data/route-atlas/workbench-routes.json`，目标态为Publisher生成物/兼容产物。
+- 唯一正式HTML：`data/routes/route-atlas-workbench.html`，属于Generated Product。
+- HTML构建：`scripts/build_route_atlas_workbench.py`。
 - 地图资源池：`data/routes/maps/`。
-- 几何停靠点可以很多，但玩家步骤按自然任务块合并。
-- 地图默认全图；只有用户主动启用“跟随当前段”才自动裁剪。
-- 有特殊执行机制的逻辑步骤显示“有备注”。
-- Questie继续负责游戏内精确目标点，Route Atlas负责宏观路线、任务块顺序和需要额外记忆的机制。
+- Route Atlas只从结构化真源和规则单向生成玩家页面；不得从HTML/旧workbench反推任务事实或路线决策。
 
 ## 安全与隐私边界
 
@@ -73,7 +63,7 @@ README不保存具体当前等级、地图和任务进度。继续实跑只读�
 
 ## 旧生成器
 
-项目仍保留早期圣骑士参考页、死亡骑士母版和world-candidate生成代码，用于历史召回或后续研究；它们不是当前首组执行真值。需要修改这些生成器时从 `SKILL.md` 的ENTRY MAP定位，不在README长期维护具体旧命令和旧等级阶段。
+项目仍保留早期圣骑士参考页、死亡骑士母版和world-candidate生成代码，用于历史召回或后续研究；它们不是当前批次执行真值。需要修改这些生成器时从 `SKILL.md` 的ENTRY MAP定位，不在README长期维护具体旧命令和旧等级阶段。
 
 ## 测试
 

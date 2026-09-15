@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "task_id": 10129,
+  "identity": {
+    "name_zhcn": "任务：穆尔凯斯和沙德拉兹之门",
+    "name_en": "Mission: Gateways Murketh and Shaadraz",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "unknown",
+    "repeatability": "unknown",
+    "game_variant_id": "timewalking-wotlk-cn"
+  },
+  "coverage": {
+    "availability": "partial",
+    "objectives": "unknown",
+    "locations": "unknown",
+    "rewards": "unknown",
+    "mechanics": "verified",
+    "fivebox": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 62,
+    "min_level": 58,
+    "pre_any": [
+      10208
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "hidden_requirements": []
+  },
+  "objectives": [],
+  "mechanics": {
+    "fivebox_observation": {
+      "kind": "distance_limited_shared_vehicle_progress",
+      "summary": "队伍距离足够近时轰炸进度共享，不需要五号各完整飞一轮。",
+      "confidence": "verified",
+      "source_refs": [
+        "evidence-fivebox-migration"
+      ]
+    }
+  },
+  "fivebox": {
+    "stages": [
+      {
+        "stage_id": "primary",
+        "objective_id": null,
+        "mode": "shared_progress",
+        "summary": "队伍距离足够近时轰炸进度共享，不需要五号各完整飞一轮。",
+        "confidence": "verified",
+        "source_refs": [
+          "evidence-fivebox-migration"
+        ]
+      }
+    ],
+    "status": "shared"
+  },
+  "guide": [
+    "保持队伍在可共享距离内完成轰炸；离开前核对五号均已完成。"
+  ],
+  "verification": {
+    "open_questions": []
+  },
+  "evidence": [
+    {
+      "evidence_id": "evidence-foundation-migration",
+      "source_type": "legacy_migration",
+      "source_ref": "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json#quest_id=10129",
+      "observed_at": null,
+      "version_scope": "current migrated project data",
+      "confidence": "partial",
+      "supports_fields": [
+        "identity.name_zhcn",
+        "identity.name_en",
+        "availability.quest_level",
+        "availability.min_level",
+        "availability.pre_any",
+        "availability.pre_all"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-migration",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.10129",
+      "observed_at": "2026-09-15",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "mechanics.fivebox_observation",
+        "fivebox.stages"
+      ]
+    }
+  ],
+  "presentation": {}
+}
