@@ -154,80 +154,90 @@ async function cmdReport(opts = {}) {
 // ─── resolve-stock ────────────────────────────────────────────────────────────
 async function cmdResolveStock(opts = {}) {
   const cdp = require('../product-mapping/lib/cdp');
+  const { releaseErpLock } = require('../product-mapping/lib/erp-lock');
   const { queryStockAndSave } = require('./lib/query-stock');
 
-  const targets = await cdp.getTargets();
-  console.log('可用 CDP targets:');
-  targets.forEach(t => console.log(`  ${t.id}  ${t.url}`));
+  try {
+    const targets = await cdp.getTargets();
+    console.log('可用 CDP targets:');
+    targets.forEach(t => console.log(`  ${t.id}  ${t.url}`));
 
-  const erpId = opts.erpId || targets.find(t => t.url && (t.url.includes('viperp') || t.url.includes('superboss')))?.targetId;
-  if (!erpId) fail('找不到 ERP tab，请确认 Chrome 已打开 ERP 并连接 CDP proxy');
+    const erpId = opts.erpId || targets.find(t => t.url && (t.url.includes('viperp') || t.url.includes('superboss')))?.targetId;
+    if (!erpId) fail('找不到 ERP tab，请确认 Chrome 已打开 ERP 并连接 CDP proxy');
 
-  console.log(`使用 ERP targetId: ${erpId}`);
-  console.log('查询库存状态...');
-  const output = await queryStockAndSave(erpId);
+    console.log(`使用 ERP targetId: ${erpId}`);
+    console.log('查询库存状态...');
+    const output = await queryStockAndSave(erpId);
 
-  ok({
-    totalRawRows: output._meta.totalRawRows,
-    mappedCount: output._meta.mappedCount,
-    warnings: output._meta.warnings.length,
-    savedTo: 'data/warehouse-stock.json',
-  });
+    ok({
+      totalRawRows: output._meta.totalRawRows,
+      mappedCount: output._meta.mappedCount,
+      warnings: output._meta.warnings.length,
+      savedTo: 'data/warehouse-stock.json',
+    });
+  } finally {
+    await releaseErpLock();
+  }
 }
 
 // ─── resolve-components ───────────────────────────────────────────────────────
 async function cmdResolveComponents(opts = {}) {
   const cdp = require('../product-mapping/lib/cdp');
+  const { releaseErpLock } = require('../product-mapping/lib/erp-lock');
   const { resolveComponents } = require('./lib/resolve-components');
 
-  const targets = await cdp.getTargets();
-  const erpId = opts.erpId || targets.find(t => t.url && (t.url.includes('viperp') || t.url.includes('superboss')))?.targetId;
-  if (!erpId) fail('找不到 ERP tab，请确认 Chrome 已打开 ERP 并连接 CDP proxy');
+  try {
+    const targets = await cdp.getTargets();
+    const erpId = opts.erpId || targets.find(t => t.url && (t.url.includes('viperp') || t.url.includes('superboss')))?.targetId;
+    if (!erpId) fail('找不到 ERP tab，请确认 Chrome 已打开 ERP 并连接 CDP proxy');
 
-  console.log(`使用 ERP targetId: ${erpId}`);
+    console.log(`使用 ERP targetId: ${erpId}`);
 
-  // 供应商ID → ERP店铺名 自动推导（--shop 参数为显式覆盖）
-  let shopName;
-  if (opts.shop) {
-    shopName = opts.shop;
-    console.log(`读取对应表（店铺: ${shopName}，显式指定）...`);
-  } else {
-    shopName = getShopFromCartData();
-    if (shopName) {
-      console.log(`读取对应表（店铺: ${shopName}，从供应商ID自动推导）...`);
+    // 供应商ID → ERP店铺名 自动推导（--shop 参数为显式覆盖）
+    let shopName;
+    if (opts.shop) {
+      shopName = opts.shop;
+      console.log(`读取对应表（店铺: ${shopName}，显式指定）...`);
     } else {
-      fail('无法确定店铺名：cart-adds.json 不存在或缺少 supplierId。请先运行 parse，或使用 --shop 显式指定');
+      shopName = getShopFromCartData();
+      if (shopName) {
+        console.log(`读取对应表（店铺: ${shopName}，从供应商ID自动推导）...`);
+      } else {
+        fail('无法确定店铺名：cart-adds.json 不存在或缺少 supplierId。请先运行 parse，或使用 --shop 显式指定');
+      }
     }
+
+    const output = await resolveComponents(erpId, shopName);
+    const { _meta } = output;
+
+    // ── 反向验证：所有加购SKU必须全部匹配 ──
+    if (_meta.matchedSkus < _meta.totalSkus) {
+      const unmatchedWarnings = _meta.warnings.filter(w => w.includes('对应表中找不到'));
+      const noErpCodeWarnings = _meta.warnings.filter(w => w.includes('无 erpCode'));
+
+      console.error(`\n❌ 匹配不完整: ${_meta.matchedSkus}/${_meta.totalSkus} SKU 匹配成功`);
+      if (unmatchedWarnings.length > 0) {
+        console.error(`\n对应表中找不到 (${unmatchedWarnings.length} 条):`);
+        unmatchedWarnings.forEach(w => console.error(`  - ${w.replace('对应表中找不到: ', '')}`));
+      }
+      if (noErpCodeWarnings.length > 0) {
+        console.error(`\n对应表有记录但 erpCode 为空 (${noErpCodeWarnings.length} 条):`);
+        noErpCodeWarnings.forEach(w => console.error(`  - ${w}`));
+      }
+      console.error(`\n请检查 ERP 商品对应表（店铺: ${shopName}），补全缺失的 SKU 后再跑。`);
+      throw new Error('ERP SKU 匹配不完整');
+    }
+
+    ok({
+      totalSkus:    _meta.totalSkus,
+      matchedSkus:  _meta.matchedSkus,
+      resolvedSkus: _meta.resolvedSkus,
+      warnings:     _meta.warnings.length,
+      savedTo:      'data/sku-components.json',
+    });
+  } finally {
+    await releaseErpLock();
   }
-
-  const output = await resolveComponents(erpId, shopName);
-  const { _meta } = output;
-
-  // ── 反向验证：所有加购SKU必须全部匹配 ──
-  if (_meta.matchedSkus < _meta.totalSkus) {
-    const unmatchedWarnings = _meta.warnings.filter(w => w.includes('对应表中找不到'));
-    const noErpCodeWarnings = _meta.warnings.filter(w => w.includes('无 erpCode'));
-
-    console.error(`\n❌ 匹配不完整: ${_meta.matchedSkus}/${_meta.totalSkus} SKU 匹配成功`);
-    if (unmatchedWarnings.length > 0) {
-      console.error(`\n对应表中找不到 (${unmatchedWarnings.length} 条):`);
-      unmatchedWarnings.forEach(w => console.error(`  - ${w.replace('对应表中找不到: ', '')}`));
-    }
-    if (noErpCodeWarnings.length > 0) {
-      console.error(`\n对应表有记录但 erpCode 为空 (${noErpCodeWarnings.length} 条):`);
-      noErpCodeWarnings.forEach(w => console.error(`  - ${w}`));
-    }
-    console.error(`\n请检查 ERP 商品对应表（店铺: ${shopName}），补全缺失的 SKU 后再跑。`);
-    process.exit(1);
-  }
-
-  ok({
-    totalSkus:    _meta.totalSkus,
-    matchedSkus:  _meta.matchedSkus,
-    resolvedSkus: _meta.resolvedSkus,
-    warnings:     _meta.warnings.length,
-    savedTo:      'data/sku-components.json',
-  });
 }
 
 // ─── run（全流程）───────────────────────────────────────────────────────────

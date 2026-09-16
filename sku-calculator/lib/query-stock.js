@@ -112,7 +112,10 @@ async function queryStock(erpId) {
   while (Date.now() - totalWaitStart < 10000) {
     const totalText = await cdp.eval(erpId, `
       (function(){
-        var el = document.querySelector('.el-pagination__total');
+        var el = Array.from(document.querySelectorAll('.el-pagination__total')).find(function(node){
+          var r = node.getBoundingClientRect();
+          return r.width > 0 && r.height > 0;
+        });
         return el ? el.innerText.trim() : '';
       })()
     `);
@@ -146,7 +149,10 @@ async function queryStock(erpId) {
     if (page > 1) {
       await cdp.eval(erpId, `
         (function(){
-          var btn = document.querySelector('button.btn-next');
+          var btn = Array.from(document.querySelectorAll('button.btn-next')).find(function(node){
+            var r = node.getBoundingClientRect();
+            return r.width > 0 && r.height > 0;
+          });
           if (btn) btn.click();
         })()
       `);
