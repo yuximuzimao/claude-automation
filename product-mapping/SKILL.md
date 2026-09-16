@@ -15,6 +15,7 @@ entry: cli.js
 6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
 7. **ChatGPT 通过 CodexPro 操作时必读** → `docs/chatgpt-codexpro-operations.md`（本地图片桥接、前台时间边界、target 刷新、长任务交给本地 Codex）
 8. **处理 HEE/悦希新品前先查当前待办** → `tasks/todo.md`；尚未补齐图片/识图特征的新品按待办中的标准 ERP 名称和编码识别，不能归为普通未知，也不得复用旧版视觉。装箱尺寸、箱规和组合规则属于 `../order-review/`，不在这里维护。
+9. **运行 check/match 等 CLI 时** → 观察边界只看 `docs/INDEX.md §1「脚本自治边界」`；正常执行不由 Agent 实时监工。
 
 ## ENTRY MAP
 
