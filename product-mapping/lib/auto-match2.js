@@ -195,46 +195,52 @@ async function clickMarkSuite(erpId, platformCode) {
 }
 
 // ── Phase 1c：逐个复制为套件（不离开当前页，用搜索框过滤） ──
-async function closeSelectDialogIfOpen(erpId) {
-  // 点关闭/取消
-  const found = await cdp.eval(erpId,
-    '(function(){' +
-    '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
-    '  for(var i=0;i<ds.length;i++){' +
-    '    var d=ds[i];' +
-    '    if(d.getBoundingClientRect().height<=0)continue;' +
-    '    var t=d.querySelector(".el-dialog__title");' +
-    '    if(!t||t.innerText.trim()!=="选择商品")continue;' +
-    '    var btns=Array.from(d.querySelectorAll("button"));' +
-    '    var cancel=btns.find(function(b){var s=b.querySelector("span");return s&&(s.innerText.trim()==="取消"||s.innerText.trim()==="关闭");});' +
-    '    if(cancel){cancel.click();}' +
-    '    else{var close=d.querySelector(".el-dialog__headerbtn");if(close)close.click();}' +
-    '    return true;' +
-    '  }' +
-    '  return false;' +
-    '})()'
-  );
-  if (!found) return;
-  // 等 dialog 高度真正归零（最多等 3s）
-  for (let i = 0; i < 6; i++) {
-    await sleep(500);
-    const gone = await cdp.eval(erpId,
+async function closeResidualDialogsIfOpen(erpId) {
+  // 换绑成功后 Element UI 偶尔保留空的「换对应商品」wrapper；必须先关顶层，
+  // 再清理可能残留的「选择商品」，否则下一条会把旧弹窗误判为当前弹窗。
+  for (const title of ['换对应商品', '选择商品']) {
+    const found = await cdp.eval(erpId,
       '(function(){' +
+      '  var wanted=' + JSON.stringify(title) + ';' +
       '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
       '  for(var i=0;i<ds.length;i++){' +
-      '    var t=ds[i].querySelector(".el-dialog__title");' +
-      '    if(t&&t.innerText.trim()==="选择商品"&&ds[i].getBoundingClientRect().height>0)return false;' +
+      '    var d=ds[i];' +
+      '    if(d.getBoundingClientRect().height<=0)continue;' +
+      '    var t=d.querySelector(".el-dialog__title");' +
+      '    if(!t||t.innerText.trim()!==wanted)continue;' +
+      '    var btns=Array.from(d.querySelectorAll("button"));' +
+      '    var cancel=btns.find(function(b){var s=b.querySelector("span");return s&&(s.innerText.trim()==="取消"||s.innerText.trim()==="关闭");});' +
+      '    var close=d.querySelector("button.el-dialog__closeBtn,button.el-dialog__headerbtn");' +
+      '    if(cancel)cancel.click();else if(close)close.click();else return "no-close";' +
+      '    return "clicked";' +
       '  }' +
-      '  return true;' +
+      '  return "not-found";' +
       '})()'
     );
-    if (gone) return;
+    if (found === 'no-close') throw new Error(`残留弹窗无法关闭: ${title}`);
+    if (found !== 'clicked') continue;
+
+    let gone = false;
+    for (let i = 0; i < 20; i++) {
+      await sleep(500);
+      gone = await cdp.eval(erpId,
+        '(function(){' +
+        '  var wanted=' + JSON.stringify(title) + ';' +
+        '  return !Array.from(document.querySelectorAll(".el-dialog__wrapper")).some(function(d){' +
+        '    var t=d.querySelector(".el-dialog__title");' +
+        '    return t&&t.innerText.trim()===wanted&&d.getBoundingClientRect().height>0;' +
+        '  });' +
+        '})()'
+      );
+      if (gone) break;
+    }
+    if (!gone) throw new Error(`残留弹窗 10 秒内未关闭: ${title}`);
   }
 }
 
 async function copyOneSku(erpId, shopName, productCode, platformCode, products) {
-  // 先关掉上次失败残留的弹窗（如有）
-  await closeSelectDialogIfOpen(erpId);
+  // 先关掉上次换绑或失败残留的弹窗（如有）
+  await closeResidualDialogsIfOpen(erpId);
   await sleep(300);
 
   // 当前 ERP 对应表搜索框按货号过滤（2026-07-24 实时 DOM 验证）
