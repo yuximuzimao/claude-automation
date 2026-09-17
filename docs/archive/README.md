@@ -5,3 +5,4 @@
 ## 归档索引
 
 - `2026-09-06-agents-skills-instruction-audit/` — 全局 AGENTS / Skills 自主性、批准与完成规则审计；包含最终验证摘要和历史审阅方案。
+- `2026-09-13-workbuddy-governance/` — WorkBuddy 记忆、项目入口、Skill 与工作区治理收尾；记录最终架构、清理结果与冷启动验证。
