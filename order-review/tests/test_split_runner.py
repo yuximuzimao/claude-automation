@@ -241,7 +241,7 @@ def test_next_package_accepts_rows_exhausted_by_previous_package():
     assert "JSON.stringify(actual) !== JSON.stringify(quantities)" not in add_script
 
 
-def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
+def test_split_runner_stops_immediately_after_split_confirmation(monkeypatch):
     source, plan = _source_and_plan()
     evaluations = []
     clicks = []
@@ -330,20 +330,17 @@ def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
         sleeper=lambda seconds: sleeps.append(seconds),
     )
 
-    assert report.state == AuditExecutionState.SUCCESS
-    assert split_result_reads == [(3, "target-1", evaluator)]
-    assert len(post_audit_scrolls) == 1
-    assert post_audit_scrolls[0][0] == (1, "target-1")
-    assert post_audit_scrolls[0][1]["expected_system_order_id"] == ""
+    assert report.state == AuditExecutionState.STOPPED
+    assert report.split_confirmation_clicked is True
+    assert report.split_completed is False
+    assert split_result_reads == []
+    assert post_audit_scrolls == []
     assert moves == [("target-1", 10.0, 20.0)]
     assert clicks == [
         ("target-1", 20.0, 30.0),
         ("target-1", 30.0, 40.0),
         ("target-1", 40.0, 50.0),
         ("target-1", 50.0, 60.0),
-        ("target-1", 60.0, 70.0),
-        ("target-1", 70.0, 80.0),
-        ("target-1", 80.0, 90.0),
     ]
     assert sum("PACKAGE_QUANTITY_INVALID" in js for js in evaluations) == 2
     assert sum("INPUT_DOM_MISMATCH" in js for js in evaluations) == 1
@@ -352,10 +349,12 @@ def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
         js for js in evaluations if "PACKAGE_QUANTITY_INVALID" in js
     ]
     assert all("buttons[0].click()" not in js for js in fill_scripts)
-    assert sleeps.count(split_runner.SPLIT_ACTION_PAUSE_SECONDS) == 12
-    assert split_runner.SPLIT_RESULT_RENDER_SETTLE_SECONDS in sleeps
-    assert report.split_completed is True
-    assert report.render_text().startswith("拆分并审核成功")
+    assert sleeps.count(split_runner.SPLIT_ACTION_PAUSE_SECONDS) == 8
+    assert not any("__orderReviewSplitNetwork =" in js for js in evaluations)
+    assert not any("RESULT_NOT_READY" in js for js in evaluations)
+    assert not any("PREPARE_SPLIT_AUDIT" in js for js in evaluations)
+    assert report.render_text().startswith("已点击拆分确认")
+    assert report.to_log_dict()["splitConfirmationClicked"] is True
 
 
 def test_split_result_poll_waits_until_first_n_selected_rows_are_ready():
@@ -469,7 +468,7 @@ def test_split_result_missing_identity_after_stable_first_n_is_not_retried():
     )
 
 
-def test_split_runner_stops_when_erp_returns_business_failure(monkeypatch):
+def test_split_runner_marks_secondary_confirmation_click_error_unknown(monkeypatch):
     source, plan = _source_and_plan()
 
     def evaluator(_target_id, js):
@@ -497,15 +496,14 @@ def test_split_runner_stops_when_erp_returns_business_failure(monkeypatch):
             return {"ok": True, "x": 40, "y": 50}
         if "CONFIRM_TEXT_CHANGED" in js:
             return {"ok": True, "x": 50, "y": 60}
-        if "RESULT_NOT_READY" in js:
-            return {
-                "ok": True,
-                "status": 200,
-                "result": 0,
-                "splitSuccess": None,
-                "increaseSplitCount": 0,
-            }
         raise AssertionError("出现未预期的页面脚本")
+
+    clicks = []
+
+    def failing_clicker(target_id, x, y):
+        clicks.append((target_id, x, y))
+        if (x, y) == (50.0, 60.0):
+            raise RuntimeError("click failed")
 
     report = split_runner.run_mixed_order_split(
         target_system_order_id="SYSTEM-1",
@@ -513,7 +511,7 @@ def test_split_runner_stops_when_erp_returns_business_failure(monkeypatch):
         plan=plan,
         target_id="target-1",
         evaluator=evaluator,
-        mouse_clicker=lambda *_args: None,
+        mouse_clicker=failing_clicker,
         mouse_mover=lambda *_args: None,
         preflight_runner=lambda **_kwargs: SimpleNamespace(
             preflight_ready=True,
@@ -522,8 +520,10 @@ def test_split_runner_stops_when_erp_returns_business_failure(monkeypatch):
         sleeper=lambda _seconds: None,
     )
 
-    assert report.state == AuditExecutionState.STOPPED
-    assert "increaseSplitCount=0/2" in report.render_text()
+    assert report.state == AuditExecutionState.UNKNOWN
+    assert report.split_confirmation_clicked is False
+    assert clicks[-1] == ("target-1", 50.0, 60.0)
+    assert "二次确认点击过程返回异常" in report.render_text()
 
 
 def test_network_success_uses_observed_mix_split_response_shape():

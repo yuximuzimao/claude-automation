@@ -263,10 +263,38 @@ def search_packing(
         )
 
     deadline = monotonic() + float(max_search_seconds)
+    grid_layout = _homogeneous_grid_layout(
+        container,
+        unit_items,
+        orientations_by_id,
+    )
+    if grid_layout is not None:
+        grid_nodes = len(grid_layout)
+        if monotonic() >= deadline:
+            return PackingGeometryResult(
+                status=GeometryStatus.UNKNOWN,
+                container=container,
+                placements=(),
+                searched_nodes=grid_nodes,
+                max_search_nodes=max_search_nodes,
+                reason="达到搜索时间上限，规则网格快速路径结果未被采纳",
+            )
+        if grid_nodes <= max_search_nodes:
+            return PackingGeometryResult(
+                status=GeometryStatus.FOUND,
+                container=container,
+                placements=grid_layout,
+                searched_nodes=grid_nodes,
+                max_search_nodes=max_search_nodes,
+                reason="同类物件规则网格快速路径已找到完整底面支撑摆放",
+            )
+
     searched_nodes = 0
     node_limit_reached = False
     deadline_reached = False
     attempted_orders = 0
+    best_partial_support: tuple[PlacedUnit, ...] | None = None
+    best_partial_support_ratio = -1.0
 
     def budget_exhausted() -> bool:
         nonlocal deadline_reached
@@ -292,7 +320,7 @@ def search_packing(
 
             unit = ordered_units[index]
             for dimensions in orientations_by_id[unit.instance_id]:
-                for position in _candidate_positions(container, placements):
+                for position in _candidate_positions(container, placements, dimensions):
                     if budget_exhausted():
                         return None
                     if searched_nodes >= max_search_nodes:
@@ -312,7 +340,11 @@ def search_packing(
                         continue
                     if any(_overlaps(candidate, placed) for placed in placements):
                         continue
-                    if not _fully_supported(candidate, placements):
+                    # Geometry feasibility and packing stability are separate concerns.
+                    # Elevated items must touch a stackable support surface, but full
+                    # footprint coverage is a preference/diagnostic rather than a hard
+                    # geometry gate.
+                    if candidate.position.z > 0 and support_coverage_ratio(candidate, placements) <= 0:
                         continue
                     placements.append(candidate)
                     result = place_next(index + 1)
@@ -331,17 +363,40 @@ def search_packing(
         attempted_orders += 1
         result = try_order(ordered_units)
         if result is not None:
-            return PackingGeometryResult(
-                status=GeometryStatus.FOUND,
-                container=container,
-                placements=result,
-                searched_nodes=searched_nodes,
-                max_search_nodes=max_search_nodes,
-                reason=(
-                    "已找到边界内、不重叠且完整支撑的摆放；"
-                    f"已尝试{attempted_orders}种等价去重后的物件顺序"
-                ),
+            minimum_support = min(
+                support_coverage_ratio(item, result)
+                for item in result
             )
+            if minimum_support >= 1.0:
+                return PackingGeometryResult(
+                    status=GeometryStatus.FOUND,
+                    container=container,
+                    placements=result,
+                    searched_nodes=searched_nodes,
+                    max_search_nodes=max_search_nodes,
+                    reason=(
+                        "已找到边界内、不重叠且全部离地物件完整底面支撑的摆放；"
+                        f"已尝试{attempted_orders}种等价去重后的物件顺序"
+                    ),
+                )
+            if minimum_support > best_partial_support_ratio:
+                best_partial_support = result
+                best_partial_support_ratio = minimum_support
+
+    if best_partial_support is not None:
+        return PackingGeometryResult(
+            status=GeometryStatus.FOUND,
+            container=container,
+            placements=best_partial_support,
+            searched_nodes=searched_nodes,
+            max_search_nodes=max_search_nodes,
+            reason=(
+                "已找到边界内、不重叠且离地物件存在承重点的几何摆放；"
+                f"最低底面支撑覆盖率为{best_partial_support_ratio:.0%}，"
+                "未在当前预算内找到完整底面支撑方案，稳定性需单独判断；"
+                f"已尝试{attempted_orders}种等价去重后的物件顺序"
+            ),
+        )
 
     if deadline_reached:
         reason = (
@@ -494,15 +549,27 @@ def layout_is_valid(
     container: DimensionsMm,
     placements: Iterable[PlacedUnit],
 ) -> bool:
+    """Validate geometry only: non-empty, inside the container, and non-overlapping."""
     placed_items = tuple(placements)
+    if not placed_items:
+        return False
     for index, item in enumerate(placed_items):
         if not _inside(container, item):
             return False
         if any(_overlaps(item, other) for other in placed_items[:index]):
             return False
-        if not _fully_supported(item, placed_items[:index]):
-            return False
     return True
+
+
+def layout_is_fully_supported(
+    container: DimensionsMm,
+    placements: Iterable[PlacedUnit],
+) -> bool:
+    """Validate full footprint support separately from geometric feasibility."""
+    placed_items = tuple(placements)
+    if not layout_is_valid(container, placed_items):
+        return False
+    return all(_fully_supported(item, placed_items) for item in placed_items)
 
 
 def _expand_product_units(
@@ -550,22 +617,105 @@ def _ordered_orientations(
     )
 
 
+def _homogeneous_grid_layout(
+    container: DimensionsMm,
+    units: tuple[PackingUnit, ...],
+    orientations_by_id: dict[str, tuple[DimensionsMm, ...]],
+) -> tuple[PlacedUnit, ...] | None:
+    if not units:
+        return None
+    first = units[0]
+    equivalence_key = _unit_order_equivalence_key(first)
+    if any(_unit_order_equivalence_key(item) != equivalence_key for item in units[1:]):
+        return None
+
+    ordered_units = tuple(sorted(units, key=lambda item: item.instance_id))
+    for dimensions in orientations_by_id[first.instance_id]:
+        nx = container.length // dimensions.length
+        ny = container.width // dimensions.width
+        nz = container.height // dimensions.height
+        if nx <= 0 or ny <= 0 or nz <= 0:
+            continue
+        if not first.stackable:
+            nz = 1
+        layer_capacity = nx * ny
+        if layer_capacity * nz < len(ordered_units):
+            continue
+
+        placements: list[PlacedUnit] = []
+        for index, unit in enumerate(ordered_units):
+            layer = index // layer_capacity
+            offset = index % layer_capacity
+            row = offset // nx
+            column = offset % nx
+            placements.append(
+                PlacedUnit(
+                    instance_id=unit.instance_id,
+                    merchant_code=unit.merchant_code,
+                    product_spec_id=unit.product_spec_id,
+                    display_name=unit.display_name,
+                    position=Point3D(
+                        column * dimensions.length,
+                        row * dimensions.width,
+                        layer * dimensions.height,
+                    ),
+                    dimensions=dimensions,
+                    stackable=unit.stackable,
+                )
+            )
+        if layout_is_fully_supported(container, placements):
+            return tuple(placements)
+    return None
+
+
 def _candidate_positions(
     container: DimensionsMm,
     placements: list[PlacedUnit],
+    dimensions: DimensionsMm,
 ) -> Iterator[Point3D]:
+    """Yield hybrid extreme-point/frontier candidates with Cartesian fallback.
+
+    Direct frontier points are tried first, then the previous surface-coordinate
+    Cartesian combinations are retained as a completeness-oriented fallback for
+    the current bounded search. Within the same layer, positions with more
+    support coverage are preferred without making full support a hard gate.
+    """
+    direct_points: set[Point3D] = {Point3D(0, 0, 0)}
+    for item in placements:
+        direct_points.update(
+            {
+                Point3D(item.right, item.position.y, item.position.z),
+                Point3D(item.position.x, item.back, item.position.z),
+                Point3D(item.position.x, item.position.y, item.top),
+            }
+        )
+
     x_values = {0, *(item.right for item in placements)}
     y_values = {0, *(item.back for item in placements)}
     z_values = {0, *(item.top for item in placements)}
-    for z in sorted(z_values):
-        for y in sorted(y_values):
-            for x in sorted(x_values):
-                if (
-                    x < container.length
-                    and y < container.width
-                    and z < container.height
-                ):
-                    yield Point3D(x, y, z)
+    all_points = {
+        Point3D(x, y, z)
+        for z in z_values
+        for y in y_values
+        for x in x_values
+        if (
+            x + dimensions.length <= container.length
+            and y + dimensions.width <= container.width
+            and z + dimensions.height <= container.height
+        )
+    }
+
+    def candidate_key(point: Point3D) -> tuple[object, ...]:
+        coverage = _support_coverage_ratio_at(point, dimensions, placements)
+        return (
+            point.z,
+            -coverage,
+            point not in direct_points,
+            point.y,
+            point.x,
+        )
+
+    yield from sorted(all_points, key=candidate_key)
 
 
 def _inside(container: DimensionsMm, item: PlacedUnit) -> bool:
@@ -590,57 +740,69 @@ def _overlaps(first: PlacedUnit, second: PlacedUnit) -> bool:
     )
 
 
-def _fully_supported(item: PlacedUnit, placements: Iterable[PlacedUnit]) -> bool:
-    if item.position.z == 0:
-        return True
+def _support_coverage_ratio_at(
+    position: Point3D,
+    dimensions: DimensionsMm,
+    placements: Iterable[PlacedUnit],
+) -> float:
+    if position.z == 0:
+        return 1.0
+    right = position.x + dimensions.length
+    back = position.y + dimensions.width
     supporters = tuple(
         placed
         for placed in placements
         if placed.stackable
-        and placed.top == item.position.z
-        and placed.position.x < item.right
-        and placed.right > item.position.x
-        and placed.position.y < item.back
-        and placed.back > item.position.y
+        and placed.top == position.z
+        and placed.position.x < right
+        and placed.right > position.x
+        and placed.position.y < back
+        and placed.back > position.y
     )
     if not supporters:
-        return False
+        return 0.0
 
     x_values = sorted(
         {
-            item.position.x,
-            item.right,
-            *(
-                max(item.position.x, supporter.position.x)
-                for supporter in supporters
-            ),
-            *(min(item.right, supporter.right) for supporter in supporters),
+            position.x,
+            right,
+            *(max(position.x, supporter.position.x) for supporter in supporters),
+            *(min(right, supporter.right) for supporter in supporters),
         }
     )
     y_values = sorted(
         {
-            item.position.y,
-            item.back,
-            *(
-                max(item.position.y, supporter.position.y)
-                for supporter in supporters
-            ),
-            *(min(item.back, supporter.back) for supporter in supporters),
+            position.y,
+            back,
+            *(max(position.y, supporter.position.y) for supporter in supporters),
+            *(min(back, supporter.back) for supporter in supporters),
         }
     )
+    covered_area = 0
     for x1, x2 in zip(x_values, x_values[1:]):
         for y1, y2 in zip(y_values, y_values[1:]):
             if x1 == x2 or y1 == y2:
                 continue
-            if not any(
+            if any(
                 supporter.position.x <= x1
                 and supporter.right >= x2
                 and supporter.position.y <= y1
                 and supporter.back >= y2
                 for supporter in supporters
             ):
-                return False
-    return True
+                covered_area += (x2 - x1) * (y2 - y1)
+    return covered_area / (dimensions.length * dimensions.width)
+
+
+def support_coverage_ratio(
+    item: PlacedUnit,
+    placements: Iterable[PlacedUnit],
+) -> float:
+    return _support_coverage_ratio_at(item.position, item.dimensions, placements)
+
+
+def _fully_supported(item: PlacedUnit, placements: Iterable[PlacedUnit]) -> bool:
+    return support_coverage_ratio(item, placements) >= 1.0
 
 
 def _interpret_geometry(

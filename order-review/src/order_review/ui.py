@@ -1744,8 +1744,8 @@ class OrderReviewWindow:
             status_text = self._audit_progress or "正在准备拆分"
             status_color = MACOS_THEME["warning"]
         elif self._split_completed_system_order_id == source.system_order_id:
-            status_text = "本单拆分并审核成功"
-            status_color = MACOS_THEME["success"]
+            status_text = "本单已点击拆分确认"
+            status_color = MACOS_THEME["warning"]
         tk.Label(
             header,
             text=status_text,
@@ -1776,7 +1776,7 @@ class OrderReviewWindow:
         )
         self._action_button(
             card,
-            "拆分并审核当前订单",
+            "拆分当前订单",
             lambda: self._start_mixed_order_split(plan),
             danger=True,
             enabled=can_split,
@@ -1784,8 +1784,8 @@ class OrderReviewWindow:
         tk.Label(
             card,
             text=(
-                "点击后连续完成当前订单拆分，并在审核弹窗显示的"
-                "已勾选数量等于目标包裹数时继续审核。"
+                "点击后只完成数量填写和拆分确认。拆分结果核验与后续审核"
+                "暂未启用；确认后请人工在 ERP 核对。"
             ),
             bg=MACOS_THEME["warning_soft"],
             fg=MACOS_THEME["muted_text"],
@@ -1887,7 +1887,7 @@ class OrderReviewWindow:
         self._order_watch_generation += 1
         self._audit_progress = "正在自动检查"
         self._audit_feedback = (
-            f"拆分并审核进行中：{self._audit_progress}。"
+            f"拆分进行中：{self._audit_progress}。"
         )
         self._reset_order_change_candidate()
         self._rerender_current_snapshot()
@@ -1947,7 +1947,7 @@ class OrderReviewWindow:
             elif event == "split_progress":
                 _state, detail = payload
                 self._audit_progress = str(detail)
-                self._audit_feedback = f"拆分并审核进行中：{detail}"
+                self._audit_feedback = f"拆分进行中：{detail}"
                 rerender = True
             elif event == "finished":
                 report = payload
@@ -1984,22 +1984,11 @@ class OrderReviewWindow:
                 self._audit_thread = None
                 self._audit_progress = ""
                 self._audit_feedback = report.render_text()
-                if report.successful:
+                if report.split_confirmation_clicked:
                     self._split_completed_system_order_id = (
                         report.target_system_order_id
                     )
-                    self._auto_refresh_not_before = (
-                        self.monotonic() + POST_AUDIT_REFRESH_DELAY_SECONDS
-                    )
-                    self._auto_refresh_paused = False
-                    if self._auto_refresh_enabled:
-                        self._audit_feedback = (
-                            f"拆分并审核成功：订单 {report.target_system_order_id} "
-                            "已离开待审核列表。正在快速确认新订单状态；"
-                            "确认稳定后会自动刷新下一单。"
-                        )
-                else:
-                    self._set_auto_refresh_enabled(False)
+                self._set_auto_refresh_enabled(False)
                 self._reset_order_change_candidate()
                 rerender = True
             elif event == "error":
@@ -2019,7 +2008,7 @@ class OrderReviewWindow:
                 self._set_auto_refresh_enabled(False)
                 self._reset_order_change_candidate()
                 self._audit_feedback = (
-                    f"拆分并审核已停止：{payload}。没有重试提交。"
+                    f"拆分已停止：{payload}。没有重试提交。"
                 )
                 rerender = True
         if rerender:

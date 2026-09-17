@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-09-17",
+  "scope": "order-review active knowledge, current milestone changes, archive index and directly relevant history",
+  "activeKnowledge": [
+    {"file": "AGENTS.md", "decision": "updated", "reason": "split confirmation is now the hard ERP stop"},
+    {"file": "CLAUDE.md", "decision": "keep", "reason": "stable startup and safety boundaries remain concise"},
+    {"file": "README.md", "decision": "keep", "reason": "human overview stays accurate and delegates details to usage/CURRENT"},
+    {"file": "SKILL.md", "decision": "updated", "reason": "latest evidence route and current support semantics"},
+    {"file": "tasks/todo.md", "decision": "updated", "reason": "packing selection/quantity UX and paused split tail are unfinished work"},
+    {"file": "docs/INDEX.md", "decision": "updated", "reason": "latest NEAT archive is discoverable"},
+    {"file": "docs/CURRENT.md", "decision": "updated", "reason": "single source for packing data and split execution boundary"},
+    {"file": "docs/usage.md", "decision": "updated", "reason": "user flow stops after split confirmation"},
+    {"file": "docs/rules/README.md", "decision": "updated", "reason": "execution-rule label no longer advertises active post-split verification"},
+    {"file": "docs/rules/erp-execution.md", "decision": "updated", "reason": "current stop and paused tail are separated"},
+    {"file": "docs/2026-07-23-package-rule-foundation.md", "decision": "updated", "reason": "confirmed cartons and durable ERP execution boundary"},
+    {"file": "docs/2026-09-08-packing-simulator-plan.md", "decision": "updated", "reason": "removed stale worktree and missing-coffee facts"},
+    {"file": "docs/2026-09-12-packing-algorithm-research.md", "decision": "updated", "reason": "research baseline separated from current implementation"}
+  ],
+  "history": {
+    "archiveDirectoriesAfterThisMilestone": 23,
+    "archiveMarkdownFilesAfterThisMilestone": 36,
+    "indexRead": "docs/archive/README.md",
+    "fullHistoryRead": [
+      "docs/archive/2026-09-13-packing-worktree-reconciliation/neat-handoff.md",
+      "docs/archive/2026-08-28-split-single-pass-verification/neat-handoff.md"
+    ],
+    "otherHistoryDecision": "enumerated_only"
+  },
+  "informationArchitecture": {
+    "currentTruth": "docs/CURRENT.md",
+    "unfinishedWork": "tasks/todo.md",
+    "stableBusinessRules": "docs/2026-07-23-package-rule-foundation.md",
+    "erpExecutionRules": "docs/rules/erp-execution.md",
+    "historicalEvidence": "docs/archive/",
+    "structuralChangeRequired": false
+  },
+  "agentMemory": {
+    "index": "/Users/chat/.claude/projects/-Users-chat-claude/memory/MEMORY.md",
+    "projectMemory": "/Users/chat/.claude/projects/-Users-chat-claude/memory/project_order_review.md",
+    "decision": "updated",
+    "reason": "removed obsolete 290-test baseline, automatic post-split audit claim and old next-stage description"
+  }
+}

@@ -73,7 +73,8 @@ def test_valid_multi_package_plan_produces_blocked_information_dry_run():
     rendered = report.to_text()
     assert "ERP 执行：由界面的受保护拆分按钮单独触发" in rendered
     assert "首个结果样本已经验证" in rendered
-    assert "仍需第二个独立订单真实验收" in rendered
+    assert "当前只运行到点击拆分二次确认" in rendered
+    assert "拆分结果核验和后续审核已临时停用" in rendered
     assert "本报告只验证本地方案，不会自行操作 ERP。" in rendered
 
 

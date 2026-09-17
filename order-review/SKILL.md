@@ -23,11 +23,11 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 | 尺寸与单箱求解 | 纸箱/规则 `data/packing-dimensions.json`；单品尺寸 `data/packing-product-dimensions.json`；`dimension_catalog.py`、`carton_packing.py` |
 | 案例/备份/回放 | `docs/usage.md`；`case_repository.py`、`case_restore.py`、`case_replay.py`、`packing_case_audit.py` |
 | 界面 | 审单浮窗：`src/order_review/ui.py`；装箱实验：`src/order_review/packing_simulator_web.py`、`packing_simulator_service.py`、`packing_simulator_static/` |
-| 本阶段证据 | worktree最终对账：`docs/archive/2026-09-13-packing-worktree-reconciliation/neat-handoff.md`；P1历史收口：`docs/archive/2026-09-11-packing-simulator-p1/neat-handoff.md` |
+| 本阶段证据 | 2026-09-17资料补充与拆分停点收口：`docs/archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md`；worktree最终对账：`docs/archive/2026-09-13-packing-worktree-reconciliation/neat-handoff.md` |
 
 ## CORE FLOWS
 
-- 日常审单：读取原订单 → 恢复/编辑本地方案 → 用户逐单点击 → 独立ERP执行验证。
+- 日常审单：读取原订单 → 恢复/编辑本地方案 → 用户逐单点击。单包按受保护审核链执行；多包当前只运行到拆分二次确认，随后由人工回ERP核对。
 - 装箱实验：只读快照/实验副本 → 标准ERP身份与装箱资料 → 指定箱型与约束 → 计算/独立校验 → 展示；历史人工方案只在求解完成后对照。
 - 商品身份：`features.json` 只贡献 `erpName`；正式简称/编码可由200条只读快照补全；视觉标签、特征、别名和活动 `sku-records` 不参与装箱身份。
 - 资料补充：保留完整名称、简称及原始尺寸 → 核实来源与估计轴 → 更新资料 → 读回；不自动扩大白名单。
@@ -36,9 +36,9 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 
 - 同一SKU不等于同一固定组合；组合相同比例也不能自动推断为同一套餐。
 - 几何UNKNOWN不等于装不下；规则支持不等于三维求解成功。
-- 当前求解器的“完整底面支撑”是已知过严的算法假设，不得升级成业务装箱规则；几何可行性与运输稳定性/摆放偏好后续分层。
+- 完整底面支撑已从几何硬条件拆成稳定性指标；部分支撑方案可以是几何有效结果，但必须展示最低支撑覆盖率并保留实物复核，不能自动升级成运输稳定结论。
 - 礼盒内部商品不能与封装礼盒重复计体积；礼袋估计厚度不能标成实测。
-- `pendingMappings`和`giftPackingFitChecks`目前含待集成资料/实验坐标，不能当作加载器已经启用的产品或箱型。
+- `pendingMappings`是资料收据台账，混有待确认、已转正式和已作废记录；`giftPackingFitChecks`保存实验坐标。两者都不能仅因存在记录就当作加载器已经启用的产品或箱型，正式能力只看现役数组与解析结果。
 - 正式案例、原始活动笔记和ERP日志保持事实，不为通过回放或匹配计划改写。
 
 ## PATHS
@@ -49,7 +49,7 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 - `docs/rules/README.md`、`docs/rules/erp-execution.md`
 - `docs/2026-07-23-package-rule-foundation.md`
 - `docs/2026-09-08-packing-simulator-plan.md`、`docs/2026-09-12-packing-algorithm-research.md`
-- `docs/archive/README.md`、`docs/archive/2026-09-11-packing-simulator-p1/`、`docs/archive/2026-09-09-packing-simulator-planning/`
+- `docs/archive/README.md`、`docs/archive/2026-09-17-packing-data-and-split-confirm-only/`、`docs/archive/2026-09-13-packing-worktree-reconciliation/`
 - `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
 - `src/order_review/`、`tests/`、`pyproject.toml`

@@ -25,6 +25,7 @@ from .carton_packing import (
     PlacedUnit,
     assess_carton,
     assess_catalog_carton,
+    support_coverage_ratio,
     units_from_catalog,
 )
 from .case_repository import ConfirmedCase, JsonCaseRepository, default_case_path
@@ -40,7 +41,7 @@ from .order_identity import same_order_signature_key
 
 
 PACKING_SIMULATOR_API_VERSION = 1
-PACKING_SIMULATOR_ALGORITHM_VERSION = "single-carton-order-search-v2"
+PACKING_SIMULATOR_ALGORITHM_VERSION = "single-carton-geometry-stability-split-v3"
 
 
 class PackingSimulatorInputError(ValueError):
@@ -799,7 +800,22 @@ class PackingSimulatorService:
 
         quantities: Counter[str] = Counter()
         for line in lines:
-            quantities[line.merchant_code] += line.quantity
+            if line.merchant_code not in self.zero_space_merchant_codes:
+                quantities[line.merchant_code] += line.quantity
+
+        applicable_originals = tuple(
+            original
+            for original in self.catalog.dedicated_original_cartons
+            if original.brand_id == brand_id
+            and original.inventory_status != InventoryStatus.RETIRED
+            and original.accepts_closed_unit(quantities)
+        )
+        original_with_dimensions = tuple(
+            original for original in applicable_originals if original.dimensions is not None
+        )
+        original_missing_dimensions = tuple(
+            original for original in applicable_originals if original.dimensions is None
+        )
 
         ordered = sorted(
             brand_cartons,
@@ -813,15 +829,19 @@ class PackingSimulatorService:
         first_failed: dict[str, Any] | None = None
         remaining_nodes = max_search_nodes
 
-        for carton in ordered:
+        for index, carton in enumerate(ordered):
             if remaining_nodes <= 0:
                 break
             considered.append(carton.carton_id)
+            remaining_cartons = (
+                len(ordered) - index + len(original_with_dimensions)
+            )
+            carton_budget = max(1, remaining_nodes // remaining_cartons)
             result = self.assess_single_carton(
                 brand_id=brand_id,
                 carton_id=carton.carton_id,
                 lines=lines,
-                max_search_nodes=remaining_nodes,
+                max_search_nodes=carton_budget,
                 use_confirmed_rules=False,
             )
             remaining_nodes = max(
@@ -864,7 +884,93 @@ class PackingSimulatorService:
             else:
                 first_failed = first_failed or result
 
+        ordered_originals = sorted(
+            original_with_dimensions,
+            key=lambda original: (original.dimensions.volume, original.carton_id),
+        )
+        for index, original in enumerate(ordered_originals):
+            if remaining_nodes <= 0:
+                break
+            considered.append(original.carton_id)
+            remaining_originals = len(ordered_originals) - index
+            original_budget = max(1, remaining_nodes // remaining_originals)
+            result = self._assess_original_carton(
+                brand_id=brand_id,
+                carton_id=original.carton_id,
+                lines=lines,
+                max_search_nodes=original_budget,
+            )
+            remaining_nodes = max(
+                0,
+                remaining_nodes - int(result["geometry"].get("searchedNodes") or 0),
+            )
+            if (
+                result["business"]["status"] == "experiment_allowed"
+                and result["geometry"]["status"]
+                == CartonAssessmentStatus.FITS_INNER_GEOMETRY.value
+                and result["geometry"]["completenessVerified"]
+            ):
+                result["selection"] = {
+                    "mode": "auto",
+                    "selectedCartonId": original.carton_id,
+                    "selectedCartonName": original.display_name,
+                    "consideredCartonIds": considered,
+                    "message": "普通候选箱未找到确定解，系统改用适用产品原箱并找到可行摆放。",
+                }
+                return result
+            if result["geometry"]["status"] == CartonAssessmentStatus.UNKNOWN.value:
+                first_unknown = first_unknown or result
+            elif result["business"]["status"] == "experiment_allowed":
+                first_failed = first_failed or result
+
         result = first_unknown or first_failed
+        if original_missing_dimensions:
+            unresolved = "、".join(
+                original.display_name for original in original_missing_dimensions
+            )
+            if result is None:
+                result = self._assess_original_carton(
+                    brand_id=brand_id,
+                    carton_id=original_missing_dimensions[0].carton_id,
+                    lines=lines,
+                    max_search_nodes=1,
+                )
+            result["business"] = {
+                "status": "experiment_allowed",
+                "reasons": ["输入可进入单箱实验，但候选容器资料尚不完整。"],
+                "evidenceIds": [],
+            }
+            result["geometry"].update(
+                {
+                    "status": CartonAssessmentStatus.UNKNOWN.value,
+                    "message": f"存在适用产品原箱但缺少尺寸：{unresolved}",
+                    "reason": (
+                        f"{unresolved} 符合当前商品与数量范围，但原箱尺寸缺失；"
+                        "不能把普通候选箱的失败解释为整单单箱装不下。"
+                    ),
+                    "containerMm": None,
+                    "placements": [],
+                    "completenessVerified": False,
+                    "fullySupported": False,
+                    "minimumSupportCoverageRatio": None,
+                }
+            )
+            result["evidence"] = {
+                "level": "insufficient",
+                "summary": "适用产品原箱缺少尺寸，单箱几何结论保持 UNKNOWN。",
+                "evidenceIds": [],
+            }
+            result["selection"] = {
+                "mode": "auto",
+                "selectedCartonId": None,
+                "selectedCartonName": None,
+                "consideredCartonIds": considered,
+                "unresolvedOriginalCartonIds": [
+                    original.carton_id for original in original_missing_dimensions
+                ],
+                "message": "存在适用产品原箱但缺少尺寸，当前不能形成完整自动选箱结论。",
+            }
+            return result
         if result is None:
             raise PackingSimulatorInputError("没有可评估的纸箱")
         result["selection"] = {
@@ -1365,9 +1471,29 @@ class PackingSimulatorService:
         completeness_verified: bool,
     ) -> dict[str, Any]:
         geometry = assessment.geometry
+        support_ratios = [
+            support_coverage_ratio(item, geometry.placements)
+            for item in geometry.placements
+        ]
+        minimum_support_ratio = min(support_ratios, default=1.0)
+        fully_supported = minimum_support_ratio >= 1.0
+        support_message = (
+            "当前方案全部离地物件均为完整底面支撑。"
+            if fully_supported
+            else (
+                f"当前方案最低底面支撑覆盖率为{minimum_support_ratio:.0%}；"
+                "几何上可放，但运输稳定性和仓库摆放偏好仍需实物复核。"
+            )
+        )
+        message = assessment.message
+        if geometry.placements and not fully_supported:
+            message = (
+                f"{message}；最低底面支撑覆盖率为{minimum_support_ratio:.0%}，"
+                "稳定性需实物复核"
+            )
         return {
             "status": assessment.status.value,
-            "message": assessment.message,
+            "message": message,
             "reason": geometry.reason,
             "containerMm": list(geometry.container.as_tuple()),
             "placements": [
@@ -1378,6 +1504,10 @@ class PackingSimulatorService:
                     "displayName": item.display_name,
                     "positionMm": [item.position.x, item.position.y, item.position.z],
                     "dimensionsMm": list(item.dimensions.as_tuple()),
+                    "supportCoverageRatio": support_coverage_ratio(
+                        item,
+                        geometry.placements,
+                    ),
                 }
                 for item in geometry.placements
             ],
@@ -1385,8 +1515,7 @@ class PackingSimulatorService:
             "maxSearchNodes": geometry.max_search_nodes,
             "occupiedVolumeRatio": assessment.occupied_volume_ratio,
             "completenessVerified": completeness_verified,
-            "supportModelWarning": (
-                "当前底层求解器仍把完整底面支撑作为搜索硬条件；该假设已记录为待修算法问题，"
-                "因此UNKNOWN不能解释为装不下。"
-            ),
+            "fullySupported": fully_supported,
+            "minimumSupportCoverageRatio": minimum_support_ratio,
+            "supportModelWarning": support_message,
         }

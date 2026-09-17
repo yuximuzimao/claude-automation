@@ -268,7 +268,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
         and "数量核对：120 / 120 件" in item.get("1.0", "end-1c")
         for item in _walk(window.content_frame)
     )
-    assert len(_buttons(window, "拆分并审核当前订单")) == 1
+    assert len(_buttons(window, "拆分当前订单")) == 1
     text_widgets = [
         item
         for item in _walk(window.content_frame)
@@ -306,13 +306,14 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
             target_system_order_id=kwargs["target_system_order_id"],
             source_snapshot_id=kwargs["expected_source"].snapshot_id,
             confirmation_reference_id=kwargs["confirmation_reference_id"],
-            state=AuditExecutionState.SUCCESS,
+            state=AuditExecutionState.STOPPED,
             steps=(),
+            split_confirmation_clicked=True,
         )
 
     window.split_executor = fake_split_executor
     window._set_auto_refresh_enabled(True)
-    split_button = _buttons(window, "拆分并审核当前订单")[0]
+    split_button = _buttons(window, "拆分当前订单")[0]
     assert split_button.cget("state") == "normal"
     split_button.invoke()
     for _ in range(20):
@@ -325,10 +326,11 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert split_calls[0]["target_system_order_id"] == "SYSTEM-ORDER-1"
     assert len(split_calls[0]["plan"].packages) == 2
     assert window._split_completed_system_order_id == "SYSTEM-ORDER-1"
-    assert window._auto_refresh_enabled is True
-    assert window.auto_refresh_button.cget("text") == "停止自动刷新"
+    assert window._auto_refresh_enabled is False
+    assert window.auto_refresh_button.cget("text") == "自动刷新"
+    assert "后续审核暂未启用" in window._audit_feedback
     assert (
-        _buttons(window, "拆分并审核当前订单")[0].cget("state")
+        _buttons(window, "拆分当前订单")[0].cget("state")
         == "disabled"
     )
     assert not _buttons(window, "审核当前订单")
@@ -480,6 +482,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert _buttons(window, "修改方案")
     assert _buttons(window, "审核当前订单")
     assert not _buttons(window, "保存方案")
+    window._set_auto_refresh_enabled(True)
     assert window._can_poll_order_identity() is True
     window._show_package_editor = True
     assert window._can_poll_order_identity() is False
@@ -580,7 +583,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert window.package_workflow.auto_adopted_recommendation is True
     assert len(window.package_workflow.draft.packages) == 2
     assert _buttons(window, "修改方案")
-    assert _buttons(window, "拆分并审核当前订单")
+    assert _buttons(window, "拆分当前订单")
     assert not _buttons(window, "保存方案")
     window._set_auto_refresh_enabled(True)
     assert window._can_poll_order_identity() is True
@@ -595,7 +598,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
         return original_confirm(**kwargs)
 
     window.package_workflow.confirm = tracked_split_confirm
-    _buttons(window, "拆分并审核当前订单")[0].invoke()
+    _buttons(window, "拆分当前订单")[0].invoke()
     for _ in range(500):
         root.update()
         if not window._audit_running:
@@ -609,7 +612,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert window.package_workflow.confirmed_plan is None
     assert window.package_workflow.draft is not None
     assert window.package_workflow.confirmation_note == ""
-    assert window._auto_refresh_enabled is True
+    assert window._auto_refresh_enabled is False
     window.package_workflow.confirm = original_confirm
 
     enzyme_snapshot = OrderSnapshot(

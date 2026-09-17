@@ -56,6 +56,7 @@ class SplitOrderReport:
     state: AuditExecutionState
     steps: tuple[AuditStep, ...]
     split_completed: bool = False
+    split_confirmation_clicked: bool = False
 
     @property
     def successful(self) -> bool:
@@ -72,15 +73,22 @@ class SplitOrderReport:
             "sourceSnapshotId": self.source_snapshot_id,
             "confirmationReferenceId": self.confirmation_reference_id,
             "splitCompleted": self.split_completed,
+            "splitConfirmationClicked": self.split_confirmation_clicked,
             "state": self.state.value,
             "steps": [step.to_dict() for step in self.steps],
         }
 
     def render_text(self) -> str:
+        if self.split_confirmation_clicked and not self.split_completed:
+            return (
+                f"已点击拆分确认：订单 {self.target_system_order_id} 已完成浮窗当前"
+                "允许的最后一步。拆分结果核验和后续审核暂未启用，请人工在 ERP "
+                "核对；浮窗不会重复提交当前订单。"
+            )
         if self.successful:
             return (
-                f"拆分并审核成功：订单 {self.target_system_order_id} 已按当前方案"
-                "拆成目标包裹，逐包明细、审核弹窗数量和审核结果均已核对通过。"
+                f"历史完整流程成功记录：订单 {self.target_system_order_id}。"
+                "当前版本不会生成该状态，也不会在拆分确认后继续核验或审核。"
             )
         detail = self.steps[-1].detail if self.steps else "没有可用执行结果"
         if self.split_completed:
@@ -151,6 +159,7 @@ def run_mixed_order_split(
     final_state = AuditExecutionState.STOPPED
     split_submitted = False
     split_completed = False
+    split_confirmation_clicked = False
     audit_submitted = False
     mouse_mover = mouse_mover or move_mouse_at
 
@@ -224,11 +233,6 @@ def run_mixed_order_split(
                     "；".join(check.detail for check in preflight.blockers),
                 )
 
-            _require_payload(
-                evaluator(target_id, build_install_network_observer_js(execution_id)),
-                "NETWORK_OBSERVER_FAILED",
-                "无法安装拆分结果观测器",
-            )
             record(
                 AuditExecutionState.SELECTING_ORDER,
                 "检查通过，正在勾选当前订单",
@@ -461,6 +465,28 @@ def run_mixed_order_split(
                 raise _SplitSubmittedUncertain(
                     f"二次确认点击过程返回异常：{exc}"
                 ) from exc
+
+            split_confirmation_clicked = True
+            final_state = AuditExecutionState.STOPPED
+            record(
+                AuditExecutionState.STOPPED,
+                (
+                    "已点击拆分二次确认；按当前临时安全边界停止，"
+                    "未读取拆分结果、未核验结果行，也未打开或提交审核"
+                ),
+            )
+            return _finish_report(
+                execution_id,
+                started_at,
+                target_system_order_id,
+                expected_source,
+                confirmation_reference_id,
+                final_state,
+                steps,
+                log_store,
+                split_completed=False,
+                split_confirmation_clicked=True,
+            )
 
             network = _poll_payload(
                 target_id,
@@ -733,6 +759,7 @@ def run_mixed_order_split(
         steps,
         log_store,
         split_completed,
+        split_confirmation_clicked,
     )
 
 
@@ -1597,6 +1624,7 @@ def _finish_report(
     steps: list[AuditStep],
     log_store: AuditExecutionLogStore | None,
     split_completed: bool = False,
+    split_confirmation_clicked: bool = False,
 ) -> SplitOrderReport:
     report = SplitOrderReport(
         execution_id=execution_id,
@@ -1608,6 +1636,7 @@ def _finish_report(
         state=state,
         steps=tuple(steps),
         split_completed=split_completed,
+        split_confirmation_clicked=split_confirmation_clicked,
     )
     if log_store is not None:
         try:

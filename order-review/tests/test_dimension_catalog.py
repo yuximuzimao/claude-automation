@@ -11,6 +11,7 @@ from order_review.carton_packing import (
     Point3D,
     assess_carton,
     assess_catalog_carton,
+    layout_is_fully_supported,
     layout_is_valid,
     units_from_catalog,
 )
@@ -24,12 +25,17 @@ from order_review.dimension_catalog import (
 
 COFFEE_CODE = "6977987940138"
 COCONUT_COFFEE_CODE = "6979151090014"
+COFFEE_7_AMERICAN_CODE = "6980319670023"
+COFFEE_7_COCONUT_CODE = "6980319670030"
 PROBIOTIC_CODE = "6977987940053"
 BLACK_TEA_JASMINE_CODE = "6979499760044"
 BLACK_TEA_PUER_CODE = "6979265440002"
 BLACK_TEA_TRIAL_JASMINE_CODE = "6979499760099"
 BLACK_TEA_TRIAL_PUER_CODE = "6979265440019"
 FIG_JELLY_CODE = "6980319670009"
+ENZYME_TRIAL_CODE = "6979499760037"
+YUEXI_SUNSCREEN_CODE = "6950328271429"
+YUEXI_REPAIR_GIFT_BOX_CODE = "6950328273508"
 
 
 @pytest.fixture(scope="module")
@@ -76,6 +82,16 @@ def test_new_product_dimensions_are_bound_only_to_confirmed_codes(catalog):
     assert catalog.product("6950328271429").dimensions == DimensionsMm(128, 51, 36)
     assert catalog.product("6975183897416").dimensions == DimensionsMm(107, 53, 43)
     assert catalog.product("6977235921278").dimensions == DimensionsMm(166, 117, 24)
+    assert catalog.product(COFFEE_7_AMERICAN_CODE).dimensions == DimensionsMm(90, 37, 154)
+    assert catalog.product(COFFEE_7_COCONUT_CODE) is catalog.product(
+        COFFEE_7_AMERICAN_CODE
+    )
+    assert catalog.product("6972838277357") is catalog.product("6976299500108")
+    assert catalog.product(YUEXI_REPAIR_GIFT_BOX_CODE).dimensions == DimensionsMm(
+        190,
+        228,
+        55,
+    )
     assert catalog.product("旧版糖果未知编码") is None
 
 
@@ -193,6 +209,88 @@ def test_coffee_original_carton_accepts_confirmed_54_to_60_range(catalog):
     assert not coffee.accepts_closed_unit({COFFEE_CODE: 59, PROBIOTIC_CODE: 1})
     assert not coffee.allow_other_products
     assert coffee.closed_shipping_unit
+
+
+def test_coffee_seven_bag_original_carton_preserves_confirmed_eighty_box_grid(
+    catalog,
+):
+    original = catalog.original_carton("original-coffee-7-80")
+    arrangement = original.confirmed_arrangement
+
+    assert original.capacity == 80
+    assert original.minimum_shippable_quantity == 80
+    assert original.dimensions == DimensionsMm(393, 380, 328)
+    assert original.accepts_closed_unit({COFFEE_7_AMERICAN_CODE: 80})
+    assert original.accepts_closed_unit(
+        {COFFEE_7_AMERICAN_CODE: 40, COFFEE_7_COCONUT_CODE: 40}
+    )
+    assert not original.accepts_closed_unit({COFFEE_7_AMERICAN_CODE: 79})
+    assert arrangement is not None
+    assert arrangement.grid == (10, 4, 2)
+    assert arrangement.item_orientation == DimensionsMm(37, 90, 154)
+    assert arrangement.occupied_dimensions == DimensionsMm(370, 360, 308)
+
+
+@pytest.mark.parametrize(
+    "carton_id,merchant_code,capacity,dimensions,grid,orientation",
+    (
+        (
+            "original-candy-2-100",
+            "6976299500108",
+            100,
+            (525, 380, 280),
+            (5, 10, 2),
+            (101, 36, 130),
+        ),
+        (
+            "original-enzyme-4-trial-72",
+            ENZYME_TRIAL_CODE,
+            72,
+            (427, 300, 350),
+            (6, 6, 2),
+            (70, 43, 165),
+        ),
+        (
+            "original-yuexi-sunscreen-60",
+            YUEXI_SUNSCREEN_CODE,
+            60,
+            (455, 267, 147),
+            (12, 5, 1),
+            (36, 51, 128),
+        ),
+        (
+            "original-yuexi-repair-gift-box-20",
+            YUEXI_REPAIR_GIFT_BOX_CODE,
+            20,
+            (473, 293, 400),
+            (2, 5, 2),
+            (228, 55, 190),
+        ),
+    ),
+)
+def test_newly_confirmed_original_cartons_preserve_capacity_and_grid(
+    catalog,
+    carton_id,
+    merchant_code,
+    capacity,
+    dimensions,
+    grid,
+    orientation,
+):
+    original = catalog.original_carton(carton_id)
+    arrangement = original.confirmed_arrangement
+
+    assert original.capacity == capacity
+    assert original.minimum_shippable_quantity == capacity
+    assert original.dimensions == DimensionsMm(*dimensions)
+    assert original.accepts_closed_unit({merchant_code: capacity})
+    assert not original.accepts_closed_unit({merchant_code: capacity - 1})
+    assert arrangement is not None
+    assert arrangement.quantity == capacity
+    assert arrangement.grid == grid
+    assert arrangement.item_orientation == DimensionsMm(*orientation)
+    inner = DimensionsMm(*(value - 5 for value in dimensions))
+    assert arrangement.occupied_dimensions.fits_inside(inner)
 
 
 def test_unknown_original_carton_dimensions_do_not_block_confirmed_capacity(catalog):
@@ -461,7 +559,7 @@ def test_total_volume_can_prove_items_do_not_fit(catalog):
     assert assessment.geometry.reason == "商品总体积大于纸箱空间"
 
 
-def test_layout_validation_rejects_partial_support():
+def test_geometry_validation_accepts_partial_support_but_stability_rejects_it():
     base = PlacedUnit(
         instance_id="base",
         merchant_code="BASE",
@@ -480,11 +578,10 @@ def test_layout_validation_rejects_partial_support():
         dimensions=DimensionsMm(100, 100, 50),
         stackable=True,
     )
+    container = DimensionsMm(200, 200, 200)
 
-    assert not layout_is_valid(
-        DimensionsMm(200, 200, 200),
-        (base, partly_floating),
-    )
+    assert layout_is_valid(container, (base, partly_floating))
+    assert not layout_is_fully_supported(container, (base, partly_floating))
 
 
 def test_search_limit_returns_unknown_instead_of_false_not_fit(catalog):
