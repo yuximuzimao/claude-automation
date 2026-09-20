@@ -52,6 +52,15 @@ function readAccountStatus() {
 function writeAccountStatus(status) {
   fs.writeFileSync(ACCOUNT_STATUS_FILE, JSON.stringify(status, null, 2));
 }
+function buildAccountAbnormalReminder(num, previous, current) {
+  if (!['expired', 'error'].includes(current.status)) return null;
+  if (previous.status === current.status && previous.error === current.error) return null;
+
+  const label = current.note || `账号${num}`;
+  const detail = current.error || (current.status === 'expired' ? '登录已失效' : '扫描异常');
+  return `【售后异常】${label}：${detail}，请打开售后系统处理`;
+}
+
 function updateAccountStatus(num, patch) {
   const s = readAccountStatus();
   const prev = s[String(num)] || {};
@@ -62,6 +71,14 @@ function updateAccountStatus(num, patch) {
   s[String(num)] = merged;
   writeAccountStatus(s);
   sse.broadcast('accounts-update', readAccountStatus());
+
+  // lastScan 表示本次确实执行过扫描或打开后台；单纯重读已有异常不重复提醒。
+  if (patch.lastScan) {
+    const title = buildAccountAbnormalReminder(num, prev, merged);
+    if (title && !createReminder(title)) {
+      log(`[预警] 店铺异常待办快捷指令失败已降级通知: ${title}`);
+    }
+  }
 }
 
 function buildA1FixedBatchFailureStatus(op, error, now = () => new Date().toISOString()) {
@@ -129,6 +146,28 @@ function sendScanSummaryReminders(state, sendReminder = createReminder) {
     results.push(sendReminder('【售后待办】有已取消工单需要取消快递拦截，请打开售后系统查看'));
   }
   return results;
+}
+
+function buildDeadlineSummaryReminder(queueItems, now = new Date()) {
+  const nowMs = now instanceof Date ? now.getTime() : Number(now);
+  const urgent = (queueItems || [])
+    .map(item => ({ deadlineMs: item.deadlineAt ? Date.parse(item.deadlineAt) : NaN }))
+    .filter(({ deadlineMs }) => Number.isFinite(deadlineMs) && deadlineMs > nowMs && deadlineMs - nowMs <= REMIND_HOURS * 3600000)
+    .sort((a, b) => a.deadlineMs - b.deadlineMs);
+  if (urgent.length === 0) return null;
+
+  const earliestMs = urgent[0].deadlineMs;
+  const totalMinutes = Math.max(1, Math.ceil((earliestMs - nowMs) / 60000));
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  const remaining = hours > 0
+    ? `${hours}小时${minutes > 0 ? `${minutes}分` : ''}`
+    : `${minutes}分钟`;
+  const deadline = new Date(earliestMs);
+  const pad = value => String(value).padStart(2, '0');
+  const deadlineText = `${deadline.getFullYear()}-${pad(deadline.getMonth() + 1)}-${pad(deadline.getDate())} ${pad(deadline.getHours())}:${pad(deadline.getMinutes())}`;
+
+  return `【售后待办】有工单即将超时，最早剩余${remaining}，截止${deadlineText}，请打开售后系统查看`;
 }
 
 // ── 公共 API ──────────────────────────────────────────────────────
@@ -955,19 +994,13 @@ async function execScan(op) {
     log('[预警] 扫描汇总待办快捷指令执行失败，已降级系统通知');
   }
 
-  // 到期预警：检查队列中 waiting/simulated 等待人工处理的工单
+  // 到期预警：同一扫描批次只按最早截止工单创建一条汇总提醒
   const queueItems = (db.readQueue().items || []).filter(i =>
     i.mode === 'live' && !['done', 'auto_executed', 'auto_executing'].includes(i.status)
   );
-  for (const qi of queueItems) {
-    if (!qi.deadlineAt) continue;
-    const remainingHours = (new Date(qi.deadlineAt).getTime() - Date.now()) / 3600000;
-    if (remainingHours > REMIND_HOURS || remainingHours <= 0) continue;
-    const timeStr = remainingHours < 1 ? '<1小时' : `${Math.round(remainingHours)}小时`;
-    const dl = new Date(qi.deadlineAt);
-    const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
-    const title = `【⚠️即将过期】${qi.accountNote || ''} 工单${qi.workOrderNum} ${qi.type || ''} 剩余${timeStr} ${dlStr}`;
-    if (!createReminder(title)) log(`[预警] 待办快捷指令失败已降级通知: ${title}`);
+  const deadlineReminder = buildDeadlineSummaryReminder(queueItems);
+  if (deadlineReminder && !createReminder(deadlineReminder)) {
+    log(`[预警] 待办快捷指令失败已降级通知: ${deadlineReminder}`);
   }
 
   sse.broadcast('accounts-update', readAccountStatus());
@@ -1535,8 +1568,10 @@ module.exports = {
   buildFreshReprocessState,
   buildOutside48ReprocessProcessed,
   buildA1FixedBatchFailureStatus,
+  buildAccountAbnormalReminder,
   createScanReminderState,
   updateScanReminderState,
   sendScanSummaryReminders,
+  buildDeadlineSummaryReminder,
   processRecheckedOpenedDetail,
 };
