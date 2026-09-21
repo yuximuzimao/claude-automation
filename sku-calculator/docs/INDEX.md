@@ -81,6 +81,7 @@ parse --supplier-id <商家ID> → resolve-components → resolve-stock → calc
 - **加购 SKU 变体名含平台后缀导致全量 0 匹配**（2026-06-23 L9）：鲸灵平台规格列格式为 `规格名;KGOS`，corrIndex 构建时去分号，但原匹配代码漏掉去分号，导致全部未命中。诊断信号：所有 ⚠️ 中 key 格式为 `货号::…;KGOS`。修复：`resolve-components.js` 匹配前加 `.replace(/;.*$/, '')`
 - **resolve-stock pageSize 硬编码导致翻页重复读取**（2026-06-23 L10）：ERP 库存状态页每页条数设为 200 时，硬编码 `PAGE_SIZE=50` 会导致翻 4 页每次读全量（如 181×4=724）。诊断信号：读取条数 = 期望条数 × 整数倍。修复：运行时读 `.el-pagination .el-select .el-input__inner` 的 value，fallback 50
 - **库存页隐藏分页节点会导致总数=0或翻页无效**（2026-09-16 茗瑞实测）：页面可同时存在隐藏分页（如“共0条记录”）和可见分页（如“共192条记录”）；直接 `querySelector('.el-pagination__total')` 或 `querySelector('button.btn-next')` 会命中隐藏节点。读取总数和点击下一页都必须遍历候选并用 `getBoundingClientRect()` 选择可见节点；否则会出现总数超时或每页重复读取 50 条。`lib/query-stock.js` 已按此修复。
+- **ERP 库存状态页已迁移到新版路由**（2026-09-21 悦希实测）：旧 `#/stock/newstatu/` 会触发导航校验失败，当前页面为 `#/stock/newstatu_next/`。新版仍使用 Element UI 表格，Vue store 中商品名=`title`、实际可用数=`availableStock`，原库存读取核心逻辑可继续复用；`product-mapping/lib/navigate.js` 的“库存状态”路由已更新到新版，`query-stock.js` 不再保留无用旧 hash 常量。
 
 ## §7 文档与历史边界
 

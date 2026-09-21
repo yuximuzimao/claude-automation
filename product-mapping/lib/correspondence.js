@@ -34,22 +34,38 @@ function attachImageUrlsByLink(products, imgMap) {
 async function downloadPlatformProducts(erpId, shopName) {
   console.error('[corr] 触发「下载平台商品」...');
 
-  // 前置清理：关闭页面上可能残留的旧下载弹窗（避免干扰新对话框检测）
+  // 前置清理：关闭页面上可能残留的旧下载弹窗（避免干扰新对话框检测）。
+  // 进度弹窗可能没有“取消”/headerbtn，需通过 Vue visible 状态关闭。
   await cdp.eval(erpId,
     '(function(){' +
     '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
     '  for(var i=0;i<ds.length;i++){' +
-    '    if(ds[i].getBoundingClientRect().height>0){' +
-    '      var btns=Array.from(ds[i].querySelectorAll("button"));' +
-    '      var cancel=btns.find(function(b){return b.innerText.trim()==="取消";});' +
-    '      if(cancel){cancel.click();continue;}' +
-    '      var close=ds[i].querySelector(".el-dialog__headerbtn");' +
-    '      if(close) close.click();' +
+    '    var el=ds[i];' +
+    '    if(el.getBoundingClientRect().height<=0) continue;' +
+    '    var btns=Array.from(el.querySelectorAll("button"));' +
+    '    var cancel=btns.find(function(b){return b.innerText.trim()==="取消";});' +
+    '    if(cancel){cancel.click();continue;}' +
+    '    var closeBtn=el.querySelector(".el-dialog__headerbtn");' +
+    '    if(!closeBtn){' +
+    '      var closeBtns=Array.from(el.querySelectorAll("button.el-dialog__closeBtn"));' +
+    '      closeBtn=closeBtns.find(function(b){return b.getBoundingClientRect().width>0;});' +
+    '    }' +
+    '    if(closeBtn){closeBtn.click();continue;}' +
+    '    var vm=el.__vue__;' +
+    '    if(vm){' +
+    '      vm.$emit("update:visible",false);' +
+    '      vm.$emit("close");' +
+    '      var p=vm.$parent;' +
+    '      for(var j=0;j<10&&p;j++){' +
+    '        if(typeof p.dialogVisible!=="undefined"){p.dialogVisible=false;break;}' +
+    '        if(typeof p.visible==="boolean"){p.visible=false;break;}' +
+    '        p=p.$parent;' +
+    '      }' +
     '    }' +
     '  }' +
     '})()'
   );
-  await sleep(500);
+  await sleep(1500);
 
   // 按优先级尝试多种按钮文字
   const clicked = await cdp.eval(erpId,
@@ -82,74 +98,60 @@ async function downloadPlatformProducts(erpId, shopName) {
   );
   if (!dialogVisible) throw new Error('点击下载按钮后弹窗未出现');
 
-  // 选择店铺：
-  // 1. 通过 ElSelectShop vm.options 找目标店铺 value
-  // 2. emit 设 ElSelectShop 自身 value
-  // 3. 向上遍历找 DownLoadCommodity（有 bindShops/userIds 字段），直接设值
-  //    原因：ElSelectShop 的 emit 不能自动上传到父组件
+  // 选择店铺：只操作带 .el-select 的下载配置弹窗。
+  // 已是唯一目标时保持现状；否则清掉多余 tag，再走组件自己的 handleOptionSelect。
   const shopSelected = await cdp.eval(erpId,
     '(function(){' +
     '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
-    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0){d=ds[i];break;}}' +
+    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0&&ds[i].querySelector(".el-select")){d=ds[i];break;}}' +
     '  if(!d)return "no-dialog";' +
     '  var sel=d.querySelector(".el-select");' +
     '  if(!sel)return "no-select";' +
     '  var vm=sel.__vue__;' +
     '  if(!vm)return "no-vue";' +
     '  var opts=vm.options||[];' +
-    '  var target=opts.find(function(o){return (o.label||"").includes(' + JSON.stringify(shopName) + ');});' +
-    '  if(!target)return "not-found:"+opts.map(function(o){return o.label;}).join(",");' +
-    // 设 ElSelectShop 自身 value
-    '  vm.visible=false;' +
-    '  vm.$emit("input",[target.value]);' +
-    '  vm.$emit("change",[target.value]);' +
-    // 向上遍历找有 bindShops 或 userIds 的父组件（DownLoadCommodity）
-    '  var parent=vm.$parent;' +
-    '  for(var i=0;i<15&&parent;i++){' +
-    '    if(typeof parent.bindShops!=="undefined"||typeof parent.userIds!=="undefined")break;' +
-    '    parent=parent.$parent;' +
+    '  var targetOpt=opts.find(function(o){return (o.label||"").includes(' + JSON.stringify(shopName) + ');});' +
+    '  if(!targetOpt)return "not-found:"+opts.map(function(o){return o.label;}).join(",");' +
+    '  var targetVal=targetOpt.value;' +
+    '  var curVal=vm.value||[];' +
+    '  if(!Array.isArray(curVal))curVal=[curVal];' +
+    '  if(curVal.length===1&&curVal[0]===targetVal)return "already-selected:"+targetOpt.label;' +
+    '  var tags=Array.from(d.querySelectorAll(".el-tag .el-tag__close"));' +
+    '  for(var ti=0;ti<tags.length;ti++){var r=tags[ti].getBoundingClientRect();if(r.width>0)tags[ti].click();}' +
+    '  if(!curVal.includes(targetVal)){' +
+    '    if(vm.handleOptionSelect){vm.handleOptionSelect(targetOpt);}' +
+    '    else{vm.$emit("input",[targetVal]);vm.$emit("change",[targetVal]);}' +
     '  }' +
-    '  var result="selected:"+target.label+":"+target.value;' +
-    // bindShops 是店铺对象数组（不是 ID 数组），禁止直接赋值，否则破坏数据结构
-    // userIds 是已选店铺 ID 数组，通过 v-model 绑定到 el-select
-    '  if(parent){' +
-    '    if(typeof parent.userIds!=="undefined"){parent.userIds=[target.value];result+=" |userIds-set";}' +
-    '  } else {result+=" |no-parent";}' +
-    '  return result;' +
+    '  return "selected:"+targetOpt.label+":"+targetVal;' +
     '})()'
   );
   console.error(`[corr] 店铺选择: ${shopSelected}`);
-  if (!shopSelected.startsWith('selected:')) {
+  if (!shopSelected.startsWith('selected:') && !shopSelected.startsWith('already-selected:')) {
     throw new Error(`下载弹窗未找到店铺「${shopName}」: ${shopSelected}`);
   }
   await sleep(300);
 
-  // 验证：DownLoadCommodity bindShops 包含目标店铺
-  const verifyParent = await cdp.eval(erpId,
+  const verifySelect = await cdp.eval(erpId,
     '(function(){' +
     '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
-    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0){d=ds[i];break;}}' +
+    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0&&ds[i].querySelector(".el-select")){d=ds[i];break;}}' +
     '  if(!d)return "no-dialog";' +
     '  var sel=d.querySelector(".el-select");' +
     '  if(!sel||!sel.__vue__)return "no-vue";' +
     '  var vm=sel.__vue__;' +
-    '  var parent=vm.$parent;' +
-    '  for(var i=0;i<15&&parent;i++){' +
-    '    if(typeof parent.bindShops!=="undefined"||typeof parent.userIds!=="undefined")break;' +
-    '    parent=parent.$parent;' +
-    '  }' +
-    '  if(!parent)return "no-parent";' +
-    '  return JSON.stringify({userIds:parent.userIds});' +
+    '  var tags=d.querySelectorAll(".el-tag");' +
+    '  var tagTexts=Array.from(tags).map(function(t){return t.innerText.trim();}).join(",");' +
+    '  return JSON.stringify({value:vm.value,tags:tagTexts});' +
     '})()'
   );
-  console.error(`[corr] DownLoadCommodity 验证: ${JSON.stringify(verifyParent)}`);
-  if (typeof verifyParent === 'string') {
-    throw new Error(`无法找到父组件 DownLoadCommodity: ${verifyParent}`);
+  console.error(`[corr] el-select 验证: ${JSON.stringify(verifySelect)}`);
+  if (typeof verifySelect === 'string') {
+    throw new Error(`el-select 状态查询失败: ${verifySelect}`);
   }
-  const parentData = verifyParent;
-  const hasShop = (parentData.userIds||[]).length > 0;
+  const selState = verifySelect;
+  const hasShop = Array.isArray(selState.value) ? selState.value.length > 0 : !!selState.value;
   if (!hasShop) {
-    throw new Error(`店铺选择验证失败，userIds未更新: ${JSON.stringify(parentData)}`);
+    throw new Error(`店铺选择验证失败，el-select value 为空: ${JSON.stringify(selState)}`);
   }
   await sleep(500);
 
@@ -157,7 +159,7 @@ async function downloadPlatformProducts(erpId, shopName) {
   await cdp.eval(erpId,
     '(function(){' +
     '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
-    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0){d=ds[i];break;}}' +
+    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0&&ds[i].querySelector(".el-select")){d=ds[i];break;}}' +
     '  if(!d)return;' +
     '  var radios=Array.from(d.querySelectorAll(".el-radio"));' +
     '  var target=radios.find(function(el){return el.innerText&&el.innerText.includes("全量");});' +
@@ -169,34 +171,67 @@ async function downloadPlatformProducts(erpId, shopName) {
   );
   await sleep(300);
 
-  // 点确认
-  await cdp.eval(erpId,
+  // 点确认：只在下载配置弹窗里找真实可见 primary 按钮。
+  const confirmResult = await cdp.eval(erpId,
     '(function(){' +
-    '  var footers=document.querySelectorAll(".el-dialog__footer");' +
-    '  for(var i=0;i<footers.length;i++){' +
-    '    if(footers[i].getBoundingClientRect().height>0){' +
-    '      var btn=footers[i].querySelector(".el-button--primary");' +
-    '      if(btn){btn.click();return;}' +
-    '    }' +
-    '  }' +
+    '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
+    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0&&ds[i].querySelector(".el-select")){d=ds[i];break;}}' +
+    '  if(!d)return "no-dialog";' +
+    '  var allBtns=Array.from(d.querySelectorAll(".el-button--primary"));' +
+    '  var btn=allBtns.find(function(b){return b.getBoundingClientRect().width>0;});' +
+    '  if(!btn)return "no-visible-btn";' +
+    '  btn.click();return "clicked:"+btn.innerText.trim();' +
     '})()'
   );
+  console.error(`[corr] 确认按钮: ${confirmResult}`);
+  if (typeof confirmResult !== 'string' || !confirmResult.startsWith('clicked:')) {
+    throw new Error(`下载确认按钮操作失败: ${confirmResult}`);
+  }
   console.error('[corr] 已确认，等待下载完成...');
 
-  // 等弹窗关闭（最多 60s）
-  for (let i = 0; i < 60; i++) {
+  // 店铺选择弹窗可能保持打开；只以独立进度弹窗消失作为下载完成。
+  for (let i = 0; i < 120; i++) {
     await sleep(1000);
-    const gone = await cdp.eval(erpId,
-      '(function(){var ds=document.querySelectorAll(".el-dialog__wrapper");for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0)return false;}return true;})()'
+    const done = await cdp.eval(erpId,
+      '(function(){var ds=document.querySelectorAll(".el-dialog__wrapper");for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0&&ds[i].querySelector(".el-progress"))return false;}return true;})()'
     );
-    if (gone) {
+    if (done) {
       console.error(`[corr] 下载完成（${i + 1}s）`);
+      await cdp.eval(erpId,
+        '(function(){' +
+        '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
+        '  for(var i=0;i<ds.length;i++){' +
+        '    var el=ds[i];if(el.getBoundingClientRect().height<=0)continue;' +
+        '    var btns=Array.from(el.querySelectorAll("button"));' +
+        '    var cancel=btns.find(function(b){var r=b.getBoundingClientRect();return r.width>0&&b.innerText.trim()==="取消";});' +
+        '    if(cancel){cancel.click();continue;}' +
+        '    var title=el.querySelector(".el-dialog__title");' +
+        '    if(title&&title.innerText.includes("校验结果")){' +
+        '      var ok=btns.find(function(b){return b.getBoundingClientRect().width>0;});if(ok)ok.click();' +
+        '    }' +
+        '  }' +
+        '})()'
+      );
+      await sleep(500);
       try { fs.writeFileSync(DOWNLOAD_MARKER_FILE, JSON.stringify({ shopName, downloadedAt: new Date().toISOString() })); } catch {}
       return;
     }
+    await cdp.eval(erpId,
+      '(function(){' +
+      '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
+      '  for(var i=0;i<ds.length;i++){' +
+      '    var el=ds[i];if(el.getBoundingClientRect().height<=0)continue;' +
+      '    var title=el.querySelector(".el-dialog__title");' +
+      '    if(title&&title.innerText.includes("校验结果")){' +
+      '      var btns=Array.from(el.querySelectorAll("button"));' +
+      '      var ok=btns.find(function(b){return b.getBoundingClientRect().width>0;});if(ok)ok.click();' +
+      '    }' +
+      '  }' +
+      '})()'
+    );
     if ((i + 1) % 10 === 0) console.error(`[corr] 下载中...（${i + 1}s）`);
   }
-  throw new Error('下载平台商品超时（60s），请检查 ERP 网络');
+  throw new Error('下载平台商品超时（120s），请检查 ERP 网络');
 }
 
 /**

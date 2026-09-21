@@ -167,7 +167,7 @@ visible.querySelector('button.el-button--primary').click();
 | 4 | 多层弹窗取第一个 footer | 必须遍历 `querySelectorAll` 找 `getBoundingClientRect().height > 0` 的 |
 | 5 | 翻页用按钮状态判断结束 | 必须用"共X条"总数推算总页数 |
 | 6 | 档案V2 查询前未清筛选残留 | 每次档案操作前检查/清空筛选状态 |
-| 7 | 识图不看 features.json 颜色字段 | 颜色规则优先级高于图片文字标注 |
+| 7 | 识图先按 SKU 名/图片文字推断，再去看实物 | 平台原图实物是最高依据；先按颜色/造型/尺寸/版本识别并计数，文字只做兜底，冲突时保留实物结论并报告 |
 | 8 | 搜索结果只看数量或首行 | 多结果时必须找到某个 td 与完整 ERP 商品名精确相等；无精确行才报错，不能把合法的子串多结果误判为歧义 |
 | 9 | 只识别未匹配 SKU | 全量识图，已匹配 SKU 也必须有 recognition 才能核对 |
 | 10 | recognition 为空但 ERP 有明细时归入 pending | 必须输出 mismatch，不能让 AI 人工兜底替代脚本比较 |

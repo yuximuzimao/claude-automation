@@ -14,9 +14,9 @@ const { sleep, retry } = require('./wait');
 const { acquireErpLock } = require('./erp-lock');
 
 const PAGE_MAP = {
-  '商品档案V2': '#/prod/parallel/',
+  '商品档案V2': '#/prod/parallel_next/',
   '商品对应表': '#/prod/prod_correspondence_next/',
-  '库存状态': '#/stock/newstatu/',
+  '库存状态': '#/stock/newstatu_next/',
 };
 
 // ── Session 缓存 ────────────────────────────────────────────────────────────

@@ -13,8 +13,6 @@ const { getByErpName } = require('./product-catalog');
 const DATA_DIR   = path.join(__dirname, '../data');
 const OUTPUT_FILE = path.join(DATA_DIR, 'warehouse-stock.json');
 
-const STOCK_PAGE_HASH = '#/stock/newstatu/';
-
 async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 /**

@@ -1,10 +1,10 @@
 {
   "_meta": {
     "brand": "悦希",
-    "campaign": "百浩悦希活动（2026-07-28）",
-    "lastUpdated": "2026-07-28",
+    "campaign": "悦希9.22活动（2026-09-20）",
+    "lastUpdated": "2026-09-20",
     "fullGift": "无",
-    "note": "本次无满赠。配件规则按 platformCode 精确匹配；识图只记录图片中可见商品，不可见配件由此文件在 match 和 check 时临时注入（不写回 recognition）。",
+    "note": "配件来源：.ai-bridge/9.22悦希货盘.xlsx Sheet1 最后一列。按本轮蘅圆 check 的 productCode 映射到具体 platformCode；识图只记录图片中可见商品，不可见配件由此文件在 match 和 check 时临时注入（不写回 recognition）。",
     "accessoryList": [
       "HEE悦希印花礼袋-白",
       "HEE悦希印花礼盒（天地盖）白色",
@@ -13,50 +13,654 @@
     ]
   },
   "rules": {
-    "260805-4": {
-      "note": "货号yx001 焕颜四件组：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+    "260922zh-2": {
+      "note": "货号260922-2：9.22货盘配件",
       "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 1
+        }
       ]
     },
-    "yxhyzh1x": {
-      "note": "货号yxhyzh1 眼霜3.0款2瓶+眼油1瓶：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+    "260922zh-3": {
+      "note": "货号260922-3：9.22货盘配件",
       "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
       ]
     },
-    "yx820-1": {
-      "note": "货号yyyszh-5 3.0眼霜*2+2.0眼膜*2：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+    "260922zh-4": {
+      "note": "货号260922-3：9.22货盘配件",
       "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
       ]
     },
-    "260605-9": {
-      "note": "货号yxxhtz 修护套组*2组：带修颜礼袋×2",
+    "260922zh-5": {
+      "note": "货号260922-4：9.22货盘配件",
       "accessories": [
-        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 2 }
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
       ]
     },
-    "yyzh26": {
-      "note": "货号yyzh26 悦颜3件组：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+    "260922zh-6": {
+      "note": "货号260922-5：9.22货盘配件",
       "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-7": {
+      "note": "货号260922-6：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-8": {
+      "note": "货号260922-6：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-9": {
+      "note": "货号260922-7：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-91": {
+      "note": "货号260922-12：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-95": {
+      "note": "货号260922-12：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-92": {
+      "note": "货号260922-12：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-11": {
+      "note": "货号yyzh24：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-10": {
+      "note": "货号yyzh24：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "721zh2": {
+      "note": "货号yyzh4：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
       ]
     },
     "260605-11": {
-      "note": "货号yxlhy-2 兰花油*2瓶赠5抗精华：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+      "note": "货号yxlhy-2：9.22货盘配件",
       "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-12": {
+      "note": "货号260922-8：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "260605-13": {
+      "note": "货号0308-1：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-13": {
+      "note": "货号260922-9：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-94": {
+      "note": "货号0509-1：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-93": {
+      "note": "货号0509-1：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 2
+        }
+      ]
+    },
+    "260922zh-15": {
+      "note": "货号260922-10：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-16": {
+      "note": "货号260922-11：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "yxhyzh1x": {
+      "note": "货号yxhyzh1：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-70": {
+      "note": "货号yyzh22：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "260922zh-17": {
+      "note": "货号yyzh22：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 1
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 1
+        }
+      ]
+    },
+    "sdw-1": {
+      "note": "货号sdw260922-2：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 1
+        }
+      ]
+    },
+    "sdw-2": {
+      "note": "货号sdw260922-2：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 1
+        }
+      ]
+    },
+    "sdw-3": {
+      "note": "货号sdw260922-3：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
+      ]
+    },
+    "sdw-5": {
+      "note": "货号sdw260922-3：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
+      ]
+    },
+    "sdw-4": {
+      "note": "货号sdw260922-3：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
+      ]
+    },
+    "sdw-6": {
+      "note": "货号sdw260922-3：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
+      ]
+    },
+    "sdw-7": {
+      "note": "货号sdw260922-4：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
+      ]
+    },
+    "sdw-8": {
+      "note": "货号sdw260922-4：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 4
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 4
+        }
+      ]
+    },
+    "sdw-9": {
+      "note": "货号sdw260922-5：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 2
+        }
+      ]
+    },
+    "sdw-10": {
+      "note": "货号sdw260922-5：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋",
+          "qty": 2
+        }
+      ]
+    },
+    "sdw-11": {
+      "note": "货号sdw260922-6：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "sdw-12": {
+      "note": "货号sdw260922-6：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
+      ]
+    },
+    "sdw-13": {
+      "note": "货号sdw260922-7：9.22货盘配件",
+      "accessories": [
+        {
+          "erpName": "HEE悦希印花礼盒（天地盖）白色",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希印花礼袋-白",
+          "qty": 2
+        },
+        {
+          "erpName": "HEE悦希雪梨纸",
+          "qty": 2
+        }
       ]
     }
   }

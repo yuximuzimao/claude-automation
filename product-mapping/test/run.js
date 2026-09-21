@@ -415,7 +415,7 @@ async function runL2EnsureCorrPage(n = 3) {
       const { navigateErp } = require(path.join(PROJECT_ROOT, 'lib/navigate'));
       await navigateErp(erpId, '商品档案V2');
       const hashBefore = await cdp.eval(erpId, 'window.location.hash');
-      assert.strictEqual(hashBefore, '#/prod/parallel/', '应在档案V2');
+      assert.strictEqual(hashBefore, '#/prod/parallel_next/', '应在档案V2');
 
       await ensureCorrPage(erpId);
       const hashAfter = await cdp.eval(erpId, 'window.location.hash');
@@ -869,7 +869,7 @@ async function runL2Navigate(n = 5) {
       await resetErp(erpId);
       await navigateErp(erpId, '商品档案V2');
       const hash2 = await cdp.eval(erpId, 'window.location.hash');
-      assert.strictEqual(hash2, '#/prod/parallel/', '应导航到档案V2');
+      assert.strictEqual(hash2, '#/prod/parallel_next/', '应导航到档案V2');
 
       // 用例 3: checkLogin 返回正确格式
       clearSessionCache();

@@ -221,7 +221,7 @@ async function closeResidualDialogsIfOpen(erpId) {
     if (found !== 'clicked') continue;
 
     let gone = false;
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
       await sleep(500);
       gone = await cdp.eval(erpId,
         '(function(){' +
@@ -234,7 +234,7 @@ async function closeResidualDialogsIfOpen(erpId) {
       );
       if (gone) break;
     }
-    if (!gone) throw new Error(`残留弹窗 10 秒内未关闭: ${title}`);
+    if (!gone) throw new Error(`残留弹窗 15 秒内未关闭: ${title}`);
   }
 }
 
