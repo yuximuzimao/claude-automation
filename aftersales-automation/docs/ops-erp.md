@@ -20,7 +20,7 @@ if (window.location.hash !== targetHash) {
 |------|---------|------|----------------|
 | 订单管理 | `订单管理` | `#/tradeNew/manage/` | `快麦ERP--订单管理` |
 | 售后工单新版 | `售后工单新版` | `#/aftersale/sale_handle_next/` | `快麦ERP--售后处理` |
-| 商品档案V2 | `商品档案V2` | `#/prod/parallel/` | `快麦ERP--商品档案V2` |
+| 商品档案V2 | `商品档案V2` | `#/prod/parallel_next/` | `快麦ERP--商品档案V2` |
 | 商品对应表 | `商品对应表` | `#/prod/prod_correspondence_next/` | `快麦ERP--商品对应表` |
 
 > ⚠️ **禁止**：`/navigate` 直接跳转任何 ERP 功能页面（会被重定向到首页或登录页）

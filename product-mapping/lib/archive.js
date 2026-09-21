@@ -4,7 +4,7 @@ const { sleep, retry } = require('./wait');
 const { navigateErp, CLOSE_ALL_DIALOGS_JS } = require('./navigate');
 
 // 直接移植自售后工单项目 lib/product/archive.js
-// 方法：DOM 输入法（模拟用户在「主商家编码」框打字）+ 精确查询下拉 + 遍历父组件找 handleQuery
+// 方法：DOM 输入法（模拟用户在「主商家编码」框打字）+ 精确查询下拉 + 调用新版 .search-wrap Vue 的 search()
 
 const SET_EXACT_QUERY_JS =
   '(function(){' +
@@ -53,15 +53,10 @@ function makeSearchCodeJS(code, placeholder) {
     '  targetInp.value=' + escaped + ';' +
     '  targetInp.dispatchEvent(new Event("input",{bubbles:true}));' +
     '  targetInp.dispatchEvent(new Event("change",{bubbles:true}));' +
-    '  var el=targetInp;var sv=null;' +
-    '  for(var i=0;i<12;i++){' +
-    '    if(!el) break;' +
-    '    var v=el.__vue__;' +
-    '    if(v&&typeof v.handleQuery==="function"){sv=v;break;}' +
-    '    el=el.parentElement;' +
-    '  }' +
-    '  if(!sv) return JSON.stringify({error:"未找到 handleQuery"});' +
-    '  sv.handleQuery();' +
+    '  var searchWrap=targetInp.closest(".search-wrap");' +
+    '  var sv=searchWrap&&searchWrap.__vue__;' +
+    '  if(!sv||typeof sv.search!=="function") return JSON.stringify({error:"未找到 search"});' +
+    '  sv.search();' +
     '  return JSON.stringify({searched:' + escaped + '});' +
     '})()';
 }
@@ -73,15 +68,12 @@ function makeReadDataListJS(placeholder, expectedCode) {
   '(function(){' +
   '  var el=Array.from(document.querySelectorAll(".el-input__inner")).find(function(i){var r=i.getBoundingClientRect();return i.placeholder===' + targetPlaceholder + '&&r.width>0&&r.height>0;});' +
   '  if(!el) return JSON.stringify({error:"未找到输入框"});' +
-  '  var v=el;var sv=null;' +
-  '  for(var i=0;i<12;i++){' +
-  '    if(!v) break;' +
-  '    var vm=v.__vue__;' +
-  '    if(vm&&vm.dataList){sv=vm;break;}' +
-  '    v=v.parentElement;' +
-  '  }' +
-  '  if(!sv||!sv.dataList||!sv.dataList.length){' +
-  '    return JSON.stringify({error:"dataList 为空",count:sv?sv.dataList.length:-1});' +
+  '  var tables=Array.from(document.querySelectorAll(".el-table")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});' +
+  '  var table=tables[0];' +
+  '  var vm=table&&table.__vue__;' +
+  '  var data=vm&&vm.store&&vm.store.states&&vm.store.states.data;' +
+  '  if(!Array.isArray(data)||!data.length){' +
+  '    return JSON.stringify({error:"table store 为空",count:Array.isArray(data)?data.length:-1});' +
   '  }' +
   '  var expected=' + expected + ';' +
   '  function containsExact(value,depth){' +
@@ -90,11 +82,11 @@ function makeReadDataListJS(placeholder, expectedCode) {
   '    if(Array.isArray(value))return value.some(function(v){return containsExact(v,depth-1);});' +
   '    return Object.keys(value).some(function(k){return containsExact(value[k],depth-1);});' +
   '  }' +
-  '  var item=sv.dataList.find(function(candidate){' +
+  '  var item=data.find(function(candidate){' +
   '    if(' + targetPlaceholder + '==="主商家编码")return String(candidate.outerId||"").trim()===expected;' +
   '    return containsExact(candidate,4);' +
   '  });' +
-  '  if(!item)return JSON.stringify({error:"dataList 未包含查询编码",count:sv.dataList.length,expected:expected});' +
+  '  if(!item)return JSON.stringify({error:"table store 未包含查询编码",count:data.length,expected:expected});' +
   '  return JSON.stringify({outerId:item.outerId,title:item.title,type:item.type,subItemNum:item.subItemNum||0});' +
   '})()'
   );
@@ -181,13 +173,19 @@ async function queryArchive(erpId, erpCode) {
   return specItem || null;
 }
 
-// 点击子商品数字链接（a.ml_15）展开单品明细弹窗
+// 点击“子商品信息”列中的数字链接展开单品明细弹窗。
+// 新版页面移除了旧 a.ml_15 class，因此按表头定位列，再在该列内精确匹配数字。
 function makeClickSubItemLinkJS(subItemNum) {
   return '(function(){' +
-    '  var el=Array.from(document.querySelectorAll("a.ml_15")).find(function(a){' +
-    '    var r=a.getBoundingClientRect();' +
-    '    return a.innerText.trim()===' + JSON.stringify(String(subItemNum)) + '&&r.width>0;' +
-    '  });' +
+    '  var tables=Array.from(document.querySelectorAll(".el-table")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});' +
+    '  var table=tables[0];' +
+    '  if(!table) return JSON.stringify({error:"visible table not found"});' +
+    '  var headers=Array.from(table.querySelectorAll("th")).map(function(th){return th.innerText.trim();});' +
+    '  var col=headers.indexOf("子商品信息");' +
+    '  if(col<0) return JSON.stringify({error:"子商品信息列不存在"});' +
+    '  var rows=Array.from(table.querySelectorAll("tr.el-table__row"));' +
+    '  var el=null;' +
+    '  rows.some(function(row){var cells=row.querySelectorAll("td");var a=cells[col]&&cells[col].querySelector("a");if(a&&a.innerText.trim()===' + JSON.stringify(String(subItemNum)) + '){el=a;return true;}return false;});' +
     '  if(!el) return JSON.stringify({error:"subItem link not found for num=' + subItemNum + '"});' +
     '  el.click();return JSON.stringify({clicked:true});' +
     '})()';

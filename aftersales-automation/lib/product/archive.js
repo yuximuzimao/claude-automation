@@ -66,15 +66,10 @@ function makeSearchSpecCodeJS(specCode) {
     mainInp.value = '${specCode}';
     mainInp.dispatchEvent(new Event('input', {bubbles:true}));
     mainInp.dispatchEvent(new Event('change', {bubbles:true}));
-    var el = mainInp; var sv = null;
-    for (var i = 0; i < 12; i++) {
-      if (!el) break;
-      var v = el.__vue__;
-      if (v && typeof v.handleQuery === 'function') { sv = v; break; }
-      el = el.parentElement;
-    }
-    if (!sv) return JSON.stringify({error:'未找到 handleQuery'});
-    sv.handleQuery();
+    var searchWrap = mainInp.closest('.search-wrap');
+    var sv = searchWrap && searchWrap.__vue__;
+    if (!sv || typeof sv.search !== 'function') return JSON.stringify({error:'未找到 search'});
+    sv.search();
     return JSON.stringify({searched: '${specCode}', searchData: sv.searchData});
   })()`;
 }
@@ -85,17 +80,16 @@ const READ_DATALIST_JS = `(function(){
   });
   var el = inputs.find(function(i){ return i.placeholder === '主商家编码'; });
   if (!el) return JSON.stringify({error:'未找到输入框'});
-  var v = el; var sv = null;
-  for (var i = 0; i < 12; i++) {
-    if (!v) break;
-    var vm = v.__vue__;
-    if (vm && vm.dataList) { sv = vm; break; }
-    v = v.parentElement;
+  var tables = Array.from(document.querySelectorAll('.el-table')).filter(function(t){
+    var r = t.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+  });
+  var table = tables[0];
+  var vm = table && table.__vue__;
+  var data = vm && vm.store && vm.store.states && vm.store.states.data;
+  if (!Array.isArray(data) || !data.length) {
+    return JSON.stringify({error:'table store 为空', count: Array.isArray(data) ? data.length : -1});
   }
-  if (!sv || !sv.dataList || !sv.dataList.length) {
-    return JSON.stringify({error:'dataList 为空', count: sv ? sv.dataList.length : -1});
-  }
-  var item = sv.dataList[0];
+  var item = data[0];
   return JSON.stringify({
     outerId: item.outerId,
     title: item.title,
@@ -122,15 +116,10 @@ function makeSearchSpecialSpecCodeJS(specCode) {
     inp.value = '${specCode}';
     inp.dispatchEvent(new Event('input', {bubbles:true}));
     inp.dispatchEvent(new Event('change', {bubbles:true}));
-    var el = inp; var sv = null;
-    for (var i = 0; i < 12; i++) {
-      if (!el) break;
-      var v = el.__vue__;
-      if (v && typeof v.handleQuery === 'function') { sv = v; break; }
-      el = el.parentElement;
-    }
-    if (!sv) return JSON.stringify({error:'未找到 handleQuery'});
-    sv.handleQuery();
+    var searchWrap = inp.closest('.search-wrap');
+    var sv = searchWrap && searchWrap.__vue__;
+    if (!sv || typeof sv.search !== 'function') return JSON.stringify({error:'未找到 search'});
+    sv.search();
     return JSON.stringify({searched: '${specCode}', searchData: sv.searchData});
   })()`;
 }
@@ -142,15 +131,14 @@ function makeReadSpecialDataListJS(specCode) {
     });
     var el = inputs.find(function(i){ return i.placeholder === '规格商家编码'; });
     if (!el) return JSON.stringify({error:'未找到规格商家编码输入框'});
-    var v = el; var sv = null;
-    for (var i = 0; i < 12; i++) {
-      if (!v) break;
-      var vm = v.__vue__;
-      if (vm && vm.dataList) { sv = vm; break; }
-      v = v.parentElement;
-    }
-    if (!sv || !sv.dataList || !sv.dataList.length) {
-      return JSON.stringify({error:'dataList 为空', count: sv ? sv.dataList.length : -1});
+    var tables = Array.from(document.querySelectorAll('.el-table')).filter(function(t){
+      var r = t.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    });
+    var table = tables[0];
+    var vm = table && table.__vue__;
+    var data = vm && vm.store && vm.store.states && vm.store.states.data;
+    if (!Array.isArray(data) || !data.length) {
+      return JSON.stringify({error:'table store 为空', count: Array.isArray(data) ? data.length : -1});
     }
     var expected = '${specCode}';
     function containsExact(value, depth) {
@@ -159,8 +147,8 @@ function makeReadSpecialDataListJS(specCode) {
       if (Array.isArray(value)) return value.some(function(x){ return containsExact(x, depth - 1); });
       return Object.keys(value).some(function(k){ return containsExact(value[k], depth - 1); });
     }
-    var item = sv.dataList.find(function(candidate){ return containsExact(candidate, 4); });
-    if (!item) return JSON.stringify({error:'dataList 未包含查询规格编码', count:sv.dataList.length});
+    var item = data.find(function(candidate){ return containsExact(candidate, 4); });
+    if (!item) return JSON.stringify({error:'table store 未包含查询规格编码', count:data.length});
     return JSON.stringify({
       outerId: item.outerId,
       title: item.title,
@@ -171,12 +159,24 @@ function makeReadSpecialDataListJS(specCode) {
   })()`;
 }
 
-// 点击子商品数字链接（a.ml_15）展开单品明细
+// 点击“子商品信息”列中的数字链接展开单品明细（新版已移除旧 a.ml_15 class）
 function makeClickSubItemLinkJS(subItemNum) {
   return `(function(){
-    var el = Array.from(document.querySelectorAll('a.ml_15')).find(function(a){
-      var r = a.getBoundingClientRect();
-      return a.innerText.trim() === '${subItemNum}' && r.width > 0;
+    var tables = Array.from(document.querySelectorAll('.el-table')).filter(function(t){
+      var r = t.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    });
+    var table = tables[0];
+    if (!table) return JSON.stringify({error:'visible table not found'});
+    var headers = Array.from(table.querySelectorAll('th')).map(function(th){ return th.innerText.trim(); });
+    var col = headers.indexOf('子商品信息');
+    if (col < 0) return JSON.stringify({error:'子商品信息列不存在'});
+    var rows = Array.from(table.querySelectorAll('tr.el-table__row'));
+    var el = null;
+    rows.some(function(row){
+      var cells = row.querySelectorAll('td');
+      var a = cells[col] && cells[col].querySelector('a');
+      if (a && a.innerText.trim() === '${subItemNum}') { el = a; return true; }
+      return false;
     });
     if (!el) return JSON.stringify({error:'subItem link not found for num=${subItemNum}'});
     el.click();
@@ -186,7 +186,7 @@ function makeClickSubItemLinkJS(subItemNum) {
 
 // 关闭子商品弹窗（读完明细后调用）
 // ⚠️ 必须用 Vue 方式关闭（btn.click()），不能用 DOM 移除。
-// DOM 移除不更新 Vue 内部 dialogVisible 状态 → 下次 a.ml_15 点击时 Vue 认为弹窗已打开而跳过 → "子商品弹窗未打开"
+// DOM 移除不更新 Vue 内部 dialogVisible 状态 → 下次点击子商品链接时 Vue 认为弹窗已打开而跳过 → "子商品弹窗未打开"
 // 关闭后轮询等待弹窗从 DOM 消失（Vue 动画可能需几百ms）
 const CLOSE_SUB_DIALOG_JS = `(function(){
   var visible = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
@@ -310,7 +310,7 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
       return d;
     }, { maxRetries: 3, delayMs: 2000, label: `product-archive ${specCode}` });
 
-    // 套件：点 a.ml_15 展开单品明细
+    // 套件：按“子商品信息”列定位数字链接并展开单品明细
     let subItems = [];
     if (data.subItemNum > 0) {
       try {

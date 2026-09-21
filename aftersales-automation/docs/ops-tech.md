@@ -69,7 +69,7 @@ node -e "const db=require('./lib/server/data'); const ids=['fb-...']; db.markFee
 | ERP | 订单管理 | `https://erpb.superboss.cc/index.html#/tradeNew/manage/` |
 | ERP | 售后工单新版 | `https://erpb.superboss.cc/index.html#/aftersale/sale_handle_next/` |
 | ERP | 商品对应表 | `https://erpb.superboss.cc/index.html#/prod/prod_correspondence_next/` |
-| ERP | 商品档案V2 | `https://erpb.superboss.cc/index.html#/prod/parallel/` |
+| ERP | 商品档案V2 | `https://erpb.superboss.cc/index.html#/prod/parallel_next/` |
 | 鲸灵图片上传 | API | `https://seller-portal.jlsupp.com/base-service/imgUpload` |
 
 ---

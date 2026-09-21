@@ -22,7 +22,7 @@ const { ok, fail } = require('../result');
 const PAGE_MAP = {
   '订单管理':   '#/tradeNew/manage/',
   '售后工单新版': '#/aftersale/sale_handle_next/',
-  '商品档案V2': '#/prod/parallel/',
+  '商品档案V2': '#/prod/parallel_next/',
   '商品对应表': '#/prod/prod_correspondence_next/',
 };
 

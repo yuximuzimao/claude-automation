@@ -133,10 +133,11 @@ if (!input) throw new Error("未找到可见的主商家编码输入框");
 input.value = code;
 input.dispatchEvent(new Event('input', { bubbles: true }));
 input.dispatchEvent(new Event('change', { bubbles: true }));
-// 向上遍历找有 handleQuery 的 Vue 组件
-let vm = input.__vue__;
-for (let i = 0; i < 12 && vm && !vm.handleQuery; i++) vm = vm.$parent;
-vm.handleQuery();
+// 新版档案V2：查询入口在最近的 .search-wrap Vue 组件
+const searchWrap = input.closest('.search-wrap');
+const vm = searchWrap && searchWrap.__vue__;
+if (!vm || typeof vm.search !== 'function') throw new Error('未找到档案查询入口');
+vm.search();
 ```
 
 ### 对应表操作规则

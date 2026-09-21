@@ -193,7 +193,7 @@ await cdp.navigate(targetId, 'https://...');
 | 9 | collect.js spawn timeout → exit code null | 被 SIGTERM 杀死时 exit code=null（非数字），`null !== 0` 为 true 触发重试。排查前先确认是超时还是逻辑错误 |
 | 10 | collect.js 失败无上限导致死循环 | 失败→重置 pending→pipeline 重采→又失败→无限。collectRetries 计数器 3 次上限后标记 simulated；成功后（进入 inferring）清零 |
 | 11 | querySelector 未过滤隐藏元素导致假阴性 | `document.querySelector('.el-input__inner[placeholder="X"]')` 返回 DOM 序第一个元素（可能隐藏 0×0），导致后续 Vue 父链遍历找不到 dataList。必须与其他函数一致：`querySelectorAll` + `getBoundingClientRect` 过滤 `r.width>0 && r.height>0` 再取第一个可见元素。案例：2026-05-04 archive.js READ_DATALIST_JS 读到隐藏的"主商家编码" input → dataList 为空 |
-| 12 | DOM 移除 Element UI 弹窗破坏 Vue 内部状态 | `el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 的 `dialogVisible` 仍为 true。下次点击 `a.ml_15` 时 Vue 认为弹窗已打开，跳过打开逻辑 → "子商品弹窗未打开"。必须用 `btn.click()` 触发 Vue close 流程，并轮询等待弹窗从 DOM 消失。案例：2026-05-04 archive.js CLOSE_SUB_DIALOG_JS 用 DOM 移除 → 第二个工单起 subItems 全空 |
+| 12 | DOM 移除 Element UI 弹窗破坏 Vue 内部状态 | `el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 的 `dialogVisible` 仍为 true。下次点击子商品链接时 Vue 认为弹窗已打开，跳过打开逻辑 → "子商品弹窗未打开"。必须用 `btn.click()` 触发 Vue close 流程，并轮询等待弹窗从 DOM 消失。案例：2026-05-04 archive.js CLOSE_SUB_DIALOG_JS 用 DOM 移除 → 第二个工单起 subItems 全空 |
 | 13 | Chrome 自动填充只触发一次 | Chrome 密码管理器在同一页面生命周期内只自动填充一次（macOS sleep / Chrome 长时间运行后尤为明显）。`recoverLogin` 必须单次尝试而非 3 次循环；仍失败时进 Phase 2 凭据注入而不是重试 reload。单点依赖 Chrome 自动填充是 ERP session 反复失效的根因。 |
 | 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
 | 15 | ~~刷新状态/check-session 全链路~~ **已删除（2026-06-16 停旧系统）** | 原批量检测会短时连续登录多个账号。账号状态只允许通过店铺管理“打开后台”的安全编排或 A1 单账号流程确认；不要重建批量刷新状态功能。 |

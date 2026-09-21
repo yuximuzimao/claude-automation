@@ -16,17 +16,10 @@
 - [ ] **悦希 9.22 懋业第二店铺商品匹配（当前会话未完成，下一会话从这里继续）**
   - 蘅圆已经完整结束：48 个货号 / 94 SKU，final check 为 `recognitionDone=94`、`comparisonMatch=94`、mismatch/pending/未匹配均为 0。最终识图已独立保存到 `docs/archive/2026-09-21-hengyuan-hee-922/recognition-snapshot.json`，不得因为第二店铺 check 全量重写运行态而丢失。
   - 懋业鲸灵账号已切到账号 17，并实时确认 `杭州懋业电子商务有限公司 / 商家ID 43306`。首次 check 已读取到 **42 个活动货号**；ERP 懋业对应表已只读到 **130 个货号 / 204 SKU / 204 张平台图**，全程使用 skip-download，没有重新下载平台商品。
-  - 两次首次 check 都在“商品档案V2”阶段 fail-fast，**尚未生成懋业 check 报告、尚未重写 `sku-records.json`、尚未对懋业执行任何 match 写入**。第一次失败：ERP 路由由 `#/prod/parallel/` 升级到 `#/prod/parallel_next/`；路由已在商品匹配共享导航中更新。第二次失败：新版页面不再暴露旧 `handleQuery/dataList` 组件结构。
-  - 新版档案页只读探针已验证：DOM 填查询条件后点击可见“查询”按钮可以正常精确查询；结果可从可见 `.el-table` 的 Vue `store.states.data` 读取。组合装“子商品信息”数字链接仍存在，但旧 `a.ml_15` class 已消失，应改为按“子商品信息”表头定位该列后点击数字链接。
-  - **下一步门禁：先等用户按本 TODO 下方“ERP 新版页面兼容”所需字段调整页面列/列头，再修改脚本。** 不先猜新 DOM，不为当前页面做大改。
+  - 两次首次 check 曾在“商品档案V2”阶段 fail-fast；因此截至兼容修复完成时，**仍尚未生成懋业 check 报告、尚未重写 `sku-records.json`、尚未对懋业执行任何 match 写入**。
+  - 2026-09-22 ERP 新版兼容已完成并实测：查询沿用 DOM 输入后调用新版 `.search-wrap` Vue 的 `search()`；结果从可见 `.el-table.__vue__.store.states.data` 读取；组合装按“子商品信息”表头定位数字链接。真实编码 `yx005` 与套装 `919zh5` 均通过。
+  - **下一步：直接重跑懋业首次 check。** 页面兼容不再是阻塞项；仍保持真实 42 货号、`brand=hee`、skip-download 和 fail-fast。
   - 页面适配完成后：①重跑懋业首次 check（真实 42 货号、`brand=hee`、skip-download）；②仅对目标店铺中与蘅圆相同 `productCode + platformCode` 的 SKU 复用已确认 recognition，目标店铺不存在的收单王链接自然忽略；③核对已匹配项无 mismatch 后，用户已授权直接执行剩余未匹配项 match；④最后执行 `check --shop 懋业 --reuse-active --skip-download`，完成门禁仍是 recognitionDone=comparisonMatch=目标 SKU 总数，mismatch/pending/pendingVisualReview/unmatched 全为 0。
-
-- [ ] **ERP 新版页面兼容：三个项目一起最小修正**
-  - 受影响项目：`product-mapping`、`sku-calculator`、`aftersales-automation`。
-  - 受影响页面只有两个：**商品档案V2**、**库存状态**。
-  - 商品档案V2：新路由已确认 `#/prod/parallel_next/`；商品匹配和售后各自都有独立档案查询实现，必须一起改；库存分配的 `resolve-components` 间接依赖商品匹配档案查询。
-  - 库存状态：新路由已确认 `#/stock/newstatu_next/`；库存分配实际读取仍可从 Vue store 获取 `title` / `availableStock`，但正式修改与回归测试等用户调整页面列后一起完成。
-  - 用户会按下一会话给出的“脚本所需数据 → 列头/控件”清单配置新版页面。配置完成后只做 URL、查询触发、表格数据源、子商品链接定位等必要兼容，禁止顺手重构。
 
 - [ ] **长批次期间保持 ERP 锁有效**
   - 当前 `lib/erp-lock.js` 的 5 分钟自动恢复窗口短于本轮 56 SKU 批量匹配时长。

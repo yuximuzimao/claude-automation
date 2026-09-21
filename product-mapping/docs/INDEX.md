@@ -259,13 +259,13 @@ data/products/
 
 ### 档案V2 搜索（DOM 输入法，非 window.__sv）
 
-**不能直接赋值** `window.__sv.searchData.outerId = code` —— Vue 双向绑定不触发，`handleQuery()` 拿到旧值或空值。
+**不能直接赋值** `window.__sv.searchData.outerId = code` —— Vue 双向绑定不触发，新版 `.search-wrap` 的 `search()` 仍会拿到旧值或空值。
 
 **正确做法**：
 1. 找 `input[placeholder="主商家编码"]`
 2. 设 `.value = code`，dispatch `input` + `change` 事件
-3. 从 input 向上遍历最多12层父元素，找到有 `handleQuery` 方法的 Vue 组件
-4. 调用 `vm.handleQuery()`
+3. 用 `input.closest('.search-wrap')` 锁定新版查询区域，并取其 Vue 组件
+4. 调用 `vm.search()`；结果从当前可见 `.el-table.__vue__.store.states.data` 读取
 
 ### 档案V2 编码类型
 
