@@ -7,7 +7,7 @@
  */
 const cdp = require('../cdp');
 const { navigateErp } = require('../erp/navigate');
-const { sleep, retry } = require('../wait');
+const { sleep, retry, waitFor } = require('../wait');
 const { ok, fail } = require('../result');
 
 // 悦希仅这 4 个已确认单品的对应表 erpCode 实际是「规格商家编码」，不是主商家编码。
@@ -74,30 +74,37 @@ function makeSearchSpecCodeJS(specCode) {
   })()`;
 }
 
-const READ_DATALIST_JS = `(function(){
-  var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
-    var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;
-  });
-  var el = inputs.find(function(i){ return i.placeholder === '主商家编码'; });
-  if (!el) return JSON.stringify({error:'未找到输入框'});
-  var tables = Array.from(document.querySelectorAll('.el-table')).filter(function(t){
-    var r = t.getBoundingClientRect(); return r.width > 0 && r.height > 0;
-  });
-  var table = tables[0];
-  var vm = table && table.__vue__;
-  var data = vm && vm.store && vm.store.states && vm.store.states.data;
-  if (!Array.isArray(data) || !data.length) {
-    return JSON.stringify({error:'table store 为空', count: Array.isArray(data) ? data.length : -1});
-  }
-  var item = data[0];
-  return JSON.stringify({
-    outerId: item.outerId,
-    title: item.title,
-    subItemNum: item.subItemNum || 0,
-    type: item.type,
-    hasProduct: item.hasProduct
-  });
-})()`;
+function makeReadDataListJS(specCode) {
+  const expected = JSON.stringify(String(specCode));
+  return `(function(){
+    var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
+      var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    });
+    var el = inputs.find(function(i){ return i.placeholder === '主商家编码'; });
+    if (!el) return JSON.stringify({error:'未找到输入框'});
+    var tables = Array.from(document.querySelectorAll('.el-table')).filter(function(t){
+      var r = t.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    });
+    var table = tables[0];
+    var vm = table && table.__vue__;
+    var data = vm && vm.store && vm.store.states && vm.store.states.data;
+    if (!Array.isArray(data) || !data.length) {
+      return JSON.stringify({error:'table store 为空', count: Array.isArray(data) ? data.length : -1});
+    }
+    var expected = ${expected};
+    var item = data.find(function(candidate){
+      return String(candidate && candidate.outerId || '').trim() === expected;
+    });
+    if (!item) return JSON.stringify({error:'table store 未包含查询主商家编码', count:data.length, expected:expected});
+    return JSON.stringify({
+      outerId: item.outerId,
+      title: item.title,
+      subItemNum: item.subItemNum || 0,
+      type: item.type,
+      hasProduct: item.hasProduct
+    });
+  })()`;
+}
 
 function makeSearchSpecialSpecCodeJS(specCode) {
   return `(function(){
@@ -282,6 +289,29 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
     const searchBySpecCode = SPEC_CODE_ONLY_ARCHIVE_CODES.has(String(specCode));
     await navigateErp(targetId, '商品档案V2');
 
+    // ERP 会保留上一次档案页的列头筛选；残留“普通商品”等条件会让本次精确编码查询得到 0 行。
+    // 每次进入档案查询都先通过页面按钮清空条件，再等待 Vue 搜索组件真正 mount 完成。
+    const cleared = await cdp.eval(targetId, `(function(){
+      var btn = Array.from(document.querySelectorAll('button, span')).find(function(b){
+        var r = b.getBoundingClientRect();
+        return b.innerText && b.innerText.trim() === '清空条件' && r.width > 0 && r.height > 0;
+      });
+      if (!btn) return JSON.stringify({skipped:'清空条件 not found'});
+      btn.click();
+      return JSON.stringify({cleared:true});
+    })()`);
+    if (cleared && cleared.cleared) await sleep(1500);
+
+    await waitFor(async () => {
+      const ready = await cdp.eval(targetId, `(function(){
+        return Array.from(document.querySelectorAll('input.el-input__inner')).some(function(i){
+          var r = i.getBoundingClientRect();
+          return i.placeholder === '主商家编码' && r.width > 0 && r.height > 0;
+        });
+      })()`);
+      return ready === true;
+    }, { timeoutMs: 15000, intervalMs: 500, label: '等待商品档案V2搜索组件' });
+
     // 设置精确查询
     await retry(async () => {
       const set = await cdp.eval(targetId, SET_EXACT_QUERY_JS);
@@ -301,7 +331,7 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
         : makeSearchSpecCodeJS(specCode);
       const readJs = searchBySpecCode
         ? makeReadSpecialDataListJS(specCode)
-        : READ_DATALIST_JS;
+        : makeReadDataListJS(specCode);
       const search = await cdp.eval(targetId, searchJs);
       if (search.error) throw new Error(search.error);
       await sleep(3500);

@@ -28,6 +28,10 @@ function loadArchiveWithMocks(evalResults) {
     exports: {
       eval: async (targetId, js) => {
         evalCalls.push({ targetId, js });
+        // archive.js 每次查询前都会做页面初始化。这里把纯初始化检查作为稳定桩处理，
+        // 不占用各测试原本用于“搜索/读表/弹窗”的业务返回序列。
+        if (js.includes("清空条件 not found")) return { skipped: '清空条件 not found' };
+        if (js.includes("return Array.from(document.querySelectorAll('input.el-input__inner')).some")) return true;
         const next = evalResults.shift();
         if (next instanceof Error) throw next;
         return next;
@@ -49,6 +53,7 @@ function loadArchiveWithMocks(evalResults) {
     exports: {
       sleep: async () => {},
       retry: async (fn) => fn(),
+      waitFor: async (fn) => fn(),
     },
   };
 
@@ -145,8 +150,10 @@ describe('productArchive suite sub-items', () => {
     assert.equal(result.success, true);
     assert.equal(result.data.outerId, 'yx005');
     assert.deepEqual(result.data.subItems, []);
-    assert.match(evalCalls[1].js, /规格商家编码/);
-    assert.match(evalCalls[2].js, /规格商家编码/);
+    const specCalls = evalCalls.filter(c => c.js.includes('规格商家编码'));
+    assert.equal(specCalls.length, 2);
+    assert.match(specCalls[0].js, /规格商家编码/);
+    assert.match(specCalls[1].js, /规格商家编码/);
 
     const { proveReturnItems } = require(modulePath('lib/return-item-proof.js'));
     const proof = proveReturnItems({
@@ -189,8 +196,10 @@ describe('productArchive suite sub-items', () => {
     assert.equal(result.success, true);
     assert.equal(result.data.outerId, 'yx002');
     assert.deepEqual(result.data.subItems, []);
-    assert.match(evalCalls[1].js, /规格商家编码/);
-    assert.match(evalCalls[2].js, /规格商家编码/);
+    const specCalls = evalCalls.filter(c => c.js.includes('规格商家编码'));
+    assert.equal(specCalls.length, 2);
+    assert.match(specCalls[0].js, /规格商家编码/);
+    assert.match(specCalls[1].js, /规格商家编码/);
   });
 
   it('特殊规格编码查询后再查普通商品时，先清空规格商家编码残留', async () => {
@@ -221,8 +230,10 @@ describe('productArchive suite sub-items', () => {
     assert.equal(special.success, true);
     assert.equal(normal.success, true);
     assert.equal(normal.data.outerId, '6950328262755');
-    assert.match(evalCalls[4].js, /规格商家编码/);
-    assert.match(evalCalls[4].js, /specInp\.value = ''/);
-    assert.match(evalCalls[4].js, /主商家编码/);
+    const normalSearchCall = evalCalls.find(c => c.js.includes("specInp.value = ''"));
+    assert.ok(normalSearchCall, '普通商品查询前必须清空规格商家编码残留');
+    assert.match(normalSearchCall.js, /规格商家编码/);
+    assert.match(normalSearchCall.js, /specInp\.value = ''/);
+    assert.match(normalSearchCall.js, /主商家编码/);
   });
 });
