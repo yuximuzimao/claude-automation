@@ -461,7 +461,8 @@ function parseHintAction(hint) {
 // 见 docs/collect-schema.md
 function validateCollectedData(cd, type) {
   if (!cd.ticket) return '采集数据缺失：ticket 未采集（read-ticket 失败）';
-  if (type === '仅退款' && !cd.erpSearch && !cd.collectErrors.some(e => e.startsWith('erp-search:'))) {
+  const collectErrors = cd.collectErrors || [];
+  if (type === '仅退款' && !cd.erpSearch && !collectErrors.some(e => e.startsWith('erp-search:'))) {
     return '采集数据缺失：仅退款工单缺少 erpSearch 且无对应 collectError';
   }
   return null; // null = 通过
@@ -1179,6 +1180,38 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     return fin(escalate('退货尚未入库确认，需人工核查'));
   }
 
+  // ERP 主行显示已收货，不代表商品明细已经成功采到。若展开明细为空或数量对不上，
+  // 只能判采集证据不完整，不能把“没采到”翻译成“客户没退”。
+  const incompleteReceiptDetails = [];
+  for (const row of receivedRows) {
+    const rowId = row.erpOrderId || '未知售后单';
+    if (!Array.isArray(row.items) || row.items.length === 0) {
+      incompleteReceiptDetails.push(`${rowId}商品明细为空`);
+      continue;
+    }
+    let detailQuantity = 0;
+    let hasInvalidQuantity = false;
+    for (const item of row.items) {
+      const qtyGood = Number(item && item.qtyGood);
+      const qtyBad = Number(item && item.qtyBad);
+      if (!Number.isFinite(qtyGood) || qtyGood < 0 || !Number.isFinite(qtyBad) || qtyBad < 0) {
+        hasInvalidQuantity = true;
+        break;
+      }
+      detailQuantity += qtyGood + qtyBad;
+    }
+    const hasReturnQty = row.returnQty !== undefined && row.returnQty !== null && row.returnQty !== '';
+    const returnQty = Number(row.returnQty);
+    if (hasInvalidQuantity || (hasReturnQty && (!Number.isFinite(returnQty) || returnQty < 0 || returnQty !== detailQuantity))) {
+      incompleteReceiptDetails.push(`${rowId}退回总数与良品次品合计不一致`);
+    }
+  }
+  if (incompleteReceiptDetails.length) {
+    const reason = `ERP已收货商品明细采集不完整：${incompleteReceiptDetails.join('；')}，请重新采集后再判断`;
+    s({ type: 'branch', text: `上报 → ${reason}` });
+    return fin(escalate(reason));
+  }
+
   // ── 收集入库明细 ─────────────────────────────────────────────────
   const receivedItems = [];  // { name, qtyGood, qtyBad }
   receivedRows.forEach(row => {
@@ -1702,10 +1735,19 @@ function inferDecision(sim, queueItem) {
   s({ type: 'read', label: '工单类型', value: type || '未知' });
 
   // ── 关键采集失败 → 上报 ───────────────────────────────────────
+  const needsErpAftersale = (type === '退货退款' || type === '换货') && Boolean(ticket.returnTracking);
   const criticalErrors = (cd.collectErrors || []).filter(e =>
-    e.startsWith('read-ticket') || e.startsWith('erp-search:')
+    e.startsWith('read-ticket')
+    || e.startsWith('erp-search:')
+    || (needsErpAftersale && e.startsWith('erp-aftersale:'))
   );
-  s({ type: 'check', condition: '关键数据采集成功 (read-ticket + erp-search)', result: criticalErrors.length === 0 });
+  s({
+    type: 'check',
+    condition: needsErpAftersale
+      ? '关键数据采集成功 (read-ticket + erp-search + erp-aftersale)'
+      : '关键数据采集成功 (read-ticket + erp-search)',
+    result: criticalErrors.length === 0,
+  });
   if (criticalErrors.length) {
     s({ type: 'branch', text: `关键采集失败，上报 → ${criticalErrors[0]}` });
     return fin(escalate(`关键数据采集失败：${criticalErrors[0]}`));

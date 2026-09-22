@@ -31,7 +31,7 @@ function makeSearchTrackingJS(tracking) {
 }
 
 // 读所有主行（有展开图标）和已展开的明细行
-// 明细行在展开容器 TR (nextSibling, class="") 内的嵌套 table 中，不是顶层 sibling
+// 明细行在展开容器 TR (nextSibling) 内的嵌套 table 中，不是顶层 sibling
 const READ_AFTERSALE_ROWS_JS = `(function(){
   var allRows = Array.from(document.querySelectorAll('tr.el-table__row'));
 
@@ -56,10 +56,11 @@ const READ_AFTERSALE_ROWS_JS = `(function(){
       items: []
     };
 
-    // 明细行在展开容器 TR（nextSibling，class=""）内的嵌套 table 的 tr.el-table__row 中
+    // 明细行在展开容器 TR 的嵌套 table 中。新版页面会给展开容器本身也加 el-table__row，
+    // 因此用 el-table__expanded-cell 识别容器，不能再用 class 排除。
     if (rec.isExpanded) {
       var container = mr.nextElementSibling;
-      if (container && container.tagName === 'TR' && !container.classList.contains('el-table__row')) {
+      if (container && container.tagName === 'TR' && container.querySelector('td.el-table__expanded-cell')) {
         var itemRows = Array.from(container.querySelectorAll('tr.el-table__row'));
         itemRows.forEach(function(ir){
           var tds = Array.from(ir.querySelectorAll('td'));
@@ -132,6 +133,19 @@ async function erpAftersale(targetId, tracking) {
     const rows = await retry(async () => {
       const r = await cdp.eval(targetId, READ_AFTERSALE_ROWS_JS);
       if (r.error) throw new Error(r.error);
+      const incompleteRows = r.filter(row => {
+        if (!String(row.goodsStatus || '').includes('卖家已收到退货')) return false;
+        if (!Array.isArray(row.items) || row.items.length === 0) return true;
+        const detailQuantity = row.items.reduce(
+          (sum, item) => sum + Number(item.qtyGood || 0) + Number(item.qtyBad || 0),
+          0
+        );
+        return Number(row.returnQty) !== detailQuantity;
+      });
+      if (incompleteRows.length) {
+        const ids = incompleteRows.map(row => row.erpOrderId || '未知售后单').join('、');
+        throw new Error(`ERP 已收货行商品明细未加载完整或数量不一致：${ids}`);
+      }
       return r;
     }, { maxRetries: 3, delayMs: 1500, label: `read-aftersale-rows ${tracking}` });
 
@@ -141,4 +155,4 @@ async function erpAftersale(targetId, tracking) {
   }
 }
 
-module.exports = { erpAftersale };
+module.exports = { erpAftersale, READ_AFTERSALE_ROWS_JS };
