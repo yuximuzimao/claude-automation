@@ -227,7 +227,10 @@ async function main() {
         process.exit(1);
       }
       const { runCheck } = require('./lib/check');
-      const result = await runCheck(jlId, erpId, opts.shop, { brand: opts.brand });
+      const result = await runCheck(jlId, erpId, opts.shop, {
+        brand: opts.brand,
+        skipDownload: args.includes('--skip-download'),
+      });
       console.log(JSON.stringify(result, null, 2));
       break;
     }

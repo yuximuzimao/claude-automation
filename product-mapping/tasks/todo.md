@@ -4,6 +4,12 @@
 
 ## P0：下次实战前必须看
 
+- [ ] **修复 L1-annotate 测试失败污染真实 `sku-records.json`**
+  - 2026-09-22 NEAT 验证触发：`node test/run.js --fast` 的 L1-annotate 会临时替换真实 `data/sku-records.json`；当前恢复逻辑只在全部断言通过后执行，断言失败会直接进入 catch，导致业务运行态遗留为测试夹具。
+  - 本轮已用最终懋业报告 + ERP 对应表实时只读数据恢复 94 条记录，并核对 imgUrl / recognition / erpCode 均为 94/94。
+  - 修复前禁止在存在未归档业务运行态时执行该用例；后续应改为 `finally` 无条件恢复，或完全改用独立临时路径。
+  - 同时更新已过时的 HEE `yx001 / 260805-4` 配件注入 fixture；当前规则加载 38 条货号规则，但该 fixture 的 `injected` 实际为 0。
+
 - [ ] **HEE 新品图片与识图特征**
   - [ ] `HEE悦希淡纹润护精华口红 09古堡邂逅 3.2g`（简称：悦希口红 09古堡邂逅；编码 `6950328226245`）；本轮活动没有可用独立商品图，继续待补。
   - [x] `HEE悦希玻色因抗皱紧致焕颜面霜（3.0） 50g`（简称：焕颜霜3.0；编码 `6950328225903`）；2026-09-20 已用本轮三瓶装实图补参考图与视觉特征，不复用面霜2.0视觉。
@@ -12,14 +18,6 @@
   - [x] `HEE悦希云朵净卸慕斯油 50ml 体验装`（简称：慕斯油 体验装；编码 `6970240607953`）；2026-09-20 已补参考图与视觉特征。
   - [x] `HEE悦希云朵净卸慕斯油 150ml`（简称：慕斯油；编码 `6970240607946`）；2026-09-20 已补参考图与视觉特征。
   - 商品匹配只维护身份与视觉事实；装箱尺寸、箱型适用范围和固定组合仍由 `order-review` 自己维护。
-
-- [ ] **悦希 9.22 懋业第二店铺商品匹配（当前会话未完成，下一会话从这里继续）**
-  - 蘅圆已经完整结束：48 个货号 / 94 SKU，final check 为 `recognitionDone=94`、`comparisonMatch=94`、mismatch/pending/未匹配均为 0。最终识图已独立保存到 `docs/archive/2026-09-21-hengyuan-hee-922/recognition-snapshot.json`，不得因为第二店铺 check 全量重写运行态而丢失。
-  - 懋业鲸灵账号已切到账号 17，并实时确认 `杭州懋业电子商务有限公司 / 商家ID 43306`。首次 check 已读取到 **42 个活动货号**；ERP 懋业对应表已只读到 **130 个货号 / 204 SKU / 204 张平台图**，全程使用 skip-download，没有重新下载平台商品。
-  - 两次首次 check 曾在“商品档案V2”阶段 fail-fast；因此截至兼容修复完成时，**仍尚未生成懋业 check 报告、尚未重写 `sku-records.json`、尚未对懋业执行任何 match 写入**。
-  - 2026-09-22 ERP 新版兼容已完成并实测：查询沿用 DOM 输入后调用新版 `.search-wrap` Vue 的 `search()`；结果从可见 `.el-table.__vue__.store.states.data` 读取；组合装按“子商品信息”表头定位数字链接。真实编码 `yx005` 与套装 `919zh5` 均通过。
-  - **下一步：直接重跑懋业首次 check。** 页面兼容不再是阻塞项；仍保持真实 42 货号、`brand=hee`、skip-download 和 fail-fast。
-  - 页面适配完成后：①重跑懋业首次 check（真实 42 货号、`brand=hee`、skip-download）；②仅对目标店铺中与蘅圆相同 `productCode + platformCode` 的 SKU 复用已确认 recognition，目标店铺不存在的收单王链接自然忽略；③核对已匹配项无 mismatch 后，用户已授权直接执行剩余未匹配项 match；④最后执行 `check --shop 懋业 --reuse-active --skip-download`，完成门禁仍是 recognitionDone=comparisonMatch=目标 SKU 总数，mismatch/pending/pendingVisualReview/unmatched 全为 0。
 
 - [ ] **长批次期间保持 ERP 锁有效**
   - 当前 `lib/erp-lock.js` 的 5 分钟自动恢复窗口短于本轮 56 SKU 批量匹配时长。
@@ -39,6 +37,12 @@
 
 ## P1：值得在下次相关改动时完成
 
+- [ ] **重构商品匹配项目的规则文档与分层**
+  - 触发原因：2026-09-22 懋业首次 check 明显属于长任务，现行规则其实已经写明“超过 CodexPro 前台时限的长任务应交给本机 Terminal / 本地 Codex 持续执行”，但 GPT 在本轮仍连续多次误用 CodexPro 同步 `bash`，直到用户反复提醒后才重新定位到正确规则。
+  - 目标：重新审查 `AGENTS.md`、`SKILL.md`、`CLAUDE.md`、`docs/INDEX.md`、`docs/chatgpt-codexpro-operations.md`、`docs/matching-stability.md`、`tasks/todo.md` 等规则入口，重点检查职责重复、层级不清、旧规则残留、关键执行边界埋得过深的问题。
+  - 必须明确形成单一权威入口：像 `check` 这类预计超过前台工具时限的任务，在 GPT 发起时应直接选择“本机 Terminal / 本地 Codex 启动并自行跑完”，CodexPro `bash` 只用于短探针、测试和受控短任务；不要等超时后再补救。
+  - 这次只做规则治理，不借机重构业务代码；优先删冗余、合并重复、强化渐进式披露和关键门禁的可见性。
+
 - [ ] **统一套件页面操作实现**
   - 触发条件：下一次需要修改 `auto-match2.js`、`mark-suite.js` 或 `ops/create-suite.js` 任一套件流程。
   - 目标：搜索、单选、hover 标记、中间态恢复、弹窗清理和结果验证只保留一个权威实现。
@@ -57,6 +61,7 @@
 
 - [ ] **L2-remap-single 边界场景**
   - 基础单品重映射已在真实活动通过；仍需覆盖搜索无精确结果、重复候选、中断和回读不一致等边界。
+  - 2026-09-22 懋业实战新增两个可复现的“写入已成功但脚本误报失败”信号：`Radio button not checked after click`，以及搜索返回“共2条记录”后报 `Search result not unique`。最终 94/94 check 证明对应关系实际正确；后续修 remap 时应把“业务写入成功后的实时回读”作为错误分类依据，避免诱发重复写入。
   - 不单独为了补测试跑破坏性页面操作；在后续已授权的真实 remap 场景中覆盖。
 
 - [ ] **L2-verify-archive**
