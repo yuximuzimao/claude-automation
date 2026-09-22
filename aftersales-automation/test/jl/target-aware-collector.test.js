@@ -266,6 +266,37 @@ test('多子订单部分ERP搜索失败使用关键错误前缀，推理不得�
   assert.equal(decision.action, 'escalate');
 });
 
+test('当前工单内收到停止信号后，不再继续ERP物流和后续子订单', async () => {
+  const controller = new AbortController();
+  const calls = [];
+  const dependencies = {
+    readTicket: async () => ok({
+      subOrders: [{ id: 'sub-1' }, { id: 'sub-2' }],
+      gifts: [],
+      subBizType: '仅退款',
+    }),
+    erpSearch: async (_targetId, subOrderId, options) => {
+      calls.push(['erpSearch', subOrderId]);
+      assert.equal(options.abortSignal, controller.signal);
+      controller.abort();
+      return ok({ rows: [] });
+    },
+    readAllErpLogistics: async () => assert.fail('停止后不应继续读ERP物流'),
+    getLogistics: async () => assert.fail('停止后不应继续读鲸灵物流'),
+    erpAftersale: async () => assert.fail('停止后不应继续'),
+    productMatch: async () => assert.fail('仅退款不查商品'),
+    productArchive: async () => assert.fail('仅退款不查商品'),
+    getErpShop: () => assert.fail('仅退款不查店铺'),
+  };
+
+  await assert.rejects(collectTicketTargetAware({
+    detailTargetId: 'detail-tab', erpTargetId: 'erp-tab', workOrderNum: WORK_ORDER,
+    accountNote: '顺链-KGOS', type: '仅退款', abortSignal: controller.signal,
+  }, dependencies), error => error && error.name === 'AbortError');
+
+  assert.deepEqual(calls, [['erpSearch', 'sub-1']]);
+});
+
 test('缺少显式详情或ERP targetId时拒绝采集', async () => {
   await assert.rejects(
     collectTicketTargetAware({ erpTargetId: 'erp-tab', workOrderNum: WORK_ORDER }, {}),

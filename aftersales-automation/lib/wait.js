@@ -40,6 +40,9 @@ async function retry(fn, { maxRetries = 2, delayMs = 2000, label = '', domain = 
       return await fn();
     } catch (e) {
       lastErr = e;
+      // 用户主动停止不是可重试错误。若在此处继续等待和重试，
+      // 紧急停止会看起来“按了没反应”。
+      if (e && e.name === 'AbortError') throw e;
       // 就地熔断检测：风控信号一旦出现，立即停止，不依赖上层
       if (isRiskControlError(e.message)) {
         if (typeof globalThis.__tripCircuitBreaker === 'function') {

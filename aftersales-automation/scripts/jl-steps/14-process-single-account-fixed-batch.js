@@ -16,6 +16,20 @@ const MAX_PAGES = 20;
 const JL_HOST_SUFFIX = 'jlsupp.com';
 const AFTER_SALE_LIST_PATH = '/micro-customer/business/after-sale-list';
 
+function createAbortError() {
+  const error = new Error('操作已被用户停止');
+  error.name = 'AbortError';
+  return error;
+}
+
+function assertNotAborted(signal) {
+  if (signal && signal.aborted) throw createAbortError();
+}
+
+function isAbortError(error) {
+  return Boolean(error && (error.name === 'AbortError' || String(error.message || '').includes('操作已被用户停止')));
+}
+
 function cloneSnapshot(items) {
   return JSON.parse(JSON.stringify(items || []));
 }
@@ -430,7 +444,9 @@ function applyInboundSharedReturnLinks(collectedData, currentWorkOrderNum, share
 }
 
 async function processOpenedDetail(context, dependencies) {
+  assertNotAborted(context && context.abortSignal);
   const collectedData = await dependencies.collectDetail(context);
+  assertNotAborted(context && context.abortSignal);
   const sharedReturnContext = context && context.sharedReturnContext;
   const currentWorkOrderNum = context && context.ticket && context.ticket.workOrderNum;
   if (sharedReturnContext && sharedReturnContext.collectedDataByWorkOrder instanceof Map && currentWorkOrderNum) {
@@ -446,6 +462,7 @@ async function processOpenedDetail(context, dependencies) {
       currentWorkOrderNum,
       sharedReturnContext
     );
+    assertNotAborted(context && context.abortSignal);
     const batchWorkOrderNums = sharedReturnContext && sharedReturnContext.batchWorkOrderNums;
     const missingWorkOrderNums = collectedData.sharedReturnGroup &&
       Array.isArray(collectedData.sharedReturnGroup.missingWorkOrderNums)
@@ -465,10 +482,13 @@ async function processOpenedDetail(context, dependencies) {
   }
   const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
   let baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
+  assertNotAborted(context && context.abortSignal);
   if (typeof dependencies.supplementExternalLogistics === 'function') {
     const supplement = await dependencies.supplementExternalLogistics(collectedData, baselineDecision, context);
+    assertNotAborted(context && context.abortSignal);
     if (supplement && supplement.attempted) {
       baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
+      assertNotAborted(context && context.abortSignal);
     }
   }
   const stageResult = applyPlatformStageObservation({
@@ -487,6 +507,7 @@ async function processOpenedDetail(context, dependencies) {
     };
   }
   const auto = await dependencies.shouldAutoExecute(decision, collectedData, queueItem);
+  assertNotAborted(context && context.abortSignal);
   if (!auto) return { status: 'simulated', collectedData, decision };
   if (context && context.deferRefundReturnAutoUntilBatchComplete === true &&
       context.ticket && context.ticket.type === '退货退款') {
@@ -499,6 +520,7 @@ async function processOpenedDetail(context, dependencies) {
   }
   if (typeof dependencies.assertAutoExecutionAllowed === 'function') {
     const gate = await dependencies.assertAutoExecutionAllowed({ ...context, collectedData, decision });
+    assertNotAborted(context && context.abortSignal);
     if (!gate || gate.allowed !== true) {
       return {
         status: 'simulated',
@@ -512,7 +534,12 @@ async function processOpenedDetail(context, dependencies) {
   if (typeof dependencies.reserveAutoExecution !== 'function' || typeof dependencies.markAutoExecuted !== 'function') {
     throw new Error('自动执行安全配置缺失: execution journal 未装配');
   }
+  // 从这里进入平台写操作临界区：开始前可以停；一旦页面动作已发出，
+  // 必须完成结果验证和 journal 记账，避免留下“平台可能已执行”的不确定状态。
+  assertNotAborted(context && context.abortSignal);
   await dependencies.reserveAutoExecution({ ...context, collectedData, decision });
+
+  assertNotAborted(context && context.abortSignal);
 
   if (typeof dependencies.markPageActionStarted === 'function') {
     await dependencies.markPageActionStarted({ ...context, collectedData, decision });
@@ -936,6 +963,7 @@ function loadDefaultDependencies() {
       workOrderNum: context.ticket.workOrderNum,
       accountNote: context.account.matchedNote || context.ticket.accountNote || '',
       type: context.ticket.type,
+      abortSignal: context.abortSignal,
     }),
     inferDecision: (collectedData, ticket) => inferDecision({ collectedData }, ticket),
     supplementExternalLogistics: (collectedData, decision, context) => supplementBaiduLogisticsIfNeeded(
@@ -1049,18 +1077,22 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   }
 
   const assertBatchAllowed = async () => {
+    assertNotAborted(options.abortSignal);
     if (typeof dependencies.assertBatchAllowed !== 'function') throw new Error('批次熔断安全门未装配');
     const gate = await dependencies.assertBatchAllowed();
+    assertNotAborted(options.abortSignal);
     if (!gate || gate.allowed !== true) throw new Error((gate && gate.reason) || '批次安全门拒绝');
   };
   await assertBatchAllowed();
 
   const accountResult = await dependencies.openAccountFlow(account);
+  assertNotAborted(options.abortSignal);
   if (!accountResult || !accountResult.success) throw stepError('打开账号失败', accountResult);
   const prepared = await dependencies.prepareAfterSaleList({
     targetId: accountResult.targetId,
     thresholdHours,
   });
+  assertNotAborted(options.abortSignal);
   if (!prepared || !prepared.success) throw stepError('准备售后列表失败', prepared);
   if (!prepared.list || prepared.list.complete !== true) {
     throw new Error(`48小时清单读取不完整: ${(prepared.list && prepared.list.stopReason) || '未确认完整终止条件'}`);
@@ -1074,12 +1106,14 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   const waitingRescanAbsences = typeof dependencies.reconcileWaitingRescanAbsences === 'function'
     ? await dependencies.reconcileWaitingRescanAbsences({ account: accountResult, snapshot })
     : [];
+  assertNotAborted(options.abortSignal);
   for (const absence of waitingRescanAbsences) await reportProgress(dependencies, absence);
   if (typeof dependencies.ensureQueueItem !== 'function' || typeof dependencies.persistOutcome !== 'function') {
     throw new Error('原售后系统数据流写回未装配: ensureQueueItem/persistOutcome 缺失');
   }
   const items = [];
   for (const ticket of snapshot) {
+    assertNotAborted(options.abortSignal);
     const workOrderNum = assertWorkOrderNum(ticket.workOrderNum);
     const queueItem = await dependencies.ensureQueueItem({ account: accountResult, ticket: { ...ticket, workOrderNum } });
     if (!queueItem || !queueItem.id) throw new Error(`工单 ${workOrderNum} 缺少原系统 queue item`);
@@ -1098,6 +1132,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   const erpTargetId = processableItems.length && typeof dependencies.resolveErpTargetId === 'function'
     ? await dependencies.resolveErpTargetId(options.erpTargetId)
     : (options.erpTargetId || null);
+  assertNotAborted(options.abortSignal);
   const sharedReturnContext = {
     batchWorkOrderNums: new Set(processableItems.map(item => String(item.workOrderNum))),
     collectedDataByWorkOrder: new Map(),
@@ -1105,11 +1140,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   };
 
   for (const item of processableItems) {
-    if (options.abortSignal && options.abortSignal.aborted) {
-      const err = new Error('操作已被用户停止');
-      err.name = 'AbortError';
-      throw err;
-    }
+    assertNotAborted(options.abortSignal);
     await assertBatchAllowed();
     item.status = 'processing';
     await reportProgress(dependencies, item);
@@ -1118,6 +1149,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
 
     try {
       const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum);
+      assertNotAborted(options.abortSignal);
       item.location = located;
       if (!located || !located.found) {
         if (!located || !located.gone) throw new Error('工单定位结果不可信');
@@ -1146,6 +1178,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       if (!opened || !opened.success || !opened.newTargetId) throw stepError('打开目标工单失败', opened);
       detailTargetId = opened.newTargetId;
       item.detailTargetId = detailTargetId;
+      assertNotAborted(options.abortSignal);
 
       const outcome = await processOpenedDetailAndPersist({
         account: accountResult,
@@ -1154,6 +1187,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         erpTargetId,
         ticket: item.ticket,
         queueItem: item.queueItem,
+        abortSignal: options.abortSignal,
         disableAutoExecute: options.disableAutoExecute === true,
         sharedReturnContext,
         allowSharedReturnDefer: true,
@@ -1196,6 +1230,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     }
 
     if (processingError) {
+      if (isAbortError(processingError)) throw processingError;
       const failureProcessed = buildFailureProcessed(item.ticket, processingError);
       try {
         const persisted = await dependencies.persistOutcome({
@@ -1225,11 +1260,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   // 第二阶段只复用内存中的采集结果，不重新打开工单，也不允许自动执行。
   const deferredSharedReturnItems = processableItems.filter(item => item.status === 'deferred_shared_return');
   for (const item of deferredSharedReturnItems) {
-    if (options.abortSignal && options.abortSignal.aborted) {
-      const err = new Error('操作已被用户停止');
-      err.name = 'AbortError';
-      throw err;
-    }
+    assertNotAborted(options.abortSignal);
     await assertBatchAllowed();
     item.status = 'processing';
     await reportProgress(dependencies, item);
@@ -1246,6 +1277,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         erpTargetId,
         ticket: item.ticket,
         queueItem: item.queueItem,
+        abortSignal: options.abortSignal,
         disableAutoExecute: true,
         autoBlockedReason: '共用退货单关联组回算只生成待人工确认结果',
         sharedReturnContext,
@@ -1288,11 +1320,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   // 这样后出现的工单若反向关联到它，能先把它改判为共用退货单人工确认，避免单向提示导致提前退款。
   const deferredAutoExecutionItems = processableItems.filter(item => item.status === 'deferred_auto_execution');
   for (const item of deferredAutoExecutionItems) {
-    if (options.abortSignal && options.abortSignal.aborted) {
-      const err = new Error('操作已被用户停止');
-      err.name = 'AbortError';
-      throw err;
-    }
+    assertNotAborted(options.abortSignal);
     await assertBatchAllowed();
     item.status = 'processing';
     await reportProgress(dependencies, item);
@@ -1316,6 +1344,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         erpTargetId,
         ticket: item.ticket,
         queueItem: item.queueItem,
+        abortSignal: options.abortSignal,
         sharedReturnContext,
         allowSharedReturnDefer: false,
         deferRefundReturnAutoUntilBatchComplete: false,
@@ -1337,12 +1366,14 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         item.persistedSimulationId = persisted && persisted.id;
       } else {
         const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum);
+        assertNotAborted(options.abortSignal);
         item.location = located;
         if (!located || !located.found) throw new Error('自动执行前无法重新定位工单');
         const opened = await dependencies.clickWorkOrderAction(item.workOrderNum, { targetId: prepared.targetId });
         if (!opened || !opened.success || !opened.newTargetId) throw stepError('自动执行前重新打开目标工单失败', opened);
         detailTargetId = opened.newTargetId;
         item.detailTargetId = detailTargetId;
+        assertNotAborted(options.abortSignal);
 
         const outcome = await processOpenedDetailAndPersist({
           account: accountResult,
@@ -1351,6 +1382,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
           erpTargetId,
           ticket: item.ticket,
           queueItem: item.queueItem,
+          abortSignal: options.abortSignal,
           sharedReturnContext,
           allowSharedReturnDefer: false,
           deferRefundReturnAutoUntilBatchComplete: false,
@@ -1390,6 +1422,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     }
 
     if (processingError) {
+      if (isAbortError(processingError)) throw processingError;
       const failureProcessed = buildFailureProcessed(item.ticket, processingError);
       try {
         const persisted = await dependencies.persistOutcome({
@@ -1416,6 +1449,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   }
 
   let cleanup = null;
+  assertNotAborted(options.abortSignal);
   if (typeof dependencies.cleanupCurrentAccountJlTargets === 'function') {
     cleanup = await dependencies.cleanupCurrentAccountJlTargets({
       account: accountResult,
@@ -1429,6 +1463,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   }
 
   try {
+    assertNotAborted(options.abortSignal);
     const accountNote = (accountResult && accountResult.matchedNote) || `账号${accountNum}`;
     if (typeof dependencies.fetchAndCacheAlerts !== 'function') {
       throw new Error('首页提醒采集依赖未装配');

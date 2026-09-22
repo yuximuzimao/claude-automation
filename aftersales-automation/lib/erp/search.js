@@ -16,6 +16,33 @@ const {
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
+function createAbortError() {
+  const error = new Error('操作已被用户停止');
+  error.name = 'AbortError';
+  return error;
+}
+
+function assertNotAborted(signal) {
+  if (signal && signal.aborted) throw createAbortError();
+}
+
+function abortableSleep(ms, signal) {
+  assertNotAborted(signal);
+  if (!signal) return sleep(ms);
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, ms);
+    const onAbort = () => {
+      clearTimeout(timer);
+      signal.removeEventListener('abort', onAbort);
+      reject(createAbortError());
+    };
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
+}
+
 function parsePlatformOrderIds(text) {
   return String(text || '')
     .split(/[；;]/)
@@ -132,15 +159,19 @@ const READ_ROWS_JS = `(function(){
   });
 })()`;
 
-async function ensureOrderPageReady(targetId) {
+async function ensureOrderPageReady(targetId, options = {}) {
+  const signal = options.abortSignal;
   await retry(async () => {
+    assertNotAborted(signal);
     const mk = await cdp.eval(targetId, CHECK_MIXKEY_JS);
+    assertNotAborted(signal);
     if (!mk.exists) throw new Error('mixKey radio 不存在');
     if (!mk.checked) {
       await cdp.clickAt(targetId, 'input[value="mixKey"]');
-      await sleep(800);
+      await abortableSleep(800, signal);
     }
     const readiness = await cdp.eval(targetId, READ_ORDER_PAGE_READINESS_JS);
+    assertNotAborted(signal);
     if (!readiness.ready) {
       throw new Error(
         `订单管理页未就绪（搜索框=${readiness.hasSearchInput ? '有' : '无'}，` +
@@ -153,30 +184,42 @@ async function ensureOrderPageReady(targetId) {
 }
 
 async function prepareErpOrderPage(targetId, options = {}) {
+  const signal = options.abortSignal;
+  assertNotAborted(signal);
   if (options.forceReload) {
     await forceReloadErpPage(targetId, '订单管理');
+    assertNotAborted(signal);
   } else {
     const loginStatus = await checkLogin(targetId);
+    assertNotAborted(signal);
     if (!loginStatus.loggedIn) await recoverLogin(targetId);
+    assertNotAborted(signal);
     await cdp.eval(targetId, CLOSE_ALL_DIALOGS_JS);
+    assertNotAborted(signal);
     await navigateErp(targetId, '订单管理');
+    assertNotAborted(signal);
   }
-  const readiness = await ensureOrderPageReady(targetId);
+  const readiness = await ensureOrderPageReady(targetId, options);
+  assertNotAborted(signal);
   return { targetId, page: '订单管理', reloaded: !!options.forceReload, readiness };
 }
 
 async function performSearchAttempt(targetId, subOrderId, options) {
+  const signal = options.abortSignal;
+  assertNotAborted(signal);
   // 保留已验证的原搜索动作：激活输入框、同一 eval 填值并 Enter。
   await cdp.clickAt(targetId, 'input.el-input__inner');
-  await sleep(800);
+  await abortableSleep(800, signal);
 
   const FINGERPRINT_JS = `(function(){
     var items = Array.from(document.querySelectorAll('.module-trade-list-item'));
     return items.map(function(r){ return r.innerText.substring(0,30); }).join('|');
   })()`;
   const prevFingerprint = await cdp.eval(targetId, FINGERPRINT_JS);
+  assertNotAborted(signal);
 
   const fill = await cdp.eval(targetId, makeSearchJS(subOrderId));
+  assertNotAborted(signal);
   if (fill.error) throw new Error(fill.error);
   if (!fill.placeholder || !fill.placeholder.includes('系统单号')) {
     throw new Error(`填入字段不正确，placeholder: ${fill.placeholder}，期望含「系统单号」`);
@@ -184,17 +227,20 @@ async function performSearchAttempt(targetId, subOrderId, options) {
 
   let newFingerprint = '';
   for (let w = 0; w < 20; w++) {
-    await sleep(500);
+    await abortableSleep(500, signal);
     newFingerprint = await cdp.eval(targetId, FINGERPRINT_JS);
+    assertNotAborted(signal);
     if (!prevFingerprint && newFingerprint) break;
     if (prevFingerprint && newFingerprint && newFingerprint !== prevFingerprint) break;
   }
   if (newFingerprint === prevFingerprint) {
     const countText = await cdp.eval(targetId, `(document.body.innerText.match(/共\\d+条/) || [''])[0]`);
+    assertNotAborted(signal);
     if (!countText) throw new Error('搜索未执行（指纹未变且无共N条文字）');
   }
 
   const rows = await cdp.eval(targetId, READ_ROWS_JS);
+  assertNotAborted(signal);
   if (options.validatePlatformOrderId !== false) {
     validatePlatformOrderRows(rows.rows || [], subOrderId);
   }
@@ -205,6 +251,7 @@ async function runSearchWithSingleRecovery(searchAttempt, recoverPage, onFirstFa
   try {
     return await searchAttempt(0);
   } catch (firstError) {
+    if (firstError && firstError.name === 'AbortError') throw firstError;
     onFirstFailure(firstError);
     await recoverPage(firstError);
     return searchAttempt(1);
@@ -213,11 +260,12 @@ async function runSearchWithSingleRecovery(searchAttempt, recoverPage, onFirstFa
 
 async function erpSearch(targetId, subOrderId, options = {}) {
   try {
-    await prepareErpOrderPage(targetId);
+    assertNotAborted(options.abortSignal);
+    await prepareErpOrderPage(targetId, options);
 
     const rows = await runSearchWithSingleRecovery(
       () => performSearchAttempt(targetId, subOrderId, options),
-      () => prepareErpOrderPage(targetId, { forceReload: true }),
+      () => prepareErpOrderPage(targetId, { forceReload: true, abortSignal: options.abortSignal }),
       error => {
         console.warn(
           `[erp-search] 子订单 ${subOrderId} 首次搜索未形成可信结果，` +
@@ -228,6 +276,7 @@ async function erpSearch(targetId, subOrderId, options = {}) {
 
     return ok({ subOrderId, rows });
   } catch (e) {
+    if (e && e.name === 'AbortError') throw e;
     return fail(e);
   }
 }

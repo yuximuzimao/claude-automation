@@ -55,6 +55,22 @@ function resultData(result, errorPrefix, collected) {
   return result.data;
 }
 
+function createAbortError() {
+  const error = new Error('操作已被用户停止');
+  error.name = 'AbortError';
+  return error;
+}
+
+function assertNotAborted(context) {
+  if (context && context.abortSignal && context.abortSignal.aborted) {
+    throw createAbortError();
+  }
+}
+
+function isAbortError(error) {
+  return Boolean(error && (error.name === 'AbortError' || String(error.message || '').includes('操作已被用户停止')));
+}
+
 function targetIdOf(target) {
   return target && (target.id || target.targetId || null);
 }
@@ -86,6 +102,7 @@ async function resolveUniqueErpTargetId(dependencies = { getTargets: cdp.getTarg
 async function collectProductDetails(context, ticket, collected, dependencies) {
   const shopName = dependencies.getErpShop(context.accountNote || '');
   for (const subOrder of ticket.subOrders || []) {
+    assertNotAborted(context);
     if (!subOrder.id || !subOrder.sku) {
       collected.collectErrors.push(`product-match(${subOrder.id || 'unknown'}): 无货号，跳过`);
       continue;
@@ -96,6 +113,7 @@ async function collectProductDetails(context, ticket, collected, dependencies) {
       subOrder.attr1 || '',
       shopName
     );
+    assertNotAborted(context);
     const match = resultData(matchResult, `product-match(${subOrder.id})`, collected);
     if (!match) continue;
     const matchEntry = { subOrderId: subOrder.id, ...match };
@@ -105,6 +123,7 @@ async function collectProductDetails(context, ticket, collected, dependencies) {
       continue;
     }
     const archiveResult = await dependencies.productArchive(context.erpTargetId, match.specCode);
+    assertNotAborted(context);
     const archive = resultData(archiveResult, `product-archive(${subOrder.id})`, collected);
     if (archive) collected.productArchives.push({ subOrderId: subOrder.id, ...archive });
   }
@@ -113,12 +132,14 @@ async function collectProductDetails(context, ticket, collected, dependencies) {
 
   const gift = (ticket.gifts || [])[0];
   if (!gift || !gift.sku) return;
+  assertNotAborted(context);
   const giftMatchResult = await dependencies.productMatch(
     context.erpTargetId,
     gift.sku,
     gift.attr1 || '',
     shopName
   );
+  assertNotAborted(context);
   const giftMatch = resultData(giftMatchResult, 'product-match(gift)', collected);
   if (!giftMatch) return;
   collected.giftProductMatch = giftMatch;
@@ -127,15 +148,22 @@ async function collectProductDetails(context, ticket, collected, dependencies) {
     return;
   }
   const giftArchiveResult = await dependencies.productArchive(context.erpTargetId, giftMatch.specCode);
+  assertNotAborted(context);
   collected.giftProductArchive = resultData(giftArchiveResult, 'product-archive(gift)', collected);
 }
 
 async function collectErpOrder(context, subOrderId, errorLabel, collected, dependencies, logisticsResults) {
-  const searchResult = await dependencies.erpSearch(context.erpTargetId, subOrderId);
+  assertNotAborted(context);
+  const searchResult = await dependencies.erpSearch(context.erpTargetId, subOrderId, {
+    abortSignal: context.abortSignal,
+  });
+  assertNotAborted(context);
   const search = resultData(searchResult, errorLabel, collected);
   if (!search) return null;
 
+  assertNotAborted(context);
   const logisticsResult = await dependencies.readAllErpLogistics(context.erpTargetId);
+  assertNotAborted(context);
   const logistics = resultData(logisticsResult, `erp-logistics(${subOrderId})`, collected);
   if (logistics && Array.isArray(logistics.results)) logisticsResults.push(...logistics.results);
   return search;
@@ -148,7 +176,9 @@ async function collectTicketTargetAware(context, customDependencies) {
 
   const dependencies = customDependencies || loadDefaultDependencies();
   const collected = emptyCollectedData();
+  assertNotAborted(context);
   const ticketResult = await dependencies.readTicket(context.detailTargetId, context.workOrderNum);
+  assertNotAborted(context);
   if (!ticketResult || !ticketResult.success) {
     throw new Error(`read-ticket: ${(ticketResult && ticketResult.error) || '未知错误'}`);
   }
@@ -158,6 +188,7 @@ async function collectTicketTargetAware(context, customDependencies) {
 
   const logisticsResults = [];
   for (const subOrder of ticket.subOrders || []) {
+    assertNotAborted(context);
     if (!subOrder.id) continue;
     const search = await collectErpOrder(
       context,
@@ -171,7 +202,9 @@ async function collectTicketTargetAware(context, customDependencies) {
   }
   collected.erpSearch = collected.erpSearches[0] || null;
 
+  assertNotAborted(context);
   const logisticsResult = await dependencies.getLogistics(context.detailTargetId, context.workOrderNum);
+  assertNotAborted(context);
   if (!logisticsResult || !logisticsResult.success) {
     throw new Error(`logistics: ${(logisticsResult && logisticsResult.error) || '未知错误'}`);
   }
@@ -187,12 +220,15 @@ async function collectTicketTargetAware(context, customDependencies) {
     try {
       await collectProductDetails(context, ticket, collected, dependencies);
     } catch (error) {
+      if (isAbortError(error)) throw error;
       collected.collectErrors.push(`product-match: ${error.message}`);
     }
   }
 
   if (ticket.returnTracking) {
+    assertNotAborted(context);
     const aftersaleResult = await dependencies.erpAftersale(context.erpTargetId, ticket.returnTracking);
+    assertNotAborted(context);
     collected.erpAftersale = resultData(aftersaleResult, 'erp-aftersale', collected);
   } else {
     collected.collectErrors.push('erp-aftersale: 无退货快递单号，跳过');
@@ -200,6 +236,7 @@ async function collectTicketTargetAware(context, customDependencies) {
 
   const giftsToCollect = type === '仅退款' ? (ticket.gifts || []) : (ticket.gifts || []).slice(0, 1);
   for (const gift of giftsToCollect) {
+    assertNotAborted(context);
     if (!gift.id) continue;
     const search = await collectErpOrder(
       context,
@@ -213,6 +250,7 @@ async function collectTicketTargetAware(context, customDependencies) {
   }
   collected.giftErpSearch = collected.giftErpSearches[0] || null;
 
+  assertNotAborted(context);
   if (logisticsResults.length) collected.erpLogistics = { results: logisticsResults };
   return collected;
 }

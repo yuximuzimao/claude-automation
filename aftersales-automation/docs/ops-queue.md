@@ -34,12 +34,15 @@ emergencyStop()
 | execExecute | 打开账号后 → 列表排序后 → 打开详情后 |
 | execReprocessOne | 打开账号后 → 列表排序后 → 定位工单后 → 打开详情后 |
 | execOpenTicket | 打开账号后 → 列表排序后 → 定位工单后 |
-| execScan | 每个账号迭代前 + 传入子函数 |
+| execScan | 10 秒预告和账号间隔均可立即中断；每个账号迭代前 + 传入子函数 |
+| Step14 单工单采集 | 定位、打开详情、读工单、逐子订单 ERP 查询、物流、商品档案、推理之间均检查停止信号；停止后关闭本次详情 tab，不写入假的“处理失败”结果 |
 | execA1FixedBatch | 入口 + 传入子函数（每个工单迭代前检查） |
 | execScanFinalize | 入口 → 清理拦截后 → 入队前 |
 | execReturnInbound | 每个快递单号前 |
 | execOpenAccount | 入口 |
 | execReinfer | 入口 + 传入 execReprocessOne |
+
+平台写操作例外：如果“同意/拒绝”的页面动作已经发出，当前工单会先完成结果验证和 execution journal 记账，然后停止。这不是继续处理下一步业务，而是避免留下“平台可能已执行，本地却未记录”的不确定状态。
 
 ## 4. Stop 事件文件
 
@@ -86,7 +89,8 @@ emergencyStop()
 ```
 
 - `allClean: true` → 前端显示 "⏹️ 已停止：队列清空，进程已终止"
-- `allClean: false` → 前端显示具体问题（队列未清空 / 子进程残留 / 运行中操作未清除）
+- `stopRequested: true` → 前端立即显示“已收到停止指令”，并短轮询直到当前步骤退出
+- `allClean: false` 且未进入停止中 → 前端显示具体问题（队列未清空 / 子进程残留 / 运行中操作未清除）
 
 ## 7. 定时扫描状态窗
 

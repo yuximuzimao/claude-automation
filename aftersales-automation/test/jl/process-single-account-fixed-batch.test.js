@@ -1345,6 +1345,64 @@ test('详情处理异常仍关闭目标tab、写回人工复核simulation并停�
   assert.deepEqual(fixture.getTargets(), ['list-tab']);
 });
 
+test('详情采集中停止时立即关闭当前tab，不写失败结果也不打开下一单', async () => {
+  const controller = new AbortController();
+  const fixture = batchDependencies({
+    collectDetail: async () => {
+      controller.abort();
+      return { ticket: { workOrderNum: ORDER_1 } };
+    },
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', {
+      dependencies: fixture.dependencies,
+      abortSignal: controller.signal,
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => call[0] === 'open').map(call => call[1]),
+    [ORDER_1]
+  );
+  assert.equal(fixture.calls.some(call => call[0] === 'persistOutcome'), false);
+  assert.equal(fixture.calls.some(call => call[0] === 'close' && call[1] === `detail-${ORDER_1}`), true);
+  assert.deepEqual(fixture.getTargets(), ['list-tab']);
+});
+
+test('平台写操作已发出后收到停止，先完成核验记账再停止下一单', async () => {
+  const controller = new AbortController();
+  const fixture = batchDependencies({
+    markPageActionStarted: async ({ ticket }) => fixture.calls.push(['page-started', ticket.workOrderNum]),
+    executeDecision: async ({ detailTargetId, ticket }) => {
+      fixture.calls.push(['execute', ticket.workOrderNum, detailTargetId]);
+      controller.abort();
+      return { success: true, action: 'approve' };
+    },
+    markPageActionSucceeded: async ({ ticket }) => fixture.calls.push(['page-succeeded', ticket.workOrderNum]),
+    markAutoExecuted: async ({ ticket }) => fixture.calls.push(['journal-executed', ticket.workOrderNum]),
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', {
+      dependencies: fixture.dependencies,
+      abortSignal: controller.signal,
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  const names = fixture.calls.map(call => call[0]);
+  assert.ok(names.indexOf('page-started') < names.indexOf('execute'));
+  assert.ok(names.indexOf('execute') < names.indexOf('page-succeeded'));
+  assert.ok(names.indexOf('page-succeeded') < names.indexOf('journal-executed'));
+  assert.ok(names.indexOf('journal-executed') < names.indexOf('persistOutcome'));
+  assert.deepEqual(
+    fixture.calls.filter(call => call[0] === 'open').map(call => call[1]),
+    [ORDER_1]
+  );
+});
+
 test('点击后新tab识别失败时关闭错误携带的新增tab并停止', async () => {
   const closes = [];
   let targets = [

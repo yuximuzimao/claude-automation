@@ -240,6 +240,11 @@ async function cancelOp(id) {
 
 // ── 紧急停止 / 恢复 ───────────────────────────────────────────────
 async function emergencyStop() {
+  const stopBtn = document.getElementById('emergency-stop-btn');
+  if (stopBtn) {
+    stopBtn.disabled = true;
+    stopBtn.textContent = '⏹ 正在停止…';
+  }
   try {
     const r = await fetch('/api/emergency-stop', { method: 'POST' });
     const data = await r.json();
@@ -247,6 +252,16 @@ async function emergencyStop() {
       const v = data.verify;
       if (v.allClean) {
         showToast('⏹️ 已停止：队列清空，进程已终止');
+      } else if (v.stopRequested) {
+        showToast('⏹️ 已收到停止指令，正在结束当前步骤');
+        for (let attempt = 0; attempt < 50; attempt++) {
+          await new Promise(resolve => setTimeout(resolve, 200));
+          const state = await api('/op-queue');
+          if (!state.running) {
+            showToast('⏹️ 已停止：当前操作已结束');
+            break;
+          }
+        }
       } else {
         const issues = [];
         if (!v.queueEmpty) issues.push('队列未完全清空');
@@ -255,7 +270,14 @@ async function emergencyStop() {
         showToast(`⚠️ 停止不完整：${issues.join('；')}`, 'error');
       }
     }
-  } catch(e) { showToast('停止请求失败', 'error'); }
+  } catch(e) {
+    showToast('停止请求失败', 'error');
+  } finally {
+    if (stopBtn) {
+      stopBtn.disabled = false;
+      stopBtn.textContent = '🛑 紧急停止';
+    }
+  }
 }
 
 async function resumeSystem() {

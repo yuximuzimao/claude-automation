@@ -308,6 +308,7 @@ function verifyStopState() {
     runningCleared: !running || running.status === 'cancelled',
     aliveProcs: aliveProcs.length > 0 ? aliveProcs : null,
     paused,
+    stopRequested: Boolean(paused && running && running._abortSignal && running._abortSignal.aborted),
     allClean: queue.length === 0 && (!running || running.status === 'cancelled') && aliveProcs.length === 0,
   };
 }
@@ -451,6 +452,26 @@ function assertNotAborted(op) {
   }
 }
 
+function waitForAbortableDelay(ms, op) {
+  assertNotAborted(op);
+  const signal = op && op._abortSignal;
+  if (!signal) return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, ms);
+    const onAbort = () => {
+      clearTimeout(timer);
+      signal.removeEventListener('abort', onAbort);
+      const error = new Error('操作已被用户停止');
+      error.name = 'AbortError';
+      reject(error);
+    };
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
+}
+
 // ── 执行分派 ──────────────────────────────────────────────────────
 
 async function executeOp(op) {
@@ -504,7 +525,7 @@ async function execWanwuScan(op) {
     log(`[scan-hud] 万物状态窗启动失败: ${error.message}`);
   }
 
-  await scanHud.wait(10000);
+  await waitForAbortableDelay(10000, op);
   assertNotAborted(op);
   updateScanHud(op, {
     phase: 'running',
@@ -756,7 +777,7 @@ async function execScan(op) {
     } catch (e) {
       log(`[scan-hud] 状态窗启动失败: ${e.message}`);
     }
-    await scanHud.wait(10000);
+    await waitForAbortableDelay(10000, op);
     assertNotAborted(op);
     updateScanHud(op, {
       phase: 'running',
@@ -970,7 +991,7 @@ async function execScan(op) {
 
     // 风控红线：账号之间间隔 ≥10s
     if (i < total - 1) {
-      await new Promise(r => setTimeout(r, 10000));
+      await waitForAbortableDelay(10000, op);
     }
   }
 
