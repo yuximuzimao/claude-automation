@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "message-record.schema.json",
+  "title": "Group Chat Normalized Message Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "batch_id",
+    "group_key",
+    "sequence",
+    "message_type",
+    "content_text",
+    "observed_at",
+    "source"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "本项目生成的本地记录ID，不是QQ原生消息ID。"
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "group_key": {
+      "type": "string",
+      "minLength": 1,
+      "description": "本地稳定群标识，不要求等于真实群号。"
+    },
+    "group_display": {
+      "type": ["string", "null"]
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "规范化后在当前批次/群中的旧到新顺序。"
+    },
+    "sender_display": {
+      "type": ["string", "null"],
+      "description": "QQ界面可见昵称；识别不到则为null。"
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "仅在能可靠解析为绝对时间时填写。"
+    },
+    "timestamp_text": {
+      "type": ["string", "null"],
+      "description": "界面原始可见时间文本，如“16:33”“昨天08:47”。"
+    },
+    "message_type": {
+      "enum": [
+        "text",
+        "system",
+        "image_placeholder",
+        "voice_placeholder",
+        "file_placeholder",
+        "sticker_placeholder",
+        "unknown"
+      ]
+    },
+    "content_text": {
+      "type": "string",
+      "description": "规范化后的可见文字；占位类型可保存界面可见占位文本。"
+    },
+    "ocr_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "本项目实际观察到该消息的时间。"
+    },
+    "source": {
+      "const": "qq_screen_ocr"
+    },
+    "capture_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["page_index"],
+        "properties": {
+          "page_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bbox": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "required": ["x", "y", "width", "height"],
+            "properties": {
+              "x": {"type": "number"},
+              "y": {"type": "number"},
+              "width": {"type": "number", "minimum": 0},
+              "height": {"type": "number", "minimum": 0}
+            }
+          }
+        }
+      }
+    }
+  }
+}

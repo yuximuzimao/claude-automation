@@ -55,6 +55,7 @@
 | `order-review/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；状态见 `docs/CURRENT.md` |
 | `product-ad-studio/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md` |
 | `wow-quest-route/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前状态再按SKILL读 `docs/verified-routes/CURRENT.md` |
+| `group-chat-analysis/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前状态按SKILL读 `docs/CURRENT.md` |
 
 悦希/HEE 商品相关任务如涉及尚未完成视觉建档的新品，先读 `product-mapping/tasks/todo.md` 的当前新品待办。待办中已记录标准 ERP 名称、当前编码和缺失视觉资料的商品不得归为普通未知，也不得复用旧版外观或创建错误训练类别；装箱尺寸、箱规与组合规则统一由 `order-review` 自己维护。
 
