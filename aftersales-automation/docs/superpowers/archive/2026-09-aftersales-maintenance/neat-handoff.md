@@ -1,6 +1,6 @@
 # 2026-09 售后维护完成交接
 
-> 历史完成记录，仅供追溯。当前规则以 `docs/erp-query.md`、`docs/collect-schema.md`、`SKILL.md` 和生产代码为准。
+> 历史完成记录，仅供追溯。当前规则以 `docs/INDEX.md`、`docs/erp-query.md`、`docs/collect-schema.md`、`docs/ops-erp.md`、`SKILL.md` 和生产代码为准。
 
 ## 本轮收口内容
 
@@ -37,11 +37,23 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 
 因此特殊单品查到后保留 ERP 原始 `outerId`，并保持普通单品既有的 `subItems=[]`。严格退货证明继续按单品规则用 `title + outerId + qty=1` 构造应退项。没有把查询条码写入 `subItems.specCode`，避免普通推理按名称能匹配、严格编码门禁却不一致。
 
+### 5. ERP Hash 路由查询参数兼容
+
+2026-09-24 工单 `100001789395328690402` 在前置采集均正常后，连续停在 ERP 售后页导航校验。系统期望 `#/aftersale/sale_handle_next/`，页面实际为同一路由加正常上下文参数：
+
+```text
+#/aftersale/sale_handle_next/?from=trade&tid=766654801
+```
+
+旧实现完整比较 `window.location.hash`，因此把正确页面误判成导航失败。最终修复只比较 `?` 前的完整路由：同一路由允许保留查询参数，不同路由和相似前缀仍然拒绝。长期规则已写入 `docs/INDEX.md` #81 和 `docs/ops-erp.md`，实现由 `lib/erp/navigate.js` 的 `matchesErpRoute()` 统一承载。
+
 ## 验证
 
 - `node --test test/product/archive-subitems.test.js`：6/6 通过；新增用例覆盖特殊规格查询、1.0旧款、特殊→普通连续查询，以及 `yx005` 严格退货编码核对。
 - 全量 `npm test` 在最终代码收口前已通过；归档前再次运行最终全量回归确认。
 - `lib/` 修改均按 `/aftersales-restart` 规则在 op-queue 空闲时重启；重启不自动重新采集现有工单。
+- Hash 路由修复新增正反边界测试，并在主工作区完成 `496/496` 全量回归；关键生产状态文件测试前后校验值一致。
+- 服务重启后，用户对工单 `100001789395328690402` 重新采集：ERP 售后入库成功读取 1 条已收货记录，3 件均为良品，`collectErrors=[]`；推理结果为高置信 `approve`，既有自动门禁执行成功，queue 最终状态为 `auto_executed`。
 
 ## 当前权威入口
 
@@ -50,3 +62,5 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - 实现：`lib/product/archive.js`
 - 回归测试：`test/product/archive-subitems.test.js`
 - `skip` 视觉状态防错规则：`SKILL.md` failure pattern #36
+- ERP Hash 路由匹配规则：`docs/INDEX.md` #81、`docs/ops-erp.md`
+- ERP 路由实现与回归：`lib/erp/navigate.js`、`test/server/erp-scan-readiness.test.js`
