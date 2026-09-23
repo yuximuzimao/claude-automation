@@ -7,11 +7,12 @@
 ```javascript
 // Step 0：前置检查，已在目标页则跳过
 var targetHash = "#/tradeNew/manage/";  // 替换为目标页 hash
-if (window.location.hash !== targetHash) {
+var currentRoute = window.location.hash.split('?', 1)[0];
+if (currentRoute !== targetHash) {
   var li = Array.from(document.querySelectorAll("li.fix-tab"))
     .find(el => el.textContent.trim() === "订单管理");  // 替换为目标页名
   li.click();
-  // 等 2 秒后验证 window.location.hash === targetHash
+  // 等 2 秒后验证 hash 的路由部分等于 targetHash；允许保留 ?from=trade&tid=... 等页面上下文参数
 }
 ```
 
@@ -24,6 +25,8 @@ if (window.location.hash !== targetHash) {
 | 商品对应表 | `商品对应表` | `#/prod/prod_correspondence_next/` | `快麦ERP--商品对应表` |
 
 > ⚠️ **禁止**：`/navigate` 直接跳转任何 ERP 功能页面（会被重定向到首页或登录页）
+
+ERP 的 Hash 路由可能附带查询参数，例如从订单详情进入售后页后出现 `#/aftersale/sale_handle_next/?from=trade&tid=...`。导航校验只比较 `?` 之前的完整路由，参数不代表跳错页面；但不同路由和相似前缀仍必须拒绝。
 
 ## 2. ERP 登录状态检测与恢复
 

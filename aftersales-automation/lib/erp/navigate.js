@@ -26,6 +26,11 @@ const PAGE_MAP = {
   '商品对应表': '#/prod/prod_correspondence_next/',
 };
 
+function matchesErpRoute(currentHash, targetHash) {
+  const routeOnly = value => String(value || '').split('?', 1)[0];
+  return routeOnly(currentHash) === routeOnly(targetHash);
+}
+
 // ============================================================
 // Session 缓存（跨进程复用，collect.js 每次是新进程）
 // ============================================================
@@ -400,7 +405,7 @@ async function navigateErp(targetId, pageName) {
       return navigateErp(targetId, pageName);
     }
     const currentHash = await cdp.eval(targetId, 'window.location.hash');
-    if (currentHash === targetHash) {
+    if (matchesErpRoute(currentHash, targetHash)) {
       if (process.env.VERBOSE) process.stderr.write(`[navigateErp] 跳过刷新（session 新鲜，已在目标页）\n`);
       cache[targetId] = { time: now, page: pageName }; saveSessionCache(cache);
       return;
@@ -435,7 +440,7 @@ async function navigateErp(targetId, pageName) {
 
   await retry(async () => {
     const currentHash = await cdp.eval(targetId, 'window.location.hash');
-    if (currentHash === targetHash) {
+    if (matchesErpRoute(currentHash, targetHash)) {
       await waitForPageContent(targetId, pageName);
       return;
     }
@@ -453,10 +458,10 @@ async function navigateErp(targetId, pageName) {
     for (let i = 0; i < 6; i++) {
       await sleep(500);
       const h = await cdp.eval(targetId, 'window.location.hash');
-      if (h === targetHash) break;
+      if (matchesErpRoute(h, targetHash)) break;
     }
     const hash = await cdp.eval(targetId, 'window.location.hash');
-    if (hash !== targetHash) throw new Error(`导航失败: 期望 ${targetHash}，实际 ${hash}`);
+    if (!matchesErpRoute(hash, targetHash)) throw new Error(`导航失败: 期望 ${targetHash}，实际 ${hash}`);
     await waitForPageContent(targetId, pageName);
   }, { maxRetries: 3, delayMs: 6000, label: `erp-nav ${pageName}` });
 
@@ -537,6 +542,6 @@ async function erpNav(targetId, pageName) {
 }
 
 module.exports = {
-  navigateErp, forceReloadErpPage, checkLogin, recoverLogin, erpNav, CLOSE_ALL_DIALOGS_JS,
+  navigateErp, forceReloadErpPage, checkLogin, recoverLogin, erpNav, matchesErpRoute, CLOSE_ALL_DIALOGS_JS,
   updateErpHealth, loadErpHealth, alertErpDown,
 };
