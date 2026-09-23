@@ -189,6 +189,36 @@ function createWaitForPage(waitForFn) {
   };
 }
 
+function createRefreshList({ reload, assertReady, readSortCheck, readCurrentPage, waitForFn, sleepFn }) {
+  return async targetId => {
+    await reload(targetId);
+    await assertReady(targetId);
+    await sleepFn(2000);
+    await readSortCheck(targetId);
+
+    let previousSignature = null;
+    let stableReads = 0;
+    return waitForFn(async () => {
+      const state = await readCurrentPage(targetId);
+      let trusted;
+      try {
+        trusted = assertTrustedPagination(state);
+      } catch (_) {
+        return null;
+      }
+      if (trusted.pagination.currentPage !== 1) return null;
+      const signature = [
+        trusted.pagination.totalCount,
+        trusted.pagination.hasNext,
+        ticketFingerprint(state),
+      ].join(':');
+      stableReads = signature === previousSignature ? stableReads + 1 : 1;
+      previousSignature = signature;
+      return stableReads >= 2 ? state : null;
+    }, { timeoutMs: 15000, intervalMs: 500, label: '分页异常后刷新售后列表' });
+  };
+}
+
 function createCircuitReader(readFile, filePath) {
   return () => {
     try { return JSON.parse(readFile(filePath, 'utf8')); } catch (error) {
@@ -304,6 +334,7 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
   }
 
   const pagesChecked = [];
+  let refreshedAfterPaginationDrift = false;
   for (let checked = 0; checked < maxPages; checked++) {
     trusted = assertTrustedPagination(current);
     const pageNumber = trusted.pagination.currentPage;
@@ -337,12 +368,39 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
     if (checked === maxPages - 1) throw new Error(`达到最大页数 ${maxPages}，不能判定工单消失`);
     const next = await dependencies.clickNextPage(targetId);
     if (!next || next.clicked !== true) {
+      if (!refreshedAfterPaginationDrift && typeof dependencies.refreshList === 'function') {
+        current = await dependencies.refreshList(targetId, {
+          reason: (next && next.reason) || '下一页点击未确认',
+        });
+        const refreshed = assertTrustedPagination(current);
+        if (refreshed.pagination.currentPage !== 1) {
+          throw new Error(`分页兜底刷新后未回到第1页: 当前第${refreshed.pagination.currentPage}页`);
+        }
+        refreshedAfterPaginationDrift = true;
+        pagesChecked.length = 0;
+        checked = -1;
+        continue;
+      }
       throw new Error(`翻页失败: ${(next && next.reason) || '下一页点击未确认'}`);
     }
     const expectedPage = pageNumber + 1;
-    current = typeof dependencies.waitForPage === 'function'
-      ? await dependencies.waitForPage(targetId, expectedPage, () => dependencies.readCurrentPage(targetId), current)
-      : await dependencies.readCurrentPage(targetId);
+    try {
+      current = typeof dependencies.waitForPage === 'function'
+        ? await dependencies.waitForPage(targetId, expectedPage, () => dependencies.readCurrentPage(targetId), current)
+        : await dependencies.readCurrentPage(targetId);
+    } catch (error) {
+      const expectedTimeout = error && error.message === `waitFor 超时: 等待售后列表第${expectedPage}页刷新`;
+      if (!expectedTimeout || refreshedAfterPaginationDrift || typeof dependencies.refreshList !== 'function') throw error;
+      current = await dependencies.refreshList(targetId, { reason: error.message });
+      const refreshed = assertTrustedPagination(current);
+      if (refreshed.pagination.currentPage !== 1) {
+        throw new Error(`分页兜底刷新后未回到第1页: 当前第${refreshed.pagination.currentPage}页`);
+      }
+      refreshedAfterPaginationDrift = true;
+      pagesChecked.length = 0;
+      checked = -1;
+      continue;
+    }
     const after = assertTrustedPagination(current);
     if (after.pagination.currentPage !== expectedPage) {
       throw new Error(`翻页后页码未变化: 期望${expectedPage}，实际${after.pagination.currentPage}`);
@@ -888,7 +946,11 @@ function buildSimulationPayload({ account, queueItem, ticket, processed, source 
 function loadDefaultDependencies() {
   const cdp = require('../../lib/cdp');
   const { openAccountFlow } = require('../../lib/jl/open-account-flow');
-  const { prepareAfterSaleList } = require('./11-prepare-after-sale-list');
+  const {
+    prepareAfterSaleList,
+    assertAfterSaleListReady,
+    readCurrentPageSortCheck,
+  } = require('./11-prepare-after-sale-list');
   const { clickWorkOrderAction } = require('./12-click-work-order-action');
   const { readShopName } = require('./02-read-shop-name');
   const step10 = require('./10-read-urgent-after-sale-list');
@@ -916,6 +978,14 @@ function loadDefaultDependencies() {
     };
   };
   const waitForPage = createWaitForPage(waitFor);
+  const refreshList = createRefreshList({
+    reload: cdp.reload,
+    assertReady: assertAfterSaleListReady,
+    readSortCheck: readCurrentPageSortCheck,
+    readCurrentPage,
+    waitForFn: waitFor,
+    sleepFn: sleep,
+  });
   const circuitFile = path.join(__dirname, '../../data/circuit-breaker.json');
   const executionJournal = createAutoExecutionJournal();
   const readCircuit = createCircuitReader(fs.readFileSync, circuitFile);
@@ -947,6 +1017,7 @@ function loadDefaultDependencies() {
         clickPageOne: id => clickPageOneLikeHuman(id, pageDependencies),
         clickNextPage: step10.clickNextPage,
         waitForPage,
+        refreshList,
       });
     },
     resolveErpTargetId: requestedTargetId => resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, requestedTargetId),
@@ -1512,6 +1583,7 @@ module.exports = {
   assertAccountNum,
   clickPageOneLikeHuman,
   createWaitForPage,
+  createRefreshList,
   createCircuitReader,
   createAutoExecutionGate,
   buildMissingWaitingRescanProcessed,

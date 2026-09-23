@@ -9,6 +9,7 @@ const path = require('node:path');
 const {
   clickPageOneLikeHuman,
   createWaitForPage,
+  createRefreshList,
   createCircuitReader,
   createAutoExecutionGate,
   buildMissingWaitingRescanProcessed,
@@ -1205,6 +1206,98 @@ test('生产waitForPage拒绝稳定两次的旧page2 cards，直到page1新cards
   });
   assert.deepEqual(result.tickets, newState.tickets);
   assert.equal(states.length, 0);
+});
+
+test('等待第二页超时时刷新列表一次，并从新的第一页定位前移工单', async () => {
+  const first = page(1, [{ workOrderNum: ORDER_2 }], {
+    totalCount: 13,
+    hasNext: true,
+    pages: [{ text: '1', active: true }, { text: '2', active: false }],
+  });
+  const refreshed = page(1, [{ workOrderNum: ORDER_1 }], {
+    totalCount: 8,
+    hasNext: false,
+    pages: [{ text: '1', active: true }],
+  });
+  const calls = [];
+
+  const result = await locateWorkOrderOnFreshList('list-tab', ORDER_1, {
+    readCurrentPage: async () => first,
+    clickPageOne: async () => assert.fail('刷新后已经在第一页，不应重复点击'),
+    clickNextPage: async () => { calls.push('next'); return { clicked: true }; },
+    waitForPage: async () => { throw new Error('waitFor 超时: 等待售后列表第2页刷新'); },
+    refreshList: async (_targetId, context) => {
+      calls.push('refresh', context.reason);
+      return refreshed;
+    },
+  });
+
+  assert.equal(result.found, true);
+  assert.equal(result.page, 1);
+  assert.deepEqual(result.pagesChecked, [1]);
+  assert.deepEqual(calls, [
+    'next',
+    'refresh',
+    'waitFor 超时: 等待售后列表第2页刷新',
+  ]);
+});
+
+test('分页兜底刷新后重新确认页面、排序和稳定第一页', async () => {
+  const calls = [];
+  const fresh = page(1, [{ workOrderNum: ORDER_1 }], {
+    totalCount: 8,
+    hasNext: false,
+    pages: [{ text: '1', active: true }],
+  });
+  const states = [fresh, fresh];
+  const refreshList = createRefreshList({
+    reload: async targetId => calls.push(['reload', targetId]),
+    assertReady: async targetId => calls.push(['ready', targetId]),
+    sleepFn: async ms => calls.push(['sleep', ms]),
+    readSortCheck: async targetId => calls.push(['sort', targetId]),
+    readCurrentPage: async targetId => {
+      calls.push(['read', targetId]);
+      return states.shift();
+    },
+    waitForFn: async predicate => {
+      while (true) { const value = await predicate(); if (value) return value; }
+    },
+  });
+
+  const result = await refreshList('list-tab');
+
+  assert.equal(result.pagination.totalCount, 8);
+  assert.deepEqual(result.tickets, fresh.tickets);
+  assert.deepEqual(calls, [
+    ['reload', 'list-tab'],
+    ['ready', 'list-tab'],
+    ['sleep', 2000],
+    ['sort', 'list-tab'],
+    ['read', 'list-tab'],
+    ['read', 'list-tab'],
+  ]);
+});
+
+test('分页异常刷新只执行一次，刷新后再次超时则停止', async () => {
+  const first = page(1, [{ workOrderNum: ORDER_2 }], {
+    totalCount: 13,
+    hasNext: true,
+    pages: [{ text: '1', active: true }, { text: '2', active: false }],
+  });
+  let refreshCount = 0;
+
+  await assert.rejects(locateWorkOrderOnFreshList('list-tab', ORDER_1, {
+    readCurrentPage: async () => first,
+    clickPageOne: async () => assert.fail('始终在第一页，不应点击页1'),
+    clickNextPage: async () => ({ clicked: true }),
+    waitForPage: async () => { throw new Error('waitFor 超时: 等待售后列表第2页刷新'); },
+    refreshList: async () => {
+      refreshCount += 1;
+      return first;
+    },
+  }), /等待售后列表第2页刷新/);
+
+  assert.equal(refreshCount, 1);
 });
 
 test('可信地遍历到末页仍找不到时才标记 gone_from_pending', async () => {
