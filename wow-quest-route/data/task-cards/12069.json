@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "task_id": 12069,
+  "identity": {
+    "name_zhcn": "大酋长归来",
+    "name_en": "Return of the High Chief",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 73,
+    "min_level": 71,
+    "pre_any": [
+      12064
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 500
+      },
+      {
+        "faction_id": 1064,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 30750
+  },
+  "guide": [
+    "接取：班索克·冰雾。",
+    "使用阿努巴尔牢笼钥匙放出冰雾部族的大酋长，并协助他击败虫王阿努布耶坎。 /  / 取回一片阿努布耶坎的外壳碎片，把它带回龙骨荒野的阿格玛之锤，交给阿格玛大王。",
+    "交付：阿格玛大王。",
+    "使用阿努巴尔监狱钥匙释放牦牛人酋长，协助其对抗阿努布埃坎，随后拾取所需甲壳碎片。"
+  ],
+  "fivebox": {
+    "status": "special"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12069",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12069; legacy_type=event_group_shared_plus_named_corpse_multi_person_loot_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12069",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12069/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《大酋长归来》：共享：救援与虫王击杀只需主控完成；虫王尸体上的外壳碎片由五号分别拾取。\n【需要单独修正优化】《大酋长归来》首组龙骨实跑确认：救援/事件完成进度五号共享；虫王只需击杀一次，但外壳碎片需要五个角色分别从同一具尸体拾取。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12069",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

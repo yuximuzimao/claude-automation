@@ -1,0 +1,1285 @@
+{
+  "grizzly": {
+    "order": 11,
+    "title": "灰熊丘陵 · 80级五开任务路线",
+    "displayName": "灰熊丘陵",
+    "sub": "祖达克结束后进入灰熊丘陵，先到征服堡；炉石绑定征服堡；按步骤完成灰熊丘陵任务。",
+    "badge": "炉石：征服堡\n预计总时间：6小时22分（4小时49分—7小时56分）",
+    "hearthChain": [
+      "征服堡"
+    ],
+    "timing": {
+      "centerMinutes": 382.5,
+      "rangeMinutes": [
+        288.7,
+        476.3
+      ]
+    },
+    "uiStandard": "semantic-hud-v45",
+    "image": "maps/394-grizzly-hills-hd.jpg",
+    "legend": "",
+    "footer": "在加弗洛克交《终获解救》后，本图灰熊丘陵清理段结束。",
+    "labels": [
+      [
+        20.8,
+        64.2,
+        "征服堡"
+      ],
+      [
+        11.2,
+        76.6,
+        "风险湾"
+      ],
+      [
+        27.1,
+        73.0,
+        "沃德伦"
+      ],
+      [
+        36.1,
+        67.7,
+        "银溪镇"
+      ],
+      [
+        16.2,
+        47.7,
+        "花岗岩之泉"
+      ],
+      [
+        33.0,
+        49.0,
+        "沃达希尔"
+      ],
+      [
+        44.0,
+        48.0,
+        "盲眼卢娜"
+      ],
+      [
+        57.5,
+        41.3,
+        "萨莎"
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地"
+      ],
+      [
+        65.8,
+        17.8,
+        "库伦"
+      ],
+      [
+        70.0,
+        14.5,
+        "索尔莫丹"
+      ],
+      [
+        73.8,
+        34.1,
+        "哈考尔/克拉斯"
+      ],
+      [
+        79.8,
+        33.6,
+        "加弗洛克"
+      ],
+      [
+        71.0,
+        22.0,
+        "Drakil'jin遗迹"
+      ],
+      [
+        85.5,
+        26.0,
+        "血月岛"
+      ],
+      [
+        76.2,
+        57.5,
+        "Dun Argol"
+      ]
+    ],
+    "points": [
+      [
+        20.8,
+        64.2,
+        "征服堡",
+        "征服者克雷娜 → 交《前往征服堡，自求多福吧！》 → 接《征服者的指派》",
+        "conquest",
+        "",
+        "crossmap",
+        false,
+        ""
+      ],
+      [
+        21.2,
+        64.3,
+        "征服堡",
+        "纳兹格利姆中士 → 交《征服者的指派》 → 接《缚焰者的秘密》、《显示力量》\n皮货商人休尼克 → 接《灰狼的毛皮》\n粮食商人洛克兰 → 接《赚外快》\n开飞行点：征服堡\n绑定炉石：征服堡",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        31.0,
+        73.5,
+        "征服堡南侧 / 沃德伦",
+        "↳ 做《赚外快》、《灰狼的毛皮》、《缚焰者的秘密》、《显示力量》",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        21.2,
+        64.3,
+        "征服堡",
+        "粮食商人洛克兰 → 交《赚外快》\n皮货商人休尼克 → 交《灰狼的毛皮》 → 接《替代品》\n纳兹格利姆中士 → 交《缚焰者的秘密》、《显示力量》 → 接《沃德伦的领主》",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        11.2,
+        76.6,
+        "风险湾",
+        "古图尔 → 接《寻找溶解剂》\n↳ 做《寻找溶解剂》\n古图尔 → 交《寻找溶解剂》",
+        "southwest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        27.1,
+        73.0,
+        "沃德伦",
+        "↳ 做《沃德伦的领主》",
+        "southwest",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        20.8,
+        64.2,
+        "征服堡",
+        "纳兹格利姆中士 → 交《沃德伦的领主》 → 接《前往欧尼瓦营地》\n征服者克雷娜 → 接《我的敌人的朋友》",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        36.1,
+        67.7,
+        "银溪镇南侧",
+        "↳ 做《我的敌人的朋友》\n米克哈尔的日记 → 接《米克哈尔的日记》",
+        "silverbrook",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        42.0,
+        62.0,
+        "银溪镇北侧",
+        "↳ 做《替代品》",
+        "silverbrook",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        20.8,
+        64.2,
+        "征服堡",
+        "征服者克雷娜 → 交《我的敌人的朋友》、《米克哈尔的日记》 → 接《攻击银溪镇》、《高戈娜》\n高戈娜 → 交《高戈娜》 → 接《顺藤摸瓜》\n皮货商人休尼克 → 交《替代品》 → 接《休尼克的掩饰》",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.6,
+        64.8,
+        "征服堡",
+        "皮货商人休尼克 → 交《休尼克的掩饰》 → 接《给克雷娜送货》\n征服者克雷娜 → 交《给克雷娜送货》\n风之先知希尔·灰角 → 接《白肩鹰的眼睛》\n苏尔肯中士 → 接《狩猎巨魔》",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        16.2,
+        47.7,
+        "花岗岩之泉",
+        "萨米尔 → 交《狩猎巨魔》 → 接《抓巨魔》\n↳ 做《抓巨魔》\n萨米尔 → 交《抓巨魔》\n达库鲁 → 接《停战？》\n↳ 做《停战？》\n达库鲁 → 交《停战？》 → 接《幻象之瓶》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        15.0,
+        39.0,
+        "花岗岩之泉北侧",
+        "↳ 做《幻象之瓶》\n达库鲁 → 交《幻象之瓶》 → 接《解读象形文字》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        15.7,
+        48.0,
+        "花岗岩之泉",
+        "普雷蒙 → 接《清理天灾》、《蘑菇汤！》\n↳ 做《清理天灾》\n马克·菲尔森 → 交《清理天灾》 → 接《净化天灾巨魔》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        13.2,
+        60.9,
+        "达库鲁火盆·南侧",
+        "↳ 做《解读象形文字》\n达库鲁的影像 → 交《解读象形文字》 → 接《必要的牺牲》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        16.0,
+        35.5,
+        "Zeb'Halak",
+        "↳ 做《必要的牺牲》、《蘑菇汤！》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        17.4,
+        36.4,
+        "达库鲁火盆·北侧",
+        "达库鲁的影像 → 交《必要的牺牲》 → 接《古树精华宝石》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        16.0,
+        30.0,
+        "达克萨隆外",
+        "↳ 做《净化天灾巨魔》\n被囚禁的猎户 → 交《顺藤摸瓜》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        26.0,
+        31.0,
+        "银溪北侧 / 古树之心",
+        "↳ 做《攻击银溪镇》\n古树精华宝石 → 交《古树精华宝石》\n古树精华宝石 → 接《尽在掌控》",
+        "central",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        45.0,
+        28.4,
+        "Drak'atal Passage",
+        "达库鲁的影像 → 交《尽在掌控》 → 接《灰尘之声》",
+        "central",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        20.8,
+        64.2,
+        "征服堡",
+        "使用炉石：征服堡",
+        "hearth",
+        "",
+        "hearth",
+        false,
+        ""
+      ],
+      [
+        20.8,
+        64.2,
+        "征服堡",
+        "征服者克雷娜 → 交《攻击银溪镇》\n高戈娜 → 接《盲眼卢娜》\n风之先知希尔·灰角 → 接《沃达希尔的陨落》、《地下的黑暗》\n格里尼克斯·西维格 → 接《征服斗兽场：斗熊！》",
+        "conquest",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.4,
+        63.9,
+        "征服斗兽场",
+        "↳ 做《征服斗兽场：斗熊！》\n赌徒维尔金 → 交《征服斗兽场：斗熊！》\n格里尼克斯·西维格 → 接《征服斗兽场：疯狂的熊怪》\n↳ 做《征服斗兽场：疯狂的熊怪》\n赌徒维尔金 → 交《征服斗兽场：疯狂的熊怪》\n格里尼克斯·西维格 → 接《征服斗兽场：鲜血与金属》\n↳ 做《征服斗兽场：鲜血与金属》\n赌徒维尔金 → 交《征服斗兽场：鲜血与金属》\n格里尼克斯·西维格 → 接《征服斗兽场：九死一生》\n↳ 做《征服斗兽场：九死一生》\n赌徒维尔金 → 交《征服斗兽场：九死一生》\n格里尼克斯·西维格 → 接《征服斗兽场：摊牌》\n↳ 做《征服斗兽场：摊牌》\n高戈娜 → 交《征服斗兽场：摊牌》",
+        "arena",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        15.8,
+        47.0,
+        "花岗岩之泉",
+        "马克·菲尔森 → 交《净化天灾巨魔》\n普雷蒙 → 交《蘑菇汤！》 → 接《跟我的小朋友打招呼》",
+        "drakuru",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        33.0,
+        49.0,
+        "沃达希尔三洞",
+        "↳ 做《沃达希尔的陨落》、《地下的黑暗》、《白肩鹰的眼睛》",
+        "vordrassil",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        44.0,
+        48.0,
+        "盲眼卢娜",
+        "盲眼卢娜 → 交《盲眼卢娜》 → 接《卢娜的要求》\n↳ 做《卢娜的要求》\n盲眼卢娜 → 交《卢娜的要求》 → 接《梦游体验》\n↳ 做《梦游体验》\n盲眼卢娜 → 交《梦游体验》 → 接《命运与巧合》",
+        "ruuna",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地",
+        "斥候沃塔肯 → 交《前往欧尼瓦营地》 → 接《新的盟友》\n索鲁克·雷怒 → 接《惊吓野马》\n托尔玛克 → 接《不速之“客”》\n开飞行点：欧尼瓦营地",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        68.0,
+        40.0,
+        "欧尼瓦东北",
+        "↳ 做《不速之“客”》、《惊吓野马》\n休·格兰斯 → 接《熊的美食》\n↳ 做《熊的美食》",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        64.3,
+        19.8,
+        "索尔莫丹外",
+        "破碎的日记 → 接《破损的日记》\n↳ 做《破损的日记》",
+        "thor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.5,
+        63.0,
+        "征服堡",
+        "使用炉石：征服堡\n风之先知希尔·灰角 → 交《白肩鹰的眼睛》、《沃达希尔的陨落》、《地下的黑暗》 → 接《可能的关联》、《熊神的后代》",
+        "hearth",
+        "",
+        "hearth",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地",
+        "系统飞行：征服堡 → 欧尼瓦营地\n托尔玛克 → 交《不速之“客”》 → 接《有趣的计划》\n索鲁克·雷怒 → 交《惊吓野马》\n休·格兰斯 → 交《熊的美食》",
+        "oneqwah",
+        "",
+        "taxi",
+        false,
+        ""
+      ],
+      [
+        65.2,
+        47.8,
+        "欧尼瓦营地",
+        "先知帕鲁纳 → 交《破损的日记》 → 接《翻译日记》",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        66.5,
+        58.9,
+        "欧尼瓦南侧",
+        "↳ 做《翻译日记》、《可能的关联》、《熊神的后代》",
+        "vordrassil",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.5,
+        63.0,
+        "征服堡",
+        "风之先知希尔·灰角 → 交《可能的关联》、《熊神的后代》 → 接《摧毁树苗》、《沃达希尔的种子》",
+        "vordrassil",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.2,
+        47.8,
+        "欧尼瓦营地",
+        "系统飞行：征服堡 → 欧尼瓦营地\n先知帕鲁纳 → 交《翻译日记》 → 接《符文中的预言》\n斥候沃塔肯 → 接《“钢铁之子”》",
+        "oneqwah",
+        "",
+        "taxi",
+        false,
+        ""
+      ],
+      [
+        65.8,
+        17.8,
+        "库伦",
+        "库伦 → 交《新的盟友》 → 接《巨石横飞》\n↳ 做《巨石横飞》\n库伦 → 交《巨石横飞》 → 接《鼓舞士气》\n↳ 做《鼓舞士气》\n库伦 → 交《鼓舞士气》 → 接《攻破防线》",
+        "thor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        70.0,
+        14.5,
+        "索尔莫丹",
+        "↳ 做《攻破防线》、《“钢铁之子”》、《符文中的预言》",
+        "thor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.8,
+        17.8,
+        "库伦",
+        "库伦 → 交《攻破防线》 → 接《加弗洛克》",
+        "thor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        73.8,
+        34.1,
+        "哈考尔 / 克拉斯",
+        "哈考尔 → 交《跟我的小朋友打招呼》 → 接《等肉下锅》、《心灵的创伤》\n克拉斯 → 接《孤胆英雄……》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        79.8,
+        33.6,
+        "加弗洛克",
+        "加弗洛克 → 交《加弗洛克》 → 接《压制符文》",
+        "gavrock",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.2,
+        47.8,
+        "欧尼瓦营地",
+        "斥候沃塔肯 → 交《“钢铁之子”》 → 接《以洛肯之名》\n先知帕鲁纳 → 交《符文中的预言》",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        57.5,
+        41.3,
+        "萨莎",
+        "萨莎 → 交《命运与巧合》 → 接《萨莎的狩猎》、《阿纳托雷》\n↳ 做《萨莎的狩猎》、《阿纳托雷》\n萨莎 → 交《萨莎的狩猎》、《阿纳托雷》 → 接《姐姐的誓言》",
+        "sasha",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        50.8,
+        42.6,
+        "灰喉堡",
+        "↳ 做《摧毁树苗》、《沃达希尔的种子》",
+        "vordrassil",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.5,
+        63.0,
+        "征服堡",
+        "使用炉石：征服堡\n风之先知希尔·灰角 → 交《摧毁树苗》、《沃达希尔的种子》 → 接《乌索克，巨熊之神》",
+        "hearth",
+        "",
+        "hearth",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地",
+        "系统飞行：征服堡 → 欧尼瓦营地",
+        "oneqwah",
+        "",
+        "taxi",
+        false,
+        ""
+      ],
+      [
+        52.6,
+        24.1,
+        "乌索克",
+        "↳ 做《乌索克，巨熊之神》",
+        "vordrassil",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地",
+        "系统飞行：欧尼瓦营地 → 征服堡",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.5,
+        63.0,
+        "征服堡",
+        "风之先知希尔·灰角 → 交《乌索克，巨熊之神》",
+        "hearth",
+        "",
+        "taxi",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地",
+        "系统飞行：征服堡 → 欧尼瓦营地",
+        "oneqwah",
+        "",
+        "taxi",
+        false,
+        ""
+      ],
+      [
+        64.8,
+        43.4,
+        "安娅",
+        "安娅 → 交《姐姐的誓言》",
+        "sasha",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        57.5,
+        41.3,
+        "萨莎",
+        "萨莎 → 接《狼人的末日》",
+        "sasha",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        69.1,
+        40.1,
+        "休·格兰斯",
+        "↳ 做《以洛肯之名》",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        78.8,
+        43.4,
+        "符文监督者",
+        "↳ 做《压制符文》、《心灵的创伤》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        71.0,
+        22.0,
+        "Drakil'jin遗迹",
+        "↳ 做《孤胆英雄……》、《灰尘之声》\n达库鲁的影像 → 交《灰尘之声》\n哈里森·琼斯 → 接《喔——哒！！》\n↳ 做《喔——哒！！》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        73.8,
+        34.1,
+        "哈考尔 / 克拉斯",
+        "哈考尔 → 交《心灵的创伤》、《喔——哒！！》\n克拉斯 → 交《孤胆英雄……》 → 接《达卡古尔之槌》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        74.0,
+        30.0,
+        "达卡古尔",
+        "↳ 做《达卡古尔之槌》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        73.8,
+        34.1,
+        "克拉斯",
+        "克拉斯 → 交《达卡古尔之槌》 → 接《死后相见》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        70.5,
+        22.0,
+        "Drakil'jin墓穴",
+        "↳ 做《死后相见》\n甘休 → 交《死后相见》 → 接《冷静一下，伙计》\n↳ 做《冷静一下，伙计》",
+        "drakiljin",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        73.8,
+        34.1,
+        "克拉斯",
+        "克拉斯 → 交《冷静一下，伙计》 → 接《金亚拉克的末日》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        70.5,
+        22.0,
+        "Drakil'jin墓穴",
+        "↳ 做《金亚拉克的末日》",
+        "drakiljin",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        73.8,
+        34.1,
+        "克拉斯",
+        "克拉斯 → 交《金亚拉克的末日》",
+        "drakiljin",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        85.5,
+        26.0,
+        "血月岛",
+        "↳ 做《狼人的末日》",
+        "bloodmoon",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        57.5,
+        41.3,
+        "萨莎",
+        "萨莎 → 交《狼人的末日》",
+        "sasha",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        79.8,
+        33.6,
+        "加弗洛克",
+        "加弗洛克 → 交《压制符文》 → 接《潜在的能量》\n↳ 做《以洛肯之名》、《潜在的能量》",
+        "gavrock",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.7,
+        "欧尼瓦营地",
+        "斥候沃塔肯 → 交《以洛肯之名》 → 接《监工的制服》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        76.2,
+        57.5,
+        "Dun Argol",
+        "↳ 做《监工的制服》、《有趣的计划》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.5,
+        "欧尼瓦营地",
+        "斥候沃塔肯 → 交《监工的制服》 → 接《活灵活现》\n勘探员罗卡尔 → 交《有趣的计划》 → 接《收集零件》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        76.2,
+        57.5,
+        "Dun Argol",
+        "↳ 做《活灵活现》、《收集零件》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.5,
+        "欧尼瓦营地",
+        "斥候沃塔肯 → 交《活灵活现》 → 接《洛肯的命令》\n勘探员罗卡尔 → 交《收集零件》 → 接《我们有能源》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        76.5,
+        59.5,
+        "Dun Argol上层",
+        "↳ 做《我们有能源》、《洛肯的命令》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.3,
+        "欧尼瓦营地",
+        "勘探员罗卡尔 → 交《我们有能源》 → 接《……我们没有能源》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        73.0,
+        55.0,
+        "Dun Argol外围",
+        "↳ 做《……我们没有能源》",
+        "dunargol",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.5,
+        "欧尼瓦营地",
+        "勘探员罗卡尔 → 交《……我们没有能源》 → 接《击败铁领主》",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        76.6,
+        63.7,
+        "Dun Argol上层",
+        "↳ 做《击败铁领主》",
+        "dunargol",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        65.1,
+        47.5,
+        "欧尼瓦营地",
+        "托尔玛克 → 交《击败铁领主》\n斥候沃塔肯 → 交《洛肯的命令》",
+        "oneqwah",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        79.8,
+        33.6,
+        "加弗洛克",
+        "加弗洛克 → 交《潜在的能量》 → 接《终获解救》",
+        "gavrock",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        72.0,
+        37.0,
+        "符文巨人平原",
+        "↳ 做《终获解救》、《等肉下锅》",
+        "gavrock",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        73.8,
+        34.0,
+        "哈考尔",
+        "哈考尔 → 交《等肉下锅》",
+        "gavrock",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        79.8,
+        33.6,
+        "加弗洛克",
+        "加弗洛克 → 交《终获解救》",
+        "final",
+        "",
+        "ride",
+        false,
+        ""
+      ]
+    ],
+    "defaultIndex": 0,
+    "phaseColors": {},
+    "stepGroups": [
+      {
+        "start": 0,
+        "end": 3,
+        "title": "征服堡 → 沃德伦任务",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 22.0,
+          "rangeMinutes": [
+            16.6,
+            27.5
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">征服者克雷娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">前往征服堡，自求多福吧！</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">征服者的指派</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格利姆中士</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">征服者的指派</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">缚焰者的秘密</span>、<span class=\"ra-task ra-accept\">显示力量</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">皮货商人休尼克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">灰狼的毛皮</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">粮食商人洛克兰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">赚外快</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">绑定炉石：征服堡</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡南侧 / 沃德伦</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">赚外快</span>、<span class=\"ra-task ra-do-task\">灰狼的毛皮</span>、<span class=\"ra-task ra-do-task\">缚焰者的秘密</span>、<span class=\"ra-task ra-do-task\">显示力量</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">粮食商人洛克兰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">赚外快</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">皮货商人休尼克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">灰狼的毛皮</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">替代品</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格利姆中士</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">缚焰者的秘密</span>、<span class=\"ra-task ra-turnin\">显示力量</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">沃德伦的领主</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《前往征服堡，自求多福吧！》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《前往征服堡，自求多福吧！》只携带，后续进入灰熊丘陵自然交付。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服者的指派》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《缚焰者的秘密》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《赚外快》《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《显示力量》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《显示力量》：共享：击杀进度五号同步。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《灰狼的毛皮》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《赚外快》《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《赚外快》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《赚外快》《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《替代品》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃德伦的领主》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《沃德伦的领主》：共享。西侧约(26.6,78.0)骑烈焰使者，领主在塔顶约(27.1,72.9)；贴到近身后优先卡CD用翼击眩晕，眩晕间隙补两种火焰技能，别在远距离吃弓箭/齐射。<br>《沃德伦的领主》灰熊丘陵首组实跑确认：共享，任务龙载具战由主控完成即可同步五号。</div></div>"
+      },
+      {
+        "start": 4,
+        "end": 6,
+        "title": "风险湾 → 沃德伦领主 → 征服堡",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 6.1,
+          "rangeMinutes": [
+            5.0,
+            7.2
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">风险湾</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">古图尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">寻找溶解剂</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">寻找溶解剂</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">古图尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">寻找溶解剂</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">沃德伦</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">沃德伦的领主</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格利姆中士</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">沃德伦的领主</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">前往欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">征服者克雷娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">我的敌人的朋友</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《寻找溶解剂》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>不共享：按单个场景物交互/拾取处理，五号依次获取 Element 115；拾取后开始短时限返程，立即原路返回古图尔并尽量不进战斗。<br>《寻找溶解剂》按用户确认的任务机制规则处理：单个物品交互/拾取类型默认不共享，五号依次获取Element 115；本组未单独留下实跑记忆，因此这是按已确认机制类型规则锁定，而非逐号现场观察。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃德伦的领主》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《沃德伦的领主》：共享。西侧约(26.6,78.0)骑烈焰使者，领主在塔顶约(27.1,72.9)；贴到近身后优先卡CD用翼击眩晕，眩晕间隙补两种火焰技能，别在远距离吃弓箭/齐射。<br>《沃德伦的领主》灰熊丘陵首组实跑确认：共享，任务龙载具战由主控完成即可同步五号。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《前往欧尼瓦营地》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《我的敌人的朋友》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 7,
+        "end": 10,
+        "title": "银溪镇 → 征服堡：克雷娜 / 高戈娜 / 休尼克",
+        "summary": "银溪镇完成《我的敌人的朋友》并取得米克哈尔日记，北侧补灰熊皮；回征服堡按真实NPC推进克雷娜、高戈娜和休尼克三条线。",
+        "timing": {
+          "centerMinutes": 16.2,
+          "rangeMinutes": [
+            12.2,
+            20.3
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">银溪镇南侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">我的敌人的朋友</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">米克哈尔的日记</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">米克哈尔的日记</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">银溪镇北侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">替代品</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">征服者克雷娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">我的敌人的朋友</span>、<span class=\"ra-task ra-turnin\">米克哈尔的日记</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">攻击银溪镇</span>、<span class=\"ra-task ra-accept\">高戈娜</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">高戈娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">高戈娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">顺藤摸瓜</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">皮货商人休尼克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">替代品</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">休尼克的掩饰</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">皮货商人休尼克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">休尼克的掩饰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">给克雷娜送货</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">征服者克雷娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">给克雷娜送货</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">风之先知希尔·灰角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">白肩鹰的眼睛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">苏尔肯中士</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎巨魔</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《我的敌人的朋友》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《米克哈尔的日记》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《米克哈尔的日记》：来源怪为银溪猎人；击杀后拾取掉落的任务起始物“米克哈尔的日记”，五号分别右键接任务。离开前确认五号日志里都有任务。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《替代品》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《攻击银溪镇》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《高戈娜》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《顺藤摸瓜》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《休尼克的掩饰》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《休尼克的掩饰》：交任务前在征服堡商人购买5份面粉和1份煤块。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《给克雷娜送货》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《白肩鹰的眼睛》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《白肩鹰的眼睛》灰熊丘陵首组实跑确认：共享；主号对白肩鹰使用银色羽毛即可同步五号进度。<br>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎巨魔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 11,
+        "end": 13,
+        "title": "花岗岩之泉：达库鲁 / 天灾",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 31.4,
+          "rangeMinutes": [
+            23.6,
+            39.3
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">花岗岩之泉</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">萨米尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎巨魔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">抓巨魔</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">抓巨魔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">萨米尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">抓巨魔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">停战？</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">停战？</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">停战？</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">幻象之瓶</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">花岗岩之泉北侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">幻象之瓶</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">幻象之瓶</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">解读象形文字</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">花岗岩之泉</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">普雷蒙</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">清理天灾</span>、<span class=\"ra-task ra-accept\">蘑菇汤！</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">清理天灾</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">马克·菲尔森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">清理天灾</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">净化天灾巨魔</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎巨魔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《抓巨魔》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《停战？》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《幻象之瓶》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《幻象之瓶》：不共享：水草叶、3片朦胧叶和水晶瓶都齐再离开；水晶瓶在花岗岩之泉商人购买，一次购买直接得到5个，只需买一次。<br>《幻象之瓶》灰熊丘陵首组实跑确认：不共享；水晶瓶一次购买直接得到5个，不需要五个角色分别购买。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《解读象形文字》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《解读象形文字》：不共享：冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像，召唤NPC不共享。当前号背包里若还有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。<br>《解读象形文字》灰熊丘陵首组实跑确认：不共享；冰冻魔精可在角色间交易，每号都要自己在火盆用药剂召唤达库鲁影像，召唤出的NPC不共享。当前号背包里若有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《清理天灾》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《蘑菇汤！》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《净化天灾巨魔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 14,
+        "end": 20,
+        "title": "达库鲁火盆 → 古树之心 → Drak'atal",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 30.7,
+          "rangeMinutes": [
+            23.0,
+            38.3
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">达库鲁火盆·南侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">解读象形文字</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁的影像</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">解读象形文字</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">必要的牺牲</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Zeb&#x27;Halak</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">必要的牺牲</span>、<span class=\"ra-task ra-do-task\">蘑菇汤！</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">达库鲁火盆·北侧</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁的影像</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">必要的牺牲</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">古树精华宝石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">达克萨隆外</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">净化天灾巨魔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">被囚禁的猎户</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">顺藤摸瓜</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">银溪北侧 / 古树之心</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">攻击银溪镇</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">古树精华宝石</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">古树精华宝石</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">古树精华宝石</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">尽在掌控</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Drak&#x27;atal Passage</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁的影像</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">尽在掌控</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">灰尘之声</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：征服堡</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《解读象形文字》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《解读象形文字》：不共享：冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像，召唤NPC不共享。当前号背包里若还有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。<br>《解读象形文字》灰熊丘陵首组实跑确认：不共享；冰冻魔精可在角色间交易，每号都要自己在火盆用药剂召唤达库鲁影像，召唤出的NPC不共享。当前号背包里若有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《必要的牺牲》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《必要的牺牲》：不共享：所需魔精由五号依次拾取，预言者之眼也需要五号依次交互取得，再分别到火盆完成交付。<br>《必要的牺牲》灰熊丘陵首组实跑确认：不共享；所需魔精由五号依次拾取，预言者之眼也需要五号依次交互取得，再分别在火盆完成交付。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《蘑菇汤！》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《古树精华宝石》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《净化天灾巨魔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《顺藤摸瓜》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《攻击银溪镇》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《尽在掌控》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《灰尘之声》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《灰尘之声》先携带，进入Drakil&#x27;jin遗迹再完成。<br>启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。</div></div>"
+      },
+      {
+        "start": 21,
+        "end": 21,
+        "title": "征服堡：斗兽场准备",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 8.3,
+          "rangeMinutes": [
+            6.2,
+            10.3
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">征服者克雷娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">攻击银溪镇</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">高戈娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">盲眼卢娜</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">风之先知希尔·灰角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">沃达希尔的陨落</span>、<span class=\"ra-task ra-accept\">地下的黑暗</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">格里尼克斯·西维格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">征服斗兽场：斗熊！</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《攻击银溪镇》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《盲眼卢娜》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃达希尔的陨落》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《地下的黑暗》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《地下的黑暗》灰熊丘陵首组实跑确认：共享；三处洞穴目标由主号完成即可同步五号。<br>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服斗兽场：斗熊！》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div>"
+      },
+      {
+        "start": 22,
+        "end": 22,
+        "title": "征服斗兽场五连",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 7.8,
+          "rangeMinutes": [
+            6.4,
+            9.2
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服斗兽场</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">征服斗兽场：斗熊！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赌徒维尔金</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">征服斗兽场：斗熊！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">格里尼克斯·西维格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">征服斗兽场：疯狂的熊怪</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">征服斗兽场：疯狂的熊怪</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赌徒维尔金</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">征服斗兽场：疯狂的熊怪</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">格里尼克斯·西维格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">征服斗兽场：鲜血与金属</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">征服斗兽场：鲜血与金属</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赌徒维尔金</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">征服斗兽场：鲜血与金属</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">格里尼克斯·西维格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">征服斗兽场：九死一生</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">征服斗兽场：九死一生</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赌徒维尔金</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">征服斗兽场：九死一生</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">格里尼克斯·西维格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">征服斗兽场：摊牌</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">征服斗兽场：摊牌</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">高戈娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">征服斗兽场：摊牌</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服斗兽场：斗熊！》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服斗兽场：疯狂的熊怪》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《征服斗兽场：疯狂的熊怪》灰熊丘陵首组实跑确认：共享。实战关键不是原地清图腾，而是持续跑动拉开；1防骑可直接单挑完成，保持移动并打断闪电链即可。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服斗兽场：鲜血与金属》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服斗兽场：九死一生》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《征服斗兽场：摊牌》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span></div></div>"
+      },
+      {
+        "start": 23,
+        "end": 25,
+        "title": "花岗岩之泉 → 沃达希尔 → 盲眼卢娜",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 14.4,
+          "rangeMinutes": [
+            10.9,
+            18.1
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">花岗岩之泉</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">马克·菲尔森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">净化天灾巨魔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">普雷蒙</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">蘑菇汤！</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">跟我的小朋友打招呼</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">沃达希尔三洞</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">沃达希尔的陨落</span>、<span class=\"ra-task ra-do-task\">地下的黑暗</span>、<span class=\"ra-task ra-do-task\">白肩鹰的眼睛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">盲眼卢娜</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">盲眼卢娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">盲眼卢娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">卢娜的要求</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">卢娜的要求</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">盲眼卢娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">卢娜的要求</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">梦游体验</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">梦游体验</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">盲眼卢娜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">梦游体验</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">命运与巧合</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《净化天灾巨魔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《蘑菇汤！》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《跟我的小朋友打招呼》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃达希尔的陨落》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《地下的黑暗》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《地下的黑暗》灰熊丘陵首组实跑确认：共享；三处洞穴目标由主号完成即可同步五号。<br>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《白肩鹰的眼睛》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《白肩鹰的眼睛》灰熊丘陵首组实跑确认：共享；主号对白肩鹰使用银色羽毛即可同步五号进度。<br>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《盲眼卢娜》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《卢娜的要求》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《卢娜的要求》灰熊丘陵首组实跑确认：不共享；五号分别收集4份薄纱之尘。<br>《卢娜的要求》不共享，五号分别收集4份薄纱之尘。《梦游体验》不共享，五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《梦游体验》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《梦游体验》灰熊丘陵首组实跑确认：不共享；五个角色分别在卢娜水晶球附近喝药并完成视觉事件。<br>《卢娜的要求》不共享，五号分别收集4份薄纱之尘。《梦游体验》不共享，五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《命运与巧合》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 26,
+        "end": 28,
+        "title": "欧尼瓦 → 索尔莫丹",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 19.1,
+          "rangeMinutes": [
+            14.3,
+            23.8
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">前往欧尼瓦营地</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">新的盟友</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">索鲁克·雷怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">惊吓野马</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托尔玛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">不速之“客”</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：欧尼瓦营地</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦东北</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">不速之“客”</span>、<span class=\"ra-task ra-do-task\">惊吓野马</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">休·格兰斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">熊的美食</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">熊的美食</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">索尔莫丹外</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">破碎的日记</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">破损的日记</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">破损的日记</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《前往欧尼瓦营地》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《新的盟友》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《惊吓野马》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《不速之“客”》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《熊的美食》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《熊的美食》不共享：五号分别对鱼群使用任务渔网，不需要钓鱼专业。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《破损的日记》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《破损的日记》：不共享。索尔莫丹外约(64.3,19.8)五号分别拾取地面的破损日记并接任务；书页就在周围战场地面，每号分别收集8张，最后各自在背包把书页与不完整日记合成完整日记再下山。<br>《破损的日记》灰熊丘陵首组实跑确认：不共享；五号分别取得任务并收集8张缺失书页，各自合成完整日记。</div></div>"
+      },
+      {
+        "start": 29,
+        "end": 31,
+        "title": "炉石征服堡 → 欧尼瓦交接",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 18.9,
+          "rangeMinutes": [
+            14.2,
+            23.7
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">风之先知希尔·灰角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">白肩鹰的眼睛</span>、<span class=\"ra-task ra-turnin\">沃达希尔的陨落</span>、<span class=\"ra-task ra-turnin\">地下的黑暗</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">可能的关联</span>、<span class=\"ra-task ra-accept\">熊神的后代</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：征服堡 → 欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托尔玛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">不速之“客”</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">有趣的计划</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">索鲁克·雷怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">惊吓野马</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">休·格兰斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">熊的美食</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">先知帕鲁纳</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">破损的日记</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">翻译日记</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《白肩鹰的眼睛》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《白肩鹰的眼睛》灰熊丘陵首组实跑确认：共享；主号对白肩鹰使用银色羽毛即可同步五号进度。<br>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃达希尔的陨落》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《地下的黑暗》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《地下的黑暗》灰熊丘陵首组实跑确认：共享；三处洞穴目标由主号完成即可同步五号。<br>《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《可能的关联》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《熊神的后代》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《不速之“客”》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《有趣的计划》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《有趣的计划》灰熊丘陵首组实跑确认：不共享；三张蓝图均为个人掉落，五号分别收集第1/2/3部分并各自在背包合成完整蓝图。最下方建筑内任务怪最密。<br>《监工的制服》目标打一次后五号依次拾取；《有趣的计划》不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《惊吓野马》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《熊的美食》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《熊的美食》不共享：五号分别对鱼群使用任务渔网，不需要钓鱼专业。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《破损的日记》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《破损的日记》：不共享。索尔莫丹外约(64.3,19.8)五号分别拾取地面的破损日记并接任务；书页就在周围战场地面，每号分别收集8张，最后各自在背包把书页与不完整日记合成完整日记再下山。<br>《破损的日记》灰熊丘陵首组实跑确认：不共享；五号分别取得任务并收集8张缺失书页，各自合成完整日记。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《翻译日记》</div><div class=\"ra-note-text\"><span class=\"ra-sequential-loot\">依次拾取：</span>《翻译日记》灰熊丘陵首组实跑确认：目标只需击杀一次，同一尸体可由五号依次拾取任务物。<br>《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。</div></div>"
+      },
+      {
+        "start": 32,
+        "end": 34,
+        "title": "欧尼瓦南侧 → 征服堡灰角 → 欧尼瓦",
+        "summary": "欧尼瓦南侧完成翻译日记、熊怪血液和熊神子嗣；回征服堡只找灰角交接，再系统飞欧尼瓦分别找帕鲁纳和沃塔肯接索尔莫丹任务。",
+        "timing": {
+          "centerMinutes": 18.1,
+          "rangeMinutes": [
+            13.6,
+            22.6
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦南侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">翻译日记</span>、<span class=\"ra-task ra-do-task\">可能的关联</span>、<span class=\"ra-task ra-do-task\">熊神的后代</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">风之先知希尔·灰角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">可能的关联</span>、<span class=\"ra-task ra-turnin\">熊神的后代</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">摧毁树苗</span>、<span class=\"ra-task ra-accept\">沃达希尔的种子</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：征服堡 → 欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">先知帕鲁纳</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">翻译日记</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">符文中的预言</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">“钢铁之子”</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《翻译日记》</div><div class=\"ra-note-text\"><span class=\"ra-sequential-loot\">依次拾取：</span>《翻译日记》灰熊丘陵首组实跑确认：目标只需击杀一次，同一尸体可由五号依次拾取任务物。<br>《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《可能的关联》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《熊神的后代》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《摧毁树苗》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《摧毁树苗》灰熊丘陵首组实跑确认：不共享；完成后本组直接炉石回征服堡。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃达希尔的种子》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《符文中的预言》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《符文中的预言》共享：三块符文板由主号读取即可同步五号。<br>《符文中的预言》灰熊丘陵首组实跑确认：共享；三块符文板由主号完成即可同步五号。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《“钢铁之子”》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 35,
+        "end": 40,
+        "title": "库伦 / 索尔莫丹 → 哈考尔 / 加弗洛克 → 欧尼瓦",
+        "summary": "库伦三连后在索尔莫丹同时完成铁矮人和符文板；再去哈考尔/克拉斯、加弗洛克接任务，最后回欧尼瓦分别向沃塔肯和帕鲁纳交接。",
+        "timing": {
+          "centerMinutes": 22.9,
+          "rangeMinutes": [
+            17.2,
+            28.6
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">库伦</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">库伦</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">新的盟友</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">巨石横飞</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">巨石横飞</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">库伦</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">巨石横飞</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">鼓舞士气</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">鼓舞士气</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">库伦</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">鼓舞士气</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">攻破防线</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">索尔莫丹</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">攻破防线</span>、<span class=\"ra-task ra-do-task\">“钢铁之子”</span>、<span class=\"ra-task ra-do-task\">符文中的预言</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">库伦</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">库伦</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">攻破防线</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">加弗洛克</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">哈考尔 / 克拉斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈考尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">跟我的小朋友打招呼</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">等肉下锅</span>、<span class=\"ra-task ra-accept\">心灵的创伤</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克拉斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">孤胆英雄……</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加弗洛克</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">加弗洛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">加弗洛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">压制符文</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">“钢铁之子”</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">以洛肯之名</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">先知帕鲁纳</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">符文中的预言</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《新的盟友》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《巨石横飞》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《巨石横飞》灰熊丘陵首组实跑确认：共享；主号投掷巨石推进目标即可同步五号。<br>《巨石横飞》《鼓舞士气》均共享；主号完成即可同步五号。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《鼓舞士气》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《鼓舞士气》灰熊丘陵首组实跑确认：共享；主号使用大地碎片并处理后续目标即可同步五号。<br>《巨石横飞》《鼓舞士气》均共享；主号完成即可同步五号。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《攻破防线》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《“钢铁之子”》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《符文中的预言》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《符文中的预言》共享：三块符文板由主号读取即可同步五号。<br>《符文中的预言》灰熊丘陵首组实跑确认：共享；三块符文板由主号完成即可同步五号。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《加弗洛克》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《跟我的小朋友打招呼》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《等肉下锅》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《终获解救》共享；符文破坏者失败时目标会被削弱，可等冷却后再次使用。《等肉下锅》先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《心灵的创伤》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《孤胆英雄……》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《压制符文》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《以洛肯之名》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《以洛肯之名》《潜在的能量》均共享。<br>《以洛肯之名》先找休·格兰斯对话，再去加弗洛克完成剩余对话。</div></div>"
+      },
+      {
+        "start": 41,
+        "end": 45,
+        "title": "萨莎 → 灰喉堡 → 乌索克",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 19.2,
+          "rangeMinutes": [
+            14.4,
+            24.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨莎</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">萨莎</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">命运与巧合</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">萨莎的狩猎</span>、<span class=\"ra-task ra-accept\">阿纳托雷</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">萨莎的狩猎</span>、<span class=\"ra-task ra-do-task\">阿纳托雷</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">萨莎</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">萨莎的狩猎</span>、<span class=\"ra-task ra-turnin\">阿纳托雷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">姐姐的誓言</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">灰喉堡</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">摧毁树苗</span>、<span class=\"ra-task ra-do-task\">沃达希尔的种子</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">风之先知希尔·灰角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">摧毁树苗</span>、<span class=\"ra-task ra-turnin\">沃达希尔的种子</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">乌索克，巨熊之神</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：征服堡 → 欧尼瓦营地</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">乌索克</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">乌索克，巨熊之神</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《命运与巧合》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《萨莎的狩猎》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阿纳托雷》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《阿纳托雷》不共享：去至日村找塔季娅娜，对她使用镇静飞镖触发坐骑/带回脚本；一个号完成后其余号留在原地等塔季娅娜刷新，再依次完成。<br>《阿纳托雷》灰熊丘陵首组实跑确认：不共享；一个角色完成后，其余角色需要留在原地等待目标刷新，再依次使用任务道具并完成脚本。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《姐姐的誓言》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《摧毁树苗》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《摧毁树苗》灰熊丘陵首组实跑确认：不共享；完成后本组直接炉石回征服堡。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《沃达希尔的种子》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《乌索克，巨熊之神》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享。击败乌索克后对尸体使用净化灰烬；1防骑+4惩戒可让NPC助手负责治疗。</div></div>"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "title": "乌索克交付 → 安娅 / 萨莎",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 9.9,
+          "rangeMinutes": [
+            8.1,
+            11.7
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：欧尼瓦营地 → 征服堡</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">征服堡</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">风之先知希尔·灰角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">乌索克，巨熊之神</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：征服堡 → 欧尼瓦营地</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">安娅</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">安娅</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">姐姐的誓言</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨莎</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">萨莎</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狼人的末日</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">休·格兰斯</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">以洛肯之名</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《乌索克，巨熊之神》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享。击败乌索克后对尸体使用净化灰烬；1防骑+4惩戒可让NPC助手负责治疗。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《姐姐的誓言》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狼人的末日》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享；按三前置Boss → 阿鲁高之影的脚本顺序完成即可。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《以洛肯之名》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《以洛肯之名》《潜在的能量》均共享。<br>《以洛肯之名》先找休·格兰斯对话，再去加弗洛克完成剩余对话。</div></div>"
+      },
+      {
+        "start": 52,
+        "end": 57,
+        "title": "符文监督者 → Drakil'jin墓穴",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 31.8,
+          "rangeMinutes": [
+            23.9,
+            39.7
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">符文监督者</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">压制符文</span>、<span class=\"ra-task ra-do-task\">心灵的创伤</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Drakil&#x27;jin遗迹</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">孤胆英雄……</span>、<span class=\"ra-task ra-do-task\">灰尘之声</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达库鲁的影像</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">灰尘之声</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈里森·琼斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">喔——哒！！</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">喔——哒！！</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">哈考尔 / 克拉斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈考尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">心灵的创伤</span>、<span class=\"ra-task ra-turnin\">喔——哒！！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克拉斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">孤胆英雄……</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">达卡古尔之槌</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">达卡古尔</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">达卡古尔之槌</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">克拉斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克拉斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">达卡古尔之槌</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">死后相见</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Drakil&#x27;jin墓穴</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">死后相见</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">甘休</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">死后相见</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">冷静一下，伙计</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">冷静一下，伙计</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《压制符文》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《心灵的创伤》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《孤胆英雄……》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《灰尘之声》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《灰尘之声》先携带，进入Drakil&#x27;jin遗迹再完成。<br>启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《喔——哒！！》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《达卡古尔之槌》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《死后相见》</div><div class=\"ra-note-text\"><span class=\"ra-special\">特殊：</span>《死后相见》灰熊丘陵首组实跑确认：敲锣触发时任务完成进度共享，但五个角色仍都要分别敲锣进入脚本，否则未亲自触发的角色无法正常交任务。<br>《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《冷静一下，伙计》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。</div></div>"
+      },
+      {
+        "start": 58,
+        "end": 63,
+        "title": "金亚拉克 → 血月岛 → 加弗洛克",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 27.9,
+          "rangeMinutes": [
+            20.8,
+            34.8
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">克拉斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克拉斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">冷静一下，伙计</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">金亚拉克的末日</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Drakil&#x27;jin墓穴</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">金亚拉克的末日</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">克拉斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克拉斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">金亚拉克的末日</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">血月岛</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狼人的末日</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨莎</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">萨莎</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狼人的末日</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加弗洛克</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">加弗洛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">压制符文</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">潜在的能量</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">以洛肯之名</span>、<span class=\"ra-task ra-do-task\">潜在的能量</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《冷静一下，伙计》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《金亚拉克的末日》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享；按任务流程灌注供品并在墓穴外锣旁完成最终事件即可。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狼人的末日》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享；按三前置Boss → 阿鲁高之影的脚本顺序完成即可。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《压制符文》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《潜在的能量》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《以洛肯之名》《潜在的能量》均共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《以洛肯之名》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《以洛肯之名》《潜在的能量》均共享。<br>《以洛肯之名》先找休·格兰斯对话，再去加弗洛克完成剩余对话。</div></div>"
+      },
+      {
+        "start": 64,
+        "end": 69,
+        "title": "欧尼瓦 ↔ Dun Argol：制服 / 能源",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 29.2,
+          "rangeMinutes": [
+            21.9,
+            36.5
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">以洛肯之名</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">监工的制服</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Dun Argol</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">监工的制服</span>、<span class=\"ra-task ra-do-task\">有趣的计划</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">监工的制服</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">活灵活现</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">勘探员罗卡尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">有趣的计划</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">收集零件</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Dun Argol</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">活灵活现</span>、<span class=\"ra-task ra-do-task\">收集零件</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">活灵活现</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">洛肯的命令</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">勘探员罗卡尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">收集零件</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">我们有能源</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Dun Argol上层</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">我们有能源</span>、<span class=\"ra-task ra-do-task\">洛肯的命令</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《以洛肯之名》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《以洛肯之名》《潜在的能量》均共享。<br>《以洛肯之名》先找休·格兰斯对话，再去加弗洛克完成剩余对话。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《监工的制服》</div><div class=\"ra-note-text\"><span class=\"ra-sequential-loot\">依次拾取：</span>《监工的制服》灰熊丘陵首组实跑确认：目标只需击杀一次，同一尸体可由五号依次拾取任务物。<br>《监工的制服》目标打一次后五号依次拾取；《有趣的计划》不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《有趣的计划》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《有趣的计划》灰熊丘陵首组实跑确认：不共享；三张蓝图均为个人掉落，五号分别收集第1/2/3部分并各自在背包合成完整蓝图。最下方建筑内任务怪最密。<br>《监工的制服》目标打一次后五号依次拾取；《有趣的计划》不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《活灵活现》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《活灵活现》共享；《收集零件》不共享，五号分别拾取零件。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《收集零件》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《活灵活现》共享；《收集零件》不共享，五号分别拾取零件。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《洛肯的命令》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《我们有能源》两名目标各打一次，同一尸体能量核心由五号依次拾取；《洛肯的命令》共享。读取基座后保持已完成未交，伪装留到铁领主结束。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《我们有能源》</div><div class=\"ra-note-text\"><span class=\"ra-sequential-loot\">依次拾取：</span>《我们有能源》灰熊丘陵首组实跑确认：两名目标各击杀一次即可，同一尸体上的能量核心可由五号依次拾取。<br>《我们有能源》两名目标各打一次，同一尸体能量核心由五号依次拾取；《洛肯的命令》共享。读取基座后保持已完成未交，伪装留到铁领主结束。</div></div>"
+      },
+      {
+        "start": 70,
+        "end": 74,
+        "title": "Dun Argol：能源 → 铁领主 → 欧尼瓦",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 18.6,
+          "rangeMinutes": [
+            13.9,
+            23.2
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">勘探员罗卡尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">我们有能源</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">……我们没有能源</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Dun Argol外围</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">……我们没有能源</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">勘探员罗卡尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">……我们没有能源</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">击败铁领主</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">Dun Argol上层</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">击败铁领主</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">欧尼瓦营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托尔玛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">击败铁领主</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斥候沃塔肯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">洛肯的命令</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《我们有能源》</div><div class=\"ra-note-text\"><span class=\"ra-sequential-loot\">依次拾取：</span>《我们有能源》灰熊丘陵首组实跑确认：两名目标各击杀一次即可，同一尸体上的能量核心可由五号依次拾取。<br>《我们有能源》两名目标各打一次，同一尸体能量核心由五号依次拾取；《洛肯的命令》共享。读取基座后保持已完成未交，伪装留到铁领主结束。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《……我们没有能源》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享。五个角色分别召出的战争魔像都能对同一只闪电斥候各记1次充能；一只怪可直接记5次，两只怪即可完成全队。<br>《……我们没有能源》灰熊丘陵首组实跑确认：共享。五个角色分别召出的战争魔像都能对同一只闪电斥候计一次充能，因此一只怪可直接贡献5次进度，两只怪即可完成全队。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《击败铁领主》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>共享。穿伪装上楼/乘电梯，使用魔像控制器；铁领主死亡后继续利用魔像/载具离开。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《洛肯的命令》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《我们有能源》两名目标各打一次，同一尸体能量核心由五号依次拾取；《洛肯的命令》共享。读取基座后保持已完成未交，伪装留到铁领主结束。</div></div>"
+      },
+      {
+        "start": 75,
+        "end": 78,
+        "title": "加弗洛克 → 符文巨人平原 → 哈考尔 → 加弗洛克",
+        "summary": "加弗洛克交潜能石并接《终获解救》，符文巨人平原完成释放并补肉类；向哈考尔交《等肉下锅》，最后回加弗洛克交《终获解救》，灰熊丘陵本图结束。",
+        "timing": {
+          "centerMinutes": 30.0,
+          "rangeMinutes": [
+            22.5,
+            37.5
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加弗洛克</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">加弗洛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">潜在的能量</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">终获解救</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">符文巨人平原</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">终获解救</span>、<span class=\"ra-task ra-do-task\">等肉下锅</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">哈考尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈考尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">等肉下锅</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加弗洛克</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">加弗洛克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">终获解救</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《潜在的能量》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《以洛肯之名》《潜在的能量》均共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《终获解救》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《终获解救》共享；符文破坏者失败时目标会被削弱，可等冷却后再次使用。《等肉下锅》先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《等肉下锅》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《终获解救》共享；符文破坏者失败时目标会被削弱，可等冷却后再次使用。《等肉下锅》先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。</div></div>"
+      }
+    ],
+    "defaultGroupIndex": 0
+  }
+}

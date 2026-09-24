@@ -246,3 +246,19 @@ Tests Registry明确永久契约 / 当前迁移 / 快照三类；永久测试只
 **最终状态：Blocking=0。本轮“17份核心文档 + 新owner + schema + 机器契约 + 测试契约 + 顶层路由”正式冻结，可以NEAT归档并换新会话。**
 
 下一会话不得因为普通数据迁移或中文转换bug重新讨论本轮架构；只有出现可复现的“真实业务无法用当前Task Card / Route Profile / Rule模型表达”的案例，才允许重新打开架构设计。
+
+### 5.5 用户确认后的Task Card契约Delta（2026-09-15）
+
+后续真实迁移审查证明原Task Card把任务攻略拆成`objectives / mechanics / fivebox stages / verification.open_questions`过度结构化，且要求先建立一套当前并不存在、也无必要的全任务类型taxonomy。用户确认这是实际业务表达偏差，因此按上述“真实业务无法用当前模型自然表达”例外做最小契约修正，不重开Route Profile/Publisher总体架构。
+
+当前有效Delta：
+
+- Task Card继续以稳定`task_id`为唯一单任务真源；Questie/数据库适合机器消费的身份、Availability、奖励保持结构化；
+- 任务目标、NPC/入口/楼层、任务物、Boss/事件/载具、掉落和混合五开细节统一进入完整`guide`事实层，不再拆`objectives / mechanics / fivebox stages`；
+- `fivebox.status`固定为`shared / not_shared / sequential_loot / special / pending`五类；混合/条件型任务用`special`，细节读guide；
+- 五开未知直接用`pending`，不再维护Task Card通用open-question机器层；
+- 当前正式页面备注迁移阶段先按task_id无损进入`presentation.note_override`，备注精简另做后续专项审计；
+- Task Card只通过`timing_rule_ref`选择Timing规则，时间样本继续属于Timing Observations，不为Timing重新拆任务攻略；
+- 旧信息迁移改为逐task_id闭合；批量工具只收集证据、搬运无歧义数据库字段、校验和报冲突，不自动解释自然语言并批量落库。
+
+现有59张地狱火Task Card已完成shape转换并通过幂等规范化；当前fivebox分布为`pending=49 / shared=5 / not_shared=3 / special=2 / sequential_loot=0`。这只是现有种子卡契约转换，不代表P1全量任务信息迁移完成。

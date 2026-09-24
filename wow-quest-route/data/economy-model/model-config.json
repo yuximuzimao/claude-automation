@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "model_id": "wotlk-route-economy-v1",
+  "game_variant_id": "timewalking-wotlk-cn",
+  "max_level": 80,
+  "xp_conversion_copper_per_base_xp": 6,
+  "max_level_quest_cash_policy": "max_reward_money_or_xp_conversion",
+  "fixed_reward_policy": "all_vendor_total",
+  "choice_reward_policy": "max_vendor_total_one_choice",
+  "cost_policy": {
+    "missing_cost_input_coverage": "partial",
+    "allow_known_cost_zero_without_complete_coverage": true
+  },
+  "notes": [
+    "Max-level XP-to-money uses the base quest XP evaluated at max level after quest-level decay/rounding; the server leveling XP multiplier is not applied.",
+    "The current server policy uses max(reward_money_copper, xp_conversion_copper), based on project live-server evidence; AzerothCore default core behavior is not treated as the server policy source.",
+    "QUEST_FLAGS_NO_MONEY_FROM_XP is 0x100 in WotLK 3.3.5a sources and must be present as a structural Task Card reward fact before a max-level turn-in can be fresh."
+  ]
+}

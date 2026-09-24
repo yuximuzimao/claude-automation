@@ -1,0 +1,250 @@
+{
+  "schema": "route-profile-migration-semantic-parity/v1",
+  "reviewed_at": "2026-09-18",
+  "policy_ref": "docs/rules/route-lifecycle-final-audit.md#4-player-cold-read-与迁移语义对拍",
+  "rule": "Only windows whose migration changes player-visible wording, action order, visit boundaries, or transport structure require semantic parity review. Pure geometry/fingerprint bindings that do not alter player-visible execution text are excluded.",
+  "windows": [
+    {
+      "profile_id": "hellfire-dk-speed",
+      "window_id": "entry-dark-portal",
+      "old_source_ref": "data/route-atlas/candidates/hellfire_dk.json",
+      "old_player_meaning": "奥格瑞玛精神谷固定交通到诅咒之地黑暗之门；督军达图恩接《跨越黑暗之门》；穿门到外域；沃雷恩中将交任务并接《抵达外域》。",
+      "new_player_meaning": "同样的两段固定交通与接交顺序，仅拆成奥格瑞玛/诅咒之地/外域三个真实 visit。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "hellfire-dk-speed",
+      "window_id": "exit-to-zangarmarsh",
+      "old_source_ref": "data/route-atlas/candidates/hellfire_dk.json",
+      "old_player_meaning": "陆路：塞纳里奥哨站 → 赞加沼泽·塞纳里奥庇护所；伊谢尔·风歌交《塞纳里奥远征队》。",
+      "new_player_meaning": "move 明确为塞纳里奥哨站 → 赞加沼泽·塞纳里奥庇护所，随后伊谢尔·风歌交《塞纳里奥远征队》。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "howling-fivebox",
+      "window_id": "grizzly-handoff-entry",
+      "old_source_ref": "data/route-atlas/candidates/howling.json",
+      "old_player_meaning": "炉石征服堡 → 陆路越境药剂师营地 → 开飞行点 → 接三项任务。",
+      "new_player_meaning": "灰熊末点 handoff 后炉石征服堡 → 陆路征服堡到药剂师营地 → 开飞行点 → 接相同三项任务。",
+      "verdict": "same",
+      "correction": "Removed migrated ride precision because old player text only proved overland travel; added from_name=征服堡 so new Route Display preserves the old overland origin/destination meaning."
+    },
+    {
+      "profile_id": "howling-fivebox",
+      "window_id": "vengeance-winterhoof-roundtrips",
+      "old_source_ref": "data/route-atlas/candidates/howling.json",
+      "old_player_meaning": "先前往复仇港，再系统飞行复仇港 → 冬蹄营地；后续两轮同样按复仇港/冬蹄往返。",
+      "new_player_meaning": "明确拆成到达复仇港 visit → taxi 到冬蹄 visit，任务交接顺序不变。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "nagrand-fivebox-67-68",
+      "window_id": "hearth-garadar",
+      "old_source_ref": "data/route-atlas/candidates/nagrand.json",
+      "old_player_meaning": "使用炉石：加拉达尔；监护者布罗克交《通缉：巫婆吉塞尔达》。",
+      "new_player_meaning": "使用炉石：加拉达尔；随后监护者布罗克交同一任务。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "dragonblight-fivebox",
+      "window_id": "wyrmrest-ground-top-splits",
+      "old_source_ref": "data/route-atlas/candidates/dragonblight.json",
+      "old_player_meaning": "到龙眠神殿地面层后固定交通到顶层，再执行顶层接交；库卡隆返龙眠时先系统飞到神殿，再上顶层。",
+      "new_player_meaning": "canonical actions 保持 taxi/地面 visit → fixed_transport/顶层 visit → 顶层任务的同一玩家顺序；仅显式拆 visit。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "borean-fivebox",
+      "window_id": "naxxanar-internal-transports",
+      "old_source_ref": "data/route-atlas/candidates/borean.json",
+      "old_player_meaning": "使用外部传送器 → 固定交通进入纳克萨纳尔 → 做《过关斩将》 → 使用内部传送器 → 固定交通到上层。",
+      "new_player_meaning": "相同交互/固定交通/任务/内部传送顺序，仅为内部与上层新增 visit。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "borean-fivebox",
+      "window_id": "amber-rescue-out-and-back",
+      "old_source_ref": "data/route-atlas/candidates/borean.json",
+      "old_player_meaning": "安斯姆交《准备飞翔》接《营救艾瓦诺尔》 → 任务传送到蓝玉营地上方平台 → 做任务 → 任务传送回琥珀崖。",
+      "new_player_meaning": "同样的接交与两段 quest_transport，中间平台/返回各拆 visit。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "borean-fivebox",
+      "window_id": "saragosa-script",
+      "old_source_ref": "data/route-atlas/candidates/borean.json",
+      "old_player_meaning": "启动克莉斯塔萨任务脚本 → 固定交通上高处平台 → 做《莎拉苟萨的末日》 → 任务脚本返回 → 克莉斯塔萨交任务并接后续。",
+      "new_player_meaning": "相同脚本启动、固定交通、目标、返回 transport 与接交顺序；仅拆高台/返回 visit。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "borean-fivebox",
+      "window_id": "amber-flight-to-taunkale",
+      "old_source_ref": "data/route-atlas/candidates/borean.json",
+      "old_player_meaning": "琥珀崖飞行点 → 系统飞行：琥珀崖 → 牦牛村 → 到牦牛村接《横贯冰原》。",
+      "new_player_meaning": "同样只保留一次琥珀崖 → 牦牛村 taxi，并保持飞行点 visit → taxi → 牦牛村 visit → 接任务。",
+      "verdict": "same",
+      "correction": "Semantic parity review found and removed a duplicate migrated taxi and corrected action order."
+    },
+    {
+      "profile_id": "borean-fivebox",
+      "window_id": "task-11930-boundary-escort",
+      "old_source_ref": "data/route-atlas/candidates/borean.json + data/task-cards/11930.json",
+      "old_player_meaning": "陶拉努克撤离队：做《横贯冰原》，护送撤离者跨北风苔原/龙骨荒野边界到沃图克。",
+      "new_player_meaning": "做同一护送任务后显式表示移动到龙骨荒野边界·沃图克；movement_mode 保持未知。",
+      "verdict": "changed_intentionally",
+      "basis": "Task Card 11930 verified guide explicitly states the escort crosses the Borean/Dragonblight boundary; migration makes this movement explicit without inventing ride/walk mode."
+    },
+    {
+      "profile_id": "icecrown-fivebox",
+      "window_id": "task-13125-air-stands-still",
+      "old_source_ref": "docs/archive/neat/2026-08-31-icecrown-closure-transport-sholazar-live-neat.md + data/observations/route-timing-runs.json",
+      "old_player_meaning": "依次高阶祭司亚萨尔蒙 → 虫王塔洛诺克斯 → 最后撕裂者萨兰纳克斯；都可用阿彻鲁斯战斗号角；三个首领完成后使用最后一个死亡之门返回回音谷交《凝固的空气》。",
+      "new_player_meaning": "任务目标完成后 quest_transport 天灾城 → 回音谷并交任务；Task Presentation 已恢复相同 Boss 顺序、战斗号角与最后死亡之门技巧。",
+      "verdict": "same",
+      "correction": "Semantic parity review found the combat note had been lost during migration; restored it to Task Card 13125 presentation.note_override."
+    },
+    {
+      "profile_id": "sholazar-fivebox",
+      "window_id": "task-12521-entry",
+      "old_source_ref": "data/route-atlas/candidates/sholazar.json",
+      "old_player_meaning": "动作区写银色比武场 → 达拉然后做《赫米特·奈辛瓦里哪去了？》并在蒙特交任务；旧 note 同时写先携带且不要选择前往索拉查盆地的出发对话。",
+      "new_player_meaning": "12521在首次到达达拉然时先接取并长期携带；冰冠完成、正式进入索拉查阶段后，再经银色比武场 → taxi达拉然 → 伯塔鲁斯任务交通 → 蛮藤谷蒙特。",
+      "verdict": "same",
+      "basis": "2026-09-19用户确认：旧note中的“先携带、当时不要出发”描述的是首次达拉然接取阶段；旧action描述的是冰冠完成后的索拉查入图阶段。两者是早接晚用，不是source conflict。"
+    },
+    {
+      "profile_id": "zuldrak-fivebox",
+      "window_id": "task-12710-disclosure-compound",
+      "old_source_ref": "data/route-atlas/candidates/zuldrak.json + data/task-cards/12710.json",
+      "old_player_meaning": "使用传送器；固定交通：沃尔塔鲁斯 → 上层密室 → 痛苦之匣 → 上层密室；做/交《真相大白》并继续《爆破活动》。",
+      "new_player_meaning": "保留完全相同的复合 fixed_transport 玩家句作为原子系统动作，之后显式进入上层密室 visit 做/交相同任务；不伪造中间几何。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "hellfire-dk-speed",
+      "window_id": "legacy-outgoing-transport-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/hellfire_dk.json",
+      "old_player_meaning": "Reviewed special transport labels belong to outgoing actions or are not stated as arrival actions in old player text.",
+      "new_player_meaning": "Removed ambiguous legacy location.transport hints while preserving explicit player-visible hearth/quest-transport/action lines; arrival movement remains unresolved instead of being fabricated.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "hellfire-fivebox",
+      "window_id": "legacy-outgoing-transport-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/hellfire.json",
+      "old_player_meaning": "Reviewed special transport labels belong to outgoing actions or are not stated as arrival actions in old player text.",
+      "new_player_meaning": "Removed ambiguous legacy location.transport hints while preserving explicit player-visible hearth/quest-transport/action lines; arrival movement remains unresolved instead of being fabricated.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "dalaran-mainline-77",
+      "window_id": "task-12790-crystal-roundtrip",
+      "old_source_ref": "data/route-atlas/candidates/dalaran.json + data/task-cards/12790.json",
+      "old_player_meaning": "接《来去如风》后五个角色分别使用下城水晶和回城水晶，再回塞琳德拉交任务。",
+      "new_player_meaning": "显式保留两次水晶交互与两段固定交通：达拉然紫罗兰之门 → 紫罗兰哨站 → 达拉然紫罗兰之门，然后完成/交任务。",
+      "verdict": "same",
+      "correction": "Semantic parity review found an incorrect migrated self_move ride return and replaced it with the verified two-crystal round trip."
+    },
+    {
+      "profile_id": "dalaran-mainline-77",
+      "window_id": "task-12853-violet-stand-k3",
+      "old_source_ref": "data/route-atlas/candidates/dalaran.json + data/task-cards/12853.json",
+      "old_player_meaning": "使用传送水晶到紫罗兰哨站；落地后沿北部道路前往K3；基尔·斯巴索克交《豪华的体验！》。",
+      "new_player_meaning": "紫罗兰之门固定交通到紫罗兰哨站 → 陆路紫罗兰哨站到K3（mode未知） → 基尔·斯巴索克交同一任务。",
+      "verdict": "same",
+      "basis": "Violet Stand landing approx (15,42) from WotLK Wowhead; K3/Jeer Sparksocket zone67/(41.02,86.44) from local Questie."
+    },
+    {
+      "profile_id": "storm-peaks-fivebox",
+      "window_id": "legacy-script-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/storm.json",
+      "old_player_meaning": "Reviewed target points do not state script transport as their arrival action; any explicit system/quest actions remain in their own player lines.",
+      "new_player_meaning": "Removed legacy script styling hints only; task/action text is unchanged and arrival movement remains unresolved.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "zangarmarsh-dk-speed",
+      "window_id": "legacy-script-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/zang_dk.json",
+      "old_player_meaning": "暗泽村/塞纳里奥庇护所 points contain task actions but no special arrival transport sentence.",
+      "new_player_meaning": "Removed legacy script styling hints; task sequence unchanged and arrival movement remains unresolved.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "zangarmarsh-fivebox",
+      "window_id": "legacy-script-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/zang.json",
+      "old_player_meaning": "暗泽村/塞纳里奥庇护所 points contain task actions but no special arrival transport sentence.",
+      "new_player_meaning": "Removed legacy script styling hints; task sequence unchanged and arrival movement remains unresolved.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "borean-fivebox",
+      "window_id": "legacy-special-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/borean.json",
+      "old_player_meaning": "战斗法师安斯姆与琥珀崖飞行点的 special transport 字段描述后续任务传送/系统飞行，不是到达该 point 的动作。",
+      "new_player_meaning": "删除 legacy location.transport 提示，保留原任务传送/系统飞行玩家句；arrival 保持 unresolved。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "grizzly-fivebox",
+      "window_id": "legacy-script-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/grizzly.json",
+      "old_player_meaning": "沃德伦、斗兽场、盲眼卢娜、Drakiljin墓穴、Dun Argol上层等 target points 只包含任务执行句，没有 script 到达句。",
+      "new_player_meaning": "删除 legacy script 样式提示；任务动作原样保留，arrival 保持 unresolved。",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "dragonblight-fivebox",
+      "window_id": "legacy-script-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/dragonblight.json",
+      "old_player_meaning": "Reviewed Dragonblight target points contain task execution; Wyrmrest vertical fixed transports are already explicit player actions. No reviewed point states a script arrival action.",
+      "new_player_meaning": "Removed legacy script location styles only; all task and explicit fixed-transport player lines remain unchanged, and unknown arrivals remain unresolved.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "icecrown-fivebox",
+      "window_id": "task-13082-shattrath-dalaran-shadow-vault",
+      "old_source_ref": "data/route-atlas/candidates/icecrown.json + data/task-cards/13082.json + WotLK quest evidence",
+      "old_player_meaning": "沙塔斯接《阿达尔的恩赐》后任务传送到达拉然，再使用炉石到暗影拱顶，再前往沉默墓地交任务。",
+      "new_player_meaning": "沙塔斯 → quest_transport 达拉然（精确落点坐标UNKNOWN）→ 炉石暗影拱顶 → 飞往沉默墓地 → 交《阿达尔的恩赐》。",
+      "verdict": "same",
+      "correction": "Semantic parity found the migrated Dalaran transport was incorrectly attached directly to Shadow Vault, creating teleport-to-Shadow-Vault then hearth-to-Shadow-Vault. Added explicit Dalaran visit with null coordinates and restored the real three-stage sequence."
+    },
+    {
+      "profile_id": "icecrown-fivebox",
+      "window_id": "legacy-special-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/icecrown.json",
+      "old_player_meaning": "Reviewed hearth/crossmap/script styles describe bind-hearth or outgoing taxi/quest/fixed transports at their points, not how the player arrived there.",
+      "new_player_meaning": "Removed 10 legacy location.transport style hints; all explicit player transport lines remain, and unproven arrivals remain movement_edge_unresolved.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "howling-fivebox",
+      "window_id": "sister-mercy-boarding-sorlof-return",
+      "old_source_ref": "data/route-atlas/candidates/howling.json + data/task-cards/11527.json + data/task-cards/11529.json",
+      "old_player_meaning": "前往约38,75等慈悲修女号靠岸并登船；船上完成叛变任务；到船首用大炮击杀索罗夫，下船拾宝藏；回约38,75等船并重新登船交任务。",
+      "new_player_meaning": "显式前往38,75登船锚点（mode UNKNOWN）→等待靠岸并登船→按Task Presentation完成船首炮击/下船拾宝藏→返回38,75（mode UNKNOWN）→重新登船→交任务。",
+      "verdict": "same",
+      "correction": "Removed three ambiguous legacy script edges and an artificial ship-bow visit. Preserved the player-visible ship/treasure mechanics while keeping only the unproven travel modes unknown."
+    },
+    {
+      "profile_id": "zuldrak-fivebox",
+      "window_id": "legacy-special-style-cleanup",
+      "old_source_ref": "data/route-atlas/candidates/zuldrak.json",
+      "old_player_meaning": "Reviewed Bonegut/Gymer/arena/prophet/Mamthoth/Akari special styles are task phase or outgoing hearth/UI styles, not arrival operations.",
+      "new_player_meaning": "Removed those legacy special hints; explicit task actions remain and unknown arrivals are ordinary movement requirements.",
+      "verdict": "same"
+    },
+    {
+      "profile_id": "zuldrak-fivebox",
+      "window_id": "voltarus-reliquary-chain-final",
+      "old_source_ref": "data/route-atlas/candidates/zuldrak.json + scripts/build_zuldrak_route.py + Task Cards 12661/12669/12677/12686/12676/12710/12713 + Questie + WotLK portal evidence",
+      "old_player_meaning": "保持天灾伪装从痛苦之匣传送平台多次进入沃尔塔鲁斯；用出口传送门返回痛苦之匣并吹斯特凡号角交接；12710进入上层密室后回痛苦之匣完成爆破；12713再次入塔，与达库鲁对话到顶部，击败后用最后愿望回痛苦之匣。",
+      "new_player_meaning": "每一轮 Pain Box↔Voltarus 都有显式 fixed_transport；12710 使用发霉棺材真实锚点(27.23,42.30)并在完成后返回痛苦之匣再做爆破；12713 显式进入达库鲁层→对话 quest_transport 到顶部→最后愿望返回痛苦之匣。",
+      "verdict": "same",
+      "correction": "Replaced the earlier temporary composite transport representation because semantic parity showed Sabotage had been attached to the upper-chamber visit. The final split now matches the old builder/player sequence and Task Card mechanics."
+    }
+  ]
+}

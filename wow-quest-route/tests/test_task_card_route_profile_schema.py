@@ -26,11 +26,7 @@ def _card(task_id: int = 1) -> dict:
         },
         "coverage": {
             "availability": "partial",
-            "objectives": "unknown",
-            "locations": "unknown",
             "rewards": "unknown",
-            "mechanics": "unknown",
-            "fivebox": "unknown",
             "guide": "unknown",
         },
         "availability": {
@@ -46,11 +42,10 @@ def _card(task_id: int = 1) -> dict:
             "required_skill": [],
             "hidden_requirements": [],
         },
-        "objectives": [],
-        "mechanics": {},
-        "fivebox": {"status": "pending", "stages": []},
+        "rewards": {},
         "guide": [],
-        "verification": {"open_questions": []},
+        "fivebox": {"status": "pending"},
+        "timing_rule_ref": None,
         "evidence": [],
         "presentation": {},
     }
@@ -58,7 +53,7 @@ def _card(task_id: int = 1) -> dict:
 
 def _profile(task_id: int = 1) -> dict:
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "profile_id": "test-profile",
         "version": 1,
         "status": "draft",
@@ -67,8 +62,7 @@ def _profile(task_id: int = 1) -> dict:
             "character_profile": "test-character",
             "game_variant_id": GAME_VARIANT,
         },
-        "entry_state_contract": {"active_task_ids": []},
-        "exit_state_contract": {"active_task_ids": []},
+        "entry_requirements": {"active_task_ids": []},
         "goal": {"summary": "测试结构化路线契约"},
         "display": {
             "publish_key": "test_profile",
@@ -99,7 +93,7 @@ def test_json_schema_documents_are_valid_draft_2020_12() -> None:
     Draft202012Validator.check_schema(task_schema)
     Draft202012Validator.check_schema(route_schema)
     assert task_schema["$id"] == "wow-quest-route/task-card/v1"
-    assert route_schema["$id"] == "wow-quest-route/route-profile/v1"
+    assert route_schema["$id"] == "wow-quest-route/route-profile/v2"
 
 
 def test_task_card_shape_is_owned_by_json_schema() -> None:
@@ -111,9 +105,13 @@ def test_task_card_shape_is_owned_by_json_schema() -> None:
     with pytest.raises(TaskCardError, match="JSON Schema"):
         validate_task_card(invalid)
 
+    special = copy.deepcopy(card)
+    special["fivebox"]["status"] = "special"
+    validate_task_card(special)
+
     invalid = copy.deepcopy(card)
-    invalid["coverage"]["fivebox"] = "verified"
-    with pytest.raises(TaskCardError, match="requires at least one structured fivebox stage"):
+    invalid["fivebox"]["stages"] = []
+    with pytest.raises(TaskCardError, match="JSON Schema"):
         validate_task_card(invalid)
 
     invalid = copy.deepcopy(card)
@@ -122,15 +120,26 @@ def test_task_card_shape_is_owned_by_json_schema() -> None:
         validate_task_card(invalid)
 
 
+def test_route_profile_allows_explicit_unknown_location_coordinates() -> None:
+    profile = _profile()
+    profile["geometry"]["locations"]["p1"]["x"] = None
+    profile["geometry"]["locations"]["p1"]["y"] = None
+    validate_route_profile(profile, known_task_cards={1: _card()})
+
+
+def test_route_profile_allows_non_plottable_transition_context() -> None:
+    profile = _profile()
+    location = profile["geometry"]["locations"]["p1"]
+    location["location_role"] = "transition_context"
+    location["x"] = None
+    location["y"] = None
+    validate_route_profile(profile, known_task_cards={1: _card()})
+
+
 def test_task_card_rejects_route_decisions_and_derived_reverse_links() -> None:
     invalid = _card()
-    invalid["mechanics"]["bad"] = {
-        "kind": "test",
-        "summary": "bad",
-        "confidence": "partial",
-        "step_id": "s7",
-    }
-    with pytest.raises(TaskCardError, match="step_id"):
+    invalid["rewards"]["bad_route_leak"] = {"step_id": "s7"}
+    with pytest.raises(TaskCardError, match="bad_route_leak"):
         validate_task_card(invalid)
 
     invalid = _card()
@@ -196,13 +205,31 @@ def test_route_profile_step_groups_cover_actions_once_in_order() -> None:
         validate_route_profile(invalid, known_task_cards={1: card})
 
 
-def test_route_profile_task_state_must_close_to_exit_contract() -> None:
+def test_route_profile_exit_state_is_derived_instead_of_second_contract() -> None:
     card = _card()
     profile = _profile()
     profile["actions"] = profile["actions"][:-1]
     profile["step_groups"][0]["action_ids"] = ["a1", "a2", "a3"]
-    with pytest.raises(RouteProfileError, match="exit_state_contract"):
-        validate_route_profile(profile, known_task_cards={1: card})
+
+    # Leaving the task active is legal: Replay derives that exit state.  The Profile has
+    # no second manually-maintained exit_state_contract to keep in sync.
+    validate_route_profile(profile, known_task_cards={1: card})
+    assert "exit_state_contract" not in profile
+
+
+def test_route_profile_supports_real_hearth_conditions_and_travel_modes() -> None:
+    card = _card()
+    profile = _profile()
+    profile["entry_requirements"]["hearth_location"] = "旧炉石点"
+    profile["entry_requirements"]["completed_task_ids"] = [99]
+    profile["entry_requirements"]["opened_flight_points"] = ["测试飞行点"]
+    profile["actions"][3]["when"] = {"kind": "task_complete", "task_id": 1}
+    profile["geometry"]["locations"]["p1"]["transport"] = "fly"
+    validate_route_profile(profile, known_task_cards={1: card})
+
+    swim = copy.deepcopy(profile)
+    swim["geometry"]["locations"]["p1"]["transport"] = "swim"
+    validate_route_profile(swim, known_task_cards={1: card})
 
 
 def test_reverse_task_profile_index_is_derived() -> None:

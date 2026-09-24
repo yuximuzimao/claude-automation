@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "task_id": 11999,
+  "identity": {
+    "name_zhcn": "寻找线索",
+    "name_en": "Rifle the Bodies",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 50000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 1090,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：大法师艾萨斯·夺日者的影像。",
+    "找到眠月花园计划书，然后返回阿格玛之锤，将它交给大法师艾萨斯·夺日者的影像。",
+    "交付：大法师艾萨斯·夺日者的影像。",
+    "从死亡的法师猎手尸体上取得个人物品后，打开/右键个人物品，直到获得眠月花园计划。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11999",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11999; legacy_type=loot_and_item_trigger_personal_confirmed_same_corpse_unknown",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11999",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=11999/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《寻找线索》首组龙骨实跑确认：完成进度不共享，五个角色都必须各自取得线索物并右键打开。本轮运气较差出现明显长尾；是否同一具法师猎手尸体可供五号分别拾取尚未单独确认。\n《寻找线索》：不共享：五号各自取得线索并右键打开。\n《寻找线索》的交付NPC在阿格玛，不在眠月花园。",
+      "scope": "all",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11999 + docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

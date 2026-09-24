@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "task_id": 12017,
+  "identity": {
+    "name_zhcn": "鱼钩上的肉",
+    "name_en": "Meat on the Hook",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 73,
+    "min_level": 71,
+    "pre_any": [
+      12016
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 106000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38023,
+        "quantity": 1,
+        "name_zhcn": "捕鲨者护腿",
+        "name_en": "Sharkdiver's Leggings",
+        "sell_price_each_copper": 54735,
+        "sell_price_total_copper": 54735
+      },
+      {
+        "item_id": 38084,
+        "quantity": 1,
+        "name_zhcn": "甲壳战靴",
+        "name_en": "Crustacean Stompers",
+        "sell_price_each_copper": 49227,
+        "sell_price_total_copper": 49227
+      },
+      {
+        "item_id": 37980,
+        "quantity": 1,
+        "name_zhcn": "莫亚基鲨鱼皮外套",
+        "name_en": "Moa'ki Thresherhide Tunic",
+        "sell_price_each_copper": 45120,
+        "sell_price_total_copper": 45120
+      },
+      {
+        "item_id": 37936,
+        "quantity": 1,
+        "name_zhcn": "渔夫的耳罩",
+        "name_en": "Fisherman's Earwarmer",
+        "sell_price_each_copper": 28693,
+        "sell_price_total_copper": 28693
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 54735,
+    "gear_sale_max_copper": 54735,
+    "reputation_rewards": [
+      {
+        "faction_id": 1073,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25650
+  },
+  "guide": [
+    "接取：图尔凯。",
+    "杀死图格瓦尔，然后向莫亚基港口的图尔凯复命。",
+    "交付：图尔凯。",
+    "沿钓鱼线找到鱼钩，在鱼钩处使用诱饵召唤图戈瓦尔，然后将其击杀。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12017",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12017/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "沿粗鱼线到鱼钩，使用诱饵召出图格瓦尔并击杀；目标不是常驻怪。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "task_id": 12936,
+  "identity": {
+    "name_zhcn": "痛苦斗兽场：血怒者科尔拉克！",
+    "name_en": "The Amphitheater of Anguish: Korrak the Bloodrager!",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 75,
+    "pre_any": [
+      12935
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 195000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 32100
+  },
+  "guide": [
+    "接取：古尔戈索克。",
+    "进入痛苦斗兽场，击败血怒者科尔拉克！回到巨魔仆从伍迪那里领取你的奖励。",
+    "交付：巨魔仆从伍迪。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12936",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《痛苦斗兽场：血怒者科尔拉克！》：会冲锋、上勾拳击飞，并通过成长逐层提高伤害；狂暴时攻速大幅提高。主控尽量在场地中间接怪，避免被击飞到边缘；其余四号不要拉得太散，减少远程目标被冲锋。成长层数上来后直接交爆发，狂暴期坦克留减伤。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "stage12-publisher-payload-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "input_source_fixture": "stage9-economy-post-flag-migration-expected.json",
+  "review_input": null,
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "blocked",
+    "payload_status": "blocked",
+    "publishable": false,
+    "issue_counts": {
+      "publisher_stage11_blocked": 1
+    },
+    "program_id": null,
+    "hearth_chain": ["萨尔玛"],
+    "publish_key": "hellfire_dk",
+    "map_image": "maps/3483-hellfire-peninsula-hd.jpg",
+    "map_label_count": 11,
+    "map_visit_count": 63,
+    "map_edge_count": 62,
+    "map_visit_without_step_count": 0,
+    "step_count": 11,
+    "rendered_task_ref_count": 153,
+    "contains_legacy_payload_fields": false,
+    "unimplemented_stages": []
+  },
+  "purpose": "Frozen real-Profile Stage 12 diagnostic before any Publisher-driven cleanup. The formal hellfire-dk-speed Stage 11 report is currently blocked, so Stage 12 must preserve the semantic payload for diagnosis while setting publishable=false. It must retain the 11 Stage 11 steps, 153 task refs, the profile-bound 11 Route UI labels and offline map path without re-reading Route Profile/Task Cards or reviving legacy points/actionHtml/noteHtml payload structures."
+}

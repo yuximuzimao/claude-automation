@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "task_id": 12111,
+  "identity": {
+    "name_zhcn": "野生动物的疫苗",
+    "name_en": "Where the Wild Things Roam",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 73,
+    "min_level": 71,
+    "pre_any": [
+      12104
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 53000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38132,
+        "quantity": 1,
+        "name_zhcn": "眠月花园法杖",
+        "name_en": "Moonrest Garden Stave",
+        "sell_price_each_copper": 112355,
+        "sell_price_total_copper": 112355
+      },
+      {
+        "item_id": 38131,
+        "quantity": 1,
+        "name_zhcn": "红木法杖",
+        "name_en": "Staff of Ruby Wood",
+        "sell_price_each_copper": 111933,
+        "sell_price_total_copper": 111933
+      },
+      {
+        "item_id": 38171,
+        "quantity": 1,
+        "name_zhcn": "破旧的猛犸人战锤",
+        "name_en": "Battleworn Magnataur Crusher",
+        "sell_price_each_copper": 111910,
+        "sell_price_total_copper": 111910
+      },
+      {
+        "item_id": 38170,
+        "quantity": 1,
+        "name_zhcn": "尖刺寒风短棍",
+        "name_en": "Spiked Coldwind Club",
+        "sell_price_each_copper": 89190,
+        "sell_price_total_copper": 89190
+      },
+      {
+        "item_id": 38169,
+        "quantity": 1,
+        "name_zhcn": "锋利的林地刺刀",
+        "name_en": "Keen Woodland Shank",
+        "sell_price_each_copper": 88853,
+        "sell_price_total_copper": 88853
+      },
+      {
+        "item_id": 38172,
+        "quantity": 1,
+        "name_zhcn": "坚强游侠之弩",
+        "name_en": "Crossbow of the Hardened Ranger",
+        "sell_price_each_copper": 67392,
+        "sell_price_total_copper": 67392
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 112355,
+    "gear_sale_max_copper": 112355,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20500
+  },
+  "guide": [
+    "接取：索艾·鹰怒。",
+    "龙骨荒野阿格玛之锤的索艾·鹰怒要你使用疫苗包为5头雪落麋鹿和5头极地灰熊接种疫苗。",
+    "交付：索艾·鹰怒。",
+    "对活着的雪落麋鹿和北极灰熊使用疫苗包；这是对目标使用任务物品，不是击杀任务。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12111",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12111; legacy_type=live_target_item_use_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12111",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12111/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《野生动物的疫苗》：共享：主控对活目标使用疫苗包即可同步全队，不是击杀。\n【需要单独修正优化】《野生动物的疫苗》首组龙骨实跑确认：疫苗接种进度五号共享；主控对活着的雪落麋鹿/极地灰熊使用疫苗包即可同步全队。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12111",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

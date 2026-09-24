@@ -44,20 +44,24 @@
 
 ## 3. 地图视窗行为
 
-- 地图默认全图；
-- 切步骤、上一/下一段、播放、切Profile不得自动放大；
-- 只有用户主动启用“跟随当前段”才自动裁剪；
-- 取消跟随后恢复全图；
-- 地图缩放/裁剪不能改变底层0—100坐标语义。
+- 地图固定以完整路线全图作为玩家视角；
+- 切步骤、上一/下一段、播放、切Profile均不得自动放大；
+- 现役工作台不再提供“完整路线 / 已走+当前 / 只看当前”视图模式，也不提供“跟随当前段”或其它玩家侧缩放/裁剪开关；
+- 底层仍保留统一0—100坐标语义，仅用于路线点线、动画和中文地名定位，不再为已取消的视图模式维护第二套状态。
 
 ## 4. HUD容器
 
 - HUD位于地图左上；
 - 宽度保持稳定，内容高度自适应；
-- 可收起；
+- 可收起；收起/展开按钮固定放在HUD自身标题栏右侧，不放到页面全局控制条，保证鼠标操作始终贴近浮窗；
 - 正文超过地图卡可视高度时，HUD内部纵向滚动；
 - 禁止继续向下撑出地图区域后被外层裁掉；
-- 当前step切换时HUD内容同步更新。
+- 当前step切换时HUD内容同步更新；
+- HUD标题固定显示当前步骤序号与总步骤数，例如 `步骤 6/12 · 标题`，步骤列表同时保留自己的序号；
+- Task Presentation状态标签直接贴在对应任务名前，备注区只渲染真正的备注文本，不再为“共享/不共享/依次拾取/特殊/待实测”单独复制任务行。
+- HUD正文沿用旧正式工作台的14px字号；HUD标题保持15px。页面主体、步骤列表与控制条本身不因HUD字号调整而缩放。
+- 路线动作专用色：`开飞行点`使用暖橙`#ff9f68`，`绑定炉石`使用紫色`#cf9cff`；两者与接/做/交及地点色分离。
+- 有有效备注时，备注区必须显示独立的“备注”标题，再按`《任务名》：备注内容`渲染；备注正文不得再次重复当前任务完整名称。
 
 HUD内部字段结构由Route Display/Task Presentation生成；UI不得自行从旧point/note拼第二套文案。
 
@@ -71,11 +75,11 @@ HUD内部字段结构由Route Display/Task Presentation生成；UI不得自行�
 
 当前稳定布局：右上状态区直接显示值，不额外增加“炉石与时间”“当前状态”等无信息小标题。
 
-当前步骤预计时间位于HUD标题下的固定次级位置。
+当前步骤预计时间固定放在HUD标题栏中、紧跟步骤标题的次级位置，保持旧正式页的“标题 + 本段预计 + 收起按钮”横向结构。无论Timing是否已有数值，都必须保留“本段预计”容器：有值时显示例如 `本段预计：约25分钟（18分钟—34分钟）`，没有值时显示 `本段预计：—`。这里的破折号只是布局占位，不代表模型生成了时间。
 
 是否有值、字段语义和文本由Route Display/Timing结果决定；本文件只固定容器/视觉层级。
 
-没有可靠实跑值时，UI不得生成“实测：暂无”占位。
+没有可靠实跑值时，UI不得生成“实测：暂无”之类伪数据占位；“本段预计：—”是唯一允许的时间容器空态。
 
 ## 6. 控制行为
 
@@ -86,10 +90,12 @@ HUD内部字段结构由Route Display/Task Presentation生成；UI不得自行�
 - 剩余路线播放；
 - 上一段/下一段；
 - 步骤列表点击跳转；
-- 跟随当前段开关；
-- HUD收起/展开。
+- HUD收起/展开；
+- 记住上次使用的Profile，并分别记住每个Profile最后停留的step；刷新/重新打开页面后恢复该状态。
 
-上一/下一段切换后，可以自动播放一次选中的当前段，但不能强制自动zoom。
+播放不再提供速度下拉；固定使用1.8×播放倍率。底层仍以普通路线边约1.4秒、炉石/固定任务传送类跳转约0.85秒作为1×基准，由唯一`PLAY_RATE=1.8`统一加速。若以后修改速度，只改这一处播放倍率，不重新增加玩家侧速度档位。
+
+上一/下一段切换后不自动zoom；地图始终保持完整路线视角。
 
 业务上的“步骤是什么”由Route Profile/Route Display决定；UI不重新切分stepGroups。
 
@@ -101,11 +107,14 @@ HUD内部字段结构由Route Display/Task Presentation生成；UI不得自行�
 - 未配准通过不得切换；
 - 不为了内嵌中文地名退回低分辨率图。
 
-高清英文底图缺中文时，用独立HTML/SVG标签叠加：
+高清英文底图缺中文时，用独立HTML标签叠加；现役正式视觉以旧工作台的 `span.mapLabel` 为兼容基线，不再改用SVG `text` 重新设计字体：
 
-- 中文标签可开关；
+- 现役工作台默认显示已有中文标签，不再提供玩家侧开关；
+- 标签以同一0—100地图坐标换算为绝对定位百分比，中心锚定 `translate(-50%,-50%)`；
+- 字体链固定为 `-apple-system, "system-ui", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif`，11px / 400；
+- 文字为暖白 `rgb(247,239,216)`，背景 `rgba(6,12,18,.62)`，4px圆角，`2px 5px`内边距，`0 1px 2px`黑色阴影，`white-space: nowrap`、`pointer-events: none`；
 - 低干扰；
-- 视窗裁剪时同步viewBox；
+- 标签始终使用完整路线的统一viewBox；
 - 标签不是坐标真值；
 - 没有可靠zhCN区域数据时允许只用高清英文底图，不机器直译冒充客户端真值。
 
@@ -114,6 +123,7 @@ HUD内部字段结构由Route Display/Task Presentation生成；UI不得自行�
 - `data/routes/maps/labels-zhcn.json`
 - `scripts/build_route_map_labels.py`
 - `lib/route_map_assets.py`
+- 若某条正式路线只展示一组低干扰精选标签或需要视觉避让坐标，保存到`data/route-ui/<profile_id>.json`；这是UI展示配置，不进入Route Profile，也不得反向解释为路线点坐标。
 
 ## 8. 地图资源池与离线复制
 
@@ -151,7 +161,7 @@ HUD内部字段结构由Route Display/Task Presentation生成；UI不得自行�
 Route Display/Task Presentation拥有语义，例如：
 
 - 交/接/做分别属于什么颜色角色；
-- 共享/不共享是何种标签；
+- 共享/不共享/依次拾取/特殊/待实测是何种标签；
 - 危险词需要高风险强调；
 - 备注引用角标属于何种结构。
 
@@ -160,6 +170,7 @@ Route Display/Task Presentation拥有语义，例如：
 - 同一语义全工作台使用同一class/token；
 - 地图builder不得自己复制一套颜色；
 - CSS值改变不改变业务语义；
+- `五开待实测`是玩家需要重点关注的未验证状态，统一使用红色高强调标签；其它状态继续按各自既定token显示；
 - 业务规则改变时UI实现只消费新token/结构，不推断业务含义。
 
 具体当前色值以工作台CSS的统一token为实现真值；后续治理数据化时应集中为单一变量区，避免散落硬编码。
@@ -188,11 +199,18 @@ UI/资源修改至少验证对应项目：
 
 具体“改什么跑哪个测试”由`tests/README.md`维护。本文件定义工程契约，不复制测试命令。
 
-## 13. 本文件明确不负责
+## 13. 正式渲染操作
+
+- 当前Publisher payload已经fresh时，单Profile资源渲染：`python3 scripts/render_route_assets.py <profile_id> --output-dir <dir>`。
+- `REPUBLISH_ONLY`只允许从当前fresh Publisher payload重渲染，不重算Task Card/Profile/Timing/XP/Economy。
+- 渲染脚本不会自行选择或覆盖正式目录；正式页面替换只有Final Audit/cutover通过后才能执行。
+- 地图资源需要单独刷新时使用本文件§8列出的资源生成器，不让Publisher承担地图下载/高清化。
+
+## 14. 本文件明确不负责
 
 - 路线怎么排：`route-atlas-optimization.md`；
 - Route Profile/生命周期：`route-profile-and-lifecycle.md`；
 - 路线步骤/接做交/NPC/地点语义：`route-atlas-route-display.md`；
 - Task Card→共享标签/备注/角标：`route-atlas-task-presentation.md`；
 - 时间公式：`timing-and-benchmarking.md`；
-- 发布流程和人工冷读：Route Lifecycle SOP。
+- Publisher payload组合：`route-atlas-player-contract.md`；人工冷读与cutover判断：`route-lifecycle-final-audit.md`。

@@ -1,0 +1,47 @@
+{
+  "context_source_ref": null,
+  "diagnoses": [
+    "blocked_unknown"
+  ],
+  "input_fingerprint": "300f56d861c0e7a181e2e497bae7b1c669459dc8278143b6249e236476fc5f5c",
+  "issues": [
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "availability_route_replay"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "cross_profile_continuity"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_timing"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_xp"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_economy"
+    },
+    {
+      "kind": "review_context_required",
+      "severity": "requirement"
+    }
+  ],
+  "kind": "profile",
+  "model_id": "route-review-trigger-v1",
+  "optimization_failures": [],
+  "optimization_unknowns": [],
+  "profile_id": "hellfire-dk-speed",
+  "selection_events": [],
+  "status": "requirements",
+  "target_id": "hellfire-dk-speed",
+  "target_version": 1
+}

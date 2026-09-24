@@ -1,0 +1,65 @@
+{
+  "schema": "stage5-pre-migration-expected/v1",
+  "captured_at": "2026-09-16",
+  "purpose": "Freeze Stage 5 expected diagnostics before canonical movement migration. This is a B-class migration fixture, not route truth.",
+  "profile": {
+    "profile_id": "hellfire-dk-speed",
+    "profile_version": 1,
+    "status": "blocked",
+    "visit_count": 63,
+    "edge_count": 62,
+    "canonical_edge_count": 0,
+    "migration_candidate_count": 62,
+    "unresolved_edge_count": 10,
+    "exit_movement_action_ids": [
+      "a0229"
+    ],
+    "issue_counts": {
+      "visit_zone_id_required": 1,
+      "compound_movement_requires_visit_split": 2,
+      "canonical_incoming_movement_missing": 52,
+      "legacy_transport_requires_operation_review": 8,
+      "profile_exit_movement_requires_program_boundary": 1
+    },
+    "compound_edges": {
+      "a0001->a0007": [
+        "a0002",
+        "a0004"
+      ],
+      "a0186->a0192": [
+        "a0187",
+        "a0191"
+      ]
+    }
+  },
+  "program": {
+    "program_id": "horde-fivebox-full-clear",
+    "profile_count": 12,
+    "boundary_count": 11,
+    "status": "blocked",
+    "issue_counts": {
+      "canonical_incoming_movement_missing": 1239,
+      "legacy_transport_requires_operation_review": 106,
+      "visit_zone_id_required": 12,
+      "movement_edge_unresolved": 11,
+      "move_action_mode_required": 9,
+      "program_boundary_transition_unproven": 9,
+      "compound_movement_requires_visit_split": 4,
+      "compound_program_boundary_requires_visit_split": 1
+    },
+    "boundary_status_counts": {
+      "pass": 1,
+      "requirements": 9,
+      "blocked": 1
+    },
+    "proved_boundary": {
+      "edge_id": "dalaran-mainline-77->storm-peaks-fivebox",
+      "source": "profile_exit_action",
+      "operation_kind": "fixed_transport"
+    },
+    "compound_boundary": {
+      "edge_id": "sholazar-fivebox->zuldrak-fivebox",
+      "issue_kind": "compound_program_boundary_requires_visit_split"
+    }
+  }
+}

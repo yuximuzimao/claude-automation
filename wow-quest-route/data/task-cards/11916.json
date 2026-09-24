@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "task_id": 11916,
+  "identity": {
+    "name_zhcn": "地狱咆哮的勇士",
+    "name_en": "Hellscream's Champion",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [],
+    "pre_all": [
+      11652,
+      11705,
+      11722
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38240,
+        "quantity": 1,
+        "name_zhcn": "坚定修行者法杖",
+        "name_en": "Staff of the Purposeful Mendicant",
+        "sell_price_each_copper": 125589,
+        "sell_price_total_copper": 125589
+      },
+      {
+        "item_id": 38239,
+        "quantity": 1,
+        "name_zhcn": "无尽思维之塔",
+        "name_en": "Tower of the Infinite Mind",
+        "sell_price_each_copper": 125121,
+        "sell_price_total_copper": 125121
+      },
+      {
+        "item_id": 38237,
+        "quantity": 1,
+        "name_zhcn": "冰冻死亡之斧",
+        "name_en": "Axe of Frozen Death",
+        "sell_price_each_copper": 124160,
+        "sell_price_total_copper": 124160
+      },
+      {
+        "item_id": 38242,
+        "quantity": 1,
+        "name_zhcn": "弃灵之牙",
+        "name_en": "Fang of the Desolate Soul",
+        "sell_price_each_copper": 101241,
+        "sell_price_total_copper": 101241
+      },
+      {
+        "item_id": 38238,
+        "quantity": 1,
+        "name_zhcn": "北风击碎者",
+        "name_en": "Borean Smasher",
+        "sell_price_each_copper": 99712,
+        "sell_price_total_copper": 99712
+      },
+      {
+        "item_id": 38241,
+        "quantity": 1,
+        "name_zhcn": "龙之怒火",
+        "name_en": "Fury of the Raging Dragon",
+        "sell_price_each_copper": 75642,
+        "sell_price_total_copper": 75642
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 125589,
+    "gear_sale_max_copper": 125589,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 30150
+  },
+  "guide": [
+    "接取：加尔鲁什·地狱咆哮。",
+    "前往牦牛村与冬风酋长谈一谈。",
+    "交付：冬风酋长。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11916",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

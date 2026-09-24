@@ -1,0 +1,31 @@
+{
+  "schema": "stage10-review-trigger-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "input_source_fixture": "stage9-economy-post-flag-migration-expected.json",
+  "review_input": null,
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "requirements",
+    "report_kind": "profile",
+    "target_id": "hellfire-dk-speed",
+    "target_version": 1,
+    "report_status": "requirements",
+    "diagnoses": [
+      "blocked_unknown"
+    ],
+    "issue_counts": {
+      "upstream_stage_requirements_for_review": 5,
+      "review_context_required": 1
+    },
+    "blocked_upstream_stages": [],
+    "requirement_upstream_stages": [
+      "availability_route_replay",
+      "cross_profile_continuity",
+      "derived_timing",
+      "derived_xp",
+      "derived_economy"
+    ],
+    "unimplemented_stages": []
+  },
+  "purpose": "Current real-Profile Stage 10 fail-closed baseline after the architecture-migration route/movement/service repairs. It reuses explicit Stage 9 validation XP/cost inputs but intentionally supplies no Review Context. Movement and Service now pass; Replay/Continuity/Timing/XP/Economy remain legitimate requirements, so Stage 10 must remain blocked_unknown/requirements and must not manufacture no_review, a Selection decision, task deletion, or route reorder."
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "task_id": 13235,
+  "identity": {
+    "name_zhcn": "最强大的血肉巨人",
+    "name_en": "The Flesh Giant Champion",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13220
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 148000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 44381,
+        "quantity": 1,
+        "name_zhcn": "摩比乌斯肩铠",
+        "name_en": "Pauldrons of Morbidus",
+        "sell_price_each_copper": 68632,
+        "sell_price_total_copper": 68632
+      },
+      {
+        "item_id": 44380,
+        "quantity": 1,
+        "name_zhcn": "巨人勇士肩甲",
+        "name_en": "Giant Champion's Spaulders",
+        "sell_price_each_copper": 58991,
+        "sell_price_total_copper": 58991
+      },
+      {
+        "item_id": 44379,
+        "quantity": 1,
+        "name_zhcn": "缝合场肩垫",
+        "name_en": "Shoulderpads of Fleshwerks",
+        "sell_price_each_copper": 48763,
+        "sell_price_total_copper": 48763
+      },
+      {
+        "item_id": 44378,
+        "quantity": 1,
+        "name_zhcn": "血肉巨人衬肩",
+        "name_en": "Mantle of the Flesh Giant",
+        "sell_price_each_copper": 38867,
+        "sell_price_total_copper": 38867
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 68632,
+    "gear_sale_max_copper": 68632,
+    "reputation_rewards": [
+      {
+        "faction_id": 1098,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 27550
+  },
+  "guide": [
+    "接取：黑暗骑士阿尔蕾。",
+    "与缝合场西端的玛格拉弗·塔卡尔交谈，然后参加对摩比乌斯的战斗。击败摩比乌斯之后，返回黑色观察站，向黑暗骑士阿尔蕾复命。",
+    "交付：黑暗骑士阿尔蕾。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13235",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13235; legacy_type=boss_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

@@ -1,0 +1,630 @@
+{
+  "artifacts": {
+    "profiles/borean-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "015d7faa6d7a3f69da8bb231e76a68d50f7f52a859fe73cb4eca4af06d4ccb8e",
+      "owner": "route_display",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "e83062d273cb073a2b24b8d10da05d8a76f2488081577479204d12fcab36431e"
+    },
+    "profiles/borean-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "11ed2684ee9ce52e7a6235da558493e7d53b9f99a59792d2620062bf3bca7122",
+      "owner": "route_movement",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "9ea9122f676f47dcef8c871499f92193752ce812542e89a998afb00a7d263ab6"
+    },
+    "profiles/borean-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "7926124be7f87c0f586e400e7e6d07faca5d538e28c6f4eb02ea1be5cd664ad0",
+      "owner": "route_publisher_payload",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "743463c70ef31d95d76c174feefa544aaa297d61ef36a697d84481fa45166610"
+    },
+    "profiles/borean-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "a7b38281b3266e81e926a37ffc6d944f74ac2a6843153658c1ea0bccf5d80907",
+      "owner": "route_replay",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "9cf51c8e8e3ba978da331739c3ea43aeac0af189c5a9c0afe0b71748e3238fbd"
+    },
+    "profiles/dalaran-mainline-77/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "cc67c24cf0ad7c4b0806bde7d7dbca8a6bbf2cc7e85fc8668dd5b5fefa47fd3b",
+      "owner": "route_display",
+      "scope_id": "dalaran-mainline-77",
+      "scope_kind": "profiles",
+      "sha256": "66e7332c2bc978b7fc74cfcf4d1d92f4d2492a5101d61fd79c8119e81770c2b5"
+    },
+    "profiles/dalaran-mainline-77/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "976305a85f8aa04bf7efc35f3f55406e735784bafc7f4240d915f3586fd774d2",
+      "owner": "route_movement",
+      "scope_id": "dalaran-mainline-77",
+      "scope_kind": "profiles",
+      "sha256": "38b5735e30557043ee795bc995738ee3bd6980a38eb378bb76c01600dd54b8f0"
+    },
+    "profiles/dalaran-mainline-77/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "e79729b51b509b40506d698ffc9530915b8386bd0dc65bdc94dc9117093ab16c",
+      "owner": "route_publisher_payload",
+      "scope_id": "dalaran-mainline-77",
+      "scope_kind": "profiles",
+      "sha256": "cd8958f5f32e761fab8582bb1de01d41b7ad75064361154993942bd96ebe1153"
+    },
+    "profiles/dragonblight-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "b4726ff6edf114153236b5a2638e64bcb59bcebc5089f3b3bc53fc491885cb23",
+      "owner": "route_display",
+      "scope_id": "dragonblight-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "e50f8312a1c5c9a26a1f2eea47a02ad0c892c725175de23e4cef7f4207980d04"
+    },
+    "profiles/dragonblight-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "25a8dc18412b5b7256d600ad6e9af15b143c8750d98ff32587f4357b8ec59261",
+      "owner": "route_movement",
+      "scope_id": "dragonblight-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "16b11e14b86a77b4e2c4d127b6376bd20a1b3b47081135812b323ea496068baf"
+    },
+    "profiles/dragonblight-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "b65182f9b2bc6884778df3cfd9265946473b1a938e80ec89d1dfb161db2a6e84",
+      "owner": "route_publisher_payload",
+      "scope_id": "dragonblight-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "a3883705fefb135340c9580c20e49d92be6c29fecb5f95a8d4f1d0b5534a2e0d"
+    },
+    "profiles/dragonblight-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "9d3f0a1ecc56f33bda931142284740d293dbe34d647dfb9d5db9f104d5ba347b",
+      "owner": "route_replay",
+      "scope_id": "dragonblight-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "21abeea101b9053e0631d54e7108ed9368ccc40940177bba9221bf31a34a1a9b"
+    },
+    "profiles/grizzly-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "83a775565b313bb2ecdcd2b5434e455a3b17aa35c4cdc97699090989dbdfd46e",
+      "owner": "route_display",
+      "scope_id": "grizzly-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "f4a070d1e67f135d3677415282327b8a4ee8ddee2f266955c14d873663851144"
+    },
+    "profiles/grizzly-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "84d7b8fc2ea7b7dba891dbc868836305ad72c084d71ef610583a9dc7267688b7",
+      "owner": "route_movement",
+      "scope_id": "grizzly-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "05dab67c6a2f70adb4523bf1dc84616eba7025c19a4a17dd2eb64c6acc9641f4"
+    },
+    "profiles/grizzly-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "63766d2f94b07200a0920531404e374a93fb56fcf6b565c8167e781627cc6961",
+      "owner": "route_publisher_payload",
+      "scope_id": "grizzly-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "95203131609924f7f9b00c14ecb650b9430763ba337613a65066db07806334ea"
+    },
+    "profiles/grizzly-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "692bb735487e0e5f204f539154d35462aa352a3d75afd6a05e376ef56efa194e",
+      "owner": "route_replay",
+      "scope_id": "grizzly-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "2f6edd4458fb6d4bbbc40d6e576642aff98138bd054584df988143f99578e68d"
+    },
+    "profiles/hellfire-dk-speed/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "837e709771c8fe320de8eaf791311a407ed51601ea1c8979e6d547dffa565468",
+      "owner": "route_display",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "2f3e74e467bbfe5b541ff79eb59602ef562c778c0ce29fe4a610565090255bbf"
+    },
+    "profiles/hellfire-dk-speed/economy.json": {
+      "artifact_kind": "economy",
+      "input_fingerprint": "ad86c98d02062d28cb9c0d214b637ce0aaf1eaa427a365e33154d933e5e53a2d",
+      "owner": "route_economy",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "f27510c892da78de1f0a54f310979ab34a5f296880bb2978a96f691294744e50"
+    },
+    "profiles/hellfire-dk-speed/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "257367fad9ff371d51c535c0fbee1de987fd9c974a6108072de704245faa447b",
+      "owner": "route_movement",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "b9382e09da8a5816e78b2994a36e64ed454c9d579dddb9a882a880a54c37adde"
+    },
+    "profiles/hellfire-dk-speed/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "68ebc7d15fdbedfa49863565465a59a047aba28b6c1cff9b9d34fab27b802437",
+      "owner": "route_publisher_payload",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "f8ead065fdd32c33367e574d10057578670bf447141b97579faa99d7fb109fa6"
+    },
+    "profiles/hellfire-dk-speed/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "5df9781dedc543b94a02d2613ca6c82d5c2f18c986bb8e3b24e4cbacd66ba115",
+      "owner": "route_replay",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "57fc8c3747f2029339d2e45b30dca8b0b0175912f819c42b439afa21b54039e2"
+    },
+    "profiles/hellfire-dk-speed/review-trigger.json": {
+      "artifact_kind": "review-trigger",
+      "input_fingerprint": "300f56d861c0e7a181e2e497bae7b1c669459dc8278143b6249e236476fc5f5c",
+      "owner": "route_review_trigger",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "97fa141a8ae857e6deb552f04e5a215ae3fbbdfa3e84f27953958afe69247020"
+    },
+    "profiles/hellfire-dk-speed/service-context.json": {
+      "artifact_kind": "service-context",
+      "input_fingerprint": "3b5caf105dcccf55fb9c818c01bcb6cf9966edd1201118c956c0205135aa9fe6",
+      "owner": "route_service_context",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "16d70097bb06b59526044a08a57c3124fff846c1925c82efe42bc13ff10b3d2b"
+    },
+    "profiles/hellfire-dk-speed/timing.json": {
+      "artifact_kind": "timing",
+      "input_fingerprint": "cd999bd0f4099fc0aa7c6da3a03a936114bce2dbd012b747c4b9e861043d11cc",
+      "owner": "route_timing",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "ec8c9c6ae9ac02901b455975c4070db2beffacf88a535b5ab18f619a169adfe4"
+    },
+    "profiles/hellfire-dk-speed/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "13f73325aa9076afc2571dcc6a81074ed7029ffd052f3188f3064251b36c86d3",
+      "owner": "route_xp",
+      "scope_id": "hellfire-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "36973f34437d67f75023d9f0175dd307ca7c6b867146a13626aa7a167762a9b3"
+    },
+    "profiles/hellfire-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "60f0276698f6e3106dbcbc160cf2ecda4bca7999a7d73c4bef5fb7c529f4cf8e",
+      "owner": "route_display",
+      "scope_id": "hellfire-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "8d5bc0aadfbda2ab7b644823aa53769d4ee2afb6fe3d705dd30c59738f93afe8"
+    },
+    "profiles/hellfire-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "cd0328e189d6d59c9c818d6c4fa7461c5cbc8462a8db4cffe724219a9d5be09a",
+      "owner": "route_movement",
+      "scope_id": "hellfire-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "0d74d78b8141a99cf0bd01236cda8fdd4cf3ec3a31f96cb861e94974526be1f2"
+    },
+    "profiles/hellfire-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "2c8d779b4f47d9d9b2430340c040f811682c80c174e3f9da4dbd8245e708a2ce",
+      "owner": "route_publisher_payload",
+      "scope_id": "hellfire-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "da36547f5118ff1cedf7a1317d8aa8c201cee4c908e79e9c5d4453080b5e7f85"
+    },
+    "profiles/hellfire-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "ba141e4bf4e1d8d3cae7119b0bd16f0869ccde28ce372e1296c0e5e45fd48c18",
+      "owner": "route_replay",
+      "scope_id": "hellfire-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "6236aa592b4a1f648f1b3a6c0ea12658bb5cf2c9ebae09ecdbf1c1b88e75b8d5"
+    },
+    "profiles/howling-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "a0bef3d4f3629869062f17b95f7fbfcff42f5567679909b8c8536b6ebe9ea277",
+      "owner": "route_display",
+      "scope_id": "howling-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "1a6ed282f94c41b7ade7dce1b7418b06bdc3fd9e1c5a04e408cfcd7d6434fda5"
+    },
+    "profiles/howling-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "93d1950d76638ee644c70b1882d66b602861d6dae8ca0be1de2b703be879c2a4",
+      "owner": "route_movement",
+      "scope_id": "howling-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "7ab3e16c2f46bb553e71ef0ddfb37c8324e86f76a88f9b71734531b97e6b9ba0"
+    },
+    "profiles/howling-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "199125dd1d120f206cc90aad51925faa97a3e291ca37562f0c23f695eb577f5c",
+      "owner": "route_publisher_payload",
+      "scope_id": "howling-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "015dcbe6b7f90685f052a98af8300e1a1f5a01fa6c73c1507d81bf1f03682346"
+    },
+    "profiles/howling-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "20cb1f9ea4fb6176641ab462dd779c8b63a6e780800a6805ce3fd10c7213aa93",
+      "owner": "route_replay",
+      "scope_id": "howling-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "99c60a82e53421ea21a08d0880f33d153af394ab35de792f374156c3978de563"
+    },
+    "profiles/icecrown-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "ba01e7ae7efa9dbe2cb3354396f3056cb59b400d9ee307d3c9a9a3b5f4907339",
+      "owner": "route_display",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "af3e4711b6e46150725a3920031933e30b367d631e920b057abcce669e5ed0cd"
+    },
+    "profiles/icecrown-fivebox/economy.json": {
+      "artifact_kind": "economy",
+      "input_fingerprint": "5a8673d8a40116c6e4bf7f79f80be687a8c43b1969715a56a1e2b24945d0ef5b",
+      "owner": "route_economy",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "db20a0cb0f802822f8e6b1457bdcf63e1d6794bbfcf5f412b19733dc2ae1a3db"
+    },
+    "profiles/icecrown-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "1a71ff71e176b442ddb2da3b963f783850ad6de10fcfc743d2e6186f4c8ea6ea",
+      "owner": "route_movement",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "eb36dee166e915daf4e5abb0f8b7c494e8016f07456250485422d70cec37f90f"
+    },
+    "profiles/icecrown-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "07d5ce215682a19a6f63105da85afaa878be887b5fa9707759c1964dccf6e417",
+      "owner": "route_publisher_payload",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "7078afcdcfa3790fa6b7de71202416b28b2848374880da75d40cbcdb3450223f"
+    },
+    "profiles/icecrown-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "cfb50218c0a30f75417e6b484545fed54ab4946ec1602525b1883ae25666ce68",
+      "owner": "route_replay",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "157711ba811663d61b0c7fd80c61df0d4ac5821b551c586b81d58d95c497845b"
+    },
+    "profiles/icecrown-fivebox/service-context.json": {
+      "artifact_kind": "service-context",
+      "input_fingerprint": "2b93104c9e89b4b12ec61cb647f7da7569115b69b8fb3da72183b94b829a0371",
+      "owner": "route_service_context",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "13f7cabe3e40697dd2f38ca86f0d95fe2ac5834ceec1eb87b330938f3709917f"
+    },
+    "profiles/icecrown-fivebox/timing.json": {
+      "artifact_kind": "timing",
+      "input_fingerprint": "645c284ce4ae80c386c6601f341ecf724a4f9cb8a7bf1d7e4e4f98ad1fee3cb0",
+      "owner": "route_timing",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "21b4e52deebd54a666b619b8ef94abfea632f21abdd02eebfbc30091d99e5b83"
+    },
+    "profiles/icecrown-fivebox/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "8cfe8a6b4ac98f65d7ab722581501371a052933353d0dd199d1f7c31e3b61c7d",
+      "owner": "route_xp",
+      "scope_id": "icecrown-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "df5d797b7c1ce7cf027b137b983821da549ad199112ce9e0b065aa4ff61eafb2"
+    },
+    "profiles/nagrand-fivebox-67-68/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "1e913a5139afb26f3fb7781d77702e829ea139ad01ea708cbe963b49845cdce0",
+      "owner": "route_display",
+      "scope_id": "nagrand-fivebox-67-68",
+      "scope_kind": "profiles",
+      "sha256": "aacc761eea3eb74258e38a7fd6e517099a3879831ef00665b801de8727e926ee"
+    },
+    "profiles/nagrand-fivebox-67-68/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "5883d43d21600702e4dfafcca1535a26e03ccbefe9815ab471c8ad7bfa1d1c35",
+      "owner": "route_movement",
+      "scope_id": "nagrand-fivebox-67-68",
+      "scope_kind": "profiles",
+      "sha256": "aff67fa159a7f560ebb2a63d6a543569ce1cebfc5cd79c4bd1c8862effe009e6"
+    },
+    "profiles/nagrand-fivebox-67-68/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "d584b2add1457bb2ed1f6ed636032dbb1bda933eb4f7c3c8f33d62dcfe213d0d",
+      "owner": "route_publisher_payload",
+      "scope_id": "nagrand-fivebox-67-68",
+      "scope_kind": "profiles",
+      "sha256": "30d437f42fdec93c03b9d298ebe28506f139b0fa1e0ff57c794c1eac739af05e"
+    },
+    "profiles/sholazar-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "009a1bb0dc076a342442d379e84c6928b40593e3035522e619d08b9f0f9cfbbe",
+      "owner": "route_display",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "755af0f649e3c30ed109a45d80050f6d958db355561cf1ee6c4715ef6253dbd8"
+    },
+    "profiles/sholazar-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "198f5e4376219c1cbc66057524f27b51e23d952e74639245d9caa8213921a166",
+      "owner": "route_movement",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "a0bd9d4407035499546d80e366a1d60e6b832c611de183b60abd02fdf54199f9"
+    },
+    "profiles/sholazar-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "fc4bc0b0cc4fdd14c120ab4efaf1c6c97089dc87578419fd9263f41d0a1d630f",
+      "owner": "route_publisher_payload",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "6b09be0eb4e7c9e0c07e41b874fea6428980ca2cef93daba9a50fb8b3bba24f9"
+    },
+    "profiles/sholazar-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "1b7034672466386fce7804f797c794b3583f2396ed82ede1fe746f1842661a76",
+      "owner": "route_replay",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "26d6c21fa3661600839ff85b3c6a054b93bca0ac54d0ed7c768c1cbae9aaf906"
+    },
+    "profiles/sholazar-fivebox/service-context.json": {
+      "artifact_kind": "service-context",
+      "input_fingerprint": "64f55242d40fb1a824a8b2b8c03906cc1aa4ae649f5cb381a0ad7aa6c384c8e4",
+      "owner": "route_service_context",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "b391cab6c57ebc21483d3dd969d0f8b49fb9ab1127dfa73c138d3699a5434387"
+    },
+    "profiles/sholazar-fivebox/timing.json": {
+      "artifact_kind": "timing",
+      "input_fingerprint": "ce41bff263f359b8f39c060650b76b97e0e516c8d2f7f94c30ad8fb041a471ca",
+      "owner": "route_timing",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "6113ccaf8ef0bc995cd22b864a1b46d4bd38b0c4aa3eab7aa2f4cccd15243cf6"
+    },
+    "profiles/sholazar-fivebox/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "c82de3588986241d1c9561e482dd742a16783c5361b2bf7071965a3aedaa0f41",
+      "owner": "route_xp",
+      "scope_id": "sholazar-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "dc6e876cd48ea9ede4dbd26e562858886760304649d396f9520eb6db059523b0"
+    },
+    "profiles/storm-peaks-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "6ad43cc60bb7f3789a35facdd0db9f79cadbb308b2d4104eedb0f8ce9f3ac8eb",
+      "owner": "route_display",
+      "scope_id": "storm-peaks-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "65ec7912e8ab2f63ba57a5d73e99061c2cc176b17c674eff205f2e18b86230e4"
+    },
+    "profiles/storm-peaks-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "479e89c326bf8ff77603dc8da59e5c6a76a64f6e8babf0e4284f9f0862ea6552",
+      "owner": "route_movement",
+      "scope_id": "storm-peaks-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "a0c35a9f71081b774b0293465ab78c9f5bff7778b4ed524ab3e30bc998041560"
+    },
+    "profiles/storm-peaks-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "525043dd3b98930719b023f2821f664ecc01b9784f0fbede6f8f9255a22cf565",
+      "owner": "route_publisher_payload",
+      "scope_id": "storm-peaks-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "221cd514791bdaccd16d9306fc49f37d3031b8dab61ccc02702ca34738354c1b"
+    },
+    "profiles/storm-peaks-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "282a958b8b6a999518354d4b93595194e839139e848b5405ac749ffdaab2de06",
+      "owner": "route_replay",
+      "scope_id": "storm-peaks-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "708452f634e338085fd942216664818015a66c2a27a3d8532ec4d5f71999eb7b"
+    },
+    "profiles/zangarmarsh-dk-speed/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "e84715eb3a8476627b83e4068b41d320d523fc30fca3e2e6a71668ec6ca94550",
+      "owner": "route_display",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "e165f368a592387df622dfe2f2c6b1c49c9882ae911d8a96468b9ad91c9f6c66"
+    },
+    "profiles/zangarmarsh-dk-speed/economy.json": {
+      "artifact_kind": "economy",
+      "input_fingerprint": "e49f1c663b2343a5987644661a7d1f0391cf8120607e050aaf36831068c288cf",
+      "owner": "route_economy",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "f52ac55ee010f28a2afc072cd612255760aa68c98b1f2c25fea40ac0e027df94"
+    },
+    "profiles/zangarmarsh-dk-speed/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "35a1cdd136846eee9a095fd268e0a8878464d7f8d4c49b9d58c595b09bf2ccf8",
+      "owner": "route_movement",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "708fe509c636bad1e32bac41758b1bfae905d6b55d241188aca67594ddfe0425"
+    },
+    "profiles/zangarmarsh-dk-speed/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "c4427b59a4daf7f7211fbff6753a90d0b8ca310b40716f9c151d94612b8f5da3",
+      "owner": "route_publisher_payload",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "d1189d00b04663d521a51bd44f801e2feb85a33b014526dea956567a5deccd01"
+    },
+    "profiles/zangarmarsh-dk-speed/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "601b8c4dcd54abe006b502b9666426db146dd3c7ed6eade7201fe0c4cc694215",
+      "owner": "route_replay",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "723fab3a67b15c9140755c0d3d22471312b729256cb01d6f2fbb97d6480a6ea2"
+    },
+    "profiles/zangarmarsh-dk-speed/review-trigger.json": {
+      "artifact_kind": "review-trigger",
+      "input_fingerprint": "6a44f5fb3c1ea87e6bef0e1abe4ae2251add8a7fd919a09b19d8fb53d80ca82f",
+      "owner": "route_review_trigger",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "08cc2c6a5830583dd5dc3b60486dfaa614418760972edc14c3479eca2045bbea"
+    },
+    "profiles/zangarmarsh-dk-speed/service-context.json": {
+      "artifact_kind": "service-context",
+      "input_fingerprint": "52b95354e25d84c68fc64ae891907ed11791cde61622010c795224e333fcf8ba",
+      "owner": "route_service_context",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "8612726ba66603804829cf204478860e8625b4d3b917b8352ba91d3f62e282a2"
+    },
+    "profiles/zangarmarsh-dk-speed/timing.json": {
+      "artifact_kind": "timing",
+      "input_fingerprint": "e0dd521fb84527498dd947c58b6ba3ee63fa2ceb5f860b21958310167364f95c",
+      "owner": "route_timing",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "29a6980b861d923d31c956c1cd1d180dee59a1b63d1062e9f694806eb6efaaf0"
+    },
+    "profiles/zangarmarsh-dk-speed/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "b15447808c5da14898d596240754abe996c43caf7217f6d80c01a2f8971cb43e",
+      "owner": "route_xp",
+      "scope_id": "zangarmarsh-dk-speed",
+      "scope_kind": "profiles",
+      "sha256": "cb9362cafb825ebdc467f75b97788cd7ef79f58e8310863832fed1bc168260be"
+    },
+    "profiles/zangarmarsh-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "26dc8de496ab302555d3ed6f5821774d6232b6e64e048c8ea3b9ce686c307e2a",
+      "owner": "route_display",
+      "scope_id": "zangarmarsh-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "a5f0301508bb19ba6c3abd2e6ba4084fc83b75889f68b79883be6ae547d7db3c"
+    },
+    "profiles/zangarmarsh-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "ee30c251d386d785f6ab123c401eec41d30aac73f514686854b469fc40592401",
+      "owner": "route_movement",
+      "scope_id": "zangarmarsh-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "4f567adf357eb8b6ed8b3c27393708d6a1d4a6ee47990cf8d92aad89606efa5e"
+    },
+    "profiles/zangarmarsh-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "ca409b42547aeff4e506531c7b6457abee42a58dda7c68e2162bd47fd3c45ef1",
+      "owner": "route_publisher_payload",
+      "scope_id": "zangarmarsh-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "e6bdaaf61192d37fddf7b2594a3ce948763d84a8214147bbb66f54c084c8847d"
+    },
+    "profiles/zangarmarsh-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "3286282f4345e57b84acf50d70f82061fa34a6deb16a689004d71680e2f79244",
+      "owner": "route_replay",
+      "scope_id": "zangarmarsh-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "4d0104f4ebfefa6b75ee3846d249c7b32bb356d0f9cbea5f9a74461eebb5a3d7"
+    },
+    "profiles/zuldrak-fivebox/display.json": {
+      "artifact_kind": "display",
+      "input_fingerprint": "377228e94077280c292db01f59640fa56be5285866f299ca0868eb77dad136d2",
+      "owner": "route_display",
+      "scope_id": "zuldrak-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "8be9355b98e552b7e3f60d54e627a63ea4703a2bf6c7283eedb5f8d013dba9ee"
+    },
+    "profiles/zuldrak-fivebox/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "c0ab061853f5975616fe7eef9cfbecc41b868b1b9653e577dad8c74dce89de06",
+      "owner": "route_movement",
+      "scope_id": "zuldrak-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "d47ef1c3d3645bb032367ee7e9937caf32dab11a4ba4391463d776b785574cef"
+    },
+    "profiles/zuldrak-fivebox/publisher.json": {
+      "artifact_kind": "publisher",
+      "input_fingerprint": "cc659f52da44c292f64c632de4a6dd73039395e5ad389ff9eefeef7ebfa81778",
+      "owner": "route_publisher_payload",
+      "scope_id": "zuldrak-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "35b11356f0261f28be3d0b979143e6bcad188ebd8e4ce8670d0c10951e8e8e11"
+    },
+    "profiles/zuldrak-fivebox/replay.json": {
+      "artifact_kind": "replay",
+      "input_fingerprint": "3295ac1e8ef64e9687bbf3b668507f8aa586d23c4148f296235641345fb3606a",
+      "owner": "route_replay",
+      "scope_id": "zuldrak-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "e659e01e7a2cf353977a1a067591e02f88b45c9d6b09f5825cc12a58e3a8b43e"
+    },
+    "programs/horde-fivebox-full-clear/continuity.json": {
+      "artifact_kind": "continuity",
+      "input_fingerprint": "6104a056b86cb4baea0277425ecc09ff04c15470baa5c31cc4d8871106a099a3",
+      "owner": "route_continuity",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "0fcbef14adacf33a8c7d8491328ecb49f923e6fde236eba9b9d13d5d1be2e675"
+    },
+    "programs/horde-fivebox-full-clear/economy.json": {
+      "artifact_kind": "economy",
+      "input_fingerprint": "0753e97d670a5f7c0fd605e8154024d6b3dabd59ab24ab99762e50dd72086ff1",
+      "owner": "route_economy",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "684ccfcfd803f0ab2c2c7d15e980be1b3ee3348cc0d9d2058bd3cb6adf49d203"
+    },
+    "programs/horde-fivebox-full-clear/movement.json": {
+      "artifact_kind": "movement",
+      "input_fingerprint": "fc649d02900dc7ce02360889836779ef3f5c780861d096405e9294501f92ea2c",
+      "owner": "route_movement",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "720f6c69bf9d728b31117a418fa906e4b94f12f2d9a700845dd6f96ea50900c0"
+    },
+    "programs/horde-fivebox-full-clear/review-trigger.json": {
+      "artifact_kind": "review-trigger",
+      "input_fingerprint": "62546cc7850e4acaa9db2673c966a3bf0a832a35d1c5d559af3365cd82c9756d",
+      "owner": "route_review_trigger",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "6906887e929ffd711bd04211f2fcec2d59235a9d9bf828f8f9d3c1bf1736acb0"
+    },
+    "programs/horde-fivebox-full-clear/service-context.json": {
+      "artifact_kind": "service-context",
+      "input_fingerprint": "a30ff856b6299941c1930a532c998755b27d407a2d48b1db761de7e80242743f",
+      "owner": "route_service_context",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "14e0eab6c70c42413ba40f9c5a55ddfc83b2ddb6c7e2dfa187066ba1cd43150a"
+    },
+    "programs/horde-fivebox-full-clear/timing.json": {
+      "artifact_kind": "timing",
+      "input_fingerprint": "b39b99c862c2625926d65e20092dc11b5cb59726142a19bb420d1ca90aa8b9c3",
+      "owner": "route_timing",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "3e7b1706b5df65e4bb8a16c509c9b5abbe5dd0b21a4cd79e3169a396e5560c04"
+    },
+    "programs/horde-fivebox-full-clear/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "fb5de98c5dd3e296588c62dcc2623593f8282a0c4e79666502c383fad6d87aed",
+      "owner": "route_xp",
+      "scope_id": "horde-fivebox-full-clear",
+      "scope_kind": "programs",
+      "sha256": "c1308f8876658b1c9233fc431a83f38aa8e6037823494917330aa41c7e4aa7f1"
+    }
+  },
+  "generated_only": true,
+  "schema_version": 1
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "task_id": 12645,
+  "identity": {
+    "name_zhcn": "品酒",
+    "name_en": "The Taste Test",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 76,
+    "pre_any": [
+      12644
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 124000,
+    "fixed_items": [
+      {
+        "item_id": 39520,
+        "quantity": 20,
+        "name_zhcn": "甜果酒",
+        "name_en": "Kungaloosh",
+        "sell_price_each_copper": 200,
+        "sell_price_total_copper": 4000
+      }
+    ],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 4000,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 4000,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 26450
+  },
+  "guide": [
+    "接取：葛瑞姆·雷酒。",
+    "将雷酒的丛林佳酿的酒样交给赫米特·奈辛瓦里、哈迪乌斯·哈洛维和塔玛拉·摇链品尝，然后向奈辛瓦里营地的葛瑞姆·雷酒复命。",
+    "交付：葛瑞姆·雷酒。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12645",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12645; legacy_type=quest_use_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《品酒》：共享：对赫米特、哈德留斯、塔玛拉分别使用丛林调酒样本；前两人在奈辛瓦里营地，塔玛拉在河流之心的湖畔码头，按自然经过分两段完成。\n《品酒》：这里只完成赫米特和哈迪乌斯两个品酒目标；塔玛拉留到河流之心自然经过。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

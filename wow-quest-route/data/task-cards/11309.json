@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11309,
+  "identity": {
+    "name_zhcn": "重要零件",
+    "name_en": "Parts for the Job",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11308
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 47000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35848,
+        "quantity": 1,
+        "name_zhcn": "慷慨护腿",
+        "name_en": "Munificent Legguards",
+        "sell_price_each_copper": 63308,
+        "sell_price_total_copper": 63308
+      },
+      {
+        "item_id": 35845,
+        "quantity": 1,
+        "name_zhcn": "水晶之星",
+        "name_en": "Crystalline Star",
+        "sell_price_each_copper": 34629,
+        "sell_price_total_copper": 34629
+      },
+      {
+        "item_id": 35846,
+        "quantity": 1,
+        "name_zhcn": "镶环链甲手套",
+        "name_en": "Banded Chain Gloves",
+        "sell_price_each_copper": 26939,
+        "sell_price_total_copper": 26939
+      },
+      {
+        "item_id": 35844,
+        "quantity": 1,
+        "name_zhcn": "抗震兜帽",
+        "name_en": "Shock-Resistant Hood",
+        "sell_price_each_copper": 26750,
+        "sell_price_total_copper": 26750
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 63308,
+    "gear_sale_max_copper": 63308,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：“钢锯”杰妮。",
+    "新阿加曼德的“钢锯”杰妮要求你收集6条铲齿鹿筋，再从旅行商安东那里购买一磅鲜肉，然后把这些东西带回去交给她。",
+    "交付：“钢锯”杰妮。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11309",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《重要零件》：铲齿鹿掉6根韧带；新鲜肉不是怪物掉落，要向沿新阿加曼德西南道路巡游的肉商安东购买，常见路线约47,71—52,73。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "task_id": 12121,
+  "identity": {
+    "name_zhcn": "死后相见",
+    "name_en": "See You on the Other Side",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12120
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 59000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20950
+  },
+  "guide": [
+    "接取：克拉斯。",
+    "哈考尔营地的克拉斯希望你使用达基尔金之槌敲响达基尔金废墟外的锣。等你被杀死以后，以灵魂形态进入废墟，与甘休的灵魂交谈。",
+    "交付：甘休。"
+  ],
+  "fivebox": {
+    "status": "special"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12121",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12121; legacy_type=shared_completion_with_personal_script_gate_confirmed",
+      "observed_at": "2026-09-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12121",
+      "observed_at": "2026-09-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《死后相见》灰熊丘陵首组实跑确认：敲锣触发时任务完成进度共享，但五个角色仍都要分别敲锣进入脚本，否则未亲自触发的角色无法正常交任务。\n《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。",
+      "scope": "all",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12121 + docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

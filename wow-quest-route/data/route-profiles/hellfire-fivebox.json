@@ -1,0 +1,2808 @@
+{
+  "schema_version": 2,
+  "profile_id": "hellfire-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "地狱火半岛",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 3483
+  },
+  "entry_requirements": {
+    "active_task_ids": []
+  },
+  "goal": {
+    "summary": "黑暗之门起步，依次完成东部前线、断背/塞斯高、萨尔玛北线、猎鹰/塞纳里奥任务簇，最后直接进入赞加。"
+  },
+  "display": {
+    "publish_key": "hellfire",
+    "order": 1,
+    "title": "地狱火半岛 · 58—64五开速度路线",
+    "display_name": "地狱火半岛",
+    "subtitle": "黑暗之门起步，依次完成东部前线、断背/塞斯高、萨尔玛北线、猎鹰/塞纳里奥任务簇，最后直接进入赞加。",
+    "footer": "塞纳里奥哨站接《塞纳里奥远征队》后直接越境赞加；《向祖莱报到》继续携带到沼泽鼠岗哨。",
+    "map_image": "maps/3483-hellfire-peninsula-hd.jpg"
+  },
+  "task_ids": [
+    9407,
+    10120,
+    10289,
+    10291,
+    10121,
+    9499,
+    10086,
+    10450,
+    10123,
+    10124,
+    10208,
+    10129,
+    10162,
+    10087,
+    10449,
+    10242,
+    10220,
+    10809,
+    10229,
+    10230,
+    10792,
+    10813,
+    10250,
+    10834,
+    10258,
+    10388,
+    9400,
+    10390,
+    10236,
+    10238,
+    10629,
+    10630,
+    10391,
+    10392,
+    10136,
+    10389,
+    9401,
+    9405,
+    9410,
+    9406,
+    9340,
+    10103,
+    9466,
+    9366,
+    9374,
+    9387,
+    9376,
+    10442,
+    10367,
+    10368,
+    10369,
+    9391,
+    9370,
+    10286,
+    10287,
+    9472,
+    9372,
+    10132,
+    10159,
+    9912,
+    10134,
+    10349,
+    10255,
+    10351
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9407,
+      "location_ref": "hellfire-p001",
+      "npc_name": "督军达图恩",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9407,
+      "location_ref": "hellfire-p001",
+      "npc_name": "沃雷恩中将",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10120,
+      "location_ref": "hellfire-p001",
+      "npc_name": "沃雷恩中将",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p002",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10120,
+      "location_ref": "hellfire-p002",
+      "npc_name": "维拉加·乱羽",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10289,
+      "location_ref": "hellfire-p002",
+      "npc_name": "维拉加·乱羽",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "hellfire-p002",
+      "from_name": "黑暗之门",
+      "to_name": "萨尔玛",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p003",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10289,
+      "location_ref": "hellfire-p003",
+      "npc_name": "克拉库克将军",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10291,
+      "location_ref": "hellfire-p003",
+      "npc_name": "克拉库克将军",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10291,
+      "location_ref": "hellfire-p003",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10121,
+      "location_ref": "hellfire-p003",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9499,
+      "location_ref": "hellfire-p003",
+      "npc_name": "玛提克·托塞多雷",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10086,
+      "location_ref": "hellfire-p003",
+      "npc_name": "泽格·纳克布斯",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10450,
+      "location_ref": "hellfire-p003",
+      "npc_name": "乌托克·断斧",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "hellfire-p003",
+      "target_name": "萨尔玛",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "hellfire-p003",
+      "target_name": "萨尔玛",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p004",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10121,
+      "location_ref": "hellfire-p004",
+      "npc_name": "斯古尔·碎颅者中士",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10123,
+      "location_ref": "hellfire-p004",
+      "npc_name": "斯古尔·碎颅者中士",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p005",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10123,
+      "location_ref": "hellfire-p005",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p006",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10123,
+      "location_ref": "hellfire-p006",
+      "npc_name": "斯古尔·碎颅者中士",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10124,
+      "location_ref": "hellfire-p006",
+      "npc_name": "斯古尔·碎颅者中士",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p007",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10124,
+      "location_ref": "hellfire-p007",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10208,
+      "location_ref": "hellfire-p007",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p008",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10208,
+      "location_ref": "hellfire-p008",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p009",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10208,
+      "location_ref": "hellfire-p009",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10129,
+      "location_ref": "hellfire-p009",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p010",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "hellfire-p010",
+      "npc_name": "空军指挥官布拉克",
+      "target_name": "乘任务飞行",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10129,
+      "location_ref": "hellfire-p010",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p011",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10129,
+      "location_ref": "hellfire-p011",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10162,
+      "location_ref": "hellfire-p011",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p012",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10086,
+      "location_ref": "hellfire-p012",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10450,
+      "location_ref": "hellfire-p012",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p013",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10086,
+      "location_ref": "hellfire-p013",
+      "npc_name": "泽格·纳克布斯",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10087,
+      "location_ref": "hellfire-p013",
+      "npc_name": "泽格·纳克布斯",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10450,
+      "location_ref": "hellfire-p013",
+      "npc_name": "乌托克·断斧",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10449,
+      "location_ref": "hellfire-p013",
+      "npc_name": "乌托克·断斧",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p014",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10087,
+      "location_ref": "hellfire-p014",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p015",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10449,
+      "location_ref": "hellfire-p015",
+      "npc_name": "药剂师塞兰娜",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10242,
+      "location_ref": "hellfire-p015",
+      "npc_name": "药剂师塞兰娜",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "hellfire-p015",
+      "from_name": "机甲残骸",
+      "to_name": "断背岗哨",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p016",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10242,
+      "location_ref": "hellfire-p016",
+      "npc_name": "药剂师阿尔布雷克",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "hellfire-p016",
+      "target_name": "断背岗哨",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10220,
+      "location_ref": "hellfire-p016",
+      "npc_name": "莫迪巴大使",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10809,
+      "location_ref": "hellfire-p016",
+      "target_name": "通缉布告",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p017",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10220,
+      "location_ref": "hellfire-p017",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10229,
+      "location_ref": "hellfire-p017",
+      "target_name": "神秘的典籍",
+      "when": {
+        "kind": "has_item",
+        "item_name": "神秘的典籍"
+      },
+      "action_id": "a0062"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p018",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10809,
+      "location_ref": "hellfire-p018",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p019",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10220,
+      "location_ref": "hellfire-p019",
+      "npc_name": "莫迪巴大使",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10229,
+      "location_ref": "hellfire-p019",
+      "npc_name": "史学家奥尔森",
+      "when": {
+        "kind": "task_active",
+        "task_id": 10229
+      },
+      "action_id": "a0067"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10230,
+      "location_ref": "hellfire-p019",
+      "npc_name": "史学家奥尔森",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10809,
+      "location_ref": "hellfire-p019",
+      "npc_name": "达克霍尔上尉",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10792,
+      "location_ref": "hellfire-p019",
+      "npc_name": "达克霍尔上尉",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10813,
+      "location_ref": "hellfire-p019",
+      "npc_name": "塞萨克",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p020",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10230,
+      "location_ref": "hellfire-p020",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p021",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10792,
+      "location_ref": "hellfire-p021",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10813,
+      "location_ref": "hellfire-p021",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p022",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10230,
+      "location_ref": "hellfire-p022",
+      "npc_name": "史学家奥尔森",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10250,
+      "location_ref": "hellfire-p022",
+      "npc_name": "史学家奥尔森",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10792,
+      "location_ref": "hellfire-p022",
+      "npc_name": "达克霍尔上尉",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10813,
+      "location_ref": "hellfire-p022",
+      "npc_name": "塞萨克",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10834,
+      "location_ref": "hellfire-p022",
+      "npc_name": "塞萨克",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p023",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10250,
+      "location_ref": "hellfire-p023",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p024",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10250,
+      "location_ref": "hellfire-p024",
+      "npc_name": "史学家奥尔森",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10258,
+      "location_ref": "hellfire-p024",
+      "npc_name": "史学家奥尔森",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p025",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10834,
+      "location_ref": "hellfire-p025",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p026",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10834,
+      "location_ref": "hellfire-p026",
+      "npc_name": "塞萨克",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p027",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10258,
+      "location_ref": "hellfire-p027",
+      "npc_name": "指挥官霍加斯",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "hellfire-p027",
+      "target_name": "萨尔玛",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p028",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10087,
+      "location_ref": "hellfire-p028",
+      "npc_name": "泽格·纳克布斯",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p029",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10162,
+      "location_ref": "hellfire-p029",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p030",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10162,
+      "location_ref": "hellfire-p030",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10388,
+      "location_ref": "hellfire-p030",
+      "npc_name": "前线指挥官托尔克",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p031",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10388,
+      "location_ref": "hellfire-p031",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9400,
+      "location_ref": "hellfire-p031",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10390,
+      "location_ref": "hellfire-p031",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p032",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10236,
+      "location_ref": "hellfire-p032",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p033",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10236,
+      "location_ref": "hellfire-p033",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p034",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10236,
+      "location_ref": "hellfire-p034",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10238,
+      "location_ref": "hellfire-p034",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p035",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10238,
+      "location_ref": "hellfire-p035",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p036",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10238,
+      "location_ref": "hellfire-p036",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10629,
+      "location_ref": "hellfire-p036",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10629,
+      "location_ref": "hellfire-p036",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10629,
+      "location_ref": "hellfire-p036",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10630,
+      "location_ref": "hellfire-p036",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p037",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10630,
+      "location_ref": "hellfire-p037",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10630,
+      "location_ref": "hellfire-p037",
+      "npc_name": "工头拉泽克拉兹",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p038",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10390,
+      "location_ref": "hellfire-p038",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p039",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10390,
+      "location_ref": "hellfire-p039",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10391,
+      "location_ref": "hellfire-p039",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p040",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10391,
+      "location_ref": "hellfire-p040",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p041",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10391,
+      "location_ref": "hellfire-p041",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10392,
+      "location_ref": "hellfire-p041",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p042",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10392,
+      "location_ref": "hellfire-p042",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p043",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10392,
+      "location_ref": "hellfire-p043",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10136,
+      "location_ref": "hellfire-p043",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10389,
+      "location_ref": "hellfire-p043",
+      "npc_name": "魔导师文森特·血鹰",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p044",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9400,
+      "location_ref": "hellfire-p044",
+      "npc_name": "邪兽人的尸体",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9401,
+      "location_ref": "hellfire-p044",
+      "npc_name": "邪兽人的尸体",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "hellfire-p044",
+      "target_name": "萨尔玛",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p045",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9401,
+      "location_ref": "hellfire-p045",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9405,
+      "location_ref": "hellfire-p045",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9405,
+      "location_ref": "hellfire-p045",
+      "npc_name": "先知雷古库特",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9410,
+      "location_ref": "hellfire-p045",
+      "npc_name": "先知雷古库特",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p046",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9410,
+      "location_ref": "hellfire-p046",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p047",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9410,
+      "location_ref": "hellfire-p047",
+      "npc_name": "格尔坎·血拳",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9406,
+      "location_ref": "hellfire-p047",
+      "npc_name": "格尔坎·血拳",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p048",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9406,
+      "location_ref": "hellfire-p048",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p049",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9499,
+      "location_ref": "hellfire-p049",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9340,
+      "location_ref": "hellfire-p049",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10103,
+      "location_ref": "hellfire-p049",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9466,
+      "location_ref": "hellfire-p049",
+      "target_name": "通缉布告",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9366,
+      "location_ref": "hellfire-p049",
+      "npc_name": "阴沉的利亚森",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9374,
+      "location_ref": "hellfire-p049",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9387,
+      "location_ref": "hellfire-p049",
+      "npc_name": "药剂师艾瑟森",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9376,
+      "location_ref": "hellfire-p049",
+      "npc_name": "塔雷里斯·晨光",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10442,
+      "location_ref": "hellfire-p049",
+      "npc_name": "驯鹰者德蕾娜·河风",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "hellfire-p049",
+      "target_name": "猎鹰岗哨",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p050",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10136,
+      "location_ref": "hellfire-p050",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10389,
+      "location_ref": "hellfire-p050",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9366,
+      "location_ref": "hellfire-p050",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9374,
+      "location_ref": "hellfire-p050",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p051",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9340,
+      "location_ref": "hellfire-p051",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9466,
+      "location_ref": "hellfire-p051",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p052",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9376,
+      "location_ref": "hellfire-p052",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p053",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9387,
+      "location_ref": "hellfire-p053",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10367,
+      "location_ref": "hellfire-p053",
+      "npc_name": "纳拉杜",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p054",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10367,
+      "location_ref": "hellfire-p054",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p055",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10367,
+      "location_ref": "hellfire-p055",
+      "npc_name": "纳拉杜",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10368,
+      "location_ref": "hellfire-p055",
+      "npc_name": "纳拉杜",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p056",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10368,
+      "location_ref": "hellfire-p056",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p057",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10368,
+      "location_ref": "hellfire-p057",
+      "npc_name": "纳拉杜",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10369,
+      "location_ref": "hellfire-p057",
+      "npc_name": "纳拉杜",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10369,
+      "location_ref": "hellfire-p057",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10369,
+      "location_ref": "hellfire-p057",
+      "npc_name": "纳拉杜",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p058",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9340,
+      "location_ref": "hellfire-p058",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9466,
+      "location_ref": "hellfire-p058",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9391,
+      "location_ref": "hellfire-p058",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9376,
+      "location_ref": "hellfire-p058",
+      "npc_name": "塔雷里斯·晨光",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9366,
+      "location_ref": "hellfire-p058",
+      "npc_name": "阴沉的利亚森",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9370,
+      "location_ref": "hellfire-p058",
+      "npc_name": "阴沉的利亚森",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9374,
+      "location_ref": "hellfire-p058",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10286,
+      "location_ref": "hellfire-p058",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9387,
+      "location_ref": "hellfire-p058",
+      "npc_name": "药剂师艾瑟森",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "hellfire-p059",
+      "from_name": "猎鹰岗哨",
+      "to_name": "萨尔玛",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p059",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10136,
+      "location_ref": "hellfire-p059",
+      "npc_name": "纳兹格雷尔",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10389,
+      "location_ref": "hellfire-p059",
+      "npc_name": "魔导师文森特·血鹰",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "hellfire-p059",
+      "from_name": "萨尔玛",
+      "to_name": "猎鹰岗哨",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p060",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10286,
+      "location_ref": "hellfire-p060",
+      "npc_name": "魔导师阿利迪斯",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10287,
+      "location_ref": "hellfire-p060",
+      "npc_name": "魔导师阿利迪斯",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p061",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10287,
+      "location_ref": "hellfire-p061",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9472,
+      "location_ref": "hellfire-p061",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9472,
+      "location_ref": "hellfire-p061",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9472,
+      "location_ref": "hellfire-p061",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p062",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9370,
+      "location_ref": "hellfire-p062",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p063",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9391,
+      "location_ref": "hellfire-p063",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p064",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9370,
+      "location_ref": "hellfire-p064",
+      "npc_name": "阴沉的利亚森",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9391,
+      "location_ref": "hellfire-p064",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p065",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10442,
+      "location_ref": "hellfire-p065",
+      "npc_name": "塞安·红鬃",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9372,
+      "location_ref": "hellfire-p065",
+      "npc_name": "塞安·红鬃",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10132,
+      "location_ref": "hellfire-p065",
+      "npc_name": "图拉希恩",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10159,
+      "location_ref": "hellfire-p065",
+      "npc_name": "玛霍拉姆·硬蹄",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9912,
+      "location_ref": "hellfire-p065",
+      "npc_name": "阿米希尔·迷雾行者",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p066",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10132,
+      "location_ref": "hellfire-p066",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10134,
+      "location_ref": "hellfire-p066",
+      "target_name": "火红水晶碎片",
+      "when": {
+        "kind": "has_item",
+        "item_name": "火红水晶碎片"
+      },
+      "action_id": "a0230"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p067",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10159,
+      "location_ref": "hellfire-p067",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9372,
+      "location_ref": "hellfire-p067",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p068",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10132,
+      "location_ref": "hellfire-p068",
+      "npc_name": "图拉希恩",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10134,
+      "location_ref": "hellfire-p068",
+      "npc_name": "图拉希恩",
+      "when": {
+        "kind": "task_active",
+        "task_id": 10134
+      },
+      "action_id": "a0236"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10349,
+      "location_ref": "hellfire-p068",
+      "npc_name": "图拉希恩",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10159,
+      "location_ref": "hellfire-p068",
+      "npc_name": "玛霍拉姆·硬蹄",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9372,
+      "location_ref": "hellfire-p068",
+      "npc_name": "塞安·红鬃",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10255,
+      "location_ref": "hellfire-p068",
+      "npc_name": "塞安·红鬃",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p069",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10349,
+      "location_ref": "hellfire-p069",
+      "npc_name": "缚地者加兰蒂娅·夜风",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10351,
+      "location_ref": "hellfire-p069",
+      "npc_name": "缚地者加兰蒂娅·夜风",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10351,
+      "location_ref": "hellfire-p069",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10351,
+      "location_ref": "hellfire-p069",
+      "npc_name": "缚地者加兰蒂娅·夜风",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p070",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10255,
+      "location_ref": "hellfire-p070",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10255,
+      "location_ref": "hellfire-p070",
+      "npc_name": "塞安·红鬃",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "move",
+      "location_ref": "hellfire-p071",
+      "to_name": "赞加沼泽·塞纳里奥庇护所",
+      "action_id": "move-hellfire-zang-cenarion-refuge"
+    },
+    {
+      "kind": "location",
+      "location_ref": "hellfire-p071",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9912,
+      "location_ref": "hellfire-p071",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0250"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "黑暗之门 → 萨尔玛 → 魔火峡谷",
+      "summary": "完成外域入场、萨尔玛开点与东部燃烧军团主链，机甲残骸开到地狱岩床。",
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "机甲残骸 → 阻断援军 → 两轮轰炸",
+      "summary": "完成外域入场、萨尔玛开点与东部燃烧军团主链，机甲残骸开到地狱岩床。",
+      "action_ids": [
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "萨尔玛装备包 → 断背岗哨",
+      "summary": "把《我为部落工作！》与《噬骨之血》同片完成；随后利用任务双足飞龙进入断背岗哨。",
+      "action_ids": [
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054",
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "断背岗哨 → 军械库 → 塞斯高",
+      "summary": "书卷四链固定接入；塞斯高同时保留建筑纵火与格里洛克链，眼睛共享性留到第三组验证。",
+      "action_ids": [
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "血之复仇 → 暗眼格里洛克 → 炉石萨尔玛",
+      "summary": "书卷四链固定接入；塞斯高同时保留建筑纵火与格里洛克链，眼睛共享性留到第三组验证。",
+      "action_ids": [
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "萨尔玛 → 地狱岩床 → 矿洞短链",
+      "summary": "炉石回萨尔玛后完成北部共享击杀、矿洞短链和燃烧军团连续链。",
+      "action_ids": [
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "萨尔玛地下 → 铸魔营地 → 深渊之门",
+      "summary": "炉石回萨尔玛后完成北部共享击杀、矿洞短链和燃烧军团连续链。",
+      "action_ids": [
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "刺客 → 玛格汉岗哨",
+      "summary": "闭合《刺客》到《玛格汉》的低随机任务包；到萨尔玛交《玛格汉》后停止跨大陆后续。",
+      "action_ids": [
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 沙纳尔",
+      "summary": "第一次西侧大环同步装备任务与沙纳尔短链，明确跳过低收益随机收集和随机鸟巢。",
+      "action_ids": [
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165",
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173",
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "沙纳尔后半 → 猎鹰岗哨回交",
+      "summary": "第一次西侧大环同步装备任务与沙纳尔短链，明确跳过低收益随机收集和随机鸟巢。",
+      "action_ids": [
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0203",
+        "a0202",
+        "a0204",
+        "a0205",
+        "a0206"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "猎鹰岗哨后续 → 阿苟纳 / 大裂隙第二趟",
+      "summary": "只回访任务链真正解锁的《阻止净化》和《点燃灯塔》，同时闭合埃雷利恩本地后续。",
+      "action_ids": [
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217",
+        "a0218",
+        "a0219",
+        "a0220",
+        "a0221"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "塞纳里奥哨站 → 赞加沼泽",
+      "summary": "完成塞纳里奥本地高密度短链，接《塞纳里奥远征队》后直接越境进入赞加。",
+      "action_ids": [
+        "a0222",
+        "a0223",
+        "a0224",
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "move-hellfire-zang-cenarion-refuge",
+        "a0249",
+        "a0250"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "hellfire-p001": {
+        "display_name": "黑暗之门",
+        "x": 87.35,
+        "y": 49.78,
+        "phase": "entry",
+        "transport": "ride"
+      },
+      "hellfire-p002": {
+        "display_name": "黑暗之门·部落营地",
+        "x": 87.35,
+        "y": 48.14,
+        "phase": "entry",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p003": {
+        "display_name": "萨尔玛",
+        "x": 55.88,
+        "y": 36.65,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0008"
+        }
+      },
+      "hellfire-p004": {
+        "display_name": "萨尔玛东侧补给车队",
+        "x": 58.14,
+        "y": 41.27,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p005": {
+        "display_name": "魔火峡谷",
+        "x": 66.25,
+        "y": 47.26,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p006": {
+        "display_name": "补给车队",
+        "x": 58.14,
+        "y": 41.27,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p007": {
+        "display_name": "机甲残骸",
+        "x": 65.89,
+        "y": 43.59,
+        "phase": "wreck",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p008": {
+        "display_name": "希鲁斯 / 科卢尔传送门",
+        "x": 72.41,
+        "y": 42.11,
+        "phase": "wreck",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p009": {
+        "display_name": "机甲残骸",
+        "x": 65.89,
+        "y": 43.59,
+        "phase": "wreck",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p010": {
+        "display_name": "军团传送器",
+        "x": 77.87,
+        "y": 49.55,
+        "phase": "wreck",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p011": {
+        "display_name": "机甲残骸",
+        "x": 65.89,
+        "y": 43.59,
+        "phase": "wreck",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p012": {
+        "display_name": "噬骨者营地 / 回收物资区",
+        "x": 57.4,
+        "y": 49.3,
+        "phase": "gear",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p013": {
+        "display_name": "萨尔玛",
+        "x": 55.13,
+        "y": 36.21,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p014": {
+        "display_name": "联盟火炮阵地",
+        "x": 54.1,
+        "y": 52.5,
+        "phase": "gear",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p015": {
+        "display_name": "机甲残骸",
+        "x": 65.89,
+        "y": 43.59,
+        "phase": "wreck",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p016": {
+        "display_name": "断背岗哨",
+        "x": 61.7,
+        "y": 81.7,
+        "phase": "spinebreaker",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0054"
+        }
+      },
+      "hellfire-p017": {
+        "display_name": "远征军械库",
+        "x": 54.8,
+        "y": 80.5,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p018": {
+        "display_name": "塞斯高·第一趟",
+        "x": 67.8,
+        "y": 73.0,
+        "phase": "zethgor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p019": {
+        "display_name": "断背岗哨",
+        "x": 61.7,
+        "y": 81.7,
+        "phase": "spinebreaker",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p020": {
+        "display_name": "远征军械库·塔沃斯少校",
+        "x": 54.83,
+        "y": 83.74,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p021": {
+        "display_name": "塞斯高·第二趟",
+        "x": 69.0,
+        "y": 74.9,
+        "phase": "zethgor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p022": {
+        "display_name": "断背岗哨",
+        "x": 61.7,
+        "y": 81.7,
+        "phase": "spinebreaker",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p023": {
+        "display_name": "联盟战旗·乌尔特拉克",
+        "x": 63.5,
+        "y": 77.6,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p024": {
+        "display_name": "断背岗哨",
+        "x": 61.7,
+        "y": 81.7,
+        "phase": "spinebreaker",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p025": {
+        "display_name": "塞斯高·第三趟",
+        "x": 66.66,
+        "y": 71.5,
+        "phase": "zethgor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p026": {
+        "display_name": "断背岗哨",
+        "x": 61.7,
+        "y": 81.7,
+        "phase": "spinebreaker",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p027": {
+        "display_name": "远征军械库·指挥官霍加斯",
+        "x": 56.92,
+        "y": 77.37,
+        "phase": "south",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p028": {
+        "display_name": "萨尔玛",
+        "x": 55.13,
+        "y": 36.2,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0094"
+        }
+      },
+      "hellfire-p029": {
+        "display_name": "地狱岩床",
+        "x": 72.76,
+        "y": 17.47,
+        "phase": "north",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p030": {
+        "display_name": "机甲残骸",
+        "x": 65.89,
+        "y": 43.59,
+        "phase": "wreck",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p031": {
+        "display_name": "萨尔玛",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p032": {
+        "display_name": "萨尔玛西北矿洞",
+        "x": 51.37,
+        "y": 30.52,
+        "phase": "mine",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p033": {
+        "display_name": "矿洞外回收区",
+        "x": 47.9,
+        "y": 41.3,
+        "phase": "mine",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p034": {
+        "display_name": "矿洞",
+        "x": 51.37,
+        "y": 30.52,
+        "phase": "mine",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p035": {
+        "display_name": "邪兽人营地",
+        "x": 46.4,
+        "y": 45.2,
+        "phase": "mine",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p036": {
+        "display_name": "矿洞",
+        "x": 51.37,
+        "y": 30.52,
+        "phase": "mine",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p037": {
+        "display_name": "萨尔玛地下",
+        "x": 54.39,
+        "y": 31.57,
+        "phase": "mine",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p038": {
+        "display_name": "铸魔营地：暴虐",
+        "x": 61.8,
+        "y": 31.65,
+        "phase": "forge",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p039": {
+        "display_name": "萨尔玛",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p040": {
+        "display_name": "铸魔营地：狂乱",
+        "x": 59.33,
+        "y": 32.53,
+        "phase": "forge",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p041": {
+        "display_name": "萨尔玛",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p042": {
+        "display_name": "深渊之门",
+        "x": 53.09,
+        "y": 26.47,
+        "phase": "forge",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p043": {
+        "display_name": "萨尔玛",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "thrallmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p044": {
+        "display_name": "邪兽人尸体",
+        "x": 33.61,
+        "y": 43.52,
+        "phase": "maghar",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p045": {
+        "display_name": "萨尔玛",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "maghar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0143"
+        }
+      },
+      "hellfire-p046": {
+        "display_name": "邪兽人尸体·第二趟",
+        "x": 33.61,
+        "y": 43.52,
+        "phase": "maghar",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p047": {
+        "display_name": "玛格汉岗哨",
+        "x": 31.99,
+        "y": 27.79,
+        "phase": "maghar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p048": {
+        "display_name": "萨尔玛",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "maghar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p049": {
+        "display_name": "猎鹰岗哨",
+        "x": 27.05,
+        "y": 60.24,
+        "phase": "falcon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p050": {
+        "display_name": "阿苟纳之池",
+        "x": 40.0,
+        "y": 33.0,
+        "phase": "pools",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p051": {
+        "display_name": "大裂隙",
+        "x": 33.37,
+        "y": 65.08,
+        "phase": "fissure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p052": {
+        "display_name": "尘羽峡谷营地",
+        "x": 22.11,
+        "y": 68.3,
+        "phase": "fissure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p053": {
+        "display_name": "沙纳尔废墟·纳拉杜",
+        "x": 16.27,
+        "y": 65.09,
+        "phase": "shanaar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p054": {
+        "display_name": "沙纳尔废墟·金属箱",
+        "x": 14.34,
+        "y": 63.5,
+        "phase": "shanaar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p055": {
+        "display_name": "纳拉杜",
+        "x": 16.27,
+        "y": 65.09,
+        "phase": "shanaar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p056": {
+        "display_name": "沙纳尔废墟·三长者",
+        "x": 13.13,
+        "y": 58.75,
+        "phase": "shanaar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p057": {
+        "display_name": "纳拉杜",
+        "x": 16.27,
+        "y": 65.09,
+        "phase": "shanaar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p058": {
+        "display_name": "猎鹰岗哨",
+        "x": 27.05,
+        "y": 60.24,
+        "phase": "falcon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p059": {
+        "display_name": "系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨",
+        "x": 55.02,
+        "y": 35.96,
+        "phase": "falcon",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0203"
+        }
+      },
+      "hellfire-p060": {
+        "display_name": "猎鹰岗哨外·魔导师阿利迪斯",
+        "x": 26.56,
+        "y": 63.04,
+        "phase": "falcon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0206"
+        }
+      },
+      "hellfire-p061": {
+        "display_name": "猎鹰岗哨",
+        "x": 26.38,
+        "y": 60.32,
+        "phase": "falcon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p062": {
+        "display_name": "阿苟纳之池·第二趟",
+        "x": 40.0,
+        "y": 32.9,
+        "phase": "pools",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p063": {
+        "display_name": "大裂隙·三座灯塔",
+        "x": 34.07,
+        "y": 60.58,
+        "phase": "fissure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p064": {
+        "display_name": "猎鹰岗哨",
+        "x": 27.05,
+        "y": 60.24,
+        "phase": "falcon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p065": {
+        "display_name": "塞纳里奥哨站",
+        "x": 15.7,
+        "y": 52.09,
+        "phase": "cenarion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p066": {
+        "display_name": "塞纳里奥哨站北侧巨人",
+        "x": 15.23,
+        "y": 42.25,
+        "phase": "cenarion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p067": {
+        "display_name": "棘牙岭",
+        "x": 10.02,
+        "y": 51.6,
+        "phase": "cenarion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p068": {
+        "display_name": "塞纳里奥哨站",
+        "x": 15.7,
+        "y": 52.09,
+        "phase": "cenarion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p069": {
+        "display_name": "缚地者加兰蒂娅·夜风",
+        "x": 15.83,
+        "y": 51.83,
+        "phase": "cenarion",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p070": {
+        "display_name": "塞纳里奥哨站·野猪测试",
+        "x": 15.7,
+        "y": 52.09,
+        "phase": "cenarion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "hellfire-p071": {
+        "display_name": "赞加沼泽·塞纳里奥庇护所·伊谢尔·风歌",
+        "x": 78.4,
+        "y": 62.02,
+        "phase": "exit",
+        "zone_id": 3521,
+        "handoff_ref": "hellfire-to-zang-cenarion-refuge",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "move-hellfire-zang-cenarion-refuge"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: removed ambiguous legacy point transport styles from reviewed locations where old player text shows the special action as outgoing (or provides no incoming action). Existing explicit hearth/quest-transport actions and player text remain unchanged; arrival movement stays unresolved instead of fabricating special incoming transport."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "architecture_migration",
+      "summary": "Closed Hellfire -> Zangarmarsh endpoint semantics. The final Hellfire visit is Ysiel Windsinger at Cenarion Refuge, verified by Questie at Zangarmarsh 3521/(78.4,62.02). Added an explicit neutral move from Cenarion Post to Cenarion Refuge; movement mode remains unknown. Matching handoff_ref proves the Program boundary without relying on names."
+    }
+  ]
+}

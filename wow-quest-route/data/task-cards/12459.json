@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "task_id": 12459,
+  "identity": {
+    "name_zhcn": "创造与毁灭的力量",
+    "name_en": "That Which Creates Can Also Destroy",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 72,
+    "pre_any": [
+      12458
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 168000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38088,
+        "quantity": 1,
+        "name_zhcn": "自然愤怒胸甲",
+        "name_en": "Breastplate of Nature's Ire",
+        "sell_price_each_copper": 66701,
+        "sell_price_total_copper": 66701
+      },
+      {
+        "item_id": 38027,
+        "quantity": 1,
+        "name_zhcn": "翠绿猎手的头盔",
+        "name_en": "Verdant Hunter's Guise",
+        "sell_price_each_copper": 41655,
+        "sell_price_total_copper": 41655
+      },
+      {
+        "item_id": 37940,
+        "quantity": 1,
+        "name_zhcn": "伊萨里奥斯披风",
+        "name_en": "Mantle of Itharius",
+        "sell_price_each_copper": 26354,
+        "sell_price_total_copper": 26354
+      },
+      {
+        "item_id": 37983,
+        "quantity": 1,
+        "name_zhcn": "翡翠追踪者手套",
+        "name_en": "Gloves of the Emerald Stalker",
+        "sell_price_each_copper": 22813,
+        "sell_price_total_copper": 22813
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 66701,
+    "gear_sale_max_copper": 66701,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 31150
+  },
+  "guide": [
+    "接取：伊萨里奥斯勋爵。",
+    "龙眠神殿顶层的伊萨里奥斯勋爵要你去杀死一头被削弱的冰霜巨龙、被削弱的图尔基德和被削弱的监工戴瑟盖斯。",
+    "交付：伊萨里奥斯勋爵。",
+    "三名命名目标都必须先用自然愤怒之种削弱，再击杀；目标分布在不同位置，其中包括飞行的冰霜巨龙，不要在施种前先杀掉。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12459",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12459; legacy_type=quest_item_use_and_named_kill_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12459",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12459/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《创造与毁灭的力量》首组实跑确认：自然愤怒之种削弱目标后的任务进度五号共享；三只命名目标均按主控使用种子并击杀即可，不需要五号分别使用。\n《创造与毁灭的力量》：共享：主控用自然愤怒之种削弱图尔基德并击杀即可；后续两只命名目标同样共享。\n《创造与毁灭的力量》：监工戴瑟盖斯由主控使用自然愤怒之种削弱并击杀即可同步全队。\n《创造与毁灭的力量》：第三只复活冰霜巨龙也只需主控使用自然愤怒之种并击杀。",
+      "scope": "all",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12459 + docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

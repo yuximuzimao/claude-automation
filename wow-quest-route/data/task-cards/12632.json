@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "task_id": 12632,
+  "identity": {
+    "name_zhcn": "我的后裔",
+    "name_en": "But First My Offspring",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 74,
+    "pre_any": [
+      12628
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39821,
+        "quantity": 1,
+        "name_zhcn": "灵魂师的焦点",
+        "name_en": "Spiritist's Focus",
+        "sell_price_each_copper": 53770,
+        "sell_price_total_copper": 53770
+      },
+      {
+        "item_id": 39891,
+        "quantity": 1,
+        "name_zhcn": "青铜侵犯者头盔",
+        "name_en": "Brazen Offender's Helm",
+        "sell_price_each_copper": 52786,
+        "sell_price_total_copper": 52786
+      },
+      {
+        "item_id": 39856,
+        "quantity": 1,
+        "name_zhcn": "放血者的短裤",
+        "name_en": "Bloodletter's Pants",
+        "sell_price_each_copper": 51282,
+        "sell_price_total_copper": 51282
+      },
+      {
+        "item_id": 39787,
+        "quantity": 1,
+        "name_zhcn": "占卜者的裹手",
+        "name_en": "Soothsayer's Handwraps",
+        "sell_price_each_copper": 19352,
+        "sell_price_total_copper": 19352
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 53770,
+    "gear_sale_max_copper": 53770,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 21400
+  },
+  "guide": [
+    "接取：哈克娅。",
+    "哈克娅要求你对她的孩子们的尸体使用她的胡须，解放并复活它们。完成任务之后回到哈克娅祭坛去向她复命。",
+    "交付：哈克娅。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12632",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12632; legacy_type=quest_progress_group_shared_confirmed",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12632",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《我的后裔》：共享：杀死被诅咒的哈克娅后裔后，由主控对尸体使用哈克娅的胡须。\n【需要单独修正优化】《我的后裔》2026-09-06至07祖达克首组实跑：共享：杀死被诅咒的哈克娅后裔后，由主控对尸体使用哈克娅的胡须。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12632",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

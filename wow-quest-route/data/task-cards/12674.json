@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "task_id": 12674,
+  "identity": {
+    "name_zhcn": "地狱的复仇",
+    "name_en": "Hell Hath a Fury",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 74,
+    "pre_any": [
+      12668
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39839,
+        "quantity": 1,
+        "name_zhcn": "仪祭师护肩",
+        "name_en": "Ritualistic Shoulderguards",
+        "sell_price_each_copper": 42412,
+        "sell_price_total_copper": 42412
+      },
+      {
+        "item_id": 39859,
+        "quantity": 1,
+        "name_zhcn": "放血者的无边帽",
+        "name_en": "Bloodletter's Skullcap",
+        "sell_price_each_copper": 35180,
+        "sell_price_total_copper": 35180
+      },
+      {
+        "item_id": 39841,
+        "quantity": 1,
+        "name_zhcn": "先祖束带",
+        "name_en": "Ancestral Girdle",
+        "sell_price_each_copper": 33281,
+        "sell_price_total_copper": 33281
+      },
+      {
+        "item_id": 39791,
+        "quantity": 1,
+        "name_zhcn": "占卜者的裹腕",
+        "name_en": "Soothsayer's Wristwraps",
+        "sell_price_each_copper": 19638,
+        "sell_price_total_copper": 19638
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 42412,
+    "gear_sale_max_copper": 42412,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 26750
+  },
+  "guide": [
+    "接取：奎丝鲁恩之魂。",
+    "奎丝鲁恩祭坛的奎丝鲁恩之魂要你对高阶祭司穆弗努、高阶祭司图亚图亚和高阶祭司哈文尼使用奎丝鲁恩的妖术棒，然后杀死他们。",
+    "交付：奎丝鲁恩之魂。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12674",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12674; legacy_type=quest_progress_group_shared_confirmed",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12674",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《地狱的复仇》：共享：由主控对三名高阶祭司分别使用奎丝鲁恩妖术棒，必须等妖术读条/效果完整落上后再击杀，秒杀太快可能不计。穆弗努约74,57；图阿图阿约73,60；哈文尼在北侧约75–78,54巡逻。\n【需要单独修正优化】《地狱的复仇》2026-09-06至07祖达克首组实跑：共享：由主控对三名高阶祭司分别使用奎丝鲁恩妖术棒，再击杀；不要先杀后用。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12674",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

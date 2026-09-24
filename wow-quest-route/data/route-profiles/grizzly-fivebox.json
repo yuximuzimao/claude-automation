@@ -1,0 +1,3490 @@
+{
+  "schema_version": 2,
+  "profile_id": "grizzly-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "灰熊丘陵",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 394
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      12487
+    ]
+  },
+  "goal": {
+    "summary": "祖达克结束后进入灰熊丘陵，先到征服堡；炉石绑定征服堡；按步骤完成灰熊丘陵任务。"
+  },
+  "display": {
+    "publish_key": "grizzly",
+    "order": 11,
+    "title": "灰熊丘陵 · 80级五开任务路线",
+    "display_name": "灰熊丘陵",
+    "subtitle": "祖达克结束后进入灰熊丘陵，先到征服堡；炉石绑定征服堡；按步骤完成灰熊丘陵任务。",
+    "footer": "在加弗洛克交《终获解救》后，本图灰熊丘陵清理段结束。",
+    "map_image": "maps/394-grizzly-hills-hd.jpg"
+  },
+  "task_ids": [
+    12487,
+    12468,
+    12256,
+    12257,
+    12175,
+    12436,
+    12176,
+    12259,
+    12433,
+    12451,
+    12412,
+    12423,
+    12413,
+    12424,
+    12422,
+    12177,
+    12178,
+    12453,
+    12208,
+    11984,
+    11989,
+    11990,
+    11991,
+    12484,
+    12483,
+    12029,
+    12007,
+    12042,
+    12802,
+    12068,
+    12425,
+    12207,
+    12213,
+    12427,
+    12428,
+    12429,
+    12430,
+    12431,
+    12190,
+    12328,
+    12327,
+    12329,
+    12074,
+    12415,
+    12195,
+    12279,
+    12026,
+    12229,
+    12231,
+    12165,
+    12054,
+    12241,
+    12242,
+    12058,
+    12073,
+    11982,
+    12070,
+    11985,
+    12081,
+    12113,
+    12114,
+    12116,
+    12093,
+    12204,
+    12134,
+    12330,
+    12411,
+    12236,
+    12164,
+    12082,
+    12120,
+    12121,
+    12137,
+    12152,
+    12094,
+    12201,
+    12202,
+    12196,
+    12203,
+    12197,
+    12198,
+    12199,
+    12099
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12487,
+      "location_ref": "grizzly-p001",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12468,
+      "location_ref": "grizzly-p001",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p002",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12468,
+      "location_ref": "grizzly-p002",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12256,
+      "location_ref": "grizzly-p002",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12257,
+      "location_ref": "grizzly-p002",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12175,
+      "location_ref": "grizzly-p002",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12436,
+      "location_ref": "grizzly-p002",
+      "npc_name": "粮食商人洛克兰",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "grizzly-p002",
+      "target_name": "征服堡",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "grizzly-p002",
+      "target_name": "征服堡",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p003",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12436,
+      "location_ref": "grizzly-p003",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12175,
+      "location_ref": "grizzly-p003",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12256,
+      "location_ref": "grizzly-p003",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12257,
+      "location_ref": "grizzly-p003",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p004",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12436,
+      "location_ref": "grizzly-p004",
+      "npc_name": "粮食商人洛克兰",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12175,
+      "location_ref": "grizzly-p004",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12176,
+      "location_ref": "grizzly-p004",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12256,
+      "location_ref": "grizzly-p004",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12257,
+      "location_ref": "grizzly-p004",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12259,
+      "location_ref": "grizzly-p004",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p005",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12433,
+      "location_ref": "grizzly-p005",
+      "npc_name": "古图尔",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12433,
+      "location_ref": "grizzly-p005",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12433,
+      "location_ref": "grizzly-p005",
+      "npc_name": "古图尔",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p006",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12259,
+      "location_ref": "grizzly-p006",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p007",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12259,
+      "location_ref": "grizzly-p007",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12451,
+      "location_ref": "grizzly-p007",
+      "npc_name": "纳兹格利姆中士",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12412,
+      "location_ref": "grizzly-p007",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p008",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12412,
+      "location_ref": "grizzly-p008",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12423,
+      "location_ref": "grizzly-p008",
+      "target_name": "米克哈尔的日记",
+      "when": {
+        "kind": "has_item",
+        "item_name": "米克哈尔的日记"
+      },
+      "action_id": "a0036"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p009",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12176,
+      "location_ref": "grizzly-p009",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p010",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12412,
+      "location_ref": "grizzly-p010",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12423,
+      "location_ref": "grizzly-p010",
+      "npc_name": "征服者克雷娜",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12423
+      },
+      "action_id": "a0041"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12413,
+      "location_ref": "grizzly-p010",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12424,
+      "location_ref": "grizzly-p010",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12424,
+      "location_ref": "grizzly-p010",
+      "npc_name": "高戈娜",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12422,
+      "location_ref": "grizzly-p010",
+      "npc_name": "高戈娜",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12176,
+      "location_ref": "grizzly-p010",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12177,
+      "location_ref": "grizzly-p010",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p011",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12177,
+      "location_ref": "grizzly-p011",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12178,
+      "location_ref": "grizzly-p011",
+      "npc_name": "皮货商人休尼克",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12178,
+      "location_ref": "grizzly-p011",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12453,
+      "location_ref": "grizzly-p011",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12208,
+      "location_ref": "grizzly-p011",
+      "npc_name": "苏尔肯中士",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p012",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12208,
+      "location_ref": "grizzly-p012",
+      "npc_name": "萨米尔",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11984,
+      "location_ref": "grizzly-p012",
+      "npc_name": "萨米尔",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11984,
+      "location_ref": "grizzly-p012",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11984,
+      "location_ref": "grizzly-p012",
+      "npc_name": "萨米尔",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11989,
+      "location_ref": "grizzly-p012",
+      "npc_name": "达库鲁",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11989,
+      "location_ref": "grizzly-p012",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11989,
+      "location_ref": "grizzly-p012",
+      "npc_name": "达库鲁",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11990,
+      "location_ref": "grizzly-p012",
+      "npc_name": "达库鲁",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p013",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11990,
+      "location_ref": "grizzly-p013",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11990,
+      "location_ref": "grizzly-p013",
+      "npc_name": "达库鲁",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11991,
+      "location_ref": "grizzly-p013",
+      "npc_name": "达库鲁",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p014",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12484,
+      "location_ref": "grizzly-p014",
+      "npc_name": "普雷蒙",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12484,
+      "location_ref": "grizzly-p014",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12484,
+      "location_ref": "grizzly-p014",
+      "npc_name": "马克·菲尔森",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12483,
+      "location_ref": "grizzly-p014",
+      "npc_name": "普雷蒙",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12029,
+      "location_ref": "grizzly-p014",
+      "npc_name": "马克·菲尔森",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p015",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11991,
+      "location_ref": "grizzly-p015",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11991,
+      "location_ref": "grizzly-p015",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12007,
+      "location_ref": "grizzly-p015",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p016",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12007,
+      "location_ref": "grizzly-p016",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12483,
+      "location_ref": "grizzly-p016",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p017",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12007,
+      "location_ref": "grizzly-p017",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12042,
+      "location_ref": "grizzly-p017",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p018",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12029,
+      "location_ref": "grizzly-p018",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12422,
+      "location_ref": "grizzly-p018",
+      "npc_name": "被囚禁的猎户",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p019",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12413,
+      "location_ref": "grizzly-p019",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12042,
+      "location_ref": "grizzly-p019",
+      "target_name": "古树精华宝石",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12802,
+      "location_ref": "grizzly-p019",
+      "target_name": "古树精华宝石",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p020",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12802,
+      "location_ref": "grizzly-p020",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12068,
+      "location_ref": "grizzly-p020",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "grizzly-p021",
+      "target_name": "征服堡",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p021",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p022",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12413,
+      "location_ref": "grizzly-p022",
+      "npc_name": "征服者克雷娜",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12425,
+      "location_ref": "grizzly-p022",
+      "npc_name": "高戈娜",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12207,
+      "location_ref": "grizzly-p022",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12213,
+      "location_ref": "grizzly-p022",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12427,
+      "location_ref": "grizzly-p022",
+      "npc_name": "格里尼克斯·西维格",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p023",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12427,
+      "location_ref": "grizzly-p023",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12427,
+      "location_ref": "grizzly-p023",
+      "npc_name": "赌徒维尔金",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12428,
+      "location_ref": "grizzly-p023",
+      "npc_name": "格里尼克斯·西维格",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12428,
+      "location_ref": "grizzly-p023",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12428,
+      "location_ref": "grizzly-p023",
+      "npc_name": "赌徒维尔金",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12429,
+      "location_ref": "grizzly-p023",
+      "npc_name": "格里尼克斯·西维格",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12429,
+      "location_ref": "grizzly-p023",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12429,
+      "location_ref": "grizzly-p023",
+      "npc_name": "赌徒维尔金",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12430,
+      "location_ref": "grizzly-p023",
+      "npc_name": "格里尼克斯·西维格",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12430,
+      "location_ref": "grizzly-p023",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12430,
+      "location_ref": "grizzly-p023",
+      "npc_name": "赌徒维尔金",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12431,
+      "location_ref": "grizzly-p023",
+      "npc_name": "格里尼克斯·西维格",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12431,
+      "location_ref": "grizzly-p023",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12431,
+      "location_ref": "grizzly-p023",
+      "npc_name": "高戈娜",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p024",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12029,
+      "location_ref": "grizzly-p024",
+      "npc_name": "马克·菲尔森",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12483,
+      "location_ref": "grizzly-p024",
+      "npc_name": "普雷蒙",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12190,
+      "location_ref": "grizzly-p024",
+      "npc_name": "普雷蒙",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p025",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12207,
+      "location_ref": "grizzly-p025",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12213,
+      "location_ref": "grizzly-p025",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12453,
+      "location_ref": "grizzly-p025",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p026",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12425,
+      "location_ref": "grizzly-p026",
+      "npc_name": "盲眼卢娜",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12328,
+      "location_ref": "grizzly-p026",
+      "npc_name": "盲眼卢娜",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12328,
+      "location_ref": "grizzly-p026",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12328,
+      "location_ref": "grizzly-p026",
+      "npc_name": "盲眼卢娜",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12327,
+      "location_ref": "grizzly-p026",
+      "npc_name": "盲眼卢娜",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12327,
+      "location_ref": "grizzly-p026",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12327,
+      "location_ref": "grizzly-p026",
+      "npc_name": "盲眼卢娜",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12329,
+      "location_ref": "grizzly-p026",
+      "npc_name": "盲眼卢娜",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p027",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12451,
+      "location_ref": "grizzly-p027",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12074,
+      "location_ref": "grizzly-p027",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12415,
+      "location_ref": "grizzly-p027",
+      "npc_name": "索鲁克·雷怒",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12195,
+      "location_ref": "grizzly-p027",
+      "npc_name": "托尔玛克",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "grizzly-p027",
+      "target_name": "欧尼瓦营地",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p028",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12195,
+      "location_ref": "grizzly-p028",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12415,
+      "location_ref": "grizzly-p028",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12279,
+      "location_ref": "grizzly-p028",
+      "npc_name": "休·格兰斯",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12279,
+      "location_ref": "grizzly-p028",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p029",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12026,
+      "location_ref": "grizzly-p029",
+      "target_name": "破碎的日记",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12026,
+      "location_ref": "grizzly-p029",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "grizzly-p030",
+      "target_name": "征服堡",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p030",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12453,
+      "location_ref": "grizzly-p030",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12207,
+      "location_ref": "grizzly-p030",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12213,
+      "location_ref": "grizzly-p030",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12229,
+      "location_ref": "grizzly-p030",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12231,
+      "location_ref": "grizzly-p030",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "grizzly-p031",
+      "from_name": "征服堡",
+      "to_name": "欧尼瓦营地",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p031",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12195,
+      "location_ref": "grizzly-p031",
+      "npc_name": "托尔玛克",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12165,
+      "location_ref": "grizzly-p031",
+      "npc_name": "托尔玛克",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12415,
+      "location_ref": "grizzly-p031",
+      "npc_name": "索鲁克·雷怒",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12279,
+      "location_ref": "grizzly-p031",
+      "npc_name": "休·格兰斯",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p032",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12026,
+      "location_ref": "grizzly-p032",
+      "npc_name": "先知帕鲁纳",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12054,
+      "location_ref": "grizzly-p032",
+      "npc_name": "先知帕鲁纳",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p033",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12054,
+      "location_ref": "grizzly-p033",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12229,
+      "location_ref": "grizzly-p033",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12231,
+      "location_ref": "grizzly-p033",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p034",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12229,
+      "location_ref": "grizzly-p034",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12231,
+      "location_ref": "grizzly-p034",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12241,
+      "location_ref": "grizzly-p034",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12242,
+      "location_ref": "grizzly-p034",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "grizzly-p035",
+      "from_name": "征服堡",
+      "to_name": "欧尼瓦营地",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p035",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12054,
+      "location_ref": "grizzly-p035",
+      "npc_name": "先知帕鲁纳",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12058,
+      "location_ref": "grizzly-p035",
+      "npc_name": "先知帕鲁纳",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12073,
+      "location_ref": "grizzly-p035",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p036",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12074,
+      "location_ref": "grizzly-p036",
+      "npc_name": "库伦",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11982,
+      "location_ref": "grizzly-p036",
+      "npc_name": "库伦",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11982,
+      "location_ref": "grizzly-p036",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11982,
+      "location_ref": "grizzly-p036",
+      "npc_name": "库伦",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12070,
+      "location_ref": "grizzly-p036",
+      "npc_name": "库伦",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12070,
+      "location_ref": "grizzly-p036",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12070,
+      "location_ref": "grizzly-p036",
+      "npc_name": "库伦",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11985,
+      "location_ref": "grizzly-p036",
+      "npc_name": "库伦",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p037",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11985,
+      "location_ref": "grizzly-p037",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12073,
+      "location_ref": "grizzly-p037",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12058,
+      "location_ref": "grizzly-p037",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p038",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11985,
+      "location_ref": "grizzly-p038",
+      "npc_name": "库伦",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12081,
+      "location_ref": "grizzly-p038",
+      "npc_name": "库伦",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p039",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12190,
+      "location_ref": "grizzly-p039",
+      "npc_name": "哈考尔",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12113,
+      "location_ref": "grizzly-p039",
+      "npc_name": "哈考尔",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12114,
+      "location_ref": "grizzly-p039",
+      "npc_name": "哈考尔",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12116,
+      "location_ref": "grizzly-p039",
+      "npc_name": "克拉斯",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p040",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12081,
+      "location_ref": "grizzly-p040",
+      "npc_name": "加弗洛克",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12093,
+      "location_ref": "grizzly-p040",
+      "npc_name": "加弗洛克",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p041",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12073,
+      "location_ref": "grizzly-p041",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12058,
+      "location_ref": "grizzly-p041",
+      "npc_name": "先知帕鲁纳",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12204,
+      "location_ref": "grizzly-p041",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p042",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12329,
+      "location_ref": "grizzly-p042",
+      "npc_name": "萨莎",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12134,
+      "location_ref": "grizzly-p042",
+      "npc_name": "萨莎",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12330,
+      "location_ref": "grizzly-p042",
+      "npc_name": "萨莎",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12134,
+      "location_ref": "grizzly-p042",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12330,
+      "location_ref": "grizzly-p042",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12134,
+      "location_ref": "grizzly-p042",
+      "npc_name": "萨莎",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12330,
+      "location_ref": "grizzly-p042",
+      "npc_name": "萨莎",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12411,
+      "location_ref": "grizzly-p042",
+      "npc_name": "萨莎",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p043",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12241,
+      "location_ref": "grizzly-p043",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12242,
+      "location_ref": "grizzly-p043",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "grizzly-p044",
+      "target_name": "征服堡",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p044",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12241,
+      "location_ref": "grizzly-p044",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12242,
+      "location_ref": "grizzly-p044",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12236,
+      "location_ref": "grizzly-p044",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "grizzly-p045",
+      "from_name": "征服堡",
+      "to_name": "欧尼瓦营地",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p045",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p046",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12236,
+      "location_ref": "grizzly-p046",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p047",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "grizzly-p047",
+      "from_name": "欧尼瓦营地",
+      "to_name": "征服堡",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p048",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12236,
+      "location_ref": "grizzly-p048",
+      "npc_name": "风之先知希尔·灰角",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "grizzly-p049",
+      "from_name": "征服堡",
+      "to_name": "欧尼瓦营地",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p049",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p050",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12411,
+      "location_ref": "grizzly-p050",
+      "npc_name": "安娅",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p051",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12164,
+      "location_ref": "grizzly-p051",
+      "npc_name": "萨莎",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p052",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12204,
+      "location_ref": "grizzly-p052",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p053",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12093,
+      "location_ref": "grizzly-p053",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12114,
+      "location_ref": "grizzly-p053",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p054",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12116,
+      "location_ref": "grizzly-p054",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12068,
+      "location_ref": "grizzly-p054",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12068,
+      "location_ref": "grizzly-p054",
+      "npc_name": "达库鲁的影像",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12082,
+      "location_ref": "grizzly-p054",
+      "npc_name": "哈里森·琼斯",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12082,
+      "location_ref": "grizzly-p054",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p055",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12114,
+      "location_ref": "grizzly-p055",
+      "npc_name": "哈考尔",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12082,
+      "location_ref": "grizzly-p055",
+      "npc_name": "哈考尔",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12116,
+      "location_ref": "grizzly-p055",
+      "npc_name": "克拉斯",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12120,
+      "location_ref": "grizzly-p055",
+      "npc_name": "克拉斯",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p056",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12120,
+      "location_ref": "grizzly-p056",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p057",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12120,
+      "location_ref": "grizzly-p057",
+      "npc_name": "克拉斯",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12121,
+      "location_ref": "grizzly-p057",
+      "npc_name": "克拉斯",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p058",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12121,
+      "location_ref": "grizzly-p058",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12121,
+      "location_ref": "grizzly-p058",
+      "npc_name": "甘休",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12137,
+      "location_ref": "grizzly-p058",
+      "npc_name": "甘休",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12137,
+      "location_ref": "grizzly-p058",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p059",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12137,
+      "location_ref": "grizzly-p059",
+      "npc_name": "克拉斯",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12152,
+      "location_ref": "grizzly-p059",
+      "npc_name": "克拉斯",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p060",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12152,
+      "location_ref": "grizzly-p060",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p061",
+      "action_id": "a0267"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12152,
+      "location_ref": "grizzly-p061",
+      "npc_name": "克拉斯",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p062",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12164,
+      "location_ref": "grizzly-p062",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p063",
+      "action_id": "a0271"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12164,
+      "location_ref": "grizzly-p063",
+      "npc_name": "萨莎",
+      "action_id": "a0272"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p064",
+      "action_id": "a0273"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12093,
+      "location_ref": "grizzly-p064",
+      "npc_name": "加弗洛克",
+      "action_id": "a0274"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12094,
+      "location_ref": "grizzly-p064",
+      "npc_name": "加弗洛克",
+      "action_id": "a0275"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12204,
+      "location_ref": "grizzly-p064",
+      "action_id": "a0276"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12094,
+      "location_ref": "grizzly-p064",
+      "action_id": "a0277"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p065",
+      "action_id": "a0278"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12204,
+      "location_ref": "grizzly-p065",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0279"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12201,
+      "location_ref": "grizzly-p065",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0280"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p066",
+      "action_id": "a0281"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12201,
+      "location_ref": "grizzly-p066",
+      "action_id": "a0282"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12165,
+      "location_ref": "grizzly-p066",
+      "action_id": "a0283"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p067",
+      "action_id": "a0284"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12201,
+      "location_ref": "grizzly-p067",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0285"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12202,
+      "location_ref": "grizzly-p067",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0286"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12165,
+      "location_ref": "grizzly-p067",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0287"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12196,
+      "location_ref": "grizzly-p067",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0288"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p068",
+      "action_id": "a0289"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12202,
+      "location_ref": "grizzly-p068",
+      "action_id": "a0290"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12196,
+      "location_ref": "grizzly-p068",
+      "action_id": "a0291"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p069",
+      "action_id": "a0292"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12202,
+      "location_ref": "grizzly-p069",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0293"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12203,
+      "location_ref": "grizzly-p069",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0294"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12196,
+      "location_ref": "grizzly-p069",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0295"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12197,
+      "location_ref": "grizzly-p069",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0296"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p070",
+      "action_id": "a0297"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12197,
+      "location_ref": "grizzly-p070",
+      "action_id": "a0298"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12203,
+      "location_ref": "grizzly-p070",
+      "action_id": "a0299"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p071",
+      "action_id": "a0300"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12197,
+      "location_ref": "grizzly-p071",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0301"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12198,
+      "location_ref": "grizzly-p071",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0302"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p072",
+      "action_id": "a0303"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12198,
+      "location_ref": "grizzly-p072",
+      "action_id": "a0304"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p073",
+      "action_id": "a0305"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12198,
+      "location_ref": "grizzly-p073",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0306"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12199,
+      "location_ref": "grizzly-p073",
+      "npc_name": "勘探员罗卡尔",
+      "action_id": "a0307"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p074",
+      "action_id": "a0308"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12199,
+      "location_ref": "grizzly-p074",
+      "action_id": "a0309"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p075",
+      "action_id": "a0310"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12199,
+      "location_ref": "grizzly-p075",
+      "npc_name": "托尔玛克",
+      "action_id": "a0311"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12203,
+      "location_ref": "grizzly-p075",
+      "npc_name": "斥候沃塔肯",
+      "action_id": "a0312"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p076",
+      "action_id": "a0313"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12094,
+      "location_ref": "grizzly-p076",
+      "npc_name": "加弗洛克",
+      "action_id": "a0314"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12099,
+      "location_ref": "grizzly-p076",
+      "npc_name": "加弗洛克",
+      "action_id": "a0315"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p077",
+      "action_id": "a0316"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12099,
+      "location_ref": "grizzly-p077",
+      "action_id": "a0317"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12113,
+      "location_ref": "grizzly-p077",
+      "action_id": "a0318"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p078",
+      "action_id": "a0319"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12113,
+      "location_ref": "grizzly-p078",
+      "npc_name": "哈考尔",
+      "action_id": "a0320"
+    },
+    {
+      "kind": "location",
+      "location_ref": "grizzly-p079",
+      "action_id": "a0321"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12099,
+      "location_ref": "grizzly-p079",
+      "npc_name": "加弗洛克",
+      "action_id": "a0322"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "征服堡 → 沃德伦任务",
+      "summary": null,
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "风险湾 → 沃德伦领主 → 征服堡",
+      "summary": null,
+      "action_ids": [
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "银溪镇 → 征服堡：克雷娜 / 高戈娜 / 休尼克",
+      "summary": "银溪镇完成《我的敌人的朋友》并取得米克哈尔日记，北侧补灰熊皮；回征服堡按真实NPC推进克雷娜、高戈娜和休尼克三条线。",
+      "action_ids": [
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "花岗岩之泉：达库鲁 / 天灾",
+      "summary": null,
+      "action_ids": [
+        "a0054",
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0070",
+        "a0071",
+        "a0069",
+        "a0072"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "达库鲁火盆 → 古树之心 → Drak'atal",
+      "summary": null,
+      "action_ids": [
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0094",
+        "a0093"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "征服堡：斗兽场准备",
+      "summary": null,
+      "action_ids": [
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "征服斗兽场五连",
+      "summary": null,
+      "action_ids": [
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "花岗岩之泉 → 沃达希尔 → 盲眼卢娜",
+      "summary": null,
+      "action_ids": [
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "欧尼瓦 → 索尔莫丹",
+      "summary": null,
+      "action_ids": [
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "炉石征服堡 → 欧尼瓦交接",
+      "summary": null,
+      "action_ids": [
+        "a0148",
+        "a0147",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0155",
+        "a0154",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "欧尼瓦南侧 → 征服堡灰角 → 欧尼瓦",
+      "summary": "欧尼瓦南侧完成翻译日记、熊怪血液和熊神子嗣；回征服堡只找灰角交接，再系统飞欧尼瓦分别找帕鲁纳和沃塔肯接索尔莫丹任务。",
+      "action_ids": [
+        "a0163",
+        "a0164",
+        "a0165",
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0173",
+        "a0172",
+        "a0174",
+        "a0175",
+        "a0176"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "库伦 / 索尔莫丹 → 哈考尔 / 加弗洛克 → 欧尼瓦",
+      "summary": "库伦三连后在索尔莫丹同时完成铁矮人和符文板；再去哈考尔/克拉斯、加弗洛克接任务，最后回欧尼瓦分别向沃塔肯和帕鲁纳交接。",
+      "action_ids": [
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0204",
+        "a0203"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "萨莎 → 灰喉堡 → 乌索克",
+      "summary": null,
+      "action_ids": [
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0218",
+        "a0217",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0223",
+        "a0222",
+        "a0224",
+        "a0225"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "乌索克交付 → 安娅 / 萨莎",
+      "summary": null,
+      "action_ids": [
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0231",
+        "a0230",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "符文监督者 → Drakil'jin墓穴",
+      "summary": null,
+      "action_ids": [
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260",
+        "a0261"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "金亚拉克 → 血月岛 → 加弗洛克",
+      "summary": null,
+      "action_ids": [
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271",
+        "a0272",
+        "a0273",
+        "a0274",
+        "a0275",
+        "a0276",
+        "a0277"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "欧尼瓦 ↔ Dun Argol：制服 / 能源",
+      "summary": null,
+      "action_ids": [
+        "a0278",
+        "a0279",
+        "a0280",
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289",
+        "a0290",
+        "a0291",
+        "a0292",
+        "a0293",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298",
+        "a0299"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "Dun Argol：能源 → 铁领主 → 欧尼瓦",
+      "summary": null,
+      "action_ids": [
+        "a0300",
+        "a0301",
+        "a0302",
+        "a0303",
+        "a0304",
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308",
+        "a0309",
+        "a0310",
+        "a0311",
+        "a0312"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "加弗洛克 → 符文巨人平原 → 哈考尔 → 加弗洛克",
+      "summary": "加弗洛克交潜能石并接《终获解救》，符文巨人平原完成释放并补肉类；向哈考尔交《等肉下锅》，最后回加弗洛克交《终获解救》，灰熊丘陵本图结束。",
+      "action_ids": [
+        "a0313",
+        "a0314",
+        "a0315",
+        "a0316",
+        "a0317",
+        "a0318",
+        "a0319",
+        "a0320",
+        "a0321",
+        "a0322"
+      ]
+    }
+  ],
+  "service_overrides": [
+    {
+      "service_id": "grizzly-12113-background",
+      "kind": "background_window",
+      "task_id": 12113,
+      "start_action_id": "a0195",
+      "end_action_id": "a0318",
+      "end_policy": "fill_if_incomplete"
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "grizzly-p001": {
+        "display_name": "征服堡",
+        "x": 20.8,
+        "y": 64.2,
+        "phase": "conquest",
+        "transport": "crossmap"
+      },
+      "grizzly-p002": {
+        "display_name": "征服堡",
+        "x": 21.2,
+        "y": 64.3,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p003": {
+        "display_name": "征服堡南侧 / 沃德伦",
+        "x": 31.0,
+        "y": 73.5,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p004": {
+        "display_name": "征服堡",
+        "x": 21.2,
+        "y": 64.3,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p005": {
+        "display_name": "风险湾",
+        "x": 11.2,
+        "y": 76.6,
+        "phase": "southwest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p006": {
+        "display_name": "沃德伦",
+        "x": 27.1,
+        "y": 73.0,
+        "phase": "southwest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p007": {
+        "display_name": "征服堡",
+        "x": 20.8,
+        "y": 64.2,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p008": {
+        "display_name": "银溪镇南侧",
+        "x": 36.1,
+        "y": 67.7,
+        "phase": "silverbrook",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p009": {
+        "display_name": "银溪镇北侧",
+        "x": 42.0,
+        "y": 62.0,
+        "phase": "silverbrook",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p010": {
+        "display_name": "征服堡",
+        "x": 20.8,
+        "y": 64.2,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p011": {
+        "display_name": "征服堡",
+        "x": 22.6,
+        "y": 64.8,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p012": {
+        "display_name": "花岗岩之泉",
+        "x": 16.2,
+        "y": 47.7,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p013": {
+        "display_name": "花岗岩之泉北侧",
+        "x": 15.0,
+        "y": 39.0,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p014": {
+        "display_name": "花岗岩之泉",
+        "x": 15.7,
+        "y": 48.0,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p015": {
+        "display_name": "达库鲁火盆·南侧",
+        "x": 13.2,
+        "y": 60.9,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p016": {
+        "display_name": "Zeb'Halak",
+        "x": 16.0,
+        "y": 35.5,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p017": {
+        "display_name": "达库鲁火盆·北侧",
+        "x": 17.4,
+        "y": 36.4,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p018": {
+        "display_name": "达克萨隆外",
+        "x": 16.0,
+        "y": 30.0,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p019": {
+        "display_name": "银溪北侧 / 古树之心",
+        "x": 26.0,
+        "y": 31.0,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p020": {
+        "display_name": "Drak'atal Passage",
+        "x": 45.0,
+        "y": 28.4,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p021": {
+        "display_name": "征服堡",
+        "x": 20.8,
+        "y": 64.2,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0094"
+        }
+      },
+      "grizzly-p022": {
+        "display_name": "征服堡",
+        "x": 20.8,
+        "y": 64.2,
+        "phase": "conquest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p023": {
+        "display_name": "征服斗兽场",
+        "x": 22.4,
+        "y": 63.9,
+        "phase": "arena",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p024": {
+        "display_name": "花岗岩之泉",
+        "x": 15.8,
+        "y": 47.0,
+        "phase": "drakuru",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p025": {
+        "display_name": "沃达希尔三洞",
+        "x": 33.0,
+        "y": 49.0,
+        "phase": "vordrassil",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p026": {
+        "display_name": "盲眼卢娜",
+        "x": 44.0,
+        "y": 48.0,
+        "phase": "ruuna",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p027": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.7,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p028": {
+        "display_name": "欧尼瓦东北",
+        "x": 68.0,
+        "y": 40.0,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p029": {
+        "display_name": "索尔莫丹外",
+        "x": 64.3,
+        "y": 19.8,
+        "phase": "thor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p030": {
+        "display_name": "征服堡",
+        "x": 22.5,
+        "y": 63.0,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0148"
+        }
+      },
+      "grizzly-p031": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.7,
+        "phase": "oneqwah",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0155"
+        }
+      },
+      "grizzly-p032": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.2,
+        "y": 47.8,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p033": {
+        "display_name": "欧尼瓦南侧",
+        "x": 66.5,
+        "y": 58.9,
+        "phase": "vordrassil",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p034": {
+        "display_name": "征服堡",
+        "x": 22.5,
+        "y": 63.0,
+        "phase": "vordrassil",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p035": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.2,
+        "y": 47.8,
+        "phase": "oneqwah",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0173"
+        }
+      },
+      "grizzly-p036": {
+        "display_name": "库伦",
+        "x": 65.8,
+        "y": 17.8,
+        "phase": "thor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p037": {
+        "display_name": "索尔莫丹",
+        "x": 70.0,
+        "y": 14.5,
+        "phase": "thor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p038": {
+        "display_name": "库伦",
+        "x": 65.8,
+        "y": 17.8,
+        "phase": "thor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p039": {
+        "display_name": "哈考尔 / 克拉斯",
+        "x": 73.8,
+        "y": 34.1,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p040": {
+        "display_name": "加弗洛克",
+        "x": 79.8,
+        "y": 33.6,
+        "phase": "gavrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p041": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.2,
+        "y": 47.8,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p042": {
+        "display_name": "萨莎",
+        "x": 57.5,
+        "y": 41.3,
+        "phase": "sasha",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p043": {
+        "display_name": "灰喉堡",
+        "x": 50.8,
+        "y": 42.6,
+        "phase": "vordrassil",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p044": {
+        "display_name": "征服堡",
+        "x": 22.5,
+        "y": 63.0,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0218"
+        }
+      },
+      "grizzly-p045": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.7,
+        "phase": "oneqwah",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0223"
+        }
+      },
+      "grizzly-p046": {
+        "display_name": "乌索克",
+        "x": 52.6,
+        "y": 24.1,
+        "phase": "vordrassil",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p047": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.7,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p048": {
+        "display_name": "征服堡",
+        "x": 22.5,
+        "y": 63.0,
+        "phase": "hearth",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0227"
+        }
+      },
+      "grizzly-p049": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.7,
+        "phase": "oneqwah",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0231"
+        }
+      },
+      "grizzly-p050": {
+        "display_name": "安娅",
+        "x": 64.8,
+        "y": 43.4,
+        "phase": "sasha",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p051": {
+        "display_name": "萨莎",
+        "x": 57.5,
+        "y": 41.3,
+        "phase": "sasha",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p052": {
+        "display_name": "休·格兰斯",
+        "x": 69.1,
+        "y": 40.1,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p053": {
+        "display_name": "符文监督者",
+        "x": 78.8,
+        "y": 43.4,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p054": {
+        "display_name": "Drakil'jin遗迹",
+        "x": 71.0,
+        "y": 22.0,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p055": {
+        "display_name": "哈考尔 / 克拉斯",
+        "x": 73.8,
+        "y": 34.1,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p056": {
+        "display_name": "达卡古尔",
+        "x": 74.0,
+        "y": 30.0,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p057": {
+        "display_name": "克拉斯",
+        "x": 73.8,
+        "y": 34.1,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p058": {
+        "display_name": "Drakil'jin墓穴",
+        "x": 70.5,
+        "y": 22.0,
+        "phase": "drakiljin",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p059": {
+        "display_name": "克拉斯",
+        "x": 73.8,
+        "y": 34.1,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p060": {
+        "display_name": "Drakil'jin墓穴",
+        "x": 70.5,
+        "y": 22.0,
+        "phase": "drakiljin",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p061": {
+        "display_name": "克拉斯",
+        "x": 73.8,
+        "y": 34.1,
+        "phase": "drakiljin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p062": {
+        "display_name": "血月岛",
+        "x": 85.5,
+        "y": 26.0,
+        "phase": "bloodmoon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p063": {
+        "display_name": "萨莎",
+        "x": 57.5,
+        "y": 41.3,
+        "phase": "sasha",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p064": {
+        "display_name": "加弗洛克",
+        "x": 79.8,
+        "y": 33.6,
+        "phase": "gavrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p065": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.7,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p066": {
+        "display_name": "Dun Argol",
+        "x": 76.2,
+        "y": 57.5,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p067": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.5,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p068": {
+        "display_name": "Dun Argol",
+        "x": 76.2,
+        "y": 57.5,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p069": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.5,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p070": {
+        "display_name": "Dun Argol上层",
+        "x": 76.5,
+        "y": 59.5,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p071": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.3,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p072": {
+        "display_name": "Dun Argol外围",
+        "x": 73.0,
+        "y": 55.0,
+        "phase": "dunargol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p073": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.5,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p074": {
+        "display_name": "Dun Argol上层",
+        "x": 76.6,
+        "y": 63.7,
+        "phase": "dunargol",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p075": {
+        "display_name": "欧尼瓦营地",
+        "x": 65.1,
+        "y": 47.5,
+        "phase": "oneqwah",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p076": {
+        "display_name": "加弗洛克",
+        "x": 79.8,
+        "y": 33.6,
+        "phase": "gavrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p077": {
+        "display_name": "符文巨人平原",
+        "x": 72.0,
+        "y": 37.0,
+        "phase": "gavrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p078": {
+        "display_name": "哈考尔",
+        "x": 73.8,
+        "y": 34.0,
+        "phase": "gavrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "grizzly-p079": {
+        "display_name": "加弗洛克",
+        "x": 79.8,
+        "y": 33.6,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        },
+        "handoff_ref": "grizzly-to-howling-gavrock"
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: reviewed legacy special transport styles on these target points are not player-visible arrival actions in the old route. Remove migration-only style hints, preserve all player task/action text, and leave arrival movement unresolved."
+    }
+  ]
+}

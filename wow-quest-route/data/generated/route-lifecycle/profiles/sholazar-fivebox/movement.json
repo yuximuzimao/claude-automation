@@ -1,0 +1,2433 @@
+{
+  "canonical_edge_count": 76,
+  "edges": [
+    {
+      "cross_zone": true,
+      "edge_id": "a0001->visit-entry-dalaran",
+      "from_location_ref": "sholazar-entry-argent-tournament",
+      "from_visit_id": "a0001",
+      "from_zone_id": 210,
+      "legacy_transport": null,
+      "movement_action": {
+        "action_id": "a0002",
+        "action_kind": "taxi",
+        "from_name": "银色比武场",
+        "operation_kind": "taxi",
+        "to_name": "达拉然"
+      },
+      "movement_action_id": "a0002",
+      "operation_kind": "taxi",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-entry-dalaran",
+      "to_visit_id": "visit-entry-dalaran",
+      "to_zone_id": 4395
+    },
+    {
+      "cross_zone": true,
+      "edge_id": "visit-entry-dalaran->visit-entry-wildgrowth",
+      "from_location_ref": "sholazar-entry-dalaran",
+      "from_visit_id": "visit-entry-dalaran",
+      "from_zone_id": 4395,
+      "legacy_transport": null,
+      "movement_action": {
+        "action_id": "transport-12521-sholazar",
+        "action_kind": "quest_transport",
+        "from_name": "达拉然·大法师伯塔鲁斯",
+        "operation_kind": "quest_transport",
+        "to_name": "索拉查盆地·蛮藤谷"
+      },
+      "movement_action_id": "transport-12521-sholazar",
+      "operation_kind": "quest_transport",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p001",
+      "to_visit_id": "visit-entry-wildgrowth",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "visit-entry-wildgrowth->a0006",
+      "from_location_ref": "sholazar-p001",
+      "from_visit_id": "visit-entry-wildgrowth",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p002",
+      "to_visit_id": "a0006",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0006->a0012",
+      "from_location_ref": "sholazar-p002",
+      "from_visit_id": "a0006",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p003",
+      "to_visit_id": "a0012",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0012->a0014",
+      "from_location_ref": "sholazar-p003",
+      "from_visit_id": "a0012",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p004",
+      "to_visit_id": "a0014",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0014->a0017",
+      "from_location_ref": "sholazar-p004",
+      "from_visit_id": "a0014",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p005",
+      "to_visit_id": "a0017",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0017->a0023",
+      "from_location_ref": "sholazar-p005",
+      "from_visit_id": "a0017",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p006",
+      "to_visit_id": "a0023",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0023->a0031",
+      "from_location_ref": "sholazar-p006",
+      "from_visit_id": "a0023",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p007",
+      "to_visit_id": "a0031",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0031->a0033",
+      "from_location_ref": "sholazar-p007",
+      "from_visit_id": "a0031",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p008",
+      "to_visit_id": "a0033",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0033->a0038",
+      "from_location_ref": "sholazar-p008",
+      "from_visit_id": "a0033",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p009",
+      "to_visit_id": "a0038",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0038->a0040",
+      "from_location_ref": "sholazar-p009",
+      "from_visit_id": "a0038",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p010",
+      "to_visit_id": "a0040",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0040->a0043",
+      "from_location_ref": "sholazar-p010",
+      "from_visit_id": "a0040",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p011",
+      "to_visit_id": "a0043",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0043->a0045",
+      "from_location_ref": "sholazar-p011",
+      "from_visit_id": "a0043",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p012",
+      "to_visit_id": "a0045",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0045->a0047",
+      "from_location_ref": "sholazar-p012",
+      "from_visit_id": "a0045",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p013",
+      "to_visit_id": "a0047",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0047->a0055",
+      "from_location_ref": "sholazar-p013",
+      "from_visit_id": "a0047",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p014",
+      "to_visit_id": "a0055",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0055->a0058",
+      "from_location_ref": "sholazar-p014",
+      "from_visit_id": "a0055",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p015",
+      "to_visit_id": "a0058",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0058->a0061",
+      "from_location_ref": "sholazar-p015",
+      "from_visit_id": "a0058",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p016",
+      "to_visit_id": "a0061",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0061->a0065",
+      "from_location_ref": "sholazar-p016",
+      "from_visit_id": "a0061",
+      "from_zone_id": 3711,
+      "legacy_transport": "hearth",
+      "movement_action": {
+        "action_id": "a0066",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "奈辛瓦里营地"
+      },
+      "movement_action_id": "a0066",
+      "operation_kind": "hearth",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p017",
+      "to_visit_id": "a0065",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0065->a0078",
+      "from_location_ref": "sholazar-p017",
+      "from_visit_id": "a0065",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p018",
+      "to_visit_id": "a0078",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0078->a0082",
+      "from_location_ref": "sholazar-p018",
+      "from_visit_id": "a0078",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p019",
+      "to_visit_id": "a0082",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0082->a0085",
+      "from_location_ref": "sholazar-p019",
+      "from_visit_id": "a0082",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p020",
+      "to_visit_id": "a0085",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0085->a0087",
+      "from_location_ref": "sholazar-p020",
+      "from_visit_id": "a0085",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p021",
+      "to_visit_id": "a0087",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0087->a0089",
+      "from_location_ref": "sholazar-p021",
+      "from_visit_id": "a0087",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p022",
+      "to_visit_id": "a0089",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0089->a0091",
+      "from_location_ref": "sholazar-p022",
+      "from_visit_id": "a0089",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p023",
+      "to_visit_id": "a0091",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0091->a0097",
+      "from_location_ref": "sholazar-p023",
+      "from_visit_id": "a0091",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p024",
+      "to_visit_id": "a0097",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0097->a0099",
+      "from_location_ref": "sholazar-p024",
+      "from_visit_id": "a0097",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p025",
+      "to_visit_id": "a0099",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0099->a0104",
+      "from_location_ref": "sholazar-p025",
+      "from_visit_id": "a0099",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p026",
+      "to_visit_id": "a0104",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0104->a0107",
+      "from_location_ref": "sholazar-p026",
+      "from_visit_id": "a0104",
+      "from_zone_id": 3711,
+      "legacy_transport": "hearth",
+      "movement_action": {
+        "action_id": "a0108",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "奈辛瓦里营地"
+      },
+      "movement_action_id": "a0108",
+      "operation_kind": "hearth",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p027",
+      "to_visit_id": "a0107",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0107->a0115",
+      "from_location_ref": "sholazar-p027",
+      "from_visit_id": "a0107",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p028",
+      "to_visit_id": "a0115",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0115->a0117",
+      "from_location_ref": "sholazar-p028",
+      "from_visit_id": "a0115",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p029",
+      "to_visit_id": "a0117",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0117->a0119",
+      "from_location_ref": "sholazar-p029",
+      "from_visit_id": "a0117",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p030",
+      "to_visit_id": "a0119",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0119->a0121",
+      "from_location_ref": "sholazar-p030",
+      "from_visit_id": "a0119",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p031",
+      "to_visit_id": "a0121",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0121->a0124",
+      "from_location_ref": "sholazar-p031",
+      "from_visit_id": "a0121",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p032",
+      "to_visit_id": "a0124",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0124->a0127",
+      "from_location_ref": "sholazar-p032",
+      "from_visit_id": "a0124",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p033",
+      "to_visit_id": "a0127",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0127->a0132",
+      "from_location_ref": "sholazar-p033",
+      "from_visit_id": "a0127",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p034",
+      "to_visit_id": "a0132",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0132->a0135",
+      "from_location_ref": "sholazar-p034",
+      "from_visit_id": "a0132",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p035",
+      "to_visit_id": "a0135",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0135->a0143",
+      "from_location_ref": "sholazar-p035",
+      "from_visit_id": "a0135",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p036",
+      "to_visit_id": "a0143",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0143->a0146",
+      "from_location_ref": "sholazar-p036",
+      "from_visit_id": "a0143",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p037",
+      "to_visit_id": "a0146",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0146->a0150",
+      "from_location_ref": "sholazar-p037",
+      "from_visit_id": "a0146",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p038",
+      "to_visit_id": "a0150",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0150->a0152",
+      "from_location_ref": "sholazar-p038",
+      "from_visit_id": "a0150",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p039",
+      "to_visit_id": "a0152",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0152->a0156",
+      "from_location_ref": "sholazar-p039",
+      "from_visit_id": "a0152",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p040",
+      "to_visit_id": "a0156",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0156->a0159",
+      "from_location_ref": "sholazar-p040",
+      "from_visit_id": "a0156",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p041",
+      "to_visit_id": "a0159",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0159->a0163",
+      "from_location_ref": "sholazar-p041",
+      "from_visit_id": "a0159",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p042",
+      "to_visit_id": "a0163",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0163->a0165",
+      "from_location_ref": "sholazar-p042",
+      "from_visit_id": "a0163",
+      "from_zone_id": 3711,
+      "legacy_transport": "hearth",
+      "movement_action": {
+        "action_id": "a0166",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "奈辛瓦里营地"
+      },
+      "movement_action_id": "a0166",
+      "operation_kind": "hearth",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p043",
+      "to_visit_id": "a0165",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0165->a0171",
+      "from_location_ref": "sholazar-p043",
+      "from_visit_id": "a0165",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p044",
+      "to_visit_id": "a0171",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0171->a0174",
+      "from_location_ref": "sholazar-p044",
+      "from_visit_id": "a0171",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p045",
+      "to_visit_id": "a0174",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0174->a0178",
+      "from_location_ref": "sholazar-p045",
+      "from_visit_id": "a0174",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p046",
+      "to_visit_id": "a0178",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0178->a0182",
+      "from_location_ref": "sholazar-p046",
+      "from_visit_id": "a0178",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p047",
+      "to_visit_id": "a0182",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0182->a0185",
+      "from_location_ref": "sholazar-p047",
+      "from_visit_id": "a0182",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p048",
+      "to_visit_id": "a0185",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0185->a0189",
+      "from_location_ref": "sholazar-p048",
+      "from_visit_id": "a0185",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p049",
+      "to_visit_id": "a0189",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0189->a0191",
+      "from_location_ref": "sholazar-p049",
+      "from_visit_id": "a0189",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p050",
+      "to_visit_id": "a0191",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0191->a0194",
+      "from_location_ref": "sholazar-p050",
+      "from_visit_id": "a0191",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p051",
+      "to_visit_id": "a0194",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0194->a0197",
+      "from_location_ref": "sholazar-p051",
+      "from_visit_id": "a0194",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p052",
+      "to_visit_id": "a0197",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0197->a0201",
+      "from_location_ref": "sholazar-p052",
+      "from_visit_id": "a0197",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p053",
+      "to_visit_id": "a0201",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0201->a0206",
+      "from_location_ref": "sholazar-p053",
+      "from_visit_id": "a0201",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p054",
+      "to_visit_id": "a0206",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0206->a0209",
+      "from_location_ref": "sholazar-p054",
+      "from_visit_id": "a0206",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p055",
+      "to_visit_id": "a0209",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0209->a0212",
+      "from_location_ref": "sholazar-p055",
+      "from_visit_id": "a0209",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p056",
+      "to_visit_id": "a0212",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0212->a0218",
+      "from_location_ref": "sholazar-p056",
+      "from_visit_id": "a0212",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p057",
+      "to_visit_id": "a0218",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0218->a0220",
+      "from_location_ref": "sholazar-p057",
+      "from_visit_id": "a0218",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p058",
+      "to_visit_id": "a0220",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0220->a0223",
+      "from_location_ref": "sholazar-p058",
+      "from_visit_id": "a0220",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p059",
+      "to_visit_id": "a0223",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0223->a0225",
+      "from_location_ref": "sholazar-p059",
+      "from_visit_id": "a0223",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p060",
+      "to_visit_id": "a0225",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0225->a0228",
+      "from_location_ref": "sholazar-p060",
+      "from_visit_id": "a0225",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p061",
+      "to_visit_id": "a0228",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0228->a0232",
+      "from_location_ref": "sholazar-p061",
+      "from_visit_id": "a0228",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p062",
+      "to_visit_id": "a0232",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0232->a0234",
+      "from_location_ref": "sholazar-p062",
+      "from_visit_id": "a0232",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p063",
+      "to_visit_id": "a0234",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0234->a0239",
+      "from_location_ref": "sholazar-p063",
+      "from_visit_id": "a0234",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p064",
+      "to_visit_id": "a0239",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0239->a0242",
+      "from_location_ref": "sholazar-p064",
+      "from_visit_id": "a0239",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p065",
+      "to_visit_id": "a0242",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0242->a0246",
+      "from_location_ref": "sholazar-p065",
+      "from_visit_id": "a0242",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p066",
+      "to_visit_id": "a0246",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0246->a0248",
+      "from_location_ref": "sholazar-p066",
+      "from_visit_id": "a0246",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p067",
+      "to_visit_id": "a0248",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0248->a0250",
+      "from_location_ref": "sholazar-p067",
+      "from_visit_id": "a0248",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p068",
+      "to_visit_id": "a0250",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0250->a0252",
+      "from_location_ref": "sholazar-p068",
+      "from_visit_id": "a0250",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p069",
+      "to_visit_id": "a0252",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0252->a0255",
+      "from_location_ref": "sholazar-p069",
+      "from_visit_id": "a0252",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p070",
+      "to_visit_id": "a0255",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0255->a0261",
+      "from_location_ref": "sholazar-p070",
+      "from_visit_id": "a0255",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p071",
+      "to_visit_id": "a0261",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0261->a0263",
+      "from_location_ref": "sholazar-p071",
+      "from_visit_id": "a0261",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p072",
+      "to_visit_id": "a0263",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0263->a0265",
+      "from_location_ref": "sholazar-p072",
+      "from_visit_id": "a0263",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p073",
+      "to_visit_id": "a0265",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0265->a0267",
+      "from_location_ref": "sholazar-p073",
+      "from_visit_id": "a0265",
+      "from_zone_id": 3711,
+      "legacy_transport": "fly",
+      "movement_mode": "fly",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p074",
+      "to_visit_id": "a0267",
+      "to_zone_id": 3711
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0267->a0269",
+      "from_location_ref": "sholazar-p074",
+      "from_visit_id": "a0267",
+      "from_zone_id": 3711,
+      "legacy_transport": "hearth",
+      "movement_action": {
+        "action_id": "a0270",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "河流之心"
+      },
+      "movement_action_id": "a0270",
+      "operation_kind": "hearth",
+      "source": "canonical_profile",
+      "to_location_ref": "sholazar-p075",
+      "to_visit_id": "a0269",
+      "to_zone_id": 3711
+    }
+  ],
+  "exit_movement_actions": [
+    {
+      "action_id": "a0271",
+      "action_kind": "taxi",
+      "from_name": "河流之心",
+      "operation_kind": "taxi",
+      "to_name": "龙眠神殿"
+    }
+  ],
+  "input_fingerprint": "198f5e4376219c1cbc66057524f27b51e23d952e74639245d9caa8213921a166",
+  "issues": [
+    {
+      "kind": "profile_exit_movement_requires_program_boundary",
+      "movement_action_ids": [
+        "a0271"
+      ],
+      "reason": "Stage 5 needs Route Program order to bind exit movement to the next Profile first visit",
+      "severity": "unknown"
+    }
+  ],
+  "migration_candidate_count": 0,
+  "primary_zone_id": 3711,
+  "profile_id": "sholazar-fivebox",
+  "status": "requirements",
+  "unresolved_edge_count": 0,
+  "visits": [
+    {
+      "display_name": "银色比武场",
+      "handoff_ref": null,
+      "incoming_movement": null,
+      "legacy_transport": null,
+      "location_ref": "sholazar-entry-argent-tournament",
+      "location_role": "map_anchor",
+      "ordinal": 1,
+      "visit_id": "a0001",
+      "x": 79.8,
+      "y": 71.8,
+      "zone_id": 210
+    },
+    {
+      "display_name": "达拉然·大法师伯塔鲁斯",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0002",
+        "kind": "action"
+      },
+      "legacy_transport": null,
+      "location_ref": "sholazar-entry-dalaran",
+      "location_role": "map_anchor",
+      "ordinal": 2,
+      "visit_id": "visit-entry-dalaran",
+      "x": 68.55,
+      "y": 42.05,
+      "zone_id": 4395
+    },
+    {
+      "display_name": "蛮藤谷·蒙特",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "transport-12521-sholazar",
+        "kind": "action"
+      },
+      "legacy_transport": null,
+      "location_ref": "sholazar-p001",
+      "location_role": "map_anchor",
+      "ordinal": 3,
+      "visit_id": "visit-entry-wildgrowth",
+      "x": 39.68,
+      "y": 58.66,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p002",
+      "location_role": "map_anchor",
+      "ordinal": 4,
+      "visit_id": "a0006",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "蛮藤谷·飞行器引擎",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p003",
+      "location_role": "map_anchor",
+      "ordinal": 5,
+      "visit_id": "a0012",
+      "x": 38.7,
+      "y": 56.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p004",
+      "location_role": "map_anchor",
+      "ordinal": 6,
+      "visit_id": "a0014",
+      "x": 25.4,
+      "y": 58.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "斯温迪格林挖掘场",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p005",
+      "location_role": "map_anchor",
+      "ordinal": 7,
+      "visit_id": "a0017",
+      "x": 35.5,
+      "y": 47.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p006",
+      "location_role": "map_anchor",
+      "ordinal": 8,
+      "visit_id": "a0023",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "斯温迪格林挖掘场·北侧高台",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p007",
+      "location_role": "map_anchor",
+      "ordinal": 9,
+      "visit_id": "a0031",
+      "x": 35.8,
+      "y": 50.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p008",
+      "location_role": "map_anchor",
+      "ordinal": 10,
+      "visit_id": "a0033",
+      "x": 27.1,
+      "y": 59.9,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地·幸运的威尔海姆",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p009",
+      "location_role": "map_anchor",
+      "ordinal": 11,
+      "visit_id": "a0038",
+      "x": 27.0,
+      "y": 60.3,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p010",
+      "location_role": "map_anchor",
+      "ordinal": 12,
+      "visit_id": "a0040",
+      "x": 27.1,
+      "y": 59.9,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地东侧",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p011",
+      "location_role": "map_anchor",
+      "ordinal": 13,
+      "visit_id": "a0043",
+      "x": 28.0,
+      "y": 56.9,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "碎角犀牛区",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p012",
+      "location_role": "map_anchor",
+      "ordinal": 14,
+      "visit_id": "a0045",
+      "x": 29.4,
+      "y": 50.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p013",
+      "location_role": "map_anchor",
+      "ordinal": 15,
+      "visit_id": "a0047",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "诺兹隆之骨·神谕者索乌拉姆",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p014",
+      "location_role": "map_anchor",
+      "ordinal": 16,
+      "visit_id": "a0055",
+      "x": 25.6,
+      "y": 66.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "诺兹隆之骨南侧",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p015",
+      "location_role": "map_anchor",
+      "ordinal": 17,
+      "visit_id": "a0058",
+      "x": 28.4,
+      "y": 71.3,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "蛮藤谷中部",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p016",
+      "location_role": "map_anchor",
+      "ordinal": 18,
+      "visit_id": "a0061",
+      "x": 47.0,
+      "y": 61.0,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0066",
+        "kind": "action"
+      },
+      "legacy_transport": "hearth",
+      "location_ref": "sholazar-p017",
+      "location_role": "map_anchor",
+      "ordinal": 19,
+      "visit_id": "a0065",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "诺兹隆之骨",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p018",
+      "location_role": "map_anchor",
+      "ordinal": 20,
+      "visit_id": "a0078",
+      "x": 25.6,
+      "y": 66.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p019",
+      "location_role": "map_anchor",
+      "ordinal": 21,
+      "visit_id": "a0082",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苦潮湖西北·杉苟足迹",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p020",
+      "location_role": "map_anchor",
+      "ordinal": 22,
+      "visit_id": "a0085",
+      "x": 32.6,
+      "y": 38.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "法鲁恩",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p021",
+      "location_role": "map_anchor",
+      "ordinal": 23,
+      "visit_id": "a0087",
+      "x": 46.7,
+      "y": 42.8,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "蛮藤谷河岸·沙蕨",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p022",
+      "location_role": "map_anchor",
+      "ordinal": 24,
+      "visit_id": "a0089",
+      "x": 43.9,
+      "y": 63.3,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "河流之心",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p023",
+      "location_role": "map_anchor",
+      "ordinal": 25,
+      "visit_id": "a0091",
+      "x": 50.5,
+      "y": 62.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "河流之心·湖内",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p024",
+      "location_role": "map_anchor",
+      "ordinal": 26,
+      "visit_id": "a0097",
+      "x": 48.2,
+      "y": 63.3,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "河流之心·飞行员维克",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p025",
+      "location_role": "map_anchor",
+      "ordinal": 27,
+      "visit_id": "a0099",
+      "x": 50.0,
+      "y": 61.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "匹奇",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p026",
+      "location_role": "map_anchor",
+      "ordinal": 28,
+      "visit_id": "a0104",
+      "x": 50.5,
+      "y": 77.2,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0108",
+        "kind": "action"
+      },
+      "legacy_transport": "hearth",
+      "location_ref": "sholazar-p027",
+      "location_role": "map_anchor",
+      "ordinal": 29,
+      "visit_id": "a0107",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "蛮藤谷河岸·倒下的原木",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p028",
+      "location_role": "map_anchor",
+      "ordinal": 30,
+      "visit_id": "a0115",
+      "x": 46.3,
+      "y": 63.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "河流之心",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p029",
+      "location_role": "map_anchor",
+      "ordinal": 31,
+      "visit_id": "a0117",
+      "x": 50.5,
+      "y": 62.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p030",
+      "location_role": "map_anchor",
+      "ordinal": 32,
+      "visit_id": "a0119",
+      "x": 55.0,
+      "y": 69.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p031",
+      "location_role": "map_anchor",
+      "ordinal": 33,
+      "visit_id": "a0121",
+      "x": 55.0,
+      "y": 69.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "硬皮猩猩区",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p032",
+      "location_role": "map_anchor",
+      "ordinal": 34,
+      "visit_id": "a0124",
+      "x": 64.0,
+      "y": 72.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p033",
+      "location_role": "map_anchor",
+      "ordinal": 35,
+      "visit_id": "a0127",
+      "x": 55.0,
+      "y": 69.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "蓝玉虫巢",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p034",
+      "location_role": "map_anchor",
+      "ordinal": 36,
+      "visit_id": "a0132",
+      "x": 58.5,
+      "y": 81.0,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p035",
+      "location_role": "map_anchor",
+      "ordinal": 37,
+      "visit_id": "a0135",
+      "x": 55.0,
+      "y": 69.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭南部",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p036",
+      "location_role": "map_anchor",
+      "ordinal": 38,
+      "visit_id": "a0143",
+      "x": 57.0,
+      "y": 85.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p037",
+      "location_role": "map_anchor",
+      "ordinal": 39,
+      "visit_id": "a0146",
+      "x": 55.0,
+      "y": 69.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭·被俘虏的鳄鱼",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p038",
+      "location_role": "map_anchor",
+      "ordinal": 40,
+      "visit_id": "a0150",
+      "x": 57.3,
+      "y": 68.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雾语村·瑟匹克",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p039",
+      "location_role": "map_anchor",
+      "ordinal": 41,
+      "visit_id": "a0152",
+      "x": 42.1,
+      "y": 38.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雾语天气祭坛",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p040",
+      "location_role": "map_anchor",
+      "ordinal": 42,
+      "visit_id": "a0156",
+      "x": 44.5,
+      "y": 37.0,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雾语村·瑟匹克",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p041",
+      "location_role": "map_anchor",
+      "ordinal": 43,
+      "visit_id": "a0159",
+      "x": 42.1,
+      "y": 38.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "杉苟",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p042",
+      "location_role": "map_anchor",
+      "ordinal": 44,
+      "visit_id": "a0163",
+      "x": 33.8,
+      "y": 33.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "奈辛瓦里营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0166",
+        "kind": "action"
+      },
+      "legacy_transport": "hearth",
+      "location_ref": "sholazar-p043",
+      "location_role": "map_anchor",
+      "ordinal": 45,
+      "visit_id": "a0165",
+      "x": 27.1,
+      "y": 58.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "狂心岭",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p044",
+      "location_role": "map_anchor",
+      "ordinal": 46,
+      "visit_id": "a0171",
+      "x": 55.0,
+      "y": 69.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "受伤的雨声神谕者",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p045",
+      "location_role": "map_anchor",
+      "ordinal": 47,
+      "visit_id": "a0174",
+      "x": 56.6,
+      "y": 64.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雨声树屋",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p046",
+      "location_role": "map_anchor",
+      "ordinal": 48,
+      "visit_id": "a0178",
+      "x": 54.6,
+      "y": 56.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雨声树屋外圈",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p047",
+      "location_role": "map_anchor",
+      "ordinal": 49,
+      "visit_id": "a0182",
+      "x": 52.0,
+      "y": 56.0,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雨声树屋",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p048",
+      "location_role": "map_anchor",
+      "ordinal": 50,
+      "visit_id": "a0185",
+      "x": 54.6,
+      "y": 56.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "萨满祭司维克伊克",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p049",
+      "location_role": "map_anchor",
+      "ordinal": 51,
+      "visit_id": "a0189",
+      "x": 51.3,
+      "y": 64.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "河流之心",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p050",
+      "location_role": "map_anchor",
+      "ordinal": 52,
+      "visit_id": "a0191",
+      "x": 50.5,
+      "y": 62.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雨声树屋",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p051",
+      "location_role": "map_anchor",
+      "ordinal": 53,
+      "visit_id": "a0194",
+      "x": 54.6,
+      "y": 56.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雾语村",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p052",
+      "location_role": "map_anchor",
+      "ordinal": 54,
+      "visit_id": "a0197",
+      "x": 42.1,
+      "y": 38.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "多里安营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p053",
+      "location_role": "map_anchor",
+      "ordinal": 55,
+      "visit_id": "a0201",
+      "x": 42.3,
+      "y": 28.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "燃烧林地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p054",
+      "location_role": "map_anchor",
+      "ordinal": 56,
+      "visit_id": "a0206",
+      "x": 48.0,
+      "y": 27.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "矛生营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p055",
+      "location_role": "map_anchor",
+      "ordinal": 57,
+      "visit_id": "a0209",
+      "x": 41.5,
+      "y": 21.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "多里安营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p056",
+      "location_role": "map_anchor",
+      "ordinal": 58,
+      "visit_id": "a0212",
+      "x": 42.3,
+      "y": 28.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "裂牙猛犸区",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p057",
+      "location_role": "map_anchor",
+      "ordinal": 59,
+      "visit_id": "a0218",
+      "x": 51.7,
+      "y": 33.1,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "多里安营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p058",
+      "location_role": "map_anchor",
+      "ordinal": 60,
+      "visit_id": "a0220",
+      "x": 42.3,
+      "y": 28.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "母龙斯利维娜",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p059",
+      "location_role": "map_anchor",
+      "ordinal": 61,
+      "visit_id": "a0223",
+      "x": 47.1,
+      "y": 21.3,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "大鹏区",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p060",
+      "location_role": "map_anchor",
+      "ordinal": 62,
+      "visit_id": "a0225",
+      "x": 56.8,
+      "y": 26.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雾语村",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p061",
+      "location_role": "map_anchor",
+      "ordinal": 63,
+      "visit_id": "a0228",
+      "x": 42.1,
+      "y": 38.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苦潮湖·多头蛇",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p062",
+      "location_role": "map_anchor",
+      "ordinal": 64,
+      "visit_id": "a0232",
+      "x": 41.3,
+      "y": 41.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "多里安营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p063",
+      "location_role": "map_anchor",
+      "ordinal": 65,
+      "visit_id": "a0234",
+      "x": 42.3,
+      "y": 28.7,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雨声树屋",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p064",
+      "location_role": "map_anchor",
+      "ordinal": 66,
+      "visit_id": "a0239",
+      "x": 54.6,
+      "y": 56.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苔行村·莫乌德",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p065",
+      "location_role": "map_anchor",
+      "ordinal": 67,
+      "visit_id": "a0242",
+      "x": 75.5,
+      "y": 52.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苔行村东侧",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p066",
+      "location_role": "map_anchor",
+      "ordinal": 68,
+      "visit_id": "a0246",
+      "x": 75.7,
+      "y": 51.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苔行村·莫乌德",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p067",
+      "location_role": "map_anchor",
+      "ordinal": 69,
+      "visit_id": "a0248",
+      "x": 75.5,
+      "y": 52.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苔行祭坛东侧",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p068",
+      "location_role": "map_anchor",
+      "ordinal": 70,
+      "visit_id": "a0250",
+      "x": 71.1,
+      "y": 58.0,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "苔行村·莫乌德",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p069",
+      "location_role": "map_anchor",
+      "ordinal": 71,
+      "visit_id": "a0252",
+      "x": 75.5,
+      "y": 52.5,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "残忍的阿图里斯",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p070",
+      "location_role": "map_anchor",
+      "ordinal": 72,
+      "visit_id": "a0255",
+      "x": 72.1,
+      "y": 57.6,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "造物者悬台·古旧石箱",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p071",
+      "location_role": "map_anchor",
+      "ordinal": 73,
+      "visit_id": "a0261",
+      "x": 80.4,
+      "y": 55.8,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "造物者悬台·索拉查卫士",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p072",
+      "location_role": "map_anchor",
+      "ordinal": 74,
+      "visit_id": "a0263",
+      "x": 81.3,
+      "y": 54.0,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "造物者悬台·古旧石箱",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p073",
+      "location_role": "map_anchor",
+      "ordinal": 75,
+      "visit_id": "a0265",
+      "x": 80.4,
+      "y": 55.8,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "雨声树屋",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "fly"
+      },
+      "legacy_transport": "fly",
+      "location_ref": "sholazar-p074",
+      "location_role": "map_anchor",
+      "ordinal": 76,
+      "visit_id": "a0267",
+      "x": 54.6,
+      "y": 56.4,
+      "zone_id": 3711
+    },
+    {
+      "display_name": "河流之心·飞行点",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0270",
+        "kind": "action"
+      },
+      "legacy_transport": "hearth",
+      "location_ref": "sholazar-p075",
+      "location_role": "map_anchor",
+      "ordinal": 77,
+      "visit_id": "a0269",
+      "x": 50.5,
+      "y": 62.1,
+      "zone_id": 3711
+    }
+  ]
+}

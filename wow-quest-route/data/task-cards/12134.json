@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": 12134,
+  "identity": {
+    "name_zhcn": "萨莎的狩猎",
+    "name_en": "Sasha's Hunt",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12329
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 59000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39110,
+        "quantity": 1,
+        "name_zhcn": "正义复仇法杖",
+        "name_en": "Staff of Righteous Vengeance",
+        "sell_price_each_copper": 118528,
+        "sell_price_total_copper": 118528
+      },
+      {
+        "item_id": 39011,
+        "quantity": 1,
+        "name_zhcn": "血腥壁垒",
+        "name_en": "Bloody Bulwark",
+        "sell_price_each_copper": 59329,
+        "sell_price_total_copper": 59329
+      },
+      {
+        "item_id": 39010,
+        "quantity": 1,
+        "name_zhcn": "屠狼者的纹章盾",
+        "name_en": "Wolfslayer's Crest",
+        "sell_price_each_copper": 59102,
+        "sell_price_total_copper": 59102
+      },
+      {
+        "item_id": 38755,
+        "quantity": 1,
+        "name_zhcn": "狂热报复节杖",
+        "name_en": "Scepter of Passionate Reprisal",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 118528,
+    "gear_sale_max_copper": 118528,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20950
+  },
+  "guide": [
+    "接取：萨莎。",
+    "萨莎要求你在冬至村中击败12名冬至村猎人。",
+    "交付：萨莎。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12134",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

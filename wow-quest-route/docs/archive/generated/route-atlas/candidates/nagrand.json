@@ -1,0 +1,350 @@
+{
+  "nagrand": {
+    "order": 3,
+    "title": "纳格兰 · 67→68五开冲刺路线",
+    "displayName": "纳格兰",
+    "sub": "适用于67级新号；最低号到68即结束。",
+    "badge": "炉石：加拉达尔\n预计总时间：40分钟（32分钟—48分钟）\n首组实测（加拉达尔交付→到68）：41分26秒",
+    "hearthChain": [
+      "加拉达尔"
+    ],
+    "timing": {
+      "centerMinutes": 40.0,
+      "rangeMinutes": [
+        31.6,
+        48.4
+      ]
+    },
+    "uiStandard": "semantic-hud-v45",
+    "image": "maps/3518-nagrand-hd.jpg",
+    "legend": "",
+    "footer": "最低号到68后立即结束，不再执行第4步。",
+    "labels": [
+      [
+        33.88,
+        18.49,
+        "赞加山"
+      ],
+      [
+        46.91,
+        19.09,
+        "嘲颅废墟"
+      ],
+      [
+        60.83,
+        21.18,
+        "元素王座"
+      ],
+      [
+        29.64,
+        24.63,
+        "战槌山"
+      ],
+      [
+        56.14,
+        36.45,
+        "加拉达尔"
+      ],
+      [
+        72.36,
+        36.45,
+        "风茅小径"
+      ],
+      [
+        25.95,
+        37.2,
+        "铸魔营地：仇恨"
+      ],
+      [
+        10.78,
+        39.3,
+        "暮光岭"
+      ],
+      [
+        42.51,
+        44.09,
+        "哈兰"
+      ],
+      [
+        33.48,
+        44.84,
+        "日泉岗哨"
+      ],
+      [
+        20.61,
+        51.5,
+        "铸魔营地：畏惧"
+      ],
+      [
+        74.2,
+        52.99,
+        "风茅村"
+      ],
+      [
+        65.82,
+        54.12,
+        "试炼竞技场"
+      ],
+      [
+        49.8,
+        55.91,
+        "南风裂谷"
+      ],
+      [
+        62.43,
+        64.52,
+        "氏族岗哨"
+      ],
+      [
+        75.1,
+        66.92,
+        "火刃废墟"
+      ],
+      [
+        52.79,
+        69.31,
+        "塔拉"
+      ],
+      [
+        36.13,
+        71.33,
+        "沃舒古"
+      ],
+      [
+        42.32,
+        75.0,
+        "灵魂平原"
+      ],
+      [
+        68.91,
+        79.94,
+        "基尔索罗堡垒"
+      ]
+    ],
+    "points": [
+      [
+        55.37,
+        37.45,
+        "加拉达尔",
+        "克洛坎上尉 → 交《支援加拉达尔》\n开飞行点：加拉达尔\n绑定炉石：加拉达尔",
+        "hub",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        55.55,
+        37.7,
+        "加拉达尔",
+        "欧洛恩·远行者 → 接《奈辛瓦里狩猎队》\n加拉达尔布告牌 → 接《通缉：巫婆吉塞尔达》\n加拉达尔布告牌 → 接《通缉：顾问佐尔布》",
+        "hub",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        71.52,
+        40.62,
+        "奈辛瓦里狩猎队",
+        "\"好儿子\"沙度·远行者 → 交《奈辛瓦里狩猎队》 → 接《狩猎风鹏》\n哈罗德·兰恩 → 接《狩猎塔布羊》\n赫米特·奈辛瓦里 → 接《狩猎裂蹄牛》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        71.16,
+        82.36,
+        "基尔索罗堡垒 / 吉塞尔达",
+        "↳ 做《通缉：巫婆吉塞尔达》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        68,
+        61,
+        "塔拉附近塔布羊 / 裂蹄牛走廊",
+        "↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        67.5,
+        42,
+        "绕山风鹏刷新带",
+        "↳ 做《狩猎风鹏》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        55.37,
+        37.45,
+        "加拉达尔",
+        "使用炉石：加拉达尔\n监护者布罗克 → 交《通缉：巫婆吉塞尔达》",
+        "hearth",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        71.52,
+        40.62,
+        "奈辛瓦里狩猎队",
+        "\"好儿子\"沙度·远行者 → 交《狩猎风鹏》\n哈罗德·兰恩 → 交《狩猎塔布羊》\n赫米特·奈辛瓦里 → 交《狩猎裂蹄牛》\n\"好儿子\"沙度·远行者 → 接《狩猎风鹏》\n哈罗德·兰恩 → 接《狩猎塔布羊》\n赫米特·奈辛瓦里 → 接《狩猎裂蹄牛》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        49.01,
+        60.47,
+        "西部风鹏刷新带",
+        "↳ 做《狩猎风鹏》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        54.5,
+        48,
+        "中部草原",
+        "↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》",
+        "hunt",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        71.52,
+        40.62,
+        "奈辛瓦里狩猎队",
+        "\"好儿子\"沙度·远行者 → 交《狩猎风鹏》\n哈罗德·兰恩 → 交《狩猎塔布羊》\n赫米特·奈辛瓦里 → 交《狩猎裂蹄牛》\n\"好儿子\"沙度·远行者 → 接《狩猎风鹏》\n哈罗德·兰恩 → 接《狩猎塔布羊》\n赫米特·奈辛瓦里 → 接《狩猎裂蹄牛》",
+        "check",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        46.48,
+        18.19,
+        "【最低号未到68】战槌山 / 顾问佐尔布",
+        "↳ 做《通缉：顾问佐尔布》",
+        "conditional",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        55.37,
+        37.45,
+        "【最低号未到68】加拉达尔",
+        "监护者布罗克 → 交《通缉：顾问佐尔布》",
+        "conditional",
+        "",
+        "",
+        false,
+        ""
+      ],
+      [
+        41.4,
+        61.57,
+        "【最低号未到68】奈辛瓦里高级狩猎",
+        "↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》、《狩猎风鹏》\n哈罗德·兰恩 → 交《狩猎塔布羊》\n赫米特·奈辛瓦里 → 交《狩猎裂蹄牛》\n\"好儿子\"沙度·远行者 → 交《狩猎风鹏》\n赫米特·奈辛瓦里 → 接《终极挑战》\n↳ 做《终极挑战》\n赫米特·奈辛瓦里 → 交《终极挑战》",
+        "conditional",
+        "",
+        "ride",
+        false,
+        ""
+      ]
+    ],
+    "defaultIndex": 0,
+    "phaseColors": {},
+    "stepGroups": [
+      {
+        "start": 0,
+        "end": 2,
+        "title": "加拉达尔 → 奈辛瓦里狩猎队",
+        "summary": "从赞加南路进入加拉达尔，交任务、开飞行点并绑定炉石；接完本地任务后去奈辛瓦里接三条狩猎任务。",
+        "timing": {
+          "centerMinutes": 8.5,
+          "rangeMinutes": [
+            7.0,
+            10.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克洛坎上尉</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">支援加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">绑定炉石：加拉达尔</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">欧洛恩·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">加拉达尔布告牌</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">通缉：巫婆吉塞尔达</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">加拉达尔布告牌</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">通缉：顾问佐尔布</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">奈辛瓦里狩猎队</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎裂蹄牛</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《支援加拉达尔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《支援加拉达尔》的任务说明明确：从赞加走南路，第一岔路向东找加拉达尔。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《奈辛瓦里狩猎队》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：巫婆吉塞尔达》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：顾问佐尔布》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《通缉：顾问佐尔布》：击杀顾问佐尔布、5名战槌萨满祭司和5名战槌劫掠者。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：塔拉羊牛完成后再绕山去东部/中东部密集刷新带，不单独折返。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div>"
+      },
+      {
+        "start": 3,
+        "end": 7,
+        "title": "基尔索罗 → 塔拉羊牛 → 绕山风鹏 → 加拉达尔 → 奈辛瓦里",
+        "summary": "先完成《通缉：巫婆吉塞尔达》，继续到塔拉附近完成塔布羊和裂蹄牛，再绕山完成风鹏；三狩猎和吉塞尔达都完成后炉石回加拉达尔集中交付，再去奈辛瓦里接后续。",
+        "timing": {
+          "centerMinutes": 19.5,
+          "rangeMinutes": [
+            15.2,
+            23.8
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">基尔索罗堡垒 / 吉塞尔达</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">通缉：巫婆吉塞尔达</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塔拉附近塔布羊 / 裂蹄牛走廊</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎塔布羊</span>、<span class=\"ra-task ra-do-task\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">绕山风鹏刷新带</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎风鹏</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">监护者布罗克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">通缉：巫婆吉塞尔达</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎裂蹄牛</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：巫婆吉塞尔达》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：塔拉羊牛完成后再绕山去东部/中东部密集刷新带，不单独折返。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：饥饿的风鹏主要向西侧移动完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div>"
+      },
+      {
+        "start": 8,
+        "end": 10,
+        "title": "西部风鹏 → 中部草原 → 奈辛瓦里",
+        "summary": "完成饥饿的风鹏及后续塔布羊、裂蹄牛目标，回奈辛瓦里交任务后立即检查最低号经验；到68直接结束。",
+        "timing": {
+          "centerMinutes": 12.0,
+          "rangeMinutes": [
+            9.4,
+            14.6
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">西部风鹏刷新带</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎风鹏</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">中部草原</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎塔布羊</span>、<span class=\"ra-task ra-do-task\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎裂蹄牛</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：饥饿的风鹏主要向西侧移动完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 11,
+        "end": 13,
+        "title": "【最低号未到68】战槌山 → 奈辛瓦里高级狩猎",
+        "summary": "仅最低号仍未到68时继续：先做《通缉：顾问佐尔布》，仍不足再做奈辛瓦里高级狩猎；每次交任务后都检查最低号，到68立即结束。",
+        "timing": {
+          "centerMinutes": 20.5,
+          "rangeMinutes": [
+            16.0,
+            25.0
+          ],
+          "includeInTotal": false
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">【最低号未到68】战槌山 / 顾问佐尔布</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">通缉：顾问佐尔布</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">【最低号未到68】加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">监护者布罗克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">通缉：顾问佐尔布</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">【最低号未到68】奈辛瓦里高级狩猎</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎塔布羊</span>、<span class=\"ra-task ra-do-task\">狩猎裂蹄牛</span>、<span class=\"ra-task ra-do-task\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">终极挑战</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">终极挑战</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">终极挑战</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：顾问佐尔布》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《通缉：顾问佐尔布》：击杀顾问佐尔布、5名战槌萨满祭司和5名战槌劫掠者。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《终极挑战》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《终极挑战》：只在三条高级狩猎全部交完仍未68时启用；击杀塔丝克后，确认每个仍需要任务物的角色都取得塔丝克之心再离开。</div></div>"
+      }
+    ],
+    "defaultGroupIndex": 0
+  }
+}

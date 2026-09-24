@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": 11652,
+  "identity": {
+    "name_zhcn": "纳萨姆平原",
+    "name_en": "The Plains of Nasam",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11651
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37476,
+        "quantity": 1,
+        "name_zhcn": "格雷克罗的血怒胸甲",
+        "name_en": "Gorge's Breastplate of Bloodrage",
+        "sell_price_each_copper": 60161,
+        "sell_price_total_copper": 60161
+      },
+      {
+        "item_id": 37446,
+        "quantity": 1,
+        "name_zhcn": "坦克指挥官战靴",
+        "name_en": "Tank Commander's Treads",
+        "sell_price_each_copper": 40295,
+        "sell_price_total_copper": 40295
+      },
+      {
+        "item_id": 37276,
+        "quantity": 1,
+        "name_zhcn": "格雷克罗的休闲裤",
+        "name_en": "Gorge's Loungewear",
+        "sell_price_each_copper": 36055,
+        "sell_price_total_copper": 36055
+      },
+      {
+        "item_id": 37325,
+        "quantity": 1,
+        "name_zhcn": "战歌斥候肩甲",
+        "name_en": "Warsong Scout Spaulders",
+        "sell_price_each_copper": 32476,
+        "sell_price_total_copper": 32476
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 60161,
+    "gear_sale_max_copper": 60161,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 30150
+  },
+  "guide": [
+    "接取：Annihilator Grek'lor。",
+    "在纳萨姆平原使用部落攻城坦克消灭100名天灾士兵，并营救出3名受伤的战歌士兵。同时你也必须鉴别出领导这次突袭行动的天灾军团指挥官。 /  / 完成任务之后向战歌要塞的加尔鲁什·地狱咆哮复命。",
+    "交付：加尔鲁什·地狱咆哮。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11652",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11652; legacy_type=vehicle_objective_per_character_user_timing_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11652",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《纳萨姆平原》用户实跑给出的量级为最长约3分钟/号。五号按分别完成计，当前整队任务自身服务时间采用不超过约15分钟的保守上限；这是上限口径，不作为15分钟平均值。\n《纳萨姆平原》：不共享：五号分别上部落攻城坦克执行。\n《纳萨姆平原》：使用坦克完成100个天灾目标、救援并指认指挥官；五号分别完成，实跑单号最长约3分钟。",
+      "scope": "all",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11652 + docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

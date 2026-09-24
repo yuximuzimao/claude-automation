@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11310,
+  "identity": {
+    "name_zhcn": "集中处理",
+    "name_en": "Warning: Some Assembly Required",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11309
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 94000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35862,
+        "quantity": 1,
+        "name_zhcn": "光缚胸甲",
+        "name_en": "Light-Bound Chestguard",
+        "sell_price_each_copper": 61962,
+        "sell_price_total_copper": 61962
+      },
+      {
+        "item_id": 35859,
+        "quantity": 1,
+        "name_zhcn": "火焰净化外套",
+        "name_en": "Fire-Purifying Tunic",
+        "sell_price_each_copper": 35025,
+        "sell_price_total_copper": 35025
+      },
+      {
+        "item_id": 35860,
+        "quantity": 1,
+        "name_zhcn": "弹性皮靴",
+        "name_en": "Flexible Leather Footwraps",
+        "sell_price_each_copper": 32953,
+        "sell_price_total_copper": 32953
+      },
+      {
+        "item_id": 35861,
+        "quantity": 1,
+        "name_zhcn": "定数腰带",
+        "name_en": "Inescapable Girdle",
+        "sell_price_each_copper": 26459,
+        "sell_price_total_copper": 26459
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 61962,
+    "gear_sale_max_copper": 61962,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25150
+  },
+  "guide": [
+    "接取：“钢锯”杰妮。",
+    "在哈尔格林德内使用憎恶装配包，然后使用无脑的憎恶消灭感染的维库人。至少打倒20个维库人以后回去向新阿加曼德的“钢锯”杰妮复命。",
+    "交付：“钢锯”杰妮。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11310",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《集中处理》：只有完成《重要零件》后才解锁，因此需要再次进入感染区。到哈尔格林使用憎恶组装包进入载具：先用2号技能聚怪/雷霆一击，把3—5只目标拉到身边，再用1号自爆；自爆后重新召唤继续。击杀点离角色本体过远可能不计进度，别让憎恶跑得太远再炸。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "task_id": 12084,
+  "identity": {
+    "name_zhcn": "森林上空",
+    "name_en": "Atop the Woodlands",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12066
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 50000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37985,
+        "quantity": 1,
+        "name_zhcn": "紫罗兰追踪者护肩",
+        "name_en": "Violet Stalker Shoulderpads",
+        "sell_price_each_copper": 34469,
+        "sell_price_total_copper": 34469
+      },
+      {
+        "item_id": 38093,
+        "quantity": 1,
+        "name_zhcn": "达拉然斥候护腕",
+        "name_en": "Dalaran Sentry Wristbraces",
+        "sell_price_each_copper": 31764,
+        "sell_price_total_copper": 31764
+      },
+      {
+        "item_id": 38029,
+        "quantity": 1,
+        "name_zhcn": "碧蓝猎人护手",
+        "name_en": "Azurehunter Handguards",
+        "sell_price_each_copper": 28695,
+        "sell_price_total_copper": 28695
+      },
+      {
+        "item_id": 37942,
+        "quantity": 1,
+        "name_zhcn": "肯瑞托见习者软靴",
+        "name_en": "Kirin Tor Initiate's Sandals",
+        "sell_price_each_copper": 26557,
+        "sell_price_total_copper": 26557
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 34469,
+    "gear_sale_max_copper": 34469,
+    "reputation_rewards": [
+      {
+        "faction_id": 1090,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：大法师艾萨斯·夺日者的影像。",
+    "夺取魔网能量焦点控制护符，用它从罗萨洛尔森林的的魔网能量线焦点中获取信息。 /  / 然后返回阿格玛之锤，向大法师艾萨斯·夺日者的影像复命。",
+    "交付：大法师艾萨斯·夺日者的影像。",
+    "击杀塔辛尼中尉取得魔网能量焦点控制护符，再到洛萨洛尔森林的魔网焦点拱门处使用护符读取焦点。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12084",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12084/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《森林上空》取得护符后还要到魔网焦点拱门使用。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

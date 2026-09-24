@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "wow-quest-route/route-profile/v1",
-  "title": "WoW Quest Route Profile v1",
+  "$id": "wow-quest-route/route-profile/v2",
+  "title": "WoW Quest Route Profile v2",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -10,8 +10,7 @@
     "version",
     "status",
     "scope",
-    "entry_state_contract",
-    "exit_state_contract",
+    "entry_requirements",
     "goal",
     "display",
     "task_ids",
@@ -20,98 +19,427 @@
     "geometry"
   ],
   "$defs": {
-    "state_contract": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["active_task_ids"],
-      "properties": {
-        "active_task_ids": {
-          "type": "array",
-          "items": {"type": "integer", "minimum": 1},
-          "uniqueItems": true
-        }
-      }
-    },
     "condition": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "properties": {
-        "kind": {"enum": ["has_item", "task_active"]},
-        "item_id": {"type": "integer", "minimum": 1},
-        "item_name": {"type": "string", "minLength": 1},
-        "task_id": {"type": "integer", "minimum": 1}
+        "kind": {
+          "enum": [
+            "has_item",
+            "task_active",
+            "task_complete"
+          ]
+        },
+        "item_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "item_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_id": {
+          "type": "integer",
+          "minimum": 1
+        }
       },
       "allOf": [
         {
-          "if": {"properties": {"kind": {"const": "has_item"}}, "required": ["kind"]},
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "has_item"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
           "then": {
             "anyOf": [
-              {"required": ["item_id"]},
-              {"required": ["item_name"]}
+              {
+                "required": [
+                  "item_id"
+                ]
+              },
+              {
+                "required": [
+                  "item_name"
+                ]
+              }
             ]
           }
         },
         {
-          "if": {"properties": {"kind": {"const": "task_active"}}, "required": ["kind"]},
-          "then": {"required": ["task_id"]}
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "task_active"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "task_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "task_complete"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "task_id"
+            ]
+          }
+        }
+      ]
+    },
+    "incoming_movement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "self_move",
+            "action"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "ride",
+            "fly",
+            "swim"
+          ]
+        },
+        "action_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "self_move"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "action_id"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "action"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "action_id"
+            ],
+            "not": {
+              "required": [
+                "mode"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "entry_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active_task_ids"
+      ],
+      "properties": {
+        "active_task_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "completed_task_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "hearth_location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "opened_flight_points": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "service_override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service_id",
+        "kind"
+      ],
+      "properties": {
+        "service_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "kind": {
+          "enum": [
+            "background_window",
+            "shared_service"
+          ]
+        },
+        "task_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "end_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "end_policy": {
+          "enum": [
+            "carry_if_incomplete",
+            "fill_if_incomplete",
+            "covered_complete"
+          ]
+        },
+        "action_ids": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "background_window"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "task_id",
+              "start_action_id",
+              "end_action_id",
+              "end_policy"
+            ],
+            "not": {
+              "required": [
+                "action_ids"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "shared_service"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "action_ids"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "task_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "start_action_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "end_action_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "end_policy"
+                  ]
+                }
+              ]
+            }
+          }
         }
       ]
     }
   },
   "properties": {
-    "schema_version": {"const": 1},
-    "profile_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
-    "version": {"type": "integer", "minimum": 1},
-    "status": {"enum": ["draft", "current", "frozen_reusable", "retired"]},
+    "schema_version": {
+      "const": 2
+    },
+    "profile_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "current",
+        "frozen_reusable",
+        "retired"
+      ]
+    },
     "scope": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["route_scope", "character_profile", "game_variant_id"],
+      "required": [
+        "route_scope",
+        "character_profile",
+        "game_variant_id"
+      ],
       "properties": {
-        "route_scope": {"type": "string", "minLength": 1},
-        "character_profile": {"type": "string", "minLength": 1},
-        "game_variant_id": {"type": "string", "minLength": 1}
-      }
-    },
-    "entry_state_contract": {"$ref": "#/$defs/state_contract"},
-    "exit_state_contract": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["active_task_ids"],
-      "properties": {
-        "active_task_ids": {
-          "type": "array",
-          "items": {"type": "integer", "minimum": 1},
-          "uniqueItems": true
+        "route_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "character_profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "game_variant_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary_zone_id": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     },
     "goal": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["summary"],
+      "required": [
+        "summary"
+      ],
       "properties": {
-        "summary": {"type": "string", "minLength": 1}
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
     "display": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["publish_key", "order", "title", "display_name", "subtitle", "footer", "map_image"],
+      "required": [
+        "publish_key",
+        "order",
+        "title",
+        "display_name",
+        "subtitle",
+        "footer",
+        "map_image"
+      ],
       "properties": {
-        "publish_key": {"type": "string", "minLength": 1},
-        "order": {"type": "integer"},
-        "title": {"type": "string", "minLength": 1},
-        "display_name": {"type": "string", "minLength": 1},
-        "subtitle": {"type": "string"},
-        "footer": {"type": "string"},
-        "map_image": {"type": "string", "minLength": 1}
+        "publish_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "footer": {
+          "type": "string"
+        },
+        "map_image": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
     "task_ids": {
       "type": "array",
-      "items": {"type": "integer", "minimum": 1},
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
       "uniqueItems": true
     },
     "actions": {
@@ -119,9 +447,15 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["action_id", "kind"],
+        "required": [
+          "action_id",
+          "kind"
+        ],
         "properties": {
-          "action_id": {"type": "string", "minLength": 1},
+          "action_id": {
+            "type": "string",
+            "minLength": 1
+          },
           "kind": {
             "enum": [
               "location",
@@ -138,66 +472,234 @@
               "interact"
             ]
           },
-          "task_id": {"type": "integer", "minimum": 1},
-          "location_ref": {"type": "string", "minLength": 1},
-          "npc_name": {"type": "string", "minLength": 1},
-          "from_name": {"type": "string", "minLength": 1},
-          "to_name": {"type": "string", "minLength": 1},
-          "target_name": {"type": "string", "minLength": 1},
-          "when": {"$ref": "#/$defs/condition"}
+          "task_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "location_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "npc_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "movement_mode": {
+            "enum": [
+              "ride",
+              "fly",
+              "swim"
+            ]
+          },
+          "when": {
+            "$ref": "#/$defs/condition"
+          }
         },
         "allOf": [
           {
-            "if": {"properties": {"kind": {"enum": ["accept", "objective", "turnin"]}}, "required": ["kind"]},
-            "then": {"required": ["task_id", "location_ref"]}
-          },
-          {
-            "if": {"properties": {"kind": {"const": "accept"}}, "required": ["kind"]},
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "accept",
+                    "objective",
+                    "turnin"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
             "then": {
-              "anyOf": [
-                {"required": ["npc_name"]},
-                {"required": ["target_name"]},
-                {"required": ["when"]}
+              "required": [
+                "task_id",
+                "location_ref"
               ]
             }
           },
           {
-            "if": {"properties": {"kind": {"const": "turnin"}}, "required": ["kind"]},
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "accept"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
             "then": {
               "anyOf": [
-                {"required": ["npc_name"]},
-                {"required": ["target_name"]}
+                {
+                  "required": [
+                    "npc_name"
+                  ]
+                },
+                {
+                  "required": [
+                    "target_name"
+                  ]
+                },
+                {
+                  "required": [
+                    "when"
+                  ]
+                }
               ]
             }
           },
           {
-            "if": {"properties": {"kind": {"const": "location"}}, "required": ["kind"]},
-            "then": {"required": ["location_ref"]}
-          },
-          {
-            "if": {"properties": {"kind": {"enum": ["taxi", "fixed_transport", "quest_transport"]}}, "required": ["kind"]},
-            "then": {"required": ["from_name", "to_name"]}
-          },
-          {
-            "if": {"properties": {"kind": {"enum": ["open_flight_point", "bind_hearth", "use_hearth"]}}, "required": ["kind"]},
-            "then": {"required": ["location_ref", "target_name"]}
-          },
-          {
-            "if": {"properties": {"kind": {"const": "interact"}}, "required": ["kind"]},
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "turnin"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
             "then": {
-              "required": ["location_ref"],
               "anyOf": [
-                {"required": ["npc_name"]},
-                {"required": ["target_name"]}
+                {
+                  "required": [
+                    "npc_name"
+                  ]
+                },
+                {
+                  "required": [
+                    "target_name"
+                  ]
+                }
               ]
             }
           },
           {
-            "if": {"properties": {"kind": {"const": "move"}}, "required": ["kind"]},
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "location"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "location_ref"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "taxi",
+                    "fixed_transport",
+                    "quest_transport"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "from_name",
+                "to_name"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "open_flight_point",
+                    "bind_hearth",
+                    "use_hearth"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "location_ref",
+                "target_name"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "interact"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "location_ref"
+              ],
+              "anyOf": [
+                {
+                  "required": [
+                    "npc_name"
+                  ]
+                },
+                {
+                  "required": [
+                    "target_name"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "move"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
             "then": {
               "anyOf": [
-                {"required": ["location_ref"]},
-                {"required": ["to_name"]}
+                {
+                  "required": [
+                    "location_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "to_name"
+                  ]
+                }
               ]
             }
           }
@@ -209,38 +711,113 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["step_id", "title", "action_ids"],
+        "required": [
+          "step_id",
+          "title",
+          "action_ids"
+        ],
         "properties": {
-          "step_id": {"type": "string", "minLength": 1},
-          "title": {"type": "string", "minLength": 1},
-          "summary": {"type": ["string", "null"]},
+          "step_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "action_ids": {
             "type": "array",
             "minItems": 1,
-            "items": {"type": "string", "minLength": 1},
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
             "uniqueItems": true
           }
         }
       }
     },
+    "service_overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/service_override"
+      }
+    },
     "geometry": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["locations"],
+      "required": [
+        "locations"
+      ],
       "properties": {
         "locations": {
           "type": "object",
           "additionalProperties": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["display_name", "x", "y"],
+            "required": [
+              "display_name",
+              "x",
+              "y"
+            ],
             "properties": {
-              "display_name": {"type": "string", "minLength": 1},
-              "x": {"type": "number"},
-              "y": {"type": "number"},
-              "phase": {"type": "string", "minLength": 1},
-              "transport": {"enum": ["ride", "script", "taxi", "hearth", "crossmap"]},
-              "show_map_label": {"type": "boolean"}
+              "display_name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "location_role": {
+                "enum": [
+                  "map_anchor",
+                  "transition_context"
+                ]
+              },
+              "x": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "y": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "zone_id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "handoff_ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "incoming_movement": {
+                "$ref": "#/$defs/incoming_movement"
+              },
+              "phase": {
+                "type": "string",
+                "minLength": 1
+              },
+              "transport": {
+                "enum": [
+                  "ride",
+                  "fly",
+                  "swim",
+                  "script",
+                  "taxi",
+                  "hearth",
+                  "crossmap"
+                ]
+              },
+              "show_map_label": {
+                "type": "boolean"
+              }
             }
           }
         }
@@ -251,13 +828,29 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["date", "kind", "summary"],
+        "required": [
+          "date",
+          "kind",
+          "summary"
+        ],
         "properties": {
-          "date": {"type": "string", "minLength": 1},
-          "kind": {"type": "string", "minLength": 1},
-          "summary": {"type": "string", "minLength": 1}
+          "date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
+    },
+    "entry_requirements": {
+      "$ref": "#/$defs/entry_requirements"
     }
   }
 }

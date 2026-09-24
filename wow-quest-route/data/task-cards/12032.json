@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "task_id": 12032,
+  "identity": {
+    "name_zhcn": "海洋女神",
+    "name_en": "Conversing With the Depths",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12031
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 100000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38128,
+        "quantity": 1,
+        "name_zhcn": "利刺野兽法杖",
+        "name_en": "Staff of the Spiked Beast",
+        "sell_price_each_copper": 110678,
+        "sell_price_total_copper": 110678
+      },
+      {
+        "item_id": 38148,
+        "quantity": 1,
+        "name_zhcn": "寒冷敲头槌",
+        "name_en": "Chilled Headsmasher",
+        "sell_price_each_copper": 110667,
+        "sell_price_total_copper": 110667
+      },
+      {
+        "item_id": 38126,
+        "quantity": 1,
+        "name_zhcn": "霜寒作战法杖",
+        "name_en": "Frostbite Warstaff",
+        "sell_price_each_copper": 109845,
+        "sell_price_total_copper": 109845
+      },
+      {
+        "item_id": 38127,
+        "quantity": 1,
+        "name_zhcn": "龙骨钉锤",
+        "name_en": "Carved Dragonbone Mace",
+        "sell_price_each_copper": 88205,
+        "sell_price_total_copper": 88205
+      },
+      {
+        "item_id": 38146,
+        "quantity": 1,
+        "name_zhcn": "闪烁冰剑",
+        "name_en": "Gleaming Iceblade",
+        "sell_price_each_copper": 87858,
+        "sell_price_total_copper": 87858
+      },
+      {
+        "item_id": 38150,
+        "quantity": 1,
+        "name_zhcn": "铁皮弩",
+        "name_en": "Imported Ironshod Crossbow",
+        "sell_price_each_copper": 66900,
+        "sell_price_total_copper": 66900
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 110678,
+    "gear_sale_max_copper": 110678,
+    "reputation_rewards": [
+      {
+        "faction_id": 1073,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25400
+  },
+  "guide": [
+    "接取：长者玛纳洛。",
+    "与深海珍珠进行沟通，按照海之女神奥卡诺娅的指示行动。 /  / 通过考验后，回到龙骨荒野的莫亚基港口，向秘法师图阿鲁复命。",
+    "交付：秘法师图阿鲁。",
+    "到深海珍珠处交互并跟随海洋女神脚本；出现强制/增益提示后跳入水中继续试炼。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12032",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12032; legacy_type=scripted_object_personal_shared_respawn_bottleneck_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12032",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12032/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《海洋女神》：不共享：五号分别点击深海珍珠。珍珠约1分40秒刷新，五号串行至少等待4次；做完的角色游到岸边后走陆路，不要一路游回。\n【需要单独修正优化】《海洋女神》首组龙骨实跑确认：任务不共享，五个角色必须分别点击深海珍珠触发。实测从一次点击开始到珍珠再次可点击约1分40秒，五号串行至少有4次刷新等待（约6分40秒）。触发后的角色应游到岸边，再从陆地跑回/向集合方向移动，不从水里一路游回珍珠。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12032",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

@@ -10,16 +10,22 @@
 
 只有出现下列**触发事件**之一，才启动正式任务选择评估：
 
-1. 用户明确要求删任务、补任务、比较任务价值；
-2. Task Card事实变化导致成本/收益明显改变，例如共享→个人、掉率/刷新、前置/奖励被修正；
-3. 实跑证明某任务出现异常长尾、独立折返、失败重跑或高切号成本；
-4. 路线结构变化使某任务从高度重叠变成独立偏移，或反过来；
-5. 未满级路线出现确定经验缺口/明显经验冗余，需要补任务或从后段裁任务；
-6. 任务因Availability变化变得不可达/重新可达；
-7. 用户改变当前Route Profile的目标/scope；
-8. 新任务/遗漏任务被召回，需要判断是否进入正式路线。
+1. `user_selection_request`：用户明确要求删任务、补任务、比较任务价值；
+2. `task_fact_cost_or_benefit_changed`：Task Card事实变化导致成本/收益明显改变，例如共享→个人、掉率/刷新、前置/奖励被修正；
+3. `live_run_cost_or_variance_anomaly`：实跑证明某任务出现异常长尾、独立折返、失败重跑或高切号成本；
+4. `route_overlap_structure_changed`：路线结构变化使某任务从高度重叠变成独立偏移，或反过来；
+5. `xp_gap_or_redundancy`：未满级路线出现确定经验缺口/明显经验冗余，需要补任务或从后段裁任务；
+6. `availability_changed`：任务因Availability变化变得不可达/重新可达；
+7. `profile_goal_or_scope_changed`：用户改变当前Route Profile的目标/scope；
+8. `recalled_or_new_task`：新任务/遗漏任务被召回，需要判断是否进入正式路线。
+
+以上反引号标识是Stage 10 Review Trigger的稳定机器ID；`data/review-trigger/model-config.json`只允许作为这些owner条目的机器投影/校验表，不拥有独立业务语义，修改触发条件必须先改本owner并同步契约测试。机器层只判断“是否进入Selection Review”，不得把触发器直接解释成`now/later/never`结论。
 
 没有触发器时，不为了“理论最优”逐任务反复重算已经验证的路线。
+
+### 日常任务在一次性主路线中的口径
+
+`repeatability=daily`本身不是删除条件。一次性主路线只排除“已经完成首轮后，为每日重复收益再次接/做/交”的重复执行；如果某个日常在新角色首次跑图时会解锁后续一次性任务、承担链路前置，或已被正式路线选择为首次经过必做的一次执行，则该首次执行必须保留。不得因为任务被标记为daily就机械删除其首轮动作，也不得把同一日常的后续重复接取混进一次性主路线。
 
 ## 2. 决策对象：任务包优先于孤立单任务
 
@@ -235,7 +241,16 @@ Task Card、Route Profile或公共模型变化后，先从当前真源重新生�
 - task_id反向索引只负责找到引用该任务的Profile，不定义新的业务语义；
 - 是否需要重新比较now/later/never由本文件的触发条件决定。
 
-## 13. 本文件明确不负责
+## 13. 正式Selection Review操作
+
+Selection本身只做业务裁决；Review Trigger只是把当前fresh派生状态机械转换为“是否需要进入Selection/Optimization人工复审”的信号：
+
+- Program上下文：`python3 scripts/build_route_review_trigger.py program <program_id>`
+- 独立Profile：`python3 scripts/build_route_review_trigger.py profile <profile_id>`
+
+触发结果不能自动写`now/later/never`。用户/规则完成Selection裁决后，任务集合变化写回Route Profile，再按`route-profile-and-lifecycle.md`刷新真实下游。
+
+## 14. 本文件明确不负责
 
 - Task Card事实与字段：`docs/task-library/README.md`；
 - 任务机制分类：`execution-and-mechanics.md`；
@@ -243,4 +258,4 @@ Task Card、Route Profile或公共模型变化后，先从当前真源重新生�
 - 时间公式：`timing-and-benchmarking.md`；
 - 路线顺序/交通/聚类：`route-atlas-optimization.md`；
 - Route Atlas文案：`route-atlas-player-contract.md`及其子owner；
-- 何时执行Selection、之后跑哪些测试：Route Lifecycle SOP。
+- 输入是否属于任务删留/恢复决策由分类SOP判断；Selection裁决后的跨owner传播读`route-profile-and-lifecycle.md`，测试只读`../../tests/README.md`。

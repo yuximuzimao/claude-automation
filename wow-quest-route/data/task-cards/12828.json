@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": 12828,
+  "identity": {
+    "name_zhcn": "突发奇想",
+    "name_en": "Ample Inspiration",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 78,
+    "min_level": 77,
+    "pre_any": [],
+    "pre_all": [
+      12827,
+      12836
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 68000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 42822,
+        "quantity": 1,
+        "name_zhcn": "K3猛兽防御设备",
+        "name_en": "K3 Pachyderm Prevention Device",
+        "sell_price_each_copper": 82739,
+        "sell_price_total_copper": 82739
+      },
+      {
+        "item_id": 42810,
+        "quantity": 1,
+        "name_zhcn": "毛织兜帽",
+        "name_en": "Wooly Cowl",
+        "sell_price_each_copper": 46233,
+        "sell_price_total_copper": 46233
+      },
+      {
+        "item_id": 42798,
+        "quantity": 1,
+        "name_zhcn": "猛犸毛皮之靴",
+        "name_en": "Mammoth Hide Galoshes",
+        "sell_price_each_copper": 39717,
+        "sell_price_total_copper": 39717
+      },
+      {
+        "item_id": 42825,
+        "quantity": 1,
+        "name_zhcn": "抛光獠牙镣铐",
+        "name_en": "Polished Tusk Shackles",
+        "sell_price_each_copper": 39252,
+        "sell_price_total_copper": 39252
+      },
+      {
+        "item_id": 42785,
+        "quantity": 1,
+        "name_zhcn": "猛犸肌腱腰带",
+        "name_en": "Mammoth Sinew Cinch",
+        "sell_price_each_copper": 21737,
+        "sell_price_total_copper": 21737
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 82739,
+    "gear_sale_max_copper": 82739,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 21600
+  },
+  "guide": [
+    "接取：莉吉特。",
+    "K3的莉吉特要你去拿取一颗D16限时炸弹，用它炸翻一头猛犸象，然后收集8块巨大的猛犸肉。",
+    "交付：莉吉特。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12828",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《突发奇想》：不共享：U.D.E.D.炸活的铁毛猛犸；地面猛犸肉不绑定本号，可由任意角色拾取。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

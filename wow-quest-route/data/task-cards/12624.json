@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "task_id": 12624,
+  "identity": {
+    "name_zhcn": "不知所踪！",
+    "name_en": "It Could Be Anywhere!",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 76,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 186000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39466,
+        "quantity": 1,
+        "name_zhcn": "支配之靴",
+        "name_en": "Boots of Dominance",
+        "sell_price_each_copper": 51503,
+        "sell_price_total_copper": 51503
+      },
+      {
+        "item_id": 39446,
+        "quantity": 1,
+        "name_zhcn": "决心肩铠",
+        "name_en": "Pauldrons of Resolution",
+        "sell_price_each_copper": 44431,
+        "sell_price_total_copper": 44431
+      },
+      {
+        "item_id": 39474,
+        "quantity": 1,
+        "name_zhcn": "忠诚诺言之戒",
+        "name_en": "Ring of Devoted Promises",
+        "sell_price_each_copper": 36530,
+        "sell_price_total_copper": 36530
+      },
+      {
+        "item_id": 39479,
+        "quantity": 1,
+        "name_zhcn": "崭新希望披风",
+        "name_en": "Cloak of Renewed Hope",
+        "sell_price_each_copper": 28705,
+        "sell_price_total_copper": 28705
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 51503,
+    "gear_sale_max_copper": 51503,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 31750
+  },
+  "guide": [
+    "接取：查德。",
+    "在索拉查盆地的生物身上寻找金色订婚戒指。",
+    "交付：查德。"
+  ],
+  "fivebox": {
+    "status": "sequential_loot"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12624",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12624; legacy_type=personal_drop_same_drop_sequential_pickup_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12624",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《不知所踪！》索拉查首组实跑确认：任务物本身按个人取得；但戒指一旦实际掉落，同一枚掉落可由五号依次拾取，因此掉落命中后不需要再为其余角色重新刷出四次。\n《不知所踪！》：15只风险投资公司目标完成后戒指仍没齐，就继续刷挖掘者/恶棍；五号都1/1才离开。\n《不知所踪！》：不共享：戒指一旦掉落，同一枚掉落可由五号依次拾取；固定在第一次斯温迪格林挖掘场完成，五号都1/1再离开。",
+      "scope": "all",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12624 + docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

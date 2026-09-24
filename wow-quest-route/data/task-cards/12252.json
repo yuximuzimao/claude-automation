@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": 12252,
+  "identity": {
+    "name_zhcn": "拷问者里克拉夫",
+    "name_en": "Torture the Torturer",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12245
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 50000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38039,
+        "quantity": 1,
+        "name_zhcn": "冰剪护肩",
+        "name_en": "Iceshear Pauldrons",
+        "sell_price_each_copper": 40623,
+        "sell_price_total_copper": 40623
+      },
+      {
+        "item_id": 37953,
+        "quantity": 1,
+        "name_zhcn": "废土之风外衣",
+        "name_en": "Wastewind Garments",
+        "sell_price_each_copper": 37852,
+        "sell_price_total_copper": 37852
+      },
+      {
+        "item_id": 37995,
+        "quantity": 1,
+        "name_zhcn": "飘雪劫掠者软帽",
+        "name_en": "Snowfall Reaver Hood",
+        "sell_price_each_copper": 35726,
+        "sell_price_total_copper": 35726
+      },
+      {
+        "item_id": 38100,
+        "quantity": 1,
+        "name_zhcn": "水晶板甲护手",
+        "name_en": "Crystalplate Gauntlets",
+        "sell_price_each_copper": 32593,
+        "sell_price_total_copper": 32593
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 40623,
+    "gear_sale_max_copper": 40623,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：高级执行官乌洛斯。",
+    "怨毒镇的高级执行官乌洛斯要你对拷问者阿方斯连续使用5次权杖，获得情报后回来报告。",
+    "交付：高级执行官乌洛斯。",
+    "里克拉夫位于兵营/地下区域；先用烙印/审讯工具5次取得情报，再完成后续击杀/流程。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12252",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12252; legacy_type=interrogation_script_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12252",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12252/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《拷问者里克拉夫》：共享：主控连续使用审讯工具5次再击杀。兵营正门约(70,72)：右→左→左，第二次左转过拱门后找右侧向下楼梯。审讯时停普攻/反伤。\n【需要单独修正优化】《拷问者里克拉夫》首组实跑确认：对拷问者连续使用审讯工具5次的任务进度五号共享；主控完成一轮审讯即可。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12252",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

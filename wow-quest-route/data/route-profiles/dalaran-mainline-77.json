@@ -1,0 +1,396 @@
+{
+  "schema_version": 2,
+  "profile_id": "dalaran-mainline-77",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "达拉然",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 4395
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      12791
+    ],
+    "hearth_location": "阿格玛之锤"
+  },
+  "goal": {
+    "summary": "龙骨整图完成后进入达拉然：清完本地入城链，一次接走风暴/索拉查/祖达克三条当前可接主轴引导，然后下城去K3；《作战准备》要求寒冷天气飞行，本路线不接。"
+  },
+  "display": {
+    "publish_key": "dalaran",
+    "order": 6,
+    "title": "达拉然 · 77级主轴任务清理",
+    "display_name": "达拉然",
+    "subtitle": "龙骨整图完成后进入达拉然：清完本地入城链，一次接走风暴/索拉查/祖达克三条当前可接主轴引导，然后下城去K3；《作战准备》要求寒冷天气飞行，本路线不接。",
+    "footer": "",
+    "map_image": "maps/4395-dalaran.png"
+  },
+  "task_ids": [
+    12791,
+    12790,
+    12521,
+    12974,
+    12853
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12791,
+      "location_ref": "dalaran-p001",
+      "npc_name": "大法师塞琳德拉",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12790,
+      "location_ref": "dalaran-p001",
+      "npc_name": "大法师塞琳德拉",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p002",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "dalaran-p002",
+      "target_name": "使用通向达拉然下方废墟的传送水晶",
+      "action_id": "interact-12790-down"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dalaran-12790-violet-stand",
+      "from_name": "达拉然·紫罗兰之门",
+      "to_name": "紫罗兰哨站",
+      "action_id": "transport-12790-down"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-12790-violet-stand",
+      "action_id": "visit-12790-violet-stand"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "dalaran-12790-violet-stand",
+      "target_name": "使用通向达拉然的传送水晶",
+      "action_id": "interact-12790-up"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dalaran-p003",
+      "from_name": "紫罗兰哨站",
+      "to_name": "达拉然·紫罗兰之门",
+      "action_id": "transport-12790-up"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p003",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12790,
+      "location_ref": "dalaran-p003",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12790,
+      "location_ref": "dalaran-p003",
+      "npc_name": "大法师塞琳德拉",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p004",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12521,
+      "location_ref": "dalaran-p004",
+      "npc_name": "大法师伯塔鲁斯",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p005",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "dalaran-p005",
+      "target_name": "达拉然",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p006",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12974,
+      "location_ref": "dalaran-p006",
+      "npc_name": "狡猾的维克斯",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p007",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12853,
+      "location_ref": "dalaran-p007",
+      "npc_name": "林·多克塔",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-p008",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "dalaran-p008",
+      "target_name": "使用传送水晶",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dalaran-exit-violet-stand",
+      "from_name": "紫罗兰之门",
+      "to_name": "紫罗兰哨站",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-exit-violet-stand",
+      "action_id": "visit-violet-stand"
+    },
+    {
+      "kind": "move",
+      "movement_mode": "ride",
+      "location_ref": "dalaran-exit-k3",
+      "from_name": "紫罗兰哨站",
+      "to_name": "K3",
+      "action_id": "move-violet-stand-k3"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dalaran-exit-k3",
+      "action_id": "visit-k3-handoff"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12853,
+      "location_ref": "dalaran-exit-k3",
+      "npc_name": "基尔·斯巴索克",
+      "action_id": "a0019"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "紫罗兰之门：魔法王国达拉然 → 来去如风",
+      "summary": "交达拉然入城任务，完成上下传送水晶教学并原地交回。",
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "interact-12790-down",
+        "transport-12790-down",
+        "visit-12790-violet-stand",
+        "interact-12790-up",
+        "transport-12790-up",
+        "a0006",
+        "a0005",
+        "a0007"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "克拉苏斯平台：索拉查引导 + 达拉然飞行点",
+      "summary": "把后续索拉查引导接走，但不触发离城；同时开启达拉然飞行点。",
+      "action_ids": [
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "达拉然下水道：祖达克/风暴引导",
+      "summary": "从东入口进下水道，依次拿祖达克斗兽场引导和当前风暴K3引导，再从西入口返回地面。",
+      "action_ids": [
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "紫罗兰之门 → K3",
+      "summary": "用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
+      "action_ids": [
+        "a0016",
+        "a0017",
+        "a0018",
+        "visit-violet-stand",
+        "move-violet-stand-k3",
+        "visit-k3-handoff",
+        "a0019"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "dalaran-p001": {
+        "display_name": "紫罗兰之门·大法师塞琳德拉",
+        "x": 56.3,
+        "y": 46.72,
+        "phase": "violet",
+        "transport": "ride"
+      },
+      "dalaran-p002": {
+        "display_name": "紫罗兰之门·传送水晶",
+        "x": 55.93,
+        "y": 46.78,
+        "phase": "violet",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dalaran-p003": {
+        "display_name": "紫罗兰之门·大法师塞琳德拉",
+        "x": 56.3,
+        "y": 46.72,
+        "phase": "violet",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-12790-up"
+        }
+      },
+      "dalaran-p004": {
+        "display_name": "克拉苏斯平台西侧·大法师伯塔鲁斯",
+        "x": 68.55,
+        "y": 42.05,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dalaran-p005": {
+        "display_name": "克拉苏斯平台·飞行点",
+        "x": 72.0,
+        "y": 46.0,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dalaran-p006": {
+        "display_name": "达拉然下水道·狡猾的维克斯",
+        "x": 48.18,
+        "y": 44.71,
+        "phase": "underbelly",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dalaran-p007": {
+        "display_name": "达拉然下水道·林·多克塔",
+        "x": 37.68,
+        "y": 50.17,
+        "phase": "underbelly",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dalaran-p008": {
+        "display_name": "紫罗兰之门·传送水晶",
+        "x": 55.93,
+        "y": 46.78,
+        "phase": "exit",
+        "zone_id": 4395,
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dalaran-exit-violet-stand": {
+        "display_name": "紫罗兰哨站",
+        "x": 15.0,
+        "y": 42.0,
+        "zone_id": 2817,
+        "phase": "exit",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0018"
+        }
+      },
+      "dalaran-exit-k3": {
+        "display_name": "K3·基尔·斯巴索克",
+        "x": 41.02,
+        "y": 86.44,
+        "zone_id": 67,
+        "phase": "exit",
+        "handoff_ref": "dalaran-to-storm-k3",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "move-violet-stand-k3"
+        }
+      },
+      "dalaran-12790-violet-stand": {
+        "display_name": "紫罗兰哨站·回城水晶",
+        "x": 15.0,
+        "y": 42.0,
+        "zone_id": 2817,
+        "phase": "violet",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-12790-down"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity split for Task 12853: Dalaran Violet Gate crystal -> fixed transport to Violet Stand -> overland north-road move to K3 -> turn in. Violet Stand uses WotLK Wowhead destination evidence approx (15,42) in Crystalsong map 2817; K3 uses Questie Jeer Sparksocket zone 67/(41.02,86.44). Movement mode from Violet Stand to K3 remains unspecified because old player note only says travel along the north road."
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity correction for Task 12790: replace incorrect migrated self-move return with the verified two-crystal round trip (Dalaran Violet Gate -> Violet Stand -> Dalaran Violet Gate), preserving the old player note that each character must click both crystals. Violet Stand uses WotLK Wowhead approx (15,42), Crystalsong map 2817."
+    }
+  ]
+}

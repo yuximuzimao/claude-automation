@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 12481,
+  "identity": {
+    "name_zhcn": "骂阵",
+    "name_en": "Adding Injury to Insult",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11303
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 94000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35891,
+        "quantity": 1,
+        "name_zhcn": "符文铁甲头盔",
+        "name_en": "Runeplate Helm",
+        "sell_price_each_copper": 44535,
+        "sell_price_total_copper": 44535
+      },
+      {
+        "item_id": 35890,
+        "quantity": 1,
+        "name_zhcn": "暗石肩甲",
+        "name_en": "Magdun Spaulders",
+        "sell_price_each_copper": 37233,
+        "sell_price_total_copper": 37233
+      },
+      {
+        "item_id": 35889,
+        "quantity": 1,
+        "name_zhcn": "镶骨护腕",
+        "name_en": "Bone-Inlaid Bracers",
+        "sell_price_each_copper": 22683,
+        "sell_price_total_copper": 22683
+      },
+      {
+        "item_id": 35888,
+        "quantity": 1,
+        "name_zhcn": "纹饰貂皮束带",
+        "name_en": "Embossed Ermine Girdle",
+        "sell_price_each_copper": 18082,
+        "sell_price_total_copper": 18082
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 44535,
+    "gear_sale_max_copper": 44535,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25150
+  },
+  "guide": [
+    "接取：林德尔。",
+    "在拜尔海姆对布约恩·哈古德森朗读维库人的脏话，然后把他引到林德尔的伏击点，帮助林德尔杀了他。",
+    "交付：林德尔。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12481",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《骂阵》：先把林德尔到比约恩·哈格森之间的退路清干净，再对比约恩使用侮辱物品；他会追着你跑。不要原地硬扛，直接把他带回林德尔附近，让林德尔加入战斗后再回身集火。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

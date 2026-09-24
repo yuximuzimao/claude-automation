@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "task_id": 12199,
+  "identity": {
+    "name_zhcn": "击败铁领主",
+    "name_en": "Bringing Down the Iron Thane",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12198
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 118000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39076,
+        "quantity": 1,
+        "name_zhcn": "魔像骑兵胫甲",
+        "name_en": "Golem-Rider's Greaves",
+        "sell_price_each_copper": 67872,
+        "sell_price_total_copper": 67872
+      },
+      {
+        "item_id": 39044,
+        "quantity": 1,
+        "name_zhcn": "短路之靴",
+        "name_en": "Short-Circuiting Boots",
+        "sell_price_each_copper": 45114,
+        "sell_price_total_copper": 45114
+      },
+      {
+        "item_id": 39015,
+        "quantity": 1,
+        "name_zhcn": "癫狂护肩",
+        "name_en": "Crackpot Spaulders",
+        "sell_price_each_copper": 35292,
+        "sell_price_total_copper": 35292
+      },
+      {
+        "item_id": 38711,
+        "quantity": 1,
+        "name_zhcn": "震地手套",
+        "name_en": "Grounded Gloves",
+        "sell_price_each_copper": 18463,
+        "sell_price_total_copper": 18463
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 67872,
+    "gear_sale_max_copper": 67872,
+    "reputation_rewards": [
+      {
+        "faction_id": 1064,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 26200
+  },
+  "guide": [
+    "接取：勘探员罗卡尔。",
+    "使用你的作战魔像去打败铁领主弗雷哈默尔，然后向欧尼瓦营地的托尔玛克复命。",
+    "交付：托尔玛克。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12199",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12199; legacy_type=vehicle_boss_group_shared_confirmed",
+      "observed_at": "2026-09-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "共享。穿伪装上楼/乘电梯，使用魔像控制器；铁领主死亡后继续利用魔像/载具离开。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

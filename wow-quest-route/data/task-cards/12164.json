@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "task_id": 12164,
+  "identity": {
+    "name_zhcn": "狼人的末日",
+    "name_en": "Hour of the Worg",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12411
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 177000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39172,
+        "quantity": 1,
+        "name_zhcn": "镶骨冰铠护肩",
+        "name_en": "Bone-Polished Iceplate Shoulders",
+        "sell_price_each_copper": 61644,
+        "sell_price_total_copper": 61644
+      },
+      {
+        "item_id": 39168,
+        "quantity": 1,
+        "name_zhcn": "座狼杀手肩甲",
+        "name_en": "Worg-Rendering Shoulderguards",
+        "sell_price_each_copper": 59160,
+        "sell_price_total_copper": 59160
+      },
+      {
+        "item_id": 39169,
+        "quantity": 1,
+        "name_zhcn": "锋锐利齿护肩",
+        "name_en": "Keen Razorfang Spaulders",
+        "sell_price_each_copper": 51223,
+        "sell_price_total_copper": 51223
+      },
+      {
+        "item_id": 39171,
+        "quantity": 1,
+        "name_zhcn": "断牙护肩",
+        "name_en": "Fangsever Shoulderguards",
+        "sell_price_each_copper": 43956,
+        "sell_price_total_copper": 43956
+      },
+      {
+        "item_id": 39170,
+        "quantity": 1,
+        "name_zhcn": "屠狼者的毛皮护肩",
+        "name_en": "Furred Worgslayer Spaulders",
+        "sell_price_each_copper": 35037,
+        "sell_price_total_copper": 35037
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 61644,
+    "gear_sale_max_copper": 61644,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 31450
+  },
+  "guide": [
+    "接取：萨莎。",
+    "白松商栈的萨莎要求你前往血月岛，杀死塞拉斯、瓦拉姆、污血之喉和阿鲁高之影。",
+    "交付：萨莎。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12164",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12164; legacy_type=scripted_boss_group_shared_confirmed",
+      "observed_at": "2026-09-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "共享；按三前置Boss → 阿鲁高之影的脚本顺序完成即可。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

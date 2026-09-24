@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "task_id": 13051,
+  "identity": {
+    "name_zhcn": "侵犯领土",
+    "name_en": "Territorial Trespass",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13050
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 37000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 42859,
+        "quantity": 1,
+        "name_zhcn": "托里姆的碾压锤",
+        "name_en": "Thorim's Crusher",
+        "sell_price_each_copper": 136394,
+        "sell_price_total_copper": 136394
+      },
+      {
+        "item_id": 42857,
+        "quantity": 1,
+        "name_zhcn": "托里姆的骑鞭",
+        "name_en": "Thorim's Riding Crop",
+        "sell_price_each_copper": 135400,
+        "sell_price_total_copper": 135400
+      },
+      {
+        "item_id": 42848,
+        "quantity": 1,
+        "name_zhcn": "锋利的冰锥",
+        "name_en": "Razor-sharp Icicle",
+        "sell_price_each_copper": 112684,
+        "sell_price_total_copper": 112684
+      },
+      {
+        "item_id": 42858,
+        "quantity": 1,
+        "name_zhcn": "风暴之弩",
+        "name_en": "Crossbow of the Storms",
+        "sell_price_each_copper": 81538,
+        "sell_price_total_copper": 81538
+      },
+      {
+        "item_id": 42860,
+        "quantity": 1,
+        "name_zhcn": "母兽的庇护",
+        "name_en": "Broodmother's Protector",
+        "sell_price_each_copper": 70081,
+        "sell_price_total_copper": 70081
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 136394,
+    "gear_sale_max_copper": 136394,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 11050
+  },
+  "guide": [
+    "接取：托里姆。",
+    "将偷来的始祖龙卵放置在母龙之巢的顶部，然后返回风暴神殿向托里姆复命。",
+    "交付：托里姆。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13051",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13051; legacy_type=triggered_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13051",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《侵犯领土》：共享：风暴神殿东南约(38.8,65.5)使用偷来的始祖龙卵触发事件；主控完成《侵犯领土》即可同步五号。\n【需要单独修正优化】《侵犯领土》首组实跑确认：事件进度共享，主控触发完成即可同步五号。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13051",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

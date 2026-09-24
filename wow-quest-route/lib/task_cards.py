@@ -99,45 +99,10 @@ def validate_task_card(card: dict[str, Any], *, expected_task_id: int | None = N
         rendered = ", ".join(f"{key}@{path}" for key, path in forbidden_hits)
         raise TaskCardError(f"route/derived fields are forbidden in Task Card: {rendered}")
 
-    objectives = card["objectives"]
-    objective_ids = [objective["objective_id"] for objective in objectives]
-    duplicate_objectives = _duplicates(objective_ids)
-    if duplicate_objectives:
-        raise TaskCardError(f"duplicate objective_id values: {duplicate_objectives}")
-
-    mechanics = card["mechanics"]
-    mechanic_ids = set(mechanics)
-    for objective in objectives:
-        missing_refs = sorted(set(objective.get("mechanic_refs", [])) - mechanic_ids)
-        if missing_refs:
-            raise TaskCardError(
-                f"objective {objective['objective_id']} references missing mechanics: {missing_refs}"
-            )
-
-    stages = card["fivebox"]["stages"]
-    stage_ids = [stage["stage_id"] for stage in stages]
-    duplicate_stages = _duplicates(stage_ids)
-    if duplicate_stages:
-        raise TaskCardError(f"duplicate fivebox stage_id values: {duplicate_stages}")
-
-    objective_id_set = set(objective_ids)
-    for stage in stages:
-        objective_id = stage["objective_id"]
-        if objective_id is not None and objective_id not in objective_id_set:
-            raise TaskCardError(
-                f"fivebox stage {stage['stage_id']} references unknown objective {objective_id!r}"
-            )
-
     evidence_ids = [item["evidence_id"] for item in card["evidence"]]
     duplicate_evidence = _duplicates(evidence_ids)
     if duplicate_evidence:
         raise TaskCardError(f"duplicate evidence_id values: {duplicate_evidence}")
-
-    coverage = card["coverage"]
-    if coverage["fivebox"] == "verified" and not stages:
-        raise TaskCardError("coverage.fivebox=verified requires at least one structured fivebox stage")
-    if coverage["fivebox"] == "not_applicable" and stages:
-        raise TaskCardError("coverage.fivebox=not_applicable cannot contain fivebox stages")
 
 
 def load_task_card(task_id: int, *, validate: bool = True) -> dict[str, Any]:

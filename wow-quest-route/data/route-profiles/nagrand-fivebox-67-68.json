@@ -1,0 +1,630 @@
+{
+  "schema_version": 2,
+  "profile_id": "nagrand-fivebox-67-68",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "纳格兰",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 3518
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      9797
+    ]
+  },
+  "goal": {
+    "summary": "适用于67级新号；最低号到68即结束。"
+  },
+  "display": {
+    "publish_key": "nagrand",
+    "order": 3,
+    "title": "纳格兰 · 67→68五开冲刺路线",
+    "display_name": "纳格兰",
+    "subtitle": "适用于67级新号；最低号到68即结束。",
+    "footer": "最低号到68后立即结束，不再执行第4步。",
+    "map_image": "maps/3518-nagrand-hd.jpg"
+  },
+  "task_ids": [
+    9797,
+    10114,
+    9935,
+    9939,
+    9854,
+    9857,
+    9789,
+    9855,
+    9858,
+    9850,
+    9856,
+    9859,
+    9851,
+    9852
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9797,
+      "location_ref": "nagrand-p001",
+      "npc_name": "克洛坎上尉",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "nagrand-p001",
+      "target_name": "加拉达尔",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "nagrand-p001",
+      "target_name": "加拉达尔",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p002",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10114,
+      "location_ref": "nagrand-p002",
+      "npc_name": "欧洛恩·远行者",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9935,
+      "location_ref": "nagrand-p002",
+      "target_name": "加拉达尔布告牌",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9939,
+      "location_ref": "nagrand-p002",
+      "target_name": "加拉达尔布告牌",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p003",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10114,
+      "location_ref": "nagrand-p003",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9854,
+      "location_ref": "nagrand-p003",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9857,
+      "location_ref": "nagrand-p003",
+      "npc_name": "哈罗德·兰恩",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9789,
+      "location_ref": "nagrand-p003",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p004",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9935,
+      "location_ref": "nagrand-p004",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p005",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9857,
+      "location_ref": "nagrand-p005",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9789,
+      "location_ref": "nagrand-p005",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p006",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9854,
+      "location_ref": "nagrand-p006",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "nagrand-p007",
+      "target_name": "加拉达尔",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p007",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9935,
+      "location_ref": "nagrand-p007",
+      "npc_name": "监护者布罗克",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p008",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9854,
+      "location_ref": "nagrand-p008",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9857,
+      "location_ref": "nagrand-p008",
+      "npc_name": "哈罗德·兰恩",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9789,
+      "location_ref": "nagrand-p008",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9855,
+      "location_ref": "nagrand-p008",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9858,
+      "location_ref": "nagrand-p008",
+      "npc_name": "哈罗德·兰恩",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9850,
+      "location_ref": "nagrand-p008",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p009",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9855,
+      "location_ref": "nagrand-p009",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p010",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9858,
+      "location_ref": "nagrand-p010",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9850,
+      "location_ref": "nagrand-p010",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p011",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9855,
+      "location_ref": "nagrand-p011",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9858,
+      "location_ref": "nagrand-p011",
+      "npc_name": "哈罗德·兰恩",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9850,
+      "location_ref": "nagrand-p011",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9856,
+      "location_ref": "nagrand-p011",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9859,
+      "location_ref": "nagrand-p011",
+      "npc_name": "哈罗德·兰恩",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9851,
+      "location_ref": "nagrand-p011",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p012",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9939,
+      "location_ref": "nagrand-p012",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p013",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9939,
+      "location_ref": "nagrand-p013",
+      "npc_name": "监护者布罗克",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "location",
+      "location_ref": "nagrand-p014",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9859,
+      "location_ref": "nagrand-p014",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9851,
+      "location_ref": "nagrand-p014",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9856,
+      "location_ref": "nagrand-p014",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9859,
+      "location_ref": "nagrand-p014",
+      "npc_name": "哈罗德·兰恩",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9851,
+      "location_ref": "nagrand-p014",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9856,
+      "location_ref": "nagrand-p014",
+      "npc_name": "\"好儿子\"沙度·远行者",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9852,
+      "location_ref": "nagrand-p014",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9852,
+      "location_ref": "nagrand-p014",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9852,
+      "location_ref": "nagrand-p014",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0056"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "加拉达尔 → 奈辛瓦里狩猎队",
+      "summary": "从赞加南路进入加拉达尔，交任务、开飞行点并绑定炉石；接完本地任务后去奈辛瓦里接三条狩猎任务。",
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "基尔索罗 → 塔拉羊牛 → 绕山风鹏 → 加拉达尔 → 奈辛瓦里",
+      "summary": "先完成《通缉：巫婆吉塞尔达》，继续到塔拉附近完成塔布羊和裂蹄牛，再绕山完成风鹏；三狩猎和吉塞尔达都完成后炉石回加拉达尔集中交付，再去奈辛瓦里接后续。",
+      "action_ids": [
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0022",
+        "a0021",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "西部风鹏 → 中部草原 → 奈辛瓦里",
+      "summary": "完成饥饿的风鹏及后续塔布羊、裂蹄牛目标，回奈辛瓦里交任务后立即检查最低号经验；到68直接结束。",
+      "action_ids": [
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "【最低号未到68】战槌山 → 奈辛瓦里高级狩猎",
+      "summary": "仅最低号仍未到68时继续：先做《通缉：顾问佐尔布》，仍不足再做奈辛瓦里高级狩猎；每次交任务后都检查最低号，到68立即结束。",
+      "action_ids": [
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054",
+        "a0055",
+        "a0056"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "nagrand-p001": {
+        "display_name": "加拉达尔",
+        "x": 55.37,
+        "y": 37.45,
+        "phase": "hub"
+      },
+      "nagrand-p002": {
+        "display_name": "加拉达尔",
+        "x": 55.55,
+        "y": 37.7,
+        "phase": "hub",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p003": {
+        "display_name": "奈辛瓦里狩猎队",
+        "x": 71.52,
+        "y": 40.62,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p004": {
+        "display_name": "基尔索罗堡垒 / 吉塞尔达",
+        "x": 71.16,
+        "y": 82.36,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p005": {
+        "display_name": "塔拉附近塔布羊 / 裂蹄牛走廊",
+        "x": 68,
+        "y": 61,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p006": {
+        "display_name": "绕山风鹏刷新带",
+        "x": 67.5,
+        "y": 42,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p007": {
+        "display_name": "加拉达尔",
+        "x": 55.37,
+        "y": 37.45,
+        "phase": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0022"
+        }
+      },
+      "nagrand-p008": {
+        "display_name": "奈辛瓦里狩猎队",
+        "x": 71.52,
+        "y": 40.62,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p009": {
+        "display_name": "西部风鹏刷新带",
+        "x": 49.01,
+        "y": 60.47,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p010": {
+        "display_name": "中部草原",
+        "x": 54.5,
+        "y": 48,
+        "phase": "hunt",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p011": {
+        "display_name": "奈辛瓦里狩猎队",
+        "x": 71.52,
+        "y": 40.62,
+        "phase": "check",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p012": {
+        "display_name": "【最低号未到68】战槌山 / 顾问佐尔布",
+        "x": 46.48,
+        "y": 18.19,
+        "phase": "conditional",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p013": {
+        "display_name": "【最低号未到68】加拉达尔",
+        "x": 55.37,
+        "y": 37.45,
+        "phase": "conditional",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "nagrand-p014": {
+        "display_name": "【最低号未到68】奈辛瓦里高级狩猎",
+        "x": 41.4,
+        "y": 61.57,
+        "phase": "conditional",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    }
+  ]
+}

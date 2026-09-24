@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "task_id": 12259,
+  "identity": {
+    "name_zhcn": "沃德伦的领主",
+    "name_en": "The Thane of Voldrune",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 73,
+    "pre_any": [],
+    "pre_all": [
+      12256,
+      12257
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 56000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39045,
+        "quantity": 1,
+        "name_zhcn": "厄运扭转护腿",
+        "name_en": "Legguards of Refuted Feudalism",
+        "sell_price_each_copper": 60098,
+        "sell_price_total_copper": 60098
+      },
+      {
+        "item_id": 39077,
+        "quantity": 1,
+        "name_zhcn": "塑颅者的头盔",
+        "name_en": "Skull-Reshaper's Helm",
+        "sell_price_each_copper": 50993,
+        "sell_price_total_copper": 50993
+      },
+      {
+        "item_id": 39016,
+        "quantity": 1,
+        "name_zhcn": "歧途矫正外套",
+        "name_en": "Tunic of the Rectified Thane",
+        "sell_price_each_copper": 47229,
+        "sell_price_total_copper": 47229
+      },
+      {
+        "item_id": 38749,
+        "quantity": 1,
+        "name_zhcn": "领主杀手的徽记之戒",
+        "name_en": "Thane-Reaper's Signet",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      },
+      {
+        "item_id": 38712,
+        "quantity": 1,
+        "name_zhcn": "束缚之冠",
+        "name_en": "Headbinder's Crown",
+        "sell_price_each_copper": 27802,
+        "sell_price_total_copper": 27802
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 60098,
+    "gear_sale_max_copper": 60098,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20750
+  },
+  "guide": [
+    "接取：纳兹格利姆中士。",
+    "利用烈焰使者击败托瓦德·埃里克森领主，然后向征服堡的纳兹格利姆中士复命。",
+    "交付：纳兹格利姆中士。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12259",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12259; legacy_type=vehicle_objective_group_shared_confirmed",
+      "observed_at": "2026-09-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12259",
+      "observed_at": "2026-09-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《沃德伦的领主》：共享。西侧约(26.6,78.0)骑烈焰使者，领主在塔顶约(27.1,72.9)；贴到近身后优先卡CD用翼击眩晕，眩晕间隙补两种火焰技能，别在远距离吃弓箭/齐射。\n【需要单独修正优化】《沃德伦的领主》灰熊丘陵首组实跑确认：共享，任务龙载具战由主控完成即可同步五号。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12259",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

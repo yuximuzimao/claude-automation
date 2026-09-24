@@ -65,7 +65,15 @@ Route Atlas是跑任务时直接看的执行工具，不是知识库、审计报
 - 只改路线步骤/接做交/地点/NPC：只读Route Display；若改变真实路线顺序再读Route Optimization。
 - 只改地图/控件/CSS/离线资源：只读UI & Assets。
 - 同时改多个领域：加载对应多个owner，不因为“Route Atlas改动”就默认读取全部规则。
-- 完整发布/重新生成时，由Route Lifecycle SOP根据实际变更组合对应owner与测试。
+- 同时改多个领域时，先分别完成各owner的fresh输出；前端组合只消费这些fresh结果，不在本合同复制各owner内部操作。
+
+## Publisher组合入口
+
+Publisher负责把fresh Route Display + Task Presentation及所需派生结果组合成稳定payload，不拥有上游业务规则。
+
+- 单Profile Publisher payload：`python3 scripts/rebuild_publisher_payload.py <profile_id>`。
+- 上游Display/Presentation/Timing等不fresh时必须先回对应owner；Publisher不得内部偷偷重算或从旧workbench补值。
+- payload完成后，HTML/player-view等纯资源渲染交给`route-atlas-ui-and-assets.md`。
 
 ## 禁止形成第二套前端规则
 

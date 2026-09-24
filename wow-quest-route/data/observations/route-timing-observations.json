@@ -1,0 +1,1905 @@
+{
+  "schema_version": 1,
+  "observation_set_id": "route-timing-observations-v1",
+  "source": {
+    "path": "data/observations/route-timing-runs.json",
+    "sha256": "3b523be15af64c4451edf41b14b73a0a65dc9db6ca594fc2d8cae139f75eec69",
+    "policy": "Legacy runs are preserved verbatim as evidence. Only clean observations with exact Profile version and stable action-id scope may calibrate current Derived Timing."
+  },
+  "observations": [
+    {
+      "observation_id": "legacy-route-run-001",
+      "profile_id": "nagrand-fivebox-67-68",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 41.4333,
+      "time_precision": "journey_derived",
+      "clean": true,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "nagrand",
+      "source_record": {
+        "date": "2026-08-15",
+        "route_key": "nagrand",
+        "run_kind": "first_group_live_scoped",
+        "time_precision": "journey_derived",
+        "effective_start_local": "2026-08-15T04:12:14+08:00",
+        "effective_end_local": "2026-08-15T04:53:40+08:00",
+        "actual_minutes": 41.4333,
+        "route_window": "加拉达尔《支援加拉达尔》交付→Journey记录角色升到68；与当前67→68主路径高度一致，但不冒充从萨布拉金跨图起点开始的完整墙钟。",
+        "actual_contains_learning_or_route_errors": false,
+        "current_route_clean_baseline_minutes": 40.0,
+        "current_route_model_envelope_minutes": [
+          31.6,
+          48.4
+        ],
+        "conditional_step_4_excluded_from_normal_total": true,
+        "status": "reliable_scoped_actual_recorded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-002",
+      "profile_id": "borean-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 320,
+      "time_precision": "mixed",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "borean",
+      "source_record": {
+        "date": "2026-08-16/17",
+        "route_key": "borean",
+        "run_kind": "first_group_live",
+        "time_precision": "mixed",
+        "effective_start_local": "2026-08-16T20:15:00+08:00",
+        "effective_end_local": "2026-08-17T01:35:00+08:00",
+        "actual_minutes": 320,
+        "route_window": "第30步中段至第46步完成；第47步仅收尾/转场开始，01:35后的零散接交不计有效跑图墙钟",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "卡斯卡拉后前往牦牛村曾走错方向并顺手开启乌努比飞行点",
+          "塔尔拉玛斯目标楼层、鲜血尖塔二楼等地形信息在本轮实跑中才补齐",
+          "蒸汽熟化鹿皮共享机制原先未知，本轮确认五号分别5/5",
+          "部分交通方案在实跑复审中发现未充分利用当时已开启的系统飞行网络"
+        ],
+        "questie_event_window": {
+          "snapshot_event_count": 1526,
+          "new_events_since_previous_snapshot": 86,
+          "complete_events": 43,
+          "accept_events": 41,
+          "level_up_events": 2
+        },
+        "same_endpoint_comparison": {
+          "endpoint": "第46步《过关斩将》完成",
+          "actual_endpoint_local": "2026-08-17T01:32:51+08:00",
+          "actual_minutes": 317.85,
+          "clean_baseline_minutes": 279.5,
+          "overrun_minutes": 38.35,
+          "overrun_percent": 13.72,
+          "clean_block_estimates_minutes": [
+            {
+              "block": "第30步中段—31：仁德会南线/哈罗德收尾",
+              "minutes": 26.5
+            },
+            {
+              "block": "第32—33步：卡斯卡拉完整链",
+              "minutes": 22.0
+            },
+            {
+              "block": "第34—36步：牦牛村第一轮/补给护送/泵站第一圈",
+              "minutes": 64.0
+            },
+            {
+              "block": "第37—39步：赫米萨/塔尔拉玛斯/Hub交接",
+              "minutes": 24.0
+            },
+            {
+              "block": "第40—42步：泵站第二圈/天灾外衣/腐化土地",
+              "minutes": 84.0
+            },
+            {
+              "block": "第43—46步：号角/恩其拉/纳克萨纳尔收尾",
+              "minutes": 59.0
+            }
+          ],
+          "note": "38.35分钟为同终点总超额；当前无法从Journey精确拆出其中每一项迷路/机制学习/地形搜索/随机刷新占比，后续批次按块记录开始结束时间后再归因。"
+        },
+        "remaining_prediction": {
+          "from_step": 48,
+          "through_step": 68,
+          "center_minutes": 220.1,
+          "model_envelope_minutes": [
+            182.1,
+            258.7
+          ],
+          "source": "data/route-atlas/borean-timing-estimate.json",
+          "dungeon_tasks_included": false
+        },
+        "status": "actual_and_clean_baseline_recorded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-003",
+      "profile_id": "borean-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 34,
+      "time_precision": "approximate",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "borean",
+      "source_record": {
+        "date": "2026-08-17",
+        "route_key": "borean",
+        "run_kind": "first_group_live_step_block",
+        "time_precision": "approximate",
+        "effective_start_local": "2026-08-17T16:38:00+08:00",
+        "effective_end_local": "2026-08-17T17:12:00+08:00",
+        "actual_minutes": 34,
+        "route_window": "第48步开始→第51步完成",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "第49步结束后用户出现任务接不上；页面上层任务预览只暴露了被简写的步骤摘要，没有把本段完整接取/交付动作直接展示出来，产生现场判断成本",
+          "第50步需要上法师塔二楼交《苔原上的审讯》，此前步骤摘要没有明确二楼位置"
+        ],
+        "same_endpoint_comparison": {
+          "endpoint": "第51步《营救艾瓦诺尔 → 飞考达拉》完成",
+          "actual_minutes": 34,
+          "clean_baseline_minutes": 29.8,
+          "overrun_minutes": 4.2,
+          "overrun_percent": 14.09,
+          "step_actuals_minutes": [
+            {
+              "step": 48,
+              "actual": 8,
+              "clean_baseline": 6.8,
+              "delta": 1.2
+            },
+            {
+              "step": 49,
+              "actual": 12,
+              "clean_baseline": 7.1,
+              "delta": 4.9,
+              "note": "本段包含任务链交接信息不清导致的现场确认成本，不能直接回写为任务固有耗时"
+            },
+            {
+              "step": 50,
+              "actual": 9,
+              "clean_baseline": 8.2,
+              "delta": 0.8
+            },
+            {
+              "step": 51,
+              "actual": 5,
+              "clean_baseline": 7.7,
+              "delta": -2.7
+            }
+          ]
+        },
+        "remaining_prediction": {
+          "from_step": 52,
+          "through_step": 68,
+          "center_minutes": 190.3,
+          "model_envelope_minutes": [
+            155.9,
+            225.3
+          ],
+          "source": "data/route-atlas/borean-timing-estimate.json",
+          "dungeon_tasks_included": false
+        },
+        "status": "scoped_actual_and_clean_baseline_recorded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-004",
+      "profile_id": "borean-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 47,
+      "time_precision": "approximate",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "borean",
+      "source_record": {
+        "date": "2026-08-17",
+        "route_key": "borean",
+        "run_kind": "first_group_live_partial_step_block",
+        "time_precision": "approximate",
+        "effective_start_local": "2026-08-17T17:12:00+08:00",
+        "effective_end_local": "2026-08-17T17:59:00+08:00",
+        "actual_minutes": 47,
+        "route_window": "第52步开始→第53步执行中暂停；不是完成端点",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "《古树的秘密》目标区有其他玩家抢怪，古树击杀明显慢于clean baseline；该竞争等待不得反向覆盖正常刷新/击杀基线"
+        ],
+        "pause_state": {
+          "step": 53,
+          "completed_but_not_turned_in": [
+            "冰冷的草莓",
+            "基本的训练"
+          ],
+          "incomplete": [
+            {
+              "quest": "古树的秘密",
+              "status": "仍有3个角色未完成"
+            },
+            {
+              "quest": "监测数据",
+              "status": "还差最后1个监测点"
+            }
+          ]
+        },
+        "clean_baseline_reference_only": {
+          "step_52_minutes": 14.7,
+          "step_53_minutes": 14.1,
+          "combined_if_both_completed_minutes": 28.8,
+          "note": "当前17:59并未完成第53步，因此47分钟不能与28.8分钟做same-endpoint overrun比较；待第53步真正完成后再计算。"
+        },
+        "status": "partial_actual_recorded_waiting_for_endpoint"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-005",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 245,
+      "time_precision": "exact",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-19/20",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_live_step_block",
+        "time_precision": "exact",
+        "effective_start_local": "2026-08-19T20:35:00+08:00",
+        "effective_end_local": "2026-08-20T00:40:00+08:00",
+        "actual_minutes": 245,
+        "route_window": "从龙骨路线步骤1任务接取完毕后开始计时→步骤11《刨冰 → 柔软的包装》完成。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "《血之魔典》原路线前置顺序错误：必须先完成并交付12056《死亡名单：扎古斯》，之后冰雾村阿努巴尔教徒才掉落任务起始物；首组现场因此产生额外确认成本。",
+          "步骤10曾转错方向，在完成《囤积矿石》前先进入《刨冰》区域并打了一部分目标。",
+          "从《刨冰》区域右上悬崖跳向《采集样本》方向时发生高风险坠落：四号存活、一号摔死。",
+          "返回《囤积矿石》途中再次失足死亡，被送回龙眠神殿；因此意外提前完成/交付了《古怪的暗示》相关节点并开启龙眠神殿飞行点，再返回继续矿石。"
+        ],
+        "live_mechanic_confirmations": [
+          "步骤2《部落的血誓》对话计数共享。",
+          "步骤5《尤格-萨隆的黑血》不共享；《腐烂的器官》防腐内脏只需掉落一次，同一尸体五号可分别拾取。",
+          "步骤7三把钥匙各命名怪只杀一次，同尸体五号分别拾取；《部落的力量》不共享，但五号可同场各自插旗完成。",
+          "步骤8《大酋长归来》事件共享，虫王外壳碎片五号分别从同一尸体拾取。",
+          "步骤9《洛纳乌克万岁！》共享。"
+        ],
+        "current_live_side_effects_not_for_zero_route": [
+          "首组龙眠神殿飞行点已因意外死亡提前开启。",
+          "首组《古怪的暗示》已因意外回到龙眠神殿提前推进；从零复用路线仍按正常顺路冰拳拿号角逻辑执行。"
+        ],
+        "scoped_task_actuals_minutes": [
+          {
+            "quest_id": 12046,
+            "quest": "柔软的包装",
+            "actual": 25,
+            "journey_accept_to_complete_minutes": 26.68,
+            "note": "用户明确单独报时25分钟；Journey中00:13:49接取→00:40:30交付为26.68分钟，二者一致，25分钟可用于任务自身服务时间校准。"
+          }
+        ],
+        "journey_source": {
+          "event_count": 1727,
+          "source_sha256": "9a705fc46929a2b63f4fed48fbe505e52c76f1f402c257e3e3b39837325e5ae8"
+        },
+        "journey_derived_blocks": [
+          {
+            "scope": "步骤1近似",
+            "actual_minutes": 21.18,
+            "clean_baseline_minutes": 16.8,
+            "delta_minutes": 4.38,
+            "note": "20:35用户起点→20:56:11首次回西风交《深入密林》。Journey只能在交付点给边界，因此含少量步骤2回营地动作。"
+          },
+          {
+            "scope": "步骤2—6连续正常段",
+            "actual_minutes": 52.17,
+            "clean_baseline_minutes": 47.3,
+            "delta_minutes": 4.87,
+            "delta_percent": 10.29,
+            "note": "20:56:11→21:48:21。用户未报告偏离路线；用连续块避免接交事件造成单步边界漂移。这是当前最可靠的正常路线校准块。"
+          },
+          {
+            "scope": "步骤7冰雾村",
+            "actual_minutes": 52.82,
+            "clean_baseline_minutes": 16.1,
+            "delta_minutes": 36.72,
+            "note": "21:48:21→22:41:10。包含《血之魔典》前置顺序错误的现场纠错，以及找西诺克的额外搜索，不能回写为成熟任务固有耗时。"
+          },
+          {
+            "scope": "步骤8—9连续段",
+            "actual_minutes": 23.35,
+            "clean_baseline_minutes": 18.3,
+            "delta_minutes": 5.05,
+            "delta_percent": 27.6,
+            "note": "22:41:10→23:04:31。按当前路线完成大酋长收尾、炉石阿格玛、洛纳乌克和双足飞龙；可作为首跑实际，但只一组样本。"
+          },
+          {
+            "scope": "步骤10前半：恐怖之爪→冰拳→害虫控制→诺兹拉斯开场",
+            "actual_minutes": 12.43,
+            "clean_baseline_minutes": 7.61,
+            "delta_minutes": 4.82,
+            "note": "23:04:31→23:16:57，截止诺兹拉斯三任务接齐。路线方向正确，但首跑期间包含恐怖之爪/冰拳现场确认，不作为成熟重复速度硬校准。"
+          },
+          {
+            "scope": "步骤10后半异常段",
+            "actual_minutes": 56.63,
+            "note": "23:16:57→00:13:35。用户已明确报告转错去刨冰、提前接采集样本、两次坠落/复活、龙眠神殿意外转场；不与clean baseline直接比较。"
+          }
+        ],
+        "same_endpoint_comparison": {
+          "endpoint": "步骤11《刨冰 → 柔软的包装》完成",
+          "actual_minutes": 245,
+          "corrected_clean_baseline_minutes": 152.4,
+          "overrun_minutes": 92.6,
+          "overrun_percent": 60.76,
+          "note": "clean baseline已修复估时器‘做《任务》’解析缺陷，并按《柔软的包装》25分钟实测校准。92.6分钟超额包含已知任务链纠错、走错方向、两次坠落/复活和龙眠意外转场，不得线性外推后续步骤。"
+        },
+        "endpoint_experience": [
+          "74级222324",
+          "74级200454",
+          "74级196437",
+          "74级200413",
+          "74级197717"
+        ],
+        "lowest_character_endpoint": "74级196437",
+        "status": "scoped_actual_endpoint_recorded_with_known_errors"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-006",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 170,
+      "time_precision": "mixed",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-20",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_live_step_block",
+        "time_precision": "mixed",
+        "effective_start_local": "2026-08-20T19:31:00+08:00",
+        "effective_end_local": "2026-08-20T22:21:00+08:00",
+        "actual_minutes": 170,
+        "route_window": "步骤12开始→步骤17《眠月第二圈 → 投影》完成。步骤12—15有用户分钟级完成时刻；步骤16没有独立完成时刻，因此步骤16—17只保留合并墙钟。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "步骤15《冰虫之母》打拉特尔博尔时死亡一次；佐特防护药剂已经使用并在死亡后失去，随后误以为可以回NPC重新取得而白跑一趟，最终无药剂强打完成。死亡、复活和往返NPC属于异常墙钟。",
+          "步骤16《寻找线索》不共享，本轮运气较差，获取五号各自线索耗时出现明显随机长尾。",
+          "步骤16魔导师凯尔多努斯战斗期间发生一次死亡。",
+          "步骤16原路线只写‘回阿格玛交接’，没有在玩家操作层明确写出‘眠月花园→阿格玛之锤·夺日者影像’转场和交付点，现场需要按任务名自行查找，产生额外导航/判断成本。"
+        ],
+        "live_mechanic_confirmations": [
+          "步骤13鹰身人击杀进度共享；《抢木材》木材不共享，伐木机/载具也必须五号分别操作。",
+          "步骤14《采集样本》不共享，五号分别点击冰巨人尸体；《恶心的生意》不共享，每号自己中腐蚀性唾液并自己使用刮刀。",
+          "步骤15《抓虫子》幼虫进度不共享，五号分别装箱。",
+          "步骤16《寻找线索》不共享，五号分别取得并打开线索物品。",
+          "步骤17《奇怪的设备》古拉莫什只需击杀一次，同一具尸体可供五号分别拾取任务起始物。",
+          "步骤17《投影和计划》在五个角色都飞过投影脚本的执行方式下共享完成；尚未验证只让主控飞、其余四号原地等待是否也共享。"
+        ],
+        "manual_step_actuals_minutes": [
+          {
+            "step": 12,
+            "actual": 25,
+            "clean_baseline": 16.1,
+            "delta": 8.9,
+            "endpoint_local": "2026-08-20T19:56:00+08:00"
+          },
+          {
+            "step": 13,
+            "actual": 20,
+            "clean_baseline": 11.8,
+            "delta": 8.2,
+            "endpoint_local": "2026-08-20T20:16:00+08:00",
+            "note": "用户未报告死亡/迷路等异常；个人木材+个人载具机制说明当前clean baseline可能低估真实五开服务时间，但暂不以单次样本硬覆盖。"
+          },
+          {
+            "step": 14,
+            "actual": 14,
+            "clean_baseline": 8.2,
+            "delta": 5.8,
+            "endpoint_local": "2026-08-20T20:30:00+08:00",
+            "note": "用户未报告额外异常；两个目标均为五号个人操作，当前clean baseline可能低估逐号交互成本。"
+          },
+          {
+            "step": 15,
+            "actual": 28,
+            "clean_baseline": 8.8,
+            "delta": 19.2,
+            "endpoint_local": "2026-08-20T20:58:00+08:00",
+            "note": "包含死亡、药剂失效、误跑NPC和复活往返，不能直接回写任务固有耗时。"
+          },
+          {
+            "steps": "16-17",
+            "actual": 83,
+            "clean_baseline": 31.5,
+            "delta": 51.5,
+            "endpoint_local": "2026-08-20T22:21:00+08:00",
+            "note": "步骤16独立终点未记录；用户只确认步骤16本身已超过30分钟。合并83分钟包含寻找线索随机长尾、凯尔多努斯死亡和交付转场信息不清等异常，禁止强行拆分。"
+          }
+        ],
+        "same_endpoint_comparison": {
+          "endpoint": "步骤17《眠月第二圈 → 投影》完成",
+          "actual_minutes": 170,
+          "clean_baseline_minutes": 76.4,
+          "overrun_minutes": 93.6,
+          "overrun_percent": 122.51,
+          "note": "总超额不能整体拿来放大后续估时。步骤13、14是目前最值得后续复跑校准的正常段；步骤15、16明确包含异常成本，步骤16—17又缺少独立边界。"
+        },
+        "journey_source_check": {
+          "status": "updated_source_now_contains_this_block",
+          "observed_event_count": 1867,
+          "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+          "note": "2026-08-21用户重新更新Questie.lua后，步骤12—17相关事件已出现。Journey可用于核对接取/交付顺序与大致时间锚点，但Questie的Complete记录更接近交付事件，不能反向替代用户记录的逻辑步骤完成时刻；原手工边界继续保留为该run的主时间口径。"
+        },
+        "status": "scoped_actual_recorded_manual_primary_journey_crosschecked_with_known_errors"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-007",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 120,
+      "time_precision": "mixed",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-20/21",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_live_step_block",
+        "time_precision": "mixed",
+        "effective_start_local": "2026-08-20T22:21:00+08:00",
+        "effective_end_local": "2026-08-21T00:21:00+08:00",
+        "actual_minutes": 120,
+        "route_window": "步骤18开始→步骤24完成；用户提供分钟级步骤终点，更新后的Journey用于交付/接取事件交叉核对。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "步骤18首组因为前段动作较慢，炉石只差约25秒冷却，用户等待25秒并提前使用炉石返回；这是本轮偏离。固定路线仍把炉石留在步骤19罗萨洛尔收尾，因为成熟执行下步骤18更快时炉石未必冷却。",
+          "步骤19额外绕路提前完成《邪能之约》；用户明确要求维持原本因度雷路线，因此该绕路不进入固定路线。",
+          "步骤20首组顺手提前进入红玉洞穴击杀达莉亚并接红玉胸针任务；后续《烈焰之地》本来会再次自然击杀达莉亚，因此固定路线不采用这次提前击杀，避免重复Boss成本。",
+          "步骤22尝试吉加托尔但当前战力打不过；同时发现《前往阿格玛之锤》因后续任务已完成或激活而无法接取。",
+          "步骤23顺路额外接并完成《未来的种子》日常；经过吉加托尔附近又发生一次死亡；做《不要浪费》期间走错路并提前完成因度雷搜索；《灵魂视界》为确认不共享做了额外测试/重复执行。",
+          "步骤24因为因度雷搜索已在步骤23走错路时提前完成，本次11分钟不是完整步骤24的正常墙钟。"
+        ],
+        "live_mechanic_confirmations": [
+          "步骤18《海岸上的魔法焦点》进度五号共享，主控完成控制指环/魔网焦点操作即可。",
+          "步骤19《强化古树》只需一个角色取得树皮，强化进度五号共享。",
+          "步骤20《邪恶之约》在瓦伦哈尔下陷地形完成更顺路；五号需要轮流分别完成，目标刷新很快。",
+          "步骤21《野生动物的疫苗》进度五号共享。",
+          "步骤23《不要浪费》货物不共享，同一具尸体只能一个角色拾取自己的货物。",
+          "步骤23《消灭洛根》共享，只需一个角色拾取并使用洛根之血。",
+          "步骤23《灵魂视界》不共享，但五号分别触发自动飞行的额外操作很低。"
+        ],
+        "route_corrections_from_this_block": [
+          "《腐烂的器官》完成后第一次回阿格玛就顺手推进《好医生》到《红玉丁香》，不再拖到步骤20才做两次医生往返。",
+          "《邪恶之约》从原步骤22移动到步骤20，与《红玉丁香》地理合并。",
+          "步骤22改为直接前往莫亚基；当前不要尝试吉加托尔，后续处理点等待本轮后段实测决定。",
+          "11996《前往阿格玛之锤》在当前先阿格玛后莫亚基轴上实测不可接，加入有意不插集合。",
+          "《未来的种子》后续复审已升级为固定‘每组首次经过一次’日常例外：五号个人拾取，但与《不要浪费》完全同区、无独立跑路；用户确认每号约5G，五号约25G，收益足以覆盖个人点击成本。"
+        ],
+        "manual_step_actuals_minutes": [
+          {
+            "step": 18,
+            "actual": 7,
+            "revised_clean_baseline": 7.7,
+            "delta": -0.7,
+            "endpoint_local": "2026-08-20T22:28:00+08:00",
+            "note": "Journey中12066于22:28:32交付；首组额外等约25秒并提前用了炉石，不作为低于基线的校准证据。"
+          },
+          {
+            "step": 19,
+            "actual": 19,
+            "revised_clean_baseline": 7.6,
+            "delta": 11.4,
+            "endpoint_local": "2026-08-20T22:47:00+08:00",
+            "note": "包含提前《邪能之约》和步骤18提前消耗炉石造成的路线偏离；Journey中12084于22:46:20交付。"
+          },
+          {
+            "step": 20,
+            "actual": 16,
+            "revised_clean_baseline": 7.5,
+            "delta": 8.5,
+            "endpoint_local": "2026-08-20T23:03:00+08:00",
+            "note": "包含固定路线不采用的提前达莉亚击杀；Journey中12126于23:03:41、12102于23:03:58交付。"
+          },
+          {
+            "step": 21,
+            "actual": 4,
+            "revised_clean_baseline": 5.0,
+            "delta": -1.0,
+            "endpoint_local": "2026-08-20T23:07:00+08:00",
+            "note": "机制共享且未报告明显异常；Journey中12111于23:07:29交付，是本批最接近clean baseline的校准样本。"
+          },
+          {
+            "step": 22,
+            "actual": 11,
+            "revised_clean_baseline": 3.2,
+            "delta": 7.8,
+            "endpoint_local": "2026-08-20T23:18:00+08:00",
+            "note": "包含吉加托尔失败尝试和不可接面包屑确认；修正后的步骤22仅直接前往莫亚基，不可拿本次11分钟校准。Journey中12117于23:16:24交付。"
+          },
+          {
+            "step": 23,
+            "actual": 52,
+            "revised_clean_baseline": 19.0,
+            "delta": 33.0,
+            "endpoint_local": "2026-08-21T00:10:00+08:00",
+            "note": "《未来的种子》现已固定纳入，因此在原15分钟基线上暂加4分钟个人拾取操作成本；仍包含吉加托尔死亡、走错因度雷和灵魂视界机制测试，52分钟不能线性校准。未来干净复跑再单独校准60次幼崽拾取与《不要浪费》个人货物成本。Journey中12028于00:09:32完成。"
+          },
+          {
+            "step": 24,
+            "actual": 11,
+            "revised_clean_baseline": 18.5,
+            "delta": -7.5,
+            "endpoint_local": "2026-08-21T00:21:00+08:00",
+            "note": "因步骤23走错路已提前完成因度雷搜索，本次明显少做了一部分固定路线动作，不得作为完整步骤24速度样本。Journey中12031于00:19:39交付并接12032，与用户分钟边界相符。"
+          }
+        ],
+        "same_endpoint_comparison": {
+          "endpoint": "步骤24完成",
+          "actual_minutes": 120,
+          "revised_clean_baseline_minutes": 64.5,
+          "overrun_minutes": 55.5,
+          "overrun_percent": 86.05,
+          "note": "55.5分钟总超额高度受路线学习与额外任务污染，不能线性放大后续估时。步骤21可作为较干净样本；步骤23的《不要浪费》仍需在无迷路/无额外任务条件下复跑后再校准其个人拾取成本。"
+        },
+        "journey_source": {
+          "event_count": 1867,
+          "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+          "status": "updated_and_crosschecked"
+        },
+        "status": "scoped_actual_and_revised_route_recorded_with_known_errors"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-008",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 66,
+      "time_precision": "manual_minutes_plus_journey_crosscheck",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-21",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_live_step_block_with_post_boundary_route_divergence",
+        "time_precision": "manual_minutes_plus_journey_crosscheck",
+        "effective_start_local": "2026-08-21T00:21:00+08:00",
+        "effective_end_local": "2026-08-21T01:27:00+08:00",
+        "actual_minutes": 66,
+        "route_window": "步骤25开始→步骤26完成。步骤27之后发生大范围跳步，用户未给步骤27完成时刻，因此不把后续墙钟伪装成正常步骤27样本。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "步骤25首组没有按旧路线假设沿基利瓦/海洋女神路线顺便补陷阱，而是把五号共40个螃蟹陷阱连续做完；这暴露的是旧估时/顺路假设错误，不属于玩家迷路。",
+          "步骤25为确认《海洋女神》机制，实测一个号从点击珍珠到珍珠再次可点击约1分40秒；任务本身不共享，五号需串行触发。该刷新等待属于固有服务成本，应进入基线。",
+          "步骤26本应炉石回阿格玛；用户为了再次测试吉加托尔改走陆路，包含跑路、等怪、第一次团灭和第二次仅一号存活完成，因此27分钟不能回写到修正后的海线收尾基线。",
+          "步骤27开始后，因为首组此前意外死亡已提前开过龙眠飞行点，加上旧执行稿转场提示不够强，用户直接飞龙眠并按地图上的未来交付标记提前推进红玉链；随后又跑回猎龙营地。这一大段属于跨步骤路线偏离。",
+          "步骤27之后尝试《萨拉斯塔，北地的灾祸》失败；任务保持未完成。"
+        ],
+        "live_mechanic_confirmations": [
+          "《图尔凯的螃蟹陷阱》五号各8个，共40次个人进度；首组连续采集、换两次呼吸气囊并交任务约20分钟。",
+          "《海洋女神》不共享，五号必须分别点击深海珍珠；珍珠点击后约1分40秒才能再次点击。触发后从水中游到岸边，再由陆地跑回/向集合方向移动。",
+          "《重归尘土》红玉橡果处理尸体的任务进度五号共享。",
+          "吉加托尔在75级五开仍具有高失败风险：一次团灭，第二次最终只剩一个号存活才完成。",
+          "萨拉斯塔在75级五开实测打不过。"
+        ],
+        "route_corrections_from_this_block": [
+          "步骤25把《图尔凯的螃蟹陷阱》改成独立海底采集段，不再写成沿后续海路自然顺满；当前不假设用户未验证的更远水下陷阱覆盖。",
+          "步骤25把《海洋女神》明确为五号个人串行脚本，并把约100秒珍珠刷新锁纳入固有服务时间。",
+          "步骤26固定使用炉石从莫亚基回阿格玛，不再坐系统鸟，也不再为吉加托尔绕路。",
+          "步骤26抵达阿格玛后只交《通缉：魔导师凯尔多努斯》《通缉：恐怖之爪》；正常不会出现《前往猎龙营地》，因为吉加托尔支线已延后。",
+          "未来练级组从阿格玛第一次开场就不接《通缉：吉加托尔》，避免把一条计划80后处理的任务长期占在25任务栏位。",
+          "《通缉：吉加托尔》→《前往猎龙营地》→《萨拉斯塔，北地的灾祸》定义为同一条80后精英回收支线；《害虫控制》→《峡谷追击》是独立普通链，仍在当前等级做。",
+          "步骤27增加显式转场‘阿格玛→猎龙营地’，步骤28结束再显式‘猎龙营地→龙眠神殿并开飞行点’；禁止凭地图上的未来问号/交付点自行跳步骤。"
+        ],
+        "defer_to_80_decision": {
+          "tasks": [
+            12090,
+            12095,
+            12097
+          ],
+          "first_group": "首组75级五开已经证明吉加托尔和萨拉斯塔具有明显死亡/团灭方差，因此首组练级基线延后整条精英支线。",
+          "level80_revisit": "本次80级1防骑+4惩戒回访萨拉斯塔实测非常轻松；12097没有后续，因此首组延后到80级是安全的，但单独回跑会增加地图移动时间。",
+          "second_group": "不再把‘80后做’视为永久规则。第二组已有1防骑+4惩戒且操作经验更高，应在龙骨自然等级重新实测12090/12097；若稳定且耗时合理，就恢复首跑，若只是能勉强打过但明显拖慢路线，则继续延后。",
+          "never": "不选。虽然可以省掉回访与战斗墙钟，但会永久损失任务直接奖励、装备价值与满级金币补偿，不符合任务打金周期的全收益目标。",
+          "decision": "first_group_defer_second_group_retest"
+        },
+        "manual_step_actuals_minutes": [
+          {
+            "step": 25,
+            "actual": 39,
+            "revised_clean_baseline": 33.9,
+            "delta": 5.1,
+            "endpoint_local": "2026-08-21T01:00:00+08:00",
+            "note": "本段没有报告死亡/迷路；主要新增成本是真实五开40个陷阱与五号串行海洋女神。修正后模型33.9分钟、区间25.4—42.4，本次39分钟已落入区间，可作为有价值的首轮校准样本。"
+          },
+          {
+            "step": 26,
+            "actual": 27,
+            "revised_clean_baseline": 7.7,
+            "delta": 19.3,
+            "endpoint_local": "2026-08-21T01:27:00+08:00",
+            "note": "包含为测试吉加托尔而放弃炉石、额外陆路、等怪、一次团灭及第二次残局完成。Journey于01:27:52记录12090完成/交付锚点；禁止据此放大修正后的步骤26。"
+          }
+        ],
+        "post_step26_journey_divergence": [
+          "01:27:53 接12095《前往猎龙营地》；这是首组已经强行完成吉加托尔后才出现的状态，未来基线不会在此接到。",
+          "约01:31后直接进入龙眠并提前推进红玉链；12461、12448、12449、12450依次在01:39—02:01附近完成，证明首组已经跳过正常猎龙营地步骤顺序。",
+          "02:02:39 完成12095并在02:02:40接12097；随后萨拉斯塔尝试失败，12097在当前Journey末端仍保持激活。",
+          "02:14—02:17才回头完成12144《害虫控制》和12145《峡谷追击》，进一步确认这是路线跳步后的回补，不是正常步骤27/28墙钟。"
+        ],
+        "journey_source": {
+          "event_count": 1867,
+          "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+          "status": "updated_and_crosschecked"
+        },
+        "status": "steps25_26_recorded_step27_divergence_not_used_as_baseline"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-009",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": "manual_minutes_with_journey_crosscheck",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-21",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_late_block_manual_endpoints_and_end_of_day_checkpoint",
+        "time_precision": "manual_minutes_with_journey_crosscheck",
+        "route_window": "补充步骤28机制；步骤33于03:03完成、步骤34于03:22完成；03:30停在步骤36怨毒镇镇内任务接取完毕、尚未去镇外接《海边的地产》。步骤29—32、35没有用户提供完整步骤终点，因此不反推这些步骤墙钟。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "旧路线曾在前段提前击杀冰拳，导致后面《峡谷追击》必须重复击杀；用户明确要求冰拳留到正式后续再打，已从前段移除。",
+          "步骤32首组顺路接并完成《保卫龙眠神殿》日常；这次机制测试确认其五开效率后，固定路线改为每组首次经过做一次，但不安排每日重复回刷。",
+          "步骤33先打了《驱逐天灾》的普通目标、随后五号同时放《无路可逃》毁灭结界，叠加刷怪导致团灭；这两项都属于首组操作错误。固定路线改为先由主控只放一个结界，利用事件刷怪同步推进《驱逐天灾》。",
+          "步骤34完成黑曜石链后，首组提前炉石回阿格玛交《冰霜之约》并完成《翻译过的魔典》，再飞龙眠；这是本轮提前清理动作，当前没有足够的同终点比较证明必须重排固定后续，因此暂不拿来校准步骤34正常墙钟。",
+          "步骤36在03:30只完成怨毒镇镇内接取/《测试药剂》，尚未前往约(79.35,65.06)接《海边的地产》；03:30不是步骤36完成时刻。"
+        ],
+        "live_mechanic_confirmations": [
+          "《害虫控制》约(55,51)存在非常集中的可计数目标区，后续优先在这里补最低角色进度。",
+          "《古怪的暗示》首组回忆：冰拳同一具尸体的号角五号都能分别拾取。",
+          "《保卫龙眠神殿》：碧蓝巨龙/幼龙击杀在有效距离内五号共享；破坏碧蓝巨龙圣地需要五号分别执行。",
+          "《无路可逃》进度五号共享，只需主控放一个毁灭结界；事件刷怪能顺便推进《驱逐天灾》。",
+          "《污染的能量》摧毁通灵符文进度五号共享。",
+          "《奈萨里奥的烈焰》进度五号共享。",
+          "《测试药剂》进度五号共享，只需主控使用一次。"
+        ],
+        "route_corrections_from_this_block": [
+          "删除恐怖之爪后提前杀冰拳/提前拿号角的动作；冰拳只在接到《峡谷追击》后击杀一次。",
+          "《害虫控制》固定补怪点改为约(55,51)高密度区。",
+          "《保卫龙眠神殿》作为明确例外加入每组首次经过一次的路线；它仍是日常，不进入每日重复循环。",
+          "《无路可逃》改成步骤33的第一战斗动作：一个结界、共享完成、事件刷怪后再补《驱逐天灾》。",
+          "黑曜石通灵符文和《奈萨里奥的烈焰》移除五开待实测标记并写成主控一次共享。",
+          "建立多层建筑永久规则：任务接交点必须在标题/主动作直接标地面层、中层、顶层、地下等层级；当前龙眠交接已按地面/中层/顶层重写。",
+          "怨毒镇不再重复提示《魔法王国达拉然》；该任务此前已经在阿格玛处理，步骤36无需再次操作。",
+          "修正《海边的地产》接交点：约(79.35,65.06)镇外NPC，不是在怨毒镇药剂师处；步骤36因此增加明确镇外接取与回收两点。"
+        ],
+        "manual_timing_evidence": [
+          {
+            "step": 33,
+            "endpoint_local": "2026-08-21T03:03:00+08:00",
+            "actual_minutes": null,
+            "note": "缺少步骤32完成时刻，且包含先刷错目标顺序和五号同时放结界造成的团灭，不能反推正常步骤33耗时。"
+          },
+          {
+            "step": 34,
+            "endpoint_local": "2026-08-21T03:22:00+08:00",
+            "actual_minutes_since_step33": 19,
+            "note": "19分钟包含首组提前炉石回阿格玛处理《冰霜之约》/《翻译过的魔典》再飞龙眠的额外清理，不作为纯黑曜石步骤基线。"
+          },
+          {
+            "step": 36,
+            "checkpoint_local": "2026-08-21T03:30:00+08:00",
+            "status": "partial_town_open_only",
+            "note": "只到怨毒镇镇内任务接取完毕并完成《测试药剂》；尚未去镇外接《海边的地产》，不是步骤完成。"
+          }
+        ],
+        "end_of_day_progress": {
+          "level": 75,
+          "xp_values": [
+            1379801,
+            1360294,
+            1363413,
+            1360219,
+            1359501
+          ],
+          "lowest_character_xp": 1359501,
+          "highest_character_xp": 1379801,
+          "spread_xp": 20300,
+          "checkpoint_local": "2026-08-21T03:30:00+08:00"
+        },
+        "journey_source": {
+          "event_count": 1867,
+          "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+          "status": "crosschecked_existing_source_contains_late_block"
+        },
+        "status": "late_block_recorded_with_step33_failure_step34_extra_cleanup_and_step36_partial_checkpoint"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-010",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": null,
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-21",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_afternoon_continuation",
+        "route_window": "15:22从步骤36中途点继续；16:14完成步骤36并暂停。恢复时间未提供。步骤37顺路完成《确保他们不再站起来！》并确认五号共享，奥雷托斯战斗有一次失败。18:33停在步骤38附近。",
+        "manual_timing_evidence": [
+          {
+            "step": 36,
+            "resume_local": "2026-08-21T15:22:00+08:00",
+            "endpoint_local": "2026-08-21T16:14:00+08:00",
+            "remainder_minutes": 52,
+            "status": "partial_step_remainder_only",
+            "note": "昨夜03:30已经完成怨毒镇镇内接取和《测试药剂》，所以52分钟只代表步骤36后半段。"
+          },
+          {
+            "step": 37,
+            "actual_minutes": null,
+            "status": "no_clean_timing",
+            "note": "恢复时间未提供；顺路完成新壁炉谷任务，奥雷托斯战斗有一次失败。"
+          },
+          {
+            "step": 38,
+            "checkpoint_local": "2026-08-21T18:33:00+08:00",
+            "status": "mid_step_checkpoint",
+            "note": "停在三只猛犸人目标相关位置；不根据措辞强判三目标是否已经完成，下次按实际任务日志接续。"
+          }
+        ],
+        "live_mechanic_confirmations": [
+          "《确保他们不再站起来！》进度五号共享，主控处理即可。",
+          "《永恒之龙的秘密》进度不共享，且40码内不能同时放多个沙漏；五号实跑按2+2+1三批完成，三批纯战斗/事件约10分钟，不含跑路。"
+        ],
+        "route_corrections_from_this_block": [
+          "把新壁炉谷第一圈前移到怨毒镇去翡翠圣地途中；后续回怨毒镇只交付并接第二圈。",
+          "《永恒之龙的秘密》固定改成2+2+1三批执行，并把10分钟纯事件时间作为任务服务时间校准。"
+        ],
+        "journey_source": {
+          "event_count": 1867,
+          "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+          "status": "stale_not_refreshed_for_afternoon_session"
+        },
+        "status": "afternoon_continuation_recorded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-011",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": null,
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "dragonblight",
+      "source_record": {
+        "date": "2026-08-22",
+        "route_key": "dragonblight",
+        "run_kind": "first_group_full_map_completion",
+        "route_window": "首组五号龙骨荒野整图完成；此前分段实跑存在暂停、失败和学习成本，因此本记录只封口最终状态，不从跨日Journey总跨度反推成熟路线总墙钟。",
+        "final_progress": {
+          "level": 77,
+          "xp_values": [
+            44585,
+            34239,
+            34592,
+            40497,
+            32589
+          ],
+          "lowest_character_xp": 32589,
+          "highest_character_xp": 44585,
+          "spread_xp": 11996,
+          "status": "dragonblight_full_map_complete_user_confirmed"
+        },
+        "journey_final_boundary": {
+          "quest_12500_complete_local": "2026-08-22T02:07:11+08:00",
+          "cross_map_13242_accept_local": "2026-08-22T02:08:14+08:00",
+          "map_completion_boundary_local": "2026-08-22T02:08:14+08:00",
+          "note": "12500完成后只剩跨图保留任务的接取/携带；用户明确确认龙骨整张地图已做完，因此约02:08作为整图完成边界。"
+        },
+        "journey_source": {
+          "event_count": 1945,
+          "source_sha256": "1711b8cec722c34e0ae210ab4bf31c9549594b96076e3657439ebffcf42943c9",
+          "max_level": 77,
+          "active_quest_ids": [
+            12097,
+            12487,
+            12789,
+            12791,
+            13242
+          ],
+          "status": "refreshed_and_crosschecked_full_map_completion"
+        },
+        "timing_use": "final_state_anchor_only_not_clean_total_duration",
+        "status": "dragonblight_first_group_closed"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-012",
+      "profile_id": "storm-peaks-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 250,
+      "time_precision": "exact_minute_with_explicit_pause",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "storm",
+      "source_record": {
+        "date": "2026-08-25/26",
+        "route_key": "storm",
+        "run_kind": "first_group_live_steps_13_20",
+        "time_precision": "exact_minute_with_explicit_pause",
+        "effective_start_local": "2026-08-25T19:47:00+08:00",
+        "effective_end_local": "2026-08-26T00:00:00+08:00",
+        "wall_clock_minutes": 253,
+        "explicit_pause_minutes": 3,
+        "actual_minutes": 250,
+        "route_window": "风暴峭壁玩家步骤13开始→步骤20完成；步骤13开始时《土灵的誓言》已完成、《洛肯的副官》只差符文巨人杜洛恩。",
+        "step_actuals_minutes": [
+          {
+            "step": 13,
+            "actual": 9,
+            "endpoint_local": "2026-08-25T19:56:00+08:00"
+          },
+          {
+            "step": 14,
+            "actual": 14,
+            "endpoint_local": "2026-08-25T20:10:00+08:00"
+          },
+          {
+            "step": 15,
+            "actual": 90,
+            "endpoint_local": "2026-08-25T21:40:00+08:00",
+            "contaminated": true,
+            "note": "《寒风的声音》有人抢怪，且首跑只在较小区域找怪；实际刷新范围更大。下次优先飞去其它刷新点，不把90分钟回写为clean baseline。"
+          },
+          {
+            "step": 16,
+            "actual": 22,
+            "endpoint_local": "2026-08-25T22:02:00+08:00"
+          },
+          {
+            "step": 17,
+            "actual": 41,
+            "endpoint_local": "2026-08-25T22:43:00+08:00",
+            "subcheckpoints": [
+              {
+                "local": "22:27",
+                "state": "《稀有的土壤》完成并交付"
+              },
+              {
+                "local": "22:34",
+                "state": "《救死扶伤》《反击》完成并交付"
+              },
+              {
+                "local": "22:43",
+                "state": "奴隶/矿石任务完成后炉石回布德克拉格"
+              }
+            ]
+          },
+          {
+            "step": 18,
+            "actual": 22,
+            "endpoint_local": "2026-08-25T23:05:00+08:00"
+          },
+          {
+            "step": 19,
+            "actual": 29,
+            "endpoint_local": "2026-08-25T23:34:00+08:00",
+            "contaminated": true,
+            "note": "钢铁巨像有人抢怪；单号骑被驯服的冰虫翻车后改成五号一起打。首跑还把炉石误用在《巨像的威胁》后，复用路线改为《风暴之心》完成后再炉石。"
+          },
+          {
+            "step": 20,
+            "actual": 23,
+            "wall_clock_minutes": 26,
+            "explicit_pause_before_step_minutes": 3,
+            "endpoint_local": "2026-08-26T00:00:00+08:00"
+          }
+        ],
+        "live_mechanic_confirmations": [
+          "《侵犯领土》《土灵的誓言》《洛肯的副官》《清算之战》共享。",
+          "《追踪罪犯》Boss只打一遍；追踪气味源头与通讯器使用不共享，五号分别操作。",
+          "《联络布莱恩》不共享，五号分别使用通讯器；连续快速交互存在不计完成风险。",
+          "《拼图游戏》不共享；《采集数据》共享；《诺甘农之壳》Boss一次、同尸体五号依次拾取。",
+          "《追查诺甘农之核》固定文档五号分别但可连续拾取；《铸造钥石》共享。",
+          "《稀有的土壤》不共享且悬崖上下层搜索成本高；《救死扶伤》《反击》《雷铸铁矮人的奴隶》共享；《黑暗的矿石》不共享。",
+          "《洛肯的礼物》《护甲板的秘密》共享；黑暗护甲板起始物掉落后同一尸体五号可分别拾取，后续4份样品共享。",
+          "《摧毁熔炉！》《风暴之心》《错误的时间流》共享；《巨像的威胁》固定文档五号分别但可连续拾取；《英雄的装备》掉落后同尸体五号连续拾取。",
+          "后续回忆补齐：《完美的计划》《热身赛》《进入利齿之坑》《时间的扰动》《改变风向》共享；《见证者与英雄》三份卷轴五号分别交互但同一卷轴可连续切号点击；《维拉努斯》龙卵不共享且同一龙卵不能连续拾取；《黑暗的护甲板》后续4份样品共享。"
+        ],
+        "route_corrections_from_this_block": [
+          "《永冻之冰》因永冻碎片找不到已放弃，不再作为正式路线必做覆盖。",
+          "造物者圣台后先开布德克拉格飞行点并直接接《稀有的土壤》，因此《奥杜尔的土灵》面包屑自然失效。",
+          "雷暴台地附近提前开唐卡洛飞行点、做《见证者与英雄》并接《雷蹄的记忆》，因此《见证者夏拉托尔》面包屑自然失效。",
+          "布德克拉格正式任务块开始时绑定炉石；奴隶/矿石完成后炉石回。",
+          "《巨像的威胁》后正常飞回交接；《风暴之心》完成后再炉石。",
+          "《风暴之心》需要明确奥迪斯洞口和下层路径；钢铁巨像建议五号一起骑冰虫执行。"
+        ],
+        "timing_use": "steps_13_20_scoped_actual; contaminated steps retained as observed wall-clock, not clean baseline",
+        "status": "scoped_actual_recorded_with_learning_and_competition"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-013",
+      "profile_id": "icecrown-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": "journey_derived_with_unquantified_pause",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "icecrown",
+      "source_record": {
+        "date": "2026-08-27/28",
+        "route_key": "icecrown",
+        "run_kind": "first_group_missing_argent_chain_partial_live",
+        "time_precision": "journey_derived_with_unquantified_pause",
+        "route_window": "13227《审判日降临！》交付→13237《知己知彼》/13239《爆炸油》接取；当前漏链尚未结束。",
+        "pause_exclusion": {
+          "affected_window": "2026-08-28T00:37:50+08:00 至 2026-08-28T02:00:49+08:00 之间包含用户明确人工暂停",
+          "rule": "该跨度不计算《净化天灾城》《天灾石》《永不安息的亡者》任务耗时，也不用于整段墙钟校准。",
+          "exact_pause_minutes": null
+        },
+        "journey_reference_blocks": [
+          {
+            "scope": "银色前线基地三任务全部接齐→三项完成",
+            "start_local": "2026-08-27T23:52:24+08:00",
+            "end_local": "2026-08-28T00:09:59+08:00",
+            "actual_minutes": 17.5833,
+            "note": "《保卫前线基地》《天灾的战术》《致命的剧毒》同区重叠块；以最后一项接齐为起点。"
+          },
+          {
+            "quest_id": 13045,
+            "quest": "空中救兵",
+            "start_local": "2026-08-28T00:10:36+08:00",
+            "end_local": "2026-08-28T00:19:49+08:00",
+            "actual_minutes": 9.2167,
+            "note": "不共享；接任务后顺路开银色前线基地飞行点属于路线动作，包含在该实际跨度内。"
+          },
+          {
+            "quest_id": 13070,
+            "quest": "冷锋逼近",
+            "start_local": "2026-08-28T00:19:50+08:00",
+            "end_local": "2026-08-28T00:32:09+08:00",
+            "actual_minutes": 12.3167,
+            "note": "Journey接取→完成参考；包含任务自然移动/交接。"
+          },
+          {
+            "quest_id": 13086,
+            "quest": "最后一道防线",
+            "start_local": "2026-08-28T00:32:10+08:00",
+            "end_local": "2026-08-28T00:35:56+08:00",
+            "actual_minutes": 3.7667,
+            "note": "共享；可作为载具事件直接服务时间强参考。"
+          },
+          {
+            "quest_id": 13125,
+            "quest": "凝固的空气",
+            "start_local": "2026-08-28T02:00:50+08:00",
+            "end_local": "2026-08-28T02:10:07+08:00",
+            "actual_minutes": 9.2833,
+            "note": "最后击杀撕裂者并使用现场传送门回交；该块位于暂停之后，可用。"
+          },
+          {
+            "scope": "晶歌森林《公正堡的基石》《危险的能量》联合块",
+            "start_local": "2026-08-28T02:10:07+08:00",
+            "end_local": "2026-08-28T03:08:33+08:00",
+            "actual_minutes": 58.4333,
+            "note": "从《凝固的空气》完成后开始，到两项均交付完成；五号个人收集、不共享，完成后经夺日者指挥站飞银色前线基地。"
+          },
+          {
+            "quest_id": 13139,
+            "quest": "进入诺森德的冰冷腹地",
+            "start_local": "2026-08-28T03:09:30+08:00",
+            "end_local": "2026-08-28T03:10:10+08:00",
+            "actual_minutes": 0.6667
+          },
+          {
+            "quest_id": 13141,
+            "quest": "北伐军之峰的战斗",
+            "start_local": "2026-08-28T03:10:11+08:00",
+            "end_local": "2026-08-28T03:17:36+08:00",
+            "actual_minutes": 7.4167,
+            "note": "共享。"
+          },
+          {
+            "quest_id": 13157,
+            "quest": "北伐军之峰",
+            "start_local": "2026-08-28T03:17:36+08:00",
+            "end_local": "2026-08-28T03:19:09+08:00",
+            "actual_minutes": 1.55,
+            "note": "奖励装备选择北伐军的坚毅。"
+          },
+          {
+            "quest_id": 13068,
+            "quest": "勇气的传说",
+            "start_local": "2026-08-28T03:19:09+08:00",
+            "end_local": "2026-08-28T03:37:01+08:00",
+            "actual_minutes": 17.8667,
+            "note": "与接《奥格瑞姆之锤》、开北伐军之峰飞行点并飞银色比武场重叠，只作为路线块参考。"
+          },
+          {
+            "scope": "奥格瑞姆之锤首到→伊米海姆/日常/破碎前线重叠块",
+            "start_local": "2026-08-28T03:41:58+08:00",
+            "end_local": "2026-08-28T04:28:52+08:00",
+            "actual_minutes": 46.9,
+            "contaminated_by_overlap": true,
+            "note": "包含空中/地面突袭、伊米海姆、矿洞、思维诡计、破碎前线和日常绕行，只保存整块墙钟，不拆成单任务clean baseline。"
+          },
+          {
+            "quest_id": 13301,
+            "quest": "地面突袭",
+            "start_local": "2026-08-28T03:46:27+08:00",
+            "end_local": "2026-08-28T03:53:06+08:00",
+            "actual_minutes": 6.65,
+            "note": "共享；事件本身在该窗口内闭合，可作局部参考。"
+          },
+          {
+            "quest_id": 13308,
+            "quest": "思维诡计",
+            "start_local": "2026-08-28T04:08:07+08:00",
+            "end_local": "2026-08-28T04:12:54+08:00",
+            "actual_minutes": 4.7833,
+            "note": "共享；矿洞现场短链。"
+          }
+        ],
+        "current_endpoint": {
+          "active_tasks": [
+            13237,
+            13239
+          ],
+          "abandoned_task": 13234,
+          "journey_event_count": 2407
+        },
+        "timing_use": "clean_subblocks_only; pause-crossing and heavily overlapped windows are reference-only",
+        "status": "partial_live_supplement_reference_blocks_recorded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-014",
+      "profile_id": "sholazar-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 266.7667,
+      "time_precision": "mixed_journey_and_user_explicit_pause",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "sholazar",
+      "source_record": {
+        "date": "2026-08-31",
+        "route_key": "sholazar",
+        "run_kind": "first_group_live_start_through_step7_open",
+        "time_precision": "mixed_journey_and_user_explicit_pause",
+        "effective_start_local": "2026-08-31T00:13:06+08:00",
+        "effective_end_local": "2026-08-31T05:09:52+08:00",
+        "wall_clock_minutes": 296.7667,
+        "explicit_pause_minutes": 30,
+        "pause_window_local": "2026-08-31T01:17:00+08:00/2026-08-31T01:47:00+08:00",
+        "actual_minutes": 266.7667,
+        "route_window": "索拉查开始接任务附近（Journey以12521完成/12489接取为首个稳定锚点）→多里安营地接12603、12605、12683，亦即用户所述原步骤7开头。",
+        "actual_contains_learning_or_route_errors": true,
+        "route_version_note": "本轮用户实际走法与当时正式8步路线不同；已据实校正前半段顺序。266.77分钟只保存为首跑真实墙钟，不与旧8步clean baseline做整段同端点比较。",
+        "journey_source": {
+          "event_count": 2734,
+          "source_sha256": "8a8dece760d8de06266831cf87162d6cc6f91a05f59440e64c9cc5d598bfc878"
+        },
+        "journey_reference_blocks": [
+          {
+            "scope": "12543《给索乌拉姆的祭品》接取→12634《酿酒的材料》首个完成锚点",
+            "start_local": "2026-08-31T00:55:16+08:00",
+            "end_local": "2026-08-31T02:30:20+08:00",
+            "wall_clock_minutes": 95.0667,
+            "explicit_pause_minutes": 30,
+            "actual_minutes": 65.0667,
+            "tasks_in_user_order": [
+              "猎人们的肉排",
+              "猎人的挑战（沿路累计）",
+              "给索乌拉姆的祭品",
+              "狩猎鳄鱼：试炼",
+              "酿酒的材料"
+            ],
+            "note": "Journey在野外目标过程中没有更细完成事件，因此只能确认这整个野外块约65.07分钟有效墙钟，不能从日志硬拆单任务。用户本轮复盘明确判断《猎人们的肉排》是该块主要耗时来源，其余《给索乌拉姆的祭品》《狩猎鳄鱼：试炼》《酿酒的材料》本身不长；《猎人的挑战》全部与其它任务击杀重叠，独立耗时按0处理。"
+          },
+          {
+            "quest_id": 12699,
+            "quest": "尴尬的处境",
+            "start_local": "2026-08-31T02:55:40+08:00",
+            "end_local": "2026-08-31T03:04:47+08:00",
+            "actual_minutes": 9.1167,
+            "note": "接取→完成边界清楚；已实测不共享。原基础模型按固定物五号拾取只估约0.58分钟，明显低估实际搜索/逐号操作成本。"
+          },
+          {
+            "quest_id": 12671,
+            "quest": "侦察飞行",
+            "start_local": "2026-08-31T03:05:00+08:00",
+            "end_local": "2026-08-31T03:10:46+08:00",
+            "actual_minutes": 5.7667,
+            "note": "接取→完成边界清楚；基础数据此前错误按0独立服务时间处理。首跑确认五号需要错峰启动并切号操控飞行方向，应按约5.77分钟级别重新建模。"
+          },
+          {
+            "quest_id": 12532,
+            "quest": "鸡飞狼跳！",
+            "start_local": "2026-08-31T03:49:17+08:00",
+            "end_local": "2026-08-31T04:00:02+08:00",
+            "actual_minutes": 10.75,
+            "note": "已实测不共享，五号分别抓12只；当前人工估时中心6分钟、范围2—15分钟，首跑落在上半区，可把10.75分钟作为后续中心值校准的重要样本。"
+          },
+          {
+            "scope": "12571《赶走坏蛇》+12572《神祗喜欢亮闪闪的东西》联合块",
+            "start_local": "2026-08-31T04:31:09+08:00",
+            "end_local": "2026-08-31T05:04:05+08:00",
+            "actual_minutes": 32.9333,
+            "note": "两项几乎同时完成，Journey无法单独给出精确拆分。用户本轮复盘明确指出主要耗时来自《神祗喜欢亮闪闪的东西》：需要跟着NPC寻找可挖的亮点，亮点本身难找，而且NPC挖出的物品经常不容易看见；《赶走坏蛇》本身不长。联合块32.93分钟仍只作为整块实测，不伪造12572的精确单任务分钟数。"
+          },
+          {
+            "scope": "雾语村12537《闪电确实两次打中同一个地方！》+12538《猎杀雾语鳄鱼人》",
+            "start_local": "2026-08-31T04:14:22+08:00",
+            "end_local": "2026-08-31T04:17:43+08:00",
+            "actual_minutes": 3.35,
+            "note": "12537不共享、12538共享，但两项同区联合完成仍很快，不属于本轮主要耗时问题。"
+          },
+          {
+            "quest_id": 12540,
+            "quest": "遵命行事",
+            "start_local": "2026-08-31T04:26:24+08:00",
+            "end_local": "2026-08-31T04:27:35+08:00",
+            "actual_minutes": 1.1833,
+            "note": "共享，首跑很快。"
+          },
+          {
+            "quest_id": 12573,
+            "quest": "议和",
+            "start_local": "2026-08-31T05:04:04+08:00",
+            "end_local": "2026-08-31T05:06:36+08:00",
+            "actual_minutes": 2.5333,
+            "note": "不共享但五号分别完成总墙钟仍短，不属于本轮主要耗时问题。"
+          }
+        ],
+        "status": "first_live_partial_route_recorded_with_route_reorder_and_explicit_pause"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-015",
+      "profile_id": "sholazar-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": "mixed_user_minute_start_and_journey_exact_endpoint",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "sholazar",
+      "source_record": {
+        "date": "2026-08-31",
+        "route_key": "sholazar",
+        "run_kind": "first_group_live_step19_in_progress_through_map_endpoint",
+        "time_precision": "mixed_user_minute_start_and_journey_exact_endpoint",
+        "user_declared_start_local": "2026-08-31T21:00:00+08:00",
+        "journey_first_turnin_local": "2026-08-31T21:00:41+08:00",
+        "effective_end_local": "2026-08-31T22:24:27+08:00",
+        "actual_minutes_from_user_start": 84.45,
+        "journey_anchor_minutes": 83.7667,
+        "route_window": "用户明确从21:00开始计时；此时《磨尖你的爪子》《诱龙出巢》以及顺路完成的《被迫出手》《被抢走的雾语宝物》目标已经做完，21:00开始从多里安交12603/12605继续，至22:24:27交付12691《古旧的石箱》停止。该窗口不包含步骤19前半段野外目标服务时间，因此不得冒充完整步骤19或整图墙钟。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "12581《英雄的负担》完成后12689《神谕者之手》没有出现，导致12695及神谕者尊敬门槛后续未解锁；本轮已离图，不把缺失任务的折返/等待虚构进实跑墙钟。"
+        ],
+        "live_mechanic_confirmations": [
+          "12575《被抢走的雾语宝物》：督军塔尔特克Boss共享；宝物交互不共享，需要五号依次等待刷新后操作。",
+          "12607《驯服猛犸象》共享。",
+          "12614《母龙之怒》共享；接到任务后其余四号可取消骑乘跟随，由主控完成。",
+          "12580《苔行村的救星》共享。",
+          "12579《苔行祭坛的源血碎片》不共享。",
+          "12691《古旧的石箱》不共享。"
+        ],
+        "journey_source": {
+          "event_count": 2759,
+          "source_sha256": "ac125aae5ada8a7f4e832ce50c9946e7bd1839f02bce337c21e65eea26f0d3fe"
+        },
+        "journey_reference_blocks": [
+          {
+            "scope": "多里安交12603/12605 → 接12607/12658/12681 → 驯服猛犸",
+            "start_local": "2026-08-31T21:00:41+08:00",
+            "end_local": "2026-08-31T21:03:28+08:00",
+            "actual_minutes": 2.7833,
+            "note": "12607在21:03:28完成，随后21:03:44接12614。"
+          },
+          {
+            "scope": "苔行村12580《苔行村的救星》",
+            "start_local": "2026-08-31T21:44:44+08:00",
+            "end_local": "2026-08-31T21:50:12+08:00",
+            "actual_minutes": 5.4667,
+            "note": "与12579同时接取，但12580先完成即交；支持‘随接随交’的实跑顺序。"
+          },
+          {
+            "scope": "苔行村12579《苔行祭坛的源血碎片》",
+            "start_local": "2026-08-31T21:44:45+08:00",
+            "end_local": "2026-08-31T22:02:12+08:00",
+            "actual_minutes": 17.45,
+            "note": "与12580前半段重叠，不能把17.45分钟全部当作12579独立服务时间；仅保存真实接取→交付跨度。"
+          },
+          {
+            "quest_id": 12581,
+            "quest": "英雄的负担",
+            "start_local": "2026-08-31T22:03:02+08:00",
+            "end_local": "2026-08-31T22:09:41+08:00",
+            "actual_minutes": 6.65,
+            "note": "任务本体完成并交付，但后续12689未出现；失败属于事件/阵营分支机制，不把12689缺失当成本体正常服务时间。"
+          },
+          {
+            "quest_id": 12691,
+            "quest": "古旧的石箱",
+            "start_local": "2026-08-31T22:11:36+08:00",
+            "end_local": "2026-08-31T22:24:27+08:00",
+            "actual_minutes": 12.85,
+            "note": "不共享，五号分别完成；本次索拉查Journey以此为实跑终点。"
+          }
+        ],
+        "status": "first_group_sholazar_live_endpoint_recorded_with_oracle_branch_block"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-016",
+      "profile_id": "zuldrak-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 37.0,
+      "time_precision": "user_minute_window_plus_journey_exact_events",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "zuldrak",
+      "source_record": {
+        "date": "2026-08-31/09-01",
+        "route_key": "zuldrak",
+        "run_kind": "first_group_live_entry_through_forward_camp_partial",
+        "time_precision": "user_minute_window_plus_journey_exact_events",
+        "user_declared_start_local": "2026-08-31T23:32:00+08:00",
+        "effective_end_local": "2026-09-01T00:09:00+08:00",
+        "actual_minutes": 37.0,
+        "route_window": "用户明确23:32从开始交《前往圣光据点！》计时，00:09停止。Journey在23:33:40记录12789完成；期间完成圣光据点/怒爪巢穴、北伐军前线营地三名失踪者与相关任务，到00:06:43记录12901《从无到有》、12903《朋友的意义……》完成。12912《风暴将至》因盖米尔囚笼交互距离/碰撞盒问题未能接取，用户随后停止，因此37分钟包含现场尝试接取该任务的操作成本。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "12912《风暴将至》前置12894已在23:49:42完成，等级也满足；任务本身不需要前置物品。公开WotLK资料显示盖米尔被关在笼中时交互判定很难点到，需要贴近西南侧、跳起或利用较高坐骑进入交互范围。本次未接到主要属于任务交互/地形学习成本，不应回写为正常任务服务时间。"
+        ],
+        "journey_source": {
+          "event_count": 2779,
+          "source_sha256": "51984e2cc35daea84a7f8019d044111635a4f63ea732cda97b5da93bada76e85"
+        },
+        "journey_reference_blocks": [
+          {
+            "scope": "圣光据点首到→怒爪巢穴→回圣光据点",
+            "start_local": "2026-08-31T23:32:00+08:00",
+            "end_local": "2026-08-31T23:47:45+08:00",
+            "actual_minutes": 15.75,
+            "note": "包含12789交付、12859/12861/12857/12902接取与怒爪巢穴目标；23:47:17—23:47:45连续完成12859、12857、12861。"
+          },
+          {
+            "scope": "北伐军前线营地接取→三名失踪者与相关任务→完成12901/12903/12904",
+            "start_local": "2026-08-31T23:47:33+08:00",
+            "end_local": "2026-09-01T00:06:43+08:00",
+            "actual_minutes": 19.1667,
+            "note": "12894于23:49:42完成并解锁前线支线；12904于00:02:48完成，12903于00:06:36完成，12901于00:06:43完成。12912未接到，不把后续12914计入本窗口。"
+          }
+        ],
+        "status": "first_group_zuldrak_live_partial_recorded_before_level80_local_reoptimization"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-017",
+      "profile_id": "zuldrak-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 203.6833,
+      "time_precision": "mixed_user_minute_start_and_journey_exact_endpoint",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "zuldrak",
+      "source_record": {
+        "date": "2026-09-02",
+        "route_key": "zuldrak",
+        "run_kind": "first_group_live_step3_start_through_silver_front_handoff",
+        "time_precision": "mixed_user_minute_start_and_journey_exact_endpoint",
+        "user_declared_start_local": "2026-09-02T20:08:00+08:00",
+        "journey_anchor_start_local": "2026-09-02T20:07:46+08:00",
+        "effective_end_local": "2026-09-02T23:31:41+08:00",
+        "actual_minutes": 203.6833,
+        "route_window": "用户明确20:08从当时步骤3开头《拯救盖米尔》开始；Journey在20:07:46记录12914接取。随后完成黑锋哨站、骨肠、盖米尔载具与沃尔塔鲁斯完整链，23:30:09完成12795《银色前沿》，至23:31:41接完银色前沿首轮后续任务后视为本段终点。23:39之后用户主动飞去做日常任务，全部排除在祖达克路线实跑窗口之外。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "本次为祖达克首组开荒，用户明确说明开荒时间较长，只作参考，不作为成熟重复路线clean baseline。",
+          "本轮才确认多项五开共享/个人机制，包括《某种邀请……》单次掉落连续拾取、《乔装打扮》逐号伪装、《风暴之王的复仇》共享但需预先把其余角色移到Boss附近、《真相大白》逐号交互，以及《背叛》战斗共享但结尾拾取和返程交互逐号完成。",
+          "23:39之后进入独立日常任务绕行，不纳入本次祖达克墙钟。"
+        ],
+        "live_mechanic_confirmations": [
+          "12914《拯救盖米尔》不共享。",
+          "12630《纳斯和巨魔的毛发》共享。",
+          "12631《某种邀请……》只需掉落一次，同一次掉落可由五号依次拾取。",
+          "12652《喂饱食尸鬼》共享；12648《乔装打扮》五号分别伪装。",
+          "12916《唯一的希望》共享；12919《风暴之王的复仇》共享，但应先把其余角色移动到Boss附近。",
+          "12673《官大一级压死人》共享；12669《目前为止，一切很糟》共享；12677《危险的材料》不共享。",
+          "12710《真相大白》不共享，五号依次交互。",
+          "12713《背叛》Boss战斗共享；结尾任务道具与返回痛苦之匣的交互需五号分别完成。"
+        ],
+        "journey_source": {
+          "event_count": 2849,
+          "source_sha256": "503af3a72ff9e9f54d78e73a4674b7e4dff8e877a917c4a8352d357039898de5"
+        },
+        "status": "first_group_zuldrak_live_reference_recorded_daily_detour_excluded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-018",
+      "profile_id": "zuldrak-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 79.8833,
+      "time_precision": "mixed_user_minute_start_and_journey_exact_endpoints",
+      "clean": true,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "zuldrak",
+      "source_record": {
+        "date": "2026-09-03",
+        "route_key": "zuldrak",
+        "run_kind": "first_group_live_steps_8_10",
+        "time_precision": "mixed_user_minute_start_and_journey_exact_endpoints",
+        "user_declared_start_local": "2026-09-03T21:44:00+08:00",
+        "effective_end_local": "2026-09-03T23:03:53+08:00",
+        "actual_minutes": 79.8833,
+        "route_window": "用户明确21:44开始步骤8；此前为独立日常任务，全部排除。Journey在21:50:08记录步骤8末端《西莱图斯祭坛的麻烦》接取，22:53:01记录步骤9末端《蝙蝠翅膀》完成，23:03:53记录步骤10末端《达卡莱巨魔不需要水元素！》接取，因此本条只保存步骤8—10连续可靠窗口。",
+        "actual_contains_learning_or_route_errors": false,
+        "live_mechanic_confirmations": [
+          "12557《实验室的学徒》不共享；12799《吸取灵魂》不共享。",
+          "12609《收集腐液》不共享；12610《蝙蝠翅膀》不共享，两者路线改为连续完成后一起回阿纳斯交付。",
+          "12597《止痛药》不共享；12562《达卡莱巨魔不需要水元素！》共享；12510《珍贵的元素液体》共享。"
+        ],
+        "journey_source": {
+          "event_count": 2936,
+          "source_sha256": "6886715a1eb1f8193224050338257cf0e8d6e93d5f264c69e0cdfa9d915f1b95"
+        },
+        "same_endpoint_comparison": {
+          "route_window": "当前玩家步骤8—10",
+          "actual_minutes": 79.8833,
+          "clean_baseline_minutes": 63.0,
+          "overrun_minutes": 16.8833,
+          "overrun_percent": 26.8,
+          "step_actuals_minutes": [
+            {
+              "step": 8,
+              "actual": 6.1333,
+              "clean_baseline": 19.6,
+              "delta": -13.4667
+            },
+            {
+              "step": 9,
+              "actual": 62.8833,
+              "clean_baseline": 28.2,
+              "delta": 34.6833,
+              "note": "步骤9为本轮主要超额来源；其中《收集腐液》《蝙蝠翅膀》22:11:37接出后至22:53:01两项均交付，连续跨度约41.4分钟。先保存实跑事实，不用单组首跑直接覆盖clean任务服务时间。"
+            },
+            {
+              "step": 10,
+              "actual": 10.8667,
+              "clean_baseline": 15.2,
+              "delta": -4.3333
+            }
+          ]
+        },
+        "status": "reliable_scoped_actual_steps_8_10_recorded"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-019",
+      "profile_id": "zuldrak-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 282.4333,
+      "time_precision": "mixed_journey_exact_start_user_minute_stop",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "zuldrak",
+      "source_record": {
+        "date": "2026-09-06",
+        "route_key": "zuldrak",
+        "run_kind": "first_group_live_after_painkiller_through_step20_accepts",
+        "time_precision": "mixed_journey_exact_start_user_minute_stop",
+        "effective_start_local": "2026-09-06T20:48:34+08:00",
+        "effective_end_local": "2026-09-07T01:31:00+08:00",
+        "actual_minutes": 282.4333,
+        "latest_journey_event_local": "2026-09-07T01:30:29+08:00",
+        "actual_to_latest_event_minutes": 281.9167,
+        "route_window": "用户先为一个角色补做上次漏接的止痛药，从交付后开始；经过步骤13余段、斗兽场、金亚莱、哈克娅/伦诺克/奎丝鲁恩链，到步骤20希姆托加四项任务接取完毕。用户01:31停止；不是完整地图实测。",
+        "excluded_before_start": "20:43:13接止痛药至20:48:34交付及其之前的单号补做，全部排除。",
+        "known_error_or_learning_sources": [
+          "接核实情况前整理背包数分钟，无法精确扣减。21:56:44交斗兽场冠军至22:07:10接核实情况共10分26秒还含交通，不能全算背包时间。",
+          "用户评价路线大体无问题、斗兽场打完比较轻松；首跑机制学习与五开操作成本仍未独立量化。"
+        ],
+        "clean_actual_minutes": null,
+        "journey_source": {
+          "event_count": 3020,
+          "source_sha256": "db2fe7d60bb8317ca5c94878c6f1db9a7940275ba12bafc9882c0eef4859247e",
+          "scope": "当前单一脱敏Journey；不外推五号状态完全一致。"
+        },
+        "same_endpoint_comparison": {
+          "route_window": "步骤14开始至步骤18末尾寻找风蛇女神接取；完整包含中间炉石返回，不受步骤17/18书签边界调整影响。",
+          "start_local": "2026-09-06T21:36:46+08:00",
+          "end_local": "2026-09-07T00:29:19+08:00",
+          "actual_minutes": 172.55,
+          "previous_clean_baseline_minutes": 93.1,
+          "previous_range_minutes": [
+            70.2,
+            116.3
+          ],
+          "clean_baseline_minutes": 92.0,
+          "overrun_minutes": 80.55,
+          "step_actuals_against_previous_route": [
+            {
+              "steps": [
+                14
+              ],
+              "start": "2026-09-06T21:36:46+08:00",
+              "end": "2026-09-06T21:48:36+08:00",
+              "actual_minutes": 11.8333,
+              "previous_clean_baseline_minutes": 11.2
+            },
+            {
+              "steps": [
+                15,
+                16
+              ],
+              "start": "2026-09-06T21:48:36+08:00",
+              "end": "2026-09-06T22:32:55+08:00",
+              "actual_minutes": 44.3167,
+              "previous_clean_baseline_minutes": 20.0,
+              "note": "本次希姆托加的祝福22:07:55提前交付，因此合并比较。含接核实情况前整理背包数分钟，具体时长未知。"
+            },
+            {
+              "steps": [
+                17
+              ],
+              "start": "2026-09-06T22:32:55+08:00",
+              "end": "2026-09-06T23:43:46+08:00",
+              "actual_minutes": 70.85,
+              "previous_clean_baseline_minutes": 37.3,
+              "note": "止于希姆鲁克的祝福交付；新版步骤17末尾炉石不属于该精确端点。"
+            },
+            {
+              "steps": [
+                18
+              ],
+              "start": "2026-09-06T23:43:46+08:00",
+              "end": "2026-09-07T00:29:19+08:00",
+              "actual_minutes": 45.55,
+              "previous_clean_baseline_minutes": 24.6,
+              "note": "起于希姆鲁克祝福交付，包含之后的返回希姆托加；与新版步骤18起点不同。"
+            }
+          ]
+        },
+        "partial_windows": [
+          {
+            "scope": "交止痛药后至步骤13结束；补做回归起点不等于完整步骤13",
+            "actual_minutes": 48.2
+          },
+          {
+            "scope": "步骤19和步骤20接取阶段至用户停止；Journey不记录炉石，不拆为精确完整步骤19",
+            "start_local": "2026-09-07T00:29:19+08:00",
+            "end_local": "2026-09-07T01:31:00+08:00",
+            "actual_minutes": 61.6833
+          }
+        ],
+        "status": "scoped_first_run_reference_bag_cleanup_unquantified"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-020",
+      "profile_id": "icecrown-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 56,
+      "time_precision": "user_reported_minute",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "icecrown",
+      "source_record": {
+        "date": "2026-09-07",
+        "route_key": "icecrown",
+        "run_kind": "fivebox_daily_batch_with_cross_map_entry",
+        "time_precision": "user_reported_minute",
+        "source": "用户本轮实跑反馈；日期按本次会话当地日期记录。",
+        "effective_start_local": "2026-09-07T19:37:00+08:00",
+        "effective_end_local": "2026-09-07T20:33:00+08:00",
+        "actual_minutes": 56,
+        "route_window": "五开冰冠日常整轮，从祖达克起飞开始，到用户20:33宣布结束；包括跨图交通和两次死亡复活，不属于祖达克一次性任务实跑。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "用户报告本次死亡2次，复活花费很长时间，导致总用时较长；具体异常耗时未知。"
+        ],
+        "death_count": 2,
+        "death_recovery_minutes": null,
+        "clean_actual_minutes": null,
+        "current_route_clean_baseline_minutes": null,
+        "quest_set_note": "沿用当前10项日常讨论背景；用户未逐项确认本轮交付清单，也未明确本轮是否已用实战训练替换爆炸油，不把候选清单当实际完成证明。",
+        "entry_variant": {
+          "condition": "从其他地图进入冰冠做日常，经银色比武场进入",
+          "replace_quest": "爆炸油",
+          "with_quest": "实战训练",
+          "reason": "用户现场判断从其他地图飞来时银色比武场最近，可顺路选择实战训练。",
+          "applied_in_this_run": null
+        },
+        "status": "user_reported_batch_recorded_death_recovery_unquantified"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-021",
+      "profile_id": "howling-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 95.8,
+      "time_precision": "journey_anchor_plus_user_reported_minute_stop",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "howling",
+      "source_record": {
+        "date": "2026-09-11",
+        "route_key": "howling",
+        "run_kind": "fivebox_first_run_partial_live_window",
+        "time_precision": "journey_anchor_plus_user_reported_minute_stop",
+        "source": "最新Questie Journey + 用户本轮嚎风首组实跑反馈。",
+        "effective_start_local": "2026-09-11T01:03:12+08:00",
+        "effective_end_local": "2026-09-11T02:39:00+08:00",
+        "actual_minutes": 95.8,
+        "route_window": "最新Journey从首次接11301《疯狂的研究》作为稳定起点，到用户02:39明确暂停嚎风开始日常。期间完成西侧开场、钢铁之门、酒桶、《问题的根源》，并到新阿加曼德接出11279《绿色的龙卵和龙崽》与11424《盾牌岭》；首个接取事件以前的征服堡→药剂师营地交通未包含在95.8分钟内。",
+        "actual_contains_learning_or_route_errors": true,
+        "known_error_or_learning_sources": [
+          "首组现场发现旧路线漏在开场接《酒里有什么？》，并把无前置的《钢铁之门的古器》错误拖到后期；当前已按实跑局部重排，因此95.8分钟不得直接当成熟路线baseline。"
+        ],
+        "clean_actual_minutes": null,
+        "current_route_clean_baseline_minutes": null,
+        "status": "raw_first_group_partial_sample_do_not_recalibrate_final_model"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-022",
+      "profile_id": "icecrown-fivebox",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": 53,
+      "time_precision": "user_reported_minute",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "icecrown",
+      "source_record": {
+        "date": "2026-09-11",
+        "route_key": "icecrown",
+        "run_kind": "fivebox_daily_batch_from_howling",
+        "time_precision": "user_reported_minute",
+        "source": "用户本轮实跑反馈。",
+        "effective_start_local": "2026-09-11T02:39:00+08:00",
+        "effective_end_local": "2026-09-11T03:32:00+08:00",
+        "actual_minutes": 53,
+        "route_window": "用户02:39暂停嚎风后从新阿加曼德出发做固定日常，到03:32结束；原始总时长包括去程跨图系统飞行，末尾炉石/返程属于日常正常收尾并保留在有效日常时间中。",
+        "transport_samples": [
+          {
+            "from": "新阿加曼德",
+            "to": "银色比武场",
+            "mode": "system_flight",
+            "actual_minutes": 7.3333,
+            "display": "7分20秒"
+          }
+        ],
+        "daily_effective_minutes_excluding_outbound_system_flight": 45.6667,
+        "daily_effective_display": "45分40秒",
+        "daily_timing_contract": "每轮同时保留原始总时长，并扣除进入日常前的去程系统飞行得到有效日常时间；末尾炉石/返程时间不扣除。继续逐轮记录，只有多轮结果趋于稳定后才整理并固化正式日常基线。",
+        "clean_actual_minutes": null,
+        "current_route_clean_baseline_minutes": null,
+        "status": "raw_daily_sample_do_not_recalibrate_final_model"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-023",
+      "profile_id": null,
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": "journey_second_plus_user_pause_window",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing",
+        "profile_mapping_missing"
+      ],
+      "source_route_key": "dk_starting_zone",
+      "source_record": {
+        "date": "2026-09-13",
+        "route_key": "dk_starting_zone",
+        "run_kind": "first_group_fivebox_orc_dk_starting_zone",
+        "time_precision": "journey_second_plus_user_pause_window",
+        "source": "2026-09-14用户实跑反馈 + 最新Questie Journey。",
+        "effective_start_local": "2026-09-13T22:39:03+08:00",
+        "user_stop_local": "2026-09-14T03:30:00+08:00",
+        "journey_last_event_local": "2026-09-14T03:28:51+08:00",
+        "raw_wall_minutes_to_user_stop": 290.95,
+        "pause_windows": [
+          {
+            "start_local": "2026-09-13T23:03:00+08:00",
+            "end_local": "2026-09-14T00:03:00+08:00",
+            "minutes": 60
+          }
+        ],
+        "effective_active_minutes_to_user_stop": 230.95,
+        "effective_active_display": "约3小时51分",
+        "journey_anchor": {
+          "first_event": "22:39:03 接12593《为巫妖王而战》",
+          "last_event": "03:28:51 完成13189《酋长的祝福》"
+        },
+        "level_milestones": [
+          {
+            "level": 56,
+            "local": "2026-09-13T22:58:49+08:00",
+            "effective_elapsed_minutes": 19.77
+          },
+          {
+            "level": 57,
+            "local": "2026-09-14T00:41:28+08:00",
+            "effective_elapsed_minutes": 62.42
+          },
+          {
+            "level": 58,
+            "local": "2026-09-14T01:34:22+08:00",
+            "effective_elapsed_minutes": 115.32
+          },
+          {
+            "level": 59,
+            "local": "2026-09-14T02:15:33+08:00",
+            "effective_elapsed_minutes": 156.5
+          },
+          {
+            "level": 60,
+            "local": "2026-09-14T02:27:39+08:00",
+            "effective_elapsed_minutes": 168.6
+          }
+        ],
+        "end_state_user_reported": "60级，约12.2万当前等级经验",
+        "route_window": "从创建DK后接第一个出生区任务开始计时；23:03暂停、00:03继续；03:30停止。首组已基本熟悉机制，后续将按本次实际任务顺序制作独立DK出生区HTML路线。",
+        "status": "raw_first_group_complete_starting_zone_sample"
+      }
+    },
+    {
+      "observation_id": "legacy-route-run-024",
+      "profile_id": "hellfire-dk-speed",
+      "profile_version": null,
+      "program_id": null,
+      "program_version": null,
+      "action_scope": null,
+      "actual_minutes": null,
+      "time_precision": "pending_journey_anchor_plus_user_pause_window",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_learning_or_route_errors",
+        "profile_version_missing",
+        "stable_action_scope_missing"
+      ],
+      "source_route_key": "hellfire_dk",
+      "source_record": {
+        "date": "2026-09-15",
+        "route_key": "hellfire_dk",
+        "run_kind": "live_in_progress",
+        "time_precision": "pending_journey_anchor_plus_user_pause_window",
+        "source": "用户当前这一次地狱火DK实跑即时反馈；完整Journey尚未提供。以下计时说明只用于用户下一次提交本轮Journey时的一次性结算，不得复用为后续批次或永久路线规则。",
+        "scope": "current_2026_09_15_run_only",
+        "consume_when": "仅在用户下一次提供本轮完整Journey时使用；结算完成后转成该run的历史事实，不继续作为未来run指令。",
+        "timing_anchor_rule": "仅本轮结算：以该Journey中接《跨越黑暗之门》的事件时间作为起点。",
+        "pause_windows_raw": [
+          {
+            "start_local_clock": "00:40",
+            "end_local_clock": "00:43",
+            "minutes_to_exclude": 3
+          },
+          {
+            "start_event": "接《肮脏的工作》",
+            "end_event": null,
+            "status": "open_pause_window",
+            "rule": "仅本轮：从接《肮脏的工作》开始停止有效计时；之后全部视为脏时间，直到用户后续明确恢复。"
+          }
+        ],
+        "excluded_error_practice_windows": [
+          {
+            "start_event": "接《格里洛克之眼》",
+            "end_event": "完成《格里洛克之眼》",
+            "rule": "本轮整段不计入有效墙钟；当前是错误/学习型实践，且按不共享方式执行，不能代表稳定路线耗时。"
+          }
+        ],
+        "partial_mechanic_facts": [
+          "《任务：地狱岩床》共享。",
+          "《格里洛克之眼》本轮按不共享方式完成，但共享性仍未知；用户查到刷新约45秒，第三组专门验证。"
+        ],
+        "temporary_run_incidents": [
+          "《战斗的号角》被用户误删除：仅本轮人为操作，忽略，不视为路线/任务链错误；用户会在暂停后补接回来，相关补救时间不计有效墙钟。"
+        ],
+        "actual_minutes": null,
+        "status": "in_progress_waiting_for_full_journey"
+      }
+    }
+  ]
+}

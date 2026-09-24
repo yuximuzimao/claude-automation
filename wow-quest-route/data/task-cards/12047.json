@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "task_id": 12047,
+  "identity": {
+    "name_zhcn": "不会融化的东西",
+    "name_en": "Something That Doesn't Melt",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 72,
+    "pre_any": [
+      12046
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 56000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38072,
+        "quantity": 1,
+        "name_zhcn": "雷霆电容器",
+        "name_en": "Thunder Capacitor",
+        "sell_price_each_copper": 49964,
+        "sell_price_total_copper": 49964
+      },
+      {
+        "item_id": 38080,
+        "quantity": 1,
+        "name_zhcn": "自动武器镀膜器",
+        "name_en": "Automated Weapon Coater",
+        "sell_price_each_copper": 49964,
+        "sell_price_total_copper": 49964
+      },
+      {
+        "item_id": 37991,
+        "quantity": 1,
+        "name_zhcn": "超强增效自然皮甲",
+        "name_en": "Hyper-amplified Natural Leather Vest",
+        "sell_price_each_copper": 46963,
+        "sell_price_total_copper": 46963
+      },
+      {
+        "item_id": 38035,
+        "quantity": 1,
+        "name_zhcn": "紧缩锁链靴",
+        "name_en": "Tightened Chainmesh Boots",
+        "sell_price_each_copper": 40017,
+        "sell_price_total_copper": 40017
+      },
+      {
+        "item_id": 37948,
+        "quantity": 1,
+        "name_zhcn": "折光护肩",
+        "name_en": "Refractive Shoulderpads",
+        "sell_price_each_copper": 27885,
+        "sell_price_total_copper": 27885
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 49964,
+    "gear_sale_max_copper": 49964,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20750
+  },
+  "guide": [
+    "接取：希弗里克斯。",
+    "在诺兹拉斯哨站东边的巨龙骸骨堆里收集12块破碎的骨片。",
+    "交付：希弗里克斯。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12047",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12047/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《不会融化的东西》：破碎骨片为地面固定拾取物。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

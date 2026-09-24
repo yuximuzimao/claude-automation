@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "task_id": 9852,
+  "identity": {
+    "name_zhcn": "终极挑战",
+    "name_en": "The Ultimate Bloodsport",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 68,
+    "min_level": 64,
+    "pre_any": [],
+    "pre_all": [
+      9851,
+      9856,
+      9859
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 117000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 25640,
+        "quantity": 1,
+        "name_zhcn": "奈辛瓦里狩猎队魔棒",
+        "name_en": "Nesingwary Safari Stick",
+        "sell_price_each_copper": 58059,
+        "sell_price_total_copper": 58059
+      },
+      {
+        "item_id": 25639,
+        "quantity": 1,
+        "name_zhcn": "赫米特的雷象猎枪",
+        "name_en": "Hemet's Elekk Gun",
+        "sell_price_each_copper": 57838,
+        "sell_price_total_copper": 57838
+      },
+      {
+        "item_id": 25645,
+        "quantity": 1,
+        "name_zhcn": "平原图腾",
+        "name_en": "Totem of the Plains",
+        "sell_price_each_copper": 23660,
+        "sell_price_total_copper": 23660
+      },
+      {
+        "item_id": 25644,
+        "quantity": 1,
+        "name_zhcn": "纳格兰的赐福之书",
+        "name_en": "Blessed Book of Nagrand",
+        "sell_price_each_copper": 23574,
+        "sell_price_total_copper": 23574
+      },
+      {
+        "item_id": 25643,
+        "quantity": 1,
+        "name_zhcn": "哈罗德的活力之刺",
+        "name_en": "Harold's Rejuvenating Broach",
+        "sell_price_each_copper": 23486,
+        "sell_price_total_copper": 23486
+      },
+      {
+        "item_id": 29211,
+        "quantity": 1,
+        "name_zhcn": "沙度飞斧",
+        "name_en": "Fitz's Throwing Axe",
+        "sell_price_each_copper": 9954,
+        "sell_price_total_copper": 9954
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 58059,
+    "gear_sale_max_copper": 58059,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 17950
+  },
+  "guide": [
+    "接取：赫米特·奈辛瓦里。",
+    "将塔丝克之心交给纳格兰奈辛瓦里狩猎队营地的赫米特·奈辛瓦里。",
+    "交付：赫米特·奈辛瓦里。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9852",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《终极挑战》：只在三条高级狩猎全部交完仍未68时启用；击杀塔丝克后，确认每个仍需要任务物的角色都取得塔丝克之心再离开。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

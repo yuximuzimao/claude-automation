@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": 11632,
+  "identity": {
+    "name_zhcn": "寒风中的怪兽……",
+    "name_en": "What the Cold Wind Brings...",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37505,
+        "quantity": 1,
+        "name_zhcn": "战斗领袖胸铠",
+        "name_en": "Battle Leader's Breastplate",
+        "sell_price_each_copper": 57698,
+        "sell_price_total_copper": 57698
+      },
+      {
+        "item_id": 37424,
+        "quantity": 1,
+        "name_zhcn": "平原猎手护肩",
+        "name_en": "Plainhunter's Epaulettes",
+        "sell_price_each_copper": 40013,
+        "sell_price_total_copper": 40013
+      },
+      {
+        "item_id": 37214,
+        "quantity": 1,
+        "name_zhcn": "酷热护腿",
+        "name_en": "Sweltering Leggings",
+        "sell_price_each_copper": 34897,
+        "sell_price_total_copper": 34897
+      },
+      {
+        "item_id": 37394,
+        "quantity": 1,
+        "name_zhcn": "沼泽行者腰带",
+        "name_en": "Marshwalker Waistguard",
+        "sell_price_each_copper": 20764,
+        "sell_price_total_copper": 20764
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 57698,
+    "gear_sale_max_copper": 57698,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：伊斯里克斯的甲壳。",
+    "带着伊斯里克斯的甲壳去见战歌要塞的萨鲁法尔大王。",
+    "交付：萨鲁法尔大王。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11632",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《寒风中的怪兽……》：只在路过时检查伊斯里克斯事件；事件正在进行才击杀收割者伊斯里克斯并拾取甲壳接任务，没有事件就直接继续，不等待。\n这里直接炉石回战歌，不从瓦雷杜斯一带骑回要塞。《寒风中的怪兽……》仅在此前伊斯里克斯事件分支已接时交；未接则跳过。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "registry_id": "route-timing-rules-v1",
+  "rules": {
+    "zero-independent-service": {
+      "kind": "zero_service",
+      "description": "任务目标不产生独立objective service墙钟；移动/Hub/共享主体服务由其它结构计价。",
+      "required_inputs": []
+    },
+    "shared-kill-count": {
+      "kind": "kill_count",
+      "description": "共享击杀任务：按结构化目标数量和当前Profile战斗校准计算一次队伍服务成本。",
+      "required_inputs": ["kill_count", "combat_seconds_per_mob"]
+    },
+    "personal-drop-count": {
+      "kind": "personal_drop",
+      "description": "五号个人掉落：按需求量、掉率、战斗与个人拾取成本估算最慢角色完成窗口。",
+      "required_inputs": ["required_count", "drop_rate", "combat_seconds_per_mob", "personal_loot_seconds_per_corpse", "party_size"]
+    },
+    "fixed-object-interaction": {
+      "kind": "fixed_object",
+      "description": "固定物/场景交互：按交互次数、是否共享、当前队伍规模和单次操作校准计算。",
+      "required_inputs": ["interaction_count", "interaction_scope", "fixed_object_seconds_per_character", "party_size"]
+    },
+    "fixed-service-seconds": {
+      "kind": "fixed_seconds",
+      "description": "已被当前服务器证据隔离出的固定/脚本/事件服务墙钟。",
+      "required_inputs": ["fixed_service_seconds"]
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 12041,
+  "identity": {
+    "name_zhcn": "失落的帝国",
+    "name_en": "The Lost Empire",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12040
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38101,
+        "quantity": 1,
+        "name_zhcn": "石路战靴",
+        "name_en": "Stonepath Sabatons",
+        "sell_price_each_copper": 48692,
+        "sell_price_total_copper": 48692
+      },
+      {
+        "item_id": 38040,
+        "quantity": 1,
+        "name_zhcn": "冰剪护腕",
+        "name_en": "Iceshear Bindings",
+        "sell_price_each_copper": 27061,
+        "sell_price_total_copper": 27061
+      },
+      {
+        "item_id": 37996,
+        "quantity": 1,
+        "name_zhcn": "飘雪劫掠者手套",
+        "name_en": "Snowfall Reaver Gloves",
+        "sell_price_each_copper": 22222,
+        "sell_price_total_copper": 22222
+      },
+      {
+        "item_id": 37954,
+        "quantity": 1,
+        "name_zhcn": "废土之风束腰",
+        "name_en": "Wastewind Cinch",
+        "sell_price_each_copper": 18991,
+        "sell_price_total_copper": 18991
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 48692,
+    "gear_sale_max_copper": 48692,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 150
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 15250
+  },
+  "guide": [
+    "接取：拆解者基里克斯。",
+    "将基里克斯的作战计划带到东边的阿格玛之锤去，交给阿格玛大王。",
+    "交付：阿格玛大王。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12041",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

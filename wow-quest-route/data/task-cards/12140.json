@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": 12140,
+  "identity": {
+    "name_zhcn": "洛纳乌克万岁！",
+    "name_en": "All Hail Roanauk!",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 73,
+    "min_level": 71,
+    "pre_any": [
+      12069
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38106,
+        "quantity": 1,
+        "name_zhcn": "石化白骨之靴",
+        "name_en": "Petrified Bone Footguards",
+        "sell_price_each_copper": 49572,
+        "sell_price_total_copper": 49572
+      },
+      {
+        "item_id": 37960,
+        "quantity": 1,
+        "name_zhcn": "誓言徽记之戒",
+        "name_en": "Oath Signet",
+        "sell_price_each_copper": 33162,
+        "sell_price_total_copper": 33162
+      },
+      {
+        "item_id": 38293,
+        "quantity": 1,
+        "name_zhcn": "日灼之花",
+        "name_en": "Suntouched Flowers",
+        "sell_price_each_copper": 33162,
+        "sell_price_total_copper": 33162
+      },
+      {
+        "item_id": 38002,
+        "quantity": 1,
+        "name_zhcn": "荣耀披风",
+        "name_en": "Honorborn Cloak",
+        "sell_price_each_copper": 27272,
+        "sell_price_total_copper": 27272
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 49572,
+    "gear_sale_max_copper": 49572,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20500
+  },
+  "guide": [
+    "接取：阿格玛大王。",
+    "在阿格玛之锤找到洛纳乌克·冰雾，并引导他加入部落，成为部落的领袖之一。 /  / 完成任务之后带着部落的血誓向阿格玛大王复命。",
+    "交付：阿格玛大王。",
+    "跟随阿格玛/洛纳乌克的脚本并完成洛纳乌克的全部对话，直到效忠事件结束；不是普通命名怪击杀任务。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12140",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12140; legacy_type=script_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12140",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12140/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《洛纳乌克万岁！》：共享：主控触发并看完整个事件脚本即可同步全队。\n【需要单独修正优化】《洛纳乌克万岁！》首组龙骨实跑确认：主控触发并完成事件脚本后五号共享完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12140",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

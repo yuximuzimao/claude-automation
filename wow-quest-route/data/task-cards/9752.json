@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "task_id": 9752,
+  "identity": {
+    "name_zhcn": "逃离暗泽村",
+    "name_en": "Escape from Umbrafen",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 63,
+    "min_level": 60,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 29000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 25519,
+        "quantity": 1,
+        "name_zhcn": "看守者之锤",
+        "name_en": "Warden's Hammer",
+        "sell_price_each_copper": 61556,
+        "sell_price_total_copper": 61556
+      },
+      {
+        "item_id": 25518,
+        "quantity": 1,
+        "name_zhcn": "探险者护腿",
+        "name_en": "Explorer's Leggings",
+        "sell_price_each_copper": 30665,
+        "sell_price_total_copper": 30665
+      },
+      {
+        "item_id": 25517,
+        "quantity": 1,
+        "name_zhcn": "保护者的勋章",
+        "name_en": "Preserver's Medallion",
+        "sell_price_each_copper": 30284,
+        "sell_price_total_copper": 30284
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 61556,
+    "gear_sale_max_copper": 61556,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 10400
+  },
+  "guide": [
+    "接取：凯拉·长鬃。",
+    "护送凯拉·长鬃返回赞加沼泽的塞纳里奥庇护所，然后向伊谢尔·风歌复命。",
+    "交付：伊谢尔·风歌。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9752",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《逃离暗泽村》：五号都接好任务后只跑一次护送即可。\n《逃离暗泽村》：共享：五号都接好任务后一起护送凯拉返回塞纳里奥庇护所；保持队伍跟随。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

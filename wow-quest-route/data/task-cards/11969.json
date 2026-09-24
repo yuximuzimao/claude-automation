@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "task_id": 11969,
+  "identity": {
+    "name_zhcn": "触动陷阱",
+    "name_en": "Springing the Trap",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 69,
+    "pre_any": [
+      11967
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 47000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37080,
+        "quantity": 1,
+        "name_zhcn": "赤红的意志",
+        "name_en": "Crimson Will",
+        "sell_price_each_copper": 108665,
+        "sell_price_total_copper": 108665
+      },
+      {
+        "item_id": 37077,
+        "quantity": 1,
+        "name_zhcn": "浓烟之爪",
+        "name_en": "Smoldering Talon",
+        "sell_price_each_copper": 83683,
+        "sell_price_total_copper": 83683
+      },
+      {
+        "item_id": 37076,
+        "quantity": 1,
+        "name_zhcn": "炽热之刺",
+        "name_en": "Fiery Prod",
+        "sell_price_each_copper": 83371,
+        "sell_price_total_copper": 83371
+      },
+      {
+        "item_id": 37075,
+        "quantity": 1,
+        "name_zhcn": "锯齿鳞片匕首",
+        "name_en": "Serrated Scale Shank",
+        "sell_price_each_copper": 83050,
+        "sell_price_total_copper": 83050
+      },
+      {
+        "item_id": 37078,
+        "quantity": 1,
+        "name_zhcn": "赤红守护者魔杖",
+        "name_en": "Rod of the Crimson Keeper",
+        "sell_price_each_copper": 63002,
+        "sell_price_total_copper": 63002
+      },
+      {
+        "item_id": 37564,
+        "quantity": 1,
+        "name_zhcn": "缀鳞烈焰披风",
+        "name_en": "Scaled Flame Cloak",
+        "sell_price_each_copper": 25310,
+        "sell_price_total_copper": 25310
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 108665,
+    "gear_sale_max_copper": 108665,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：莱洛拉斯。",
+    "莱洛拉斯要你在考达拉的信号火焰处使用莱洛拉斯的火花。",
+    "交付：莱洛拉斯。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11969",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《触动陷阱》：到信号火焰约(25.4,21.8)，站在火焰旁使用任务物品莱洛拉斯的火花触发事件；到坐标不会自动完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

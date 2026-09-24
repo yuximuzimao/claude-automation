@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 12285,
+  "identity": {
+    "name_zhcn": "先发制人",
+    "name_en": "Do Unto Others",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 73,
+    "min_level": 71,
+    "pre_any": [
+      12283
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 106000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38534,
+        "quantity": 1,
+        "name_zhcn": "净化洗礼护腕",
+        "name_en": "Purity-Anointed Warbands",
+        "sell_price_each_copper": 39397,
+        "sell_price_total_copper": 39397
+      },
+      {
+        "item_id": 38535,
+        "quantity": 1,
+        "name_zhcn": "悔恨腕甲",
+        "name_en": "Wristguards of the Remorseful",
+        "sell_price_each_copper": 33699,
+        "sell_price_total_copper": 33699
+      },
+      {
+        "item_id": 38537,
+        "quantity": 1,
+        "name_zhcn": "刽子手的护腕",
+        "name_en": "Cuffs of the Decapitator",
+        "sell_price_each_copper": 28282,
+        "sell_price_total_copper": 28282
+      },
+      {
+        "item_id": 38536,
+        "quantity": 1,
+        "name_zhcn": "强悍征服者束腕",
+        "name_en": "Bindings of the Forceful Vanquisher",
+        "sell_price_each_copper": 22547,
+        "sell_price_total_copper": 22547
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 39397,
+    "gear_sale_max_copper": 39397,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25650
+  },
+  "guide": [
+    "接取：高级执行官乌洛斯。",
+    "怨毒镇的高级执行官乌洛斯命令你将阿比迪斯将军的徽记交给他。",
+    "交付：高级执行官乌洛斯。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12285",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

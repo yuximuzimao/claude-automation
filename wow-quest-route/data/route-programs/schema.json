@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wow-quest-route/route-program/v1",
+  "title": "WoW Quest Route Program v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "program_id",
+    "version",
+    "status",
+    "scope",
+    "entry_state_contract",
+    "goal",
+    "profile_ids"
+  ],
+  "$defs": {
+    "state_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active_task_ids"
+      ],
+      "properties": {
+        "active_task_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "completed_task_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "hearth_location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "opened_flight_points": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "boundary_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_id",
+        "kind",
+        "from_name",
+        "to_name"
+      ],
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "move",
+            "taxi",
+            "fixed_transport",
+            "quest_transport",
+            "use_hearth"
+          ]
+        },
+        "from_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "movement_mode": {
+          "enum": [
+            "ride",
+            "fly",
+            "swim"
+          ]
+        }
+      }
+    },
+    "boundary_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_profile_id",
+        "to_profile_id",
+        "operations"
+      ],
+      "properties": {
+        "from_profile_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "to_profile_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/boundary_operation"
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "program_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "current",
+        "frozen_reusable",
+        "retired"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "program_scope",
+        "character_profile",
+        "game_variant_id"
+      ],
+      "properties": {
+        "program_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "character_profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "game_variant_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "entry_state_contract": {
+      "$ref": "#/$defs/state_contract"
+    },
+    "goal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "profile_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "uniqueItems": true
+    },
+    "boundary_transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/boundary_transition"
+      }
+    },
+    "change_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "date",
+          "kind",
+          "summary"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "task_id": 11919,
+  "identity": {
+    "name_zhcn": "猎龙",
+    "name_en": "Drake Hunt",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 69,
+    "pre_any": [
+      11936
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 47000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37513,
+        "quantity": 1,
+        "name_zhcn": "红色龙族头盔",
+        "name_en": "Helm of the Crimson Drakonid",
+        "sell_price_each_copper": 44521,
+        "sell_price_total_copper": 44521
+      },
+      {
+        "item_id": 37226,
+        "quantity": 1,
+        "name_zhcn": "酷热长袍",
+        "name_en": "Sweltering Robes",
+        "sell_price_each_copper": 33875,
+        "sell_price_total_copper": 33875
+      },
+      {
+        "item_id": 37435,
+        "quantity": 1,
+        "name_zhcn": "烈焰能量护腕",
+        "name_en": "Flame Infused Bindings",
+        "sell_price_each_copper": 25694,
+        "sell_price_total_copper": 25694
+      },
+      {
+        "item_id": 37382,
+        "quantity": 1,
+        "name_zhcn": "焦灼龙皮腰带",
+        "name_en": "Charred Drakehide Belt",
+        "sell_price_each_copper": 21403,
+        "sell_price_total_copper": 21403
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 44521,
+    "gear_sale_max_copper": 44521,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：莱洛拉斯。",
+    "莱洛拉斯要你使用他的长矛驯服一只魔枢雏龙，并把它带回永生之盾交给他。",
+    "交付：莱洛拉斯。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11919",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11919; legacy_type=single_capture_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11919",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《猎龙》：共享：对空中的魔枢雏龙使用莱洛拉斯的长矛；这是捕获任务，不要把目标打死。命中后等待捕获生效，再带回莱洛拉斯。\n【需要单独修正优化】《猎龙》首组实跑确认任务进度五号共享；主控完成一次魔枢雏龙捕获并带回即可同步全队，不需要五个角色分别重复捕获。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11919",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

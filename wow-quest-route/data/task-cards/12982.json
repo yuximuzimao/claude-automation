@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "task_id": 12982,
+  "identity": {
+    "name_zhcn": "黑锋囚犯",
+    "name_en": "Ebon Blade Prisoners",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13085
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 74000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43935,
+        "quantity": 1,
+        "name_zhcn": "战地医师的锁甲",
+        "name_en": "Links of the Battlemender",
+        "sell_price_each_copper": 66914,
+        "sell_price_total_copper": 66914
+      },
+      {
+        "item_id": 43844,
+        "quantity": 1,
+        "name_zhcn": "黑锋肩铠",
+        "name_en": "Ebon Pauldrons",
+        "sell_price_each_copper": 58843,
+        "sell_price_total_copper": 58843
+      },
+      {
+        "item_id": 43859,
+        "quantity": 1,
+        "name_zhcn": "暗影拱顶兜帽",
+        "name_en": "Shadow Vault Cowl",
+        "sell_price_each_copper": 33092,
+        "sell_price_total_copper": 33092
+      },
+      {
+        "item_id": 43910,
+        "quantity": 1,
+        "name_zhcn": "维林的手套",
+        "name_en": "Gloves of the Flayed",
+        "sell_price_each_copper": 26679,
+        "sell_price_total_copper": 26679
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 66914,
+    "gear_sale_max_copper": 66914,
+    "reputation_rewards": [
+      {
+        "faction_id": 1098,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 22050
+  },
+  "guide": [
+    "接取：被折磨的维林。",
+    "暗影拱顶的被折磨的维林要求你去解救8位黑锋囚犯。你可以在尤顿海姆地区的各个牢笼里找到他们。",
+    "交付：被折磨的维林。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12982",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12982; legacy_type=cage_rescue_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12982",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《黑锋囚犯》首组实跑确认：共享；整组需要8把牢笼钥匙完成8次有效解救。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12982",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

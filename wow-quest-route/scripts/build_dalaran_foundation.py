@@ -13,7 +13,8 @@ sys.path.insert(0, str(ROOT))
 from lib.questie_effective import effective_quest_rows
 from lib.questie_lua import seq
 from lib.questie_source import load_questie
-from lib.wotlk_quest_rewards import base_quest_xp_at_level, max_level_bonus_money
+from lib.route_xp import load_xp_model_config
+from lib.wotlk_quest_rewards import max_level_bonus_money, server_quest_xp_at_level
 from lib.world_builder import QUEST, _ids, _parent_zone, _parse_zone_metadata
 from scripts import build_borean_tundra_foundation as shared
 from scripts.build_35_55_task_foundation import classify_objectives, classify_task, source_entities_for_item
@@ -34,7 +35,6 @@ MONTHLY = 65536
 RAID = 64
 REPEATABLE = 1
 EVENT = 2
-SERVER_XP_MULTIPLIER = 2.0
 # Canonical remaining Northrend spine after Dalaran. A task physically touching Dalaran but assigned
 # outside this set stays in the knowledge layer instead of becoming a current-route breadcrumb.
 MAIN_AXIS_ZONE_IDS = {4395, 67, 210, 3711, 66, 394, 495}
@@ -121,6 +121,7 @@ def current_scope_status(task: dict[str, Any]) -> tuple[str, list[str]]:
 def main() -> None:
     data = load_questie(QUESTIE_ZIP)
     meta = _parse_zone_metadata(QUESTIE_ZIP)
+    xp_model_config = load_xp_model_config()
 
     assigned_ids: set[int] = set()
     touching_ids: set[int] = set()
@@ -181,7 +182,12 @@ def main() -> None:
 
         required_level = row.get(4)
         qlevel = row.get(5)
-        current_xp = base_quest_xp_at_level(data, qid, CURRENT_LEVEL) * SERVER_XP_MULTIPLIER
+        current_xp = server_quest_xp_at_level(
+            data,
+            qid,
+            CURRENT_LEVEL,
+            model_config=xp_model_config,
+        )
         task: dict[str, Any] = {
             "quest_id": qid,
             "name": name,

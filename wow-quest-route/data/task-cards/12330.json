@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "task_id": 12330,
+  "identity": {
+    "name_zhcn": "阿纳托雷",
+    "name_en": "Anatoly Will Talk",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12329
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38744,
+        "quantity": 1,
+        "name_zhcn": "冬至徽记之戒",
+        "name_en": "Solstice Signet",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      },
+      {
+        "item_id": 38748,
+        "quantity": 1,
+        "name_zhcn": "休眠恶狼印记",
+        "name_en": "Seal of the Slumbering Wolf",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      },
+      {
+        "item_id": 38752,
+        "quantity": 1,
+        "name_zhcn": "塔特亚娜的坠饰",
+        "name_en": "Tatjana's Pendant",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 34846,
+    "gear_sale_max_copper": 34846,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 15700
+  },
+  "guide": [
+    "接取：萨莎。",
+    "白松商栈的萨莎要你进入冬至村，对塔特亚娜使用麻醉飞镖。然后将塔特亚娜带回白松商栈。",
+    "交付：萨莎。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12330",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12330; legacy_type=personal_scripted_respawn_sequential_confirmed",
+      "observed_at": "2026-09-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12330",
+      "observed_at": "2026-09-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《阿纳托雷》不共享：去至日村找塔季娅娜，对她使用镇静飞镖触发坐骑/带回脚本；一个号完成后其余号留在原地等塔季娅娜刷新，再依次完成。\n【需要单独修正优化】《阿纳托雷》灰熊丘陵首组实跑确认：不共享；一个角色完成后，其余角色需要留在原地等待目标刷新，再依次使用任务道具并完成脚本。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12330",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

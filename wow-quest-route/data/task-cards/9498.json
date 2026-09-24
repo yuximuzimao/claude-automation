@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "task_id": 9498,
+  "identity": {
+    "name_zhcn": "猎鹰岗哨",
+    "name_en": "Falcon Watch",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 62,
+    "min_level": 60,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 1000
+  },
+  "guide": [
+    "接取：玛提克·托塞多雷。",
+    "前往地狱火半岛西南方的猎鹰岗哨，向游侠队长维恩雷报到。",
+    "交付：游侠队长维恩雷。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-user-live-orc-dk",
+      "source_type": "user_live",
+      "source_ref": "2026-09-16 current Orc DK live run: same-name 《猎鹰岗哨》 was successfully accepted",
+      "observed_at": "2026-09-16",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity.name_zhcn",
+        "availability.required_race"
+      ]
+    },
+    {
+      "evidence_id": "evidence-azerothcore-9498",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; quest_id=9498; full-row comparison against 9499 differs only in id, race mask and localized quest text",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability.quest_level",
+        "availability.min_level",
+        "availability.required_race",
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-wowhead-wotlk-9498",
+      "source_type": "public_reference",
+      "source_ref": "https://www.wowhead.com/wotlk/quest=9498/falcon-watch",
+      "observed_at": "2026-09-16",
+      "version_scope": "WotLK Classic reference",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability.required_race",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-9498-reward-equivalence",
+      "source_type": "derived",
+      "source_ref": "AzerothCore quest_template rows 9498 and 9499 are identical in every reward-relevant field; verified Task Card 9499 reward facts therefore carry to the non-blood-elf variant 9498",
+      "observed_at": "2026-09-16",
+      "version_scope": "current architecture migration",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9498",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "data/route-profiles/hellfire-dk-speed.json",
+      "reason": "DK路线从血精灵专用9499纠正为其它部落种族版本9498；没有新增独立玩家备注。"
+    }
+  }
+}

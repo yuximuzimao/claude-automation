@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "task_id": 12080,
+  "identity": {
+    "name_zhcn": "冰虫之母",
+    "name_en": "Really Big Worm",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 72,
+    "pre_any": [
+      12076
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 168000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38096,
+        "quantity": 1,
+        "name_zhcn": "水晶板甲护腿",
+        "name_en": "Crystalplate Legguards",
+        "sell_price_each_copper": 63877,
+        "sell_price_total_copper": 63877
+      },
+      {
+        "item_id": 38033,
+        "quantity": 1,
+        "name_zhcn": "冰心护胸",
+        "name_en": "Ice Heart Chestguard",
+        "sell_price_each_copper": 52715,
+        "sell_price_total_copper": 52715
+      },
+      {
+        "item_id": 37989,
+        "quantity": 1,
+        "name_zhcn": "钻雪虫杀手护腿",
+        "name_en": "Rattlebore Slayer Leggings",
+        "sell_price_each_copper": 46630,
+        "sell_price_total_copper": 46630
+      },
+      {
+        "item_id": 37945,
+        "quantity": 1,
+        "name_zhcn": "轻薄冰虫护腿",
+        "name_en": "Thin Jormungar Legwraps",
+        "sell_price_each_copper": 35811,
+        "sell_price_total_copper": 35811
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 63877,
+    "gear_sale_max_copper": 63877,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 31150
+  },
+  "guide": [
+    "接取：坚不可摧的科查尔。",
+    "进入水晶裂痕底部的洞穴并杀死钻雪虫。如果你手中还有佐特的防护药剂，记得使用它来避免受到冰虫酸液的伤害。 /  / 完成任务之后回去向坚不可摧的科查尔复命。",
+    "交付：坚不可摧的科查尔。",
+    "拉特尔博尔位于水晶裂痕洞穴内；若仍有佐特防护药剂，在真正开Boss前使用可降低酸液威胁。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12080",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12080; legacy_type=named_elite_with_single_use_protection_consumable_failure_mode",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "partial",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12080",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12080/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "真正拉Boss前再用佐特防护药剂。药剂一次性，死亡后消失且不能重领；不要提前使用。\n【需要单独修正优化】《冰虫之母》首组龙骨实跑：打拉特尔博尔时发生一次死亡，已使用的佐特防护药剂无法通过返回NPC重新取得，最终无药剂强打完成；死亡、复活和误跑NPC属于本轮异常墙钟，不应回写为任务正常固有耗时。路线应把药剂保留到真正拉Boss前再用。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12080",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

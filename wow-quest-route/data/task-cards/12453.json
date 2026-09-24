@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "task_id": 12453,
+  "identity": {
+    "name_zhcn": "白肩鹰的眼睛",
+    "name_en": "Eyes Above",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 73,
+    "pre_any": [
+      12412
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 44000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38760,
+        "quantity": 1,
+        "name_zhcn": "修行者的护符",
+        "name_en": "Mendicant's Charm",
+        "sell_price_each_copper": 52502,
+        "sell_price_total_copper": 52502
+      },
+      {
+        "item_id": 38761,
+        "quantity": 1,
+        "name_zhcn": "仇恨之爪",
+        "name_en": "Talon of Hatred",
+        "sell_price_each_copper": 52502,
+        "sell_price_total_copper": 52502
+      },
+      {
+        "item_id": 38762,
+        "quantity": 1,
+        "name_zhcn": "血火徽记",
+        "name_en": "Insignia of Bloody Fire",
+        "sell_price_each_copper": 52502,
+        "sell_price_total_copper": 52502
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 52502,
+    "gear_sale_max_copper": 52502,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 150
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 15550
+  },
+  "guide": [
+    "接取：风之先知希尔·灰角。",
+    "风之先知希尔·灰角希望你在灰熊丘陵的6只白肩鹰身上使用银色羽毛。",
+    "交付：风之先知希尔·灰角。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12453",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12453; legacy_type=item_use_group_shared_confirmed",
+      "observed_at": "2026-09-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12453",
+      "observed_at": "2026-09-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《白肩鹰的眼睛》灰熊丘陵首组实跑确认：共享；主号对白肩鹰使用银色羽毛即可同步五号进度。\n《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。",
+      "scope": "all",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12453 + docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

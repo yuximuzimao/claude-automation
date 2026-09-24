@@ -1,0 +1,33 @@
+{
+  "schema": "stage8-xp-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "xp_input": {
+    "entry_level": 60,
+    "entry_xp_into_level": 0,
+    "character_ids": ["dk1", "dk2", "dk3", "dk4", "dk5"],
+    "external_xp_upper_bound_each": 0,
+    "source": {
+      "kind": "stage8_real_fixture",
+      "ref": "explicit-cold-start-60-0"
+    }
+  },
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "requirements",
+    "profile_status": "requirements",
+    "turnin_count": 55,
+    "guaranteed_lower_bound": 911750,
+    "possible_upper_bound": 911750,
+    "exit_level": 62,
+    "exit_xp_into_level": 304750,
+    "issue_counts": {
+      "conditional_level_gate_execution_maybe": 3,
+      "conditional_turnin_execution_maybe": 3
+    },
+    "level_gate_status_counts": {
+      "pass": 56,
+      "requirements": 3
+    }
+  },
+  "purpose": "Frozen real-Profile Stage 8 migration diagnostic created before any Stage-8-driven formal route repair. The level-60/0 XP state is an explicit validation cold-start input, not a claim about a historical live run. It proves the sole rebuild path can execute the real hellfire-dk-speed turn-in timeline, propagate five independent character states, resolve min-level gates, and preserve existing conditional-route UNKNOWN as requirements without repairing route truth."
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "profile_id": "nagrand-fivebox-67-68",
+  "status": "component-wall-clock-v1",
+  "source_ref": "data/route-atlas/workbench-routes.json#nagrand",
+  "display_badge": "炉石：加拉达尔\n预计总时间：40分钟（32分钟—48分钟）\n首组实测（加拉达尔交付→到68）：41分26秒",
+  "route": {
+    "center_minutes": 40.0,
+    "range_minutes": [
+      31.6,
+      48.4
+    ],
+    "model": "component-wall-clock-v1",
+    "actual_runs": [
+      {
+        "label": "首组实测（加拉达尔交付→到68）",
+        "minutes": 41.4333,
+        "note": "2026-08-15 Journey连续窗口 04:12:14→04:53:40；只代表该范围，不冒充完整跨图起点墙钟。"
+      }
+    ]
+  },
+  "steps": {
+    "step-01": {
+      "center_minutes": 8.5,
+      "range_minutes": [
+        7.0,
+        10.0
+      ],
+      "include_in_total": true
+    },
+    "step-02": {
+      "center_minutes": 19.5,
+      "range_minutes": [
+        15.2,
+        23.8
+      ],
+      "include_in_total": true
+    },
+    "step-03": {
+      "center_minutes": 12.0,
+      "range_minutes": [
+        9.4,
+        14.6
+      ],
+      "include_in_total": true
+    },
+    "step-04": {
+      "center_minutes": 20.5,
+      "range_minutes": [
+        16.0,
+        25.0
+      ],
+      "include_in_total": false
+    }
+  }
+}

@@ -1,341 +1,245 @@
 # Task Card：单任务事实库规范
 
-用途：`data/task-cards/<task_id>.json`承担**单任务当前有效事实的唯一机器真源**；本README只定义这些字段的语义、三层边界和消费者。Task Card描述“这个任务本身是什么、怎么做、有哪些机制和证据”，不描述“某条路线现在要不要做、排第几步”。
+用途：`data/task-cards/<task_id>.json`承担**单任务当前有效事实的唯一机器真源**。Task Card回答“这个任务是什么、怎么做、五开总体怎么执行、当前玩家页显示什么备注”；它不保存某条路线的顺序和路线决策。
 
-机器字段名、required、枚举和`additionalProperties`等shape只以`data/task-cards/schema.json`为权威；本README中的反引号字段名必须与schema一致，不得另造一套目标字段名。旧人工表格、`data/observations/`和各地图foundation在兼容迁移期间只作为证据/旧输入，独有信息迁入Task Card前不得删除，但也不得继续作为新事实写入口。
+机器字段名、required、枚举和值域只以`data/task-cards/schema.json`为权威。本文件解释字段语义和归属，不另造第二套字段。
 
-## 1. 核心边界
+## 1. 核心原则
 
-### Task Card保存
+一张Task Card对应一个稳定`task_id`。
 
-- 任务身份与版本事实；
-- 接取条件、直接前置与互斥关系；反向后续关系由索引派生；
-- 任务目标、数量、目标实体/物品；
-- 接取/目标/交付位置和隐藏地形；
-- 任务物、掉落、事件、护送、载具、Boss等完整机制事实；
-- 五开各阶段真实共享/个人机制；
-- 完整详细攻略；
-- 当前仍未确认的问题；
-- 实测/资料证据、日期和置信度；
-- 与路线无关的固有奖励/基础数值；
-- 五开状态/标签变量与必要的人工推荐备注override；
-- 可复用的任务级实测样本。
+旧信息迁移时，以**单个task_id为处理单位**：先收集这个任务在Questie/foundation、旧fivebox、旧路线备注、semantic脚本、Journey实测等来源中的信息，再逐条归入本卡、Route Profile、Timing Observation或History/Evidence。不能用一套自然语言规则批量猜一千多个任务的语义。
 
-### Task Card不保存
+批量程序只允许承担：
 
-- `必做/跳过/条件做/以后做`；
-- P1/P2/P3/P4或其它路线删留优先级；
-- DK/圣骑某条路线的步骤号、顺序、回访点；
-- `先别交/和B一起做/做完去下一Hub`等路线指令；
-- 当前角色预计交任务等级；
-- 当前路线派生经验；
-- 当前路线预计耗时/整图墙钟；
-- 当前Route Profile的炉石/飞行点状态；
-- 可以由统一机制模板自动生成的重复前端文案；
-- 旧错误值作为当前字段。
+- 按task_id收集候选资料；
+- 搬运无歧义的数据库基础字段；
+- schema校验；
+- 找出未归属/冲突信息。
 
-一句话：**任务卡只保存任务事实；路线决策属于Route Profile/规则；派生计算属于模型。**
+任务攻略、特殊五开执行方式和旧备注的语义判断必须逐task_id处理。
 
-## 2. 稳定身份
+## 2. Task Card保存什么
 
-每张卡顶层必须有`task_id`，并在`identity`中保存：
+### 2.1 稳定身份 `identity`
+
+保存：
 
 - `name_zhcn`：当前客户端完整中文名；
-- `game_variant_id`：当前游戏/服务器变体稳定标识；
-- `version_scope`：适用版本/服务器环境；
+- `name_en`：英文名，可为空；
+- `game_variant_id`：当前游戏/服务器变体；
+- `version_scope`：适用版本；
 - `faction`：阵营限制；
-- `repeatability`：一次性/可重复/日常等。
+- `repeatability`：一次性/日常/可重复/未知。
 
-事实闭合程度不再放进identity；统一由顶层`coverage`按`availability / objectives / locations / rewards / mechanics / fivebox / guide`分别记录`unknown / partial / verified / not_applicable`。
+中文任务名不是跨文件关联主键。Route Profile和所有机器引用都使用`task_id`。
 
-任务中文名可修正，不能作为跨文件关联主键。同名任务、翻译更新和展示格式变化不得破坏引用。
+### 2.2 接取条件 `availability`
 
-## 3. Availability / 任务链字段
+只保存适合稳定结构化、并且路线算法确实需要读取的基础条件：
 
-当前v1 schema中的`availability`字段为：
+- `quest_level`；
+- `min_level`；
+- `pre_any`；
+- `pre_all`；
+- `parent_active`；
+- `exclusive_with`；
+- 声望、职业、种族、技能限制；
+- 已确认的隐藏硬门槛。
 
-- `quest_level`：任务等级；
-- `min_level`：最低接取等级；
-- `pre_any`：直接前置中满足任一即可的集合；
-- `pre_all`：必须全部满足的直接前置；
-- `parent_active`：需要父任务处于活动态等关系；
-- `exclusive_with`：互斥/替代可接关系；
-- `required_reputation`：声望门槛对象或`null`；
-- `required_class`：职业限制数组；
-- `required_race`：种族限制数组；
-- `required_skill`：当前已建模的技能限制数组；
-- `hidden_requirements`：Questie漏记但已由实服/可靠资料确认的硬门槛。
+前置只保存权威方向。反向后续关系由索引根据所有Task Card派生，不在每张卡双写。
 
-职业技能、专业、法术等以后若出现当前真实需求，先扩展schema再使用新字段名；README不能提前声明机器契约中不存在的字段。
+### 2.3 固有奖励 `rewards`
 
-### 字段语义
+保存任务本身的原始奖励事实，例如：
 
-- Task Card只保存一个权威方向的直接关系/已确认隐藏关系；反向followup与完整依赖闭包由索引/路线算法派生，不能在每张卡双写正反关系或复制整棵祖先树。
-- `exclusive_with`不能解释成前置。
-- 数据库“没有记录前置”只能记`unknown/no_record`，不能自动证明独立根。
-- 用户实服已成功接到任务，是该时点可达性的最高优先级证据；旧隐藏前置假设必须让位。
+- `full_xp`：Questie记录的完整基础任务XP；
+- `reward_money_copper`：任务直接金币；
+- `fixed_items`：固定奖励物，保存item_id、数量、中英文名、单件/合计卖店价；
+- `choice_items_desc_by_sell`：可选奖励物，保存同样的原始字段并按合计卖店价降序，方便直接知道应选哪件卖店；
+- `reputation_rewards`：Questie记录的声望奖励；
+- `gear_sale_max_copper`等字段是上述稳定奖励事实的确定性汇总，方便金币模型消费。
 
-这些字段供Route Optimization做可达性/状态传播，Task Card本身不产生“应该做/不做”结论。
+精确金币/物品卖店价以AzerothCore WotLK `quest_template + item_template`为机器来源，中文物品名/XP/声望由当前Questie补充。`scripts/enrich_task_card_rewards.py <task_id>`只处理一张Task Card；旧`data/route-atlas/quest-reward-economy.json`仅保留为历史迁移证据，原writer已硬退役，不得重建或作为单任务/路线经济真源。
 
-## 4. Rewards / 固有奖励
+不保存“当前72级交能拿多少XP”“80级做更赚多少”等上下文派生结果；它们属于XP/Selection模型。
 
-Task Card保存与路线无关的原始/规范化奖励事实，例如：
+### 2.4 完整攻略事实 `guide`
 
-- `base_xp`及来源；
-- `reward_money`；
-- 固定/可选奖励物品ID；
-- 奖励装备基础卖店价值的权威数据引用；
-- 满级XP折金计算所需的任务基础输入。
+`guide`是一张卡中任务知识的完整事实层。**任务目标、NPC/入口/楼层、任务物、Boss机制、掉落方式、事件、载具、护送、刷新、五开特殊细节等都统一进入这里，不再拆成objectives/mechanics/stages多套结构。**
 
-Task Card不保存：
+典型内容包括：
 
-- “角色72级交时实际获得多少XP”这种上下文派生值；
-- 当前服务器倍率公式副本；
-- “当前做比80后做多赚多少”这种选择结果。
+- Questie已有的任务目标，例如杀多少怪、收集多少物品；
+- 接取/交付NPC、洞穴入口、二楼/水下/悬崖等空间事实；
+- 任务物如何获得和使用；
+- Boss关键机制、召唤/事件顺序、失败/重试条件；
+- 固定物刷新、特殊掉落、护送/载具操作；
+- 五开执行中无法由一个总体状态表达的细节。
 
-经验派生统一调用`docs/rules/xp-model.md`；经济删留结论由任务选择规则计算。
+这里允许完整、详细。它是长期知识，不等于玩家HUD备注。
 
-## 5. Locations / 空间事实
+不得写入：
 
-当前v1机器字段只有顶层`locations`对象；schema暂时允许对象内部按任务需要保存结构化空间事实，但**没有**把`accept_locations / objective_locations / turnin_locations / entrance / floor / vertical_relation`等名称声明为必填机器字段。
+- “DK路线第8步”；
+- “这条路线先A后B”；
+- “当前为了省时间跳过”；
+- “做完去下一Hub”；
+- 其它只在某条Route Profile中成立的编排决定。
 
-语义上仍应区分接取、目标、交付、入口、楼层/垂直关系和路线无关地标；迁移时把这些含义放进`locations`或objective自己的`locations`，并通过`coverage.locations`标记完整度。若后续需要把某个子字段冻结为正式机器契约，先修改schema，再同步本字典。
+这些属于Route Profile。
 
-位置数据必须绑定真实语义，不保存裸坐标而不说明“这是入口/目标/NPC/物体”。
+## 3. Fivebox：只保存总体执行分类
 
-Task Card可以保存“这个Boss在二楼”；不能保存“DK路线第8步从西边上楼”，后者属于Route Profile。
+`fivebox.status`只承担一个职责：给五开执行和玩家标签提供**粗粒度、明确、稳定**的总体分类。
 
-Questie平面坐标不等于真实道路/楼层；已实跑地形优先覆盖静态推断。
+当前只有五类：
 
-## 6. Objectives / 任务目标
+- `shared` → 共享；
+- `not_shared` → 不共享；
+- `sequential_loot` → 依次拾取；
+- `special` → 特殊；
+- `pending` → 待实测。
 
-每个目标独立结构化。当前v1 schema字段为：
+### 3.1 分类边界
 
-- `objective_id`；
-- `kind`：kill / loot / interact / use_item / escort / event / talk / explore / vehicle / other；
-- `target`：对象/实体/物品等目标描述；
-- `required_count`；
-- `source_entities`：掉落来源/触发来源；
-- `locations`；
-- `mechanic_refs`：关联本卡的机制块；
-- `confidence`。
+`shared`：整体可以按共享任务执行，不存在需要玩家额外理解的关键个人阶段。
 
-多个阶段机制不同必须拆开，不能用一条`shared=true`覆盖整任务。
+`not_shared`：总体上必须按个人任务处理。
 
-## 7. Mechanics / 完整机制事实
+`sequential_loot`：同一尸体/同一来源可以让多角色依次拾取，且这种执行方式本身是稳定、常见、足以独立成类的机制。
 
-Task Card的机制字段保存**已经确认的任务本身行为**。机制类别和值域由`docs/rules/execution-and-mechanics.md`定义。
+`special`：一个简单“共享/不共享”标签不足以正确执行。例如：
 
-可包含：
+- 击杀共享，但关键任务物个人；
+- 前一部分个人、后一部分共享；
+- 必须保持距离才共享；
+- 某个交互后队伍同步；
+- 其它需要看`guide`才能正确执行的混合/条件机制。
 
-- 掉落类型与参考掉率；
-- 单尸件数；
-- 固定物刷新；
-- 任务物使用目标；
-- 召唤/事件启动条件；
-- 护送脚本；
-- 载具控制；
-- Boss关键技能/失败条件；
-- 黄色/潜行/隐形目标的真实触发方式；
-- 任务起始物掉落/右键接取；
-- 等待/刷新机制；
-- 洞穴/楼层/水下等执行机制。
+`pending`：现有证据不能确认总体五开分类。无需另外建立“五开open question”机器层；后续实测确认后直接修改status，并把可靠事实补进guide/evidence。
 
-### 不允许自由推断
+### 3.2 不再建立stage分类
 
-例如：
+Task Card不再保存`fivebox.stages`，也不为了时间模型把一个任务拆成多个fivebox阶段。
 
-- 击杀共享 ≠ 任务物共享；
-- 一次事件共享 ≠ 前置收集共享；
-- 同尸可多人取 ≠ 普通FFA；
-- 任务完成 ≠ 机制已经观察确认。
+例如《阻断援军》只需要：
 
-每个事实必须有来源或明确标记unknown。
+- `fivebox.status = special`；
+- `guide`写清“符文石个人拾取；五号达标后再走；炸门共享，主控完成即可”。
 
-## 8. Fivebox / 五开机制
+如果需要回答“任务怎么五开”，读取guide；如果只需要前端标签，读取status。
 
-五开必须按**目标/阶段**结构化，而不是只存一段自由文本。
+## 4. 玩家备注 `presentation`
 
-常见枚举语义包括但不限于：
+完整攻略和玩家备注是两层。
 
-- `shared_kill`；
-- `shared_progress`；
-- `personal_progress`；
-- `ffa_loot_pool`；
-- `same_corpse_multi_character_loot`；
-- `personal_drop`；
-- `party_loot`；
-- `per_character_interaction`；
-- `shared_interaction`；
-- `per_character_item_use`；
-- `shared_event`；
-- `escort_party_shared`；
-- `unknown`。
+迁移旧正式页面时，**先无损保存当前已经存在的备注**到`presentation.note_override`。这些备注大量经过用户实跑修改，迁移阶段不重新拆句、不重新总结、不擅自删除。
 
-这些名称的严格定义由Task Mechanics维护；Task Card只记录当前任务实际属于哪一类/哪几类及证据。
+以后进行备注专项审计时，再逐条或小批量判断：
 
-复杂任务应类似：
+- 是否已经被共享标签覆盖；
+- 是否只是攻略事实、前端无需显示；
+- 是否仍然是执行时必需的最短提醒；
+- 是否应明确为空。
 
-`stage A = personal_progress`  
-`stage B = shared_event`
+`note_override.text = ""`表示已人工判断无需备注；它不同于“尚未迁移备注”。
 
-而不是写一条模糊`mixed`后丢失细节。
+备注不能反推fivebox.status，fivebox.status也不能自动生成一段长备注。
 
-## 9. Guide / 完整攻略事实
+## 5. 时间规则引用 `timing_rule_ref`
 
-`guide`允许比玩家HUD详细很多，用来保存长期可复用的“怎么做”：
+Task Card不保存整步/整图墙钟，也不为了Timing再拆任务攻略。
 
-- 完整执行机制；
-- 容易找错的入口/层级；
-- Boss打法；
-- 任务物使用；
-- 事件顺序；
-- 失败/重试；
-- 刷新/等待；
-- 新手容易误解的位置。
+`timing_rule_ref`只引用Timing owner中已经定义的计算规则/规则族；当前尚未完成时间分类时允许为`null`。
 
-但`guide`必须仍然是**任务本身攻略**，不能塞当前路线编排理由。
+如果以后一个真实任务无法由现有时间规则表达，应先在Timing owner中定义新的可复用规则，再让Task Card引用它；不能在Task Card里另建一套时间公式。
 
-前端绝不能简单把guide摘要后当备注。HUD显示多少统一由Task Presentation决定。
+任务级、地图级、step级真实墙钟样本仍进入Timing Observations，由Timing模型结合Route Profile顺序计算。
 
-## 10. Presentation / 玩家呈现元数据
+## 6. Evidence / 当前事实与来源
 
-Task Card中的玩家呈现分成两部分，并与事实/攻略层独立。
+`evidence`保存当前事实的来源和置信度，例如：
 
-### 10.1 Fivebox状态 / 标签变量
+- 用户实服反馈；
+- Questie；
+- 本地结构化数据库；
+- 公开资料；
+- 旧数据迁移来源。
 
-fivebox内部stage保存真实细分机制；同时保存一个面向玩家执行的结构化状态摘要，当前值域：
+每条证据用`supports_fields`说明它支持哪些当前字段。
 
-- `shared` → 共享
-- `not_shared` → 不共享
-- `sequential_loot` → 依次拾取
-- `pending` → 待实测
+纠错时：
 
-它是Task Card机器变量，不是备注文本，也不由open question或自由文本推断。复杂任务可以有更细stage事实，但前端标签读取这个明确状态。
+1. 当前有效字段改成新值；
+2. 旧来源/旧判断留在历史证据或archive；
+3. 不让旧错误继续占当前字段；
+4. 通过task_id重新生成引用该任务的派生结果。
 
-### 10.2 人工推荐备注
+## 7. Coverage
 
-`presentation.note_override`保存用户明确确认后的玩家备注结果：
+`coverage`只描述三类基础内容目前整理到什么程度：
 
-- `text`：最终备注；允许空字符串，表示“已经人工判断无需备注”；
-- `scope`：`all`或确有必要的特定Route Profile/版本；
-- `source_ref`：用户确认/规则来源；
-- `reason`：内部说明，不显示给玩家。
+- `availability`；
+- `rewards`；
+- `guide`。
 
-**明确为空**必须与“尚未迁移/尚未判断备注”区分。
+值为`unknown / partial / verified / not_applicable`。
 
-旧页面备注迁移时：事实/攻略进入Task Card facts/guide；真正有执行价值的玩家提示进入note_override；已被标签/动作/插件覆盖的内容明确判定为冗余；无法判断则交用户确认。
+fivebox是否确认直接由`fivebox.status`表达：`pending`就是尚未确认，不再维护第二个fivebox coverage状态。
 
-标签和备注是两条独立输出：共享标签不能自动生成共享长备注，备注也不能反推fivebox状态。完整规则见`docs/rules/route-atlas-task-presentation.md`。
+**迁移工作是否完成也不由coverage代表。** 本轮架构迁移另有逐task_id迁移清单；只有旧信息全部有归属，该task_id才可标记迁移完成。
 
-## 11. Verification / 未闭合问题
+## 8. Task Card不保存什么
 
-`verification.open_questions`保存真正需要后续实跑/查证的问题。
+- 必做/跳过/条件做；
+- P1/P2/P3/P4等路线优先级；
+- 某条路线的步骤号与顺序；
+- 路线特有的NPC访问顺序、交通、炉石、飞行点；
+- “先别交/和B一起做”等路线指令；
+- 当前角色预计交任务等级；
+- 当前路线派生XP/金币/整图墙钟；
+- 可以由统一前端规则生成的重复说明。
 
-每一项必须包括：
+一句话：**Task Card保存任务本身；Route Profile保存这条路线怎么走。**
 
-- `question_id`；
-- 要观察的具体变量；
-- 当前状态`unknown/expected`；
-- 为什么无法由现有证据确认；
-- 什么证据可以关闭；
-- 它影响的是哪个尚未确认的事实/模型输入。
+## 9. 与Route Profile / Publisher的关系
 
-禁止只写“共享未知”。
+Task Card只提供单任务当前事实，不拥有路线生成编排。Task Card修改后先用task_id反向索引找到真实引用它的Profile，再按`../rules/route-profile-and-lifecycle.md`的跨owner传播原则刷新受影响领域；本文不复制其它owner的操作，也不允许“Task Card + Profile直接到Publisher”这类旁路。
 
-确认后：更新当前事实字段 + 写证据 + 关闭open question。历史问题本身可以保留在evidence/correction日志。玩家是否显示“待实测”只看fivebox状态变量，不由open question存在与否决定。
+Route Profile中的任务动作只保存稳定`task_id`和路线原子，例如：
 
-## 12. Evidence / 证据与纠错
+`accept task_id=10208`  
+`objective task_id=10208`  
+`turnin task_id=10208`
 
-每个非数据库显然事实应可追溯：
+Publisher再：
 
-- `source_type`：user_live / questie / local_db / public_reference / derived等；
-- `source_ref`；
-- `observed_at`；
-- `server/version_scope`；
-- `confidence`；
-- `supports_fields`：这条证据支持哪些当前字段。
+1. 根据task_id读取Task Card任务名；
+2. Route Display把接/做/交/NPC/地点转换成玩家动作；
+3. Task Presentation读取`fivebox.status`生成标签；
+4. 读取当前`presentation.note_override`附着玩家备注；
+5. UI负责渲染。
 
-优先级统一由`docs/rules/README.md`定义。
+Publisher不解析guide来猜共享标签，也不从旧中文路线句子反推任务事实。
 
-### 当前值与历史错误分离
+## 10. 当前证据查询与修改方式
 
-实服纠错时：
+Evidence Index由`scripts/build_task_evidence_index.py`生成到`_sandbox/task-evidence-index.sqlite`。它一次解析Questie有效任务行（含Corrections）、AzerothCore奖励库、当前Task Card和仍在现役范围内的结构化资料，之后按`task_id`直接查询。它不读取旧workbench或迁移期fivebox账本。该SQLite是**可删除重建的查询缓存，不是真源，也不提交Git**；单任务查看使用`scripts/inspect_task_evidence.py`。
 
-1. 当前有效字段立即改成新值；
-2. 旧值、原因、日期保存到correction/evidence历史；
-3. 不能为了“保留历史”让旧值继续占据当前字段；
-4. 当前事实字段实际改变后，通过task_id找到引用Profile并从真源重新生成派生结果；不维护第二套字段传播分类。
+需要新增或修改Task Card时，先按Route Lifecycle SOP确认这确实属于`TASK_FACT`，再以本文件定义的Task Card字段职责和证据规则修改对应稳定`task_id`。Evidence Index只帮助集中查看证据，不自动替人判断共享机制、路线删留、Presentation文案或其它需要语义判断的内容。
 
-## 13. Timing / 任务级时间证据
+旧Task Card迁移脚本、review queue、fivebox type mapping和workbench动作ID对照均已完成使命并进入`docs/archive/`；它们不是当前操作入口。迁移时遗留但仍未完成的fivebox实测事项已经转入唯一`tasks/todo.md`，对应Task Card继续用`fivebox.status=pending`表达未知，后续随自然实跑验证。
 
-Task Card只保存可复用的任务级实测输入/样本，例如：
+## 11. 修改验收
 
-- 固定动画/脚本时长；
-- 独立事件持续时间；
-- 能与移动、Hub、其它任务完全隔离的单任务服务样本；
-- 刷新等待样本；
-- 掉率/击杀样本。
-
-不保存：
-
-- 多任务/step/地图/整段路线共同产生的实跑墙钟（进入Timing Observations）；
-- 某条路线当前“这个任务=7.2分钟”的最终派生结果；
-- 整个Hub共享移动/接交成本；
-- 当前Profile的地图总时间。
-
-统一墙钟计算见`timing-and-benchmarking.md`。
-
-## 14. 可复用关系与派生关系
-
-Task Card只保存**不能由更基础字段稳定推导**、且确实属于任务本身的关系事实。
-
-例如直接前置与互斥关系由Availability权威字段保存；反向后续关系、接取NPC相同、目标实体相同、所需物品相同等都应由基础字段/实体ID自动派生，不再手工双写镜像字段。
-
-只有数据库无法表达、但经实测确认且跨Route Profile稳定成立的关系，才允许作为显式typed relation保存，并必须说明不能从哪些现有字段推导。
-
-禁止保存“当前路线顺路”“这次和B一起做”这类上下文判断。Route Optimization根据Task Card基础事实和当前Route Profile动态计算任务簇/空间重叠。
-
-## 15. 消费者与重新生成
-
-Task Card不维护`x-impact`或其它字段级传播分类。
-
-当前事实变化后：
-
-1. 用稳定task_id反向索引找到引用它的现役/可复用Route Profile；
-2. Route Profile路线决策本身不自动改变；
-3. Task Presentation、Timing、XP、Availability等消费者各自重新读取当前Task Card并生成结果；
-4. 若新派生结果满足Selection触发条件，再进入Selection Review。
-
-字段字典只定义“这个字段是什么、谁可以读它”，不再定义第二套“改它以后通知谁”的业务表。
-
-## 16. 数据写入原则
-
-最终结构化Task Card应成为Builder的规范输入；人类Markdown可以作为说明/视图，但不能与机器卡片分别维护同一事实。
-
-迁移完成前：
-
-- 旧task-library Markdown；
-- `fivebox-task-types.json`；
-- 地图foundation/semantic脚本；
-
-仍可能含独有事实，必须先迁入、对账、切消费者，再禁止旧写入/归档。
-
-任何迁移都遵循：
-
-`迁入 → 对账 → 切消费者 → 禁止旧写入 → 退役旧源`
-
-禁止先删旧源再补Task Card。
-
-## 17. Task Card发布/修改验收
-
-单任务事实修改只验证受影响契约：
+单Task Card修改至少验证：
 
 - schema合法；
-- 当前字段与证据一致；
-- 没有路线决策字段泄漏；
-- 所有引用Route Profile能通过task_id反向索引正确识别；
-- 当前消费者从新事实重新生成结果，不解析旧备注/guide反推事实；
-- 与本次无关的其它地图/路线不因为“保险”被重算。
-
-整条路线发布验收不属于本README，统一由Route Lifecycle SOP编排。
+- task_id与文件名一致；
+- 当前字段有来源或明确未知；
+- 没有Route Profile决策泄漏进Task Card；
+- fivebox.status只使用五个固定分类；
+- mixed/条件机制没有被粗暴伪装成纯shared/not_shared；
+- Route Profile仍能通过task_id引用；
+- 玩家备注与fivebox状态相互独立。

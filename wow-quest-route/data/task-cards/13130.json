@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "task_id": 13130,
+  "identity": {
+    "name_zhcn": "公正堡的基石",
+    "name_en": "The Stone That Started A Revolution",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 79,
+    "min_level": 77,
+    "pre_any": [
+      13104
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43982,
+        "quantity": 1,
+        "name_zhcn": "建筑师的护肩",
+        "name_en": "Architect's Spaulders",
+        "sell_price_each_copper": 48066,
+        "sell_price_total_copper": 48066
+      },
+      {
+        "item_id": 43947,
+        "quantity": 1,
+        "name_zhcn": "牢固束带",
+        "name_en": "Stability Girdle",
+        "sell_price_each_copper": 38140,
+        "sell_price_total_copper": 38140
+      },
+      {
+        "item_id": 43914,
+        "quantity": 1,
+        "name_zhcn": "缓刑束带",
+        "name_en": "Girdle of Reprieve",
+        "sell_price_each_copper": 27784,
+        "sell_price_total_copper": 27784
+      },
+      {
+        "item_id": 43855,
+        "quantity": 1,
+        "name_zhcn": "精锐裹腕",
+        "name_en": "Adepts Wristwraps",
+        "sell_price_each_copper": 21745,
+        "sell_price_total_copper": 21745
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 48066,
+    "gear_sale_max_copper": 48066,
+    "reputation_rewards": [
+      {
+        "faction_id": 1106,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 21800
+  },
+  "guide": [
+    "接取：北伐军建筑师西拉斯。",
+    "冰冠冰川回音谷的北伐军建筑师西拉斯要你去收集10根水晶心木和10块古代精灵石砖。",
+    "交付：北伐军建筑师西拉斯。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13130",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13130; legacy_type=personal_collection_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

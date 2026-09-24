@@ -12,7 +12,9 @@ from statistics import mean, median
 from typing import Any, Iterable
 
 from lib.questie_lua import seq
+from lib.questie_objectives import objective_counts, ordered_numeric_mentions
 from lib.questie_source import QuestieData, load_questie
+from lib.route_xp import load_xp_model_config, quest_xp_at_level as route_quest_xp_at_level
 from lib.world_builder import (
     BLOOD_ELF_RACE_FLAG,
     PALADIN_CLASS_FLAG,
@@ -24,7 +26,9 @@ from lib.world_builder import (
 )
 
 
-SERVER_QUEST_XP_MULTIPLIER = 2.0
+XP_MODEL_CONFIG = load_xp_model_config()
+# Compatibility projection for legacy callers. The parameter owner is data/xp-model/model-config.json.
+SERVER_QUEST_XP_MULTIPLIER = float(XP_MODEL_CONFIG["server_quest_xp_multiplier"])
 CURRENT_LEVEL = 35
 TARGET_LEVEL = 55
 
@@ -82,15 +86,6 @@ ZONE_DIAGONAL_MINUTES_100_MOUNT = {
     215: 4.0, 267: 7.0, 331: 9.0, 357: 12.5, 361: 10.0, 400: 9.0,
     405: 10.0, 406: 7.0, 440: 11.0, 490: 8.0, 618: 10.5,
     1377: 4.0, 1497: 4.0, 1637: 4.0, 3487: 4.0,
-}
-
-NUMBER_WORDS = {
-    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
-    "eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14,
-    "fifteen": 15, "sixteen": 16, "seventeen": 17, "eighteen": 18,
-    "nineteen": 19, "twenty": 20, "thirty": 30, "forty": 40,
-    "fifty": 50, "sixty": 60,
 }
 
 ESCORT_PATTERNS = (
@@ -197,24 +192,20 @@ def clamp(value: float, low: float, high: float) -> float:
 
 
 def quest_xp_at_level(data: QuestieData, quest_id: int, player_level: int) -> int:
+    """Legacy Questie adapter; formula/multiplier ownership lives in lib.route_xp + XP config."""
     row = data.quest_xp.get(quest_id)
     if not isinstance(row, dict):
         return 0
     q_level = row.get(1)
-    base_xp = row.get(2)
-    if not isinstance(q_level, int) or not isinstance(base_xp, int) or q_level <= 0 or base_xp <= 0:
+    full_xp = row.get(2)
+    if not isinstance(q_level, int) or not isinstance(full_xp, int) or q_level <= 0 or full_xp <= 0:
         return 0
-    multiplier = int(clamp(2 * (q_level - player_level) + 20, 1, 10))
-    xp = base_xp * multiplier / 10.0
-    if xp <= 100:
-        xp = 5 * math.floor((xp + 2) / 5)
-    elif xp <= 500:
-        xp = 10 * math.floor((xp + 5) / 10)
-    elif xp <= 1000:
-        xp = 25 * math.floor((xp + 12) / 25)
-    else:
-        xp = 50 * math.floor((xp + 25) / 50)
-    return int(math.floor(xp * SERVER_QUEST_XP_MULTIPLIER))
+    return route_quest_xp_at_level(
+        quest_level=q_level,
+        full_xp=full_xp,
+        player_level=player_level,
+        model_config=XP_MODEL_CONFIG,
+    )
 
 
 def interpolate_profile(level: int) -> tuple[float, float, float]:
@@ -233,33 +224,6 @@ def interpolate_profile(level: int) -> tuple[float, float, float]:
         + ratio * (DPS_PROFILE[upper][index] - DPS_PROFILE[lower][index])
         for index in range(3)
     )
-
-
-def ordered_numeric_mentions(text: str) -> list[int]:
-    mentions: list[tuple[int, int]] = []
-    for match in re.finditer(r"(?<![A-Za-z0-9-])\d{1,3}(?![A-Za-z0-9-])", text):
-        value = int(match.group(0))
-        if 1 <= value <= 100:
-            mentions.append((match.start(), value))
-    lower = text.lower()
-    for word, value in NUMBER_WORDS.items():
-        for match in re.finditer(rf"\b{word}\b", lower):
-            mentions.append((match.start(), value))
-    mentions.sort()
-    return [value for _, value in mentions]
-
-
-def objective_counts(text: str, slot_count: int) -> tuple[list[int | None], str]:
-    if slot_count == 0:
-        return [], "exact"
-    values = ordered_numeric_mentions(text)
-    if len(values) == slot_count:
-        return values, "exact_text_order"
-    if len(values) > slot_count:
-        return values[-slot_count:], "ambiguous_extra_numbers"
-    if len(values) == 0 and slot_count == 1:
-        return [1], "implicit_single"
-    return values + [None] * (slot_count - len(values)), "missing_counts"
 
 
 def points_from_spawns(spawns: Any) -> list[Point]:

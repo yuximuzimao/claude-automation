@@ -37,7 +37,7 @@ SPECIAL_FLAGS = {"NONE": 0, "REPEATABLE": 1}
 QUEST_FLAGS = {
     "NONE": 0, "STAY_ALIVE": 1, "PARTY_ACCEPT": 2, "EXPLORATION": 4,
     "SHARABLE": 8, "UNUSED1": 16, "EPIC": 32, "RAID": 64,
-    "UNUSED2": 128, "UNKNOWN": 256, "HIDDEN_REWARDS": 512,
+    "UNUSED2": 128, "NO_MONEY_FROM_XP": 256, "HIDDEN_REWARDS": 512,
     "AUTO_REWARDED": 1024, "DAILY": 4096, "WEEKLY": 32768, "MONTHLY": 65536,
 }
 
@@ -156,6 +156,7 @@ def parse_wotlk_quest_corrections(
         "factionIDs": _simple_named_ints(quest_db_text, "QuestieDB.factionIDs ="),
         "zoneIDs": _simple_named_ints(read("Database/Zones/data/zoneIds.lua"), "ZoneDB.zoneIDs ="),
         "sortKeys": _simple_named_ints(read("Database/Constants.lua"), "QuestieDB.sortKeys ="),
+        "profKeys": _simple_named_ints(read("Modules/QuestieProfessions.lua"), "QuestieProfessions.professionKeys ="),
         "specialFlags": SPECIAL_FLAGS,
         "questFlags": QUEST_FLAGS,
     }
@@ -171,12 +172,12 @@ def parse_wotlk_quest_corrections(
             transformed = _replace_namespace(transformed, namespace, values)
         # Extra-objective icon constants affect only Questie rendering, not task facts.
         transformed = re.sub(r"\bQuestie\.ICON_TYPE_[A-Z0-9_]+\b", "0", transformed)
-        # l10n("text") returns localized text at runtime; keep the literal as evidence text.
-        transformed = re.sub(r'l10n\(("(?:\\.|[^"\\])*")\)', r'\1', transformed)
-        transformed = re.sub(r"l10n\(('(?:\\.|[^'\\])*')\)", r"\1", transformed)
+        # l10n("text"[, icon]) returns localized text at runtime; keep only the literal evidence text.
+        transformed = re.sub(r'l10n\(("(?:\\.|[^"\\])*"),?[^)]*\)', r'\1', transformed)
+        transformed = re.sub(r"l10n\(('(?:\\.|[^'\\])*'),?[^)]*\)", r"\1", transformed)
         transformed = _fold_numeric_addition(transformed)
         leftover = sorted(set(re.findall(
-            r"\b(?:questKeys|raceIDs|classIDs|factionIDs|zoneIDs|sortKeys|specialFlags|questFlags)\.[A-Za-z_][A-Za-z0-9_]*",
+            r"\b(?:questKeys|raceIDs|classIDs|factionIDs|zoneIDs|sortKeys|profKeys|specialFlags|questFlags)\.[A-Za-z_][A-Za-z0-9_]*",
             transformed,
         )))
         if leftover:

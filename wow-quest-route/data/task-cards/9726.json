@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": 9726,
+  "identity": {
+    "name_zhcn": "既然我们是朋友......",
+    "name_en": "Now That We're Friends...",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 64,
+    "min_level": 62,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": {
+      "min": {
+        "1": 970,
+        "2": 3000
+      },
+      "max": null
+    },
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 27752,
+        "quantity": 1,
+        "name_zhcn": "赞加沼泽双刃刀",
+        "name_en": "Zangarmarsh Claymore",
+        "sell_price_each_copper": 79311,
+        "sell_price_total_copper": 79311
+      },
+      {
+        "item_id": 27751,
+        "quantity": 1,
+        "name_zhcn": "生存专家的长矛",
+        "name_en": "Survivalist's Pike",
+        "sell_price_each_copper": 79015,
+        "sell_price_total_copper": 79015
+      },
+      {
+        "item_id": 27750,
+        "quantity": 1,
+        "name_zhcn": "孢子人之锤",
+        "name_en": "Hammer of the Sporelings",
+        "sell_price_each_copper": 78718,
+        "sell_price_total_copper": 78718
+      },
+      {
+        "item_id": 27749,
+        "quantity": 1,
+        "name_zhcn": "原野法杖",
+        "name_en": "Staff of the Wild",
+        "sell_price_each_copper": 78430,
+        "sell_price_total_copper": 78430
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 79311,
+    "gear_sale_max_copper": 79311,
+    "reputation_rewards": [
+      {
+        "faction_id": 970,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 10750
+  },
+  "guide": [
+    "接取：舒特。",
+    "杀掉12个血鳞驱奴者和6个血鳞女巫，然后向赞加沼泽孢子村的舒特复命。",
+    "交付：舒特。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9726",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

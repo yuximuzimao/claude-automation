@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "task_id": 11602,
+  "identity": {
+    "name_zhcn": "切断虫源",
+    "name_en": "Cutting Off the Source",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11598
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 36883,
+        "quantity": 1,
+        "name_zhcn": "斗士重剑",
+        "name_en": "Combatant Greatsword",
+        "sell_price_each_copper": 112238,
+        "sell_price_total_copper": 112238
+      },
+      {
+        "item_id": 36878,
+        "quantity": 1,
+        "name_zhcn": "纠结长杖",
+        "name_en": "Writhing Longstaff",
+        "sell_price_each_copper": 110246,
+        "sell_price_total_copper": 110246
+      },
+      {
+        "item_id": 36881,
+        "quantity": 1,
+        "name_zhcn": "医师的流星锤",
+        "name_en": "Medic's Morning Star",
+        "sell_price_each_copper": 89149,
+        "sell_price_total_copper": 89149
+      },
+      {
+        "item_id": 36880,
+        "quantity": 1,
+        "name_zhcn": "恶毒法术匕首",
+        "name_en": "Vicious Spellblade",
+        "sell_price_each_copper": 88838,
+        "sell_price_total_copper": 88838
+      },
+      {
+        "item_id": 36879,
+        "quantity": 1,
+        "name_zhcn": "士兵的尖刺钉锤",
+        "name_en": "Soldier's Spiked Mace",
+        "sell_price_each_copper": 88517,
+        "sell_price_total_copper": 88517
+      },
+      {
+        "item_id": 36882,
+        "quantity": 1,
+        "name_zhcn": "战歌长弓",
+        "name_en": "Warsong Longbow",
+        "sell_price_each_copper": 67102,
+        "sell_price_total_copper": 67102
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 112238,
+    "gear_sale_max_copper": 112238,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：拉兹格尔大王。",
+    "战歌要塞的拉兹格尔大王要你摧毁10个尼鲁巴尔蛛卵簇。",
+    "交付：拉兹格尔大王。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11602",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11602; legacy_type=object_destroy_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11602",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《切断虫源》：共享：蛛卵摧毁进度五号共享，只需主控完成。\n【需要单独修正优化】《切断虫源》摧毁尼鲁巴尔蛛卵簇的进度五号共享；只需主控沿四虫孔路线摧毁，其他角色无需分别操作。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11602",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

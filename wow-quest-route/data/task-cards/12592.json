@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": 12592,
+  "identity": {
+    "name_zhcn": "猎人的挑战",
+    "name_en": "The Great Hunter's Challenge",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 76,
+    "pre_any": [
+      12589
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 124000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39448,
+        "quantity": 1,
+        "name_zhcn": "野蛮灭绝头盔",
+        "name_en": "Helm of Brutal Slaughter",
+        "sell_price_each_copper": 51898,
+        "sell_price_total_copper": 51898
+      },
+      {
+        "item_id": 39428,
+        "quantity": 1,
+        "name_zhcn": "完美瞄准面甲",
+        "name_en": "Faceguard of Flawless Aim",
+        "sell_price_each_copper": 44573,
+        "sell_price_total_copper": 44573
+      },
+      {
+        "item_id": 39373,
+        "quantity": 1,
+        "name_zhcn": "迅疾死亡护腕",
+        "name_en": "Bracers of Rapid Death",
+        "sell_price_each_copper": 24567,
+        "sell_price_total_copper": 24567
+      },
+      {
+        "item_id": 39330,
+        "quantity": 1,
+        "name_zhcn": "灵巧杀戮手套",
+        "name_en": "Fingers of Dextrous Decimation",
+        "sell_price_each_copper": 19438,
+        "sell_price_total_copper": 19438
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 51898,
+    "gear_sale_max_copper": 51898,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 26450
+  },
+  "guide": [
+    "接取：德洛斯坦。",
+    "在协助赫米特和探险队其他成员狩猎的过程中，杀死60只猎物。在你达成60个的击杀目标后，回到奈辛瓦里营地，与德洛斯坦比对猎物数量。",
+    "交付：德洛斯坦。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12592",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《猎人的挑战》：必须在大范围狩猎前先接；后续其它狩猎任务中的野兽击杀自然累计到60。独立服务时间按0处理，不为本任务额外杀怪。\n《猎人的挑战》：这里只表示《猎人的挑战》随其它任务自然累计；不为它额外杀怪，独立耗时按0处理。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

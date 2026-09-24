@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "task_id": 11984,
+  "identity": {
+    "name_zhcn": "抓巨魔",
+    "name_en": "Filling the Cages",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 73,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 56000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39116,
+        "quantity": 1,
+        "name_zhcn": "捕获之锤",
+        "name_en": "Grinder of Reverse Emancipation",
+        "sell_price_each_copper": 121177,
+        "sell_price_total_copper": 121177
+      },
+      {
+        "item_id": 39132,
+        "quantity": 1,
+        "name_zhcn": "束缚思维之剑",
+        "name_en": "Sword of the Caged Mind",
+        "sell_price_each_copper": 95513,
+        "sell_price_total_copper": 95513
+      },
+      {
+        "item_id": 39129,
+        "quantity": 1,
+        "name_zhcn": "意志背弃之刺",
+        "name_en": "Spike of Renounced Autonomy",
+        "sell_price_each_copper": 94458,
+        "sell_price_total_copper": 94458
+      },
+      {
+        "item_id": 39128,
+        "quantity": 1,
+        "name_zhcn": "断轭刀",
+        "name_en": "Yoke Slasher",
+        "sell_price_each_copper": 94112,
+        "sell_price_total_copper": 94112
+      },
+      {
+        "item_id": 39142,
+        "quantity": 1,
+        "name_zhcn": "奴隶之锤",
+        "name_en": "Mace of Helotry",
+        "sell_price_each_copper": 91983,
+        "sell_price_total_copper": 91983
+      },
+      {
+        "item_id": 39131,
+        "quantity": 1,
+        "name_zhcn": "卑微之弩",
+        "name_en": "Warbling Crossbow",
+        "sell_price_each_copper": 71375,
+        "sell_price_total_copper": 71375
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 121177,
+    "gear_sale_max_copper": 121177,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20750
+  },
+  "guide": [
+    "接取：萨米尔。",
+    "岩石之泉的萨米尔希望你对被巴德打昏的达卡莱巨魔使用赏金猎人的笼子。",
+    "交付：萨米尔。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11984",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11984; legacy_type=quest_progress_group_shared_confirmed",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

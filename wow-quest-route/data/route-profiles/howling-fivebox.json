@@ -1,0 +1,5172 @@
+{
+  "schema_version": 2,
+  "profile_id": "howling-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "嚎风峡湾",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 495
+  },
+  "entry_requirements": {
+    "active_task_ids": [],
+    "hearth_location": "征服堡"
+  },
+  "goal": {
+    "summary": "灰熊首组完结后炉石回征服堡，陆路越境药剂师营地；先西后南，再东线与北线；首跑只按实测局部校准。"
+  },
+  "display": {
+    "publish_key": "howling",
+    "order": 12,
+    "title": "嚎风峡湾 · 80级五开任务清图",
+    "display_name": "嚎风峡湾",
+    "subtitle": "灰熊首组完结后炉石回征服堡，陆路越境药剂师营地；先西后南，再东线与北线；首跑只按实测局部校准。",
+    "footer": "在先知拉瑞恩交《头狼》后，嚎风峡湾当前户外一次性正式任务池结束。",
+    "map_image": "maps/495-howling-fjord-hd.jpg"
+  },
+  "task_ids": [
+    11301,
+    11298,
+    11397,
+    11398,
+    11422,
+    11399,
+    11286,
+    11296,
+    11317,
+    11182,
+    11504,
+    11279,
+    11424,
+    11280,
+    11507,
+    11508,
+    11456,
+    11457,
+    11458,
+    11509,
+    11510,
+    11434,
+    11511,
+    11512,
+    11519,
+    11567,
+    11455,
+    11464,
+    11469,
+    11466,
+    11467,
+    11473,
+    11459,
+    11476,
+    11479,
+    11480,
+    11471,
+    11527,
+    11529,
+    11530,
+    11568,
+    11572,
+    11167,
+    11227,
+    11270,
+    11168,
+    11253,
+    11221,
+    11254,
+    11170,
+    11304,
+    11229,
+    11295,
+    11230,
+    11232,
+    11233,
+    11241,
+    11234,
+    11282,
+    12566,
+    11283,
+    11285,
+    11303,
+    12481,
+    11423,
+    12482,
+    11305,
+    11306,
+    11307,
+    11308,
+    11309,
+    11310,
+    11271,
+    11275,
+    11311,
+    11281,
+    11297,
+    11312,
+    11350,
+    11365,
+    11256,
+    11313,
+    11314,
+    11315,
+    11316,
+    11319,
+    11428,
+    11351,
+    11366,
+    11352,
+    11367,
+    11257,
+    11258,
+    11259,
+    11260,
+    11261,
+    11263,
+    11265,
+    11287,
+    11266,
+    11264,
+    11268,
+    11433,
+    11267,
+    11453,
+    11323,
+    11415,
+    11417,
+    11324
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "howling-entry-grizzly-handoff",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "howling-entry-conquest-hold",
+      "target_name": "征服堡",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-entry-conquest-hold",
+      "action_id": "visit-entry-conquest"
+    },
+    {
+      "kind": "move",
+      "location_ref": "howling-p001",
+      "to_name": "药剂师营地",
+      "action_id": "a0003",
+      "from_name": "征服堡"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p001",
+      "action_id": "visit-entry-apothecary"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "howling-p001",
+      "target_name": "药剂师营地",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11301,
+      "location_ref": "howling-p001",
+      "npc_name": "药剂师葛瑞克",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11298,
+      "location_ref": "howling-p001",
+      "npc_name": "药剂师玛尔苏斯",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11397,
+      "location_ref": "howling-p001",
+      "npc_name": "药剂师安娜斯塔西娅",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p002",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11397,
+      "location_ref": "howling-p002",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11398,
+      "location_ref": "howling-p002",
+      "target_name": "天灾设备",
+      "when": {
+        "kind": "has_item",
+        "item_name": "天灾设备"
+      },
+      "action_id": "a0010"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p003",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11422,
+      "location_ref": "howling-p003",
+      "npc_name": "老冰鳞",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p004",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11422,
+      "location_ref": "howling-p004",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p005",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11422,
+      "location_ref": "howling-p005",
+      "npc_name": "老冰鳞",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p006",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11397,
+      "location_ref": "howling-p006",
+      "npc_name": "药剂师安娜斯塔西娅",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11398,
+      "location_ref": "howling-p006",
+      "npc_name": "药剂师安娜斯塔西娅",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11398
+      },
+      "action_id": "a0019"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11399,
+      "location_ref": "howling-p006",
+      "npc_name": "药剂师安娜斯塔西娅",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p007",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11399,
+      "location_ref": "howling-p007",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p008",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11399,
+      "location_ref": "howling-p008",
+      "npc_name": "药剂师安娜斯塔西娅",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p009",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11286,
+      "location_ref": "howling-p009",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11296,
+      "location_ref": "howling-p009",
+      "npc_name": "远行者斯图卡·天云",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p010",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11286,
+      "location_ref": "howling-p010",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p011",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11286,
+      "location_ref": "howling-p011",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11317,
+      "location_ref": "howling-p011",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p012",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11296,
+      "location_ref": "howling-p012",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11301,
+      "location_ref": "howling-p012",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p013",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11296,
+      "location_ref": "howling-p013",
+      "npc_name": "远行者斯图卡·天云",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p014",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11298,
+      "location_ref": "howling-p014",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p015",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11301,
+      "location_ref": "howling-p015",
+      "npc_name": "药剂师葛瑞克",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11298,
+      "location_ref": "howling-p015",
+      "npc_name": "药剂师玛尔苏斯",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p016",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11182,
+      "location_ref": "howling-p016",
+      "npc_name": "灰烬龙巢古树",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11182,
+      "location_ref": "howling-p016",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11182,
+      "location_ref": "howling-p016",
+      "npc_name": "灰烬龙巢古树",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p017",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11504,
+      "location_ref": "howling-p017",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p018",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "howling-p018",
+      "target_name": "新阿加曼德",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "howling-p018",
+      "target_name": "新阿加曼德",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11279,
+      "location_ref": "howling-p018",
+      "npc_name": "药剂师提灵哈斯特",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11424,
+      "location_ref": "howling-p018",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p020",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11279,
+      "location_ref": "howling-p020",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p021",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11279,
+      "location_ref": "howling-p021",
+      "npc_name": "药剂师提灵哈斯特",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11280,
+      "location_ref": "howling-p021",
+      "npc_name": "药剂师提灵哈斯特",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11280,
+      "location_ref": "howling-p021",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11280,
+      "location_ref": "howling-p021",
+      "npc_name": "药剂师提灵哈斯特",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p022",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11504,
+      "location_ref": "howling-p022",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11424,
+      "location_ref": "howling-p022",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p023",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11424,
+      "location_ref": "howling-p023",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p024",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11504,
+      "location_ref": "howling-p024",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11507,
+      "location_ref": "howling-p024",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p025",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "howling-p025",
+      "target_name": "卡玛古",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11507,
+      "location_ref": "howling-p025",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11508,
+      "location_ref": "howling-p025",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11456,
+      "location_ref": "howling-p025",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p026",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11456,
+      "location_ref": "howling-p026",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p027",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11456,
+      "location_ref": "howling-p027",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11457,
+      "location_ref": "howling-p027",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p028",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11457,
+      "location_ref": "howling-p028",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p029",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11457,
+      "location_ref": "howling-p029",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11458,
+      "location_ref": "howling-p029",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p030",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11458,
+      "location_ref": "howling-p030",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p031",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11458,
+      "location_ref": "howling-p031",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p032",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11508,
+      "location_ref": "howling-p032",
+      "npc_name": "格雷兹克斯·斯宾德斯纳普",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11509,
+      "location_ref": "howling-p032",
+      "npc_name": "格雷兹克斯·斯宾德斯纳普",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p033",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11509,
+      "location_ref": "howling-p033",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11510,
+      "location_ref": "howling-p033",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11434,
+      "location_ref": "howling-p033",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p034",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11510,
+      "location_ref": "howling-p034",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p035",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11434,
+      "location_ref": "howling-p035",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p036",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11510,
+      "location_ref": "howling-p036",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11511,
+      "location_ref": "howling-p036",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11512,
+      "location_ref": "howling-p036",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11519,
+      "location_ref": "howling-p036",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11567,
+      "location_ref": "howling-p036",
+      "npc_name": "“银月”哈瑞",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11434,
+      "location_ref": "howling-p036",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11455,
+      "location_ref": "howling-p036",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11464,
+      "location_ref": "howling-p036",
+      "npc_name": "塔鲁克",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11469,
+      "location_ref": "howling-p036",
+      "npc_name": "斯卡特·弗洛斯普",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p037",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11464,
+      "location_ref": "howling-p037",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11464,
+      "location_ref": "howling-p037",
+      "npc_name": "塔鲁克",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11466,
+      "location_ref": "howling-p037",
+      "npc_name": "塔鲁克",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11466,
+      "location_ref": "howling-p037",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11466,
+      "location_ref": "howling-p037",
+      "npc_name": "塔鲁克",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11467,
+      "location_ref": "howling-p037",
+      "npc_name": "塔鲁克",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p038",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11455,
+      "location_ref": "howling-p038",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11469,
+      "location_ref": "howling-p038",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p039",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11455,
+      "location_ref": "howling-p039",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11473,
+      "location_ref": "howling-p039",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11469,
+      "location_ref": "howling-p039",
+      "npc_name": "斯卡特·弗洛斯普",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p040",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11473,
+      "location_ref": "howling-p040",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11473,
+      "location_ref": "howling-p040",
+      "npc_name": "塞吉",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11459,
+      "location_ref": "howling-p040",
+      "npc_name": "塞吉",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p041",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11459,
+      "location_ref": "howling-p041",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11459,
+      "location_ref": "howling-p041",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11476,
+      "location_ref": "howling-p041",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p042",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11476,
+      "location_ref": "howling-p042",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11476,
+      "location_ref": "howling-p042",
+      "npc_name": "塞吉",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11479,
+      "location_ref": "howling-p042",
+      "npc_name": "塞吉",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11479,
+      "location_ref": "howling-p042",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p043",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11479,
+      "location_ref": "howling-p043",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11480,
+      "location_ref": "howling-p043",
+      "npc_name": "帅哥泰里",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11480,
+      "location_ref": "howling-p043",
+      "npc_name": "安妮·波恩",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11471,
+      "location_ref": "howling-p043",
+      "npc_name": "安妮·波恩",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p044",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11471,
+      "location_ref": "howling-p044",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11512,
+      "location_ref": "howling-p044",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p045",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11467,
+      "location_ref": "howling-p045",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p046",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11511,
+      "location_ref": "howling-p046",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p047",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11471,
+      "location_ref": "howling-p047",
+      "npc_name": "安妮·波恩",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11467,
+      "location_ref": "howling-p047",
+      "npc_name": "塔鲁克",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "move",
+      "location_ref": "howling-p048",
+      "to_name": "慈悲修女号登船点（约38,75）",
+      "action_id": "move-mercy-first-boarding"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p048",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "howling-p048",
+      "target_name": "等待慈悲修女号靠岸并登船",
+      "action_id": "interact-mercy-first-boarding"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11519,
+      "location_ref": "howling-p048",
+      "npc_name": "艾尔雷斯船长",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11527,
+      "location_ref": "howling-p048",
+      "npc_name": "艾尔雷斯船长",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11527,
+      "location_ref": "howling-p048",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11527,
+      "location_ref": "howling-p048",
+      "npc_name": "艾尔雷斯船长",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11529,
+      "location_ref": "howling-p048",
+      "npc_name": "艾尔雷斯船长",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11529,
+      "location_ref": "howling-p048",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "move",
+      "location_ref": "howling-p050",
+      "to_name": "慈悲修女号登船点（约38,75）",
+      "action_id": "move-sorlof-return-boarding"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p050",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "howling-p050",
+      "target_name": "重新登上慈悲修女号",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11529,
+      "location_ref": "howling-p050",
+      "npc_name": "艾尔雷斯船长",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11530,
+      "location_ref": "howling-p050",
+      "npc_name": "艾尔雷斯船长",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p051",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11567,
+      "location_ref": "howling-p051",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "howling-p052",
+      "target_name": "新阿加曼德",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p052",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p053",
+      "from_name": "新阿加曼德",
+      "to_name": "卡玛古",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p053",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p054",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11511,
+      "location_ref": "howling-p054",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11512,
+      "location_ref": "howling-p054",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11530,
+      "location_ref": "howling-p054",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11567,
+      "location_ref": "howling-p054",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11568,
+      "location_ref": "howling-p054",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p055",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11568,
+      "location_ref": "howling-p055",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p056",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11568,
+      "location_ref": "howling-p056",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11572,
+      "location_ref": "howling-p056",
+      "npc_name": "卡玛古的奥弗斯",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p057",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11572,
+      "location_ref": "howling-p057",
+      "npc_name": "长者阿图伊克",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p058",
+      "from_name": "卡玛古",
+      "to_name": "新阿加曼德",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p058",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "move",
+      "location_ref": "howling-p059",
+      "to_name": "复仇港",
+      "action_id": "a0188",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p059",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "howling-p059",
+      "target_name": "复仇港",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11167,
+      "location_ref": "howling-p059",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11227,
+      "location_ref": "howling-p059",
+      "npc_name": "伯提乌斯",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11270,
+      "location_ref": "howling-p059",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p060",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11167,
+      "location_ref": "howling-p060",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11227,
+      "location_ref": "howling-p060",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11270,
+      "location_ref": "howling-p060",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p061",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11167,
+      "location_ref": "howling-p061",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11168,
+      "location_ref": "howling-p061",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11227,
+      "location_ref": "howling-p061",
+      "npc_name": "伯提乌斯",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11253,
+      "location_ref": "howling-p061",
+      "npc_name": "伯提乌斯",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11270,
+      "location_ref": "howling-p061",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11221,
+      "location_ref": "howling-p061",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p062",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11221,
+      "location_ref": "howling-p062",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p063",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11168,
+      "location_ref": "howling-p063",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p064",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11253,
+      "location_ref": "howling-p064",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11253,
+      "location_ref": "howling-p064",
+      "target_name": "Dragonskin Scroll",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11254,
+      "location_ref": "howling-p064",
+      "target_name": "Dragonskin Scroll",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p065",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11168,
+      "location_ref": "howling-p065",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11170,
+      "location_ref": "howling-p065",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "howling-p065",
+      "npc_name": "蝙蝠管理员卡米尔",
+      "target_name": "乘任务蝙蝠",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11170,
+      "location_ref": "howling-p065",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11170,
+      "location_ref": "howling-p065",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11304,
+      "location_ref": "howling-p065",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11221,
+      "location_ref": "howling-p065",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11229,
+      "location_ref": "howling-p065",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11254,
+      "location_ref": "howling-p065",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11295,
+      "location_ref": "howling-p065",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p066",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11229,
+      "location_ref": "howling-p066",
+      "npc_name": "哈克尔船长",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11230,
+      "location_ref": "howling-p066",
+      "npc_name": "哈克尔船长",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11230,
+      "location_ref": "howling-p066",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11230,
+      "location_ref": "howling-p066",
+      "npc_name": "哈克尔船长",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11232,
+      "location_ref": "howling-p066",
+      "npc_name": "哈克尔船长",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p067",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11232,
+      "location_ref": "howling-p067",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11232,
+      "location_ref": "howling-p067",
+      "npc_name": "黑暗游侠莉安娜",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11233,
+      "location_ref": "howling-p067",
+      "npc_name": "黑暗游侠莉安娜",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p068",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11233,
+      "location_ref": "howling-p068",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11241,
+      "location_ref": "howling-p068",
+      "npc_name": "药剂师哈恩斯",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p069",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11233,
+      "location_ref": "howling-p069",
+      "npc_name": "黑暗游侠莉安娜",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11234,
+      "location_ref": "howling-p069",
+      "npc_name": "黑暗游侠莉安娜",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p070",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11234,
+      "location_ref": "howling-p070",
+      "npc_name": "高级执行官安希尔姆",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11241,
+      "location_ref": "howling-p070",
+      "npc_name": "药剂师雷杉德尔",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p071",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11295,
+      "location_ref": "howling-p071",
+      "npc_name": "戈斯中士",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11282,
+      "location_ref": "howling-p071",
+      "npc_name": "戈斯中士",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12566,
+      "location_ref": "howling-p071",
+      "npc_name": "远行者纳尼克",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p072",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11282,
+      "location_ref": "howling-p072",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11282,
+      "location_ref": "howling-p072",
+      "npc_name": "戈斯中士",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11283,
+      "location_ref": "howling-p072",
+      "npc_name": "戈斯中士",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11285,
+      "location_ref": "howling-p072",
+      "npc_name": "戈斯中士",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p073",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11283,
+      "location_ref": "howling-p073",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11285,
+      "location_ref": "howling-p073",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p074",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11283,
+      "location_ref": "howling-p074",
+      "npc_name": "戈斯中士",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11285,
+      "location_ref": "howling-p074",
+      "npc_name": "戈斯中士",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11303,
+      "location_ref": "howling-p074",
+      "npc_name": "戈斯中士",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p075",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11303,
+      "location_ref": "howling-p075",
+      "npc_name": "林德尔",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12481,
+      "location_ref": "howling-p075",
+      "npc_name": "林德尔",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12481,
+      "location_ref": "howling-p075",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12481,
+      "location_ref": "howling-p075",
+      "npc_name": "林德尔",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p076",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11423,
+      "location_ref": "howling-p076",
+      "npc_name": "书记员塞古茵",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12482,
+      "location_ref": "howling-p076",
+      "npc_name": "游侠队长艾蕾尔",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p077",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11423,
+      "location_ref": "howling-p077",
+      "action_id": "a0267"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12482,
+      "location_ref": "howling-p077",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p078",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11423,
+      "location_ref": "howling-p078",
+      "npc_name": "书记员塞古茵",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12482,
+      "location_ref": "howling-p078",
+      "npc_name": "游侠队长艾蕾尔",
+      "action_id": "a0271"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p079",
+      "action_id": "a0272"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11304,
+      "location_ref": "howling-p079",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0273"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11305,
+      "location_ref": "howling-p079",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0274"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p080",
+      "action_id": "a0275"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11305,
+      "location_ref": "howling-p080",
+      "action_id": "a0276"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p081",
+      "action_id": "a0277"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11305,
+      "location_ref": "howling-p081",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0278"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11306,
+      "location_ref": "howling-p081",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0279"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11306,
+      "location_ref": "howling-p081",
+      "action_id": "a0280"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11306,
+      "location_ref": "howling-p081",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0281"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11307,
+      "location_ref": "howling-p081",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0282"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p082",
+      "action_id": "a0283"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11307,
+      "location_ref": "howling-p082",
+      "action_id": "a0284"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p083",
+      "action_id": "a0285"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11307,
+      "location_ref": "howling-p083",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0286"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11308,
+      "location_ref": "howling-p083",
+      "npc_name": "首席药剂师哈瑞斯",
+      "action_id": "a0287"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11308,
+      "location_ref": "howling-p083",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0288"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11309,
+      "location_ref": "howling-p083",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0289"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p084",
+      "action_id": "a0290"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11309,
+      "location_ref": "howling-p084",
+      "action_id": "a0291"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p085",
+      "action_id": "a0292"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11309,
+      "location_ref": "howling-p085",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0293"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11310,
+      "location_ref": "howling-p085",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0294"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p086",
+      "action_id": "a0295"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11310,
+      "location_ref": "howling-p086",
+      "action_id": "a0296"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p087",
+      "action_id": "a0297"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11310,
+      "location_ref": "howling-p087",
+      "npc_name": "“钢锯”杰妮",
+      "action_id": "a0298"
+    },
+    {
+      "kind": "move",
+      "location_ref": "howling-p088",
+      "to_name": "冬蹄营地",
+      "action_id": "a0300",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p088",
+      "action_id": "a0299"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "howling-p088",
+      "target_name": "冬蹄营地",
+      "action_id": "a0301"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12566,
+      "location_ref": "howling-p088",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0302"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11271,
+      "location_ref": "howling-p088",
+      "npc_name": "安霍塔·白霜",
+      "action_id": "a0303"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11275,
+      "location_ref": "howling-p088",
+      "npc_name": "诺库玛·雪眼",
+      "action_id": "a0304"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11311,
+      "location_ref": "howling-p088",
+      "npc_name": "驯风者卡根",
+      "action_id": "a0305"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p089",
+      "action_id": "a0306"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11271,
+      "location_ref": "howling-p089",
+      "action_id": "a0307"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11275,
+      "location_ref": "howling-p089",
+      "action_id": "a0308"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11311,
+      "location_ref": "howling-p089",
+      "action_id": "a0309"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p090",
+      "action_id": "a0310"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11271,
+      "location_ref": "howling-p090",
+      "npc_name": "安霍塔·白霜",
+      "action_id": "a0311"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11275,
+      "location_ref": "howling-p090",
+      "npc_name": "诺库玛·雪眼",
+      "action_id": "a0312"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11281,
+      "location_ref": "howling-p090",
+      "npc_name": "诺库玛·雪眼",
+      "action_id": "a0313"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11297,
+      "location_ref": "howling-p090",
+      "npc_name": "游荡者犹纳特",
+      "action_id": "a0314"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11312,
+      "location_ref": "howling-p090",
+      "npc_name": "诺库玛·雪眼",
+      "action_id": "a0315"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11350,
+      "location_ref": "howling-p090",
+      "npc_name": "远行者贝姆比",
+      "action_id": "a0316"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11365,
+      "location_ref": "howling-p090",
+      "npc_name": "先知厄丹",
+      "action_id": "a0317"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11311,
+      "location_ref": "howling-p090",
+      "npc_name": "驯风者卡根",
+      "action_id": "a0318"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p091",
+      "action_id": "a0319"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11281,
+      "location_ref": "howling-p091",
+      "action_id": "a0320"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p092",
+      "action_id": "a0321"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11281,
+      "location_ref": "howling-p092",
+      "npc_name": "诺库玛·雪眼",
+      "action_id": "a0322"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11256,
+      "location_ref": "howling-p092",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0323"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p093",
+      "action_id": "a0324"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11312,
+      "location_ref": "howling-p093",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0325"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11313,
+      "location_ref": "howling-p093",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0326"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11313,
+      "location_ref": "howling-p093",
+      "action_id": "a0327"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11313,
+      "location_ref": "howling-p093",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0328"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11314,
+      "location_ref": "howling-p093",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0329"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11315,
+      "location_ref": "howling-p093",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0330"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p094",
+      "action_id": "a0331"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11314,
+      "location_ref": "howling-p094",
+      "action_id": "a0332"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11315,
+      "location_ref": "howling-p094",
+      "action_id": "a0333"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p095",
+      "action_id": "a0334"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11314,
+      "location_ref": "howling-p095",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0335"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11315,
+      "location_ref": "howling-p095",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0336"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11316,
+      "location_ref": "howling-p095",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0337"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11319,
+      "location_ref": "howling-p095",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0338"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p096",
+      "action_id": "a0339"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11316,
+      "location_ref": "howling-p096",
+      "action_id": "a0340"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11319,
+      "location_ref": "howling-p096",
+      "action_id": "a0341"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p097",
+      "action_id": "a0342"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11316,
+      "location_ref": "howling-p097",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0343"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11319,
+      "location_ref": "howling-p097",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0344"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11428,
+      "location_ref": "howling-p097",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0345"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p098",
+      "action_id": "a0346"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11428,
+      "location_ref": "howling-p098",
+      "action_id": "a0347"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p099",
+      "action_id": "a0348"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11428,
+      "location_ref": "howling-p099",
+      "npc_name": "鲁莉尔蕾",
+      "action_id": "a0349"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p100",
+      "action_id": "a0350"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11350,
+      "location_ref": "howling-p100",
+      "action_id": "a0351"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11365,
+      "location_ref": "howling-p100",
+      "action_id": "a0352"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p101",
+      "action_id": "a0353"
+    },
+    {
+      "kind": "move",
+      "movement_mode": "ride",
+      "location_ref": "howling-p101",
+      "to_name": "复仇港",
+      "action_id": "a0354"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p102-vengeance",
+      "action_id": "a0355"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p102",
+      "from_name": "复仇港",
+      "to_name": "冬蹄营地",
+      "action_id": "a0356"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p102",
+      "action_id": "visit-p102-winterhoof"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11350,
+      "location_ref": "howling-p102",
+      "npc_name": "远行者贝姆比",
+      "action_id": "a0357"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11351,
+      "location_ref": "howling-p102",
+      "npc_name": "远行者贝姆比",
+      "action_id": "a0358"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11365,
+      "location_ref": "howling-p102",
+      "npc_name": "先知厄丹",
+      "action_id": "a0359"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11366,
+      "location_ref": "howling-p102",
+      "npc_name": "先知厄丹",
+      "action_id": "a0360"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p103",
+      "from_name": "冬蹄营地",
+      "to_name": "复仇港",
+      "action_id": "a0362"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p103",
+      "action_id": "a0361"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p104",
+      "action_id": "a0363"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11351,
+      "location_ref": "howling-p104",
+      "action_id": "a0364"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11366,
+      "location_ref": "howling-p104",
+      "action_id": "a0365"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p105",
+      "action_id": "a0366"
+    },
+    {
+      "kind": "move",
+      "movement_mode": "ride",
+      "location_ref": "howling-p105",
+      "to_name": "复仇港",
+      "action_id": "a0367"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p106-vengeance",
+      "action_id": "a0368"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p106",
+      "from_name": "复仇港",
+      "to_name": "冬蹄营地",
+      "action_id": "a0369"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p106",
+      "action_id": "visit-p106-winterhoof"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11351,
+      "location_ref": "howling-p106",
+      "npc_name": "远行者贝姆比",
+      "action_id": "a0370"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11352,
+      "location_ref": "howling-p106",
+      "npc_name": "远行者贝姆比",
+      "action_id": "a0371"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11366,
+      "location_ref": "howling-p106",
+      "npc_name": "先知厄丹",
+      "action_id": "a0372"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11367,
+      "location_ref": "howling-p106",
+      "npc_name": "先知厄丹",
+      "action_id": "a0373"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p107",
+      "from_name": "冬蹄营地",
+      "to_name": "复仇港",
+      "action_id": "a0375"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p107",
+      "action_id": "a0374"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p108",
+      "action_id": "a0376"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11352,
+      "location_ref": "howling-p108",
+      "action_id": "a0377"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p109",
+      "action_id": "a0378"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11367,
+      "location_ref": "howling-p109",
+      "action_id": "a0379"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p110",
+      "action_id": "a0380"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11352,
+      "location_ref": "howling-p110",
+      "npc_name": "远行者贝姆比",
+      "action_id": "a0381"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11367,
+      "location_ref": "howling-p110",
+      "npc_name": "先知厄丹",
+      "action_id": "a0382"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p111",
+      "action_id": "a0383"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11256,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0384"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11257,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0385"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11258,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0386"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11259,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0387"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11257,
+      "location_ref": "howling-p111",
+      "action_id": "a0388"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11258,
+      "location_ref": "howling-p111",
+      "action_id": "a0389"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11259,
+      "location_ref": "howling-p111",
+      "action_id": "a0390"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11260,
+      "location_ref": "howling-p111",
+      "target_name": "维库升华卷轴",
+      "when": {
+        "kind": "has_item",
+        "item_name": "维库升华卷轴"
+      },
+      "action_id": "a0391"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11260,
+      "location_ref": "howling-p111",
+      "action_id": "a0392"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11257,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0393"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11258,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0394"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11259,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0395"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11261,
+      "location_ref": "howling-p111",
+      "npc_name": "冬蹄勇士",
+      "action_id": "a0396"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p112",
+      "action_id": "a0397"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11261,
+      "location_ref": "howling-p112",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0398"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11263,
+      "location_ref": "howling-p112",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0399"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11260,
+      "location_ref": "howling-p112",
+      "npc_name": "安卡祖母",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11260
+      },
+      "action_id": "a0400"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11265,
+      "location_ref": "howling-p112",
+      "npc_name": "安卡祖母",
+      "action_id": "a0401"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11287,
+      "location_ref": "howling-p112",
+      "npc_name": "安卡祖母",
+      "action_id": "a0402"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p113",
+      "action_id": "a0403"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11263,
+      "location_ref": "howling-p113",
+      "action_id": "a0404"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11265,
+      "location_ref": "howling-p113",
+      "action_id": "a0405"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11266,
+      "location_ref": "howling-p113",
+      "target_name": "亚勒伯龙攻击计划",
+      "when": {
+        "kind": "has_item",
+        "item_name": "亚勒伯龙攻击计划"
+      },
+      "action_id": "a0406"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p114",
+      "action_id": "a0407"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11263,
+      "location_ref": "howling-p114",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0408"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11264,
+      "location_ref": "howling-p114",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0409"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11265,
+      "location_ref": "howling-p114",
+      "npc_name": "安卡祖母",
+      "action_id": "a0410"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11268,
+      "location_ref": "howling-p114",
+      "npc_name": "安卡祖母",
+      "action_id": "a0411"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11433,
+      "location_ref": "howling-p114",
+      "npc_name": "安霍塔·白霜",
+      "action_id": "a0412"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11266,
+      "location_ref": "howling-p114",
+      "npc_name": "塞莉亚·冰鬃",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11266
+      },
+      "action_id": "a0413"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11267,
+      "location_ref": "howling-p114",
+      "npc_name": "塞莉亚·冰鬃",
+      "action_id": "a0414"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p115",
+      "action_id": "a0415"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11264,
+      "location_ref": "howling-p115",
+      "action_id": "a0416"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11268,
+      "location_ref": "howling-p115",
+      "action_id": "a0417"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11433,
+      "location_ref": "howling-p115",
+      "action_id": "a0418"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11267,
+      "location_ref": "howling-p115",
+      "action_id": "a0419"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11453,
+      "location_ref": "howling-p115",
+      "target_name": "麦森的文件",
+      "when": {
+        "kind": "has_item",
+        "item_name": "麦森的文件"
+      },
+      "action_id": "a0420"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p116",
+      "action_id": "a0421"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11453,
+      "location_ref": "howling-p116",
+      "action_id": "a0422"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p117",
+      "action_id": "a0423"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11264,
+      "location_ref": "howling-p117",
+      "npc_name": "灰烬图腾酋长",
+      "action_id": "a0424"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11453,
+      "location_ref": "howling-p117",
+      "npc_name": "灰烬图腾酋长",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11453
+      },
+      "action_id": "a0425"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11268,
+      "location_ref": "howling-p117",
+      "npc_name": "安卡祖母",
+      "action_id": "a0426"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11433,
+      "location_ref": "howling-p117",
+      "npc_name": "安霍塔·白霜",
+      "action_id": "a0427"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11267,
+      "location_ref": "howling-p117",
+      "npc_name": "塞莉亚·冰鬃",
+      "action_id": "a0428"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p118",
+      "action_id": "a0429"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11317,
+      "location_ref": "howling-p118",
+      "action_id": "a0430"
+    },
+    {
+      "kind": "move",
+      "location_ref": "howling-p119",
+      "to_name": "冬蹄营地",
+      "action_id": "a0432",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p119",
+      "action_id": "a0431"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11297,
+      "location_ref": "howling-p119",
+      "npc_name": "药剂师玛尔苏斯",
+      "action_id": "a0433"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "howling-p120",
+      "from_name": "冬蹄营地",
+      "to_name": "药剂师营地",
+      "action_id": "a0435"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p120",
+      "action_id": "a0434"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p121",
+      "action_id": "a0436"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11287,
+      "location_ref": "howling-p121",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0437"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11317,
+      "location_ref": "howling-p121",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0438"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11323,
+      "location_ref": "howling-p121",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0439"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p122",
+      "action_id": "a0440"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11323,
+      "location_ref": "howling-p122",
+      "npc_name": "乌尔芬",
+      "action_id": "a0441"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11415,
+      "location_ref": "howling-p122",
+      "npc_name": "乌尔芬",
+      "action_id": "a0442"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p123",
+      "action_id": "a0443"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11415,
+      "location_ref": "howling-p123",
+      "action_id": "a0444"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p124",
+      "action_id": "a0445"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11415,
+      "location_ref": "howling-p124",
+      "action_id": "a0446"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p125",
+      "action_id": "a0447"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11415,
+      "location_ref": "howling-p125",
+      "npc_name": "乌尔芬",
+      "action_id": "a0448"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11417,
+      "location_ref": "howling-p125",
+      "npc_name": "乌尔芬",
+      "action_id": "a0449"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p126",
+      "action_id": "a0450"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11417,
+      "location_ref": "howling-p126",
+      "action_id": "a0451"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p127",
+      "action_id": "a0452"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11417,
+      "location_ref": "howling-p127",
+      "npc_name": "乌尔芬",
+      "action_id": "a0453"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11324,
+      "location_ref": "howling-p127",
+      "npc_name": "乌尔芬",
+      "action_id": "a0454"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p128",
+      "action_id": "a0455"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11324,
+      "location_ref": "howling-p128",
+      "action_id": "a0456"
+    },
+    {
+      "kind": "location",
+      "location_ref": "howling-p129",
+      "action_id": "a0457"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11324,
+      "location_ref": "howling-p129",
+      "npc_name": "先知拉瑞恩·迷雾行者",
+      "action_id": "a0458"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "征服堡 → 冷原海岸 / 腐鳃 / 护盾",
+      "summary": null,
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "visit-entry-conquest",
+        "a0003",
+        "visit-entry-apothecary",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "钢铁之门前哨 → 古器 / 囚犯 → 酒桶",
+      "summary": null,
+      "action_ids": [
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "灰烬龙巢 → 新阿加曼德开场",
+      "summary": null,
+      "action_ids": [
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "龙卵 / 龙胃 → 盾牌岭 → 奥弗斯",
+      "summary": null,
+      "action_ids": [
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "卡玛古 → 长矛岛 → 伊斯卡尔",
+      "summary": null,
+      "action_ids": [
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "卡玛古 → 格雷兹克斯 → 银月哈瑞",
+      "summary": null,
+      "action_ids": [
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "斯库德 / 被遗忘的宝藏 → 赌债 / 嗜酒的杰克",
+      "summary": null,
+      "action_ids": [
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "无赖港西侧 → 权力链 → 洞穴双任务",
+      "summary": null,
+      "action_ids": [
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "死人的债务 / 风暴愤怒法杖 → 无赖港",
+      "summary": null,
+      "action_ids": [
+        "a0147",
+        "a0148",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "慈悲修女号",
+      "summary": null,
+      "action_ids": [
+        "move-mercy-first-boarding",
+        "a0154",
+        "interact-mercy-first-boarding",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0161",
+        "move-sorlof-return-boarding",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "四遗物 → 炉石新阿加曼德 → 盾牌岭",
+      "summary": "取得克瓦迪尔上古甲胄后炉石返回新阿加曼德，经卡玛古回交四遗物，再完成《安息》。",
+      "action_ids": [
+        "a0166",
+        "a0167",
+        "a0169",
+        "a0168",
+        "a0171",
+        "a0170",
+        "a0172",
+        "a0173",
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "新阿加曼德 → 复仇港开场",
+      "summary": null,
+      "action_ids": [
+        "a0186",
+        "a0185",
+        "a0188",
+        "a0187",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0203"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "复仇港前线 → 北岸 → 回港",
+      "summary": null,
+      "action_ids": [
+        "a0204",
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217",
+        "a0218",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0222"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "风行者舰队 → 联盟前线",
+      "summary": "连续推进风行者舰队与联盟前线任务，并顺路处理《烈火冲天》。",
+      "action_ids": [
+        "a0223",
+        "a0224",
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0241"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "戈斯中士 → 拜尔海姆",
+      "summary": null,
+      "action_ids": [
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "林德尔 → 尼弗莱瓦",
+      "summary": null,
+      "action_ids": [
+        "a0258",
+        "a0259",
+        "a0260",
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "新阿加曼德：量身订制 → 药剂喷雾",
+      "summary": null,
+      "action_ids": [
+        "a0272",
+        "a0273",
+        "a0274",
+        "a0275",
+        "a0276",
+        "a0277",
+        "a0278",
+        "a0279",
+        "a0280",
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "重要零件 → 集中处理",
+      "summary": null,
+      "action_ids": [
+        "a0290",
+        "a0291",
+        "a0292",
+        "a0293",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "冬蹄营地 → 东北自然区",
+      "summary": null,
+      "action_ids": [
+        "a0300",
+        "a0299",
+        "a0301",
+        "a0302",
+        "a0303",
+        "a0304",
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308",
+        "a0309"
+      ]
+    },
+    {
+      "step_id": "step-20",
+      "title": "冬蹄交接 → 冰瀑",
+      "summary": null,
+      "action_ids": [
+        "a0310",
+        "a0311",
+        "a0312",
+        "a0313",
+        "a0314",
+        "a0315",
+        "a0316",
+        "a0317",
+        "a0318",
+        "a0319",
+        "a0320",
+        "a0321",
+        "a0322",
+        "a0323"
+      ]
+    },
+    {
+      "step_id": "step-21",
+      "title": "鲁莉尔蕾 → 裂木 / 凋零林地",
+      "summary": null,
+      "action_ids": [
+        "a0324",
+        "a0325",
+        "a0326",
+        "a0327",
+        "a0328",
+        "a0329",
+        "a0330",
+        "a0331",
+        "a0332",
+        "a0333",
+        "a0334",
+        "a0335",
+        "a0336",
+        "a0337",
+        "a0338",
+        "a0339",
+        "a0340",
+        "a0341"
+      ]
+    },
+    {
+      "step_id": "step-22",
+      "title": "鲁莉尔蕾 → 凋零之叶",
+      "summary": null,
+      "action_ids": [
+        "a0342",
+        "a0343",
+        "a0344",
+        "a0345",
+        "a0346",
+        "a0347",
+        "a0348",
+        "a0349"
+      ]
+    },
+    {
+      "step_id": "step-23",
+      "title": "巨人平原：符文 / 巨人前两段",
+      "summary": null,
+      "action_ids": [
+        "a0350",
+        "a0351",
+        "a0352",
+        "a0353",
+        "a0354",
+        "a0355",
+        "a0356",
+        "visit-p102-winterhoof",
+        "a0357",
+        "a0358",
+        "a0359",
+        "a0360",
+        "a0362",
+        "a0361",
+        "a0363",
+        "a0364",
+        "a0365",
+        "a0366",
+        "a0367"
+      ]
+    },
+    {
+      "step_id": "step-24",
+      "title": "巨人平原：命令符文 / 麦加利斯",
+      "summary": null,
+      "action_ids": [
+        "a0368",
+        "a0369",
+        "visit-p106-winterhoof",
+        "a0370",
+        "a0371",
+        "a0372",
+        "a0373",
+        "a0375",
+        "a0374",
+        "a0376",
+        "a0377",
+        "a0378",
+        "a0379",
+        "a0380",
+        "a0381",
+        "a0382"
+      ]
+    },
+    {
+      "step_id": "step-25",
+      "title": "斯克恩",
+      "summary": "同时完成三项冬蹄勇士任务与掉落触发的《阻止升华！》，再完成《斯克恩的征服者！》。",
+      "action_ids": [
+        "a0383",
+        "a0384",
+        "a0385",
+        "a0386",
+        "a0387",
+        "a0388",
+        "a0389",
+        "a0390",
+        "a0391",
+        "a0392",
+        "a0393",
+        "a0394",
+        "a0395",
+        "a0396",
+        "a0397",
+        "a0398",
+        "a0399",
+        "a0400",
+        "a0401",
+        "a0402"
+      ]
+    },
+    {
+      "step_id": "step-26",
+      "title": "亚勒伯龙·前段",
+      "summary": "完成《亚勒伯龙的麻烦》《钥匙和牢笼》并取得攻击计划，回冬蹄接后续。",
+      "action_ids": [
+        "a0403",
+        "a0404",
+        "a0405",
+        "a0406",
+        "a0407",
+        "a0408",
+        "a0409",
+        "a0410",
+        "a0411",
+        "a0412",
+        "a0413",
+        "a0414"
+      ]
+    },
+    {
+      "step_id": "step-27",
+      "title": "亚勒伯龙·后段",
+      "summary": "完成交前段任务后才解锁的麦森、行尸、休眠巨人、冰霜巨龙和沉睡国王。",
+      "action_ids": [
+        "a0415",
+        "a0416",
+        "a0417",
+        "a0418",
+        "a0419",
+        "a0420",
+        "a0421",
+        "a0422",
+        "a0423",
+        "a0424",
+        "a0425",
+        "a0426",
+        "a0427",
+        "a0428"
+      ]
+    },
+    {
+      "step_id": "step-28",
+      "title": "霜刃神殿 → 先知拉瑞恩",
+      "summary": "在冬蹄阶段自然北上完成早已携带的《净化》，再一次返回西侧交《找到先知拉瑞恩·迷雾行者》《净化》并推进乌尔芬链；不再重复跑钢铁之门或酒桶。",
+      "action_ids": [
+        "a0429",
+        "a0430",
+        "a0432",
+        "a0431",
+        "a0433",
+        "a0435",
+        "a0434",
+        "a0436",
+        "a0437",
+        "a0438",
+        "a0439"
+      ]
+    },
+    {
+      "step_id": "step-29",
+      "title": "乌尔芬 → 兄弟 → 巨鹰",
+      "summary": null,
+      "action_ids": [
+        "a0440",
+        "a0441",
+        "a0442",
+        "a0443",
+        "a0444",
+        "a0445",
+        "a0446",
+        "a0447",
+        "a0448",
+        "a0449",
+        "a0450",
+        "a0451"
+      ]
+    },
+    {
+      "step_id": "step-30",
+      "title": "乌尔芬 → 头狼 → 拉瑞恩",
+      "summary": null,
+      "action_ids": [
+        "a0452",
+        "a0453",
+        "a0454",
+        "a0455",
+        "a0456",
+        "a0457",
+        "a0458"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "howling-p001": {
+        "display_name": "药剂师营地",
+        "x": 26.2,
+        "y": 24.6,
+        "phase": "west",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0003"
+        }
+      },
+      "howling-p002": {
+        "display_name": "冷原海岸",
+        "x": 22.3,
+        "y": 23.7,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p003": {
+        "display_name": "老冰鳞",
+        "x": 19.8,
+        "y": 22.2,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p004": {
+        "display_name": "沉船附近·腐鳃",
+        "x": 23.4,
+        "y": 34.6,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p005": {
+        "display_name": "老冰鳞",
+        "x": 19.8,
+        "y": 22.2,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p006": {
+        "display_name": "药剂师营地",
+        "x": 26.2,
+        "y": 24.6,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p007": {
+        "display_name": "天灾水晶",
+        "x": 22.2,
+        "y": 23.5,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p008": {
+        "display_name": "药剂师营地",
+        "x": 26.2,
+        "y": 24.6,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p009": {
+        "display_name": "钢铁之门前哨",
+        "x": 31.2,
+        "y": 24.5,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p010": {
+        "display_name": "钢铁之门遗迹",
+        "x": 31.1,
+        "y": 27.0,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p011": {
+        "display_name": "先知拉瑞恩",
+        "x": 31.2,
+        "y": 24.5,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p012": {
+        "display_name": "钢铁之门北侧",
+        "x": 32.0,
+        "y": 16.0,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p013": {
+        "display_name": "钢铁之门前哨",
+        "x": 31.2,
+        "y": 24.5,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p014": {
+        "display_name": "矮人酒桶",
+        "x": 33.6,
+        "y": 37.8,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p015": {
+        "display_name": "药剂师营地",
+        "x": 26.2,
+        "y": 24.6,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p016": {
+        "display_name": "灰烬龙巢",
+        "x": 37.6,
+        "y": 49.3,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p017": {
+        "display_name": "远古升降梯·奥弗斯",
+        "x": 40.2,
+        "y": 60.2,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p018": {
+        "display_name": "新阿加曼德",
+        "x": 53.4,
+        "y": 66.0,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p020": {
+        "display_name": "灰烬龙巢北缘",
+        "x": 50.2,
+        "y": 55.0,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p021": {
+        "display_name": "新阿加曼德",
+        "x": 53.1,
+        "y": 66.9,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p022": {
+        "display_name": "盾牌岭",
+        "x": 59.8,
+        "y": 78.6,
+        "phase": "shield",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p023": {
+        "display_name": "新阿加曼德",
+        "x": 53.7,
+        "y": 65.2,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p024": {
+        "display_name": "远古升降梯·奥弗斯",
+        "x": 40.2,
+        "y": 60.2,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p025": {
+        "display_name": "卡玛古",
+        "x": 25.0,
+        "y": 57.0,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p026": {
+        "display_name": "长矛岛·鹿群",
+        "x": 26.6,
+        "y": 62.4,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p027": {
+        "display_name": "卡玛古",
+        "x": 25.0,
+        "y": 57.0,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p028": {
+        "display_name": "长矛岛",
+        "x": 27.7,
+        "y": 60.5,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p029": {
+        "display_name": "卡玛古",
+        "x": 25.0,
+        "y": 57.0,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p030": {
+        "display_name": "奴隶贩子营地",
+        "x": 35.2,
+        "y": 64.3,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p031": {
+        "display_name": "卡玛古",
+        "x": 25.0,
+        "y": 57.0,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p032": {
+        "display_name": "格雷兹克斯",
+        "x": 23.1,
+        "y": 62.7,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p033": {
+        "display_name": "无赖港",
+        "x": 35.1,
+        "y": 80.9,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p034": {
+        "display_name": "斯库德",
+        "x": 38.9,
+        "y": 86.4,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p035": {
+        "display_name": "无赖港周边",
+        "x": 36.8,
+        "y": 81.8,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p036": {
+        "display_name": "无赖港",
+        "x": 35.1,
+        "y": 80.9,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p037": {
+        "display_name": "无赖港·赌债链",
+        "x": 35.3,
+        "y": 80.7,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p038": {
+        "display_name": "无赖港西侧",
+        "x": 33.0,
+        "y": 78.5,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p039": {
+        "display_name": "无赖港",
+        "x": 35.6,
+        "y": 80.4,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p040": {
+        "display_name": "无赖港酒馆",
+        "x": 35.6,
+        "y": 80.5,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p041": {
+        "display_name": "无赖港",
+        "x": 35.6,
+        "y": 80.3,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p042": {
+        "display_name": "无赖港南侧",
+        "x": 36.0,
+        "y": 83.6,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p043": {
+        "display_name": "无赖港",
+        "x": 35.6,
+        "y": 80.2,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p044": {
+        "display_name": "乔纳·斯特林洞穴",
+        "x": 33.0,
+        "y": 78.6,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p045": {
+        "display_name": "长矛岛东北高地",
+        "x": 32.0,
+        "y": 60.0,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p046": {
+        "display_name": "风暴愤怒法杖",
+        "x": 35.3,
+        "y": 64.8,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p047": {
+        "display_name": "无赖港",
+        "x": 35.6,
+        "y": 80.4,
+        "phase": "pirate",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p048": {
+        "display_name": "慈悲修女号登船点",
+        "x": 38.0,
+        "y": 74.7,
+        "phase": "mercy",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "move-mercy-first-boarding"
+        }
+      },
+      "howling-p050": {
+        "display_name": "慈悲修女号登船点",
+        "x": 38.0,
+        "y": 74.7,
+        "phase": "mercy",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "move-sorlof-return-boarding"
+        }
+      },
+      "howling-p051": {
+        "display_name": "克瓦迪尔上古甲胄",
+        "x": 81.8,
+        "y": 73.9,
+        "phase": "relic",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p052": {
+        "display_name": "炉石：最远东 → 新阿加曼德",
+        "x": 53.4,
+        "y": 66.0,
+        "phase": "relic",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0169"
+        }
+      },
+      "howling-p053": {
+        "display_name": "系统飞行：新阿加曼德 → 卡玛古",
+        "x": 25.0,
+        "y": 57.0,
+        "phase": "kamagua",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0171"
+        }
+      },
+      "howling-p054": {
+        "display_name": "远古升降梯·四遗物回收",
+        "x": 40.2,
+        "y": 60.2,
+        "phase": "shield",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p055": {
+        "display_name": "盾牌岭·第二趟",
+        "x": 59.5,
+        "y": 78.5,
+        "phase": "shield",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p056": {
+        "display_name": "远古升降梯·奥弗斯",
+        "x": 40.2,
+        "y": 60.2,
+        "phase": "shield",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p057": {
+        "display_name": "卡玛古",
+        "x": 25.0,
+        "y": 57.0,
+        "phase": "kamagua",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p058": {
+        "display_name": "系统飞行：卡玛古 → 新阿加曼德",
+        "x": 53.4,
+        "y": 66.0,
+        "phase": "east",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0186"
+        }
+      },
+      "howling-p059": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0188"
+        }
+      },
+      "howling-p060": {
+        "display_name": "复仇港周边",
+        "x": 78.0,
+        "y": 34.0,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p061": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p062": {
+        "display_name": "复仇港前线",
+        "x": 78.0,
+        "y": 35.5,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p063": {
+        "display_name": "北岸巨型潮行蟹",
+        "x": 79.0,
+        "y": 25.8,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p064": {
+        "display_name": "北岸洞穴·龙皮地图",
+        "x": 75.9,
+        "y": 19.7,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p065": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p066": {
+        "display_name": "风行者舰队",
+        "x": 84.7,
+        "y": 36.5,
+        "phase": "fleet",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p067": {
+        "display_name": "西部卫戍前线",
+        "x": 80.0,
+        "y": 39.0,
+        "phase": "fleet",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p068": {
+        "display_name": "联盟前线军官",
+        "x": 82.2,
+        "y": 42.5,
+        "phase": "fleet",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p069": {
+        "display_name": "黑暗游侠莉安娜",
+        "x": 78.7,
+        "y": 37.1,
+        "phase": "fleet",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p070": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p071": {
+        "display_name": "戈斯中士",
+        "x": 71.1,
+        "y": 39.1,
+        "phase": "baleheim",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p072": {
+        "display_name": "拜尔海姆入口",
+        "x": 71.0,
+        "y": 39.1,
+        "phase": "baleheim",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p073": {
+        "display_name": "拜尔海姆",
+        "x": 65.0,
+        "y": 40.5,
+        "phase": "baleheim",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p074": {
+        "display_name": "戈斯中士",
+        "x": 71.1,
+        "y": 39.1,
+        "phase": "baleheim",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p075": {
+        "display_name": "林德尔",
+        "x": 65.9,
+        "y": 36.8,
+        "phase": "baleheim",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p076": {
+        "display_name": "尼弗莱瓦南侧",
+        "x": 67.4,
+        "y": 60.4,
+        "phase": "nifflevar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p077": {
+        "display_name": "尼弗莱瓦内部",
+        "x": 67.5,
+        "y": 54.0,
+        "phase": "nifflevar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p078": {
+        "display_name": "尼弗莱瓦南侧",
+        "x": 67.4,
+        "y": 60.4,
+        "phase": "nifflevar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p079": {
+        "display_name": "新阿加曼德",
+        "x": 53.6,
+        "y": 66.4,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p080": {
+        "display_name": "托尔瓦德",
+        "x": 46.8,
+        "y": 68.1,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p081": {
+        "display_name": "新阿加曼德",
+        "x": 53.6,
+        "y": 66.4,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p082": {
+        "display_name": "感染区·第一趟",
+        "x": 50.2,
+        "y": 54.5,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p083": {
+        "display_name": "新阿加曼德",
+        "x": 53.6,
+        "y": 66.4,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p084": {
+        "display_name": "铲齿鹿群",
+        "x": 54.5,
+        "y": 58.3,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p085": {
+        "display_name": "新阿加曼德",
+        "x": 53.7,
+        "y": 65.2,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p086": {
+        "display_name": "感染区·第二趟",
+        "x": 50.2,
+        "y": 54.5,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p087": {
+        "display_name": "新阿加曼德",
+        "x": 53.7,
+        "y": 65.2,
+        "phase": "newagamand",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p088": {
+        "display_name": "冬蹄营地",
+        "x": 49.0,
+        "y": 11.8,
+        "phase": "winterhoof",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0300"
+        }
+      },
+      "howling-p089": {
+        "display_name": "冬蹄东北自然区",
+        "x": 57.5,
+        "y": 8.0,
+        "phase": "winterhoof",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p090": {
+        "display_name": "冬蹄营地",
+        "x": 49.0,
+        "y": 11.8,
+        "phase": "winterhoof",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p091": {
+        "display_name": "冰瀑",
+        "x": 52.3,
+        "y": 3.7,
+        "phase": "winterhoof",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p092": {
+        "display_name": "冬蹄营地",
+        "x": 49.3,
+        "y": 12.0,
+        "phase": "winterhoof",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p093": {
+        "display_name": "鲁莉尔蕾",
+        "x": 61.5,
+        "y": 22.9,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p094": {
+        "display_name": "裂木森林",
+        "x": 53.0,
+        "y": 24.0,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p095": {
+        "display_name": "鲁莉尔蕾",
+        "x": 61.5,
+        "y": 22.9,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p096": {
+        "display_name": "凋零林地",
+        "x": 53.8,
+        "y": 17.7,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p097": {
+        "display_name": "鲁莉尔蕾",
+        "x": 61.5,
+        "y": 22.9,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p098": {
+        "display_name": "凋零之叶",
+        "x": 53.8,
+        "y": 18.0,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p099": {
+        "display_name": "鲁莉尔蕾",
+        "x": 61.5,
+        "y": 22.9,
+        "phase": "runewood",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p100": {
+        "display_name": "巨人平原·前段",
+        "x": 70.0,
+        "y": 28.0,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p101": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p102": {
+        "display_name": "冬蹄营地",
+        "x": 49.0,
+        "y": 11.8,
+        "phase": "giants",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0356"
+        }
+      },
+      "howling-p103": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "giants",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0362"
+        }
+      },
+      "howling-p104": {
+        "display_name": "巨人平原·中段",
+        "x": 71.0,
+        "y": 25.0,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p105": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p106": {
+        "display_name": "冬蹄营地",
+        "x": 49.0,
+        "y": 11.8,
+        "phase": "giants",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0369"
+        }
+      },
+      "howling-p107": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "giants",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0375"
+        }
+      },
+      "howling-p108": {
+        "display_name": "巨人平原·命令符文",
+        "x": 71.5,
+        "y": 26.0,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p109": {
+        "display_name": "麦加利斯",
+        "x": 66.5,
+        "y": 9.5,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p110": {
+        "display_name": "冬蹄营地",
+        "x": 49.0,
+        "y": 11.8,
+        "phase": "giants",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p111": {
+        "display_name": "斯克恩",
+        "x": 45.0,
+        "y": 31.0,
+        "phase": "skorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p112": {
+        "display_name": "冬蹄营地",
+        "x": 48.1,
+        "y": 10.7,
+        "phase": "skorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p113": {
+        "display_name": "亚勒伯龙·前段",
+        "x": 36.0,
+        "y": 11.5,
+        "phase": "gjalerbron",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p114": {
+        "display_name": "冬蹄营地",
+        "x": 48.2,
+        "y": 10.7,
+        "phase": "gjalerbron",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p115": {
+        "display_name": "亚勒伯龙·后段",
+        "x": 37.0,
+        "y": 10.0,
+        "phase": "gjalerbron",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p116": {
+        "display_name": "冬之平台·安格博达女王",
+        "x": 40.9,
+        "y": 6.5,
+        "phase": "gjalerbron",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p117": {
+        "display_name": "冬蹄营地",
+        "x": 48.2,
+        "y": 10.7,
+        "phase": "gjalerbron",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p118": {
+        "display_name": "霜刃神殿",
+        "x": 61.2,
+        "y": 2.0,
+        "phase": "westfinal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p119": {
+        "display_name": "冬蹄营地",
+        "x": 49.0,
+        "y": 11.8,
+        "phase": "westfinal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0432"
+        }
+      },
+      "howling-p120": {
+        "display_name": "药剂师营地",
+        "x": 26.2,
+        "y": 24.6,
+        "phase": "westfinal",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0435"
+        }
+      },
+      "howling-p121": {
+        "display_name": "先知拉瑞恩",
+        "x": 31.2,
+        "y": 24.5,
+        "phase": "westfinal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p122": {
+        "display_name": "乌尔芬",
+        "x": 29.7,
+        "y": 5.7,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p123": {
+        "display_name": "比奥莫弗",
+        "x": 27.6,
+        "y": 21.1,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p124": {
+        "display_name": "瓦尔戈",
+        "x": 34.0,
+        "y": 28.9,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p125": {
+        "display_name": "乌尔芬",
+        "x": 29.7,
+        "y": 5.7,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p126": {
+        "display_name": "塔隆斯里克",
+        "x": 41.3,
+        "y": 35.9,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p127": {
+        "display_name": "乌尔芬",
+        "x": 29.7,
+        "y": 5.7,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p128": {
+        "display_name": "头狼迦瓦尔",
+        "x": 28.3,
+        "y": 9.2,
+        "phase": "ulfang",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p129": {
+        "display_name": "先知拉瑞恩",
+        "x": 31.2,
+        "y": 24.5,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "howling-p102-vengeance": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "giants",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0354"
+        }
+      },
+      "howling-p106-vengeance": {
+        "display_name": "复仇港",
+        "x": 78.6,
+        "y": 31.2,
+        "phase": "giants",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0367"
+        }
+      },
+      "howling-entry-grizzly-handoff": {
+        "display_name": "加弗洛克（灰熊丘陵收尾）",
+        "x": 79.8,
+        "y": 33.6,
+        "zone_id": 394,
+        "phase": "entry",
+        "handoff_ref": "grizzly-to-howling-gavrock"
+      },
+      "howling-entry-conquest-hold": {
+        "display_name": "征服堡",
+        "x": 20.8,
+        "y": 64.2,
+        "zone_id": 394,
+        "phase": "entry",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0002"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Stage 5 entry split from Grizzly endpoint handoff: Gavrock -> hearth Conquest Hold -> overland ride Apothecary Camp; existing route actions preserved and former combined first point normalized."
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic parity correction: old player text says overland crossing to Apothecary Camp, not specifically riding; removed migrated ride precision and keep movement mode unresolved until independently evidenced."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity migration for Sister Mercy: replace three ambiguous legacy script edges with explicit player behavior from the old route/Task Presentation. Go to the ~38,75 boarding anchor (mode unknown), wait for the ship and board, use the bow cannon and recover Sorlof booty per Task 11529 presentation, return to ~38,75 (mode unknown), then reboard and turn in. Removed the artificial separate ship-bow visit so internal task movement remains Task Presentation/service semantics instead of a fake route edge."
+    }
+  ]
+}

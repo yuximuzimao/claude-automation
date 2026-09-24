@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": 12581,
+  "identity": {
+    "name_zhcn": "英雄的负担",
+    "name_en": "A Hero's Burden",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 76,
+    "pre_any": [
+      12579
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 195000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39475,
+        "quantity": 1,
+        "name_zhcn": "阿图里斯的专注石",
+        "name_en": "Artruis's Focus Stone",
+        "sell_price_each_copper": 43836,
+        "sell_price_total_copper": 43836
+      },
+      {
+        "item_id": 39483,
+        "quantity": 1,
+        "name_zhcn": "联结项圈",
+        "name_en": "Choker of Binding",
+        "sell_price_each_copper": 43836,
+        "sell_price_total_copper": 43836
+      },
+      {
+        "item_id": 39484,
+        "quantity": 1,
+        "name_zhcn": "奴役之尖刺项圈",
+        "name_en": "Spiked Collar of Servitude",
+        "sell_price_each_copper": 43836,
+        "sell_price_total_copper": 43836
+      },
+      {
+        "item_id": 39485,
+        "quantity": 1,
+        "name_zhcn": "灌血坠饰",
+        "name_en": "Blood-Infused Pendant",
+        "sell_price_each_copper": 43836,
+        "sell_price_total_copper": 43836
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 43836,
+    "gear_sale_max_copper": 43836,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 32100
+  },
+  "guide": [
+    "接取：莫乌德。",
+    "杀死残忍的阿图里斯。 /  / 莫乌德无法陪你执行这项任务，因此你最好召集其他伙伴帮忙。",
+    "交付：阿图里斯的护命匣。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12581",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《英雄的负担》：神谕者路线不要爆发秒杀阿图里斯。约30%血量后等亚鲁乌特和泽匹克解除控制，只杀泽匹克并保留亚鲁乌特；继续让亚鲁乌特参与最后阶段后再击杀阿图里斯。战后原地确认亚鲁乌特出现《神谕者之手》，没有出现就不要直接离开，避免整条神谕者后续断掉。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

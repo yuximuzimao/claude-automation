@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "task_id": 13157,
+  "identity": {
+    "name_zhcn": "北伐军之峰",
+    "name_en": "The Crusaders' Pinnacle",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 79,
+    "min_level": 77,
+    "pre_any": [
+      13141
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 44046,
+        "quantity": 1,
+        "name_zhcn": "银色头冠",
+        "name_en": "The Argent Crown",
+        "sell_price_each_copper": 69625,
+        "sell_price_total_copper": 69625
+      },
+      {
+        "item_id": 44040,
+        "quantity": 1,
+        "name_zhcn": "北伐军的坚毅",
+        "name_en": "The Crusader's Resolution",
+        "sell_price_each_copper": 68138,
+        "sell_price_total_copper": 68138
+      },
+      {
+        "item_id": 44045,
+        "quantity": 1,
+        "name_zhcn": "北伐军的罩帽",
+        "name_en": "Crusader's Coif",
+        "sell_price_each_copper": 59584,
+        "sell_price_total_copper": 59584
+      },
+      {
+        "item_id": 44044,
+        "quantity": 1,
+        "name_zhcn": "提里奥的头盔",
+        "name_en": "Tirion's Headwrap",
+        "sell_price_each_copper": 49474,
+        "sell_price_total_copper": 49474
+      },
+      {
+        "item_id": 44019,
+        "quantity": 1,
+        "name_zhcn": "银色软帽",
+        "name_en": "The Argent Skullcap",
+        "sell_price_each_copper": 37849,
+        "sell_price_total_copper": 37849
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 69625,
+    "gear_sale_max_copper": 69625,
+    "reputation_rewards": [
+      {
+        "faction_id": 1106,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 32700
+  },
+  "guide": [
+    "接取：古斯塔夫神父。",
+    "前往冰冠冰川的北伐军之峰，寻找大领主提里奥·弗丁。",
+    "交付：大领主提里奥·弗丁。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13157",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

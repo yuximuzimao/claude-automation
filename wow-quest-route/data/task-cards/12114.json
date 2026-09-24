@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "task_id": 12114,
+  "identity": {
+    "name_zhcn": "心灵的创伤",
+    "name_en": "Therapy",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 59000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39093,
+        "quantity": 1,
+        "name_zhcn": "怒火爆发胸甲",
+        "name_en": "Chestguard of Expressed Fury",
+        "sell_price_each_copper": 67127,
+        "sell_price_total_copper": 67127
+      },
+      {
+        "item_id": 39027,
+        "quantity": 1,
+        "name_zhcn": "愤怒掌控护腿",
+        "name_en": "Leggings of Anger Management",
+        "sell_price_each_copper": 45637,
+        "sell_price_total_copper": 45637
+      },
+      {
+        "item_id": 38728,
+        "quantity": 1,
+        "name_zhcn": "平静感化褶裙",
+        "name_en": "Kilt of Peaceful Reclamation",
+        "sell_price_each_copper": 36501,
+        "sell_price_total_copper": 36501
+      },
+      {
+        "item_id": 38758,
+        "quantity": 1,
+        "name_zhcn": "治愈披风",
+        "name_en": "Therapeutic Cloak",
+        "sell_price_each_copper": 29191,
+        "sell_price_total_copper": 29191
+      },
+      {
+        "item_id": 39055,
+        "quantity": 1,
+        "name_zhcn": "根除护手",
+        "name_en": "Handguards of Extermination",
+        "sell_price_each_copper": 28225,
+        "sell_price_total_copper": 28225
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 67127,
+    "gear_sale_max_copper": 67127,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20950
+  },
+  "guide": [
+    "接取：哈考尔。",
+    "哈考尔营地的哈考尔要你在达基尔金废墟外面杀死10个达卡莱保卫者和10个达卡莱先知。",
+    "交付：哈考尔。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12114",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

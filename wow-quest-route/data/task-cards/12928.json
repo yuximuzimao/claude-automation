@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "task_id": 12928,
+  "identity": {
+    "name_zhcn": "诺甘农之壳",
+    "name_en": "Norgannon's Shell",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13416
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 74000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 42824,
+        "quantity": 1,
+        "name_zhcn": "造物者之刃",
+        "name_en": "Maker's Edge",
+        "sell_price_each_copper": 138893,
+        "sell_price_total_copper": 138893
+      },
+      {
+        "item_id": 42794,
+        "quantity": 1,
+        "name_zhcn": "粗暴者的藤杖",
+        "name_en": "Hardened Vine of the Mauler",
+        "sell_price_each_copper": 130415,
+        "sell_price_total_copper": 130415
+      },
+      {
+        "item_id": 42807,
+        "quantity": 1,
+        "name_zhcn": "开端之剑",
+        "name_en": "Blade of the Inception",
+        "sell_price_each_copper": 112308,
+        "sell_price_total_copper": 112308
+      },
+      {
+        "item_id": 42819,
+        "quantity": 1,
+        "name_zhcn": "造物者之触",
+        "name_en": "Maker's Touch",
+        "sell_price_each_copper": 109137,
+        "sell_price_total_copper": 109137
+      },
+      {
+        "item_id": 42831,
+        "quantity": 1,
+        "name_zhcn": "女武士的匕首",
+        "name_en": "Maiden's Dagger",
+        "sell_price_each_copper": 103117,
+        "sell_price_total_copper": 103117
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 138893,
+    "gear_sale_max_copper": 138893,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 22050
+  },
+  "guide": [
+    "接取：创世者的图书馆控制台。",
+    "从档案员麦卡顿那里拿到诺甘农之壳。",
+    "交付：布莱恩·铜须。"
+  ],
+  "fivebox": {
+    "status": "sequential_loot"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12928",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12928; legacy_type=single_boss_shared_same_corpse_fivebox_loot_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12928",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《诺甘农之壳》：共享：档案员麦卡顿只需击杀一次；同一尸体五号依次拾取诺甘农之壳，随后用布莱恩通讯器继续。\n【需要单独修正优化】《诺甘农之壳》首组实跑确认：档案员麦卡顿只需击杀一次，同一尸体五个角色依次拾取诺甘农之壳即可。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12928",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

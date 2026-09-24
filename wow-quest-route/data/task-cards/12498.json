@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "task_id": 12498,
+  "identity": {
+    "name_zhcn": "红龙之翼",
+    "name_en": "On Ruby Wings",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 71,
+    "pre_any": [
+      12497
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38114,
+        "quantity": 1,
+        "name_zhcn": "红玉勇士胸铠",
+        "name_en": "Chestplate of the Ruby Champion",
+        "sell_price_each_copper": 63398,
+        "sell_price_total_copper": 63398
+      },
+      {
+        "item_id": 38053,
+        "quantity": 1,
+        "name_zhcn": "巨龙火焰链甲",
+        "name_en": "Wyrmfire Links",
+        "sell_price_each_copper": 52709,
+        "sell_price_total_copper": 52709
+      },
+      {
+        "item_id": 38073,
+        "quantity": 1,
+        "name_zhcn": "红龙的意志",
+        "name_en": "Will of the Red Dragonflight",
+        "sell_price_each_copper": 47427,
+        "sell_price_total_copper": 47427
+      },
+      {
+        "item_id": 38010,
+        "quantity": 1,
+        "name_zhcn": "天灾杀手皮帽",
+        "name_en": "Scourgeslayer Cover",
+        "sell_price_each_copper": 35092,
+        "sell_price_total_copper": 35092
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 63398,
+    "gear_sale_max_copper": 63398,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25950
+  },
+  "guide": [
+    "接取：托拉斯塔萨。",
+    "消灭30个废土挖掘者并夺取安提沃克的镰刀。完成这个任务之后，回到龙眠神殿去找阿莱克丝塔萨，生命的缚誓者。",
+    "交付：阿莱克丝塔萨，生命的缚誓者。",
+    "使用红玉信标骑乘红龙，用载具技能击杀所需天灾目标，并完成Boss/镰刀事件后再返回龙后处。"
+  ],
+  "fivebox": {
+    "status": "special"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12498",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12498; legacy_type=vehicle_kill_group_shared_same_corpse_fivebox_personal_loot_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12498",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12498/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《红龙之翼》：共享：主控召红龙完成30个天灾目标；用红龙击杀闪电使者提亚希，等安提沃克出现后必须下龙，用角色本体击杀。安提沃克尸体可供五号分别拾取镰刀。\n【需要单独修正优化】《红龙之翼》首组实跑确认：主控使用红龙载具完成30个天灾目标时进度五号共享；安提沃克只需击杀一次，同一具尸体可供五个角色分别拾取各自的镰刀。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12498",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

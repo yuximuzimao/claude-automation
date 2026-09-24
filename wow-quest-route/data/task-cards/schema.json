@@ -10,11 +10,10 @@
     "identity",
     "coverage",
     "availability",
-    "objectives",
-    "mechanics",
-    "fivebox",
+    "rewards",
     "guide",
-    "verification",
+    "fivebox",
+    "timing_rule_ref",
     "evidence",
     "presentation"
   ],
@@ -34,6 +33,48 @@
         "expected",
         "unknown"
       ]
+    },
+    "reward_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "quantity",
+        "name_zhcn",
+        "name_en",
+        "sell_price_each_copper",
+        "sell_price_total_copper"
+      ],
+      "properties": {
+        "item_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name_zhcn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name_en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sell_price_each_copper": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sell_price_total_copper": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
     }
   },
   "properties": {
@@ -96,30 +137,14 @@
       "additionalProperties": false,
       "required": [
         "availability",
-        "objectives",
-        "locations",
         "rewards",
-        "mechanics",
-        "fivebox",
         "guide"
       ],
       "properties": {
         "availability": {
           "$ref": "#/$defs/coverage_status"
         },
-        "objectives": {
-          "$ref": "#/$defs/coverage_status"
-        },
-        "locations": {
-          "$ref": "#/$defs/coverage_status"
-        },
         "rewards": {
-          "$ref": "#/$defs/coverage_status"
-        },
-        "mechanics": {
-          "$ref": "#/$defs/coverage_status"
-        },
-        "fivebox": {
           "$ref": "#/$defs/coverage_status"
         },
         "guide": {
@@ -248,193 +273,59 @@
     },
     "rewards": {
       "type": "object",
-      "additionalProperties": true
-    },
-    "locations": {
-      "type": "object",
-      "additionalProperties": true
-    },
-    "objectives": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "objective_id",
-          "kind",
-          "required_count",
-          "mechanic_refs",
-          "confidence"
-        ],
-        "properties": {
-          "objective_id": {
-            "type": "string",
-            "minLength": 1
-          },
-          "kind": {
-            "enum": [
-              "kill",
-              "loot",
-              "interact",
-              "use_item",
-              "escort",
-              "event",
-              "talk",
-              "explore",
-              "vehicle",
-              "other"
-            ]
-          },
-          "target": {
-            "type": [
-              "object",
-              "string",
-              "null"
-            ]
-          },
-          "required_count": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "minimum": 0
-          },
-          "source_entities": {
-            "type": "array",
-            "items": {
-              "type": [
-                "integer",
-                "string"
-              ]
-            }
-          },
-          "locations": {
-            "type": "array",
-            "items": {
-              "type": [
-                "object",
-                "string"
-              ]
-            }
-          },
-          "mechanic_refs": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "minLength": 1
-            },
-            "uniqueItems": true
-          },
-          "confidence": {
-            "$ref": "#/$defs/confidence"
-          }
-        }
-      }
-    },
-    "mechanics": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "additionalProperties": true,
-        "required": [
-          "kind",
-          "summary",
-          "confidence"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "minLength": 1
-          },
-          "summary": {
-            "type": "string",
-            "minLength": 1
-          },
-          "confidence": {
-            "$ref": "#/$defs/confidence"
-          },
-          "source_refs": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "minLength": 1
-            },
-            "uniqueItems": true
-          }
-        }
-      }
-    },
-    "fivebox": {
-      "type": "object",
       "additionalProperties": false,
-      "required": [
-        "status",
-        "stages"
-      ],
       "properties": {
-        "status": {
-          "enum": [
-            "shared",
-            "not_shared",
-            "sequential_loot",
-            "pending"
-          ]
+        "full_xp": {
+          "type": "integer",
+          "minimum": 0
         },
-        "stages": {
+        "no_money_from_xp": {
+          "type": "boolean"
+        },
+        "reward_money_copper": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fixed_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reward_item"
+          }
+        },
+        "choice_items_desc_by_sell": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reward_item"
+          }
+        },
+        "fixed_items_sell_total_copper": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "choice_item_max_sell_copper": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gear_sale_max_copper": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reputation_rewards": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
             "required": [
-              "stage_id",
-              "objective_id",
-              "mode",
-              "confidence"
+              "faction_id",
+              "amount"
             ],
             "properties": {
-              "stage_id": {
-                "type": "string",
-                "minLength": 1
+              "faction_id": {
+                "type": "integer",
+                "minimum": 1
               },
-              "objective_id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "mode": {
-                "enum": [
-                  "shared_kill",
-                  "shared_progress",
-                  "personal_progress",
-                  "ffa_loot_pool",
-                  "same_corpse_multi_character_loot",
-                  "personal_drop",
-                  "party_loot",
-                  "per_character_interaction",
-                  "shared_interaction",
-                  "per_character_item_use",
-                  "shared_event",
-                  "escort_party_shared",
-                  "unknown"
-                ]
-              },
-              "summary": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "confidence": {
-                "$ref": "#/$defs/confidence"
-              },
-              "source_refs": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "uniqueItems": true
+              "amount": {
+                "type": "integer"
               }
             }
           }
@@ -448,60 +339,30 @@
         "minLength": 1
       }
     },
-    "timing_samples": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": true
-      }
-    },
-    "verification": {
+    "fivebox": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "open_questions"
+        "status"
       ],
       "properties": {
-        "open_questions": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "question_id",
-              "variable",
-              "status",
-              "close_condition"
-            ],
-            "properties": {
-              "question_id": {
-                "type": "string",
-                "minLength": 1
-              },
-              "variable": {
-                "type": "string",
-                "minLength": 1
-              },
-              "status": {
-                "enum": [
-                  "unknown",
-                  "expected"
-                ]
-              },
-              "reason": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "close_condition": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
+        "status": {
+          "enum": [
+            "shared",
+            "not_shared",
+            "sequential_loot",
+            "special",
+            "pending"
+          ]
         }
       }
+    },
+    "timing_rule_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
     },
     "evidence": {
       "type": "array",

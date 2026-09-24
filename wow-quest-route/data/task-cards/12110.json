@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "task_id": 12110,
+  "identity": {
+    "name_zhcn": "魔网能量线的终端",
+    "name_en": "The End of the Line",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12106
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 100000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38129,
+        "quantity": 1,
+        "name_zhcn": "魔网看护者法杖",
+        "name_en": "Staff of the Ley Mender",
+        "sell_price_each_copper": 111100,
+        "sell_price_total_copper": 111100
+      },
+      {
+        "item_id": 38153,
+        "quantity": 1,
+        "name_zhcn": "法力灌注之爪",
+        "name_en": "Mana Infused Claw",
+        "sell_price_each_copper": 90204,
+        "sell_price_total_copper": 90204
+      },
+      {
+        "item_id": 38152,
+        "quantity": 1,
+        "name_zhcn": "紫罗兰卫士之锤",
+        "name_en": "Mace of the Violet Guardian",
+        "sell_price_each_copper": 89875,
+        "sell_price_total_copper": 89875
+      },
+      {
+        "item_id": 38151,
+        "quantity": 1,
+        "name_zhcn": "达斯卡的废弃刺刀",
+        "name_en": "Daschal's Discarded Shiv",
+        "sell_price_each_copper": 89537,
+        "sell_price_total_copper": 89537
+      },
+      {
+        "item_id": 38217,
+        "quantity": 1,
+        "name_zhcn": "紫罗兰塔之书",
+        "name_en": "Tome of the Violet Tower",
+        "sell_price_each_copper": 33162,
+        "sell_price_total_copper": 33162
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 111100,
+    "gear_sale_max_copper": 111100,
+    "reputation_rewards": [
+      {
+        "faction_id": 1090,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25400
+  },
+  "guide": [
+    "接取：法师指挥官伊文斯塔。",
+    "使用魔网能量焦点控制饰品从因度雷湖底的魔网能量焦点处收集信息。然后向东走，前往龙骨荒野中南部区域的碧蓝巨龙圣地，在那里的西侧进行调查。 /  / 完成调查之后，回到龙骨荒野的阿格玛之锤，向大法师艾萨斯·夺日者的影像复命。",
+    "交付：大法师艾萨斯·夺日者的影像。",
+    "先在因度雷湖魔网焦点处使用魔网护符，再前往碧蓝巨龙圣地观察点；两段空间检查都必须完成。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12110",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12110/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《魔网能量线的终端》：湖内魔网焦点必须主动使用任务饰品取得第一段信息，不是路过自动计数。\n《魔网能量线的终端》：这里完成观察碧蓝巨龙圣地目标；不要把区域发现提示当成任务完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

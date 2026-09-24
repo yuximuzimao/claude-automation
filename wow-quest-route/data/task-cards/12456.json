@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "task_id": 12456,
+  "identity": {
+    "name_zhcn": "奥雷托斯的羽毛",
+    "name_en": "The Plume of Alystros",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 72,
+    "pre_any": [
+      12454
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 112000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37981,
+        "quantity": 1,
+        "name_zhcn": "上古梦游者护腿",
+        "name_en": "Ancient Dreamer's Leggings",
+        "sell_price_each_copper": 45289,
+        "sell_price_total_copper": 45289
+      },
+      {
+        "item_id": 38024,
+        "quantity": 1,
+        "name_zhcn": "翠绿链甲长靴",
+        "name_en": "Verdant Linked Boots",
+        "sell_price_each_copper": 41386,
+        "sell_price_total_copper": 41386
+      },
+      {
+        "item_id": 38085,
+        "quantity": 1,
+        "name_zhcn": "翡翠卫士腰带",
+        "name_en": "Belt of the Emerald Guardian",
+        "sell_price_each_copper": 33187,
+        "sell_price_total_copper": 33187
+      },
+      {
+        "item_id": 37937,
+        "quantity": 1,
+        "name_zhcn": "奥雷托斯的羽毛腰带",
+        "name_en": "Alystros's Plume Cinch",
+        "sell_price_each_copper": 17369,
+        "sell_price_total_copper": 17369
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 45289,
+    "gear_sale_max_copper": 45289,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25950
+  },
+  "guide": [
+    "接取：护园者尼瑟拉。",
+    "翡翠巨龙圣地的护园者尼瑟拉要你取得奥雷托斯的羽毛。",
+    "交付：护园者尼瑟拉。",
+    "在东南林地使用天爪蜕皮召唤奥雷托斯，击杀后拾取羽毛；命名目标是召唤出现，不会固定站在地图点。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12456",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12456/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "在林地东南端放下天爪枭羽蜕召出奥雷托斯。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

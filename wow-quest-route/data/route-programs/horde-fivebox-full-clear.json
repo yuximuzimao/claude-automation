@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "program_id": "horde-fivebox-full-clear",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "program_scope": "Horde fivebox Outland-to-Northrend full-clear sequence",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn"
+  },
+  "entry_state_contract": {
+    "active_task_ids": []
+  },
+  "goal": {
+    "summary": "把当前普通五开地狱火→赞加→纳格兰→诺森德各正式Route Profile按既有业务顺序组成一条可验证的完整执行方案；成员Profile内部路线保持独立真源。"
+  },
+  "profile_ids": [
+    "hellfire-fivebox",
+    "zangarmarsh-fivebox",
+    "nagrand-fivebox-67-68",
+    "borean-fivebox",
+    "dragonblight-fivebox",
+    "dalaran-mainline-77",
+    "storm-peaks-fivebox",
+    "icecrown-fivebox",
+    "sholazar-fivebox",
+    "zuldrak-fivebox",
+    "grizzly-fivebox",
+    "howling-fivebox"
+  ],
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "把旧正式工作台1—12发布顺序与现有Profile跨图目标固化为Route Program组合真源；这里只迁移Profile顺序，不宣称跨Profile entry/exit已通过Stage 4连续性验收。"
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "architecture_migration",
+      "summary": "Add Program-owned boundary transitions where player operations are evidenced but do not belong to either local-map Profile: Zangarmarsh Lisaao -> Nagrand Garadar carries Task 9797; Dragonblight end -> known Aethas image access point (mode UNKNOWN) -> speak again for Task 12791 quest teleport to Dalaran. Cross-Profile travel is no longer forced into local-map geometry. Zangarmarsh -> Nagrand movement mode was later resolved to ground riding from the verified 67-68 sprint evidence."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "migration_fidelity",
+      "summary": "Restore the reviewed Icecrown -> Sholazar first leg after Icecrown's formal exit was repaired back to Orgrim's Hammer: use the retained K3 loaner wyvern to self-fly from Orgrim's Hammer to the already-open Argent Tournament Grounds flight point. Sholazar Profile continues to own Argent Tournament -> Dalaran taxi and Task 12521 transport to Wildgrowth Mangal."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "migration_fidelity",
+      "summary": "Migrate the reviewed Zul'Drak -> Grizzly Hills physical handoff into the Program: after the Zul'Drak route closes at Dubra'Jin, ride into Conquest Hold. Grizzly Profile begins at Conquest Hold with Task 12487 turn-in and retains local flight-point/hearth setup."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "migration_fidelity",
+      "summary": "Migrate the reviewed Storm Peaks -> Icecrown physical handoff into the Program: Storm Peaks closes at Camp Tunka'lo; the retained K3 loaner wind rider is valid in both Storm Peaks and Icecrown, and the formal Icecrown entry audit fixes the first geographic region at the Argent Tournament Grounds. The boundary is therefore a self-flight to the Argent Tournament Grounds."
+    }
+  ],
+  "boundary_transitions": [
+    {
+      "from_profile_id": "zangarmarsh-fivebox",
+      "to_profile_id": "nagrand-fivebox-67-68",
+      "operations": [
+        {
+          "operation_id": "zang-lisaao-to-nagrand-garadar",
+          "kind": "move",
+          "from_name": "赞加沼泽·莉萨奥营地",
+          "to_name": "纳格兰·加拉达尔",
+          "movement_mode": "ride"
+        }
+      ]
+    },
+    {
+      "from_profile_id": "dragonblight-fivebox",
+      "to_profile_id": "dalaran-mainline-77",
+      "operations": [
+        {
+          "operation_id": "dragonblight-end-to-aethas-image",
+          "kind": "move",
+          "from_name": "龙骨荒野·萨鲁法尔战甲",
+          "to_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像"
+        },
+        {
+          "operation_id": "quest-12791-teleport-dalaran",
+          "kind": "quest_transport",
+          "from_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
+          "to_name": "达拉然·紫罗兰之门"
+        }
+      ]
+    },
+    {
+      "from_profile_id": "icecrown-fivebox",
+      "to_profile_id": "sholazar-fivebox",
+      "operations": [
+        {
+          "operation_id": "icecrown-orgrims-to-argent-tournament",
+          "kind": "move",
+          "from_name": "奥格瑞姆之锤",
+          "to_name": "银色比武场",
+          "movement_mode": "fly"
+        }
+      ]
+    },
+    {
+      "from_profile_id": "zuldrak-fivebox",
+      "to_profile_id": "grizzly-fivebox",
+      "operations": [
+        {
+          "operation_id": "zuldrak-dubrajin-to-grizzly-conquest-hold",
+          "kind": "move",
+          "from_name": "杜布拉金",
+          "to_name": "征服堡",
+          "movement_mode": "ride"
+        }
+      ]
+    },
+    {
+      "from_profile_id": "storm-peaks-fivebox",
+      "to_profile_id": "icecrown-fivebox",
+      "operations": [
+        {
+          "operation_id": "storm-tunkalo-to-icecrown-argent-tournament",
+          "kind": "move",
+          "from_name": "唐卡洛营地",
+          "to_name": "银色比武场",
+          "movement_mode": "fly"
+        }
+      ]
+    }
+  ]
+}

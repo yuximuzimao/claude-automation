@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "task_id": 11471,
+  "identity": {
+    "name_zhcn": "取而代之",
+    "name_en": "The Jig is Up",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 69,
+    "pre_any": [
+      11480
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38257,
+        "quantity": 1,
+        "name_zhcn": "海洋的打击",
+        "name_en": "Strike of the Seas",
+        "sell_price_each_copper": 56913,
+        "sell_price_total_copper": 56913
+      },
+      {
+        "item_id": 38258,
+        "quantity": 1,
+        "name_zhcn": "水手的绳结护符",
+        "name_en": "Sailor's Knotted Charm",
+        "sell_price_each_copper": 56913,
+        "sell_price_total_copper": 56913
+      },
+      {
+        "item_id": 38259,
+        "quantity": 1,
+        "name_zhcn": "大副的怀表",
+        "name_en": "First Mate's Pocketwatch",
+        "sell_price_each_copper": 56913,
+        "sell_price_total_copper": 56913
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 56913,
+    "gear_sale_max_copper": 56913,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 25150
+  },
+  "guide": [
+    "接取：安妮·波恩。",
+    "无赖港的安妮·波恩要你把“疯狗”约纳·斯特林的望远镜交给她。",
+    "交付：安妮·波恩。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11471",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《取而代之》：不是单Boss击杀；从约33,75洞口进入，先打乔纳·斯特林，压到低血量后他会逃下去并触发霍泽尔吃掉他的脚本，随后继续击杀霍泽尔并拾取任务物。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

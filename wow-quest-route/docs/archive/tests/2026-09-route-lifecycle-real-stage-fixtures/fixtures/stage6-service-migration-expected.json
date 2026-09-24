@@ -1,0 +1,81 @@
+{
+  "schema": "stage6-service-migration-expected/v1",
+  "captured_at": "2026-09-17",
+  "purpose": "Predeclare route-only Service Context facts recovered from already-reviewed live/legacy route evidence before writing service_overrides into Route Profiles. These are migration expectations, not new route optimization decisions.",
+  "profiles": {
+    "zangarmarsh-fivebox": [
+      {
+        "service_id": "zang-9802-background",
+        "kind": "background_window",
+        "task_id": 9802,
+        "start_action_id": "a0012",
+        "end_action_id": "a0101",
+        "end_policy": "carry_if_incomplete"
+      },
+      {
+        "service_id": "zang-9728-background",
+        "kind": "background_window",
+        "task_id": 9728,
+        "start_action_id": "a0014",
+        "end_action_id": "a0067",
+        "end_policy": "fill_if_incomplete"
+      },
+      {
+        "service_id": "zang-9806-background",
+        "kind": "background_window",
+        "task_id": 9806,
+        "start_action_id": "a0145",
+        "end_action_id": "a0197",
+        "end_policy": "fill_if_incomplete"
+      },
+      {
+        "service_id": "zang-9708-9820-shared",
+        "kind": "shared_service",
+        "action_ids": [
+          "a0181",
+          "a0182"
+        ]
+      }
+    ],
+    "sholazar-fivebox": [
+      {
+        "service_id": "sholazar-12592-background",
+        "kind": "background_window",
+        "task_id": 12592,
+        "start_action_id": "a0042",
+        "end_action_id": "a0060",
+        "end_policy": "covered_complete"
+      }
+    ],
+    "storm-peaks-fivebox": [
+      {
+        "service_id": "storm-12882-background",
+        "kind": "background_window",
+        "task_id": 12882,
+        "start_action_id": "a0190",
+        "end_action_id": "a0352",
+        "end_policy": "fill_if_incomplete"
+      }
+    ],
+    "grizzly-fivebox": [
+      {
+        "service_id": "grizzly-12113-background",
+        "kind": "background_window",
+        "task_id": 12113,
+        "start_action_id": "a0195",
+        "end_action_id": "a0318",
+        "end_policy": "fill_if_incomplete"
+      }
+    ],
+    "borean-fivebox": [
+      {
+        "service_id": "borean-11866-background",
+        "kind": "background_window",
+        "task_id": 11866,
+        "start_action_id": "a0235",
+        "end_action_id": "a0301",
+        "end_policy": "fill_if_incomplete"
+      }
+    ]
+  }
+}

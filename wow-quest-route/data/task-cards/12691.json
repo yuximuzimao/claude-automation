@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "task_id": 12691,
+  "identity": {
+    "name_zhcn": "古旧的石箱",
+    "name_en": "A Timeworn Coffer",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 78,
+    "min_level": 77,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 68000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39508,
+        "quantity": 1,
+        "name_zhcn": "石缚胸铠",
+        "name_en": "Stonebound Chestguard",
+        "sell_price_each_copper": 71166,
+        "sell_price_total_copper": 71166
+      },
+      {
+        "item_id": 39348,
+        "quantity": 1,
+        "name_zhcn": "古代守卫者护腿",
+        "name_en": "Aged Watcher's Legwraps",
+        "sell_price_each_copper": 38575,
+        "sell_price_total_copper": 38575
+      },
+      {
+        "item_id": 39438,
+        "quantity": 1,
+        "name_zhcn": "岩石操控手套",
+        "name_en": "Rockhandler's Gloves",
+        "sell_price_each_copper": 30822,
+        "sell_price_total_copper": 30822
+      },
+      {
+        "item_id": 39402,
+        "quantity": 1,
+        "name_zhcn": "远古守护者护腕",
+        "name_en": "Binding of the Ancient Keeper",
+        "sell_price_each_copper": 26062,
+        "sell_price_total_copper": 26062
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 71166,
+    "gear_sale_max_copper": 71166,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 21600
+  },
+  "guide": [
+    "接取：古旧的石箱。",
+    "从索拉查卫士身上取得巨型石钥匙，用它打开造物者悬台上的古旧石箱。",
+    "交付：古旧的石箱。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12691",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12691; legacy_type=quest_interaction_personal_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12691",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《古旧的石箱》：不共享：古旧的石箱五号分别完成。\n【需要单独修正优化】《古旧的石箱》索拉查首组实跑确认：不共享，五号分别完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12691",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

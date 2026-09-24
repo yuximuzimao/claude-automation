@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11661,
+  "identity": {
+    "name_zhcn": "舵手奥拉布斯",
+    "name_en": "Orabus the Helmsman",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11660
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 141000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37484,
+        "quantity": 1,
+        "name_zhcn": "医师之靴",
+        "name_en": "Mendicant's Treads",
+        "sell_price_each_copper": 47572,
+        "sell_price_total_copper": 47572
+      },
+      {
+        "item_id": 37402,
+        "quantity": 1,
+        "name_zhcn": "洪荒平原外衣",
+        "name_en": "Floodplain Vest",
+        "sell_price_each_copper": 43951,
+        "sell_price_total_copper": 43951
+      },
+      {
+        "item_id": 37543,
+        "quantity": 1,
+        "name_zhcn": "好斗项圈",
+        "name_en": "Pugnacious Collar",
+        "sell_price_each_copper": 31478,
+        "sell_price_total_copper": 31478
+      },
+      {
+        "item_id": 37208,
+        "quantity": 1,
+        "name_zhcn": "横贯平原护腕",
+        "name_en": "Transborean Bracers",
+        "sell_price_each_copper": 16606,
+        "sell_price_total_copper": 16606
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 47572,
+    "gear_sale_max_copper": 47572,
+    "reputation_rewards": [
+      {
+        "faction_id": 1073,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：瓦托尔。",
+    "北风苔原回音海岸的瓦托尔要你利用古代水手的号角召唤舵手奥拉布斯并杀死他。",
+    "交付：瓦托尔。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11661",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《舵手奥拉布斯》：在战歌码头最西端旗帜/塔附近约(26.8,54.8)使用古代水手的号角触发事件。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

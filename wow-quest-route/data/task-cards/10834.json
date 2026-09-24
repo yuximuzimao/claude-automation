@@ -4,19 +4,15 @@
   "identity": {
     "name_zhcn": "\"暗眼\"格里洛克",
     "name_en": "Grillok \"Darkeye\"",
+    "game_variant_id": "timewalking-wotlk-cn",
     "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
-    "faction": "unknown",
-    "repeatability": "unknown",
-    "game_variant_id": "timewalking-wotlk-cn"
+    "faction": "horde",
+    "repeatability": "once"
   },
   "coverage": {
-    "availability": "partial",
-    "objectives": "unknown",
-    "locations": "unknown",
-    "rewards": "unknown",
-    "mechanics": "unknown",
-    "fivebox": "unknown",
-    "guide": "unknown"
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
   },
   "availability": {
     "quest_level": 62,
@@ -28,18 +24,83 @@
     "parent_active": [],
     "exclusive_with": [],
     "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
     "hidden_requirements": []
   },
-  "objectives": [],
-  "mechanics": {},
+  "rewards": {
+    "reward_money_copper": 54000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 28055,
+        "quantity": 1,
+        "name_zhcn": "镀金火色胸甲",
+        "name_en": "Gilded Crimson Chestplate",
+        "sell_price_each_copper": 47247,
+        "sell_price_total_copper": 47247
+      },
+      {
+        "item_id": 28057,
+        "quantity": 1,
+        "name_zhcn": "噬骨狂暴者外套",
+        "name_en": "Bonechewer Berserker's Vest",
+        "sell_price_each_copper": 40796,
+        "sell_price_total_copper": 40796
+      },
+      {
+        "item_id": 28051,
+        "quantity": 1,
+        "name_zhcn": "狂野灵魂外套",
+        "name_en": "Jerkin of the Untamed Spirit",
+        "sell_price_each_copper": 33255,
+        "sell_price_total_copper": 33255
+      },
+      {
+        "item_id": 28050,
+        "quantity": 1,
+        "name_zhcn": "圣羽外衣",
+        "name_en": "Sacred Feather Vest",
+        "sell_price_each_copper": 33134,
+        "sell_price_total_copper": 33134
+      },
+      {
+        "item_id": 28052,
+        "quantity": 1,
+        "name_zhcn": "金纹外套",
+        "name_en": "Goldweave Tunic",
+        "sell_price_each_copper": 26703,
+        "sell_price_total_copper": 26703
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 47247,
+    "gear_sale_max_copper": 47247,
+    "reputation_rewards": [
+      {
+        "faction_id": 947,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 12600
+  },
+  "guide": [
+    "接取：塞萨克。",
+    "杀死\"暗眼\"格里洛克，将格里洛克的眼罩交给断背岗哨的塞萨克。",
+    "交付：塞萨克。"
+  ],
   "fivebox": {
-    "stages": [],
     "status": "pending"
   },
-  "guide": [],
-  "verification": {
-    "open_questions": []
-  },
+  "timing_rule_ref": null,
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",
@@ -56,7 +117,38 @@
         "availability.pre_any",
         "availability.pre_all"
       ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10834",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
     }
   ],
-  "presentation": {}
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
 }

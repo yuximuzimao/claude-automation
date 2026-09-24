@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "task_id": 9720,
+  "identity": {
+    "name_zhcn": "恢复平衡",
+    "name_en": "Balance Must Be Preserved",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 64,
+    "min_level": 61,
+    "pre_any": [
+      9718
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 31000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 13350
+  },
+  "guide": [
+    "接取：伊谢尔·风歌。",
+    "伊谢尔·风歌要你利用铁藤种子，破坏毒蛇湖、暗泽湖、沼光湖和环礁湖的蒸汽泵控制台，然后返回赞加沼泽的塞纳里奥庇护所，将剩余的铁藤种子还给她。",
+    "交付：伊谢尔·风歌。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9720",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《恢复平衡》：第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n《恢复平衡》：第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n《恢复平衡》：第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n《恢复平衡》：第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}
