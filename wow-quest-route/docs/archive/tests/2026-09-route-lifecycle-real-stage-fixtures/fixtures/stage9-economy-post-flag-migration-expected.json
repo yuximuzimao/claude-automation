@@ -1,0 +1,39 @@
+{
+  "schema": "stage9-economy-post-flag-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "xp_input": {
+    "entry_level": 80,
+    "entry_xp_into_level": 0,
+    "character_ids": ["dk1", "dk2", "dk3", "dk4", "dk5"],
+    "external_xp_upper_bound_each": 0,
+    "source": {
+      "kind": "stage9_real_fixture",
+      "ref": "explicit-cold-start-80-0"
+    }
+  },
+  "economy_input": {
+    "cost_coverage": "complete",
+    "known_cost_copper_each": 0,
+    "source": {
+      "kind": "stage9_real_fixture",
+      "ref": "explicit-zero-cost-validation"
+    }
+  },
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "requirements",
+    "profile_status": "requirements",
+    "turnin_count": 55,
+    "character_count": 5,
+    "known_gross_copper": 8858975,
+    "gross_copper": 8858975,
+    "known_cost_copper": 0,
+    "net_copper": 8858975,
+    "gross_gph": null,
+    "issue_counts": {
+      "upstream_stage8_requirements": 1,
+      "fresh_complete_timing_required_for_gph": 1
+    }
+  },
+  "purpose": "Frozen post-reward-flag-migration real-Profile Stage 9 diagnostic. It proves the formal Task Card no_money_from_xp migration removes only the missing stable reward-flag requirements: exact max-level quest/vendor gross and net become available, while pre-existing conditional Stage 8 requirements and incomplete Stage 7 Timing still prevent a fake exact G/hour."
+}

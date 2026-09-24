@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11305,
+  "identity": {
+    "name_zhcn": "量身订制",
+    "name_en": "A Tailor-Made Formula",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11304
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35849,
+        "quantity": 1,
+        "name_zhcn": "鸿毛巨剑",
+        "name_en": "Featherweight Claymore",
+        "sell_price_each_copper": 113440,
+        "sell_price_total_copper": 113440
+      },
+      {
+        "item_id": 35852,
+        "quantity": 1,
+        "name_zhcn": "锤锻寒钢匕首",
+        "name_en": "Fullered Coldsteel Dagger",
+        "sell_price_each_copper": 83042,
+        "sell_price_total_copper": 83042
+      },
+      {
+        "item_id": 35851,
+        "quantity": 1,
+        "name_zhcn": "酸蚀拳套",
+        "name_en": "Acid-Etched Knuckles",
+        "sell_price_each_copper": 82721,
+        "sell_price_total_copper": 82721
+      },
+      {
+        "item_id": 35856,
+        "quantity": 1,
+        "name_zhcn": "精密触发火枪",
+        "name_en": "Hair-Trigger Blunderbuss",
+        "sell_price_each_copper": 63236,
+        "sell_price_total_copper": 63236
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 113440,
+    "gear_sale_max_copper": 113440,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：首席药剂师哈瑞斯。",
+    "前往托尔瓦德的营地，从托尔瓦德身上取得掠龙族长的样本，将它交给新阿加曼德的首席药剂师哈瑞斯。",
+    "交付：首席药剂师哈瑞斯。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11305",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "托尔瓦德在新阿加曼德西侧帐篷附近（约46.8,68.1）；击杀后拾取鲜血样本。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

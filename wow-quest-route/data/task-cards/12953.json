@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": 12953,
+  "identity": {
+    "name_zhcn": "燃烧吧，瓦基里安",
+    "name_en": "Valkyrion Must Burn",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      12841
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 58000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 42896,
+        "quantity": 1,
+        "name_zhcn": "瓦基里安追踪者护胸",
+        "name_en": "Valkyrion Tracker's Chestguard",
+        "sell_price_each_copper": 64740,
+        "sell_price_total_copper": 64740
+      },
+      {
+        "item_id": 42884,
+        "quantity": 1,
+        "name_zhcn": "钢尖暖靴",
+        "name_en": "Steel-tipped Snowboots",
+        "sell_price_each_copper": 54056,
+        "sell_price_total_copper": 54056
+      },
+      {
+        "item_id": 42874,
+        "quantity": 1,
+        "name_zhcn": "羊毛靴",
+        "name_en": "Wooly Stompers",
+        "sell_price_each_copper": 40172,
+        "sell_price_total_copper": 40172
+      },
+      {
+        "item_id": 42850,
+        "quantity": 1,
+        "name_zhcn": "烈焰使者之冠",
+        "name_en": "Flamebringer's Crown",
+        "sell_price_each_copper": 31667,
+        "sell_price_total_copper": 31667
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 64740,
+    "gear_sale_max_copper": 64740,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 16550
+  },
+  "guide": [
+    "接取：鱼叉箱。",
+    "用瓦基里安鱼叉炮点燃6堆干草垛。",
+    "交付：复仇者伊芬。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12953",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《燃烧吧，瓦基里安》：伊尔达旁大箱子接任务；鱼叉炮在室外东侧约(26.6,59.9)，用炮台技能点燃6个干草垛。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

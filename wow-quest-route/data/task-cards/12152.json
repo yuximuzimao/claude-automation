@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "task_id": 12152,
+  "identity": {
+    "name_zhcn": "金亚拉克的末日",
+    "name_en": "Jin'arrak's End",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12137
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 59000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39114,
+        "quantity": 1,
+        "name_zhcn": "督军末日之斧",
+        "name_en": "Axe of the Warlord's Demise",
+        "sell_price_each_copper": 120290,
+        "sell_price_total_copper": 120290
+      },
+      {
+        "item_id": 39113,
+        "quantity": 1,
+        "name_zhcn": "锯齿巨魔撕裂者",
+        "name_en": "Jagged Troll Render",
+        "sell_price_each_copper": 95887,
+        "sell_price_total_copper": 95887
+      },
+      {
+        "item_id": 39127,
+        "quantity": 1,
+        "name_zhcn": "锯齿寒铁利剑",
+        "name_en": "Serrated Cold-Iron Slicer",
+        "sell_price_each_copper": 93758,
+        "sell_price_total_copper": 93758
+      },
+      {
+        "item_id": 39125,
+        "quantity": 1,
+        "name_zhcn": "鸟嘴匕首",
+        "name_en": "Beaked Dagger",
+        "sell_price_each_copper": 93048,
+        "sell_price_total_copper": 93048
+      },
+      {
+        "item_id": 39118,
+        "quantity": 1,
+        "name_zhcn": "闪光巫毒宝珠",
+        "name_en": "Glowing Voodoo Orb",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      },
+      {
+        "item_id": 39124,
+        "quantity": 1,
+        "name_zhcn": "洞察梦境之枝",
+        "name_en": "Branch of Insightful Dreams",
+        "sell_price_each_copper": 34846,
+        "sell_price_total_copper": 34846
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 120290,
+    "gear_sale_max_copper": 120290,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20950
+  },
+  "guide": [
+    "接取：克拉斯。",
+    "哈考尔营地的克拉斯希望你从达基尔金废墟收集神圣达卡莱供品，然后将达卡莱灵魂之尘撒在上面。你必须在达基尔金废墟的锣处使用灌注能量的达卡莱供品。",
+    "交付：克拉斯。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12152",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12152; legacy_type=scripted_objective_group_shared_confirmed",
+      "observed_at": "2026-09-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "共享；按任务流程灌注供品并在墓穴外锣旁完成最终事件即可。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

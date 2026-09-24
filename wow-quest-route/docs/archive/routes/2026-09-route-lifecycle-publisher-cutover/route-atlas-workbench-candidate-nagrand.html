@@ -1,0 +1,416 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>魔兽任务路线工作台</title><style>
+:root{color-scheme:dark;--bg:#081018;--p:#101923;--line:#26384a;--text:#e8eef5;--muted:#91a4b8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}.page{max-width:1720px;margin:auto;padding:16px}.top{display:flex;gap:18px;justify-content:space-between;align-items:flex-start;margin-bottom:12px}.top h1{font-size:23px;margin:0 0 7px}.top p,.footer{font-size:13px;color:var(--muted);line-height:1.65;margin:0}.badge{min-width:285px;font-size:13px;line-height:1.65;border:1px solid #415268;border-radius:9px;padding:9px 12px;white-space:pre-line}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--p);border:1px solid var(--line);padding:10px;border-radius:10px;margin-bottom:12px}.controls button,.controls select{background:#172431;color:var(--text);border:1px solid #344b61;border-radius:7px;padding:7px 10px}.controls button{cursor:pointer}.controls label,.stat{font-size:12px;color:var(--muted)}.stat{margin-left:auto}.mapPick{font-weight:700;color:#f8df96}.card{background:var(--p);border:1px solid var(--line);border-radius:12px;overflow:hidden}.shell{position:relative}.map{width:100%;display:block;aspect-ratio:1887/1259}.mapLabels{position:absolute;inset:0;pointer-events:none;overflow:hidden}.mapLabels.hidden{display:none}.mapLabel{position:absolute;transform:translate(-50%,-50%);padding:2px 5px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(6,12,18,.62);color:#f7efd8;font-size:11px;white-space:nowrap;text-shadow:0 1px 2px #000}.hud{position:absolute;left:12px;top:12px;width:600px;max-width:calc(100% - 24px);background:rgba(6,12,18,.92);border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:10px 12px;font-size:14px;line-height:1.55;box-shadow:0 8px 22px rgba(0,0,0,.28)}.hudbar{display:flex;gap:10px}.hudtitle{flex:1;font-size:15px}.hudcoord{margin-left:8px;color:var(--muted);font-size:12px;font-weight:400}.hudtoggle{background:#172431;color:var(--muted);border:1px solid #344b61;border-radius:6px;padding:3px 7px;font-size:12px;cursor:pointer}.hudbody{margin-top:6px}.hud.collapsed .hudbody{display:none}.hudnext{margin-top:3px;color:var(--muted);font-size:12px}.hudnote{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.12);color:#f8df96}.legend{padding:12px 16px;margin-top:12px;font-size:13px;line-height:1.75;color:#c8d5e1}.legend b{color:#f8df96}.stepsCard{margin-top:12px}.steps{padding:8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 9px}.step{display:grid;grid-template-columns:32px 1fr;gap:8px;padding:8px 9px;border:1px solid transparent;border-radius:7px;cursor:pointer}.step.active{background:#26333f;border-color:#52677b}.step.past{opacity:.55}.step.conditional{border-color:#5f4a1d}.num{width:28px;height:28px;border-radius:6px;background:#1a2936;display:grid;place-items:center;font-size:11px}.st{font-size:14px;font-weight:600}.noteTag{display:inline-block;margin-left:7px;padding:1px 5px;border:1px solid #735f2c;border-radius:4px;color:#f8df96;font-size:10px;font-weight:600;vertical-align:1px}.fiveboxTag{display:inline-block;margin-left:7px;padding:1px 5px;border:1px solid #b45309;border-radius:4px;background:rgba(180,83,9,.14);color:#fdba74;font-size:10px;font-weight:700;vertical-align:1px}.hudfivebox{margin-top:8px;padding:8px 9px;border-top:2px solid #f59e0b;border-left:3px solid #f59e0b;background:rgba(245,158,11,.10);color:#fed7aa;font-size:13px;line-height:1.55}.hudfivebox strong{color:#fdba74}.sm{font-size:13px;color:var(--muted);line-height:1.5}.footer{margin-top:10px}@media(max-width:1050px){.top{display:block}.badge{margin-top:9px}.steps{grid-template-columns:1fr}.stat{width:100%;margin-left:0}}
+</style></head><body><div class="page"><div class="top"><div><h1 id="pageTitle">魔兽任务路线工作台</h1><p id="pageSub">所有地图区域路线统一放在这一份工作台中；版本变化只更新路线数据与文字审计。</p></div><div class="badge"><div id="badgeBody">选择地图查看对应路线。</div></div></div><div class="controls"><label class="mapPick">地图 <select id="zone"></select></label><button id="playSegment">▶ 当前段</button><button id="playRemaining">▶ 剩余路线</button><button id="prev">← 上一段</button><button id="next">下一段 →</button><button id="reset">起点</button><button id="full">全图</button><button id="toggleMapLabels">中文地名：开</button><label>显示 <select id="mode"><option value="full">完整路线</option><option value="progress">已走+当前</option><option value="current">只看当前</option></select></label><label><input id="follow" type="checkbox"> 跟随当前段</label><label>速度 <select id="speed"><option>.6</option><option selected>1</option><option>1.8</option><option>3</option></select></label><span class="stat" id="stat"></span></div><section class="card"><div class="shell"><svg id="svg" class="map" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><marker id="arr" markerWidth="5" markerHeight="5" refX="4.2" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L5 2.5L0 5z" fill="context-stroke"/></marker></defs><image id="mapImage" href="maps/3518-nagrand-hd.jpg" x="0" y="0" width="100" height="100" preserveAspectRatio="none"/><g id="lines"></g><circle id="start" r=".72" fill="#7dd3fc"/><circle id="end" r=".72" fill="#34d399"/><circle id="pulse" r="1.1" fill="none" stroke="#fff" stroke-width=".3"/><circle id="mover" r=".62" fill="#fff" stroke="#111827" stroke-width=".22"/></svg><div class="mapLabels" id="mapLabels"></div><div class="hud" id="hud"><div class="hudbar"><div class="hudtitle"><b id="hudTitle">—</b><span class="hudcoord" id="hudCoord">—</span></div><button class="hudtoggle" id="hudToggle">收起 ▲</button></div><div class="hudbody"><div id="hudAction">—</div><div class="hudnext" id="hudNext">—</div><div class="hudnote" id="hudNote"></div><div class="hudfivebox" id="hudFivebox"></div></div></div></div></section><section class="card legend"><div id="legend"></div></section><section class="card stepsCard"><div class="steps" id="steps"></div></section><div class="footer" id="footer"></div></div><script>
+const ROUTES=/* ROUTE_DATA_START */{"nagrand":{"order":3,"title":"纳格兰 · 67→68五开冲刺路线","displayName":"纳格兰","sub":"适用于67级新号；最低号到68即结束。","badge":"炉石：加拉达尔\n预计总时间：40分钟（32分钟—48分钟）\n首组实测（加拉达尔交付→到68）：41分26秒","hearthChain":["加拉达尔"],"timing":{"centerMinutes":40.0,"rangeMinutes":[31.6,48.4]},"uiStandard":"semantic-hud-v45","image":"maps/3518-nagrand-hd.jpg","legend":"","footer":"最低号到68后立即结束，不再执行第4步。","labels":[[33.88,18.49,"赞加山"],[46.91,19.09,"嘲颅废墟"],[60.83,21.18,"元素王座"],[29.64,24.63,"战槌山"],[56.14,36.45,"加拉达尔"],[72.36,36.45,"风茅小径"],[25.95,37.2,"铸魔营地：仇恨"],[10.78,39.3,"暮光岭"],[42.51,44.09,"哈兰"],[33.48,44.84,"日泉岗哨"],[20.61,51.5,"铸魔营地：畏惧"],[74.2,52.99,"风茅村"],[65.82,54.12,"试炼竞技场"],[49.8,55.91,"南风裂谷"],[62.43,64.52,"氏族岗哨"],[75.1,66.92,"火刃废墟"],[52.79,69.31,"塔拉"],[36.13,71.33,"沃舒古"],[42.32,75.0,"灵魂平原"],[68.91,79.94,"基尔索罗堡垒"]],"points":[[55.37,37.45,"加拉达尔","克洛坎上尉 → 交《支援加拉达尔》\n开飞行点：加拉达尔\n绑定炉石：加拉达尔","hub","","",false,""],[55.55,37.7,"加拉达尔","欧洛恩·远行者 → 接《奈辛瓦里狩猎队》\n加拉达尔布告牌 → 接《通缉：巫婆吉塞尔达》\n加拉达尔布告牌 → 接《通缉：顾问佐尔布》","hub","","",false,""],[71.52,40.62,"奈辛瓦里狩猎队","\"好儿子\"沙度·远行者 → 交《奈辛瓦里狩猎队》 → 接《狩猎风鹏》\n哈罗德·兰恩 → 接《狩猎塔布羊》\n赫米特·奈辛瓦里 → 接《狩猎裂蹄牛》","hunt","","",false,""],[71.16,82.36,"基尔索罗堡垒 / 吉塞尔达","↳ 做《通缉：巫婆吉塞尔达》","hunt","","",false,""],[68,61,"塔拉附近塔布羊 / 裂蹄牛走廊","↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》","hunt","","",false,""],[67.5,42,"绕山风鹏刷新带","↳ 做《狩猎风鹏》","hunt","","",false,""],[55.37,37.45,"加拉达尔","使用炉石：加拉达尔\n监护者布罗克 → 交《通缉：巫婆吉塞尔达》","hearth","","",false,""],[71.52,40.62,"奈辛瓦里狩猎队","\"好儿子\"沙度·远行者 → 交《狩猎风鹏》\n哈罗德·兰恩 → 交《狩猎塔布羊》\n赫米特·奈辛瓦里 → 交《狩猎裂蹄牛》\n\"好儿子\"沙度·远行者 → 接《狩猎风鹏》\n哈罗德·兰恩 → 接《狩猎塔布羊》\n赫米特·奈辛瓦里 → 接《狩猎裂蹄牛》","hunt","","",false,""],[49.01,60.47,"西部风鹏刷新带","↳ 做《狩猎风鹏》","hunt","","",false,""],[54.5,48,"中部草原","↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》","hunt","","",false,""],[71.52,40.62,"奈辛瓦里狩猎队","\"好儿子\"沙度·远行者 → 交《狩猎风鹏》\n哈罗德·兰恩 → 交《狩猎塔布羊》\n赫米特·奈辛瓦里 → 交《狩猎裂蹄牛》\n\"好儿子\"沙度·远行者 → 接《狩猎风鹏》\n哈罗德·兰恩 → 接《狩猎塔布羊》\n赫米特·奈辛瓦里 → 接《狩猎裂蹄牛》","check","","",false,""],[46.48,18.19,"【最低号未到68】战槌山 / 顾问佐尔布","↳ 做《通缉：顾问佐尔布》","conditional","","",false,""],[55.37,37.45,"【最低号未到68】加拉达尔","监护者布罗克 → 交《通缉：顾问佐尔布》","conditional","","",false,""],[41.4,61.57,"【最低号未到68】奈辛瓦里高级狩猎","↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》、《狩猎风鹏》\n哈罗德·兰恩 → 交《狩猎塔布羊》\n赫米特·奈辛瓦里 → 交《狩猎裂蹄牛》\n\"好儿子\"沙度·远行者 → 交《狩猎风鹏》\n赫米特·奈辛瓦里 → 接《终极挑战》\n↳ 做《终极挑战》\n赫米特·奈辛瓦里 → 交《终极挑战》","conditional","","ride",false,""]],"defaultIndex":0,"phaseColors":{},"stepGroups":[{"start":0,"end":2,"title":"加拉达尔 → 奈辛瓦里狩猎队","summary":"从赞加南路进入加拉达尔，交任务、开飞行点并绑定炉石；接完本地任务后去奈辛瓦里接三条狩猎任务。","timing":{"centerMinutes":8.5,"rangeMinutes":[7.0,10.0],"includeInTotal":true},"actionHtml":"<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克洛坎上尉</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">支援加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">绑定炉石：加拉达尔</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">欧洛恩·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">加拉达尔布告牌</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">通缉：巫婆吉塞尔达</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">加拉达尔布告牌</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">通缉：顾问佐尔布</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">奈辛瓦里狩猎队</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎裂蹄牛</span></div>","noteHtml":"<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《支援加拉达尔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《支援加拉达尔》的任务说明明确：从赞加走南路，第一岔路向东找加拉达尔。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《奈辛瓦里狩猎队》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：巫婆吉塞尔达》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：顾问佐尔布》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《通缉：顾问佐尔布》：击杀顾问佐尔布、5名战槌萨满祭司和5名战槌劫掠者。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：塔拉羊牛完成后再绕山去东部/中东部密集刷新带，不单独折返。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div>"},{"start":3,"end":7,"title":"基尔索罗 → 塔拉羊牛 → 绕山风鹏 → 加拉达尔 → 奈辛瓦里","summary":"先完成《通缉：巫婆吉塞尔达》，继续到塔拉附近完成塔布羊和裂蹄牛，再绕山完成风鹏；三狩猎和吉塞尔达都完成后炉石回加拉达尔集中交付，再去奈辛瓦里接后续。","timing":{"centerMinutes":19.5,"rangeMinutes":[15.2,23.8],"includeInTotal":true},"actionHtml":"<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">基尔索罗堡垒 / 吉塞尔达</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">通缉：巫婆吉塞尔达</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塔拉附近塔布羊 / 裂蹄牛走廊</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎塔布羊</span>、<span class=\"ra-task ra-do-task\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">绕山风鹏刷新带</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎风鹏</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">监护者布罗克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">通缉：巫婆吉塞尔达</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎裂蹄牛</span></div>","noteHtml":"<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：巫婆吉塞尔达》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿同一条南向走廊同时完成。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：塔拉羊牛完成后再绕山去东部/中东部密集刷新带，不单独折返。<br>《狩猎风鹏》《狩猎塔布羊》《狩猎裂蹄牛》：共享：</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：饥饿的风鹏主要向西侧移动完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div>"},{"start":8,"end":10,"title":"西部风鹏 → 中部草原 → 奈辛瓦里","summary":"完成饥饿的风鹏及后续塔布羊、裂蹄牛目标，回奈辛瓦里交任务后立即检查最低号经验；到68直接结束。","timing":{"centerMinutes":12.0,"rangeMinutes":[9.4,14.6],"includeInTotal":true},"actionHtml":"<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">西部风鹏刷新带</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎风鹏</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">中部草原</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎塔布羊</span>、<span class=\"ra-task ra-do-task\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奈辛瓦里狩猎队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">狩猎裂蹄牛</span></div>","noteHtml":"<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎风鹏》：饥饿的风鹏主要向西侧移动完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《狩猎塔布羊》《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"},{"start":11,"end":13,"title":"【最低号未到68】战槌山 → 奈辛瓦里高级狩猎","summary":"仅最低号仍未到68时继续：先做《通缉：顾问佐尔布》，仍不足再做奈辛瓦里高级狩猎；每次交任务后都检查最低号，到68立即结束。","timing":{"centerMinutes":20.5,"rangeMinutes":[16.0,25.0],"includeInTotal":false},"actionHtml":"<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">【最低号未到68】战槌山 / 顾问佐尔布</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">通缉：顾问佐尔布</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">【最低号未到68】加拉达尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">监护者布罗克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">通缉：顾问佐尔布</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">【最低号未到68】奈辛瓦里高级狩猎</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">狩猎塔布羊</span>、<span class=\"ra-task ra-do-task\">狩猎裂蹄牛</span>、<span class=\"ra-task ra-do-task\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">哈罗德·兰恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎塔布羊</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎裂蹄牛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">&quot;好儿子&quot;沙度·远行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">狩猎风鹏</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">终极挑战</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">终极挑战</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">赫米特·奈辛瓦里</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">终极挑战</span></div>","noteHtml":"<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：顾问佐尔布》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《通缉：顾问佐尔布》：击杀顾问佐尔布、5名战槌萨满祭司和5名战槌劫掠者。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎塔布羊》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎裂蹄牛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《狩猎风鹏》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《终极挑战》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《终极挑战》：只在三条高级狩猎全部交完仍未68时启用；击杀塔丝克后，确认每个仍需要任务物的角色都取得塔丝克之心再离开。</div></div>"}],"defaultGroupIndex":0}}/* ROUTE_DATA_END */;
+const COLORS={east:'#60a5fa',pump:'#f6c453',west:'#4fd1c5',final:'#a78bfa',cleanup:'#34d399',hearth:'#fb7185',hub:'#60a5fa',hunt:'#4fd1c5',check:'#f6c453',conditional:'#f59e0b'};
+let routeKey='borean',S=[],G=[],seg=[],cur=0,playing=false,playMode='',raf=0,last=0,prog=0,animSeg=0,animEnd=-1;const svg=document.getElementById('svg'),g=document.getElementById('lines'),mv=document.getElementById('mover'),pu=document.getElementById('pulse');
+function ns(t,a){let n=document.createElementNS('http://www.w3.org/2000/svg',t);for(let k in a)n.setAttribute(k,a[k]);return n}function segKind(i){return S[i+1]?.transport||(S[i+1]?.phase==='hearth'?'hearth':'ride')}function isH(i){return segKind(i)==='hearth'}function isTransport(i){return segKind(i)!=='ride'}
+function route(){return ROUTES[routeKey]}function routeColor(phase){let r=route();return r.phaseColors?.[phase]||COLORS[phase]||'#94a3b8'}function transportColor(kind){return kind==='hearth'?COLORS.hearth:kind==='script'?'#fb7185':kind==='taxi'?'#7dd3fc':kind==='crossmap'?'#34d399':null}
+function buildGroups(r){if(Array.isArray(r.stepGroups)&&r.stepGroups.length)return r.stepGroups.map((x,i)=>({start:x.start,end:x.end,title:x.title||S[x.end]?.label||`步骤${i+1}`,summary:x.summary||S.slice(x.start,x.end+1).map(s=>s.action).join(' → '),i}));return S.map((s,i)=>({start:i,end:i,title:s.label,summary:s.action,i}))}
+function groupSegRange(gr){if(!gr||gr.end<=0)return null;return{start:gr.start===0?0:gr.start-1,end:gr.end-1}}
+function groupNotes(gr){return [...new Set(S.slice(gr.start,gr.end+1).map(s=>s.note).filter(Boolean))].join('；')}function groupFivebox(gr){return [...new Set(S.slice(gr.start,gr.end+1).map(s=>s.fivebox).filter(Boolean))].join('；')}
+function rebuild(){stop();g.innerHTML='';document.getElementById('steps').innerHTML='';document.getElementById('mapLabels').innerHTML='';seg=[];cur=0;prog=0;let r=route();S=r.points.map((p,i)=>({x:p[0],y:p[1],label:p[2],action:p[3],phase:p[4],note:p[5],transport:p[6]||'ride',conditional:!!p[7],fivebox:p[8]||'',i}));G=buildGroups(r);document.title=r.title+' · 魔兽任务路线工作台';document.getElementById('pageTitle').textContent=r.title;document.getElementById('pageSub').textContent=r.sub;document.getElementById('badgeBody').textContent=r.badge;document.getElementById('legend').innerHTML=r.legend;document.getElementById('footer').textContent=r.footer;document.getElementById('mapImage').setAttribute('href',r.image);S.slice(0,-1).forEach((a,i)=>{let b=S[i+1],kind=segKind(i),special=isTransport(i),l=ns('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,'marker-end':'url(#arr)','vector-effect':'non-scaling-stroke'});l.style.stroke=transportColor(kind)||routeColor(b.phase);l.style.strokeWidth=special?'1.8':'1.25';l.style.strokeDasharray=(special||b.conditional||b.phase==='conditional')?'4 3':'none';l.style.strokeLinecap='round';g.appendChild(l);seg.push(l)});[['start',S[0]],['end',S.at(-1)],['mover',S[0]],['pulse',S[0]]].forEach(([id,q])=>{let e=document.getElementById(id);e.setAttribute('cx',q.x);e.setAttribute('cy',q.y)});let box=document.getElementById('steps');G.forEach((gr,i)=>{let d=document.createElement('div'),conditional=S.slice(gr.start,gr.end+1).some(s=>s.conditional||s.phase==='conditional');d.className='step'+(conditional?' conditional':'');let notes=groupNotes(gr),fivebox=groupFivebox(gr);d.innerHTML=`<div class="num">${i+1}</div><div><div class="st">${gr.title}${notes?'<span class="noteTag">有备注</span>':''}${fivebox?'<span class="fiveboxTag">五开待实测</span>':''}</div><div class="sm">${gr.summary}</div></div>`;d.onclick=()=>jump(i);box.appendChild(d)});(r.labels||[]).forEach(([x,y,name])=>{let d=document.createElement('span');d.className='mapLabel';d.textContent=name;d.dataset.x=x;d.dataset.y=y;document.getElementById('mapLabels').appendChild(d)});full();move(S[0].x,S[0].y);render()}
+function syncLabels(){let vb=svg.getAttribute('viewBox').trim().split(/\s+/).map(Number),[vx,vy,vw,vh]=vb;document.querySelectorAll('.mapLabel').forEach(el=>{let x=+el.dataset.x,y=+el.dataset.y,inside=x>=vx&&x<=vx+vw&&y>=vy&&y<=vy+vh;el.hidden=!inside;if(!inside)return;el.style.left=`${(x-vx)/vw*100}%`;el.style.top=`${(y-vy)/vh*100}%`})}
+function render(){let m=document.getElementById('mode').value,rg=groupSegRange(G[cur]);seg.forEach((l,i)=>{let active=rg&&i>=rg.start&&i<=rg.end,past=rg?i<rg.start:false;l.style.opacity=m==='full'?.38:m==='progress'?(past?.28:active?1:.055):(active?1:.035);let special=isTransport(i);l.style.strokeWidth=active?(special?'3.4':'3.0'):(special?'1.8':'1.25')});document.querySelectorAll('.step').forEach((n,i)=>{n.classList.toggle('past',i<cur);n.classList.toggle('active',i===cur)});info()}
+function info(){let gr=G[cur],a=S[gr.end],p=S[Math.max(0,gr.start-1)],b=G[Math.min(cur+1,G.length-1)];document.getElementById('stat').textContent=`${route().displayName||document.getElementById('zone').selectedOptions[0].text} · 步骤 ${cur+1}/${G.length}`;document.getElementById('hudTitle').textContent=`步骤 ${cur+1}/${G.length} · ${gr.title}`;document.getElementById('hudCoord').textContent=gr.start===0?`本段 ${S[gr.start].label} → ${a.label} (${a.x.toFixed(2)},${a.y.toFixed(2)})`:`${p.label} (${p.x.toFixed(2)},${p.y.toFixed(2)}) → ${a.label} (${a.x.toFixed(2)},${a.y.toFixed(2)})`;document.getElementById('hudAction').textContent=gr.summary;document.getElementById('hudNext').textContent=cur<G.length-1?`下一步：${b.title}`:'本图当前路线结束';let notes=groupNotes(gr),hn=document.getElementById('hudNote');hn.textContent=notes?`备注：${notes}`:'';hn.style.display=notes?'block':'none';let fivebox=groupFivebox(gr),hf=document.getElementById('hudFivebox');hf.innerHTML=fivebox?`<strong>五开待实测：</strong>${fivebox}`:'';hf.style.display=fivebox?'block':'none'}
+function move(x,y){mv.setAttribute('cx',x);mv.setAttribute('cy',y);pu.setAttribute('cx',x);pu.setAttribute('cy',y)}function full(){svg.setAttribute('viewBox','0 0 100 100');syncLabels()}function fit(i){if(!document.getElementById('follow').checked)return;let gr=G[i],from=Math.max(0,gr.start-1),pts=S.slice(from,gr.end+1),miX=Math.min(...pts.map(p=>p.x)),maX=Math.max(...pts.map(p=>p.x)),miY=Math.min(...pts.map(p=>p.y)),maY=Math.max(...pts.map(p=>p.y)),z=Math.min(100,Math.max(maX-miX,maY-miY,16)+9),cx=(miX+maX)/2,cy=(miY+maY)/2,x=Math.max(0,Math.min(100-z,cx-z/2)),y=Math.max(0,Math.min(100-z,cy-z/2));svg.setAttribute('viewBox',`${x} ${y} ${z} ${z}`);syncLabels()}
+function stop(){playing=false;playMode='';document.getElementById('playSegment').textContent='▶ 当前段';document.getElementById('playRemaining').textContent='▶ 剩余路线';cancelAnimationFrame(raf);last=0}
+function prepareAnim(i){let rg=groupSegRange(G[i]);if(!rg)return false;animSeg=rg.start;animEnd=rg.end;prog=0;move(S[animSeg].x,S[animSeg].y);fit(i);render();return true}
+function startSegment(){stop();if(!prepareAnim(cur))return;playing=true;playMode='segment';document.getElementById('playSegment').textContent='⏸ 当前段';raf=requestAnimationFrame(tick)}
+function startRemaining(){stop();if(!prepareAnim(cur)){if(cur>=G.length-1)return;cur++;if(!prepareAnim(cur))return}playing=true;playMode='remaining';document.getElementById('playRemaining').textContent='⏸ 剩余路线';raf=requestAnimationFrame(tick)}
+function tick(t){if(!playing)return;if(!last)last=t;let dt=(t-last)*+document.getElementById('speed').value;last=t;let a=S[animSeg],b=S[animSeg+1],kind=b?.transport||'ride',jump=kind==='hearth'||kind==='script'||kind==='crossmap',dur=jump?850:1400;prog=Math.min(1,prog+dt/dur);let u=jump?(prog<.58?0:1):prog;move(a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u);pu.setAttribute('r',1+.5*Math.abs(Math.sin(t/220)));if(prog>=1){move(b.x,b.y);if(animSeg<animEnd){animSeg++;prog=0}else if(playMode==='segment'){stop();return}else if(cur<G.length-1){cur++;if(!prepareAnim(cur)){render();stop();return}}else{render();stop();return}}raf=requestAnimationFrame(tick)}
+function jump(i){stop();cur=Math.max(0,Math.min(G.length-1,i));prog=0;let q=S[G[cur].end];move(q.x,q.y);fit(cur);render()}
+const zoneSelect=document.getElementById('zone');Object.entries(ROUTES).sort((a,b)=>(a[1].order??999)-(b[1].order??999)).forEach(([key,r])=>{let o=document.createElement('option');o.value=key;o.textContent=r.displayName||r.title;zoneSelect.appendChild(o)});zoneSelect.value=routeKey;
+document.getElementById('zone').onchange=e=>{routeKey=e.target.value;rebuild()};document.getElementById('playSegment').onclick=()=>playing&&playMode==='segment'?stop():startSegment();document.getElementById('playRemaining').onclick=()=>playing&&playMode==='remaining'?stop():startRemaining();document.getElementById('next').onclick=()=>{stop();cur=Math.min(G.length-1,cur+1);render();startSegment()};document.getElementById('prev').onclick=()=>{stop();cur=Math.max(0,cur-1);render();startSegment()};document.getElementById('reset').onclick=()=>{stop();cur=0;prog=0;move(S[0].x,S[0].y);full();render()};document.getElementById('full').onclick=()=>{document.getElementById('follow').checked=false;full()};document.getElementById('toggleMapLabels').onclick=()=>{let layer=document.getElementById('mapLabels'),hidden=layer.classList.toggle('hidden');document.getElementById('toggleMapLabels').textContent=hidden?'中文地名：关':'中文地名：开'};document.getElementById('mode').onchange=render;document.getElementById('follow').onchange=()=>document.getElementById('follow').checked?fit(cur):full();document.getElementById('hudToggle').onclick=()=>{let h=document.getElementById('hud'),c=h.classList.toggle('collapsed');document.getElementById('hudToggle').textContent=c?'展开 ▼':'收起 ▲'};rebuild();
+</script><script>
+function fmtRouteMinutes(v){let total=Math.max(1,Math.round(+v||0)),h=Math.floor(total/60),m=total%60;if(h)return m?`${h}小时${m}分`:`${h}小时`;return `${m}分钟`}
+const routeAtlasInfoBase=info;
+info=function(){routeAtlasInfoBase();let t=route().stepGroups?.[cur]?.timing,el=document.getElementById('hudCoord');if(!el)return;if(!t){el.textContent='本段预计：待计算';return}let rg=t.rangeMinutes||[],suffix=t.includeInTotal===false?' · 条件触发时':'',range=rg.length===2?`（${fmtRouteMinutes(rg[0])}—${fmtRouteMinutes(rg[1])}）`:'';el.textContent=`本段预计：约${fmtRouteMinutes(t.centerMinutes)}${range}${suffix}`}
+if(typeof G!=='undefined'&&G.length)info();
+/* HUD_GROUP_ACTIONS_START */
+const routeAtlasInfoWithFullActions=info;
+
+(function installRouteAtlasSemanticPrototype(){
+  if(!document.getElementById('raSemanticPrototypeStyle')){
+    const style=document.createElement('style');
+    style.id='raSemanticPrototypeStyle';
+    style.textContent=`
+      .hud.ra-semantic-panel{max-height:calc(100% - 24px);overflow:hidden!important;display:flex;flex-direction:column;box-sizing:border-box}
+      .hud.ra-semantic-panel .hudbody{min-height:0;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin}
+      #hudAction.ra-semantic-hud{white-space:normal!important;line-height:1.68;margin-top:4px}
+      #hudAction .ra-line,.stepsCard .ra-step-semantic .ra-line{display:block;margin:2px 0;color:#f2f2f2}
+      #hudAction .ra-line.ra-do,.stepsCard .ra-step-semantic .ra-line.ra-do{padding-left:14px;margin-top:0;margin-bottom:6px}
+      #hudAction .ra-line.ra-do-inline{padding-left:0;margin-top:6px;margin-bottom:5px}
+      #hudAction .ra-inline-sep{color:#b9bec5}
+      #hudAction .ra-point-anchor,.stepsCard .ra-step-semantic .ra-point-anchor{margin-top:8px;margin-bottom:1px}
+      #hudAction .ra-point-anchor:first-child,.stepsCard .ra-step-semantic .ra-point-anchor:first-child{margin-top:0}
+      .ra-location{font-weight:400!important;color:#9fcff5!important}
+      .ra-npc{font-weight:700!important;color:#f2f2f2!important}
+      .ra-task{font-weight:600!important;text-decoration:underline!important;text-decoration-thickness:1px!important;text-underline-offset:2px!important}
+      .ra-task.ra-turnin{color:#82d59a!important}
+      .ra-task.ra-accept{color:#ffd66b!important}
+      .ra-task.ra-do-task{color:#79baff!important}
+      .ra-verb{font:inherit;font-weight:400;color:inherit;padding:0;border:0;background:none}
+      .ra-arrow{display:inline-block;margin:0 4px;color:#b9bec5!important}
+      .ra-branch{display:inline-block;width:18px;font-size:1.08em;font-weight:800;color:#b9bec5!important}
+      .ra-transport{font-weight:750;color:#c9d6e3!important}
+      .ra-system-action{display:inline-block;font-weight:700}
+      .ra-flightpoint,.ra-flightpath{color:#7dd3fc!important}
+      .ra-hearthstone{color:#fdba74!important}
+      .stepsCard .step .sm{display:none!important}
+      .stepsCard .ra-step-semantic{display:none!important}
+      .stepsCard .ra-step-note{display:none!important}
+      .ra-semantic-notes{display:block!important;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.18);white-space:normal!important}
+      .ra-note-heading{display:block!important;font-weight:850;color:#fff;margin-bottom:3px}
+      .ra-note-block{display:block!important;width:100%;padding:6px 0 7px;margin:0;clear:both;line-height:1.62}
+      .ra-note-block+.ra-note-block{border-top:1px solid rgba(255,255,255,.18);margin-top:2px}
+      .ra-note-task{display:block!important;font-weight:800;color:#f0e4bd;margin:0 0 2px}
+      .ra-note-text{display:block!important;line-height:1.62;color:#eee}
+      .ra-note-task.ra-note-task-inline{display:inline!important;margin:0;color:#f0e4bd}
+      .ra-note-task.ra-note-task-inline::after{content:'：';color:#b9bec5;font-weight:500}
+      .ra-note-text.ra-note-text-inline{display:inline!important;line-height:inherit;color:#eee}
+      .ra-note-ref{display:inline-block;margin-left:2px;font-size:.68em;line-height:0;vertical-align:super;font-weight:900;color:#d8c8ff!important;text-decoration:none!important}
+      .ra-note-ref.ra-note-ref-lead{margin:0 4px 0 0}
+      .ra-mechanic-tag{display:inline-block;margin:0 5px 0 1px;padding:1px 5px 2px;border-radius:4px;font-size:.72em;line-height:1.25;font-weight:900;vertical-align:1px;text-decoration:none!important;box-shadow:0 0 0 1px rgba(255,255,255,.16) inset}
+      .ra-mechanic-shared{background:#d8d0ff;color:#29234f!important}
+      .ra-mechanic-personal{background:#ffd3b6;color:#4b2614!important}
+      .ra-fivebox-line{display:block!important;margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,214,107,.22);line-height:1.55;color:#eee}
+      .ra-key{font-weight:400;color:#ff8f8f}
+      .ra-shared{font-weight:700;color:#9fd8c5}
+      .ra-not-shared{font-weight:700;color:#f0b66e}
+      .ra-danger{font-weight:400;color:#ff8f8f}
+      .ra-pending{font-weight:850;color:#ffd66b}
+      .ra-note-meta{margin-top:2px;font-size:.93em;color:#ddd}
+    `;
+    document.head.appendChild(style);
+  }
+})();
+function raFindNoteBox(actionEl,create){
+  const fallback=document.querySelector('[data-ra-semantic-fallback="1"]');
+  if(fallback)return fallback;
+  let root=actionEl.parentElement;
+  for(let depth=0;root&&depth<4;depth++,root=root.parentElement){
+    const nodes=[...root.querySelectorAll('div,p,section')];
+    const hit=nodes.find(node=>{
+      if(node===actionEl||node.contains(actionEl))return false;
+      const text=(node.textContent||'').trim();
+      return text.startsWith('备注：')||text.startsWith('备注:');
+    });
+    if(hit)return hit;
+  }
+  if(!create)return null;
+  const box=document.createElement('div');
+  box.dataset.raSemanticFallback='1';
+  actionEl.insertAdjacentElement('afterend',box);
+  return box;
+}
+function raTaskNamesFromNoteLabel(label){
+  const text=(label||'').trim();
+  const bracketNames=[...text.matchAll(/《([^》]+)》/g)].map(match=>match[1].trim()).filter(Boolean);
+  if(bracketNames.length)return bracketNames.flatMap(name=>name.split(/\s+\/\s+/).map(part=>part.trim()).filter(Boolean));
+  if(!text||text==='本段'||text==='五开待实测')return [];
+  return text.split(/\s+\/\s+/).map(part=>part.trim()).filter(Boolean);
+}
+function raPreferredTaskNode(actionEl,name){
+  const matches=[...actionEl.querySelectorAll('.ra-task')].filter(node=>(node.textContent||'').trim()===name);
+  return matches.find(node=>node.classList.contains('ra-do-task'))||matches[0]||null;
+}
+function raAddMechanicTag(actionEl,name,status){
+  const target=raPreferredTaskNode(actionEl,name);
+  if(!target)return;
+  const tag=document.createElement('span');
+  tag.className='ra-mechanic-tag '+(status==='shared'?'ra-mechanic-shared':'ra-mechanic-personal');
+  tag.textContent=status==='shared'?'共享':'不共享';
+  target.insertAdjacentElement('beforebegin',tag);
+}
+function raAddNoteReference(actionEl,names,index){
+  names.forEach(name=>{
+    const target=raPreferredTaskNode(actionEl,name);
+    if(!target)return;
+    const ref=document.createElement('sup');
+    ref.className='ra-note-ref';
+    ref.textContent=String(index);
+    target.insertAdjacentElement('afterend',ref);
+  });
+}
+function raDecorateSemanticAnnotations(actionEl,noteEl){
+  const blocks=[...noteEl.querySelectorAll('.ra-note-block')];
+  const referenced=[];
+  blocks.forEach(block=>{
+    const taskEl=block.querySelector('.ra-note-task');
+    const textEl=block.querySelector('.ra-note-text');
+    if(!taskEl||!textEl)return;
+    const names=raTaskNamesFromNoteLabel(taskEl.textContent||'');
+    const statusEl=textEl.querySelector('.ra-shared,.ra-not-shared');
+    if(statusEl&&names.length){
+      const status=statusEl.classList.contains('ra-shared')?'shared':'personal';
+      names.forEach(name=>raAddMechanicTag(actionEl,name,status));
+      statusEl.remove();
+      const remaining=(textEl.textContent||'').replace(/^[\s：:；;,，。]+/,'').trim();
+      if(!remaining){
+        block.remove();
+        return;
+      }
+    }
+    taskEl.classList.add('ra-note-task-inline');
+    textEl.classList.add('ra-note-text-inline');
+    if(taskEl.classList.contains('ra-pending')||(taskEl.textContent||'').trim()==='五开待实测'||!names.length)return;
+    referenced.push({block,taskEl,names});
+  });
+  referenced.forEach((item,offset)=>{
+    const index=offset+1;
+    const lead=document.createElement('sup');
+    lead.className='ra-note-ref ra-note-ref-lead';
+    lead.textContent=String(index);
+    item.taskEl.insertAdjacentElement('beforebegin',lead);
+    raAddNoteReference(actionEl,item.names,index);
+  });
+  const hasBlocks=Boolean(noteEl.querySelector('.ra-note-block'));
+  const heading=noteEl.querySelector('.ra-note-heading');
+  if(heading)heading.style.display=hasBlocks?'':'none';
+  return hasBlocks;
+}
+function raHideEmptySemanticNote(note){
+  note.innerHTML='';
+  note.classList.remove('ra-semantic-notes');
+  delete note.dataset.raSemantic;
+  if(note.id==='hudNote')note.style.display='none';
+  else note.remove();
+}
+function raPrototypeActionHtml(){
+  return `
+    <div class="ra-line"><span class="ra-location">怨毒镇</span>·<span class="ra-npc">高级执行官</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">炸毁弩炮</span>、<span class="ra-task ra-turnin">日常计划</span>、<span class="ra-task ra-turnin">解决方案</span>、<span class="ra-task ra-turnin">谴责</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">新壁炉谷的卧底</span>、<span class="ra-task ra-accept">水火之灾</span></div>
+    <div class="ra-line"><span class="ra-npc">斯古莉</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">新壁炉谷的卧底</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">祈祷之书</span></div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">祈祷之书</span></div>
+    <div class="ra-line"><span class="ra-npc">斯古莉</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">祈祷之书</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">完美的伪装</span></div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">完美的伪装</span></div>
+    <div class="ra-line"><span class="ra-npc">斯古莉</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">完美的伪装</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">狼狈不堪</span></div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">狼狈不堪</span></div>`;
+}
+function raPrototypeNoteHtml(){
+  return `
+    <div class="ra-note-heading">备注</div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《祈祷之书》</div>
+      <div class="ra-note-text"><span class="ra-location">小礼拜堂</span> 约 (69,76)；斯崔特主教只杀一次，同一具尸体五号分别拾取祈祷之书。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《完美的伪装》</div>
+      <div class="ra-note-text"><span class="ra-shared">共享：</span>主控对 <span class="ra-npc">黑鸦祭司</span> 使用一次女妖魔镜即可五号完成；<span class="ra-danger">不要直接击杀</span>。随后需要祭司伪装时，直接找斯古莉对话变身。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《狼狈不堪》</div>
+      <div class="ra-note-text"><span class="ra-danger">先锋军骑士会识破伪装</span>；<span class="ra-shared">共享：</span>主控进入 <span class="ra-location">修道院</span>，沿螺旋楼梯上 <span class="ra-key">顶层</span> 敲钟 → 回 <span class="ra-key">一层</span> 与高阶修士交谈 → 出门跟随，直到事件完成。</div>
+    </div>`;
+}
+function raGrizzlyStep1ActionHtml(){
+  return `
+    <div class="ra-line"><span class="ra-location">征服堡</span>：从龙骨荒野沿东/东南公路过河进入征服堡</div>
+    <div class="ra-line"><span class="ra-npc">征服者克雷娜</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">前往征服堡，自求多福吧！</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">征服者的指派</span></div>
+    <div class="ra-line"><span class="ra-npc">纳兹格利姆中士</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">征服者的指派</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">缚焰者的秘密</span>、<span class="ra-task ra-accept">显示力量</span></div>
+    <div class="ra-line"><span class="ra-npc">皮货商人休尼克</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">灰狼的毛皮</span></div>
+    <div class="ra-line"><span class="ra-npc">粮食商人洛克兰</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">赚外快</span></div>
+    <div class="ra-line">五号开启<span class="ra-location">征服堡</span>飞行点；炉石绑定<span class="ra-location">征服堡</span></div>
+    <div class="ra-line"><span class="ra-location">征服堡南侧</span><span class="ra-arrow">→</span><span class="ra-location">沃德伦</span>：沿道路推进</div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">赚外快</span>、<span class="ra-task ra-do-task">灰狼的毛皮</span></div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">缚焰者的秘密</span>、<span class="ra-task ra-do-task">显示力量</span></div>
+    <div class="ra-line"><span class="ra-npc">粮食商人洛克兰</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">赚外快</span></div>
+    <div class="ra-line"><span class="ra-npc">皮货商人休尼克</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">灰狼的毛皮</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">替代品</span></div>
+    <div class="ra-line"><span class="ra-npc">纳兹格利姆中士</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">缚焰者的秘密</span>、<span class="ra-task ra-turnin">显示力量</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">沃德伦的领主</span></div>
+    <div class="ra-line"><span class="ra-location">风险湾</span>·<span class="ra-npc">古图尔</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">寻找溶解剂</span></div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span>进入仓库拾取 Element 115</div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span>立即原路返回<span class="ra-npc">古图尔</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">寻找溶解剂</span></div>
+    <div class="ra-line"><span class="ra-location">沃德伦</span>：骑乘任务龙</div>
+    <div class="ra-line ra-do"><span class="ra-branch">↳</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">沃德伦的领主</span>：击杀沃德伦领主</div>
+    <div class="ra-line">完成后直接返回<span class="ra-location">征服堡</span></div>
+    <div class="ra-line"><span class="ra-npc">纳兹格利姆中士</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">沃德伦的领主</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">前往欧尼瓦营地</span></div>
+    <div class="ra-line"><span class="ra-npc">征服者克雷娜</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">我的敌人的朋友</span></div>`;
+}
+function raGrizzlyStep1NoteHtml(){
+  return `
+    <div class="ra-note-heading">备注</div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《赚外快》《灰狼的毛皮》</div>
+      <div class="ra-note-text">鹿和狼分布在征服堡南侧道路两边；任务物为个人掉落，五号分别拾取。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《缚焰者的秘密》</div>
+      <div class="ra-note-text">任务物为个人掉落，五号分别拾取。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《显示力量》</div>
+      <div class="ra-note-text"><span class="ra-shared">共享：</span>击杀进度五号共享。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《寻找溶解剂》</div>
+      <div class="ra-note-text">拾取 Element 115 后开始<span class="ra-key">短时限返程</span>；<span class="ra-danger">立即原路返回</span>，尽量不进战斗，坐骑/移速增益不能代替快速返程。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task ra-pending">五开待实测</div>
+      <div class="ra-note-text">Element 115必须逐号拾取的概率很高；首组确认是否能同一刷新点连续五号取、以及返程窗口是否分别计时。</div>
+    </div>
+    <div class="ra-note-block">
+      <div class="ra-note-task">《沃德伦的领主》</div>
+      <div class="ra-note-text">载具战贴近目标；技能冷却结束就优先使用高伤技能。</div>
+    </div>`;
+}
+function raRawNoteHasDetail(raw){
+  return String(raw||'').split(/\n+/).some(line=>{
+    let text=line.trim();
+    if(!text)return false;
+    text=text.replace(/^《[^》]+》\s*[：:]\s*/,'');
+    text=text.replace(/^(?:共享|不共享)\s*[：:]\s*/,'');
+    return Boolean(text.trim());
+  });
+}
+function raApplySemanticStepCards(){
+  document.querySelectorAll('.stepsCard [data-ra-step-note="1"],.stepsCard [data-ra-step-semantic="1"]').forEach(node=>node.remove());
+  document.querySelectorAll('.stepsCard .step').forEach((stepEl,index)=>{
+    const gr=Array.isArray(G)?G[index]:null;
+    if(!gr)return;
+    const hasDetail=S.slice(gr.start,gr.end+1).some(point=>raRawNoteHasDetail(point.note));
+    if(!hasDetail)stepEl.querySelector('.noteTag')?.remove();
+  });
+}
+
+info=function(){
+  routeAtlasInfoWithFullActions();
+  raApplySemanticStepCards();
+  setTimeout(raApplySemanticStepCards,0);
+  const legacyFivebox=document.getElementById('hudFivebox');
+  if(legacyFivebox)legacyFivebox.style.display='';
+  const runtimeGr=G[cur],semanticGr=route()?.stepGroups?.[cur],el=document.getElementById('hudAction');
+  if(!runtimeGr||!el)return;
+  const gr=semanticGr||runtimeGr;
+  const hudPanel=el.closest('.hud');
+  if(hudPanel)hudPanel.classList.remove('ra-semantic-panel');
+  document.querySelectorAll('[data-ra-semantic-fallback="1"]').forEach(node=>node.remove());
+  el.classList.remove('ra-semantic-hud');
+  const lines=S.slice(runtimeGr.start,runtimeGr.end+1).map(point=>`${point.label}：${point.action}`).filter(Boolean);
+  if(typeof gr.actionHtml==='string'&&gr.actionHtml.trim()){
+    if(legacyFivebox){legacyFivebox.textContent='';legacyFivebox.style.display='none'}
+    if(hudPanel)hudPanel.classList.add('ra-semantic-panel');
+    el.classList.add('ra-semantic-hud');
+    el.innerHTML=gr.actionHtml;
+    const note=raFindNoteBox(el,true);
+    if(typeof gr.noteHtml==='string'&&gr.noteHtml.trim()){
+      note.style.removeProperty('display');
+      note.classList.add('ra-semantic-notes');
+      note.dataset.raSemantic='1';
+      note.innerHTML=gr.noteHtml;
+      if(!raDecorateSemanticAnnotations(el,note))raHideEmptySemanticNote(note);
+    }else{
+      raHideEmptySemanticNote(note);
+    }
+    return;
+  }
+  if(gr.title==='新壁炉谷：祈祷之书 → 完美伪装 → 狼狈不堪'){
+    if(hudPanel)hudPanel.classList.add('ra-semantic-panel');
+    el.classList.add('ra-semantic-hud');
+    el.innerHTML=raPrototypeActionHtml();
+    const note=raFindNoteBox(el,true);
+    note.classList.add('ra-semantic-notes');
+    note.dataset.raSemantic='1';
+    note.innerHTML=raPrototypeNoteHtml();
+    if(!raDecorateSemanticAnnotations(el,note))raHideEmptySemanticNote(note);
+    return;
+  }
+  if(gr.title==='征服堡 → 沃德伦 → 风险湾 → 沃德伦领主'){
+    if(hudPanel)hudPanel.classList.add('ra-semantic-panel');
+    el.classList.add('ra-semantic-hud');
+    el.innerHTML=raGrizzlyStep1ActionHtml();
+    const note=raFindNoteBox(el,true);
+    note.classList.add('ra-semantic-notes');
+    note.dataset.raSemantic='1';
+    note.innerHTML=raGrizzlyStep1NoteHtml();
+    if(!raDecorateSemanticAnnotations(el,note))raHideEmptySemanticNote(note);
+    return;
+  }
+  const note=raFindNoteBox(el,false);
+  if(note&&note.dataset.raSemantic==='1'){
+    note.classList.remove('ra-semantic-notes');
+    delete note.dataset.raSemantic;
+  }
+  el.style.whiteSpace='pre-line';
+  el.textContent=lines.join('\n');
+};
+if(Array.isArray(G)&&G.length)info();
+/* HUD_GROUP_ACTIONS_END */
+
+/* ROUTE_RESUME_START */
+(function installRouteAtlasResume(){
+  const STEP_PREFIX='route-atlas:last-step:';
+  const LAST_ROUTE='route-atlas:last-route';
+  const originalInfo=info;
+  let restoring=true;
+  function currentRouteKey(){
+    try{
+      const current=route();
+      const hit=Object.entries(ROUTES).find(([,value])=>value===current);
+      if(hit)return hit[0];
+      return current?.displayName||current?.title||'default';
+    }catch(_){
+      return 'default';
+    }
+  }
+  function savedStep(routeKey){
+    try{
+      const saved=Number.parseInt(localStorage.getItem(STEP_PREFIX+routeKey)||'',10);
+      return Number.isInteger(saved)?saved:null;
+    }catch(_){
+      return null;
+    }
+  }
+  function restoreStep(){
+    const saved=savedStep(currentRouteKey());
+    if(saved!==null&&Array.isArray(G)&&G.length){
+      cur=Math.max(0,Math.min(saved,G.length-1));
+    }
+  }
+  function saveState(){
+    try{
+      const key=currentRouteKey();
+      localStorage.setItem(LAST_ROUTE,key);
+      localStorage.setItem(STEP_PREFIX+key,String(cur));
+    }catch(_){}
+  }
+  function activateRoute(routeKey){
+    if(!routeKey||!ROUTES[routeKey]||routeKey===currentRouteKey())return;
+    const label=ROUTES[routeKey].displayName||ROUTES[routeKey].title||'';
+    const nodes=[...document.querySelectorAll('button,[role="tab"],option')];
+    const hit=nodes.find(node=>
+      node.dataset?.route===routeKey||
+      node.dataset?.key===routeKey||
+      node.dataset?.routeKey===routeKey||
+      node.value===routeKey||
+      (label&&(node.textContent||'').trim()===label)
+    );
+    if(!hit)return;
+    if(hit.tagName==='OPTION'&&hit.parentElement){
+      hit.parentElement.value=hit.value;
+      hit.parentElement.dispatchEvent(new Event('change',{bubbles:true}));
+    }else{
+      hit.click();
+    }
+  }
+  info=function(){
+    originalInfo();
+    if(!restoring)saveState();
+  };
+  function resume(){
+    let lastRoute='';
+    try{lastRoute=localStorage.getItem(LAST_ROUTE)||'';}catch(_){}
+    activateRoute(lastRoute);
+    restoreStep();
+    originalInfo();
+    restoring=false;
+    saveState();
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>setTimeout(resume,0),{once:true});
+  }else{
+    setTimeout(resume,0);
+  }
+})();
+/* ROUTE_RESUME_END */
+</script></body></html>

@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": 12832,
+  "identity": {
+    "name_zhcn": "痛苦的离别",
+    "name_en": "Bitter Departure",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 78,
+    "min_level": 77,
+    "pre_any": [
+      12831
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 68000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 42828,
+        "quantity": 1,
+        "name_zhcn": "加姆的守卫之杖",
+        "name_en": "Garm's Ward",
+        "sell_price_each_copper": 140868,
+        "sell_price_total_copper": 140868
+      },
+      {
+        "item_id": 42799,
+        "quantity": 1,
+        "name_zhcn": "雪盲屠夫",
+        "name_en": "Snowblind Butcher",
+        "sell_price_each_copper": 132887,
+        "sell_price_total_copper": 132887
+      },
+      {
+        "item_id": 42786,
+        "quantity": 1,
+        "name_zhcn": "达斯卡尔的锯齿利刃",
+        "name_en": "Daschal's Serrated Blade",
+        "sell_price_each_copper": 111931,
+        "sell_price_total_copper": 111931
+      },
+      {
+        "item_id": 42811,
+        "quantity": 1,
+        "name_zhcn": "扭曲的映像",
+        "name_en": "Twisted Reflection",
+        "sell_price_each_copper": 103128,
+        "sell_price_total_copper": 103128
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 140868,
+    "gear_sale_max_copper": 140868,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 21600
+  },
+  "guide": [
+    "接取：受伤的地精矿工。",
+    "护送受伤的地精矿工离开水晶蛛网洞穴，然后与K3的莉吉特谈一谈。",
+    "交付：莉吉特。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12832",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《痛苦的离别》：共享：一个号开始护送即可，结束后五号同步完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

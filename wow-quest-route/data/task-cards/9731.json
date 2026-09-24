@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "task_id": 9731,
+  "identity": {
+    "name_zhcn": "抽水泵结构图",
+    "name_en": "Drain Schematics",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 63,
+    "min_level": 59,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 29000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 27733,
+        "quantity": 1,
+        "name_zhcn": "看守者的精准之戒",
+        "name_en": "Warden's Ring of Precision",
+        "sell_price_each_copper": 30284,
+        "sell_price_total_copper": 30284
+      },
+      {
+        "item_id": 27734,
+        "quantity": 1,
+        "name_zhcn": "远征军施法者指环",
+        "name_en": "Expedition Caster's Band",
+        "sell_price_each_copper": 30284,
+        "sell_price_total_copper": 30284
+      },
+      {
+        "item_id": 27735,
+        "quantity": 1,
+        "name_zhcn": "沼泽坠饰",
+        "name_en": "Pendant of the Marsh",
+        "sell_price_each_copper": 30284,
+        "sell_price_total_copper": 30284
+      },
+      {
+        "item_id": 27730,
+        "quantity": 1,
+        "name_zhcn": "观察者的警觉披风",
+        "name_en": "Watcher's Cloak of Vigilance",
+        "sell_price_each_copper": 17870,
+        "sell_price_total_copper": 17870
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 30284,
+    "gear_sale_max_copper": 30284,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 10400
+  },
+  "guide": [
+    "接取：抽水泵结构图。",
+    "前往毒蛇湖搜寻抽水泵的踪迹，然后向塞纳里奥庇护所的伊谢尔·风歌汇报你的发现。",
+    "交付：伊谢尔·风歌。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9731",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "到水下排水口完成调查；完成后直接在水中使用炉石，不游回岸边。\n环礁湖的蒸汽泵监工会掉落“抽水泵结构图”，拾取后右键接任务；这里只顺手打，不额外强刷。\n若此前还没拿到，毒蛇湖优先击杀血鳞监工、血鳞唤潮者和蒸汽泵监工，取得“抽水泵结构图”后右键接任务；离开毒蛇湖前必须拿到。先进入《恢复平衡》四泵阶段再补刷，泵旁使用铁藤种子可让蒸汽泵监工再次出现。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

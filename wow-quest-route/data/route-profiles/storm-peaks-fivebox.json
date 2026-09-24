@@ -1,0 +1,5251 @@
+{
+  "schema_version": 2,
+  "profile_id": "storm-peaks-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "风暴峭壁",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 67
+  },
+  "entry_requirements": {
+    "active_task_ids": [],
+    "hearth_location": "阿格玛之锤"
+  },
+  "goal": {
+    "summary": "K3取得借用双足飞龙后，按K3→希弗列尔达/布伦希尔达→霍迪尔/托里姆→格罗玛什/布莱恩→布德克拉格→唐卡洛固定顺序清一次性户外任务。"
+  },
+  "display": {
+    "publish_key": "storm",
+    "order": 7,
+    "title": "风暴峭壁 · 77+ 五开整图路线",
+    "display_name": "风暴峭壁",
+    "subtitle": "K3取得借用双足飞龙后，按K3→希弗列尔达/布伦希尔达→霍迪尔/托里姆→格罗玛什/布莱恩→布德克拉格→唐卡洛固定顺序清一次性户外任务。",
+    "footer": "",
+    "map_image": "maps/67-the-storm-peaks-hd.jpg"
+  },
+  "task_ids": [
+    12818,
+    12827,
+    12836,
+    12843,
+    12844,
+    12819,
+    12826,
+    12820,
+    12828,
+    12829,
+    12830,
+    12831,
+    12832,
+    12821,
+    12846,
+    12822,
+    12823,
+    12824,
+    12841,
+    12905,
+    12906,
+    12907,
+    12908,
+    12921,
+    12969,
+    12970,
+    12971,
+    12972,
+    12925,
+    12942,
+    12968,
+    12953,
+    12851,
+    12856,
+    13063,
+    12900,
+    12983,
+    12989,
+    12996,
+    12997,
+    13061,
+    13062,
+    12886,
+    13064,
+    12915,
+    12882,
+    12895,
+    13000,
+    13054,
+    13055,
+    13056,
+    12922,
+    12956,
+    12924,
+    12966,
+    12975,
+    13011,
+    13001,
+    12967,
+    12981,
+    13009,
+    12985,
+    12987,
+    13006,
+    12994,
+    13046,
+    12976,
+    13050,
+    13051,
+    13010,
+    13057,
+    13034,
+    13037,
+    13005,
+    13035,
+    13047,
+    12930,
+    12909,
+    12910,
+    12913,
+    12917,
+    12920,
+    12926,
+    12927,
+    13416,
+    12928,
+    13273,
+    13274,
+    13285,
+    12931,
+    12937,
+    12957,
+    12964,
+    12965,
+    12978,
+    12979,
+    12980,
+    12984,
+    12988,
+    12991,
+    12993,
+    12998,
+    13007,
+    13038,
+    13048,
+    13049,
+    13058
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "storm-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "storm-p001",
+      "npc_name": "“诚实的”麦克斯",
+      "target_name": "五号分别领取借用双足飞龙",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "storm-p001",
+      "target_name": "K3",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p002",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12818,
+      "location_ref": "storm-p002",
+      "npc_name": "基尔·斯巴索克",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12827,
+      "location_ref": "storm-p002",
+      "npc_name": "莉吉特",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12836,
+      "location_ref": "storm-p002",
+      "npc_name": "莉吉特",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12843,
+      "location_ref": "storm-p002",
+      "npc_name": "格莱奇·菲兹巴克",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12844,
+      "location_ref": "storm-p002",
+      "npc_name": "格莱奇·菲兹巴克",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p003",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12818,
+      "location_ref": "storm-p003",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p004",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12818,
+      "location_ref": "storm-p004",
+      "npc_name": "基尔·斯巴索克",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12819,
+      "location_ref": "storm-p004",
+      "npc_name": "基尔·斯巴索克",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p005",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12819,
+      "location_ref": "storm-p005",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p006",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12836,
+      "location_ref": "storm-p006",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12827,
+      "location_ref": "storm-p006",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p007",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12819,
+      "location_ref": "storm-p007",
+      "npc_name": "基尔·斯巴索克",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12826,
+      "location_ref": "storm-p007",
+      "npc_name": "基尔·斯巴索克",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12826,
+      "location_ref": "storm-p007",
+      "npc_name": "莉吉特",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12820,
+      "location_ref": "storm-p007",
+      "npc_name": "莉吉特",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12827,
+      "location_ref": "storm-p007",
+      "npc_name": "莉吉特",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12836,
+      "location_ref": "storm-p007",
+      "npc_name": "莉吉特",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12828,
+      "location_ref": "storm-p007",
+      "npc_name": "莉吉特",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p008",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12820,
+      "location_ref": "storm-p008",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p009",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12829,
+      "location_ref": "storm-p009",
+      "npc_name": "托莉·兰波维奇",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12830,
+      "location_ref": "storm-p009",
+      "npc_name": "托莉·兰波维奇",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p010",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12828,
+      "location_ref": "storm-p010",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p011",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12829,
+      "location_ref": "storm-p011",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12830,
+      "location_ref": "storm-p011",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12831,
+      "location_ref": "storm-p011",
+      "npc_name": "受伤的地精矿工",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p012",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12831,
+      "location_ref": "storm-p012",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p013",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12831,
+      "location_ref": "storm-p013",
+      "npc_name": "受伤的地精矿工",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12832,
+      "location_ref": "storm-p013",
+      "npc_name": "受伤的地精矿工",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12832,
+      "location_ref": "storm-p013",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p014",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12829,
+      "location_ref": "storm-p014",
+      "npc_name": "托莉·兰波维奇",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12830,
+      "location_ref": "storm-p014",
+      "npc_name": "托莉·兰波维奇",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p015",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12843,
+      "location_ref": "storm-p015",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12844,
+      "location_ref": "storm-p015",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p016",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12820,
+      "location_ref": "storm-p016",
+      "npc_name": "莉吉特",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12828,
+      "location_ref": "storm-p016",
+      "npc_name": "莉吉特",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12832,
+      "location_ref": "storm-p016",
+      "npc_name": "莉吉特",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12821,
+      "location_ref": "storm-p016",
+      "npc_name": "莉吉特",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12843,
+      "location_ref": "storm-p016",
+      "npc_name": "格莱奇·菲兹巴克",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12844,
+      "location_ref": "storm-p016",
+      "npc_name": "格莱奇·菲兹巴克",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12846,
+      "location_ref": "storm-p016",
+      "npc_name": "格莱奇·菲兹巴克",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p017",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12821,
+      "location_ref": "storm-p017",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p018",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12821,
+      "location_ref": "storm-p018",
+      "npc_name": "莉吉特",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12822,
+      "location_ref": "storm-p018",
+      "npc_name": "莉吉特",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "storm-p018",
+      "target_name": "使用莉吉特旁的传送台",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "storm-p018",
+      "from_name": "K3",
+      "to_name": "加姆高地",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p019",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12823,
+      "location_ref": "storm-p019",
+      "npc_name": "吉诺",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12822,
+      "location_ref": "storm-p019",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12823,
+      "location_ref": "storm-p019",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12823,
+      "location_ref": "storm-p019",
+      "npc_name": "吉诺",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12824,
+      "location_ref": "storm-p019",
+      "npc_name": "吉诺",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "storm-p019",
+      "target_name": "使用加姆传送器",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "storm-p019",
+      "from_name": "加姆高地",
+      "to_name": "K3",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p020",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12822,
+      "location_ref": "storm-p020",
+      "npc_name": "莉吉特",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12824,
+      "location_ref": "storm-p020",
+      "npc_name": "莉吉特",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p021",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12846,
+      "location_ref": "storm-p021",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12841,
+      "location_ref": "storm-p021",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p022",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12841,
+      "location_ref": "storm-p022",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p023",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12841,
+      "location_ref": "storm-p023",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12905,
+      "location_ref": "storm-p023",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p024",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12905,
+      "location_ref": "storm-p024",
+      "npc_name": "残酷的米尔德蕾",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12906,
+      "location_ref": "storm-p024",
+      "npc_name": "残酷的米尔德蕾",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p025",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12906,
+      "location_ref": "storm-p025",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p026",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12906,
+      "location_ref": "storm-p026",
+      "npc_name": "残酷的米尔德蕾",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12907,
+      "location_ref": "storm-p026",
+      "npc_name": "残酷的米尔德蕾",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p027",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12907,
+      "location_ref": "storm-p027",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p028",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12907,
+      "location_ref": "storm-p028",
+      "npc_name": "残酷的米尔德蕾",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12908,
+      "location_ref": "storm-p028",
+      "npc_name": "残酷的米尔德蕾",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p029",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12908,
+      "location_ref": "storm-p029",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12908,
+      "location_ref": "storm-p029",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12921,
+      "location_ref": "storm-p029",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p030",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12921,
+      "location_ref": "storm-p030",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12969,
+      "location_ref": "storm-p030",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p031",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12969,
+      "location_ref": "storm-p031",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p032",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12969,
+      "location_ref": "storm-p032",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12970,
+      "location_ref": "storm-p032",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12970,
+      "location_ref": "storm-p032",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12970,
+      "location_ref": "storm-p032",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12971,
+      "location_ref": "storm-p032",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p033",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12971,
+      "location_ref": "storm-p033",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p034",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12971,
+      "location_ref": "storm-p034",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12972,
+      "location_ref": "storm-p034",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p035",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12925,
+      "location_ref": "storm-p035",
+      "npc_name": "塞拉·克文沙尔",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12942,
+      "location_ref": "storm-p035",
+      "npc_name": "复仇者伊芬",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12968,
+      "location_ref": "storm-p035",
+      "npc_name": "复仇者伊芬",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p036",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12968,
+      "location_ref": "storm-p036",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12953,
+      "location_ref": "storm-p036",
+      "target_name": "鱼叉箱",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p037",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12925,
+      "location_ref": "storm-p037",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12942,
+      "location_ref": "storm-p037",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p038",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12953,
+      "location_ref": "storm-p038",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p039",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12925,
+      "location_ref": "storm-p039",
+      "npc_name": "塞拉·克文沙尔",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12942,
+      "location_ref": "storm-p039",
+      "npc_name": "复仇者伊芬",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12953,
+      "location_ref": "storm-p039",
+      "npc_name": "复仇者伊芬",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12968,
+      "location_ref": "storm-p039",
+      "npc_name": "复仇者伊芬",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p040",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12972,
+      "location_ref": "storm-p040",
+      "npc_name": "布莉亚娜",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12851,
+      "location_ref": "storm-p040",
+      "npc_name": "布莉亚娜",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p041",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12851,
+      "location_ref": "storm-p041",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p042",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12851,
+      "location_ref": "storm-p042",
+      "npc_name": "布莉亚娜",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12856,
+      "location_ref": "storm-p042",
+      "npc_name": "布莉亚娜",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p043",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12856,
+      "location_ref": "storm-p043",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p044",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12856,
+      "location_ref": "storm-p044",
+      "npc_name": "布莉亚娜",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13063,
+      "location_ref": "storm-p044",
+      "npc_name": "布莉亚娜",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p045",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13063,
+      "location_ref": "storm-p045",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12900,
+      "location_ref": "storm-p045",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p046",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12900,
+      "location_ref": "storm-p046",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p047",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12900,
+      "location_ref": "storm-p047",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12983,
+      "location_ref": "storm-p047",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12989,
+      "location_ref": "storm-p047",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p048",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "move",
+      "location_ref": "storm-p048",
+      "to_name": "洞穴内部",
+      "action_id": "a0159",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p049",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12983,
+      "location_ref": "storm-p049",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12989,
+      "location_ref": "storm-p049",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p050",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12983,
+      "location_ref": "storm-p050",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12989,
+      "location_ref": "storm-p050",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12996,
+      "location_ref": "storm-p050",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p051",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12996,
+      "location_ref": "storm-p051",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p052",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12996,
+      "location_ref": "storm-p052",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12997,
+      "location_ref": "storm-p052",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p053",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12997,
+      "location_ref": "storm-p053",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p054",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12997,
+      "location_ref": "storm-p054",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13061,
+      "location_ref": "storm-p054",
+      "npc_name": "艾丝崔·约利塔尔",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p055",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13061,
+      "location_ref": "storm-p055",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13062,
+      "location_ref": "storm-p055",
+      "npc_name": "女巫洛莉拉",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13062,
+      "location_ref": "storm-p055",
+      "npc_name": "仲裁者格蕾塔",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12886,
+      "location_ref": "storm-p055",
+      "npc_name": "仲裁者格蕾塔",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p056",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12886,
+      "location_ref": "storm-p056",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12886,
+      "location_ref": "storm-p056",
+      "npc_name": "托里姆",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13064,
+      "location_ref": "storm-p056",
+      "npc_name": "托里姆",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13064,
+      "location_ref": "storm-p056",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13064,
+      "location_ref": "storm-p056",
+      "npc_name": "托里姆",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12915,
+      "location_ref": "storm-p056",
+      "npc_name": "托里姆",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p057",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12882,
+      "location_ref": "storm-p057",
+      "npc_name": "奥鲁特·埃雷古",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12895,
+      "location_ref": "storm-p057",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13000,
+      "location_ref": "storm-p057",
+      "npc_name": "血卫士洛尔加",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13054,
+      "location_ref": "storm-p057",
+      "npc_name": "血卫士洛尔加",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "storm-p057",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "storm-p057",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p058",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "move",
+      "location_ref": "storm-p058",
+      "to_name": "洞穴内部",
+      "action_id": "a0197",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p059",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13000,
+      "location_ref": "storm-p059",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13054,
+      "location_ref": "storm-p059",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13054,
+      "location_ref": "storm-p059",
+      "npc_name": "猎户瓦尔兹",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13055,
+      "location_ref": "storm-p059",
+      "npc_name": "猎户瓦尔兹",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p060",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13055,
+      "location_ref": "storm-p060",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p061",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13055,
+      "location_ref": "storm-p061",
+      "npc_name": "猎户瓦尔兹",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13056,
+      "location_ref": "storm-p061",
+      "npc_name": "猎户瓦尔兹",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p062",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13056,
+      "location_ref": "storm-p062",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p063",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13056,
+      "location_ref": "storm-p063",
+      "npc_name": "猎户瓦尔兹",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p064",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12915,
+      "location_ref": "storm-p064",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12922,
+      "location_ref": "storm-p064",
+      "target_name": "熔渣包裹的金属",
+      "when": {
+        "kind": "has_item",
+        "item_name": "熔渣包裹的金属"
+      },
+      "action_id": "a0214"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12922,
+      "location_ref": "storm-p064",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12922,
+      "location_ref": "storm-p064",
+      "target_name": "弗约恩之砧",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12922
+      },
+      "action_id": "a0216"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12956,
+      "location_ref": "storm-p064",
+      "target_name": "弗约恩之砧",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "storm-p065",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p065",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13000,
+      "location_ref": "storm-p065",
+      "npc_name": "血卫士洛尔加",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p066",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12915,
+      "location_ref": "storm-p066",
+      "npc_name": "托里姆",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12956,
+      "location_ref": "storm-p066",
+      "npc_name": "托里姆",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12924,
+      "location_ref": "storm-p066",
+      "npc_name": "托里姆",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p067",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12966,
+      "location_ref": "storm-p067",
+      "npc_name": "约库姆国王",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13011,
+      "location_ref": "storm-p067",
+      "npc_name": "约库姆国王",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13001,
+      "location_ref": "storm-p067",
+      "npc_name": "博学者兰德维尔",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "storm-p067",
+      "target_name": "丹尼芬雷",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p068",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12966,
+      "location_ref": "storm-p068",
+      "npc_name": "亚米尔德",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12967,
+      "location_ref": "storm-p068",
+      "npc_name": "亚米尔德",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12967,
+      "location_ref": "storm-p068",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12967,
+      "location_ref": "storm-p068",
+      "npc_name": "亚米尔德",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p069",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12981,
+      "location_ref": "storm-p069",
+      "target_name": "弗约恩之砧",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12924,
+      "location_ref": "storm-p069",
+      "npc_name": "亚米尔德",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13009,
+      "location_ref": "storm-p069",
+      "npc_name": "亚米尔德",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12985,
+      "location_ref": "storm-p069",
+      "npc_name": "亚米尔德",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12975,
+      "location_ref": "storm-p067",
+      "npc_name": "约库姆国王",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p070",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12981,
+      "location_ref": "storm-p070",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12985,
+      "location_ref": "storm-p070",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p071",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12981,
+      "location_ref": "storm-p071",
+      "target_name": "弗约恩之砧",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12985,
+      "location_ref": "storm-p071",
+      "npc_name": "亚米尔德",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12987,
+      "location_ref": "storm-p071",
+      "npc_name": "亚米尔德",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12994,
+      "location_ref": "storm-p071",
+      "npc_name": "冰霜座狼母兽",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p072",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12987,
+      "location_ref": "storm-p072",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p073",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12987,
+      "location_ref": "storm-p073",
+      "npc_name": "亚米尔德",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13006,
+      "location_ref": "storm-p071",
+      "target_name": "霍迪尔之盔",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13046,
+      "location_ref": "storm-p073",
+      "target_name": "贪婪的安格里姆",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p074",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13001,
+      "location_ref": "storm-p074",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13006,
+      "location_ref": "storm-p074",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13011,
+      "location_ref": "storm-p074",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p075",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12994,
+      "location_ref": "storm-p075",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13046,
+      "location_ref": "storm-p075",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p076",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13001,
+      "location_ref": "storm-p076",
+      "npc_name": "博学者兰德维尔",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13011,
+      "location_ref": "storm-p076",
+      "npc_name": "约库姆国王",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13006,
+      "location_ref": "storm-p076",
+      "target_name": "霍迪尔之盔",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12994,
+      "location_ref": "storm-p076",
+      "npc_name": "冰霜座狼母兽",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13046,
+      "location_ref": "storm-p076",
+      "target_name": "贪婪的安格里姆",
+      "action_id": "a0267"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p077",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12975,
+      "location_ref": "storm-p077",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p078",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12975,
+      "location_ref": "storm-p078",
+      "npc_name": "约库姆国王",
+      "action_id": "a0271"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12976,
+      "location_ref": "storm-p078",
+      "npc_name": "约库姆国王",
+      "action_id": "a0272"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12976,
+      "location_ref": "storm-p078",
+      "npc_name": "亚米尔德",
+      "action_id": "a0273"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "storm-p079",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0275"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p079",
+      "action_id": "a0274"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p080",
+      "action_id": "a0276"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13009,
+      "location_ref": "storm-p080",
+      "npc_name": "托里姆",
+      "action_id": "a0277"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13050,
+      "location_ref": "storm-p080",
+      "npc_name": "托里姆",
+      "action_id": "a0278"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p081",
+      "action_id": "a0279"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13050,
+      "location_ref": "storm-p081",
+      "action_id": "a0280"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p082",
+      "action_id": "a0281"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13050,
+      "location_ref": "storm-p082",
+      "npc_name": "托里姆",
+      "action_id": "a0282"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13051,
+      "location_ref": "storm-p082",
+      "npc_name": "托里姆",
+      "action_id": "a0283"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p083",
+      "action_id": "a0284"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12895,
+      "location_ref": "storm-p083",
+      "action_id": "a0285"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p084",
+      "action_id": "a0286"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13051,
+      "location_ref": "storm-p084",
+      "action_id": "a0287"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p085",
+      "action_id": "a0288"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13051,
+      "location_ref": "storm-p085",
+      "npc_name": "托里姆",
+      "action_id": "a0289"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13010,
+      "location_ref": "storm-p085",
+      "npc_name": "托里姆",
+      "action_id": "a0290"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p086",
+      "action_id": "a0291"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13010,
+      "location_ref": "storm-p086",
+      "action_id": "a0292"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p087",
+      "action_id": "a0293"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13010,
+      "location_ref": "storm-p087",
+      "npc_name": "托里姆",
+      "action_id": "a0294"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13057,
+      "location_ref": "storm-p087",
+      "npc_name": "托里姆",
+      "action_id": "a0295"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p088",
+      "action_id": "a0296"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "storm-p088",
+      "target_name": "唐卡洛营地",
+      "action_id": "a0297"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13034,
+      "location_ref": "storm-p088",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0298"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13034,
+      "location_ref": "storm-p088",
+      "action_id": "a0299"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13034,
+      "location_ref": "storm-p088",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0300"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13037,
+      "location_ref": "storm-p088",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0301"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p089",
+      "action_id": "a0302"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13057,
+      "location_ref": "storm-p089",
+      "npc_name": "托里姆",
+      "action_id": "a0303"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13005,
+      "location_ref": "storm-p089",
+      "npc_name": "托里姆",
+      "action_id": "a0304"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13035,
+      "location_ref": "storm-p089",
+      "npc_name": "托里姆",
+      "action_id": "a0305"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p090",
+      "action_id": "a0306"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13035,
+      "location_ref": "storm-p090",
+      "action_id": "a0307"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p091",
+      "action_id": "a0308"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13005,
+      "location_ref": "storm-p091",
+      "action_id": "a0309"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p092",
+      "action_id": "a0310"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13035,
+      "location_ref": "storm-p092",
+      "action_id": "a0311"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p093",
+      "action_id": "a0312"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13035,
+      "location_ref": "storm-p093",
+      "action_id": "a0313"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p094",
+      "action_id": "a0314"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13005,
+      "location_ref": "storm-p094",
+      "npc_name": "托里姆",
+      "action_id": "a0315"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13035,
+      "location_ref": "storm-p094",
+      "npc_name": "托里姆",
+      "action_id": "a0316"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13047,
+      "location_ref": "storm-p094",
+      "npc_name": "托里姆",
+      "action_id": "a0317"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p095",
+      "action_id": "a0318"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "storm-p095",
+      "target_name": "布德克拉格庇护所",
+      "action_id": "a0319"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12930,
+      "location_ref": "storm-p095",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0320"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p096",
+      "action_id": "a0321"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13047,
+      "location_ref": "storm-p096",
+      "action_id": "a0322"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p097",
+      "action_id": "a0323"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "storm-p097",
+      "target_name": "奥杜尔",
+      "action_id": "a0324"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "storm-p097",
+      "from_name": "奥杜尔",
+      "to_name": "丹尼芬雷",
+      "action_id": "a0325"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p098",
+      "action_id": "a0326"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13047,
+      "location_ref": "storm-p098",
+      "npc_name": "约库姆国王",
+      "action_id": "a0327"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "storm-p099",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0329"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p099",
+      "action_id": "a0328"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12895,
+      "location_ref": "storm-p099",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0330"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12909,
+      "location_ref": "storm-p099",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0331"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p100",
+      "action_id": "a0332"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12909,
+      "location_ref": "storm-p100",
+      "npc_name": "凯尔莉丝",
+      "action_id": "a0333"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12910,
+      "location_ref": "storm-p100",
+      "npc_name": "凯尔莉丝",
+      "action_id": "a0334"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p101",
+      "action_id": "a0335"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12910,
+      "location_ref": "storm-p101",
+      "action_id": "a0336"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12910,
+      "location_ref": "storm-p101",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0337"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12913,
+      "location_ref": "storm-p101",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0338"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p102",
+      "action_id": "a0339"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12913,
+      "location_ref": "storm-p102",
+      "npc_name": "莫塔哈·风魂",
+      "action_id": "a0340"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12917,
+      "location_ref": "storm-p102",
+      "npc_name": "莫塔哈·风魂",
+      "action_id": "a0341"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p103",
+      "action_id": "a0342"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12917,
+      "location_ref": "storm-p103",
+      "action_id": "a0343"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p104",
+      "action_id": "a0344"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12917,
+      "location_ref": "storm-p104",
+      "npc_name": "莫塔哈·风魂",
+      "action_id": "a0345"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12920,
+      "location_ref": "storm-p104",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0346"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12920,
+      "location_ref": "storm-p104",
+      "action_id": "a0347"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12920,
+      "location_ref": "storm-p104",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0348"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12926,
+      "location_ref": "storm-p104",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0349"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p105",
+      "action_id": "a0350"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12926,
+      "location_ref": "storm-p105",
+      "action_id": "a0351"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12882,
+      "location_ref": "storm-p105",
+      "action_id": "a0352"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12926,
+      "location_ref": "storm-p105",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0353"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12927,
+      "location_ref": "storm-p105",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0354"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12927,
+      "location_ref": "storm-p105",
+      "action_id": "a0355"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12927,
+      "location_ref": "storm-p105",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0356"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13416,
+      "location_ref": "storm-p105",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0357"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p106",
+      "action_id": "a0358"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13416,
+      "location_ref": "storm-p106",
+      "target_name": "创世者的图书馆控制台",
+      "action_id": "a0359"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12928,
+      "location_ref": "storm-p106",
+      "target_name": "创世者的图书馆控制台",
+      "action_id": "a0360"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12928,
+      "location_ref": "storm-p106",
+      "action_id": "a0361"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12928,
+      "location_ref": "storm-p106",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0362"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13273,
+      "location_ref": "storm-p106",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0363"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p107",
+      "action_id": "a0364"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13273,
+      "location_ref": "storm-p107",
+      "action_id": "a0365"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13273,
+      "location_ref": "storm-p107",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0366"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13274,
+      "location_ref": "storm-p107",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0367"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p108",
+      "action_id": "a0368"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13274,
+      "location_ref": "storm-p108",
+      "action_id": "a0369"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13274,
+      "location_ref": "storm-p108",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0370"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13285,
+      "location_ref": "storm-p108",
+      "npc_name": "布莱恩·铜须",
+      "action_id": "a0371"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p109",
+      "action_id": "a0372"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13285,
+      "location_ref": "storm-p109",
+      "action_id": "a0373"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p110",
+      "action_id": "a0374"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13285,
+      "location_ref": "storm-p110",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0375"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12882,
+      "location_ref": "storm-p110",
+      "npc_name": "奥鲁特·埃雷古",
+      "action_id": "a0376"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p111",
+      "action_id": "a0377"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "storm-p111",
+      "target_name": "布德克拉格庇护所",
+      "action_id": "a0378"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p112",
+      "action_id": "a0379"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12930,
+      "location_ref": "storm-p112",
+      "action_id": "a0380"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p113",
+      "action_id": "a0381"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12930,
+      "location_ref": "storm-p113",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0382"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12931,
+      "location_ref": "storm-p113",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0383"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12937,
+      "location_ref": "storm-p113",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0384"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p114",
+      "action_id": "a0385"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12931,
+      "location_ref": "storm-p114",
+      "action_id": "a0386"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12937,
+      "location_ref": "storm-p114",
+      "action_id": "a0387"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p115",
+      "action_id": "a0388"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12931,
+      "location_ref": "storm-p115",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0389"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12937,
+      "location_ref": "storm-p115",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0390"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12957,
+      "location_ref": "storm-p115",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0391"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12964,
+      "location_ref": "storm-p115",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0392"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p116",
+      "action_id": "a0393"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12957,
+      "location_ref": "storm-p116",
+      "action_id": "a0394"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12964,
+      "location_ref": "storm-p116",
+      "action_id": "a0395"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "storm-p117",
+      "target_name": "布德克拉格庇护所",
+      "action_id": "a0397"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p117",
+      "action_id": "a0396"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12957,
+      "location_ref": "storm-p117",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0398"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12964,
+      "location_ref": "storm-p117",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0399"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12965,
+      "location_ref": "storm-p117",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0400"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12978,
+      "location_ref": "storm-p117",
+      "npc_name": "布鲁沃·斩铁",
+      "action_id": "a0401"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p118",
+      "action_id": "a0402"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12965,
+      "location_ref": "storm-p118",
+      "action_id": "a0403"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p119",
+      "action_id": "a0404"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12965,
+      "location_ref": "storm-p119",
+      "action_id": "a0405"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p120",
+      "action_id": "a0406"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12965,
+      "location_ref": "storm-p120",
+      "action_id": "a0407"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p121",
+      "action_id": "a0408"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12978,
+      "location_ref": "storm-p121",
+      "action_id": "a0409"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12979,
+      "location_ref": "storm-p121",
+      "target_name": "黑暗护甲板",
+      "when": {
+        "kind": "has_item",
+        "item_name": "黑暗护甲板"
+      },
+      "action_id": "a0410"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12979,
+      "location_ref": "storm-p121",
+      "action_id": "a0411"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p122",
+      "action_id": "a0412"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12965,
+      "location_ref": "storm-p122",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0413"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12978,
+      "location_ref": "storm-p122",
+      "npc_name": "布鲁沃·斩铁",
+      "action_id": "a0414"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12979,
+      "location_ref": "storm-p122",
+      "npc_name": "布鲁沃·斩铁",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12979
+      },
+      "action_id": "a0415"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12980,
+      "location_ref": "storm-p122",
+      "npc_name": "布鲁沃·斩铁",
+      "action_id": "a0416"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p123",
+      "action_id": "a0417"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12980,
+      "location_ref": "storm-p123",
+      "action_id": "a0418"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p124",
+      "action_id": "a0419"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12980,
+      "location_ref": "storm-p124",
+      "npc_name": "布鲁沃·斩铁",
+      "action_id": "a0420"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12984,
+      "location_ref": "storm-p124",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0421"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p125",
+      "action_id": "a0422"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12984,
+      "location_ref": "storm-p125",
+      "action_id": "a0423"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p126",
+      "action_id": "a0424"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12984,
+      "location_ref": "storm-p126",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0425"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12988,
+      "location_ref": "storm-p126",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0426"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12991,
+      "location_ref": "storm-p126",
+      "npc_name": "布鲁沃·斩铁",
+      "action_id": "a0427"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p127",
+      "action_id": "a0428"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12988,
+      "location_ref": "storm-p127",
+      "action_id": "a0429"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12991,
+      "location_ref": "storm-p127",
+      "action_id": "a0430"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p128",
+      "action_id": "a0431"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12988,
+      "location_ref": "storm-p128",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0432"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12993,
+      "location_ref": "storm-p128",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0433"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12991,
+      "location_ref": "storm-p128",
+      "npc_name": "布鲁沃·斩铁",
+      "action_id": "a0434"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p129",
+      "action_id": "a0435"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12993,
+      "location_ref": "storm-p129",
+      "action_id": "a0436"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p130",
+      "action_id": "a0437"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12993,
+      "location_ref": "storm-p130",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0438"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12998,
+      "location_ref": "storm-p130",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0439"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p131",
+      "action_id": "a0440"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12998,
+      "location_ref": "storm-p131",
+      "action_id": "a0441"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "storm-p132",
+      "target_name": "布德克拉格庇护所",
+      "action_id": "a0443"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p132",
+      "action_id": "a0442"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12998,
+      "location_ref": "storm-p132",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0444"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13007,
+      "location_ref": "storm-p132",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0445"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p133",
+      "action_id": "a0446"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13007,
+      "location_ref": "storm-p133",
+      "action_id": "a0447"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p134",
+      "action_id": "a0448"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13007,
+      "location_ref": "storm-p134",
+      "npc_name": "塑石者布德克拉格",
+      "action_id": "a0449"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "storm-p135",
+      "from_name": "布德克拉格庇护所",
+      "to_name": "唐卡洛营地",
+      "action_id": "a0451"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p135",
+      "action_id": "a0450"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p136",
+      "action_id": "a0452"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13037,
+      "location_ref": "storm-p136",
+      "action_id": "a0453"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13038,
+      "location_ref": "storm-p136",
+      "npc_name": "迅矛酋长",
+      "action_id": "a0454"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p137",
+      "action_id": "a0455"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13038,
+      "location_ref": "storm-p137",
+      "action_id": "a0456"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p138",
+      "action_id": "a0457"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13037,
+      "location_ref": "storm-p138",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0458"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13038,
+      "location_ref": "storm-p138",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0459"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13048,
+      "location_ref": "storm-p138",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0460"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13049,
+      "location_ref": "storm-p138",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0461"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p139",
+      "action_id": "a0462"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13048,
+      "location_ref": "storm-p139",
+      "action_id": "a0463"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13049,
+      "location_ref": "storm-p139",
+      "action_id": "a0464"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p140",
+      "action_id": "a0465"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13048,
+      "location_ref": "storm-p140",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0466"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13049,
+      "location_ref": "storm-p140",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0467"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13058,
+      "location_ref": "storm-p140",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0468"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p141",
+      "action_id": "a0469"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13058,
+      "location_ref": "storm-p141",
+      "action_id": "a0470"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p142",
+      "action_id": "a0471"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13058,
+      "location_ref": "storm-p142",
+      "npc_name": "夏拉托尔",
+      "action_id": "a0472"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "K3：入图、借用飞龙、接任务",
+      "summary": "交《豪华的体验！》，五号分别领取借用双足飞龙并开K3飞行点，再接基尔、莉吉特和格莱奇当前任务。",
+      "action_ids": [
+        "a0001",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "K3西侧：清理残骸 → 雷区 → 野蛮岭",
+      "summary": "先取烧焦零件，回K3接《雷区里的工具》；再进雷区取工具，去野蛮岭做瘤皮和粮食，最后回K3交接。",
+      "action_ids": [
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "加姆 → 水晶蛛网洞穴 → 希弗列尔达",
+      "summary": "先做加姆雷区地雷，再接洞穴任务；K3北侧做U.D.E.D.，进洞完成蜘蛛、矿石、毒囊和护送，再去希弗列尔达做囚犯与设备后回K3。",
+      "action_ids": [
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054",
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "加姆高地：牢门探戈 → 完美计划",
+      "summary": "在加姆高地取电池并激活传送器回K3；交接后用莉吉特旁传送台返回加姆，沿路杀怪到最上层祭坛爆破，再传回K3交任务。",
+      "action_ids": [
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "荒弃矿洞：洛莉拉 → 米尔德蕾",
+      "summary": "沿矿洞内NPC顺序推进，做到《特殊的囚犯》并回洛莉拉。",
+      "action_ids": [
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "布伦希尔达 → 瓦基里安",
+      "summary": "完成村内比武链；到瓦基里安先杀伊尔达并从旁边大箱子接《燃烧吧，瓦基里安》，再做室外任务。",
+      "action_ids": [
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134",
+        "a0135"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "布莉亚娜：熊熊大作战 → 冰冷的心",
+      "summary": "完成冰牙载具战和丹尼芬雷营救，再回布莉亚娜。",
+      "action_ids": [
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "艾丝崔 → 冬眠洞穴 → 利齿之坑",
+      "summary": "从冬眠洞穴入口进洞完成母熊/冰虫，再做基加拉格和利齿之坑。",
+      "action_ids": [
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165",
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173",
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "驭龙赛 → 托里姆 → 格罗玛什",
+      "summary": "完成驭龙赛和托里姆对话；到格罗玛什接任务、开飞行点、绑炉石，再进基莫拉克之巢完成猎人链和《紧急措施》。",
+      "action_ids": [
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0203",
+        "a0204",
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "弗约恩之砧：弥补关系 + 精炼之火",
+      "summary": "完成《弥补关系》《精炼之火》，在弗约恩之砧接《希望的火花》；炉石回格罗玛什交《紧急措施》，再去风暴神殿找托里姆。",
+      "action_ids": [
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217",
+        "a0219",
+        "a0218",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0223",
+        "a0224"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "丹尼芬雷：元素之战 → 霍迪尔任务 → 炉石格罗玛什",
+      "summary": "完成《元素之战》后，在丹尼芬雷完成《热与冷》《猎杀间谍》《粘滞清洁》《喂饱安格里姆》；完成雷暴台地任务后炉石回格罗玛什。",
+      "action_ids": [
+        "a0225",
+        "a0226",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0227",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0248",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260",
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271",
+        "a0272",
+        "a0273",
+        "a0275",
+        "a0274"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "托里姆：维拉努斯 → 科洛米尔 → 唐卡洛开点",
+      "summary": "取5枚小型始祖龙卵；回托里姆后顺路拿布莱恩便笺，再分别完成维拉努斯并推进《科洛米尔，风暴之锤》；雷暴台地结束后顺手去唐卡洛开飞行点，做《见证者与英雄》并接《雷蹄的记忆》。",
+      "action_ids": [
+        "a0276",
+        "a0277",
+        "a0278",
+        "a0279",
+        "a0280",
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289",
+        "a0290",
+        "a0291",
+        "a0292",
+        "a0293",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298",
+        "a0299",
+        "a0300",
+        "a0301"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "造物者圣台 → 布德克拉格开点 → 清算 → 奥杜尔",
+      "summary": "完成造物者圣台任务后先去布德克拉格开飞行点并直接接《稀有的土壤》，再做《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。",
+      "action_ids": [
+        "a0302",
+        "a0303",
+        "a0304",
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308",
+        "a0309",
+        "a0310",
+        "a0311",
+        "a0312",
+        "a0313",
+        "a0314",
+        "a0315",
+        "a0316",
+        "a0317",
+        "a0318",
+        "a0319",
+        "a0320",
+        "a0321",
+        "a0322",
+        "a0323",
+        "a0324",
+        "a0325",
+        "a0326",
+        "a0327"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "炉石格罗玛什 → 兽人语 → 寒风",
+      "summary": "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。",
+      "action_ids": [
+        "a0329",
+        "a0328",
+        "a0330",
+        "a0331",
+        "a0332",
+        "a0333",
+        "a0334",
+        "a0335",
+        "a0336",
+        "a0337",
+        "a0338",
+        "a0339",
+        "a0340",
+        "a0341"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "寒风峡谷 → 发明家图书馆",
+      "summary": "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿。",
+      "action_ids": [
+        "a0342",
+        "a0343",
+        "a0344",
+        "a0345",
+        "a0346",
+        "a0347",
+        "a0348",
+        "a0349",
+        "a0350",
+        "a0351",
+        "a0352",
+        "a0353",
+        "a0354",
+        "a0355",
+        "a0356",
+        "a0357",
+        "a0358",
+        "a0359",
+        "a0360",
+        "a0361",
+        "a0362",
+        "a0363"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "布莱恩营地 → 诺甘农之核 → 格罗玛什",
+      "summary": "取两份文件，进入洛肯的宝库取得诺甘农之核，再到创世神殿顶部完成钥石事件。",
+      "action_ids": [
+        "a0364",
+        "a0365",
+        "a0366",
+        "a0367",
+        "a0368",
+        "a0369",
+        "a0370",
+        "a0371",
+        "a0372",
+        "a0373",
+        "a0374",
+        "a0375",
+        "a0376"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "布德克拉格：绑炉石 → 土壤 → 雪流平原 → 尼达维里尔",
+      "summary": "在已开的布德克拉格庇护所绑定炉石；完成《稀有的土壤》《反击》《救死扶伤》后进入尼达维里尔，做完奴隶和矿石直接炉石回庇护所。",
+      "action_ids": [
+        "a0377",
+        "a0378",
+        "a0379",
+        "a0380",
+        "a0381",
+        "a0382",
+        "a0383",
+        "a0384",
+        "a0385",
+        "a0386",
+        "a0387",
+        "a0388",
+        "a0389",
+        "a0390",
+        "a0391",
+        "a0392",
+        "a0393",
+        "a0394",
+        "a0395",
+        "a0397",
+        "a0396",
+        "a0398",
+        "a0399",
+        "a0400",
+        "a0401"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "布德克拉格：洛肯物件 → 黑暗护甲 → 瓦杜兰",
+      "summary": "依次处理三件洛肯固定物、黑暗护甲板链和风暴之子瓦杜兰。",
+      "action_ids": [
+        "a0402",
+        "a0403",
+        "a0404",
+        "a0405",
+        "a0406",
+        "a0407",
+        "a0408",
+        "a0409",
+        "a0410",
+        "a0411",
+        "a0412",
+        "a0413",
+        "a0414",
+        "a0415",
+        "a0416",
+        "a0417",
+        "a0418",
+        "a0419",
+        "a0420",
+        "a0421",
+        "a0422",
+        "a0423",
+        "a0424",
+        "a0425",
+        "a0426",
+        "a0427"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "尼达维里尔熔炉 → 风暴之心 → 炉石 → 钢铁巨像",
+      "summary": "完成三个闪电熔炉和两份规格说明书；正常回庇护所交接后进奥迪斯取风暴之心，完成后炉石回庇护所，再做钢铁巨像。",
+      "action_ids": [
+        "a0428",
+        "a0429",
+        "a0430",
+        "a0431",
+        "a0432",
+        "a0433",
+        "a0434",
+        "a0435",
+        "a0436",
+        "a0437",
+        "a0438",
+        "a0439",
+        "a0440",
+        "a0441",
+        "a0443",
+        "a0442",
+        "a0444",
+        "a0445",
+        "a0446",
+        "a0447",
+        "a0448",
+        "a0449"
+      ]
+    },
+    {
+      "step_id": "step-20",
+      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风",
+      "summary": "从布德克拉格庇护所系统飞行到已开的唐卡洛营地，继续已接的《雷蹄的记忆》，再完成裂隙、嚎风洞穴和北风事件。",
+      "action_ids": [
+        "a0451",
+        "a0450",
+        "a0452",
+        "a0453",
+        "a0454",
+        "a0455",
+        "a0456",
+        "a0457",
+        "a0458",
+        "a0459",
+        "a0460",
+        "a0461",
+        "a0462",
+        "a0463",
+        "a0464",
+        "a0465",
+        "a0466",
+        "a0467",
+        "a0468",
+        "a0469",
+        "a0470",
+        "a0471",
+        "a0472"
+      ]
+    }
+  ],
+  "service_overrides": [
+    {
+      "service_id": "storm-12882-background",
+      "kind": "background_window",
+      "task_id": 12882,
+      "start_action_id": "a0190",
+      "end_action_id": "a0352",
+      "end_policy": "fill_if_incomplete"
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "storm-p001": {
+        "display_name": "K3",
+        "x": 41.0,
+        "y": 86.4,
+        "phase": "k3",
+        "transport": "crossmap",
+        "handoff_ref": "dalaran-to-storm-k3"
+      },
+      "storm-p002": {
+        "display_name": "K3",
+        "x": 41.0,
+        "y": 85.6,
+        "phase": "k3",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p003": {
+        "display_name": "K3西侧",
+        "x": 39.0,
+        "y": 86.7,
+        "phase": "k3_west",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p004": {
+        "display_name": "K3",
+        "x": 41.0,
+        "y": 86.4,
+        "phase": "k3",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p005": {
+        "display_name": "K3西侧雷区",
+        "x": 35.1,
+        "y": 87.8,
+        "phase": "k3_west",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p006": {
+        "display_name": "野蛮岭",
+        "x": 30.3,
+        "y": 85.7,
+        "phase": "k3_west",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p007": {
+        "display_name": "K3",
+        "x": 41.0,
+        "y": 85.7,
+        "phase": "k3",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p008": {
+        "display_name": "加姆雷区",
+        "x": 44.9,
+        "y": 81.3,
+        "phase": "garm",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p009": {
+        "display_name": "水晶蛛网洞穴外",
+        "x": 41.7,
+        "y": 80.0,
+        "phase": "crystalweb",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p010": {
+        "display_name": "K3北侧",
+        "x": 39.6,
+        "y": 81.9,
+        "phase": "garm",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p011": {
+        "display_name": "水晶蛛网洞穴内",
+        "x": 43.0,
+        "y": 74.8,
+        "phase": "crystalweb",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p012": {
+        "display_name": "水晶蛛网洞穴深处",
+        "x": 47.1,
+        "y": 71.2,
+        "phase": "crystalweb",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p013": {
+        "display_name": "水晶蛛网洞穴内",
+        "x": 43.5,
+        "y": 75.2,
+        "phase": "crystalweb",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p014": {
+        "display_name": "水晶蛛网洞穴外",
+        "x": 41.7,
+        "y": 80.0,
+        "phase": "crystalweb",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p015": {
+        "display_name": "希弗列尔达村",
+        "x": 41.2,
+        "y": 72.2,
+        "phase": "sifreldar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p016": {
+        "display_name": "K3",
+        "x": 41.0,
+        "y": 85.7,
+        "phase": "k3",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p017": {
+        "display_name": "加姆高地",
+        "x": 48.2,
+        "y": 82.1,
+        "phase": "garm",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p018": {
+        "display_name": "K3",
+        "x": 40.9,
+        "y": 85.3,
+        "phase": "k3",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p019": {
+        "display_name": "加姆高地",
+        "x": 50.3,
+        "y": 81.8,
+        "phase": "garm",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0066"
+        }
+      },
+      "storm-p020": {
+        "display_name": "K3",
+        "x": 40.9,
+        "y": 85.3,
+        "phase": "k3",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0074"
+        }
+      },
+      "storm-p021": {
+        "display_name": "荒弃矿洞",
+        "x": 42.8,
+        "y": 68.9,
+        "phase": "forlorn",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p022": {
+        "display_name": "荒弃矿洞内",
+        "x": 45.2,
+        "y": 71.0,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p023": {
+        "display_name": "荒弃矿洞内",
+        "x": 42.8,
+        "y": 68.9,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p024": {
+        "display_name": "荒弃矿洞内",
+        "x": 44.4,
+        "y": 68.9,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p025": {
+        "display_name": "荒弃矿洞内",
+        "x": 44.3,
+        "y": 68.2,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p026": {
+        "display_name": "荒弃矿洞内",
+        "x": 44.4,
+        "y": 68.9,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p027": {
+        "display_name": "荒弃矿洞内",
+        "x": 45.4,
+        "y": 69.1,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p028": {
+        "display_name": "荒弃矿洞内",
+        "x": 44.4,
+        "y": 68.9,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p029": {
+        "display_name": "荒弃矿洞内",
+        "x": 42.8,
+        "y": 68.9,
+        "phase": "forlorn",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p030": {
+        "display_name": "布伦希尔达村",
+        "x": 47.5,
+        "y": 69.1,
+        "phase": "brunnhildar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p031": {
+        "display_name": "布伦希尔达村",
+        "x": 48.3,
+        "y": 69.8,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p032": {
+        "display_name": "布伦希尔达村",
+        "x": 47.5,
+        "y": 69.1,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p033": {
+        "display_name": "布伦希尔达村南侧",
+        "x": 50.5,
+        "y": 66.9,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p034": {
+        "display_name": "布伦希尔达村",
+        "x": 47.5,
+        "y": 69.1,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p035": {
+        "display_name": "布伦希尔达村",
+        "x": 48.4,
+        "y": 72.1,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p036": {
+        "display_name": "瓦基里安最大建筑室内",
+        "x": 24.0,
+        "y": 61.9,
+        "phase": "valkyrion",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p037": {
+        "display_name": "瓦基里安室外",
+        "x": 24.8,
+        "y": 61.2,
+        "phase": "valkyrion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p038": {
+        "display_name": "瓦基里安室外",
+        "x": 26.6,
+        "y": 59.9,
+        "phase": "valkyrion",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p039": {
+        "display_name": "布伦希尔达村",
+        "x": 48.4,
+        "y": 72.1,
+        "phase": "brunnhildar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p040": {
+        "display_name": "布伦希尔达东侧",
+        "x": 53.1,
+        "y": 65.7,
+        "phase": "brunnhildar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p041": {
+        "display_name": "上古寒冬山谷",
+        "x": 60.0,
+        "y": 61.2,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p042": {
+        "display_name": "布伦希尔达东侧",
+        "x": 53.1,
+        "y": 65.7,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p043": {
+        "display_name": "丹尼芬雷上空",
+        "x": 64.6,
+        "y": 60.5,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p044": {
+        "display_name": "布伦希尔达东侧",
+        "x": 53.1,
+        "y": 65.7,
+        "phase": "brunnhildar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p045": {
+        "display_name": "布伦希尔达村",
+        "x": 49.8,
+        "y": 71.8,
+        "phase": "brunnhildar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p046": {
+        "display_name": "布伦希尔达西侧",
+        "x": 45.8,
+        "y": 74.2,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p047": {
+        "display_name": "布伦希尔达村",
+        "x": 49.8,
+        "y": 71.8,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p048": {
+        "display_name": "冬眠洞穴入口",
+        "x": 55.9,
+        "y": 63.9,
+        "phase": "hibernal",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p049": {
+        "display_name": "冬眠洞穴内",
+        "x": 55.2,
+        "y": 61.9,
+        "phase": "hibernal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0159"
+        }
+      },
+      "storm-p050": {
+        "display_name": "布伦希尔达村",
+        "x": 49.8,
+        "y": 71.8,
+        "phase": "brunnhildar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p051": {
+        "display_name": "布伦希尔达南侧",
+        "x": 50.7,
+        "y": 67.3,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p052": {
+        "display_name": "布伦希尔达村",
+        "x": 49.8,
+        "y": 71.8,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p053": {
+        "display_name": "利齿之坑",
+        "x": 49.2,
+        "y": 68.6,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p054": {
+        "display_name": "布伦希尔达村",
+        "x": 49.8,
+        "y": 71.8,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p055": {
+        "display_name": "布伦希尔达村",
+        "x": 47.5,
+        "y": 69.1,
+        "phase": "brunnhildar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p056": {
+        "display_name": "驭龙赛 → 风暴神殿",
+        "x": 33.4,
+        "y": 57.9,
+        "phase": "thorim"
+      },
+      "storm-p057": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.6,
+        "phase": "gromarsh",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p058": {
+        "display_name": "基莫拉克之巢入口",
+        "x": 46.7,
+        "y": 55.2,
+        "phase": "brann",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p059": {
+        "display_name": "基莫拉克之巢内",
+        "x": 48.5,
+        "y": 54.3,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0197"
+        }
+      },
+      "storm-p060": {
+        "display_name": "基莫拉克之巢深处",
+        "x": 48.6,
+        "y": 50.0,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p061": {
+        "display_name": "基莫拉克之巢内",
+        "x": 48.5,
+        "y": 54.3,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p062": {
+        "display_name": "基莫拉克之巢更深处",
+        "x": 49.0,
+        "y": 46.6,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p063": {
+        "display_name": "基莫拉克之巢内",
+        "x": 48.5,
+        "y": 54.3,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p064": {
+        "display_name": "弗约恩之砧",
+        "x": 73.0,
+        "y": 62.8,
+        "phase": "hodir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p065": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.6,
+        "phase": "gromarsh",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0219"
+        }
+      },
+      "storm-p066": {
+        "display_name": "风暴神殿",
+        "x": 33.4,
+        "y": 57.9,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p067": {
+        "display_name": "丹尼芬雷",
+        "x": 65.4,
+        "y": 60.2,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p068": {
+        "display_name": "弗约恩之砧",
+        "x": 75.4,
+        "y": 63.6,
+        "phase": "hodir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p069": {
+        "display_name": "丹尼芬雷",
+        "x": 63.2,
+        "y": 63.2,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p070": {
+        "display_name": "霜原湖",
+        "x": 69.4,
+        "y": 59.6,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p071": {
+        "display_name": "丹尼芬雷",
+        "x": 63.8,
+        "y": 59.6,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p072": {
+        "display_name": "丹尼芬雷北侧冰柱",
+        "x": 64.2,
+        "y": 59.2,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p073": {
+        "display_name": "丹尼芬雷",
+        "x": 65.0,
+        "y": 59.4,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p074": {
+        "display_name": "冬眠洞穴 / 上古寒冬山谷",
+        "x": 54.9,
+        "y": 61.0,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p075": {
+        "display_name": "上古寒冬山谷",
+        "x": 57.2,
+        "y": 64.0,
+        "phase": "dun_niffelem",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p076": {
+        "display_name": "丹尼芬雷",
+        "x": 65.0,
+        "y": 59.1,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p077": {
+        "display_name": "雷暴台地",
+        "x": 72.0,
+        "y": 49.5,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p078": {
+        "display_name": "丹尼芬雷",
+        "x": 65.4,
+        "y": 60.2,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p079": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.6,
+        "phase": "gromarsh",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0275"
+        }
+      },
+      "storm-p080": {
+        "display_name": "风暴神殿",
+        "x": 33.4,
+        "y": 57.9,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p081": {
+        "display_name": "布伦希尔达附近峭壁龙巢",
+        "x": 45.2,
+        "y": 67.2,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p082": {
+        "display_name": "风暴神殿",
+        "x": 33.4,
+        "y": 57.9,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p083": {
+        "display_name": "风暴神殿南侧",
+        "x": 36.1,
+        "y": 64.1,
+        "phase": "brann",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p084": {
+        "display_name": "风暴神殿东南",
+        "x": 38.8,
+        "y": 65.5,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p085": {
+        "display_name": "风暴神殿",
+        "x": 33.4,
+        "y": 57.9,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p086": {
+        "display_name": "丹尼芬雷",
+        "x": 65.4,
+        "y": 60.2,
+        "phase": "dun_niffelem",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p087": {
+        "display_name": "雷暴台地",
+        "x": 71.0,
+        "y": 49.0,
+        "phase": "thorim",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p088": {
+        "display_name": "唐卡洛营地",
+        "x": 65.7,
+        "y": 51.4,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p089": {
+        "display_name": "造物者圣台",
+        "x": 56.0,
+        "y": 43.5,
+        "phase": "terrace",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p090": {
+        "display_name": "塑造者之厅",
+        "x": 55.3,
+        "y": 43.3,
+        "phase": "terrace",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p091": {
+        "display_name": "造物者圣台",
+        "x": 51.5,
+        "y": 44.7,
+        "phase": "terrace",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p092": {
+        "display_name": "造物者圣台",
+        "x": 48.7,
+        "y": 45.7,
+        "phase": "terrace",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p093": {
+        "display_name": "造物者圣台北侧",
+        "x": 44.9,
+        "y": 38.0,
+        "phase": "terrace",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p094": {
+        "display_name": "造物者圣台",
+        "x": 56.0,
+        "y": 43.5,
+        "phase": "terrace",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p095": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p096": {
+        "display_name": "智慧神殿附近桥上",
+        "x": 35.9,
+        "y": 31.6,
+        "phase": "thorim",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p097": {
+        "display_name": "奥杜尔",
+        "x": 45.0,
+        "y": 28.0,
+        "phase": "ulduar",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p098": {
+        "display_name": "丹尼芬雷",
+        "x": 65.4,
+        "y": 60.2,
+        "phase": "dun_niffelem",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0325"
+        }
+      },
+      "storm-p099": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.6,
+        "phase": "gromarsh",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0329"
+        }
+      },
+      "storm-p100": {
+        "display_name": "格罗玛什东侧",
+        "x": 40.8,
+        "y": 51.2,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p101": {
+        "display_name": "追踪终点",
+        "x": 48.6,
+        "y": 60.8,
+        "phase": "brann",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p102": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.7,
+        "phase": "gromarsh",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p103": {
+        "display_name": "西部峡谷",
+        "x": 27.9,
+        "y": 43.6,
+        "phase": "brann",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p104": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.7,
+        "phase": "gromarsh",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p105": {
+        "display_name": "发明家图书馆",
+        "x": 39.5,
+        "y": 41.2,
+        "phase": "library",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p106": {
+        "display_name": "发明家图书馆内层",
+        "x": 37.5,
+        "y": 46.8,
+        "phase": "library",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p107": {
+        "display_name": "布莱恩营地上层",
+        "x": 59.5,
+        "y": 52.1,
+        "phase": "brann",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p108": {
+        "display_name": "洛肯的宝库",
+        "x": 56.4,
+        "y": 52.1,
+        "phase": "brann",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p109": {
+        "display_name": "创世神殿顶部",
+        "x": 45.5,
+        "y": 49.0,
+        "phase": "brann",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p110": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.7,
+        "phase": "gromarsh",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p111": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p112": {
+        "display_name": "庇护所西北",
+        "x": 25.1,
+        "y": 34.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p113": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p114": {
+        "display_name": "雪流平原",
+        "x": 27.5,
+        "y": 37.3,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p115": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p116": {
+        "display_name": "尼达维里尔",
+        "x": 26.5,
+        "y": 50.9,
+        "phase": "nidavelir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p117": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0397"
+        }
+      },
+      "storm-p118": {
+        "display_name": "尼达维里尔",
+        "x": 24.0,
+        "y": 42.6,
+        "phase": "nidavelir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p119": {
+        "display_name": "尼达维里尔",
+        "x": 26.2,
+        "y": 47.7,
+        "phase": "nidavelir",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p120": {
+        "display_name": "尼达维里尔",
+        "x": 24.6,
+        "y": 48.4,
+        "phase": "nidavelir",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p121": {
+        "display_name": "尼达维里尔",
+        "x": 29.1,
+        "y": 45.1,
+        "phase": "nidavelir",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "storm-p122": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.3,
+        "y": 38.2,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p123": {
+        "display_name": "米米尔车间",
+        "x": 32.0,
+        "y": 40.7,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p124": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p125": {
+        "display_name": "尼达维里尔北侧",
+        "x": 24.3,
+        "y": 52.2,
+        "phase": "nidavelir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p126": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p127": {
+        "display_name": "尼达维里尔",
+        "x": 29.7,
+        "y": 45.8,
+        "phase": "nidavelir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p128": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p129": {
+        "display_name": "尼达维里尔下层",
+        "x": 29.4,
+        "y": 44.9,
+        "phase": "nidavelir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p130": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p131": {
+        "display_name": "奥迪斯",
+        "x": 36.1,
+        "y": 60.9,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p132": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0443"
+        }
+      },
+      "storm-p133": {
+        "display_name": "尼达维里尔",
+        "x": 27.5,
+        "y": 45.3,
+        "phase": "nidavelir",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p134": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p135": {
+        "display_name": "唐卡洛营地",
+        "x": 65.7,
+        "y": 51.4,
+        "phase": "tunkalo",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0451"
+        }
+      },
+      "storm-p136": {
+        "display_name": "唐卡洛北侧",
+        "x": 61.2,
+        "y": 39.0,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p137": {
+        "display_name": "浮冰深渊南侧",
+        "x": 64.6,
+        "y": 45.0,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p138": {
+        "display_name": "唐卡洛营地",
+        "x": 65.7,
+        "y": 51.4,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p139": {
+        "display_name": "嚎风洞穴",
+        "x": 65.2,
+        "y": 42.6,
+        "phase": "howling_hollow",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p140": {
+        "display_name": "唐卡洛营地",
+        "x": 65.7,
+        "y": 51.4,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p141": {
+        "display_name": "唐卡洛南侧",
+        "x": 64.4,
+        "y": 46.7,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "storm-p142": {
+        "display_name": "唐卡洛营地",
+        "x": 65.7,
+        "y": 51.4,
+        "phase": "tunkalo",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: reviewed legacy script transports on these target points are not player-visible arrival actions in the old route. Remove the ambiguous migration hint; preserve all task/action text and keep arrival movement unresolved."
+    }
+  ]
+}

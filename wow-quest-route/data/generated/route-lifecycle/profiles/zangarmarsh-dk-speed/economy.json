@@ -1,0 +1,43 @@
+{
+  "characters": [],
+  "cost_coverage": "partial",
+  "gross_copper": null,
+  "gross_gph": null,
+  "input_fingerprint": "e49f1c663b2343a5987644661a7d1f0391cf8120607e050aaf36831068c288cf",
+  "issues": [
+    {
+      "kind": "upstream_stage8_requirements",
+      "profile_id": "zangarmarsh-dk-speed",
+      "severity": "requirement"
+    },
+    {
+      "kind": "economy_character_state_required",
+      "profile_id": "zangarmarsh-dk-speed",
+      "severity": "requirement"
+    },
+    {
+      "kind": "route_cost_coverage_incomplete",
+      "note": "No structured current-scope cost input was supplied; known cost remains zero with partial coverage.",
+      "severity": "requirement"
+    },
+    {
+      "kind": "fresh_complete_timing_required_for_gph",
+      "severity": "requirement",
+      "timing_input_fingerprint": "e0dd521fb84527498dd947c58b6ba3ee63fa2ceb5f860b21958310167364f95c",
+      "timing_status": "requirements"
+    }
+  ],
+  "kind": "profile",
+  "known_cost_copper": 0,
+  "known_gross_copper": 0,
+  "matched_observation_count": 0,
+  "model_id": "wotlk-route-economy-v1",
+  "net_copper": null,
+  "net_gph": null,
+  "observation_comparisons": [],
+  "profile_id": "zangarmarsh-dk-speed",
+  "status": "requirements",
+  "timing_input_fingerprint": "e0dd521fb84527498dd947c58b6ba3ee63fa2ceb5f860b21958310167364f95c",
+  "turnins": [],
+  "xp_input_fingerprint": "b15447808c5da14898d596240754abe996c43caf7217f6d80c01a2f8971cb43e"
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "task_id": 13086,
+  "identity": {
+    "name_zhcn": "最后一道防线",
+    "name_en": "The Last Line Of Defense",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 78,
+    "min_level": 77,
+    "pre_any": [
+      13070
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 44013,
+        "quantity": 1,
+        "name_zhcn": "炮兵的点火器",
+        "name_en": "Cannoneer's Fuselighter",
+        "sell_price_each_copper": 70613,
+        "sell_price_total_copper": 70613
+      },
+      {
+        "item_id": 44014,
+        "quantity": 1,
+        "name_zhcn": "菲斯克的怀表",
+        "name_en": "Fezzik's Pocketwatch",
+        "sell_price_each_copper": 70613,
+        "sell_price_total_copper": 70613
+      },
+      {
+        "item_id": 44015,
+        "quantity": 1,
+        "name_zhcn": "炮兵的士气",
+        "name_en": "Cannoneer's Morale",
+        "sell_price_each_copper": 70613,
+        "sell_price_total_copper": 70613
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 70613,
+    "gear_sale_max_copper": 70613,
+    "reputation_rewards": [
+      {
+        "faction_id": 1106,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 32400
+  },
+  "guide": [
+    "接取：攻城大师菲斯克。",
+    "使用银色火炮消灭100名天灾军团攻击者和3条霜巢毁灭者。 /  / 完成任务后向攻城大师菲斯克复命。",
+    "交付：攻城大师菲斯克。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13086",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13086; legacy_type=vehicle_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

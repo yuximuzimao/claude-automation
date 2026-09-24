@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": 13285,
+  "identity": {
+    "name_zhcn": "铸造钥石",
+    "name_en": "Forging the Keystone",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13274
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 148000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43189,
+        "quantity": 1,
+        "name_zhcn": "琥珀光芒徽记",
+        "name_en": "Amberglow Signet",
+        "sell_price_each_copper": 46867,
+        "sell_price_total_copper": 46867
+      },
+      {
+        "item_id": 43190,
+        "quantity": 1,
+        "name_zhcn": "冰铸战斗之戒",
+        "name_en": "Iceforged Battle Ring",
+        "sell_price_each_copper": 46867,
+        "sell_price_total_copper": 46867
+      },
+      {
+        "item_id": 43191,
+        "quantity": 1,
+        "name_zhcn": "碎冰指环",
+        "name_en": "Jagged Ice Band",
+        "sell_price_each_copper": 46867,
+        "sell_price_total_copper": 46867
+      },
+      {
+        "item_id": 43192,
+        "quantity": 1,
+        "name_zhcn": "北风之戒",
+        "name_en": "Ring of the Northern Winds",
+        "sell_price_each_copper": 46867,
+        "sell_price_total_copper": 46867
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 46867,
+    "gear_sale_max_copper": 46867,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 27550
+  },
+  "guide": [
+    "接取：布莱恩·铜须。",
+    "布莱恩·铜须希望你和他在创世神殿碰头，帮助他把诺甘农之壳和诺甘农之核组合起来。等你完成了帮助布莱恩的使命之后，回到格罗玛什坠毁点，向伯克塔·血怒复命。",
+    "交付：伯克塔·血怒。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13285",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13285; legacy_type=script_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13285",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《铸造钥石》：共享：创世神殿顶部约(45.5,49)找布莱恩完成合成钥石事件；一号触发即可同步五号。\n【需要单独修正优化】《铸造钥石》首组实跑确认：合成钥石事件一号触发即可同步五号。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13285",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

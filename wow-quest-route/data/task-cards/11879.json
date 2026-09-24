@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "task_id": 11879,
+  "identity": {
+    "name_zhcn": "猛犸毁灭者卡奥",
+    "name_en": "Kaw the Mammoth Destroyer",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 70,
+    "pre_any": [
+      11878
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37009,
+        "quantity": 1,
+        "name_zhcn": "道德战靴",
+        "name_en": "Moral Sabatons",
+        "sell_price_each_copper": 45874,
+        "sell_price_total_copper": 45874
+      },
+      {
+        "item_id": 37008,
+        "quantity": 1,
+        "name_zhcn": "仁慈护肩",
+        "name_en": "Ethical Epaulettes",
+        "sell_price_each_copper": 39430,
+        "sell_price_total_copper": 39430
+      },
+      {
+        "item_id": 37005,
+        "quantity": 1,
+        "name_zhcn": "仁德会罩衫",
+        "name_en": "D.E.H.T.A. Overshirt",
+        "sell_price_each_copper": 34509,
+        "sell_price_total_copper": 34509
+      },
+      {
+        "item_id": 37007,
+        "quantity": 1,
+        "name_zhcn": "虚伪皮帽",
+        "name_en": "Faux Leather Hood",
+        "sell_price_each_copper": 32593,
+        "sell_price_total_copper": 32593
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 45874,
+    "gear_sale_max_copper": 45874,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25400
+  },
+  "guide": [
+    "接取：巨兽库诺克。",
+    "杀死猛犸毁灭者卡奥，并夺取卡奥的战戟。将卡奥的战戟带回北风苔原的仁德会营地，交给大德鲁伊拉索留斯。",
+    "交付：大德鲁伊拉索留斯。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11879",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《猛犸毁灭者卡奥》：卡奥死后战戟生成在地面，不是从尸体直接拾取。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

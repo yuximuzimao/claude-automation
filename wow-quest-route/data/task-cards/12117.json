@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "task_id": 12117,
+  "identity": {
+    "name_zhcn": "前往莫亚基港口",
+    "name_en": "Travel to Moa'ki Harbor",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 68,
+    "pre_any": [
+      11968
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [
+      12118
+    ],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37283,
+        "quantity": 1,
+        "name_zhcn": "游荡治疗者褶裙",
+        "name_en": "Wandering Healer's Kilt",
+        "sell_price_each_copper": 33480,
+        "sell_price_total_copper": 33480
+      },
+      {
+        "item_id": 37546,
+        "quantity": 1,
+        "name_zhcn": "北风项圈",
+        "name_en": "Choker of the Northern Wind",
+        "sell_price_each_copper": 31478,
+        "sell_price_total_copper": 31478
+      },
+      {
+        "item_id": 37566,
+        "quantity": 1,
+        "name_zhcn": "耐用的座狼皮斗篷",
+        "name_en": "Durable Worghide Cape",
+        "sell_price_each_copper": 25500,
+        "sell_price_total_copper": 25500
+      },
+      {
+        "item_id": 37319,
+        "quantity": 1,
+        "name_zhcn": "狂风平原之握",
+        "name_en": "Grips of the Windswept Plains",
+        "sell_price_each_copper": 20600,
+        "sell_price_total_copper": 20600
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 33480,
+    "gear_sale_max_copper": 33480,
+    "reputation_rewards": [
+      {
+        "faction_id": 1073,
+        "amount": 10
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 2050
+  },
+  "guide": [
+    "接取：霍塔瓦。",
+    "前往龙骨荒野的莫亚基港口，与长者库纳尼谈一谈。",
+    "交付：长者库纳尼。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12117",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12117/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

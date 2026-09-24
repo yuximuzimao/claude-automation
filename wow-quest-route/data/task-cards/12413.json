@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "task_id": 12413,
+  "identity": {
+    "name_zhcn": "攻击银溪镇",
+    "name_en": "Attack on Silverbrook",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 73,
+    "pre_any": [
+      12412
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39097,
+        "quantity": 1,
+        "name_zhcn": "泯灭人性战靴",
+        "name_en": "Sabatons of Crushed Humanity",
+        "sell_price_each_copper": 50988,
+        "sell_price_total_copper": 50988
+      },
+      {
+        "item_id": 38733,
+        "quantity": 1,
+        "name_zhcn": "笼中困兽外套",
+        "name_en": "Raiment of the Caged Beast",
+        "sell_price_each_copper": 37203,
+        "sell_price_total_copper": 37203
+      },
+      {
+        "item_id": 39031,
+        "quantity": 1,
+        "name_zhcn": "心灵挣扎之靴",
+        "name_en": "Boots of Internal Strife",
+        "sell_price_each_copper": 34756,
+        "sell_price_total_copper": 34756
+      },
+      {
+        "item_id": 39059,
+        "quantity": 1,
+        "name_zhcn": "痛苦灵魂护腕",
+        "name_en": "Wristguard of the Tormented Soul",
+        "sell_price_each_copper": 29410,
+        "sell_price_total_copper": 29410
+      },
+      {
+        "item_id": 38750,
+        "quantity": 1,
+        "name_zhcn": "座狼杀手指环",
+        "name_en": "Worgslayer's Ring",
+        "sell_price_each_copper": 16778,
+        "sell_price_total_copper": 16778
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 50988,
+    "gear_sale_max_copper": 50988,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20750
+  },
+  "guide": [
+    "接取：征服者克雷娜。",
+    "征服堡的征服者克雷娜要你前往银溪丘陵，杀死8名银溪镇防御者。",
+    "交付：征服者克雷娜。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12413",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

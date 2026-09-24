@@ -1,0 +1,32 @@
+{
+  "schema": "stage13-player-assets-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "input_source_fixture": "stage9-economy-post-flag-migration-expected.json",
+  "review_input": null,
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "blocked",
+    "asset_status": "blocked",
+    "publishable": false,
+    "issue_counts": {
+      "player_assets_publisher_blocked": 1
+    },
+    "workbench_name": "route-atlas-workbench.html",
+    "workbench_min_bytes": 80000,
+    "referenced_assets": [
+      "maps/3483-hellfire-peninsula-hd.jpg"
+    ],
+    "publish_key": "hellfire_dk",
+    "player_view_chars": 5969,
+    "player_view_required_fragments": [
+      "# 地狱火半岛 · DK专用加速路线",
+      "炉石：萨尔玛",
+      "## 步骤 1｜黑暗之门 → 萨尔玛 → 魔火峡谷",
+      "固定交通：奥格瑞玛·精神谷传送门区 → 诅咒之地·黑暗之门前",
+      "督军达图恩 → 接《跨越黑暗之门》",
+      "## 步骤 11｜塞纳里奥哨站 → 赞加沼泽"
+    ],
+    "unimplemented_stages": []
+  },
+  "purpose": "Frozen real-Profile Stage 13 diagnostic before any final business/display cleanup. The current Stage 12 hellfire_dk payload is intentionally non-publishable, so Stage 13 must still render deterministic in-memory diagnostic HTML/player-view while refusing formal writes. The renderer must use the existing local HD map only, emit one workbench name, and generate player-readable route text directly from Publisher payload rather than stripping old HTML or reading workbench-routes.json."
+}

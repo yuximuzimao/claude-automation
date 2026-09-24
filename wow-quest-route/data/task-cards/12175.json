@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": 12175,
+  "identity": {
+    "name_zhcn": "灰狼的毛皮",
+    "name_en": "Gray Worg Hides",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 73,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 56000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39098,
+        "quantity": 1,
+        "name_zhcn": "生锈的洞穴之靴",
+        "name_en": "Rusty Cave Stompers",
+        "sell_price_each_copper": 51174,
+        "sell_price_total_copper": 51174
+      },
+      {
+        "item_id": 39033,
+        "quantity": 1,
+        "name_zhcn": "废旧的矿工外套",
+        "name_en": "Discarded Miner's Jerkin",
+        "sell_price_each_copper": 46696,
+        "sell_price_total_copper": 46696
+      },
+      {
+        "item_id": 39060,
+        "quantity": 1,
+        "name_zhcn": "猎户的补丁护肩",
+        "name_en": "Patched Trapper Pauldrons",
+        "sell_price_each_copper": 44472,
+        "sell_price_total_copper": 44472
+      },
+      {
+        "item_id": 38734,
+        "quantity": 1,
+        "name_zhcn": "被遗弃的兜帽",
+        "name_en": "Abandoned Hood",
+        "sell_price_each_copper": 28009,
+        "sell_price_total_copper": 28009
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 51174,
+    "gear_sale_max_copper": 51174,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20750
+  },
+  "guide": [
+    "接取：皮货商人休尼克。",
+    "征服堡的皮货商人休尼克希望你能从北面森林的灰雾捕猎者身上获取3张灰色座狼皮。",
+    "交付：皮货商人休尼克。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12175",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《赚外快》《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

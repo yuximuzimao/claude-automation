@@ -1,0 +1,6653 @@
+{
+  "display": {
+    "display_name": "索拉查盆地",
+    "footer": "",
+    "order": 9,
+    "publish_key": "sholazar",
+    "subtitle": "达拉然脚本入图后，以奈辛瓦里营地为前半段炉石Hub；进入神谕者北部线后改绑河流之心，完成多里安、阿图里斯与东部任务后炉石回河流之心，直接系统飞龙眠神殿转祖达克。",
+    "title": "索拉查盆地 · 80级五开整图路线"
+  },
+  "hearth_chain": [
+    "奈辛瓦里营地",
+    "河流之心"
+  ],
+  "input_fingerprint": "fc4bc0b0cc4fdd14c120ab4efaf1c6c97089dc87578419fd9263f41d0a1d630f",
+  "issues": [],
+  "kind": "publisher_payload",
+  "map": {
+    "geometry": {
+      "edges": [
+        {
+          "edge_id": "a0001->visit-entry-dalaran",
+          "from_location_ref": "sholazar-entry-argent-tournament",
+          "from_visit_id": "a0001",
+          "movement_action_id": "a0002",
+          "movement_mode": null,
+          "operation_kind": "taxi",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-entry-dalaran",
+          "to_visit_id": "visit-entry-dalaran"
+        },
+        {
+          "edge_id": "visit-entry-dalaran->visit-entry-wildgrowth",
+          "from_location_ref": "sholazar-entry-dalaran",
+          "from_visit_id": "visit-entry-dalaran",
+          "movement_action_id": "transport-12521-sholazar",
+          "movement_mode": null,
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p001",
+          "to_visit_id": "visit-entry-wildgrowth"
+        },
+        {
+          "edge_id": "visit-entry-wildgrowth->a0006",
+          "from_location_ref": "sholazar-p001",
+          "from_visit_id": "visit-entry-wildgrowth",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p002",
+          "to_visit_id": "a0006"
+        },
+        {
+          "edge_id": "a0006->a0012",
+          "from_location_ref": "sholazar-p002",
+          "from_visit_id": "a0006",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p003",
+          "to_visit_id": "a0012"
+        },
+        {
+          "edge_id": "a0012->a0014",
+          "from_location_ref": "sholazar-p003",
+          "from_visit_id": "a0012",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p004",
+          "to_visit_id": "a0014"
+        },
+        {
+          "edge_id": "a0014->a0017",
+          "from_location_ref": "sholazar-p004",
+          "from_visit_id": "a0014",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p005",
+          "to_visit_id": "a0017"
+        },
+        {
+          "edge_id": "a0017->a0023",
+          "from_location_ref": "sholazar-p005",
+          "from_visit_id": "a0017",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p006",
+          "to_visit_id": "a0023"
+        },
+        {
+          "edge_id": "a0023->a0031",
+          "from_location_ref": "sholazar-p006",
+          "from_visit_id": "a0023",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p007",
+          "to_visit_id": "a0031"
+        },
+        {
+          "edge_id": "a0031->a0033",
+          "from_location_ref": "sholazar-p007",
+          "from_visit_id": "a0031",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p008",
+          "to_visit_id": "a0033"
+        },
+        {
+          "edge_id": "a0033->a0038",
+          "from_location_ref": "sholazar-p008",
+          "from_visit_id": "a0033",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p009",
+          "to_visit_id": "a0038"
+        },
+        {
+          "edge_id": "a0038->a0040",
+          "from_location_ref": "sholazar-p009",
+          "from_visit_id": "a0038",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p010",
+          "to_visit_id": "a0040"
+        },
+        {
+          "edge_id": "a0040->a0043",
+          "from_location_ref": "sholazar-p010",
+          "from_visit_id": "a0040",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p011",
+          "to_visit_id": "a0043"
+        },
+        {
+          "edge_id": "a0043->a0045",
+          "from_location_ref": "sholazar-p011",
+          "from_visit_id": "a0043",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p012",
+          "to_visit_id": "a0045"
+        },
+        {
+          "edge_id": "a0045->a0047",
+          "from_location_ref": "sholazar-p012",
+          "from_visit_id": "a0045",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p013",
+          "to_visit_id": "a0047"
+        },
+        {
+          "edge_id": "a0047->a0055",
+          "from_location_ref": "sholazar-p013",
+          "from_visit_id": "a0047",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p014",
+          "to_visit_id": "a0055"
+        },
+        {
+          "edge_id": "a0055->a0058",
+          "from_location_ref": "sholazar-p014",
+          "from_visit_id": "a0055",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p015",
+          "to_visit_id": "a0058"
+        },
+        {
+          "edge_id": "a0058->a0061",
+          "from_location_ref": "sholazar-p015",
+          "from_visit_id": "a0058",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p016",
+          "to_visit_id": "a0061"
+        },
+        {
+          "edge_id": "a0061->a0065",
+          "from_location_ref": "sholazar-p016",
+          "from_visit_id": "a0061",
+          "movement_action_id": "a0066",
+          "movement_mode": null,
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p017",
+          "to_visit_id": "a0065"
+        },
+        {
+          "edge_id": "a0065->a0078",
+          "from_location_ref": "sholazar-p017",
+          "from_visit_id": "a0065",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p018",
+          "to_visit_id": "a0078"
+        },
+        {
+          "edge_id": "a0078->a0082",
+          "from_location_ref": "sholazar-p018",
+          "from_visit_id": "a0078",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p019",
+          "to_visit_id": "a0082"
+        },
+        {
+          "edge_id": "a0082->a0085",
+          "from_location_ref": "sholazar-p019",
+          "from_visit_id": "a0082",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p020",
+          "to_visit_id": "a0085"
+        },
+        {
+          "edge_id": "a0085->a0087",
+          "from_location_ref": "sholazar-p020",
+          "from_visit_id": "a0085",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p021",
+          "to_visit_id": "a0087"
+        },
+        {
+          "edge_id": "a0087->a0089",
+          "from_location_ref": "sholazar-p021",
+          "from_visit_id": "a0087",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p022",
+          "to_visit_id": "a0089"
+        },
+        {
+          "edge_id": "a0089->a0091",
+          "from_location_ref": "sholazar-p022",
+          "from_visit_id": "a0089",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p023",
+          "to_visit_id": "a0091"
+        },
+        {
+          "edge_id": "a0091->a0097",
+          "from_location_ref": "sholazar-p023",
+          "from_visit_id": "a0091",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p024",
+          "to_visit_id": "a0097"
+        },
+        {
+          "edge_id": "a0097->a0099",
+          "from_location_ref": "sholazar-p024",
+          "from_visit_id": "a0097",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p025",
+          "to_visit_id": "a0099"
+        },
+        {
+          "edge_id": "a0099->a0104",
+          "from_location_ref": "sholazar-p025",
+          "from_visit_id": "a0099",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p026",
+          "to_visit_id": "a0104"
+        },
+        {
+          "edge_id": "a0104->a0107",
+          "from_location_ref": "sholazar-p026",
+          "from_visit_id": "a0104",
+          "movement_action_id": "a0108",
+          "movement_mode": null,
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p027",
+          "to_visit_id": "a0107"
+        },
+        {
+          "edge_id": "a0107->a0115",
+          "from_location_ref": "sholazar-p027",
+          "from_visit_id": "a0107",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p028",
+          "to_visit_id": "a0115"
+        },
+        {
+          "edge_id": "a0115->a0117",
+          "from_location_ref": "sholazar-p028",
+          "from_visit_id": "a0115",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p029",
+          "to_visit_id": "a0117"
+        },
+        {
+          "edge_id": "a0117->a0119",
+          "from_location_ref": "sholazar-p029",
+          "from_visit_id": "a0117",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p030",
+          "to_visit_id": "a0119"
+        },
+        {
+          "edge_id": "a0119->a0121",
+          "from_location_ref": "sholazar-p030",
+          "from_visit_id": "a0119",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p031",
+          "to_visit_id": "a0121"
+        },
+        {
+          "edge_id": "a0121->a0124",
+          "from_location_ref": "sholazar-p031",
+          "from_visit_id": "a0121",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p032",
+          "to_visit_id": "a0124"
+        },
+        {
+          "edge_id": "a0124->a0127",
+          "from_location_ref": "sholazar-p032",
+          "from_visit_id": "a0124",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p033",
+          "to_visit_id": "a0127"
+        },
+        {
+          "edge_id": "a0127->a0132",
+          "from_location_ref": "sholazar-p033",
+          "from_visit_id": "a0127",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p034",
+          "to_visit_id": "a0132"
+        },
+        {
+          "edge_id": "a0132->a0135",
+          "from_location_ref": "sholazar-p034",
+          "from_visit_id": "a0132",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p035",
+          "to_visit_id": "a0135"
+        },
+        {
+          "edge_id": "a0135->a0143",
+          "from_location_ref": "sholazar-p035",
+          "from_visit_id": "a0135",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p036",
+          "to_visit_id": "a0143"
+        },
+        {
+          "edge_id": "a0143->a0146",
+          "from_location_ref": "sholazar-p036",
+          "from_visit_id": "a0143",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p037",
+          "to_visit_id": "a0146"
+        },
+        {
+          "edge_id": "a0146->a0150",
+          "from_location_ref": "sholazar-p037",
+          "from_visit_id": "a0146",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p038",
+          "to_visit_id": "a0150"
+        },
+        {
+          "edge_id": "a0150->a0152",
+          "from_location_ref": "sholazar-p038",
+          "from_visit_id": "a0150",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p039",
+          "to_visit_id": "a0152"
+        },
+        {
+          "edge_id": "a0152->a0156",
+          "from_location_ref": "sholazar-p039",
+          "from_visit_id": "a0152",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p040",
+          "to_visit_id": "a0156"
+        },
+        {
+          "edge_id": "a0156->a0159",
+          "from_location_ref": "sholazar-p040",
+          "from_visit_id": "a0156",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p041",
+          "to_visit_id": "a0159"
+        },
+        {
+          "edge_id": "a0159->a0163",
+          "from_location_ref": "sholazar-p041",
+          "from_visit_id": "a0159",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p042",
+          "to_visit_id": "a0163"
+        },
+        {
+          "edge_id": "a0163->a0165",
+          "from_location_ref": "sholazar-p042",
+          "from_visit_id": "a0163",
+          "movement_action_id": "a0166",
+          "movement_mode": null,
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p043",
+          "to_visit_id": "a0165"
+        },
+        {
+          "edge_id": "a0165->a0171",
+          "from_location_ref": "sholazar-p043",
+          "from_visit_id": "a0165",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p044",
+          "to_visit_id": "a0171"
+        },
+        {
+          "edge_id": "a0171->a0174",
+          "from_location_ref": "sholazar-p044",
+          "from_visit_id": "a0171",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p045",
+          "to_visit_id": "a0174"
+        },
+        {
+          "edge_id": "a0174->a0178",
+          "from_location_ref": "sholazar-p045",
+          "from_visit_id": "a0174",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p046",
+          "to_visit_id": "a0178"
+        },
+        {
+          "edge_id": "a0178->a0182",
+          "from_location_ref": "sholazar-p046",
+          "from_visit_id": "a0178",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p047",
+          "to_visit_id": "a0182"
+        },
+        {
+          "edge_id": "a0182->a0185",
+          "from_location_ref": "sholazar-p047",
+          "from_visit_id": "a0182",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p048",
+          "to_visit_id": "a0185"
+        },
+        {
+          "edge_id": "a0185->a0189",
+          "from_location_ref": "sholazar-p048",
+          "from_visit_id": "a0185",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p049",
+          "to_visit_id": "a0189"
+        },
+        {
+          "edge_id": "a0189->a0191",
+          "from_location_ref": "sholazar-p049",
+          "from_visit_id": "a0189",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p050",
+          "to_visit_id": "a0191"
+        },
+        {
+          "edge_id": "a0191->a0194",
+          "from_location_ref": "sholazar-p050",
+          "from_visit_id": "a0191",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p051",
+          "to_visit_id": "a0194"
+        },
+        {
+          "edge_id": "a0194->a0197",
+          "from_location_ref": "sholazar-p051",
+          "from_visit_id": "a0194",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p052",
+          "to_visit_id": "a0197"
+        },
+        {
+          "edge_id": "a0197->a0201",
+          "from_location_ref": "sholazar-p052",
+          "from_visit_id": "a0197",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p053",
+          "to_visit_id": "a0201"
+        },
+        {
+          "edge_id": "a0201->a0206",
+          "from_location_ref": "sholazar-p053",
+          "from_visit_id": "a0201",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p054",
+          "to_visit_id": "a0206"
+        },
+        {
+          "edge_id": "a0206->a0209",
+          "from_location_ref": "sholazar-p054",
+          "from_visit_id": "a0206",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p055",
+          "to_visit_id": "a0209"
+        },
+        {
+          "edge_id": "a0209->a0212",
+          "from_location_ref": "sholazar-p055",
+          "from_visit_id": "a0209",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p056",
+          "to_visit_id": "a0212"
+        },
+        {
+          "edge_id": "a0212->a0218",
+          "from_location_ref": "sholazar-p056",
+          "from_visit_id": "a0212",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p057",
+          "to_visit_id": "a0218"
+        },
+        {
+          "edge_id": "a0218->a0220",
+          "from_location_ref": "sholazar-p057",
+          "from_visit_id": "a0218",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p058",
+          "to_visit_id": "a0220"
+        },
+        {
+          "edge_id": "a0220->a0223",
+          "from_location_ref": "sholazar-p058",
+          "from_visit_id": "a0220",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p059",
+          "to_visit_id": "a0223"
+        },
+        {
+          "edge_id": "a0223->a0225",
+          "from_location_ref": "sholazar-p059",
+          "from_visit_id": "a0223",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p060",
+          "to_visit_id": "a0225"
+        },
+        {
+          "edge_id": "a0225->a0228",
+          "from_location_ref": "sholazar-p060",
+          "from_visit_id": "a0225",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p061",
+          "to_visit_id": "a0228"
+        },
+        {
+          "edge_id": "a0228->a0232",
+          "from_location_ref": "sholazar-p061",
+          "from_visit_id": "a0228",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p062",
+          "to_visit_id": "a0232"
+        },
+        {
+          "edge_id": "a0232->a0234",
+          "from_location_ref": "sholazar-p062",
+          "from_visit_id": "a0232",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p063",
+          "to_visit_id": "a0234"
+        },
+        {
+          "edge_id": "a0234->a0239",
+          "from_location_ref": "sholazar-p063",
+          "from_visit_id": "a0234",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p064",
+          "to_visit_id": "a0239"
+        },
+        {
+          "edge_id": "a0239->a0242",
+          "from_location_ref": "sholazar-p064",
+          "from_visit_id": "a0239",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p065",
+          "to_visit_id": "a0242"
+        },
+        {
+          "edge_id": "a0242->a0246",
+          "from_location_ref": "sholazar-p065",
+          "from_visit_id": "a0242",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p066",
+          "to_visit_id": "a0246"
+        },
+        {
+          "edge_id": "a0246->a0248",
+          "from_location_ref": "sholazar-p066",
+          "from_visit_id": "a0246",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p067",
+          "to_visit_id": "a0248"
+        },
+        {
+          "edge_id": "a0248->a0250",
+          "from_location_ref": "sholazar-p067",
+          "from_visit_id": "a0248",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p068",
+          "to_visit_id": "a0250"
+        },
+        {
+          "edge_id": "a0250->a0252",
+          "from_location_ref": "sholazar-p068",
+          "from_visit_id": "a0250",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p069",
+          "to_visit_id": "a0252"
+        },
+        {
+          "edge_id": "a0252->a0255",
+          "from_location_ref": "sholazar-p069",
+          "from_visit_id": "a0252",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p070",
+          "to_visit_id": "a0255"
+        },
+        {
+          "edge_id": "a0255->a0261",
+          "from_location_ref": "sholazar-p070",
+          "from_visit_id": "a0255",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p071",
+          "to_visit_id": "a0261"
+        },
+        {
+          "edge_id": "a0261->a0263",
+          "from_location_ref": "sholazar-p071",
+          "from_visit_id": "a0261",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p072",
+          "to_visit_id": "a0263"
+        },
+        {
+          "edge_id": "a0263->a0265",
+          "from_location_ref": "sholazar-p072",
+          "from_visit_id": "a0263",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p073",
+          "to_visit_id": "a0265"
+        },
+        {
+          "edge_id": "a0265->a0267",
+          "from_location_ref": "sholazar-p073",
+          "from_visit_id": "a0265",
+          "movement_action_id": null,
+          "movement_mode": "fly",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p074",
+          "to_visit_id": "a0267"
+        },
+        {
+          "edge_id": "a0267->a0269",
+          "from_location_ref": "sholazar-p074",
+          "from_visit_id": "a0267",
+          "movement_action_id": "a0270",
+          "movement_mode": null,
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
+          "to_location_ref": "sholazar-p075",
+          "to_visit_id": "a0269"
+        }
+      ],
+      "input_fingerprint": "9e93762806560c70967509d9f5bf4816b0b33870e9486c455e7f2fa089aafb32",
+      "status": "pass",
+      "visits": [
+        {
+          "display_name": "银色比武场",
+          "location_ref": "sholazar-entry-argent-tournament",
+          "location_role": "map_anchor",
+          "ordinal": 1,
+          "step_id": "step-01",
+          "visit_id": "a0001",
+          "x": 79.8,
+          "y": 71.8
+        },
+        {
+          "display_name": "达拉然·大法师伯塔鲁斯",
+          "location_ref": "sholazar-entry-dalaran",
+          "location_role": "map_anchor",
+          "ordinal": 2,
+          "step_id": "step-01",
+          "visit_id": "visit-entry-dalaran",
+          "x": 68.55,
+          "y": 42.05
+        },
+        {
+          "display_name": "蛮藤谷·蒙特",
+          "location_ref": "sholazar-p001",
+          "location_role": "map_anchor",
+          "ordinal": 3,
+          "step_id": "step-01",
+          "visit_id": "visit-entry-wildgrowth",
+          "x": 39.68,
+          "y": 58.66
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p002",
+          "location_role": "map_anchor",
+          "ordinal": 4,
+          "step_id": "step-01",
+          "visit_id": "a0006",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "蛮藤谷·飞行器引擎",
+          "location_ref": "sholazar-p003",
+          "location_role": "map_anchor",
+          "ordinal": 5,
+          "step_id": "step-02",
+          "visit_id": "a0012",
+          "x": 38.7,
+          "y": 56.7
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p004",
+          "location_role": "map_anchor",
+          "ordinal": 6,
+          "step_id": "step-02",
+          "visit_id": "a0014",
+          "x": 25.4,
+          "y": 58.5
+        },
+        {
+          "display_name": "斯温迪格林挖掘场",
+          "location_ref": "sholazar-p005",
+          "location_role": "map_anchor",
+          "ordinal": 7,
+          "step_id": "step-02",
+          "visit_id": "a0017",
+          "x": 35.5,
+          "y": 47.4
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p006",
+          "location_role": "map_anchor",
+          "ordinal": 8,
+          "step_id": "step-03",
+          "visit_id": "a0023",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "斯温迪格林挖掘场·北侧高台",
+          "location_ref": "sholazar-p007",
+          "location_role": "map_anchor",
+          "ordinal": 9,
+          "step_id": "step-04",
+          "visit_id": "a0031",
+          "x": 35.8,
+          "y": 50.4
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p008",
+          "location_role": "map_anchor",
+          "ordinal": 10,
+          "step_id": "step-04",
+          "visit_id": "a0033",
+          "x": 27.1,
+          "y": 59.9
+        },
+        {
+          "display_name": "奈辛瓦里营地·幸运的威尔海姆",
+          "location_ref": "sholazar-p009",
+          "location_role": "map_anchor",
+          "ordinal": 11,
+          "step_id": "step-04",
+          "visit_id": "a0038",
+          "x": 27.0,
+          "y": 60.3
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p010",
+          "location_role": "map_anchor",
+          "ordinal": 12,
+          "step_id": "step-04",
+          "visit_id": "a0040",
+          "x": 27.1,
+          "y": 59.9
+        },
+        {
+          "display_name": "奈辛瓦里营地东侧",
+          "location_ref": "sholazar-p011",
+          "location_role": "map_anchor",
+          "ordinal": 13,
+          "step_id": "step-05",
+          "visit_id": "a0043",
+          "x": 28.0,
+          "y": 56.9
+        },
+        {
+          "display_name": "碎角犀牛区",
+          "location_ref": "sholazar-p012",
+          "location_role": "map_anchor",
+          "ordinal": 14,
+          "step_id": "step-05",
+          "visit_id": "a0045",
+          "x": 29.4,
+          "y": 50.4
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p013",
+          "location_role": "map_anchor",
+          "ordinal": 15,
+          "step_id": "step-05",
+          "visit_id": "a0047",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "诺兹隆之骨·神谕者索乌拉姆",
+          "location_ref": "sholazar-p014",
+          "location_role": "map_anchor",
+          "ordinal": 16,
+          "step_id": "step-06",
+          "visit_id": "a0055",
+          "x": 25.6,
+          "y": 66.5
+        },
+        {
+          "display_name": "诺兹隆之骨南侧",
+          "location_ref": "sholazar-p015",
+          "location_role": "map_anchor",
+          "ordinal": 17,
+          "step_id": "step-06",
+          "visit_id": "a0058",
+          "x": 28.4,
+          "y": 71.3
+        },
+        {
+          "display_name": "蛮藤谷中部",
+          "location_ref": "sholazar-p016",
+          "location_role": "map_anchor",
+          "ordinal": 18,
+          "step_id": "step-06",
+          "visit_id": "a0061",
+          "x": 47.0,
+          "y": 61.0
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p017",
+          "location_role": "map_anchor",
+          "ordinal": 19,
+          "step_id": "step-07",
+          "visit_id": "a0065",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "诺兹隆之骨",
+          "location_ref": "sholazar-p018",
+          "location_role": "map_anchor",
+          "ordinal": 20,
+          "step_id": "step-08",
+          "visit_id": "a0078",
+          "x": 25.6,
+          "y": 66.5
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p019",
+          "location_role": "map_anchor",
+          "ordinal": 21,
+          "step_id": "step-08",
+          "visit_id": "a0082",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "苦潮湖西北·杉苟足迹",
+          "location_ref": "sholazar-p020",
+          "location_role": "map_anchor",
+          "ordinal": 22,
+          "step_id": "step-08",
+          "visit_id": "a0085",
+          "x": 32.6,
+          "y": 38.5
+        },
+        {
+          "display_name": "法鲁恩",
+          "location_ref": "sholazar-p021",
+          "location_role": "map_anchor",
+          "ordinal": 23,
+          "step_id": "step-09",
+          "visit_id": "a0087",
+          "x": 46.7,
+          "y": 42.8
+        },
+        {
+          "display_name": "蛮藤谷河岸·沙蕨",
+          "location_ref": "sholazar-p022",
+          "location_role": "map_anchor",
+          "ordinal": 24,
+          "step_id": "step-09",
+          "visit_id": "a0089",
+          "x": 43.9,
+          "y": 63.3
+        },
+        {
+          "display_name": "河流之心",
+          "location_ref": "sholazar-p023",
+          "location_role": "map_anchor",
+          "ordinal": 25,
+          "step_id": "step-09",
+          "visit_id": "a0091",
+          "x": 50.5,
+          "y": 62.1
+        },
+        {
+          "display_name": "河流之心·湖内",
+          "location_ref": "sholazar-p024",
+          "location_role": "map_anchor",
+          "ordinal": 26,
+          "step_id": "step-10",
+          "visit_id": "a0097",
+          "x": 48.2,
+          "y": 63.3
+        },
+        {
+          "display_name": "河流之心·飞行员维克",
+          "location_ref": "sholazar-p025",
+          "location_role": "map_anchor",
+          "ordinal": 27,
+          "step_id": "step-10",
+          "visit_id": "a0099",
+          "x": 50.0,
+          "y": 61.5
+        },
+        {
+          "display_name": "匹奇",
+          "location_ref": "sholazar-p026",
+          "location_role": "map_anchor",
+          "ordinal": 28,
+          "step_id": "step-10",
+          "visit_id": "a0104",
+          "x": 50.5,
+          "y": 77.2
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p027",
+          "location_role": "map_anchor",
+          "ordinal": 29,
+          "step_id": "step-11",
+          "visit_id": "a0107",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "蛮藤谷河岸·倒下的原木",
+          "location_ref": "sholazar-p028",
+          "location_role": "map_anchor",
+          "ordinal": 30,
+          "step_id": "step-11",
+          "visit_id": "a0115",
+          "x": 46.3,
+          "y": 63.4
+        },
+        {
+          "display_name": "河流之心",
+          "location_ref": "sholazar-p029",
+          "location_role": "map_anchor",
+          "ordinal": 31,
+          "step_id": "step-12",
+          "visit_id": "a0117",
+          "x": 50.5,
+          "y": 62.1
+        },
+        {
+          "display_name": "狂心岭",
+          "location_ref": "sholazar-p030",
+          "location_role": "map_anchor",
+          "ordinal": 32,
+          "step_id": "step-12",
+          "visit_id": "a0119",
+          "x": 55.0,
+          "y": 69.1
+        },
+        {
+          "display_name": "狂心岭",
+          "location_ref": "sholazar-p031",
+          "location_role": "map_anchor",
+          "ordinal": 33,
+          "step_id": "step-13",
+          "visit_id": "a0121",
+          "x": 55.0,
+          "y": 69.1
+        },
+        {
+          "display_name": "硬皮猩猩区",
+          "location_ref": "sholazar-p032",
+          "location_role": "map_anchor",
+          "ordinal": 34,
+          "step_id": "step-13",
+          "visit_id": "a0124",
+          "x": 64.0,
+          "y": 72.5
+        },
+        {
+          "display_name": "狂心岭",
+          "location_ref": "sholazar-p033",
+          "location_role": "map_anchor",
+          "ordinal": 35,
+          "step_id": "step-13",
+          "visit_id": "a0127",
+          "x": 55.0,
+          "y": 69.1
+        },
+        {
+          "display_name": "蓝玉虫巢",
+          "location_ref": "sholazar-p034",
+          "location_role": "map_anchor",
+          "ordinal": 36,
+          "step_id": "step-13",
+          "visit_id": "a0132",
+          "x": 58.5,
+          "y": 81.0
+        },
+        {
+          "display_name": "狂心岭",
+          "location_ref": "sholazar-p035",
+          "location_role": "map_anchor",
+          "ordinal": 37,
+          "step_id": "step-14",
+          "visit_id": "a0135",
+          "x": 55.0,
+          "y": 69.1
+        },
+        {
+          "display_name": "狂心岭南部",
+          "location_ref": "sholazar-p036",
+          "location_role": "map_anchor",
+          "ordinal": 38,
+          "step_id": "step-14",
+          "visit_id": "a0143",
+          "x": 57.0,
+          "y": 85.7
+        },
+        {
+          "display_name": "狂心岭",
+          "location_ref": "sholazar-p037",
+          "location_role": "map_anchor",
+          "ordinal": 39,
+          "step_id": "step-14",
+          "visit_id": "a0146",
+          "x": 55.0,
+          "y": 69.1
+        },
+        {
+          "display_name": "狂心岭·被俘虏的鳄鱼",
+          "location_ref": "sholazar-p038",
+          "location_role": "map_anchor",
+          "ordinal": 40,
+          "step_id": "step-15",
+          "visit_id": "a0150",
+          "x": 57.3,
+          "y": 68.4
+        },
+        {
+          "display_name": "雾语村·瑟匹克",
+          "location_ref": "sholazar-p039",
+          "location_role": "map_anchor",
+          "ordinal": 41,
+          "step_id": "step-15",
+          "visit_id": "a0152",
+          "x": 42.1,
+          "y": 38.6
+        },
+        {
+          "display_name": "雾语天气祭坛",
+          "location_ref": "sholazar-p040",
+          "location_role": "map_anchor",
+          "ordinal": 42,
+          "step_id": "step-15",
+          "visit_id": "a0156",
+          "x": 44.5,
+          "y": 37.0
+        },
+        {
+          "display_name": "雾语村·瑟匹克",
+          "location_ref": "sholazar-p041",
+          "location_role": "map_anchor",
+          "ordinal": 43,
+          "step_id": "step-15",
+          "visit_id": "a0159",
+          "x": 42.1,
+          "y": 38.6
+        },
+        {
+          "display_name": "杉苟",
+          "location_ref": "sholazar-p042",
+          "location_role": "map_anchor",
+          "ordinal": 44,
+          "step_id": "step-15",
+          "visit_id": "a0163",
+          "x": 33.8,
+          "y": 33.7
+        },
+        {
+          "display_name": "奈辛瓦里营地",
+          "location_ref": "sholazar-p043",
+          "location_role": "map_anchor",
+          "ordinal": 45,
+          "step_id": "step-16",
+          "visit_id": "a0165",
+          "x": 27.1,
+          "y": 58.6
+        },
+        {
+          "display_name": "狂心岭",
+          "location_ref": "sholazar-p044",
+          "location_role": "map_anchor",
+          "ordinal": 46,
+          "step_id": "step-16",
+          "visit_id": "a0171",
+          "x": 55.0,
+          "y": 69.1
+        },
+        {
+          "display_name": "受伤的雨声神谕者",
+          "location_ref": "sholazar-p045",
+          "location_role": "map_anchor",
+          "ordinal": 47,
+          "step_id": "step-17",
+          "visit_id": "a0174",
+          "x": 56.6,
+          "y": 64.5
+        },
+        {
+          "display_name": "雨声树屋",
+          "location_ref": "sholazar-p046",
+          "location_role": "map_anchor",
+          "ordinal": 48,
+          "step_id": "step-17",
+          "visit_id": "a0178",
+          "x": 54.6,
+          "y": 56.4
+        },
+        {
+          "display_name": "雨声树屋外圈",
+          "location_ref": "sholazar-p047",
+          "location_role": "map_anchor",
+          "ordinal": 49,
+          "step_id": "step-17",
+          "visit_id": "a0182",
+          "x": 52.0,
+          "y": 56.0
+        },
+        {
+          "display_name": "雨声树屋",
+          "location_ref": "sholazar-p048",
+          "location_role": "map_anchor",
+          "ordinal": 50,
+          "step_id": "step-17",
+          "visit_id": "a0185",
+          "x": 54.6,
+          "y": 56.4
+        },
+        {
+          "display_name": "萨满祭司维克伊克",
+          "location_ref": "sholazar-p049",
+          "location_role": "map_anchor",
+          "ordinal": 51,
+          "step_id": "step-17",
+          "visit_id": "a0189",
+          "x": 51.3,
+          "y": 64.6
+        },
+        {
+          "display_name": "河流之心",
+          "location_ref": "sholazar-p050",
+          "location_role": "map_anchor",
+          "ordinal": 52,
+          "step_id": "step-18",
+          "visit_id": "a0191",
+          "x": 50.5,
+          "y": 62.1
+        },
+        {
+          "display_name": "雨声树屋",
+          "location_ref": "sholazar-p051",
+          "location_role": "map_anchor",
+          "ordinal": 53,
+          "step_id": "step-18",
+          "visit_id": "a0194",
+          "x": 54.6,
+          "y": 56.4
+        },
+        {
+          "display_name": "雾语村",
+          "location_ref": "sholazar-p052",
+          "location_role": "map_anchor",
+          "ordinal": 54,
+          "step_id": "step-18",
+          "visit_id": "a0197",
+          "x": 42.1,
+          "y": 38.6
+        },
+        {
+          "display_name": "多里安营地",
+          "location_ref": "sholazar-p053",
+          "location_role": "map_anchor",
+          "ordinal": 55,
+          "step_id": "step-19",
+          "visit_id": "a0201",
+          "x": 42.3,
+          "y": 28.7
+        },
+        {
+          "display_name": "燃烧林地",
+          "location_ref": "sholazar-p054",
+          "location_role": "map_anchor",
+          "ordinal": 56,
+          "step_id": "step-19",
+          "visit_id": "a0206",
+          "x": 48.0,
+          "y": 27.5
+        },
+        {
+          "display_name": "矛生营地",
+          "location_ref": "sholazar-p055",
+          "location_role": "map_anchor",
+          "ordinal": 57,
+          "step_id": "step-19",
+          "visit_id": "a0209",
+          "x": 41.5,
+          "y": 21.5
+        },
+        {
+          "display_name": "多里安营地",
+          "location_ref": "sholazar-p056",
+          "location_role": "map_anchor",
+          "ordinal": 58,
+          "step_id": "step-19",
+          "visit_id": "a0212",
+          "x": 42.3,
+          "y": 28.7
+        },
+        {
+          "display_name": "裂牙猛犸区",
+          "location_ref": "sholazar-p057",
+          "location_role": "map_anchor",
+          "ordinal": 59,
+          "step_id": "step-20",
+          "visit_id": "a0218",
+          "x": 51.7,
+          "y": 33.1
+        },
+        {
+          "display_name": "多里安营地",
+          "location_ref": "sholazar-p058",
+          "location_role": "map_anchor",
+          "ordinal": 60,
+          "step_id": "step-20",
+          "visit_id": "a0220",
+          "x": 42.3,
+          "y": 28.7
+        },
+        {
+          "display_name": "母龙斯利维娜",
+          "location_ref": "sholazar-p059",
+          "location_role": "map_anchor",
+          "ordinal": 61,
+          "step_id": "step-20",
+          "visit_id": "a0223",
+          "x": 47.1,
+          "y": 21.3
+        },
+        {
+          "display_name": "大鹏区",
+          "location_ref": "sholazar-p060",
+          "location_role": "map_anchor",
+          "ordinal": 62,
+          "step_id": "step-20",
+          "visit_id": "a0225",
+          "x": 56.8,
+          "y": 26.5
+        },
+        {
+          "display_name": "雾语村",
+          "location_ref": "sholazar-p061",
+          "location_role": "map_anchor",
+          "ordinal": 63,
+          "step_id": "step-20",
+          "visit_id": "a0228",
+          "x": 42.1,
+          "y": 38.6
+        },
+        {
+          "display_name": "苦潮湖·多头蛇",
+          "location_ref": "sholazar-p062",
+          "location_role": "map_anchor",
+          "ordinal": 64,
+          "step_id": "step-20",
+          "visit_id": "a0232",
+          "x": 41.3,
+          "y": 41.7
+        },
+        {
+          "display_name": "多里安营地",
+          "location_ref": "sholazar-p063",
+          "location_role": "map_anchor",
+          "ordinal": 65,
+          "step_id": "step-20",
+          "visit_id": "a0234",
+          "x": 42.3,
+          "y": 28.7
+        },
+        {
+          "display_name": "雨声树屋",
+          "location_ref": "sholazar-p064",
+          "location_role": "map_anchor",
+          "ordinal": 66,
+          "step_id": "step-21",
+          "visit_id": "a0239",
+          "x": 54.6,
+          "y": 56.4
+        },
+        {
+          "display_name": "苔行村·莫乌德",
+          "location_ref": "sholazar-p065",
+          "location_role": "map_anchor",
+          "ordinal": 67,
+          "step_id": "step-21",
+          "visit_id": "a0242",
+          "x": 75.5,
+          "y": 52.5
+        },
+        {
+          "display_name": "苔行村东侧",
+          "location_ref": "sholazar-p066",
+          "location_role": "map_anchor",
+          "ordinal": 68,
+          "step_id": "step-21",
+          "visit_id": "a0246",
+          "x": 75.7,
+          "y": 51.5
+        },
+        {
+          "display_name": "苔行村·莫乌德",
+          "location_ref": "sholazar-p067",
+          "location_role": "map_anchor",
+          "ordinal": 69,
+          "step_id": "step-21",
+          "visit_id": "a0248",
+          "x": 75.5,
+          "y": 52.5
+        },
+        {
+          "display_name": "苔行祭坛东侧",
+          "location_ref": "sholazar-p068",
+          "location_role": "map_anchor",
+          "ordinal": 70,
+          "step_id": "step-21",
+          "visit_id": "a0250",
+          "x": 71.1,
+          "y": 58.0
+        },
+        {
+          "display_name": "苔行村·莫乌德",
+          "location_ref": "sholazar-p069",
+          "location_role": "map_anchor",
+          "ordinal": 71,
+          "step_id": "step-21",
+          "visit_id": "a0252",
+          "x": 75.5,
+          "y": 52.5
+        },
+        {
+          "display_name": "残忍的阿图里斯",
+          "location_ref": "sholazar-p070",
+          "location_role": "map_anchor",
+          "ordinal": 72,
+          "step_id": "step-21",
+          "visit_id": "a0255",
+          "x": 72.1,
+          "y": 57.6
+        },
+        {
+          "display_name": "造物者悬台·古旧石箱",
+          "location_ref": "sholazar-p071",
+          "location_role": "map_anchor",
+          "ordinal": 73,
+          "step_id": "step-22",
+          "visit_id": "a0261",
+          "x": 80.4,
+          "y": 55.8
+        },
+        {
+          "display_name": "造物者悬台·索拉查卫士",
+          "location_ref": "sholazar-p072",
+          "location_role": "map_anchor",
+          "ordinal": 74,
+          "step_id": "step-22",
+          "visit_id": "a0263",
+          "x": 81.3,
+          "y": 54.0
+        },
+        {
+          "display_name": "造物者悬台·古旧石箱",
+          "location_ref": "sholazar-p073",
+          "location_role": "map_anchor",
+          "ordinal": 75,
+          "step_id": "step-22",
+          "visit_id": "a0265",
+          "x": 80.4,
+          "y": 55.8
+        },
+        {
+          "display_name": "雨声树屋",
+          "location_ref": "sholazar-p074",
+          "location_role": "map_anchor",
+          "ordinal": 76,
+          "step_id": "step-22",
+          "visit_id": "a0267",
+          "x": 54.6,
+          "y": 56.4
+        },
+        {
+          "display_name": "河流之心·飞行点",
+          "location_ref": "sholazar-p075",
+          "location_role": "map_anchor",
+          "ordinal": 77,
+          "step_id": "step-23",
+          "visit_id": "a0269",
+          "x": 50.5,
+          "y": 62.1
+        }
+      ]
+    },
+    "image": "maps/3711-sholazar-basin-hd.jpg",
+    "labels": [
+      {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6
+      },
+      {
+        "display_name": "斯温迪格林挖掘场",
+        "x": 35.5,
+        "y": 47.4
+      },
+      {
+        "display_name": "诺兹隆之骨",
+        "x": 25.6,
+        "y": 66.5
+      },
+      {
+        "display_name": "河流之心",
+        "x": 50.5,
+        "y": 62.1
+      },
+      {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1
+      },
+      {
+        "display_name": "雾语村",
+        "x": 42.1,
+        "y": 38.6
+      },
+      {
+        "display_name": "雨声树屋",
+        "x": 54.6,
+        "y": 56.4
+      },
+      {
+        "display_name": "多里安营地",
+        "x": 42.3,
+        "y": 28.7
+      },
+      {
+        "display_name": "苔行村",
+        "x": 75.5,
+        "y": 52.5
+      },
+      {
+        "display_name": "残忍的阿图里斯",
+        "x": 72.1,
+        "y": 57.6
+      }
+    ]
+  },
+  "profile_id": "sholazar-fivebox",
+  "profile_version": 1,
+  "program_id": "horde-fivebox-full-clear",
+  "publishable": true,
+  "route_timing": {
+    "center_minutes": null,
+    "input_fingerprint": "6d3ee3f06c278016491ab3f713c87d556eb463cefb9fc0b990a6956451236bb8",
+    "range_minutes": null,
+    "status": "requirements"
+  },
+  "schema_version": 1,
+  "stage11_input_fingerprint": "009a1bb0dc076a342442d379e84c6928b40593e3035522e619d08b9f0f9cfbbe",
+  "status": "pass",
+  "steps": [
+    {
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "visit-entry-dalaran",
+        "a0003",
+        "transport-12521-sholazar",
+        "visit-entry-wildgrowth",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0001"
+          ],
+          "location_ref": "sholazar-entry-argent-tournament",
+          "task_refs": [],
+          "text": "银色比武场",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0002"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：银色比武场 → 达拉然",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "visit-entry-dalaran"
+          ],
+          "location_ref": "sholazar-entry-dalaran",
+          "task_refs": [],
+          "text": "达拉然·大法师伯塔鲁斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0003"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "赫米特·奈辛瓦里哪去了？",
+              "task_id": 12521
+            }
+          ],
+          "text": "↳ 做《赫米特·奈辛瓦里哪去了？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "transport-12521-sholazar"
+          ],
+          "action_kind": "quest_transport",
+          "task_refs": [],
+          "text": "任务传送：达拉然·大法师伯塔鲁斯 → 索拉查盆地·蛮藤谷",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "visit-entry-wildgrowth",
+            "a0004",
+            "a0005"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒙特"
+          },
+          "location_ref": "sholazar-p001",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "赫米特·奈辛瓦里哪去了？",
+              "task_id": 12521
+            },
+            {
+              "kind": "accept",
+              "name": "欢迎来到索拉查盆地",
+              "task_id": 12489
+            }
+          ],
+          "text": "蛮藤谷·蒙特 → 交《赫米特·奈辛瓦里哪去了？》 → 接《欢迎来到索拉查盆地》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0006"
+          ],
+          "location_ref": "sholazar-p002",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0007"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "欢迎来到索拉查盆地",
+              "task_id": 12489
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 交《欢迎来到索拉查盆地》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0008"
+          ],
+          "action_kind": "bind_hearth",
+          "task_refs": [],
+          "text": "绑定炉石：奈辛瓦里营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0009"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "维斯雷·扭钳"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "需要引擎",
+              "task_id": 12522
+            }
+          ],
+          "text": "维斯雷·扭钳 → 接《需要引擎》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0010"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "风险投资公司的风险",
+              "task_id": 12524
+            }
+          ],
+          "text": "蒂巴尔 → 接《风险投资公司的风险》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0011"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "查德"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "不知所踪！",
+              "task_id": 12624
+            }
+          ],
+          "text": "查德 → 接《不知所踪！》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-01",
+      "summary": "进入索拉查后先完成欢迎任务、绑定炉石，并接第一轮工程/挖掘场任务。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "赫米特·奈辛瓦里哪去了？",
+          "note": "第一次到达达拉然时先接取并携带；当时不要选择前往索拉查盆地的出发对话。冰冠路线完成、正式进入索拉查阶段后，再回到大法师伯塔鲁斯处触发任务交通前往索拉查。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12521
+        },
+        {
+          "badge": null,
+          "name": "欢迎来到索拉查盆地",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12489
+        },
+        {
+          "badge": null,
+          "name": "需要引擎",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12522
+        },
+        {
+          "badge": "shared",
+          "name": "风险投资公司的风险",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12524
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "不知所踪！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12624
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "入图 → 奈辛瓦里初始化"
+    },
+    {
+      "action_ids": [
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0012"
+          ],
+          "location_ref": "sholazar-p003",
+          "task_refs": [],
+          "text": "蛮藤谷·飞行器引擎",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0013"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "需要引擎",
+              "task_id": 12522
+            }
+          ],
+          "text": "↳ 做《需要引擎》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0014"
+          ],
+          "location_ref": "sholazar-p004",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0015",
+            "a0016"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "维斯雷·扭钳"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "需要引擎",
+              "task_id": 12522
+            },
+            {
+              "kind": "accept",
+              "name": "借零件",
+              "task_id": 12523
+            }
+          ],
+          "text": "维斯雷·扭钳 → 交《需要引擎》 → 接《借零件》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0017"
+          ],
+          "location_ref": "sholazar-p005",
+          "task_refs": [],
+          "text": "斯温迪格林挖掘场",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0018",
+            "a0019",
+            "a0020"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "借零件",
+              "task_id": 12523
+            },
+            {
+              "kind": "objective",
+              "name": "风险投资公司的风险",
+              "task_id": 12524
+            },
+            {
+              "kind": "objective",
+              "name": "不知所踪！",
+              "task_id": 12624
+            }
+          ],
+          "text": "↳ 做《借零件》、《风险投资公司的风险》、《不知所踪！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0021"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "工程师赫莉丝"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "工程师的逃亡",
+              "task_id": 12688
+            }
+          ],
+          "text": "工程师赫莉丝 → 接《工程师的逃亡》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0022"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "工程师的逃亡",
+              "task_id": 12688
+            }
+          ],
+          "text": "↳ 做《工程师的逃亡》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-02",
+      "summary": "拿引擎回营接《借零件》，随后一次清挖掘场的零件、风险投资公司、戒指与工程师护送。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "需要引擎",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12522
+        },
+        {
+          "badge": "not_shared",
+          "name": "借零件",
+          "note": "备用零件五号分别拾取。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12523
+        },
+        {
+          "badge": "shared",
+          "name": "风险投资公司的风险",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12524
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "不知所踪！",
+          "note": "15只风险投资公司目标完成后戒指仍没齐，就继续刷挖掘者/恶棍；五号都1/1才离开。\n戒指一旦掉落，同一枚掉落可由五号依次拾取；固定在第一次斯温迪格林挖掘场完成，五号都1/1再离开。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12624
+        },
+        {
+          "badge": "shared",
+          "name": "工程师的逃亡",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12688
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "飞行器引擎 → 挖掘场第一圈"
+    },
+    {
+      "action_ids": [
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0023"
+          ],
+          "location_ref": "sholazar-p006",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0024"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "工程师的逃亡",
+              "task_id": 12688
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 交《工程师的逃亡》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0025"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "维斯雷·扭钳"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "借零件",
+              "task_id": 12523
+            }
+          ],
+          "text": "维斯雷·扭钳 → 交《借零件》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0026",
+            "a0027"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "风险投资公司的风险",
+              "task_id": 12524
+            },
+            {
+              "kind": "accept",
+              "name": "工头斯温迪格林",
+              "task_id": 12525
+            }
+          ],
+          "text": "蒂巴尔 → 交《风险投资公司的风险》 → 接《工头斯温迪格林》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0028"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "查德"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "不知所踪！",
+              "task_id": 12624
+            }
+          ],
+          "text": "查德 → 交《不知所踪！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0029"
+          ],
+          "action_kind": "open_flight_point",
+          "task_refs": [],
+          "text": "开飞行点：奈辛瓦里营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0030"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "卡尔维特教授"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "空中侦察",
+              "task_id": 12696
+            }
+          ],
+          "text": "卡尔维特教授 → 接《空中侦察》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-03",
+      "summary": "回营一次性交第一轮任务，开飞行点并接《空中侦察》。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "工程师的逃亡",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12688
+        },
+        {
+          "badge": "not_shared",
+          "name": "借零件",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12523
+        },
+        {
+          "badge": "shared",
+          "name": "风险投资公司的风险",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12524
+        },
+        {
+          "badge": "shared",
+          "name": "工头斯温迪格林",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12525
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "不知所踪！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12624
+        },
+        {
+          "badge": null,
+          "name": "空中侦察",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12696
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "奈辛瓦里集中交接 → 开飞行点"
+    },
+    {
+      "action_ids": [
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0031"
+          ],
+          "location_ref": "sholazar-p007",
+          "task_refs": [],
+          "text": "斯温迪格林挖掘场·北侧高台",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0032"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "工头斯温迪格林",
+              "task_id": 12525
+            }
+          ],
+          "text": "↳ 做《工头斯温迪格林》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0033"
+          ],
+          "location_ref": "sholazar-p008",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0034"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "工头斯温迪格林",
+              "task_id": 12525
+            }
+          ],
+          "text": "蒂巴尔 → 交《工头斯温迪格林》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0035"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "狩猎犀牛：初试身手",
+              "task_id": 12520
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 接《狩猎犀牛：初试身手》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0036"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "巴克·坎维尔"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "狩猎恶刃豹：成为猎手",
+              "task_id": 12549
+            }
+          ],
+          "text": "巴克·坎维尔 → 接《狩猎恶刃豹：成为猎手》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0037"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "德洛斯坦"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "后坐力？什么后坐力？",
+              "task_id": 12589
+            }
+          ],
+          "text": "德洛斯坦 → 接《后坐力？什么后坐力？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0038"
+          ],
+          "location_ref": "sholazar-p009",
+          "task_refs": [],
+          "text": "奈辛瓦里营地·幸运的威尔海姆",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0039"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "后坐力？什么后坐力？",
+              "task_id": 12589
+            }
+          ],
+          "text": "↳ 做《后坐力？什么后坐力？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0040"
+          ],
+          "location_ref": "sholazar-p010",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0041",
+            "a0042"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "德洛斯坦"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "后坐力？什么后坐力？",
+              "task_id": 12589
+            },
+            {
+              "kind": "accept",
+              "name": "猎人的挑战",
+              "task_id": 12592
+            }
+          ],
+          "text": "德洛斯坦 → 交《后坐力？什么后坐力？》 → 接《猎人的挑战》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-04",
+      "summary": "杀工头回营后接犀牛、恶刃豹、《后坐力》并打开《猎人的挑战》。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "工头斯温迪格林",
+          "note": "工头斯温迪格林和肉馅都在挖掘场木制高台附近，连续击杀即可。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12525
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎犀牛：初试身手",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12520
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎恶刃豹：成为猎手",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12549
+        },
+        {
+          "badge": "shared",
+          "name": "后坐力？什么后坐力？",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12589
+        },
+        {
+          "badge": null,
+          "name": "猎人的挑战",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12592
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "工头斯温迪格林 → 打开狩猎线"
+    },
+    {
+      "action_ids": [
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0043"
+          ],
+          "location_ref": "sholazar-p011",
+          "task_refs": [],
+          "text": "奈辛瓦里营地东侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0044"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎恶刃豹：成为猎手",
+              "task_id": 12549
+            }
+          ],
+          "text": "↳ 做《狩猎恶刃豹：成为猎手》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0045"
+          ],
+          "location_ref": "sholazar-p012",
+          "task_refs": [],
+          "text": "碎角犀牛区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0046"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎犀牛：初试身手",
+              "task_id": 12520
+            }
+          ],
+          "text": "↳ 做《狩猎犀牛：初试身手》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0047"
+          ],
+          "location_ref": "sholazar-p013",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0048",
+            "a0049"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎犀牛：初试身手",
+              "task_id": 12520
+            },
+            {
+              "kind": "accept",
+              "name": "狩猎犀牛：乘胜追击",
+              "task_id": 12526
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 交《狩猎犀牛：初试身手》 → 接《狩猎犀牛：乘胜追击》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0050",
+            "a0051"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "巴克·坎维尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎恶刃豹：成为猎手",
+              "task_id": 12549
+            },
+            {
+              "kind": "accept",
+              "name": "狩猎恶刃豹：追踪猎物",
+              "task_id": 12550
+            }
+          ],
+          "text": "巴克·坎维尔 → 交《狩猎恶刃豹：成为猎手》 → 接《狩猎恶刃豹：追踪猎物》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0052"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "狩猎鳄鱼：试炼",
+              "task_id": 12551
+            }
+          ],
+          "text": "蒂巴尔 → 接《狩猎鳄鱼：试炼》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0053"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "葛瑞姆·雷酒"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "酿酒的材料",
+              "task_id": 12634
+            }
+          ],
+          "text": "葛瑞姆·雷酒 → 接《酿酒的材料》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0054"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "菜刀库尔格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "猎人们的肉排",
+              "task_id": 12804
+            }
+          ],
+          "text": "菜刀库尔格 → 接《猎人们的肉排》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-05",
+      "summary": "完成两项初阶狩猎，回营交接并一次拿齐追踪、鳄鱼、酿酒和肉排。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "狩猎恶刃豹：成为猎手",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12549
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎犀牛：初试身手",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12520
+        },
+        {
+          "badge": null,
+          "name": "狩猎犀牛：乘胜追击",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12526
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎恶刃豹：追踪猎物",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12550
+        },
+        {
+          "badge": null,
+          "name": "狩猎鳄鱼：试炼",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12551
+        },
+        {
+          "badge": "not_shared",
+          "name": "酿酒的材料",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12634
+        },
+        {
+          "badge": "not_shared",
+          "name": "猎人们的肉排",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12804
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "初阶豹 / 犀牛 → 营地接第二批"
+    },
+    {
+      "action_ids": [
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0055",
+            "a0056",
+            "a0057"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "神谕者索乌拉姆"
+          },
+          "location_ref": "sholazar-p014",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎犀牛：乘胜追击",
+              "task_id": 12526
+            },
+            {
+              "kind": "accept",
+              "name": "给索乌拉姆的祭品",
+              "task_id": 12543
+            }
+          ],
+          "text": "诺兹隆之骨·神谕者索乌拉姆 → 交《狩猎犀牛：乘胜追击》 → 接《给索乌拉姆的祭品》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0058"
+          ],
+          "location_ref": "sholazar-p015",
+          "task_refs": [],
+          "text": "诺兹隆之骨南侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0059",
+            "a0060"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "猎人们的肉排",
+              "task_id": 12804
+            },
+            {
+              "kind": "objective",
+              "name": "猎人的挑战",
+              "task_id": 12592
+            }
+          ],
+          "text": "↳ 做《猎人们的肉排》、《猎人的挑战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0061"
+          ],
+          "location_ref": "sholazar-p016",
+          "task_refs": [],
+          "text": "蛮藤谷中部",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0062",
+            "a0063",
+            "a0064"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "给索乌拉姆的祭品",
+              "task_id": 12543
+            },
+            {
+              "kind": "objective",
+              "name": "狩猎鳄鱼：试炼",
+              "task_id": 12551
+            },
+            {
+              "kind": "objective",
+              "name": "酿酒的材料",
+              "task_id": 12634
+            }
+          ],
+          "text": "↳ 做《给索乌拉姆的祭品》、《狩猎鳄鱼：试炼》、《酿酒的材料》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-06",
+      "summary": "接祭品后把南侧肉排、猎人挑战累计、祭品、鳄鱼试炼和酿酒材料一圈做完。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "狩猎犀牛：乘胜追击",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12526
+        },
+        {
+          "badge": null,
+          "name": "给索乌拉姆的祭品",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12543
+        },
+        {
+          "badge": "not_shared",
+          "name": "猎人们的肉排",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12804
+        },
+        {
+          "badge": null,
+          "name": "猎人的挑战",
+          "note": "必须在大范围狩猎前先接；后续其它狩猎任务中的野兽击杀自然累计到60。独立服务时间按0处理，不为本任务额外杀怪。\n这里只表示本任务随其它任务自然累计；不为它额外杀怪，独立耗时按0处理。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12592
+        },
+        {
+          "badge": null,
+          "name": "狩猎鳄鱼：试炼",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12551
+        },
+        {
+          "badge": "not_shared",
+          "name": "酿酒的材料",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12634
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "索乌拉姆 → 肉排 / 祭品 / 鳄鱼 / 酿酒"
+    },
+    {
+      "action_ids": [
+        "a0066",
+        "a0065",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0066"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：奈辛瓦里营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0065"
+          ],
+          "location_ref": "sholazar-p017",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0067",
+            "a0068"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎鳄鱼：试炼",
+              "task_id": 12551
+            },
+            {
+              "kind": "accept",
+              "name": "狩猎鳄鱼：计划",
+              "task_id": 12560
+            }
+          ],
+          "text": "蒂巴尔 → 交《狩猎鳄鱼：试炼》 → 接《狩猎鳄鱼：计划》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0069"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "菜刀库尔格"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "猎人们的肉排",
+              "task_id": 12804
+            }
+          ],
+          "text": "菜刀库尔格 → 交《猎人们的肉排》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0070",
+            "a0071"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "葛瑞姆·雷酒"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "酿酒的材料",
+              "task_id": 12634
+            },
+            {
+              "kind": "accept",
+              "name": "酒香犹存",
+              "task_id": 12644
+            }
+          ],
+          "text": "葛瑞姆·雷酒 → 交《酿酒的材料》 → 接《酒香犹存》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0072"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "德洛斯坦"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "猎人的挑战",
+              "task_id": 12592
+            }
+          ],
+          "text": "德洛斯坦 → 交《猎人的挑战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0073"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "酒香犹存",
+              "task_id": 12644
+            }
+          ],
+          "text": "↳ 做《酒香犹存》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0074",
+            "a0075"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "葛瑞姆·雷酒"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "酒香犹存",
+              "task_id": 12644
+            },
+            {
+              "kind": "accept",
+              "name": "品酒",
+              "task_id": 12645
+            }
+          ],
+          "text": "葛瑞姆·雷酒 → 交《酒香犹存》 → 接《品酒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0076",
+            "a0077"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "品酒",
+              "task_id": 12645
+            },
+            {
+              "kind": "objective",
+              "name": "品酒",
+              "task_id": 12645
+            }
+          ],
+          "text": "↳ 做《品酒》、《品酒》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-07",
+      "summary": "炉石回营集中交这一批，并完成《酒香犹存》和营地内两个品酒目标。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "狩猎鳄鱼：试炼",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12551
+        },
+        {
+          "badge": "not_shared",
+          "name": "狩猎鳄鱼：计划",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12560
+        },
+        {
+          "badge": "not_shared",
+          "name": "猎人们的肉排",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12804
+        },
+        {
+          "badge": "not_shared",
+          "name": "酿酒的材料",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12634
+        },
+        {
+          "badge": "shared",
+          "name": "酒香犹存",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12644
+        },
+        {
+          "badge": null,
+          "name": "猎人的挑战",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12592
+        },
+        {
+          "badge": "shared",
+          "name": "品酒",
+          "note": "对赫米特、哈德留斯、塔玛拉分别使用丛林调酒样本；前两人在奈辛瓦里营地，塔玛拉在河流之心的湖畔码头，按自然经过分两段完成。\n这里只完成赫米特和哈迪乌斯两个品酒目标；塔玛拉留到河流之心自然经过。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12645
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "炉石回营 → 酒香犹存 / 品酒"
+    },
+    {
+      "action_ids": [
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0078"
+          ],
+          "location_ref": "sholazar-p018",
+          "task_refs": [],
+          "text": "诺兹隆之骨",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0079",
+            "a0080"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "神谕者索乌拉姆"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "给索乌拉姆的祭品",
+              "task_id": 12543
+            },
+            {
+              "kind": "accept",
+              "name": "诺兹隆之骨",
+              "task_id": 12544
+            }
+          ],
+          "text": "神谕者索乌拉姆 → 交《给索乌拉姆的祭品》 → 接《诺兹隆之骨》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0081"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "诺兹隆之骨",
+              "task_id": 12544
+            }
+          ],
+          "text": "↳ 做《诺兹隆之骨》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0082"
+          ],
+          "location_ref": "sholazar-p019",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0083",
+            "a0084"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "诺兹隆之骨",
+              "task_id": 12544
+            },
+            {
+              "kind": "accept",
+              "name": "狩猎犀牛：终极决战",
+              "task_id": 12556
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 交《诺兹隆之骨》 → 接《狩猎犀牛：终极决战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0085"
+          ],
+          "location_ref": "sholazar-p020",
+          "task_refs": [],
+          "text": "苦潮湖西北·杉苟足迹",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0086"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎恶刃豹：追踪猎物",
+              "task_id": 12550
+            }
+          ],
+          "text": "↳ 做《狩猎恶刃豹：追踪猎物》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-08",
+      "summary": "做完诺兹隆之骨、打开终极犀牛后去杉苟足迹完成追踪。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "给索乌拉姆的祭品",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12543
+        },
+        {
+          "badge": "shared",
+          "name": "诺兹隆之骨",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12544
+        },
+        {
+          "badge": null,
+          "name": "狩猎犀牛：终极决战",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12556
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎恶刃豹：追踪猎物",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12550
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "诺兹隆之骨 → 杉苟追踪"
+    },
+    {
+      "action_ids": [
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0087"
+          ],
+          "location_ref": "sholazar-p021",
+          "task_refs": [],
+          "text": "法鲁恩",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0088"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎犀牛：终极决战",
+              "task_id": 12556
+            }
+          ],
+          "text": "↳ 做《狩猎犀牛：终极决战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0089"
+          ],
+          "location_ref": "sholazar-p022",
+          "task_refs": [],
+          "text": "蛮藤谷河岸·沙蕨",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0090"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎鳄鱼：计划",
+              "task_id": 12560
+            }
+          ],
+          "text": "↳ 做《狩猎鳄鱼：计划》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0091"
+          ],
+          "location_ref": "sholazar-p023",
+          "task_refs": [],
+          "text": "河流之心",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0092"
+          ],
+          "action_kind": "open_flight_point",
+          "task_refs": [],
+          "text": "开飞行点：河流之心",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0093"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "品酒",
+              "task_id": 12645
+            }
+          ],
+          "text": "↳ 做《品酒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0094",
+            "a0095"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "飞行员维克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "空中侦察",
+              "task_id": 12696
+            },
+            {
+              "kind": "accept",
+              "name": "尴尬的处境",
+              "task_id": 12699
+            }
+          ],
+          "text": "飞行员维克 → 交《空中侦察》 → 接《尴尬的处境》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0096"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "塔玛拉·摇链"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "兼职猎人",
+              "task_id": 12654
+            }
+          ],
+          "text": "塔玛拉·摇链 → 接《兼职猎人》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-09",
+      "summary": "完成法鲁恩和鳄鱼计划，进入河流之心开点、补最后品酒并接维克/兼职猎人。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "狩猎犀牛：终极决战",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12556
+        },
+        {
+          "badge": "not_shared",
+          "name": "狩猎鳄鱼：计划",
+          "note": "沙蕨叶五号分别拾取。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12560
+        },
+        {
+          "badge": "shared",
+          "name": "品酒",
+          "note": "对赫米特、哈德留斯、塔玛拉分别使用丛林调酒样本；前两人在奈辛瓦里营地，塔玛拉在河流之心的湖畔码头，按自然经过分两段完成。\n这里只完成赫米特和哈迪乌斯两个品酒目标；塔玛拉留到河流之心自然经过。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12645
+        },
+        {
+          "badge": null,
+          "name": "空中侦察",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12696
+        },
+        {
+          "badge": "not_shared",
+          "name": "尴尬的处境",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12699
+        },
+        {
+          "badge": null,
+          "name": "兼职猎人",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12654
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "终极犀牛 / 鳄鱼计划 → 河流之心"
+    },
+    {
+      "action_ids": [
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0097"
+          ],
+          "location_ref": "sholazar-p024",
+          "task_refs": [],
+          "text": "河流之心·湖内",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0098"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "尴尬的处境",
+              "task_id": 12699
+            }
+          ],
+          "text": "↳ 做《尴尬的处境》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0099",
+            "a0100",
+            "a0101"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "飞行员维克"
+          },
+          "location_ref": "sholazar-p025",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "尴尬的处境",
+              "task_id": 12699
+            },
+            {
+              "kind": "accept",
+              "name": "侦察飞行",
+              "task_id": 12671
+            }
+          ],
+          "text": "河流之心·飞行员维克 → 交《尴尬的处境》 → 接《侦察飞行》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0102"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "侦察飞行",
+              "task_id": 12671
+            }
+          ],
+          "text": "↳ 做《侦察飞行》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0103"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "飞行员维克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "侦察飞行",
+              "task_id": 12671
+            }
+          ],
+          "text": "飞行员维克 → 交《侦察飞行》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0104"
+          ],
+          "location_ref": "sholazar-p026",
+          "task_refs": [],
+          "text": "匹奇",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0105"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "兼职猎人",
+              "task_id": 12654
+            }
+          ],
+          "text": "↳ 做《兼职猎人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0106"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "猎手基克吉克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "伪装奴隶",
+              "task_id": 12528
+            }
+          ],
+          "text": "猎手基克吉克 → 接《伪装奴隶》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-10",
+      "summary": "在河流之心连续做维克两项任务，再去匹奇完成兼职猎人并接《伪装奴隶》。",
+      "task_presentations": [
+        {
+          "badge": "not_shared",
+          "name": "尴尬的处境",
+          "note": "维克的钥匙五号分别取得。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12699
+        },
+        {
+          "badge": null,
+          "name": "侦察飞行",
+          "note": "五号不要连续同时起飞；每个号启动后留出间隔，确认已能操控飞行方向再切下一个，否则容易来不及修正航向。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12671
+        },
+        {
+          "badge": null,
+          "name": "兼职猎人",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12654
+        },
+        {
+          "badge": null,
+          "name": "伪装奴隶",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12528
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "尴尬的处境 → 侦察飞行 → 匹奇"
+    },
+    {
+      "action_ids": [
+        "a0108",
+        "a0107",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115",
+        "a0116"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0108"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：奈辛瓦里营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0107"
+          ],
+          "location_ref": "sholazar-p027",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0109"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎犀牛：终极决战",
+              "task_id": 12556
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 交《狩猎犀牛：终极决战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0110",
+            "a0111"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "巴克·坎维尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎恶刃豹：追踪猎物",
+              "task_id": 12550
+            },
+            {
+              "kind": "accept",
+              "name": "狩猎恶刃豹：突然袭击",
+              "task_id": 12558
+            }
+          ],
+          "text": "巴克·坎维尔 → 交《狩猎恶刃豹：追踪猎物》 → 接《狩猎恶刃豹：突然袭击》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0112",
+            "a0113"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎鳄鱼：计划",
+              "task_id": 12560
+            },
+            {
+              "kind": "accept",
+              "name": "狩猎鳄鱼：伏击",
+              "task_id": 12569
+            }
+          ],
+          "text": "蒂巴尔 → 交《狩猎鳄鱼：计划》 → 接《狩猎鳄鱼：伏击》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0114"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "葛瑞姆·雷酒"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "品酒",
+              "task_id": 12645
+            }
+          ],
+          "text": "葛瑞姆·雷酒 → 交《品酒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0115"
+          ],
+          "location_ref": "sholazar-p028",
+          "task_refs": [],
+          "text": "蛮藤谷河岸·倒下的原木",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0116"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎鳄鱼：伏击",
+              "task_id": 12569
+            }
+          ],
+          "text": "↳ 做《狩猎鳄鱼：伏击》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-11",
+      "summary": "炉石回营交终极狩猎/计划/品酒，接突然袭击与伏击后先做鳄鱼伏击。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "狩猎犀牛：终极决战",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12556
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎恶刃豹：追踪猎物",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12550
+        },
+        {
+          "badge": null,
+          "name": "狩猎恶刃豹：突然袭击",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12558
+        },
+        {
+          "badge": "not_shared",
+          "name": "狩猎鳄鱼：计划",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12560
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎鳄鱼：伏击",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12569
+        },
+        {
+          "badge": "shared",
+          "name": "品酒",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12645
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "炉石奈辛瓦里 → 鳄鱼伏击"
+    },
+    {
+      "action_ids": [
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0117"
+          ],
+          "location_ref": "sholazar-p029",
+          "task_refs": [],
+          "text": "河流之心",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0118"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "塔玛拉·摇链"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "兼职猎人",
+              "task_id": 12654
+            }
+          ],
+          "text": "塔玛拉·摇链 → 交《兼职猎人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0119"
+          ],
+          "location_ref": "sholazar-p030",
+          "task_refs": [],
+          "text": "狂心岭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0120"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "伪装奴隶",
+              "task_id": 12528
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 交《伪装奴隶》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-12",
+      "summary": "顺交《兼职猎人》，再到狂心岭交《伪装奴隶》。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "兼职猎人",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12654
+        },
+        {
+          "badge": null,
+          "name": "伪装奴隶",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12528
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "河流之心 → 狂心岭交接"
+    },
+    {
+      "action_ids": [
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0121"
+          ],
+          "location_ref": "sholazar-p031",
+          "task_refs": [],
+          "text": "狂心岭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0122"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "猩猩猎手的奴隶",
+              "task_id": 12529
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 接《猩猩猎手的奴隶》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0123"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "猩猩猎手格利基克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "狩猎硬皮猩猩",
+              "task_id": 12530
+            }
+          ],
+          "text": "猩猩猎手格利基克 → 接《狩猎硬皮猩猩》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0124"
+          ],
+          "location_ref": "sholazar-p032",
+          "task_refs": [],
+          "text": "硬皮猩猩区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0125",
+            "a0126"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "猩猩猎手的奴隶",
+              "task_id": 12529
+            },
+            {
+              "kind": "objective",
+              "name": "狩猎硬皮猩猩",
+              "task_id": 12530
+            }
+          ],
+          "text": "↳ 做《猩猩猎手的奴隶》、《狩猎硬皮猩猩》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0127"
+          ],
+          "location_ref": "sholazar-p033",
+          "task_refs": [],
+          "text": "狂心岭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0128",
+            "a0129",
+            "a0130"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "猩猩猎手的奴隶",
+              "task_id": 12529
+            },
+            {
+              "kind": "turnin",
+              "name": "狩猎硬皮猩猩",
+              "task_id": 12530
+            },
+            {
+              "kind": "accept",
+              "name": "蓝蜂猎手的学徒",
+              "task_id": 12533
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 交《猩猩猎手的奴隶》、《狩猎硬皮猩猩》 → 接《蓝蜂猎手的学徒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0131"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者哈尔卡克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "蓝色蜂后",
+              "task_id": 12534
+            }
+          ],
+          "text": "长者哈尔卡克 → 接《蓝色蜂后》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0132"
+          ],
+          "location_ref": "sholazar-p034",
+          "task_refs": [],
+          "text": "蓝玉虫巢",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0133",
+            "a0134"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "蓝蜂猎手的学徒",
+              "task_id": 12533
+            },
+            {
+              "kind": "objective",
+              "name": "蓝色蜂后",
+              "task_id": 12534
+            }
+          ],
+          "text": "↳ 做《蓝蜂猎手的学徒》、《蓝色蜂后》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-13",
+      "summary": "接猩猩任务，清硬皮猩猩后回岭交接，再一圈做完蓝玉虫巢。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "猩猩猎手的奴隶",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12529
+        },
+        {
+          "badge": null,
+          "name": "狩猎硬皮猩猩",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12530
+        },
+        {
+          "badge": null,
+          "name": "蓝蜂猎手的学徒",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12533
+        },
+        {
+          "badge": null,
+          "name": "蓝色蜂后",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12534
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "狂心岭第一圈：猩猩 → 蓝玉虫巢"
+    },
+    {
+      "action_ids": [
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0135"
+          ],
+          "location_ref": "sholazar-p035",
+          "task_refs": [],
+          "text": "狂心岭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0136",
+            "a0137"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "蓝蜂猎手的学徒",
+              "task_id": 12533
+            },
+            {
+              "kind": "turnin",
+              "name": "蓝色蜂后",
+              "task_id": 12534
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 交《蓝蜂猎手的学徒》、《蓝色蜂后》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0138"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者哈尔卡克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "鸡飞狼跳！",
+              "task_id": 12532
+            }
+          ],
+          "text": "长者哈尔卡克 → 接《鸡飞狼跳！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0139"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "鸡飞狼跳！",
+              "task_id": 12532
+            }
+          ],
+          "text": "↳ 做《鸡飞狼跳！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0140",
+            "a0141"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者哈尔卡克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "鸡飞狼跳！",
+              "task_id": 12532
+            },
+            {
+              "kind": "accept",
+              "name": "地下的威胁",
+              "task_id": 12531
+            }
+          ],
+          "text": "长者哈尔卡克 → 交《鸡飞狼跳！》 → 接《地下的威胁》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0142"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "恶作剧的材料",
+              "task_id": 12535
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 接《恶作剧的材料》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0143"
+          ],
+          "location_ref": "sholazar-p036",
+          "task_refs": [],
+          "text": "狂心岭南部",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0144",
+            "a0145"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "地下的威胁",
+              "task_id": 12531
+            },
+            {
+              "kind": "objective",
+              "name": "恶作剧的材料",
+              "task_id": 12535
+            }
+          ],
+          "text": "↳ 做《地下的威胁》、《恶作剧的材料》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0146"
+          ],
+          "location_ref": "sholazar-p037",
+          "task_refs": [],
+          "text": "狂心岭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0147",
+            "a0148",
+            "a0149"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "地下的威胁",
+              "task_id": 12531
+            },
+            {
+              "kind": "turnin",
+              "name": "恶作剧的材料",
+              "task_id": 12535
+            },
+            {
+              "kind": "accept",
+              "name": "颠簸的航行",
+              "task_id": 12536
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 交《地下的威胁》、《恶作剧的材料》 → 接《颠簸的航行》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-14",
+      "summary": "回岭完成抓鸡并打开地下/材料任务，南部清完后接《颠簸的航行》。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "蓝蜂猎手的学徒",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12533
+        },
+        {
+          "badge": null,
+          "name": "蓝色蜂后",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12534
+        },
+        {
+          "badge": "not_shared",
+          "name": "鸡飞狼跳！",
+          "note": "五号分别抓12只逃跑的小鸡。任务提供捕鸡网；可骑坐骑操作，小鸡难看清时开姓名板；用网定住后还要点击小鸡完成抓取。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12532
+        },
+        {
+          "badge": null,
+          "name": "地下的威胁",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12531
+        },
+        {
+          "badge": null,
+          "name": "恶作剧的材料",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12535
+        },
+        {
+          "badge": null,
+          "name": "颠簸的航行",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12536
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "狂心岭第二圈：抓鸡 → 南部任务"
+    },
+    {
+      "action_ids": [
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0150"
+          ],
+          "location_ref": "sholazar-p038",
+          "task_refs": [],
+          "text": "狂心岭·被俘虏的鳄鱼",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0151"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "颠簸的航行",
+              "task_id": 12536
+            }
+          ],
+          "text": "↳ 做《颠簸的航行》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0152"
+          ],
+          "location_ref": "sholazar-p039",
+          "task_refs": [],
+          "text": "雾语村·瑟匹克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0153",
+            "a0154",
+            "a0155"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "鳄鱼人猎手瑟匹克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "颠簸的航行",
+              "task_id": 12536
+            },
+            {
+              "kind": "accept",
+              "name": "闪电确实两次打中同一个地方！",
+              "task_id": 12537
+            },
+            {
+              "kind": "accept",
+              "name": "猎杀雾语鳄鱼人",
+              "task_id": 12538
+            }
+          ],
+          "text": "鳄鱼人猎手瑟匹克 → 交《颠簸的航行》 → 接《闪电确实两次打中同一个地方！》、《猎杀雾语鳄鱼人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0156"
+          ],
+          "location_ref": "sholazar-p040",
+          "task_refs": [],
+          "text": "雾语天气祭坛",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0157",
+            "a0158"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "闪电确实两次打中同一个地方！",
+              "task_id": 12537
+            },
+            {
+              "kind": "objective",
+              "name": "猎杀雾语鳄鱼人",
+              "task_id": 12538
+            }
+          ],
+          "text": "↳ 做《闪电确实两次打中同一个地方！》、《猎杀雾语鳄鱼人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0159"
+          ],
+          "location_ref": "sholazar-p041",
+          "task_refs": [],
+          "text": "雾语村·瑟匹克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0160",
+            "a0161",
+            "a0162"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "鳄鱼人猎手瑟匹克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "闪电确实两次打中同一个地方！",
+              "task_id": 12537
+            },
+            {
+              "kind": "turnin",
+              "name": "猎杀雾语鳄鱼人",
+              "task_id": 12538
+            },
+            {
+              "kind": "accept",
+              "name": "步行回家",
+              "task_id": 12539
+            }
+          ],
+          "text": "鳄鱼人猎手瑟匹克 → 交《闪电确实两次打中同一个地方！》、《猎杀雾语鳄鱼人》 → 接《步行回家》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0163"
+          ],
+          "location_ref": "sholazar-p042",
+          "task_refs": [],
+          "text": "杉苟",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0164"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎恶刃豹：突然袭击",
+              "task_id": 12558
+            }
+          ],
+          "text": "↳ 做《狩猎恶刃豹：突然袭击》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-15",
+      "summary": "乘被俘鳄鱼到雾语村，做完两项雾语任务接《步行回家》，顺路击杀杉苟。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "颠簸的航行",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12536
+        },
+        {
+          "badge": "not_shared",
+          "name": "闪电确实两次打中同一个地方！",
+          "note": "五号分别敲碎通天水晶簇。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12537
+        },
+        {
+          "badge": "shared",
+          "name": "猎杀雾语鳄鱼人",
+          "note": "雾语战士/神谕者合计12个；泽匹克的狩猎号角可重新召出泽匹克。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12538
+        },
+        {
+          "badge": null,
+          "name": "步行回家",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12539
+        },
+        {
+          "badge": null,
+          "name": "狩猎恶刃豹：突然袭击",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12558
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "颠簸航行 → 雾语村 → 杉苟"
+    },
+    {
+      "action_ids": [
+        "a0166",
+        "a0165",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0166"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：奈辛瓦里营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0165"
+          ],
+          "location_ref": "sholazar-p043",
+          "task_refs": [],
+          "text": "奈辛瓦里营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0167"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "巴克·坎维尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎恶刃豹：突然袭击",
+              "task_id": 12558
+            }
+          ],
+          "text": "巴克·坎维尔 → 交《狩猎恶刃豹：突然袭击》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0168"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "蒂巴尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎鳄鱼：伏击",
+              "task_id": 12569
+            }
+          ],
+          "text": "蒂巴尔 → 交《狩猎鳄鱼：伏击》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0169",
+            "a0170"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赫米特·奈辛瓦里"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "湖边着陆场",
+              "task_id": 12651
+            },
+            {
+              "kind": "accept",
+              "name": "更大的猎物",
+              "task_id": 12595
+            }
+          ],
+          "text": "赫米特·奈辛瓦里 → 接《湖边着陆场》、《更大的猎物》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0171"
+          ],
+          "location_ref": "sholazar-p044",
+          "task_refs": [],
+          "text": "狂心岭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0172",
+            "a0173"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶萨满祭司拉克亚克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "步行回家",
+              "task_id": 12539
+            },
+            {
+              "kind": "accept",
+              "name": "遵命行事",
+              "task_id": 12540
+            }
+          ],
+          "text": "高阶萨满祭司拉克亚克 → 交《步行回家》 → 接《遵命行事》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-16",
+      "summary": "炉石回营集中交狩猎任务并接更大猎物，再到狂心岭交《步行回家》。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "狩猎恶刃豹：突然袭击",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12558
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎鳄鱼：伏击",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12569
+        },
+        {
+          "badge": null,
+          "name": "湖边着陆场",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12651
+        },
+        {
+          "badge": null,
+          "name": "更大的猎物",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12595
+        },
+        {
+          "badge": null,
+          "name": "步行回家",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12539
+        },
+        {
+          "badge": "shared",
+          "name": "遵命行事",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12540
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "炉石奈辛瓦里 → 步行回家"
+    },
+    {
+      "action_ids": [
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0174"
+          ],
+          "location_ref": "sholazar-p045",
+          "task_refs": [],
+          "text": "受伤的雨声神谕者",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0175",
+            "a0176"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "受伤的雨声神谕者"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "遵命行事",
+              "task_id": 12540
+            },
+            {
+              "kind": "accept",
+              "name": "幸福的误会",
+              "task_id": 12570
+            }
+          ],
+          "text": "受伤的雨声神谕者 → 交《遵命行事》 → 接《幸福的误会》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0177"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "幸福的误会",
+              "task_id": 12570
+            }
+          ],
+          "text": "↳ 做《幸福的误会》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0178"
+          ],
+          "location_ref": "sholazar-p046",
+          "task_refs": [],
+          "text": "雨声树屋",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0179",
+            "a0180"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶神谕者索乌塞"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "幸福的误会",
+              "task_id": 12570
+            },
+            {
+              "kind": "accept",
+              "name": "赶走坏蛇",
+              "task_id": 12571
+            }
+          ],
+          "text": "高阶神谕者索乌塞 → 交《幸福的误会》 → 接《赶走坏蛇》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0181"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "拉弗乌"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "神祗喜欢亮闪闪的东西",
+              "task_id": 12572
+            }
+          ],
+          "text": "拉弗乌 → 接《神祗喜欢亮闪闪的东西》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0182"
+          ],
+          "location_ref": "sholazar-p047",
+          "task_refs": [],
+          "text": "雨声树屋外圈",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0183",
+            "a0184"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "赶走坏蛇",
+              "task_id": 12571
+            },
+            {
+              "kind": "objective",
+              "name": "神祗喜欢亮闪闪的东西",
+              "task_id": 12572
+            }
+          ],
+          "text": "↳ 做《赶走坏蛇》、《神祗喜欢亮闪闪的东西》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0185"
+          ],
+          "location_ref": "sholazar-p048",
+          "task_refs": [],
+          "text": "雨声树屋",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0186",
+            "a0187",
+            "a0188"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶神谕者索乌塞"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "赶走坏蛇",
+              "task_id": 12571
+            },
+            {
+              "kind": "turnin",
+              "name": "神祗喜欢亮闪闪的东西",
+              "task_id": 12572
+            },
+            {
+              "kind": "accept",
+              "name": "议和",
+              "task_id": 12573
+            }
+          ],
+          "text": "高阶神谕者索乌塞 → 交《赶走坏蛇》、《神祗喜欢亮闪闪的东西》 → 接《议和》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0189"
+          ],
+          "location_ref": "sholazar-p049",
+          "task_refs": [],
+          "text": "萨满祭司维克伊克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0190"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "议和",
+              "task_id": 12573
+            }
+          ],
+          "text": "↳ 做《议和》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-17",
+      "summary": "完成受伤神谕者、坏蛇和亮闪闪，接着处理《议和》。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "遵命行事",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12540
+        },
+        {
+          "badge": null,
+          "name": "幸福的误会",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12570
+        },
+        {
+          "badge": null,
+          "name": "赶走坏蛇",
+          "note": "杀10条帝王眼镜蛇和毒尖；毒尖在雨声树屋东北瀑布附近。任务提供拉弗乌的虫袋，可召拉弗乌随行。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12571
+        },
+        {
+          "badge": null,
+          "name": "神祗喜欢亮闪闪的东西",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12572
+        },
+        {
+          "badge": "not_shared",
+          "name": "议和",
+          "note": "五号分别完成议和交互。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12573
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "受伤神谕者 → 雨声树屋 → 议和"
+    },
+    {
+      "action_ids": [
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0191"
+          ],
+          "location_ref": "sholazar-p050",
+          "task_refs": [],
+          "text": "河流之心",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0192"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "塔玛拉·摇链"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "湖边着陆场",
+              "task_id": 12651
+            }
+          ],
+          "text": "塔玛拉·摇链 → 交《湖边着陆场》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0193"
+          ],
+          "action_kind": "bind_hearth",
+          "task_refs": [],
+          "text": "绑定炉石：河流之心",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0194"
+          ],
+          "location_ref": "sholazar-p051",
+          "task_refs": [],
+          "text": "雨声树屋",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0195",
+            "a0196"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶神谕者索乌塞"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "议和",
+              "task_id": 12573
+            },
+            {
+              "kind": "accept",
+              "name": "这么快就回来啦？",
+              "task_id": 12574
+            }
+          ],
+          "text": "高阶神谕者索乌塞 → 交《议和》 → 接《这么快就回来啦？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0197"
+          ],
+          "location_ref": "sholazar-p052",
+          "task_refs": [],
+          "text": "雾语村",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0198",
+            "a0199",
+            "a0200"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "唤雾者索乌甘"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "这么快就回来啦？",
+              "task_id": 12574
+            },
+            {
+              "kind": "accept",
+              "name": "被抢走的雾语宝物",
+              "task_id": 12575
+            },
+            {
+              "kind": "accept",
+              "name": "被迫出手",
+              "task_id": 12576
+            }
+          ],
+          "text": "唤雾者索乌甘 → 交《这么快就回来啦？》 → 接《被抢走的雾语宝物》、《被迫出手》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-18",
+      "summary": "在河流之心绑定炉石，回雨声树屋交议和，再到雾语村接北部两项任务。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "湖边着陆场",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12651
+        },
+        {
+          "badge": "not_shared",
+          "name": "议和",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12573
+        },
+        {
+          "badge": null,
+          "name": "这么快就回来啦？",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12574
+        },
+        {
+          "badge": "special",
+          "name": "被抢走的雾语宝物",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12575
+        },
+        {
+          "badge": null,
+          "name": "被迫出手",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12576
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "河流之心 → 雨声树屋 → 雾语村"
+    },
+    {
+      "action_ids": [
+        "a0201",
+        "a0202",
+        "a0203",
+        "a0204",
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0201"
+          ],
+          "location_ref": "sholazar-p053",
+          "task_refs": [],
+          "text": "多里安营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0202",
+            "a0203",
+            "a0204"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "多里安·达克斯托克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "更大的猎物",
+              "task_id": 12595
+            },
+            {
+              "kind": "accept",
+              "name": "磨尖你的爪子",
+              "task_id": 12603
+            },
+            {
+              "kind": "accept",
+              "name": "诱龙出巢",
+              "task_id": 12605
+            }
+          ],
+          "text": "多里安·达克斯托克 → 交《更大的猎物》 → 接《磨尖你的爪子》、《诱龙出巢》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0205"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "考尔文·诺灵顿"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "燃烧的唾液",
+              "task_id": 12683
+            }
+          ],
+          "text": "考尔文·诺灵顿 → 接《燃烧的唾液》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0206"
+          ],
+          "location_ref": "sholazar-p054",
+          "task_refs": [],
+          "text": "燃烧林地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0207",
+            "a0208"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "磨尖你的爪子",
+              "task_id": 12603
+            },
+            {
+              "kind": "objective",
+              "name": "诱龙出巢",
+              "task_id": 12605
+            }
+          ],
+          "text": "↳ 做《磨尖你的爪子》、《诱龙出巢》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0209"
+          ],
+          "location_ref": "sholazar-p055",
+          "task_refs": [],
+          "text": "矛生营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0210",
+            "a0211"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "被抢走的雾语宝物",
+              "task_id": 12575
+            },
+            {
+              "kind": "objective",
+              "name": "被迫出手",
+              "task_id": 12576
+            }
+          ],
+          "text": "↳ 做《被抢走的雾语宝物》、《被迫出手》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0212"
+          ],
+          "location_ref": "sholazar-p056",
+          "task_refs": [],
+          "text": "多里安营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0213",
+            "a0214"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "多里安·达克斯托克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "磨尖你的爪子",
+              "task_id": 12603
+            },
+            {
+              "kind": "turnin",
+              "name": "诱龙出巢",
+              "task_id": 12605
+            }
+          ],
+          "text": "多里安·达克斯托克 → 交《磨尖你的爪子》、《诱龙出巢》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0215",
+            "a0216"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "苏特菲兹"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "驯服猛犸象",
+              "task_id": 12607
+            },
+            {
+              "kind": "accept",
+              "name": "我的宠物大鹏",
+              "task_id": 12658
+            }
+          ],
+          "text": "苏特菲兹 → 接《驯服猛犸象》、《我的宠物大鹏》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0217"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "考尔文·诺灵顿"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "猎取材料",
+              "task_id": 12681
+            }
+          ],
+          "text": "考尔文·诺灵顿 → 接《猎取材料》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-19",
+      "summary": "完成《磨尖你的爪子》《诱龙出巢》时一并处理雾语村北部两项，再回多里安交接。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "更大的猎物",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12595
+        },
+        {
+          "badge": null,
+          "name": "磨尖你的爪子",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12603
+        },
+        {
+          "badge": null,
+          "name": "诱龙出巢",
+          "note": "多里安营地东/东北燃烧林地找始祖龙卵；打破蛋后会出黄色的始祖龙宝宝，右键拾取，共6只。不要误攻击宝宝，否则可能无法拾取；也可直接捡已被龙火孵出的宝宝。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12605
+        },
+        {
+          "badge": null,
+          "name": "燃烧的唾液",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12683
+        },
+        {
+          "badge": "special",
+          "name": "被抢走的雾语宝物",
+          "note": "督军塔尔特克击杀共享；雾语宝物交互不共享，五号需要依次交互，物体被取走后等刷新再操作下一号。先杀塔尔特克再处理宝物。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12575
+        },
+        {
+          "badge": null,
+          "name": "被迫出手",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12576
+        },
+        {
+          "badge": "shared",
+          "name": "驯服猛犸象",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12607
+        },
+        {
+          "badge": null,
+          "name": "我的宠物大鹏",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12658
+        },
+        {
+          "badge": null,
+          "name": "猎取材料",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12681
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "多里安 → 燃烧林地 / 矛生营地"
+    },
+    {
+      "action_ids": [
+        "a0218",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0223",
+        "a0224",
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0218"
+          ],
+          "location_ref": "sholazar-p057",
+          "task_refs": [],
+          "text": "裂牙猛犸区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0219"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "驯服猛犸象",
+              "task_id": 12607
+            }
+          ],
+          "text": "↳ 做《驯服猛犸象》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0220"
+          ],
+          "location_ref": "sholazar-p058",
+          "task_refs": [],
+          "text": "多里安营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0221"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "苏特菲兹"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "驯服猛犸象",
+              "task_id": 12607
+            }
+          ],
+          "text": "苏特菲兹 → 交《驯服猛犸象》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0222"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "多里安·达克斯托克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "母龙之怒",
+              "task_id": 12614
+            }
+          ],
+          "text": "多里安·达克斯托克 → 接《母龙之怒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0223"
+          ],
+          "location_ref": "sholazar-p059",
+          "task_refs": [],
+          "text": "母龙斯利维娜",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0224"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "母龙之怒",
+              "task_id": 12614
+            }
+          ],
+          "text": "↳ 做《母龙之怒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0225"
+          ],
+          "location_ref": "sholazar-p060",
+          "task_refs": [],
+          "text": "大鹏区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0226",
+            "a0227"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "我的宠物大鹏",
+              "task_id": 12658
+            },
+            {
+              "kind": "objective",
+              "name": "猎取材料",
+              "task_id": 12681
+            }
+          ],
+          "text": "↳ 做《我的宠物大鹏》、《猎取材料》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0228"
+          ],
+          "location_ref": "sholazar-p061",
+          "task_refs": [],
+          "text": "雾语村",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0229",
+            "a0230",
+            "a0231"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "唤雾者索乌甘"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "被抢走的雾语宝物",
+              "task_id": 12575
+            },
+            {
+              "kind": "turnin",
+              "name": "被迫出手",
+              "task_id": 12576
+            },
+            {
+              "kind": "accept",
+              "name": "回家喽！",
+              "task_id": 12577
+            }
+          ],
+          "text": "唤雾者索乌甘 → 交《被抢走的雾语宝物》、《被迫出手》 → 接《回家喽！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0232"
+          ],
+          "location_ref": "sholazar-p062",
+          "task_refs": [],
+          "text": "苦潮湖·多头蛇",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0233"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "燃烧的唾液",
+              "task_id": 12683
+            }
+          ],
+          "text": "↳ 做《燃烧的唾液》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0234"
+          ],
+          "location_ref": "sholazar-p063",
+          "task_refs": [],
+          "text": "多里安营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0235"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "多里安·达克斯托克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "母龙之怒",
+              "task_id": 12614
+            }
+          ],
+          "text": "多里安·达克斯托克 → 交《母龙之怒》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0236"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "苏特菲兹"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "我的宠物大鹏",
+              "task_id": 12658
+            }
+          ],
+          "text": "苏特菲兹 → 交《我的宠物大鹏》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0237",
+            "a0238"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "考尔文·诺灵顿"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "猎取材料",
+              "task_id": 12681
+            },
+            {
+              "kind": "turnin",
+              "name": "燃烧的唾液",
+              "task_id": 12683
+            }
+          ],
+          "text": "考尔文·诺灵顿 → 交《猎取材料》、《燃烧的唾液》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-20",
+      "summary": "驯服猛犸后先做母龙，再做大鹏和材料；随后交雾语村两项、做燃烧的唾液并回多里安交付。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "驯服猛犸象",
+          "note": "驯服一只猛犸象即可同步完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12607
+        },
+        {
+          "badge": "shared",
+          "name": "母龙之怒",
+          "note": "接到任务后其余四号取消骑乘跟随即可，由主控完成母龙目标，队伍同步。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12614
+        },
+        {
+          "badge": null,
+          "name": "我的宠物大鹏",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12658
+        },
+        {
+          "badge": null,
+          "name": "猎取材料",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12681
+        },
+        {
+          "badge": "special",
+          "name": "被抢走的雾语宝物",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12575
+        },
+        {
+          "badge": null,
+          "name": "被迫出手",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12576
+        },
+        {
+          "badge": null,
+          "name": "回家喽！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12577
+        },
+        {
+          "badge": null,
+          "name": "燃烧的唾液",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12683
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "猛犸 → 母龙 / 大鹏 → 燃烧的唾液"
+    },
+    {
+      "action_ids": [
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0239"
+          ],
+          "location_ref": "sholazar-p064",
+          "task_refs": [],
+          "text": "雨声树屋",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0240",
+            "a0241"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶神谕者索乌塞"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "回家喽！",
+              "task_id": 12577
+            },
+            {
+              "kind": "accept",
+              "name": "愤怒的鳄鱼人",
+              "task_id": 12578
+            }
+          ],
+          "text": "高阶神谕者索乌塞 → 交《回家喽！》 → 接《愤怒的鳄鱼人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0242",
+            "a0243",
+            "a0244",
+            "a0245"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "莫乌德"
+          },
+          "location_ref": "sholazar-p065",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "愤怒的鳄鱼人",
+              "task_id": 12578
+            },
+            {
+              "kind": "accept",
+              "name": "苔行祭坛的源血碎片",
+              "task_id": 12579
+            },
+            {
+              "kind": "accept",
+              "name": "苔行村的救星",
+              "task_id": 12580
+            }
+          ],
+          "text": "苔行村·莫乌德 → 交《愤怒的鳄鱼人》 → 接《苔行祭坛的源血碎片》、《苔行村的救星》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0246"
+          ],
+          "location_ref": "sholazar-p066",
+          "task_refs": [],
+          "text": "苔行村东侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0247"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "苔行村的救星",
+              "task_id": 12580
+            }
+          ],
+          "text": "↳ 做《苔行村的救星》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0248",
+            "a0249"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "莫乌德"
+          },
+          "location_ref": "sholazar-p067",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "苔行村的救星",
+              "task_id": 12580
+            }
+          ],
+          "text": "苔行村·莫乌德 → 交《苔行村的救星》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0250"
+          ],
+          "location_ref": "sholazar-p068",
+          "task_refs": [],
+          "text": "苔行祭坛东侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0251"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "苔行祭坛的源血碎片",
+              "task_id": 12579
+            }
+          ],
+          "text": "↳ 做《苔行祭坛的源血碎片》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0252",
+            "a0253",
+            "a0254"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "莫乌德"
+          },
+          "location_ref": "sholazar-p069",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "苔行祭坛的源血碎片",
+              "task_id": 12579
+            },
+            {
+              "kind": "accept",
+              "name": "英雄的负担",
+              "task_id": 12581
+            }
+          ],
+          "text": "苔行村·莫乌德 → 交《苔行祭坛的源血碎片》 → 接《英雄的负担》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0255"
+          ],
+          "location_ref": "sholazar-p070",
+          "task_refs": [],
+          "text": "残忍的阿图里斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0256"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "英雄的负担",
+              "task_id": 12581
+            }
+          ],
+          "text": "↳ 做《英雄的负担》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0257"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "阿图里斯的护命匣"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "英雄的负担",
+              "task_id": 12581
+            }
+          ],
+          "text": "阿图里斯的护命匣 → 交《英雄的负担》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0258",
+            "a0259",
+            "a0260"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "亚鲁乌特"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "神谕者之手",
+              "task_id": 12689
+            },
+            {
+              "kind": "turnin",
+              "name": "神谕者之手",
+              "task_id": 12689
+            },
+            {
+              "kind": "accept",
+              "name": "友善的干燥皮肤朋友",
+              "task_id": 12695
+            }
+          ],
+          "text": "亚鲁乌特 → 接《神谕者之手》 → 交《神谕者之手》 → 接《友善的干燥皮肤朋友》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-21",
+      "summary": "交《回家喽！》后进入苔行村；救星与源血碎片分别完成即交，再做《英雄的负担》。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "回家喽！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12577
+        },
+        {
+          "badge": null,
+          "name": "愤怒的鳄鱼人",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12578
+        },
+        {
+          "badge": "not_shared",
+          "name": "苔行祭坛的源血碎片",
+          "note": "源血碎片五号分别完成；完成后直接回莫乌德交，不和《苔行村的救星》一起压到最后。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12579
+        },
+        {
+          "badge": "shared",
+          "name": "苔行村的救星",
+          "note": "完成后直接回莫乌德交。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12580
+        },
+        {
+          "badge": null,
+          "name": "英雄的负担",
+          "note": "神谕者路线不要爆发秒杀阿图里斯。约30%血量后等亚鲁乌特和泽匹克解除控制，只杀泽匹克并保留亚鲁乌特；继续让亚鲁乌特参与最后阶段后再击杀阿图里斯。战后原地确认亚鲁乌特出现《神谕者之手》，没有出现就不要直接离开，避免整条神谕者后续断掉。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12581
+        },
+        {
+          "badge": null,
+          "name": "神谕者之手",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12689
+        },
+        {
+          "badge": null,
+          "name": "友善的干燥皮肤朋友",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12695
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "回家喽 → 苔行村 → 英雄的负担"
+    },
+    {
+      "action_ids": [
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0261"
+          ],
+          "location_ref": "sholazar-p071",
+          "task_refs": [],
+          "text": "造物者悬台·古旧石箱",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0262"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "古旧的石箱"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "古旧的石箱",
+              "task_id": 12691
+            }
+          ],
+          "text": "古旧的石箱 → 接《古旧的石箱》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0263"
+          ],
+          "location_ref": "sholazar-p072",
+          "task_refs": [],
+          "text": "造物者悬台·索拉查卫士",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0264"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "古旧的石箱",
+              "task_id": 12691
+            }
+          ],
+          "text": "↳ 做《古旧的石箱》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0265"
+          ],
+          "location_ref": "sholazar-p073",
+          "task_refs": [],
+          "text": "造物者悬台·古旧石箱",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0266"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "古旧的石箱"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "古旧的石箱",
+              "task_id": 12691
+            }
+          ],
+          "text": "古旧的石箱 → 交《古旧的石箱》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0267"
+          ],
+          "location_ref": "sholazar-p074",
+          "task_refs": [],
+          "text": "雨声树屋",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0268"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高阶神谕者索乌塞"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "友善的干燥皮肤朋友",
+              "task_id": 12695
+            }
+          ],
+          "text": "高阶神谕者索乌塞 → 交《友善的干燥皮肤朋友》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-22",
+      "summary": "阿图里斯后继续古旧石箱；正常神谕者分支最后回雨声树屋交《友善的干燥皮肤朋友》。",
+      "task_presentations": [
+        {
+          "badge": "not_shared",
+          "name": "古旧的石箱",
+          "note": "古旧的石箱五号分别完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12691
+        },
+        {
+          "badge": null,
+          "name": "友善的干燥皮肤朋友",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12695
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "古旧石箱 → 神谕者交付"
+    },
+    {
+      "action_ids": [
+        "a0270",
+        "a0269",
+        "a0271"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0270"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：河流之心",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0269"
+          ],
+          "location_ref": "sholazar-p075",
+          "task_refs": [],
+          "text": "河流之心·飞行点",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0271"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：河流之心 → 龙眠神殿",
+          "type": "route_action"
+        }
+      ],
+      "step_id": "step-23",
+      "summary": "使用炉石回河流之心后直接系统飞龙眠神殿。",
+      "task_presentations": [],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "河流之心 → 龙眠神殿"
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "status": "workflow_ledger_only_not_task_truth",
+  "scope": "Hellfire Peninsula task-card migration",
+  "method": "one task_id at a time; complete only after legacy source disposition audit reaches unclassified=0",
+  "tasks": {
+    "10208": {
+      "name": "阻断援军",
+      "migration_status": "complete",
+      "completed_at": "2026-09-15",
+      "task_card": "data/task-cards/10208.json",
+      "unclassified_count": 0,
+      "notes": [
+        "timing_rule_ref remains null by current Timing contract; this is not a migration gap.",
+        "presentation.note_override is intentionally empty by explicit user decision; old long HUD notes are historical/compatibility text, not missing presentation data."
+      ],
+      "fact_sources": [
+        "Questie 11.34.0 wotlkQuestDB/xpDB quest_id=10208",
+        "AzerothCore WotLK quest_template/item_template exact reward data",
+        "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json",
+        "data/observations/fivebox-task-types.json"
+      ],
+      "source_dispositions": {
+        "route_profile_or_generated_route": [
+          "data/route-atlas/workbench-routes.json",
+          "data/route-atlas/hellfire-speed-route-scope.json",
+          "data/route-atlas/hellfire-player-step-groups.json",
+          "data/route-profiles/hellfire-dk-speed.json",
+          "data/routes/world-candidate/3483-hellfire-peninsula/route.json",
+          "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json",
+          "scripts/build_hellfire_route.py",
+          "scripts/build_dk_outland_speed_routes.py"
+        ],
+        "timing_or_history_evidence": [
+          "data/journey/current-paladin.json",
+          "data/video-route/master-events.json",
+          "data/video-route/map-reference-blocks.json"
+        ],
+        "selection_chain_or_old_analysis": [
+          "data/routes/horde/blood-elf/outland-58-68-chain-audit.json",
+          "data/routes/horde/blood-elf/hellfire-chain-round-overlap.json",
+          "docs/analysis/2026-09-14-outland-60-68-removal-review.md",
+          "docs/archive/analysis/2026-08-11-hellfire-time-server-circles-v2.md",
+          "docs/archive/analysis/2026-08-11-hellfire-chain-round-overlap.md",
+          "docs/archive/analysis/2026-08-17-outland-loot-reward-filter-audit.md",
+          "docs/archive/analysis/2026-08-11-outland-58-68-level-window-chain-audit.md",
+          "docs/archive/neat/2026-08-12-hellfire-58-61-midrun-neat.md"
+        ],
+        "rules_architecture_or_error_history": [
+          "docs/analysis/2026-09-15-architecture-governance-acceptance.md",
+          "docs/verified-routes/ERROR-BOOK.md",
+          "docs/rules/route-profile-and-lifecycle.md",
+          "docs/rules/route-atlas-task-presentation.md",
+          "docs/task-library/README.md",
+          "docs/archive/neat/2026-09-15-architecture-governance-freeze-neat.md"
+        ],
+        "derived_relation_or_compatibility": [
+          "data/task-cards/10129.json",
+          "scripts/migrate_hellfire_dk_task_cards.py",
+          "scripts/normalize_hellfire_task_cards_v1.py"
+        ],
+        "task_truth": [
+          "data/task-cards/10208.json"
+        ]
+      }
+    },
+    "9407": {
+      "name": "跨越黑暗之门",
+      "migration_status": "complete",
+      "completed_at": "2026-09-15",
+      "task_card": "data/task-cards/9407.json",
+      "unclassified_count": 0,
+      "notes": [
+        "Questie also contains same-name IDs 10046 and 10119; current Horde candidate/Profile explicitly uses 9407 and race mask 690, so identity is closed.",
+        "No legacy fivebox observation exists; fivebox.status remains pending without inference.",
+        "Current workbench has no independent note for this task; presentation.note_override is explicitly empty.",
+        "Journey accept→complete timestamps are historical/timing evidence, not Task Card timing truth."
+      ],
+      "fact_sources": [
+        "Questie 11.34.0 wotlkQuestDB/xpDB quest_id=9407",
+        "AzerothCore WotLK quest_template/item_template exact reward data",
+        "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json"
+      ],
+      "source_dispositions": {
+        "route_profile_or_generated_route": [
+          "data/route-atlas/workbench-routes.json",
+          "data/route-profiles/hellfire-dk-speed.json",
+          "data/routes/world-candidate/3483-hellfire-peninsula/route.json",
+          "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json",
+          "scripts/build_hellfire_route.py",
+          "scripts/update_hellfire_entry_transport.py"
+        ],
+        "timing_or_history_evidence": [
+          "data/journey/current-paladin.json",
+          "data/video-route/master-events.json",
+          "data/video-route/map-reference-blocks.json",
+          "data/observations/route-timing-runs.json"
+        ],
+        "selection_chain_or_old_analysis": [
+          "data/routes/horde/blood-elf/35-55-task-foundation-enriched.json",
+          "data/routes/horde/blood-elf/35-55-task-foundation.json",
+          "data/routes/horde/blood-elf/35-55-candidates.json",
+          "data/routes/horde/blood-elf/outland-58-68-chain-audit.json",
+          "data/routes/horde/blood-elf/39-55-zero-purchase-zone-pool.json",
+          "data/routes/horde/blood-elf/35-55-overlap-graph.json",
+          "data/routes/horde/blood-elf/hellfire-chain-round-overlap.json",
+          "docs/archive/analysis/2026-08-11-hellfire-time-server-circles-v2.md",
+          "docs/archive/analysis/2026-08-11-hellfire-chain-round-overlap.md",
+          "docs/archive/analysis/2026-08-11-outland-58-68-chain-master-table.md",
+          "docs/archive/analysis/2026-08-17-outland-loot-reward-filter-audit.md",
+          "docs/archive/analysis/2026-08-11-outland-58-68-level-window-chain-audit.md",
+          "docs/archive/neat/2026-08-12-hellfire-58-61-midrun-neat.md"
+        ],
+        "derived_relation_or_compatibility": [
+          "data/task-cards/10120.json",
+          "scripts/build_hellfire_chain_overlap.py"
+        ],
+        "task_truth": [
+          "data/task-cards/9407.json"
+        ]
+      }
+    },
+    "10120": {
+      "name": "抵达外域",
+      "migration_status": "complete",
+      "completed_at": "2026-09-15",
+      "task_card": "data/task-cards/10120.json",
+      "unclassified_count": 0,
+      "notes": [
+        "Same-name ID 10288 is Alliance (race mask 1101); current Horde ID 10120 uses race mask 690.",
+        "No legacy fivebox observation or player note exists; status remains pending and note_override is explicitly empty.",
+        "Route Profile accept NPC was deterministically corrected from parser output '奥格瑞玛' to '沃雷恩中将'."
+      ],
+      "fact_sources": [
+        "Questie 11.34.0 wotlkQuestDB/xpDB quest_id=10120",
+        "AzerothCore WotLK quest_template/item_template exact reward data",
+        "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json"
+      ],
+      "source_dispositions": {
+        "route_profile_or_generated_route": [
+          "data/route-atlas/workbench-routes.json",
+          "data/route-profiles/hellfire-dk-speed.json",
+          "data/routes/world-candidate/3483-hellfire-peninsula/route.json",
+          "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json"
+        ],
+        "timing_or_history_evidence": [
+          "data/journey/current-paladin.json",
+          "data/video-route/master-events.json",
+          "data/video-route/map-reference-blocks.json",
+          "data/video-route/cross-episode-gaps.json"
+        ],
+        "selection_chain_or_old_analysis": [
+          "data/routes/horde/blood-elf/outland-58-68-chain-audit.json",
+          "data/routes/horde/blood-elf/hellfire-chain-round-overlap.json"
+        ],
+        "derived_relation_or_compatibility": [
+          "data/task-cards/10289.json"
+        ],
+        "task_truth": [
+          "data/task-cards/10120.json"
+        ]
+      }
+    },
+    "10289": {
+      "name": "萨尔玛之旅",
+      "migration_status": "complete",
+      "completed_at": "2026-09-15",
+      "task_card": "data/task-cards/10289.json",
+      "unclassified_count": 0,
+      "notes": [
+        "Unique Questie task name/ID; no identity ambiguity.",
+        "No legacy fivebox observation or player note exists; status remains pending and note_override is explicitly empty.",
+        "Quest-provided wind rider travel is preserved in guide; route timing/order remains Route Profile truth."
+      ],
+      "fact_sources": [
+        "Questie 11.34.0 wotlkQuestDB/xpDB quest_id=10289",
+        "AzerothCore WotLK quest_template/item_template exact reward data",
+        "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json"
+      ],
+      "source_dispositions": {
+        "route_profile_or_generated_route": [
+          "data/route-atlas/workbench-routes.json",
+          "data/route-profiles/hellfire-dk-speed.json",
+          "data/routes/world-candidate/3483-hellfire-peninsula/route.json",
+          "data/routes/world-candidate-dk/3483-hellfire-peninsula/route.json"
+        ],
+        "timing_or_history_evidence": [
+          "data/journey/current-paladin.json"
+        ],
+        "selection_chain_or_old_analysis": [
+          "data/routes/horde/blood-elf/outland-58-68-chain-audit.json",
+          "data/routes/horde/blood-elf/hellfire-chain-round-overlap.json"
+        ],
+        "derived_relation_or_compatibility": [
+          "data/task-cards/10291.json"
+        ],
+        "task_truth": [
+          "data/task-cards/10289.json"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "task_id": 12713,
+  "identity": {
+    "name_zhcn": "背叛",
+    "name_en": "Betrayal",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 74,
+    "pre_any": [
+      12676
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 186000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39652,
+        "quantity": 1,
+        "name_zhcn": "背叛者的狂暴项圈",
+        "name_en": "Choker of the Betrayer",
+        "sell_price_each_copper": 46109,
+        "sell_price_total_copper": 46109
+      },
+      {
+        "item_id": 39653,
+        "quantity": 1,
+        "name_zhcn": "背叛者的法术项圈",
+        "name_en": "Choker of Betrayal",
+        "sell_price_each_copper": 46109,
+        "sell_price_total_copper": 46109
+      },
+      {
+        "item_id": 39655,
+        "quantity": 1,
+        "name_zhcn": "背叛者的防御项圈",
+        "name_en": "Betrayer's Choker",
+        "sell_price_each_copper": 46109,
+        "sell_price_total_copper": 46109
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 46109,
+    "gear_sale_max_copper": 46109,
+    "reputation_rewards": [
+      {
+        "faction_id": 1098,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 31750
+  },
+  "guide": [
+    "接取：斯特凡·瓦杜。",
+    "黑锋哨站的斯特凡要求你击败达库鲁。 /  / 如果你丢失了迷惑项圈，可以返回黑锋哨站的斯特凡那里去再要一个。",
+    "交付：斯特凡·瓦杜。"
+  ],
+  "fivebox": {
+    "status": "special"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12713",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12713; legacy_type=mixed_boss_shared_personal_loot_transport_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12713",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《背叛》：共享：与达库鲁对话传送到沃尔塔鲁斯顶部后，伪装失效是正常流程；等提示出现后立刻用统御权杖控制平台边缘的荒芜之血巨魔，让宠物主攻达库鲁。优先循环重击/击昏，自己躲开达库鲁投出的荒芜水晶及留下的毒雾；角色掉血时用巨魔的灌注技能回血。第一只巨魔快死时靠近下一只，死亡后再控第二只，避免空档吃暗影箭。剧情结束后五号分别拾取最后道具，并各自使用最后愿望传送回痛苦之匣。\n【需要单独修正优化】《背叛》祖达克首组实跑确认：Boss战斗共享；结尾任务道具需要五号分别拾取，返回痛苦之匣也需要五号分别交互传送。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12713",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

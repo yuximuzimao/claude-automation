@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": 13364,
+  "identity": {
+    "name_zhcn": "提里奥的尝试",
+    "name_en": "Tirion's Gambit",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13363
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 222000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 44748,
+        "quantity": 1,
+        "name_zhcn": "青春哀伤法杖",
+        "name_en": "Stave of Youthful Sorrow",
+        "sell_price_each_copper": 153789,
+        "sell_price_total_copper": 153789
+      },
+      {
+        "item_id": 44745,
+        "quantity": 1,
+        "name_zhcn": "空虚心灵之刃",
+        "name_en": "Blade of the Empty Void",
+        "sell_price_each_copper": 133337,
+        "sell_price_total_copper": 133337
+      },
+      {
+        "item_id": 44746,
+        "quantity": 1,
+        "name_zhcn": "黯淡灵魂匕首",
+        "name_en": "Knife of the Tarnished Soul",
+        "sell_price_each_copper": 123031,
+        "sell_price_total_copper": 123031
+      },
+      {
+        "item_id": 44747,
+        "quantity": 1,
+        "name_zhcn": "痛苦改变之锤",
+        "name_en": "Hammer of Wrenching Change",
+        "sell_price_each_copper": 123031,
+        "sell_price_total_copper": 123031
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 153789,
+    "gear_sale_max_copper": 153789,
+    "reputation_rewards": [
+      {
+        "faction_id": 1050,
+        "amount": 500
+      },
+      {
+        "faction_id": 1085,
+        "amount": 500
+      },
+      {
+        "faction_id": 1098,
+        "amount": 500
+      },
+      {
+        "faction_id": 1106,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 33100
+  },
+  "guide": [
+    "接取：大领主提里奥·弗丁。",
+    "北伐军之峰的提里奥·弗丁要你想办法获取一件诅咒教徒的兜帽，穿上它，然后前往冰冠堡垒西北方的黑暗大教堂入口处与他汇合。",
+    "交付：大领主提里奥·弗丁。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13364",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13364; legacy_type=scripted_event_group_shared_with_all_prerequisite_state_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13364",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《提里奥的尝试》本轮实跑确认：共享；五号必须都先装备侍僧兜帽并贴近提里奥，再由一个号互动启动事件即可同步。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13364",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

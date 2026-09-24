@@ -1,0 +1,40 @@
+{
+  "schema": "stage9-economy-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "xp_input": {
+    "entry_level": 80,
+    "entry_xp_into_level": 0,
+    "character_ids": ["dk1", "dk2", "dk3", "dk4", "dk5"],
+    "external_xp_upper_bound_each": 0,
+    "source": {
+      "kind": "stage9_real_fixture",
+      "ref": "explicit-cold-start-80-0"
+    }
+  },
+  "economy_input": {
+    "cost_coverage": "complete",
+    "known_cost_copper_each": 0,
+    "source": {
+      "kind": "stage9_real_fixture",
+      "ref": "explicit-zero-cost-validation"
+    }
+  },
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "requirements",
+    "profile_status": "requirements",
+    "turnin_count": 55,
+    "character_count": 5,
+    "known_gross_copper": 3695725,
+    "gross_copper": null,
+    "known_cost_copper": 0,
+    "net_copper": null,
+    "gross_gph": null,
+    "issue_counts": {
+      "upstream_stage8_requirements": 1,
+      "no_money_from_xp_fact_required": 275,
+      "fresh_complete_timing_required_for_gph": 1
+    }
+  },
+  "purpose": "Frozen real-Profile Stage 9 diagnostic captured before no_money_from_xp is mechanically added to formal Task Cards. The level-80/0 XP state and zero-cost input are explicit validation inputs, not historical live-run claims. The fixture proves the unified Economy stage preserves known vendor reward value while refusing to invent exact max-level quest cash, net value or G/hour when the stable reward flag and complete Timing are not fresh. Formal Task Card migration must not rewrite this pre-migration expectation to make the old diagnostic green."
+}

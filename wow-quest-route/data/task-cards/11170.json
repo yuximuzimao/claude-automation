@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11170,
+  "identity": {
+    "name_zhcn": "海中测试",
+    "name_en": "Test at Sea",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11168
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 47000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35842,
+        "quantity": 1,
+        "name_zhcn": "碧蓝链甲外套",
+        "name_en": "Azure Chain Hauberk",
+        "sell_price_each_copper": 51738,
+        "sell_price_total_copper": 51738
+      },
+      {
+        "item_id": 35843,
+        "quantity": 1,
+        "name_zhcn": "鹦鹉螺护肩",
+        "name_en": "Ramshorn-Inlaid Shoulders",
+        "sell_price_each_copper": 46555,
+        "sell_price_total_copper": 46555
+      },
+      {
+        "item_id": 35839,
+        "quantity": 1,
+        "name_zhcn": "符文蚌壳项链",
+        "name_en": "Runed Clamshell Choker",
+        "sell_price_each_copper": 31478,
+        "sell_price_total_copper": 31478
+      },
+      {
+        "item_id": 35841,
+        "quantity": 1,
+        "name_zhcn": "霜痕护手",
+        "name_en": "Frost-Trimmed Gauntlets",
+        "sell_price_each_copper": 21477,
+        "sell_price_total_copper": 21477
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 51738,
+    "gear_sale_max_copper": 51738,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：药剂师雷杉德尔。",
+    "与蝙蝠管理员卡米蕾交谈，骑乘蝙蝠前去拦截联盟的增援部队。飞到联盟舰队上空时，使用药剂瓶拦截他们并统计16份测试结果。",
+    "交付：药剂师雷杉德尔。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11170",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《海中测试》：乘卡米尔的任务蝙蝠飞到舰队上空，对北方舰队预备兵投掷瘟疫之瓶，累计感染16人；一趟没完成可以再次乘蝙蝠补完。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

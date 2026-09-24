@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import math
 from typing import Any
+
+from .route_xp import base_quest_xp_at_level_values, load_xp_model_config, quest_xp_at_level
 
 # WotLK 3.3.5 quest flag: experience is not converted to bonus money at max level.
 QUEST_FLAGS_NO_MONEY_FROM_XP = 0x100
@@ -9,28 +10,48 @@ MAX_LEVEL = 80
 COPPER_PER_XP_AT_MAX_LEVEL = 6
 
 
-def _round_quest_xp(xp: float) -> int:
-    """Mirror the 3.3.5 Quest::XPValue rounding bands used by AzerothCore/Trinity-style cores."""
-    if xp <= 100:
-        return int(5 * math.floor((xp + 2) / 5))
-    if xp <= 500:
-        return int(10 * math.floor((xp + 5) / 10))
-    if xp <= 1000:
-        return int(25 * math.floor((xp + 12) / 25))
-    return int(50 * math.floor((xp + 25) / 50))
+def _quest_xp_inputs(questie_data: Any, quest_id: int) -> tuple[int, int] | None:
+    row = questie_data.quest_xp.get(quest_id)
+    if not isinstance(row, dict):
+        return None
+    quest_level = row.get(1)
+    full_xp = row.get(2)
+    if not isinstance(quest_level, int) or not isinstance(full_xp, int) or quest_level <= 0 or full_xp <= 0:
+        return None
+    return quest_level, full_xp
 
 
 def base_quest_xp_at_level(questie_data: Any, quest_id: int, player_level: int) -> int:
     """Return base (unmultiplied server-rate) quest XP at a player level from Questie's XP DB."""
-    row = questie_data.quest_xp.get(quest_id)
-    if not isinstance(row, dict):
+    inputs = _quest_xp_inputs(questie_data, quest_id)
+    if inputs is None:
         return 0
-    quest_level = row.get(1)
-    full_xp = row.get(2)
-    if not isinstance(quest_level, int) or not isinstance(full_xp, int) or quest_level <= 0 or full_xp <= 0:
+    quest_level, full_xp = inputs
+    return base_quest_xp_at_level_values(
+        quest_level=quest_level,
+        full_xp=full_xp,
+        player_level=player_level,
+    )
+
+
+def server_quest_xp_at_level(
+    questie_data: Any,
+    quest_id: int,
+    player_level: int,
+    *,
+    model_config: dict[str, Any] | None = None,
+) -> int:
+    """Return server-rate leveling XP through the sole Stage 8 XP implementation/config."""
+    inputs = _quest_xp_inputs(questie_data, quest_id)
+    if inputs is None:
         return 0
-    diff_factor = max(1, min(10, 2 * (quest_level - player_level) + 20))
-    return _round_quest_xp(full_xp * diff_factor / 10.0)
+    quest_level, full_xp = inputs
+    return quest_xp_at_level(
+        quest_level=quest_level,
+        full_xp=full_xp,
+        player_level=player_level,
+        model_config=model_config or load_xp_model_config(),
+    )
 
 
 def max_level_bonus_money(questie_data: Any, quest_id: int, quest_flags: int | None = None) -> dict[str, Any]:

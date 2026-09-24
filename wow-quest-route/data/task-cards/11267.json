@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11267,
+  "identity": {
+    "name_zhcn": "冰霜巨龙和它的主人",
+    "name_en": "The Frost Wyrm and its Master",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 68,
+    "pre_any": [
+      11266
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 100000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35882,
+        "quantity": 1,
+        "name_zhcn": "魔刺头盔",
+        "name_en": "Magispike Helm",
+        "sell_price_each_copper": 39828,
+        "sell_price_total_copper": 39828
+      },
+      {
+        "item_id": 35881,
+        "quantity": 1,
+        "name_zhcn": "失落的维库徽记之戒",
+        "name_en": "Lost Vrykul Signet",
+        "sell_price_each_copper": 31478,
+        "sell_price_total_copper": 31478
+      },
+      {
+        "item_id": 35883,
+        "quantity": 1,
+        "name_zhcn": "银钢护手",
+        "name_en": "Silversteel Gauntlets",
+        "sell_price_each_copper": 31264,
+        "sell_price_total_copper": 31264
+      },
+      {
+        "item_id": 35880,
+        "quantity": 1,
+        "name_zhcn": "土墙裹足",
+        "name_en": "Earthwell Footwraps",
+        "sell_price_each_copper": 26360,
+        "sell_price_total_copper": 26360
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 39828,
+    "gear_sale_max_copper": 39828,
+    "reputation_rewards": [
+      {
+        "faction_id": 1064,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25400
+  },
+  "guide": [
+    "接取：塞莉亚·冰鬃。",
+    "杀死唤龙者维尔，使用唤龙者的号角召唤并杀死格拉希恩。然后返回冬蹄营地，将号角交给塞莉亚·冰鬃。",
+    "交付：塞莉亚·冰鬃。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11267",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《冰霜巨龙和它的主人》：唤龙者维尔约36.7,7，放到本平台最后杀，拾取号角后立刻使用召下格拉希恩；维尔刷新很快，拖久会与巨龙一起打。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

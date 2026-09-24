@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "task_id": 11991,
+  "identity": {
+    "name_zhcn": "解读象形文字",
+    "name_en": "Subject to Interpretation",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 73,
+    "pre_any": [
+      11990
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 56000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39081,
+        "quantity": 1,
+        "name_zhcn": "灵铸头盔",
+        "name_en": "Spiritforged Helm",
+        "sell_price_each_copper": 51732,
+        "sell_price_total_copper": 51732
+      },
+      {
+        "item_id": 39049,
+        "quantity": 1,
+        "name_zhcn": "灵魂链接头盔",
+        "name_en": "Helm of Spirit Links",
+        "sell_price_each_copper": 41388,
+        "sell_price_total_copper": 41388
+      },
+      {
+        "item_id": 39020,
+        "quantity": 1,
+        "name_zhcn": "达库鲁的苍白头盔",
+        "name_en": "Drakuru's Ghastly Helm",
+        "sell_price_each_copper": 35950,
+        "sell_price_total_copper": 35950
+      },
+      {
+        "item_id": 38716,
+        "quantity": 1,
+        "name_zhcn": "轻灵兜帽",
+        "name_en": "Ethereal Hood",
+        "sell_price_each_copper": 28225,
+        "sell_price_total_copper": 28225
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 51732,
+    "gear_sale_max_copper": 51732,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20750
+  },
+  "guide": [
+    "接取：达库鲁。",
+    "达库鲁希望你从达克辛废墟的达卡莱巨魔身上获取5份冰冻魔精，然后在达库鲁的火盆处使用他的药剂。",
+    "交付：达库鲁的影像。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11991",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11991; legacy_type=personal_summon_turnin_with_tradeable_reagent_confirmed",
+      "observed_at": "2026-09-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11991",
+      "observed_at": "2026-09-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《解读象形文字》：不共享：冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像，召唤NPC不共享。当前号背包里若还有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。\n【需要单独修正优化】《解读象形文字》灰熊丘陵首组实跑确认：不共享；冰冻魔精可在角色间交易，每号都要自己在火盆用药剂召唤达库鲁影像，召唤出的NPC不共享。当前号背包里若有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11991",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

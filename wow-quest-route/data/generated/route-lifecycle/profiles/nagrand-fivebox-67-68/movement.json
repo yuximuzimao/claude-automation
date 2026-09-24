@@ -1,0 +1,436 @@
+{
+  "canonical_edge_count": 13,
+  "edges": [
+    {
+      "cross_zone": false,
+      "edge_id": "a0001->a0005",
+      "from_location_ref": "nagrand-p001",
+      "from_visit_id": "a0001",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p002",
+      "to_visit_id": "a0005",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0005->a0009",
+      "from_location_ref": "nagrand-p002",
+      "from_visit_id": "a0005",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p003",
+      "to_visit_id": "a0009",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0009->a0014",
+      "from_location_ref": "nagrand-p003",
+      "from_visit_id": "a0009",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p004",
+      "to_visit_id": "a0014",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0014->a0016",
+      "from_location_ref": "nagrand-p004",
+      "from_visit_id": "a0014",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p005",
+      "to_visit_id": "a0016",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0016->a0019",
+      "from_location_ref": "nagrand-p005",
+      "from_visit_id": "a0016",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p006",
+      "to_visit_id": "a0019",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0019->a0021",
+      "from_location_ref": "nagrand-p006",
+      "from_visit_id": "a0019",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_action": {
+        "action_id": "a0022",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "加拉达尔"
+      },
+      "movement_action_id": "a0022",
+      "operation_kind": "hearth",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p007",
+      "to_visit_id": "a0021",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0021->a0024",
+      "from_location_ref": "nagrand-p007",
+      "from_visit_id": "a0021",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p008",
+      "to_visit_id": "a0024",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0024->a0031",
+      "from_location_ref": "nagrand-p008",
+      "from_visit_id": "a0024",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p009",
+      "to_visit_id": "a0031",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0031->a0033",
+      "from_location_ref": "nagrand-p009",
+      "from_visit_id": "a0031",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p010",
+      "to_visit_id": "a0033",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0033->a0036",
+      "from_location_ref": "nagrand-p010",
+      "from_visit_id": "a0033",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p011",
+      "to_visit_id": "a0036",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0036->a0043",
+      "from_location_ref": "nagrand-p011",
+      "from_visit_id": "a0036",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p012",
+      "to_visit_id": "a0043",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0043->a0045",
+      "from_location_ref": "nagrand-p012",
+      "from_visit_id": "a0043",
+      "from_zone_id": 3518,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p013",
+      "to_visit_id": "a0045",
+      "to_zone_id": 3518
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0045->a0047",
+      "from_location_ref": "nagrand-p013",
+      "from_visit_id": "a0045",
+      "from_zone_id": 3518,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "nagrand-p014",
+      "to_visit_id": "a0047",
+      "to_zone_id": 3518
+    }
+  ],
+  "exit_movement_actions": [],
+  "input_fingerprint": "5883d43d21600702e4dfafcca1535a26e03ccbefe9815ab471c8ad7bfa1d1c35",
+  "issues": [],
+  "migration_candidate_count": 0,
+  "primary_zone_id": 3518,
+  "profile_id": "nagrand-fivebox-67-68",
+  "status": "pass",
+  "unresolved_edge_count": 0,
+  "visits": [
+    {
+      "display_name": "加拉达尔",
+      "handoff_ref": null,
+      "incoming_movement": null,
+      "legacy_transport": null,
+      "location_ref": "nagrand-p001",
+      "location_role": "map_anchor",
+      "ordinal": 1,
+      "visit_id": "a0001",
+      "x": 55.37,
+      "y": 37.45,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "加拉达尔",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p002",
+      "location_role": "map_anchor",
+      "ordinal": 2,
+      "visit_id": "a0005",
+      "x": 55.55,
+      "y": 37.7,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "奈辛瓦里狩猎队",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p003",
+      "location_role": "map_anchor",
+      "ordinal": 3,
+      "visit_id": "a0009",
+      "x": 71.52,
+      "y": 40.62,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "基尔索罗堡垒 / 吉塞尔达",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p004",
+      "location_role": "map_anchor",
+      "ordinal": 4,
+      "visit_id": "a0014",
+      "x": 71.16,
+      "y": 82.36,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "塔拉附近塔布羊 / 裂蹄牛走廊",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p005",
+      "location_role": "map_anchor",
+      "ordinal": 5,
+      "visit_id": "a0016",
+      "x": 68,
+      "y": 61,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "绕山风鹏刷新带",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p006",
+      "location_role": "map_anchor",
+      "ordinal": 6,
+      "visit_id": "a0019",
+      "x": 67.5,
+      "y": 42,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "加拉达尔",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0022",
+        "kind": "action"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p007",
+      "location_role": "map_anchor",
+      "ordinal": 7,
+      "visit_id": "a0021",
+      "x": 55.37,
+      "y": 37.45,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "奈辛瓦里狩猎队",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p008",
+      "location_role": "map_anchor",
+      "ordinal": 8,
+      "visit_id": "a0024",
+      "x": 71.52,
+      "y": 40.62,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "西部风鹏刷新带",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p009",
+      "location_role": "map_anchor",
+      "ordinal": 9,
+      "visit_id": "a0031",
+      "x": 49.01,
+      "y": 60.47,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "中部草原",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p010",
+      "location_role": "map_anchor",
+      "ordinal": 10,
+      "visit_id": "a0033",
+      "x": 54.5,
+      "y": 48,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "奈辛瓦里狩猎队",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p011",
+      "location_role": "map_anchor",
+      "ordinal": 11,
+      "visit_id": "a0036",
+      "x": 71.52,
+      "y": 40.62,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "【最低号未到68】战槌山 / 顾问佐尔布",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p012",
+      "location_role": "map_anchor",
+      "ordinal": 12,
+      "visit_id": "a0043",
+      "x": 46.48,
+      "y": 18.19,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "【最低号未到68】加拉达尔",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "nagrand-p013",
+      "location_role": "map_anchor",
+      "ordinal": 13,
+      "visit_id": "a0045",
+      "x": 55.37,
+      "y": 37.45,
+      "zone_id": 3518
+    },
+    {
+      "display_name": "【最低号未到68】奈辛瓦里高级狩猎",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "nagrand-p014",
+      "location_role": "map_anchor",
+      "ordinal": 14,
+      "visit_id": "a0047",
+      "x": 41.4,
+      "y": 61.57,
+      "zone_id": 3518
+    }
+  ]
+}

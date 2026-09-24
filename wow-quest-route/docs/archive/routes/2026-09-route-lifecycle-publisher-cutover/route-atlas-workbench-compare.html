@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Route Atlas 旧版 / 新版替代验收</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#101216;color:#e7e9ee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:20;background:#171a20;border-bottom:1px solid #39414e;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header strong{margin-right:10px}select,input,button,a.btn{background:#242a33;color:#eee;border:1px solid #4d5969;border-radius:6px;padding:7px 9px;text-decoration:none}
+button{cursor:pointer}#syncStatus{color:#aeb8c6;font-size:12px}
+.frames{display:grid;grid-template-columns:1fr 1fr;height:67vh;border-bottom:1px solid #3a414c}
+.pane{display:flex;flex-direction:column;min-width:0}.pane:first-child{border-right:1px solid #4b5564}
+.label{height:31px;display:flex;align-items:center;justify-content:center;background:#1d222a;font-weight:700;font-size:13px}
+iframe{border:0;width:100%;flex:1;background:#fff}
+.detail{padding:18px;max-width:1800px;margin:auto}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#181c22;border:1px solid #343c48;border-radius:8px;padding:12px}.card b{display:block;margin-bottom:6px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px}.shot{background:#181c22;border:1px solid #343c48;border-radius:8px;padding:8px}.shot img{display:block;width:100%;height:auto;border-radius:4px}
+.warn{color:#f0c36a}.ok{color:#87d78a}.muted{color:#9ba6b5;font-size:13px}
+@media(max-width:900px){.frames,.shots{grid-template-columns:1fr}.frames{height:auto}iframe{height:70vh}}
+</style></head>
+<body>
+<header>
+<strong>Route Atlas 替代验收</strong>
+<label>路线 <select id="route"><option value="hellfire">地狱火半岛</option>
+<option value="zang">赞加沼泽</option>
+<option value="nagrand">纳格兰</option>
+<option value="borean">北风苔原</option>
+<option value="dragonblight">龙骨荒野</option>
+<option value="dalaran">达拉然</option>
+<option value="storm">风暴峭壁</option>
+<option value="icecrown">冰冠冰川</option>
+<option value="sholazar">索拉查盆地</option>
+<option value="zuldrak">祖达克</option>
+<option value="grizzly">灰熊丘陵</option>
+<option value="howling">嚎风峡湾</option>
+<option value="hellfire_dk">地狱火半岛（DK专用）</option>
+<option value="zang_dk">赞加沼泽（DK专用）</option></select></label>
+<label>步骤 <input id="step" type="number" min="1" value="1" style="width:72px"></label>
+<button id="apply">同步旧/新</button><button id="prev">← 同步上一步</button><button id="next">同步下一步 →</button>
+<a class="btn" href="route-atlas-workbench.html" target="_blank">单独打开旧版</a>
+<a class="btn" href="route-atlas-workbench-next.html" target="_blank">单独打开新版</a>
+<span id="syncStatus">等待两个页面加载…</span>
+</header>
+<div class="frames">
+<section class="pane"><div class="label">旧正式版（只读比较）</div><iframe id="oldFrame" src="route-atlas-workbench.html"></iframe></section>
+<section class="pane"><div class="label">新 Publisher 候选版（worktree）</div><iframe id="newFrame" src="route-atlas-workbench-next.html"></iframe></section>
+</div>
+<section class="detail">
+<h2 id="detailTitle"></h2>
+<p class="muted">上方是真实页面；下方两张图是同一路线 Step 1 的 1440×1100 Chrome 截图，便于整体视觉对照。</p>
+<div class="metrics" id="metrics"></div>
+<div class="shots"><div class="shot"><b>旧版首屏</b><img id="oldShot"></div><div class="shot"><b>新版首屏</b><img id="newShot"></div></div>
+</section>
+<script>
+const SUMMARY={"hellfire":{"display":"地狱火半岛","old_steps":12,"new_steps":12,"titles_same":true,"task_changed":1,"old_only":1,"new_only":0,"old_map":{"source":"","rendered_lines":70,"rendered_labels":11,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3483-hellfire-peninsula-hd.jpg","rendered_lines":70,"rendered_visits":71,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"zang":{"display":"赞加沼泽","old_steps":14,"new_steps":14,"titles_same":true,"task_changed":3,"old_only":2,"new_only":1,"old_map":{"source":"","rendered_lines":56,"rendered_labels":25,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3521-zangarmarsh-hd.jpg","rendered_lines":56,"rendered_visits":57,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"nagrand":{"display":"纳格兰","old_steps":4,"new_steps":4,"titles_same":true,"task_changed":0,"old_only":0,"new_only":0,"old_map":{"source":"","rendered_lines":13,"rendered_labels":20,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3518-nagrand-hd.jpg","rendered_lines":13,"rendered_visits":14,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"borean":{"display":"北风苔原","old_steps":66,"new_steps":66,"titles_same":true,"task_changed":5,"old_only":4,"new_only":1,"old_map":{"source":"","rendered_lines":224,"rendered_labels":12,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3537-borean-tundra-hd.jpg","rendered_lines":229,"rendered_visits":230,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"dragonblight":{"display":"龙骨荒野","old_steps":51,"new_steps":51,"titles_same":true,"task_changed":1,"old_only":1,"new_only":0,"old_map":{"source":"","rendered_lines":193,"rendered_labels":19,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/65-dragonblight-hd.jpg","rendered_lines":194,"rendered_visits":195,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"dalaran":{"display":"达拉然","old_steps":4,"new_steps":4,"titles_same":true,"task_changed":0,"old_only":0,"new_only":0,"old_map":{"source":"","rendered_lines":7,"rendered_labels":7,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/4395-dalaran.png","rendered_lines":10,"rendered_visits":11,"rendered_labels":0,"natural_width":774,"natural_height":520,"svg_width":1410,"svg_height":793.125}},"storm":{"display":"风暴峭壁","old_steps":20,"new_steps":20,"titles_same":true,"task_changed":2,"old_only":1,"new_only":0,"old_map":{"source":"","rendered_lines":141,"rendered_labels":15,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/67-the-storm-peaks-hd.jpg","rendered_lines":141,"rendered_visits":142,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"icecrown":{"display":"冰冠冰川","old_steps":54,"new_steps":56,"titles_same":false,"task_changed":53,"old_only":440,"new_only":420,"old_map":{"source":"","rendered_lines":269,"rendered_labels":43,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/210-icecrown-hd.jpg","rendered_lines":262,"rendered_visits":264,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"sholazar":{"display":"索拉查盆地","old_steps":23,"new_steps":23,"titles_same":true,"task_changed":2,"old_only":2,"new_only":0,"old_map":{"source":"","rendered_lines":74,"rendered_labels":10,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3711-sholazar-basin-hd.jpg","rendered_lines":76,"rendered_visits":77,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"zuldrak":{"display":"祖达克","old_steps":23,"new_steps":23,"titles_same":true,"task_changed":3,"old_only":0,"new_only":0,"old_map":{"source":"","rendered_lines":107,"rendered_labels":16,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/66-zul-drak-hd.jpg","rendered_lines":107,"rendered_visits":108,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"grizzly":{"display":"灰熊丘陵","old_steps":19,"new_steps":19,"titles_same":true,"task_changed":2,"old_only":0,"new_only":0,"old_map":{"source":"","rendered_lines":78,"rendered_labels":16,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/394-grizzly-hills-hd.jpg","rendered_lines":78,"rendered_visits":79,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"howling":{"display":"嚎风峡湾","old_steps":30,"new_steps":30,"titles_same":true,"task_changed":1,"old_only":2,"new_only":0,"old_map":{"source":"","rendered_lines":128,"rendered_labels":14,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/495-howling-fjord-hd.jpg","rendered_lines":130,"rendered_visits":131,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"hellfire_dk":{"display":"地狱火半岛（DK专用）","old_steps":11,"new_steps":11,"titles_same":true,"task_changed":3,"old_only":1,"new_only":4,"old_map":{"source":"","rendered_lines":62,"rendered_labels":11,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3483-hellfire-peninsula-hd.jpg","rendered_lines":64,"rendered_visits":65,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}},"zang_dk":{"display":"赞加沼泽（DK专用）","old_steps":10,"new_steps":10,"titles_same":true,"task_changed":3,"old_only":1,"new_only":0,"old_map":{"source":"","rendered_lines":36,"rendered_labels":25,"svg_width":1406,"svg_height":938.078125},"new_map":{"source":"maps/3521-zangarmarsh-hd.jpg","rendered_lines":36,"rendered_visits":37,"rendered_labels":0,"natural_width":4008,"natural_height":2672,"svg_width":1410,"svg_height":793.125}}};
+const routeEl=document.getElementById('route'),stepEl=document.getElementById('step'),statusEl=document.getElementById('syncStatus');
+const oldF=document.getElementById('oldFrame'),newF=document.getElementById('newFrame');
+function clampStep(key,n){const s=SUMMARY[key];return Math.max(1,Math.min(Math.min(s.old_steps,s.new_steps),Number(n)||1))}
+function updateDetail(){
+ const key=routeEl.value,s=SUMMARY[key];
+ document.getElementById('detailTitle').textContent=s.display+'｜'+key;
+ const cls=s.titles_same?'ok':'warn';
+ document.getElementById('metrics').innerHTML=
+  '<div class="card"><b>步骤数</b>'+s.old_steps+' → '+s.new_steps+'</div>'+
+  '<div class="card"><b>步骤标题序列</b><span class="'+cls+'">'+(s.titles_same?'一致':'存在重排/增删')+'</span></div>'+
+  '<div class="card"><b>同索引任务序列变化</b>'+s.task_changed+' 段</div>'+
+  '<div class="card"><b>任务引用差异计数</b>旧独有 '+s.old_only+' / 新独有 '+s.new_only+'</div>'+
+  '<div class="card"><b>地图线段</b>'+s.old_map.rendered_lines+' → '+s.new_map.rendered_lines+'</div>'+
+  '<div class="card"><b>地图标签</b>'+s.old_map.rendered_labels+' → '+s.new_map.rendered_labels+'</div>';
+ document.getElementById('oldShot').src='workbench-compare/old/'+key+'.png';
+ document.getElementById('newShot').src='workbench-compare/new/'+key+'.png';
+}
+function sync(){
+ const key=routeEl.value,n=clampStep(key,stepEl.value);stepEl.value=n;updateDetail();
+ try{
+   const od=oldF.contentDocument;
+   const zone=od.getElementById('zone');zone.value=key;zone.dispatchEvent(new Event('change',{bubbles:true}));
+   const os=od.querySelectorAll('#steps .step');if(os[n-1])os[n-1].click();
+   const nd=newF.contentDocument;
+   const idx=Object.keys(SUMMARY).indexOf(key),routeSelect=nd.getElementById('routeSelect');
+   routeSelect.value=String(idx);routeSelect.dispatchEvent(new Event('change',{bubbles:true}));
+   const ns=nd.querySelectorAll('#steps .step');if(ns[n-1])ns[n-1].click();
+   statusEl.textContent='已同步：'+SUMMARY[key].display+' · Step '+n;statusEl.className='ok';
+ }catch(e){statusEl.textContent='同步失败：'+e;statusEl.className='warn';}
+}
+document.getElementById('apply').onclick=sync;
+document.getElementById('prev').onclick=()=>{stepEl.value=clampStep(routeEl.value,Number(stepEl.value)-1);sync()};
+document.getElementById('next').onclick=()=>{stepEl.value=clampStep(routeEl.value,Number(stepEl.value)+1);sync()};
+routeEl.onchange=()=>{stepEl.value=1;sync()};
+let loaded=0;function ready(){loaded++;if(loaded===2)sync()}oldF.onload=ready;newF.onload=ready;
+updateDetail();
+</script></body></html>

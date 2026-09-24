@@ -9,25 +9,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.build_35_55_task_foundation import quest_xp_at_level
 from lib.questie_source import load_questie
+from lib.route_xp import load_xp_model_config
 
 
+_XP_MODEL = load_xp_model_config()
+# Compatibility projection for legacy candidate builders. The table owner is data/xp-model/model-config.json.
 XP_TO_NEXT = {
-    39: 70100,
-    40: 74300,
-    41: 78500,
-    42: 82800,
-    43: 87100,
-    44: 91600,
-    45: 96300,
-    46: 101000,
-    47: 105800,
-    48: 110700,
-    49: 115700,
-    50: 120900,
-    51: 126100,
-    52: 131500,
-    53: 137000,
-    54: 142500,
+    level: int(_XP_MODEL["xp_to_next_by_level"][str(level)])
+    for level in range(39, 55)
 }
 
 

@@ -4,18 +4,14 @@
   "identity": {
     "name_zhcn": "格里洛克之眼",
     "name_en": "The Eyes of Grillok",
+    "game_variant_id": "timewalking-wotlk-cn",
     "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
-    "faction": "unknown",
-    "repeatability": "unknown",
-    "game_variant_id": "timewalking-wotlk-cn"
+    "faction": "horde",
+    "repeatability": "once"
   },
   "coverage": {
-    "availability": "partial",
-    "objectives": "unknown",
-    "locations": "unknown",
-    "rewards": "unknown",
-    "mechanics": "partial",
-    "fivebox": "partial",
+    "availability": "verified",
+    "rewards": "verified",
     "guide": "partial"
   },
   "availability": {
@@ -28,48 +24,40 @@
     "parent_active": [],
     "exclusive_with": [],
     "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
     "hidden_requirements": []
   },
-  "objectives": [],
-  "mechanics": {
-    "fivebox_observation": {
-      "kind": "special_capture_sharing_unresolved",
-      "summary": "捕获格里洛克之眼的真实共享性尚未确认；第二组按逐号方式完成不能证明不共享。",
-      "confidence": "partial",
-      "source_refs": [
-        "evidence-fivebox-migration"
-      ]
-    }
-  },
-  "fivebox": {
-    "stages": [
+  "rewards": {
+    "reward_money_copper": 14000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
       {
-        "stage_id": "primary",
-        "objective_id": null,
-        "mode": "unknown",
-        "summary": "捕获格里洛克之眼的真实共享性尚未确认；第二组按逐号方式完成不能证明不共享。",
-        "confidence": "partial",
-        "source_refs": [
-          "evidence-fivebox-migration"
-        ]
+        "faction_id": 947,
+        "amount": 75
       }
     ],
-    "status": "pending"
+    "no_money_from_xp": false,
+    "full_xp": 5000
   },
   "guide": [
     "向塞萨克取得碎片捕获格里洛克之眼，再带到塞萨克的熔锅使其分离。"
   ],
-  "verification": {
-    "open_questions": [
-      {
-        "question_id": "fivebox-sharing",
-        "variable": "fivebox.stages[0].mode",
-        "status": "expected",
-        "reason": "第二组执行方式不能证明真实共享性，第三组需专门验证。",
-        "close_condition": "在普通五人小队中由主控单独完成捕获流程并核对其余四号任务进度。"
-      }
-    ]
+  "fivebox": {
+    "status": "pending"
   },
+  "timing_rule_ref": null,
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",
@@ -95,10 +83,51 @@
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "partial",
       "supports_fields": [
-        "mechanics.fivebox_observation",
-        "fivebox.stages"
+        "guide",
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10813",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.10813; legacy_type=special_capture_mechanic_group_share_pending",
+      "observed_at": "2026-09-15",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "partial",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],
-  "presentation": {}
+  "presentation": {
+    "note_override": {
+      "text": "《格里洛克之眼》：使用塞萨克的碎片捕获眼睛，再带到塞萨克的熔锅使其分离。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
 }

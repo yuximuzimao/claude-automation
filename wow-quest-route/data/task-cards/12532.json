@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "task_id": 12532,
+  "identity": {
+    "name_zhcn": "鸡飞狼跳！",
+    "name_en": "Flown the Coop!",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 76,
+    "pre_any": [],
+    "pre_all": [
+      12533,
+      12534
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 65000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39435,
+        "quantity": 1,
+        "name_zhcn": "稻草纹路护腿",
+        "name_en": "Straw-Lined Leggings",
+        "sell_price_each_copper": 60982,
+        "sell_price_total_copper": 60982
+      },
+      {
+        "item_id": 39337,
+        "quantity": 1,
+        "name_zhcn": "脏兮兮的鸡笼罩",
+        "name_en": "Stained Coop Warmer",
+        "sell_price_each_copper": 39910,
+        "sell_price_total_copper": 39910
+      },
+      {
+        "item_id": 39383,
+        "quantity": 1,
+        "name_zhcn": "孵卵靴",
+        "name_en": "Egg-Warming Boots",
+        "sell_price_each_copper": 39237,
+        "sell_price_total_copper": 39237
+      },
+      {
+        "item_id": 39455,
+        "quantity": 1,
+        "name_zhcn": "破损的鸡窝加固环",
+        "name_en": "Cracked Nest Stabilizer",
+        "sell_price_each_copper": 35772,
+        "sell_price_total_copper": 35772
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 60982,
+    "gear_sale_max_copper": 60982,
+    "reputation_rewards": [
+      {
+        "faction_id": 1104,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 21400
+  },
+  "guide": [
+    "接取：长者哈尔卡克。",
+    "捕捉12只逃走的小鸡，然后向长者哈尔卡克复命。 /  / 如果你弄丢了达伊克的旧粉笔，就去找狂心岭的长者哈尔卡克。",
+    "交付：长者哈尔卡克。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12532",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12532; legacy_type=capture_progress_personal_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12532",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《鸡飞狼跳！》：不共享：五号分别抓12只逃跑的小鸡。任务提供捕鸡网；可骑坐骑操作，小鸡难看清时开姓名板；用网定住后还要点击小鸡完成抓取。\n【需要单独修正优化】《鸡飞狼跳！》索拉查首组实跑确认：不共享，五号分别完成捕鸡。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12532",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "task_id": 12584,
+  "identity": {
+    "name_zhcn": "纯粹的邪恶",
+    "name_en": "Pure Evil",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 74,
+    "pre_any": [
+      12552
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 62000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39795,
+        "quantity": 1,
+        "name_zhcn": "祭坛长靴",
+        "name_en": "Boots of the Altar",
+        "sell_price_each_copper": 52210,
+        "sell_price_total_copper": 52210
+      },
+      {
+        "item_id": 39792,
+        "quantity": 1,
+        "name_zhcn": "光明仪祭指环",
+        "name_en": "Ritualistic Band of Light",
+        "sell_price_each_copper": 35688,
+        "sell_price_total_copper": 35688
+      },
+      {
+        "item_id": 39773,
+        "quantity": 1,
+        "name_zhcn": "占卜者的肩垫",
+        "name_en": "Soothsayer's Shoulderpads",
+        "sell_price_each_copper": 29679,
+        "sell_price_total_copper": 29679
+      },
+      {
+        "item_id": 39837,
+        "quantity": 1,
+        "name_zhcn": "迅疾死亡手套",
+        "name_en": "Gloves of Swift Death",
+        "sell_price_each_copper": 25734,
+        "sell_price_total_copper": 25734
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 52210,
+    "gear_sale_max_copper": 52210,
+    "reputation_rewards": [
+      {
+        "faction_id": 1106,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 21150
+  },
+  "guide": [
+    "接取：鲁伯特上尉。",
+    "鲁伯特上尉要求你收集10份大块的萨隆邪铁，并将它们交给银色前沿的伊崔格。",
+    "交付：伊崔格。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12584",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12584; legacy_type=fixed_object_collect_personal_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12584",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《纯粹的邪恶》：不共享：\n【需要单独修正优化】《纯粹的邪恶》祖达克首组实跑确认：不共享，五号分别完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12584",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "task_id": 12303,
+  "identity": {
+    "name_zhcn": "战争的开销",
+    "name_en": "Funding the War Effort",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 50000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38181,
+        "quantity": 1,
+        "name_zhcn": "被遗忘步兵的巨剑",
+        "name_en": "Warblade of the Forgotten Footman",
+        "sell_price_each_copper": 119121,
+        "sell_price_total_copper": 119121
+      },
+      {
+        "item_id": 38030,
+        "quantity": 1,
+        "name_zhcn": "被遗忘上尉的胸甲",
+        "name_en": "Chestpiece of the Forgotten Captain",
+        "sell_price_each_copper": 52112,
+        "sell_price_total_copper": 52112
+      },
+      {
+        "item_id": 38071,
+        "quantity": 1,
+        "name_zhcn": "瓦伦弗斯的记忆",
+        "name_en": "Valonforth's Remembrance",
+        "sell_price_each_copper": 49964,
+        "sell_price_total_copper": 49964
+      },
+      {
+        "item_id": 37986,
+        "quantity": 1,
+        "name_zhcn": "被遗忘火枪手的兜帽",
+        "name_en": "Hood of the Forgotten Rifleman",
+        "sell_price_each_copper": 34596,
+        "sell_price_total_copper": 34596
+      },
+      {
+        "item_id": 38036,
+        "quantity": 1,
+        "name_zhcn": "被遗忘佣兵的头饰",
+        "name_en": "Circlet of the Forgotten Mercenary",
+        "sell_price_each_copper": 33162,
+        "sell_price_total_copper": 33162
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 119121,
+    "gear_sale_max_copper": 119121,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：军需官巴莱特。",
+    "怨毒镇的军需官巴莱特要求你去取回6份被遗忘的宝藏。",
+    "交付：军需官巴莱特。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12303",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

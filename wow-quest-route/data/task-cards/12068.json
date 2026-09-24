@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "task_id": 12068,
+  "identity": {
+    "name_zhcn": "灰尘之声",
+    "name_en": "Voices From the Dust",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 73,
+    "pre_any": [
+      12802
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 59000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39089,
+        "quantity": 1,
+        "name_zhcn": "灵魂锻铸腿甲",
+        "name_en": "Spiritforged Legguards",
+        "sell_price_each_copper": 66540,
+        "sell_price_total_copper": 66540
+      },
+      {
+        "item_id": 39051,
+        "quantity": 1,
+        "name_zhcn": "位面转换长靴",
+        "name_en": "Plane-shifted Boots",
+        "sell_price_each_copper": 41888,
+        "sell_price_total_copper": 41888
+      },
+      {
+        "item_id": 39022,
+        "quantity": 1,
+        "name_zhcn": "青烟头盔",
+        "name_en": "Helm of Rising Smoke",
+        "sell_price_each_copper": 36216,
+        "sell_price_total_copper": 36216
+      },
+      {
+        "item_id": 38751,
+        "quantity": 1,
+        "name_zhcn": "复仇灵魂珠串",
+        "name_en": "Vengeful Spirit Beads",
+        "sell_price_each_copper": 30284,
+        "sell_price_total_copper": 30284
+      },
+      {
+        "item_id": 38718,
+        "quantity": 1,
+        "name_zhcn": "精魂护肩",
+        "name_en": "Wispy Shoulderpads",
+        "sell_price_each_copper": 28435,
+        "sell_price_total_copper": 28435
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 66540,
+    "gear_sale_max_copper": 66540,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 20950
+  },
+  "guide": [
+    "接取：达库鲁的影像。",
+    "达库鲁希望你在达基尔金废墟中找到达卡莱石板，并从达卡莱先知和达卡莱保卫者身上收集5份神圣魔精。然后在废墟中达库鲁的火盆上使用达库鲁的药剂，召唤出他的影像。",
+    "交付：达库鲁的影像。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12068",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《灰尘之声》先携带，进入Drakil'jin遗迹再完成。\n启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+    }
+  }
+}

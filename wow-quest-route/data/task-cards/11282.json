@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11282,
+  "identity": {
+    "name_zhcn": "领略恐惧",
+    "name_en": "A Lesson in Fear",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11295
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 47000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35870,
+        "quantity": 1,
+        "name_zhcn": "石地重斧",
+        "name_en": "Stoneground Cleaver",
+        "sell_price_each_copper": 102990,
+        "sell_price_total_copper": 102990
+      },
+      {
+        "item_id": 35868,
+        "quantity": 1,
+        "name_zhcn": "地缚短裤",
+        "name_en": "Grounded Pants",
+        "sell_price_each_copper": 45211,
+        "sell_price_total_copper": 45211
+      },
+      {
+        "item_id": 35869,
+        "quantity": 1,
+        "name_zhcn": "妖术锁链头盔",
+        "name_en": "Hex-Linked Stronghelm",
+        "sell_price_each_copper": 40834,
+        "sell_price_total_copper": 40834
+      },
+      {
+        "item_id": 35867,
+        "quantity": 1,
+        "name_zhcn": "轻盈指环",
+        "name_en": "Nimblefinger Band",
+        "sell_price_each_copper": 31478,
+        "sell_price_total_copper": 31478
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 102990,
+    "gear_sale_max_copper": 102990,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：戈斯中士。",
+    "戈斯要你杀死放血者伍尔弗、恶毒的奥瑞克和贡纳·索瓦德森，并将被遗忘者旗帜插在他们面前。你需要杀死数名封锁线对面的维库人，直到他们露面。",
+    "交付：戈斯中士。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11282",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《领略恐惧》：击杀周围维库直到乌尔夫、奥里克、贡纳尔三名英雄出现；每名英雄死亡后都要对尸体使用被遗忘者战旗。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

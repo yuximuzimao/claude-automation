@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "task_id": 13305,
+  "identity": {
+    "name_zhcn": "竭尽全力",
+    "name_en": "Do Your Worst",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13304
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 74000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43932,
+        "quantity": 1,
+        "name_zhcn": "传动锁链护腿",
+        "name_en": "Drivetrain Chain Leggings",
+        "sell_price_each_copper": 66204,
+        "sell_price_total_copper": 66204
+      },
+      {
+        "item_id": 43930,
+        "quantity": 1,
+        "name_zhcn": "加速器战靴",
+        "name_en": "Accelerator Stompers",
+        "sell_price_each_copper": 57401,
+        "sell_price_total_copper": 57401
+      },
+      {
+        "item_id": 43881,
+        "quantity": 1,
+        "name_zhcn": "攻城车驾驶员的风衣",
+        "name_en": "Demolisher Driver's Dustcoat",
+        "sell_price_each_copper": 41268,
+        "sell_price_total_copper": 41268
+      },
+      {
+        "item_id": 43847,
+        "quantity": 1,
+        "name_zhcn": "攻城车的握钳",
+        "name_en": "Demolisher's Grips",
+        "sell_price_each_copper": 37160,
+        "sell_price_total_copper": 37160
+      },
+      {
+        "item_id": 43892,
+        "quantity": 1,
+        "name_zhcn": "整修过的攻城车齿链",
+        "name_en": "Refurbished Demolisher Gear Belt",
+        "sell_price_each_copper": 26878,
+        "sell_price_total_copper": 26878
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 66204,
+    "gear_sale_max_copper": 66204,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 22050
+  },
+  "guide": [
+    "接取：米斯希尔萨·阿奈尔。",
+    "使用整修过的攻城车，在失落希望之谷里消灭150只腐朽的食尸鬼、20个霜颅大法师和2个白骨巨人。完成任务之后前往第一军团前线营地，与米斯希尔萨·阿奈尔谈一谈。",
+    "交付：米斯希尔萨·阿奈尔。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13305",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13305; legacy_type=vehicle_kill_credit_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

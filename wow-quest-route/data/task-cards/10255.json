@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "task_id": 10255,
+  "identity": {
+    "name_zhcn": "测试解毒剂",
+    "name_en": "Testing the Antidote",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 63,
+    "min_level": 61,
+    "pre_any": [
+      9372
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 29000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 25987,
+        "quantity": 1,
+        "name_zhcn": "地狱野猪雕饰利刃",
+        "name_en": "Helboar Carving Blade",
+        "sell_price_each_copper": 75824,
+        "sell_price_total_copper": 75824
+      },
+      {
+        "item_id": 25986,
+        "quantity": 1,
+        "name_zhcn": "恐怖獠牙之怒",
+        "name_en": "Dreadtusk's Fury",
+        "sell_price_each_copper": 75544,
+        "sell_price_total_copper": 75544
+      },
+      {
+        "item_id": 25985,
+        "quantity": 1,
+        "name_zhcn": "塞纳里奥博学者法杖",
+        "name_en": "Cenarion Naturalist's Staff",
+        "sell_price_each_copper": 75264,
+        "sell_price_total_copper": 75264
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 75824,
+    "gear_sale_max_copper": 75824,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 10400
+  },
+  "guide": [
+    "接取：塞安·红鬃。",
+    "对笨拙的地狱野猪使用塞纳里奥解毒剂，并观察解毒剂的效果。然后返回地狱火半岛的塞纳里奥哨站，向塞安·红鬃汇报实验的结果。",
+    "交付：塞安·红鬃。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10255",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "对一只笨拙的地狱野猪使用塞纳里奥解毒剂并观察结果。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

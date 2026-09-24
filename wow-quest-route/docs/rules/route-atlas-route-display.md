@@ -35,7 +35,8 @@ NPC承担“找谁交互”的语义：
 
 - 纯NPC交互显示NPC；
 - NPC不得伪装成地点；
-- 同一NPC连续交接只显示一次NPC，再串联动作。
+- 同一NPC连续交接只显示一次NPC，再串联动作；
+- 如果一个合法地点 `display_name` 已明确以 `·NPC名` 结尾，且紧接着的任务动作就是同一 `location_ref` 上该NPC的接/交动作，则玩家展示合并为 `地点·NPC → 接/交《任务》`，不再先显示地点、下一行又重复同一NPC；地点名若**只有NPC名**，仍按异常地点数据诊断，不用这条规则掩盖；如果地点只是场所名（例如“银色比武场·夺日者大帐”）而不包含具体NPC，地点继续单独显示，下面各NPC动作正常保留。
 
 ### 隐藏空间信息
 
@@ -63,7 +64,11 @@ Route Display只负责把Route Profile中的**原子语义**转换成玩家中�
 - open_flight_point + location → `开飞行点：地点`；
 - bind/use hearth + location → 对应炉石动作。
 
+`open_flight_point`与`bind_hearth`是独立路线动作语义，前端必须保留可区分的专用视觉角色；不得与接/做/交颜色复用，也不得靠文本内容猜颜色。
+
 同一NPC连续交/接可以在生成阶段合并成一句，但合并只是渲染优化；底层动作仍保持独立原子，不能反过来把完整中文句保存为路线真源。
+
+条件型机会任务的机器门槛与玩家动作文字分开：`accept + when.has_item`仍由Replay按物品条件判断能否执行，但Route Display只输出`接《任务》`；触发物来源由Task Presentation备注负责。其它条件动作若仍需要玩家在当下判断，可继续显示其条件前缀，除非对应规则owner另有明确规则。
 
 路径、NPC、任务、交通是不同语义。迁移器若无法确定某段旧中文属于哪一种，不得靠位置猜测；应保留为待迁问题或显式映射。
 
@@ -79,6 +84,7 @@ Route Display只负责把Route Profile中的**原子语义**转换成玩家中�
 - `接`任务：黄色任务名；
 - `做`任务：蓝色任务名；
 - 同一动作多个任务用`、`；
+- 同一行同名任务出现多次时，渲染必须先按当前可见动词/结构化 `kind`（accept/objective/turnin）匹配，再按稳定 `task_id`/出现顺序兜底；禁止只按中文任务名命中第一条引用；
 - 流程任务名保留下划线语义；玩家可见任务名至少必须完整，不能用裸ID代替任务名；
 - 地点：低强调普通字；
 - NPC：比地点略高强调，但不能抢过任务动作。
@@ -168,3 +174,10 @@ Task Presentation不得插入新的接/做/交顺序；Route Display不得自行
 - 最终生成结果没有回退到旧plaintext-only HUD。
 
 “是否太长/是否真的省脑”仍需最终HTML人工冷读，不能只靠行数测试。
+
+## 10. 正式Route Display操作
+
+- 完整重建单Profile Display：`python3 scripts/build_route_display.py <profile_id>`。
+- 单Task Card变化且任务身份未改变：`python3 scripts/update_route_display_task.py <profile_id> <task_id>`。
+- 若任务身份/名称等会影响所有可见引用的字段改变，使用该脚本的`--identity-changed`分支，不能只局部替换一处文本。
+- Display只读取当前Profile、Task Presentation及fresh上游派生，不从旧HTML/actionHtml反推。

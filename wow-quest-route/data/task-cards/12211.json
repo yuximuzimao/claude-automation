@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": 12211,
+  "identity": {
+    "name_zhcn": "确保他们不再站起来！",
+    "name_en": "Let Them Not Rise!",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12206
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 50000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38057,
+        "quantity": 1,
+        "name_zhcn": "啃噬防护头盔",
+        "name_en": "Rodent-Proof Headguard",
+        "sell_price_each_copper": 40135,
+        "sell_price_total_copper": 40135
+      },
+      {
+        "item_id": 38118,
+        "quantity": 1,
+        "name_zhcn": "撕咬防护手套",
+        "name_en": "Bite-Proof Grips",
+        "sell_price_each_copper": 32352,
+        "sell_price_total_copper": 32352
+      },
+      {
+        "item_id": 38014,
+        "quantity": 1,
+        "name_zhcn": "害虫控制护手",
+        "name_en": "Vermin-Handler's Gauntlets",
+        "sell_price_each_copper": 22051,
+        "sell_price_total_copper": 22051
+      },
+      {
+        "item_id": 37971,
+        "quantity": 1,
+        "name_zhcn": "侵蚀瘟疫束腰",
+        "name_en": "Sash of the Nibbling Plague",
+        "sell_price_each_copper": 18789,
+        "sell_price_total_copper": 18789
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 40135,
+    "gear_sale_max_copper": 40135,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：药剂师薇吉·莱文。",
+    "怨毒镇的药剂师薇吉·莱文要你前往新壁炉谷，在15个倒下的血色先锋军成员那里使用她的老鼠箱。",
+    "交付：药剂师薇吉·莱文。",
+    "先击杀血色先锋军成员，再对尸体使用老鼠容器；必须完成尸体交互才会增加进度。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12211",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12211; legacy_type=corpse_item_use_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12211",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12211/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《确保他们不再站起来！》：共享：主控对15具血色先锋军尸体使用老鼠箱即可同步全队。\n【需要单独修正优化】《确保他们不再站起来！》首组实跑确认：对血色先锋军尸体使用老鼠箱后的15具尸体进度五号共享；主控处理尸体即可。用户从怨毒镇去翡翠圣地途中顺路完成，证明这条应与《通缉：血色先锋军》《物资掠夺》一起前移到新壁炉谷第一圈，而不是后面单独折返。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12211",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

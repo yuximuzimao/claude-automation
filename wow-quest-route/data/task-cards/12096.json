@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": 12096,
+  "identity": {
+    "name_zhcn": "强化古树",
+    "name_en": "Strengthen the Ancients",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12066
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 50000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38112,
+        "quantity": 1,
+        "name_zhcn": "树皮肩甲",
+        "name_en": "Bark Covered Pauldrons",
+        "sell_price_each_copper": 47104,
+        "sell_price_total_copper": 47104
+      },
+      {
+        "item_id": 38051,
+        "quantity": 1,
+        "name_zhcn": "群星之墓战靴",
+        "name_en": "Star's Rest Treads",
+        "sell_price_each_copper": 39406,
+        "sell_price_total_copper": 39406
+      },
+      {
+        "item_id": 38008,
+        "quantity": 1,
+        "name_zhcn": "罗萨洛尔森林行者腰带",
+        "name_en": "Lothalar Woodwalker Belt",
+        "sell_price_each_copper": 23228,
+        "sell_price_total_copper": 23228
+      },
+      {
+        "item_id": 37966,
+        "quantity": 1,
+        "name_zhcn": "自然愤怒护腕",
+        "name_en": "Bracers of Nature's Fury",
+        "sell_price_each_copper": 18453,
+        "sell_price_total_copper": 18453
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 47104,
+    "gear_sale_max_copper": 47104,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：大地看守者格莱弗。",
+    "使用树人的树皮让3个罗萨洛尔古树恢复力量，然后向阿格玛之锤的大地看守者格莱弗复命。",
+    "交付：大地看守者格莱弗。",
+    "在洛萨洛尔取得林地行者树皮，并对可用的非敌对洛萨洛尔古树使用树皮；这是任务物品对NPC的交互，不是击杀任务。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12096",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12096; legacy_type=single_item_source_plus_object_use_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12096",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12096/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《强化古树》：共享：树皮只需主控取得一份并强化古树。\n【需要单独修正优化】《强化古树》首组龙骨实跑确认：所需树皮只需要一个角色取得；主控对古树执行强化后任务进度五号共享，不需要五号各拿一份树皮。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12096",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

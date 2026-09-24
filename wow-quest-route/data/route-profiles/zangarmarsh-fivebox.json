@@ -1,0 +1,2543 @@
+{
+  "schema_version": 2,
+  "profile_id": "zangarmarsh-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "赞加沼泽",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 3521
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      10103
+    ]
+  },
+  "goal": {
+    "summary": "从塞纳里奥庇护所开始，完成赞加主体路线后由莉萨奥方向进入纳格兰。"
+  },
+  "display": {
+    "publish_key": "zang",
+    "order": 2,
+    "title": "赞加沼泽 · 五开升级路线",
+    "display_name": "赞加沼泽",
+    "subtitle": "从塞纳里奥庇护所开始，完成赞加主体路线后由莉萨奥方向进入纳格兰。",
+    "footer": "交《偷回蘑菇》后，从莉萨奥方向前往纳格兰。",
+    "map_image": "maps/3521-zangarmarsh-hd.jpg"
+  },
+  "task_ids": [
+    9716,
+    9876,
+    9778,
+    9697,
+    9895,
+    9730,
+    9817,
+    9785,
+    9747,
+    9802,
+    9728,
+    9752,
+    9718,
+    9720,
+    9788,
+    10096,
+    9894,
+    9769,
+    9773,
+    9770,
+    10103,
+    9774,
+    9775,
+    9731,
+    9814,
+    9845,
+    10117,
+    9820,
+    9841,
+    9903,
+    9904,
+    9724,
+    9899,
+    9771,
+    9898,
+    9772,
+    9828,
+    9816,
+    9842,
+    9846,
+    9847,
+    9806,
+    9808,
+    9701,
+    9739,
+    9743,
+    9919,
+    9702,
+    9726,
+    9911,
+    9708,
+    9822,
+    9709,
+    9823,
+    10118,
+    9797
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "zang-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9716,
+      "location_ref": "zang-p001",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9876,
+      "location_ref": "zang-p001",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9778,
+      "location_ref": "zang-p001",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9697,
+      "location_ref": "zang-p001",
+      "npc_name": "莱森·月火",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9895,
+      "location_ref": "zang-p001",
+      "npc_name": "莱森·月火",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9730,
+      "location_ref": "zang-p001",
+      "target_name": "通缉布告",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9817,
+      "location_ref": "zang-p001",
+      "target_name": "通缉布告",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9785,
+      "location_ref": "zang-p001",
+      "npc_name": "唤风者塔鲁·黑蹄",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9747,
+      "location_ref": "zang-p001",
+      "npc_name": "伊卡因",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9802,
+      "location_ref": "zang-p001",
+      "npc_name": "劳兰娜·萨维尔",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9778,
+      "location_ref": "zang-p001",
+      "npc_name": "监护者哈穆特",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9728,
+      "location_ref": "zang-p001",
+      "npc_name": "监护者哈穆特",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p002",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9785,
+      "location_ref": "zang-p002",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p003",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9785,
+      "location_ref": "zang-p003",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p004",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9785,
+      "location_ref": "zang-p004",
+      "npc_name": "唤风者塔鲁·黑蹄",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p005",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9716,
+      "location_ref": "zang-p005",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p006",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9747,
+      "location_ref": "zang-p006",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9752,
+      "location_ref": "zang-p006",
+      "npc_name": "凯拉·长鬃",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9752,
+      "location_ref": "zang-p006",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p007",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9752,
+      "location_ref": "zang-p007",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9716,
+      "location_ref": "zang-p007",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9718,
+      "location_ref": "zang-p007",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9718,
+      "location_ref": "zang-p007",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9718,
+      "location_ref": "zang-p007",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9720,
+      "location_ref": "zang-p007",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9747,
+      "location_ref": "zang-p007",
+      "npc_name": "伊卡因",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9788,
+      "location_ref": "zang-p007",
+      "npc_name": "伊卡因",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10096,
+      "location_ref": "zang-p007",
+      "npc_name": "劳兰娜·萨维尔",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9894,
+      "location_ref": "zang-p007",
+      "npc_name": "唤风者塔鲁·黑蹄",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p008",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zang-p008",
+      "target_name": "沼泽鼠岗哨",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9769,
+      "location_ref": "zang-p008",
+      "npc_name": "玛加沙",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9773,
+      "location_ref": "zang-p008",
+      "npc_name": "玛加沙",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9770,
+      "location_ref": "zang-p008",
+      "npc_name": "里维伊",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10103,
+      "location_ref": "zang-p008",
+      "npc_name": "祖莱",
+      "when": {
+        "kind": "task_active",
+        "task_id": 10103
+      },
+      "action_id": "a0043"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9774,
+      "location_ref": "zang-p008",
+      "npc_name": "祖莱",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9775,
+      "location_ref": "zang-p008",
+      "npc_name": "祖莱",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p009",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9770,
+      "location_ref": "zang-p009",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9895,
+      "location_ref": "zang-p009",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9773,
+      "location_ref": "zang-p009",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9769,
+      "location_ref": "zang-p009",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9774,
+      "location_ref": "zang-p009",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9728,
+      "location_ref": "zang-p009",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p010",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9788,
+      "location_ref": "zang-p010",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10096,
+      "location_ref": "zang-p010",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9894,
+      "location_ref": "zang-p010",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p011",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9720,
+      "location_ref": "zang-p011",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p012",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9720,
+      "location_ref": "zang-p012",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9730,
+      "location_ref": "zang-p012",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9728,
+      "location_ref": "zang-p012",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9731,
+      "location_ref": "zang-p012",
+      "target_name": "抽水泵结构图",
+      "when": {
+        "kind": "has_item",
+        "item_name": "抽水泵结构图"
+      },
+      "action_id": "a0063"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p013",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9720,
+      "location_ref": "zang-p013",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9817,
+      "location_ref": "zang-p013",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9728,
+      "location_ref": "zang-p013",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p014",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9876,
+      "location_ref": "zang-p014",
+      "npc_name": "观察者杰哈恩",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p015",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zang-p015",
+      "target_name": "萨布拉金",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "zang-p015",
+      "target_name": "萨布拉金",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9775,
+      "location_ref": "zang-p015",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9814,
+      "location_ref": "zang-p015",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9845,
+      "location_ref": "zang-p015",
+      "npc_name": "苏尔加亚",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10117,
+      "location_ref": "zang-p015",
+      "target_name": "通缉布告",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9820,
+      "location_ref": "zang-p015",
+      "target_name": "通缉布告",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9841,
+      "location_ref": "zang-p015",
+      "npc_name": "加巴林卡",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p016",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9845,
+      "location_ref": "zang-p016",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9731,
+      "location_ref": "zang-p016",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zang-p017",
+      "target_name": "萨布拉金",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p017",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9845,
+      "location_ref": "zang-p017",
+      "npc_name": "苏尔加亚",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9903,
+      "location_ref": "zang-p017",
+      "npc_name": "苏尔加亚",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9904,
+      "location_ref": "zang-p017",
+      "npc_name": "苏尔加亚",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p018",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9720,
+      "location_ref": "zang-p018",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "zang-p019",
+      "from_name": "萨布拉金",
+      "to_name": "塞纳里奥庇护所",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p019",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9720,
+      "location_ref": "zang-p019",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9731,
+      "location_ref": "zang-p019",
+      "npc_name": "伊谢尔·风歌",
+      "when": {
+        "kind": "task_active",
+        "task_id": 9731
+      },
+      "action_id": "a0092"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9724,
+      "location_ref": "zang-p019",
+      "npc_name": "伊谢尔·风歌",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9817,
+      "location_ref": "zang-p019",
+      "npc_name": "监护者哈穆特",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9730,
+      "location_ref": "zang-p019",
+      "npc_name": "监护者哈穆特",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9728,
+      "location_ref": "zang-p019",
+      "npc_name": "监护者哈穆特",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9894,
+      "location_ref": "zang-p019",
+      "npc_name": "唤风者塔鲁·黑蹄",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9895,
+      "location_ref": "zang-p019",
+      "npc_name": "莱森·月火",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9788,
+      "location_ref": "zang-p019",
+      "npc_name": "伊卡因",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10096,
+      "location_ref": "zang-p019",
+      "npc_name": "劳兰娜·萨维尔",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9802,
+      "location_ref": "zang-p019",
+      "npc_name": "劳兰娜·萨维尔",
+      "when": {
+        "kind": "task_complete",
+        "task_id": 9802
+      },
+      "action_id": "a0101"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "zang-p020",
+      "from_name": "塞纳里奥庇护所",
+      "to_name": "沼泽鼠岗哨",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p020",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9769,
+      "location_ref": "zang-p020",
+      "npc_name": "玛加沙",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9773,
+      "location_ref": "zang-p020",
+      "npc_name": "玛加沙",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9899,
+      "location_ref": "zang-p020",
+      "npc_name": "玛加沙",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9774,
+      "location_ref": "zang-p020",
+      "npc_name": "祖莱",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9771,
+      "location_ref": "zang-p020",
+      "npc_name": "祖莱",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9770,
+      "location_ref": "zang-p020",
+      "npc_name": "里维伊",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9898,
+      "location_ref": "zang-p020",
+      "npc_name": "里维伊",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p021",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9771,
+      "location_ref": "zang-p021",
+      "npc_name": "斥候尤尔巴",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9772,
+      "location_ref": "zang-p021",
+      "npc_name": "斥候尤尔巴",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p022",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9772,
+      "location_ref": "zang-p022",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9828,
+      "location_ref": "zang-p022",
+      "target_name": "枯萎的孢芽",
+      "when": {
+        "kind": "has_item",
+        "item_name": "枯萎的孢芽"
+      },
+      "action_id": "a0116"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p023",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9899,
+      "location_ref": "zang-p023",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p024",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9899,
+      "location_ref": "zang-p024",
+      "npc_name": "玛加沙",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9772,
+      "location_ref": "zang-p024",
+      "npc_name": "祖莱",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9828,
+      "location_ref": "zang-p024",
+      "npc_name": "里维伊",
+      "when": {
+        "kind": "task_active",
+        "task_id": 9828
+      },
+      "action_id": "a0122"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p025",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9898,
+      "location_ref": "zang-p025",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p026",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9898,
+      "location_ref": "zang-p026",
+      "npc_name": "里维伊",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zang-p027",
+      "target_name": "萨布拉金",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p027",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p028",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9814,
+      "location_ref": "zang-p028",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9841,
+      "location_ref": "zang-p028",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9814,
+      "location_ref": "zang-p028",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9816,
+      "location_ref": "zang-p028",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9841,
+      "location_ref": "zang-p028",
+      "npc_name": "加巴林卡",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9842,
+      "location_ref": "zang-p028",
+      "npc_name": "加巴林卡",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9846,
+      "location_ref": "zang-p028",
+      "npc_name": "先知亚尼迪",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p029",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9846,
+      "location_ref": "zang-p029",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p030",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9846,
+      "location_ref": "zang-p030",
+      "npc_name": "先知亚尼迪",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9847,
+      "location_ref": "zang-p030",
+      "npc_name": "先知亚尼迪",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p031",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9904,
+      "location_ref": "zang-p031",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p032",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9806,
+      "location_ref": "zang-p032",
+      "npc_name": "格沙弗",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9808,
+      "location_ref": "zang-p032",
+      "npc_name": "姆希菲",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p033",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9697,
+      "location_ref": "zang-p033",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9701,
+      "location_ref": "zang-p033",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p034",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9739,
+      "location_ref": "zang-p034",
+      "npc_name": "法恩森",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9743,
+      "location_ref": "zang-p034",
+      "npc_name": "法恩森",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9919,
+      "location_ref": "zang-p034",
+      "npc_name": "法恩森",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p035",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9739,
+      "location_ref": "zang-p035",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9701,
+      "location_ref": "zang-p035",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9743,
+      "location_ref": "zang-p035",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p036",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9739,
+      "location_ref": "zang-p036",
+      "npc_name": "法恩森",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9743,
+      "location_ref": "zang-p036",
+      "npc_name": "法恩森",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p037",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9701,
+      "location_ref": "zang-p037",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9702,
+      "location_ref": "zang-p037",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p038",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9726,
+      "location_ref": "zang-p038",
+      "npc_name": "舒特",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p039",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9702,
+      "location_ref": "zang-p039",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p040",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9911,
+      "location_ref": "zang-p040",
+      "target_name": "\"伯爵\"昂古拉的下颚骨",
+      "when": {
+        "kind": "has_item",
+        "item_name": "\"伯爵\"昂古拉的下颚骨"
+      },
+      "action_id": "a0169"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p041",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9702,
+      "location_ref": "zang-p041",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9911,
+      "location_ref": "zang-p041",
+      "npc_name": "观察者莉萨奥",
+      "when": {
+        "kind": "task_active",
+        "task_id": 9911
+      },
+      "action_id": "a0172"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9708,
+      "location_ref": "zang-p041",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p042",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9726,
+      "location_ref": "zang-p042",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p043",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10117,
+      "location_ref": "zang-p043",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p044",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9816,
+      "location_ref": "zang-p044",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p045",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9820,
+      "location_ref": "zang-p045",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9708,
+      "location_ref": "zang-p045",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p046",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9903,
+      "location_ref": "zang-p046",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zang-p047",
+      "target_name": "萨布拉金",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p047",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10117,
+      "location_ref": "zang-p047",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9820,
+      "location_ref": "zang-p047",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9822,
+      "location_ref": "zang-p047",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9816,
+      "location_ref": "zang-p047",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9903,
+      "location_ref": "zang-p047",
+      "npc_name": "苏尔加亚",
+      "when": {
+        "kind": "task_complete",
+        "task_id": 9903
+      },
+      "action_id": "a0191"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9904,
+      "location_ref": "zang-p047",
+      "npc_name": "苏尔加亚",
+      "when": {
+        "kind": "task_complete",
+        "task_id": 9904
+      },
+      "action_id": "a0192"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p048",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9822,
+      "location_ref": "zang-p048",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p049",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9726,
+      "location_ref": "zang-p049",
+      "npc_name": "舒特",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9806,
+      "location_ref": "zang-p049",
+      "npc_name": "格沙弗",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9808,
+      "location_ref": "zang-p049",
+      "npc_name": "姆希菲",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9919,
+      "location_ref": "zang-p049",
+      "npc_name": "姆希菲",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p050",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9708,
+      "location_ref": "zang-p050",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9709,
+      "location_ref": "zang-p050",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p051",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9847,
+      "location_ref": "zang-p051",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zang-p052",
+      "target_name": "萨布拉金",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p052",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9822,
+      "location_ref": "zang-p052",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9823,
+      "location_ref": "zang-p052",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10118,
+      "location_ref": "zang-p052",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9847,
+      "location_ref": "zang-p052",
+      "npc_name": "先知亚尼迪",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p053",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9842,
+      "location_ref": "zang-p053",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p054",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "objective",
+      "task_id": 10118,
+      "location_ref": "zang-p054",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p055",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9709,
+      "location_ref": "zang-p055",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9823,
+      "location_ref": "zang-p055",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zang-p056",
+      "target_name": "萨布拉金",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p056",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9842,
+      "location_ref": "zang-p056",
+      "npc_name": "加巴林卡",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 10118,
+      "location_ref": "zang-p056",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9823,
+      "location_ref": "zang-p056",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9903,
+      "location_ref": "zang-p056",
+      "npc_name": "苏尔加亚",
+      "when": {
+        "kind": "task_complete",
+        "task_id": 9903
+      },
+      "action_id": "a0223"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9904,
+      "location_ref": "zang-p056",
+      "npc_name": "苏尔加亚",
+      "when": {
+        "kind": "task_complete",
+        "task_id": 9904
+      },
+      "action_id": "a0224"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9797,
+      "location_ref": "zang-p056",
+      "npc_name": "信使加兹格里戈",
+      "action_id": "accept-9797-zabrajin"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang-p057",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9709,
+      "location_ref": "zang-p057",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0226"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所",
+      "summary": "完成塞纳里奥开场、古树祝福、暗泽湖调查与暗泽村护送；回庇护所接出乌鸦飞行和恢复平衡。",
+      "action_ids": [
+        "a0001",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵",
+      "summary": "沼泽鼠岗哨接齐东部任务后，一次扫东部湖区和暗泽南缘，最后处理第一处恢复平衡抽水泵。",
+      "action_ids": [
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054",
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩",
+      "summary": "环礁湖完成第二处抽水泵与哈格哈兹；毒蛇湖完成第三泵、弗亚希并补齐纳迦爪子，离开前确保取得《抽水泵结构图》，最后去观察者杰哈恩交任务。",
+      "action_ids": [
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "萨布拉金 → 水域排水口 → 炉石萨布拉金",
+      "summary": "首次到萨布拉金开启飞行点并绑定炉石；进入水域一次完成《下钩钓鱼》和《抽水泵结构图》调查，做完直接在水中炉石回萨布拉金交接。",
+      "action_ids": [
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0083",
+        "a0082",
+        "a0084",
+        "a0085",
+        "a0086"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "沼光湖 → 塞纳里奥庇护所 → 沼泽鼠岗哨",
+      "summary": "完成陆地第四泵后乘系统鸟回塞纳里奥集中交付，再乘系统鸟到沼泽鼠；《沼牙的威胁》在这次自然回访时交并接出《对方的尊重》。",
+      "action_ids": [
+        "a0087",
+        "a0088",
+        "a0090",
+        "a0089",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0103",
+        "a0102",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "死亡泥潭 → 孢子之翼 → 沼泽鼠岗哨 → 黑钉 → 炉石萨布拉金",
+      "summary": "尤尔巴先接出报告，再在死亡泥潭处理枯萎巨人和条件触发物；完成孢子之翼后回沼泽鼠交付，去黑钉完成《对方的尊重》，再回沼泽鼠交任务后炉石萨布拉金。",
+      "action_ids": [
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0128",
+        "a0127"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "萨布拉金 → 蛮沼区 → 恐爪刷新点",
+      "summary": "先完成萨布拉金本地采集并接出后续，再往返蛮沼区完成《蛮沼之灵》；经过恐爪刷新点时只在目标现身的情况下顺手完成。",
+      "action_ids": [
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "孢子村 → 莉萨奥 → 法恩森 → 孢殖林 → 孢子村",
+      "summary": "孢子村先接背景采集；莉萨奥和法恩森接出三项孢殖林任务，完成后分别回原NPC交接，最后自然回孢子村接《既然我们是朋友......》。",
+      "action_ids": [
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "丢弃的食物 → 昂古拉 → 莉萨奥",
+      "summary": "完成《狼吞虎咽》后顺路在昂古拉刷新点接《沼泽中的伯爵》，再回莉萨奥一次性交两项并接《熟悉的蘑菇》。",
+      "action_ids": [
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "血鳞区 → 穆玛基 → 匕潭鱼人笼 → 格罗阿克",
+      "summary": "沿北部连续完成血鳞、穆玛基、鱼人笼和格罗阿克；成熟孢子只做背景累计，多头蛇之王只在经过时目标已刷新才顺手做。",
+      "action_ids": [
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "炉石萨布拉金 → 战斗迫近 → 孢子村 → 莉萨奥",
+      "summary": "炉石回萨布拉金交北部任务并接《战斗迫近》；完成后自然回孢子村集中交付，再到莉萨奥接《偷回蘑菇》。",
+      "action_ids": [
+        "a0186",
+        "a0185",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "博哈姆 → 炉石萨布拉金",
+      "summary": "在博哈姆完成《灵魂之盟？》后直接炉石萨布拉金，交《战斗迫近》和灵魂任务，并接最后北上两项。",
+      "action_ids": [
+        "a0203",
+        "a0204",
+        "a0206",
+        "a0205",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "昂古拉走廊 → 匕潭失落者 → 安葛洛什",
+      "summary": "从中部走廊一路北上，依次完成《最锋利的刀刃》《警告匕潭失落者》，最后在安葛洛什合并完成《偷回蘑菇》和《你死我活》。",
+      "action_ids": [
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "炉石萨布拉金 → 莉萨奥",
+      "summary": "炉石回萨布拉金交北部已完成任务；刷新目标只交已经完成的，随后到莉萨奥交《偷回蘑菇》。",
+      "action_ids": [
+        "a0219",
+        "a0218",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0223",
+        "a0224",
+        "accept-9797-zabrajin",
+        "a0225",
+        "a0226"
+      ]
+    }
+  ],
+  "service_overrides": [
+    {
+      "service_id": "zang-9802-background",
+      "kind": "background_window",
+      "task_id": 9802,
+      "start_action_id": "a0012",
+      "end_action_id": "a0101",
+      "end_policy": "carry_if_incomplete"
+    },
+    {
+      "service_id": "zang-9728-background",
+      "kind": "background_window",
+      "task_id": 9728,
+      "start_action_id": "a0014",
+      "end_action_id": "a0067",
+      "end_policy": "fill_if_incomplete"
+    },
+    {
+      "service_id": "zang-9806-background",
+      "kind": "background_window",
+      "task_id": 9806,
+      "start_action_id": "a0145",
+      "end_action_id": "a0197",
+      "end_policy": "fill_if_incomplete"
+    },
+    {
+      "service_id": "zang-9708-9820-shared",
+      "kind": "shared_service",
+      "action_ids": [
+        "a0181",
+        "a0182"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "zang-p001": {
+        "display_name": "塞纳里奥庇护所",
+        "x": 78.4,
+        "y": 62.02,
+        "phase": "opening",
+        "transport": "ride",
+        "handoff_ref": "hellfire-to-zang-cenarion-refuge"
+      },
+      "zang-p002": {
+        "display_name": "埃西恩",
+        "x": 81.1,
+        "y": 63.87,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p003": {
+        "display_name": "克勒斯",
+        "x": 78.97,
+        "y": 67.44,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p004": {
+        "display_name": "塞纳里奥庇护所",
+        "x": 79.09,
+        "y": 65.27,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p005": {
+        "display_name": "暗泽湖",
+        "x": 70.75,
+        "y": 80.15,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p006": {
+        "display_name": "暗泽村",
+        "x": 83.38,
+        "y": 85.54,
+        "phase": "opening",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p007": {
+        "display_name": "塞纳里奥庇护所",
+        "x": 78.4,
+        "y": 62.02,
+        "phase": "opening"
+      },
+      "zang-p008": {
+        "display_name": "沼泽鼠岗哨",
+        "x": 85.28,
+        "y": 54.75,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p009": {
+        "display_name": "东部湖区",
+        "x": 77.5,
+        "y": 70.5,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p010": {
+        "display_name": "暗泽南缘",
+        "x": 72.5,
+        "y": 94.8,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p011": {
+        "display_name": "暗泽湖抽水泵",
+        "x": 70.6,
+        "y": 80.29,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p012": {
+        "display_name": "环礁湖",
+        "x": 65.1,
+        "y": 68.67,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p013": {
+        "display_name": "毒蛇湖",
+        "x": 65.15,
+        "y": 40.91,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p014": {
+        "display_name": "观察者杰哈恩",
+        "x": 80.75,
+        "y": 36.27,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p015": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p016": {
+        "display_name": "水域排水口",
+        "x": 50.34,
+        "y": 40.87,
+        "phase": "water",
+        "transport": "swim",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "swim"
+        }
+      },
+      "zang-p017": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "west",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0083"
+        }
+      },
+      "zang-p018": {
+        "display_name": "沼光湖抽水泵",
+        "x": 25.4,
+        "y": 42.86,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p019": {
+        "display_name": "塞纳里奥庇护所",
+        "x": 78.4,
+        "y": 62.02,
+        "phase": "east",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0090"
+        }
+      },
+      "zang-p020": {
+        "display_name": "沼泽鼠岗哨",
+        "x": 85.28,
+        "y": 54.75,
+        "phase": "east",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0103"
+        }
+      },
+      "zang-p021": {
+        "display_name": "死亡泥潭",
+        "x": 80.75,
+        "y": 36.27,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p022": {
+        "display_name": "死亡泥潭·枯萎的巨人",
+        "x": 82.5,
+        "y": 45.0,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p023": {
+        "display_name": "孢子之翼",
+        "x": 78.01,
+        "y": 45.41,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p024": {
+        "display_name": "沼泽鼠岗哨",
+        "x": 84.36,
+        "y": 54.33,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p025": {
+        "display_name": "黑钉",
+        "x": 49.75,
+        "y": 60.06,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p026": {
+        "display_name": "沼泽鼠岗哨",
+        "x": 84.96,
+        "y": 54.03,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p027": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "west",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0128"
+        }
+      },
+      "zang-p028": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p029": {
+        "display_name": "蛮沼区",
+        "x": 46.4,
+        "y": 61.3,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p030": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p031": {
+        "display_name": "恐爪刷新点",
+        "x": 22.31,
+        "y": 45.78,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p032": {
+        "display_name": "孢子村",
+        "x": 19.54,
+        "y": 50.04,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p033": {
+        "display_name": "莉萨奥营地",
+        "x": 23.32,
+        "y": 66.21,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p034": {
+        "display_name": "法恩森",
+        "x": 19.02,
+        "y": 62.43,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p035": {
+        "display_name": "孢殖林",
+        "x": 14.39,
+        "y": 61.05,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p036": {
+        "display_name": "法恩森",
+        "x": 19.02,
+        "y": 62.43,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p037": {
+        "display_name": "莉萨奥营地",
+        "x": 23.32,
+        "y": 66.21,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p038": {
+        "display_name": "孢子村",
+        "x": 19.54,
+        "y": 50.04,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p039": {
+        "display_name": "丢弃的食物",
+        "x": 30.11,
+        "y": 63.94,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p040": {
+        "display_name": "昂古拉刷新点",
+        "x": 32.81,
+        "y": 59.53,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p041": {
+        "display_name": "莉萨奥营地",
+        "x": 23.32,
+        "y": 66.21,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p042": {
+        "display_name": "血鳞区",
+        "x": 26.21,
+        "y": 40.63,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p043": {
+        "display_name": "穆玛基",
+        "x": 23.78,
+        "y": 26.75,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p044": {
+        "display_name": "匕潭鱼人笼点",
+        "x": 26.81,
+        "y": 22.6,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p045": {
+        "display_name": "格罗阿克",
+        "x": 34.82,
+        "y": 34.83,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p046": {
+        "display_name": "多头蛇之王刷新点",
+        "x": 42.23,
+        "y": 41.42,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p047": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "final",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0186"
+        }
+      },
+      "zang-p048": {
+        "display_name": "战斗迫近",
+        "x": 19.88,
+        "y": 27.09,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p049": {
+        "display_name": "孢子村",
+        "x": 19.54,
+        "y": 50.04,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p050": {
+        "display_name": "莉萨奥营地",
+        "x": 23.32,
+        "y": 66.21,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p051": {
+        "display_name": "博哈姆废墟",
+        "x": 44.36,
+        "y": 66.01,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p052": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "final",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0206"
+        }
+      },
+      "zang-p053": {
+        "display_name": "昂古拉走廊",
+        "x": 32.81,
+        "y": 59.53,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p054": {
+        "display_name": "匕潭失落者营地",
+        "x": 25.13,
+        "y": 23.78,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p055": {
+        "display_name": "安葛洛什",
+        "x": 18.6,
+        "y": 7.0,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang-p056": {
+        "display_name": "萨布拉金",
+        "x": 32.38,
+        "y": 51.96,
+        "phase": "cleanup",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0219"
+        }
+      },
+      "zang-p057": {
+        "display_name": "莉萨奥营地",
+        "x": 23.32,
+        "y": 66.21,
+        "phase": "cleanup",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: reviewed legacy script transports on these target points are not player-visible arrival actions in the old route. Remove the ambiguous migration hint; preserve all task/action text and keep arrival movement unresolved."
+    }
+  ]
+}

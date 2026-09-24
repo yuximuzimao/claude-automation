@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "task_id": 13125,
+  "identity": {
+    "name_zhcn": "凝固的空气",
+    "name_en": "The Air Stands Still",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 79,
+    "min_level": 77,
+    "pre_any": [],
+    "pre_all": [
+      13122,
+      13118
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43830,
+        "quantity": 1,
+        "name_zhcn": "考巴尔特的护肩",
+        "name_en": "Cobalt's Shoulderguards",
+        "sell_price_each_copper": 46973,
+        "sell_price_total_copper": 46973
+      },
+      {
+        "item_id": 43840,
+        "quantity": 1,
+        "name_zhcn": "希克森的软帽",
+        "name_en": "Sixen's Skullcap",
+        "sell_price_each_copper": 41518,
+        "sell_price_total_copper": 41518
+      },
+      {
+        "item_id": 43842,
+        "quantity": 1,
+        "name_zhcn": "杰德的强化护手",
+        "name_en": "Jayde's Reinforced Handguards",
+        "sell_price_each_copper": 39252,
+        "sell_price_total_copper": 39252
+      },
+      {
+        "item_id": 43839,
+        "quantity": 1,
+        "name_zhcn": "莉娅安的足垫",
+        "name_en": "Leiah's Footpads",
+        "sell_price_each_copper": 33095,
+        "sell_price_total_copper": 33095
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 46973,
+    "gear_sale_max_copper": 46973,
+    "reputation_rewards": [
+      {
+        "faction_id": 1098,
+        "amount": 500
+      },
+      {
+        "faction_id": 1106,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 32700
+  },
+  "guide": [
+    "接取：黑锋观察者。",
+    "冰冠冰川回音谷的黑锋观察者要你去杀死撕裂者萨兰纳克斯、虫王塔洛诺克斯和高阶祭司亚萨尔蒙。",
+    "交付：黑锋观察者。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13125",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《凝固的空气》：先击杀高阶祭司亚萨尔蒙，再击杀虫王塔洛诺克斯，最后击杀撕裂者萨兰纳克斯；三个首领都可以用阿彻鲁斯战斗号角召黑锋援军。每场结束都可能出现死亡之门，三个首领全部完成后再使用最后一个门返回回音谷交任务。",
+      "scope": "all",
+      "source_ref": "docs/archive/neat/2026-08-31-icecrown-closure-transport-sholazar-live-neat.md",
+      "reason": "迁移语义对拍恢复旧玩家可见Boss执行技巧；归档与实测记录明确要求保留Boss顺序、战斗号角和最后死亡之门回交语义。"
+    }
+  }
+}

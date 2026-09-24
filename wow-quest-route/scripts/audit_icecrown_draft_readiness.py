@@ -81,15 +81,6 @@ def main() -> None:
         if fivebox_checks:
             risks.append("fivebox_live_check")
 
-        econ = task.get("level_80_economy") or {}
-        if (
-            int(econ.get("xp_bonus_money_copper") or 0) == 0
-            and int(econ.get("equipment_reward_count") or 0) == 0
-            and int(econ.get("other_reward_item_count") or 0) == 0
-            and int(econ.get("direct_money_copper") or 0) == 0
-        ):
-            risks.append("economy_reward_review")
-
         rows.append(
             {
                 "quest_id": qid,

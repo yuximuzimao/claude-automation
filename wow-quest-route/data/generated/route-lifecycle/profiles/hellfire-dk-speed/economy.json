@@ -1,0 +1,43 @@
+{
+  "characters": [],
+  "cost_coverage": "partial",
+  "gross_copper": null,
+  "gross_gph": null,
+  "input_fingerprint": "ad86c98d02062d28cb9c0d214b637ce0aaf1eaa427a365e33154d933e5e53a2d",
+  "issues": [
+    {
+      "kind": "upstream_stage8_requirements",
+      "profile_id": "hellfire-dk-speed",
+      "severity": "requirement"
+    },
+    {
+      "kind": "economy_character_state_required",
+      "profile_id": "hellfire-dk-speed",
+      "severity": "requirement"
+    },
+    {
+      "kind": "route_cost_coverage_incomplete",
+      "note": "No structured current-scope cost input was supplied; known cost remains zero with partial coverage.",
+      "severity": "requirement"
+    },
+    {
+      "kind": "fresh_complete_timing_required_for_gph",
+      "severity": "requirement",
+      "timing_input_fingerprint": "cd999bd0f4099fc0aa7c6da3a03a936114bce2dbd012b747c4b9e861043d11cc",
+      "timing_status": "requirements"
+    }
+  ],
+  "kind": "profile",
+  "known_cost_copper": 0,
+  "known_gross_copper": 0,
+  "matched_observation_count": 0,
+  "model_id": "wotlk-route-economy-v1",
+  "net_copper": null,
+  "net_gph": null,
+  "observation_comparisons": [],
+  "profile_id": "hellfire-dk-speed",
+  "status": "requirements",
+  "timing_input_fingerprint": "cd999bd0f4099fc0aa7c6da3a03a936114bce2dbd012b747c4b9e861043d11cc",
+  "turnins": [],
+  "xp_input_fingerprint": "13f73325aa9076afc2571dcc6a81074ed7029ffd052f3188f3064251b36c86d3"
+}

@@ -1,0 +1,1973 @@
+{
+  "schema_version": 1,
+  "status": "migration_workflow_mapping_not_task_truth",
+  "source": "tasks/task-card-migration/review-queue.json + previous mapping ledger",
+  "legacy_type_count": 202,
+  "task_count": 334,
+  "type_status_counts": {
+    "not_shared": 69,
+    "pending": 5,
+    "sequential_loot": 16,
+    "shared": 97,
+    "special": 15
+  },
+  "task_status_counts": {
+    "not_shared": 118,
+    "pending": 5,
+    "sequential_loot": 21,
+    "shared": 175,
+    "special": 15
+  },
+  "mappings": [
+    {
+      "legacy_type": "bait_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11280
+      ]
+    },
+    {
+      "legacy_type": "bell_dialogue_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12274
+      ]
+    },
+    {
+      "legacy_type": "boss_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13235
+      ]
+    },
+    {
+      "legacy_type": "cage_rescue_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12982
+      ]
+    },
+    {
+      "legacy_type": "capture_object_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12078
+      ]
+    },
+    {
+      "legacy_type": "capture_progress_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12532
+      ]
+    },
+    {
+      "legacy_type": "carried_object_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13144
+      ]
+    },
+    {
+      "legacy_type": "collection_and_combine_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12926
+      ]
+    },
+    {
+      "legacy_type": "communicator_interaction_personal_with_completion_race",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12920
+      ]
+    },
+    {
+      "legacy_type": "corpse_burn_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13211
+      ]
+    },
+    {
+      "legacy_type": "corpse_flag_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12995
+      ]
+    },
+    {
+      "legacy_type": "corpse_interaction_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12893
+      ]
+    },
+    {
+      "legacy_type": "corpse_interaction_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13358
+      ]
+    },
+    {
+      "legacy_type": "corpse_item_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 4,
+      "task_ids": [
+        11593,
+        11899,
+        12211,
+        12449
+      ]
+    },
+    {
+      "legacy_type": "corpse_mining_and_followup_loot_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12985
+      ]
+    },
+    {
+      "legacy_type": "corpse_transform_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12813
+      ]
+    },
+    {
+      "legacy_type": "daily_escort_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13301
+      ]
+    },
+    {
+      "legacy_type": "daily_kill_loot_item_use_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12981
+      ]
+    },
+    {
+      "legacy_type": "daily_personal_collection_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12838
+      ]
+    },
+    {
+      "legacy_type": "daily_personal_loot_fast_respawn_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13006
+      ]
+    },
+    {
+      "legacy_type": "daily_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12994,
+        13046
+      ]
+    },
+    {
+      "legacy_type": "daily_vehicle_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13310
+      ]
+    },
+    {
+      "legacy_type": "database_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12927
+      ]
+    },
+    {
+      "legacy_type": "debuff_plus_self_item_use_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12076
+      ]
+    },
+    {
+      "legacy_type": "defense_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13141
+      ]
+    },
+    {
+      "legacy_type": "destructible_object_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12232
+      ]
+    },
+    {
+      "legacy_type": "dialogue_combat_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12955
+      ]
+    },
+    {
+      "legacy_type": "dialogue_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12204
+      ]
+    },
+    {
+      "legacy_type": "dialogue_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11983
+      ]
+    },
+    {
+      "legacy_type": "dialogue_script_per_character_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12807
+      ]
+    },
+    {
+      "legacy_type": "elite_encounter_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 6,
+      "task_ids": [
+        12236,
+        12427,
+        12428,
+        12429,
+        12430,
+        12431
+      ]
+    },
+    {
+      "legacy_type": "escort_control_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13133
+      ]
+    },
+    {
+      "legacy_type": "escort_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12688
+      ]
+    },
+    {
+      "legacy_type": "event_and_kill_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13048
+      ]
+    },
+    {
+      "legacy_type": "event_credit_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13047
+      ]
+    },
+    {
+      "legacy_type": "event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13239
+      ]
+    },
+    {
+      "legacy_type": "event_group_shared_plus_named_corpse_multi_person_loot_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12069
+      ]
+    },
+    {
+      "legacy_type": "event_personal_trigger_same_scene_concurrent_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12053
+      ]
+    },
+    {
+      "legacy_type": "fixed_document_personal_same_spawn_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        12993,
+        13273
+      ]
+    },
+    {
+      "legacy_type": "fixed_document_pickup_personal_each_character_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        12234,
+        12283
+      ]
+    },
+    {
+      "legacy_type": "fixed_ground_pickup_personal_no_same_spawn_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13050
+      ]
+    },
+    {
+      "legacy_type": "fixed_ground_pickup_personal_vertical_search_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12930
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_collect_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 7,
+      "task_ids": [
+        12039,
+        12557,
+        12583,
+        12584,
+        12597,
+        12599,
+        12975
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_destroy_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12265
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 6,
+      "task_ids": [
+        13084,
+        13117,
+        13119,
+        13120,
+        13134,
+        13220
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_interaction_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12965,
+        12998
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_interaction_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12075
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_interaction_personal_same_object_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13034
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        13138,
+        13355
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_personal_interaction_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        13174,
+        13328
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_personal_same_spawn_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13121
+      ]
+    },
+    {
+      "legacy_type": "fixed_object_pickup_personal_dedicated_underwater_loop_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12009
+      ]
+    },
+    {
+      "legacy_type": "fixed_spawn_personal_pickup_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13078
+      ]
+    },
+    {
+      "legacy_type": "forced_wand_named_targets_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12273
+      ]
+    },
+    {
+      "legacy_type": "ground_pickup_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12964
+      ]
+    },
+    {
+      "legacy_type": "group_kill_personal_loot_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12622
+      ]
+    },
+    {
+      "legacy_type": "group_shared_completion_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11397
+      ]
+    },
+    {
+      "legacy_type": "group_shared_same_target_sequential_interaction_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13042
+      ]
+    },
+    {
+      "legacy_type": "interrogation_script_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12252
+      ]
+    },
+    {
+      "legacy_type": "item_trigger_same_corpse_fivebox_loot_followup_samples_shared_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12979
+      ]
+    },
+    {
+      "legacy_type": "item_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12202,
+        12453
+      ]
+    },
+    {
+      "legacy_type": "item_use_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12066
+      ]
+    },
+    {
+      "legacy_type": "item_use_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11894
+      ]
+    },
+    {
+      "legacy_type": "kill_credit_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 7,
+      "task_ids": [
+        12520,
+        12524,
+        12538,
+        12549,
+        12992,
+        13170,
+        13230
+      ]
+    },
+    {
+      "legacy_type": "kill_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12231
+      ]
+    },
+    {
+      "legacy_type": "kill_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 4,
+      "task_ids": [
+        11560,
+        12052,
+        12562,
+        12931
+      ]
+    },
+    {
+      "legacy_type": "live_target_item_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12111
+      ]
+    },
+    {
+      "legacy_type": "loot_and_item_trigger_personal_confirmed_same_corpse_unknown",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11999
+      ]
+    },
+    {
+      "legacy_type": "mixed_boss_shared_personal_loot_transport_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12713
+      ]
+    },
+    {
+      "legacy_type": "mixed_ground_pickup_and_loot_personal_same_spawn_sequential_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        13001
+      ]
+    },
+    {
+      "legacy_type": "mixed_ground_pickup_or_mob_drop_pickup_preferred",
+      "fivebox_status": "pending",
+      "basis": "旧记录没有形成足够五开共享结论；保留待实测，不猜。",
+      "task_count": 1,
+      "task_ids": [
+        11559
+      ]
+    },
+    {
+      "legacy_type": "mixed_named_kill_shared_object_interaction_personal_respawn",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12575
+      ]
+    },
+    {
+      "legacy_type": "mixed_personal_essence_same_corpse_sequential_loot_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12891
+      ]
+    },
+    {
+      "legacy_type": "mixed_single_boss_shared_personal_tracking_and_communicator",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12910
+      ]
+    },
+    {
+      "legacy_type": "mixed_summon_and_kill_group_shared_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        13005
+      ]
+    },
+    {
+      "legacy_type": "mixed_trigger_shared_then_personal_collection_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        13136
+      ]
+    },
+    {
+      "legacy_type": "named_elite_with_single_use_protection_consumable_failure_mode",
+      "fivebox_status": "pending",
+      "basis": "旧记录没有形成足够五开共享结论；保留待实测，不猜。",
+      "task_count": 1,
+      "task_ids": [
+        12080
+      ]
+    },
+    {
+      "legacy_type": "named_kill_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 5,
+      "task_ids": [
+        11182,
+        11422,
+        12525,
+        12569,
+        13035
+      ]
+    },
+    {
+      "legacy_type": "named_kill_task_item_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12949
+      ]
+    },
+    {
+      "legacy_type": "named_single_kill_multi_person_item_start_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12059
+      ]
+    },
+    {
+      "legacy_type": "named_target_item_use_personal_fast_respawn_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12126
+      ]
+    },
+    {
+      "legacy_type": "npc_interaction_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12980
+      ]
+    },
+    {
+      "legacy_type": "object_collect_manual_local_loop",
+      "fivebox_status": "pending",
+      "basis": "旧记录没有形成足够五开共享结论；保留待实测，不猜。",
+      "task_count": 1,
+      "task_ids": [
+        9814
+      ]
+    },
+    {
+      "legacy_type": "object_destroy_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        11602,
+        12988
+      ]
+    },
+    {
+      "legacy_type": "object_disable_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11399
+      ]
+    },
+    {
+      "legacy_type": "object_interaction_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11605
+      ]
+    },
+    {
+      "legacy_type": "object_pickup_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 3,
+      "task_ids": [
+        11606,
+        11887,
+        11906
+      ]
+    },
+    {
+      "legacy_type": "object_release_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 3,
+      "task_ids": [
+        11611,
+        11676,
+        11876
+      ]
+    },
+    {
+      "legacy_type": "object_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 5,
+      "task_ids": [
+        11677,
+        12058,
+        12094,
+        12099,
+        12213
+      ]
+    },
+    {
+      "legacy_type": "object_use_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12241
+      ]
+    },
+    {
+      "legacy_type": "personal_collection_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 25,
+      "task_ids": [
+        11990,
+        12196,
+        12279,
+        12483,
+        12514,
+        12523,
+        12560,
+        12579,
+        12609,
+        12610,
+        12634,
+        12635,
+        12639,
+        12666,
+        12672,
+        12677,
+        12684,
+        12699,
+        12709,
+        12804,
+        12914,
+        13130,
+        13135,
+        13275,
+        13556
+      ]
+    },
+    {
+      "legacy_type": "personal_collection_same_corpse_sequential_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 2,
+      "task_ids": [
+        13212,
+        13277
+      ]
+    },
+    {
+      "legacy_type": "personal_collection_same_corpse_sequential_loot_with_buff_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        13356
+      ]
+    },
+    {
+      "legacy_type": "personal_defense_event_three_batches_40yd_exclusion_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12470
+      ]
+    },
+    {
+      "legacy_type": "personal_disguise_interaction_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12648
+      ]
+    },
+    {
+      "legacy_type": "personal_drop_collection_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 6,
+      "task_ids": [
+        11424,
+        11456,
+        11457,
+        12207,
+        12328,
+        13140
+      ]
+    },
+    {
+      "legacy_type": "personal_drop_same_drop_sequential_pickup_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12624
+      ]
+    },
+    {
+      "legacy_type": "personal_drop_single_drop_multi_person_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        11455
+      ]
+    },
+    {
+      "legacy_type": "personal_ground_or_drop_pickup_not_shared_same_corpse_exclusive_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12230
+      ]
+    },
+    {
+      "legacy_type": "personal_item_use_and_loot_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        11279,
+        12137
+      ]
+    },
+    {
+      "legacy_type": "personal_item_use_collection_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11301
+      ]
+    },
+    {
+      "legacy_type": "personal_loot_and_object_interaction_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12007
+      ]
+    },
+    {
+      "legacy_type": "personal_loot_same_kill_sequential_pickup_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12729
+      ]
+    },
+    {
+      "legacy_type": "personal_loot_single_corpse_single_character_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11958
+      ]
+    },
+    {
+      "legacy_type": "personal_mixed_collection_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        11434
+      ]
+    },
+    {
+      "legacy_type": "personal_multi_part_drop_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12165
+      ]
+    },
+    {
+      "legacy_type": "personal_object_pickup_full_route_overlap_daily_once_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11960
+      ]
+    },
+    {
+      "legacy_type": "personal_objective_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12116
+      ]
+    },
+    {
+      "legacy_type": "personal_phase_personal_pickup_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13074
+      ]
+    },
+    {
+      "legacy_type": "personal_scripted_respawn_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12330
+      ]
+    },
+    {
+      "legacy_type": "personal_scripted_vision_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12327
+      ]
+    },
+    {
+      "legacy_type": "personal_summon_turnin_with_tradeable_reagent_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11991
+      ]
+    },
+    {
+      "legacy_type": "personal_trigger_same_drop_sequential_pickup_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12631
+      ]
+    },
+    {
+      "legacy_type": "personal_world_object_collection_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 3,
+      "task_ids": [
+        11286,
+        11298,
+        12026
+      ]
+    },
+    {
+      "legacy_type": "personal_world_object_interaction_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11504
+      ]
+    },
+    {
+      "legacy_type": "placed_object_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13306
+      ]
+    },
+    {
+      "legacy_type": "portal_interaction_personal_transport_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        13073,
+        13075
+      ]
+    },
+    {
+      "legacy_type": "post_prerequisite_item_trigger_fixed_route_task",
+      "fivebox_status": "pending",
+      "basis": "旧记录没有形成足够五开共享结论；保留待实测，不猜。",
+      "task_count": 1,
+      "task_ids": [
+        12057
+      ]
+    },
+    {
+      "legacy_type": "quest_interaction_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        12573,
+        12691
+      ]
+    },
+    {
+      "legacy_type": "quest_item_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13038
+      ]
+    },
+    {
+      "legacy_type": "quest_item_script_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12823
+      ]
+    },
+    {
+      "legacy_type": "quest_item_use_and_named_kill_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12459
+      ]
+    },
+    {
+      "legacy_type": "quest_item_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12925
+      ]
+    },
+    {
+      "legacy_type": "quest_item_use_group_shared_then_npc_disguise_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12260
+      ]
+    },
+    {
+      "legacy_type": "quest_item_use_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12987
+      ]
+    },
+    {
+      "legacy_type": "quest_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 21,
+      "task_ids": [
+        11984,
+        11989,
+        12484,
+        12510,
+        12516,
+        12540,
+        12580,
+        12614,
+        12627,
+        12630,
+        12632,
+        12640,
+        12659,
+        12662,
+        12665,
+        12668,
+        12674,
+        12708,
+        12712,
+        12730,
+        13549
+      ]
+    },
+    {
+      "legacy_type": "quest_progress_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        12527,
+        13228
+      ]
+    },
+    {
+      "legacy_type": "quest_start_drop_personal_sequential_loot_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11398
+      ]
+    },
+    {
+      "legacy_type": "quest_start_drop_same_source_fivebox_personal_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12271
+      ]
+    },
+    {
+      "legacy_type": "quest_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 7,
+      "task_ids": [
+        12544,
+        12589,
+        12645,
+        12652,
+        12669,
+        12810,
+        12916
+      ]
+    },
+    {
+      "legacy_type": "quest_use_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        12537,
+        12799
+      ]
+    },
+    {
+      "legacy_type": "random_drop_same_corpse_fivebox_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        13049
+      ]
+    },
+    {
+      "legacy_type": "rescue_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11296
+      ]
+    },
+    {
+      "legacy_type": "rescue_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12937,
+        12957
+      ]
+    },
+    {
+      "legacy_type": "rescue_transport_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13045
+      ]
+    },
+    {
+      "legacy_type": "same_spawn_multi_pickup_personal_activation_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12821
+      ]
+    },
+    {
+      "legacy_type": "script_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 8,
+      "task_ids": [
+        12140,
+        12847,
+        13043,
+        13058,
+        13059,
+        13142,
+        13152,
+        13285
+      ]
+    },
+    {
+      "legacy_type": "script_rescue_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13308
+      ]
+    },
+    {
+      "legacy_type": "scripted_boss_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12164
+      ]
+    },
+    {
+      "legacy_type": "scripted_dialogue_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12203
+      ]
+    },
+    {
+      "legacy_type": "scripted_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12644
+      ]
+    },
+    {
+      "legacy_type": "scripted_event_group_shared_with_all_prerequisite_state_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13364
+      ]
+    },
+    {
+      "legacy_type": "scripted_flight_personal_low_incremental_cost_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12028
+      ]
+    },
+    {
+      "legacy_type": "scripted_interaction_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12721
+      ]
+    },
+    {
+      "legacy_type": "scripted_interaction_personal_sequential_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12710
+      ]
+    },
+    {
+      "legacy_type": "scripted_item_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12070
+      ]
+    },
+    {
+      "legacy_type": "scripted_named_target_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12150
+      ]
+    },
+    {
+      "legacy_type": "scripted_object_personal_shared_respawn_bottleneck_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12032
+      ]
+    },
+    {
+      "legacy_type": "scripted_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12152
+      ]
+    },
+    {
+      "legacy_type": "scripted_throw_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11982
+      ]
+    },
+    {
+      "legacy_type": "scripted_travel_group_shared_all_present_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12061
+      ]
+    },
+    {
+      "legacy_type": "shared_completion_with_personal_script_gate_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12121
+      ]
+    },
+    {
+      "legacy_type": "shared_corpse_single_drop_multi_person_loot",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        9772
+      ]
+    },
+    {
+      "legacy_type": "shared_kill_plus_object_destroy_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11936
+      ]
+    },
+    {
+      "legacy_type": "shared_kill_plus_single_drop_multi_person_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12100
+      ]
+    },
+    {
+      "legacy_type": "ship_burning_shared_same_corpse_fivebox_personal_loot_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12243
+      ]
+    },
+    {
+      "legacy_type": "single_boss_shared_same_corpse_fivebox_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12928
+      ]
+    },
+    {
+      "legacy_type": "single_capture_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11919
+      ]
+    },
+    {
+      "legacy_type": "single_corpse_item_use_personal_same_corpse_reusable",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11571
+      ]
+    },
+    {
+      "legacy_type": "single_corpse_multi_character_item_start_recalled_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12147
+      ]
+    },
+    {
+      "legacy_type": "single_event_kill_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11895
+      ]
+    },
+    {
+      "legacy_type": "single_event_trigger_group_shared_spawn_overlap_failure_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12261
+      ]
+    },
+    {
+      "legacy_type": "single_fight_multi_character_interaction_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        11464
+      ]
+    },
+    {
+      "legacy_type": "single_item_personal_loot_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12831
+      ]
+    },
+    {
+      "legacy_type": "single_item_source_plus_object_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12096
+      ]
+    },
+    {
+      "legacy_type": "single_kill_multi_person_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 5,
+      "task_ids": [
+        11469,
+        11510,
+        12054,
+        12197,
+        12201
+      ]
+    },
+    {
+      "legacy_type": "single_kill_same_corpse_fivebox_personal_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12254
+      ]
+    },
+    {
+      "legacy_type": "single_loot_and_self_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11959
+      ]
+    },
+    {
+      "legacy_type": "single_target_item_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12206
+      ]
+    },
+    {
+      "legacy_type": "single_world_object_personal_assumed_from_mechanic",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12433
+      ]
+    },
+    {
+      "legacy_type": "special_capture_mechanic_group_share_pending",
+      "fivebox_status": "pending",
+      "basis": "旧记录没有形成足够五开共享结论；保留待实测，不猜。",
+      "task_count": 1,
+      "task_ids": [
+        10813
+      ]
+    },
+    {
+      "legacy_type": "summon_named_target_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12240,
+        13011
+      ]
+    },
+    {
+      "legacy_type": "summoned_vehicle_charge_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12198
+      ]
+    },
+    {
+      "legacy_type": "tame_or_escort_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13143
+      ]
+    },
+    {
+      "legacy_type": "tame_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12607
+      ]
+    },
+    {
+      "legacy_type": "task_item_trigger_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12939,
+        12943
+      ]
+    },
+    {
+      "legacy_type": "three_named_single_kill_multi_person_loot_confirmed",
+      "fivebox_status": "sequential_loot",
+      "basis": "任务物由各号取得，但同一有效掉落/尸体可供五号依次拾取。",
+      "task_count": 1,
+      "task_ids": [
+        12064
+      ]
+    },
+    {
+      "legacy_type": "tracking_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12550
+      ]
+    },
+    {
+      "legacy_type": "triggered_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13051
+      ]
+    },
+    {
+      "legacy_type": "triggered_named_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12267
+      ]
+    },
+    {
+      "legacy_type": "two_named_target_drop_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        11943
+      ]
+    },
+    {
+      "legacy_type": "vehicle_boss_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12199
+      ]
+    },
+    {
+      "legacy_type": "vehicle_collection_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12050
+      ]
+    },
+    {
+      "legacy_type": "vehicle_daily_mixed_group_shared_kills_personal_shrine_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12372
+      ]
+    },
+    {
+      "legacy_type": "vehicle_delivery_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 2,
+      "task_ids": [
+        12214,
+        12814
+      ]
+    },
+    {
+      "legacy_type": "vehicle_event_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13086
+      ]
+    },
+    {
+      "legacy_type": "vehicle_kill_credit_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 4,
+      "task_ids": [
+        13069,
+        13091,
+        13172,
+        13305
+      ]
+    },
+    {
+      "legacy_type": "vehicle_kill_credit_group_shared_in_range_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12218
+      ]
+    },
+    {
+      "legacy_type": "vehicle_kill_group_shared_follow_mounts_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12851
+      ]
+    },
+    {
+      "legacy_type": "vehicle_kill_group_shared_same_corpse_fivebox_personal_loot_confirmed",
+      "fivebox_status": "special",
+      "basis": "同一任务同时包含共享阶段与个人阶段/条件阶段，按粗粒度五类归special。",
+      "task_count": 1,
+      "task_ids": [
+        12498
+      ]
+    },
+    {
+      "legacy_type": "vehicle_kill_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12997
+      ]
+    },
+    {
+      "legacy_type": "vehicle_kill_progress_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12967
+      ]
+    },
+    {
+      "legacy_type": "vehicle_named_fight_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12996
+      ]
+    },
+    {
+      "legacy_type": "vehicle_objective_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 3,
+      "task_ids": [
+        12259,
+        12707,
+        13169
+      ]
+    },
+    {
+      "legacy_type": "vehicle_objective_group_shared_proximity_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12919
+      ]
+    },
+    {
+      "legacy_type": "vehicle_objective_per_character_user_timing_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        11652
+      ]
+    },
+    {
+      "legacy_type": "vehicle_objective_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 2,
+      "task_ids": [
+        13171,
+        13283
+      ]
+    },
+    {
+      "legacy_type": "vehicle_or_control_interaction_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        13168
+      ]
+    },
+    {
+      "legacy_type": "vehicle_or_control_progress_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12673
+      ]
+    },
+    {
+      "legacy_type": "vehicle_rescue_group_shared_close_range_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        12856
+      ]
+    },
+    {
+      "legacy_type": "vehicle_use_group_shared_confirmed",
+      "fivebox_status": "shared",
+      "basis": "旧type明确记录整项任务/任务进度共享。",
+      "task_count": 1,
+      "task_ids": [
+        13071
+      ]
+    },
+    {
+      "legacy_type": "world_object_collection_personal_confirmed",
+      "fivebox_status": "not_shared",
+      "basis": "旧type明确记录逐角色完成或个人进度。",
+      "task_count": 1,
+      "task_ids": [
+        12242
+      ]
+    }
+  ]
+}

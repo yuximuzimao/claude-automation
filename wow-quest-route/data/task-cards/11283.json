@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 11283,
+  "identity": {
+    "name_zhcn": "血战拜尔海姆",
+    "name_en": "Baleheim Bodycount",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11282
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 94000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35822,
+        "quantity": 1,
+        "name_zhcn": "废旧提拉斯板甲",
+        "name_en": "Scavenged Tirasian Plate",
+        "sell_price_each_copper": 60373,
+        "sell_price_total_copper": 60373
+      },
+      {
+        "item_id": 35821,
+        "quantity": 1,
+        "name_zhcn": "流线战靴",
+        "name_en": "Streamlined Stompers",
+        "sell_price_each_copper": 38839,
+        "sell_price_total_copper": 38839
+      },
+      {
+        "item_id": 35818,
+        "quantity": 1,
+        "name_zhcn": "绷皮护肩",
+        "name_en": "Stretch-Hide Spaulders",
+        "sell_price_each_copper": 25492,
+        "sell_price_total_copper": 25492
+      },
+      {
+        "item_id": 35820,
+        "quantity": 1,
+        "name_zhcn": "执事的手套",
+        "name_en": "Deacon's Wraps",
+        "sell_price_each_copper": 21401,
+        "sell_price_total_copper": 21401
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 60373,
+    "gear_sale_max_copper": 60373,
+    "reputation_rewards": [
+      {
+        "faction_id": 1067,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25150
+  },
+  "guide": [
+    "接取：戈斯中士。",
+    "戈斯中士要你前往拜尔海姆，杀死16名斯克恩维库人。",
+    "交付：戈斯中士。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11283",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《血战拜尔海姆》：只在拜尔海姆区域内击杀才计数，别把维库拉出区域再杀。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

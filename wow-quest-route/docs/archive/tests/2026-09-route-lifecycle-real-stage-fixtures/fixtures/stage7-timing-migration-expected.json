@@ -1,0 +1,22 @@
+{
+  "schema": "stage7-timing-migration-expected/v1",
+  "profile_probe": "zangarmarsh-fivebox",
+  "program_id": "horde-fivebox-full-clear",
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "blocked",
+    "program_status": "blocked",
+    "known_seconds": 52933.2,
+    "center_minutes": null,
+    "range_minutes": null,
+    "issue_counts": {
+      "member_timing_requirements": 9,
+      "upstream_stage5_program_boundary_requirements": 9,
+      "member_timing_blocked": 3,
+      "upstream_stage4_blocked": 1,
+      "program_boundary_action_timing_input_required": 1,
+      "upstream_stage5_program_boundary_blocked": 1
+    }
+  },
+  "purpose": "Frozen pre-Timing-data-migration diagnostic. It proves Stage 7 can classify the current real Program without repairing route business truth. Future legitimate route/timing migrations may update the formal data, but must not rewrite this historical expectation to make the original diagnostic green."
+}

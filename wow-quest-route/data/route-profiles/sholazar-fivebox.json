@@ -1,0 +1,3106 @@
+{
+  "schema_version": 2,
+  "profile_id": "sholazar-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "索拉查盆地",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 3711
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      12521
+    ]
+  },
+  "goal": {
+    "summary": "达拉然脚本入图后，以奈辛瓦里营地为前半段炉石Hub；进入神谕者北部线后改绑河流之心，完成多里安、阿图里斯与东部任务后炉石回河流之心，直接系统飞龙眠神殿转祖达克。"
+  },
+  "display": {
+    "publish_key": "sholazar",
+    "order": 9,
+    "title": "索拉查盆地 · 80级五开整图路线",
+    "display_name": "索拉查盆地",
+    "subtitle": "达拉然脚本入图后，以奈辛瓦里营地为前半段炉石Hub；进入神谕者北部线后改绑河流之心，完成多里安、阿图里斯与东部任务后炉石回河流之心，直接系统飞龙眠神殿转祖达克。",
+    "footer": "",
+    "map_image": "maps/3711-sholazar-basin-hd.jpg"
+  },
+  "task_ids": [
+    12521,
+    12489,
+    12522,
+    12524,
+    12624,
+    12523,
+    12688,
+    12525,
+    12696,
+    12520,
+    12549,
+    12589,
+    12592,
+    12526,
+    12550,
+    12551,
+    12634,
+    12804,
+    12543,
+    12560,
+    12644,
+    12645,
+    12544,
+    12556,
+    12699,
+    12654,
+    12671,
+    12528,
+    12558,
+    12569,
+    12651,
+    12529,
+    12530,
+    12533,
+    12534,
+    12532,
+    12531,
+    12535,
+    12536,
+    12537,
+    12538,
+    12539,
+    12595,
+    12540,
+    12570,
+    12571,
+    12572,
+    12573,
+    12574,
+    12575,
+    12576,
+    12603,
+    12605,
+    12683,
+    12607,
+    12658,
+    12681,
+    12614,
+    12577,
+    12578,
+    12579,
+    12580,
+    12581,
+    12689,
+    12695,
+    12691
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "sholazar-entry-argent-tournament",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "sholazar-entry-dalaran",
+      "from_name": "银色比武场",
+      "to_name": "达拉然",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-entry-dalaran",
+      "action_id": "visit-entry-dalaran"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12521,
+      "location_ref": "sholazar-entry-dalaran",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "sholazar-p001",
+      "from_name": "达拉然·大法师伯塔鲁斯",
+      "to_name": "索拉查盆地·蛮藤谷",
+      "action_id": "transport-12521-sholazar"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p001",
+      "action_id": "visit-entry-wildgrowth"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12521,
+      "location_ref": "sholazar-p001",
+      "npc_name": "蒙特",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12489,
+      "location_ref": "sholazar-p001",
+      "npc_name": "蒙特",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p002",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12489,
+      "location_ref": "sholazar-p002",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "sholazar-p002",
+      "target_name": "奈辛瓦里营地",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12522,
+      "location_ref": "sholazar-p002",
+      "npc_name": "维斯雷·扭钳",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12524,
+      "location_ref": "sholazar-p002",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12624,
+      "location_ref": "sholazar-p002",
+      "npc_name": "查德",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p003",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12522,
+      "location_ref": "sholazar-p003",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p004",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12522,
+      "location_ref": "sholazar-p004",
+      "npc_name": "维斯雷·扭钳",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12523,
+      "location_ref": "sholazar-p004",
+      "npc_name": "维斯雷·扭钳",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p005",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12523,
+      "location_ref": "sholazar-p005",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12524,
+      "location_ref": "sholazar-p005",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12624,
+      "location_ref": "sholazar-p005",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12688,
+      "location_ref": "sholazar-p005",
+      "npc_name": "工程师赫莉丝",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12688,
+      "location_ref": "sholazar-p005",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p006",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12688,
+      "location_ref": "sholazar-p006",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12523,
+      "location_ref": "sholazar-p006",
+      "npc_name": "维斯雷·扭钳",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12524,
+      "location_ref": "sholazar-p006",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12525,
+      "location_ref": "sholazar-p006",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12624,
+      "location_ref": "sholazar-p006",
+      "npc_name": "查德",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "sholazar-p006",
+      "target_name": "奈辛瓦里营地",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12696,
+      "location_ref": "sholazar-p006",
+      "npc_name": "卡尔维特教授",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p007",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12525,
+      "location_ref": "sholazar-p007",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p008",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12525,
+      "location_ref": "sholazar-p008",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12520,
+      "location_ref": "sholazar-p008",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12549,
+      "location_ref": "sholazar-p008",
+      "npc_name": "巴克·坎维尔",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12589,
+      "location_ref": "sholazar-p008",
+      "npc_name": "德洛斯坦",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p009",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12589,
+      "location_ref": "sholazar-p009",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p010",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12589,
+      "location_ref": "sholazar-p010",
+      "npc_name": "德洛斯坦",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12592,
+      "location_ref": "sholazar-p010",
+      "npc_name": "德洛斯坦",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p011",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12549,
+      "location_ref": "sholazar-p011",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p012",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12520,
+      "location_ref": "sholazar-p012",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p013",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12520,
+      "location_ref": "sholazar-p013",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12526,
+      "location_ref": "sholazar-p013",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12549,
+      "location_ref": "sholazar-p013",
+      "npc_name": "巴克·坎维尔",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12550,
+      "location_ref": "sholazar-p013",
+      "npc_name": "巴克·坎维尔",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12551,
+      "location_ref": "sholazar-p013",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12634,
+      "location_ref": "sholazar-p013",
+      "npc_name": "葛瑞姆·雷酒",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12804,
+      "location_ref": "sholazar-p013",
+      "npc_name": "菜刀库尔格",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p014",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12526,
+      "location_ref": "sholazar-p014",
+      "npc_name": "神谕者索乌拉姆",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12543,
+      "location_ref": "sholazar-p014",
+      "npc_name": "神谕者索乌拉姆",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p015",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12804,
+      "location_ref": "sholazar-p015",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12592,
+      "location_ref": "sholazar-p015",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p016",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12543,
+      "location_ref": "sholazar-p016",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12551,
+      "location_ref": "sholazar-p016",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12634,
+      "location_ref": "sholazar-p016",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "sholazar-p017",
+      "target_name": "奈辛瓦里营地",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p017",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12551,
+      "location_ref": "sholazar-p017",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12560,
+      "location_ref": "sholazar-p017",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12804,
+      "location_ref": "sholazar-p017",
+      "npc_name": "菜刀库尔格",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12634,
+      "location_ref": "sholazar-p017",
+      "npc_name": "葛瑞姆·雷酒",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12644,
+      "location_ref": "sholazar-p017",
+      "npc_name": "葛瑞姆·雷酒",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12592,
+      "location_ref": "sholazar-p017",
+      "npc_name": "德洛斯坦",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12644,
+      "location_ref": "sholazar-p017",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12644,
+      "location_ref": "sholazar-p017",
+      "npc_name": "葛瑞姆·雷酒",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12645,
+      "location_ref": "sholazar-p017",
+      "npc_name": "葛瑞姆·雷酒",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12645,
+      "location_ref": "sholazar-p017",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12645,
+      "location_ref": "sholazar-p017",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p018",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12543,
+      "location_ref": "sholazar-p018",
+      "npc_name": "神谕者索乌拉姆",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12544,
+      "location_ref": "sholazar-p018",
+      "npc_name": "神谕者索乌拉姆",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12544,
+      "location_ref": "sholazar-p018",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p019",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12544,
+      "location_ref": "sholazar-p019",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12556,
+      "location_ref": "sholazar-p019",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p020",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12550,
+      "location_ref": "sholazar-p020",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p021",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12556,
+      "location_ref": "sholazar-p021",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p022",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12560,
+      "location_ref": "sholazar-p022",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p023",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "sholazar-p023",
+      "target_name": "河流之心",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12645,
+      "location_ref": "sholazar-p023",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12696,
+      "location_ref": "sholazar-p023",
+      "npc_name": "飞行员维克",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12699,
+      "location_ref": "sholazar-p023",
+      "npc_name": "飞行员维克",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12654,
+      "location_ref": "sholazar-p023",
+      "npc_name": "塔玛拉·摇链",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p024",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12699,
+      "location_ref": "sholazar-p024",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p025",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12699,
+      "location_ref": "sholazar-p025",
+      "npc_name": "飞行员维克",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12671,
+      "location_ref": "sholazar-p025",
+      "npc_name": "飞行员维克",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12671,
+      "location_ref": "sholazar-p025",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12671,
+      "location_ref": "sholazar-p025",
+      "npc_name": "飞行员维克",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p026",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12654,
+      "location_ref": "sholazar-p026",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12528,
+      "location_ref": "sholazar-p026",
+      "npc_name": "猎手基克吉克",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "sholazar-p027",
+      "target_name": "奈辛瓦里营地",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p027",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12556,
+      "location_ref": "sholazar-p027",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12550,
+      "location_ref": "sholazar-p027",
+      "npc_name": "巴克·坎维尔",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12558,
+      "location_ref": "sholazar-p027",
+      "npc_name": "巴克·坎维尔",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12560,
+      "location_ref": "sholazar-p027",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12569,
+      "location_ref": "sholazar-p027",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12645,
+      "location_ref": "sholazar-p027",
+      "npc_name": "葛瑞姆·雷酒",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p028",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12569,
+      "location_ref": "sholazar-p028",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p029",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12654,
+      "location_ref": "sholazar-p029",
+      "npc_name": "塔玛拉·摇链",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p030",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12528,
+      "location_ref": "sholazar-p030",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p031",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12529,
+      "location_ref": "sholazar-p031",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12530,
+      "location_ref": "sholazar-p031",
+      "npc_name": "猩猩猎手格利基克",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p032",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12529,
+      "location_ref": "sholazar-p032",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12530,
+      "location_ref": "sholazar-p032",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p033",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12529,
+      "location_ref": "sholazar-p033",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12530,
+      "location_ref": "sholazar-p033",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12533,
+      "location_ref": "sholazar-p033",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12534,
+      "location_ref": "sholazar-p033",
+      "npc_name": "长者哈尔卡克",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p034",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12533,
+      "location_ref": "sholazar-p034",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12534,
+      "location_ref": "sholazar-p034",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p035",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12533,
+      "location_ref": "sholazar-p035",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12534,
+      "location_ref": "sholazar-p035",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12532,
+      "location_ref": "sholazar-p035",
+      "npc_name": "长者哈尔卡克",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12532,
+      "location_ref": "sholazar-p035",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12532,
+      "location_ref": "sholazar-p035",
+      "npc_name": "长者哈尔卡克",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12531,
+      "location_ref": "sholazar-p035",
+      "npc_name": "长者哈尔卡克",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12535,
+      "location_ref": "sholazar-p035",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p036",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12531,
+      "location_ref": "sholazar-p036",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12535,
+      "location_ref": "sholazar-p036",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p037",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12531,
+      "location_ref": "sholazar-p037",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12535,
+      "location_ref": "sholazar-p037",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12536,
+      "location_ref": "sholazar-p037",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p038",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12536,
+      "location_ref": "sholazar-p038",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p039",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12536,
+      "location_ref": "sholazar-p039",
+      "npc_name": "鳄鱼人猎手瑟匹克",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12537,
+      "location_ref": "sholazar-p039",
+      "npc_name": "鳄鱼人猎手瑟匹克",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12538,
+      "location_ref": "sholazar-p039",
+      "npc_name": "鳄鱼人猎手瑟匹克",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p040",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12537,
+      "location_ref": "sholazar-p040",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12538,
+      "location_ref": "sholazar-p040",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p041",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12537,
+      "location_ref": "sholazar-p041",
+      "npc_name": "鳄鱼人猎手瑟匹克",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12538,
+      "location_ref": "sholazar-p041",
+      "npc_name": "鳄鱼人猎手瑟匹克",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12539,
+      "location_ref": "sholazar-p041",
+      "npc_name": "鳄鱼人猎手瑟匹克",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p042",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12558,
+      "location_ref": "sholazar-p042",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "sholazar-p043",
+      "target_name": "奈辛瓦里营地",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p043",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12558,
+      "location_ref": "sholazar-p043",
+      "npc_name": "巴克·坎维尔",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12569,
+      "location_ref": "sholazar-p043",
+      "npc_name": "蒂巴尔",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12651,
+      "location_ref": "sholazar-p043",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12595,
+      "location_ref": "sholazar-p043",
+      "npc_name": "赫米特·奈辛瓦里",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p044",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12539,
+      "location_ref": "sholazar-p044",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12540,
+      "location_ref": "sholazar-p044",
+      "npc_name": "高阶萨满祭司拉克亚克",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p045",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12540,
+      "location_ref": "sholazar-p045",
+      "npc_name": "受伤的雨声神谕者",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12570,
+      "location_ref": "sholazar-p045",
+      "npc_name": "受伤的雨声神谕者",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12570,
+      "location_ref": "sholazar-p045",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p046",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12570,
+      "location_ref": "sholazar-p046",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12571,
+      "location_ref": "sholazar-p046",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12572,
+      "location_ref": "sholazar-p046",
+      "npc_name": "拉弗乌",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p047",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12571,
+      "location_ref": "sholazar-p047",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12572,
+      "location_ref": "sholazar-p047",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p048",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12571,
+      "location_ref": "sholazar-p048",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12572,
+      "location_ref": "sholazar-p048",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12573,
+      "location_ref": "sholazar-p048",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p049",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12573,
+      "location_ref": "sholazar-p049",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p050",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12651,
+      "location_ref": "sholazar-p050",
+      "npc_name": "塔玛拉·摇链",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "sholazar-p050",
+      "target_name": "河流之心",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p051",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12573,
+      "location_ref": "sholazar-p051",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12574,
+      "location_ref": "sholazar-p051",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p052",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12574,
+      "location_ref": "sholazar-p052",
+      "npc_name": "唤雾者索乌甘",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12575,
+      "location_ref": "sholazar-p052",
+      "npc_name": "唤雾者索乌甘",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12576,
+      "location_ref": "sholazar-p052",
+      "npc_name": "唤雾者索乌甘",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p053",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12595,
+      "location_ref": "sholazar-p053",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12603,
+      "location_ref": "sholazar-p053",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12605,
+      "location_ref": "sholazar-p053",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12683,
+      "location_ref": "sholazar-p053",
+      "npc_name": "考尔文·诺灵顿",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p054",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12603,
+      "location_ref": "sholazar-p054",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12605,
+      "location_ref": "sholazar-p054",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p055",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12575,
+      "location_ref": "sholazar-p055",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12576,
+      "location_ref": "sholazar-p055",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p056",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12603,
+      "location_ref": "sholazar-p056",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12605,
+      "location_ref": "sholazar-p056",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12607,
+      "location_ref": "sholazar-p056",
+      "npc_name": "苏特菲兹",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12658,
+      "location_ref": "sholazar-p056",
+      "npc_name": "苏特菲兹",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12681,
+      "location_ref": "sholazar-p056",
+      "npc_name": "考尔文·诺灵顿",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p057",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12607,
+      "location_ref": "sholazar-p057",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p058",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12607,
+      "location_ref": "sholazar-p058",
+      "npc_name": "苏特菲兹",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12614,
+      "location_ref": "sholazar-p058",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p059",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12614,
+      "location_ref": "sholazar-p059",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p060",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12658,
+      "location_ref": "sholazar-p060",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12681,
+      "location_ref": "sholazar-p060",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p061",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12575,
+      "location_ref": "sholazar-p061",
+      "npc_name": "唤雾者索乌甘",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12576,
+      "location_ref": "sholazar-p061",
+      "npc_name": "唤雾者索乌甘",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12577,
+      "location_ref": "sholazar-p061",
+      "npc_name": "唤雾者索乌甘",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p062",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12683,
+      "location_ref": "sholazar-p062",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p063",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12614,
+      "location_ref": "sholazar-p063",
+      "npc_name": "多里安·达克斯托克",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12658,
+      "location_ref": "sholazar-p063",
+      "npc_name": "苏特菲兹",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12681,
+      "location_ref": "sholazar-p063",
+      "npc_name": "考尔文·诺灵顿",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12683,
+      "location_ref": "sholazar-p063",
+      "npc_name": "考尔文·诺灵顿",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p064",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12577,
+      "location_ref": "sholazar-p064",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12578,
+      "location_ref": "sholazar-p064",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p065",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12578,
+      "location_ref": "sholazar-p065",
+      "npc_name": "莫乌德",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12579,
+      "location_ref": "sholazar-p065",
+      "npc_name": "莫乌德",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12580,
+      "location_ref": "sholazar-p065",
+      "npc_name": "莫乌德",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p066",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12580,
+      "location_ref": "sholazar-p066",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p067",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12580,
+      "location_ref": "sholazar-p067",
+      "npc_name": "莫乌德",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p068",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12579,
+      "location_ref": "sholazar-p068",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p069",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12579,
+      "location_ref": "sholazar-p069",
+      "npc_name": "莫乌德",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12581,
+      "location_ref": "sholazar-p069",
+      "npc_name": "莫乌德",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p070",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12581,
+      "location_ref": "sholazar-p070",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12581,
+      "location_ref": "sholazar-p070",
+      "target_name": "阿图里斯的护命匣",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12689,
+      "location_ref": "sholazar-p070",
+      "npc_name": "亚鲁乌特",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12689,
+      "location_ref": "sholazar-p070",
+      "npc_name": "亚鲁乌特",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12695,
+      "location_ref": "sholazar-p070",
+      "npc_name": "亚鲁乌特",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p071",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12691,
+      "location_ref": "sholazar-p071",
+      "target_name": "古旧的石箱",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p072",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12691,
+      "location_ref": "sholazar-p072",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p073",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12691,
+      "location_ref": "sholazar-p073",
+      "target_name": "古旧的石箱",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p074",
+      "action_id": "a0267"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12695,
+      "location_ref": "sholazar-p074",
+      "npc_name": "高阶神谕者索乌塞",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "sholazar-p075",
+      "target_name": "河流之心",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "location",
+      "location_ref": "sholazar-p075",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "sholazar-p075",
+      "from_name": "河流之心",
+      "to_name": "龙眠神殿",
+      "action_id": "a0271"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "入图 → 奈辛瓦里初始化",
+      "summary": "进入索拉查后先完成欢迎任务、绑定炉石，并接第一轮工程/挖掘场任务。",
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "visit-entry-dalaran",
+        "a0003",
+        "transport-12521-sholazar",
+        "visit-entry-wildgrowth",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "飞行器引擎 → 挖掘场第一圈",
+      "summary": "拿引擎回营接《借零件》，随后一次清挖掘场的零件、风险投资公司、戒指与工程师护送。",
+      "action_ids": [
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "奈辛瓦里集中交接 → 开飞行点",
+      "summary": "回营一次性交第一轮任务，开飞行点并接《空中侦察》。",
+      "action_ids": [
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "工头斯温迪格林 → 打开狩猎线",
+      "summary": "杀工头回营后接犀牛、恶刃豹、《后坐力》并打开《猎人的挑战》。",
+      "action_ids": [
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "初阶豹 / 犀牛 → 营地接第二批",
+      "summary": "完成两项初阶狩猎，回营交接并一次拿齐追踪、鳄鱼、酿酒和肉排。",
+      "action_ids": [
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "索乌拉姆 → 肉排 / 祭品 / 鳄鱼 / 酿酒",
+      "summary": "接祭品后把南侧肉排、猎人挑战累计、祭品、鳄鱼试炼和酿酒材料一圈做完。",
+      "action_ids": [
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "炉石回营 → 酒香犹存 / 品酒",
+      "summary": "炉石回营集中交这一批，并完成《酒香犹存》和营地内两个品酒目标。",
+      "action_ids": [
+        "a0066",
+        "a0065",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "诺兹隆之骨 → 杉苟追踪",
+      "summary": "做完诺兹隆之骨、打开终极犀牛后去杉苟足迹完成追踪。",
+      "action_ids": [
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "终极犀牛 / 鳄鱼计划 → 河流之心",
+      "summary": "完成法鲁恩和鳄鱼计划，进入河流之心开点、补最后品酒并接维克/兼职猎人。",
+      "action_ids": [
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "尴尬的处境 → 侦察飞行 → 匹奇",
+      "summary": "在河流之心连续做维克两项任务，再去匹奇完成兼职猎人并接《伪装奴隶》。",
+      "action_ids": [
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "炉石奈辛瓦里 → 鳄鱼伏击",
+      "summary": "炉石回营交终极狩猎/计划/品酒，接突然袭击与伏击后先做鳄鱼伏击。",
+      "action_ids": [
+        "a0108",
+        "a0107",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115",
+        "a0116"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "河流之心 → 狂心岭交接",
+      "summary": "顺交《兼职猎人》，再到狂心岭交《伪装奴隶》。",
+      "action_ids": [
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "狂心岭第一圈：猩猩 → 蓝玉虫巢",
+      "summary": "接猩猩任务，清硬皮猩猩后回岭交接，再一圈做完蓝玉虫巢。",
+      "action_ids": [
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "狂心岭第二圈：抓鸡 → 南部任务",
+      "summary": "回岭完成抓鸡并打开地下/材料任务，南部清完后接《颠簸的航行》。",
+      "action_ids": [
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "颠簸航行 → 雾语村 → 杉苟",
+      "summary": "乘被俘鳄鱼到雾语村，做完两项雾语任务接《步行回家》，顺路击杀杉苟。",
+      "action_ids": [
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "炉石奈辛瓦里 → 步行回家",
+      "summary": "炉石回营集中交狩猎任务并接更大猎物，再到狂心岭交《步行回家》。",
+      "action_ids": [
+        "a0166",
+        "a0165",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "受伤神谕者 → 雨声树屋 → 议和",
+      "summary": "完成受伤神谕者、坏蛇和亮闪闪，接着处理《议和》。",
+      "action_ids": [
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "河流之心 → 雨声树屋 → 雾语村",
+      "summary": "在河流之心绑定炉石，回雨声树屋交议和，再到雾语村接北部两项任务。",
+      "action_ids": [
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "多里安 → 燃烧林地 / 矛生营地",
+      "summary": "完成《磨尖你的爪子》《诱龙出巢》时一并处理雾语村北部两项，再回多里安交接。",
+      "action_ids": [
+        "a0201",
+        "a0202",
+        "a0203",
+        "a0204",
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217"
+      ]
+    },
+    {
+      "step_id": "step-20",
+      "title": "猛犸 → 母龙 / 大鹏 → 燃烧的唾液",
+      "summary": "驯服猛犸后先做母龙，再做大鹏和材料；随后交雾语村两项、做燃烧的唾液并回多里安交付。",
+      "action_ids": [
+        "a0218",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0223",
+        "a0224",
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238"
+      ]
+    },
+    {
+      "step_id": "step-21",
+      "title": "回家喽 → 苔行村 → 英雄的负担",
+      "summary": "交《回家喽！》后进入苔行村；救星与源血碎片分别完成即交，再做《英雄的负担》。",
+      "action_ids": [
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260"
+      ]
+    },
+    {
+      "step_id": "step-22",
+      "title": "古旧石箱 → 神谕者交付",
+      "summary": "阿图里斯后继续古旧石箱；正常神谕者分支最后回雨声树屋交《友善的干燥皮肤朋友》。",
+      "action_ids": [
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268"
+      ]
+    },
+    {
+      "step_id": "step-23",
+      "title": "河流之心 → 龙眠神殿",
+      "summary": "使用炉石回河流之心后直接系统飞龙眠神殿。",
+      "action_ids": [
+        "a0270",
+        "a0269",
+        "a0271"
+      ]
+    }
+  ],
+  "service_overrides": [
+    {
+      "service_id": "sholazar-12592-background",
+      "kind": "background_window",
+      "task_id": 12592,
+      "start_action_id": "a0042",
+      "end_action_id": "a0060",
+      "end_policy": "covered_complete"
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "sholazar-p001": {
+        "display_name": "蛮藤谷·蒙特",
+        "x": 39.68,
+        "y": 58.66,
+        "phase": "entry",
+        "zone_id": 3711,
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-12521-sholazar"
+        }
+      },
+      "sholazar-p002": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p003": {
+        "display_name": "蛮藤谷·飞行器引擎",
+        "x": 38.7,
+        "y": 56.7,
+        "phase": "engineering",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p004": {
+        "display_name": "奈辛瓦里营地",
+        "x": 25.4,
+        "y": 58.5,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p005": {
+        "display_name": "斯温迪格林挖掘场",
+        "x": 35.5,
+        "y": 47.4,
+        "phase": "dig",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p006": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p007": {
+        "display_name": "斯温迪格林挖掘场·北侧高台",
+        "x": 35.8,
+        "y": 50.4,
+        "phase": "dig",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p008": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 59.9,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p009": {
+        "display_name": "奈辛瓦里营地·幸运的威尔海姆",
+        "x": 27.0,
+        "y": 60.3,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p010": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 59.9,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p011": {
+        "display_name": "奈辛瓦里营地东侧",
+        "x": 28.0,
+        "y": 56.9,
+        "phase": "hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p012": {
+        "display_name": "碎角犀牛区",
+        "x": 29.4,
+        "y": 50.4,
+        "phase": "hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p013": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p014": {
+        "display_name": "诺兹隆之骨·神谕者索乌拉姆",
+        "x": 25.6,
+        "y": 66.5,
+        "phase": "nozzlerust",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p015": {
+        "display_name": "诺兹隆之骨南侧",
+        "x": 28.4,
+        "y": 71.3,
+        "phase": "nozzlerust",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p016": {
+        "display_name": "蛮藤谷中部",
+        "x": 47.0,
+        "y": 61.0,
+        "phase": "central",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p017": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0066"
+        }
+      },
+      "sholazar-p018": {
+        "display_name": "诺兹隆之骨",
+        "x": 25.6,
+        "y": 66.5,
+        "phase": "nozzlerust",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p019": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p020": {
+        "display_name": "苦潮湖西北·杉苟足迹",
+        "x": 32.6,
+        "y": 38.5,
+        "phase": "tracks",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p021": {
+        "display_name": "法鲁恩",
+        "x": 46.7,
+        "y": 42.8,
+        "phase": "final_hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p022": {
+        "display_name": "蛮藤谷河岸·沙蕨",
+        "x": 43.9,
+        "y": 63.3,
+        "phase": "final_hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p023": {
+        "display_name": "河流之心",
+        "x": 50.5,
+        "y": 62.1,
+        "phase": "rivers_heart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p024": {
+        "display_name": "河流之心·湖内",
+        "x": 48.2,
+        "y": 63.3,
+        "phase": "rivers_heart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p025": {
+        "display_name": "河流之心·飞行员维克",
+        "x": 50.0,
+        "y": 61.5,
+        "phase": "rivers_heart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p026": {
+        "display_name": "匹奇",
+        "x": 50.5,
+        "y": 77.2,
+        "phase": "pitch",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p027": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0108"
+        }
+      },
+      "sholazar-p028": {
+        "display_name": "蛮藤谷河岸·倒下的原木",
+        "x": 46.3,
+        "y": 63.4,
+        "phase": "river",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p029": {
+        "display_name": "河流之心",
+        "x": 50.5,
+        "y": 62.1,
+        "phase": "rivers_heart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p030": {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1,
+        "phase": "frenzyheart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p031": {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1,
+        "phase": "frenzyheart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p032": {
+        "display_name": "硬皮猩猩区",
+        "x": 64.0,
+        "y": 72.5,
+        "phase": "hardknuckle",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p033": {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1,
+        "phase": "frenzyheart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p034": {
+        "display_name": "蓝玉虫巢",
+        "x": 58.5,
+        "y": 81.0,
+        "phase": "sapphire",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p035": {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1,
+        "phase": "frenzyheart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p036": {
+        "display_name": "狂心岭南部",
+        "x": 57.0,
+        "y": 85.7,
+        "phase": "frenzyheart_south",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p037": {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1,
+        "phase": "frenzyheart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p038": {
+        "display_name": "狂心岭·被俘虏的鳄鱼",
+        "x": 57.3,
+        "y": 68.4,
+        "phase": "transport",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p039": {
+        "display_name": "雾语村·瑟匹克",
+        "x": 42.1,
+        "y": 38.6,
+        "phase": "mistwhisper",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p040": {
+        "display_name": "雾语天气祭坛",
+        "x": 44.5,
+        "y": 37.0,
+        "phase": "mistwhisper",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p041": {
+        "display_name": "雾语村·瑟匹克",
+        "x": 42.1,
+        "y": 38.6,
+        "phase": "mistwhisper",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p042": {
+        "display_name": "杉苟",
+        "x": 33.8,
+        "y": 33.7,
+        "phase": "final_hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p043": {
+        "display_name": "奈辛瓦里营地",
+        "x": 27.1,
+        "y": 58.6,
+        "phase": "camp",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0166"
+        }
+      },
+      "sholazar-p044": {
+        "display_name": "狂心岭",
+        "x": 55.0,
+        "y": 69.1,
+        "phase": "frenzyheart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p045": {
+        "display_name": "受伤的雨声神谕者",
+        "x": 56.6,
+        "y": 64.5,
+        "phase": "oracle",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p046": {
+        "display_name": "雨声树屋",
+        "x": 54.6,
+        "y": 56.4,
+        "phase": "rainspeaker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p047": {
+        "display_name": "雨声树屋外圈",
+        "x": 52.0,
+        "y": 56.0,
+        "phase": "rainspeaker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p048": {
+        "display_name": "雨声树屋",
+        "x": 54.6,
+        "y": 56.4,
+        "phase": "rainspeaker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p049": {
+        "display_name": "萨满祭司维克伊克",
+        "x": 51.3,
+        "y": 64.6,
+        "phase": "peace",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p050": {
+        "display_name": "河流之心",
+        "x": 50.5,
+        "y": 62.1,
+        "phase": "rivers_heart",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p051": {
+        "display_name": "雨声树屋",
+        "x": 54.6,
+        "y": 56.4,
+        "phase": "rainspeaker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p052": {
+        "display_name": "雾语村",
+        "x": 42.1,
+        "y": 38.6,
+        "phase": "mistwhisper",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p053": {
+        "display_name": "多里安营地",
+        "x": 42.3,
+        "y": 28.7,
+        "phase": "dorian",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p054": {
+        "display_name": "燃烧林地",
+        "x": 48.0,
+        "y": 27.5,
+        "phase": "burning_nest",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p055": {
+        "display_name": "矛生营地",
+        "x": 41.5,
+        "y": 21.5,
+        "phase": "spearborn",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p056": {
+        "display_name": "多里安营地",
+        "x": 42.3,
+        "y": 28.7,
+        "phase": "dorian",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p057": {
+        "display_name": "裂牙猛犸区",
+        "x": 51.7,
+        "y": 33.1,
+        "phase": "mammoth",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p058": {
+        "display_name": "多里安营地",
+        "x": 42.3,
+        "y": 28.7,
+        "phase": "dorian",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p059": {
+        "display_name": "母龙斯利维娜",
+        "x": 47.1,
+        "y": 21.3,
+        "phase": "north_hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p060": {
+        "display_name": "大鹏区",
+        "x": 56.8,
+        "y": 26.5,
+        "phase": "north_hunt",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p061": {
+        "display_name": "雾语村",
+        "x": 42.1,
+        "y": 38.6,
+        "phase": "mistwhisper",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p062": {
+        "display_name": "苦潮湖·多头蛇",
+        "x": 41.3,
+        "y": 41.7,
+        "phase": "bittertide",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p063": {
+        "display_name": "多里安营地",
+        "x": 42.3,
+        "y": 28.7,
+        "phase": "dorian",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p064": {
+        "display_name": "雨声树屋",
+        "x": 54.6,
+        "y": 56.4,
+        "phase": "rainspeaker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p065": {
+        "display_name": "苔行村·莫乌德",
+        "x": 75.5,
+        "y": 52.5,
+        "phase": "mosswalker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p066": {
+        "display_name": "苔行村东侧",
+        "x": 75.7,
+        "y": 51.5,
+        "phase": "mosswalker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p067": {
+        "display_name": "苔行村·莫乌德",
+        "x": 75.5,
+        "y": 52.5,
+        "phase": "mosswalker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p068": {
+        "display_name": "苔行祭坛东侧",
+        "x": 71.1,
+        "y": 58.0,
+        "phase": "mosswalker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p069": {
+        "display_name": "苔行村·莫乌德",
+        "x": 75.5,
+        "y": 52.5,
+        "phase": "mosswalker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p070": {
+        "display_name": "残忍的阿图里斯",
+        "x": 72.1,
+        "y": 57.6,
+        "phase": "artruis",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p071": {
+        "display_name": "造物者悬台·古旧石箱",
+        "x": 80.4,
+        "y": 55.8,
+        "phase": "makers",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p072": {
+        "display_name": "造物者悬台·索拉查卫士",
+        "x": 81.3,
+        "y": 54.0,
+        "phase": "makers",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p073": {
+        "display_name": "造物者悬台·古旧石箱",
+        "x": 80.4,
+        "y": 55.8,
+        "phase": "makers",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p074": {
+        "display_name": "雨声树屋",
+        "x": 54.6,
+        "y": 56.4,
+        "phase": "rainspeaker",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
+      "sholazar-p075": {
+        "display_name": "河流之心·飞行点",
+        "x": 50.5,
+        "y": 62.1,
+        "phase": "exit",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0270"
+        }
+      },
+      "sholazar-entry-argent-tournament": {
+        "display_name": "银色比武场",
+        "x": 79.8,
+        "y": 71.8,
+        "zone_id": 210,
+        "phase": "entry"
+      },
+      "sholazar-entry-dalaran": {
+        "display_name": "达拉然·大法师伯塔鲁斯",
+        "x": 68.55,
+        "y": 42.05,
+        "zone_id": 4395,
+        "phase": "entry",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0002"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Stage 5 entry split: Argent Tournament -> taxi Dalaran -> verified Task 12521 ride to Sholazar Wildgrowth Mangal. Questie anchors: Archmage Pentarus 4395/(68.55,42.05), Monte Muzzleshot 3711/(39.68,58.66). Icecrown-to-Argent Program boundary remains intentionally unresolved."
+    }
+  ]
+}

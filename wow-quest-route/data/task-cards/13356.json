@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "task_id": 13356,
+  "identity": {
+    "name_zhcn": "重新考验",
+    "name_en": "Retest Now",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      13355
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 74000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39121,
+        "quantity": 1,
+        "name_zhcn": "诅咒教徒的搅拌器",
+        "name_en": "Cultist's Cauldron Stirrer",
+        "sell_price_each_copper": 128386,
+        "sell_price_total_copper": 128386
+      },
+      {
+        "item_id": 39144,
+        "quantity": 1,
+        "name_zhcn": "扭曲歹徒重锤",
+        "name_en": "Twisted Hooligan Whacker",
+        "sell_price_each_copper": 103880,
+        "sell_price_total_copper": 103880
+      },
+      {
+        "item_id": 39143,
+        "quantity": 1,
+        "name_zhcn": "翻腾钉锤",
+        "name_en": "Writhing Mace",
+        "sell_price_each_copper": 103493,
+        "sell_price_total_copper": 103493
+      },
+      {
+        "item_id": 39134,
+        "quantity": 1,
+        "name_zhcn": "衰退之弓",
+        "name_en": "Bow of Regression",
+        "sell_price_each_copper": 80885,
+        "sell_price_total_copper": 80885
+      },
+      {
+        "item_id": 39138,
+        "quantity": 1,
+        "name_zhcn": "致命锋锐飞镖",
+        "name_en": "Deadly Razordarts",
+        "sell_price_each_copper": 34629,
+        "sell_price_total_copper": 34629
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 128386,
+    "gear_sale_max_copper": 128386,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 22050
+  },
+  "guide": [
+    "接取：首席技师考伯克拉。",
+    "奥格瑞姆之锤的首席技师考伯克拉希望你把沸腾的魔质扔进奥尔杜萨的瘟疫之锅里。",
+    "交付：首席技师考伯克拉。"
+  ],
+  "fivebox": {
+    "status": "sequential_loot"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13356",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13356; legacy_type=personal_collection_same_corpse_sequential_loot_with_buff_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13356",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《重新考验》本轮实跑确认：不共享；只要五个角色都先挂好滋补剂道具Buff，同一具符合条件的尸体可由五号依次拾取任务物。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13356",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

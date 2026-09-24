@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "model_id": "component-wall-clock-v2",
+  "calibration_status": "historical_provisional",
+  "source_refs": [
+    "scripts/estimate_route_atlas_timing.py",
+    "data/observations/route-timing-runs.json",
+    "docs/rules/timing-and-benchmarking.md"
+  ],
+  "global": {
+    "combat_seconds_per_mob": 15.0,
+    "personal_loot_seconds_per_corpse": 9.0,
+    "fixed_object_seconds_per_character": 7.0,
+    "personal_drop_tail_sigma_multiplier": 1.2,
+    "accept_turnin_base_seconds_per_stop": 39.0,
+    "accept_turnin_per_task_seconds": 9.6
+  },
+  "movement": {
+    "self_move_speed_yards_per_second": {
+      "ride": 14.0,
+      "fly": 21.0,
+      "swim": null
+    },
+    "ride_speed_multiplier_by_class": {
+      "paladin": 1.2
+    },
+    "path_factor_by_mode": {
+      "ride": 1.0,
+      "fly": 1.05,
+      "swim": null
+    },
+    "map_dimensions_yards_by_profile": {
+      "zangarmarsh-fivebox": {
+        "width": 5027.0835,
+        "height": 3352.0833
+      },
+      "zangarmarsh-dk-speed": {
+        "width": 5027.0835,
+        "height": 3352.0833
+      },
+      "nagrand-fivebox-67-68": {
+        "width": 5525.0,
+        "height": 3683.3333
+      },
+      "borean-fivebox": {
+        "width": 5764.583,
+        "height": 3843.7499
+      },
+      "dragonblight-fivebox": {
+        "width": 5608.3333,
+        "height": 3739.5833
+      },
+      "grizzly-fivebox": {
+        "width": 5249.9999,
+        "height": 3499.9999
+      },
+      "zuldrak-fivebox": {
+        "width": 4993.75,
+        "height": 3329.1665
+      },
+      "storm-peaks-fivebox": {
+        "width": 7112.5,
+        "height": 4741.6665
+      },
+      "howling-fivebox": {
+        "width": 6045.833,
+        "height": 4031.2499
+      },
+      "sholazar-fivebox": {
+        "width": 4356.25,
+        "height": 2904.1665
+      }
+    },
+    "map_dimensions_yards_by_zone": {}
+  },
+  "profile_overrides": {},
+  "uncertainty": {
+    "component_relative_by_kind": {},
+    "minimum_matching_clean_observations": 2
+  },
+  "note": "Ground self-move defaults to a normal +100% ground mount (14 yd/s); paladin uses the current 1.2 class movement multiplier. Cross-map self-move is transition overhead and is excluded from per-map wall-clock baselines. These remain provisional calibrations and are superseded by matching clean route observations."
+}

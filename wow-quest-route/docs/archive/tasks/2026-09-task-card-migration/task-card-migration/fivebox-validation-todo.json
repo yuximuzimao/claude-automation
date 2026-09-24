@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "status": "workflow_validation_ledger_not_task_truth",
+  "purpose": "旧正式workbench中尚待实测的fivebox提示。Task Card用fivebox=pending表达未知；这里仅保留验证问题原文，不作为任务事实真源。",
+  "task_count": 47,
+  "tasks": [
+    {
+      "task_id": 9370,
+      "name": "阻止净化",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认一号放置信号宝石并击杀召唤目标后其余四号是否同步完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 9376,
+      "name": "朝圣者的困境",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认同一只背包是否能让五号连续互动完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 9391,
+      "name": "点燃灯塔",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认三座灯塔是否需要五号分别使用任务火炬。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 9410,
+      "name": "灵魂的指引",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认五号是否都要分别使用先祖狼魂图腾并各自完成跟随。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 9852,
+      "name": "终极挑战",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "仅当真的走到《终极挑战》时检查：击杀塔丝克后，同一具尸体的塔丝克之心是否能让五个角色都分别拾取。若只能一个角色取得，不要原地等四次刷新，停止这条兜底并记录。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10159,
+      "name": "扫清棘牙岭！",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认地狱野猪血样是否个人掉落；共享未知保留待实测。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10230,
+      "name": "战斗的号角",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认号角是否为个人拾取，以及同一尸体能否供五号依次拾取。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10250,
+      "name": "血之复仇",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认一号吹号并击杀后其余四号是否同步完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10255,
+      "name": "测试解毒剂",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认一号使用解毒剂并击杀后其余四号是否同步完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10367,
+      "name": "叛徒",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认同一金属箱取得钥匙是否需要五号分别互动/等待刷新。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10368,
+      "name": "残冠长者",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认释放三名长者是否一号互动即可同步给队伍。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10390,
+      "name": "铸魔营地：暴虐",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认剃刀电锯的任务起始信件是否同一尸体能让五号分别拾取。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10392,
+      "name": "深渊之门",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认钥匙/怨恨符文操作是否需要五号分别执行。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10450,
+      "name": "噬骨之血",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认回收木材/金属是否必须五号分别拾取，以及《噬骨之血》同一尸体能否连续供五号拾取。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 10813,
+      "name": "格里洛克之眼",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "已实测：《燃烧吧，塞斯高！》建筑纵火共享。当前这组《格里洛克之眼》按不共享方式完成，不能据此判定真实共享性；用户查到目标刷新约45秒，第三组专门验证是否可共享。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11170,
+      "name": "海中测试",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《海中测试》：确认一名角色乘蝙蝠投掷瘟疫之瓶时，其余四号是否同步增加进度。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11227,
+      "name": "让它们吃乌鸦",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《让它们吃乌鸦》：确认一名角色喂食瘟疫猎犬时，其余四号是否同步增加进度。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11253,
+      "name": "嗅出敌人",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《嗅出敌人》：确认五号是否都要分别使用瘟疫猎犬之链完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11254,
+      "name": "龙皮地图",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《龙皮地图》：确认五号是否都要分别互动龙皮地图。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11257,
+      "name": "可怕而必要的手段",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《可怕而必要的手段》：确认弯刀处理尸体是否同步给其余四号。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11258,
+      "name": "燃烧吧，斯克恩，燃烧吧！",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《燃烧吧，斯克恩，燃烧吧！》：确认建筑火炬是否同步给其余四号。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11259,
+      "name": "危险的塔楼",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《危险的塔楼》：确认塔楼信号弹是否同步给其余四号。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11260,
+      "name": "阻止升华！",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《阻止升华！》：确认升华卷轴召唤/击杀是否同步给其余四号。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11265,
+      "name": "钥匙和牢笼",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《钥匙和牢笼》：确认一名角色开启牢笼释放囚犯时，其余四号是否同步增加进度。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11281,
+      "name": "模仿叫声",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认一名角色使用号角并击杀霜喉时，其余四号是否同步完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11282,
+      "name": "领略恐惧",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《领略恐惧》：确认一名角色对三名英雄尸体使用被遗忘者战旗时，其余四号是否同步完成对应插旗进度。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11317,
+      "name": "净化",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《净化》：确认一名角色在霜刃神殿冥想并完成事件时，其余四号是否同步完成；若不共享则逐号互动。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11323,
+      "name": "座狼的伪装",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《座狼的伪装》：确认五号是否都需要分别使用座狼伪装并进入洞穴完成交付。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11365,
+      "name": "巨人的迁徙",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《巨人的迁徙》：确认一名角色对巨人尸体使用寻符鹤嘴锄时，其余四号是否同步记进度。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11433,
+      "name": "休眠的巨人",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《休眠的巨人》：确认一名角色对休眠维库人使用苏醒之杖并击杀后，其余四号是否同步增加进度。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11466,
+      "name": "嗜酒的杰克",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《嗜酒的杰克》：公开WotLK资料显示正常触发需由一名角色付1G给奥尔加，一次请酒后五号可在杰克醉倒期间分别搜身；若现场已有其他玩家触发到杰克醉倒，可直接搜身。当前时光服仍待本轮实测确认。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 11529,
+      "name": "索罗夫的宝藏",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《索罗夫的宝藏》：确认一名角色操作大炮击杀索罗夫是否同步记击杀；宝藏拾取是否需要五号分别完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12047,
+      "name": "不会融化的东西",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《不会融化的东西》：主控拾取一块破碎骨片后，其他四个角色是否同步计数，还是五号需要分别拾取？",
+        "请确认"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12072,
+      "name": "该死的荒芜兽！",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《该死的荒芜兽！》：主控使用任务双足飞龙击杀后，其他四个角色的25只目标是否同步计数，还是五号都必须分别跑载具？",
+        "请确认"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12085,
+      "name": "一封家书",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "请确认塔辛尼掉落的《一封家书》任务起始物：同一具尸体是否可由五个角色分别拾取？"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12125,
+      "name": "邪能之约",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《邪能之约》：血宝石需要五个角色分别使用，还是主控使用后全队同步完成？"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12127,
+      "name": "冰霜之约",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《冰霜之约》：冰霜宝石是否需要五个角色分别对目标使用，还是主控使用后全队同步完成？"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12132,
+      "name": "毁灭的力量",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《毁灭的力量》：五号是否都需分别与库尔迪拉对话进入阴影位面；主控击杀时其他角色是否同步计数？",
+        "请确认"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12456,
+      "name": "奥雷托斯的羽毛",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《奥雷托斯的羽毛》：同一具奥雷托斯尸体的任务羽毛是否可由五个角色分别拾取？",
+        "请确认"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12571,
+      "name": "赶走坏蛇",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《赶走坏蛇》：确认帝王眼镜蛇/毒尖击杀进度是否共享。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12581,
+      "name": "英雄的负担",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《英雄的负担》：五号统一选择神谕者：阿图里斯约30%血量进入阵营NPC可选阶段后，保留亚鲁乌特并击杀泽匹克；确认一次选择/击杀是否能同步五号，若不同步则各号分别完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12592,
+      "name": "猎人的挑战",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《猎人的挑战》：确认狩猎动物60只的击杀进度是否共享。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12605,
+      "name": "诱龙出巢",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "《诱龙出巢》：确认始祖龙宝宝是否个人拾取，以及同一个孵化目标能否五号连续取得。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12629,
+      "name": "无处可藏",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认两种任务物是否个人掉落。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12676,
+      "name": "爆破活动",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认《火上浇油》的控制憎恶与《爆破活动》的炸药束进度是否共享。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12686,
+      "name": "无法容忍",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认《无法容忍》的仆从控制是否需五号分别完成。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    },
+    {
+      "task_id": 12690,
+      "name": "火上浇油",
+      "current_fivebox_status": "pending",
+      "prompts": [
+        "确认《火上浇油》的控制憎恶与《爆破活动》的炸药束进度是否共享。"
+      ],
+      "source": "data/route-atlas/workbench-routes.json",
+      "disposition": "deferred_validation_not_task_fact"
+    }
+  ]
+}

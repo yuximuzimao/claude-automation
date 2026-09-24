@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "task_id": 12450,
+  "identity": {
+    "name_zhcn": "烈焰之地",
+    "name_en": "Through Fields of Flame",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 71,
+    "pre_any": [
+      12449
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 118000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38108,
+        "quantity": 1,
+        "name_zhcn": "新兵的红宝石腰带",
+        "name_en": "Conscript's Ruby Waistguard",
+        "sell_price_each_copper": 33534,
+        "sell_price_total_copper": 33534
+      },
+      {
+        "item_id": 38046,
+        "quantity": 1,
+        "name_zhcn": "巨龙火焰手套",
+        "name_en": "Wyrmfire Gloves",
+        "sell_price_each_copper": 28391,
+        "sell_price_total_copper": 28391
+      },
+      {
+        "item_id": 37962,
+        "quantity": 1,
+        "name_zhcn": "焦灼山谷之靴",
+        "name_en": "Treads of the Charred Canyon",
+        "sell_price_each_copper": 26551,
+        "sell_price_total_copper": 26551
+      },
+      {
+        "item_id": 38004,
+        "quantity": 1,
+        "name_zhcn": "天灾杀手腰带",
+        "name_en": "Scourgeslayer Belt",
+        "sell_price_each_copper": 22893,
+        "sell_price_total_copper": 22893
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 33534,
+    "gear_sale_max_copper": 33534,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 26200
+  },
+  "guide": [
+    "接取：瓦加斯塔兹。",
+    "从南面的小路进入红玉巨龙圣地，杀死6个冰冷通灵师并摧毁圣地下面的堕落之源。完成任务后向瓦加斯塔兹复命。",
+    "交付：瓦加斯塔兹。",
+    "从南侧进入红玉巨龙圣地；除击杀通灵师外，还必须摧毁圣地下面的腐化源，单纯击杀不会完成第二目标。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12450",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12450/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《烈焰之地》：洞穴从中央巨树东南侧底部进入；达莉亚·日触只在这里处理。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

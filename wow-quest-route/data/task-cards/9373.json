@@ -6,17 +6,13 @@
     "name_en": "Missing Missive",
     "game_variant_id": "timewalking-wotlk-cn",
     "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
-    "faction": "unknown",
-    "repeatability": "unknown"
+    "faction": "both",
+    "repeatability": "once"
   },
   "coverage": {
-    "availability": "partial",
-    "objectives": "unknown",
-    "locations": "unknown",
-    "rewards": "unknown",
-    "mechanics": "partial",
-    "fivebox": "unknown",
-    "guide": "unknown"
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
   },
   "availability": {
     "quest_level": 61,
@@ -26,27 +22,34 @@
     "parent_active": [],
     "exclusive_with": [],
     "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
     "hidden_requirements": []
   },
-  "objectives": [],
-  "mechanics": {
-    "starts_from_item_drop": {
-      "kind": "item_starts_quest",
-      "summary": "被腐蚀的皮箱自然掉落后可接取《遗失的信件》；任务路线不应把自然掉落机会误写成无条件接取。",
-      "confidence": "partial",
-      "source_refs": [
-        "evidence-legacy-route-condition"
-      ]
-    }
+  "rewards": {
+    "reward_money_copper": 20000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 9800
   },
+  "guide": [
+    "被腐蚀的皮箱自然掉落后可接取《遗失的信件》。"
+  ],
   "fivebox": {
-    "stages": [],
     "status": "pending"
   },
-  "guide": [],
-  "verification": {
-    "open_questions": []
-  },
+  "timing_rule_ref": null,
   "evidence": [
     {
       "evidence_id": "evidence-legacy-route-condition",
@@ -59,9 +62,39 @@
         "identity.name_zhcn",
         "availability.quest_level",
         "availability.min_level",
-        "mechanics.starts_from_item_drop"
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9373",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
       ]
     }
   ],
-  "presentation": {}
+  "presentation": {
+    "note_override": {
+      "text": "被腐蚀的皮箱自然掉落后可接《遗失的信件》。",
+      "scope": "all",
+      "source_ref": "data/task-cards/9373.json#guide",
+      "reason": "2026-09-20通用Presentation规则确认：has_item触发条件不塞入动作行，已有Task Card guide中的触发物来源作为最短必要备注显示。"
+    }
+  }
 }

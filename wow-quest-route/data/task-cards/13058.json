@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "task_id": 13058,
+  "identity": {
+    "name_zhcn": "改变风向",
+    "name_en": "Changing the Wind's Course",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [],
+    "pre_all": [
+      13048,
+      13049
+    ],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 148000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43186,
+        "quantity": 1,
+        "name_zhcn": "冰啸之触",
+        "name_en": "Iceshrieker's Touch",
+        "sell_price_each_copper": 101057,
+        "sell_price_total_copper": 101057
+      },
+      {
+        "item_id": 43185,
+        "quantity": 1,
+        "name_zhcn": "寒冷复兴魔杖",
+        "name_en": "Wand of Chilled Renewal",
+        "sell_price_each_copper": 100700,
+        "sell_price_total_copper": 100700
+      },
+      {
+        "item_id": 43187,
+        "quantity": 1,
+        "name_zhcn": "加重飞斧",
+        "name_en": "Weighted Throwing Axe",
+        "sell_price_each_copper": 34629,
+        "sell_price_total_copper": 34629
+      },
+      {
+        "item_id": 43188,
+        "quantity": 1,
+        "name_zhcn": "锐利冰片",
+        "name_en": "Razor-sharp Ice Shards",
+        "sell_price_each_copper": 34629,
+        "sell_price_total_copper": 34629
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 101057,
+    "gear_sale_max_copper": 101057,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 27550
+  },
+  "guide": [
+    "接取：夏拉托尔。",
+    "使用知识之锤回到过去，以雷蹄的身份挑战北风。雷蹄倒下之后会掉落元素愤怒号角，届时你必须使用元素愤怒号角击败北风，然后返回唐卡洛营地，向夏拉托尔复命。",
+    "交付：夏拉托尔。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13058",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13058; legacy_type=script_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.13058",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《改变风向》：共享：在指定点用锤子回到过去，完成北风事件后按脚本返回；主控触发并完成即可同步五号。\n【需要单独修正优化】《改变风向》实跑确认：北风事件共享，主控触发并完成一次即可同步五号。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13058",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # 路线墙钟模型与实跑基准
 
-用途：这是项目中**墙钟时间如何分解、计算、校准和保存实跑样本**的唯一规则owner。Task Card提供任务机制/掉率/固定时长等输入，Route Profile提供真实路线顺序与空间状态；本模型输出步骤/任务块/路线时间，不决定任务删留，也不定义HUD放在哪里。
+用途：这是项目中**墙钟时间如何分解、计算、校准和保存实跑样本**的唯一规则owner。Task Card只通过`timing_rule_ref`引用这里定义的计算规则/规则族，Route Profile提供真实路线顺序与空间状态；本模型输出步骤/任务块/路线时间，不决定任务删留，也不定义HUD放在哪里。
 
 任务是否值得做见`leveling-and-selection.md`；任务机制分类见`execution-and-mechanics.md`；路线排序见`route-atlas-optimization.md`；时间结果怎样显示见Route Atlas展示/UI规则。
 
@@ -95,71 +95,63 @@
 
 多个任务共享一次战斗/移动时，背景任务只计真实新增边际成本。
 
-## 4. Fivebox机制到时间成本的映射
+## 4. Task Card如何选择时间规则
 
-Timing只消费Task Card已确认的结构化fivebox类型，不从自然语言备注猜机制。
+Task Card不再把任务拆成fivebox stages或objective/mechanic类型供Timing消费。它只提供`timing_rule_ref`，指向本文或机器配置中已经定义的一个计算规则/规则族。
 
-### `shared_kill / shared_progress / shared_event`
+规则：
 
-只计实际发生的一次战斗/事件服务量，不乘五；若存在五号接取/站位/距离检查，额外计对应切号/准备成本。
+- `timing_rule_ref = null`表示这个任务尚未完成Timing分类；模型不得从guide、玩家备注或`fivebox.status`自由猜一个精确公式。
+- `fivebox.status`只负责玩家执行分类；`shared / not_shared / sequential_loot / special / pending`不是完整的时间模型。
+- 同一类真实任务反复出现后，可以在Timing owner中定义一个可复用规则，再让对应Task Card引用它。
+- mixed/条件型任务可以引用一个专门的组合规则；不需要把任务本身重新拆成stage。
+- 若现有规则无法表达真实任务，先扩Timing owner/模型配置，再写新的`timing_rule_ref`。
 
-### `ffa_loot_pool`
+旧模型中的`shared_kill / personal_drop / same_corpse_multi_character_loot / per_character_interaction`等细分名称，如果仍有计算价值，应作为**Timing规则族**保留，而不是重新变成Task Card fivebox机器事实。
 
-根据：
+当`timing_rule_ref`尚未填写、且其差异足以显著影响总时间时，当前预测必须保留不确定范围或暂不产出精确任务级估时，不能为了凑完整结果擅自解析guide。
 
-- 五号总需求件数；
-- 单尸实际件数分布；
-- 掉率；
-- 击杀周期；
-- 拾取/切号成本；
+### 4.1 Timing机器输入解析合同
 
-估计完成总击杀与拾取墙钟。
+`timing_rule_ref`只回答“使用哪一个可复用规则族”，它本身不携带目标数量、掉率、交互次数、事件固定时长或职业速度等全部参数。Derived Timing必须通过一个统一的**Timing Input Resolution**阶段解析规则实际需要的参数，任何地图Builder不得自己另选来源。
 
-不能机械用“任务数量×5”，也不能假设一尸五号各取一份。
+输入身份固定分为：
 
-### `same_corpse_multi_character_loot`
+1. **Task Card结构化事实**：规则实际需要且Task Card已经有稳定机器字段的值，直接读取当前Task Card；
+2. **Effective Quest Source Adapter**：Task Card没有为Timing保存结构化副本时，可以按稳定`task_id`从当前有效Questie/数据库适配器读取机械基础量（例如标准目标数量/实体关系），并把源版本/hash计入fingerprint；这只是避免为了Timing复制一套Task Card objectives schema，不是让Questie凌驾于用户实测；
+3. **Timing Input Config / task-id parameter**：当前服务器实测、特殊脚本或高优先级证据已经证明基础源不适用时，用版本化Timing配置保存该规则真正需要的机器参数、适用scope和source refs；不得把任务中文名写进代码分支；
+4. **Profile/global calibration params**：职业/Profile击杀速度、切号成本、Hub成本、移动能力等当前校准参数；
+5. **Timing Observations**：只按本文件的scope/precision/clean规则参与校准或直接锚定可隔离成本，不自动覆盖任务事实；
+6. **Movement外部静态输入**：例如Leatrix系统飞行表，必须通过canonical movement/flight-point registry绑定具体edge并记录源版本/hash。
 
-战斗只计一次；同尸多角色拾取按实际逐号操作成本叠加。
+解析优先级不是“后读文件覆盖前读文件”的自由合并。固定原则：
 
-### `personal_drop / personal_progress`
+- 已有高优先级当前服务器事实时，显式Timing Input Config必须承接它，Questie只能作为旧基础证据；
+- Task Card已有结构化当前事实时，不允许另一个Timing脚本复制不同值；
+- Questie adapter只补**尚无更高优先级结构化Timing输入**的基础量；
+- Observation是测量/校准证据，不因一次样本自动改写掉率、目标数量等任务事实；需要提升为长期参数时先经人工/规则核验写入版本化Timing配置；
+- 任一来源冲突而没有明确当前值时返回`UNKNOWN_INPUT`，不得从guide/备注或旧页面文本猜值。
 
-按五号都达到完成条件的分布建模；若各号进度相关/独立，需要明确假设，不用简单“平均×5”代替。
-
-### `per_character_interaction / per_character_item_use`
-
-按真实角色数×交互次数×单次操作成本，再叠加对象消失/刷新和切号定位成本。
-
-### `shared_interaction`
-
-只计主控一次动作 + 必要队伍同步检查。
-
-### `unknown`
-
-若共享/个人差异会显著改变结果，保留两个边界场景：
-
-- 共享端；
-- 个人端。
-
-中心值必须标记“不确定来源”，实测后立即收窄；不能为了给出一个数字擅自选机制。
+每个Derived Timing fingerprint至少包含：当前Profile/version、引用Task Cards及`timing_rule_ref`、Timing规则注册表版本、实际使用的source-adapter hash、task-id Timing输入配置版本、Profile/global参数版本、匹配Observation集合、movement/Leatrix版本。它用于审计“这份Timing由哪些输入生成、是否串版本”；Timing输入或算法变化时只重算真实受影响的Profile/Program Timing，fingerprint不负责自动决定impact范围。
 
 ## 5. 随机掉落模型
 
 随机掉落任务至少需要：
 
-- 每号/全队需求量；
-- Fivebox loot类型；
-- 掉率或实测分布；
-- 单尸可能掉落件数；
+- 对应`timing_rule_ref`定义的计算口径；
+- 规则需要的需求量/掉率/单尸件数等模型参数；
 - 目标密度/刷新；
 - 平均击杀周期；
-- 是否与其它任务共享击杀；
-- 拾取操作成本。
+- 是否与其它任务共享战斗/移动；
+- 拾取/切号操作成本。
+
+这些参数来自Timing模型配置、Questie基础数据或Timing Observations；不得为了计算方便重新把Task Card guide拆成另一套objective/fivebox schema。
 
 ### 期望值不是唯一输出
 
 低掉率/小样本可能有明显右尾；除了中心值，必须给合理区间或方差来源。
 
-首次实跑因不知道高密度刷点而产生的学习时间不能直接写成任务固有随机长尾；Task Card地形/刷新事实修正后，重新计算clean baseline。
+首次实跑因不知道高密度刷点而产生的学习时间不能直接写成任务固有随机长尾；攻略事实或Timing规则/参数修正后，重新计算clean baseline。
 
 ## 6. 固定物模型
 
@@ -181,7 +173,7 @@ Timing只消费Task Card已确认的结构化fivebox类型，不从自然语言�
 - 载具战斗；
 - 当前只有主控真正输出的五开执行模式。
 
-任务怪等级、目标数量和Boss特殊机制来自Task Card。
+任务怪等级、目标数量和Boss特殊机制属于任务攻略事实；Timing若需要机器计算，只能通过`timing_rule_ref`对应规则及其模型输入消费，不能重新解析Task Card自由文本。
 
 若职业/Profile变化，战斗参数可以变化，但Task Card不改。
 
@@ -197,9 +189,10 @@ Timing只消费Task Card已确认的结构化fivebox类型，不从自然语言�
 - 切号基础成本；
 - 固定物单次交互成本；
 - Hub基础+每任务附加成本；
-- 地面坐骑速度/移动能力。
+- 地面坐骑速度/移动能力。普通自主地面移动不要求路线数据区分骑马/步行；粗算默认按当前角色可用的100%地面坐骑速度处理。当前圣骑Profile可使用其已知职业移动加速校准，其它没有额外移动加速的职业按普通100%坐骑校准；最终仍由同Profile/同版本的段落实跑Observation覆盖粗算；
+- 地图实际世界尺寸（yard）。当项目中的 `zone_id` 不能唯一对应玩家地图/Route Profile时，尺寸必须按 `profile_id` 保存和读取，不能为了复用一个zone id把不同地图共用同一尺寸；只有zone id本身已证明唯一时才允许使用zone级后备。旧Timing中已有且来源明确的地图尺寸可以作为基础模型参数保真迁移，不能要求重新实跑才能使用。
 
-它们属于模型配置，可由后续实跑重新校准，不是游戏永久常数。
+它们属于模型配置，可由后续实跑重新校准，不是游戏永久常数。跨地图自主转场只作为Program/地图间过渡上下文保存，不计入任一单地图Profile的墙钟/G小时；若未来需要统计全程端到端墙钟，可单列transition overhead，不反写地图基线。
 
 ### 任务级实测参数
 
@@ -209,7 +202,7 @@ Timing只消费Task Card已确认的结构化fivebox类型，不从自然语言�
 - 某Boss平均1分20秒；
 - 某固定物刷新约45秒。
 
-这类数据进入Task Card timing samples/机制证据，由Timing Model消费。
+这类时间数据进入Timing Observations或Timing模型配置，并按task_id/规则引用关联；Task Card本身只保存`timing_rule_ref`，不再保存timing samples。
 
 旧模型中曾使用的`普通怪15秒/只`、`个人尸体拾取9秒/具`、`固定物7秒/角色/次`、`Hub 0.65分钟 + 0.16分钟×任务条数`等数值属于**当前历史校准参数**，迁移时必须进入显式模型配置并带版本；不能继续散落在脚本/规则中成为不可追踪常量。
 
@@ -271,7 +264,7 @@ Timing只负责把这些动作换算成墙钟。
 
 这条样本应保持原始范围，至少记录：
 
-- `profile_id`与当时的`profile_version`；
+- `profile_id`与当时的`profile_version`；跨Profile样本同时记录`program_id/program_version`与经过的Profile边界；
 - 起止范围（start/end action、step或可复核的人类锚点）；
 - 当时覆盖的任务集合快照，仅用于解释历史样本，不反向定义当前Route Profile；
 - 原始开始/结束墙钟或原始总分钟；
@@ -284,21 +277,22 @@ Timing只负责把这些动作换算成墙钟。
 
 这类阶段样本的价值是比较同一路线迭代前后的真实效率，也可用于校准任务块/路线模型；除非后来能独立隔离某个任务自身的固定服务时间，否则不要反推成单任务固有耗时。
 
-### 11.2 只有真正任务固有的隔离样本才进入Task Card
+### 11.2 单任务隔离样本也属于Timing Observations
 
-例如某任务固定事件从触发到结束稳定约3分42秒，且可与移动/Hub/其它任务完全分离，才可作为Task Card的任务级timing sample。
+例如某任务固定事件从触发到结束稳定约3分42秒，且可与移动/Hub/其它任务完全分离，可以作为按task_id关联的高质量Timing Observation或模型校准输入，但不写回Task Card。
 
-整图、step、多个任务共同推进、共享移动/共享战斗得到的墙钟都留在Timing Observations。
+整图、step、多个任务共同推进、共享移动/共享战斗得到的墙钟同样留在Timing Observations，只是scope和精度不同。
 
 ### 11.3 当前兼容状态
 
-旧`data/observations/route-timing-runs.json`目前仍混有模型说明、长期目标和`runs`。治理完成前：
+旧`data/observations/route-timing-runs.json`仍作为历史原始来源保留，其中`model / long_term_targets`等字段不再拥有Timing Model规范权。其中24条`runs`已经完整迁入纯Observation投影`data/observations/route-timing-observations.json`，并保存原始记录与源hash；迁移工具已归档。
 
-- `runs`只按Timing Observation解释；
-- 文件里的旧`model / long_term_targets`等字段不再作为Timing Model长期owner；
-- 后续Timing机器配置迁移时再做一次数据结构拆分，不为了当前Publisher切换先重写24条历史run。
+- 自动校准资格要求同时满足：`clean`、精确Profile/version、稳定action范围；缺任一项都保留为历史证据但`calibration_eligible=false`；
+- 当前24条旧run没有一条满足完整新合同，因此**0条**会被Stage 7静默套到当前Profile/Program；
+- 以后新增可校准样本必须直接绑定现役Profile/Program版本和稳定action范围，不再依赖旧`route_key`/step号推断；
+- Route Atlas旧页面仍可保留历史展示快照，但它不是Observation/Derived Timing owner。
 
-当前Route Atlas前端也**没有直接消费`route-timing-runs.json`中的run记录**；旧`estimate_route_atlas_timing.py`仍有自己的`ACTUAL_RUNS`兼容硬编码。它属于待迁消费者，不能提升为新的实测真源。
+旧Route Atlas估时CLI及其Timing snapshot写入链已经归档，不再属于当前执行路径。现役Timing算法owner是`lib/route_timing.py`；`scripts/rebuild_route_profile.py`只在显式完整诊断时调用Timing owner，不是日常Timing更新入口。
 
 ## 12. 重叠时间样本不能直接相加
 
@@ -357,15 +351,15 @@ Timing不定义：
 
 Timing Model只定义“哪些输入会使现有时间派生值失效”，例如：
 
-- Task Card中的真实机制/掉率/固定时长变化；
+- Task Card的`timing_rule_ref`变化；
 - Route Profile顺序、交通、动作或共享成本结构变化；
-- 通用/Profile模型参数变化；
-- unknown机制被确认；
+- Timing规则/模型参数或对应Observations变化；
+- 原本未分类任务获得可用的timing_rule_ref；
 - Timing公式/解析器实现变化。
 
 Task Card或Route Profile输入变化后，通过`task_id → Route Profile`引用关系重新生成受影响路线的Timing派生结果；不维护第二套`x-impact`传播分类。
 
-是否继续触发Selection Review由Route Lifecycle SOP按实际结果决定；Timing结果变化本身不得自动修改任务集合。
+Timing结果是否形成Selection Review条件只读Review Trigger / Selection owner；Timing结果变化本身不得自动修改任务集合。
 
 ## 17. 可机械验证的不变量
 
@@ -373,8 +367,15 @@ Task Card或Route Profile输入变化后，通过`task_id → Route Profile`引�
 
 - 显式`做`任务不会漏出objective service；
 - 同一共享战斗/移动不重复收费；
-- fivebox类型由结构化事实输入，不解析玩家备注；
-- 未知机制保留不确定边界；
+- 任务时间规则只读`timing_rule_ref`，不解析guide/玩家备注，也不把fivebox状态当完整时间公式；
+- `timing_rule_ref=null`时保留不确定边界，不擅自猜规则；
 - Route Profile每个需要发布的stepGroup都有Timing结果/或明确`includeInTotal=false`；
 - 实跑样本scope与当前Route Profile/version匹配；
 - 模型公式/参数有版本，不存在地图Builder各自复制一套公式。
+
+## 18. 正式Timing操作
+
+- 单Profile Timing：`python3 scripts/build_route_timing.py <profile_id>`。
+- Program没有合法Timing基线，或Program级Timing输入/合同改变：`python3 scripts/build_program_timing.py <program_id>`。
+- 已有合法Program Timing基线，仅指定成员Timing受影响：`python3 scripts/update_program_member_timing.py <program_id> <profile_id>`；其它成员结果原样复用。
+- Timing只消费当前fresh Movement / Service Context与Timing输入；缺少必要输入时返回`requirements`，不得从旧页面总分钟或历史快照补值。

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "task_id": 11872,
+  "identity": {
+    "name_zhcn": "罪恶的蛤蜊主宰……",
+    "name_en": "The Nefarious Clam Master...",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 70,
+    "pre_any": [
+      11871
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37014,
+        "quantity": 1,
+        "name_zhcn": "偷猎者惩戒棍棒",
+        "name_en": "Rod of Poacher Punishment",
+        "sell_price_each_copper": 89141,
+        "sell_price_total_copper": 89141
+      },
+      {
+        "item_id": 37017,
+        "quantity": 1,
+        "name_zhcn": "轻盈之刃",
+        "name_en": "Nimble Blade",
+        "sell_price_each_copper": 83717,
+        "sell_price_total_copper": 83717
+      },
+      {
+        "item_id": 37015,
+        "quantity": 1,
+        "name_zhcn": "探寻魔杖",
+        "name_en": "Dowsing Rod",
+        "sell_price_each_copper": 67096,
+        "sell_price_total_copper": 67096
+      },
+      {
+        "item_id": 37018,
+        "quantity": 1,
+        "name_zhcn": "仁德枪",
+        "name_en": "G.E.H.T.A.",
+        "sell_price_each_copper": 63028,
+        "sell_price_total_copper": 63028
+      },
+      {
+        "item_id": 37016,
+        "quantity": 1,
+        "name_zhcn": "守卫者魔杖",
+        "name_en": "Wand of the Keeper",
+        "sell_price_each_copper": 62547,
+        "sell_price_total_copper": 62547
+      },
+      {
+        "item_id": 37019,
+        "quantity": 1,
+        "name_zhcn": "北风之盾",
+        "name_en": "Borean Ward",
+        "sell_price_each_copper": 53989,
+        "sell_price_total_copper": 53989
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 89141,
+    "gear_sale_max_copper": 89141,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：圣职者莉安德拉。",
+    "杀死蛤蜊主宰老K，然后向仁德会营地的圣职者塞妮丝复命。",
+    "交付：圣职者塞妮丝。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11872",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

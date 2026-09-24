@@ -1,0 +1,956 @@
+{
+  "hellfire_dk": {
+    "order": 101,
+    "title": "地狱火半岛 · DK专用加速路线",
+    "displayName": "地狱火半岛（DK专用）",
+    "sub": "黑暗之门起步，依次完成东部前线、断背/塞斯高、萨尔玛北线、猎鹰/塞纳里奥任务簇，最后直接进入赞加。",
+    "badge": "炉石：萨尔玛\n预计总时间：330分钟（补回复仇链后的首跑前预算）",
+    "hearthChain": [
+      "萨尔玛"
+    ],
+    "timing": {
+      "centerMinutes": 330.0,
+      "rangeMinutes": [
+        243.0,
+        436.0
+      ]
+    },
+    "uiStandard": "semantic-hud-v45",
+    "image": "maps/3483-hellfire-peninsula-hd.jpg",
+    "legend": "",
+    "footer": "塞纳里奥哨站接《塞纳里奥远征队》后直接越境赞加；下一张切换“赞加沼泽（DK专用）”。",
+    "labels": [
+      [
+        87.35,
+        49.78,
+        "黑暗之门"
+      ],
+      [
+        55.1,
+        36.3,
+        "萨尔玛"
+      ],
+      [
+        65.9,
+        43.6,
+        "机甲残骸"
+      ],
+      [
+        61.7,
+        81.7,
+        "断背岗哨"
+      ],
+      [
+        68.0,
+        73.0,
+        "塞斯高"
+      ],
+      [
+        51.4,
+        30.5,
+        "萨尔玛西北矿洞"
+      ],
+      [
+        31.99,
+        27.79,
+        "玛格汉岗哨"
+      ],
+      [
+        27.05,
+        60.24,
+        "猎鹰岗哨"
+      ],
+      [
+        40.0,
+        33.0,
+        "阿苟纳之池"
+      ],
+      [
+        16.27,
+        65.09,
+        "沙纳尔废墟"
+      ],
+      [
+        15.7,
+        52.09,
+        "塞纳里奥哨站"
+      ]
+    ],
+    "points": [
+      [
+        87.35,
+        49.78,
+        "黑暗之门",
+        "固定交通：奥格瑞玛·精神谷传送门区 → 诅咒之地·黑暗之门前\n督军达图恩 → 接《跨越黑暗之门》\n固定交通：诅咒之地·黑暗之门 → 外域·黑暗之门\n沃雷恩中将 → 交《跨越黑暗之门》 → 接《抵达外域》",
+        "entry",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        87.35,
+        48.14,
+        "黑暗之门·部落营地",
+        "维拉加·乱羽 → 交《抵达外域》 → 接《萨尔玛之旅》\n任务传送：黑暗之门 → 萨尔玛",
+        "entry",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        55.88,
+        36.65,
+        "萨尔玛",
+        "克拉库克将军 → 交《萨尔玛之旅》 → 接《向纳兹格雷尔报到》\n纳兹格雷尔 → 交《向纳兹格雷尔报到》 → 接《消灭燃烧军团》\n玛提克·托塞多雷 → 接《猎鹰岗哨》\n开飞行点：萨尔玛\n绑定炉石：萨尔玛",
+        "thrallmar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        58.14,
+        41.27,
+        "萨尔玛东侧补给车队",
+        "斯古尔·碎颅者中士 → 交《消灭燃烧军团》 → 接《魔火峡谷》",
+        "east",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        66.25,
+        47.26,
+        "魔火峡谷",
+        "↳ 做《魔火峡谷》",
+        "east",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        58.14,
+        41.27,
+        "补给车队",
+        "斯古尔·碎颅者中士 → 交《魔火峡谷》 → 接《机甲残骸》",
+        "east",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.89,
+        43.59,
+        "机甲残骸",
+        "前线指挥官托尔克 → 交《机甲残骸》 → 接《阻断援军》",
+        "wreck",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        72.41,
+        42.11,
+        "希鲁斯 / 科卢尔传送门",
+        "↳ 做《阻断援军》",
+        "wreck",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        65.89,
+        43.59,
+        "机甲残骸",
+        "前线指挥官托尔克 → 交《阻断援军》 → 接《任务：穆尔凯斯和沙德拉兹之门》",
+        "wreck",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        77.87,
+        49.55,
+        "军团传送器",
+        "空军指挥官布拉克 → 乘任务飞行\n↳ 做《任务：穆尔凯斯和沙德拉兹之门》",
+        "wreck",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        65.89,
+        43.59,
+        "机甲残骸",
+        "前线指挥官托尔克 → 交《任务：穆尔凯斯和沙德拉兹之门》 → 接《任务：地狱岩床》",
+        "wreck",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        72.76,
+        17.47,
+        "地狱岩床",
+        "空军指挥官布拉克 → 乘任务飞行\n↳ 做《任务：地狱岩床》",
+        "north",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        65.89,
+        43.59,
+        "机甲残骸",
+        "前线指挥官托尔克 → 交《任务：地狱岩床》 → 接《返回萨尔玛》",
+        "wreck",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        61.7,
+        81.7,
+        "断背岗哨",
+        "开飞行点：断背岗哨\n莫迪巴大使 → 接《聆听之魂》\n通缉布告 → 接《通缉：座狼主宰卡鲁什》",
+        "spinebreaker",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        54.8,
+        80.5,
+        "远征军械库",
+        "↳ 做《聆听之魂》\n神秘典籍 → 接《解读书卷》",
+        "south",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        67.8,
+        73.0,
+        "塞斯高·第一趟",
+        "↳ 做《通缉：座狼主宰卡鲁什》",
+        "zethgor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        61.7,
+        81.7,
+        "断背岗哨",
+        "莫迪巴大使 → 交《聆听之魂》\n史学家奥尔森 → 交《解读书卷》 → 接《战斗的号角》\n达克霍尔上尉 → 交《通缉：座狼主宰卡鲁什》 → 接《燃烧吧，塞斯高！》\n塞萨克 → 接《格里洛克之眼》",
+        "spinebreaker",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        54.83,
+        83.74,
+        "远征军械库·塔沃斯少校",
+        "↳ 做《战斗的号角》",
+        "south",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        69.0,
+        74.9,
+        "塞斯高·第二趟",
+        "↳ 做《燃烧吧，塞斯高！》、《格里洛克之眼》",
+        "zethgor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        61.7,
+        81.7,
+        "断背岗哨",
+        "史学家奥尔森 → 交《战斗的号角》 → 接《血之复仇》\n达克霍尔上尉 → 交《燃烧吧，塞斯高！》\n塞萨克 → 交《格里洛克之眼》 → 接《\"暗眼\"格里洛克》",
+        "spinebreaker",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        63.5,
+        77.6,
+        "联盟战旗·乌尔特拉克",
+        "↳ 做《血之复仇》",
+        "south",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        61.7,
+        81.7,
+        "断背岗哨",
+        "史学家奥尔森 → 交《血之复仇》 → 接《逝者的荣耀》",
+        "spinebreaker",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        66.66,
+        71.5,
+        "塞斯高·第三趟",
+        "↳ 做《\"暗眼\"格里洛克》",
+        "zethgor",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        61.7,
+        81.7,
+        "断背岗哨",
+        "塞萨克 → 交《\"暗眼\"格里洛克》",
+        "spinebreaker",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        56.92,
+        77.37,
+        "远征军械库·指挥官霍加斯",
+        "指挥官霍加斯 → 交《逝者的荣耀》\n使用炉石：萨尔玛",
+        "south",
+        "",
+        "hearth",
+        false,
+        ""
+      ],
+      [
+        55.02,
+        35.96,
+        "萨尔玛",
+        "纳兹格雷尔 → 交《返回萨尔玛》 → 接《刺客》、《铸魔营地：暴虐》",
+        "thrallmar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        51.37,
+        30.52,
+        "萨尔玛西北矿洞",
+        "工头拉泽克拉兹 → 接《外域这烂地方！》",
+        "mine",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        47.9,
+        41.3,
+        "矿洞外回收区",
+        "↳ 做《外域这烂地方！》",
+        "mine",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        51.37,
+        30.52,
+        "矿洞",
+        "工头拉泽克拉兹 → 交《外域这烂地方！》 → 接《如何为地精效力》",
+        "mine",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        46.4,
+        45.2,
+        "邪兽人营地",
+        "↳ 做《如何为地精效力》",
+        "mine",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        51.37,
+        30.52,
+        "矿洞",
+        "工头拉泽克拉兹 → 交《如何为地精效力》 → 接《肮脏的工作》\n↳ 做《肮脏的工作》\n工头拉泽克拉兹 → 交《肮脏的工作》 → 接《萨尔玛的地下》",
+        "mine",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        54.39,
+        31.57,
+        "萨尔玛地下",
+        "↳ 做《萨尔玛的地下》\n工头拉泽克拉兹 → 交《萨尔玛的地下》",
+        "mine",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        61.8,
+        31.65,
+        "铸魔营地：暴虐",
+        "↳ 做《铸魔营地：暴虐》\n若持有燃烧军团信件：接《邪恶的计划》",
+        "forge",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        55.02,
+        35.96,
+        "萨尔玛",
+        "纳兹格雷尔 → 交《铸魔营地：暴虐》 → 接《军团的火炮》\n若任务仍在：魔导师文森特·血鹰 → 交《邪恶的计划》",
+        "thrallmar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        59.33,
+        32.53,
+        "铸魔营地：狂乱",
+        "↳ 做《军团的火炮》",
+        "forge",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        55.02,
+        35.96,
+        "萨尔玛",
+        "纳兹格雷尔 → 交《军团的火炮》 → 接《深渊之门》",
+        "thrallmar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        53.09,
+        26.47,
+        "深渊之门",
+        "↳ 做《深渊之门》",
+        "forge",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        33.61,
+        43.52,
+        "邪兽人尸体",
+        "邪兽人尸体 → 交《刺客》 → 接《奇怪的武器》\n使用炉石：萨尔玛",
+        "maghar",
+        "",
+        "hearth",
+        false,
+        ""
+      ],
+      [
+        55.02,
+        35.96,
+        "萨尔玛",
+        "纳兹格雷尔 → 交《深渊之门》 → 接《阿拉修斯的意图》\n魔导师文森特·血鹰 → 接《痛苦与黑暗》\n纳兹格雷尔 → 交《奇怪的武器》 → 接《酋长的命令》\n先知雷古库特 → 交《酋长的命令》 → 接《灵魂的指引》",
+        "thrallmar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        33.61,
+        43.52,
+        "邪兽人尸体·第二趟",
+        "↳ 做《灵魂的指引》",
+        "maghar",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        31.99,
+        27.79,
+        "玛格汉岗哨",
+        "格尔坎·血拳 → 交《灵魂的指引》 → 接《玛格汉》",
+        "maghar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        27.05,
+        60.24,
+        "猎鹰岗哨",
+        "游侠队长维恩雷 → 交《猎鹰岗哨》 → 接《大裂隙》、《向祖莱报到》\n通缉布告 → 接《通缉：黑色利爪》\n阴沉的利亚森 → 接《邪恶之血》\n魔导师卡尔琳达 → 接《埃雷利恩的日记》\n药剂师艾瑟森 → 接《堕落之源》\n塔雷里斯·晨光 → 接《朝圣者的困境》\n驯鹰者德蕾娜·河风 → 接《帮助塞纳里奥哨站》\n开飞行点：猎鹰岗哨",
+        "falcon",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        40.0,
+        33.0,
+        "阿苟纳之池",
+        "↳ 做《阿拉修斯的意图》、《痛苦与黑暗》、《邪恶之血》、《埃雷利恩的日记》",
+        "pools",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        33.37,
+        65.08,
+        "大裂隙",
+        "↳ 做《大裂隙》、《通缉：黑色利爪》\n若持有被腐蚀的皮箱：接《遗失的信件》",
+        "fissure",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        22.11,
+        68.3,
+        "尘羽峡谷营地",
+        "↳ 做《朝圣者的困境》",
+        "fissure",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        16.27,
+        65.09,
+        "沙纳尔废墟·纳拉杜",
+        "↳ 做《堕落之源》\n纳拉杜 → 接《叛徒》",
+        "shanaar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        14.34,
+        63.5,
+        "沙纳尔废墟·金属箱",
+        "↳ 做《叛徒》",
+        "shanaar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        16.27,
+        65.09,
+        "纳拉杜",
+        "纳拉杜 → 交《叛徒》 → 接《残冠长者》",
+        "shanaar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        13.13,
+        58.75,
+        "沙纳尔废墟·三长者",
+        "↳ 做《残冠长者》",
+        "shanaar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        16.27,
+        65.09,
+        "纳拉杜",
+        "纳拉杜 → 交《残冠长者》 → 接《阿尔泽斯之死》\n↳ 做《阿尔泽斯之死》\n纳拉杜 → 交《阿尔泽斯之死》",
+        "shanaar",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        27.05,
+        60.24,
+        "猎鹰岗哨",
+        "游侠队长维恩雷 → 交《大裂隙》、《通缉：黑色利爪》 → 接《点燃灯塔》\n塔雷里斯·晨光 → 交《朝圣者的困境》\n阴沉的利亚森 → 交《邪恶之血》 → 接《阻止净化》\n魔导师卡尔琳达 → 交《埃雷利恩的日记》 → 接《埃雷利恩的秘密》\n药剂师艾瑟森 → 交《堕落之源》",
+        "falcon",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        55.02,
+        35.96,
+        "系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨",
+        "系统飞行：猎鹰岗哨 → 萨尔玛\n纳兹格雷尔 → 交《玛格汉》、《阿拉修斯的意图》\n魔导师文森特·血鹰 → 交《痛苦与黑暗》\n系统飞行：萨尔玛 → 猎鹰岗哨",
+        "falcon",
+        "",
+        "taxi",
+        false,
+        ""
+      ],
+      [
+        26.56,
+        63.04,
+        "猎鹰岗哨外·魔导师阿利迪斯",
+        "魔导师阿利迪斯 → 交《埃雷利恩的秘密》 → 接《\"恋人\"曝光》",
+        "falcon",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        26.38,
+        60.32,
+        "猎鹰岗哨",
+        "魔导师卡尔琳达 → 交《\"恋人\"曝光》 → 接《埃雷利恩的\"恋人\"》\n↳ 做《埃雷利恩的\"恋人\"》\n魔导师卡尔琳达 → 交《埃雷利恩的\"恋人\"》",
+        "falcon",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        40.0,
+        32.9,
+        "阿苟纳之池·第二趟",
+        "↳ 做《阻止净化》",
+        "pools",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        34.07,
+        60.58,
+        "大裂隙·三座灯塔",
+        "↳ 做《点燃灯塔》",
+        "fissure",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        27.05,
+        60.24,
+        "猎鹰岗哨",
+        "阴沉的利亚森 → 交《阻止净化》\n游侠队长维恩雷 → 交《点燃灯塔》",
+        "falcon",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        15.7,
+        52.09,
+        "塞纳里奥哨站",
+        "塞安·红鬃 → 交《帮助塞纳里奥哨站》\n图拉希恩 → 接《巨人的威胁》\n玛霍拉姆·硬蹄 → 接《扫清棘牙岭！》\n阿米希尔·迷雾行者 → 接《塞纳里奥远征队》\n若任务仍在：塞安·红鬃 → 交《遗失的信件》",
+        "cenarion",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        15.23,
+        42.25,
+        "塞纳里奥哨站北侧巨人",
+        "↳ 做《巨人的威胁》\n若持有火红水晶碎片：接《火红水晶中的线索》",
+        "cenarion",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        10.02,
+        51.6,
+        "棘牙岭",
+        "↳ 做《扫清棘牙岭！》",
+        "cenarion",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        15.7,
+        52.09,
+        "塞纳里奥哨站",
+        "图拉希恩 → 交《巨人的威胁》\n若任务仍在：图拉希恩 → 交《火红水晶中的线索》\n图拉希恩 → 接《缚地者》\n玛霍拉姆·硬蹄 → 交《扫清棘牙岭！》",
+        "cenarion",
+        "",
+        "ride",
+        false,
+        ""
+      ],
+      [
+        15.83,
+        51.83,
+        "缚地者加兰蒂娅·夜风",
+        "缚地者加兰蒂娅·夜风 → 交《缚地者》 → 接《自然的治愈》\n↳ 做《自然的治愈》\n缚地者加兰蒂娅·夜风 → 交《自然的治愈》",
+        "cenarion",
+        "",
+        "script",
+        false,
+        ""
+      ],
+      [
+        15.95,
+        52.15,
+        "塞纳里奥哨站 → 赞加沼泽",
+        "陆路：塞纳里奥哨站 → 赞加沼泽·塞纳里奥庇护所\n伊谢尔·风歌 → 交《塞纳里奥远征队》",
+        "exit",
+        "",
+        "crossmap",
+        false,
+        ""
+      ]
+    ],
+    "defaultIndex": 0,
+    "phaseColors": {},
+    "stepGroups": [
+      {
+        "start": 0,
+        "end": 5,
+        "title": "黑暗之门 → 萨尔玛 → 魔火峡谷",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 25.0,
+          "rangeMinutes": [
+            18.0,
+            34.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">黑暗之门</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-transport\">固定交通：奥格瑞玛·精神谷传送门区 → 诅咒之地·黑暗之门前</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">督军达图恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">跨越黑暗之门</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-transport\">固定交通：诅咒之地·黑暗之门 → 外域·黑暗之门</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">沃雷恩中将</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">跨越黑暗之门</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">抵达外域</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">黑暗之门·部落营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">维拉加·乱羽</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">抵达外域</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">萨尔玛之旅</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">任务传送：黑暗之门 → 萨尔玛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">克拉库克将军</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">萨尔玛之旅</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">向纳兹格雷尔报到</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">向纳兹格雷尔报到</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">消灭燃烧军团</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">玛提克·托塞多雷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">猎鹰岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">绑定炉石：萨尔玛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛东侧补给车队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斯古尔·碎颅者中士</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">消灭燃烧军团</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">魔火峡谷</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">魔火峡谷</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">魔火峡谷</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">补给车队</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">斯古尔·碎颅者中士</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">魔火峡谷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">机甲残骸</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《跨越黑暗之门》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《抵达外域》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《萨尔玛之旅》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《向纳兹格雷尔报到》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《消灭燃烧军团》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《猎鹰岗哨》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《魔火峡谷》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《机甲残骸》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 6,
+        "end": 12,
+        "title": "机甲残骸 → 阻断援军 → 两轮轰炸",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 27.0,
+          "rangeMinutes": [
+            20.0,
+            36.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">机甲残骸</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">前线指挥官托尔克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">机甲残骸</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">阻断援军</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">希鲁斯 / 科卢尔传送门</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">阻断援军</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">机甲残骸</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">前线指挥官托尔克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">阻断援军</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">任务：穆尔凯斯和沙德拉兹之门</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">军团传送器</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">空军指挥官布拉克</span><span class=\"ra-arrow\">→</span><span class=\"ra-transport\">乘任务飞行</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">任务：穆尔凯斯和沙德拉兹之门</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">机甲残骸</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">前线指挥官托尔克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">任务：穆尔凯斯和沙德拉兹之门</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">任务：地狱岩床</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">地狱岩床</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">空军指挥官布拉克</span><span class=\"ra-arrow\">→</span><span class=\"ra-transport\">乘任务飞行</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">任务：地狱岩床</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">机甲残骸</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">前线指挥官托尔克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">任务：地狱岩床</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">返回萨尔玛</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《机甲残骸》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阻断援军》</div><div class=\"ra-note-text\"><span class=\"ra-special\">特殊：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《任务：穆尔凯斯和沙德拉兹之门》</div><div class=\"ra-note-text\"><span class=\"ra-special\">特殊：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《任务：地狱岩床》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《任务：地狱岩床》地狱火半岛DK第二组实跑确认：任务进度共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《返回萨尔玛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 13,
+        "end": 18,
+        "title": "断背岗哨 → 军械库 → 塞斯高",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 30.0,
+          "rangeMinutes": [
+            22.0,
+            40.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">断背岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：断背岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">莫迪巴大使</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">聆听之魂</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">通缉布告</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">通缉：座狼主宰卡鲁什</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">远征军械库</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">聆听之魂</span></div>\n<div class=\"ra-line\"><span class=\"ra-transport\">神秘典籍</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">解读书卷</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞斯高·第一趟</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">通缉：座狼主宰卡鲁什</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">断背岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">莫迪巴大使</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">聆听之魂</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">史学家奥尔森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">解读书卷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">战斗的号角</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达克霍尔上尉</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">通缉：座狼主宰卡鲁什</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">燃烧吧，塞斯高！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塞萨克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">格里洛克之眼</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">远征军械库·塔沃斯少校</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">战斗的号角</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞斯高·第二趟</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">燃烧吧，塞斯高！</span>、<span class=\"ra-task ra-do-task\">格里洛克之眼</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《聆听之魂》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《聆听之魂》地狱火半岛DK首组实跑确认：三类阴魂击杀进度共享，主控击杀即可同步推进五号。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：座狼主宰卡鲁什》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《通缉：座狼主宰卡鲁什》地狱火半岛DK首组实跑确认：共享，座狼主宰卡鲁什只需击杀一次。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《解读书卷》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《战斗的号角》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>击杀塔沃斯少校取得顽强战斗号角。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《燃烧吧，塞斯高！》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《燃烧吧，塞斯高！》地狱火半岛DK首组实跑确认：建筑纵火任务进度共享，主控完成纵火即可同步队伍。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《格里洛克之眼》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《格里洛克之眼》：使用塞萨克的碎片捕获眼睛，再带到塞萨克的熔锅使其分离。</div></div>"
+      },
+      {
+        "start": 19,
+        "end": 24,
+        "title": "血之复仇 → 暗眼格里洛克 → 炉石萨尔玛",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 25.0,
+          "rangeMinutes": [
+            18.0,
+            34.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">断背岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">史学家奥尔森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">战斗的号角</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">血之复仇</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">达克霍尔上尉</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">燃烧吧，塞斯高！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塞萨克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">格里洛克之眼</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">&quot;暗眼&quot;格里洛克</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">联盟战旗·乌尔特拉克</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">血之复仇</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">断背岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">史学家奥尔森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">血之复仇</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">逝者的荣耀</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞斯高·第三趟</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">&quot;暗眼&quot;格里洛克</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">断背岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塞萨克</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">&quot;暗眼&quot;格里洛克</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">远征军械库·指挥官霍加斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">指挥官霍加斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">逝者的荣耀</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：萨尔玛</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《战斗的号角》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>击杀塔沃斯少校取得顽强战斗号角。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《血之复仇》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>在联盟战旗旁使用顽强战斗号角召出乌尔特拉克，再击杀。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《燃烧吧，塞斯高！》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《燃烧吧，塞斯高！》地狱火半岛DK首组实跑确认：建筑纵火任务进度共享，主控完成纵火即可同步队伍。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《格里洛克之眼》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《格里洛克之眼》：使用塞萨克的碎片捕获眼睛，再带到塞萨克的熔锅使其分离。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《&quot;暗眼&quot;格里洛克》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《逝者的荣耀》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 25,
+        "end": 30,
+        "title": "萨尔玛 → 矿洞短链",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 25.0,
+          "rangeMinutes": [
+            18.0,
+            34.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">返回萨尔玛</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">刺客</span>、<span class=\"ra-task ra-accept\">铸魔营地：暴虐</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛西北矿洞</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">工头拉泽克拉兹</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">外域这烂地方！</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">矿洞外回收区</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">外域这烂地方！</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">矿洞</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">工头拉泽克拉兹</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">外域这烂地方！</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">如何为地精效力</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">邪兽人营地</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">如何为地精效力</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">矿洞</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">工头拉泽克拉兹</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">如何为地精效力</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">肮脏的工作</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">肮脏的工作</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">工头拉泽克拉兹</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">肮脏的工作</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">萨尔玛的地下</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《返回萨尔玛》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《刺客》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《铸魔营地：暴虐》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《外域这烂地方！》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《如何为地精效力》</div><div class=\"ra-note-text\"><span class=\"ra-shared\">共享：</span>《如何为地精效力》地狱火半岛DK第二组实跑确认：营救三名地精的任务进度共享，主控执行即可同步队伍。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《肮脏的工作》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>《肮脏的工作》用哨子召地狱犬，击杀野猪喂食后从地狱犬残渣取得钥匙。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《萨尔玛的地下》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 31,
+        "end": 36,
+        "title": "萨尔玛地下 → 铸魔营地 → 深渊之门",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 25.0,
+          "rangeMinutes": [
+            18.0,
+            34.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛地下</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">萨尔玛的地下</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">工头拉泽克拉兹</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">萨尔玛的地下</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">铸魔营地：暴虐</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">铸魔营地：暴虐</span></div>\n<div class=\"ra-line\"><span class=\"ra-key\">若持有燃烧军团信件：</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">邪恶的计划</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">铸魔营地：暴虐</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">军团的火炮</span></div>\n<div class=\"ra-line\"><span class=\"ra-key\">若任务仍在：</span><span class=\"ra-npc\">魔导师文森特·血鹰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">邪恶的计划</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">铸魔营地：狂乱</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">军团的火炮</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">军团的火炮</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">深渊之门</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">深渊之门</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">深渊之门</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《萨尔玛的地下》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《铸魔营地：暴虐》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《邪恶的计划》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>剃刀电锯若掉落燃烧军团信件，拾取后接《邪恶的计划》；不等刷新。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《军团的火炮》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《深渊之门》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>击杀战争使者阿利萨玛尔取得钥匙，再摧毁怨恨符文。</div></div>"
+      },
+      {
+        "start": 37,
+        "end": 40,
+        "title": "刺客 → 玛格汉岗哨",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 29.0,
+          "rangeMinutes": [
+            21.0,
+            40.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">邪兽人尸体</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">邪兽人尸体</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">刺客</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">奇怪的武器</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：萨尔玛</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">深渊之门</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">阿拉修斯的意图</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师文森特·血鹰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">痛苦与黑暗</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">奇怪的武器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">酋长的命令</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">先知雷古库特</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">酋长的命令</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">灵魂的指引</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">邪兽人尸体·第二趟</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">灵魂的指引</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">玛格汉岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">格尔坎·血拳</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">灵魂的指引</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">玛格汉</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《刺客》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《奇怪的武器》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《深渊之门》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>击杀战争使者阿利萨玛尔取得钥匙，再摧毁怨恨符文。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阿拉修斯的意图》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《痛苦与黑暗》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《酋长的命令》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《灵魂的指引》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>在尸体处使用先祖狼魂图腾，跟随狼魂前往玛格汉岗哨。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《玛格汉》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 41,
+        "end": 46,
+        "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 沙纳尔",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 35.0,
+          "rangeMinutes": [
+            26.0,
+            44.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">猎鹰岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">游侠队长维恩雷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">猎鹰岗哨</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">大裂隙</span>、<span class=\"ra-task ra-accept\">向祖莱报到</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">通缉布告</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">通缉：黑色利爪</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">阴沉的利亚森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">邪恶之血</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师卡尔琳达</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">埃雷利恩的日记</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">药剂师艾瑟森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">堕落之源</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塔雷里斯·晨光</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">朝圣者的困境</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">驯鹰者德蕾娜·河风</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">帮助塞纳里奥哨站</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：猎鹰岗哨</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">阿苟纳之池</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">阿拉修斯的意图</span>、<span class=\"ra-task ra-do-task\">痛苦与黑暗</span>、<span class=\"ra-task ra-do-task\">邪恶之血</span>、<span class=\"ra-task ra-do-task\">埃雷利恩的日记</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">大裂隙</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">大裂隙</span>、<span class=\"ra-task ra-do-task\">通缉：黑色利爪</span></div>\n<div class=\"ra-line\"><span class=\"ra-key\">若持有被腐蚀的皮箱：</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">遗失的信件</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">尘羽峡谷营地</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">朝圣者的困境</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">沙纳尔废墟·纳拉杜</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">堕落之源</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳拉杜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">叛徒</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">沙纳尔废墟·金属箱</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">叛徒</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《猎鹰岗哨》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《大裂隙》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《向祖莱报到》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>《向祖莱报到》继续携带；进入赞加后在正式赞加第1步自然到沼泽鼠岗哨时交给祖莱。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：黑色利爪》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《邪恶之血》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《埃雷利恩的日记》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《堕落之源》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《朝圣者的困境》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《帮助塞纳里奥哨站》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阿拉修斯的意图》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《痛苦与黑暗》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《遗失的信件》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《叛徒》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>固定金属箱取得沙纳尔钥匙。</div></div>"
+      },
+      {
+        "start": 47,
+        "end": 51,
+        "title": "沙纳尔后半 → 猎鹰岗哨回交",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 27.0,
+          "rangeMinutes": [
+            20.0,
+            36.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">纳拉杜</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳拉杜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">叛徒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">残冠长者</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">沙纳尔废墟·三长者</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">残冠长者</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">纳拉杜</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳拉杜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">残冠长者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">阿尔泽斯之死</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">阿尔泽斯之死</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳拉杜</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">阿尔泽斯之死</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">猎鹰岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">游侠队长维恩雷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">大裂隙</span>、<span class=\"ra-task ra-turnin\">通缉：黑色利爪</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">点燃灯塔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塔雷里斯·晨光</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">朝圣者的困境</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">阴沉的利亚森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">邪恶之血</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">阻止净化</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师卡尔琳达</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">埃雷利恩的日记</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">埃雷利恩的秘密</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">药剂师艾瑟森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">堕落之源</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：猎鹰岗哨 → 萨尔玛</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">纳兹格雷尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">玛格汉</span>、<span class=\"ra-task ra-turnin\">阿拉修斯的意图</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师文森特·血鹰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">痛苦与黑暗</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：萨尔玛 → 猎鹰岗哨</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《叛徒》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>固定金属箱取得沙纳尔钥匙。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《残冠长者》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阿尔泽斯之死》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>对无情的阿尔泽斯使用长者法杖后再击杀。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《大裂隙》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《通缉：黑色利爪》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《点燃灯塔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《朝圣者的困境》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《邪恶之血》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阻止净化》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>放置信号宝石后击杀召出的德莱尼学者。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《埃雷利恩的日记》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《埃雷利恩的秘密》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>阿利迪斯沿猎鹰岗哨外道路巡逻。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《堕落之源》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《玛格汉》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阿拉修斯的意图》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《痛苦与黑暗》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 52,
+        "end": 56,
+        "title": "猎鹰岗哨后续 → 阿苟纳 / 大裂隙第二趟",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 40.0,
+          "rangeMinutes": [
+            30.0,
+            52.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">猎鹰岗哨外·魔导师阿利迪斯</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师阿利迪斯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">埃雷利恩的秘密</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">&quot;恋人&quot;曝光</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">猎鹰岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师卡尔琳达</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">&quot;恋人&quot;曝光</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">埃雷利恩的&quot;恋人&quot;</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">埃雷利恩的&quot;恋人&quot;</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">魔导师卡尔琳达</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">埃雷利恩的&quot;恋人&quot;</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">阿苟纳之池·第二趟</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">阻止净化</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">大裂隙·三座灯塔</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">点燃灯塔</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">猎鹰岗哨</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">阴沉的利亚森</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">阻止净化</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">游侠队长维恩雷</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">点燃灯塔</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《埃雷利恩的秘密》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>阿利迪斯沿猎鹰岗哨外道路巡逻。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《&quot;恋人&quot;曝光》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《埃雷利恩的&quot;恋人&quot;》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>诱使薇拉离岗后使用惩戒卷轴。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《阻止净化》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>放置信号宝石后击杀召出的德莱尼学者。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《点燃灯塔》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div>"
+      },
+      {
+        "start": 57,
+        "end": 62,
+        "title": "塞纳里奥哨站 → 赞加沼泽",
+        "summary": "",
+        "timing": {
+          "centerMinutes": 22.0,
+          "rangeMinutes": [
+            16.0,
+            31.0
+          ],
+          "includeInTotal": true
+        },
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞纳里奥哨站</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塞安·红鬃</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">帮助塞纳里奥哨站</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">图拉希恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">巨人的威胁</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">玛霍拉姆·硬蹄</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">扫清棘牙岭！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">阿米希尔·迷雾行者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">塞纳里奥远征队</span></div>\n<div class=\"ra-line\"><span class=\"ra-key\">若任务仍在：</span><span class=\"ra-npc\">塞安·红鬃</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">遗失的信件</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞纳里奥哨站北侧巨人</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">巨人的威胁</span></div>\n<div class=\"ra-line\"><span class=\"ra-key\">若持有火红水晶碎片：</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">火红水晶中的线索</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">棘牙岭</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">扫清棘牙岭！</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞纳里奥哨站</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">图拉希恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">巨人的威胁</span></div>\n<div class=\"ra-line\"><span class=\"ra-key\">若任务仍在：</span><span class=\"ra-npc\">图拉希恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">火红水晶中的线索</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">图拉希恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">缚地者</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">玛霍拉姆·硬蹄</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">扫清棘牙岭！</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">缚地者加兰蒂娅·夜风</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">缚地者加兰蒂娅·夜风</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">缚地者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">自然的治愈</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">自然的治愈</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">缚地者加兰蒂娅·夜风</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">自然的治愈</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塞纳里奥哨站 → 赞加沼泽</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-transport\">陆路：塞纳里奥哨站 → 赞加沼泽·塞纳里奥庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伊谢尔·风歌</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">塞纳里奥远征队</span></div>",
+        "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《帮助塞纳里奥哨站》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《巨人的威胁》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《扫清棘牙岭！》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《塞纳里奥远征队》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《遗失的信件》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《火红水晶中的线索》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>巨人若掉落火红水晶碎片，拾取后接《火红水晶中的线索》。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《缚地者》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span></div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《自然的治愈》</div><div class=\"ra-note-text\"><span class=\"ra-fivebox-check\">五开待实测：</span>在缚地者法阵使用新生之种。</div></div>"
+      }
+    ],
+    "defaultGroupIndex": 0
+  }
+}

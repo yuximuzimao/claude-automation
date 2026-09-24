@@ -1,0 +1,4662 @@
+{
+  "schema_version": 2,
+  "profile_id": "zuldrak-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "祖达克",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 66
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      12789,
+      12974
+    ]
+  },
+  "goal": {
+    "summary": "从圣光据点开始；中段炉石绑定希姆托加；完成杜布拉金迅猛龙卵任务后结束本图。"
+  },
+  "display": {
+    "publish_key": "zuldrak",
+    "order": 10,
+    "title": "祖达克 · 80级五开任务路线",
+    "display_name": "祖达克",
+    "subtitle": "从圣光据点开始；中段炉石绑定希姆托加；完成杜布拉金迅猛龙卵任务后结束本图。",
+    "footer": "在杜布拉金交《杜布拉金需要迅猛龙卵》后，本图祖达克清理段结束。",
+    "map_image": "maps/66-zul-drak-hd.jpg"
+  },
+  "task_ids": [
+    12789,
+    12857,
+    12859,
+    12861,
+    12902,
+    12883,
+    12884,
+    12894,
+    12903,
+    12901,
+    12904,
+    12912,
+    12914,
+    12630,
+    12631,
+    12637,
+    12629,
+    12648,
+    12652,
+    12661,
+    12795,
+    12916,
+    12919,
+    12664,
+    12669,
+    12673,
+    12677,
+    12686,
+    12676,
+    12690,
+    12710,
+    12713,
+    12503,
+    12740,
+    12565,
+    12505,
+    12596,
+    12506,
+    12557,
+    12799,
+    12609,
+    12610,
+    12504,
+    12508,
+    12507,
+    12510,
+    12562,
+    12599,
+    12597,
+    12598,
+    12512,
+    12606,
+    12552,
+    12553,
+    12554,
+    12583,
+    12584,
+    12555,
+    12514,
+    12527,
+    12516,
+    12623,
+    12974,
+    12932,
+    12933,
+    12934,
+    12935,
+    12936,
+    12948,
+    12615,
+    12627,
+    12622,
+    13099,
+    12628,
+    12640,
+    12635,
+    12639,
+    12632,
+    12642,
+    12650,
+    13549,
+    12655,
+    12646,
+    12647,
+    12653,
+    12662,
+    12659,
+    12665,
+    12666,
+    12667,
+    12672,
+    12668,
+    12674,
+    12675,
+    12684,
+    12685,
+    12707,
+    12708,
+    12709,
+    12712,
+    12721,
+    13556,
+    12729,
+    12730,
+    13097
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12789,
+      "location_ref": "zuldrak-p001",
+      "npc_name": "莉安娜中士",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zuldrak-p001",
+      "target_name": "圣光据点",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p002",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12857,
+      "location_ref": "zuldrak-p002",
+      "target_name": "通缉！",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12859,
+      "location_ref": "zuldrak-p002",
+      "npc_name": "萨满长者莫奇",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12861,
+      "location_ref": "zuldrak-p002",
+      "npc_name": "怒爪酋长",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12902,
+      "location_ref": "zuldrak-p002",
+      "npc_name": "北伐军领主兰迪加",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p003",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12859,
+      "location_ref": "zuldrak-p003",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12861,
+      "location_ref": "zuldrak-p003",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12857,
+      "location_ref": "zuldrak-p003",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12902,
+      "location_ref": "zuldrak-p003",
+      "target_name": "达库鲁的命令",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12883,
+      "location_ref": "zuldrak-p003",
+      "target_name": "达库鲁的命令",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p004",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12857,
+      "location_ref": "zuldrak-p004",
+      "npc_name": "怒爪酋长",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12861,
+      "location_ref": "zuldrak-p004",
+      "npc_name": "怒爪酋长",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12859,
+      "location_ref": "zuldrak-p004",
+      "npc_name": "萨满长者莫奇",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12883,
+      "location_ref": "zuldrak-p004",
+      "npc_name": "北伐军领主兰迪加",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12884,
+      "location_ref": "zuldrak-p004",
+      "npc_name": "北伐军领主兰迪加",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12894,
+      "location_ref": "zuldrak-p004",
+      "npc_name": "北伐军领主兰迪加",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p005",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12894,
+      "location_ref": "zuldrak-p005",
+      "npc_name": "北伐军战士马克拉尔",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12903,
+      "location_ref": "zuldrak-p005",
+      "npc_name": "北伐军战士马克拉尔",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12901,
+      "location_ref": "zuldrak-p005",
+      "npc_name": "工程师里德",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p006",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12903,
+      "location_ref": "zuldrak-p006",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12901,
+      "location_ref": "zuldrak-p006",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p007",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12903,
+      "location_ref": "zuldrak-p007",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12904,
+      "location_ref": "zuldrak-p007",
+      "npc_name": "戈尔克",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12904,
+      "location_ref": "zuldrak-p007",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12904,
+      "location_ref": "zuldrak-p007",
+      "npc_name": "戈尔克",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p008",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12903,
+      "location_ref": "zuldrak-p008",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p009",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12912,
+      "location_ref": "zuldrak-p009",
+      "npc_name": "盖米尔",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p010",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12901,
+      "location_ref": "zuldrak-p010",
+      "npc_name": "工程师里德",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12912,
+      "location_ref": "zuldrak-p010",
+      "npc_name": "工程师里德",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12914,
+      "location_ref": "zuldrak-p010",
+      "npc_name": "工程师里德",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12903,
+      "location_ref": "zuldrak-p010",
+      "npc_name": "北伐军战士马克拉尔",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p011",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12914,
+      "location_ref": "zuldrak-p011",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p012",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12884,
+      "location_ref": "zuldrak-p012",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12630,
+      "location_ref": "zuldrak-p012",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zuldrak-p012",
+      "target_name": "黑锋哨站",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p013",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12914,
+      "location_ref": "zuldrak-p013",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p014",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12630,
+      "location_ref": "zuldrak-p014",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12631,
+      "location_ref": "zuldrak-p014",
+      "target_name": "尸灵项圈",
+      "when": {
+        "kind": "has_item",
+        "item_name": "尸灵项圈"
+      },
+      "action_id": "a0053"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p015",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12631,
+      "location_ref": "zuldrak-p015",
+      "npc_name": "斯特凡·瓦杜",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12631
+      },
+      "action_id": "a0055"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12637,
+      "location_ref": "zuldrak-p015",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p016",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12637,
+      "location_ref": "zuldrak-p016",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p017",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12637,
+      "location_ref": "zuldrak-p017",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12629,
+      "location_ref": "zuldrak-p017",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p018",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12629,
+      "location_ref": "zuldrak-p018",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p019",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12629,
+      "location_ref": "zuldrak-p019",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12648,
+      "location_ref": "zuldrak-p019",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p020",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12648,
+      "location_ref": "zuldrak-p020",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12652,
+      "location_ref": "zuldrak-p020",
+      "npc_name": "骨肠",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12652,
+      "location_ref": "zuldrak-p020",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12652,
+      "location_ref": "zuldrak-p020",
+      "npc_name": "骨肠",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p021",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12648,
+      "location_ref": "zuldrak-p021",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12630,
+      "location_ref": "zuldrak-p021",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12661,
+      "location_ref": "zuldrak-p021",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12795,
+      "location_ref": "zuldrak-p021",
+      "npc_name": "血玫瑰达图拉",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p022",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12914,
+      "location_ref": "zuldrak-p022",
+      "npc_name": "工程师里德",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12916,
+      "location_ref": "zuldrak-p022",
+      "npc_name": "工程师里德",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p023",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12916,
+      "location_ref": "zuldrak-p023",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12916,
+      "location_ref": "zuldrak-p023",
+      "npc_name": "盖米尔",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12919,
+      "location_ref": "zuldrak-p023",
+      "npc_name": "盖米尔",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p024",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12919,
+      "location_ref": "zuldrak-p024",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p025",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12919,
+      "location_ref": "zuldrak-p025",
+      "npc_name": "北伐军战士马克拉尔",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p026",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p026",
+      "target_name": "使用迷惑项圈",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p026",
+      "from_name": "黑锋哨站",
+      "to_name": "沃尔塔鲁斯",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p027",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12664,
+      "location_ref": "zuldrak-p027",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12664,
+      "location_ref": "zuldrak-p027",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12664,
+      "location_ref": "zuldrak-p027",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12661,
+      "location_ref": "zuldrak-p027",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p027",
+      "from_name": "沃尔塔鲁斯·达库鲁 / 高尔巴格",
+      "to_name": "痛苦之匣",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p028",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p028",
+      "target_name": "使用斯特凡号角",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12661,
+      "location_ref": "zuldrak-p028",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12669,
+      "location_ref": "zuldrak-p028",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p029",
+      "from_name": "痛苦之匣传送平台（保持天灾伪装）",
+      "to_name": "沃尔塔鲁斯",
+      "action_id": "transport-pain-voltarus-12673"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p029",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12673,
+      "location_ref": "zuldrak-p029",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12673,
+      "location_ref": "zuldrak-p029",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12673,
+      "location_ref": "zuldrak-p029",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p030",
+      "from_name": "沃尔塔鲁斯出口传送门",
+      "to_name": "痛苦之匣",
+      "action_id": "transport-voltarus-pain-12669"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p030",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12669,
+      "location_ref": "zuldrak-p030",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p030",
+      "target_name": "使用斯特凡号角",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12669,
+      "location_ref": "zuldrak-p030",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12677,
+      "location_ref": "zuldrak-p030",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p031",
+      "from_name": "痛苦之匣传送平台（保持天灾伪装）",
+      "to_name": "沃尔塔鲁斯",
+      "action_id": "transport-pain-voltarus-12677"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p031",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12686,
+      "location_ref": "zuldrak-p031",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12686,
+      "location_ref": "zuldrak-p031",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12677,
+      "location_ref": "zuldrak-p031",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12686,
+      "location_ref": "zuldrak-p031",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p032",
+      "from_name": "沃尔塔鲁斯出口传送门",
+      "to_name": "痛苦之匣",
+      "action_id": "transport-voltarus-pain-12677"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p032",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p032",
+      "target_name": "使用斯特凡号角",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12677,
+      "location_ref": "zuldrak-p032",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12676,
+      "location_ref": "zuldrak-p032",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p033",
+      "from_name": "痛苦之匣传送平台（保持天灾伪装）",
+      "to_name": "沃尔塔鲁斯",
+      "action_id": "transport-pain-voltarus-12690"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p033",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12690,
+      "location_ref": "zuldrak-p033",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12690,
+      "location_ref": "zuldrak-p033",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12690,
+      "location_ref": "zuldrak-p033",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12710,
+      "location_ref": "zuldrak-p033",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p033",
+      "target_name": "使用传送器",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p033-post-cycle",
+      "from_name": "沃尔塔鲁斯·达库鲁",
+      "to_name": "沃尔塔鲁斯·上层密室",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p033-post-cycle",
+      "action_id": "visit-p033-post-cycle"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12710,
+      "location_ref": "zuldrak-p033-post-cycle",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12710,
+      "location_ref": "zuldrak-p033-post-cycle",
+      "npc_name": "达库鲁大王",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p034",
+      "from_name": "沃尔塔鲁斯·上层密室出口",
+      "to_name": "痛苦之匣",
+      "action_id": "transport-upper-pain-12676"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p034",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12676,
+      "location_ref": "zuldrak-p034",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p034",
+      "target_name": "使用斯特凡号角",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12676,
+      "location_ref": "zuldrak-p034",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12713,
+      "location_ref": "zuldrak-p034",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p035-drakuru",
+      "from_name": "痛苦之匣传送平台（保持天灾伪装）",
+      "to_name": "沃尔塔鲁斯·达库鲁",
+      "action_id": "transport-pain-voltarus-12713"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p035-drakuru",
+      "action_id": "visit-p035-drakuru"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p035-drakuru",
+      "npc_name": "达库鲁大王",
+      "target_name": "对话进入沃尔塔鲁斯顶部",
+      "action_id": "interact-drakuru-top"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "zuldrak-p035",
+      "from_name": "沃尔塔鲁斯·达库鲁",
+      "to_name": "沃尔塔鲁斯顶部",
+      "action_id": "transport-drakuru-top"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p035",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12713,
+      "location_ref": "zuldrak-p035",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p035",
+      "target_name": "使用达库鲁的最后愿望",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "zuldrak-p036",
+      "from_name": "沃尔塔鲁斯顶部·达库鲁的最后愿望",
+      "to_name": "痛苦之匣",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p036",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "zuldrak-p036",
+      "target_name": "使用斯特凡号角",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12713,
+      "location_ref": "zuldrak-p036",
+      "npc_name": "斯特凡·瓦杜",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p037",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12795,
+      "location_ref": "zuldrak-p037",
+      "npc_name": "指挥官法斯塔夫",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12503,
+      "location_ref": "zuldrak-p037",
+      "npc_name": "指挥官法斯塔夫",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12740,
+      "location_ref": "zuldrak-p037",
+      "npc_name": "指挥官法斯塔夫",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12565,
+      "location_ref": "zuldrak-p037",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zuldrak-p037",
+      "target_name": "银色前沿",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "zuldrak-p037",
+      "target_name": "银色前沿",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p038",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12503,
+      "location_ref": "zuldrak-p038",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12740,
+      "location_ref": "zuldrak-p038",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p039",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12503,
+      "location_ref": "zuldrak-p039",
+      "npc_name": "指挥官法斯塔夫",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12740,
+      "location_ref": "zuldrak-p039",
+      "npc_name": "指挥官法斯塔夫",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12505,
+      "location_ref": "zuldrak-p039",
+      "npc_name": "指挥官库恩斯",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12596,
+      "location_ref": "zuldrak-p039",
+      "npc_name": "指挥官库恩斯",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12506,
+      "location_ref": "zuldrak-p039",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p040",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12557,
+      "location_ref": "zuldrak-p040",
+      "npc_name": "炼金师菲肯斯坦",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12799,
+      "location_ref": "zuldrak-p040",
+      "npc_name": "阿纳斯上尉",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12557,
+      "location_ref": "zuldrak-p040",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12557,
+      "location_ref": "zuldrak-p040",
+      "npc_name": "炼金师菲肯斯坦",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p041",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12799,
+      "location_ref": "zuldrak-p041",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p042",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12799,
+      "location_ref": "zuldrak-p042",
+      "npc_name": "阿纳斯上尉",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12609,
+      "location_ref": "zuldrak-p042",
+      "npc_name": "阿纳斯上尉",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12610,
+      "location_ref": "zuldrak-p042",
+      "npc_name": "阿纳斯上尉",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p043",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12609,
+      "location_ref": "zuldrak-p043",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p044",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12610,
+      "location_ref": "zuldrak-p044",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p045",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12609,
+      "location_ref": "zuldrak-p045",
+      "npc_name": "阿纳斯上尉",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12610,
+      "location_ref": "zuldrak-p045",
+      "npc_name": "阿纳斯上尉",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p046",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12505,
+      "location_ref": "zuldrak-p046",
+      "npc_name": "斯塔哈默中士",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12504,
+      "location_ref": "zuldrak-p046",
+      "npc_name": "斯塔哈默中士",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12508,
+      "location_ref": "zuldrak-p046",
+      "npc_name": "玛加下士",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12506,
+      "location_ref": "zuldrak-p046",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12504,
+      "location_ref": "zuldrak-p046",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12508,
+      "location_ref": "zuldrak-p046",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12507,
+      "location_ref": "zuldrak-p046",
+      "target_name": "奇怪的魔精",
+      "when": {
+        "kind": "has_item",
+        "item_name": "奇怪的魔精"
+      },
+      "action_id": "a0181"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12504,
+      "location_ref": "zuldrak-p046",
+      "npc_name": "斯塔哈默中士",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12508,
+      "location_ref": "zuldrak-p046",
+      "npc_name": "玛加下士",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p047",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12506,
+      "location_ref": "zuldrak-p047",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12507,
+      "location_ref": "zuldrak-p047",
+      "npc_name": "妖术师乌布戈",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12507
+      },
+      "action_id": "a0186"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12510,
+      "location_ref": "zuldrak-p047",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12562,
+      "location_ref": "zuldrak-p047",
+      "npc_name": "亚克斯中尉",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p048",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12599,
+      "location_ref": "zuldrak-p048",
+      "npc_name": "格隆迪尔上尉",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p049",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12597,
+      "location_ref": "zuldrak-p049",
+      "npc_name": "布兰顿上尉",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p050",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12597,
+      "location_ref": "zuldrak-p050",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12562,
+      "location_ref": "zuldrak-p050",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12510,
+      "location_ref": "zuldrak-p050",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p051",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12597,
+      "location_ref": "zuldrak-p051",
+      "npc_name": "布兰顿上尉",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p052",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12598,
+      "location_ref": "zuldrak-p052",
+      "npc_name": "鲁伯特上尉",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12512,
+      "location_ref": "zuldrak-p052",
+      "npc_name": "罗杰斯博士",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p053",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12598,
+      "location_ref": "zuldrak-p053",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p054",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12598,
+      "location_ref": "zuldrak-p054",
+      "npc_name": "鲁伯特上尉",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12606,
+      "location_ref": "zuldrak-p054",
+      "npc_name": "鲁伯特上尉",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12552,
+      "location_ref": "zuldrak-p054",
+      "npc_name": "穆尔沙·月影中士",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12553,
+      "location_ref": "zuldrak-p054",
+      "npc_name": "专家考格维尔",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p055",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12512,
+      "location_ref": "zuldrak-p055",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12606,
+      "location_ref": "zuldrak-p055",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p056",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12552,
+      "location_ref": "zuldrak-p056",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12553,
+      "location_ref": "zuldrak-p056",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p057",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12512,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "罗杰斯博士",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12606,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "鲁伯特上尉",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12552,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "穆尔沙·月影中士",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12554,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "穆尔沙·月影中士",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12553,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "专家考格维尔",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12583,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "专家考格维尔",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12584,
+      "location_ref": "zuldrak-p057",
+      "npc_name": "鲁伯特上尉",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p058",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12554,
+      "location_ref": "zuldrak-p058",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12583,
+      "location_ref": "zuldrak-p058",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12584,
+      "location_ref": "zuldrak-p058",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p059",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12554,
+      "location_ref": "zuldrak-p059",
+      "npc_name": "穆尔沙·月影中士",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12583,
+      "location_ref": "zuldrak-p059",
+      "npc_name": "专家考格维尔",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12555,
+      "location_ref": "zuldrak-p059",
+      "npc_name": "专家考格维尔",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p060",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12555,
+      "location_ref": "zuldrak-p060",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12555,
+      "location_ref": "zuldrak-p060",
+      "npc_name": "专家考格维尔",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p061",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12565,
+      "location_ref": "zuldrak-p061",
+      "target_name": "希姆埃巴",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zuldrak-p062",
+      "target_name": "银色前沿",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p062",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12562,
+      "location_ref": "zuldrak-p062",
+      "npc_name": "亚克斯中尉",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12510,
+      "location_ref": "zuldrak-p062",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12514,
+      "location_ref": "zuldrak-p062",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12584,
+      "location_ref": "zuldrak-p062",
+      "npc_name": "伊崔格",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12527,
+      "location_ref": "zuldrak-p062",
+      "npc_name": "学徒匹斯波特",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p063",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12514,
+      "location_ref": "zuldrak-p063",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12527,
+      "location_ref": "zuldrak-p063",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p064",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12599,
+      "location_ref": "zuldrak-p064",
+      "npc_name": "格隆迪尔上尉",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p065",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12514,
+      "location_ref": "zuldrak-p065",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12516,
+      "location_ref": "zuldrak-p065",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p066",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12527,
+      "location_ref": "zuldrak-p066",
+      "npc_name": "炼金师菲肯斯坦",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p067",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12516,
+      "location_ref": "zuldrak-p067",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p068",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12516,
+      "location_ref": "zuldrak-p068",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12623,
+      "location_ref": "zuldrak-p068",
+      "npc_name": "妖术师乌布戈",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12596,
+      "location_ref": "zuldrak-p068",
+      "npc_name": "指挥官库恩斯",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12974,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12932,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12932,
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12932,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "巨魔仆从伍迪",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12933,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12933,
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12933,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "巨魔仆从伍迪",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12934,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12934,
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12934,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "巨魔仆从伍迪",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12935,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0271"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12935,
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0272"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12935,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "巨魔仆从伍迪",
+      "action_id": "a0273"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12936,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0275"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12936,
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0276"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12936,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "巨魔仆从伍迪",
+      "action_id": "a0277"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12948,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "古尔戈索克",
+      "action_id": "a0278"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12948,
+      "location_ref": "zuldrak-p069",
+      "action_id": "a0279"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12948,
+      "location_ref": "zuldrak-p069",
+      "npc_name": "巨魔仆从伍迪",
+      "action_id": "a0280"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p072",
+      "action_id": "a0281"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12623,
+      "location_ref": "zuldrak-p072",
+      "npc_name": "巫医库弗",
+      "action_id": "a0282"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12615,
+      "location_ref": "zuldrak-p072",
+      "npc_name": "巫医库弗",
+      "action_id": "a0283"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12627,
+      "location_ref": "zuldrak-p072",
+      "npc_name": "巫医库弗",
+      "action_id": "a0284"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12622,
+      "location_ref": "zuldrak-p072",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0285"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13099,
+      "location_ref": "zuldrak-p072",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0286"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zuldrak-p072",
+      "target_name": "希姆托加",
+      "action_id": "a0287"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "zuldrak-p072",
+      "target_name": "希姆托加",
+      "action_id": "a0288"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p073",
+      "action_id": "a0289"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12627,
+      "location_ref": "zuldrak-p073",
+      "action_id": "a0290"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12622,
+      "location_ref": "zuldrak-p073",
+      "action_id": "a0291"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zuldrak-p074",
+      "target_name": "希姆托加",
+      "action_id": "a0293"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p074",
+      "action_id": "a0292"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12627,
+      "location_ref": "zuldrak-p074",
+      "npc_name": "巫医库弗",
+      "action_id": "a0294"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12628,
+      "location_ref": "zuldrak-p074",
+      "npc_name": "巫医库弗",
+      "action_id": "a0295"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12622,
+      "location_ref": "zuldrak-p074",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0296"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12640,
+      "location_ref": "zuldrak-p074",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0297"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12635,
+      "location_ref": "zuldrak-p074",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0298"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12639,
+      "location_ref": "zuldrak-p074",
+      "npc_name": "元素驯服者德苟达",
+      "action_id": "a0299"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12615,
+      "location_ref": "zuldrak-p074",
+      "target_name": "希姆托加",
+      "action_id": "a0300"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p075",
+      "action_id": "a0301"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12628,
+      "location_ref": "zuldrak-p075",
+      "npc_name": "哈克娅",
+      "action_id": "a0302"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12632,
+      "location_ref": "zuldrak-p075",
+      "npc_name": "哈克娅",
+      "action_id": "a0303"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p076",
+      "action_id": "a0304"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12635,
+      "location_ref": "zuldrak-p076",
+      "action_id": "a0305"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12632,
+      "location_ref": "zuldrak-p076",
+      "action_id": "a0306"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p077",
+      "action_id": "a0307"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12632,
+      "location_ref": "zuldrak-p077",
+      "npc_name": "哈克娅",
+      "action_id": "a0308"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12642,
+      "location_ref": "zuldrak-p077",
+      "npc_name": "哈克娅",
+      "action_id": "a0309"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p078",
+      "action_id": "a0310"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12635,
+      "location_ref": "zuldrak-p078",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0311"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12650,
+      "location_ref": "zuldrak-p078",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0312"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13549,
+      "location_ref": "zuldrak-p078",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0313"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12655,
+      "location_ref": "zuldrak-p078",
+      "npc_name": "巫医库弗",
+      "action_id": "a0314"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p079",
+      "action_id": "a0315"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12639,
+      "location_ref": "zuldrak-p079",
+      "action_id": "a0316"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12640,
+      "location_ref": "zuldrak-p079",
+      "action_id": "a0317"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12642,
+      "location_ref": "zuldrak-p079",
+      "npc_name": "伦诺克之魂",
+      "action_id": "a0318"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12646,
+      "location_ref": "zuldrak-p079",
+      "npc_name": "伦诺克之魂",
+      "action_id": "a0319"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12646,
+      "location_ref": "zuldrak-p079",
+      "action_id": "a0320"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12646,
+      "location_ref": "zuldrak-p079",
+      "npc_name": "伦诺克之魂",
+      "action_id": "a0321"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12647,
+      "location_ref": "zuldrak-p079",
+      "npc_name": "伦诺克之魂",
+      "action_id": "a0322"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12647,
+      "location_ref": "zuldrak-p079",
+      "action_id": "a0323"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12647,
+      "location_ref": "zuldrak-p079",
+      "npc_name": "伦诺克之魂",
+      "action_id": "a0324"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12653,
+      "location_ref": "zuldrak-p079",
+      "npc_name": "伦诺克之魂",
+      "action_id": "a0325"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12650,
+      "location_ref": "zuldrak-p079",
+      "action_id": "a0326"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12655,
+      "location_ref": "zuldrak-p079",
+      "target_name": "希姆鲁克",
+      "action_id": "a0327"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zuldrak-p080",
+      "target_name": "希姆托加",
+      "action_id": "a0329"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p080",
+      "action_id": "a0328"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p081",
+      "action_id": "a0330"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12639,
+      "location_ref": "zuldrak-p081",
+      "npc_name": "元素驯服者德苟达",
+      "action_id": "a0331"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12640,
+      "location_ref": "zuldrak-p081",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0333"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12662,
+      "location_ref": "zuldrak-p081",
+      "npc_name": "元素驯服者德苟达",
+      "action_id": "a0332"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12659,
+      "location_ref": "zuldrak-p081",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0334"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12650,
+      "location_ref": "zuldrak-p081",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0335"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p082",
+      "action_id": "a0336"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12659,
+      "location_ref": "zuldrak-p082",
+      "action_id": "a0337"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12662,
+      "location_ref": "zuldrak-p082",
+      "action_id": "a0338"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p083",
+      "action_id": "a0339"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12659,
+      "location_ref": "zuldrak-p083",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0340"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12662,
+      "location_ref": "zuldrak-p083",
+      "npc_name": "元素驯服者德苟达",
+      "action_id": "a0341"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p084",
+      "action_id": "a0342"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12653,
+      "location_ref": "zuldrak-p084",
+      "npc_name": "哈克娅",
+      "action_id": "a0343"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12665,
+      "location_ref": "zuldrak-p084",
+      "npc_name": "哈克娅",
+      "action_id": "a0344"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12665,
+      "location_ref": "zuldrak-p084",
+      "action_id": "a0345"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12665,
+      "location_ref": "zuldrak-p084",
+      "npc_name": "哈克娅",
+      "action_id": "a0346"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12666,
+      "location_ref": "zuldrak-p084",
+      "npc_name": "哈克娅",
+      "action_id": "a0347"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p085",
+      "action_id": "a0348"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12666,
+      "location_ref": "zuldrak-p085",
+      "action_id": "a0349"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12666,
+      "location_ref": "zuldrak-p085",
+      "npc_name": "哈克娅",
+      "action_id": "a0350"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12667,
+      "location_ref": "zuldrak-p085",
+      "npc_name": "哈克娅",
+      "action_id": "a0351"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p086",
+      "action_id": "a0352"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12667,
+      "location_ref": "zuldrak-p086",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0353"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12672,
+      "location_ref": "zuldrak-p086",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0354"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p087",
+      "action_id": "a0355"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12672,
+      "location_ref": "zuldrak-p087",
+      "action_id": "a0356"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12672,
+      "location_ref": "zuldrak-p087",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0357"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12668,
+      "location_ref": "zuldrak-p087",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0358"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p088",
+      "action_id": "a0359"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12668,
+      "location_ref": "zuldrak-p088",
+      "action_id": "a0360"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12668,
+      "location_ref": "zuldrak-p088",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0361"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12674,
+      "location_ref": "zuldrak-p088",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0362"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p089",
+      "action_id": "a0363"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12674,
+      "location_ref": "zuldrak-p089",
+      "action_id": "a0364"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13549,
+      "location_ref": "zuldrak-p089",
+      "action_id": "a0365"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12674,
+      "location_ref": "zuldrak-p089",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0366"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12675,
+      "location_ref": "zuldrak-p089",
+      "npc_name": "奎丝鲁恩之魂",
+      "action_id": "a0367"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p090",
+      "action_id": "a0368"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12675,
+      "location_ref": "zuldrak-p090",
+      "npc_name": "哈克娅",
+      "action_id": "a0369"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12684,
+      "location_ref": "zuldrak-p090",
+      "npc_name": "哈克娅",
+      "action_id": "a0370"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p091",
+      "action_id": "a0371"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12684,
+      "location_ref": "zuldrak-p091",
+      "action_id": "a0372"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p092",
+      "action_id": "a0373"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12684,
+      "location_ref": "zuldrak-p092",
+      "npc_name": "哈克娅",
+      "action_id": "a0374"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12685,
+      "location_ref": "zuldrak-p092",
+      "npc_name": "哈克娅",
+      "action_id": "a0375"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p093",
+      "action_id": "a0376"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12685,
+      "location_ref": "zuldrak-p093",
+      "action_id": "a0377"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zuldrak-p093",
+      "target_name": "希姆托加",
+      "action_id": "a0378"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p094",
+      "action_id": "a0379"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12685,
+      "location_ref": "zuldrak-p094",
+      "npc_name": "巫医库弗",
+      "action_id": "a0380"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13549,
+      "location_ref": "zuldrak-p094",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0381"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12707,
+      "location_ref": "zuldrak-p094",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0382"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12708,
+      "location_ref": "zuldrak-p094",
+      "npc_name": "元素驯服者德苟达",
+      "action_id": "a0383"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12709,
+      "location_ref": "zuldrak-p094",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0384"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12712,
+      "location_ref": "zuldrak-p094",
+      "npc_name": "哈克娅",
+      "action_id": "a0385"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p095",
+      "action_id": "a0386"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12707,
+      "location_ref": "zuldrak-p095",
+      "action_id": "a0387"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p096",
+      "action_id": "a0388"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12708,
+      "location_ref": "zuldrak-p096",
+      "action_id": "a0389"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12709,
+      "location_ref": "zuldrak-p096",
+      "action_id": "a0390"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12712,
+      "location_ref": "zuldrak-p096",
+      "action_id": "a0391"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p097",
+      "action_id": "a0392"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12707,
+      "location_ref": "zuldrak-p097",
+      "npc_name": "剥皮师埃霍奈",
+      "action_id": "a0393"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12708,
+      "location_ref": "zuldrak-p097",
+      "npc_name": "元素驯服者德苟达",
+      "action_id": "a0394"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12709,
+      "location_ref": "zuldrak-p097",
+      "npc_name": "记载者图基尼",
+      "action_id": "a0395"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12712,
+      "location_ref": "zuldrak-p097",
+      "npc_name": "哈克娅",
+      "action_id": "a0396"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12721,
+      "location_ref": "zuldrak-p097",
+      "npc_name": "哈克娅",
+      "action_id": "a0397"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p098",
+      "action_id": "a0398"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "zuldrak-p098",
+      "target_name": "古达克",
+      "action_id": "a0399"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13556,
+      "location_ref": "zuldrak-p098",
+      "npc_name": "哈瓦纳",
+      "action_id": "a0400"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p099",
+      "action_id": "a0401"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12721,
+      "location_ref": "zuldrak-p099",
+      "action_id": "a0402"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zuldrak-p099",
+      "target_name": "希姆托加",
+      "action_id": "a0403"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p100",
+      "action_id": "a0404"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12721,
+      "location_ref": "zuldrak-p100",
+      "npc_name": "巫医库弗",
+      "action_id": "a0405"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12729,
+      "location_ref": "zuldrak-p100",
+      "npc_name": "巫医库弗",
+      "action_id": "a0406"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p101",
+      "action_id": "a0407"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12729,
+      "location_ref": "zuldrak-p101",
+      "action_id": "a0408"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p102",
+      "action_id": "a0409"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12729,
+      "location_ref": "zuldrak-p102",
+      "action_id": "a0410"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p103",
+      "action_id": "a0411"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12729,
+      "location_ref": "zuldrak-p103",
+      "npc_name": "哈克娅",
+      "action_id": "a0412"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12730,
+      "location_ref": "zuldrak-p103",
+      "npc_name": "哈克娅",
+      "action_id": "a0413"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p104",
+      "action_id": "a0414"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12730,
+      "location_ref": "zuldrak-p104",
+      "action_id": "a0415"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p105",
+      "action_id": "a0416"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12730,
+      "location_ref": "zuldrak-p105",
+      "npc_name": "哈克娅",
+      "action_id": "a0417"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13097,
+      "location_ref": "zuldrak-p105",
+      "npc_name": "哈克娅",
+      "action_id": "a0418"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p106",
+      "action_id": "a0419"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13556,
+      "location_ref": "zuldrak-p106",
+      "action_id": "a0420"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p107",
+      "action_id": "a0421"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13097,
+      "location_ref": "zuldrak-p107",
+      "npc_name": "托玛尔",
+      "action_id": "a0422"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13099,
+      "location_ref": "zuldrak-p107",
+      "npc_name": "记载者拜基妮",
+      "action_id": "a0423"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zuldrak-p108",
+      "action_id": "a0424"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13556,
+      "location_ref": "zuldrak-p108",
+      "npc_name": "哈瓦纳",
+      "action_id": "a0425"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "圣光据点 → 怒爪巢穴 → 圣光据点",
+      "summary": null,
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "北伐军前线 → 三名失踪者 → 盖米尔",
+      "summary": null,
+      "action_ids": [
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "黑锋哨站 → 纳斯 → 无处可藏",
+      "summary": null,
+      "action_ids": [
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054",
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "骨肠 → 盖米尔 → 沃尔塔鲁斯",
+      "summary": null,
+      "action_ids": [
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "黑暗的地平线 → 官大一级压死人",
+      "summary": null,
+      "action_ids": [
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "transport-pain-voltarus-12673",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "transport-voltarus-pain-12669",
+        "a0106",
+        "a0105",
+        "a0107",
+        "a0108",
+        "a0109"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "危险的材料 → 真相大白 / 爆破",
+      "summary": null,
+      "action_ids": [
+        "transport-pain-voltarus-12677",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "transport-voltarus-pain-12677",
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118",
+        "transport-pain-voltarus-12690",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "visit-p033-post-cycle",
+        "a0126",
+        "a0127",
+        "transport-upper-pain-12676",
+        "a0129",
+        "a0128"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "背叛 → 痛苦之匣",
+      "summary": null,
+      "action_ids": [
+        "a0130",
+        "a0131",
+        "a0132",
+        "transport-pain-voltarus-12713",
+        "visit-p035-drakuru",
+        "interact-drakuru-top",
+        "transport-drakuru-top",
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "银色前沿：接任务 / 庭院 / 接后续",
+      "summary": null,
+      "action_ids": [
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "赫布瓦罗 → 扎尔金之池 → 腐液 / 蝙蝠",
+      "summary": null,
+      "action_ids": [
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165",
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "赫布瓦罗交付 → 西莱图斯 → 银色前沿",
+      "summary": null,
+      "action_ids": [
+        "a0171",
+        "a0172",
+        "a0173",
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "达克迦尔 → 布兰顿 → 鲁伯特 / 蛛魔弹坑",
+      "summary": null,
+      "action_ids": [
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0203",
+        "a0204",
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "蛛魔救援区 → 达克索塔北侧 → 希姆埃巴",
+      "summary": null,
+      "action_ids": [
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217",
+        "a0218",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0223",
+        "a0224",
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "炉石银色前沿 → 蘑菇 / 蜥蜴 → 巡逻任务",
+      "summary": null,
+      "action_ids": [
+        "a0237",
+        "a0236",
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "痛苦斗兽场：伊戈达斯 → 海象人",
+      "summary": null,
+      "action_ids": [
+        "a0259",
+        "a0260",
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271",
+        "a0272",
+        "a0273"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "痛苦斗兽场：科尔拉克 / 冠军 → 希姆托加",
+      "summary": null,
+      "action_ids": [
+        "a0275",
+        "a0276",
+        "a0277",
+        "a0278",
+        "a0279",
+        "a0280",
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289",
+        "a0290",
+        "a0291"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "希姆托加：金亚莱交任务 / 神灵链",
+      "summary": null,
+      "action_ids": [
+        "a0293",
+        "a0292",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298",
+        "a0299",
+        "a0300"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "哈克娅 → 伦诺克完整链",
+      "summary": null,
+      "action_ids": [
+        "a0301",
+        "a0302",
+        "a0303",
+        "a0304",
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308",
+        "a0309",
+        "a0310",
+        "a0311",
+        "a0312",
+        "a0313",
+        "a0314",
+        "a0315",
+        "a0316",
+        "a0317",
+        "a0318",
+        "a0319",
+        "a0320",
+        "a0321",
+        "a0322",
+        "a0323",
+        "a0324",
+        "a0325",
+        "a0326",
+        "a0327",
+        "a0329",
+        "a0328"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "希姆托加 → 赫布达卡 → 哈克娅",
+      "summary": null,
+      "action_ids": [
+        "a0330",
+        "a0331",
+        "a0333",
+        "a0332",
+        "a0334",
+        "a0335",
+        "a0336",
+        "a0337",
+        "a0338",
+        "a0339",
+        "a0340",
+        "a0341",
+        "a0342",
+        "a0343",
+        "a0344",
+        "a0345",
+        "a0346",
+        "a0347",
+        "a0348",
+        "a0349",
+        "a0350",
+        "a0351"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "奎丝鲁恩 → 哈克娅 → 炉石希姆托加",
+      "summary": null,
+      "action_ids": [
+        "a0352",
+        "a0353",
+        "a0354",
+        "a0355",
+        "a0356",
+        "a0357",
+        "a0358",
+        "a0359",
+        "a0360",
+        "a0361",
+        "a0362",
+        "a0363",
+        "a0364",
+        "a0365",
+        "a0366",
+        "a0367",
+        "a0368",
+        "a0369",
+        "a0370",
+        "a0371",
+        "a0372",
+        "a0373",
+        "a0374",
+        "a0375",
+        "a0376",
+        "a0377",
+        "a0378"
+      ]
+    },
+    {
+      "step_id": "step-20",
+      "title": "希姆托加 → 犸托斯 / 佐尔玛兹",
+      "summary": null,
+      "action_ids": [
+        "a0379",
+        "a0380",
+        "a0381",
+        "a0382",
+        "a0383",
+        "a0384",
+        "a0385",
+        "a0386",
+        "a0387",
+        "a0388",
+        "a0389",
+        "a0390",
+        "a0391"
+      ]
+    },
+    {
+      "step_id": "step-21",
+      "title": "希姆托加 → 古达克 → 阿卡里",
+      "summary": null,
+      "action_ids": [
+        "a0392",
+        "a0393",
+        "a0394",
+        "a0395",
+        "a0396",
+        "a0397",
+        "a0398",
+        "a0399",
+        "a0400",
+        "a0401",
+        "a0402",
+        "a0403",
+        "a0404",
+        "a0405",
+        "a0406"
+      ]
+    },
+    {
+      "step_id": "step-22",
+      "title": "诸神的指引 → 古达克 / 希姆托加",
+      "summary": null,
+      "action_ids": [
+        "a0407",
+        "a0408",
+        "a0409",
+        "a0410",
+        "a0411",
+        "a0412",
+        "a0413",
+        "a0414",
+        "a0415",
+        "a0416",
+        "a0417",
+        "a0418"
+      ]
+    },
+    {
+      "step_id": "step-23",
+      "title": "迅猛龙卵 → 杜布拉金",
+      "summary": null,
+      "action_ids": [
+        "a0419",
+        "a0420",
+        "a0421",
+        "a0422",
+        "a0423",
+        "a0424",
+        "a0425"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "zuldrak-p001": {
+        "display_name": "圣光据点",
+        "x": 32.0,
+        "y": 74.4,
+        "phase": "light",
+        "transport": "crossmap"
+      },
+      "zuldrak-p002": {
+        "display_name": "圣光据点",
+        "x": 32.2,
+        "y": 75.7,
+        "phase": "light",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p003": {
+        "display_name": "怒爪巢穴",
+        "x": 35.0,
+        "y": 83.0,
+        "phase": "rageclaw",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p004": {
+        "display_name": "圣光据点",
+        "x": 32.2,
+        "y": 75.7,
+        "phase": "light",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p005": {
+        "display_name": "北伐军前线营地",
+        "x": 25.3,
+        "y": 64.0,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p006": {
+        "display_name": "北伐军战士达加斯",
+        "x": 25.0,
+        "y": 51.6,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p007": {
+        "display_name": "戈尔克",
+        "x": 17.6,
+        "y": 57.5,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p008": {
+        "display_name": "布尔",
+        "x": 15.7,
+        "y": 59.4,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p009": {
+        "display_name": "盖米尔囚笼",
+        "x": 19.9,
+        "y": 56.2,
+        "phase": "gymer",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p010": {
+        "display_name": "北伐军前线营地",
+        "x": 25.3,
+        "y": 64.0,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p011": {
+        "display_name": "北伐军前线周边",
+        "x": 25.9,
+        "y": 60.4,
+        "phase": "gymer",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p012": {
+        "display_name": "黑锋哨站",
+        "x": 14.1,
+        "y": 73.8,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p013": {
+        "display_name": "黑锋哨站入口",
+        "x": 13.3,
+        "y": 74.8,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p014": {
+        "display_name": "干瘪巨魔",
+        "x": 17.9,
+        "y": 69.9,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p015": {
+        "display_name": "黑锋哨站",
+        "x": 14.1,
+        "y": 73.8,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p016": {
+        "display_name": "血玫瑰达图拉",
+        "x": 14.3,
+        "y": 74.0,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p017": {
+        "display_name": "黑锋哨站",
+        "x": 14.1,
+        "y": 73.8,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p018": {
+        "display_name": "痛苦之匣下层",
+        "x": 21.0,
+        "y": 76.7,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p019": {
+        "display_name": "黑锋哨站",
+        "x": 14.1,
+        "y": 73.8,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p020": {
+        "display_name": "骨肠",
+        "x": 19.9,
+        "y": 75.5,
+        "phase": "ebon",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p021": {
+        "display_name": "黑锋哨站",
+        "x": 14.2,
+        "y": 73.9,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p022": {
+        "display_name": "北伐军前线营地",
+        "x": 25.3,
+        "y": 64.0,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p023": {
+        "display_name": "盖米尔囚笼",
+        "x": 19.9,
+        "y": 56.2,
+        "phase": "gymer",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p024": {
+        "display_name": "盖米尔载具",
+        "x": 26.7,
+        "y": 57.3,
+        "phase": "gymer",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p025": {
+        "display_name": "北伐军前线营地",
+        "x": 25.3,
+        "y": 64.0,
+        "phase": "forward",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p026": {
+        "display_name": "黑锋哨站",
+        "x": 14.1,
+        "y": 73.8,
+        "phase": "ebon",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p027": {
+        "display_name": "沃尔塔鲁斯·达库鲁 / 高尔巴格",
+        "x": 28.4,
+        "y": 44.9,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0090"
+        }
+      },
+      "zuldrak-p028": {
+        "display_name": "痛苦之匣",
+        "x": 28.4,
+        "y": 44.9,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0096"
+        }
+      },
+      "zuldrak-p029": {
+        "display_name": "沃尔塔鲁斯·达库鲁 / 荒芜恶鬼",
+        "x": 27.1,
+        "y": 46.2,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-pain-voltarus-12673"
+        }
+      },
+      "zuldrak-p030": {
+        "display_name": "痛苦之匣",
+        "x": 28.4,
+        "y": 44.9,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-voltarus-pain-12669"
+        }
+      },
+      "zuldrak-p031": {
+        "display_name": "沃尔塔鲁斯·达穆克 / 荒芜水晶",
+        "x": 30.0,
+        "y": 48.5,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-pain-voltarus-12677"
+        }
+      },
+      "zuldrak-p032": {
+        "display_name": "痛苦之匣",
+        "x": 28.4,
+        "y": 44.9,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-voltarus-pain-12677"
+        }
+      },
+      "zuldrak-p033": {
+        "display_name": "沃尔塔鲁斯·裂颅者 / 达库鲁",
+        "x": 29.0,
+        "y": 46.0,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-pain-voltarus-12690"
+        }
+      },
+      "zuldrak-p034": {
+        "display_name": "痛苦之匣",
+        "x": 28.4,
+        "y": 44.9,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-upper-pain-12676"
+        }
+      },
+      "zuldrak-p035": {
+        "display_name": "沃尔塔鲁斯顶部·达库鲁",
+        "x": 28.63,
+        "y": 44.54,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-drakuru-top"
+        }
+      },
+      "zuldrak-p036": {
+        "display_name": "痛苦之匣",
+        "x": 28.4,
+        "y": 44.9,
+        "phase": "voltarus",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0136"
+        }
+      },
+      "zuldrak-p037": {
+        "display_name": "银色前沿",
+        "x": 39.4,
+        "y": 67.0,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p038": {
+        "display_name": "银色前沿庭院",
+        "x": 37.4,
+        "y": 66.5,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p039": {
+        "display_name": "银色前沿",
+        "x": 39.8,
+        "y": 66.2,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p040": {
+        "display_name": "赫布瓦罗岗哨",
+        "x": 35.2,
+        "y": 52.2,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p041": {
+        "display_name": "扎尔金之池",
+        "x": 39.1,
+        "y": 61.1,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p042": {
+        "display_name": "赫布瓦罗岗哨",
+        "x": 35.6,
+        "y": 52.2,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p043": {
+        "display_name": "暗门爬行者",
+        "x": 41.7,
+        "y": 50.7,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p044": {
+        "display_name": "西莱图斯东北",
+        "x": 44.8,
+        "y": 43.4,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p045": {
+        "display_name": "赫布瓦罗岗哨",
+        "x": 35.6,
+        "y": 52.2,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p046": {
+        "display_name": "西莱图斯祭坛",
+        "x": 40.4,
+        "y": 48.3,
+        "phase": "sseratus",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p047": {
+        "display_name": "银色前沿",
+        "x": 40.5,
+        "y": 65.6,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p048": {
+        "display_name": "达克迦尔岗哨",
+        "x": 48.2,
+        "y": 63.9,
+        "phase": "patrol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p049": {
+        "display_name": "达克索塔西侧",
+        "x": 48.8,
+        "y": 78.9,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p050": {
+        "display_name": "水罂粟 / 水元素走廊",
+        "x": 42.7,
+        "y": 78.3,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p051": {
+        "display_name": "达克索塔西侧",
+        "x": 48.8,
+        "y": 78.9,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p052": {
+        "display_name": "达克索塔东侧",
+        "x": 58.2,
+        "y": 72.4,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p053": {
+        "display_name": "蛛魔弹坑",
+        "x": 54.2,
+        "y": 69.1,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p054": {
+        "display_name": "达克索塔东侧",
+        "x": 58.2,
+        "y": 72.4,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p055": {
+        "display_name": "蛛魔救援区",
+        "x": 53.8,
+        "y": 70.5,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p056": {
+        "display_name": "哈沙尔",
+        "x": 58.5,
+        "y": 79.5,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p057": {
+        "display_name": "达克索塔东侧",
+        "x": 58.2,
+        "y": 72.4,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p058": {
+        "display_name": "达克索塔北侧",
+        "x": 58.0,
+        "y": 78.0,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p059": {
+        "display_name": "达克索塔东侧",
+        "x": 58.2,
+        "y": 72.4,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p060": {
+        "display_name": "药剂喷射器",
+        "x": 57.4,
+        "y": 80.8,
+        "phase": "draksotra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p061": {
+        "display_name": "希姆埃巴雕像",
+        "x": 36.7,
+        "y": 72.8,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p062": {
+        "display_name": "银色前沿",
+        "x": 40.5,
+        "y": 65.8,
+        "phase": "argent",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0237"
+        }
+      },
+      "zuldrak-p063": {
+        "display_name": "银色前沿东北",
+        "x": 43.7,
+        "y": 60.6,
+        "phase": "patrol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p064": {
+        "display_name": "达克迦尔岗哨",
+        "x": 48.2,
+        "y": 63.9,
+        "phase": "patrol",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p065": {
+        "display_name": "银色前沿",
+        "x": 40.5,
+        "y": 65.6,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p066": {
+        "display_name": "赫布瓦罗岗哨",
+        "x": 35.2,
+        "y": 52.2,
+        "phase": "hebvalok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p067": {
+        "display_name": "西莱图斯先知",
+        "x": 40.5,
+        "y": 42.5,
+        "phase": "sseratus",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p068": {
+        "display_name": "银色前沿",
+        "x": 40.5,
+        "y": 65.8,
+        "phase": "argent",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p069": {
+        "display_name": "痛苦斗兽场·伊戈达斯 / 猛犸人",
+        "x": 48.4,
+        "y": 56.4,
+        "phase": "arena",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p072": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p073": {
+        "display_name": "金亚莱",
+        "x": 57.5,
+        "y": 63.5,
+        "phase": "jinalai",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p074": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0293"
+        }
+      },
+      "zuldrak-p075": {
+        "display_name": "哈克娅祭坛",
+        "x": 63.7,
+        "y": 70.4,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p076": {
+        "display_name": "哈克娅之爪",
+        "x": 63.0,
+        "y": 73.5,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p077": {
+        "display_name": "哈克娅祭坛",
+        "x": 63.7,
+        "y": 70.4,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p078": {
+        "display_name": "希姆托加",
+        "x": 59.8,
+        "y": 57.8,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p079": {
+        "display_name": "伦诺克祭坛 / 希姆鲁克雕像",
+        "x": 56.0,
+        "y": 46.0,
+        "phase": "rhunok",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p080": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0329"
+        }
+      },
+      "zuldrak-p081": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p082": {
+        "display_name": "赫布达卡",
+        "x": 64.3,
+        "y": 52.5,
+        "phase": "hebdrakkar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p083": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p084": {
+        "display_name": "哈克娅祭坛",
+        "x": 63.7,
+        "y": 70.4,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p085": {
+        "display_name": "哈克娅之爪",
+        "x": 62.9,
+        "y": 74.2,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p086": {
+        "display_name": "奎丝鲁恩之魂",
+        "x": 75.4,
+        "y": 58.6,
+        "phase": "quetzlun",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p087": {
+        "display_name": "奎丝鲁恩",
+        "x": 73.8,
+        "y": 59.5,
+        "phase": "quetzlun",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p088": {
+        "display_name": "奎丝鲁恩",
+        "x": 74.0,
+        "y": 58.8,
+        "phase": "quetzlun",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p089": {
+        "display_name": "奎丝鲁恩三名高阶祭司",
+        "x": 74.5,
+        "y": 58.0,
+        "phase": "quetzlun",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p090": {
+        "display_name": "哈克娅祭坛",
+        "x": 63.7,
+        "y": 70.4,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p091": {
+        "display_name": "犸托斯祭坛",
+        "x": 74.8,
+        "y": 49.6,
+        "phase": "mamtoth",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p092": {
+        "display_name": "哈克娅祭坛",
+        "x": 63.7,
+        "y": 70.4,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p093": {
+        "display_name": "虚弱的奎丝鲁恩先知",
+        "x": 75.5,
+        "y": 58.6,
+        "phase": "quetzlun",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p094": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0378"
+        }
+      },
+      "zuldrak-p095": {
+        "display_name": "犸托斯",
+        "x": 73.7,
+        "y": 42.2,
+        "phase": "mamtoth",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p096": {
+        "display_name": "佐尔玛兹要塞",
+        "x": 67.0,
+        "y": 34.0,
+        "phase": "zolmaz",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p097": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p098": {
+        "display_name": "古达克飞行点 / 杜布拉金",
+        "x": 70.5,
+        "y": 23.2,
+        "phase": "north",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p099": {
+        "display_name": "阿卡里",
+        "x": 78.6,
+        "y": 25.0,
+        "phase": "north",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p100": {
+        "display_name": "希姆托加",
+        "x": 59.5,
+        "y": 58.0,
+        "phase": "zimtorga",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0403"
+        }
+      },
+      "zuldrak-p101": {
+        "display_name": "希姆鲁克守卫者",
+        "x": 59.5,
+        "y": 44.2,
+        "phase": "guidance",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p102": {
+        "display_name": "奎丝鲁恩祭坛典狱官",
+        "x": 73.5,
+        "y": 59.2,
+        "phase": "guidance",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p103": {
+        "display_name": "哈克娅",
+        "x": 63.7,
+        "y": 70.4,
+        "phase": "harkoa",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p104": {
+        "display_name": "佐尔赫布召唤圈",
+        "x": 77.6,
+        "y": 36.7,
+        "phase": "north",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p105": {
+        "display_name": "希姆托加",
+        "x": 59.8,
+        "y": 57.8,
+        "phase": "zimtorga",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p106": {
+        "display_name": "古达克迅猛龙卵",
+        "x": 76.9,
+        "y": 28.4,
+        "phase": "dubrajin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p107": {
+        "display_name": "杜布拉金",
+        "x": 70.1,
+        "y": 21.0,
+        "phase": "dubrajin",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p108": {
+        "display_name": "杜布拉金",
+        "x": 70.0,
+        "y": 21.0,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zuldrak-p033-post-cycle": {
+        "display_name": "沃尔塔鲁斯·上层密室（发霉的棺材）",
+        "x": 27.23,
+        "y": 42.3,
+        "zone_id": 66,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0125"
+        }
+      },
+      "zuldrak-p035-drakuru": {
+        "display_name": "沃尔塔鲁斯·达库鲁",
+        "x": 27.07,
+        "y": 46.16,
+        "zone_id": 66,
+        "phase": "voltarus",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "transport-pain-voltarus-12713"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity migration for Zuldrak Task 12710 window: preserve the old player-visible compound fixed-transport sentence as one atomic action (Voltarus -> upper chamber -> Pain Box -> upper chamber), then place the task actions at an explicit post-cycle upper-chamber visit. No intermediate geometry is invented."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: removed reviewed legacy special transport styles from Zuldrak Bonegut/Gymer/arena/prophet/Mamthoth/Akari target points. Old player text contains task/vehicle phases or outgoing hearth instructions, not special arrival operations; explicit actions remain and unproven arrivals stay unresolved."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "architecture_migration",
+      "summary": "Rebuilt the Voltarus/Reliquary of Pain chain from old player text, Task Cards, Questie coordinates, and WotLK portal mechanics. Repeated Pain Box->Voltarus entries use the transfer platform while disguised; Voltarus exits return to Pain Box. Task 12710 uses the Musty Coffin upper-chamber anchor (27.23,42.30), then returns to Pain Box before Sabotage. Betrayal explicitly re-enters Voltarus, talks to Drakuru for the top transport, fights at the Last Wish anchor (28.63,44.54), then uses the Last Wish to return to Pain Box. Step-06 now ends only after Sabotage at Pain Box; step-07 begins with Stefan handoff."
+    }
+  ]
+}

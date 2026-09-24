@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": 13007,
+  "identity": {
+    "name_zhcn": "钢铁巨像",
+    "name_en": "The Iron Colossus",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 80,
+    "min_level": 77,
+    "pre_any": [
+      12998
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 222000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 43203,
+        "quantity": 1,
+        "name_zhcn": "钢铁巨像腿铠",
+        "name_en": "Iron Colossus Legplates",
+        "sell_price_each_copper": 93309,
+        "sell_price_total_copper": 93309
+      },
+      {
+        "item_id": 43202,
+        "quantity": 1,
+        "name_zhcn": "冰虫外皮护腿",
+        "name_en": "Jormungar Hide Legguards",
+        "sell_price_each_copper": 79700,
+        "sell_price_total_copper": 79700
+      },
+      {
+        "item_id": 43201,
+        "quantity": 1,
+        "name_zhcn": "强化复兴护腿",
+        "name_en": "Leggings of Heightened Renewal",
+        "sell_price_each_copper": 66178,
+        "sell_price_total_copper": 66178
+      },
+      {
+        "item_id": 43200,
+        "quantity": 1,
+        "name_zhcn": "雪流长裤",
+        "name_en": "Snowdrift Pantaloons",
+        "sell_price_each_copper": 52752,
+        "sell_price_total_copper": 52752
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 93309,
+    "gear_sale_max_copper": 93309,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 33100
+  },
+  "guide": [
+    "接取：塑石者布德克拉格。",
+    "使用被驯服的冰虫击败钢铁巨像，然后回到布德克拉格庇护所，向塑石者布德克拉格复命。",
+    "交付：塑石者布德克拉格。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=13007",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《钢铁巨像》：五号一起骑被驯服的冰虫打钢铁巨像更稳；单号容易翻车。不要下坐骑直接硬打。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

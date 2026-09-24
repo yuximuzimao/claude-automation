@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "task_id": 11980,
+  "identity": {
+    "name_zhcn": "部落的荣耀",
+    "name_en": "Pride of the Horde",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38110,
+        "quantity": 1,
+        "name_zhcn": "阿格玛保卫者腿铠",
+        "name_en": "Legplates of the Agmar Preserver",
+        "sell_price_each_copper": 62459,
+        "sell_price_total_copper": 62459
+      },
+      {
+        "item_id": 38048,
+        "quantity": 1,
+        "name_zhcn": "灼烧甲壳胸铠",
+        "name_en": "Breastplate of Sizzling Chitin",
+        "sell_price_each_copper": 57183,
+        "sell_price_total_copper": 57183
+      },
+      {
+        "item_id": 38081,
+        "quantity": 1,
+        "name_zhcn": "伊萨诺斯甲虫",
+        "name_en": "Scarab of Isanoth",
+        "sell_price_each_copper": 49964,
+        "sell_price_total_copper": 49964
+      },
+      {
+        "item_id": 38006,
+        "quantity": 1,
+        "name_zhcn": "林地游荡者腰带",
+        "name_en": "Glade Wanderer Belt",
+        "sell_price_each_copper": 23062,
+        "sell_price_total_copper": 23062
+      },
+      {
+        "item_id": 37964,
+        "quantity": 1,
+        "name_zhcn": "蜘蛛卫士护腕",
+        "name_en": "Spiderwarder Braces",
+        "sell_price_each_copper": 18320,
+        "sell_price_total_copper": 18320
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 62459,
+    "gear_sale_max_copper": 62459,
+    "reputation_rewards": [
+      {
+        "faction_id": 1085,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：血卫士洛恩基尔。",
+    "龙骨荒野西风避难营的血卫士洛恩基尔要求你消灭15只阿努巴尔伏击者。",
+    "交付：血卫士洛恩基尔。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11980",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

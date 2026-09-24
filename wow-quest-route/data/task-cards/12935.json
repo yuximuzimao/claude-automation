@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "task_id": 12935,
+  "identity": {
+    "name_zhcn": "痛苦斗兽场：海象人的末日！",
+    "name_en": "The Amphitheater of Anguish: Tuskarrmageddon!",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 75,
+    "pre_any": [
+      12934
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 195000,
+    "fixed_items": [
+      {
+        "item_id": 33447,
+        "quantity": 5,
+        "name_zhcn": "符文治疗药水",
+        "name_en": "Runic Healing Potion",
+        "sell_price_each_copper": 6000,
+        "sell_price_total_copper": 30000
+      },
+      {
+        "item_id": 33448,
+        "quantity": 5,
+        "name_zhcn": "符文法力药水",
+        "name_en": "Runic Mana Potion",
+        "sell_price_each_copper": 6000,
+        "sell_price_total_copper": 30000
+      },
+      {
+        "item_id": 34722,
+        "quantity": 20,
+        "name_zhcn": "厚霜纹布绷带",
+        "name_en": "Heavy Frostweave Bandage",
+        "sell_price_each_copper": 2500,
+        "sell_price_total_copper": 50000
+      }
+    ],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 110000,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 110000,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 32100
+  },
+  "guide": [
+    "接取：古尔戈索克。",
+    "进入痛苦斗兽场，击败奥里努克·碎牙！回到巨魔仆从伍迪那里领取你的奖励。",
+    "交付：巨魔仆从伍迪。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12935",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《痛苦斗兽场：海象人的末日！》：会招来企鹅和宠物海狮；主控用群攻接住小怪，继续集中打海象人。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

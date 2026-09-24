@@ -1,0 +1,667 @@
+{
+  "display": {
+    "display_name": "达拉然",
+    "footer": "",
+    "map_image": "maps/4395-dalaran.png",
+    "order": 6,
+    "publish_key": "dalaran",
+    "subtitle": "龙骨整图完成后进入达拉然：清完本地入城链，一次接走风暴/索拉查/祖达克三条当前可接主轴引导，然后下城去K3；《作战准备》要求寒冷天气飞行，本路线不接。",
+    "title": "达拉然 · 77级主轴任务清理"
+  },
+  "hearth_chain": [
+    "阿格玛之锤"
+  ],
+  "input_fingerprint": "cc67c24cf0ad7c4b0806bde7d7dbca8a6bbf2cc7e85fc8668dd5b5fefa47fd3b",
+  "issues": [],
+  "kind": "route_display",
+  "map_geometry": {
+    "edges": [
+      {
+        "edge_id": "a0001->a0004",
+        "from_location_ref": "dalaran-p001",
+        "from_visit_id": "a0001",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p002",
+        "to_visit_id": "a0004"
+      },
+      {
+        "edge_id": "a0004->visit-12790-violet-stand",
+        "from_location_ref": "dalaran-p002",
+        "from_visit_id": "a0004",
+        "movement_action_id": "transport-12790-down",
+        "movement_mode": null,
+        "operation_kind": "fixed_transport",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-12790-violet-stand",
+        "to_visit_id": "visit-12790-violet-stand"
+      },
+      {
+        "edge_id": "visit-12790-violet-stand->a0006",
+        "from_location_ref": "dalaran-12790-violet-stand",
+        "from_visit_id": "visit-12790-violet-stand",
+        "movement_action_id": "transport-12790-up",
+        "movement_mode": null,
+        "operation_kind": "fixed_transport",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p003",
+        "to_visit_id": "a0006"
+      },
+      {
+        "edge_id": "a0006->a0008",
+        "from_location_ref": "dalaran-p003",
+        "from_visit_id": "a0006",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p004",
+        "to_visit_id": "a0008"
+      },
+      {
+        "edge_id": "a0008->a0010",
+        "from_location_ref": "dalaran-p004",
+        "from_visit_id": "a0008",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p005",
+        "to_visit_id": "a0010"
+      },
+      {
+        "edge_id": "a0010->a0012",
+        "from_location_ref": "dalaran-p005",
+        "from_visit_id": "a0010",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p006",
+        "to_visit_id": "a0012"
+      },
+      {
+        "edge_id": "a0012->a0014",
+        "from_location_ref": "dalaran-p006",
+        "from_visit_id": "a0012",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p007",
+        "to_visit_id": "a0014"
+      },
+      {
+        "edge_id": "a0014->a0016",
+        "from_location_ref": "dalaran-p007",
+        "from_visit_id": "a0014",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-p008",
+        "to_visit_id": "a0016"
+      },
+      {
+        "edge_id": "a0016->visit-violet-stand",
+        "from_location_ref": "dalaran-p008",
+        "from_visit_id": "a0016",
+        "movement_action_id": "a0018",
+        "movement_mode": null,
+        "operation_kind": "fixed_transport",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-exit-violet-stand",
+        "to_visit_id": "visit-violet-stand"
+      },
+      {
+        "edge_id": "visit-violet-stand->visit-k3-handoff",
+        "from_location_ref": "dalaran-exit-violet-stand",
+        "from_visit_id": "visit-violet-stand",
+        "movement_action_id": "move-violet-stand-k3",
+        "movement_mode": "ride",
+        "operation_kind": "move",
+        "source": "canonical_profile",
+        "to_location_ref": "dalaran-exit-k3",
+        "to_visit_id": "visit-k3-handoff"
+      }
+    ],
+    "input_fingerprint": "3cdcb4a0f1d0449a9dd3f7fd35e050416b59d800a83e73cc99824c20a15bee5e",
+    "status": "pass",
+    "visits": [
+      {
+        "display_name": "紫罗兰之门·大法师塞琳德拉",
+        "location_ref": "dalaran-p001",
+        "location_role": "map_anchor",
+        "ordinal": 1,
+        "step_id": "step-01",
+        "visit_id": "a0001",
+        "x": 56.3,
+        "y": 46.72
+      },
+      {
+        "display_name": "紫罗兰之门·传送水晶",
+        "location_ref": "dalaran-p002",
+        "location_role": "map_anchor",
+        "ordinal": 2,
+        "step_id": "step-01",
+        "visit_id": "a0004",
+        "x": 55.93,
+        "y": 46.78
+      },
+      {
+        "display_name": "紫罗兰哨站·回城水晶",
+        "location_ref": "dalaran-12790-violet-stand",
+        "location_role": "map_anchor",
+        "ordinal": 3,
+        "step_id": "step-01",
+        "visit_id": "visit-12790-violet-stand",
+        "x": 15.0,
+        "y": 42.0
+      },
+      {
+        "display_name": "紫罗兰之门·大法师塞琳德拉",
+        "location_ref": "dalaran-p003",
+        "location_role": "map_anchor",
+        "ordinal": 4,
+        "step_id": "step-01",
+        "visit_id": "a0006",
+        "x": 56.3,
+        "y": 46.72
+      },
+      {
+        "display_name": "克拉苏斯平台西侧·大法师伯塔鲁斯",
+        "location_ref": "dalaran-p004",
+        "location_role": "map_anchor",
+        "ordinal": 5,
+        "step_id": "step-02",
+        "visit_id": "a0008",
+        "x": 68.55,
+        "y": 42.05
+      },
+      {
+        "display_name": "克拉苏斯平台·飞行点",
+        "location_ref": "dalaran-p005",
+        "location_role": "map_anchor",
+        "ordinal": 6,
+        "step_id": "step-02",
+        "visit_id": "a0010",
+        "x": 72.0,
+        "y": 46.0
+      },
+      {
+        "display_name": "达拉然下水道·狡猾的维克斯",
+        "location_ref": "dalaran-p006",
+        "location_role": "map_anchor",
+        "ordinal": 7,
+        "step_id": "step-03",
+        "visit_id": "a0012",
+        "x": 48.18,
+        "y": 44.71
+      },
+      {
+        "display_name": "达拉然下水道·林·多克塔",
+        "location_ref": "dalaran-p007",
+        "location_role": "map_anchor",
+        "ordinal": 8,
+        "step_id": "step-03",
+        "visit_id": "a0014",
+        "x": 37.68,
+        "y": 50.17
+      },
+      {
+        "display_name": "紫罗兰之门·传送水晶",
+        "location_ref": "dalaran-p008",
+        "location_role": "map_anchor",
+        "ordinal": 9,
+        "step_id": "step-04",
+        "visit_id": "a0016",
+        "x": 55.93,
+        "y": 46.78
+      },
+      {
+        "display_name": "紫罗兰哨站",
+        "location_ref": "dalaran-exit-violet-stand",
+        "location_role": "map_anchor",
+        "ordinal": 10,
+        "step_id": "step-04",
+        "visit_id": "visit-violet-stand",
+        "x": 15.0,
+        "y": 42.0
+      },
+      {
+        "display_name": "K3·基尔·斯巴索克",
+        "location_ref": "dalaran-exit-k3",
+        "location_role": "map_anchor",
+        "ordinal": 11,
+        "step_id": "step-04",
+        "visit_id": "visit-k3-handoff",
+        "x": 41.02,
+        "y": 86.44
+      }
+    ]
+  },
+  "profile_id": "dalaran-mainline-77",
+  "profile_version": 1,
+  "program_id": "horde-fivebox-full-clear",
+  "route_timing": {
+    "center_minutes": null,
+    "input_fingerprint": "79c5596a31b6d145266c9b17c97c98e9adb5bb365778f28a04a895ea567c6fe2",
+    "range_minutes": null,
+    "status": "requirements"
+  },
+  "status": "pass",
+  "steps": [
+    {
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "interact-12790-down",
+        "transport-12790-down",
+        "visit-12790-violet-stand",
+        "interact-12790-up",
+        "transport-12790-up",
+        "a0006",
+        "a0005",
+        "a0007"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0001",
+            "a0002",
+            "a0003"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "大法师塞琳德拉"
+          },
+          "location_ref": "dalaran-p001",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "魔法王国达拉然",
+              "task_id": 12791
+            },
+            {
+              "kind": "accept",
+              "name": "来去如风",
+              "task_id": 12790
+            }
+          ],
+          "text": "紫罗兰之门·大法师塞琳德拉 → 交《魔法王国达拉然》 → 接《来去如风》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0004"
+          ],
+          "location_ref": "dalaran-p002",
+          "task_refs": [],
+          "text": "紫罗兰之门·传送水晶",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "interact-12790-down"
+          ],
+          "action_kind": "interact",
+          "task_refs": [],
+          "text": "使用通向达拉然下方废墟的传送水晶",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "transport-12790-down"
+          ],
+          "action_kind": "fixed_transport",
+          "task_refs": [],
+          "text": "固定交通：达拉然·紫罗兰之门 → 紫罗兰哨站",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "visit-12790-violet-stand"
+          ],
+          "location_ref": "dalaran-12790-violet-stand",
+          "task_refs": [],
+          "text": "紫罗兰哨站·回城水晶",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "interact-12790-up"
+          ],
+          "action_kind": "interact",
+          "task_refs": [],
+          "text": "使用通向达拉然的传送水晶",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "transport-12790-up"
+          ],
+          "action_kind": "fixed_transport",
+          "task_refs": [],
+          "text": "固定交通：紫罗兰哨站 → 达拉然·紫罗兰之门",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0006"
+          ],
+          "location_ref": "dalaran-p003",
+          "task_refs": [],
+          "text": "紫罗兰之门·大法师塞琳德拉",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0005"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "来去如风",
+              "task_id": 12790
+            }
+          ],
+          "text": "↳ 做《来去如风》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0007"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "大法师塞琳德拉"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "来去如风",
+              "task_id": 12790
+            }
+          ],
+          "text": "大法师塞琳德拉 → 交《来去如风》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-01",
+      "summary": "交达拉然入城任务，完成上下传送水晶教学并原地交回。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "魔法王国达拉然",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12791
+        },
+        {
+          "badge": null,
+          "name": "来去如风",
+          "note": "两个水晶都是个人任务交互；五个角色分别完成下城和回城两次点击。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12790
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "紫罗兰之门：魔法王国达拉然 → 来去如风"
+    },
+    {
+      "action_ids": [
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0008",
+            "a0009"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "大法师伯塔鲁斯"
+          },
+          "location_ref": "dalaran-p004",
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "赫米特·奈辛瓦里哪去了？",
+              "task_id": 12521
+            }
+          ],
+          "text": "克拉苏斯平台西侧·大法师伯塔鲁斯 → 接《赫米特·奈辛瓦里哪去了？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0010"
+          ],
+          "location_ref": "dalaran-p005",
+          "task_refs": [],
+          "text": "克拉苏斯平台·飞行点",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0011"
+          ],
+          "action_kind": "open_flight_point",
+          "task_refs": [],
+          "text": "开飞行点：达拉然",
+          "type": "route_action"
+        }
+      ],
+      "step_id": "step-02",
+      "summary": "把后续索拉查引导接走，但不触发离城；同时开启达拉然飞行点。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "赫米特·奈辛瓦里哪去了？",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12521
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "克拉苏斯平台：索拉查引导 + 达拉然飞行点"
+    },
+    {
+      "action_ids": [
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0012",
+            "a0013"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "狡猾的维克斯"
+          },
+          "location_ref": "dalaran-p006",
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "勇士的召唤！",
+              "task_id": 12974
+            }
+          ],
+          "text": "达拉然下水道·狡猾的维克斯 → 接《勇士的召唤！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0014",
+            "a0015"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "林·多克塔"
+          },
+          "location_ref": "dalaran-p007",
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "豪华的体验！",
+              "task_id": 12853
+            }
+          ],
+          "text": "达拉然下水道·林·多克塔 → 接《豪华的体验！》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-03",
+      "summary": "从东入口进下水道，依次拿祖达克斗兽场引导和当前风暴K3引导，再从西入口返回地面。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "勇士的召唤！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12974
+        },
+        {
+          "badge": null,
+          "name": "豪华的体验！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12853
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "达拉然下水道：祖达克/风暴引导"
+    },
+    {
+      "action_ids": [
+        "a0016",
+        "a0017",
+        "a0018",
+        "visit-violet-stand",
+        "move-violet-stand-k3",
+        "visit-k3-handoff",
+        "a0019"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0016"
+          ],
+          "location_ref": "dalaran-p008",
+          "task_refs": [],
+          "text": "紫罗兰之门·传送水晶",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0017"
+          ],
+          "action_kind": "interact",
+          "task_refs": [],
+          "text": "使用传送水晶",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0018"
+          ],
+          "action_kind": "fixed_transport",
+          "task_refs": [],
+          "text": "固定交通：紫罗兰之门 → 紫罗兰哨站",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "visit-violet-stand"
+          ],
+          "location_ref": "dalaran-exit-violet-stand",
+          "task_refs": [],
+          "text": "紫罗兰哨站",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "move-violet-stand-k3"
+          ],
+          "action_kind": "move",
+          "task_refs": [],
+          "text": "陆路：紫罗兰哨站 → K3",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "visit-k3-handoff",
+            "a0019"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "基尔·斯巴索克"
+          },
+          "location_ref": "dalaran-exit-k3",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "豪华的体验！",
+              "task_id": 12853
+            }
+          ],
+          "text": "K3·基尔·斯巴索克 → 交《豪华的体验！》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-04",
+      "summary": "用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "豪华的体验！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12853
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "紫罗兰之门 → K3"
+    }
+  ]
+}

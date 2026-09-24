@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "model_id": "route-review-trigger-v1",
+  "selection_trigger_ids": [
+    "user_selection_request",
+    "task_fact_cost_or_benefit_changed",
+    "live_run_cost_or_variance_anomaly",
+    "route_overlap_structure_changed",
+    "xp_gap_or_redundancy",
+    "availability_changed",
+    "profile_goal_or_scope_changed",
+    "recalled_or_new_task"
+  ],
+  "optimization_validator_ids": [
+    "player_state",
+    "quest_prerequisite",
+    "availability",
+    "objective_ready",
+    "xp_deadline",
+    "transport",
+    "branch_state",
+    "fivebox_mechanic",
+    "spatial_service",
+    "background_capacity",
+    "no_dead_step",
+    "trigger_source_ready",
+    "state_continuity",
+    "map_transition_contract"
+  ],
+  "diagnoses": [
+    "no_review",
+    "selection_review",
+    "optimization_review",
+    "blocked_unknown"
+  ],
+  "policy": {
+    "missing_review_context": "blocked_unknown",
+    "stale_review_context": "blocked_unknown",
+    "upstream_not_fresh": "blocked_unknown",
+    "selection_trigger": "selection_review",
+    "optimization_validator_fail": "optimization_review",
+    "optimization_validator_unknown": "blocked_unknown",
+    "explicit_complete_context_without_open_trigger": "no_review"
+  }
+}

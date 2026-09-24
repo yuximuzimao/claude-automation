@@ -1,0 +1,7508 @@
+{
+  "display": {
+    "display_name": "灰熊丘陵",
+    "footer": "在加弗洛克交《终获解救》后，本图灰熊丘陵清理段结束。",
+    "map_image": "maps/394-grizzly-hills-hd.jpg",
+    "order": 11,
+    "publish_key": "grizzly",
+    "subtitle": "祖达克结束后进入灰熊丘陵，先到征服堡；炉石绑定征服堡；按步骤完成灰熊丘陵任务。",
+    "title": "灰熊丘陵 · 80级五开任务路线"
+  },
+  "hearth_chain": [
+    "征服堡"
+  ],
+  "input_fingerprint": "83a775565b313bb2ecdcd2b5434e455a3b17aa35c4cdc97699090989dbdfd46e",
+  "issues": [
+    {
+      "display_name": "盲眼卢娜",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p026",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "库伦",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p036",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "库伦",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p038",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "加弗洛克",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p040",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "萨莎",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p042",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "安娅",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p050",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "萨莎",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p051",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "休·格兰斯",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p052",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "克拉斯",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p057",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "克拉斯",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p059",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "克拉斯",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p061",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "萨莎",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p063",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "加弗洛克",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p064",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "加弗洛克",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p076",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "哈考尔",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p078",
+      "severity": "advisory"
+    },
+    {
+      "display_name": "加弗洛克",
+      "kind": "location_display_matches_npc_name",
+      "location_ref": "grizzly-p079",
+      "severity": "advisory"
+    }
+  ],
+  "kind": "route_display",
+  "map_geometry": {
+    "edges": [
+      {
+        "edge_id": "a0001->a0004",
+        "from_location_ref": "grizzly-p001",
+        "from_visit_id": "a0001",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p002",
+        "to_visit_id": "a0004"
+      },
+      {
+        "edge_id": "a0004->a0012",
+        "from_location_ref": "grizzly-p002",
+        "from_visit_id": "a0004",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p003",
+        "to_visit_id": "a0012"
+      },
+      {
+        "edge_id": "a0012->a0017",
+        "from_location_ref": "grizzly-p003",
+        "from_visit_id": "a0012",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p004",
+        "to_visit_id": "a0017"
+      },
+      {
+        "edge_id": "a0017->a0024",
+        "from_location_ref": "grizzly-p004",
+        "from_visit_id": "a0017",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p005",
+        "to_visit_id": "a0024"
+      },
+      {
+        "edge_id": "a0024->a0028",
+        "from_location_ref": "grizzly-p005",
+        "from_visit_id": "a0024",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p006",
+        "to_visit_id": "a0028"
+      },
+      {
+        "edge_id": "a0028->a0030",
+        "from_location_ref": "grizzly-p006",
+        "from_visit_id": "a0028",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p007",
+        "to_visit_id": "a0030"
+      },
+      {
+        "edge_id": "a0030->a0034",
+        "from_location_ref": "grizzly-p007",
+        "from_visit_id": "a0030",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p008",
+        "to_visit_id": "a0034"
+      },
+      {
+        "edge_id": "a0034->a0037",
+        "from_location_ref": "grizzly-p008",
+        "from_visit_id": "a0034",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p009",
+        "to_visit_id": "a0037"
+      },
+      {
+        "edge_id": "a0037->a0039",
+        "from_location_ref": "grizzly-p009",
+        "from_visit_id": "a0037",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p010",
+        "to_visit_id": "a0039"
+      },
+      {
+        "edge_id": "a0039->a0048",
+        "from_location_ref": "grizzly-p010",
+        "from_visit_id": "a0039",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p011",
+        "to_visit_id": "a0048"
+      },
+      {
+        "edge_id": "a0048->a0054",
+        "from_location_ref": "grizzly-p011",
+        "from_visit_id": "a0048",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p012",
+        "to_visit_id": "a0054"
+      },
+      {
+        "edge_id": "a0054->a0063",
+        "from_location_ref": "grizzly-p012",
+        "from_visit_id": "a0054",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p013",
+        "to_visit_id": "a0063"
+      },
+      {
+        "edge_id": "a0063->a0067",
+        "from_location_ref": "grizzly-p013",
+        "from_visit_id": "a0063",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p014",
+        "to_visit_id": "a0067"
+      },
+      {
+        "edge_id": "a0067->a0073",
+        "from_location_ref": "grizzly-p014",
+        "from_visit_id": "a0067",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p015",
+        "to_visit_id": "a0073"
+      },
+      {
+        "edge_id": "a0073->a0077",
+        "from_location_ref": "grizzly-p015",
+        "from_visit_id": "a0073",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p016",
+        "to_visit_id": "a0077"
+      },
+      {
+        "edge_id": "a0077->a0080",
+        "from_location_ref": "grizzly-p016",
+        "from_visit_id": "a0077",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p017",
+        "to_visit_id": "a0080"
+      },
+      {
+        "edge_id": "a0080->a0083",
+        "from_location_ref": "grizzly-p017",
+        "from_visit_id": "a0080",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p018",
+        "to_visit_id": "a0083"
+      },
+      {
+        "edge_id": "a0083->a0086",
+        "from_location_ref": "grizzly-p018",
+        "from_visit_id": "a0083",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p019",
+        "to_visit_id": "a0086"
+      },
+      {
+        "edge_id": "a0086->a0090",
+        "from_location_ref": "grizzly-p019",
+        "from_visit_id": "a0086",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p020",
+        "to_visit_id": "a0090"
+      },
+      {
+        "edge_id": "a0090->a0093",
+        "from_location_ref": "grizzly-p020",
+        "from_visit_id": "a0090",
+        "movement_action_id": "a0094",
+        "movement_mode": null,
+        "operation_kind": "hearth",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p021",
+        "to_visit_id": "a0093"
+      },
+      {
+        "edge_id": "a0093->a0095",
+        "from_location_ref": "grizzly-p021",
+        "from_visit_id": "a0093",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p022",
+        "to_visit_id": "a0095"
+      },
+      {
+        "edge_id": "a0095->a0101",
+        "from_location_ref": "grizzly-p022",
+        "from_visit_id": "a0095",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p023",
+        "to_visit_id": "a0101"
+      },
+      {
+        "edge_id": "a0101->a0116",
+        "from_location_ref": "grizzly-p023",
+        "from_visit_id": "a0101",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p024",
+        "to_visit_id": "a0116"
+      },
+      {
+        "edge_id": "a0116->a0120",
+        "from_location_ref": "grizzly-p024",
+        "from_visit_id": "a0116",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p025",
+        "to_visit_id": "a0120"
+      },
+      {
+        "edge_id": "a0120->a0124",
+        "from_location_ref": "grizzly-p025",
+        "from_visit_id": "a0120",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p026",
+        "to_visit_id": "a0124"
+      },
+      {
+        "edge_id": "a0124->a0133",
+        "from_location_ref": "grizzly-p026",
+        "from_visit_id": "a0124",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p027",
+        "to_visit_id": "a0133"
+      },
+      {
+        "edge_id": "a0133->a0139",
+        "from_location_ref": "grizzly-p027",
+        "from_visit_id": "a0133",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p028",
+        "to_visit_id": "a0139"
+      },
+      {
+        "edge_id": "a0139->a0144",
+        "from_location_ref": "grizzly-p028",
+        "from_visit_id": "a0139",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p029",
+        "to_visit_id": "a0144"
+      },
+      {
+        "edge_id": "a0144->a0147",
+        "from_location_ref": "grizzly-p029",
+        "from_visit_id": "a0144",
+        "movement_action_id": "a0148",
+        "movement_mode": null,
+        "operation_kind": "hearth",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p030",
+        "to_visit_id": "a0147"
+      },
+      {
+        "edge_id": "a0147->a0154",
+        "from_location_ref": "grizzly-p030",
+        "from_visit_id": "a0147",
+        "movement_action_id": "a0155",
+        "movement_mode": null,
+        "operation_kind": "taxi",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p031",
+        "to_visit_id": "a0154"
+      },
+      {
+        "edge_id": "a0154->a0160",
+        "from_location_ref": "grizzly-p031",
+        "from_visit_id": "a0154",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p032",
+        "to_visit_id": "a0160"
+      },
+      {
+        "edge_id": "a0160->a0163",
+        "from_location_ref": "grizzly-p032",
+        "from_visit_id": "a0160",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p033",
+        "to_visit_id": "a0163"
+      },
+      {
+        "edge_id": "a0163->a0167",
+        "from_location_ref": "grizzly-p033",
+        "from_visit_id": "a0163",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p034",
+        "to_visit_id": "a0167"
+      },
+      {
+        "edge_id": "a0167->a0172",
+        "from_location_ref": "grizzly-p034",
+        "from_visit_id": "a0167",
+        "movement_action_id": "a0173",
+        "movement_mode": null,
+        "operation_kind": "taxi",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p035",
+        "to_visit_id": "a0172"
+      },
+      {
+        "edge_id": "a0172->a0177",
+        "from_location_ref": "grizzly-p035",
+        "from_visit_id": "a0172",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p036",
+        "to_visit_id": "a0177"
+      },
+      {
+        "edge_id": "a0177->a0186",
+        "from_location_ref": "grizzly-p036",
+        "from_visit_id": "a0177",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p037",
+        "to_visit_id": "a0186"
+      },
+      {
+        "edge_id": "a0186->a0190",
+        "from_location_ref": "grizzly-p037",
+        "from_visit_id": "a0186",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p038",
+        "to_visit_id": "a0190"
+      },
+      {
+        "edge_id": "a0190->a0193",
+        "from_location_ref": "grizzly-p038",
+        "from_visit_id": "a0190",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p039",
+        "to_visit_id": "a0193"
+      },
+      {
+        "edge_id": "a0193->a0198",
+        "from_location_ref": "grizzly-p039",
+        "from_visit_id": "a0193",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p040",
+        "to_visit_id": "a0198"
+      },
+      {
+        "edge_id": "a0198->a0201",
+        "from_location_ref": "grizzly-p040",
+        "from_visit_id": "a0198",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p041",
+        "to_visit_id": "a0201"
+      },
+      {
+        "edge_id": "a0201->a0205",
+        "from_location_ref": "grizzly-p041",
+        "from_visit_id": "a0201",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p042",
+        "to_visit_id": "a0205"
+      },
+      {
+        "edge_id": "a0205->a0214",
+        "from_location_ref": "grizzly-p042",
+        "from_visit_id": "a0205",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p043",
+        "to_visit_id": "a0214"
+      },
+      {
+        "edge_id": "a0214->a0217",
+        "from_location_ref": "grizzly-p043",
+        "from_visit_id": "a0214",
+        "movement_action_id": "a0218",
+        "movement_mode": null,
+        "operation_kind": "hearth",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p044",
+        "to_visit_id": "a0217"
+      },
+      {
+        "edge_id": "a0217->a0222",
+        "from_location_ref": "grizzly-p044",
+        "from_visit_id": "a0217",
+        "movement_action_id": "a0223",
+        "movement_mode": null,
+        "operation_kind": "taxi",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p045",
+        "to_visit_id": "a0222"
+      },
+      {
+        "edge_id": "a0222->a0224",
+        "from_location_ref": "grizzly-p045",
+        "from_visit_id": "a0222",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p046",
+        "to_visit_id": "a0224"
+      },
+      {
+        "edge_id": "a0224->a0226",
+        "from_location_ref": "grizzly-p046",
+        "from_visit_id": "a0224",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p047",
+        "to_visit_id": "a0226"
+      },
+      {
+        "edge_id": "a0226->a0228",
+        "from_location_ref": "grizzly-p047",
+        "from_visit_id": "a0226",
+        "movement_action_id": "a0227",
+        "movement_mode": null,
+        "operation_kind": "taxi",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p048",
+        "to_visit_id": "a0228"
+      },
+      {
+        "edge_id": "a0228->a0230",
+        "from_location_ref": "grizzly-p048",
+        "from_visit_id": "a0228",
+        "movement_action_id": "a0231",
+        "movement_mode": null,
+        "operation_kind": "taxi",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p049",
+        "to_visit_id": "a0230"
+      },
+      {
+        "edge_id": "a0230->a0232",
+        "from_location_ref": "grizzly-p049",
+        "from_visit_id": "a0230",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p050",
+        "to_visit_id": "a0232"
+      },
+      {
+        "edge_id": "a0232->a0234",
+        "from_location_ref": "grizzly-p050",
+        "from_visit_id": "a0232",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p051",
+        "to_visit_id": "a0234"
+      },
+      {
+        "edge_id": "a0234->a0236",
+        "from_location_ref": "grizzly-p051",
+        "from_visit_id": "a0234",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p052",
+        "to_visit_id": "a0236"
+      },
+      {
+        "edge_id": "a0236->a0238",
+        "from_location_ref": "grizzly-p052",
+        "from_visit_id": "a0236",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p053",
+        "to_visit_id": "a0238"
+      },
+      {
+        "edge_id": "a0238->a0241",
+        "from_location_ref": "grizzly-p053",
+        "from_visit_id": "a0238",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p054",
+        "to_visit_id": "a0241"
+      },
+      {
+        "edge_id": "a0241->a0247",
+        "from_location_ref": "grizzly-p054",
+        "from_visit_id": "a0241",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p055",
+        "to_visit_id": "a0247"
+      },
+      {
+        "edge_id": "a0247->a0252",
+        "from_location_ref": "grizzly-p055",
+        "from_visit_id": "a0247",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p056",
+        "to_visit_id": "a0252"
+      },
+      {
+        "edge_id": "a0252->a0254",
+        "from_location_ref": "grizzly-p056",
+        "from_visit_id": "a0252",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p057",
+        "to_visit_id": "a0254"
+      },
+      {
+        "edge_id": "a0254->a0257",
+        "from_location_ref": "grizzly-p057",
+        "from_visit_id": "a0254",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p058",
+        "to_visit_id": "a0257"
+      },
+      {
+        "edge_id": "a0257->a0262",
+        "from_location_ref": "grizzly-p058",
+        "from_visit_id": "a0257",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p059",
+        "to_visit_id": "a0262"
+      },
+      {
+        "edge_id": "a0262->a0265",
+        "from_location_ref": "grizzly-p059",
+        "from_visit_id": "a0262",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p060",
+        "to_visit_id": "a0265"
+      },
+      {
+        "edge_id": "a0265->a0267",
+        "from_location_ref": "grizzly-p060",
+        "from_visit_id": "a0265",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p061",
+        "to_visit_id": "a0267"
+      },
+      {
+        "edge_id": "a0267->a0269",
+        "from_location_ref": "grizzly-p061",
+        "from_visit_id": "a0267",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p062",
+        "to_visit_id": "a0269"
+      },
+      {
+        "edge_id": "a0269->a0271",
+        "from_location_ref": "grizzly-p062",
+        "from_visit_id": "a0269",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p063",
+        "to_visit_id": "a0271"
+      },
+      {
+        "edge_id": "a0271->a0273",
+        "from_location_ref": "grizzly-p063",
+        "from_visit_id": "a0271",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p064",
+        "to_visit_id": "a0273"
+      },
+      {
+        "edge_id": "a0273->a0278",
+        "from_location_ref": "grizzly-p064",
+        "from_visit_id": "a0273",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p065",
+        "to_visit_id": "a0278"
+      },
+      {
+        "edge_id": "a0278->a0281",
+        "from_location_ref": "grizzly-p065",
+        "from_visit_id": "a0278",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p066",
+        "to_visit_id": "a0281"
+      },
+      {
+        "edge_id": "a0281->a0284",
+        "from_location_ref": "grizzly-p066",
+        "from_visit_id": "a0281",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p067",
+        "to_visit_id": "a0284"
+      },
+      {
+        "edge_id": "a0284->a0289",
+        "from_location_ref": "grizzly-p067",
+        "from_visit_id": "a0284",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p068",
+        "to_visit_id": "a0289"
+      },
+      {
+        "edge_id": "a0289->a0292",
+        "from_location_ref": "grizzly-p068",
+        "from_visit_id": "a0289",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p069",
+        "to_visit_id": "a0292"
+      },
+      {
+        "edge_id": "a0292->a0297",
+        "from_location_ref": "grizzly-p069",
+        "from_visit_id": "a0292",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p070",
+        "to_visit_id": "a0297"
+      },
+      {
+        "edge_id": "a0297->a0300",
+        "from_location_ref": "grizzly-p070",
+        "from_visit_id": "a0297",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p071",
+        "to_visit_id": "a0300"
+      },
+      {
+        "edge_id": "a0300->a0303",
+        "from_location_ref": "grizzly-p071",
+        "from_visit_id": "a0300",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p072",
+        "to_visit_id": "a0303"
+      },
+      {
+        "edge_id": "a0303->a0305",
+        "from_location_ref": "grizzly-p072",
+        "from_visit_id": "a0303",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p073",
+        "to_visit_id": "a0305"
+      },
+      {
+        "edge_id": "a0305->a0308",
+        "from_location_ref": "grizzly-p073",
+        "from_visit_id": "a0305",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p074",
+        "to_visit_id": "a0308"
+      },
+      {
+        "edge_id": "a0308->a0310",
+        "from_location_ref": "grizzly-p074",
+        "from_visit_id": "a0308",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p075",
+        "to_visit_id": "a0310"
+      },
+      {
+        "edge_id": "a0310->a0313",
+        "from_location_ref": "grizzly-p075",
+        "from_visit_id": "a0310",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p076",
+        "to_visit_id": "a0313"
+      },
+      {
+        "edge_id": "a0313->a0316",
+        "from_location_ref": "grizzly-p076",
+        "from_visit_id": "a0313",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p077",
+        "to_visit_id": "a0316"
+      },
+      {
+        "edge_id": "a0316->a0319",
+        "from_location_ref": "grizzly-p077",
+        "from_visit_id": "a0316",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p078",
+        "to_visit_id": "a0319"
+      },
+      {
+        "edge_id": "a0319->a0321",
+        "from_location_ref": "grizzly-p078",
+        "from_visit_id": "a0319",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "grizzly-p079",
+        "to_visit_id": "a0321"
+      }
+    ],
+    "input_fingerprint": "fff5a5663d467b75c4e75cdaa50445f02240e88c966b06ed3f0dae946f4ccd7d",
+    "status": "pass",
+    "visits": [
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p001",
+        "location_role": "map_anchor",
+        "ordinal": 1,
+        "step_id": "step-01",
+        "visit_id": "a0001",
+        "x": 20.8,
+        "y": 64.2
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p002",
+        "location_role": "map_anchor",
+        "ordinal": 2,
+        "step_id": "step-01",
+        "visit_id": "a0004",
+        "x": 21.2,
+        "y": 64.3
+      },
+      {
+        "display_name": "征服堡南侧 / 沃德伦",
+        "location_ref": "grizzly-p003",
+        "location_role": "map_anchor",
+        "ordinal": 3,
+        "step_id": "step-01",
+        "visit_id": "a0012",
+        "x": 31.0,
+        "y": 73.5
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p004",
+        "location_role": "map_anchor",
+        "ordinal": 4,
+        "step_id": "step-01",
+        "visit_id": "a0017",
+        "x": 21.2,
+        "y": 64.3
+      },
+      {
+        "display_name": "风险湾",
+        "location_ref": "grizzly-p005",
+        "location_role": "map_anchor",
+        "ordinal": 5,
+        "step_id": "step-02",
+        "visit_id": "a0024",
+        "x": 11.2,
+        "y": 76.6
+      },
+      {
+        "display_name": "沃德伦",
+        "location_ref": "grizzly-p006",
+        "location_role": "map_anchor",
+        "ordinal": 6,
+        "step_id": "step-02",
+        "visit_id": "a0028",
+        "x": 27.1,
+        "y": 73.0
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p007",
+        "location_role": "map_anchor",
+        "ordinal": 7,
+        "step_id": "step-02",
+        "visit_id": "a0030",
+        "x": 20.8,
+        "y": 64.2
+      },
+      {
+        "display_name": "银溪镇南侧",
+        "location_ref": "grizzly-p008",
+        "location_role": "map_anchor",
+        "ordinal": 8,
+        "step_id": "step-03",
+        "visit_id": "a0034",
+        "x": 36.1,
+        "y": 67.7
+      },
+      {
+        "display_name": "银溪镇北侧",
+        "location_ref": "grizzly-p009",
+        "location_role": "map_anchor",
+        "ordinal": 9,
+        "step_id": "step-03",
+        "visit_id": "a0037",
+        "x": 42.0,
+        "y": 62.0
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p010",
+        "location_role": "map_anchor",
+        "ordinal": 10,
+        "step_id": "step-03",
+        "visit_id": "a0039",
+        "x": 20.8,
+        "y": 64.2
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p011",
+        "location_role": "map_anchor",
+        "ordinal": 11,
+        "step_id": "step-03",
+        "visit_id": "a0048",
+        "x": 22.6,
+        "y": 64.8
+      },
+      {
+        "display_name": "花岗岩之泉",
+        "location_ref": "grizzly-p012",
+        "location_role": "map_anchor",
+        "ordinal": 12,
+        "step_id": "step-04",
+        "visit_id": "a0054",
+        "x": 16.2,
+        "y": 47.7
+      },
+      {
+        "display_name": "花岗岩之泉北侧",
+        "location_ref": "grizzly-p013",
+        "location_role": "map_anchor",
+        "ordinal": 13,
+        "step_id": "step-04",
+        "visit_id": "a0063",
+        "x": 15.0,
+        "y": 39.0
+      },
+      {
+        "display_name": "花岗岩之泉",
+        "location_ref": "grizzly-p014",
+        "location_role": "map_anchor",
+        "ordinal": 14,
+        "step_id": "step-04",
+        "visit_id": "a0067",
+        "x": 15.7,
+        "y": 48.0
+      },
+      {
+        "display_name": "达库鲁火盆·南侧",
+        "location_ref": "grizzly-p015",
+        "location_role": "map_anchor",
+        "ordinal": 15,
+        "step_id": "step-05",
+        "visit_id": "a0073",
+        "x": 13.2,
+        "y": 60.9
+      },
+      {
+        "display_name": "Zeb'Halak",
+        "location_ref": "grizzly-p016",
+        "location_role": "map_anchor",
+        "ordinal": 16,
+        "step_id": "step-05",
+        "visit_id": "a0077",
+        "x": 16.0,
+        "y": 35.5
+      },
+      {
+        "display_name": "达库鲁火盆·北侧",
+        "location_ref": "grizzly-p017",
+        "location_role": "map_anchor",
+        "ordinal": 17,
+        "step_id": "step-05",
+        "visit_id": "a0080",
+        "x": 17.4,
+        "y": 36.4
+      },
+      {
+        "display_name": "达克萨隆外",
+        "location_ref": "grizzly-p018",
+        "location_role": "map_anchor",
+        "ordinal": 18,
+        "step_id": "step-05",
+        "visit_id": "a0083",
+        "x": 16.0,
+        "y": 30.0
+      },
+      {
+        "display_name": "银溪北侧 / 古树之心",
+        "location_ref": "grizzly-p019",
+        "location_role": "map_anchor",
+        "ordinal": 19,
+        "step_id": "step-05",
+        "visit_id": "a0086",
+        "x": 26.0,
+        "y": 31.0
+      },
+      {
+        "display_name": "Drak'atal Passage",
+        "location_ref": "grizzly-p020",
+        "location_role": "map_anchor",
+        "ordinal": 20,
+        "step_id": "step-05",
+        "visit_id": "a0090",
+        "x": 45.0,
+        "y": 28.4
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p021",
+        "location_role": "map_anchor",
+        "ordinal": 21,
+        "step_id": "step-05",
+        "visit_id": "a0093",
+        "x": 20.8,
+        "y": 64.2
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p022",
+        "location_role": "map_anchor",
+        "ordinal": 22,
+        "step_id": "step-06",
+        "visit_id": "a0095",
+        "x": 20.8,
+        "y": 64.2
+      },
+      {
+        "display_name": "征服斗兽场",
+        "location_ref": "grizzly-p023",
+        "location_role": "map_anchor",
+        "ordinal": 23,
+        "step_id": "step-07",
+        "visit_id": "a0101",
+        "x": 22.4,
+        "y": 63.9
+      },
+      {
+        "display_name": "花岗岩之泉",
+        "location_ref": "grizzly-p024",
+        "location_role": "map_anchor",
+        "ordinal": 24,
+        "step_id": "step-08",
+        "visit_id": "a0116",
+        "x": 15.8,
+        "y": 47.0
+      },
+      {
+        "display_name": "沃达希尔三洞",
+        "location_ref": "grizzly-p025",
+        "location_role": "map_anchor",
+        "ordinal": 25,
+        "step_id": "step-08",
+        "visit_id": "a0120",
+        "x": 33.0,
+        "y": 49.0
+      },
+      {
+        "display_name": "盲眼卢娜",
+        "location_ref": "grizzly-p026",
+        "location_role": "map_anchor",
+        "ordinal": 26,
+        "step_id": "step-08",
+        "visit_id": "a0124",
+        "x": 44.0,
+        "y": 48.0
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p027",
+        "location_role": "map_anchor",
+        "ordinal": 27,
+        "step_id": "step-09",
+        "visit_id": "a0133",
+        "x": 65.1,
+        "y": 47.7
+      },
+      {
+        "display_name": "欧尼瓦东北",
+        "location_ref": "grizzly-p028",
+        "location_role": "map_anchor",
+        "ordinal": 28,
+        "step_id": "step-09",
+        "visit_id": "a0139",
+        "x": 68.0,
+        "y": 40.0
+      },
+      {
+        "display_name": "索尔莫丹外",
+        "location_ref": "grizzly-p029",
+        "location_role": "map_anchor",
+        "ordinal": 29,
+        "step_id": "step-09",
+        "visit_id": "a0144",
+        "x": 64.3,
+        "y": 19.8
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p030",
+        "location_role": "map_anchor",
+        "ordinal": 30,
+        "step_id": "step-10",
+        "visit_id": "a0147",
+        "x": 22.5,
+        "y": 63.0
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p031",
+        "location_role": "map_anchor",
+        "ordinal": 31,
+        "step_id": "step-10",
+        "visit_id": "a0154",
+        "x": 65.1,
+        "y": 47.7
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p032",
+        "location_role": "map_anchor",
+        "ordinal": 32,
+        "step_id": "step-10",
+        "visit_id": "a0160",
+        "x": 65.2,
+        "y": 47.8
+      },
+      {
+        "display_name": "欧尼瓦南侧",
+        "location_ref": "grizzly-p033",
+        "location_role": "map_anchor",
+        "ordinal": 33,
+        "step_id": "step-11",
+        "visit_id": "a0163",
+        "x": 66.5,
+        "y": 58.9
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p034",
+        "location_role": "map_anchor",
+        "ordinal": 34,
+        "step_id": "step-11",
+        "visit_id": "a0167",
+        "x": 22.5,
+        "y": 63.0
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p035",
+        "location_role": "map_anchor",
+        "ordinal": 35,
+        "step_id": "step-11",
+        "visit_id": "a0172",
+        "x": 65.2,
+        "y": 47.8
+      },
+      {
+        "display_name": "库伦",
+        "location_ref": "grizzly-p036",
+        "location_role": "map_anchor",
+        "ordinal": 36,
+        "step_id": "step-12",
+        "visit_id": "a0177",
+        "x": 65.8,
+        "y": 17.8
+      },
+      {
+        "display_name": "索尔莫丹",
+        "location_ref": "grizzly-p037",
+        "location_role": "map_anchor",
+        "ordinal": 37,
+        "step_id": "step-12",
+        "visit_id": "a0186",
+        "x": 70.0,
+        "y": 14.5
+      },
+      {
+        "display_name": "库伦",
+        "location_ref": "grizzly-p038",
+        "location_role": "map_anchor",
+        "ordinal": 38,
+        "step_id": "step-12",
+        "visit_id": "a0190",
+        "x": 65.8,
+        "y": 17.8
+      },
+      {
+        "display_name": "哈考尔 / 克拉斯",
+        "location_ref": "grizzly-p039",
+        "location_role": "map_anchor",
+        "ordinal": 39,
+        "step_id": "step-12",
+        "visit_id": "a0193",
+        "x": 73.8,
+        "y": 34.1
+      },
+      {
+        "display_name": "加弗洛克",
+        "location_ref": "grizzly-p040",
+        "location_role": "map_anchor",
+        "ordinal": 40,
+        "step_id": "step-12",
+        "visit_id": "a0198",
+        "x": 79.8,
+        "y": 33.6
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p041",
+        "location_role": "map_anchor",
+        "ordinal": 41,
+        "step_id": "step-12",
+        "visit_id": "a0201",
+        "x": 65.2,
+        "y": 47.8
+      },
+      {
+        "display_name": "萨莎",
+        "location_ref": "grizzly-p042",
+        "location_role": "map_anchor",
+        "ordinal": 42,
+        "step_id": "step-13",
+        "visit_id": "a0205",
+        "x": 57.5,
+        "y": 41.3
+      },
+      {
+        "display_name": "灰喉堡",
+        "location_ref": "grizzly-p043",
+        "location_role": "map_anchor",
+        "ordinal": 43,
+        "step_id": "step-13",
+        "visit_id": "a0214",
+        "x": 50.8,
+        "y": 42.6
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p044",
+        "location_role": "map_anchor",
+        "ordinal": 44,
+        "step_id": "step-13",
+        "visit_id": "a0217",
+        "x": 22.5,
+        "y": 63.0
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p045",
+        "location_role": "map_anchor",
+        "ordinal": 45,
+        "step_id": "step-13",
+        "visit_id": "a0222",
+        "x": 65.1,
+        "y": 47.7
+      },
+      {
+        "display_name": "乌索克",
+        "location_ref": "grizzly-p046",
+        "location_role": "map_anchor",
+        "ordinal": 46,
+        "step_id": "step-13",
+        "visit_id": "a0224",
+        "x": 52.6,
+        "y": 24.1
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p047",
+        "location_role": "map_anchor",
+        "ordinal": 47,
+        "step_id": "step-14",
+        "visit_id": "a0226",
+        "x": 65.1,
+        "y": 47.7
+      },
+      {
+        "display_name": "征服堡",
+        "location_ref": "grizzly-p048",
+        "location_role": "map_anchor",
+        "ordinal": 48,
+        "step_id": "step-14",
+        "visit_id": "a0228",
+        "x": 22.5,
+        "y": 63.0
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p049",
+        "location_role": "map_anchor",
+        "ordinal": 49,
+        "step_id": "step-14",
+        "visit_id": "a0230",
+        "x": 65.1,
+        "y": 47.7
+      },
+      {
+        "display_name": "安娅",
+        "location_ref": "grizzly-p050",
+        "location_role": "map_anchor",
+        "ordinal": 50,
+        "step_id": "step-14",
+        "visit_id": "a0232",
+        "x": 64.8,
+        "y": 43.4
+      },
+      {
+        "display_name": "萨莎",
+        "location_ref": "grizzly-p051",
+        "location_role": "map_anchor",
+        "ordinal": 51,
+        "step_id": "step-14",
+        "visit_id": "a0234",
+        "x": 57.5,
+        "y": 41.3
+      },
+      {
+        "display_name": "休·格兰斯",
+        "location_ref": "grizzly-p052",
+        "location_role": "map_anchor",
+        "ordinal": 52,
+        "step_id": "step-14",
+        "visit_id": "a0236",
+        "x": 69.1,
+        "y": 40.1
+      },
+      {
+        "display_name": "符文监督者",
+        "location_ref": "grizzly-p053",
+        "location_role": "map_anchor",
+        "ordinal": 53,
+        "step_id": "step-15",
+        "visit_id": "a0238",
+        "x": 78.8,
+        "y": 43.4
+      },
+      {
+        "display_name": "Drakil'jin遗迹",
+        "location_ref": "grizzly-p054",
+        "location_role": "map_anchor",
+        "ordinal": 54,
+        "step_id": "step-15",
+        "visit_id": "a0241",
+        "x": 71.0,
+        "y": 22.0
+      },
+      {
+        "display_name": "哈考尔 / 克拉斯",
+        "location_ref": "grizzly-p055",
+        "location_role": "map_anchor",
+        "ordinal": 55,
+        "step_id": "step-15",
+        "visit_id": "a0247",
+        "x": 73.8,
+        "y": 34.1
+      },
+      {
+        "display_name": "达卡古尔",
+        "location_ref": "grizzly-p056",
+        "location_role": "map_anchor",
+        "ordinal": 56,
+        "step_id": "step-15",
+        "visit_id": "a0252",
+        "x": 74.0,
+        "y": 30.0
+      },
+      {
+        "display_name": "克拉斯",
+        "location_ref": "grizzly-p057",
+        "location_role": "map_anchor",
+        "ordinal": 57,
+        "step_id": "step-15",
+        "visit_id": "a0254",
+        "x": 73.8,
+        "y": 34.1
+      },
+      {
+        "display_name": "Drakil'jin墓穴",
+        "location_ref": "grizzly-p058",
+        "location_role": "map_anchor",
+        "ordinal": 58,
+        "step_id": "step-15",
+        "visit_id": "a0257",
+        "x": 70.5,
+        "y": 22.0
+      },
+      {
+        "display_name": "克拉斯",
+        "location_ref": "grizzly-p059",
+        "location_role": "map_anchor",
+        "ordinal": 59,
+        "step_id": "step-16",
+        "visit_id": "a0262",
+        "x": 73.8,
+        "y": 34.1
+      },
+      {
+        "display_name": "Drakil'jin墓穴",
+        "location_ref": "grizzly-p060",
+        "location_role": "map_anchor",
+        "ordinal": 60,
+        "step_id": "step-16",
+        "visit_id": "a0265",
+        "x": 70.5,
+        "y": 22.0
+      },
+      {
+        "display_name": "克拉斯",
+        "location_ref": "grizzly-p061",
+        "location_role": "map_anchor",
+        "ordinal": 61,
+        "step_id": "step-16",
+        "visit_id": "a0267",
+        "x": 73.8,
+        "y": 34.1
+      },
+      {
+        "display_name": "血月岛",
+        "location_ref": "grizzly-p062",
+        "location_role": "map_anchor",
+        "ordinal": 62,
+        "step_id": "step-16",
+        "visit_id": "a0269",
+        "x": 85.5,
+        "y": 26.0
+      },
+      {
+        "display_name": "萨莎",
+        "location_ref": "grizzly-p063",
+        "location_role": "map_anchor",
+        "ordinal": 63,
+        "step_id": "step-16",
+        "visit_id": "a0271",
+        "x": 57.5,
+        "y": 41.3
+      },
+      {
+        "display_name": "加弗洛克",
+        "location_ref": "grizzly-p064",
+        "location_role": "map_anchor",
+        "ordinal": 64,
+        "step_id": "step-16",
+        "visit_id": "a0273",
+        "x": 79.8,
+        "y": 33.6
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p065",
+        "location_role": "map_anchor",
+        "ordinal": 65,
+        "step_id": "step-17",
+        "visit_id": "a0278",
+        "x": 65.1,
+        "y": 47.7
+      },
+      {
+        "display_name": "Dun Argol",
+        "location_ref": "grizzly-p066",
+        "location_role": "map_anchor",
+        "ordinal": 66,
+        "step_id": "step-17",
+        "visit_id": "a0281",
+        "x": 76.2,
+        "y": 57.5
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p067",
+        "location_role": "map_anchor",
+        "ordinal": 67,
+        "step_id": "step-17",
+        "visit_id": "a0284",
+        "x": 65.1,
+        "y": 47.5
+      },
+      {
+        "display_name": "Dun Argol",
+        "location_ref": "grizzly-p068",
+        "location_role": "map_anchor",
+        "ordinal": 68,
+        "step_id": "step-17",
+        "visit_id": "a0289",
+        "x": 76.2,
+        "y": 57.5
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p069",
+        "location_role": "map_anchor",
+        "ordinal": 69,
+        "step_id": "step-17",
+        "visit_id": "a0292",
+        "x": 65.1,
+        "y": 47.5
+      },
+      {
+        "display_name": "Dun Argol上层",
+        "location_ref": "grizzly-p070",
+        "location_role": "map_anchor",
+        "ordinal": 70,
+        "step_id": "step-17",
+        "visit_id": "a0297",
+        "x": 76.5,
+        "y": 59.5
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p071",
+        "location_role": "map_anchor",
+        "ordinal": 71,
+        "step_id": "step-18",
+        "visit_id": "a0300",
+        "x": 65.1,
+        "y": 47.3
+      },
+      {
+        "display_name": "Dun Argol外围",
+        "location_ref": "grizzly-p072",
+        "location_role": "map_anchor",
+        "ordinal": 72,
+        "step_id": "step-18",
+        "visit_id": "a0303",
+        "x": 73.0,
+        "y": 55.0
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p073",
+        "location_role": "map_anchor",
+        "ordinal": 73,
+        "step_id": "step-18",
+        "visit_id": "a0305",
+        "x": 65.1,
+        "y": 47.5
+      },
+      {
+        "display_name": "Dun Argol上层",
+        "location_ref": "grizzly-p074",
+        "location_role": "map_anchor",
+        "ordinal": 74,
+        "step_id": "step-18",
+        "visit_id": "a0308",
+        "x": 76.6,
+        "y": 63.7
+      },
+      {
+        "display_name": "欧尼瓦营地",
+        "location_ref": "grizzly-p075",
+        "location_role": "map_anchor",
+        "ordinal": 75,
+        "step_id": "step-18",
+        "visit_id": "a0310",
+        "x": 65.1,
+        "y": 47.5
+      },
+      {
+        "display_name": "加弗洛克",
+        "location_ref": "grizzly-p076",
+        "location_role": "map_anchor",
+        "ordinal": 76,
+        "step_id": "step-19",
+        "visit_id": "a0313",
+        "x": 79.8,
+        "y": 33.6
+      },
+      {
+        "display_name": "符文巨人平原",
+        "location_ref": "grizzly-p077",
+        "location_role": "map_anchor",
+        "ordinal": 77,
+        "step_id": "step-19",
+        "visit_id": "a0316",
+        "x": 72.0,
+        "y": 37.0
+      },
+      {
+        "display_name": "哈考尔",
+        "location_ref": "grizzly-p078",
+        "location_role": "map_anchor",
+        "ordinal": 78,
+        "step_id": "step-19",
+        "visit_id": "a0319",
+        "x": 73.8,
+        "y": 34.0
+      },
+      {
+        "display_name": "加弗洛克",
+        "location_ref": "grizzly-p079",
+        "location_role": "map_anchor",
+        "ordinal": 79,
+        "step_id": "step-19",
+        "visit_id": "a0321",
+        "x": 79.8,
+        "y": 33.6
+      }
+    ]
+  },
+  "profile_id": "grizzly-fivebox",
+  "profile_version": 1,
+  "program_id": "horde-fivebox-full-clear",
+  "route_timing": {
+    "center_minutes": null,
+    "input_fingerprint": "c7efab0231a4df18908633c32fbf87da4a40956634d493e7d0c00a765e5aa88b",
+    "range_minutes": null,
+    "status": "requirements"
+  },
+  "status": "pass",
+  "steps": [
+    {
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0001"
+          ],
+          "location_ref": "grizzly-p001",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0002",
+            "a0003"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "前往征服堡，自求多福吧！",
+              "task_id": 12487
+            },
+            {
+              "kind": "accept",
+              "name": "征服者的指派",
+              "task_id": 12468
+            }
+          ],
+          "text": "征服者克雷娜 → 交《前往征服堡，自求多福吧！》 → 接《征服者的指派》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0004"
+          ],
+          "location_ref": "grizzly-p002",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0005",
+            "a0006",
+            "a0007"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "纳兹格利姆中士"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "征服者的指派",
+              "task_id": 12468
+            },
+            {
+              "kind": "accept",
+              "name": "缚焰者的秘密",
+              "task_id": 12256
+            },
+            {
+              "kind": "accept",
+              "name": "显示力量",
+              "task_id": 12257
+            }
+          ],
+          "text": "纳兹格利姆中士 → 交《征服者的指派》 → 接《缚焰者的秘密》、《显示力量》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0008"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "皮货商人休尼克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "灰狼的毛皮",
+              "task_id": 12175
+            }
+          ],
+          "text": "皮货商人休尼克 → 接《灰狼的毛皮》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0009"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "粮食商人洛克兰"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "赚外快",
+              "task_id": 12436
+            }
+          ],
+          "text": "粮食商人洛克兰 → 接《赚外快》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0010"
+          ],
+          "action_kind": "open_flight_point",
+          "task_refs": [],
+          "text": "开飞行点：征服堡",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0011"
+          ],
+          "action_kind": "bind_hearth",
+          "task_refs": [],
+          "text": "绑定炉石：征服堡",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0012"
+          ],
+          "location_ref": "grizzly-p003",
+          "task_refs": [],
+          "text": "征服堡南侧 / 沃德伦",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0013",
+            "a0014",
+            "a0015",
+            "a0016"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "赚外快",
+              "task_id": 12436
+            },
+            {
+              "kind": "objective",
+              "name": "灰狼的毛皮",
+              "task_id": 12175
+            },
+            {
+              "kind": "objective",
+              "name": "缚焰者的秘密",
+              "task_id": 12256
+            },
+            {
+              "kind": "objective",
+              "name": "显示力量",
+              "task_id": 12257
+            }
+          ],
+          "text": "↳ 做《赚外快》、《灰狼的毛皮》、《缚焰者的秘密》、《显示力量》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0017"
+          ],
+          "location_ref": "grizzly-p004",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0018"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "粮食商人洛克兰"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "赚外快",
+              "task_id": 12436
+            }
+          ],
+          "text": "粮食商人洛克兰 → 交《赚外快》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0019",
+            "a0020"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "皮货商人休尼克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "灰狼的毛皮",
+              "task_id": 12175
+            },
+            {
+              "kind": "accept",
+              "name": "替代品",
+              "task_id": 12176
+            }
+          ],
+          "text": "皮货商人休尼克 → 交《灰狼的毛皮》 → 接《替代品》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0021",
+            "a0022",
+            "a0023"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "纳兹格利姆中士"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "缚焰者的秘密",
+              "task_id": 12256
+            },
+            {
+              "kind": "turnin",
+              "name": "显示力量",
+              "task_id": 12257
+            },
+            {
+              "kind": "accept",
+              "name": "沃德伦的领主",
+              "task_id": 12259
+            }
+          ],
+          "text": "纳兹格利姆中士 → 交《缚焰者的秘密》、《显示力量》 → 接《沃德伦的领主》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-01",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "前往征服堡，自求多福吧！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12487
+        },
+        {
+          "badge": null,
+          "name": "征服者的指派",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12468
+        },
+        {
+          "badge": null,
+          "name": "缚焰者的秘密",
+          "note": "《赚外快》《灰狼的毛皮》本任务：不共享：任务物为个人掉落，五号分别拾取。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12256
+        },
+        {
+          "badge": null,
+          "name": "显示力量",
+          "note": "击杀进度五号同步。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12257
+        },
+        {
+          "badge": null,
+          "name": "灰狼的毛皮",
+          "note": "《赚外快》本任务《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12175
+        },
+        {
+          "badge": null,
+          "name": "赚外快",
+          "note": "《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12436
+        },
+        {
+          "badge": null,
+          "name": "替代品",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12176
+        },
+        {
+          "badge": "shared",
+          "name": "沃德伦的领主",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12259
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "征服堡 → 沃德伦任务"
+    },
+    {
+      "action_ids": [
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0024"
+          ],
+          "location_ref": "grizzly-p005",
+          "task_refs": [],
+          "text": "风险湾",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0025"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "古图尔"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "寻找溶解剂",
+              "task_id": 12433
+            }
+          ],
+          "text": "古图尔 → 接《寻找溶解剂》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0026"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "寻找溶解剂",
+              "task_id": 12433
+            }
+          ],
+          "text": "↳ 做《寻找溶解剂》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0027"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "古图尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "寻找溶解剂",
+              "task_id": 12433
+            }
+          ],
+          "text": "古图尔 → 交《寻找溶解剂》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0028"
+          ],
+          "location_ref": "grizzly-p006",
+          "task_refs": [],
+          "text": "沃德伦",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0029"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "沃德伦的领主",
+              "task_id": 12259
+            }
+          ],
+          "text": "↳ 做《沃德伦的领主》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0030"
+          ],
+          "location_ref": "grizzly-p007",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0031",
+            "a0032"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "纳兹格利姆中士"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "沃德伦的领主",
+              "task_id": 12259
+            },
+            {
+              "kind": "accept",
+              "name": "前往欧尼瓦营地",
+              "task_id": 12451
+            }
+          ],
+          "text": "纳兹格利姆中士 → 交《沃德伦的领主》 → 接《前往欧尼瓦营地》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0033"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "我的敌人的朋友",
+              "task_id": 12412
+            }
+          ],
+          "text": "征服者克雷娜 → 接《我的敌人的朋友》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-02",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "not_shared",
+          "name": "寻找溶解剂",
+          "note": "按单个场景物交互/拾取处理，五号依次获取 Element 115；拾取后开始短时限返程，立即原路返回古图尔并尽量不进战斗。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12433
+        },
+        {
+          "badge": "shared",
+          "name": "沃德伦的领主",
+          "note": "西侧约(26.6,78.0)骑烈焰使者，领主在塔顶约(27.1,72.9)；贴到近身后优先卡CD用翼击眩晕，眩晕间隙补两种火焰技能，别在远距离吃弓箭/齐射。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12259
+        },
+        {
+          "badge": null,
+          "name": "前往欧尼瓦营地",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12451
+        },
+        {
+          "badge": null,
+          "name": "我的敌人的朋友",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12412
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "风险湾 → 沃德伦领主 → 征服堡"
+    },
+    {
+      "action_ids": [
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0034"
+          ],
+          "location_ref": "grizzly-p008",
+          "task_refs": [],
+          "text": "银溪镇南侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0035"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "我的敌人的朋友",
+              "task_id": 12412
+            }
+          ],
+          "text": "↳ 做《我的敌人的朋友》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0036"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "米克哈尔的日记"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "米克哈尔的日记",
+              "task_id": 12423
+            }
+          ],
+          "text": "米克哈尔的日记 → 接《米克哈尔的日记》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0037"
+          ],
+          "location_ref": "grizzly-p009",
+          "task_refs": [],
+          "text": "银溪镇北侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0038"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "替代品",
+              "task_id": 12176
+            }
+          ],
+          "text": "↳ 做《替代品》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0039"
+          ],
+          "location_ref": "grizzly-p010",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0040"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "我的敌人的朋友",
+              "task_id": 12412
+            }
+          ],
+          "text": "征服者克雷娜 → 交《我的敌人的朋友》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0041"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "米克哈尔的日记",
+              "task_id": 12423
+            }
+          ],
+          "text": "若任务仍在：征服者克雷娜 → 交《米克哈尔的日记》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0042",
+            "a0043"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "攻击银溪镇",
+              "task_id": 12413
+            },
+            {
+              "kind": "accept",
+              "name": "高戈娜",
+              "task_id": 12424
+            }
+          ],
+          "text": "征服者克雷娜 → 接《攻击银溪镇》、《高戈娜》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0044",
+            "a0045"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高戈娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "高戈娜",
+              "task_id": 12424
+            },
+            {
+              "kind": "accept",
+              "name": "顺藤摸瓜",
+              "task_id": 12422
+            }
+          ],
+          "text": "高戈娜 → 交《高戈娜》 → 接《顺藤摸瓜》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0046",
+            "a0047"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "皮货商人休尼克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "替代品",
+              "task_id": 12176
+            },
+            {
+              "kind": "accept",
+              "name": "休尼克的掩饰",
+              "task_id": 12177
+            }
+          ],
+          "text": "皮货商人休尼克 → 交《替代品》 → 接《休尼克的掩饰》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0048"
+          ],
+          "location_ref": "grizzly-p011",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0049",
+            "a0050"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "皮货商人休尼克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "休尼克的掩饰",
+              "task_id": 12177
+            },
+            {
+              "kind": "accept",
+              "name": "给克雷娜送货",
+              "task_id": 12178
+            }
+          ],
+          "text": "皮货商人休尼克 → 交《休尼克的掩饰》 → 接《给克雷娜送货》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0051"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "给克雷娜送货",
+              "task_id": 12178
+            }
+          ],
+          "text": "征服者克雷娜 → 交《给克雷娜送货》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0052"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "风之先知希尔·灰角"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "白肩鹰的眼睛",
+              "task_id": 12453
+            }
+          ],
+          "text": "风之先知希尔·灰角 → 接《白肩鹰的眼睛》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0053"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "苏尔肯中士"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "狩猎巨魔",
+              "task_id": 12208
+            }
+          ],
+          "text": "苏尔肯中士 → 接《狩猎巨魔》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-03",
+      "summary": "银溪镇完成《我的敌人的朋友》并取得米克哈尔日记，北侧补灰熊皮；回征服堡按真实NPC推进克雷娜、高戈娜和休尼克三条线。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "我的敌人的朋友",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12412
+        },
+        {
+          "badge": null,
+          "name": "米克哈尔的日记",
+          "note": "来源怪为银溪猎人；击杀后拾取掉落的任务起始物“米克哈尔的日记”，五号分别右键接任务。离开前确认五号日志里都有任务。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12423
+        },
+        {
+          "badge": null,
+          "name": "替代品",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12176
+        },
+        {
+          "badge": null,
+          "name": "攻击银溪镇",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12413
+        },
+        {
+          "badge": null,
+          "name": "高戈娜",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12424
+        },
+        {
+          "badge": null,
+          "name": "顺藤摸瓜",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12422
+        },
+        {
+          "badge": null,
+          "name": "休尼克的掩饰",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12177
+        },
+        {
+          "badge": null,
+          "name": "给克雷娜送货",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12178
+        },
+        {
+          "badge": "shared",
+          "name": "白肩鹰的眼睛",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12453
+        },
+        {
+          "badge": null,
+          "name": "狩猎巨魔",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12208
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "银溪镇 → 征服堡：克雷娜 / 高戈娜 / 休尼克"
+    },
+    {
+      "action_ids": [
+        "a0054",
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0070",
+        "a0071",
+        "a0069",
+        "a0072"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0054"
+          ],
+          "location_ref": "grizzly-p012",
+          "task_refs": [],
+          "text": "花岗岩之泉",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0055",
+            "a0056"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨米尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎巨魔",
+              "task_id": 12208
+            },
+            {
+              "kind": "accept",
+              "name": "抓巨魔",
+              "task_id": 11984
+            }
+          ],
+          "text": "萨米尔 → 交《狩猎巨魔》 → 接《抓巨魔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0057"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "抓巨魔",
+              "task_id": 11984
+            }
+          ],
+          "text": "↳ 做《抓巨魔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0058"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨米尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "抓巨魔",
+              "task_id": 11984
+            }
+          ],
+          "text": "萨米尔 → 交《抓巨魔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0059"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "停战？",
+              "task_id": 11989
+            }
+          ],
+          "text": "达库鲁 → 接《停战？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0060"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "停战？",
+              "task_id": 11989
+            }
+          ],
+          "text": "↳ 做《停战？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0061",
+            "a0062"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "停战？",
+              "task_id": 11989
+            },
+            {
+              "kind": "accept",
+              "name": "幻象之瓶",
+              "task_id": 11990
+            }
+          ],
+          "text": "达库鲁 → 交《停战？》 → 接《幻象之瓶》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0063"
+          ],
+          "location_ref": "grizzly-p013",
+          "task_refs": [],
+          "text": "花岗岩之泉北侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0064"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "幻象之瓶",
+              "task_id": 11990
+            }
+          ],
+          "text": "↳ 做《幻象之瓶》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0065",
+            "a0066"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "幻象之瓶",
+              "task_id": 11990
+            },
+            {
+              "kind": "accept",
+              "name": "解读象形文字",
+              "task_id": 11991
+            }
+          ],
+          "text": "达库鲁 → 交《幻象之瓶》 → 接《解读象形文字》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0067"
+          ],
+          "location_ref": "grizzly-p014",
+          "task_refs": [],
+          "text": "花岗岩之泉",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0068"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "普雷蒙"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "清理天灾",
+              "task_id": 12484
+            }
+          ],
+          "text": "普雷蒙 → 接《清理天灾》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0070"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "清理天灾",
+              "task_id": 12484
+            }
+          ],
+          "text": "↳ 做《清理天灾》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0071"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "马克·菲尔森"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "清理天灾",
+              "task_id": 12484
+            }
+          ],
+          "text": "马克·菲尔森 → 交《清理天灾》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0069"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "普雷蒙"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "蘑菇汤！",
+              "task_id": 12483
+            }
+          ],
+          "text": "普雷蒙 → 接《蘑菇汤！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0072"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "马克·菲尔森"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "净化天灾巨魔",
+              "task_id": 12029
+            }
+          ],
+          "text": "马克·菲尔森 → 接《净化天灾巨魔》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-04",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "狩猎巨魔",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12208
+        },
+        {
+          "badge": "shared",
+          "name": "抓巨魔",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 11984
+        },
+        {
+          "badge": "shared",
+          "name": "停战？",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 11989
+        },
+        {
+          "badge": "not_shared",
+          "name": "幻象之瓶",
+          "note": "水草叶、3片朦胧叶和水晶瓶都齐再离开；水晶瓶在花岗岩之泉商人购买，一次购买直接得到5个，只需买一次。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 11990
+        },
+        {
+          "badge": "not_shared",
+          "name": "解读象形文字",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 11991
+        },
+        {
+          "badge": "shared",
+          "name": "清理天灾",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12484
+        },
+        {
+          "badge": "not_shared",
+          "name": "蘑菇汤！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12483
+        },
+        {
+          "badge": null,
+          "name": "净化天灾巨魔",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12029
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "花岗岩之泉：达库鲁 / 天灾"
+    },
+    {
+      "action_ids": [
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0094",
+        "a0093"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0073"
+          ],
+          "location_ref": "grizzly-p015",
+          "task_refs": [],
+          "text": "达库鲁火盆·南侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0074"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "解读象形文字",
+              "task_id": 11991
+            }
+          ],
+          "text": "↳ 做《解读象形文字》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0075",
+            "a0076"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁的影像"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "解读象形文字",
+              "task_id": 11991
+            },
+            {
+              "kind": "accept",
+              "name": "必要的牺牲",
+              "task_id": 12007
+            }
+          ],
+          "text": "达库鲁的影像 → 交《解读象形文字》 → 接《必要的牺牲》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0077"
+          ],
+          "location_ref": "grizzly-p016",
+          "task_refs": [],
+          "text": "Zeb'Halak",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0078",
+            "a0079"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "必要的牺牲",
+              "task_id": 12007
+            },
+            {
+              "kind": "objective",
+              "name": "蘑菇汤！",
+              "task_id": 12483
+            }
+          ],
+          "text": "↳ 做《必要的牺牲》、《蘑菇汤！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0080"
+          ],
+          "location_ref": "grizzly-p017",
+          "task_refs": [],
+          "text": "达库鲁火盆·北侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0081",
+            "a0082"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁的影像"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "必要的牺牲",
+              "task_id": 12007
+            },
+            {
+              "kind": "accept",
+              "name": "古树精华宝石",
+              "task_id": 12042
+            }
+          ],
+          "text": "达库鲁的影像 → 交《必要的牺牲》 → 接《古树精华宝石》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0083"
+          ],
+          "location_ref": "grizzly-p018",
+          "task_refs": [],
+          "text": "达克萨隆外",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0084"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "净化天灾巨魔",
+              "task_id": 12029
+            }
+          ],
+          "text": "↳ 做《净化天灾巨魔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0085"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "被囚禁的猎户"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "顺藤摸瓜",
+              "task_id": 12422
+            }
+          ],
+          "text": "被囚禁的猎户 → 交《顺藤摸瓜》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0086"
+          ],
+          "location_ref": "grizzly-p019",
+          "task_refs": [],
+          "text": "银溪北侧 / 古树之心",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0087"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "攻击银溪镇",
+              "task_id": 12413
+            }
+          ],
+          "text": "↳ 做《攻击银溪镇》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0088"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "古树精华宝石"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "古树精华宝石",
+              "task_id": 12042
+            }
+          ],
+          "text": "古树精华宝石 → 交《古树精华宝石》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0089"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "古树精华宝石"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "尽在掌控",
+              "task_id": 12802
+            }
+          ],
+          "text": "古树精华宝石 → 接《尽在掌控》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0090"
+          ],
+          "location_ref": "grizzly-p020",
+          "task_refs": [],
+          "text": "Drak'atal Passage",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0091",
+            "a0092"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁的影像"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "尽在掌控",
+              "task_id": 12802
+            },
+            {
+              "kind": "accept",
+              "name": "灰尘之声",
+              "task_id": 12068
+            }
+          ],
+          "text": "达库鲁的影像 → 交《尽在掌控》 → 接《灰尘之声》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0094"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：征服堡",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0093"
+          ],
+          "location_ref": "grizzly-p021",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        }
+      ],
+      "step_id": "step-05",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "not_shared",
+          "name": "解读象形文字",
+          "note": "冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像，召唤NPC不共享。当前号背包里若还有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 11991
+        },
+        {
+          "badge": "not_shared",
+          "name": "必要的牺牲",
+          "note": "所需魔精由五号依次拾取，预言者之眼也需要五号依次交互取得，再分别到火盆完成交付。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12007
+        },
+        {
+          "badge": "not_shared",
+          "name": "蘑菇汤！",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12483
+        },
+        {
+          "badge": null,
+          "name": "古树精华宝石",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12042
+        },
+        {
+          "badge": null,
+          "name": "净化天灾巨魔",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12029
+        },
+        {
+          "badge": null,
+          "name": "顺藤摸瓜",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12422
+        },
+        {
+          "badge": null,
+          "name": "攻击银溪镇",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12413
+        },
+        {
+          "badge": null,
+          "name": "尽在掌控",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12802
+        },
+        {
+          "badge": null,
+          "name": "灰尘之声",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12068
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "达库鲁火盆 → 古树之心 → Drak'atal"
+    },
+    {
+      "action_ids": [
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0095"
+          ],
+          "location_ref": "grizzly-p022",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0096"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "征服者克雷娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "攻击银溪镇",
+              "task_id": 12413
+            }
+          ],
+          "text": "征服者克雷娜 → 交《攻击银溪镇》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0097"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高戈娜"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "盲眼卢娜",
+              "task_id": 12425
+            }
+          ],
+          "text": "高戈娜 → 接《盲眼卢娜》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0098",
+            "a0099"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "风之先知希尔·灰角"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "沃达希尔的陨落",
+              "task_id": 12207
+            },
+            {
+              "kind": "accept",
+              "name": "地下的黑暗",
+              "task_id": 12213
+            }
+          ],
+          "text": "风之先知希尔·灰角 → 接《沃达希尔的陨落》、《地下的黑暗》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0100"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "格里尼克斯·西维格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "征服斗兽场：斗熊！",
+              "task_id": 12427
+            }
+          ],
+          "text": "格里尼克斯·西维格 → 接《征服斗兽场：斗熊！》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-06",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "攻击银溪镇",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12413
+        },
+        {
+          "badge": null,
+          "name": "盲眼卢娜",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12425
+        },
+        {
+          "badge": "not_shared",
+          "name": "沃达希尔的陨落",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12207
+        },
+        {
+          "badge": "shared",
+          "name": "地下的黑暗",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12213
+        },
+        {
+          "badge": "shared",
+          "name": "征服斗兽场：斗熊！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12427
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "征服堡：斗兽场准备"
+    },
+    {
+      "action_ids": [
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0101"
+          ],
+          "location_ref": "grizzly-p023",
+          "task_refs": [],
+          "text": "征服斗兽场",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0102"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "征服斗兽场：斗熊！",
+              "task_id": 12427
+            }
+          ],
+          "text": "↳ 做《征服斗兽场：斗熊！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0103"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赌徒维尔金"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "征服斗兽场：斗熊！",
+              "task_id": 12427
+            }
+          ],
+          "text": "赌徒维尔金 → 交《征服斗兽场：斗熊！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0104"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "格里尼克斯·西维格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "征服斗兽场：疯狂的熊怪",
+              "task_id": 12428
+            }
+          ],
+          "text": "格里尼克斯·西维格 → 接《征服斗兽场：疯狂的熊怪》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0105"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "征服斗兽场：疯狂的熊怪",
+              "task_id": 12428
+            }
+          ],
+          "text": "↳ 做《征服斗兽场：疯狂的熊怪》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0106"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赌徒维尔金"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "征服斗兽场：疯狂的熊怪",
+              "task_id": 12428
+            }
+          ],
+          "text": "赌徒维尔金 → 交《征服斗兽场：疯狂的熊怪》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0107"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "格里尼克斯·西维格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "征服斗兽场：鲜血与金属",
+              "task_id": 12429
+            }
+          ],
+          "text": "格里尼克斯·西维格 → 接《征服斗兽场：鲜血与金属》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0108"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "征服斗兽场：鲜血与金属",
+              "task_id": 12429
+            }
+          ],
+          "text": "↳ 做《征服斗兽场：鲜血与金属》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0109"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赌徒维尔金"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "征服斗兽场：鲜血与金属",
+              "task_id": 12429
+            }
+          ],
+          "text": "赌徒维尔金 → 交《征服斗兽场：鲜血与金属》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0110"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "格里尼克斯·西维格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "征服斗兽场：九死一生",
+              "task_id": 12430
+            }
+          ],
+          "text": "格里尼克斯·西维格 → 接《征服斗兽场：九死一生》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0111"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "征服斗兽场：九死一生",
+              "task_id": 12430
+            }
+          ],
+          "text": "↳ 做《征服斗兽场：九死一生》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0112"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "赌徒维尔金"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "征服斗兽场：九死一生",
+              "task_id": 12430
+            }
+          ],
+          "text": "赌徒维尔金 → 交《征服斗兽场：九死一生》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0113"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "格里尼克斯·西维格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "征服斗兽场：摊牌",
+              "task_id": 12431
+            }
+          ],
+          "text": "格里尼克斯·西维格 → 接《征服斗兽场：摊牌》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0114"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "征服斗兽场：摊牌",
+              "task_id": 12431
+            }
+          ],
+          "text": "↳ 做《征服斗兽场：摊牌》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0115"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高戈娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "征服斗兽场：摊牌",
+              "task_id": 12431
+            }
+          ],
+          "text": "高戈娜 → 交《征服斗兽场：摊牌》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-07",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "征服斗兽场：斗熊！",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12427
+        },
+        {
+          "badge": "shared",
+          "name": "征服斗兽场：疯狂的熊怪",
+          "note": "实战关键不是原地清图腾，而是持续跑动拉开；1防骑可直接单挑完成，保持移动并打断闪电链即可。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12428
+        },
+        {
+          "badge": "shared",
+          "name": "征服斗兽场：鲜血与金属",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12429
+        },
+        {
+          "badge": "shared",
+          "name": "征服斗兽场：九死一生",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12430
+        },
+        {
+          "badge": "shared",
+          "name": "征服斗兽场：摊牌",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12431
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "征服斗兽场五连"
+    },
+    {
+      "action_ids": [
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0116"
+          ],
+          "location_ref": "grizzly-p024",
+          "task_refs": [],
+          "text": "花岗岩之泉",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0117"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "马克·菲尔森"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "净化天灾巨魔",
+              "task_id": 12029
+            }
+          ],
+          "text": "马克·菲尔森 → 交《净化天灾巨魔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0118",
+            "a0119"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "普雷蒙"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "蘑菇汤！",
+              "task_id": 12483
+            },
+            {
+              "kind": "accept",
+              "name": "跟我的小朋友打招呼",
+              "task_id": 12190
+            }
+          ],
+          "text": "普雷蒙 → 交《蘑菇汤！》 → 接《跟我的小朋友打招呼》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0120"
+          ],
+          "location_ref": "grizzly-p025",
+          "task_refs": [],
+          "text": "沃达希尔三洞",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0121",
+            "a0122",
+            "a0123"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "沃达希尔的陨落",
+              "task_id": 12207
+            },
+            {
+              "kind": "objective",
+              "name": "地下的黑暗",
+              "task_id": 12213
+            },
+            {
+              "kind": "objective",
+              "name": "白肩鹰的眼睛",
+              "task_id": 12453
+            }
+          ],
+          "text": "↳ 做《沃达希尔的陨落》、《地下的黑暗》、《白肩鹰的眼睛》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0124"
+          ],
+          "location_ref": "grizzly-p026",
+          "task_refs": [],
+          "text": "盲眼卢娜",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0125",
+            "a0126"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "盲眼卢娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "盲眼卢娜",
+              "task_id": 12425
+            },
+            {
+              "kind": "accept",
+              "name": "卢娜的要求",
+              "task_id": 12328
+            }
+          ],
+          "text": "盲眼卢娜 → 交《盲眼卢娜》 → 接《卢娜的要求》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0127"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "卢娜的要求",
+              "task_id": 12328
+            }
+          ],
+          "text": "↳ 做《卢娜的要求》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0128",
+            "a0129"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "盲眼卢娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "卢娜的要求",
+              "task_id": 12328
+            },
+            {
+              "kind": "accept",
+              "name": "梦游体验",
+              "task_id": 12327
+            }
+          ],
+          "text": "盲眼卢娜 → 交《卢娜的要求》 → 接《梦游体验》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0130"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "梦游体验",
+              "task_id": 12327
+            }
+          ],
+          "text": "↳ 做《梦游体验》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0131",
+            "a0132"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "盲眼卢娜"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "梦游体验",
+              "task_id": 12327
+            },
+            {
+              "kind": "accept",
+              "name": "命运与巧合",
+              "task_id": 12329
+            }
+          ],
+          "text": "盲眼卢娜 → 交《梦游体验》 → 接《命运与巧合》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-08",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "净化天灾巨魔",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12029
+        },
+        {
+          "badge": "not_shared",
+          "name": "蘑菇汤！",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12483
+        },
+        {
+          "badge": null,
+          "name": "跟我的小朋友打招呼",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12190
+        },
+        {
+          "badge": "not_shared",
+          "name": "沃达希尔的陨落",
+          "note": "五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12207
+        },
+        {
+          "badge": "shared",
+          "name": "地下的黑暗",
+          "note": "《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；本任务共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12213
+        },
+        {
+          "badge": "shared",
+          "name": "白肩鹰的眼睛",
+          "note": "《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；本任务共享，可沿三洞路线顺手完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12453
+        },
+        {
+          "badge": null,
+          "name": "盲眼卢娜",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12425
+        },
+        {
+          "badge": "not_shared",
+          "name": "卢娜的要求",
+          "note": "五号分别收集4份薄纱之尘。《梦游体验》不共享，五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12328
+        },
+        {
+          "badge": "not_shared",
+          "name": "梦游体验",
+          "note": "《卢娜的要求》不共享，五号分别收集4份薄纱之尘。本任务不共享，五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12327
+        },
+        {
+          "badge": null,
+          "name": "命运与巧合",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12329
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "花岗岩之泉 → 沃达希尔 → 盲眼卢娜"
+    },
+    {
+      "action_ids": [
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0133"
+          ],
+          "location_ref": "grizzly-p027",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0134",
+            "a0135"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "前往欧尼瓦营地",
+              "task_id": 12451
+            },
+            {
+              "kind": "accept",
+              "name": "新的盟友",
+              "task_id": 12074
+            }
+          ],
+          "text": "斥候沃塔肯 → 交《前往欧尼瓦营地》 → 接《新的盟友》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0136"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "索鲁克·雷怒"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "惊吓野马",
+              "task_id": 12415
+            }
+          ],
+          "text": "索鲁克·雷怒 → 接《惊吓野马》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0137"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "托尔玛克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "不速之“客”",
+              "task_id": 12195
+            }
+          ],
+          "text": "托尔玛克 → 接《不速之“客”》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0138"
+          ],
+          "action_kind": "open_flight_point",
+          "task_refs": [],
+          "text": "开飞行点：欧尼瓦营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0139"
+          ],
+          "location_ref": "grizzly-p028",
+          "task_refs": [],
+          "text": "欧尼瓦东北",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0140",
+            "a0141"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "不速之“客”",
+              "task_id": 12195
+            },
+            {
+              "kind": "objective",
+              "name": "惊吓野马",
+              "task_id": 12415
+            }
+          ],
+          "text": "↳ 做《不速之“客”》、《惊吓野马》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0142"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "休·格兰斯"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "熊的美食",
+              "task_id": 12279
+            }
+          ],
+          "text": "休·格兰斯 → 接《熊的美食》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0143"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "熊的美食",
+              "task_id": 12279
+            }
+          ],
+          "text": "↳ 做《熊的美食》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0144"
+          ],
+          "location_ref": "grizzly-p029",
+          "task_refs": [],
+          "text": "索尔莫丹外",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0145"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "破碎的日记"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "破损的日记",
+              "task_id": 12026
+            }
+          ],
+          "text": "破碎的日记 → 接《破损的日记》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0146"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "破损的日记",
+              "task_id": 12026
+            }
+          ],
+          "text": "↳ 做《破损的日记》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-09",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "前往欧尼瓦营地",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12451
+        },
+        {
+          "badge": null,
+          "name": "新的盟友",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12074
+        },
+        {
+          "badge": null,
+          "name": "惊吓野马",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12415
+        },
+        {
+          "badge": null,
+          "name": "不速之“客”",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12195
+        },
+        {
+          "badge": "not_shared",
+          "name": "熊的美食",
+          "note": "五号分别对鱼群使用任务渔网，不需要钓鱼专业。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12279
+        },
+        {
+          "badge": "not_shared",
+          "name": "破损的日记",
+          "note": "索尔莫丹外约(64.3,19.8)五号分别拾取地面的破损日记并接任务；书页就在周围战场地面，每号分别收集8张，最后各自在背包把书页与不完整日记合成完整日记再下山。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12026
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "欧尼瓦 → 索尔莫丹"
+    },
+    {
+      "action_ids": [
+        "a0148",
+        "a0147",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0155",
+        "a0154",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0148"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：征服堡",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0147"
+          ],
+          "location_ref": "grizzly-p030",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0149",
+            "a0150",
+            "a0151",
+            "a0152",
+            "a0153"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "风之先知希尔·灰角"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "白肩鹰的眼睛",
+              "task_id": 12453
+            },
+            {
+              "kind": "turnin",
+              "name": "沃达希尔的陨落",
+              "task_id": 12207
+            },
+            {
+              "kind": "turnin",
+              "name": "地下的黑暗",
+              "task_id": 12213
+            },
+            {
+              "kind": "accept",
+              "name": "可能的关联",
+              "task_id": 12229
+            },
+            {
+              "kind": "accept",
+              "name": "熊神的后代",
+              "task_id": 12231
+            }
+          ],
+          "text": "风之先知希尔·灰角 → 交《白肩鹰的眼睛》、《沃达希尔的陨落》、《地下的黑暗》 → 接《可能的关联》、《熊神的后代》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0155"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：征服堡 → 欧尼瓦营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0154"
+          ],
+          "location_ref": "grizzly-p031",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0156",
+            "a0157"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "托尔玛克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "不速之“客”",
+              "task_id": 12195
+            },
+            {
+              "kind": "accept",
+              "name": "有趣的计划",
+              "task_id": 12165
+            }
+          ],
+          "text": "托尔玛克 → 交《不速之“客”》 → 接《有趣的计划》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0158"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "索鲁克·雷怒"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "惊吓野马",
+              "task_id": 12415
+            }
+          ],
+          "text": "索鲁克·雷怒 → 交《惊吓野马》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0159"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "休·格兰斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "熊的美食",
+              "task_id": 12279
+            }
+          ],
+          "text": "休·格兰斯 → 交《熊的美食》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0160"
+          ],
+          "location_ref": "grizzly-p032",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0161",
+            "a0162"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知帕鲁纳"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "破损的日记",
+              "task_id": 12026
+            },
+            {
+              "kind": "accept",
+              "name": "翻译日记",
+              "task_id": 12054
+            }
+          ],
+          "text": "先知帕鲁纳 → 交《破损的日记》 → 接《翻译日记》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-10",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "白肩鹰的眼睛",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12453
+        },
+        {
+          "badge": "not_shared",
+          "name": "沃达希尔的陨落",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12207
+        },
+        {
+          "badge": "shared",
+          "name": "地下的黑暗",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12213
+        },
+        {
+          "badge": null,
+          "name": "可能的关联",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12229
+        },
+        {
+          "badge": "shared",
+          "name": "熊神的后代",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12231
+        },
+        {
+          "badge": null,
+          "name": "不速之“客”",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12195
+        },
+        {
+          "badge": "not_shared",
+          "name": "有趣的计划",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12165
+        },
+        {
+          "badge": null,
+          "name": "惊吓野马",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12415
+        },
+        {
+          "badge": "not_shared",
+          "name": "熊的美食",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12279
+        },
+        {
+          "badge": "not_shared",
+          "name": "破损的日记",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12026
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "翻译日记",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12054
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "炉石征服堡 → 欧尼瓦交接"
+    },
+    {
+      "action_ids": [
+        "a0163",
+        "a0164",
+        "a0165",
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0173",
+        "a0172",
+        "a0174",
+        "a0175",
+        "a0176"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0163"
+          ],
+          "location_ref": "grizzly-p033",
+          "task_refs": [],
+          "text": "欧尼瓦南侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0164",
+            "a0165",
+            "a0166"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "翻译日记",
+              "task_id": 12054
+            },
+            {
+              "kind": "objective",
+              "name": "可能的关联",
+              "task_id": 12229
+            },
+            {
+              "kind": "objective",
+              "name": "熊神的后代",
+              "task_id": 12231
+            }
+          ],
+          "text": "↳ 做《翻译日记》、《可能的关联》、《熊神的后代》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0167"
+          ],
+          "location_ref": "grizzly-p034",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0168",
+            "a0169",
+            "a0170",
+            "a0171"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "风之先知希尔·灰角"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "可能的关联",
+              "task_id": 12229
+            },
+            {
+              "kind": "turnin",
+              "name": "熊神的后代",
+              "task_id": 12231
+            },
+            {
+              "kind": "accept",
+              "name": "摧毁树苗",
+              "task_id": 12241
+            },
+            {
+              "kind": "accept",
+              "name": "沃达希尔的种子",
+              "task_id": 12242
+            }
+          ],
+          "text": "风之先知希尔·灰角 → 交《可能的关联》、《熊神的后代》 → 接《摧毁树苗》、《沃达希尔的种子》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0173"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：征服堡 → 欧尼瓦营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0172"
+          ],
+          "location_ref": "grizzly-p035",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0174",
+            "a0175"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知帕鲁纳"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "翻译日记",
+              "task_id": 12054
+            },
+            {
+              "kind": "accept",
+              "name": "符文中的预言",
+              "task_id": 12058
+            }
+          ],
+          "text": "先知帕鲁纳 → 交《翻译日记》 → 接《符文中的预言》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0176"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "“钢铁之子”",
+              "task_id": 12073
+            }
+          ],
+          "text": "斥候沃塔肯 → 接《“钢铁之子”》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-11",
+      "summary": "欧尼瓦南侧完成翻译日记、熊怪血液和熊神子嗣；回征服堡只找灰角交接，再系统飞欧尼瓦分别找帕鲁纳和沃塔肯接索尔莫丹任务。",
+      "task_presentations": [
+        {
+          "badge": "sequential_loot",
+          "name": "翻译日记",
+          "note": "目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12054
+        },
+        {
+          "badge": null,
+          "name": "可能的关联",
+          "note": "《翻译日记》目标只需击杀一次，五号依次拾取；本任务推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12229
+        },
+        {
+          "badge": "shared",
+          "name": "熊神的后代",
+          "note": "《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；本任务共享。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12231
+        },
+        {
+          "badge": "not_shared",
+          "name": "摧毁树苗",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12241
+        },
+        {
+          "badge": "not_shared",
+          "name": "沃达希尔的种子",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12242
+        },
+        {
+          "badge": "shared",
+          "name": "符文中的预言",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12058
+        },
+        {
+          "badge": null,
+          "name": "“钢铁之子”",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12073
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "欧尼瓦南侧 → 征服堡灰角 → 欧尼瓦"
+    },
+    {
+      "action_ids": [
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0204",
+        "a0203"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0177"
+          ],
+          "location_ref": "grizzly-p036",
+          "task_refs": [],
+          "text": "库伦",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0178",
+            "a0179"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "库伦"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "新的盟友",
+              "task_id": 12074
+            },
+            {
+              "kind": "accept",
+              "name": "巨石横飞",
+              "task_id": 11982
+            }
+          ],
+          "text": "库伦 → 交《新的盟友》 → 接《巨石横飞》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0180"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "巨石横飞",
+              "task_id": 11982
+            }
+          ],
+          "text": "↳ 做《巨石横飞》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0181",
+            "a0182"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "库伦"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "巨石横飞",
+              "task_id": 11982
+            },
+            {
+              "kind": "accept",
+              "name": "鼓舞士气",
+              "task_id": 12070
+            }
+          ],
+          "text": "库伦 → 交《巨石横飞》 → 接《鼓舞士气》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0183"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "鼓舞士气",
+              "task_id": 12070
+            }
+          ],
+          "text": "↳ 做《鼓舞士气》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0184",
+            "a0185"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "库伦"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "鼓舞士气",
+              "task_id": 12070
+            },
+            {
+              "kind": "accept",
+              "name": "攻破防线",
+              "task_id": 11985
+            }
+          ],
+          "text": "库伦 → 交《鼓舞士气》 → 接《攻破防线》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0186"
+          ],
+          "location_ref": "grizzly-p037",
+          "task_refs": [],
+          "text": "索尔莫丹",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0187",
+            "a0188",
+            "a0189"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "攻破防线",
+              "task_id": 11985
+            },
+            {
+              "kind": "objective",
+              "name": "“钢铁之子”",
+              "task_id": 12073
+            },
+            {
+              "kind": "objective",
+              "name": "符文中的预言",
+              "task_id": 12058
+            }
+          ],
+          "text": "↳ 做《攻破防线》、《“钢铁之子”》、《符文中的预言》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0190"
+          ],
+          "location_ref": "grizzly-p038",
+          "task_refs": [],
+          "text": "库伦",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0191",
+            "a0192"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "库伦"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "攻破防线",
+              "task_id": 11985
+            },
+            {
+              "kind": "accept",
+              "name": "加弗洛克",
+              "task_id": 12081
+            }
+          ],
+          "text": "库伦 → 交《攻破防线》 → 接《加弗洛克》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0193"
+          ],
+          "location_ref": "grizzly-p039",
+          "task_refs": [],
+          "text": "哈考尔 / 克拉斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0194",
+            "a0195",
+            "a0196"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "哈考尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "跟我的小朋友打招呼",
+              "task_id": 12190
+            },
+            {
+              "kind": "accept",
+              "name": "等肉下锅",
+              "task_id": 12113
+            },
+            {
+              "kind": "accept",
+              "name": "心灵的创伤",
+              "task_id": 12114
+            }
+          ],
+          "text": "哈考尔 → 交《跟我的小朋友打招呼》 → 接《等肉下锅》、《心灵的创伤》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0197"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "克拉斯"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "孤胆英雄……",
+              "task_id": 12116
+            }
+          ],
+          "text": "克拉斯 → 接《孤胆英雄……》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0198"
+          ],
+          "location_ref": "grizzly-p040",
+          "task_refs": [],
+          "text": "加弗洛克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0199",
+            "a0200"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "加弗洛克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "加弗洛克",
+              "task_id": 12081
+            },
+            {
+              "kind": "accept",
+              "name": "压制符文",
+              "task_id": 12093
+            }
+          ],
+          "text": "加弗洛克 → 交《加弗洛克》 → 接《压制符文》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0201"
+          ],
+          "location_ref": "grizzly-p041",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0202"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "“钢铁之子”",
+              "task_id": 12073
+            }
+          ],
+          "text": "斥候沃塔肯 → 交《“钢铁之子”》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0204"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知帕鲁纳"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "符文中的预言",
+              "task_id": 12058
+            }
+          ],
+          "text": "先知帕鲁纳 → 交《符文中的预言》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0203"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "以洛肯之名",
+              "task_id": 12204
+            }
+          ],
+          "text": "斥候沃塔肯 → 接《以洛肯之名》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-12",
+      "summary": "库伦三连后在索尔莫丹同时完成铁矮人和符文板；再去哈考尔/克拉斯、加弗洛克接任务，最后回欧尼瓦分别向沃塔肯和帕鲁纳交接。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "新的盟友",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12074
+        },
+        {
+          "badge": "shared",
+          "name": "巨石横飞",
+          "note": "《鼓舞士气》均共享；主号完成即可同步五号。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 11982
+        },
+        {
+          "badge": "shared",
+          "name": "鼓舞士气",
+          "note": "《巨石横飞》本任务均共享；主号完成即可同步五号。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12070
+        },
+        {
+          "badge": null,
+          "name": "攻破防线",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 11985
+        },
+        {
+          "badge": null,
+          "name": "“钢铁之子”",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12073
+        },
+        {
+          "badge": "shared",
+          "name": "符文中的预言",
+          "note": "三块符文板由主号读取即可同步五号。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12058
+        },
+        {
+          "badge": null,
+          "name": "加弗洛克",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12081
+        },
+        {
+          "badge": null,
+          "name": "跟我的小朋友打招呼",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12190
+        },
+        {
+          "badge": null,
+          "name": "等肉下锅",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12113
+        },
+        {
+          "badge": null,
+          "name": "心灵的创伤",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12114
+        },
+        {
+          "badge": "not_shared",
+          "name": "孤胆英雄……",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12116
+        },
+        {
+          "badge": null,
+          "name": "压制符文",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12093
+        },
+        {
+          "badge": "shared",
+          "name": "以洛肯之名",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12204
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "库伦 / 索尔莫丹 → 哈考尔 / 加弗洛克 → 欧尼瓦"
+    },
+    {
+      "action_ids": [
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0218",
+        "a0217",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0223",
+        "a0222",
+        "a0224",
+        "a0225"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0205"
+          ],
+          "location_ref": "grizzly-p042",
+          "task_refs": [],
+          "text": "萨莎",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0206",
+            "a0207",
+            "a0208"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨莎"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "命运与巧合",
+              "task_id": 12329
+            },
+            {
+              "kind": "accept",
+              "name": "萨莎的狩猎",
+              "task_id": 12134
+            },
+            {
+              "kind": "accept",
+              "name": "阿纳托雷",
+              "task_id": 12330
+            }
+          ],
+          "text": "萨莎 → 交《命运与巧合》 → 接《萨莎的狩猎》、《阿纳托雷》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0209",
+            "a0210"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "萨莎的狩猎",
+              "task_id": 12134
+            },
+            {
+              "kind": "objective",
+              "name": "阿纳托雷",
+              "task_id": 12330
+            }
+          ],
+          "text": "↳ 做《萨莎的狩猎》、《阿纳托雷》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0211",
+            "a0212",
+            "a0213"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨莎"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "萨莎的狩猎",
+              "task_id": 12134
+            },
+            {
+              "kind": "turnin",
+              "name": "阿纳托雷",
+              "task_id": 12330
+            },
+            {
+              "kind": "accept",
+              "name": "姐姐的誓言",
+              "task_id": 12411
+            }
+          ],
+          "text": "萨莎 → 交《萨莎的狩猎》、《阿纳托雷》 → 接《姐姐的誓言》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0214"
+          ],
+          "location_ref": "grizzly-p043",
+          "task_refs": [],
+          "text": "灰喉堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0215",
+            "a0216"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "摧毁树苗",
+              "task_id": 12241
+            },
+            {
+              "kind": "objective",
+              "name": "沃达希尔的种子",
+              "task_id": 12242
+            }
+          ],
+          "text": "↳ 做《摧毁树苗》、《沃达希尔的种子》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0218"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：征服堡",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0217"
+          ],
+          "location_ref": "grizzly-p044",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0219",
+            "a0220",
+            "a0221"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "风之先知希尔·灰角"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "摧毁树苗",
+              "task_id": 12241
+            },
+            {
+              "kind": "turnin",
+              "name": "沃达希尔的种子",
+              "task_id": 12242
+            },
+            {
+              "kind": "accept",
+              "name": "乌索克，巨熊之神",
+              "task_id": 12236
+            }
+          ],
+          "text": "风之先知希尔·灰角 → 交《摧毁树苗》、《沃达希尔的种子》 → 接《乌索克，巨熊之神》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0223"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：征服堡 → 欧尼瓦营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0222"
+          ],
+          "location_ref": "grizzly-p045",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0224"
+          ],
+          "location_ref": "grizzly-p046",
+          "task_refs": [],
+          "text": "乌索克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0225"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "乌索克，巨熊之神",
+              "task_id": 12236
+            }
+          ],
+          "text": "↳ 做《乌索克，巨熊之神》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-13",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "命运与巧合",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12329
+        },
+        {
+          "badge": null,
+          "name": "萨莎的狩猎",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12134
+        },
+        {
+          "badge": "not_shared",
+          "name": "阿纳托雷",
+          "note": "去至日村找塔季娅娜，对她使用镇静飞镖触发坐骑/带回脚本；一个号完成后其余号留在原地等塔季娅娜刷新，再依次完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12330
+        },
+        {
+          "badge": null,
+          "name": "姐姐的誓言",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12411
+        },
+        {
+          "badge": "not_shared",
+          "name": "摧毁树苗",
+          "note": "完成后本组直接炉石回征服堡。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12241
+        },
+        {
+          "badge": "not_shared",
+          "name": "沃达希尔的种子",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12242
+        },
+        {
+          "badge": "shared",
+          "name": "乌索克，巨熊之神",
+          "note": "击败乌索克后对尸体使用净化灰烬；1防骑+4惩戒可让NPC助手负责治疗。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12236
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "萨莎 → 灰喉堡 → 乌索克"
+    },
+    {
+      "action_ids": [
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0231",
+        "a0230",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0226"
+          ],
+          "location_ref": "grizzly-p047",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0227"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：欧尼瓦营地 → 征服堡",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0228"
+          ],
+          "location_ref": "grizzly-p048",
+          "task_refs": [],
+          "text": "征服堡",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0229"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "风之先知希尔·灰角"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "乌索克，巨熊之神",
+              "task_id": 12236
+            }
+          ],
+          "text": "风之先知希尔·灰角 → 交《乌索克，巨熊之神》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0231"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：征服堡 → 欧尼瓦营地",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0230"
+          ],
+          "location_ref": "grizzly-p049",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0232"
+          ],
+          "location_ref": "grizzly-p050",
+          "task_refs": [],
+          "text": "安娅",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0233"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "安娅"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "姐姐的誓言",
+              "task_id": 12411
+            }
+          ],
+          "text": "安娅 → 交《姐姐的誓言》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0234"
+          ],
+          "location_ref": "grizzly-p051",
+          "task_refs": [],
+          "text": "萨莎",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0235"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨莎"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "狼人的末日",
+              "task_id": 12164
+            }
+          ],
+          "text": "萨莎 → 接《狼人的末日》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0236"
+          ],
+          "location_ref": "grizzly-p052",
+          "task_refs": [],
+          "text": "休·格兰斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0237"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "以洛肯之名",
+              "task_id": 12204
+            }
+          ],
+          "text": "↳ 做《以洛肯之名》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-14",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "乌索克，巨熊之神",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12236
+        },
+        {
+          "badge": null,
+          "name": "姐姐的誓言",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12411
+        },
+        {
+          "badge": "shared",
+          "name": "狼人的末日",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12164
+        },
+        {
+          "badge": "shared",
+          "name": "以洛肯之名",
+          "note": "《潜在的能量》均共享。\n先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12204
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "乌索克交付 → 安娅 / 萨莎"
+    },
+    {
+      "action_ids": [
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260",
+        "a0261"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0238"
+          ],
+          "location_ref": "grizzly-p053",
+          "task_refs": [],
+          "text": "符文监督者",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0239",
+            "a0240"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "压制符文",
+              "task_id": 12093
+            },
+            {
+              "kind": "objective",
+              "name": "心灵的创伤",
+              "task_id": 12114
+            }
+          ],
+          "text": "↳ 做《压制符文》、《心灵的创伤》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0241"
+          ],
+          "location_ref": "grizzly-p054",
+          "task_refs": [],
+          "text": "Drakil'jin遗迹",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0242",
+            "a0243"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "孤胆英雄……",
+              "task_id": 12116
+            },
+            {
+              "kind": "objective",
+              "name": "灰尘之声",
+              "task_id": 12068
+            }
+          ],
+          "text": "↳ 做《孤胆英雄……》、《灰尘之声》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0244"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "达库鲁的影像"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "灰尘之声",
+              "task_id": 12068
+            }
+          ],
+          "text": "达库鲁的影像 → 交《灰尘之声》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0245"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "哈里森·琼斯"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "喔——哒！！",
+              "task_id": 12082
+            }
+          ],
+          "text": "哈里森·琼斯 → 接《喔——哒！！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0246"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "喔——哒！！",
+              "task_id": 12082
+            }
+          ],
+          "text": "↳ 做《喔——哒！！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0247"
+          ],
+          "location_ref": "grizzly-p055",
+          "task_refs": [],
+          "text": "哈考尔 / 克拉斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0248",
+            "a0249"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "哈考尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "心灵的创伤",
+              "task_id": 12114
+            },
+            {
+              "kind": "turnin",
+              "name": "喔——哒！！",
+              "task_id": 12082
+            }
+          ],
+          "text": "哈考尔 → 交《心灵的创伤》、《喔——哒！！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0250",
+            "a0251"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "克拉斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "孤胆英雄……",
+              "task_id": 12116
+            },
+            {
+              "kind": "accept",
+              "name": "达卡古尔之槌",
+              "task_id": 12120
+            }
+          ],
+          "text": "克拉斯 → 交《孤胆英雄……》 → 接《达卡古尔之槌》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0252"
+          ],
+          "location_ref": "grizzly-p056",
+          "task_refs": [],
+          "text": "达卡古尔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0253"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "达卡古尔之槌",
+              "task_id": 12120
+            }
+          ],
+          "text": "↳ 做《达卡古尔之槌》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0254"
+          ],
+          "location_ref": "grizzly-p057",
+          "task_refs": [],
+          "text": "克拉斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0255",
+            "a0256"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "克拉斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "达卡古尔之槌",
+              "task_id": 12120
+            },
+            {
+              "kind": "accept",
+              "name": "死后相见",
+              "task_id": 12121
+            }
+          ],
+          "text": "克拉斯 → 交《达卡古尔之槌》 → 接《死后相见》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0257"
+          ],
+          "location_ref": "grizzly-p058",
+          "task_refs": [],
+          "text": "Drakil'jin墓穴",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0258"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "死后相见",
+              "task_id": 12121
+            }
+          ],
+          "text": "↳ 做《死后相见》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0259",
+            "a0260"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "甘休"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "死后相见",
+              "task_id": 12121
+            },
+            {
+              "kind": "accept",
+              "name": "冷静一下，伙计",
+              "task_id": 12137
+            }
+          ],
+          "text": "甘休 → 交《死后相见》 → 接《冷静一下，伙计》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0261"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "冷静一下，伙计",
+              "task_id": 12137
+            }
+          ],
+          "text": "↳ 做《冷静一下，伙计》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-15",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "压制符文",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12093
+        },
+        {
+          "badge": null,
+          "name": "心灵的创伤",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12114
+        },
+        {
+          "badge": "not_shared",
+          "name": "孤胆英雄……",
+          "note": "启动护送前先确认本任务《灰尘之声》的遗迹内目标已完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12116
+        },
+        {
+          "badge": null,
+          "name": "灰尘之声",
+          "note": "先携带，进入Drakil'jin遗迹再完成。\n启动护送前先确认《孤胆英雄……》本任务的遗迹内目标已完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12068
+        },
+        {
+          "badge": null,
+          "name": "喔——哒！！",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12082
+        },
+        {
+          "badge": null,
+          "name": "达卡古尔之槌",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12120
+        },
+        {
+          "badge": "special",
+          "name": "死后相见",
+          "note": "敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12121
+        },
+        {
+          "badge": "not_shared",
+          "name": "冷静一下，伙计",
+          "note": "《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；本任务不共享，五号分别完成。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12137
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "符文监督者 → Drakil'jin墓穴"
+    },
+    {
+      "action_ids": [
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271",
+        "a0272",
+        "a0273",
+        "a0274",
+        "a0275",
+        "a0276",
+        "a0277"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0262"
+          ],
+          "location_ref": "grizzly-p059",
+          "task_refs": [],
+          "text": "克拉斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0263",
+            "a0264"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "克拉斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "冷静一下，伙计",
+              "task_id": 12137
+            },
+            {
+              "kind": "accept",
+              "name": "金亚拉克的末日",
+              "task_id": 12152
+            }
+          ],
+          "text": "克拉斯 → 交《冷静一下，伙计》 → 接《金亚拉克的末日》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0265"
+          ],
+          "location_ref": "grizzly-p060",
+          "task_refs": [],
+          "text": "Drakil'jin墓穴",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0266"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "金亚拉克的末日",
+              "task_id": 12152
+            }
+          ],
+          "text": "↳ 做《金亚拉克的末日》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0267"
+          ],
+          "location_ref": "grizzly-p061",
+          "task_refs": [],
+          "text": "克拉斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0268"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "克拉斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "金亚拉克的末日",
+              "task_id": 12152
+            }
+          ],
+          "text": "克拉斯 → 交《金亚拉克的末日》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0269"
+          ],
+          "location_ref": "grizzly-p062",
+          "task_refs": [],
+          "text": "血月岛",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0270"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狼人的末日",
+              "task_id": 12164
+            }
+          ],
+          "text": "↳ 做《狼人的末日》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0271"
+          ],
+          "location_ref": "grizzly-p063",
+          "task_refs": [],
+          "text": "萨莎",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0272"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨莎"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狼人的末日",
+              "task_id": 12164
+            }
+          ],
+          "text": "萨莎 → 交《狼人的末日》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0273"
+          ],
+          "location_ref": "grizzly-p064",
+          "task_refs": [],
+          "text": "加弗洛克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0274",
+            "a0275"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "加弗洛克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "压制符文",
+              "task_id": 12093
+            },
+            {
+              "kind": "accept",
+              "name": "潜在的能量",
+              "task_id": 12094
+            }
+          ],
+          "text": "加弗洛克 → 交《压制符文》 → 接《潜在的能量》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0276",
+            "a0277"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "以洛肯之名",
+              "task_id": 12204
+            },
+            {
+              "kind": "objective",
+              "name": "潜在的能量",
+              "task_id": 12094
+            }
+          ],
+          "text": "↳ 做《以洛肯之名》、《潜在的能量》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-16",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "not_shared",
+          "name": "冷静一下，伙计",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12137
+        },
+        {
+          "badge": "shared",
+          "name": "金亚拉克的末日",
+          "note": "按任务流程灌注供品并在墓穴外锣旁完成最终事件即可。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12152
+        },
+        {
+          "badge": "shared",
+          "name": "狼人的末日",
+          "note": "按三前置Boss → 阿鲁高之影的脚本顺序完成即可。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12164
+        },
+        {
+          "badge": null,
+          "name": "压制符文",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 12093
+        },
+        {
+          "badge": "shared",
+          "name": "潜在的能量",
+          "note": "《以洛肯之名》本任务均共享。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12094
+        },
+        {
+          "badge": "shared",
+          "name": "以洛肯之名",
+          "note": "《潜在的能量》均共享。\n先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12204
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "金亚拉克 → 血月岛 → 加弗洛克"
+    },
+    {
+      "action_ids": [
+        "a0278",
+        "a0279",
+        "a0280",
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289",
+        "a0290",
+        "a0291",
+        "a0292",
+        "a0293",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298",
+        "a0299"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0278"
+          ],
+          "location_ref": "grizzly-p065",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0279",
+            "a0280"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "以洛肯之名",
+              "task_id": 12204
+            },
+            {
+              "kind": "accept",
+              "name": "监工的制服",
+              "task_id": 12201
+            }
+          ],
+          "text": "斥候沃塔肯 → 交《以洛肯之名》 → 接《监工的制服》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0281"
+          ],
+          "location_ref": "grizzly-p066",
+          "task_refs": [],
+          "text": "Dun Argol",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0282",
+            "a0283"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "监工的制服",
+              "task_id": 12201
+            },
+            {
+              "kind": "objective",
+              "name": "有趣的计划",
+              "task_id": 12165
+            }
+          ],
+          "text": "↳ 做《监工的制服》、《有趣的计划》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0284"
+          ],
+          "location_ref": "grizzly-p067",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0285",
+            "a0286"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "监工的制服",
+              "task_id": 12201
+            },
+            {
+              "kind": "accept",
+              "name": "活灵活现",
+              "task_id": 12202
+            }
+          ],
+          "text": "斥候沃塔肯 → 交《监工的制服》 → 接《活灵活现》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0287",
+            "a0288"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "勘探员罗卡尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "有趣的计划",
+              "task_id": 12165
+            },
+            {
+              "kind": "accept",
+              "name": "收集零件",
+              "task_id": 12196
+            }
+          ],
+          "text": "勘探员罗卡尔 → 交《有趣的计划》 → 接《收集零件》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0289"
+          ],
+          "location_ref": "grizzly-p068",
+          "task_refs": [],
+          "text": "Dun Argol",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0290",
+            "a0291"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "活灵活现",
+              "task_id": 12202
+            },
+            {
+              "kind": "objective",
+              "name": "收集零件",
+              "task_id": 12196
+            }
+          ],
+          "text": "↳ 做《活灵活现》、《收集零件》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0292"
+          ],
+          "location_ref": "grizzly-p069",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0293",
+            "a0294"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "活灵活现",
+              "task_id": 12202
+            },
+            {
+              "kind": "accept",
+              "name": "洛肯的命令",
+              "task_id": 12203
+            }
+          ],
+          "text": "斥候沃塔肯 → 交《活灵活现》 → 接《洛肯的命令》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0295",
+            "a0296"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "勘探员罗卡尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "收集零件",
+              "task_id": 12196
+            },
+            {
+              "kind": "accept",
+              "name": "我们有能源",
+              "task_id": 12197
+            }
+          ],
+          "text": "勘探员罗卡尔 → 交《收集零件》 → 接《我们有能源》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0297"
+          ],
+          "location_ref": "grizzly-p070",
+          "task_refs": [],
+          "text": "Dun Argol上层",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0298",
+            "a0299"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "我们有能源",
+              "task_id": 12197
+            },
+            {
+              "kind": "objective",
+              "name": "洛肯的命令",
+              "task_id": 12203
+            }
+          ],
+          "text": "↳ 做《我们有能源》、《洛肯的命令》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-17",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "以洛肯之名",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12204
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "监工的制服",
+          "note": "目标打一次后五号依次拾取；《有趣的计划》不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12201
+        },
+        {
+          "badge": "not_shared",
+          "name": "有趣的计划",
+          "note": "《监工的制服》目标打一次后五号依次拾取；本任务不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12165
+        },
+        {
+          "badge": "shared",
+          "name": "活灵活现",
+          "note": "《收集零件》不共享，五号分别拾取零件。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12202
+        },
+        {
+          "badge": "not_shared",
+          "name": "收集零件",
+          "note": "《活灵活现》共享；本任务不共享，五号分别拾取零件。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12196
+        },
+        {
+          "badge": "shared",
+          "name": "洛肯的命令",
+          "note": "《我们有能源》两名目标各打一次，同一尸体能量核心由五号依次拾取；本任务共享。读取基座后保持已完成未交，伪装留到铁领主结束。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12203
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "我们有能源",
+          "note": "两名目标各打一次，同一尸体能量核心由五号依次拾取；《洛肯的命令》共享。读取基座后保持已完成未交，伪装留到铁领主结束。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12197
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "欧尼瓦 ↔ Dun Argol：制服 / 能源"
+    },
+    {
+      "action_ids": [
+        "a0300",
+        "a0301",
+        "a0302",
+        "a0303",
+        "a0304",
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308",
+        "a0309",
+        "a0310",
+        "a0311",
+        "a0312"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0300"
+          ],
+          "location_ref": "grizzly-p071",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0301",
+            "a0302"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "勘探员罗卡尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "我们有能源",
+              "task_id": 12197
+            },
+            {
+              "kind": "accept",
+              "name": "……我们没有能源",
+              "task_id": 12198
+            }
+          ],
+          "text": "勘探员罗卡尔 → 交《我们有能源》 → 接《……我们没有能源》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0303"
+          ],
+          "location_ref": "grizzly-p072",
+          "task_refs": [],
+          "text": "Dun Argol外围",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0304"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "……我们没有能源",
+              "task_id": 12198
+            }
+          ],
+          "text": "↳ 做《……我们没有能源》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0305"
+          ],
+          "location_ref": "grizzly-p073",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0306",
+            "a0307"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "勘探员罗卡尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "……我们没有能源",
+              "task_id": 12198
+            },
+            {
+              "kind": "accept",
+              "name": "击败铁领主",
+              "task_id": 12199
+            }
+          ],
+          "text": "勘探员罗卡尔 → 交《……我们没有能源》 → 接《击败铁领主》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0308"
+          ],
+          "location_ref": "grizzly-p074",
+          "task_refs": [],
+          "text": "Dun Argol上层",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0309"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "击败铁领主",
+              "task_id": 12199
+            }
+          ],
+          "text": "↳ 做《击败铁领主》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0310"
+          ],
+          "location_ref": "grizzly-p075",
+          "task_refs": [],
+          "text": "欧尼瓦营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0311"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "托尔玛克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "击败铁领主",
+              "task_id": 12199
+            }
+          ],
+          "text": "托尔玛克 → 交《击败铁领主》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0312"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候沃塔肯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "洛肯的命令",
+              "task_id": 12203
+            }
+          ],
+          "text": "斥候沃塔肯 → 交《洛肯的命令》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-18",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "sequential_loot",
+          "name": "我们有能源",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12197
+        },
+        {
+          "badge": "shared",
+          "name": "……我们没有能源",
+          "note": "五个角色分别召出的战争魔像都能对同一只闪电斥候各记1次充能；一只怪可直接记5次，两只怪即可完成全队。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12198
+        },
+        {
+          "badge": "shared",
+          "name": "击败铁领主",
+          "note": "穿伪装上楼/乘电梯，使用魔像控制器；铁领主死亡后继续利用魔像/载具离开。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12199
+        },
+        {
+          "badge": "shared",
+          "name": "洛肯的命令",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12203
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "Dun Argol：能源 → 铁领主 → 欧尼瓦"
+    },
+    {
+      "action_ids": [
+        "a0313",
+        "a0314",
+        "a0315",
+        "a0316",
+        "a0317",
+        "a0318",
+        "a0319",
+        "a0320",
+        "a0321",
+        "a0322"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0313"
+          ],
+          "location_ref": "grizzly-p076",
+          "task_refs": [],
+          "text": "加弗洛克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0314",
+            "a0315"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "加弗洛克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "潜在的能量",
+              "task_id": 12094
+            },
+            {
+              "kind": "accept",
+              "name": "终获解救",
+              "task_id": 12099
+            }
+          ],
+          "text": "加弗洛克 → 交《潜在的能量》 → 接《终获解救》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0316"
+          ],
+          "location_ref": "grizzly-p077",
+          "task_refs": [],
+          "text": "符文巨人平原",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0317",
+            "a0318"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "终获解救",
+              "task_id": 12099
+            },
+            {
+              "kind": "objective",
+              "name": "等肉下锅",
+              "task_id": 12113
+            }
+          ],
+          "text": "↳ 做《终获解救》、《等肉下锅》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0319"
+          ],
+          "location_ref": "grizzly-p078",
+          "task_refs": [],
+          "text": "哈考尔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0320"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "哈考尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "等肉下锅",
+              "task_id": 12113
+            }
+          ],
+          "text": "哈考尔 → 交《等肉下锅》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0321"
+          ],
+          "location_ref": "grizzly-p079",
+          "task_refs": [],
+          "text": "加弗洛克",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0322"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "加弗洛克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "终获解救",
+              "task_id": 12099
+            }
+          ],
+          "text": "加弗洛克 → 交《终获解救》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-19",
+      "summary": "加弗洛克交潜能石并接《终获解救》，符文巨人平原完成释放并补肉类；向哈考尔交《等肉下锅》，最后回加弗洛克交《终获解救》，灰熊丘陵本图结束。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "潜在的能量",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 12094
+        },
+        {
+          "badge": "shared",
+          "name": "终获解救",
+          "note": "符文破坏者失败时目标会被削弱，可等冷却后再次使用。《等肉下锅》先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": false,
+          "task_id": 12099
+        },
+        {
+          "badge": null,
+          "name": "等肉下锅",
+          "note": "《终获解救》共享；符文破坏者失败时目标会被削弱，可等冷却后再次使用。本任务先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 12113
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "加弗洛克 → 符文巨人平原 → 哈考尔 → 加弗洛克"
+    }
+  ]
+}

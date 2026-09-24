@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": 11677,
+  "identity": {
+    "name_zhcn": "阻止瘟疫",
+    "name_en": "Stop the Plague",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [
+      11675
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 47000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 37507,
+        "quantity": 1,
+        "name_zhcn": "冷淬肩甲",
+        "name_en": "Chilled Shoulderplates",
+        "sell_price_each_copper": 43523,
+        "sell_price_total_copper": 43523
+      },
+      {
+        "item_id": 37391,
+        "quantity": 1,
+        "name_zhcn": "犀牛皮面具",
+        "name_en": "Rhinohide Mask",
+        "sell_price_each_copper": 34042,
+        "sell_price_total_copper": 34042
+      },
+      {
+        "item_id": 37427,
+        "quantity": 1,
+        "name_zhcn": "平原猎手腰带",
+        "name_en": "Plainhunter's Waistband",
+        "sell_price_each_copper": 26843,
+        "sell_price_total_copper": 26843
+      },
+      {
+        "item_id": 37223,
+        "quantity": 1,
+        "name_zhcn": "酷热裹手",
+        "name_en": "Sweltering Handwraps",
+        "sell_price_each_copper": 18020,
+        "sell_price_total_copper": 18020
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 43523,
+    "gear_sale_max_copper": 43523,
+    "reputation_rewards": [
+      {
+        "faction_id": 1064,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20100
+  },
+  "guide": [
+    "接取：先知赫米萨。",
+    "亡者之穴以南的先知赫米萨要你进入亡者之穴，对一口瘟疫之锅使用赫米萨的净化之种。",
+    "交付：先知赫米萨。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11677",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11677; legacy_type=object_use_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11677",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《阻止瘟疫》：共享：目标在洞穴里面，不在地表。洞穴入口约(74.8,14.2)，锅在洞内约(78,18)一带；到Questie平面坐标附近看不到锅时先找洞口。进入后对瘟疫锅使用赫米萨的净化之种。\n【需要单独修正优化】《阻止瘟疫》对亡者之穴瘟疫锅使用净化之种后，任务进度五号共享；主控完成一次即可同步全队，不需要五个角色分别对锅操作。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11677",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

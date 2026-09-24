@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": 12151,
+  "identity": {
+    "name_zhcn": "暴虐的酋长",
+    "name_en": "Wanton Warlord",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 72,
+    "pre_any": [
+      12150
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 168000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38156,
+        "quantity": 1,
+        "name_zhcn": "碎裂的猛犸人双刃斧",
+        "name_en": "Battered Magnataur Dualblade",
+        "sell_price_each_copper": 114021,
+        "sell_price_total_copper": 114021
+      },
+      {
+        "item_id": 38155,
+        "quantity": 1,
+        "name_zhcn": "红玉盟军短剑",
+        "name_en": "Shortblade of the Ruby Ally",
+        "sell_price_each_copper": 90879,
+        "sell_price_total_copper": 90879
+      },
+      {
+        "item_id": 38154,
+        "quantity": 1,
+        "name_zhcn": "天生牙",
+        "name_en": "Taigasha",
+        "sell_price_each_copper": 90541,
+        "sell_price_total_copper": 90541
+      },
+      {
+        "item_id": 38130,
+        "quantity": 1,
+        "name_zhcn": "艾米的法术之刃",
+        "name_en": "Emme's Lost Spellblade",
+        "sell_price_each_copper": 89218,
+        "sell_price_total_copper": 89218
+      },
+      {
+        "item_id": 38157,
+        "quantity": 1,
+        "name_zhcn": "红玉骑士长弓",
+        "name_en": "Longbow of the Ruby Rider",
+        "sell_price_each_copper": 70473,
+        "sell_price_total_copper": 70473
+      },
+      {
+        "item_id": 38224,
+        "quantity": 1,
+        "name_zhcn": "生命缚誓者护符",
+        "name_en": "Life Binder Talisman",
+        "sell_price_each_copper": 33162,
+        "sell_price_total_copper": 33162
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 114021,
+    "gear_sale_max_copper": 114021,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 31150
+  },
+  "guide": [
+    "接取：奥拉斯塔萨。",
+    "前往碧蓝巨龙圣地以南的火炬之环，吹响精美的战斗号角。击败雷霆使者戈洛塔尔，并将他的首级交给龙眠神殿的奥拉斯塔萨。",
+    "交付：奥拉斯塔萨。",
+    "在碧蓝巨龙圣地南侧的火炬之环使用精致的战斗号角召唤格罗姆萨；战斗有击退风险，尽量远离悬崖。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12151",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12151/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "到8支火炬围成的黑色地面，吹精美战斗号角召出戈洛塔尔。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

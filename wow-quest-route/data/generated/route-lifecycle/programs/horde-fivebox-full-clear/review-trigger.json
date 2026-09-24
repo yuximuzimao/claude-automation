@@ -1,0 +1,47 @@
+{
+  "context_source_ref": null,
+  "diagnoses": [
+    "blocked_unknown"
+  ],
+  "input_fingerprint": "62546cc7850e4acaa9db2673c966a3bf0a832a35d1c5d559af3365cd82c9756d",
+  "issues": [
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "cross_profile_continuity"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "canonical_spatial_movement"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_timing"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_xp"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_economy"
+    },
+    {
+      "kind": "review_context_required",
+      "severity": "requirement"
+    }
+  ],
+  "kind": "program",
+  "model_id": "route-review-trigger-v1",
+  "optimization_failures": [],
+  "optimization_unknowns": [],
+  "program_id": "horde-fivebox-full-clear",
+  "selection_events": [],
+  "status": "requirements",
+  "target_id": "horde-fivebox-full-clear",
+  "target_version": 1
+}

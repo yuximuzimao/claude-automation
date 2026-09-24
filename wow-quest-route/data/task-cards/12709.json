@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "task_id": 12709,
+  "identity": {
+    "name_zhcn": "妖术宝箱",
+    "name_en": "Hexed Caches",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 74,
+    "pre_any": [
+      12685
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39863,
+        "quantity": 1,
+        "name_zhcn": "缚血者的软皮外衣",
+        "name_en": "Supple Vest of the Bloodbinder",
+        "sell_price_each_copper": 48930,
+        "sell_price_total_copper": 48930
+      },
+      {
+        "item_id": 39848,
+        "quantity": 1,
+        "name_zhcn": "放血者的项链",
+        "name_en": "Neckcharm of the Bloodletter",
+        "sell_price_each_copper": 35688,
+        "sell_price_total_copper": 35688
+      },
+      {
+        "item_id": 39849,
+        "quantity": 1,
+        "name_zhcn": "神圣先祖腰带",
+        "name_en": "Belt of Divine Ancestry",
+        "sell_price_each_copper": 35214,
+        "sell_price_total_copper": 35214
+      },
+      {
+        "item_id": 39797,
+        "quantity": 1,
+        "name_zhcn": "缚血者的兜帽",
+        "name_en": "Bloodbinder's Hood",
+        "sell_price_each_copper": 30890,
+        "sell_price_total_copper": 30890
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 48930,
+    "gear_sale_max_copper": 48930,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 21400
+  },
+  "guide": [
+    "接取：记载者图基尼。",
+    "希姆托加的记载者图基尼要求你为他夺取12只佐尔玛兹要塞宝箱。",
+    "交付：记载者图基尼。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12709",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12709; legacy_type=personal_collection_confirmed",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12709",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《妖术宝箱》：不共享：开启宝箱可能随机中妖术；附近魔化蒂基面具战士会掉蒂基妖术清除器，先刷一些清除器再开箱；如果中了持续掉血类妖术，及时用清除器解除。\n【需要单独修正优化】《妖术宝箱》祖达克首组实跑确认：不共享，五号分别完成宝箱收集。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12709",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

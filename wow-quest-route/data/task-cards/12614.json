@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "task_id": 12614,
+  "identity": {
+    "name_zhcn": "母龙之怒",
+    "name_en": "Post-partum Aggression",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 76,
+    "pre_any": [
+      12607
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 130000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39488,
+        "quantity": 1,
+        "name_zhcn": "奈辛瓦里燃烧器",
+        "name_en": "Nesingwary Brush Burner",
+        "sell_price_each_copper": 89111,
+        "sell_price_total_copper": 89111
+      },
+      {
+        "item_id": 39487,
+        "quantity": 1,
+        "name_zhcn": "屠龙者的短弓",
+        "name_en": "Dragon Slayer's Shortbow",
+        "sell_price_each_copper": 88776,
+        "sell_price_total_copper": 88776
+      },
+      {
+        "item_id": 39486,
+        "quantity": 1,
+        "name_zhcn": "赫米特的纪念猎枪",
+        "name_en": "Hemet's Trophy Gun",
+        "sell_price_each_copper": 88441,
+        "sell_price_total_copper": 88441
+      },
+      {
+        "item_id": 39478,
+        "quantity": 1,
+        "name_zhcn": "致命竞争披风",
+        "name_en": "Cloak of the Deadliest Game",
+        "sell_price_each_copper": 37939,
+        "sell_price_total_copper": 37939
+      },
+      {
+        "item_id": 40353,
+        "quantity": 1,
+        "name_zhcn": "精美的始祖龙披风",
+        "name_en": "Polished Protodrake Cloak",
+        "sell_price_each_copper": 35785,
+        "sell_price_total_copper": 35785
+      },
+      {
+        "item_id": 39490,
+        "quantity": 1,
+        "name_zhcn": "多里安的飞镖",
+        "name_en": "Dorian's Prybar",
+        "sell_price_each_copper": 34629,
+        "sell_price_total_copper": 34629
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 89111,
+    "gear_sale_max_copper": 89111,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 26750
+  },
+  "guide": [
+    "接取：多里安·达克斯托克。",
+    "杀死母龙斯利维娜，然后向多里安哨站的多里安·达克斯托克复命。",
+    "交付：多里安·达克斯托克。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12614",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12614; legacy_type=quest_progress_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12614",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《母龙之怒》：共享：接到任务后其余四号取消骑乘跟随即可，由主控完成母龙目标，队伍同步。\n【需要单独修正优化】《母龙之怒》索拉查首组实跑确认：共享；接到任务后其余四号可取消骑乘跟随，由主控完成即可同步。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12614",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

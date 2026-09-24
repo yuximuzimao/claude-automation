@@ -1,0 +1,44 @@
+{
+  "schema": "stage11-display-migration-expected/v1",
+  "profile_probe": "hellfire-dk-speed",
+  "input_source_fixture": "stage9-economy-post-flag-migration-expected.json",
+  "review_input": null,
+  "expected": {
+    "stage_implementation_status": "implemented",
+    "stage_evaluation_status": "blocked",
+    "display_status": "blocked",
+    "step_count": 11,
+    "line_count": 186,
+    "task_action_count": 153,
+    "rendered_task_ref_count": 153,
+    "presentation_count": 86,
+    "pending_presentation_count": 75,
+    "route_timing_center_minutes": null,
+    "route_timing_range_minutes": null,
+    "contains_html": false,
+    "issue_counts": {
+      "display_upstream_blocked": 3,
+      "location_display_matches_npc_name": 4,
+      "location_display_encodes_route_action": 2
+    },
+    "location_issues": [
+      ["location_display_matches_npc_name", "hellfire-dk-p038", "邪兽人尸体"],
+      ["location_display_matches_npc_name", "hellfire-dk-p048", "纳拉杜"],
+      ["location_display_matches_npc_name", "hellfire-dk-p050", "纳拉杜"],
+      ["location_display_encodes_route_action", "hellfire-dk-p052", "系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨"],
+      ["location_display_matches_npc_name", "hellfire-dk-p062", "缚地者加兰蒂娅·夜风"],
+      ["location_display_encodes_route_action", "hellfire-dk-p063", "塞纳里奥哨站 → 赞加沼泽"]
+    ],
+    "first_step_title": "黑暗之门 → 萨尔玛 → 魔火峡谷",
+    "first_step_prefix_lines": [
+      "黑暗之门",
+      "固定交通：奥格瑞玛·精神谷传送门区 → 诅咒之地·黑暗之门前",
+      "督军达图恩 → 接《跨越黑暗之门》",
+      "固定交通：诅咒之地·黑暗之门 → 外域·黑暗之门",
+      "沃雷恩中将 → 交《跨越黑暗之门》 → 接《抵达外域》"
+    ],
+    "last_step_title": "塞纳里奥哨站 → 赞加沼泽",
+    "unimplemented_stages": []
+  },
+  "purpose": "Frozen real-Profile Stage 11 diagnostic before any Stage-11-driven display cleanup. It proves the semantic projection preserves every formal task action (153/153), resolves current Task Card names/presentation, emits no HTML, and refuses to expose blocked Timing as precise minutes. Existing migrated display defects remain diagnostics rather than being silently rewritten: four geometry display names currently collide with NPC/interaction names and two geometry display names encode route movement text. Upstream Stage 5/7/10 blocks also remain explicit, so current artifact evaluation stays blocked while Stage 11 implementation can still be validated."
+}

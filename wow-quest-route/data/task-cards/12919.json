@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "task_id": 12919,
+  "identity": {
+    "name_zhcn": "风暴之王的复仇",
+    "name_en": "The Storm King's Vengeance",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 74,
+    "pre_any": [
+      12916
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 186000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 41846,
+        "quantity": 1,
+        "name_zhcn": "风暴巨人之握",
+        "name_en": "Clutch of the Storm Giant",
+        "sell_price_each_copper": 84966,
+        "sell_price_total_copper": 84966
+      },
+      {
+        "item_id": 41845,
+        "quantity": 1,
+        "name_zhcn": "生命光芒肩铠",
+        "name_en": "Life-Light Pauldrons",
+        "sell_price_each_copper": 63375,
+        "sell_price_total_copper": 63375
+      },
+      {
+        "item_id": 41829,
+        "quantity": 1,
+        "name_zhcn": "闪电恐惧之角",
+        "name_en": "Horns of Electrified Terror",
+        "sell_price_each_copper": 46008,
+        "sell_price_total_copper": 46008
+      },
+      {
+        "item_id": 41844,
+        "quantity": 1,
+        "name_zhcn": "复仇征程护腕",
+        "name_en": "Bracers of Vengeful Flight",
+        "sell_price_each_copper": 36152,
+        "sell_price_total_copper": 36152
+      },
+      {
+        "item_id": 41826,
+        "quantity": 1,
+        "name_zhcn": "巨人骑士护手",
+        "name_en": "Grips of the Giant-Rider",
+        "sell_price_each_copper": 24278,
+        "sell_price_total_copper": 24278
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 84966,
+    "gear_sale_max_copper": 84966,
+    "reputation_rewards": [
+      {
+        "faction_id": 1106,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 31750
+  },
+  "guide": [
+    "接取：盖米尔。",
+    "与盖米尔交谈以开始行动。 /  / 骑着盖米尔去消灭100个天灾士兵，并消灭天选者奥贾尔、塞穆和纳瓦留斯王子。成功之后，向北伐军前线营地的北伐军战士马克拉尔报告。",
+    "交付：北伐军战士马克拉尔。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12919",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12919; legacy_type=vehicle_objective_group_shared_proximity_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12919",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《风暴之王的复仇》：共享：开始载具战斗前先把其余角色移动到Boss附近，避免距离过远丢失共享信用。目标是100只天灾 + 天选者奥贾尔、纳瓦留斯王子、塞穆；纳瓦留斯施放灵魂偏转时暂停输出，避免反伤。盖米尔血量不足时选中风暴云用3号抓取技能吸收，可回血并补充技能资源；塞穆通常要在纳瓦留斯死后才进入本任务阶段。\n【需要单独修正优化】《风暴之王的复仇》祖达克首组实跑确认：共享；开始载具战斗前先把其余角色移动到Boss附近，避免距离过远丢失共享信用。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12919",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

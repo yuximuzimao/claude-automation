@@ -10,10 +10,21 @@
 
 - `quest_id`：稳定任务ID；
 - `quest_level`：当前版本任务等级；
-- `base_xp`：Questie/当前权威数据中的基础经验；
+- `base_xp`：Task Card当前`rewards.full_xp`/当前权威基础经验；
 - `player_level`：预计实际交付时的角色等级；
 - `server_quest_xp_multiplier`：当前服务器任务经验倍率，属于**可校准模型参数**，不能写进每张Task Card，也不能把某次阶段值当永久游戏常数；
 - 当前路线若做保证账，还需要五号各自的起始等级/经验和该窗口确定会发生的任务奖励/强制击杀经验。
+
+### 路线起始等级/经验必须是机器输入
+
+Derived XP不能从`goal/subtitle/标题`里的“67→68”“68—80”等人类文案解析起始等级。每次Profile级计算必须明确一个`entry_level_xp_source`：
+
+- 继续当前实跑：来自与当前`profile_id + profile_version`匹配的CURRENT真实五号等级/经验；
+- 可复用冷启动Profile：来自调用方按本owner合同显式提供的结构化等级/经验起始输入；Profile `entry_requirements`不承载XP，且当前Stage 8尚未闭合时不得用subtitle/goal或路线名代填；
+- 承接上一Profile：XP数值只来自上一Profile fresh Derived XP；Profile顺序与RouteState边界来源必须先由Stage 4按Route Program顺序确认，边界RouteState来自唯一Replay派生输出而非人工exit合同。XP数值传播与等级门槛判定仍只由本owner/Stage 8执行，不在Stage 4复制第二套逻辑；
+- 如果只有区间而没有精确五号状态，模型可以输出与输入区间一致的上下界，但不得伪造一个精确起点。
+
+起始状态的来源/版本必须进入Derived XP fingerprint，用于审计XP结果对应的输入版本。Profile版本、CURRENT恢复点、上一Profile XP结果、Program边界或XP算法本身变化时，只重算真实受影响的XP结果；fingerprint只负责审计，不负责替代这项impact判断。
 
 ### 单任务输出
 
@@ -52,7 +63,7 @@
 
 `xp_at_turnin_level = floor(rounded_xp × server_quest_xp_multiplier)`
 
-当前旧实现曾直接把倍率`2.0`硬编码在`build_35_55_task_foundation.py`中。治理完成后，**公式可以固定，服务器倍率必须作为显式参数/配置输入**；任何其它脚本不得再复制该常量。
+历史实现曾在多个foundation/model脚本直接硬编码倍率`2.0`。当前治理已收口：**公式可以固定，服务器倍率只能来自`data/xp-model/model-config.json`的显式版本化输入**；现役Questie兼容消费者经`lib/wotlk_quest_rewards.py`委托本owner，任何其它现役脚本不得再复制该常量。已硬退役的旧模型可保留历史常量作为迁移证据，但不得重新成为执行入口。
 
 ## 3. 完整经验截止
 
@@ -137,3 +148,11 @@
 发生变化后，只需要对引用相关Task Card的Profile重新计算XP派生结果；不维护独立字段传播分类。是否因此进入Selection Review由`leveling-and-selection.md`的触发条件决定。
 
 XP结果变化本身不得自动删除任务。
+
+## 9. 正式XP操作
+
+- 单Profile XP：`python3 scripts/build_route_xp.py <profile_id>`。
+- Program没有合法XP基线，或Program起始XP/合同改变：`python3 scripts/build_program_xp.py <program_id>`。
+- 已有合法Program XP基线，仅某成员及其后缀受影响：`python3 scripts/update_program_xp_from_member.py <program_id> <profile_id>`，只从该成员向后传播。
+- Program没有显式合法entry XP时，完整builder只能刷新`requirements`与fingerprint，不得从标题、subtitle或旧结果伪造起点。
+- XP结果若触发任务删留复审，只把当前fresh结果交给`leveling-and-selection.md`；不得在XP脚本里直接改Profile。

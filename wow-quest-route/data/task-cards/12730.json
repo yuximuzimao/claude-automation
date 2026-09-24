@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 12730,
+  "identity": {
+    "name_zhcn": "在佐尔赫布相会",
+    "name_en": "Convocation at Zol'Heb",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 78,
+    "min_level": 74,
+    "pre_any": [
+      12729
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 204000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 41932,
+        "quantity": 1,
+        "name_zhcn": "恐惧神灵胸甲",
+        "name_en": "Links of the Terrified Deity",
+        "sell_price_each_copper": 80667,
+        "sell_price_total_copper": 80667
+      },
+      {
+        "item_id": 41905,
+        "quantity": 1,
+        "name_zhcn": "狂暴愤怒胸甲",
+        "name_en": "Chestguard of Rampaging Fury",
+        "sell_price_each_copper": 67333,
+        "sell_price_total_copper": 67333
+      },
+      {
+        "item_id": 41891,
+        "quantity": 1,
+        "name_zhcn": "精致赞达拉外套",
+        "name_en": "Intricate Zandalari Tunic",
+        "sell_price_each_copper": 57419,
+        "sell_price_total_copper": 57419
+      },
+      {
+        "item_id": 41890,
+        "quantity": 1,
+        "name_zhcn": "征服先知长袍",
+        "name_en": "Robe of the Conquered Prophet",
+        "sell_price_each_copper": 45761,
+        "sell_price_total_copper": 45761
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 80667,
+    "gear_sale_max_copper": 80667,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 32400
+  },
+  "guide": [
+    "接取：哈克娅。",
+    "希姆托加的哈克娅要求你杀死阿卡里先知。",
+    "交付：哈克娅。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12730",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12730; legacy_type=quest_progress_group_shared_confirmed",
+      "observed_at": "2026-09-07",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《在佐尔赫布相会》：共享：站进力量召唤圈后使用任务提供的召唤道具召出阿卡里先知。第一阶段先把先知压到约75%；随后会强制眩晕并进入剧情停顿，哈克娅赶来解除控制并加入战斗，还会提供范围治疗。主控前75%留一部分减伤，哈克娅到场后让她先接稳再集中输出；剧情停顿不是卡任务。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

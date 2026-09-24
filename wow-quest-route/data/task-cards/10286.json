@@ -4,19 +4,15 @@
   "identity": {
     "name_zhcn": "埃雷利恩的秘密",
     "name_en": "Arelion's Secret",
+    "game_variant_id": "timewalking-wotlk-cn",
     "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
-    "faction": "unknown",
-    "repeatability": "unknown",
-    "game_variant_id": "timewalking-wotlk-cn"
+    "faction": "horde",
+    "repeatability": "once"
   },
   "coverage": {
-    "availability": "partial",
-    "objectives": "unknown",
-    "locations": "unknown",
-    "rewards": "unknown",
-    "mechanics": "unknown",
-    "fivebox": "unknown",
-    "guide": "unknown"
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
   },
   "availability": {
     "quest_level": 62,
@@ -28,18 +24,42 @@
     "parent_active": [],
     "exclusive_with": [],
     "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
     "hidden_requirements": []
   },
-  "objectives": [],
-  "mechanics": {},
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 911,
+        "amount": 150
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 7600
+  },
+  "guide": [
+    "接取：魔导师卡尔琳达。",
+    "魔导师卡尔琳达要你审问魔导师阿利迪斯，他已经离开猎鹰岗哨，往赞加沼泽的方向去了。",
+    "交付：魔导师阿利迪斯。"
+  ],
   "fivebox": {
-    "stages": [],
     "status": "pending"
   },
-  "guide": [],
-  "verification": {
-    "open_questions": []
-  },
+  "timing_rule_ref": null,
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",
@@ -56,7 +76,38 @@
         "availability.pre_any",
         "availability.pre_all"
       ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10286",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
     }
   ],
-  "presentation": {}
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】阿利迪斯沿猎鹰岗哨外道路巡逻。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json#hellfire_dk.point52",
+      "reason": "候选Publisher语义对账补回旧正式页面短备注；保留执行定位信息，后续备注专项优化再判断最短表达。"
+    }
+  }
 }

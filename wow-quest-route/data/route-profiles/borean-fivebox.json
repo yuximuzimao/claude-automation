@@ -1,0 +1,8465 @@
+{
+  "schema_version": 2,
+  "profile_id": "borean-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "北风苔原",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 3537
+  },
+  "entry_requirements": {
+    "active_task_ids": []
+  },
+  "goal": {
+    "summary": "从飞艇抵达战歌要塞开始，能吃满经验的任务尽量清；做到《横贯冰原》后自然转入龙骨荒野。"
+  },
+  "display": {
+    "publish_key": "borean",
+    "order": 4,
+    "title": "北风苔原 · 68+ 尽量清图升级路线",
+    "display_name": "北风苔原",
+    "subtitle": "从飞艇抵达战歌要塞开始，能吃满经验的任务尽量清；做到《横贯冰原》后自然转入龙骨荒野。",
+    "footer": "完成《横贯冰原》后按任务引导进入龙骨荒野。",
+    "map_image": "maps/3537-borean-tundra-hd.jpg"
+  },
+  "task_ids": [
+    11585,
+    11596,
+    11598,
+    11606,
+    11888,
+    11611,
+    11608,
+    11602,
+    11614,
+    11615,
+    11634,
+    11616,
+    11636,
+    11618,
+    11642,
+    11643,
+    11644,
+    11655,
+    11660,
+    11664,
+    11651,
+    11656,
+    11661,
+    11652,
+    11662,
+    11613,
+    12471,
+    11619,
+    11620,
+    11625,
+    11626,
+    11574,
+    12486,
+    11632,
+    11686,
+    11676,
+    11688,
+    11703,
+    11690,
+    11705,
+    11709,
+    11711,
+    11714,
+    11716,
+    11717,
+    11724,
+    11719,
+    11720,
+    11721,
+    11722,
+    11916,
+    11864,
+    11866,
+    11876,
+    11865,
+    11869,
+    11884,
+    11605,
+    11612,
+    11868,
+    11870,
+    11878,
+    11879,
+    11607,
+    11617,
+    11609,
+    11623,
+    11610,
+    11871,
+    11872,
+    11892,
+    11949,
+    11950,
+    11961,
+    11968,
+    12117,
+    11890,
+    11684,
+    11881,
+    11674,
+    11887,
+    11893,
+    11685,
+    11895,
+    11896,
+    11899,
+    11906,
+    11675,
+    11677,
+    11678,
+    11683,
+    11687,
+    11689,
+    11894,
+    11907,
+    11909,
+    11628,
+    11630,
+    11633,
+    11695,
+    11640,
+    11641,
+    11647,
+    11706,
+    11654,
+    11659,
+    11898,
+    11929,
+    11587,
+    11576,
+    11590,
+    11582,
+    11646,
+    12728,
+    11648,
+    11663,
+    11671,
+    11679,
+    11680,
+    11681,
+    11682,
+    11733,
+    11900,
+    11910,
+    11912,
+    11918,
+    11914,
+    11936,
+    11941,
+    11919,
+    11943,
+    11931,
+    11946,
+    11951,
+    11957,
+    11967,
+    11969,
+    11592,
+    11593,
+    11594,
+    11624,
+    11702,
+    11627,
+    11571,
+    11559,
+    11560,
+    11561,
+    11562,
+    11563,
+    11564,
+    11565,
+    11566,
+    11569,
+    11570,
+    11649,
+    11629,
+    11631,
+    11635,
+    11639,
+    11637,
+    11638,
+    11930
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "borean-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11585,
+      "location_ref": "borean-p001",
+      "npc_name": "战歌征募官",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p002",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11585,
+      "location_ref": "borean-p002",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p003",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11596,
+      "location_ref": "borean-p003",
+      "npc_name": "萨鲁法尔大王",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p004",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "borean-p004",
+      "target_name": "战歌要塞",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p005",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11596,
+      "location_ref": "borean-p005",
+      "npc_name": "拉兹格尔大王",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11598,
+      "location_ref": "borean-p005",
+      "npc_name": "拉兹格尔大王",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p006",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11606,
+      "location_ref": "borean-p006",
+      "npc_name": "军需官霍尔古斯",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p007",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11888,
+      "location_ref": "borean-p007",
+      "npc_name": "塔洛迦大使",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p008",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11611,
+      "location_ref": "borean-p008",
+      "npc_name": "工头摩尔图斯",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p009",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11598,
+      "location_ref": "borean-p009",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11606,
+      "location_ref": "borean-p009",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11611,
+      "location_ref": "borean-p009",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p010",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11598,
+      "location_ref": "borean-p010",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11606,
+      "location_ref": "borean-p010",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11611,
+      "location_ref": "borean-p010",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p011",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11598,
+      "location_ref": "borean-p011",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11606,
+      "location_ref": "borean-p011",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11611,
+      "location_ref": "borean-p011",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p012",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11611,
+      "location_ref": "borean-p012",
+      "npc_name": "工头摩尔图斯",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p013",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11606,
+      "location_ref": "borean-p013",
+      "npc_name": "军需官霍尔古斯",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11608,
+      "location_ref": "borean-p013",
+      "npc_name": "军需官霍尔古斯",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p014",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11598,
+      "location_ref": "borean-p014",
+      "npc_name": "拉兹格尔大王",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11602,
+      "location_ref": "borean-p014",
+      "npc_name": "拉兹格尔大王",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p015",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11614,
+      "location_ref": "borean-p015",
+      "npc_name": "暗影密探巴尔苏斯",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p016",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11608,
+      "location_ref": "borean-p016",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11602,
+      "location_ref": "borean-p016",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p017",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11608,
+      "location_ref": "borean-p017",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11602,
+      "location_ref": "borean-p017",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p018",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11608,
+      "location_ref": "borean-p018",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11602,
+      "location_ref": "borean-p018",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p019",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11614,
+      "location_ref": "borean-p019",
+      "npc_name": "暗影密探卢瑟尔",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11615,
+      "location_ref": "borean-p019",
+      "npc_name": "暗影密探卢瑟尔",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p020",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11608,
+      "location_ref": "borean-p020",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11602,
+      "location_ref": "borean-p020",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p021",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11608,
+      "location_ref": "borean-p021",
+      "npc_name": "军需官霍尔古斯",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p022",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11602,
+      "location_ref": "borean-p022",
+      "npc_name": "拉兹格尔大王",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11634,
+      "location_ref": "borean-p022",
+      "npc_name": "拉兹格尔大王",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p023",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11615,
+      "location_ref": "borean-p023",
+      "npc_name": "暗影密探巴尔苏斯",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11616,
+      "location_ref": "borean-p023",
+      "npc_name": "暗影密探巴尔苏斯",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p024",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "borean-p024",
+      "target_name": "战歌要塞",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11634,
+      "location_ref": "borean-p024",
+      "npc_name": "驭风大师图波尔",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11636,
+      "location_ref": "borean-p024",
+      "npc_name": "驭风大师图波尔",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p025",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11616,
+      "location_ref": "borean-p025",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11618,
+      "location_ref": "borean-p025",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p026",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11636,
+      "location_ref": "borean-p026",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "borean-p026",
+      "from_name": "战歌要塞",
+      "to_name": "加尔鲁什码头",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p027",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11636,
+      "location_ref": "borean-p027",
+      "npc_name": "Annihilator Grek'lor",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11642,
+      "location_ref": "borean-p027",
+      "npc_name": "Annihilator Grek'lor",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p028",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11642,
+      "location_ref": "borean-p028",
+      "npc_name": "莫布",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11643,
+      "location_ref": "borean-p028",
+      "npc_name": "莫布",
+      "action_id": "a0078"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11644,
+      "location_ref": "borean-p028",
+      "npc_name": "莫布",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p029",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11655,
+      "location_ref": "borean-p029",
+      "npc_name": "瓦托尔",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11660,
+      "location_ref": "borean-p029",
+      "npc_name": "瓦托尔",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p030",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11643,
+      "location_ref": "borean-p030",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p031",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11644,
+      "location_ref": "borean-p031",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11655,
+      "location_ref": "borean-p031",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11660,
+      "location_ref": "borean-p031",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p032",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11664,
+      "location_ref": "borean-p032",
+      "npc_name": "小穆图",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11664,
+      "location_ref": "borean-p032",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p033",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11664,
+      "location_ref": "borean-p033",
+      "npc_name": "长者穆图",
+      "action_id": "a0093"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p034",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11643,
+      "location_ref": "borean-p034",
+      "npc_name": "莫布",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11644,
+      "location_ref": "borean-p034",
+      "npc_name": "莫布",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11651,
+      "location_ref": "borean-p034",
+      "npc_name": "莫布",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p035",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11655,
+      "location_ref": "borean-p035",
+      "npc_name": "瓦托尔",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11656,
+      "location_ref": "borean-p035",
+      "npc_name": "瓦托尔",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11660,
+      "location_ref": "borean-p035",
+      "npc_name": "瓦托尔",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11661,
+      "location_ref": "borean-p035",
+      "npc_name": "瓦托尔",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p036",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11651,
+      "location_ref": "borean-p036",
+      "npc_name": "Annihilator Grek'lor",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11652,
+      "location_ref": "borean-p036",
+      "npc_name": "Annihilator Grek'lor",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p037",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11656,
+      "location_ref": "borean-p037",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p038",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11656,
+      "location_ref": "borean-p038",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p039",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11656,
+      "location_ref": "borean-p039",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p040",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11661,
+      "location_ref": "borean-p040",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p041",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11656,
+      "location_ref": "borean-p041",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p042",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11656,
+      "location_ref": "borean-p042",
+      "npc_name": "瓦托尔",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11662,
+      "location_ref": "borean-p042",
+      "npc_name": "瓦托尔",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11661,
+      "location_ref": "borean-p042",
+      "npc_name": "瓦托尔",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p043",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11652,
+      "location_ref": "borean-p043",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p044",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11652,
+      "location_ref": "borean-p044",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p045",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11662,
+      "location_ref": "borean-p045",
+      "npc_name": "卡鲁克",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11613,
+      "location_ref": "borean-p045",
+      "npc_name": "卡鲁克",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p046",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12471,
+      "location_ref": "borean-p046",
+      "npc_name": "被俘虏的海象人",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p047",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11613,
+      "location_ref": "borean-p047",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p048",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11613,
+      "location_ref": "borean-p048",
+      "npc_name": "卡鲁克",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12471,
+      "location_ref": "borean-p048",
+      "npc_name": "卡鲁克",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11619,
+      "location_ref": "borean-p048",
+      "npc_name": "卡鲁克",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p049",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11619,
+      "location_ref": "borean-p049",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p050",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11619,
+      "location_ref": "borean-p050",
+      "npc_name": "卡鲁克",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11620,
+      "location_ref": "borean-p050",
+      "npc_name": "卡鲁克",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p051",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11620,
+      "location_ref": "borean-p051",
+      "npc_name": "维赫亚",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11625,
+      "location_ref": "borean-p051",
+      "npc_name": "维赫亚",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p052",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11625,
+      "location_ref": "borean-p052",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p053",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11625,
+      "location_ref": "borean-p053",
+      "npc_name": "维赫亚",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11626,
+      "location_ref": "borean-p053",
+      "npc_name": "维赫亚",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p054",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11626,
+      "location_ref": "borean-p054",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p055",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11626,
+      "location_ref": "borean-p055",
+      "npc_name": "卡鲁克",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "borean-p056",
+      "target_name": "战歌要塞",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p056",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p057",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11652,
+      "location_ref": "borean-p057",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11574,
+      "location_ref": "borean-p057",
+      "npc_name": "恩多拉",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12486,
+      "location_ref": "borean-p057",
+      "npc_name": "秘法师萨乌拉诺克",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p058",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11632,
+      "location_ref": "borean-p058",
+      "target_name": "伊斯里克斯的甲壳",
+      "when": {
+        "kind": "has_item",
+        "item_name": "伊斯里克斯的甲壳"
+      },
+      "action_id": "a0159"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p059",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11618,
+      "location_ref": "borean-p059",
+      "npc_name": "暗影密探伊克里斯",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11686,
+      "location_ref": "borean-p059",
+      "npc_name": "暗影密探伊克里斯",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p060",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11676,
+      "location_ref": "borean-p060",
+      "npc_name": "暗影密探卡纳留斯",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11688,
+      "location_ref": "borean-p060",
+      "npc_name": "农夫托普",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p061",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11686,
+      "location_ref": "borean-p061",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p062",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11686,
+      "location_ref": "borean-p062",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p063",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11676,
+      "location_ref": "borean-p063",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11688,
+      "location_ref": "borean-p063",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p064",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11686,
+      "location_ref": "borean-p064",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p065",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11686,
+      "location_ref": "borean-p065",
+      "npc_name": "暗影密探伊克里斯",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11703,
+      "location_ref": "borean-p065",
+      "npc_name": "暗影密探伊克里斯",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11676,
+      "location_ref": "borean-p065",
+      "npc_name": "暗影密探卡纳留斯",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p066",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11688,
+      "location_ref": "borean-p066",
+      "npc_name": "农夫托普",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11690,
+      "location_ref": "borean-p066",
+      "npc_name": "农夫托普",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p067",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11690,
+      "location_ref": "borean-p067",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p068",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11690,
+      "location_ref": "borean-p068",
+      "npc_name": "农夫托普",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p069",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11703,
+      "location_ref": "borean-p069",
+      "npc_name": "暗影密探盖特莱",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11705,
+      "location_ref": "borean-p069",
+      "npc_name": "暗影密探盖特莱",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p070",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11705,
+      "location_ref": "borean-p070",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "borean-p071",
+      "target_name": "战歌要塞",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p071",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11632,
+      "location_ref": "borean-p071",
+      "npc_name": "萨鲁法尔大王",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11632
+      },
+      "action_id": "a0193"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11705,
+      "location_ref": "borean-p071",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11709,
+      "location_ref": "borean-p071",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p072",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11709,
+      "location_ref": "borean-p072",
+      "npc_name": "典狱官诺克·血怒",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11711,
+      "location_ref": "borean-p072",
+      "npc_name": "典狱官诺克·血怒",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11711,
+      "location_ref": "borean-p072",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p073",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11711,
+      "location_ref": "borean-p073",
+      "npc_name": "斥候图古克",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11714,
+      "location_ref": "borean-p073",
+      "npc_name": "斥候图古克",
+      "action_id": "a0202"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p074",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11716,
+      "location_ref": "borean-p074",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p075",
+      "action_id": "a0205"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11714,
+      "location_ref": "borean-p075",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11716,
+      "location_ref": "borean-p075",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p076",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11714,
+      "location_ref": "borean-p076",
+      "npc_name": "斥候图古克",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p077",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11716,
+      "location_ref": "borean-p077",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11717,
+      "location_ref": "borean-p077",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p078",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11717,
+      "location_ref": "borean-p078",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11724,
+      "location_ref": "borean-p078",
+      "target_name": "巨大的发光蛾卵",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p079",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11717,
+      "location_ref": "borean-p079",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11724,
+      "location_ref": "borean-p079",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11719,
+      "location_ref": "borean-p079",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11719,
+      "location_ref": "borean-p079",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11719,
+      "location_ref": "borean-p079",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11720,
+      "location_ref": "borean-p079",
+      "npc_name": "血法师劳莉丝",
+      "action_id": "a0222"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11720,
+      "location_ref": "borean-p079",
+      "npc_name": "普雷玛·巨角",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11721,
+      "location_ref": "borean-p079",
+      "npc_name": "普雷玛·巨角",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p080",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11721,
+      "location_ref": "borean-p080",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p081",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11721,
+      "location_ref": "borean-p081",
+      "npc_name": "普雷玛·巨角",
+      "action_id": "a0228"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11722,
+      "location_ref": "borean-p081",
+      "npc_name": "普雷玛·巨角",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p082",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11722,
+      "location_ref": "borean-p082",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11916,
+      "location_ref": "borean-p082",
+      "npc_name": "加尔鲁什·地狱咆哮",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p083",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11864,
+      "location_ref": "borean-p083",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "accept-11864-dehta"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11864,
+      "location_ref": "borean-p083",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11866,
+      "location_ref": "borean-p083",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11876,
+      "location_ref": "borean-p083",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11865,
+      "location_ref": "borean-p083",
+      "npc_name": "扎扎",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11869,
+      "location_ref": "borean-p083",
+      "npc_name": "圣职者塞妮丝",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11884,
+      "location_ref": "borean-p083",
+      "npc_name": "兽穴卫士凯林格",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p084",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11884,
+      "location_ref": "borean-p084",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p085",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11869,
+      "location_ref": "borean-p085",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p086",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11865,
+      "location_ref": "borean-p086",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p087",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11605,
+      "location_ref": "borean-p087",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11612,
+      "location_ref": "borean-p087",
+      "npc_name": "伊塔鲁克",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p088",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11876,
+      "location_ref": "borean-p088",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p089",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11865,
+      "location_ref": "borean-p089",
+      "npc_name": "扎扎",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11868,
+      "location_ref": "borean-p089",
+      "npc_name": "扎扎",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11869,
+      "location_ref": "borean-p089",
+      "npc_name": "圣职者塞妮丝",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11870,
+      "location_ref": "borean-p089",
+      "npc_name": "圣职者塞妮丝",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11876,
+      "location_ref": "borean-p089",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11878,
+      "location_ref": "borean-p089",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11884,
+      "location_ref": "borean-p089",
+      "npc_name": "兽穴卫士凯林格",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p090",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11878,
+      "location_ref": "borean-p090",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11878,
+      "location_ref": "borean-p090",
+      "npc_name": "巨兽库诺克",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11879,
+      "location_ref": "borean-p090",
+      "npc_name": "巨兽库诺克",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p091",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11879,
+      "location_ref": "borean-p091",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p092",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11605,
+      "location_ref": "borean-p092",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11612,
+      "location_ref": "borean-p092",
+      "action_id": "a0267"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p093",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11605,
+      "location_ref": "borean-p093",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11607,
+      "location_ref": "borean-p093",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11612,
+      "location_ref": "borean-p093",
+      "npc_name": "伊塔鲁克",
+      "action_id": "a0271"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11617,
+      "location_ref": "borean-p093",
+      "npc_name": "伊塔鲁克",
+      "action_id": "a0272"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p094",
+      "action_id": "a0273"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11607,
+      "location_ref": "borean-p094",
+      "action_id": "a0274"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11617,
+      "location_ref": "borean-p094",
+      "action_id": "a0275"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p095",
+      "action_id": "a0276"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11607,
+      "location_ref": "borean-p095",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0277"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11609,
+      "location_ref": "borean-p095",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0278"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11617,
+      "location_ref": "borean-p095",
+      "npc_name": "伊塔鲁克",
+      "action_id": "a0279"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11623,
+      "location_ref": "borean-p095",
+      "npc_name": "伊塔鲁克",
+      "action_id": "a0280"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p096",
+      "action_id": "a0281"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11609,
+      "location_ref": "borean-p096",
+      "action_id": "a0282"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11623,
+      "location_ref": "borean-p096",
+      "action_id": "a0283"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p097",
+      "action_id": "a0284"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11609,
+      "location_ref": "borean-p097",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0285"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11610,
+      "location_ref": "borean-p097",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0286"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p098",
+      "action_id": "a0287"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11610,
+      "location_ref": "borean-p098",
+      "action_id": "a0288"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p099",
+      "action_id": "a0289"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11610,
+      "location_ref": "borean-p099",
+      "target_name": "长者阿特卡诺克",
+      "action_id": "a0290"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11623,
+      "location_ref": "borean-p099",
+      "npc_name": "伊塔鲁克",
+      "action_id": "a0291"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p100",
+      "action_id": "a0292"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11879,
+      "location_ref": "borean-p100",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0293"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p101",
+      "action_id": "a0294"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11868,
+      "location_ref": "borean-p101",
+      "action_id": "a0295"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p102",
+      "action_id": "a0296"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11870,
+      "location_ref": "borean-p102",
+      "npc_name": "圣职者莉安德拉",
+      "action_id": "a0297"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11871,
+      "location_ref": "borean-p102",
+      "npc_name": "圣职者莉安德拉",
+      "action_id": "a0298"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p103",
+      "action_id": "a0299"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11871,
+      "location_ref": "borean-p103",
+      "action_id": "a0300"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11866,
+      "location_ref": "borean-p103",
+      "action_id": "a0301"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p104",
+      "action_id": "a0302"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11871,
+      "location_ref": "borean-p104",
+      "npc_name": "圣职者莉安德拉",
+      "action_id": "a0303"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11872,
+      "location_ref": "borean-p104",
+      "npc_name": "圣职者莉安德拉",
+      "action_id": "a0304"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p105",
+      "action_id": "a0305"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11872,
+      "location_ref": "borean-p105",
+      "action_id": "a0306"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p106",
+      "action_id": "a0307"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11868,
+      "location_ref": "borean-p106",
+      "npc_name": "扎扎",
+      "action_id": "a0308"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11866,
+      "location_ref": "borean-p106",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0309"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11872,
+      "location_ref": "borean-p106",
+      "npc_name": "圣职者塞妮丝",
+      "action_id": "a0310"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11892,
+      "location_ref": "borean-p106",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0311"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p107",
+      "action_id": "a0312"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11892,
+      "location_ref": "borean-p107",
+      "action_id": "a0313"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p108",
+      "action_id": "a0314"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11892,
+      "location_ref": "borean-p108",
+      "npc_name": "大德鲁伊拉索留斯",
+      "action_id": "a0315"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p109",
+      "action_id": "a0316"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11949,
+      "location_ref": "borean-p109",
+      "npc_name": "阿泰卡",
+      "action_id": "a0317"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p110",
+      "action_id": "a0318"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11949,
+      "location_ref": "borean-p110",
+      "action_id": "a0319"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p111",
+      "action_id": "a0320"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11949,
+      "location_ref": "borean-p111",
+      "npc_name": "阿泰卡",
+      "action_id": "a0321"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11950,
+      "location_ref": "borean-p111",
+      "npc_name": "阿泰卡",
+      "action_id": "a0322"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p112",
+      "action_id": "a0323"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11950,
+      "location_ref": "borean-p112",
+      "npc_name": "长者穆希特",
+      "action_id": "a0324"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11961,
+      "location_ref": "borean-p112",
+      "npc_name": "长者穆希特",
+      "action_id": "a0325"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p113",
+      "action_id": "a0326"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11961,
+      "location_ref": "borean-p113",
+      "action_id": "a0327"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p114",
+      "action_id": "a0328"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11961,
+      "location_ref": "borean-p114",
+      "npc_name": "长者穆希特",
+      "action_id": "a0329"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11968,
+      "location_ref": "borean-p114",
+      "npc_name": "长者穆希特",
+      "action_id": "a0330"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p115",
+      "action_id": "a0331"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11968,
+      "location_ref": "borean-p115",
+      "action_id": "a0332"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p116",
+      "action_id": "a0333"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11968,
+      "location_ref": "borean-p116",
+      "npc_name": "长者穆希特",
+      "action_id": "a0334"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12117,
+      "location_ref": "borean-p116",
+      "npc_name": "霍塔瓦",
+      "action_id": "a0335"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p117",
+      "action_id": "a0336"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "borean-p117",
+      "target_name": "牦牛村",
+      "action_id": "a0337"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11888,
+      "location_ref": "borean-p117",
+      "npc_name": "天空大地先知",
+      "action_id": "a0338"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11890,
+      "location_ref": "borean-p117",
+      "npc_name": "天空大地先知",
+      "action_id": "a0339"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11916,
+      "location_ref": "borean-p117",
+      "npc_name": "冬风酋长",
+      "action_id": "a0340"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11684,
+      "location_ref": "borean-p117",
+      "npc_name": "玛罕宗父",
+      "action_id": "a0341"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11881,
+      "location_ref": "borean-p117",
+      "npc_name": "菲兹克斯·盖维斯特",
+      "action_id": "a0342"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11674,
+      "location_ref": "borean-p117",
+      "npc_name": "塔迦祖母",
+      "action_id": "a0343"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p118",
+      "action_id": "a0344"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11684,
+      "location_ref": "borean-p118",
+      "action_id": "a0345"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p119",
+      "action_id": "a0346"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11684,
+      "location_ref": "borean-p119",
+      "action_id": "a0347"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p120",
+      "action_id": "a0348"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11684,
+      "location_ref": "borean-p120",
+      "action_id": "a0349"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11890,
+      "location_ref": "borean-p120",
+      "action_id": "a0350"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p121",
+      "action_id": "a0351"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11887,
+      "location_ref": "borean-p121",
+      "npc_name": "坠毁侦察机的飞行员",
+      "action_id": "a0352"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11887,
+      "location_ref": "borean-p121",
+      "action_id": "a0353"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p122",
+      "action_id": "a0354"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11881,
+      "location_ref": "borean-p122",
+      "action_id": "a0355"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p123",
+      "action_id": "a0356"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11881,
+      "location_ref": "borean-p123",
+      "npc_name": "菲兹克斯·盖维斯特",
+      "action_id": "a0357"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11893,
+      "location_ref": "borean-p123",
+      "npc_name": "多莱安·霜蹄",
+      "action_id": "a0358"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11887,
+      "location_ref": "borean-p123",
+      "npc_name": "菲兹克斯·盖维斯特",
+      "action_id": "a0359"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11684,
+      "location_ref": "borean-p123",
+      "npc_name": "玛罕宗父",
+      "action_id": "a0360"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11685,
+      "location_ref": "borean-p123",
+      "npc_name": "玛罕宗父",
+      "action_id": "a0361"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11890,
+      "location_ref": "borean-p123",
+      "npc_name": "天空大地先知",
+      "action_id": "a0362"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11895,
+      "location_ref": "borean-p123",
+      "npc_name": "天空大地先知",
+      "action_id": "a0363"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11895,
+      "location_ref": "borean-p123",
+      "action_id": "a0364"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11895,
+      "location_ref": "borean-p123",
+      "npc_name": "天空大地先知",
+      "action_id": "a0365"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11896,
+      "location_ref": "borean-p123",
+      "npc_name": "天空大地先知",
+      "action_id": "a0366"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11899,
+      "location_ref": "borean-p123",
+      "npc_name": "塔迦祖母",
+      "action_id": "a0367"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11906,
+      "location_ref": "borean-p123",
+      "npc_name": "铁眼",
+      "action_id": "a0368"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p124",
+      "action_id": "a0369"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11893,
+      "location_ref": "borean-p124",
+      "action_id": "a0370"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p125",
+      "action_id": "a0371"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11896,
+      "location_ref": "borean-p125",
+      "action_id": "a0372"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11899,
+      "location_ref": "borean-p125",
+      "action_id": "a0373"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11906,
+      "location_ref": "borean-p125",
+      "action_id": "a0374"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p126",
+      "action_id": "a0375"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11674,
+      "location_ref": "borean-p126",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0376"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11675,
+      "location_ref": "borean-p126",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0377"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p127",
+      "action_id": "a0378"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11675,
+      "location_ref": "borean-p127",
+      "action_id": "a0379"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p128",
+      "action_id": "a0380"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11675,
+      "location_ref": "borean-p128",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0381"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11677,
+      "location_ref": "borean-p128",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0382"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p129",
+      "action_id": "a0383"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11677,
+      "location_ref": "borean-p129",
+      "action_id": "a0384"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p130",
+      "action_id": "a0385"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11677,
+      "location_ref": "borean-p130",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0386"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11678,
+      "location_ref": "borean-p130",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0387"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11683,
+      "location_ref": "borean-p130",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0388"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p131",
+      "action_id": "a0389"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11678,
+      "location_ref": "borean-p131",
+      "npc_name": "远行者萨安·钢角",
+      "action_id": "a0390"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11687,
+      "location_ref": "borean-p131",
+      "npc_name": "远行者萨安·钢角",
+      "action_id": "a0391"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11683,
+      "location_ref": "borean-p131",
+      "action_id": "a0392"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11687,
+      "location_ref": "borean-p131",
+      "action_id": "a0393"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p132",
+      "action_id": "a0394"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11683,
+      "location_ref": "borean-p132",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0395"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11687,
+      "location_ref": "borean-p132",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0396"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11689,
+      "location_ref": "borean-p132",
+      "npc_name": "先知赫米萨",
+      "action_id": "a0397"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p133",
+      "action_id": "a0398"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11689,
+      "location_ref": "borean-p133",
+      "npc_name": "塔迦祖母",
+      "action_id": "a0399"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11893,
+      "location_ref": "borean-p133",
+      "npc_name": "多莱安·霜蹄",
+      "action_id": "a0400"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11894,
+      "location_ref": "borean-p133",
+      "npc_name": "菲兹克斯·盖维斯特",
+      "action_id": "a0401"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11896,
+      "location_ref": "borean-p133",
+      "npc_name": "天空大地先知",
+      "action_id": "a0402"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11907,
+      "location_ref": "borean-p133",
+      "npc_name": "天空大地先知",
+      "action_id": "a0403"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11899,
+      "location_ref": "borean-p133",
+      "npc_name": "塔迦祖母",
+      "action_id": "a0404"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11909,
+      "location_ref": "borean-p133",
+      "npc_name": "塔迦祖母",
+      "action_id": "a0405"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11906,
+      "location_ref": "borean-p133",
+      "npc_name": "铁眼",
+      "action_id": "a0406"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p134",
+      "action_id": "a0407"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11894,
+      "location_ref": "borean-p134",
+      "action_id": "a0408"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11907,
+      "location_ref": "borean-p134",
+      "action_id": "a0409"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11909,
+      "location_ref": "borean-p134",
+      "action_id": "a0410"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p135",
+      "action_id": "a0411"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11894,
+      "location_ref": "borean-p135",
+      "npc_name": "菲兹克斯·盖维斯特",
+      "action_id": "a0412"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11628,
+      "location_ref": "borean-p135",
+      "npc_name": "冬风酋长",
+      "action_id": "a0413"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11907,
+      "location_ref": "borean-p135",
+      "npc_name": "天空大地先知",
+      "action_id": "a0414"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11909,
+      "location_ref": "borean-p135",
+      "npc_name": "塔迦祖母",
+      "action_id": "a0415"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p136",
+      "action_id": "a0416"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11628,
+      "location_ref": "borean-p136",
+      "action_id": "a0417"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p137",
+      "action_id": "a0418"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11628,
+      "location_ref": "borean-p137",
+      "npc_name": "冬风酋长",
+      "action_id": "a0419"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11630,
+      "location_ref": "borean-p137",
+      "npc_name": "冬风酋长",
+      "action_id": "a0420"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p138",
+      "action_id": "a0421"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11630,
+      "location_ref": "borean-p138",
+      "action_id": "a0422"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p139",
+      "action_id": "a0423"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11685,
+      "location_ref": "borean-p139",
+      "action_id": "a0424"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p140",
+      "action_id": "a0425"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11630,
+      "location_ref": "borean-p140",
+      "npc_name": "冬风酋长",
+      "action_id": "a0426"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11633,
+      "location_ref": "borean-p140",
+      "npc_name": "冬风酋长",
+      "action_id": "a0427"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11685,
+      "location_ref": "borean-p140",
+      "npc_name": "驯风者巴兰",
+      "action_id": "a0428"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11695,
+      "location_ref": "borean-p140",
+      "npc_name": "驯风者巴兰",
+      "action_id": "a0429"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p141",
+      "action_id": "a0430"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11695,
+      "location_ref": "borean-p141",
+      "action_id": "a0431"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p142",
+      "action_id": "a0432"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11695,
+      "location_ref": "borean-p142",
+      "action_id": "a0433"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p143",
+      "action_id": "a0434"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11633,
+      "location_ref": "borean-p143",
+      "action_id": "a0435"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p144",
+      "action_id": "a0436"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11633,
+      "location_ref": "borean-p144",
+      "npc_name": "冬风酋长",
+      "action_id": "a0437"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11640,
+      "location_ref": "borean-p144",
+      "npc_name": "冬风酋长",
+      "action_id": "a0438"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11641,
+      "location_ref": "borean-p144",
+      "npc_name": "杜尔姆·冰皮",
+      "action_id": "a0439"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11647,
+      "location_ref": "borean-p144",
+      "npc_name": "先知埃恩雷",
+      "action_id": "a0440"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11695,
+      "location_ref": "borean-p144",
+      "npc_name": "驯风者巴兰",
+      "action_id": "a0441"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11706,
+      "location_ref": "borean-p144",
+      "npc_name": "驯风者巴兰",
+      "action_id": "a0442"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p145",
+      "action_id": "a0443"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11640,
+      "location_ref": "borean-p145",
+      "action_id": "a0444"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11641,
+      "location_ref": "borean-p145",
+      "action_id": "a0445"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11647,
+      "location_ref": "borean-p145",
+      "action_id": "a0446"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11654,
+      "location_ref": "borean-p145",
+      "target_name": "一瓶新鲜血液",
+      "when": {
+        "kind": "has_item",
+        "item_name": "一瓶新鲜血液"
+      },
+      "action_id": "a0447"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p146",
+      "action_id": "a0448"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11654,
+      "location_ref": "borean-p146",
+      "npc_name": "踏雪者戈鲁姆",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11654
+      },
+      "action_id": "a0449"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11659,
+      "location_ref": "borean-p146",
+      "npc_name": "踏雪者戈鲁姆",
+      "action_id": "a0450"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11659,
+      "location_ref": "borean-p146",
+      "action_id": "a0451"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p147",
+      "action_id": "a0452"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11659,
+      "location_ref": "borean-p147",
+      "npc_name": "踏雪者尤内克",
+      "action_id": "a0453"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11647,
+      "location_ref": "borean-p147",
+      "npc_name": "先知埃恩雷",
+      "action_id": "a0454"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11641,
+      "location_ref": "borean-p147",
+      "npc_name": "杜尔姆·冰皮",
+      "action_id": "a0455"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11640,
+      "location_ref": "borean-p147",
+      "npc_name": "冬风酋长",
+      "action_id": "a0456"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11898,
+      "location_ref": "borean-p147",
+      "npc_name": "冬风酋长",
+      "action_id": "a0457"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p148",
+      "action_id": "a0458"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11706,
+      "location_ref": "borean-p148",
+      "action_id": "a0459"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p149",
+      "action_id": "a0460"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11706,
+      "location_ref": "borean-p149",
+      "npc_name": "驯风者巴兰",
+      "action_id": "a0461"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p150",
+      "action_id": "a0462"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "borean-p150",
+      "target_name": "使用外部传送器",
+      "action_id": "a0463"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "borean-p150-inner",
+      "from_name": "纳克萨纳尔",
+      "to_name": "纳克萨纳尔",
+      "action_id": "a0464"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p150-inner",
+      "action_id": "visit-p150-inner"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11898,
+      "location_ref": "borean-p150-inner",
+      "action_id": "a0465"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "borean-p150-inner",
+      "target_name": "使用内部传送器",
+      "action_id": "a0466"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "borean-p150-upper",
+      "from_name": "纳克萨纳尔",
+      "to_name": "上层",
+      "action_id": "a0467"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p150-upper",
+      "action_id": "visit-p150-upper"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p151",
+      "action_id": "a0468"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11898,
+      "location_ref": "borean-p151",
+      "npc_name": "冬风酋长",
+      "action_id": "a0469"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11929,
+      "location_ref": "borean-p151",
+      "npc_name": "冬风酋长",
+      "action_id": "a0470"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11929,
+      "location_ref": "borean-p151",
+      "npc_name": "陶拉努克宗母",
+      "action_id": "a0471"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "borean-p152",
+      "target_name": "战歌要塞",
+      "action_id": "a0473"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p152",
+      "action_id": "a0472"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p153",
+      "action_id": "a0474"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "borean-p153",
+      "target_name": "琥珀崖",
+      "action_id": "a0475"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11574,
+      "location_ref": "borean-p153",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0476"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11587,
+      "location_ref": "borean-p153",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0477"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11576,
+      "location_ref": "borean-p153",
+      "npc_name": "图书馆员盖伦",
+      "action_id": "a0478"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p154",
+      "action_id": "a0479"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11587,
+      "location_ref": "borean-p154",
+      "action_id": "a0480"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p155",
+      "action_id": "a0481"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11576,
+      "location_ref": "borean-p155",
+      "action_id": "a0482"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p156",
+      "action_id": "a0483"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11587,
+      "location_ref": "borean-p156",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0484"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11590,
+      "location_ref": "borean-p156",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0485"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11576,
+      "location_ref": "borean-p156",
+      "npc_name": "图书馆员盖伦",
+      "action_id": "a0486"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11582,
+      "location_ref": "borean-p156",
+      "npc_name": "图书馆员盖伦",
+      "action_id": "a0487"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p157",
+      "action_id": "a0488"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11590,
+      "location_ref": "borean-p157",
+      "action_id": "a0489"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p158",
+      "action_id": "a0490"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11582,
+      "location_ref": "borean-p158",
+      "action_id": "a0491"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p159",
+      "action_id": "a0492"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11590,
+      "location_ref": "borean-p159",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0493"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11646,
+      "location_ref": "borean-p159",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0494"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11582,
+      "location_ref": "borean-p159",
+      "npc_name": "图书馆员盖伦",
+      "action_id": "a0495"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12728,
+      "location_ref": "borean-p159",
+      "npc_name": "图书馆员盖伦",
+      "action_id": "a0496"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p160",
+      "action_id": "a0497"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11646,
+      "location_ref": "borean-p160",
+      "npc_name": "图书馆员诺曼提斯",
+      "action_id": "a0498"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11648,
+      "location_ref": "borean-p160",
+      "npc_name": "图书馆员诺曼提斯",
+      "action_id": "a0499"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11648,
+      "location_ref": "borean-p160",
+      "action_id": "a0500"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11648,
+      "location_ref": "borean-p160",
+      "npc_name": "图书馆员诺曼提斯",
+      "action_id": "a0501"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11663,
+      "location_ref": "borean-p160",
+      "npc_name": "图书馆员诺曼提斯",
+      "action_id": "a0502"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11663,
+      "location_ref": "borean-p160",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0503"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11671,
+      "location_ref": "borean-p160",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0504"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p161",
+      "action_id": "a0505"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11671,
+      "location_ref": "borean-p161",
+      "action_id": "a0506"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p162",
+      "action_id": "a0507"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11671,
+      "location_ref": "borean-p162",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0508"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11679,
+      "location_ref": "borean-p162",
+      "npc_name": "图书馆员多纳森",
+      "action_id": "a0509"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11679,
+      "location_ref": "borean-p162",
+      "npc_name": "苏雷斯塔兹",
+      "action_id": "a0510"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11680,
+      "location_ref": "borean-p162",
+      "npc_name": "苏雷斯塔兹",
+      "action_id": "a0511"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p163",
+      "action_id": "a0512"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11680,
+      "location_ref": "borean-p163",
+      "npc_name": "战斗法师安斯姆",
+      "action_id": "a0513"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11681,
+      "location_ref": "borean-p163",
+      "npc_name": "战斗法师安斯姆",
+      "action_id": "a0514"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "borean-p163-platform",
+      "from_name": "琥珀崖",
+      "to_name": "蓝玉营地上方平台",
+      "action_id": "a0515"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p163-platform",
+      "action_id": "visit-p163-platform"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11681,
+      "location_ref": "borean-p163-platform",
+      "action_id": "a0516"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "borean-p163-return",
+      "from_name": "蓝玉营地上方平台",
+      "to_name": "琥珀崖",
+      "action_id": "a0517"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p163-return",
+      "action_id": "visit-p163-return"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p164",
+      "action_id": "a0518"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11681,
+      "location_ref": "borean-p164",
+      "npc_name": "大法师艾瓦诺尔",
+      "action_id": "a0519"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11682,
+      "location_ref": "borean-p164",
+      "npc_name": "大法师艾瓦诺尔",
+      "action_id": "a0520"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p165",
+      "action_id": "a0521"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11682,
+      "location_ref": "borean-p165",
+      "npc_name": "苏雷斯塔兹",
+      "action_id": "a0522"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11733,
+      "location_ref": "borean-p165",
+      "npc_name": "苏雷斯塔兹",
+      "action_id": "a0523"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "borean-p165",
+      "from_name": "琥珀崖",
+      "to_name": "考达拉",
+      "action_id": "a0524"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p166",
+      "action_id": "a0525"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "borean-p166",
+      "target_name": "永生之盾",
+      "action_id": "a0526"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11733,
+      "location_ref": "borean-p166",
+      "npc_name": "大法师伯林纳德",
+      "action_id": "a0527"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11900,
+      "location_ref": "borean-p166",
+      "npc_name": "大法师伯林纳德",
+      "action_id": "a0528"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11910,
+      "location_ref": "borean-p166",
+      "npc_name": "大法师伯林纳德",
+      "action_id": "a0529"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11912,
+      "location_ref": "borean-p166",
+      "npc_name": "图书馆员塞尔拉",
+      "action_id": "a0530"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11918,
+      "location_ref": "borean-p166",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0531"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p167",
+      "action_id": "a0532"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11900,
+      "location_ref": "borean-p167",
+      "action_id": "a0533"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11910,
+      "location_ref": "borean-p167",
+      "action_id": "a0534"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11912,
+      "location_ref": "borean-p167",
+      "action_id": "a0535"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11918,
+      "location_ref": "borean-p167",
+      "action_id": "a0536"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p168",
+      "action_id": "a0537"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11900,
+      "location_ref": "borean-p168",
+      "action_id": "a0538"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11910,
+      "location_ref": "borean-p168",
+      "action_id": "a0539"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11912,
+      "location_ref": "borean-p168",
+      "action_id": "a0540"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11918,
+      "location_ref": "borean-p168",
+      "action_id": "a0541"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p169",
+      "action_id": "a0542"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11900,
+      "location_ref": "borean-p169",
+      "action_id": "a0543"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11910,
+      "location_ref": "borean-p169",
+      "action_id": "a0544"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11912,
+      "location_ref": "borean-p169",
+      "action_id": "a0545"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11918,
+      "location_ref": "borean-p169",
+      "action_id": "a0546"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p170",
+      "action_id": "a0547"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11900,
+      "location_ref": "borean-p170",
+      "action_id": "a0548"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p171",
+      "action_id": "a0549"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11900,
+      "location_ref": "borean-p171",
+      "action_id": "a0550"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11910,
+      "location_ref": "borean-p171",
+      "action_id": "a0551"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11912,
+      "location_ref": "borean-p171",
+      "action_id": "a0552"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11918,
+      "location_ref": "borean-p171",
+      "action_id": "a0553"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p172",
+      "action_id": "a0554"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11900,
+      "location_ref": "borean-p172",
+      "npc_name": "大法师伯林纳德",
+      "action_id": "a0555"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11910,
+      "location_ref": "borean-p172",
+      "npc_name": "大法师伯林纳德",
+      "action_id": "a0556"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11912,
+      "location_ref": "borean-p172",
+      "npc_name": "图书馆员塞尔拉",
+      "action_id": "a0557"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11914,
+      "location_ref": "borean-p172",
+      "npc_name": "图书馆员塞尔拉",
+      "action_id": "a0558"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11918,
+      "location_ref": "borean-p172",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0559"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11936,
+      "location_ref": "borean-p172",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0560"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p173",
+      "action_id": "a0561"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11914,
+      "location_ref": "borean-p173",
+      "action_id": "a0562"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11936,
+      "location_ref": "borean-p173",
+      "action_id": "a0563"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11941,
+      "location_ref": "borean-p173",
+      "target_name": "闪耀的碎片",
+      "when": {
+        "kind": "has_item",
+        "item_name": "闪耀的碎片"
+      },
+      "action_id": "a0564"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p174",
+      "action_id": "a0565"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11914,
+      "location_ref": "borean-p174",
+      "npc_name": "图书馆员塞尔拉",
+      "action_id": "a0566"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11936,
+      "location_ref": "borean-p174",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0567"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11919,
+      "location_ref": "borean-p174",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0568"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11941,
+      "location_ref": "borean-p174",
+      "npc_name": "莱洛拉斯",
+      "when": {
+        "kind": "task_active",
+        "task_id": 11941
+      },
+      "action_id": "a0569"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11943,
+      "location_ref": "borean-p174",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0570"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p175",
+      "action_id": "a0571"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11943,
+      "location_ref": "borean-p175",
+      "action_id": "a0572"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p176",
+      "action_id": "a0573"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11943,
+      "location_ref": "borean-p176",
+      "action_id": "a0574"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p177",
+      "action_id": "a0575"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11919,
+      "location_ref": "borean-p177",
+      "action_id": "a0576"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p178",
+      "action_id": "a0577"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11919,
+      "location_ref": "borean-p178",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0578"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11931,
+      "location_ref": "borean-p178",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0579"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11943,
+      "location_ref": "borean-p178",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0580"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11946,
+      "location_ref": "borean-p178",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0581"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11946,
+      "location_ref": "borean-p178",
+      "action_id": "a0582"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11946,
+      "location_ref": "borean-p178",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0583"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11951,
+      "location_ref": "borean-p178",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0584"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p179",
+      "action_id": "a0585"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11951,
+      "location_ref": "borean-p179",
+      "action_id": "a0586"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11931,
+      "location_ref": "borean-p179",
+      "action_id": "a0587"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p180",
+      "action_id": "a0588"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11931,
+      "location_ref": "borean-p180",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0589"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11951,
+      "location_ref": "borean-p180",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0590"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11957,
+      "location_ref": "borean-p180",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0591"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p181",
+      "action_id": "a0592"
+    },
+    {
+      "kind": "interact",
+      "location_ref": "borean-p181",
+      "target_name": "启动克莉斯塔萨任务脚本",
+      "action_id": "a0593"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "borean-p181-high",
+      "from_name": "莎拉苟萨平台",
+      "to_name": "高处平台",
+      "action_id": "a0594"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p181-high",
+      "action_id": "visit-p181-high"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11957,
+      "location_ref": "borean-p181-high",
+      "action_id": "a0595"
+    },
+    {
+      "kind": "quest_transport",
+      "location_ref": "borean-p181-return",
+      "from_name": "莎拉苟萨·高处平台",
+      "to_name": "莎拉苟萨平台",
+      "action_id": "a0596"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p181-return",
+      "action_id": "visit-p181-return"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11957,
+      "location_ref": "borean-p181-return",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0597"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11967,
+      "location_ref": "borean-p181-return",
+      "npc_name": "克莉斯塔萨",
+      "action_id": "a0598"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p182",
+      "action_id": "a0599"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11967,
+      "location_ref": "borean-p182",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0600"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11969,
+      "location_ref": "borean-p182",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0601"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p183",
+      "action_id": "a0602"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11969,
+      "location_ref": "borean-p183",
+      "action_id": "a0603"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p184",
+      "action_id": "a0604"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11969,
+      "location_ref": "borean-p184",
+      "npc_name": "莱洛拉斯",
+      "action_id": "a0605"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p185",
+      "action_id": "a0606"
+    },
+    {
+      "kind": "move",
+      "location_ref": "borean-p185",
+      "to_name": "飞行管理员",
+      "action_id": "a0607",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p186",
+      "action_id": "a0608"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "borean-p186",
+      "from_name": "永生之盾",
+      "to_name": "琥珀崖",
+      "action_id": "a0609"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p187",
+      "action_id": "a0610"
+    },
+    {
+      "kind": "move",
+      "location_ref": "borean-p187",
+      "to_name": "琥珀崖",
+      "action_id": "a0611",
+      "movement_mode": "ride"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p188",
+      "action_id": "a0612"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11592,
+      "location_ref": "borean-p188",
+      "npc_name": "远行者达玛·傲蹄",
+      "action_id": "a0613"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11593,
+      "location_ref": "borean-p188",
+      "npc_name": "步兵沃塔·怒拳",
+      "action_id": "a0614"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11594,
+      "location_ref": "borean-p188",
+      "npc_name": "步兵沃塔·怒拳",
+      "action_id": "a0615"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p189",
+      "action_id": "a0616"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11592,
+      "location_ref": "borean-p189",
+      "action_id": "a0617"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11593,
+      "location_ref": "borean-p189",
+      "action_id": "a0618"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11594,
+      "location_ref": "borean-p189",
+      "action_id": "a0619"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p190",
+      "action_id": "a0620"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11593,
+      "location_ref": "borean-p190",
+      "npc_name": "步兵沃塔·怒拳",
+      "action_id": "a0621"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11594,
+      "location_ref": "borean-p190",
+      "npc_name": "步兵沃塔·怒拳",
+      "action_id": "a0622"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p191",
+      "action_id": "a0623"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "borean-p191",
+      "target_name": "博古洛克前哨站",
+      "action_id": "a0624"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11592,
+      "location_ref": "borean-p191",
+      "npc_name": "博古洛克大王",
+      "action_id": "a0625"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12486,
+      "location_ref": "borean-p191",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0626"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11624,
+      "location_ref": "borean-p191",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0627"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11702,
+      "location_ref": "borean-p191",
+      "npc_name": "补给官塔尼斯",
+      "action_id": "a0628"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p192",
+      "action_id": "a0629"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11624,
+      "location_ref": "borean-p192",
+      "npc_name": "因波莉安",
+      "action_id": "a0630"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11627,
+      "location_ref": "borean-p192",
+      "npc_name": "因波莉安",
+      "action_id": "a0631"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p193",
+      "action_id": "a0632"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11627,
+      "location_ref": "borean-p193",
+      "action_id": "a0633"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p194",
+      "action_id": "a0634"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11627,
+      "location_ref": "borean-p194",
+      "action_id": "a0635"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p195",
+      "action_id": "a0636"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11702,
+      "location_ref": "borean-p195",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0637"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11571,
+      "location_ref": "borean-p195",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0638"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p196",
+      "action_id": "a0639"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11571,
+      "location_ref": "borean-p196",
+      "action_id": "a0640"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p197",
+      "action_id": "a0641"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11571,
+      "location_ref": "borean-p197",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0642"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11559,
+      "location_ref": "borean-p197",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0643"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p198",
+      "action_id": "a0644"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11559,
+      "location_ref": "borean-p198",
+      "action_id": "a0645"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p199",
+      "action_id": "a0646"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11559,
+      "location_ref": "borean-p199",
+      "npc_name": "呀噜咕噜",
+      "action_id": "a0647"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11560,
+      "location_ref": "borean-p199",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0648"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11561,
+      "location_ref": "borean-p199",
+      "npc_name": "吧咕姆咕",
+      "action_id": "a0649"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p200",
+      "action_id": "a0650"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11560,
+      "location_ref": "borean-p200",
+      "action_id": "a0651"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11561,
+      "location_ref": "borean-p200",
+      "action_id": "a0652"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p201",
+      "action_id": "a0653"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11560,
+      "location_ref": "borean-p201",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0654"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11562,
+      "location_ref": "borean-p201",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0655"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11561,
+      "location_ref": "borean-p201",
+      "npc_name": "吧咕姆咕",
+      "action_id": "a0656"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p202",
+      "action_id": "a0657"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11562,
+      "location_ref": "borean-p202",
+      "npc_name": "姆姆咕咕",
+      "action_id": "a0658"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11563,
+      "location_ref": "borean-p202",
+      "npc_name": "姆姆咕咕",
+      "action_id": "a0659"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11564,
+      "location_ref": "borean-p202",
+      "npc_name": "屠夫布咕布噜",
+      "action_id": "a0660"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p203",
+      "action_id": "a0661"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11563,
+      "location_ref": "borean-p203",
+      "action_id": "a0662"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11564,
+      "location_ref": "borean-p203",
+      "action_id": "a0663"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p204",
+      "action_id": "a0664"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11563,
+      "location_ref": "borean-p204",
+      "npc_name": "姆姆咕咕",
+      "action_id": "a0665"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11565,
+      "location_ref": "borean-p204",
+      "npc_name": "姆姆咕咕",
+      "action_id": "a0666"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11564,
+      "location_ref": "borean-p204",
+      "npc_name": "屠夫布咕布噜",
+      "action_id": "a0667"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p205",
+      "action_id": "a0668"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11565,
+      "location_ref": "borean-p205",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0669"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11566,
+      "location_ref": "borean-p205",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0670"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p206",
+      "action_id": "a0671"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12728,
+      "location_ref": "borean-p206",
+      "action_id": "a0672"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p207",
+      "action_id": "a0673"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11569,
+      "location_ref": "borean-p207",
+      "npc_name": "咕啦咕啦",
+      "action_id": "a0674"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p208",
+      "action_id": "a0675"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11569,
+      "location_ref": "borean-p208",
+      "action_id": "a0676"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p209",
+      "action_id": "a0677"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11569,
+      "location_ref": "borean-p209",
+      "npc_name": "咕啦咕啦",
+      "action_id": "a0678"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11570,
+      "location_ref": "borean-p209",
+      "npc_name": "噜呱吧呱",
+      "action_id": "a0679"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p210",
+      "action_id": "a0680"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11566,
+      "location_ref": "borean-p210",
+      "action_id": "a0681"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11570,
+      "location_ref": "borean-p210",
+      "action_id": "a0682"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p211",
+      "action_id": "a0683"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11566,
+      "location_ref": "borean-p211",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0684"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11570,
+      "location_ref": "borean-p211",
+      "npc_name": "国王姆嘎姆嘎",
+      "action_id": "a0685"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p212",
+      "action_id": "a0686"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11627,
+      "location_ref": "borean-p212",
+      "npc_name": "因波莉安",
+      "action_id": "a0687"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11649,
+      "location_ref": "borean-p212",
+      "npc_name": "因波莉安",
+      "action_id": "a0688"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p213",
+      "action_id": "a0689"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11649,
+      "location_ref": "borean-p213",
+      "action_id": "a0690"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p214",
+      "action_id": "a0691"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11649,
+      "location_ref": "borean-p214",
+      "npc_name": "因波莉安",
+      "action_id": "a0692"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11629,
+      "location_ref": "borean-p214",
+      "npc_name": "因波莉安",
+      "action_id": "a0693"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p215",
+      "action_id": "a0694"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11629,
+      "location_ref": "borean-p215",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0695"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11631,
+      "location_ref": "borean-p215",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0696"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11631,
+      "location_ref": "borean-p215",
+      "action_id": "a0697"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11631,
+      "location_ref": "borean-p215",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0698"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11635,
+      "location_ref": "borean-p215",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0699"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11639,
+      "location_ref": "borean-p215",
+      "npc_name": "奥尔托什",
+      "action_id": "a0700"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p216",
+      "action_id": "a0701"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11635,
+      "location_ref": "borean-p216",
+      "npc_name": "先知格雷姆沃克的灵魂",
+      "action_id": "a0702"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11637,
+      "location_ref": "borean-p216",
+      "npc_name": "先知格雷姆沃克的灵魂",
+      "action_id": "a0703"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p217",
+      "action_id": "a0704"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11637,
+      "location_ref": "borean-p217",
+      "action_id": "a0705"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11639,
+      "location_ref": "borean-p217",
+      "action_id": "a0706"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p218",
+      "action_id": "a0707"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11637,
+      "location_ref": "borean-p218",
+      "npc_name": "先知格雷姆沃克的灵魂",
+      "action_id": "a0708"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11638,
+      "location_ref": "borean-p218",
+      "npc_name": "先知格雷姆沃克的灵魂",
+      "action_id": "a0709"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11638,
+      "location_ref": "borean-p218",
+      "action_id": "a0710"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p219",
+      "action_id": "a0711"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11638,
+      "location_ref": "borean-p219",
+      "npc_name": "灵语者斯纳尔芬",
+      "action_id": "a0712"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11639,
+      "location_ref": "borean-p219",
+      "npc_name": "奥尔托什",
+      "action_id": "a0713"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p220",
+      "action_id": "a0714"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "borean-p220",
+      "from_name": "博古洛克",
+      "to_name": "琥珀崖",
+      "action_id": "a0715"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p221",
+      "action_id": "a0716"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12728,
+      "location_ref": "borean-p221",
+      "npc_name": "图书馆员盖伦",
+      "action_id": "a0717"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "borean-p223",
+      "from_name": "琥珀崖",
+      "to_name": "牦牛村",
+      "action_id": "a0719"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p223",
+      "action_id": "a0720"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11930,
+      "location_ref": "borean-p223",
+      "npc_name": "陶拉努克宗母",
+      "action_id": "a0721"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p224",
+      "action_id": "a0722"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11930,
+      "location_ref": "borean-p224",
+      "action_id": "a0723"
+    },
+    {
+      "kind": "move",
+      "location_ref": "borean-p225",
+      "to_name": "龙骨荒野边界·沃图克",
+      "action_id": "move-borean-11930-boundary"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p225",
+      "action_id": "a0724"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "战歌要塞",
+      "summary": "在战歌要塞完成入场引导，接到《战歌要塞的防御》。",
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "战歌要塞 → 巨石采掘场",
+      "summary": "在战歌要塞绑定炉石，接《夺回巨石采掘场》《耐心是我们不需要的美德》《前往牦牛村》《被掠走的苦工》。",
+      "action_ids": [
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010",
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "巨石采掘场",
+      "summary": "从采掘场西侧一路扫到东侧，同时完成《夺回巨石采掘场》《耐心是我们不需要的美德》《被掠走的苦工》。",
+      "action_ids": [
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "巨石采掘场 → 战歌要塞",
+      "summary": "回战歌要塞依次交《被掠走的苦工》《耐心是我们不需要的美德》《夺回巨石采掘场》，接《活埋了那些蟑螂！》《切断虫源》《隐藏的真相》。",
+      "action_ids": [
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "四虫孔与蛛卵一圈清",
+      "summary": "按东→南→西→北四个虫孔一圈完成《活埋了那些蟑螂！》，沿途同步完成《切断虫源》；西侧顺路找暗影密探卢瑟尔交接《隐藏的真相》《尼鲁巴尔的秘密》。",
+      "action_ids": [
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "战歌要塞",
+      "summary": "回战歌依次交《活埋了那些蟑螂！》《切断虫源》《尼鲁巴尔的秘密》，接《驭风大师图波尔》《通知地狱咆哮》。",
+      "action_ids": [
+        "a0055",
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "开飞行点 → 通知地狱咆哮 → 魔法飞毯",
+      "summary": "五号顺路开启战歌要塞飞行点，交《驭风大师图波尔》接《魔法飞毯》；向加尔鲁什交接后，通过《魔法飞毯》的任务脚本飞行前往加尔鲁什码头。",
+      "action_ids": [
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070",
+        "a0071",
+        "a0072"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "加尔鲁什码头 → 回音海岸",
+      "summary": "交《魔法飞毯》后，在加尔鲁什码头与回音海岸接齐莫布、瓦托尔当前任务；后续掉落任务留在同一克瓦迪尔怪区一起完成。",
+      "action_ids": [
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080",
+        "a0081",
+        "a0082"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "固定零件 + 克瓦迪尔三任务 + 短护送",
+      "summary": "先进入南侧岸边小屋拿固定零件，再在同一克瓦迪尔怪区一起完成三条掉落任务；顺路接《逃离迷雾》并完成小穆图护送。",
+      "action_ids": [
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "回音海岸 → 加尔鲁什码头",
+      "summary": "护送结束后连续交付《逃离迷雾》及克瓦迪尔三任务，接出《坦克准备就绪！》《烧毁船只》《舵手奥拉布斯》《纳萨姆平原》；《纳萨姆平原》此时只携带。",
+      "action_ids": [
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "伯尔之锤 → 战歌码头 → 伯尔之砧",
+      "summary": "沿海岸依次点燃伯尔之锤、库尔达卡、毒蛇之喉、伯尔之砧；途中在战歌码头尽头吹号角完成《舵手奥拉布斯》。",
+      "action_ids": [
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "海岸交付后直接上坦克做纳萨姆",
+      "summary": "向瓦托尔交《烧毁船只》《舵手奥拉布斯》并接《找到卡鲁克！》，随后五号分别使用部落攻城坦克完成《纳萨姆平原》。",
+      "action_ids": [
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "裂鞭海岸 → 卡鲁克",
+      "summary": "先找卡鲁克交《找到卡鲁克！》并接《卡鲁克的誓言》；再救出被俘虏的海象人接《残忍的科瓦迪尔》，完成斯卡迪尔击杀后回卡鲁克一起交付。",
+      "action_ids": [
+        "a0124",
+        "a0125",
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "贾梅尔 → 父亲的话 → 维赫亚",
+      "summary": "击杀残忍的贾梅尔后回卡鲁克交任务并接《父亲的话》，再到蛇鳞神殿找维赫亚交《父亲的话》并接《纳兹亚的三叉戟》。",
+      "action_ids": [
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "纳兹亚的三叉戟 → 使者 → 卡鲁克",
+      "summary": "在裂鞭废墟东北部击杀拉格纳取得三叉戟，交给维赫亚接《使者》；再下潜到北部冰山下用三叉戟处理利维洛斯，最后回卡鲁克交任务。",
+      "action_ids": [
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149",
+        "a0150",
+        "a0151"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "战歌要塞 → 伊斯里克斯事件",
+      "summary": "炉石回战歌交《纳萨姆平原》，分别从恩多拉和秘法师萨乌拉诺克接两条引导任务；经过南门时只检查一次伊斯里克斯事件，无事件就继续。",
+      "action_ids": [
+        "a0153",
+        "a0152",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158",
+        "a0159"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "战歌农场开局接任务",
+      "summary": "到战歌农场哨站交《增援来了……》，从伊克里斯、卡纳留斯、农夫托普分别接《战歌农场》《慈悲为怀》《该死的猪》。",
+      "action_ids": [
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "农场三处侦察 + 囚犯/亡灵猪同圈",
+      "summary": "依次侦察托普的农场、战歌粮仓和战歌屠宰场；中途在西南怪区同时完成《慈悲为怀》和《该死的猪》。",
+      "action_ids": [
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173",
+        "a0174"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "战歌农场交付 → 科多救援",
+      "summary": "回战歌农场哨站交《战歌农场》《慈悲为怀》，从伊克里斯接《暗影密探盖特莱》；农夫托普交《该死的猪》后接《把它们活着带回去》，救回8只感染科多兽并交任务。",
+      "action_ids": [
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0185"
+      ]
+    },
+    {
+      "step_id": "step-20",
+      "title": "暗影密探盖特莱 → 残忍的瓦雷杜斯",
+      "summary": "找暗影密探盖特莱交同名任务并接《愚蠢的努力》，随后击杀残忍的瓦雷杜斯。",
+      "action_ids": [
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190"
+      ]
+    },
+    {
+      "step_id": "step-21",
+      "title": "炉石战歌 → 逃兵快递 → 图古克 / 劳莉丝",
+      "summary": "炉石回战歌交《愚蠢的努力》并接诺克链；把联盟逃兵送到东侧十字路口并使用信号枪后，再找图古克和劳莉丝接血孢平原任务。",
+      "action_ids": [
+        "a0192",
+        "a0191",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199",
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0203",
+        "a0204"
+      ]
+    },
+    {
+      "step_id": "step-22",
+      "title": "血孢平原 → 巨蛾/蛾卵 → 迦莫斯链",
+      "summary": "先完成《清除北地狗头人》《奇妙的血孢》，再到迦莫斯洞穴上方高处同点完成《授粉的巨蛾》并接《巨大的蛾卵》；回劳莉丝原地完成《完美的测试对象》，随后由普雷玛·巨角接出《折磨者迦莫斯拉》。",
+      "action_ids": [
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209",
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217",
+        "a0218",
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0223",
+        "a0224"
+      ]
+    },
+    {
+      "step_id": "step-23",
+      "title": "迦莫斯洞穴 → 血孢平原 → 战歌要塞",
+      "summary": "在迦莫斯洞穴底层削弱并击杀迦莫斯拉，取头颅回普雷玛·巨角交任务；随后把《迦莫斯的战利品》交给加尔鲁什，满足前置后接《地狱咆哮的勇士》。",
+      "action_ids": [
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228",
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232"
+      ]
+    },
+    {
+      "step_id": "step-24",
+      "title": "仁德会·尼达尔 / 欢乐的蚌壳 / 死不足惜",
+      "summary": "在仁德会接齐第一批任务；依次完成《尼达尔，犀牛之王……》《欢乐的蚌壳》《死不足惜》。",
+      "action_ids": [
+        "a0233",
+        "accept-11864-dehta",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238",
+        "a0239",
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245"
+      ]
+    },
+    {
+      "step_id": "step-25",
+      "title": "冷石采掘场 → 帮助弱小",
+      "summary": "冷石采掘场外接《海象人的先祖》《夺回采掘场》，随后完成《帮助弱小》。",
+      "action_ids": [
+        "a0246",
+        "a0247",
+        "a0248",
+        "a0249",
+        "a0250"
+      ]
+    },
+    {
+      "step_id": "step-26",
+      "title": "仁德会 → 库诺克 / 卡奥",
+      "summary": "仁德会交接当前任务并接后续；完成《库诺克的智慧》，再接并完成《猛犸毁灭者卡奥》。",
+      "action_ids": [
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260",
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264"
+      ]
+    },
+    {
+      "step_id": "step-27",
+      "title": "冷石采掘场·海象人的先祖 / 夺回采掘场",
+      "summary": "在冷石采掘场完成《海象人的先祖》《夺回采掘场》，随后回采掘场外交接后续。",
+      "action_ids": [
+        "a0265",
+        "a0266",
+        "a0267",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271",
+        "a0272"
+      ]
+    },
+    {
+      "step_id": "step-28",
+      "title": "冷石采掘场·失落的灵魂 / 别让他们逃了！",
+      "summary": "在冷石采掘场完成《失落的灵魂》《别让他们逃了！》，随后回采掘场外交接后续。",
+      "action_ids": [
+        "a0273",
+        "a0274",
+        "a0275",
+        "a0276",
+        "a0277",
+        "a0278",
+        "a0279",
+        "a0280"
+      ]
+    },
+    {
+      "step_id": "step-29",
+      "title": "冷石采掘场·寻找古器 / 先祖的回归",
+      "summary": "完成《寻找古器》《拜访馆长》，向长者阿特卡诺克接《先祖的回归》并完成，最后回采掘场外交付。",
+      "action_ids": [
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289",
+        "a0290",
+        "a0291"
+      ]
+    },
+    {
+      "step_id": "step-30",
+      "title": "仁德会南线：卡琳 → 遗弃海岸 / 不可容忍",
+      "summary": "仁德会交《猛犸毁灭者卡奥》；完成《驯鹿杀手之死》后到莉安德拉交《遗弃海岸》接《不可容忍》，在遗弃海岸完成当前任务并回接蛤蜊主宰。",
+      "action_ids": [
+        "a0292",
+        "a0293",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298",
+        "a0299",
+        "a0300",
+        "a0301",
+        "a0302",
+        "a0303",
+        "a0304"
+      ]
+    },
+    {
+      "step_id": "step-31",
+      "title": "仁德会·蛤蜊主宰 / 刺杀哈罗德·兰恩",
+      "summary": "完成《罪恶的蛤蜊主宰……》后回仁德会交接，接《刺杀哈罗德·兰恩》并完成后回交。",
+      "action_ids": [
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308",
+        "a0309",
+        "a0310",
+        "a0311",
+        "a0312",
+        "a0313",
+        "a0314",
+        "a0315"
+      ]
+    },
+    {
+      "step_id": "step-32",
+      "title": "卡斯卡拉·战斗到底 / 穆希特的智慧",
+      "summary": "阿泰卡接并完成《战斗到底！》，随后接《穆希特的智慧》，到长者穆希特交付并接《神灵的眷顾》。",
+      "action_ids": [
+        "a0316",
+        "a0317",
+        "a0318",
+        "a0319",
+        "a0320",
+        "a0321",
+        "a0322",
+        "a0323",
+        "a0324",
+        "a0325"
+      ]
+    },
+    {
+      "step_id": "step-33",
+      "title": "卡斯卡拉·神灵的眷顾 / 情势扭转",
+      "summary": "完成《神灵的眷顾》后回长者穆希特接《情势扭转》，完成并回交；随后从霍塔瓦接《前往莫亚基港口》。",
+      "action_ids": [
+        "a0326",
+        "a0327",
+        "a0328",
+        "a0329",
+        "a0330",
+        "a0331",
+        "a0332",
+        "a0333",
+        "a0334",
+        "a0335"
+      ]
+    },
+    {
+      "step_id": "step-34",
+      "title": "牦牛村 → 三处虫孔",
+      "summary": "到牦牛村开飞行点并交接当前任务；随后完成《侦查虫孔》《他们想干什么？》。",
+      "action_ids": [
+        "a0336",
+        "a0337",
+        "a0338",
+        "a0339",
+        "a0340",
+        "a0341",
+        "a0342",
+        "a0343",
+        "a0344",
+        "a0345",
+        "a0346",
+        "a0347",
+        "a0348",
+        "a0349",
+        "a0350"
+      ]
+    },
+    {
+      "step_id": "step-35",
+      "title": "应急的物资 / 运货行动 → 牦牛村",
+      "summary": "完成《应急的物资》《运货行动！》后回牦牛村集中交接；完成《风暴的主宰》并接后续任务。",
+      "action_ids": [
+        "a0351",
+        "a0352",
+        "a0353",
+        "a0354",
+        "a0355",
+        "a0356",
+        "a0357",
+        "a0358",
+        "a0359",
+        "a0360",
+        "a0361",
+        "a0362",
+        "a0363",
+        "a0364",
+        "a0365",
+        "a0366",
+        "a0367",
+        "a0368"
+      ]
+    },
+    {
+      "step_id": "step-36",
+      "title": "元素的力量 / 菲兹兰克泵站",
+      "summary": "完成《元素的力量》，再进入菲兹兰克泵站完成《闪电的力量》《灵魂的解脱》《净化水池》。",
+      "action_ids": [
+        "a0369",
+        "a0370",
+        "a0371",
+        "a0372",
+        "a0373",
+        "a0374"
+      ]
+    },
+    {
+      "step_id": "step-37",
+      "title": "赫米萨：死亡的解脱 → 阻止瘟疫",
+      "summary": "找先知赫米萨交同名任务并接《死亡的解脱》，完成后回赫米萨接《阻止瘟疫》，再去亡者之穴完成任务。",
+      "action_ids": [
+        "a0375",
+        "a0376",
+        "a0377",
+        "a0378",
+        "a0379",
+        "a0380",
+        "a0381",
+        "a0382",
+        "a0383",
+        "a0384"
+      ]
+    },
+    {
+      "step_id": "step-38",
+      "title": "阻止瘟疫交接 → 塔尔拉玛斯 → 报告坏消息",
+      "summary": "回先知赫米萨交《阻止瘟疫》并接后续；到塔尔拉玛斯完成《坠落的浮空城》《博士和巫妖领主》，最后回赫米萨交付并接《报告坏消息》。",
+      "action_ids": [
+        "a0385",
+        "a0386",
+        "a0387",
+        "a0388",
+        "a0389",
+        "a0390",
+        "a0391",
+        "a0392",
+        "a0393",
+        "a0394",
+        "a0395",
+        "a0396",
+        "a0397"
+      ]
+    },
+    {
+      "step_id": "step-39",
+      "title": "牦牛村·任务交接",
+      "summary": "回牦牛村集中交付《报告坏消息》《元素的力量》《闪电的力量》《灵魂的解脱》《净化水池》，并接《修修补补》《机械副官》《击败机甲专家》。",
+      "action_ids": [
+        "a0398",
+        "a0399",
+        "a0400",
+        "a0401",
+        "a0402",
+        "a0403",
+        "a0404",
+        "a0405",
+        "a0406"
+      ]
+    },
+    {
+      "step_id": "step-40",
+      "title": "菲兹兰克泵站·修修补补 / 机械副官 / 击败机甲专家",
+      "summary": "回菲兹兰克泵站完成《修修补补》《机械副官》《击败机甲专家》。",
+      "action_ids": [
+        "a0407",
+        "a0408",
+        "a0409",
+        "a0410"
+      ]
+    },
+    {
+      "step_id": "step-41",
+      "title": "牦牛村 → 天灾的外衣",
+      "summary": "回牦牛村交接当前任务；完成《天灾的外衣》后向冬风酋长交付并接《腐化的土地》。",
+      "action_ids": [
+        "a0411",
+        "a0412",
+        "a0413",
+        "a0414",
+        "a0415",
+        "a0416",
+        "a0417",
+        "a0418",
+        "a0419",
+        "a0420"
+      ]
+    },
+    {
+      "step_id": "step-42",
+      "title": "腐化的土地 / 元素之心 → 牦牛村",
+      "summary": "先完成《腐化的土地》《元素之心》，再回牦牛村分别交付并接《乔装潜入》《元素愤怒号角》。",
+      "action_ids": [
+        "a0421",
+        "a0422",
+        "a0423",
+        "a0424",
+        "a0425",
+        "a0426",
+        "a0427",
+        "a0428",
+        "a0429"
+      ]
+    },
+    {
+      "step_id": "step-43",
+      "title": "元素愤怒号角·上下半截",
+      "summary": "依次取得元素愤怒号角的上、下半截。",
+      "action_ids": [
+        "a0430",
+        "a0431",
+        "a0432",
+        "a0433"
+      ]
+    },
+    {
+      "step_id": "step-44",
+      "title": "恩其拉·乔装潜入 → 牦牛村",
+      "summary": "完成《乔装潜入》后回牦牛村交接《力量之语》《勇猛的进攻》《中和瘟疫之锅》《天崩地裂》。",
+      "action_ids": [
+        "a0434",
+        "a0435",
+        "a0436",
+        "a0437",
+        "a0438",
+        "a0439",
+        "a0440",
+        "a0441",
+        "a0442"
+      ]
+    },
+    {
+      "step_id": "step-45",
+      "title": "恩其拉·力量之语 / 鲜血尖塔 → 牦牛村",
+      "summary": "在恩其拉完成《力量之语》《勇猛的进攻》《中和瘟疫之锅》《鲜血尖塔》《击碎宝珠！》，随后回牦牛村交接并接《过关斩将》。",
+      "action_ids": [
+        "a0443",
+        "a0444",
+        "a0445",
+        "a0446",
+        "a0447",
+        "a0448",
+        "a0449",
+        "a0450",
+        "a0451",
+        "a0452",
+        "a0453",
+        "a0454",
+        "a0455",
+        "a0456",
+        "a0457"
+      ]
+    },
+    {
+      "step_id": "step-46",
+      "title": "天崩地裂 / 过关斩将 → 牦牛村",
+      "summary": "完成《天崩地裂》《过关斩将》后回牦牛村交接《牦牛村的陷落》；暂不接《横贯冰原》。",
+      "action_ids": [
+        "a0458",
+        "a0459",
+        "a0460",
+        "a0461",
+        "a0462",
+        "a0463",
+        "a0464",
+        "visit-p150-inner",
+        "a0465",
+        "a0466",
+        "a0467",
+        "visit-p150-upper",
+        "a0468",
+        "a0469",
+        "a0470",
+        "a0471"
+      ]
+    },
+    {
+      "step_id": "step-47",
+      "title": "炉石战歌要塞 → 琥珀崖",
+      "summary": "炉石回战歌要塞；到琥珀崖开启飞行点，交《危在旦夕》后接《越狱》，并接《监视裂谷：悬崖异常》。",
+      "action_ids": [
+        "a0473",
+        "a0472",
+        "a0474",
+        "a0475",
+        "a0476",
+        "a0477",
+        "a0478"
+      ]
+    },
+    {
+      "step_id": "step-48",
+      "title": "蓝玉营地 / 悬崖异常 → 琥珀崖",
+      "summary": "完成《越狱》《监视裂谷：悬崖异常》，回琥珀崖交付并接《调查》《监视裂谷：峭壁断层》。",
+      "action_ids": [
+        "a0479",
+        "a0480",
+        "a0481",
+        "a0482",
+        "a0483",
+        "a0484",
+        "a0485",
+        "a0486",
+        "a0487"
+      ]
+    },
+    {
+      "step_id": "step-49",
+      "title": "调查 / 峭壁断层 → 琥珀崖",
+      "summary": "完成《调查》《监视裂谷：峭壁断层》，回琥珀崖交付并接《苔原上的审讯》《监视裂谷：冬鳞洞穴》。",
+      "action_ids": [
+        "a0488",
+        "a0489",
+        "a0490",
+        "a0491",
+        "a0492",
+        "a0493",
+        "a0494",
+        "a0495",
+        "a0496"
+      ]
+    },
+    {
+      "step_id": "step-50",
+      "title": "法师塔二楼 → 与时间赛跑 → 苏雷斯塔兹",
+      "summary": "在法师塔二楼推进审讯链，下楼由多纳森接出《与时间赛跑》；完成后回琥珀崖经多纳森与苏雷斯塔兹接到《准备飞翔》。",
+      "action_ids": [
+        "a0497",
+        "a0498",
+        "a0499",
+        "a0500",
+        "a0501",
+        "a0502",
+        "a0503",
+        "a0504",
+        "a0505",
+        "a0506",
+        "a0507",
+        "a0508",
+        "a0509",
+        "a0510",
+        "a0511"
+      ]
+    },
+    {
+      "step_id": "step-51",
+      "title": "营救艾瓦诺尔 → 苏雷斯塔兹 → 考达拉",
+      "summary": "由战斗法师安斯姆启动任务飞行完成《营救艾瓦诺尔》；回琥珀崖交接到《飞越裂谷》，再乘任务飞行进入考达拉。",
+      "action_ids": [
+        "a0512",
+        "a0513",
+        "a0514",
+        "a0515",
+        "visit-p163-platform",
+        "a0516",
+        "a0517",
+        "visit-p163-return",
+        "a0518",
+        "a0519",
+        "a0520",
+        "a0521",
+        "a0522",
+        "a0523",
+        "a0524"
+      ]
+    },
+    {
+      "step_id": "step-52",
+      "title": "永生之盾 → 南部 / 西部监测点",
+      "summary": "抵达永生之盾后开飞行点并接齐当前户外任务；先完成南部与西部监测点，同时推进同区域任务。",
+      "action_ids": [
+        "a0525",
+        "a0526",
+        "a0527",
+        "a0528",
+        "a0529",
+        "a0530",
+        "a0531",
+        "a0532",
+        "a0533",
+        "a0534",
+        "a0535",
+        "a0536",
+        "a0537",
+        "a0538",
+        "a0539",
+        "a0540",
+        "a0541"
+      ]
+    },
+    {
+      "step_id": "step-53",
+      "title": "北部 / 东北 / 中央监测点 → 永生之盾",
+      "summary": "完成北部、东北和中央监测点并补齐同区域任务；回永生之盾交付，接《保持隐蔽》和《蓝龙的卵》。",
+      "action_ids": [
+        "a0542",
+        "a0543",
+        "a0544",
+        "a0545",
+        "a0546",
+        "a0547",
+        "a0548",
+        "a0549",
+        "a0550",
+        "a0551",
+        "a0552",
+        "a0553",
+        "a0554",
+        "a0555",
+        "a0556",
+        "a0557",
+        "a0558",
+        "a0559",
+        "a0560"
+      ]
+    },
+    {
+      "step_id": "step-54",
+      "title": "考达拉外圈 → 奇怪…… → 永生之盾",
+      "summary": "在考达拉外圈完成《保持隐蔽》《蓝龙的卵》，并从考达拉缚法者取得闪光碎片触发《奇怪……》；回永生之盾交接《猎龙》《牢笼》。",
+      "action_ids": [
+        "a0561",
+        "a0562",
+        "a0563",
+        "a0564",
+        "a0565",
+        "a0566",
+        "a0567",
+        "a0568",
+        "a0569",
+        "a0570"
+      ]
+    },
+    {
+      "step_id": "step-55",
+      "title": "戈德拉克 / 塞鲁利恩 → 猎龙 → 永生之盾",
+      "summary": "完成《牢笼》和《猎龙》，把捕获的魔枢雏龙带回永生之盾；继续推进《克莉斯塔萨》并接《诱饵》。",
+      "action_ids": [
+        "a0571",
+        "a0572",
+        "a0573",
+        "a0574",
+        "a0575",
+        "a0576",
+        "a0577",
+        "a0578",
+        "a0579",
+        "a0580",
+        "a0581",
+        "a0582",
+        "a0583",
+        "a0584"
+      ]
+    },
+    {
+      "step_id": "step-56",
+      "title": "考达拉目标区 → 莎拉苟萨平台",
+      "summary": "完成《诱饵》《破译密码》，回永生之盾接《莎拉苟萨的末日》；通过克莉斯塔萨脚本进入高处平台完成莎拉苟萨事件。",
+      "action_ids": [
+        "a0585",
+        "a0586",
+        "a0587",
+        "a0588",
+        "a0589",
+        "a0590",
+        "a0591",
+        "a0592",
+        "a0593",
+        "a0594",
+        "visit-p181-high",
+        "a0595",
+        "a0596",
+        "visit-p181-return",
+        "a0597",
+        "a0598"
+      ]
+    },
+    {
+      "step_id": "step-57",
+      "title": "永生之盾 → 信号火焰 → 莱洛拉斯",
+      "summary": "交《集结红龙》接《触动陷阱》，到信号火焰完成事件后回莱洛拉斯交付。",
+      "action_ids": [
+        "a0599",
+        "a0600",
+        "a0601",
+        "a0602",
+        "a0603",
+        "a0604",
+        "a0605"
+      ]
+    },
+    {
+      "step_id": "step-58",
+      "title": "永生之盾 → 系统鸟琥珀崖",
+      "summary": "考达拉任务结束后回永生之盾飞行管理员，乘系统鸟返回琥珀崖。",
+      "action_ids": [
+        "a0606",
+        "a0607",
+        "a0608",
+        "a0609",
+        "a0610",
+        "a0611"
+      ]
+    },
+    {
+      "step_id": "step-59",
+      "title": "钢腭车队 → 博古洛克前哨站",
+      "summary": "在钢腭车队接并完成三条战场任务；继续到博古洛克前哨站开飞行点并完成当前交接。",
+      "action_ids": [
+        "a0612",
+        "a0613",
+        "a0614",
+        "a0615",
+        "a0616",
+        "a0617",
+        "a0618",
+        "a0619",
+        "a0620",
+        "a0621",
+        "a0622",
+        "a0623",
+        "a0624",
+        "a0625",
+        "a0626",
+        "a0627",
+        "a0628"
+      ]
+    },
+    {
+      "step_id": "step-60",
+      "title": "因波莉安 → 火水元素 → 冬鳞避难所",
+      "summary": "由因波莉安接《沸点》，完成火、水元素后进入冬鳞避难所；推进《国王姆嘎姆嘎》《学习沟通》，接到《冬鳞鱼人的贸易》。",
+      "action_ids": [
+        "a0629",
+        "a0630",
+        "a0631",
+        "a0632",
+        "a0633",
+        "a0634",
+        "a0635",
+        "a0636",
+        "a0637",
+        "a0638",
+        "a0639",
+        "a0640",
+        "a0641",
+        "a0642",
+        "a0643"
+      ]
+    },
+    {
+      "step_id": "step-61",
+      "title": "冬鳞外圈 → 幽光海湾 → 冬鳞避难所",
+      "summary": "完成冬鳞外圈和幽光海湾任务，连续推进避难所交接，直到接到《决不投降！》。",
+      "action_ids": [
+        "a0644",
+        "a0645",
+        "a0646",
+        "a0647",
+        "a0648",
+        "a0649",
+        "a0650",
+        "a0651",
+        "a0652",
+        "a0653",
+        "a0654",
+        "a0655",
+        "a0656",
+        "a0657",
+        "a0658",
+        "a0659",
+        "a0660",
+        "a0661",
+        "a0662",
+        "a0663",
+        "a0664",
+        "a0665",
+        "a0666",
+        "a0667",
+        "a0668",
+        "a0669",
+        "a0670"
+      ]
+    },
+    {
+      "step_id": "step-62",
+      "title": "冬鳞洞穴：裂谷 → 钥匙 → 护送",
+      "summary": "进入冬鳞洞穴后完成裂谷监测，推进钥匙任务并接护送；沿同一洞穴路线完成《决不投降！》，随护送出洞后回避难所交付。",
+      "action_ids": [
+        "a0671",
+        "a0672",
+        "a0673",
+        "a0674",
+        "a0675",
+        "a0676",
+        "a0677",
+        "a0678",
+        "a0679",
+        "a0680",
+        "a0681",
+        "a0682",
+        "a0683",
+        "a0684",
+        "a0685"
+      ]
+    },
+    {
+      "step_id": "step-63",
+      "title": "因波莉安 → 风暴微粒 → 博古洛克",
+      "summary": "回因波莉安交《沸点》并完成《风暴微粒》；回博古洛克完成《空气的幻象》，接《先知格雷姆沃克之魂》《向犸格莫斯复仇》。",
+      "action_ids": [
+        "a0686",
+        "a0687",
+        "a0688",
+        "a0689",
+        "a0690",
+        "a0691",
+        "a0692",
+        "a0693",
+        "a0694",
+        "a0695",
+        "a0696",
+        "a0697",
+        "a0698",
+        "a0699",
+        "a0700"
+      ]
+    },
+    {
+      "step_id": "step-64",
+      "title": "犸格莫斯洞穴 → 博古洛克",
+      "summary": "在犸格莫斯洞穴推进《卡加尼舒》《向犸格莫斯复仇》《落叶归根》，取得先知遗骸后回博古洛克交付。",
+      "action_ids": [
+        "a0701",
+        "a0702",
+        "a0703",
+        "a0704",
+        "a0705",
+        "a0706",
+        "a0707",
+        "a0708",
+        "a0709",
+        "a0710",
+        "a0711",
+        "a0712",
+        "a0713"
+      ]
+    },
+    {
+      "step_id": "step-65",
+      "title": "博古洛克 → 系统鸟琥珀崖",
+      "summary": "从博古洛克乘系统鸟回琥珀崖，向图书馆员盖伦交《监视裂谷：冬鳞洞穴》。",
+      "action_ids": [
+        "a0714",
+        "a0715",
+        "a0716",
+        "a0717"
+      ]
+    },
+    {
+      "step_id": "step-66",
+      "title": "系统鸟琥珀崖 → 牦牛村 → 横贯冰原",
+      "summary": "从琥珀崖直接乘系统鸟到牦牛村，接《横贯冰原》并护送撤离者进入龙骨荒野。",
+      "action_ids": [
+        "a0719",
+        "a0720",
+        "a0721",
+        "a0722",
+        "a0723",
+        "move-borean-11930-boundary",
+        "a0724"
+      ]
+    }
+  ],
+  "service_overrides": [
+    {
+      "service_id": "borean-11866-background",
+      "kind": "background_window",
+      "task_id": 11866,
+      "start_action_id": "a0235",
+      "end_action_id": "a0301",
+      "end_policy": "fill_if_incomplete"
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "borean-p001": {
+        "display_name": "战歌要塞",
+        "x": 41.62,
+        "y": 53.99,
+        "phase": "opening",
+        "transport": "ride"
+      },
+      "borean-p002": {
+        "display_name": "战歌要塞",
+        "x": 41.35,
+        "y": 53.58,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p003": {
+        "display_name": "战歌要塞",
+        "x": 41.36,
+        "y": 53.69,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p004": {
+        "display_name": "战歌要塞旅店",
+        "x": 41.7,
+        "y": 54.5,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p005": {
+        "display_name": "战歌要塞",
+        "x": 43.19,
+        "y": 54.97,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p006": {
+        "display_name": "战歌要塞",
+        "x": 43.33,
+        "y": 55.36,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p007": {
+        "display_name": "战歌要塞",
+        "x": 41.7,
+        "y": 54.59,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p008": {
+        "display_name": "战歌要塞南门",
+        "x": 42.21,
+        "y": 56.17,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p009": {
+        "display_name": "巨石采掘场西侧",
+        "x": 39.8,
+        "y": 55.7,
+        "phase": "quarry1",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p010": {
+        "display_name": "巨石采掘场南中部",
+        "x": 41.7,
+        "y": 59.0,
+        "phase": "quarry1",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p011": {
+        "display_name": "巨石采掘场东侧",
+        "x": 44.2,
+        "y": 58.0,
+        "phase": "quarry1",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p012": {
+        "display_name": "战歌要塞南门",
+        "x": 42.21,
+        "y": 56.17,
+        "phase": "quarry1",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p013": {
+        "display_name": "战歌要塞",
+        "x": 43.33,
+        "y": 55.36,
+        "phase": "quarry1",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p014": {
+        "display_name": "战歌要塞",
+        "x": 43.19,
+        "y": 54.97,
+        "phase": "quarry1",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p015": {
+        "display_name": "战歌要塞",
+        "x": 43.2,
+        "y": 55.05,
+        "phase": "quarry2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p016": {
+        "display_name": "东虫孔",
+        "x": 44.24,
+        "y": 56.76,
+        "phase": "quarry2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p017": {
+        "display_name": "南虫孔",
+        "x": 41.62,
+        "y": 58.3,
+        "phase": "quarry2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p018": {
+        "display_name": "西虫孔",
+        "x": 39.81,
+        "y": 52.55,
+        "phase": "quarry2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p019": {
+        "display_name": "暗影密探卢瑟尔",
+        "x": 40.07,
+        "y": 52.06,
+        "phase": "quarry2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p020": {
+        "display_name": "北虫孔",
+        "x": 41.34,
+        "y": 50.36,
+        "phase": "quarry2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p021": {
+        "display_name": "战歌要塞",
+        "x": 43.33,
+        "y": 55.36,
+        "phase": "closure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p022": {
+        "display_name": "战歌要塞",
+        "x": 43.19,
+        "y": 54.97,
+        "phase": "closure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p023": {
+        "display_name": "战歌要塞",
+        "x": 43.2,
+        "y": 55.05,
+        "phase": "closure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p024": {
+        "display_name": "战歌要塞飞行点",
+        "x": 42.41,
+        "y": 55.11,
+        "phase": "closure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p025": {
+        "display_name": "战歌要塞",
+        "x": 41.35,
+        "y": 53.58,
+        "phase": "closure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p026": {
+        "display_name": "战歌要塞·亚尼",
+        "x": 42.29,
+        "y": 55.68,
+        "phase": "closure",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p027": {
+        "display_name": "加尔鲁什码头",
+        "x": 32.25,
+        "y": 54.07,
+        "phase": "coast",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0072"
+        }
+      },
+      "borean-p028": {
+        "display_name": "回音海岸",
+        "x": 32.05,
+        "y": 54.31,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p029": {
+        "display_name": "回音海岸",
+        "x": 32.34,
+        "y": 54.27,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p030": {
+        "display_name": "回音海岸南侧岸边小屋",
+        "x": 32.38,
+        "y": 49.17,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p031": {
+        "display_name": "回音海岸克瓦迪尔怪区",
+        "x": 30.4,
+        "y": 53.5,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p032": {
+        "display_name": "回音海岸",
+        "x": 31.88,
+        "y": 52.32,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p033": {
+        "display_name": "长者穆图",
+        "x": 31.69,
+        "y": 54.37,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p034": {
+        "display_name": "莫布",
+        "x": 32.05,
+        "y": 54.31,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p035": {
+        "display_name": "瓦托尔",
+        "x": 32.34,
+        "y": 54.27,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p036": {
+        "display_name": "格雷克罗",
+        "x": 32.25,
+        "y": 54.07,
+        "phase": "coast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p037": {
+        "display_name": "伯尔之锤",
+        "x": 29.42,
+        "y": 53.06,
+        "phase": "coast2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p038": {
+        "display_name": "库尔达卡",
+        "x": 30.77,
+        "y": 48.38,
+        "phase": "coast2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p039": {
+        "display_name": "毒蛇之喉",
+        "x": 31.33,
+        "y": 47.96,
+        "phase": "coast2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p040": {
+        "display_name": "战歌码头尽头",
+        "x": 26.84,
+        "y": 54.78,
+        "phase": "coast2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p041": {
+        "display_name": "伯尔之砧",
+        "x": 29.62,
+        "y": 61.93,
+        "phase": "coast2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p042": {
+        "display_name": "瓦托尔",
+        "x": 32.34,
+        "y": 54.27,
+        "phase": "coast2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p043": {
+        "display_name": "加尔鲁什码头",
+        "x": 31.75,
+        "y": 54.89,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p044": {
+        "display_name": "纳萨姆平原",
+        "x": 36.2,
+        "y": 63.3,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p045": {
+        "display_name": "裂鞭海岸",
+        "x": 47.13,
+        "y": 75.48,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p046": {
+        "display_name": "裂鞭海岸·被俘虏的海象人",
+        "x": 44.2,
+        "y": 77.85,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p047": {
+        "display_name": "裂鞭海岸·斯卡迪尔营地",
+        "x": 46.5,
+        "y": 78.6,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p048": {
+        "display_name": "卡鲁克",
+        "x": 47.13,
+        "y": 75.48,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p049": {
+        "display_name": "残忍的贾梅尔",
+        "x": 46.42,
+        "y": 78.23,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p050": {
+        "display_name": "卡鲁克",
+        "x": 47.13,
+        "y": 75.48,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p051": {
+        "display_name": "蛇鳞神殿",
+        "x": 43.6,
+        "y": 80.53,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p052": {
+        "display_name": "裂鞭废墟东北部",
+        "x": 52.0,
+        "y": 90.3,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p053": {
+        "display_name": "维赫亚",
+        "x": 43.6,
+        "y": 80.53,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p054": {
+        "display_name": "裂鞭废墟北部冰山下",
+        "x": 52.06,
+        "y": 88.18,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p055": {
+        "display_name": "卡鲁克",
+        "x": 47.13,
+        "y": 75.48,
+        "phase": "south",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p056": {
+        "display_name": "战歌要塞",
+        "x": 41.7,
+        "y": 54.5,
+        "phase": "warsong2",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0153"
+        }
+      },
+      "borean-p057": {
+        "display_name": "战歌要塞",
+        "x": 41.35,
+        "y": 53.58,
+        "phase": "warsong2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p058": {
+        "display_name": "战歌要塞南门·伊斯里克斯事件",
+        "x": 43.16,
+        "y": 56.51,
+        "phase": "warsong2",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p059": {
+        "display_name": "战歌农场哨站",
+        "x": 38.08,
+        "y": 52.63,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p060": {
+        "display_name": "战歌农场哨站",
+        "x": 37.93,
+        "y": 52.59,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p061": {
+        "display_name": "托普的农场",
+        "x": 36.84,
+        "y": 52.28,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p062": {
+        "display_name": "战歌粮仓",
+        "x": 34.92,
+        "y": 54.67,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p063": {
+        "display_name": "战歌农场西南怪区 / 囚笼",
+        "x": 35.7,
+        "y": 49.5,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p064": {
+        "display_name": "战歌屠宰场",
+        "x": 39.54,
+        "y": 47.38,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p065": {
+        "display_name": "战歌农场哨站",
+        "x": 38.08,
+        "y": 52.63,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p066": {
+        "display_name": "农夫托普",
+        "x": 37.93,
+        "y": 52.31,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p067": {
+        "display_name": "感染科多兽区",
+        "x": 35.5,
+        "y": 50.0,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p068": {
+        "display_name": "农夫托普",
+        "x": 37.93,
+        "y": 52.31,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p069": {
+        "display_name": "暗影密探盖特莱",
+        "x": 34.59,
+        "y": 46.43,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p070": {
+        "display_name": "残忍的瓦雷杜斯",
+        "x": 35.25,
+        "y": 46.26,
+        "phase": "farm",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p071": {
+        "display_name": "战歌要塞",
+        "x": 41.35,
+        "y": 53.58,
+        "phase": "bloodspore",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0192"
+        }
+      },
+      "borean-p072": {
+        "display_name": "战歌要塞",
+        "x": 43.71,
+        "y": 54.43,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p073": {
+        "display_name": "斥候图古克",
+        "x": 53.31,
+        "y": 51.86,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p074": {
+        "display_name": "血法师劳莉丝",
+        "x": 52.06,
+        "y": 52.5,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p075": {
+        "display_name": "血孢平原",
+        "x": 47.5,
+        "y": 61.0,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p076": {
+        "display_name": "斥候图古克",
+        "x": 53.31,
+        "y": 51.86,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p077": {
+        "display_name": "血法师劳莉丝",
+        "x": 52.06,
+        "y": 52.5,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p078": {
+        "display_name": "迦莫斯洞穴上方高处·巨大的发光蛾卵",
+        "x": 48.55,
+        "y": 59.04,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p079": {
+        "display_name": "血孢平原",
+        "x": 52.06,
+        "y": 52.5,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p080": {
+        "display_name": "迦莫斯洞穴底层",
+        "x": 46.04,
+        "y": 62.01,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p081": {
+        "display_name": "血孢平原",
+        "x": 52.18,
+        "y": 52.82,
+        "phase": "bloodspore",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p082": {
+        "display_name": "战歌要塞",
+        "x": 41.35,
+        "y": 53.58,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p083": {
+        "display_name": "仁德会营地",
+        "x": 57.05,
+        "y": 44.32,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p084": {
+        "display_name": "库姆亚湖西侧高地",
+        "x": 49.7,
+        "y": 41.3,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p085": {
+        "display_name": "库姆亚湖·利欲熏心的潜水员",
+        "x": 51.53,
+        "y": 44.39,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p086": {
+        "display_name": "仁德会南侧驯鹿陷阱带",
+        "x": 57.0,
+        "y": 49.0,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p087": {
+        "display_name": "冷石采掘场外",
+        "x": 54.6,
+        "y": 35.85,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p088": {
+        "display_name": "被困猛犸幼崽区",
+        "x": 55.55,
+        "y": 34.24,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p089": {
+        "display_name": "仁德会营地",
+        "x": 57.05,
+        "y": 44.32,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p090": {
+        "display_name": "巨兽库诺克",
+        "x": 59.46,
+        "y": 30.37,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p091": {
+        "display_name": "猛犸毁灭者卡奥",
+        "x": 53.64,
+        "y": 24.53,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p092": {
+        "display_name": "冷石采掘场",
+        "x": 51.8,
+        "y": 32.6,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p093": {
+        "display_name": "冷石采掘场外",
+        "x": 54.5,
+        "y": 35.95,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p094": {
+        "display_name": "冷石采掘场",
+        "x": 52.0,
+        "y": 33.1,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p095": {
+        "display_name": "冷石采掘场外",
+        "x": 54.5,
+        "y": 35.95,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p096": {
+        "display_name": "冷石采掘场 / 西侧平台",
+        "x": 51.3,
+        "y": 32.7,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p097": {
+        "display_name": "冷石采掘场外",
+        "x": 54.5,
+        "y": 35.95,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p098": {
+        "display_name": "三位先祖石像",
+        "x": 51.9,
+        "y": 32.5,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p099": {
+        "display_name": "冷石采掘场外",
+        "x": 54.5,
+        "y": 35.95,
+        "phase": "coldrock",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p100": {
+        "display_name": "仁德会营地",
+        "x": 57.05,
+        "y": 44.32,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p101": {
+        "display_name": "驯鹿杀手卡琳",
+        "x": 57.2,
+        "y": 56.38,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p102": {
+        "display_name": "圣职者莉安德拉",
+        "x": 57.8,
+        "y": 55.11,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p103": {
+        "display_name": "遗弃海岸",
+        "x": 59.5,
+        "y": 59.5,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p104": {
+        "display_name": "莉安德拉",
+        "x": 57.8,
+        "y": 55.11,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p105": {
+        "display_name": "蛤蜊主宰老K",
+        "x": 62.29,
+        "y": 66.14,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p106": {
+        "display_name": "仁德会营地",
+        "x": 57.05,
+        "y": 44.32,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p107": {
+        "display_name": "哈罗德·兰恩",
+        "x": 49.9,
+        "y": 41.54,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p108": {
+        "display_name": "仁德会营地",
+        "x": 57.05,
+        "y": 44.32,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p109": {
+        "display_name": "卡斯卡拉·阿泰卡",
+        "x": 63.8,
+        "y": 46.13,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p110": {
+        "display_name": "卡斯卡拉海岸",
+        "x": 65.37,
+        "y": 48.08,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p111": {
+        "display_name": "阿泰卡",
+        "x": 63.8,
+        "y": 46.13,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p112": {
+        "display_name": "长者穆希特",
+        "x": 67.21,
+        "y": 54.79,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p113": {
+        "display_name": "尼约德海湾·水下伊鲁克尸体",
+        "x": 67.25,
+        "y": 56.0,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p114": {
+        "display_name": "长者穆希特",
+        "x": 67.21,
+        "y": 54.79,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p115": {
+        "display_name": "尼约德海湾",
+        "x": 67.41,
+        "y": 56.87,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p116": {
+        "display_name": "卡斯卡拉",
+        "x": 67.23,
+        "y": 54.79,
+        "phase": "kaskala",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p117": {
+        "display_name": "牦牛村",
+        "x": 77.25,
+        "y": 38.47,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p118": {
+        "display_name": "南部虫孔",
+        "x": 70.33,
+        "y": 36.69,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p119": {
+        "display_name": "西北虫孔",
+        "x": 66.38,
+        "y": 32.49,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p120": {
+        "display_name": "东北虫孔 / 菲兹兰克泵站外围",
+        "x": 69.73,
+        "y": 32.57,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p121": {
+        "display_name": "坠毁侦察机飞行员",
+        "x": 64.08,
+        "y": 35.81,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p122": {
+        "display_name": "坠毁飞行器",
+        "x": 61.09,
+        "y": 36.98,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p123": {
+        "display_name": "牦牛村",
+        "x": 77.3,
+        "y": 37.3,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p124": {
+        "display_name": "蒸汽狂怒者区",
+        "x": 72.15,
+        "y": 30.12,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p125": {
+        "display_name": "泵站机器人核心区",
+        "x": 64.0,
+        "y": 23.0,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p126": {
+        "display_name": "先知赫米萨",
+        "x": 74.67,
+        "y": 23.66,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p127": {
+        "display_name": "亡者之穴外侧坡地",
+        "x": 77.0,
+        "y": 22.5,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p128": {
+        "display_name": "赫米萨",
+        "x": 74.67,
+        "y": 23.66,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p129": {
+        "display_name": "亡者之穴",
+        "x": 76.53,
+        "y": 16.04,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p130": {
+        "display_name": "赫米萨",
+        "x": 74.67,
+        "y": 23.66,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p131": {
+        "display_name": "塔尔拉玛斯",
+        "x": 69.77,
+        "y": 12.52,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p132": {
+        "display_name": "赫米萨",
+        "x": 74.67,
+        "y": 23.66,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p133": {
+        "display_name": "牦牛村",
+        "x": 77.25,
+        "y": 37.5,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p134": {
+        "display_name": "菲兹兰克泵站",
+        "x": 64.2,
+        "y": 23.8,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p135": {
+        "display_name": "牦牛村",
+        "x": 77.2,
+        "y": 37.4,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p136": {
+        "display_name": "牦牛村东北·天灾猛犸象区",
+        "x": 79.38,
+        "y": 25.2,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p137": {
+        "display_name": "冬风酋长",
+        "x": 75.89,
+        "y": 37.24,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p138": {
+        "display_name": "恩其拉南侧疫土",
+        "x": 80.2,
+        "y": 31.0,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p139": {
+        "display_name": "冰冻元素海岸",
+        "x": 84.5,
+        "y": 46.0,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p140": {
+        "display_name": "牦牛村",
+        "x": 75.8,
+        "y": 37.3,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p141": {
+        "display_name": "西南鱼人水池",
+        "x": 68.51,
+        "y": 40.37,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p142": {
+        "display_name": "东北鱼人水池",
+        "x": 78.72,
+        "y": 28.33,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p143": {
+        "display_name": "圣城恩其拉",
+        "x": 87.0,
+        "y": 23.5,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p144": {
+        "display_name": "牦牛村",
+        "x": 75.85,
+        "y": 37.25,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p145": {
+        "display_name": "圣城恩其拉",
+        "x": 87.6,
+        "y": 23.0,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p146": {
+        "display_name": "鲜血尖塔·踏雪者戈鲁姆",
+        "x": 87.57,
+        "y": 19.94,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p147": {
+        "display_name": "牦牛村",
+        "x": 76.0,
+        "y": 37.4,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p148": {
+        "display_name": "南部虫孔",
+        "x": 70.29,
+        "y": 37.42,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p149": {
+        "display_name": "驯风者巴兰",
+        "x": 75.58,
+        "y": 35.77,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p150": {
+        "display_name": "纳克萨纳尔",
+        "x": 86.8,
+        "y": 29.0,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p151": {
+        "display_name": "牦牛村",
+        "x": 75.89,
+        "y": 37.24,
+        "phase": "taunka",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p152": {
+        "display_name": "炉石：战歌要塞",
+        "x": 41.7,
+        "y": 54.5,
+        "phase": "amber",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0473"
+        }
+      },
+      "borean-p153": {
+        "display_name": "琥珀崖",
+        "x": 45.27,
+        "y": 33.35,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p154": {
+        "display_name": "蓝玉营地",
+        "x": 41.8,
+        "y": 39.15,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p155": {
+        "display_name": "悬崖异常",
+        "x": 34.29,
+        "y": 42.16,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p156": {
+        "display_name": "琥珀崖",
+        "x": 45.15,
+        "y": 33.35,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p157": {
+        "display_name": "蓝玉营地",
+        "x": 42.2,
+        "y": 39.3,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p158": {
+        "display_name": "峭壁断层异常",
+        "x": 43.86,
+        "y": 28.64,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p159": {
+        "display_name": "琥珀崖",
+        "x": 45.2,
+        "y": 33.35,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p160": {
+        "display_name": "琥珀崖·法师塔二楼",
+        "x": 46.33,
+        "y": 32.84,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p161": {
+        "display_name": "蓝玉营地·圆形平台",
+        "x": 41.8,
+        "y": 39.1,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p162": {
+        "display_name": "琥珀崖",
+        "x": 45.27,
+        "y": 33.35,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p163": {
+        "display_name": "琥珀崖·战斗法师安斯姆",
+        "x": 46.38,
+        "y": 37.31,
+        "phase": "amber",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p164": {
+        "display_name": "琥珀崖·法师塔",
+        "x": 46.37,
+        "y": 32.4,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p165": {
+        "display_name": "琥珀崖·苏雷斯塔兹",
+        "x": 45.33,
+        "y": 34.52,
+        "phase": "amber",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p166": {
+        "display_name": "考达拉·永生之盾",
+        "x": 32.94,
+        "y": 34.4,
+        "phase": "coldarra",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0524"
+        }
+      },
+      "borean-p167": {
+        "display_name": "考达拉南部监测点",
+        "x": 28.5,
+        "y": 35.0,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p168": {
+        "display_name": "考达拉西部监测点",
+        "x": 22.5,
+        "y": 23.8,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p169": {
+        "display_name": "考达拉北部",
+        "x": 27.3,
+        "y": 20.4,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p170": {
+        "display_name": "考达拉东北监测点",
+        "x": 31.48,
+        "y": 20.38,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p171": {
+        "display_name": "考达拉中央监测点",
+        "x": 28.31,
+        "y": 28.46,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p172": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.2,
+        "y": 34.45,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p173": {
+        "display_name": "考达拉外圈",
+        "x": 28.0,
+        "y": 27.0,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p174": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.31,
+        "y": 34.54,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p175": {
+        "display_name": "战争使者戈德拉克",
+        "x": 24.13,
+        "y": 29.6,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p176": {
+        "display_name": "塞鲁利恩将军",
+        "x": 27.32,
+        "y": 20.4,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p177": {
+        "display_name": "魔枢雏龙",
+        "x": 23.23,
+        "y": 26.17,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p178": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.31,
+        "y": 34.54,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p179": {
+        "display_name": "考达拉目标区",
+        "x": 33.37,
+        "y": 28.36,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p180": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.31,
+        "y": 34.54,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p181": {
+        "display_name": "莎拉苟萨平台",
+        "x": 22.0,
+        "y": 22.6,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p182": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.31,
+        "y": 34.54,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p183": {
+        "display_name": "考达拉·信号火焰",
+        "x": 25.36,
+        "y": 21.75,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p184": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.31,
+        "y": 34.54,
+        "phase": "coldarra",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p185": {
+        "display_name": "考达拉·永生之盾",
+        "x": 33.31,
+        "y": 34.54,
+        "phase": "transition",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p186": {
+        "display_name": "永生之盾飞行点",
+        "x": 33.2,
+        "y": 34.45,
+        "phase": "transition",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0607"
+        }
+      },
+      "borean-p187": {
+        "display_name": "琥珀崖",
+        "x": 45.2,
+        "y": 33.35,
+        "phase": "transition",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0609"
+        }
+      },
+      "borean-p188": {
+        "display_name": "钢腭车队",
+        "x": 48.45,
+        "y": 19.74,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0611"
+        }
+      },
+      "borean-p189": {
+        "display_name": "钢腭车队战场",
+        "x": 49.4,
+        "y": 23.5,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p190": {
+        "display_name": "钢腭车队",
+        "x": 48.45,
+        "y": 19.74,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p191": {
+        "display_name": "博古洛克前哨站",
+        "x": 50.28,
+        "y": 9.72,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p192": {
+        "display_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p193": {
+        "display_name": "火元素西米尔",
+        "x": 50.2,
+        "y": 15.1,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p194": {
+        "display_name": "水元素卓恩",
+        "x": 45.6,
+        "y": 13.6,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p195": {
+        "display_name": "冬鳞避难所",
+        "x": 43.5,
+        "y": 13.97,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p196": {
+        "display_name": "斯卡德尔尸体",
+        "x": 42.0,
+        "y": 17.0,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p197": {
+        "display_name": "冬鳞避难所",
+        "x": 43.5,
+        "y": 13.97,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p198": {
+        "display_name": "冬鳞鱼人外圈",
+        "x": 40.0,
+        "y": 19.0,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p199": {
+        "display_name": "冬鳞避难所",
+        "x": 43.5,
+        "y": 13.97,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p200": {
+        "display_name": "冬鳞鱼人外圈",
+        "x": 39.5,
+        "y": 20.0,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p201": {
+        "display_name": "冬鳞避难所",
+        "x": 43.3,
+        "y": 13.8,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p202": {
+        "display_name": "冬鳞避难所·姆姆咕咕 / 屠夫布咕布噜",
+        "x": 42.0,
+        "y": 12.77,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p203": {
+        "display_name": "幽光海湾",
+        "x": 39.8,
+        "y": 9.5,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p204": {
+        "display_name": "冬鳞避难所",
+        "x": 42.0,
+        "y": 12.9,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p205": {
+        "display_name": "冬鳞避难所·国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p206": {
+        "display_name": "冬鳞洞穴·裂谷异常",
+        "x": 40.1,
+        "y": 19.9,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p207": {
+        "display_name": "冬鳞洞穴·咕啦咕啦",
+        "x": 37.8,
+        "y": 23.1,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p208": {
+        "display_name": "钥匙管理者呜啦咕噜",
+        "x": 39.17,
+        "y": 22.61,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p209": {
+        "display_name": "冬鳞洞穴·咕啦咕啦 / 噜呱吧呱",
+        "x": 37.84,
+        "y": 23.23,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p210": {
+        "display_name": "冬鳞洞穴·克拉西姆斯",
+        "x": 37.54,
+        "y": 27.53,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p211": {
+        "display_name": "冬鳞避难所",
+        "x": 43.5,
+        "y": 13.97,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p212": {
+        "display_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p213": {
+        "display_name": "狂怒的雷暴",
+        "x": 43.95,
+        "y": 9.22,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p214": {
+        "display_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p215": {
+        "display_name": "博古洛克",
+        "x": 50.28,
+        "y": 9.72,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p216": {
+        "display_name": "犸格莫斯·先知格雷姆沃克的灵魂",
+        "x": 56.17,
+        "y": 9.11,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p217": {
+        "display_name": "犸格莫斯洞穴",
+        "x": 56.0,
+        "y": 12.0,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p218": {
+        "display_name": "先知格雷姆沃克遗骸",
+        "x": 56.17,
+        "y": 9.11,
+        "phase": "quest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p219": {
+        "display_name": "博古洛克前哨站",
+        "x": 50.0,
+        "y": 9.9,
+        "phase": "hub",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p220": {
+        "display_name": "博古洛克飞行点",
+        "x": 50.28,
+        "y": 9.72,
+        "phase": "transition",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p221": {
+        "display_name": "琥珀崖",
+        "x": 44.98,
+        "y": 33.38,
+        "phase": "hub",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0715"
+        }
+      },
+      "borean-p223": {
+        "display_name": "牦牛村",
+        "x": 75.89,
+        "y": 37.24,
+        "phase": "transition",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0719"
+        }
+      },
+      "borean-p224": {
+        "display_name": "陶拉努克撤离队",
+        "x": 78.33,
+        "y": 38.01,
+        "phase": "transition",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "borean-p225": {
+        "display_name": "龙骨荒野边界·沃图克",
+        "x": 12.75,
+        "y": 51.7,
+        "phase": "transition",
+        "transport": "crossmap",
+        "zone_id": 65,
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "move-borean-11930-boundary"
+        },
+        "handoff_ref": "borean-to-dragonblight-wartook"
+      },
+      "borean-p150-inner": {
+        "display_name": "纳克萨纳尔·内部",
+        "x": 86.8,
+        "y": 29.0,
+        "phase": "taunka",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0464"
+        }
+      },
+      "borean-p150-upper": {
+        "display_name": "纳克萨纳尔·上层",
+        "x": 86.8,
+        "y": 29.0,
+        "phase": "taunka",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0467"
+        }
+      },
+      "borean-p163-platform": {
+        "display_name": "蓝玉营地上方平台",
+        "x": 46.38,
+        "y": 37.31,
+        "phase": "amber",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0515"
+        }
+      },
+      "borean-p163-return": {
+        "display_name": "琥珀崖",
+        "x": 46.38,
+        "y": 37.31,
+        "phase": "amber",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0517"
+        }
+      },
+      "borean-p181-high": {
+        "display_name": "莎拉苟萨·高处平台",
+        "x": 22.0,
+        "y": 22.6,
+        "phase": "coldarra",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0594"
+        }
+      },
+      "borean-p181-return": {
+        "display_name": "莎拉苟萨平台·返回",
+        "x": 22.0,
+        "y": 22.6,
+        "phase": "coldarra",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0596"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Stage 5: restored explicit Amber Ledge to Taunkale Village taxi from flight-state audit; represented verified Task 11930 Borean/Dragonblight escort crossing as move action while intentionally leaving movement_mode unknown."
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic parity correction: restored old player-visible order Amber Ledge flight point -> exactly one taxi to Taunkale Village; removed duplicate migrated taxi and left flight-point incoming movement unknown rather than inventing a prior move."
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: reviewed legacy special transport styles on these target points are not player-visible arrival actions in the old route. Remove migration-only style hints, preserve all player task/action text, and leave arrival movement unresolved."
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "architecture_migration",
+      "summary": "Closed Borean -> Dragonblight at Wartook Iceborn. Questie verifies Task 11930 turn-in NPC Wartook at Dragonblight zone 65/(12.75,51.7); corrected the old mixed-frame Borean endpoint coordinates and added matching handoff_ref to the Dragonblight first visit."
+    }
+  ]
+}

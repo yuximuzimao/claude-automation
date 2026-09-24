@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "task_id": 11241,
+  "identity": {
+    "name_zhcn": "烈火冲天",
+    "name_en": "Trail of Fire",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 71,
+    "min_level": 68,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 94000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 35824,
+        "quantity": 1,
+        "name_zhcn": "石刃刀",
+        "name_en": "Stoneblade Slicer",
+        "sell_price_each_copper": 86880,
+        "sell_price_total_copper": 86880
+      },
+      {
+        "item_id": 35823,
+        "quantity": 1,
+        "name_zhcn": "冰霜匕首",
+        "name_en": "Ice-Rimed Dagger",
+        "sell_price_each_copper": 86559,
+        "sell_price_total_copper": 86559
+      },
+      {
+        "item_id": 35830,
+        "quantity": 1,
+        "name_zhcn": "破旧维库拳套",
+        "name_en": "Worn Vrykul Smasher",
+        "sell_price_each_copper": 82409,
+        "sell_price_total_copper": 82409
+      },
+      {
+        "item_id": 35829,
+        "quantity": 1,
+        "name_zhcn": "冷刺长弓",
+        "name_en": "Coldspike Longbow",
+        "sell_price_each_copper": 68077,
+        "sell_price_total_copper": 68077
+      },
+      {
+        "item_id": 35827,
+        "quantity": 1,
+        "name_zhcn": "华丽节杖",
+        "name_en": "Regal Sceptre",
+        "sell_price_each_copper": 67596,
+        "sell_price_total_copper": 67596
+      },
+      {
+        "item_id": 35826,
+        "quantity": 1,
+        "name_zhcn": "雏龙骨杖",
+        "name_en": "Whelpling-Skull Zapper",
+        "sell_price_each_copper": 65634,
+        "sell_price_total_copper": 65634
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 86880,
+    "gear_sale_max_copper": 86880,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25150
+  },
+  "guide": [
+    "接取：药剂师哈恩斯。",
+    "护送药剂师哈恩斯离开荒弃海岸。完成这个任务之后回到嚎风峡湾的复仇港，向药剂师雷杉德尔复命。",
+    "交付：药剂师雷杉德尔。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=11241",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《烈火冲天》：接取后跟着药剂师哈恩斯推进前线，别提前骑马跑远，沿他的路径清怪即可完成事件。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

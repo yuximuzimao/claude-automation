@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "task_id": 12740,
+  "identity": {
+    "name_zhcn": "银色北伐军的降落伞",
+    "name_en": "Parachutes for the Argent Crusade",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 76,
+    "min_level": 74,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 39820,
+        "quantity": 1,
+        "name_zhcn": "英勇士兵之刃",
+        "name_en": "Blade of Valorous Service",
+        "sell_price_each_copper": 94206,
+        "sell_price_total_copper": 94206
+      },
+      {
+        "item_id": 39799,
+        "quantity": 1,
+        "name_zhcn": "营救者的胸甲",
+        "name_en": "Rescuer's Chestguard",
+        "sell_price_each_copper": 56311,
+        "sell_price_total_copper": 56311
+      },
+      {
+        "item_id": 39801,
+        "quantity": 1,
+        "name_zhcn": "营救者的战靴",
+        "name_en": "Boots of the Rescuer",
+        "sell_price_each_copper": 49559,
+        "sell_price_total_copper": 49559
+      },
+      {
+        "item_id": 39840,
+        "quantity": 1,
+        "name_zhcn": "营救者的绳索",
+        "name_en": "Rescuer's Ripcord",
+        "sell_price_each_copper": 35688,
+        "sell_price_total_copper": 35688
+      },
+      {
+        "item_id": 39779,
+        "quantity": 1,
+        "name_zhcn": "北伐军的开伞索",
+        "name_en": "Crusader's Ripcord",
+        "sell_price_each_copper": 20220,
+        "sell_price_total_copper": 20220
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 94206,
+    "gear_sale_max_copper": 94206,
+    "reputation_rewards": [
+      {
+        "faction_id": 1106,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 21150
+  },
+  "guide": [
+    "接取：指挥官法斯塔夫。",
+    "银色前沿的指挥官法斯塔夫要你为庭院里的10名银色北伐军战士或银色持盾战士配备降落伞。",
+    "交付：指挥官法斯塔夫。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12740",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《银色北伐军的降落伞》：选中庭院里的银色北伐军战士/持盾战士，在天灾飞行怪把他们抓起或即将摔下时使用北伐军降落伞；不是对飞行怪使用。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+    }
+  }
+}

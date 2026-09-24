@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "task_id": 12267,
+  "identity": {
+    "name_zhcn": "奈萨里奥的烈焰",
+    "name_en": "Neltharion's Flame",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 75,
+    "min_level": 72,
+    "pre_any": [
+      12265
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 118000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38095,
+        "quantity": 1,
+        "name_zhcn": "屈服骑士腿铠",
+        "name_en": "Legplates of the Conquered Knight",
+        "sell_price_each_copper": 63641,
+        "sell_price_total_copper": 63641
+      },
+      {
+        "item_id": 37944,
+        "quantity": 1,
+        "name_zhcn": "高阶祭司弗里斯的长袍",
+        "name_en": "High Priest Forith's Robes",
+        "sell_price_each_copper": 35676,
+        "sell_price_total_copper": 35676
+      },
+      {
+        "item_id": 38032,
+        "quantity": 1,
+        "name_zhcn": "龙奴项圈",
+        "name_en": "Wyrm-slave Collar",
+        "sell_price_each_copper": 33162,
+        "sell_price_total_copper": 33162
+      },
+      {
+        "item_id": 37988,
+        "quantity": 1,
+        "name_zhcn": "普瑞斯托的斗篷",
+        "name_en": "Lord Prestor's Drape",
+        "sell_price_each_copper": 27877,
+        "sell_price_total_copper": 27877
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 63641,
+    "gear_sale_max_copper": 63641,
+    "reputation_rewards": [
+      {
+        "faction_id": 1091,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 26200
+  },
+  "guide": [
+    "接取：瑟里纳尔。",
+    "进入奈萨里奥之喉深处，使用奈萨里奥的烈焰净化召唤区域。当你吸引到腐烂者洛森的注意力之后，杀掉他，然后把瓶子还给洞穴外的瑟里纳尔。",
+    "交付：瑟里纳尔。",
+    "深入奈萨里奥之喉，在召唤区域使用奈萨里奥之焰触发净化并引出腐烂者洛辛，然后将其击杀。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12267",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12267; legacy_type=triggered_named_event_group_shared_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12267",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12267/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《奈萨里奥的烈焰》：共享：主控在洛森附近使用任务物品触发并完成战斗一次即可。\n【需要单独修正优化】《奈萨里奥的烈焰》首组实测：任务进度五号共享；主控在洛森附近使用任务物品触发并完成战斗一次即可。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12267",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}

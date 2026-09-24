@@ -4,19 +4,15 @@
   "identity": {
     "name_zhcn": "如何为地精效力",
     "name_en": "How to Serve Goblins",
+    "game_variant_id": "timewalking-wotlk-cn",
     "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
-    "faction": "unknown",
-    "repeatability": "unknown",
-    "game_variant_id": "timewalking-wotlk-cn"
+    "faction": "both",
+    "repeatability": "once"
   },
   "coverage": {
-    "availability": "partial",
-    "objectives": "unknown",
-    "locations": "unknown",
-    "rewards": "unknown",
-    "mechanics": "verified",
-    "fivebox": "verified",
-    "guide": "unknown"
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
   },
   "availability": {
     "quest_level": 61,
@@ -28,38 +24,40 @@
     "parent_active": [],
     "exclusive_with": [],
     "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
     "hidden_requirements": []
   },
-  "objectives": [],
-  "mechanics": {
-    "fivebox_observation": {
-      "kind": "shared_rescue_progress",
-      "summary": "营救三名地精的任务进度共享，主控执行即可同步队伍。",
-      "confidence": "verified",
-      "source_refs": [
-        "evidence-fivebox-migration"
-      ]
-    }
-  },
-  "fivebox": {
-    "stages": [
+  "rewards": {
+    "reward_money_copper": 20000,
+    "fixed_items": [
       {
-        "stage_id": "primary",
-        "objective_id": null,
-        "mode": "shared_progress",
-        "summary": "营救三名地精的任务进度共享，主控执行即可同步队伍。",
-        "confidence": "verified",
-        "source_refs": [
-          "evidence-fivebox-migration"
-        ]
+        "item_id": 30858,
+        "quantity": 5,
+        "name_zhcn": "苦工催眠药水",
+        "name_en": "Peon Sleep Potion",
+        "sell_price_each_copper": 0,
+        "sell_price_total_copper": 0
       }
     ],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 9800
+  },
+  "guide": [
+    "接取：工头拉泽克拉兹。",
+    "从邪兽人的营地中救出曼尼、莫恩和雅克，然后返回萨尔玛西北方的矿洞，向工头拉泽克拉兹复命。",
+    "交付：工头拉泽克拉兹。"
+  ],
+  "fivebox": {
     "status": "shared"
   },
-  "guide": [],
-  "verification": {
-    "open_questions": []
-  },
+  "timing_rule_ref": null,
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",
@@ -85,10 +83,51 @@
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
       "supports_fields": [
-        "mechanics.fivebox_observation",
-        "fivebox.stages"
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10238",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.10238",
+      "observed_at": "2026-09-15",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
       ]
     }
   ],
-  "presentation": {}
+  "presentation": {
+    "note_override": {
+      "text": "【需要单独修正优化】《如何为地精效力》地狱火半岛DK第二组实跑确认：营救三名地精的任务进度共享，主控执行即可同步队伍。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.10238",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
 }

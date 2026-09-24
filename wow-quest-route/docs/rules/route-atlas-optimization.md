@@ -13,7 +13,9 @@
 路线优化至少消费：
 
 - Route Profile的scope、entry state、goal和当前任务集合；
-- Task Card的稳定任务ID、Availability、objectives、locations、typed relations、机制/地形事实；
+- 当前Profile属于多Profile完整方案时，同时读取Route Program的严格Profile顺序、Program goal/entry以及前后相邻Profile引用；不得从`display.order`或旧workbench顺序猜上下游；
+- Task Card的稳定任务ID、Availability、奖励和`timing_rule_ref`；完整攻略事实用于人工核验，不由优化器解析自由文本；
+- 当前Route Profile已有的结构化地点/动作，以及新建Profile时从Questie等证据源临时提取的规划输入；临时规划输入不能成为第二任务真源；
 - CURRENT仅在“继续当前实跑”时作为当前角色runtime overlay；
 - RouteState：已开飞行点、炉石、任务日志、声望/阵营、关键携带物、当前等级等；
 - Timing Model提供的候选边际墙钟；
@@ -22,18 +24,61 @@
 
 ### 输出
 
-只输出路线计划：
+输出分两种身份，不能混成第二路线真源。
+
+**正式路线决策候选**只包含Route Profile真正需要长期保存的最小原子：
 
 - 任务动作`接 / 做 / 交`；
-- 动作顺序；
-- Target Cluster / Spatial Instance / Background Layer结构；
-- 交通/炉石选择；
-- RouteState转移；
+- 动作顺序；同一step、同一`location_ref`的一轮无条件NPC接/交中，在任务依赖与真实交互顺序都允许时，应把同一NPC的动作排成连续run；底层action仍逐条独立保存，Display只压缩连续run，不得自行跨其它NPC重排；
+- canonical真实地点/空间与movement/交通/炉石决策；
 - 玩家逻辑stepGroups所需的路线边界；
-- 插入/重排诊断；
-- 可重建的几何/时序派生结果。
+- 只有无法从这些原子可靠重建、且确实改变执行/Timing/后续优化时，才保存最小通用route-only service语义。
+
+**算法派生/诊断**包括：
+
+- Target Cluster；
+- 可由真实地点/服务事实机械形成的Spatial Instance；
+- 可由路线覆盖机械形成的Background Layer/service coverage；
+- RouteState转移与受影响窗口；
+- 插入/重排候选、Hard Validator结果和成本诊断；
+- 可重建的几何/时序分析结果。
+
+这些派生/诊断可以重算，不因“优化器内部需要”就全部持久化进Route Profile。只有前述无法稳定重建的route-only决策才提升为Profile最小原子。路线设计/重排完成后必须做一次局部交互连续性检查：机械列出“同一地点、同一轮无条件NPC接/交中，同一NPC被其它NPC动作隔开”的候选；它是review signal而非自动重排或发布硬门禁，只有依赖/现场顺序证明安全后才修改Profile。人工/AI冷读可以补充发现，但不能替代机械检查。正式检查入口见本文§23。
 
 不输出新的Task Card事实，也不自行生成“这个任务共享/不共享”等机制结论。
+
+### 1.1 Stage 5 Canonical Spatial / Movement 最小合同
+
+该合同来自现有正式路线的真实结构，而不是一般图模型：当前Route Profile都是严格线性执行链，同一物理Hub可能因前置/阶段变化被多次返回，因此**physical place 与 visit occurrence 不得混为一层**。`location` action表示一次真实visit occurrence；重复回到同一营地必须允许多个visit，即使显示名/坐标相同。
+
+- 每个visit通过`location_ref`读取自己的执行/空间上下文；Profile提供结构化`primary_zone_id`，跨图visit才单独覆盖`zone_id`。不得从Profile标题、subtitle、图片文件名或中文地点名猜zone；
+- `geometry.locations[*].location_role`默认是`map_anchor`：这是玩家需要在当前地图上导航/定位的真实点，必须有可证实坐标；坐标暂时拿不到就保持UNKNOWN，不得补假点。对于NPC/任务传送、相位/镜像/灵魂视角、载具脚本等**只用于保持执行顺序与交通状态、玩家不需要依靠本地图坐标导航**的中间状态，可显式使用`transition_context`；它的`x/y`必须为null，且“没有地图点”本身不是requirement。若玩家必须在该上下文内自主走/飞/游或坐标会改变执行决策，就不能用`transition_context`逃避空间建模，必须回到`map_anchor`或保持UNKNOWN；
+- 相邻两个visit之间只允许一条canonical incoming edge。`cross_zone`由两端zone_id是否不同机械得到，**不是交通方式**；
+- 普通自主移动的edge只保存真正需要的`ride / fly / swim`移动方式；
+- `taxi / use_hearth / fixed_transport / quest_transport / move`等显式动作是玩家必须执行的操作。若某条edge由一个显式移动动作产生，canonical edge只引用该`action_id`，交通kind从action机械得到，不能在edge再抄一份；
+- 一个visit区间出现多个会改变位置的显式动作，说明旧point压缩了中间真实visit，必须报告`compound_movement_requires_visit_split`并保留review，不能把多段移动合成一条edge；
+- Profile最后一个visit之后仍有移动动作时属于Profile出口移动。Route Program上下文把**唯一一条**出口移动绑定到下一Profile首visit；若有多条则说明中间真实落点被压缩，必须拆visit；
+- 若跨Profile边界没有离图动作，只允许两端首尾visit显式使用相同`handoff_ref`证明“这是同一个自然交接点”（例如同一地图边界落点）；Program顺序本身、地点名相似或坐标看起来接近都不能代替这一证明。没有离图动作也没有共同handoff时保持`program_boundary_transition_unproven`；
+- 这对应项目既有跨图经验中的四段合同：上一图真实终点/交通状态 → 离图动作或显式自然handoff → 下一图真实落点 → Stage 4核入口任务/第一Hub状态。Stage 5只拥有前三段空间/移动，不复制Stage 4任务状态；
+- 旧`geometry.locations[*].transport`的历史语义是“前一点→本点”的前端线型/入边提示。Stage 5迁移期只能把它当**migration evidence**：`ride/fly/swim`在没有显式移动动作时可以形成机械迁移候选；`taxi/hearth/script/crossmap`不得单凭线型自动造玩家动作。新canonical edge闭合后该字段只能由Stage 5/Display projection生成，任何下游不得直接读取它决定业务移动。
+
+Stage 5输出按visit/edge携带来源、fingerprint、UNKNOWN/冲突诊断；Stage 6只消费这份fresh输出形成Service Context，Stage 7只消费它计算movement Timing。旧point index永远不是稳定edge身份。
+
+### 1.2 Stage 6 Service Context 最小合同
+
+Stage 6回答“当前Route Profile中的任务服务发生在哪里、哪些服务真正共享、哪些任务只是被主体路线背景覆盖”，不重新决定任务集合或路线顺序。现役唯一解释器是`lib/route_service_context.py`；正式执行范围与入口见本文§23。完整诊断工具不是日常写入口。
+
+- 每个结构化`objective` action天然是一条foreground service event；它绑定Stage 5当前真实visit occurrence。`objective`只表示“这里发生任务服务”，不表示任务在此已经完成；任务完成/交付状态仍由Stage 3 Replay的turnin语义拥有。
+- 默认每条objective service独立形成一个Target Cluster。多个objective恰好在同一visit，只能证明共处，**不能自动证明同目标/零边际成本**；真正的共享服务必须由Profile最小`service_overrides.kind=shared_service`显式保存，且当前合同只允许同一visit内的objective actions组成一组。跨visit共享/持续累计应使用background window，不把多个地点伪装成同一个Target Cluster。
+- Spatial Instance默认只派生到canonical visit occurrence这一保守粒度：同一visit内的Target Clusters共享一个visit-level instance；不得用Questie平均坐标、旧`phase`字符串、地图距离或旧target-cluster文件自动声称洞穴/楼层/相位可互通。以后若新优化确实需要更强拓扑，必须先有独立可验证空间owner/原子，而不是在Stage 6偷偷猜。
+- `service_overrides.kind=background_window`只保存**无法从objective actions稳定重建、但会改变Timing/Optimization的route-only决策**：`task_id + start_action_id + end_action_id + end_policy`。窗口只引用稳定action身份，不引用旧step号/point index。
+- `end_policy=carry_if_incomplete`：窗口结束仍未完成时不建立专门补刷段，任务继续携带；例如《赞加沼泽的植物》在后续路线自然累计，不够就继续保留。
+- `end_policy=fill_if_incomplete`：先吃主体路线自然覆盖，到窗口收口点仍不足才补缺口；例如《热情的欢迎》《成熟的孢子》《远古的圣物》《等肉下锅》《敌人的耳环》。Stage 6只保存这个服务策略，不在此估算剩余数量/分钟，具体边际时间交Stage 7 Timing。
+- `end_policy=covered_complete`：本任务不建立独立服务时间，预期由窗口内其它主体服务完全覆盖；例如《猎人的挑战》随其它狩猎任务自然累计。若实跑证明覆盖不足，进入Observation/Review，不自动新增隐藏刷怪段。
+- `shared_service`与`background_window`都不是Task Card任务固有事实。Task Card guide可以保留完整攻略知识，但Stage 6运行时**禁止解析guide、presentation.note_override、旧semantic文案、旧`*-target-clusters.json`或HTML**来猜Service Context；这些旧资料只可作为迁移/人工review证据。
+- 旧foundation/target-cluster数据继续保留为历史优化证据，不能被新Route Lifecycle消费为Stage 6真源。当前Stage 6输出中的Target Cluster、Spatial Instance、Background Layer均可删除重建；Profile只保存上述确实无法机械重建的最小service override。
+
+Stage 6输出必须带Stage 5 fingerprint + Profile service override输入fingerprint。Stage 5 blocked/requirements会原样阻止Stage 6宣称publishable exact context；但这不允许Stage 6恢复旧geometry/备注推断捷径。
 
 ## 2. Task Card / Route Profile边界
 
@@ -72,21 +117,23 @@ Task Card保存任务本身事实；Route Profile保存当前路线选择和顺�
 
 完整依赖闭包由算法计算，不在Task Card逐张复制。
 
+Route Replay/Availability统一使用三态结果，不把“当前还不能证明”伪装成pass：
+
+- `pass/fail`：当前结构化RouteState与Character Profile已经能机械证明；
+- `required_external_state`：例如本Profile开始前必须已经完成某前置、保持某任务active、已开某飞行点，由Cross-Profile Continuity/CURRENT继续验证；
+- `deferred_gate`：当前stage没有合法输入可以证明，例如Profile内未来升级才能跨过的`min_level`交Stage 8 XP逐节点消解；首跑累计声望不足以机器确定时按§17保留待校准门槛；专业/技能/隐藏硬门槛没有对应机器状态时同样显式deferred。
+
+Stage 3“fresh”只表示Replay/Evaluator完整地输出了当前pass/fail/外部要求/deferred门槛，**不表示所有deferred都已经通过**。未在Stage 4/8或后续合法输入中消解、且足以改变可接性的门槛必须继续进入Review Trigger的`blocked_unknown`，Publisher不得把它当合法路线。
+
 数据库缺少前置记录不能自动证明任务为独立根；遇到会改变路线的大依赖UNKNOWN，返回事实层核验。
 
 ## 4. Target Cluster
 
 完全相同真实服务目标优先形成Target Cluster。
 
-聚类依据来自Task Card结构化关系和目标事实，例如：
+聚类依据来自当前路线已有的结构化动作/位置，以及新建或重排时针对当前窗口从Questie/实测证据提取的临时规划事实，例如同目标实体、同任务物来源、同洞穴/事件或真实空间重叠。
 
-- same target entity/object；
-- same required item/source；
-- same cave/event；
-- shared objective service；
-- 真实空间重叠。
-
-不能只凭Questie点位接近、任务名相似或旧页面曾经放在一起就归为同簇。
+这些规划事实用于本次求解，不反向写成Task Card的新分类字段。不能只凭Questie点位接近、任务名相似或旧页面曾经放在一起就归为同簇；无法确认时进入人工核验。
 
 Target Cluster是**服务目标聚合**，不是固定路线顺序；前置/Availability/交通变化可以打开局部窗口重新排序。
 
@@ -155,13 +202,13 @@ Spatial Instance由真实可达性决定，至少考虑：
 
 ## 9. 地图转场合同
 
-新地图路线先建立入口合同，再排内部任务。
+新地图路线先建立入口合同，再排内部任务。多Profile完整方案中的“上一/下一”必须来自Route Program顺序；单Profile冷启动则只使用显式entry，不创造隐含前序。
 
 至少明确：
 
-- 上一Profile/上一地图真实结束状态；
+- Route Program指定的上一Profile/上一地图真实fresh结束状态，或显式冷启动entry；
 - 离开动作；
-- 下一地图真实落点/入口Spatial Instance；
+- Route Program指定的下一Profile/下一地图真实落点/入口Spatial Instance（若当前Program存在后续）；
 - 入口任务/第一Hub；
 - 当时可用交通；
 - 必须携带的跨图任务/关键状态。
@@ -214,6 +261,8 @@ Hard Validator是**候选插入维度**，不是每次发布机械跑一整套�
 12. `trigger_source_ready`：触发任务所需Task Card事实闭合到足以合法编排；
 13. `state_continuity`：插入后状态能重新接回后缀，否则扩大窗口；
 14. `map_transition_contract`：地图入口能从上一个真实结束状态推出。
+
+以上反引号Validator标识同时是Stage 10 Review Trigger使用的稳定机器ID；`data/review-trigger/model-config.json`只允许作为本节列表的机器投影/校验表，不拥有第二套Validator语义。
 
 返回：
 
@@ -335,7 +384,7 @@ RouteState至少显式维护：
 
 恢复算法：
 
-1. 从CURRENT读当前profile/version与现场状态；
+1. 从CURRENT读当前profile/version与现场状态；若本次执行属于Route Program，同时校验program/version及当前Profile在Program中的位置；
 2. 将已完成动作视为runtime progress，不从正式Profile永久删除；
 3. active任务检查剩余`做/交`；
 4. unseen后续按当前Availability；
@@ -353,7 +402,7 @@ RouteState至少显式维护：
 
 视频不能直接强迫恢复已删除任务或覆盖当前优化结果。
 
-是否在某个阶段必须做视频反向审查属于Route Lifecycle SOP/当前项目阶段策略；本算法只定义视频能作为哪类输入。
+是否需要调用视频反向证据由当前业务/迁移任务决定；本算法只定义视频能作为哪类输入，不建立第二套执行流程。
 
 ## 21. 精确优化器定位
 
@@ -384,9 +433,19 @@ PC-SP、DP/labeling、MILP、Branch-and-Cut、CP-SAT、flexible service location
 
 发现问题只打开对应局部窗口修正，不从地图起点全量重验。
 
-玩家文案/HTML冷读不属于本算法，Route Lifecycle SOP调用Route Display/Task Presentation对应门禁。
+玩家文案/HTML冷读不属于本算法；需要发布/冷读时进入Route Display / Task Presentation / UI & Assets，最终切换再进入Final Audit。
 
-## 23. 本文件明确不负责
+## 23. 正式Optimization / Movement / Service操作
+
+- 路线设计/重排后的同NPC连续性候选检查：`python3 scripts/audit_route_interaction_continuity.py <profile_id>`。只报告候选，不自动重排。
+- 单Profile canonical Movement：`python3 scripts/build_route_movement.py <profile_id>`。
+- Program Movement边界：`python3 scripts/build_program_movement.py <program_id>`；只消费成员当前Movement，不在内部重算成员。
+- 单Profile Service Context：`python3 scripts/build_route_service_context.py <profile_id>`。
+- Program首次/合同级Service Context：`python3 scripts/build_program_service_context.py <program_id>`。
+- 已有合法Program Service基线，仅某成员变化：`python3 scripts/update_program_member_service_context.py <program_id> <profile_id>`。
+- Movement / Service遇到UNKNOWN或冲突必须返回requirements/blocked，不得回读旧geometry、备注或target-cluster产物补齐。
+
+## 24. 本文件明确不负责
 
 - Task Card字段/事实：`docs/task-library/README.md`；
 - 任务机制核验：`execution-and-mechanics.md`；
@@ -397,4 +456,4 @@ PC-SP、DP/labeling、MILP、Branch-and-Cut、CP-SAT、flexible service location
 - Route Atlas路线显示：`route-atlas-route-display.md`；
 - 任务备注/标签：`route-atlas-task-presentation.md`；
 - 页面/地图工程：`route-atlas-ui-and-assets.md`；
-- 何时调用算法/测试/人工终审：Route Lifecycle SOP。
+- 当前输入是否需要Route Optimization由分类SOP及Selection结果决定；测试读`../../tests/README.md`，最终项目切换读Final Audit owner。

@@ -140,8 +140,8 @@ JSON Schema负责shape；Python validator只负责跨字段/跨文件/状态闭�
 - state旧文档只允许作为兼容指针；
 - Task Card / Route Profile JSON Schema与语义边界；
 - Route Profile稳定task_id、step覆盖、状态闭合；
-- fivebox状态是标签真源；
-- 待实测不由open question副作用产生；
+- fivebox五类状态是标签真源；`special`承载混合/条件型任务的总体分类；
+- `pending`直接表达待实测，不依赖第二套open-question状态；
 - 人工推荐备注与标签独立，且允许明确为空。
 
 ### 当前迁移测试
@@ -158,7 +158,7 @@ JSON Schema负责shape；Python validator只负责跨字段/跨文件/状态闭�
 
 后续实现/转换阶段仍需：
 
-1. 按最终Task Card字段把旧独有事实/备注/fivebox状态完整迁入；
+1. 按单个task_id逐卡闭合旧独有事实/fivebox状态/当前页面备注；Questie基础字段可机械搬运，guide/特殊机制不做批量自然语言推断；
 2. 按最终Route Profile原子模型迁完整路线；
 3. 做旧信息归属审计，要求`unclassified=0`；
 4. 再生成候选workbench/HTML；

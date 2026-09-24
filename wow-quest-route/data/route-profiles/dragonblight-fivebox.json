@@ -1,0 +1,7083 @@
+{
+  "schema_version": 2,
+  "profile_id": "dragonblight-fivebox",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "龙骨荒野",
+    "character_profile": "horde-fivebox-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 65
+  },
+  "entry_requirements": {
+    "active_task_ids": [
+      11930,
+      12117
+    ]
+  },
+  "goal": {
+    "summary": "从北风护送《横贯冰原》进入龙骨边界，在沃图克处交付后开始；按页面步骤完成龙骨当前可达世界任务；跨图任务继续保留到对应后续地图自然交付。"
+  },
+  "display": {
+    "publish_key": "dragonblight",
+    "order": 5,
+    "title": "龙骨荒野 · 北风出口衔接 73+ 尽量清图路线",
+    "display_name": "龙骨荒野",
+    "subtitle": "从北风护送《横贯冰原》进入龙骨边界，在沃图克处交付后开始；按页面步骤完成龙骨当前可达世界任务；跨图任务继续保留到对应后续地图自然交付。",
+    "footer": "天谴之门拾取萨鲁法尔战甲后，本图龙骨荒野清理段结束；仍在日志中的跨图任务继续保留。",
+    "map_image": "maps/65-dragonblight-hd.jpg"
+  },
+  "task_ids": [
+    11930,
+    11977,
+    11978,
+    11980,
+    11983,
+    12008,
+    12034,
+    12033,
+    12036,
+    12488,
+    12039,
+    12056,
+    12089,
+    12091,
+    12100,
+    11999,
+    12040,
+    12041,
+    12053,
+    12048,
+    12101,
+    12102,
+    12063,
+    12064,
+    12057,
+    12069,
+    12140,
+    12071,
+    12115,
+    12125,
+    12126,
+    12127,
+    12072,
+    12144,
+    12469,
+    12044,
+    12045,
+    12043,
+    12046,
+    12047,
+    12049,
+    12050,
+    12052,
+    12112,
+    12075,
+    12076,
+    12079,
+    12077,
+    12080,
+    12078,
+    12006,
+    12013,
+    12005,
+    12059,
+    12061,
+    12791,
+    12066,
+    12084,
+    12096,
+    12085,
+    12106,
+    12104,
+    12111,
+    12117,
+    11958,
+    11960,
+    11959,
+    12009,
+    12028,
+    12030,
+    12110,
+    12031,
+    12032,
+    12011,
+    12016,
+    12017,
+    12122,
+    12767,
+    12461,
+    12447,
+    12458,
+    12470,
+    12145,
+    12147,
+    12448,
+    12449,
+    12450,
+    12419,
+    12769,
+    12124,
+    12148,
+    12435,
+    12372,
+    12261,
+    12262,
+    12263,
+    12264,
+    12265,
+    12267,
+    12266,
+    12149,
+    12487,
+    12205,
+    12209,
+    12303,
+    12206,
+    12211,
+    12188,
+    12304,
+    12200,
+    12454,
+    12456,
+    12150,
+    12459,
+    12151,
+    12218,
+    12245,
+    12214,
+    12230,
+    12252,
+    12271,
+    12273,
+    12542,
+    12221,
+    12232,
+    12234,
+    12240,
+    12239,
+    12243,
+    12254,
+    12260,
+    12274,
+    12283,
+    12285,
+    12545,
+    12789,
+    12132,
+    12136,
+    12224,
+    12496,
+    12497,
+    12498,
+    12500,
+    13242
+  ],
+  "actions": [
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p001",
+      "action_id": "a0001"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11930,
+      "location_ref": "dragonblight-p001",
+      "npc_name": "沃图克",
+      "action_id": "a0002"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11977,
+      "location_ref": "dragonblight-p001",
+      "npc_name": "沃图克",
+      "action_id": "a0003"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p002",
+      "action_id": "a0004"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11977,
+      "location_ref": "dragonblight-p002",
+      "npc_name": "特使艾米萨·闪蹄",
+      "action_id": "a0005"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11978,
+      "location_ref": "dragonblight-p002",
+      "npc_name": "特使艾米萨·闪蹄",
+      "action_id": "a0006"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11980,
+      "location_ref": "dragonblight-p002",
+      "npc_name": "血卫士洛恩基尔",
+      "action_id": "a0007"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p003",
+      "action_id": "a0008"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11978,
+      "location_ref": "dragonblight-p003",
+      "action_id": "a0009"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11980,
+      "location_ref": "dragonblight-p003",
+      "action_id": "a0010"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p004",
+      "action_id": "a0011"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11978,
+      "location_ref": "dragonblight-p004",
+      "npc_name": "特使艾米萨·闪蹄",
+      "action_id": "a0012"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11983,
+      "location_ref": "dragonblight-p004",
+      "npc_name": "特使艾米萨·闪蹄",
+      "action_id": "a0013"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11980,
+      "location_ref": "dragonblight-p004",
+      "npc_name": "血卫士洛恩基尔",
+      "action_id": "a0014"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p005",
+      "action_id": "a0015"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11983,
+      "location_ref": "dragonblight-p005",
+      "action_id": "a0016"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p006",
+      "action_id": "a0017"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11983,
+      "location_ref": "dragonblight-p006",
+      "npc_name": "特使艾米萨·闪蹄",
+      "action_id": "a0018"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12008,
+      "location_ref": "dragonblight-p006",
+      "npc_name": "特使艾米萨·闪蹄",
+      "action_id": "a0019"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p007",
+      "action_id": "a0020"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12008,
+      "location_ref": "dragonblight-p007",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0021"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12034,
+      "location_ref": "dragonblight-p007",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0022"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p008",
+      "action_id": "a0023"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "dragonblight-p008",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0024"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "dragonblight-p008",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0025"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p009",
+      "action_id": "a0026"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12033,
+      "location_ref": "dragonblight-p009",
+      "npc_name": "信使托弗斯",
+      "action_id": "a0027"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12033,
+      "location_ref": "dragonblight-p009",
+      "action_id": "a0028"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12033,
+      "location_ref": "dragonblight-p009",
+      "npc_name": "信使托弗斯",
+      "action_id": "a0029"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p010",
+      "action_id": "a0030"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12034,
+      "location_ref": "dragonblight-p010",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0031"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12036,
+      "location_ref": "dragonblight-p010",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0032"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12488,
+      "location_ref": "dragonblight-p010",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0033"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p011",
+      "action_id": "a0034"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12039,
+      "location_ref": "dragonblight-p011",
+      "npc_name": "伯鲁斯·折铁",
+      "action_id": "a0035"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p012",
+      "action_id": "a0036"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12056,
+      "location_ref": "dragonblight-p012",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0037"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12089,
+      "location_ref": "dragonblight-p012",
+      "target_name": "通缉！",
+      "action_id": "a0038"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12091,
+      "location_ref": "dragonblight-p012",
+      "target_name": "通缉！",
+      "action_id": "a0039"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p013",
+      "action_id": "a0040"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12100,
+      "location_ref": "dragonblight-p013",
+      "npc_name": "索艾·鹰怒",
+      "action_id": "a0041"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p014",
+      "action_id": "a0042"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11999,
+      "location_ref": "dragonblight-p014",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0043"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p015",
+      "action_id": "a0044"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12036,
+      "location_ref": "dragonblight-p015",
+      "action_id": "a0045"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p016",
+      "action_id": "a0046"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12056,
+      "location_ref": "dragonblight-p016",
+      "action_id": "a0047"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p017",
+      "action_id": "a0048"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12039,
+      "location_ref": "dragonblight-p017",
+      "action_id": "a0049"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p018",
+      "action_id": "a0050"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12040,
+      "location_ref": "dragonblight-p018",
+      "npc_name": "拆解者基里克斯",
+      "action_id": "a0051"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12040,
+      "location_ref": "dragonblight-p018",
+      "action_id": "a0052"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12040,
+      "location_ref": "dragonblight-p018",
+      "npc_name": "拆解者基里克斯",
+      "action_id": "a0053"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12041,
+      "location_ref": "dragonblight-p018",
+      "npc_name": "拆解者基里克斯",
+      "action_id": "a0054"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p019",
+      "action_id": "a0055"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12100,
+      "location_ref": "dragonblight-p019",
+      "action_id": "a0056"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p020",
+      "action_id": "a0057"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12041,
+      "location_ref": "dragonblight-p020",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0058"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12036,
+      "location_ref": "dragonblight-p020",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0059"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12053,
+      "location_ref": "dragonblight-p020",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0060"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12039,
+      "location_ref": "dragonblight-p020",
+      "npc_name": "伯鲁斯·折铁",
+      "action_id": "a0061"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12048,
+      "location_ref": "dragonblight-p020",
+      "npc_name": "伯鲁斯·折铁",
+      "action_id": "a0062"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12056,
+      "location_ref": "dragonblight-p020",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0063"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p021",
+      "action_id": "a0064"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12100,
+      "location_ref": "dragonblight-p021",
+      "npc_name": "索艾·鹰怒",
+      "action_id": "a0065"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12101,
+      "location_ref": "dragonblight-p021",
+      "npc_name": "索艾·鹰怒",
+      "action_id": "a0066"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p022",
+      "action_id": "a0067"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12101,
+      "location_ref": "dragonblight-p022",
+      "npc_name": "辛塔尔·玛菲奥斯博士",
+      "action_id": "a0068"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12102,
+      "location_ref": "dragonblight-p022",
+      "npc_name": "辛塔尔·玛菲奥斯博士",
+      "action_id": "a0069"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p023",
+      "action_id": "a0070"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12063,
+      "location_ref": "dragonblight-p023",
+      "npc_name": "冰雾祖母",
+      "action_id": "a0071"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p024",
+      "action_id": "a0072"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12063,
+      "location_ref": "dragonblight-p024",
+      "npc_name": "班索克·冰雾",
+      "action_id": "a0073"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12064,
+      "location_ref": "dragonblight-p024",
+      "npc_name": "班索克·冰雾",
+      "action_id": "a0074"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p025",
+      "action_id": "a0075"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12064,
+      "location_ref": "dragonblight-p025",
+      "action_id": "a0076"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12048,
+      "location_ref": "dragonblight-p025",
+      "action_id": "a0077"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12057,
+      "location_ref": "dragonblight-p025",
+      "target_name": "血之魔典",
+      "when": {
+        "kind": "has_item",
+        "item_name": "血之魔典"
+      },
+      "action_id": "a0078"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p026",
+      "action_id": "a0079"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12053,
+      "location_ref": "dragonblight-p026",
+      "action_id": "a0080"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p027",
+      "action_id": "a0081"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12064,
+      "location_ref": "dragonblight-p027",
+      "npc_name": "班索克·冰雾",
+      "action_id": "a0082"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12069,
+      "location_ref": "dragonblight-p027",
+      "npc_name": "班索克·冰雾",
+      "action_id": "a0083"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p028",
+      "action_id": "a0084"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12069,
+      "location_ref": "dragonblight-p028",
+      "action_id": "a0085"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p029",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0087"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p029",
+      "action_id": "a0086"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12069,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0088"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12140,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0089"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12053,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0090"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12071,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "军士长祖托克",
+      "action_id": "a0091"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12048,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "伯鲁斯·折铁",
+      "action_id": "a0092"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12057,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "高尔特上尉",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12057
+      },
+      "action_id": "a0093"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12115,
+      "location_ref": "dragonblight-p029",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0094"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p030",
+      "action_id": "a0095"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12115,
+      "location_ref": "dragonblight-p030",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0096"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12125,
+      "location_ref": "dragonblight-p030",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0097"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12126,
+      "location_ref": "dragonblight-p030",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0098"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12127,
+      "location_ref": "dragonblight-p030",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0099"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p031",
+      "action_id": "a0100"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12140,
+      "location_ref": "dragonblight-p031",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p032",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12140,
+      "location_ref": "dragonblight-p032",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0103"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12071,
+      "location_ref": "dragonblight-p032",
+      "npc_name": "瓦诺克·风怒",
+      "action_id": "a0104"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12072,
+      "location_ref": "dragonblight-p032",
+      "npc_name": "瓦诺克·风怒",
+      "action_id": "a0105"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p033",
+      "action_id": "a0106"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12072,
+      "location_ref": "dragonblight-p033",
+      "action_id": "a0107"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p034",
+      "action_id": "a0108"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12072,
+      "location_ref": "dragonblight-p034",
+      "npc_name": "瓦诺克·风怒",
+      "action_id": "a0109"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p035",
+      "action_id": "a0110"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12091,
+      "location_ref": "dragonblight-p035",
+      "action_id": "a0111"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p036",
+      "action_id": "a0112"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12144,
+      "location_ref": "dragonblight-p036",
+      "npc_name": "肯图卡尼斯",
+      "action_id": "a0113"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p037",
+      "action_id": "a0114"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12469,
+      "location_ref": "dragonblight-p037",
+      "npc_name": "诺兹拉斯补给员",
+      "action_id": "a0115"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p038",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12469,
+      "location_ref": "dragonblight-p038",
+      "npc_name": "辛克",
+      "action_id": "a0117"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12044,
+      "location_ref": "dragonblight-p038",
+      "npc_name": "辛克",
+      "action_id": "a0118"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12045,
+      "location_ref": "dragonblight-p038",
+      "npc_name": "希弗里克斯",
+      "action_id": "a0119"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12043,
+      "location_ref": "dragonblight-p038",
+      "npc_name": "纳尔弗",
+      "action_id": "a0120"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p039",
+      "action_id": "a0121"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12043,
+      "location_ref": "dragonblight-p039",
+      "action_id": "a0122"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12044,
+      "location_ref": "dragonblight-p039",
+      "action_id": "a0123"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p040",
+      "action_id": "a0124"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12043,
+      "location_ref": "dragonblight-p040",
+      "npc_name": "纳尔弗",
+      "action_id": "a0125"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12044,
+      "location_ref": "dragonblight-p040",
+      "npc_name": "辛克",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p041",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12045,
+      "location_ref": "dragonblight-p041",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p042",
+      "action_id": "a0129"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12045,
+      "location_ref": "dragonblight-p042",
+      "npc_name": "希弗里克斯",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12046,
+      "location_ref": "dragonblight-p042",
+      "npc_name": "希弗里克斯",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p043",
+      "action_id": "a0132"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12046,
+      "location_ref": "dragonblight-p043",
+      "action_id": "a0133"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p044",
+      "action_id": "a0134"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12046,
+      "location_ref": "dragonblight-p044",
+      "npc_name": "希弗里克斯",
+      "action_id": "a0135"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12047,
+      "location_ref": "dragonblight-p044",
+      "npc_name": "希弗里克斯",
+      "action_id": "a0136"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12049,
+      "location_ref": "dragonblight-p044",
+      "npc_name": "辛克",
+      "action_id": "a0137"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p045",
+      "action_id": "a0138"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12047,
+      "location_ref": "dragonblight-p045",
+      "action_id": "a0139"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p046",
+      "action_id": "a0140"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12049,
+      "location_ref": "dragonblight-p046",
+      "action_id": "a0141"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p047",
+      "action_id": "a0142"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12047,
+      "location_ref": "dragonblight-p047",
+      "npc_name": "希弗里克斯",
+      "action_id": "a0143"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12049,
+      "location_ref": "dragonblight-p047",
+      "npc_name": "辛克",
+      "action_id": "a0144"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12050,
+      "location_ref": "dragonblight-p047",
+      "npc_name": "辛克",
+      "action_id": "a0145"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12052,
+      "location_ref": "dragonblight-p047",
+      "npc_name": "纳尔弗",
+      "action_id": "a0146"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p048",
+      "action_id": "a0147"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12052,
+      "location_ref": "dragonblight-p048",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12050,
+      "location_ref": "dragonblight-p048",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p049",
+      "action_id": "a0150"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12052,
+      "location_ref": "dragonblight-p049",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p050",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12050,
+      "location_ref": "dragonblight-p050",
+      "npc_name": "辛克",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12052,
+      "location_ref": "dragonblight-p050",
+      "npc_name": "纳尔弗",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12112,
+      "location_ref": "dragonblight-p050",
+      "npc_name": "纳尔弗",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p051",
+      "action_id": "a0156"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12112,
+      "location_ref": "dragonblight-p051",
+      "npc_name": "佐特",
+      "action_id": "a0157"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12075,
+      "location_ref": "dragonblight-p051",
+      "npc_name": "佐特",
+      "action_id": "a0158"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p052",
+      "action_id": "a0159"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12075,
+      "location_ref": "dragonblight-p052",
+      "action_id": "a0160"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p053",
+      "action_id": "a0161"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12075,
+      "location_ref": "dragonblight-p053",
+      "npc_name": "佐特",
+      "action_id": "a0162"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12076,
+      "location_ref": "dragonblight-p053",
+      "npc_name": "佐特",
+      "action_id": "a0163"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12079,
+      "location_ref": "dragonblight-p053",
+      "npc_name": "坚不可摧的科查尔",
+      "action_id": "a0164"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p054",
+      "action_id": "a0165"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12076,
+      "location_ref": "dragonblight-p054",
+      "action_id": "a0166"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p055",
+      "action_id": "a0167"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12076,
+      "location_ref": "dragonblight-p055",
+      "npc_name": "佐特",
+      "action_id": "a0168"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12077,
+      "location_ref": "dragonblight-p055",
+      "npc_name": "佐特",
+      "action_id": "a0169"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p056",
+      "action_id": "a0170"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12077,
+      "location_ref": "dragonblight-p056",
+      "npc_name": "坚不可摧的科查尔",
+      "action_id": "a0171"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12080,
+      "location_ref": "dragonblight-p056",
+      "npc_name": "坚不可摧的科查尔",
+      "action_id": "a0172"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12078,
+      "location_ref": "dragonblight-p056",
+      "npc_name": "佐特",
+      "action_id": "a0173"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p057",
+      "action_id": "a0174"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12078,
+      "location_ref": "dragonblight-p057",
+      "action_id": "a0175"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12079,
+      "location_ref": "dragonblight-p057",
+      "action_id": "a0176"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p058",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12080,
+      "location_ref": "dragonblight-p058",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p059",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12078,
+      "location_ref": "dragonblight-p059",
+      "npc_name": "佐特",
+      "action_id": "a0180"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12079,
+      "location_ref": "dragonblight-p059",
+      "npc_name": "坚不可摧的科查尔",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12080,
+      "location_ref": "dragonblight-p059",
+      "npc_name": "坚不可摧的科查尔",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p060",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0184"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p060",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p061",
+      "action_id": "a0185"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12006,
+      "location_ref": "dragonblight-p061",
+      "npc_name": "伊瑟尼安·月影",
+      "action_id": "a0186"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p062",
+      "action_id": "a0187"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12006,
+      "location_ref": "dragonblight-p062",
+      "action_id": "a0188"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11999,
+      "location_ref": "dragonblight-p062",
+      "action_id": "a0189"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12089,
+      "location_ref": "dragonblight-p062",
+      "action_id": "a0190"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p063",
+      "action_id": "a0191"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12006,
+      "location_ref": "dragonblight-p063",
+      "npc_name": "伊瑟尼安·月影",
+      "action_id": "a0192"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12013,
+      "location_ref": "dragonblight-p063",
+      "npc_name": "伊瑟尼安·月影",
+      "action_id": "a0193"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p064",
+      "action_id": "a0194"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12013,
+      "location_ref": "dragonblight-p064",
+      "action_id": "a0195"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p065",
+      "action_id": "a0196"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11999,
+      "location_ref": "dragonblight-p065",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0197"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12005,
+      "location_ref": "dragonblight-p065",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0198"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12013,
+      "location_ref": "dragonblight-p065",
+      "npc_name": "伊瑟尼安·月影",
+      "action_id": "a0199"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p066",
+      "action_id": "a0200"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12005,
+      "location_ref": "dragonblight-p066",
+      "action_id": "a0201"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12059,
+      "location_ref": "dragonblight-p066",
+      "target_name": "古拉莫什的奇怪设备",
+      "when": {
+        "kind": "has_item",
+        "item_name": "古拉莫什的奇怪设备"
+      },
+      "action_id": "a0202"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p067",
+      "action_id": "a0203"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12005,
+      "location_ref": "dragonblight-p067",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0204"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12059,
+      "location_ref": "dragonblight-p067",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12059
+      },
+      "action_id": "a0205"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12061,
+      "location_ref": "dragonblight-p067",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0206"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12791,
+      "location_ref": "dragonblight-p067",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0207"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p068",
+      "action_id": "a0208"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12061,
+      "location_ref": "dragonblight-p068",
+      "action_id": "a0209"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p069",
+      "action_id": "a0210"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12061,
+      "location_ref": "dragonblight-p069",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0211"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12066,
+      "location_ref": "dragonblight-p069",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0212"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p070",
+      "action_id": "a0213"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12066,
+      "location_ref": "dragonblight-p070",
+      "action_id": "a0214"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p071",
+      "action_id": "a0215"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12066,
+      "location_ref": "dragonblight-p071",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0216"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12084,
+      "location_ref": "dragonblight-p071",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0217"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12096,
+      "location_ref": "dragonblight-p071",
+      "npc_name": "大地看守者格莱弗",
+      "action_id": "a0218"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p072",
+      "action_id": "a0219"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12084,
+      "location_ref": "dragonblight-p072",
+      "action_id": "a0220"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12096,
+      "location_ref": "dragonblight-p072",
+      "action_id": "a0221"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12085,
+      "location_ref": "dragonblight-p072",
+      "target_name": "塔辛尼中尉的信",
+      "when": {
+        "kind": "has_item",
+        "item_name": "塔辛尼中尉的信"
+      },
+      "action_id": "a0222"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p073",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0224"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p073",
+      "action_id": "a0223"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12084,
+      "location_ref": "dragonblight-p073",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0225"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12106,
+      "location_ref": "dragonblight-p073",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0226"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12096,
+      "location_ref": "dragonblight-p073",
+      "npc_name": "大地看守者格莱弗",
+      "action_id": "a0227"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12085,
+      "location_ref": "dragonblight-p073",
+      "npc_name": "阿格玛大王",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12085
+      },
+      "action_id": "a0228"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p074",
+      "action_id": "a0229"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12102,
+      "location_ref": "dragonblight-p074",
+      "action_id": "a0230"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p075",
+      "action_id": "a0231"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12126,
+      "location_ref": "dragonblight-p075",
+      "action_id": "a0232"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p076",
+      "action_id": "a0233"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12126,
+      "location_ref": "dragonblight-p076",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0234"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12102,
+      "location_ref": "dragonblight-p076",
+      "npc_name": "辛塔尔·玛菲奥斯博士",
+      "action_id": "a0235"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12104,
+      "location_ref": "dragonblight-p076",
+      "npc_name": "辛塔尔·玛菲奥斯博士",
+      "action_id": "a0236"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p077",
+      "action_id": "a0237"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12104,
+      "location_ref": "dragonblight-p077",
+      "npc_name": "索艾·鹰怒",
+      "action_id": "a0238"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12111,
+      "location_ref": "dragonblight-p077",
+      "npc_name": "索艾·鹰怒",
+      "action_id": "a0239"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p078",
+      "action_id": "a0240"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12111,
+      "location_ref": "dragonblight-p078",
+      "action_id": "a0241"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p079",
+      "action_id": "a0242"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12111,
+      "location_ref": "dragonblight-p079",
+      "npc_name": "索艾·鹰怒",
+      "action_id": "a0243"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p080",
+      "action_id": "a0244"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12117,
+      "location_ref": "dragonblight-p080",
+      "npc_name": "长者库纳尼",
+      "action_id": "a0245"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11958,
+      "location_ref": "dragonblight-p080",
+      "npc_name": "长者库纳尼",
+      "action_id": "a0246"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11960,
+      "location_ref": "dragonblight-p080",
+      "npc_name": "猎手莫伊",
+      "action_id": "a0247"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "dragonblight-p080",
+      "target_name": "莫亚基港口",
+      "action_id": "a0248"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p081",
+      "action_id": "a0249"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11958,
+      "location_ref": "dragonblight-p081",
+      "action_id": "a0250"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11960,
+      "location_ref": "dragonblight-p081",
+      "action_id": "a0251"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p082",
+      "action_id": "a0252"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11958,
+      "location_ref": "dragonblight-p082",
+      "npc_name": "长者库纳尼",
+      "action_id": "a0253"
+    },
+    {
+      "kind": "accept",
+      "task_id": 11959,
+      "location_ref": "dragonblight-p082",
+      "npc_name": "长者库纳尼",
+      "action_id": "a0254"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11960,
+      "location_ref": "dragonblight-p082",
+      "npc_name": "猎手莫伊",
+      "action_id": "a0255"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p083",
+      "action_id": "a0256"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11959,
+      "location_ref": "dragonblight-p083",
+      "action_id": "a0257"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p084",
+      "action_id": "a0258"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11959,
+      "location_ref": "dragonblight-p084",
+      "npc_name": "长者库纳尼",
+      "action_id": "a0259"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p085",
+      "action_id": "a0260"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12009,
+      "location_ref": "dragonblight-p085",
+      "npc_name": "图尔凯",
+      "action_id": "a0261"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12028,
+      "location_ref": "dragonblight-p085",
+      "npc_name": "秘法师图阿鲁",
+      "action_id": "a0262"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12028,
+      "location_ref": "dragonblight-p085",
+      "action_id": "a0263"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12028,
+      "location_ref": "dragonblight-p085",
+      "npc_name": "秘法师图阿鲁",
+      "action_id": "a0264"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12030,
+      "location_ref": "dragonblight-p085",
+      "npc_name": "秘法师图阿鲁",
+      "action_id": "a0265"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p086",
+      "action_id": "a0266"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12106,
+      "location_ref": "dragonblight-p086",
+      "npc_name": "法师指挥官伊文斯塔",
+      "action_id": "a0267"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12110,
+      "location_ref": "dragonblight-p086",
+      "npc_name": "法师指挥官伊文斯塔",
+      "action_id": "a0268"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12110,
+      "location_ref": "dragonblight-p086",
+      "action_id": "a0269"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p087",
+      "action_id": "a0270"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12030,
+      "location_ref": "dragonblight-p087",
+      "target_name": "长者玛纳洛",
+      "action_id": "a0271"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12031,
+      "location_ref": "dragonblight-p087",
+      "target_name": "长者玛纳洛",
+      "action_id": "a0272"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p088",
+      "action_id": "a0273"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12031,
+      "location_ref": "dragonblight-p088",
+      "action_id": "a0274"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12125,
+      "location_ref": "dragonblight-p088",
+      "action_id": "a0275"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p089",
+      "action_id": "a0276"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12031,
+      "location_ref": "dragonblight-p089",
+      "target_name": "长者玛纳洛",
+      "action_id": "a0277"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12032,
+      "location_ref": "dragonblight-p089",
+      "target_name": "长者玛纳洛",
+      "action_id": "a0278"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p090",
+      "action_id": "a0279"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12110,
+      "location_ref": "dragonblight-p090",
+      "action_id": "a0280"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p091",
+      "action_id": "a0281"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12011,
+      "location_ref": "dragonblight-p091",
+      "target_name": "被破坏的螃蟹陷阱",
+      "action_id": "a0282"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p092",
+      "action_id": "a0283"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12009,
+      "location_ref": "dragonblight-p092",
+      "action_id": "a0284"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p093",
+      "action_id": "a0285"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12011,
+      "location_ref": "dragonblight-p093",
+      "npc_name": "图尔凯",
+      "action_id": "a0286"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12016,
+      "location_ref": "dragonblight-p093",
+      "npc_name": "图尔凯",
+      "action_id": "a0287"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12009,
+      "location_ref": "dragonblight-p093",
+      "npc_name": "图尔凯",
+      "action_id": "a0288"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p094",
+      "action_id": "a0289"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12016,
+      "location_ref": "dragonblight-p094",
+      "action_id": "a0290"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p095",
+      "action_id": "a0291"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12032,
+      "location_ref": "dragonblight-p095",
+      "action_id": "a0292"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p096",
+      "action_id": "a0293"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12016,
+      "location_ref": "dragonblight-p096",
+      "npc_name": "图尔凯",
+      "action_id": "a0294"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12017,
+      "location_ref": "dragonblight-p096",
+      "npc_name": "图尔凯",
+      "action_id": "a0295"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12032,
+      "location_ref": "dragonblight-p096",
+      "npc_name": "秘法师图阿鲁",
+      "action_id": "a0296"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p097",
+      "action_id": "a0297"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12017,
+      "location_ref": "dragonblight-p097",
+      "action_id": "a0298"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p098",
+      "action_id": "a0299"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12017,
+      "location_ref": "dragonblight-p098",
+      "npc_name": "图尔凯",
+      "action_id": "a0300"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p099",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0302"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p099",
+      "action_id": "a0301"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12125,
+      "location_ref": "dragonblight-p099",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0303"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12110,
+      "location_ref": "dragonblight-p099",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0304"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12122,
+      "location_ref": "dragonblight-p099",
+      "npc_name": "大法师艾萨斯·夺日者的影像",
+      "action_id": "a0305"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p100",
+      "action_id": "a0306"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12089,
+      "location_ref": "dragonblight-p100",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0307"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12091,
+      "location_ref": "dragonblight-p100",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0308"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p101",
+      "action_id": "a0309"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "dragonblight-p101",
+      "target_name": "龙眠神殿",
+      "action_id": "a0310"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p102",
+      "action_id": "a0311"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12122,
+      "location_ref": "dragonblight-p102",
+      "npc_name": "塔里奥斯塔兹",
+      "action_id": "a0312"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12767,
+      "location_ref": "dragonblight-p102",
+      "npc_name": "塔里奥斯塔兹",
+      "action_id": "a0313"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p103",
+      "action_id": "a0314"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12767,
+      "location_ref": "dragonblight-p103",
+      "npc_name": "古拉克·石拳",
+      "action_id": "a0315"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12461,
+      "location_ref": "dragonblight-p103",
+      "npc_name": "古拉克·石拳",
+      "action_id": "a0316"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p104",
+      "from_name": "龙眠地面层",
+      "to_name": "顶层",
+      "action_id": "a0318"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p104",
+      "action_id": "a0317"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12447,
+      "location_ref": "dragonblight-p104",
+      "npc_name": "纳莉丝",
+      "action_id": "a0319"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12458,
+      "location_ref": "dragonblight-p104",
+      "npc_name": "伊萨里奥斯勋爵",
+      "action_id": "a0320"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12470,
+      "location_ref": "dragonblight-p104",
+      "npc_name": "克罗米",
+      "action_id": "a0321"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p105",
+      "action_id": "a0322"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12144,
+      "location_ref": "dragonblight-p105",
+      "action_id": "a0323"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p106",
+      "action_id": "a0324"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12144,
+      "location_ref": "dragonblight-p106",
+      "npc_name": "肯图卡尼斯",
+      "action_id": "a0325"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12145,
+      "location_ref": "dragonblight-p106",
+      "npc_name": "肯图卡尼斯",
+      "action_id": "a0326"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p107",
+      "action_id": "a0327"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12145,
+      "location_ref": "dragonblight-p107",
+      "action_id": "a0328"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12147,
+      "location_ref": "dragonblight-p107",
+      "target_name": "精美的战斗号角",
+      "when": {
+        "kind": "has_item",
+        "item_name": "精美的战斗号角"
+      },
+      "action_id": "a0329"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p108",
+      "action_id": "a0330"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12145,
+      "location_ref": "dragonblight-p108",
+      "npc_name": "肯图卡尼斯",
+      "action_id": "a0331"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p109",
+      "action_id": "a0332"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12461,
+      "location_ref": "dragonblight-p109",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0333"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12448,
+      "location_ref": "dragonblight-p109",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0334"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p110",
+      "action_id": "a0335"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12448,
+      "location_ref": "dragonblight-p110",
+      "action_id": "a0336"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p111",
+      "action_id": "a0337"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12448,
+      "location_ref": "dragonblight-p111",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0338"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12449,
+      "location_ref": "dragonblight-p111",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0339"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p112",
+      "action_id": "a0340"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12449,
+      "location_ref": "dragonblight-p112",
+      "action_id": "a0341"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p113",
+      "action_id": "a0342"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12449,
+      "location_ref": "dragonblight-p113",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0343"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12450,
+      "location_ref": "dragonblight-p113",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0344"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p114",
+      "action_id": "a0345"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12450,
+      "location_ref": "dragonblight-p114",
+      "action_id": "a0346"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12419,
+      "location_ref": "dragonblight-p114",
+      "target_name": "红玉胸针",
+      "when": {
+        "kind": "has_item",
+        "item_name": "红玉胸针"
+      },
+      "action_id": "a0347"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p115",
+      "action_id": "a0348"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12450,
+      "location_ref": "dragonblight-p115",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0349"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12769,
+      "location_ref": "dragonblight-p115",
+      "npc_name": "瓦加斯塔兹",
+      "action_id": "a0350"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p116",
+      "action_id": "a0351"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12769,
+      "location_ref": "dragonblight-p116",
+      "npc_name": "塔里奥斯塔兹",
+      "action_id": "a0352"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12124,
+      "location_ref": "dragonblight-p116",
+      "npc_name": "塔里奥斯塔兹",
+      "action_id": "a0353"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12147,
+      "location_ref": "dragonblight-p116",
+      "npc_name": "奥拉斯塔萨",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12147
+      },
+      "action_id": "a0354"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12148,
+      "location_ref": "dragonblight-p116",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0355"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p117",
+      "from_name": "龙眠地面层",
+      "to_name": "顶层",
+      "action_id": "a0357"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p117",
+      "action_id": "a0356"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12419,
+      "location_ref": "dragonblight-p117",
+      "npc_name": "克拉苏斯",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12419
+      },
+      "action_id": "a0358"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12124,
+      "location_ref": "dragonblight-p117",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0360"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12435,
+      "location_ref": "dragonblight-p117",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0361"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p117",
+      "from_name": "龙眠顶层",
+      "to_name": "中层",
+      "action_id": "a0362"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p119",
+      "action_id": "a0363"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12435,
+      "location_ref": "dragonblight-p119",
+      "npc_name": "德弗雷斯塔兹领主",
+      "action_id": "a0364"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12372,
+      "location_ref": "dragonblight-p119",
+      "npc_name": "德弗雷斯塔兹领主",
+      "action_id": "a0365"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p120",
+      "action_id": "a0366"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12372,
+      "location_ref": "dragonblight-p120",
+      "action_id": "a0367"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12372,
+      "location_ref": "dragonblight-p120",
+      "npc_name": "德弗雷斯塔兹领主",
+      "action_id": "a0368"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p121",
+      "action_id": "a0369"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12148,
+      "location_ref": "dragonblight-p121",
+      "action_id": "a0370"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p122",
+      "action_id": "a0371"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12447,
+      "location_ref": "dragonblight-p122",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0372"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12261,
+      "location_ref": "dragonblight-p122",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0373"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12262,
+      "location_ref": "dragonblight-p122",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0374"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p123",
+      "action_id": "a0375"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12261,
+      "location_ref": "dragonblight-p123",
+      "action_id": "a0376"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12262,
+      "location_ref": "dragonblight-p123",
+      "action_id": "a0377"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p124",
+      "action_id": "a0378"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12261,
+      "location_ref": "dragonblight-p124",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0379"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12262,
+      "location_ref": "dragonblight-p124",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0380"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12263,
+      "location_ref": "dragonblight-p124",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0381"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p125",
+      "action_id": "a0382"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12263,
+      "location_ref": "dragonblight-p125",
+      "action_id": "a0383"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12263,
+      "location_ref": "dragonblight-p125",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0384"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12264,
+      "location_ref": "dragonblight-p125",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0385"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12265,
+      "location_ref": "dragonblight-p125",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0386"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p126",
+      "action_id": "a0387"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12264,
+      "location_ref": "dragonblight-p126",
+      "action_id": "a0388"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12265,
+      "location_ref": "dragonblight-p126",
+      "action_id": "a0389"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p127",
+      "action_id": "a0390"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12264,
+      "location_ref": "dragonblight-p127",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0391"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12265,
+      "location_ref": "dragonblight-p127",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0392"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12267,
+      "location_ref": "dragonblight-p127",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0393"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p128",
+      "action_id": "a0394"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12267,
+      "location_ref": "dragonblight-p128",
+      "action_id": "a0395"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p129",
+      "action_id": "a0396"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12267,
+      "location_ref": "dragonblight-p129",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0397"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12266,
+      "location_ref": "dragonblight-p129",
+      "npc_name": "瑟里纳尔",
+      "action_id": "a0398"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p130",
+      "action_id": "a0399"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12148,
+      "location_ref": "dragonblight-p130",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0400"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12149,
+      "location_ref": "dragonblight-p130",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0401"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p131",
+      "from_name": "龙眠地面层",
+      "to_name": "顶层",
+      "action_id": "a0403"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p131",
+      "action_id": "a0402"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12266,
+      "location_ref": "dragonblight-p131",
+      "npc_name": "纳莉丝",
+      "action_id": "a0404"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p132",
+      "action_id": "a0405"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12127,
+      "location_ref": "dragonblight-p132",
+      "action_id": "a0406"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12149,
+      "location_ref": "dragonblight-p132",
+      "action_id": "a0407"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p133",
+      "action_id": "a0408"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12149,
+      "location_ref": "dragonblight-p133",
+      "action_id": "a0409"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12470,
+      "location_ref": "dragonblight-p133",
+      "action_id": "a0410"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p134",
+      "action_id": "a0411"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12488,
+      "location_ref": "dragonblight-p134",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0412"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12487,
+      "location_ref": "dragonblight-p134",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0413"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12205,
+      "location_ref": "dragonblight-p134",
+      "target_name": "通缉告示",
+      "action_id": "a0414"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12209,
+      "location_ref": "dragonblight-p134",
+      "npc_name": "军需官巴莱特",
+      "action_id": "a0415"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12303,
+      "location_ref": "dragonblight-p134",
+      "npc_name": "军需官巴莱特",
+      "action_id": "a0416"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "dragonblight-p134",
+      "target_name": "怨毒镇",
+      "action_id": "a0417"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p135",
+      "action_id": "a0418"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12206,
+      "location_ref": "dragonblight-p135",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0419"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12206,
+      "location_ref": "dragonblight-p135",
+      "action_id": "a0420"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12206,
+      "location_ref": "dragonblight-p135",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0421"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12211,
+      "location_ref": "dragonblight-p135",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0422"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12188,
+      "location_ref": "dragonblight-p135",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0423"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p136",
+      "action_id": "a0424"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12304,
+      "location_ref": "dragonblight-p136",
+      "npc_name": "测量员汉森",
+      "action_id": "a0425"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p137",
+      "action_id": "a0426"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12188,
+      "location_ref": "dragonblight-p137",
+      "action_id": "a0427"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12303,
+      "location_ref": "dragonblight-p137",
+      "action_id": "a0428"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12304,
+      "location_ref": "dragonblight-p137",
+      "action_id": "a0429"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p138",
+      "action_id": "a0430"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12304,
+      "location_ref": "dragonblight-p138",
+      "npc_name": "测量员汉森",
+      "action_id": "a0431"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p139",
+      "action_id": "a0432"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12188,
+      "location_ref": "dragonblight-p139",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0433"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12200,
+      "location_ref": "dragonblight-p139",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0434"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12303,
+      "location_ref": "dragonblight-p139",
+      "npc_name": "军需官巴莱特",
+      "action_id": "a0435"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p140",
+      "action_id": "a0436"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12205,
+      "location_ref": "dragonblight-p140",
+      "action_id": "a0437"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12209,
+      "location_ref": "dragonblight-p140",
+      "action_id": "a0438"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12211,
+      "location_ref": "dragonblight-p140",
+      "action_id": "a0439"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p141",
+      "action_id": "a0440"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12454,
+      "location_ref": "dragonblight-p141",
+      "npc_name": "护园者尼瑟拉",
+      "action_id": "a0441"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12454,
+      "location_ref": "dragonblight-p141",
+      "action_id": "a0442"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12454,
+      "location_ref": "dragonblight-p141",
+      "npc_name": "护园者尼瑟拉",
+      "action_id": "a0443"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12456,
+      "location_ref": "dragonblight-p141",
+      "npc_name": "护园者尼瑟拉",
+      "action_id": "a0444"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12200,
+      "location_ref": "dragonblight-p141",
+      "action_id": "a0445"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12458,
+      "location_ref": "dragonblight-p141",
+      "action_id": "a0446"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12149,
+      "location_ref": "dragonblight-p141",
+      "action_id": "a0447"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p142",
+      "action_id": "a0448"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12456,
+      "location_ref": "dragonblight-p142",
+      "action_id": "a0449"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p143",
+      "action_id": "a0450"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12456,
+      "location_ref": "dragonblight-p143",
+      "npc_name": "护园者尼瑟拉",
+      "action_id": "a0451"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p144",
+      "action_id": "a0452"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12149,
+      "location_ref": "dragonblight-p144",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0453"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12150,
+      "location_ref": "dragonblight-p144",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0454"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p145",
+      "from_name": "龙眠地面层",
+      "to_name": "顶层",
+      "action_id": "a0456"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p145",
+      "action_id": "a0455"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12458,
+      "location_ref": "dragonblight-p145",
+      "npc_name": "伊萨里奥斯勋爵",
+      "action_id": "a0457"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12459,
+      "location_ref": "dragonblight-p145",
+      "npc_name": "伊萨里奥斯勋爵",
+      "action_id": "a0458"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12470,
+      "location_ref": "dragonblight-p145",
+      "npc_name": "克罗米",
+      "action_id": "a0459"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p146",
+      "action_id": "a0460"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12150,
+      "location_ref": "dragonblight-p146",
+      "action_id": "a0461"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p147",
+      "action_id": "a0462"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12150,
+      "location_ref": "dragonblight-p147",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0463"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12151,
+      "location_ref": "dragonblight-p147",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0464"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p148",
+      "action_id": "a0465"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12151,
+      "location_ref": "dragonblight-p148",
+      "action_id": "a0466"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p149",
+      "action_id": "a0467"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12151,
+      "location_ref": "dragonblight-p149",
+      "npc_name": "奥拉斯塔萨",
+      "action_id": "a0468"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p150",
+      "action_id": "a0469"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12200,
+      "location_ref": "dragonblight-p150",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0470"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12218,
+      "location_ref": "dragonblight-p150",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0471"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p151",
+      "action_id": "a0472"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12205,
+      "location_ref": "dragonblight-p151",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0473"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12245,
+      "location_ref": "dragonblight-p151",
+      "npc_name": "间谍女王瑞贝娅",
+      "action_id": "a0474"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12209,
+      "location_ref": "dragonblight-p151",
+      "npc_name": "军需官巴莱特",
+      "action_id": "a0475"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12214,
+      "location_ref": "dragonblight-p151",
+      "npc_name": "汉瑟·鲍尔",
+      "action_id": "a0476"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12211,
+      "location_ref": "dragonblight-p151",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0477"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12230,
+      "location_ref": "dragonblight-p151",
+      "npc_name": "亡灵卫兵莫德尔",
+      "action_id": "a0478"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p152",
+      "action_id": "a0479"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12245,
+      "location_ref": "dragonblight-p152",
+      "action_id": "a0480"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12214,
+      "location_ref": "dragonblight-p152",
+      "action_id": "a0481"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p153",
+      "action_id": "a0482"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12245,
+      "location_ref": "dragonblight-p153",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0483"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12252,
+      "location_ref": "dragonblight-p153",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0484"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12214,
+      "location_ref": "dragonblight-p153",
+      "npc_name": "汉瑟·鲍尔",
+      "action_id": "a0485"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p154",
+      "action_id": "a0486"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12252,
+      "location_ref": "dragonblight-p154",
+      "action_id": "a0487"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12271,
+      "location_ref": "dragonblight-p154",
+      "target_name": "拷问者的魔棒",
+      "when": {
+        "kind": "has_item",
+        "item_name": "拷问者的魔棒"
+      },
+      "action_id": "a0488"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p155",
+      "action_id": "a0489"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12252,
+      "location_ref": "dragonblight-p155",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0490"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12271,
+      "location_ref": "dragonblight-p155",
+      "npc_name": "高级执行官乌洛斯",
+      "when": {
+        "kind": "task_active",
+        "task_id": 12271
+      },
+      "action_id": "a0491"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12273,
+      "location_ref": "dragonblight-p155",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0492"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p156",
+      "action_id": "a0493"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12218,
+      "location_ref": "dragonblight-p156",
+      "action_id": "a0494"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12230,
+      "location_ref": "dragonblight-p156",
+      "action_id": "a0495"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p157",
+      "action_id": "a0496"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12459,
+      "location_ref": "dragonblight-p157",
+      "action_id": "a0497"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p158",
+      "action_id": "a0498"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12542,
+      "location_ref": "dragonblight-p158",
+      "npc_name": "蒂尔达·达拉森",
+      "action_id": "a0499"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p159",
+      "action_id": "a0500"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12218,
+      "location_ref": "dragonblight-p159",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0501"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12221,
+      "location_ref": "dragonblight-p159",
+      "npc_name": "首席药剂师米德尔顿",
+      "action_id": "a0502"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12230,
+      "location_ref": "dragonblight-p159",
+      "npc_name": "亡灵卫兵莫德尔",
+      "action_id": "a0503"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12232,
+      "location_ref": "dragonblight-p159",
+      "npc_name": "亡灵卫兵莫德尔",
+      "action_id": "a0504"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12234,
+      "location_ref": "dragonblight-p159",
+      "npc_name": "间谍女王瑞贝娅",
+      "action_id": "a0505"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12240,
+      "location_ref": "dragonblight-p159",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0506"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p160",
+      "action_id": "a0507"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12240,
+      "location_ref": "dragonblight-p160",
+      "action_id": "a0508"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12273,
+      "location_ref": "dragonblight-p160",
+      "action_id": "a0509"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p161",
+      "action_id": "a0510"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12234,
+      "location_ref": "dragonblight-p161",
+      "action_id": "a0511"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12273,
+      "location_ref": "dragonblight-p161",
+      "action_id": "a0512"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p162",
+      "action_id": "a0513"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12273,
+      "location_ref": "dragonblight-p162",
+      "action_id": "a0514"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12232,
+      "location_ref": "dragonblight-p162",
+      "action_id": "a0515"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p163",
+      "action_id": "a0516"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12234,
+      "location_ref": "dragonblight-p163",
+      "action_id": "a0517"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p164",
+      "action_id": "a0518"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12273,
+      "location_ref": "dragonblight-p164",
+      "action_id": "a0519"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12232,
+      "location_ref": "dragonblight-p164",
+      "action_id": "a0520"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p165",
+      "action_id": "a0521"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12234,
+      "location_ref": "dragonblight-p165",
+      "action_id": "a0522"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p166",
+      "action_id": "a0523"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12232,
+      "location_ref": "dragonblight-p166",
+      "npc_name": "亡灵卫兵莫德尔",
+      "action_id": "a0524"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12234,
+      "location_ref": "dragonblight-p166",
+      "npc_name": "间谍女王瑞贝娅",
+      "action_id": "a0525"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12239,
+      "location_ref": "dragonblight-p166",
+      "npc_name": "间谍女王瑞贝娅",
+      "action_id": "a0526"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12240,
+      "location_ref": "dragonblight-p166",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0527"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12243,
+      "location_ref": "dragonblight-p166",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0528"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12273,
+      "location_ref": "dragonblight-p166",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0529"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p167",
+      "action_id": "a0530"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12239,
+      "location_ref": "dragonblight-p167",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0531"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12254,
+      "location_ref": "dragonblight-p167",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0532"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p168",
+      "action_id": "a0533"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12254,
+      "location_ref": "dragonblight-p168",
+      "action_id": "a0534"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p169",
+      "action_id": "a0535"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12254,
+      "location_ref": "dragonblight-p169",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0536"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12260,
+      "location_ref": "dragonblight-p169",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0537"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p170",
+      "action_id": "a0538"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12260,
+      "location_ref": "dragonblight-p170",
+      "action_id": "a0539"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p171",
+      "action_id": "a0540"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12260,
+      "location_ref": "dragonblight-p171",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0541"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12274,
+      "location_ref": "dragonblight-p171",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0542"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p172",
+      "action_id": "a0543"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12274,
+      "location_ref": "dragonblight-p172",
+      "action_id": "a0544"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p173",
+      "action_id": "a0545"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12274,
+      "location_ref": "dragonblight-p173",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0546"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12283,
+      "location_ref": "dragonblight-p173",
+      "npc_name": "斯古莉探员",
+      "action_id": "a0547"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p174",
+      "action_id": "a0548"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12283,
+      "location_ref": "dragonblight-p174",
+      "action_id": "a0549"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p175",
+      "action_id": "a0550"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12243,
+      "location_ref": "dragonblight-p175",
+      "action_id": "a0551"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p176",
+      "action_id": "a0552"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12283,
+      "location_ref": "dragonblight-p176",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0553"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12285,
+      "location_ref": "dragonblight-p176",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0554"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12243,
+      "location_ref": "dragonblight-p176",
+      "npc_name": "药剂师薇吉·莱文",
+      "action_id": "a0555"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p177",
+      "action_id": "a0556"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12285,
+      "location_ref": "dragonblight-p177",
+      "action_id": "a0557"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p178",
+      "action_id": "a0558"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12285,
+      "location_ref": "dragonblight-p178",
+      "npc_name": "高级执行官乌洛斯",
+      "action_id": "a0559"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p179",
+      "action_id": "a0560"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12542,
+      "location_ref": "dragonblight-p179",
+      "npc_name": "北伐军战士瓦鲁斯",
+      "action_id": "a0561"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12545,
+      "location_ref": "dragonblight-p179",
+      "npc_name": "北伐军战士瓦鲁斯",
+      "action_id": "a0562"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p180",
+      "action_id": "a0563"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12545,
+      "location_ref": "dragonblight-p180",
+      "action_id": "a0564"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12459,
+      "location_ref": "dragonblight-p180",
+      "action_id": "a0565"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p181",
+      "action_id": "a0566"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12545,
+      "location_ref": "dragonblight-p181",
+      "npc_name": "北伐军战士瓦鲁斯",
+      "action_id": "a0567"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12789,
+      "location_ref": "dragonblight-p181",
+      "npc_name": "北伐军战士瓦鲁斯",
+      "action_id": "a0568"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p182",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0570"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p182",
+      "action_id": "a0569"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12221,
+      "location_ref": "dragonblight-p182",
+      "npc_name": "辛塔尔·玛菲奥斯博士",
+      "action_id": "a0571"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p183",
+      "action_id": "a0572"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12127,
+      "location_ref": "dragonblight-p183",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0573"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12132,
+      "location_ref": "dragonblight-p183",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0574"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p184",
+      "action_id": "a0575"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12132,
+      "location_ref": "dragonblight-p184",
+      "action_id": "a0576"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p185",
+      "action_id": "a0577"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12132,
+      "location_ref": "dragonblight-p185",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0578"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12136,
+      "location_ref": "dragonblight-p185",
+      "npc_name": "库尔迪拉·织亡者",
+      "action_id": "a0579"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12136,
+      "location_ref": "dragonblight-p185",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0580"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p186",
+      "action_id": "a0581"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12224,
+      "location_ref": "dragonblight-p186",
+      "npc_name": "阿格玛大王",
+      "action_id": "a0582"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p187",
+      "action_id": "a0583"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12224,
+      "location_ref": "dragonblight-p187",
+      "npc_name": "小萨鲁法尔",
+      "action_id": "a0584"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12496,
+      "location_ref": "dragonblight-p187",
+      "npc_name": "小萨鲁法尔",
+      "action_id": "a0585"
+    },
+    {
+      "kind": "open_flight_point",
+      "location_ref": "dragonblight-p187",
+      "target_name": "库卡隆先锋营地",
+      "action_id": "a0586"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "dragonblight-p188-ground",
+      "from_name": "库卡隆先锋营地",
+      "to_name": "龙眠神殿",
+      "action_id": "a0588"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p188-ground",
+      "action_id": "a0587"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p188",
+      "from_name": "龙眠地面层",
+      "to_name": "顶层",
+      "action_id": "a0589"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p188",
+      "action_id": "visit-p188-top"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12496,
+      "location_ref": "dragonblight-p188",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0590"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12497,
+      "location_ref": "dragonblight-p188",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0591"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p189",
+      "action_id": "a0592"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12497,
+      "location_ref": "dragonblight-p189",
+      "npc_name": "托拉斯塔萨",
+      "action_id": "a0593"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12498,
+      "location_ref": "dragonblight-p189",
+      "npc_name": "托拉斯塔萨",
+      "action_id": "a0594"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p190",
+      "action_id": "a0595"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12498,
+      "location_ref": "dragonblight-p190",
+      "action_id": "a0596"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12459,
+      "location_ref": "dragonblight-p190",
+      "action_id": "a0597"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p191-ground",
+      "action_id": "a0598"
+    },
+    {
+      "kind": "fixed_transport",
+      "location_ref": "dragonblight-p191",
+      "from_name": "龙眠地面层",
+      "to_name": "顶层",
+      "action_id": "a0599"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p191",
+      "action_id": "visit-p191-top"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12498,
+      "location_ref": "dragonblight-p191",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0600"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12500,
+      "location_ref": "dragonblight-p191",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0601"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12459,
+      "location_ref": "dragonblight-p191",
+      "npc_name": "伊萨里奥斯勋爵",
+      "action_id": "a0602"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "dragonblight-p192",
+      "from_name": "龙眠神殿",
+      "to_name": "库卡隆先锋营地",
+      "action_id": "a0604"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p192",
+      "action_id": "a0603"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12500,
+      "location_ref": "dragonblight-p192",
+      "npc_name": "小萨鲁法尔",
+      "action_id": "a0605"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p193",
+      "action_id": "a0606"
+    },
+    {
+      "kind": "accept",
+      "task_id": 13242,
+      "location_ref": "dragonblight-p193",
+      "npc_name": "阿莱克丝塔萨，生命的缚誓者",
+      "action_id": "a0607"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p194",
+      "action_id": "a0608"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13242,
+      "location_ref": "dragonblight-p194",
+      "action_id": "a0609"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "龙骨边界 → 西风避难营 → 东侧林地",
+      "summary": "在沃图克处交《横贯冰原》后进入西风避难营，接齐《深入密林》《部落的荣耀》，到东侧林地同区完成。",
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004",
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "西风避难营 → 部落的血誓 → 阿格玛之锤",
+      "summary": "回西风避难营交当前任务，完成共享的《部落的血誓》，再由艾米萨接出《阿格玛之锤》。",
+      "action_ids": [
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "阿格玛之锤：主线 → 飞行点 / 炉石 → 萨鲁法尔的信",
+      "summary": "向阿格玛大王交入口任务；五号开启飞行点并绑定炉石，向信使托弗斯原地完成《萨鲁法尔的信》，再由军士长祖托克接深渊与怨毒镇引导。",
+      "action_ids": [
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "阿格玛之锤：黑血 / 通缉 / 腐烂器官 / 寻找线索",
+      "summary": "在阿格玛之锤接齐纳尔苏深渊、通缉、感染野兽和眠月花园任务；吉加托尔精英支线继续留80后。",
+      "action_ids": [
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037",
+        "a0038",
+        "a0039",
+        "a0040",
+        "a0041",
+        "a0042",
+        "a0043"
+      ]
+    },
+    {
+      "step_id": "step-05",
+      "title": "纳尔苏深渊：扎古斯 → 黑血 → 基里克斯 → 感染野兽",
+      "summary": "沿洞穴向下完成深渊探索、扎古斯、黑血和基里克斯链；出洞后补《腐烂的器官》。",
+      "action_ids": [
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049",
+        "a0050",
+        "a0051",
+        "a0052",
+        "a0053",
+        "a0054",
+        "a0055",
+        "a0056"
+      ]
+    },
+    {
+      "step_id": "step-06",
+      "title": "阿格玛之锤：深渊交付 → 解锁血之魔典 → 红玉丁香",
+      "summary": "回阿格玛按NPC交深渊任务；交扎古斯后血之魔典才进入可刷状态，同时把医生链推进到《红玉丁香》。",
+      "action_ids": [
+        "a0057",
+        "a0058",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069"
+      ]
+    },
+    {
+      "step_id": "step-07",
+      "title": "冰雾祖母 → 班索克 → 三钥匙 / 魔典 / 军旗",
+      "summary": "从冰雾祖母接引导进入冰雾村；完成三把钥匙、军备、血之魔典和《部落的力量》。",
+      "action_ids": [
+        "a0070",
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079",
+        "a0080"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "班索克 → 大酋长归来",
+      "summary": "向班索克交三钥匙并接《大酋长归来》，救出大酋长并完成虫王事件。",
+      "action_ids": [
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085"
+      ]
+    },
+    {
+      "step_id": "step-09",
+      "title": "炉石阿格玛 → 三宝石 → 洛纳乌克 → 荒芜兽",
+      "summary": "炉石回阿格玛完成冰雾任务交付，接三宝石；完成共享洛纳乌克事件后向阿格玛大王交付，再推进任务双足飞龙。",
+      "action_ids": [
+        "a0087",
+        "a0086",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100",
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109"
+      ]
+    },
+    {
+      "step_id": "step-10",
+      "title": "恐怖之爪 → 猎龙营地 → 诺兹拉斯挖掘场",
+      "summary": "击杀恐怖之爪，猎龙营地接《害虫控制》，再由诺兹拉斯补给员接引导进入哨站并完成挖掘场第一组。",
+      "action_ids": [
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113",
+        "a0114",
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125",
+        "a0126"
+      ]
+    },
+    {
+      "step_id": "step-11",
+      "title": "刨冰 → 柔软的包装 → 不会融化的东西",
+      "summary": "完成《刨冰》后由希弗里克斯接《柔软的包装》，刷满薄兽皮再回哨站接《不会融化的东西》和《难以下咽》。",
+      "action_ids": [
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137"
+      ]
+    },
+    {
+      "step_id": "step-12",
+      "title": "破碎骨片 → 巨大冰虫 → 诺兹拉斯",
+      "summary": "完成《不会融化的东西》《难以下咽》，回诺兹拉斯分别向希弗里克斯、辛克和纳尔弗交接鹰身人/伐木机任务。",
+      "action_ids": [
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141",
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146"
+      ]
+    },
+    {
+      "step_id": "step-13",
+      "title": "鹰身人 / 伐木机 → 冷风女王 → 水晶裂痕",
+      "summary": "同区推进共享鹰身人击杀与五号个人伐木机木材，补冷风女王后回诺兹拉斯交接，再到佐特接《采集样本》。",
+      "action_ids": [
+        "a0147",
+        "a0148",
+        "a0149",
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158"
+      ]
+    },
+    {
+      "step_id": "step-14",
+      "title": "水晶裂痕：采集样本 → 恶心的生意 → 冰虫之母",
+      "summary": "五号分别取样并完成腐蚀性唾液操作；佐特与科查尔交接后接到《冰虫之母》《抓虫子》。",
+      "action_ids": [
+        "a0159",
+        "a0160",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165",
+        "a0166",
+        "a0167",
+        "a0168",
+        "a0169",
+        "a0170",
+        "a0171",
+        "a0172",
+        "a0173"
+      ]
+    },
+    {
+      "step_id": "step-15",
+      "title": "冰心洞穴 → 拉特尔博尔 → 水晶裂痕 → 炉石阿格玛",
+      "summary": "在冰心洞穴完成《抓虫子》《践踏大地》，击杀拉特尔博尔后回水晶裂痕交付，随后炉石回阿格玛。",
+      "action_ids": [
+        "a0174",
+        "a0175",
+        "a0176",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0180",
+        "a0181",
+        "a0182",
+        "a0184",
+        "a0183"
+      ]
+    },
+    {
+      "step_id": "step-16",
+      "title": "眠月花园 → 阿格玛 → 伊瑟尼安",
+      "summary": "完成《上层精灵的愤怒》《寻找线索》和凯尔多努斯；推进《阿坎尼姆斯的终结》后到阿格玛交线索/通缉，再回伊瑟尼安交任务。",
+      "action_ids": [
+        "a0185",
+        "a0186",
+        "a0187",
+        "a0188",
+        "a0189",
+        "a0190",
+        "a0191",
+        "a0192",
+        "a0193",
+        "a0194",
+        "a0195",
+        "a0196",
+        "a0197",
+        "a0198",
+        "a0199"
+      ]
+    },
+    {
+      "step_id": "step-17",
+      "title": "眠月花园 → 奇怪的设备 → 投影和计划",
+      "summary": "完成《阻碍协议》并从古拉莫什取得五份任务起始物；回阿格玛交接后五号一起进入《投影和计划》脚本。",
+      "action_ids": [
+        "a0200",
+        "a0201",
+        "a0202",
+        "a0203",
+        "a0204",
+        "a0205",
+        "a0206",
+        "a0207",
+        "a0208",
+        "a0209"
+      ]
+    },
+    {
+      "step_id": "step-18",
+      "title": "投影和计划 → 灿烂海岸 → 罗萨洛尔任务",
+      "summary": "回阿格玛交《投影和计划》接《海岸上的魔法焦点》；完成后再回阿格玛，分别从夺日者影像和格莱弗接罗萨洛尔任务。",
+      "action_ids": [
+        "a0210",
+        "a0211",
+        "a0212",
+        "a0213",
+        "a0214",
+        "a0215",
+        "a0216",
+        "a0217",
+        "a0218"
+      ]
+    },
+    {
+      "step_id": "step-19",
+      "title": "罗萨洛尔森林 → 炉石阿格玛",
+      "summary": "同区完成《森林上空》《强化古树》并取得《一封家书》；炉石回阿格玛后分别向夺日者影像、格莱弗和阿格玛大王交付。",
+      "action_ids": [
+        "a0219",
+        "a0220",
+        "a0221",
+        "a0222",
+        "a0224",
+        "a0223",
+        "a0225",
+        "a0226",
+        "a0227",
+        "a0228"
+      ]
+    },
+    {
+      "step_id": "step-20",
+      "title": "红玉丁香 → 邪恶之约 → 阿格玛疫苗链",
+      "summary": "完成《红玉丁香》并在附近坑内让五号分别做《邪恶之约》；回阿格玛交两条任务并由索艾接《野生动物的疫苗》。",
+      "action_ids": [
+        "a0229",
+        "a0230",
+        "a0231",
+        "a0232",
+        "a0233",
+        "a0234",
+        "a0235",
+        "a0236",
+        "a0237",
+        "a0238",
+        "a0239"
+      ]
+    },
+    {
+      "step_id": "step-21",
+      "title": "野生动物的疫苗 → 索艾",
+      "summary": "由主控给活着的雪落麋鹿和极地灰熊接种，完成后回索艾交付。",
+      "action_ids": [
+        "a0240",
+        "a0241",
+        "a0242",
+        "a0243"
+      ]
+    },
+    {
+      "step_id": "step-22",
+      "title": "莫亚基港口：库纳尼 / 莫伊 / 飞行点",
+      "summary": "到莫亚基向长者库纳尼交北风带来的引导并接《不要浪费》；猎手莫伊接《未来的种子》，五号开启飞行点。",
+      "action_ids": [
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248"
+      ]
+    },
+    {
+      "step_id": "step-23",
+      "title": "飘雪林地 → 洛根 → 灵魂视界",
+      "summary": "同区完成五号个人货物和幼崽；主控处理洛根后回莫亚基，再由图尔凯/图阿鲁接海线并让五号分别完成灵魂视界。",
+      "action_ids": [
+        "a0249",
+        "a0250",
+        "a0251",
+        "a0252",
+        "a0253",
+        "a0254",
+        "a0255",
+        "a0256",
+        "a0257",
+        "a0258",
+        "a0259",
+        "a0260",
+        "a0261",
+        "a0262",
+        "a0263",
+        "a0264",
+        "a0265"
+      ]
+    },
+    {
+      "step_id": "step-24",
+      "title": "因度雷 → 长者玛纳洛 → 碧蓝圣地",
+      "summary": "向伊文斯塔推进魔网线，在长者玛纳洛雕像接《解脱和安息》；因度雷同区完成并观察碧蓝巨龙圣地。",
+      "action_ids": [
+        "a0266",
+        "a0267",
+        "a0268",
+        "a0269",
+        "a0270",
+        "a0271",
+        "a0272",
+        "a0273",
+        "a0274",
+        "a0275",
+        "a0276",
+        "a0277",
+        "a0278",
+        "a0279",
+        "a0280"
+      ]
+    },
+    {
+      "step_id": "step-25",
+      "title": "破损陷阱 → 螃蟹陷阱 → 诱饵 → 海洋女神",
+      "summary": "水下破损陷阱接《大麻烦的征兆》，五号刷满螃蟹陷阱；交接《诱饵》后处理基利瓦，再让五号分别完成《海洋女神》。",
+      "action_ids": [
+        "a0281",
+        "a0282",
+        "a0283",
+        "a0284",
+        "a0285",
+        "a0286",
+        "a0287",
+        "a0288",
+        "a0289",
+        "a0290",
+        "a0291",
+        "a0292"
+      ]
+    },
+    {
+      "step_id": "step-26",
+      "title": "莫亚基 → 鱼钩 → 炉石阿格玛",
+      "summary": "向图尔凯/图阿鲁交海线任务，完成《鱼钩上的肉》；炉石回阿格玛交《邪能之约》和魔网观察，再向高尔特交两条通缉。",
+      "action_ids": [
+        "a0293",
+        "a0294",
+        "a0295",
+        "a0296",
+        "a0297",
+        "a0298",
+        "a0299",
+        "a0300",
+        "a0302",
+        "a0301",
+        "a0303",
+        "a0304",
+        "a0305",
+        "a0306",
+        "a0307",
+        "a0308"
+      ]
+    },
+    {
+      "step_id": "step-27",
+      "title": "龙眠神殿：地面层 → 顶层任务",
+      "summary": "首次到龙眠先开飞行点；地面层经塔里奥斯塔兹与部落大使接到红玉任务，再乘龙上顶层接黑曜石、翡翠和青铜任务。",
+      "action_ids": [
+        "a0309",
+        "a0310",
+        "a0311",
+        "a0312",
+        "a0313",
+        "a0314",
+        "a0315",
+        "a0316",
+        "a0318",
+        "a0317",
+        "a0319",
+        "a0320",
+        "a0321"
+      ]
+    },
+    {
+      "step_id": "step-28",
+      "title": "害虫控制 → 峡谷追击 → 冰拳",
+      "summary": "在龙眠西南高密度区补《害虫控制》，回肯图卡尼斯接《峡谷追击》；一次击杀冰拳并让五号各自取得号角后回交。",
+      "action_ids": [
+        "a0322",
+        "a0323",
+        "a0324",
+        "a0325",
+        "a0326",
+        "a0327",
+        "a0328",
+        "a0329",
+        "a0330",
+        "a0331"
+      ]
+    },
+    {
+      "step_id": "step-29",
+      "title": "红玉巨龙圣地：白热化的战斗 → 重归尘土",
+      "summary": "向瓦加斯塔兹交红玉引导，完成《白热化的战斗》并接《重归尘土》；主控处理红龙尸体即可同步全队。",
+      "action_ids": [
+        "a0332",
+        "a0333",
+        "a0334",
+        "a0335",
+        "a0336",
+        "a0337",
+        "a0338",
+        "a0339",
+        "a0340",
+        "a0341"
+      ]
+    },
+    {
+      "step_id": "step-30",
+      "title": "红玉巨龙圣地：烈焰之地 → 龙眠神殿的执事",
+      "summary": "交《重归尘土》接《烈焰之地》，进巨树下洞穴击杀达莉亚并取得红玉胸针；回瓦加斯塔兹交付并接《龙眠神殿的执事》。",
+      "action_ids": [
+        "a0342",
+        "a0343",
+        "a0344",
+        "a0345",
+        "a0346",
+        "a0347",
+        "a0348",
+        "a0349",
+        "a0350"
+      ]
+    },
+    {
+      "step_id": "step-31",
+      "title": "龙眠：地面层 → 顶层 → 中层 → 保卫龙眠",
+      "summary": "地面层交红玉执事和冰拳号角；乘龙上顶层交红玉命运并通知女王，再到中层完成首次《保卫龙眠神殿》。",
+      "action_ids": [
+        "a0351",
+        "a0352",
+        "a0353",
+        "a0354",
+        "a0355",
+        "a0357",
+        "a0356",
+        "a0358",
+        "a0360",
+        "a0361",
+        "a0362",
+        "a0363",
+        "a0364",
+        "a0365",
+        "a0366",
+        "a0367",
+        "a0368"
+      ]
+    },
+    {
+      "step_id": "step-32",
+      "title": "裂骨者 → 奈萨里奥之喉 → 无路可逃",
+      "summary": "途中处理裂骨者；进奈萨里奥之喉找瑟里纳尔，先做共享《无路可逃》，事件怪同时推进《驱逐天灾》。",
+      "action_ids": [
+        "a0369",
+        "a0370",
+        "a0371",
+        "a0372",
+        "a0373",
+        "a0374",
+        "a0375",
+        "a0376",
+        "a0377",
+        "a0378",
+        "a0379",
+        "a0380",
+        "a0381"
+      ]
+    },
+    {
+      "step_id": "step-33",
+      "title": "敌人的意图 → 扫荡诅咒教派 / 污染的能量",
+      "summary": "在洞穴深处完成《敌人的意图》，回瑟里纳尔接两条清理任务；同圈完成后接《奈萨里奥的烈焰》。",
+      "action_ids": [
+        "a0382",
+        "a0383",
+        "a0384",
+        "a0385",
+        "a0386",
+        "a0387",
+        "a0388",
+        "a0389",
+        "a0390",
+        "a0391",
+        "a0392",
+        "a0393"
+      ]
+    },
+    {
+      "step_id": "step-34",
+      "title": "奈萨里奥的烈焰 → 龙眠地面层 / 顶层",
+      "summary": "共享完成《奈萨里奥的烈焰》并从瑟里纳尔接《毁灭的故事》；回龙眠地面层向奥拉斯塔萨交裂骨者，再上顶层向纳莉丝交黑曜石链。",
+      "action_ids": [
+        "a0394",
+        "a0395",
+        "a0396",
+        "a0397",
+        "a0398",
+        "a0399",
+        "a0400",
+        "a0401",
+        "a0403",
+        "a0402",
+        "a0404"
+      ]
+    },
+    {
+      "step_id": "step-35",
+      "title": "晨曦之镜 → 德拉古尔 → 青铜巨龙圣地",
+      "summary": "晨曦之镜完成冰霜宝石并推进破冰者；北上击杀德拉古尔后，在青铜巨龙圣地按2+2+1完成五号个人沙漏防守。",
+      "action_ids": [
+        "a0405",
+        "a0406",
+        "a0407",
+        "a0408",
+        "a0409",
+        "a0410"
+      ]
+    },
+    {
+      "step_id": "step-36",
+      "title": "怨毒镇 → 遗忘海岸 → 翡翠龙泪",
+      "summary": "怨毒镇按NPC接齐血色、药剂和出图任务；镇外从测量员汉森接《海边的地产》，同圈清遗忘海岸后分别回汉森、米德尔顿和巴莱特交付。",
+      "action_ids": [
+        "a0411",
+        "a0412",
+        "a0413",
+        "a0414",
+        "a0415",
+        "a0416",
+        "a0417",
+        "a0418",
+        "a0419",
+        "a0420",
+        "a0421",
+        "a0422",
+        "a0423",
+        "a0424",
+        "a0425",
+        "a0426",
+        "a0427",
+        "a0428",
+        "a0429",
+        "a0430",
+        "a0431",
+        "a0432",
+        "a0433",
+        "a0434",
+        "a0435"
+      ]
+    },
+    {
+      "step_id": "step-37",
+      "title": "新壁炉谷 → 翡翠巨龙圣地 → 奥雷托斯",
+      "summary": "去翡翠途中完成血色先锋军、装备和共享尸体处理；翡翠圣地推进尼瑟拉本地链、龙泪、种子和食血者，再召出奥雷托斯。",
+      "action_ids": [
+        "a0436",
+        "a0437",
+        "a0438",
+        "a0439",
+        "a0440",
+        "a0441",
+        "a0442",
+        "a0443",
+        "a0444",
+        "a0445",
+        "a0446",
+        "a0447",
+        "a0448",
+        "a0449",
+        "a0450",
+        "a0451"
+      ]
+    },
+    {
+      "step_id": "step-38",
+      "title": "龙眠地面层 → 顶层：猛犸 / 翡翠 / 青铜交付",
+      "summary": "从翡翠回龙眠地面层向奥拉斯塔萨交《强大的猛犸人》并接《隐居的铭语师》；乘龙上顶层向伊萨里奥斯和克罗米交圣地任务。",
+      "action_ids": [
+        "a0452",
+        "a0453",
+        "a0454",
+        "a0456",
+        "a0455",
+        "a0457",
+        "a0458",
+        "a0459"
+      ]
+    },
+    {
+      "step_id": "step-39",
+      "title": "德雷格玛尔 → 奥拉斯塔萨 → 戈洛塔尔",
+      "summary": "共享完成《隐居的铭语师》，回地面层接《暴虐的酋长》；到火炬之环召出戈洛塔尔并回奥拉斯塔萨交付。",
+      "action_ids": [
+        "a0460",
+        "a0461",
+        "a0462",
+        "a0463",
+        "a0464",
+        "a0465",
+        "a0466",
+        "a0467",
+        "a0468"
+      ]
+    },
+    {
+      "step_id": "step-40",
+      "title": "怨毒镇：翡翠 / 血色交接",
+      "summary": "回怨毒镇分别向米德尔顿、乌洛斯、巴莱特、汉瑟和薇吉交付已完成任务，并接出新壁炉谷下一批。",
+      "action_ids": [
+        "a0469",
+        "a0470",
+        "a0471",
+        "a0472",
+        "a0473",
+        "a0474",
+        "a0475",
+        "a0476",
+        "a0477",
+        "a0478"
+      ]
+    },
+    {
+      "step_id": "step-41",
+      "title": "新壁炉谷：毫不留情 / 补充坐骑 → 地下审讯",
+      "summary": "完成四名命名目标和共享战马；回怨毒镇交接后进兵营地下完成共享审讯，从同一掉落来源让五号分别取得强制魔棒。",
+      "action_ids": [
+        "a0479",
+        "a0480",
+        "a0481",
+        "a0482",
+        "a0483",
+        "a0484",
+        "a0485",
+        "a0486",
+        "a0487",
+        "a0488",
+        "a0489",
+        "a0490",
+        "a0491",
+        "a0492"
+      ]
+    },
+    {
+      "step_id": "step-42",
+      "title": "怨毒镇东北：凋零战车 / 炸弹 / 图尔基德 / 北伐军",
+      "summary": "主控开凋零战车完成共享击杀，五号分别收炸弹；共享处理图尔基德并接北伐军引导，回怨毒镇按NPC交接下一批。",
+      "action_ids": [
+        "a0493",
+        "a0494",
+        "a0495",
+        "a0496",
+        "a0497",
+        "a0498",
+        "a0499",
+        "a0500",
+        "a0501",
+        "a0502",
+        "a0503",
+        "a0504",
+        "a0505",
+        "a0506"
+      ]
+    },
+    {
+      "step_id": "step-43",
+      "title": "新壁炉谷：卡雷基 / 默瑟 → 兵营乔丹 → 铁匠铺",
+      "summary": "伐木场完成共享《解决方案》并谴责默瑟；兵营拾第一份个人命令并谴责乔丹；铁匠铺谴责古德曼并开始炸弩炮。",
+      "action_ids": [
+        "a0507",
+        "a0508",
+        "a0509",
+        "a0510",
+        "a0511",
+        "a0512",
+        "a0513",
+        "a0514",
+        "a0515"
+      ]
+    },
+    {
+      "step_id": "step-44",
+      "title": "修道院命令 → 齐尔哈特 / 弩炮 → 海滩命令",
+      "summary": "五号分别拿修道院命令；沿东南下坡由主控谴责齐尔哈特并补齐弩炮，最后五号分别取得海滩命令。",
+      "action_ids": [
+        "a0516",
+        "a0517",
+        "a0518",
+        "a0519",
+        "a0520",
+        "a0521",
+        "a0522"
+      ]
+    },
+    {
+      "step_id": "step-45",
+      "title": "怨毒镇 → 斯古莉 → 祈祷之书 → 完美伪装 → 狼狈不堪",
+      "summary": "怨毒镇按NPC交弩炮/命令/白蚁/谴责并接卧底与水火线；找斯古莉连续推进祈祷书、共享镜像伪装和共享修道院事件。",
+      "action_ids": [
+        "a0523",
+        "a0524",
+        "a0525",
+        "a0526",
+        "a0527",
+        "a0528",
+        "a0529",
+        "a0530",
+        "a0531",
+        "a0532",
+        "a0533",
+        "a0534",
+        "a0535",
+        "a0536",
+        "a0537",
+        "a0538",
+        "a0539",
+        "a0540",
+        "a0541",
+        "a0542",
+        "a0543",
+        "a0544"
+      ]
+    },
+    {
+      "step_id": "step-46",
+      "title": "寻找真相 → 罪人的愚行号",
+      "summary": "向斯古莉交《狼狈不堪》接《寻找真相》，五号分别拿阿比迪斯日记；再由主控烧船并击杀舍雷船长，五号分别拾取船长任务物。",
+      "action_ids": [
+        "a0545",
+        "a0546",
+        "a0547",
+        "a0548",
+        "a0549",
+        "a0550",
+        "a0551"
+      ]
+    },
+    {
+      "step_id": "step-47",
+      "title": "怨毒镇 → 阿比迪斯将军 → 乌洛斯",
+      "summary": "回怨毒镇由乌洛斯交《寻找真相》接《先发制人》，薇吉交《水火之灾》；击杀阿比迪斯将军后回乌洛斯交《先发制人》。",
+      "action_ids": [
+        "a0552",
+        "a0553",
+        "a0554",
+        "a0555",
+        "a0556",
+        "a0557",
+        "a0558",
+        "a0559"
+      ]
+    },
+    {
+      "step_id": "step-48",
+      "title": "圣光据点 → 金萨卡拉 → 炉石阿格玛",
+      "summary": "向北伐军战士瓦鲁斯交引导并清金萨卡拉；共享处理监工戴瑟盖斯后接祖达克引导，炉石回阿格玛向辛塔尔交凋零药剂。",
+      "action_ids": [
+        "a0560",
+        "a0561",
+        "a0562",
+        "a0563",
+        "a0564",
+        "a0565",
+        "a0566",
+        "a0567",
+        "a0568",
+        "a0570",
+        "a0569",
+        "a0571"
+      ]
+    },
+    {
+      "step_id": "step-49",
+      "title": "冰霜之约 → 毁灭的力量 → 翻译过的魔典",
+      "summary": "向库尔迪拉交最后一颗冰霜宝石；三宝石齐后进入阴影界完成《毁灭的力量》，再把《翻译过的魔典》交给高尔特。",
+      "action_ids": [
+        "a0572",
+        "a0573",
+        "a0574",
+        "a0575",
+        "a0576",
+        "a0577",
+        "a0578",
+        "a0579",
+        "a0580"
+      ]
+    },
+    {
+      "step_id": "step-50",
+      "title": "阿格玛 → 库卡隆先锋 → 系统鸟龙眠 → 红龙之翼",
+      "summary": "三项前置齐后向阿格玛大王接《库卡隆先锋！》；到营地找小萨鲁法尔交接并开飞行点，乘系统鸟回龙眠，再乘龙上顶层经女王与托拉斯塔萨接《红龙之翼》。",
+      "action_ids": [
+        "a0581",
+        "a0582",
+        "a0583",
+        "a0584",
+        "a0585",
+        "a0586",
+        "a0588",
+        "a0587",
+        "a0589",
+        "visit-p188-top",
+        "a0590",
+        "a0591",
+        "a0592",
+        "a0593",
+        "a0594"
+      ]
+    },
+    {
+      "step_id": "step-51",
+      "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门",
+      "summary": "迦拉克隆之墓共享完成《红龙之翼》并处理第三只自然愤怒目标；回龙眠顶层交任务，再乘系统鸟回库卡隆交《返回安加萨》，最后到天谴之门接《黑暗的骚动》并拾取战甲。",
+      "action_ids": [
+        "a0595",
+        "a0596",
+        "a0597",
+        "a0598",
+        "a0599",
+        "visit-p191-top",
+        "a0600",
+        "a0601",
+        "a0602",
+        "a0604",
+        "a0603",
+        "a0605",
+        "a0606",
+        "a0607",
+        "a0608",
+        "a0609"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "dragonblight-p001": {
+        "display_name": "龙骨边界·沃图克",
+        "x": 12.75,
+        "y": 51.7,
+        "phase": "entry",
+        "transport": "crossmap",
+        "zone_id": 65,
+        "handoff_ref": "borean-to-dragonblight-wartook"
+      },
+      "dragonblight-p002": {
+        "display_name": "西风避难营",
+        "x": 13.3,
+        "y": 49.91,
+        "phase": "entry",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p003": {
+        "display_name": "西风避难营东侧林地",
+        "x": 16.9,
+        "y": 49.1,
+        "phase": "entry",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p004": {
+        "display_name": "西风避难营",
+        "x": 13.3,
+        "y": 49.91,
+        "phase": "entry",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p005": {
+        "display_name": "牦牛难民帐篷区",
+        "x": 13.45,
+        "y": 48.75,
+        "phase": "entry",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p006": {
+        "display_name": "西风避难营",
+        "x": 13.3,
+        "y": 49.91,
+        "phase": "entry",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p007": {
+        "display_name": "阿格玛之锤",
+        "x": 38.17,
+        "y": 46.33,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p008": {
+        "display_name": "阿格玛之锤·飞行点 / 旅店",
+        "x": 38.1,
+        "y": 46.4,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p009": {
+        "display_name": "阿格玛之锤·信使托弗斯",
+        "x": 37.32,
+        "y": 46.79,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p010": {
+        "display_name": "阿格玛之锤",
+        "x": 36.62,
+        "y": 46.58,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p011": {
+        "display_name": "阿格玛之锤",
+        "x": 36.61,
+        "y": 47.19,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p012": {
+        "display_name": "阿格玛之锤·高尔特 / 通缉板",
+        "x": 35.81,
+        "y": 48.39,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p013": {
+        "display_name": "阿格玛之锤",
+        "x": 37.08,
+        "y": 48.55,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p014": {
+        "display_name": "阿格玛之锤",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p015": {
+        "display_name": "纳尔苏深渊·入口",
+        "x": 29.0,
+        "y": 50.0,
+        "phase": "pit",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p016": {
+        "display_name": "高阶教徒扎古斯",
+        "x": 28.88,
+        "y": 49.73,
+        "phase": "pit",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p017": {
+        "display_name": "纳尔苏深渊·黑血区",
+        "x": 26.99,
+        "y": 49.25,
+        "phase": "pit",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p018": {
+        "display_name": "纳尔苏深渊·拆解者基里克斯",
+        "x": 26.18,
+        "y": 50.78,
+        "phase": "pit",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p019": {
+        "display_name": "深渊外感染野兽带",
+        "x": 28.54,
+        "y": 49.42,
+        "phase": "pit",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p020": {
+        "display_name": "阿格玛之锤",
+        "x": 38.17,
+        "y": 46.33,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p021": {
+        "display_name": "阿格玛之锤",
+        "x": 37.08,
+        "y": 48.55,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p022": {
+        "display_name": "阿格玛之锤",
+        "x": 36.08,
+        "y": 48.88,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p023": {
+        "display_name": "阿格玛之锤·西侧",
+        "x": 35.8,
+        "y": 46.9,
+        "phase": "icemist",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p024": {
+        "display_name": "冰雾村",
+        "x": 22.6,
+        "y": 41.73,
+        "phase": "icemist",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p025": {
+        "display_name": "冰雾村·三钥匙 / 阿努巴尔教徒",
+        "x": 25.0,
+        "y": 42.5,
+        "phase": "icemist",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p026": {
+        "display_name": "冰雾村·战歌军旗",
+        "x": 25.0,
+        "y": 43.0,
+        "phase": "icemist",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p027": {
+        "display_name": "冰雾村",
+        "x": 22.6,
+        "y": 41.73,
+        "phase": "icemist",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p028": {
+        "display_name": "冰雾牢笼 / 虫王",
+        "x": 24.7,
+        "y": 42.0,
+        "phase": "icemist",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p029": {
+        "display_name": "阿格玛之锤",
+        "x": 38.17,
+        "y": 46.33,
+        "phase": "agmar",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0087"
+        }
+      },
+      "dragonblight-p030": {
+        "display_name": "阿格玛之锤",
+        "x": 37.11,
+        "y": 46.57,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p031": {
+        "display_name": "洛纳乌克",
+        "x": 36.25,
+        "y": 45.44,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p032": {
+        "display_name": "阿格玛之锤",
+        "x": 37.21,
+        "y": 45.71,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p033": {
+        "display_name": "冰雾村·库卡隆双足飞龙",
+        "x": 25.27,
+        "y": 43.7,
+        "phase": "icemist",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p034": {
+        "display_name": "阿格玛之锤",
+        "x": 37.21,
+        "y": 45.71,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p035": {
+        "display_name": "恐怖之爪",
+        "x": 46.29,
+        "y": 43.03,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p036": {
+        "display_name": "猎龙营地",
+        "x": 46.68,
+        "y": 33.5,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p037": {
+        "display_name": "诺兹拉斯西南坡",
+        "x": 48.45,
+        "y": 24.1,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p038": {
+        "display_name": "诺兹拉斯哨站",
+        "x": 55.02,
+        "y": 23.42,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p039": {
+        "display_name": "迦拉克隆挖掘场",
+        "x": 55.2,
+        "y": 30.8,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p040": {
+        "display_name": "诺兹拉斯哨站",
+        "x": 54.8,
+        "y": 23.47,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p041": {
+        "display_name": "水晶冰雪元素",
+        "x": 51.28,
+        "y": 18.2,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p042": {
+        "display_name": "诺兹拉斯哨站",
+        "x": 54.7,
+        "y": 23.25,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p043": {
+        "display_name": "掘洞冰虫 / 秃鹫带",
+        "x": 51.6,
+        "y": 23.9,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p044": {
+        "display_name": "诺兹拉斯哨站",
+        "x": 54.7,
+        "y": 23.25,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p045": {
+        "display_name": "巨龙骸骨堆",
+        "x": 59.78,
+        "y": 26.64,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p046": {
+        "display_name": "巨大的冰虫",
+        "x": 60.06,
+        "y": 22.3,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p047": {
+        "display_name": "诺兹拉斯哨站",
+        "x": 55.0,
+        "y": 23.4,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p048": {
+        "display_name": "鹰身人巢穴 / 伐木机",
+        "x": 49.5,
+        "y": 17.5,
+        "phase": "nozzlerust",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p049": {
+        "display_name": "冷风女王",
+        "x": 45.59,
+        "y": 9.33,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p050": {
+        "display_name": "诺兹拉斯哨站",
+        "x": 54.8,
+        "y": 23.47,
+        "phase": "nozzlerust",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p051": {
+        "display_name": "水晶裂痕",
+        "x": 59.4,
+        "y": 18.18,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p052": {
+        "display_name": "水晶裂痕·冰巨人尸体",
+        "x": 58.8,
+        "y": 18.8,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p053": {
+        "display_name": "水晶裂痕",
+        "x": 59.4,
+        "y": 18.18,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p054": {
+        "display_name": "水晶裂痕·冰虫酸液区",
+        "x": 56.5,
+        "y": 18.5,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p055": {
+        "display_name": "水晶裂痕",
+        "x": 59.4,
+        "y": 18.18,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p056": {
+        "display_name": "水晶裂痕",
+        "x": 58.98,
+        "y": 17.8,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p057": {
+        "display_name": "冰心洞穴",
+        "x": 55.3,
+        "y": 11.0,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p058": {
+        "display_name": "钻雪虫·拉特尔博尔",
+        "x": 50.67,
+        "y": 17.8,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p059": {
+        "display_name": "水晶裂痕",
+        "x": 59.1,
+        "y": 18.0,
+        "phase": "crystal",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p060": {
+        "display_name": "阿格玛之锤",
+        "x": 38.1,
+        "y": 46.4,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0184"
+        }
+      },
+      "dragonblight-p061": {
+        "display_name": "眠月花园",
+        "x": 24.19,
+        "y": 60.08,
+        "phase": "moonrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p062": {
+        "display_name": "眠月花园",
+        "x": 20.5,
+        "y": 60.5,
+        "phase": "moonrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p063": {
+        "display_name": "眠月花园",
+        "x": 24.19,
+        "y": 60.08,
+        "phase": "moonrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p064": {
+        "display_name": "阿坎尼姆斯",
+        "x": 20.02,
+        "y": 59.64,
+        "phase": "moonrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p065": {
+        "display_name": "阿格玛之锤 → 眠月花园",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p066": {
+        "display_name": "眠月花园",
+        "x": 19.0,
+        "y": 58.5,
+        "phase": "moonrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p067": {
+        "display_name": "阿格玛之锤",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p068": {
+        "display_name": "湍流之针",
+        "x": 19.78,
+        "y": 59.79,
+        "phase": "moonrest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p069": {
+        "display_name": "阿格玛之锤",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p070": {
+        "display_name": "灿烂海岸·魔网焦点",
+        "x": 26.3,
+        "y": 65.0,
+        "phase": "moonrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p071": {
+        "display_name": "阿格玛之锤",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p072": {
+        "display_name": "罗萨洛尔森林",
+        "x": 32.2,
+        "y": 71.0,
+        "phase": "lothalor",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p073": {
+        "display_name": "阿格玛之锤",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0224"
+        }
+      },
+      "dragonblight-p074": {
+        "display_name": "红玉丁香",
+        "x": 47.64,
+        "y": 48.97,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p075": {
+        "display_name": "瓦伦哈尔公爵",
+        "x": 47.44,
+        "y": 51.82,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p076": {
+        "display_name": "阿格玛之锤",
+        "x": 36.08,
+        "y": 48.88,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p077": {
+        "display_name": "阿格玛之锤",
+        "x": 37.08,
+        "y": 48.55,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p078": {
+        "display_name": "雪落麋鹿 / 极地灰熊",
+        "x": 45.5,
+        "y": 52.2,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p079": {
+        "display_name": "阿格玛之锤",
+        "x": 37.08,
+        "y": 48.55,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p080": {
+        "display_name": "莫亚基港口",
+        "x": 48.0,
+        "y": 74.88,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p081": {
+        "display_name": "飘雪林地",
+        "x": 45.5,
+        "y": 63.5,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p082": {
+        "display_name": "莫亚基港口",
+        "x": 48.0,
+        "y": 74.88,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p083": {
+        "display_name": "洛根",
+        "x": 46.32,
+        "y": 59.14,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p084": {
+        "display_name": "莫亚基港口",
+        "x": 48.0,
+        "y": 74.88,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p085": {
+        "display_name": "莫亚基港口·图尔凯 / 图阿鲁",
+        "x": 47.7,
+        "y": 76.6,
+        "phase": "moaki",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p086": {
+        "display_name": "因度雷湖",
+        "x": 40.25,
+        "y": 66.87,
+        "phase": "indule",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p087": {
+        "display_name": "长者玛纳洛雕像",
+        "x": 36.64,
+        "y": 64.96,
+        "phase": "indule",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p088": {
+        "display_name": "因度雷村",
+        "x": 39.2,
+        "y": 67.0,
+        "phase": "indule",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p089": {
+        "display_name": "长者玛纳洛雕像",
+        "x": 36.64,
+        "y": 64.96,
+        "phase": "indule",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p090": {
+        "display_name": "碧蓝巨龙圣地西侧",
+        "x": 53.0,
+        "y": 65.0,
+        "phase": "indule",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p091": {
+        "display_name": "莫亚基西南码头外·水下",
+        "x": 47.7,
+        "y": 79.96,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p092": {
+        "display_name": "莫亚基近海",
+        "x": 47.7,
+        "y": 78.8,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p093": {
+        "display_name": "莫亚基港口",
+        "x": 47.7,
+        "y": 76.6,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p094": {
+        "display_name": "基利瓦环礁",
+        "x": 43.27,
+        "y": 82.4,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p095": {
+        "display_name": "深海珍珠",
+        "x": 34.0,
+        "y": 83.46,
+        "phase": "indule"
+      },
+      "dragonblight-p096": {
+        "display_name": "莫亚基港口",
+        "x": 47.7,
+        "y": 76.6,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p097": {
+        "display_name": "图尔凯的鱼钩",
+        "x": 46.7,
+        "y": 78.2,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p098": {
+        "display_name": "莫亚基港口",
+        "x": 47.7,
+        "y": 76.6,
+        "phase": "moaki",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p099": {
+        "display_name": "阿格玛之锤",
+        "x": 38.05,
+        "y": 46.22,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0302"
+        }
+      },
+      "dragonblight-p100": {
+        "display_name": "阿格玛之锤",
+        "x": 35.81,
+        "y": 48.39,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p101": {
+        "display_name": "龙眠神殿",
+        "x": 58.0,
+        "y": 54.5,
+        "phase": "wyrmrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p102": {
+        "display_name": "龙眠地面层",
+        "x": 57.91,
+        "y": 54.17,
+        "phase": "wyrmrest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p103": {
+        "display_name": "龙眠地面层",
+        "x": 58.1,
+        "y": 55.51,
+        "phase": "wyrmrest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p104": {
+        "display_name": "龙眠顶层",
+        "x": 60.07,
+        "y": 54.2,
+        "phase": "wyrmrest",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0318"
+        }
+      },
+      "dragonblight-p105": {
+        "display_name": "龙眠西南侧·高密度目标区",
+        "x": 55.0,
+        "y": 51.0,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p106": {
+        "display_name": "猎龙营地",
+        "x": 46.68,
+        "y": 33.5,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p107": {
+        "display_name": "峡谷·冰拳",
+        "x": 42.41,
+        "y": 39.63,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p108": {
+        "display_name": "猎龙营地",
+        "x": 46.68,
+        "y": 33.5,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p109": {
+        "display_name": "红玉巨龙圣地",
+        "x": 42.97,
+        "y": 50.89,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p110": {
+        "display_name": "红玉巨龙圣地",
+        "x": 48.5,
+        "y": 50.0,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p111": {
+        "display_name": "红玉巨龙圣地",
+        "x": 42.97,
+        "y": 50.89,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p112": {
+        "display_name": "红龙尸体区",
+        "x": 47.45,
+        "y": 47.1,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p113": {
+        "display_name": "红玉巨龙圣地",
+        "x": 42.97,
+        "y": 50.89,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p114": {
+        "display_name": "红玉圣地·巨树下洞穴",
+        "x": 48.0,
+        "y": 50.0,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p115": {
+        "display_name": "红玉巨龙圣地",
+        "x": 42.97,
+        "y": 50.89,
+        "phase": "ruby",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p116": {
+        "display_name": "龙眠地面层",
+        "x": 57.91,
+        "y": 54.17,
+        "phase": "wyrmrest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p117": {
+        "display_name": "龙眠顶层",
+        "x": 59.79,
+        "y": 54.7,
+        "phase": "wyrmrest",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0357"
+        }
+      },
+      "dragonblight-p119": {
+        "display_name": "龙眠中层",
+        "x": 59.32,
+        "y": 54.31,
+        "phase": "wyrmrest",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0362"
+        }
+      },
+      "dragonblight-p120": {
+        "display_name": "碧蓝巨龙圣地 → 龙眠中层",
+        "x": 55.5,
+        "y": 66.0,
+        "phase": "wyrmrest"
+      },
+      "dragonblight-p121": {
+        "display_name": "裂骨者",
+        "x": 51.27,
+        "y": 59.63,
+        "phase": "shrines",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p122": {
+        "display_name": "奈萨里奥之喉",
+        "x": 35.21,
+        "y": 30.05,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p123": {
+        "display_name": "黑曜石外圈",
+        "x": 37.8,
+        "y": 31.5,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p124": {
+        "display_name": "奈萨里奥之喉",
+        "x": 35.21,
+        "y": 30.05,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p125": {
+        "display_name": "奈萨里奥之喉·洞穴深处",
+        "x": 31.75,
+        "y": 30.46,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p126": {
+        "display_name": "奈萨里奥之喉·洞穴深处",
+        "x": 31.93,
+        "y": 28.17,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p127": {
+        "display_name": "奈萨里奥之喉",
+        "x": 35.21,
+        "y": 30.05,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p128": {
+        "display_name": "奈萨里奥之喉·腐烂者洛森",
+        "x": 31.44,
+        "y": 30.95,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p129": {
+        "display_name": "奈萨里奥之喉",
+        "x": 35.21,
+        "y": 30.05,
+        "phase": "obsidian",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p130": {
+        "display_name": "龙眠地面层",
+        "x": 60.02,
+        "y": 55.2,
+        "phase": "wyrmrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p131": {
+        "display_name": "龙眠顶层",
+        "x": 60.07,
+        "y": 54.2,
+        "phase": "wyrmrest",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0403"
+        }
+      },
+      "dragonblight-p132": {
+        "display_name": "晨曦之镜",
+        "x": 66.5,
+        "y": 52.3,
+        "phase": "shrines",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p133": {
+        "display_name": "德拉古尔 → 青铜巨龙圣地",
+        "x": 69.8,
+        "y": 38.8,
+        "phase": "bronze",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p134": {
+        "display_name": "怨毒镇",
+        "x": 76.77,
+        "y": 63.28,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p135": {
+        "display_name": "怨毒镇",
+        "x": 77.0,
+        "y": 62.9,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p136": {
+        "display_name": "怨毒镇东南·测量员汉森",
+        "x": 79.35,
+        "y": 65.06,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p137": {
+        "display_name": "遗忘海岸",
+        "x": 81.5,
+        "y": 69.5,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p138": {
+        "display_name": "怨毒镇东南·测量员汉森",
+        "x": 79.35,
+        "y": 65.06,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p139": {
+        "display_name": "怨毒镇",
+        "x": 77.67,
+        "y": 62.8,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p140": {
+        "display_name": "新壁炉谷",
+        "x": 71.0,
+        "y": 74.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p141": {
+        "display_name": "翡翠巨龙圣地",
+        "x": 63.0,
+        "y": 69.0,
+        "phase": "emerald",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p142": {
+        "display_name": "翡翠圣地东南端",
+        "x": 65.0,
+        "y": 78.0,
+        "phase": "emerald",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p143": {
+        "display_name": "翡翠巨龙圣地",
+        "x": 63.0,
+        "y": 69.0,
+        "phase": "emerald",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p144": {
+        "display_name": "龙眠地面层",
+        "x": 60.02,
+        "y": 55.2,
+        "phase": "wyrmrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p145": {
+        "display_name": "龙眠顶层",
+        "x": 60.0,
+        "y": 54.5,
+        "phase": "wyrmrest",
+        "transport": "script",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0456"
+        }
+      },
+      "dragonblight-p146": {
+        "display_name": "德雷格玛尔·符印",
+        "x": 72.76,
+        "y": 49.68,
+        "phase": "shrines",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p147": {
+        "display_name": "龙眠地面层",
+        "x": 60.02,
+        "y": 55.2,
+        "phase": "wyrmrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p148": {
+        "display_name": "火炬之环",
+        "x": 57.0,
+        "y": 76.0,
+        "phase": "shrines",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p149": {
+        "display_name": "龙眠地面层",
+        "x": 60.02,
+        "y": 55.2,
+        "phase": "wyrmrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p150": {
+        "display_name": "怨毒镇",
+        "x": 77.67,
+        "y": 62.8,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p151": {
+        "display_name": "怨毒镇",
+        "x": 76.77,
+        "y": 63.28,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p152": {
+        "display_name": "新壁炉谷",
+        "x": 70.5,
+        "y": 73.5,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p153": {
+        "display_name": "怨毒镇",
+        "x": 76.77,
+        "y": 63.28,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p154": {
+        "display_name": "新壁炉谷·兵营地下",
+        "x": 69.8,
+        "y": 72.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p155": {
+        "display_name": "怨毒镇",
+        "x": 76.77,
+        "y": 63.28,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p156": {
+        "display_name": "怨毒镇东北",
+        "x": 85.2,
+        "y": 54.0,
+        "phase": "east",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p157": {
+        "display_name": "卑鄙的图尔基德",
+        "x": 86.15,
+        "y": 46.95,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p158": {
+        "display_name": "东部北伐军联络点",
+        "x": 87.24,
+        "y": 57.4,
+        "phase": "east",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p159": {
+        "display_name": "怨毒镇",
+        "x": 77.67,
+        "y": 62.8,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p160": {
+        "display_name": "新壁炉谷·伐木场 / 马厩",
+        "x": 68.0,
+        "y": 74.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p161": {
+        "display_name": "新壁炉谷·兵营",
+        "x": 69.7,
+        "y": 71.9,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p162": {
+        "display_name": "新壁炉谷·铁匠铺 / 弩炮",
+        "x": 71.0,
+        "y": 71.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p163": {
+        "display_name": "新壁炉谷·修道院一楼图书馆",
+        "x": 73.4,
+        "y": 72.6,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p164": {
+        "display_name": "新壁炉谷·东南下坡炮位",
+        "x": 73.0,
+        "y": 78.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p165": {
+        "display_name": "新壁炉谷·海滩营地",
+        "x": 71.6,
+        "y": 80.4,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p166": {
+        "display_name": "怨毒镇",
+        "x": 76.8,
+        "y": 63.0,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p167": {
+        "display_name": "新壁炉谷·斯古莉探员",
+        "x": 73.58,
+        "y": 73.54,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p168": {
+        "display_name": "伐木场旁小礼拜堂",
+        "x": 69.0,
+        "y": 76.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p169": {
+        "display_name": "新壁炉谷·斯古莉探员",
+        "x": 73.58,
+        "y": 73.54,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p170": {
+        "display_name": "黑鸦祭司",
+        "x": 72.12,
+        "y": 74.28,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p171": {
+        "display_name": "新壁炉谷·斯古莉探员",
+        "x": 73.58,
+        "y": 73.54,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p172": {
+        "display_name": "新壁炉谷·修道院",
+        "x": 73.0,
+        "y": 73.6,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p173": {
+        "display_name": "新壁炉谷·斯古莉探员",
+        "x": 73.58,
+        "y": 73.54,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p174": {
+        "display_name": "阿比迪斯日记·楼上房间",
+        "x": 68.28,
+        "y": 76.98,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p175": {
+        "display_name": "罪人的愚行号",
+        "x": 71.86,
+        "y": 84.0,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p176": {
+        "display_name": "怨毒镇",
+        "x": 76.77,
+        "y": 63.28,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p177": {
+        "display_name": "阿比迪斯将军",
+        "x": 71.1,
+        "y": 77.88,
+        "phase": "hearthglen",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p178": {
+        "display_name": "怨毒镇",
+        "x": 76.77,
+        "y": 63.28,
+        "phase": "venom",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p179": {
+        "display_name": "圣光据点",
+        "x": 83.98,
+        "y": 26.1,
+        "phase": "northeast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p180": {
+        "display_name": "金萨卡拉",
+        "x": 88.0,
+        "y": 22.5,
+        "phase": "northeast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p181": {
+        "display_name": "圣光据点",
+        "x": 83.98,
+        "y": 26.1,
+        "phase": "northeast",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p182": {
+        "display_name": "阿格玛之锤",
+        "x": 38.1,
+        "y": 46.4,
+        "phase": "hearth",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0570"
+        }
+      },
+      "dragonblight-p183": {
+        "display_name": "阿格玛之锤",
+        "x": 37.11,
+        "y": 46.57,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p184": {
+        "display_name": "阿格玛之锤·阴影界",
+        "x": 37.4,
+        "y": 46.5,
+        "phase": "final"
+      },
+      "dragonblight-p185": {
+        "display_name": "阿格玛之锤",
+        "x": 37.11,
+        "y": 46.57,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p186": {
+        "display_name": "阿格玛之锤",
+        "x": 38.17,
+        "y": 46.33,
+        "phase": "final",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p187": {
+        "display_name": "库卡隆先锋营地",
+        "x": 40.71,
+        "y": 18.06,
+        "phase": "korkron",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p188": {
+        "display_name": "龙眠顶层",
+        "x": 59.8,
+        "y": 54.7,
+        "phase": "wyrmrest",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0589"
+        }
+      },
+      "dragonblight-p189": {
+        "display_name": "龙眠顶层",
+        "x": 59.51,
+        "y": 53.33,
+        "phase": "wyrmrest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p190": {
+        "display_name": "迦拉克隆之墓",
+        "x": 55.5,
+        "y": 34.5,
+        "phase": "galakrond",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p191": {
+        "display_name": "龙眠顶层",
+        "x": 59.8,
+        "y": 54.7,
+        "phase": "wyrmrest",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0599"
+        }
+      },
+      "dragonblight-p192": {
+        "display_name": "库卡隆先锋营地",
+        "x": 40.71,
+        "y": 18.06,
+        "phase": "korkron",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0604"
+        }
+      },
+      "dragonblight-p193": {
+        "display_name": "天谴之门战场",
+        "x": 38.42,
+        "y": 19.25,
+        "phase": "galakrond",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p194": {
+        "display_name": "萨鲁法尔战甲",
+        "x": 38.16,
+        "y": 18.71,
+        "phase": "galakrond",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p188-ground": {
+        "display_name": "龙眠神殿·地面层",
+        "x": 59.8,
+        "y": 54.7,
+        "phase": "wyrmrest",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0588"
+        }
+      },
+      "dragonblight-p191-ground": {
+        "display_name": "龙眠神殿·地面层",
+        "x": 59.8,
+        "y": 54.7,
+        "phase": "wyrmrest",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-16",
+      "kind": "architecture_migration",
+      "summary": "从当前正式workbench机械迁移稳定task_id、路线动作、步骤与几何；玩家备注/地图悬浮标签/时间模型分别归属Task Presentation、UI、Timing。"
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "architecture_migration",
+      "summary": "Semantic-parity cleanup: removed reviewed legacy script location styles from 14 Dragonblight target points. Old player text contains task execution only at these arrivals; explicit Wyrmrest fixed transports already remain as canonical actions. Unknown arrivals stay unresolved."
+    }
+  ]
+}

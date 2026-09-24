@@ -4,19 +4,15 @@
   "identity": {
     "name_zhcn": "阻断援军",
     "name_en": "Disrupt Their Reinforcements",
+    "game_variant_id": "timewalking-wotlk-cn",
     "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
     "faction": "horde",
-    "repeatability": "once",
-    "game_variant_id": "timewalking-wotlk-cn"
+    "repeatability": "once"
   },
   "coverage": {
-    "availability": "partial",
-    "objectives": "partial",
-    "locations": "unknown",
-    "rewards": "unknown",
-    "mechanics": "verified",
-    "fivebox": "verified",
-    "guide": "partial"
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
   },
   "availability": {
     "quest_level": 62,
@@ -29,87 +25,82 @@
     "exclusive_with": [],
     "required_reputation": null,
     "required_class": [],
-    "required_race": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
     "required_skill": [],
     "hidden_requirements": []
   },
-  "locations": {},
-  "objectives": [
-    {
-      "objective_id": "collect_demonic_runestones",
-      "kind": "loot",
-      "target": "恶魔符文石",
-      "required_count": null,
-      "source_entities": [],
-      "locations": [],
-      "mechanic_refs": [
-        "demonic_runestone_personal_loot"
-      ],
-      "confidence": "verified"
-    },
-    {
-      "objective_id": "bomb_two_portals",
-      "kind": "use_item",
-      "target": "希鲁斯传送门、科卢尔传送门",
-      "required_count": 2,
-      "source_entities": [],
-      "locations": [],
-      "mechanic_refs": [
-        "portal_bombing_shared_progress"
-      ],
-      "confidence": "verified"
-    }
-  ],
-  "mechanics": {
-    "demonic_runestone_personal_loot": {
-      "kind": "personal_quest_loot",
-      "summary": "恶魔符文石由五个角色分别拾取；以五号都达到任务要求为该阶段离开条件。",
-      "confidence": "verified",
-      "source_refs": [
-        "evidence-fivebox-2026-09-15"
-      ]
-    },
-    "portal_bombing_shared_progress": {
-      "kind": "shared_objective_progress",
-      "summary": "炸毁两座传送门的任务进度共享；五号符文石阶段都达标后，由主控完成炸门即可推进队伍。",
-      "confidence": "verified",
-      "source_refs": [
-        "evidence-fivebox-2026-09-15"
-      ]
-    }
-  },
-  "fivebox": {
-    "stages": [
+  "rewards": {
+    "reward_money_copper": 27000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
       {
-        "stage_id": "runestones",
-        "objective_id": "collect_demonic_runestones",
-        "mode": "personal_progress",
-        "summary": "五号分别拾取，以最低进度为准。",
-        "confidence": "verified",
-        "source_refs": [
-          "evidence-fivebox-2026-09-15"
-        ]
+        "item_id": 29935,
+        "quantity": 1,
+        "name_zhcn": "火痕胸甲",
+        "name_en": "Fire Scarred Breastplate",
+        "sell_price_each_copper": 37614,
+        "sell_price_total_copper": 37614
       },
       {
-        "stage_id": "portals",
-        "objective_id": "bomb_two_portals",
-        "mode": "shared_progress",
-        "summary": "主控完成炸门即可同步推进队伍。",
-        "confidence": "verified",
-        "source_refs": [
-          "evidence-fivebox-2026-09-15"
-        ]
+        "item_id": 29932,
+        "quantity": 1,
+        "name_zhcn": "奥术环甲外套",
+        "name_en": "Arcane Ringed Tunic",
+        "sell_price_each_copper": 31887,
+        "sell_price_total_copper": 31887
+      },
+      {
+        "item_id": 29939,
+        "quantity": 1,
+        "name_zhcn": "剥石者皮革护腿",
+        "name_en": "Flayer-Hide Leggings",
+        "sell_price_each_copper": 27261,
+        "sell_price_total_copper": 27261
+      },
+      {
+        "item_id": 29946,
+        "quantity": 1,
+        "name_zhcn": "入侵者的巨盔",
+        "name_en": "Invader's Greathelm",
+        "sell_price_each_copper": 27224,
+        "sell_price_total_copper": 27224
+      },
+      {
+        "item_id": 29927,
+        "quantity": 1,
+        "name_zhcn": "暗水旅帽",
+        "name_en": "Shadowbrim Travel Hat",
+        "sell_price_each_copper": 16831,
+        "sell_price_total_copper": 16831
       }
     ],
-    "status": "shared"
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 37614,
+    "gear_sale_max_copper": 37614,
+    "reputation_rewards": [
+      {
+        "faction_id": 947,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 10050
   },
   "guide": [
-    "先让五个角色分别拾取恶魔符文石，五号都达到任务要求后再离开收集区。",
-    "随后处理希鲁斯传送门和科卢尔传送门；炸门进度共享，由主控完成即可。"
+    "在地狱火半岛机甲残骸处找前线指挥官托尔克接取并交付任务。消灭希鲁斯传送门和科卢尔传送门附近的敌人，收集8枚恶魔符文石；随后分别进入两座传送门，使用托尔克的雷管炸毁传送门。",
+    "恶魔符文石由五个角色分别拾取；五号都达到8枚后再离开收集区。",
+    "炸毁希鲁斯传送门和科卢尔传送门的进度共享；主控完成炸门即可同步推进队伍。"
   ],
-  "verification": {
-    "open_questions": []
+  "fivebox": {
+    "status": "special"
   },
+  "timing_rule_ref": null,
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",
@@ -124,7 +115,19 @@
         "availability.quest_level",
         "availability.min_level",
         "availability.pre_any",
-        "objectives"
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10208",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability"
       ]
     },
     {
@@ -135,9 +138,19 @@
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
       "supports_fields": [
-        "mechanics.demonic_runestone_personal_loot",
-        "mechanics.portal_bombing_shared_progress",
-        "fivebox.stages"
+        "guide",
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
       ]
     }
   ],
@@ -146,7 +159,7 @@
       "text": "",
       "scope": "all",
       "source_ref": "user-live:2026-09-15:block-reinforcements-presentation",
-      "reason": "用户明确确认玩家页不需要重复完整实测说明；共享角标足够，完整混合机制保留在Task Card。"
+      "reason": "用户明确确认玩家页不需要重复完整实测说明；完整混合机制保留在Task Card guide，备注保持为空。"
     }
   }
 }

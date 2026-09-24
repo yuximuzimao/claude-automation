@@ -1,0 +1,47 @@
+{
+  "context_source_ref": null,
+  "diagnoses": [
+    "blocked_unknown"
+  ],
+  "input_fingerprint": "6a44f5fb3c1ea87e6bef0e1abe4ae2251add8a7fd919a09b19d8fb53d80ca82f",
+  "issues": [
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "availability_route_replay"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "cross_profile_continuity"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_timing"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_xp"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_economy"
+    },
+    {
+      "kind": "review_context_required",
+      "severity": "requirement"
+    }
+  ],
+  "kind": "profile",
+  "model_id": "route-review-trigger-v1",
+  "optimization_failures": [],
+  "optimization_unknowns": [],
+  "profile_id": "zangarmarsh-dk-speed",
+  "selection_events": [],
+  "status": "requirements",
+  "target_id": "zangarmarsh-dk-speed",
+  "target_version": 1
+}

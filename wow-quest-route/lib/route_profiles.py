@@ -95,7 +95,7 @@ def _validate_task_state(profile: dict[str, Any]) -> None:
     needs it.
     """
 
-    active = set(profile["entry_state_contract"]["active_task_ids"])
+    active = set(profile["entry_requirements"]["active_task_ids"])
     maybe_active: set[int] = set()
 
     for action in profile["actions"]:
@@ -136,9 +136,9 @@ def _validate_task_state(profile: dict[str, Any]) -> None:
                 active.remove(task_id)
                 continue
 
-            if condition["kind"] != "task_active" or condition.get("task_id") != task_id:
+            if condition["kind"] not in {"task_active", "task_complete"} or condition.get("task_id") != task_id:
                 raise RouteProfileError(
-                    f"conditional turnin {action['action_id']} must use when=task_active for the same task"
+                    f"conditional turnin {action['action_id']} must use when=task_active/task_complete for the same task"
                 )
             active.discard(task_id)
             maybe_active.discard(task_id)
@@ -146,14 +146,6 @@ def _validate_task_state(profile: dict[str, Any]) -> None:
     if maybe_active:
         raise RouteProfileError(
             "conditional tasks remain unresolved at profile exit: " + ", ".join(map(str, sorted(maybe_active)))
-        )
-
-    declared_exit = set(profile["exit_state_contract"]["active_task_ids"])
-    if active != declared_exit:
-        missing = sorted(active - declared_exit)
-        extra = sorted(declared_exit - active)
-        raise RouteProfileError(
-            f"exit_state_contract does not match replayed state; missing={missing}, extra={extra}"
         )
 
 
@@ -208,16 +200,53 @@ def validate_route_profile(
     duplicate_actions = _duplicates(action_ids)
     if duplicate_actions:
         raise RouteProfileError(f"duplicate action_id values: {duplicate_actions}")
+    action_by_id = {action["action_id"]: action for action in profile["actions"]}
+    action_ordinal = {action_id: index for index, action_id in enumerate(action_ids)}
+
+    service_overrides = profile.get("service_overrides") or []
+    service_ids = [row["service_id"] for row in service_overrides]
+    duplicate_service_ids = _duplicates(service_ids)
+    if duplicate_service_ids:
+        raise RouteProfileError(f"duplicate service_override service_id values: {duplicate_service_ids}")
+    for row in service_overrides:
+        if row["kind"] == "background_window":
+            task_id = int(row["task_id"])
+            if task_id not in task_id_set:
+                raise RouteProfileError(
+                    f"service_override {row['service_id']} references task not listed in task_ids: {task_id}"
+                )
+            start_action_id = row["start_action_id"]
+            end_action_id = row["end_action_id"]
+            if start_action_id not in action_by_id or end_action_id not in action_by_id:
+                raise RouteProfileError(
+                    f"service_override {row['service_id']} references unknown background window action"
+                )
+            if action_ordinal[start_action_id] > action_ordinal[end_action_id]:
+                raise RouteProfileError(
+                    f"service_override {row['service_id']} background window is reversed"
+                )
+        elif row["kind"] == "shared_service":
+            unknown = sorted(action_id for action_id in row["action_ids"] if action_id not in action_by_id)
+            if unknown:
+                raise RouteProfileError(
+                    f"service_override {row['service_id']} references unknown shared-service actions: {unknown}"
+                )
+            non_objective = sorted(
+                action_id
+                for action_id in row["action_ids"]
+                if action_by_id[action_id]["kind"] != "objective"
+            )
+            if non_objective:
+                raise RouteProfileError(
+                    f"service_override {row['service_id']} shared_service may reference only objective actions: {non_objective}"
+                )
 
     referenced_task_ids = {
         action["task_id"]
         for action in profile["actions"]
         if action["kind"] in TASK_ACTION_KINDS
     }
-    contract_task_ids = {
-        *profile["entry_state_contract"]["active_task_ids"],
-        *profile["exit_state_contract"]["active_task_ids"],
-    }
+    contract_task_ids = set(profile["entry_requirements"]["active_task_ids"])
     missing_from_task_ids = sorted((referenced_task_ids | contract_task_ids) - task_id_set)
     if missing_from_task_ids:
         raise RouteProfileError(

@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "task_id": 9788,
+  "identity": {
+    "name_zhcn": "阴冷之地",
+    "name_en": "A Damp, Dark Place",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 62,
+    "min_level": 60,
+    "pre_any": [
+      9747
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 27000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 27716,
+        "quantity": 1,
+        "name_zhcn": "避难护甲",
+        "name_en": "Refuge Armor",
+        "sell_price_each_copper": 40188,
+        "sell_price_total_copper": 40188
+      },
+      {
+        "item_id": 25514,
+        "quantity": 1,
+        "name_zhcn": "伊卡因的肩甲",
+        "name_en": "Ikeyen's Pauldrons",
+        "sell_price_each_copper": 25751,
+        "sell_price_total_copper": 25751
+      },
+      {
+        "item_id": 25515,
+        "quantity": 1,
+        "name_zhcn": "泥泞长靴",
+        "name_en": "Mud Encrusted Boots",
+        "sell_price_each_copper": 21444,
+        "sell_price_total_copper": 21444
+      },
+      {
+        "item_id": 25516,
+        "quantity": 1,
+        "name_zhcn": "伊卡因的长靴",
+        "name_en": "Ikeyen's Boots",
+        "sell_price_each_copper": 17218,
+        "sell_price_total_copper": 17218
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 40188,
+    "gear_sale_max_copper": 40188,
+    "reputation_rewards": [
+      {
+        "faction_id": 942,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 10050
+  },
+  "guide": [
+    "接取：伊卡因。",
+    "进入暗泽村以南的一处洞穴寻找伊卡因的物品，把它们还给赞加沼泽塞纳里奥庇护所的伊卡因。",
+    "交付：伊卡因。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9788",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
+      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+    }
+  }
+}

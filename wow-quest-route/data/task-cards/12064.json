@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "task_id": 12064,
+  "identity": {
+    "name_zhcn": "阿努巴尔的束缚",
+    "name_en": "Chains of the Anub'ar",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 72,
+    "min_level": 71,
+    "pre_any": [
+      12063
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 38105,
+        "quantity": 1,
+        "name_zhcn": "石路肩甲",
+        "name_en": "Stonepath Pauldrons",
+        "sell_price_each_copper": 49395,
+        "sell_price_total_copper": 49395
+      },
+      {
+        "item_id": 38044,
+        "quantity": 1,
+        "name_zhcn": "阿努巴尔甲壳护肩",
+        "name_en": "Anub'ar-Husk Shoulderguards",
+        "sell_price_each_copper": 41378,
+        "sell_price_total_copper": 41378
+      },
+      {
+        "item_id": 38001,
+        "quantity": 1,
+        "name_zhcn": "飘雪劫掠者护肩",
+        "name_en": "Snowfall Reaver Pauldrons",
+        "sell_price_each_copper": 33963,
+        "sell_price_total_copper": 33963
+      },
+      {
+        "item_id": 37959,
+        "quantity": 1,
+        "name_zhcn": "废土之风护肩",
+        "name_en": "Wastewind Pauldrons",
+        "sell_price_each_copper": 26250,
+        "sell_price_total_copper": 26250
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 49395,
+    "gear_sale_max_copper": 49395,
+    "reputation_rewards": [
+      {
+        "faction_id": 1052,
+        "amount": 250
+      },
+      {
+        "faction_id": 1064,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 20300
+  },
+  "guide": [
+    "接取：班索克·冰雾。",
+    "冰雾村的班索克·冰雾要求你将安诺科拉的钥匙碎片、提瓦克斯的钥匙碎片和西诺克的钥匙碎片交给他。",
+    "交付：班索克·冰雾。",
+    "冰雾村三名命名目标分别携带不同钥匙碎片；阿诺克拉位于较低/地面层，另外两名目标可能在不同位置，返回前收齐全部碎片。"
+  ],
+  "fivebox": {
+    "status": "sequential_loot"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=12064",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk quest_template sha256=5dc7e6c92ea6875a5fc68cf5d3e33150e86cda5819a11af0c59217b24c63a37f; item_template sha256=bd4859be01946ca1521f7896f558f665e1e1d98890757a3df30e717b62768cc6 + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-type-mapping",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12064; legacy_type=three_named_single_kill_multi_person_loot_confirmed",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-note-deferred-to-presentation",
+      "source_type": "legacy_migration",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12064",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-dragonblight-special-mechanism-audit",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/dragonblight-special-mechanism-audit.json#quest_id=12064/final_review.facts",
+      "observed_at": null,
+      "version_scope": "legacy Dragonblight manual executability audit; migrated 2026-09-16",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《阿努巴尔的束缚》：三名钥匙目标各杀一次；每具尸体可供五号分别拾取钥匙。西诺克在南侧高台连排大房子内约(25.7,44.2)。\n【需要单独修正优化】《阿努巴尔的束缚》首组龙骨实跑确认：安诺科拉、提瓦克斯、西诺克各只需击杀一次；每具命名怪尸体可由五个角色分别拾取各自钥匙。",
+      "scope": "all",
+      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12064",
+      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+    }
+  }
+}
