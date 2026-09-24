@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-09-17
+更新时间：2026-09-25
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
-当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
+当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 

@@ -6,11 +6,11 @@
 
 进入 `/Users/chat/claude` 或任一子项目时：
 
-1. 先读当前目录的 `CLAUDE.md`。
+1. 先读取根`AGENTS.md`和根`CLAUDE.md`。**CodexPro若要切换到具体子项目或`/Users/chat/.config/superpowers/worktrees/...`，必须先以`/Users/chat/claude`为workspace打开一次。** 外置worktree不在根目录祖先链上，禁止假设工作区总规则会自动继承。
 2. 用户用中文项目名、简称或业务词描述任务时，先查 `docs/project-aliases.md` 定位英文目录；命中后进入该目录读入口文档，未命中才允许搜索。
-3. 如果进入子项目，先读该子项目的 `SKILL.md`，再读 `CLAUDE.md`。若旧项目缺 `SKILL.md`，先读现有 `CLAUDE.md/README/CURRENT` 恢复最小上下文，同时明确标记“项目骨架不合规”；本次若涉及结构性维护，先按 `docs/new-project-template.md` 补齐骨架。
-4. 再读该子项目的 `tasks/todo.md` 和 `docs/INDEX.md`；不存在时不得猜测其职责，按项目入口表与现有文件工作。正常项目按 `SKILL.md` 的 DO FIRST 决定是否继续加载其它文档。
-5. 禁止在有 `SKILL.md` 的项目里先用大范围 grep/glob 搜索业务逻辑再回来读SKILL。`SKILL.md` 是导航地图，先看地图再走路。
+3. 进入子项目后先读该项目`SKILL.md`，再按SKILL需要读项目`CLAUDE.md`、Todo、INDEX、CURRENT或专项SOP。根CLAUDE已定义的工作区共识不得在子项目重复一份。
+4. 若旧项目缺`SKILL.md`，先读现有`CLAUDE.md/README/CURRENT`恢复最小上下文，同时明确标记“项目骨架不合规”；本次若涉及结构性维护，按`docs/new-project-template.md`补齐骨架。
+5. 禁止在有`SKILL.md`的项目里先用大范围 grep/glob 搜索业务逻辑再回来读SKILL。SKILL是一级导航；存在语义歧义时继续进入项目专项SOP，不在SKILL猜分支。
 
 ## 工作区红线
 
@@ -95,14 +95,12 @@ Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同�
 
 ## 项目结构与文档维护
 
-- 长期项目的标准骨架与初始化门禁统一以根 `CLAUDE.md` + `docs/new-project-template.md` 为准；Codex不得维护另一套项目规范。
-- 正常长期项目至少有 `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；有持续变化现场状态时另设 `CURRENT.md` 作为唯一当前真值。README只做人类概览，不复制CURRENT。
-- `docs/INDEX.md` 默认是导航，不是无限扩张的规则正文。项目出现多个独立规则域/工作流，或一次读INDEX会加载大量无关规则时，建立 `docs/rules/README.md` 并按主题渐进式拆分。
-- 稳定经验从 `tasks/lessons.md` 迁到正确归属：跨批次方法→`docs/rules/`；重复错误→error book/known pitfalls；单对象事实→对应知识库/observations；当前状态→CURRENT；历史阶段→archive/NEAT。迁移后删掉lessons重复项。
-- 新项目历史默认用 `docs/archive/`；运行时/认证会话才使用根或运行目录 `sessions/`。现有 `docs/**/sessions/` 可保留为历史文档，但必须正常版本管理。
-- 任何文件新增、删除、移动、重命名，都要同步所属项目 `SKILL.md` PATHS/ENTRY MAP、`docs/INDEX.md` 和当前入口链接。被新结构替代的旧权威文件在内容迁移和引用审计完成后直接删除；除非有明确外部消费者，不保留兼容跳转壳。
-- 修改 `.gitignore` 时必须检查匹配范围；只忽略根目录使用 `/name/`。至少验证一个应该被忽略和一个不应被忽略的样本。项目文档被ignore时视为异常，不能靠 `git add -f` 作为长期方案。
-- 跨项目影响必须同时检查上下游文档，特别是 `aftersales-automation`、`product-mapping`、`sku-calculator`、`return-inbound` 之间共享的 ERP / 鲸灵能力。
+- **工作区级项目结构、SKILL/SOP/Owner/README/INDEX/Todo/CURRENT/Archive职责、渐进式披露、现役/历史二分和无兼容层原则，唯一以根`CLAUDE.md §项目结构与文档职责`为准。** 本AGENTS只补Codex启动/工具差异，不维护第二套同义定义。
+- 长期项目初始化/升级按根`CLAUDE.md` + `docs/new-project-template.md`执行；模板只负责搭骨架，不得覆盖根规则。
+- 任何文件新增、删除、移动、重命名，按项目SKILL/INDEX实际职责更新导航；是否需要更新哪些入口由当前项目结构决定，不机械复制路径表。
+- 稳定经验迁到其唯一owner；当前状态只进CURRENT；尚未完成事项只进Todo；历史阶段只进archive/NEAT。
+- 修改`.gitignore`时必须检查匹配范围；只忽略根目录使用`/name/`。至少验证一个应该被忽略和一个不应被忽略的样本。项目文档被ignore时视为异常，不能靠`git add -f`作为长期方案。
+- 跨项目影响必须同时检查上下游文档，特别是`aftersales-automation`、`product-mapping`、`sku-calculator`、`return-inbound`之间共享的 ERP / 鲸灵能力。
 
 ## 新项目 / 旧项目升级
 
@@ -114,4 +112,4 @@ Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同�
 
 - 不在 `AGENTS.md` 内粘贴大段记忆导出或会话摘要；这会快速过期，并稀释启动规则。
 - 需要历史背景时，优先查项目自己的 `SKILL.md` / `CLAUDE.md` / `docs/INDEX.md` / `tasks/todo.md` / `CURRENT.md` / `docs/HANDOFF.md`，再按需使用记忆检索工具。
-- 历史经验一旦稳定影响长期操作，应迁入对应 `docs/rules/` 或项目稳定规则文件；当前状态只进CURRENT；不要把大段历史继续堆在AGENTS/CLAUDE/INDEX/lessons里。
+- 历史经验一旦稳定影响长期操作，应迁入对应唯一owner；当前状态只进CURRENT；不要把大段历史继续堆在AGENTS/CLAUDE/INDEX/lessons里。

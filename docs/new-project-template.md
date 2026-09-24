@@ -4,24 +4,11 @@
 
 本规范同时约束 Claude Code 与 Codex。初始化不是“先建代码目录，以后再补文档”；下方初始化门禁未通过前，不算项目建立完成。
 
-## 1. 文档职责先于目录数量
+## 1. 文档职责以根CLAUDE为准
 
-每类信息只保留一个权威来源：
+项目文档与工具的职责、SKILL/SOP/Owner关系、README/INDEX/Todo/CURRENT/Archive边界、渐进式披露、现役/历史二分和无兼容层原则，**唯一以工作区根`CLAUDE.md §项目结构与文档职责`为准**。
 
-| 信息类型 | 权威位置 | 禁止行为 |
-| --- | --- | --- |
-| Agent怎么进入项目、该读什么 | `SKILL.md` | 在README/CLAUDE重复一整套文件地图 |
-| 稳定Session启动、安全边界、相关项目 | `CLAUDE.md` | 塞当前等级、当前工单、当前任务进度等易变状态 |
-| 人类快速理解项目 | `README.md` | 把README变成当前状态数据库或历史日志 |
-| 文档/数据在哪里 | `docs/INDEX.md` | 默认把所有业务规则都堆进INDEX |
-| 当前尚未完成的工作 | `tasks/todo.md` | 长期保留已经完成的阶段历史 |
-| 尚未归类的新教训 | `tasks/lessons.md` | 稳定后继续和正式规则重复维护 |
-| 持续变化的当前状态 | `CURRENT.md`（位置由项目决定） | 在CLAUDE/README/SKILL复制当前状态 |
-| 跨批次长期规则 | `docs/rules/` 或小项目的少量INDEX规则 | 从NEAT/日期文档反推永久规则 |
-| 历史/阶段证据 | `docs/archive/` | 让历史文档继续充当当前入口 |
-| 单对象/单任务事实 | 专门知识库、observations等 | 塞进通用规则正文 |
-
-核心原则：**导航、当前状态、永久规则、历史证据必须分层。**
+本模板只负责初始化骨架，不维护第二套职责定义。若本模板的任何示例与根CLAUDE冲突，以根CLAUDE为准并修正本模板。
 
 ## 2. 标准目录结构
 
@@ -29,37 +16,33 @@
 
 ```text
 project/
-  README.md                 # 推荐：人类项目概览；不存当前状态
-  SKILL.md                  # 必须：Agent导航地图，进入项目第一步读
-  CLAUDE.md                 # 必须：稳定Session启动/安全/协作边界
-  <cli/server/main>         # 项目主入口，按语言实际选择
-  lib/ or src/              # 核心模块
+  README.md
+  SKILL.md
+  CLAUDE.md
+  <cli/server/main>
+  lib/ or src/
   docs/
-    INDEX.md                # 必须：文档/数据导航
-    rules/                  # 多规则域项目使用；小项目可暂不创建
-      README.md             # 规则路由，只告诉Agent当前任务该读哪份
-      <topic>.md            # 按业务/技术主题拆分
-    archive/                # 历史阶段、NEAT、旧设计；默认不用sessions命名
-  data/                     # 结构化持久数据；按项目Git边界决定是否版本化
+    INDEX.md
+    <domain-sop-or-owner-files-as-needed>
+    archive/
+  data/
   tasks/
-    todo.md                 # 必须：当前待办
-    lessons.md              # 推荐：临时教训收件箱
-  tests/ or test/           # 有可测逻辑时建立
+    todo.md
+    lessons.md                # 可选：尚未归类的新教训收件箱
+  tests/ or test/
 ```
 
 项目存在持续变化的真实状态时，再建立一个明确的 `CURRENT.md`。可以是 `docs/CURRENT.md`、`docs/verified-routes/CURRENT.md` 等，但必须在 `SKILL.md` 明确它是唯一当前真值。
 
-## 3. 什么时候必须拆 `docs/rules/`
+## 3. 什么时候拆SOP / Owner
 
-`docs/INDEX.md` 默认是导航，不天然是“所有规则正文”。满足任一条件就拆：
+不要为了统一目录样式强制创建`docs/rules/README.md`。
 
-1. 已出现两个以上相互独立的工作流/规则域，例如“业务决策规则”和“前端/资源规则”；
-2. 回答一个局部问题时，读取INDEX会加载大量完全无关的规则；
-3. 同一文件同时混入当前状态、长期方法、技术实现约束和历史案例；
-4. Agent需要靠搜索长文档才能找到应该先读哪一节；
-5. 规则文件继续增长时已经出现重复、冲突、兼容入口或旧规则难以删除。
-
-拆分方式固定：`docs/rules/README.md` 只保存最小公共规则 + 路由表，具体规则按主题拆文件。不要创建第二个“大总规则”替代第一个。
+- 某个复杂领域存在多个相似但定义不同的输入，需要先分类再进入具体业务时，建立该领域专项SOP。
+- 某个业务职责已经明确，就建立一个唯一owner入口；规则与正式操作默认放在同一owner。
+- owner内容较小就保持单文件；只有信息量已经影响AI准确读取时，才在owner内部拆成README + 子文档。
+- 外层SKILL/SOP只指向owner入口，不依赖owner内部是否拆成1个还是多个文件。
+- `docs/INDEX.md`始终只做文件导航，不因为项目变大而升级成规则路由器。
 
 ## 4. SKILL.md 必要职责
 
@@ -70,7 +53,7 @@ project/
 1. 读 `tasks/todo.md`
 2. 读 `docs/INDEX.md`（只导航）
 3. 若有 CURRENT，按当前工作流决定是否读取
-4. 若涉及规则判断，从 `docs/rules/README.md` 只加载对应主题
+4. 若涉及语义分类或规则判断，按SKILL进入对应专项SOP或唯一owner
 5. 核心入口：`<cli/server/main>`
 
 ## ENTRY MAP
@@ -84,9 +67,11 @@ project/
 ```
 
 要求：
-- DO FIRST体现**最小上下文**，不要把所有历史、所有规则列成每次必读；
-- 新增/删除/移动/重命名核心文件时同步ENTRY MAP/PATHS；
-- 当前状态只指向CURRENT，不在SKILL复制具体数值/任务列表。
+- SKILL沉淀高频、成熟、低歧义流程和项目一级入口；
+- 同一关键词可能落到多个相似业务定义时，只分流到专项SOP，不在SKILL继续判断；
+- DO FIRST体现最小上下文，不把所有历史、所有规则列成每次必读；
+- 新增/删除/移动/重命名核心文件时按实际导航关系同步ENTRY MAP/PATHS；
+- 当前状态只引用CURRENT，不复制具体状态。
 
 ## 5. CLAUDE.md 必要职责
 
@@ -99,16 +84,16 @@ project/
 1. 读 `SKILL.md`
 2. 读 `tasks/todo.md`
 3. 读 `docs/INDEX.md`
-4. 按SKILL分流CURRENT / rules / 专项文档
+4. 按SKILL分流CURRENT / 专项SOP / owner
 
 ## 稳定项目目标与安全边界
 
-## 规则文档（渐进式）
+## 专项SOP / Owner（渐进式）
 | 文档 | 加载时机 |
 
 ## 教训沉淀流程
 - `tasks/lessons.md`：只放未归类新发现
-- 稳定后迁到 rules / error book / knowledge / observations / CURRENT / archive 的正确层级，并从lessons删除
+- 稳定后迁到唯一owner / Error Book / knowledge / Observations / CURRENT / Archive的正确层级，并从lessons删除
 
 ## 相关项目
 
@@ -119,18 +104,16 @@ project/
 
 CLAUDE只保存跨Session仍成立的东西。任何“当前是第几级/当前处理到第几单/当前实验R17”都不应长期复制在CLAUDE里。
 
-## 6. README / INDEX / CURRENT 的边界
+## 6. README / INDEX / Todo / CURRENT
 
-- README：让人30秒知道项目做什么、当前主入口在哪、怎么开始；不要复制业务状态和易过期命令清单。
-- INDEX：告诉Agent“哪里有什么”，不要求把所有规则正文集中在这里。
-- CURRENT：只有项目确实存在持续变化状态时创建；一旦创建，其状态信息不得同时在README/CLAUDE/SKILL维护第二份。
+具体职责只读根`CLAUDE.md §项目结构与文档职责`。本模板只检查这些入口是否按项目需要建立，不在这里重新定义一遍。
 
 ## 7. 教训、永久规则与NEAT
 
 `tasks/lessons.md` 是收件箱，不是历史数据库。
 
 稳定后按归属迁移：
-- 跨批次方法 → `docs/rules/`
+- 跨批次方法 → 对应唯一owner（可按需位于`docs/rules/`）
 - 重复错误模式 → error book / known pitfalls
 - 单任务/单SKU/单对象事实 → 专门知识库/observations
 - 当前现场真值 → CURRENT
@@ -178,9 +161,10 @@ sessions/
 2. 补回不能被“概括掉”的硬字段/状态机/验证约束；
 3. 搜索当前入口、代码生成器、SOP、todo、README、SKILL、CURRENT里的旧引用；
 4. 更新 `SKILL.md` ENTRY MAP/PATHS 和 `docs/INDEX.md`；
-5. 确认无明确外部消费者后，**直接删除旧权威文件**；
-6. 不默认保留兼容跳转壳。只有明确存在外部工具/用户书签依赖时才允许兼容层，并写清退役计划；
-7. 历史archive/NEAT可以描述“旧文件当时存在”，但不得继续给出读取旧路径的当前指令。
+5. 对仍被当前正式流程需要的能力/引用，先迁入新的唯一现役入口；
+6. 迁移完成后，旧文件/工具只允许归档或删除，**不保留新旧兼容入口**；
+7. 外部消费者若仍真实存在，就把它当作当前正式契约纳入现役owner/SOP并完成迁移，而不是继续依赖旧壳；
+8. 历史archive/NEAT可以描述“旧文件当时存在”，但不得继续给出读取旧路径的当前指令。
 
 ## 10. 新项目初始化门禁
 
@@ -192,7 +176,7 @@ sessions/
 - [ ] 创建 `tasks/todo.md`；
 - [ ] 创建 `docs/INDEX.md`；
 - [ ] 需要人类长期使用时创建 `README.md`；
-- [ ] 若已有多个规则域，直接创建 `docs/rules/README.md` + 主题规则，不先造大INDEX；
+- [ ] 若存在需要语义分类的复杂领域，建立专项SOP；若存在长期业务规则/操作，建立对应唯一owner；是否拆目录按信息量决定；
 - [ ] 若有持续变化状态，创建CURRENT并指定唯一真值；
 - [ ] 明确代码入口、数据目录、测试入口、安全/隐私边界；
 - [ ] 在根 `docs/project-aliases.md` 注册中文项目名/触发词；
