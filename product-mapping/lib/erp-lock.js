@@ -1,71 +1,54 @@
 'use strict';
 /**
- * ERP 操作锁：product-mapping 操作 ERP 时临时暂停 aftersales server
+ * 商品匹配与售后系统共享同一个 ERP 标签页。
  *
- * 为什么需要这个：aftersales server.js 有定时任务（心跳/扫描）会导航 ERP tab、
- * 关闭所有弹窗，与 product-mapping 操作同一个 ERP tab 时造成干扰。
- *
- * 设计：
- * - acquireErpLock() 调 aftersales POST /api/emergency-stop 暂停其活动
- * - releaseErpLock() 调 POST /api/resume 恢复
- * - 5 分钟超时保护：防止 product-mapping 异常退出导致 aftersales 永久暂停
- * - 重入安全：已加锁时再 acquire 只重置超时计时器，不重复 POST
- * - 降级：aftersales server 未运行时静默忽略
+ * 当前规则：
+ * - 商品匹配开始前由用户手动停止售后系统；
+ * - product-mapping 只验证售后确实处于 paused 状态，不再自动 emergency-stop，也不设置定时恢复；
+ * - 任一异常/中断后保持售后停止，避免破坏 ERP 现场；
+ * - 只有最终 check 完整通过完成门禁后，才自动调用 /api/resume 恢复售后。
  */
 
 const AFTERSALES_API = 'http://localhost:3457/api';
-const MAX_LOCK_MS = 5 * 60 * 1000; // 5 分钟超时保护
 
-let locked = false;
-let lockTimer = null;
-
-async function _callApi(endpoint, logMsg) {
-  const res = await fetch(`${AFTERSALES_API}/${endpoint}`, { method: 'POST' });
-  if (!res.ok) throw new Error(`aftersales API ${endpoint} failed: ${res.status}`);
-  if (process.env.VERBOSE) process.stderr.write(`[erp-lock] ${logMsg}\n`);
-}
-
-function _resetTimer() {
-  if (lockTimer) clearTimeout(lockTimer);
-  lockTimer = setTimeout(async () => {
-    locked = false;
-    lockTimer = null;
-    try {
-      await _callApi('resume', 'aftersales 已恢复（超时保护）');
-    } catch (e) {
-      // aftersales server 可能已关闭，超时恢复失败可忽略
-      if (process.env.VERBOSE) process.stderr.write(`[erp-lock] resume failed: ${e.message}\n`);
+async function ensureAftersalesPaused() {
+  let res;
+  try {
+    res = await fetch(`${AFTERSALES_API}/op-queue`);
+  } catch (e) {
+    // 售后服务本身未运行时不存在并发扫描风险。
+    if (process.env.VERBOSE) {
+      process.stderr.write(`[aftersales-guard] 售后服务未运行，跳过暂停状态检查: ${e.message}\n`);
     }
-  }, MAX_LOCK_MS);
-}
-
-/**
- * 在 ERP 操作前调用。已加锁时只重置超时计时器（延长保护窗口）。
- */
-async function acquireErpLock() {
-  _resetTimer();
-  if (locked) return;
-  locked = true;
-  try {
-    await _callApi('emergency-stop', 'aftersales 已暂停');
-  } catch (_) {
-    // aftersales server 未运行，无需锁
-    if (process.env.VERBOSE) process.stderr.write('[erp-lock] aftersales server 未运行，跳过\n');
+    return { reachable: false, paused: true };
   }
-}
 
-/**
- * 在 ERP 操作完成（或失败）后调用。通常放在 try/finally 里。
- */
-async function releaseErpLock() {
-  if (lockTimer) { clearTimeout(lockTimer); lockTimer = null; }
-  if (!locked) return;
-  locked = false;
-  try {
-    await _callApi('resume', 'aftersales 已恢复');
-  } catch (_) {
-    // aftersales server 未运行，忽略
+  if (!res.ok) {
+    throw new Error(`无法确认售后系统停止状态（HTTP ${res.status}），请先手动确认售后系统已停止再继续`);
   }
+
+  const state = await res.json();
+  if (!state || state.paused !== true) {
+    throw new Error('商品匹配开始前请先手动停止售后系统；当前检测到售后仍在运行');
+  }
+
+  return { reachable: true, paused: true };
 }
 
-module.exports = { acquireErpLock, releaseErpLock };
+async function resumeAftersales() {
+  let res;
+  try {
+    res = await fetch(`${AFTERSALES_API}/resume`, { method: 'POST' });
+  } catch (e) {
+    throw new Error(`最终核查已通过，但售后系统自动恢复失败，请手动恢复：${e.message}`);
+  }
+
+  if (!res.ok) {
+    throw new Error(`最终核查已通过，但售后系统自动恢复失败（HTTP ${res.status}），请手动恢复`);
+  }
+
+  if (process.env.VERBOSE) process.stderr.write('[aftersales-guard] 最终核查通过，售后系统已恢复\n');
+  return { resumed: true };
+}
+
+module.exports = { ensureAftersalesPaused, resumeAftersales };

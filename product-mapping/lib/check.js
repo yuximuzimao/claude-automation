@@ -12,7 +12,6 @@ const { readAllCorrespondence, readCorrWithoutDownload } = require('./correspond
 const { initArchiveComp, queryArchive, querySubItems } = require('./archive');
 const { imgPath, downloadImg, mergeVerdicts } = require('./visual');
 const { sleep } = require('./wait');
-const { releaseErpLock } = require('./erp-lock');
 const { compareSkuArchive } = require('./compare');
 const { requireKnownBrand, requireRecordBrand, assertSameBrand } = require('./brand-scope');
 const { recordKey, findRecord } = require('./sku-identity');
@@ -102,8 +101,7 @@ function loadReusableActiveProducts(shopName, skuRecords) {
  * @returns {Promise<object>} 核查报告
  */
 async function runCheck(jlId, erpId, shopName, options = {}) {
-  try {
-    const reuseActiveScope = options.reuseActiveScope === true;
+  const reuseActiveScope = options.reuseActiveScope === true;
     const skipDownload = options.skipDownload === true;
 
     // 读取识图记录（sku-records.json），用于活动范围复用和报告对比
@@ -364,10 +362,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
       }
     }
 
-    return report;
-  } finally {
-    await releaseErpLock();
-  }
+  return report;
 }
 
 module.exports = { runCheck, summarizeSkuComparisons };

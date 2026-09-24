@@ -17,7 +17,6 @@ const { createSuite } = require('./ops/create-suite');
 const { readErpCodes } = require('./ops/read-erp-codes');
 const { verifyArchive } = require('./ops/verify-archive');
 const { safeWriteJson } = require('./utils/safe-write');
-const { releaseErpLock } = require('./erp-lock');
 const { requireKnownBrand, assertSameBrand } = require('./brand-scope');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
@@ -51,8 +50,7 @@ function stageAtLeast(current, required) {
  * @param {{ from?: string, brand?: string }} opts
  */
 async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
-  try {
-    const { from } = opts;
+  const { from } = opts;
     const brand = requireKnownBrand(opts.brand, 'match-one ');
 
     // --from 非法值校验
@@ -163,10 +161,7 @@ async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
       return { done: true, summary: r.data };
     }
 
-    return { done: true };
-  } finally {
-    await releaseErpLock();
-  }
+  return { done: true };
 }
 
 module.exports = { matchOne, STEPS };

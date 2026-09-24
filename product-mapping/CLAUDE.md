@@ -6,7 +6,7 @@
 
 1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
 2. 读 `tasks/todo.md` — 确认当前待办和进度
-3. 若当前由 ChatGPT 通过 CodexPro 操作，先读 `docs/chatgpt-codexpro-operations.md`，提前确定图片桥接和长任务交接方式
+3. 若当前由 ChatGPT 通过 CodexPro 操作，在执行命令前读 `docs/chatgpt-codexpro-operations.md`；正式 `check/match` 固定走本机 Terminal，不再按预计时长选择执行端
 4. 按命令确认浏览器依赖：首次 `check` 需要鲸灵+ERP；`match` 和后置 `check --reuse-active` 只需要 ERP
 5. 读 `docs/INDEX.md` — 操作规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
 
@@ -16,7 +16,7 @@
 |------|---------|
 | `docs/INDEX.md` | **每次必读**：流程、视觉匹配规则、技术规范、坑位 |
 | `docs/matching-stability.md` | 自动匹配、断点恢复、页面异常时必读：状态机、故障优先级、恢复顺序 |
-| `docs/chatgpt-codexpro-operations.md` | 仅 ChatGPT + CodexPro 模式必读：图片桥接、有限前台时长（本轮 180 秒）、target 刷新和本地 Codex 交接 |
+| `docs/chatgpt-codexpro-operations.md` | 仅 ChatGPT + CodexPro 模式必读：正式命令执行端、Terminal 启动/回看边界、图片桥接与 target 规则；这是该类规则唯一详细来源 |
 
 ## 命令速查
 

@@ -7,15 +7,23 @@ entry: cli.js
 
 ## DO FIRST
 
-1. **找 CLI 命令** → `cli.js`（命令路由和 JSON 输出）
-2. **找流程** → `docs/INDEX.md §2`（5 步核查流程：check→识图→match→check→verify-table）
-3. **找单 SKU 匹配** → `lib/match-one.js`（7 步闭环，支持 `--from` 断点续跑）
-4. **ERP 操作前必走完整导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
-5. **写操作（新增匹配）必须人工确认后执行**
-6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
-7. **ChatGPT 通过 CodexPro 操作时必读** → `docs/chatgpt-codexpro-operations.md`（本地图片桥接、前台时间边界、target 刷新、长任务交给本地 Codex）
+1. **若当前是 ChatGPT + CodexPro** → 在执行任何正式商品匹配命令前先读 `docs/chatgpt-codexpro-operations.md`；正式 `check/match` 固定由本机 Terminal 持续运行，不做“预计时长”判断。
+2. **找业务流程与完成门禁** → `docs/INDEX.md §2`（check→识图→match→check→verify-table）
+3. **找 CLI 命令** → `cli.js`（命令路由和 JSON 输出）
+4. **找单 SKU 匹配** → `lib/match-one.js`（7 步闭环，支持 `--from` 断点续跑）
+5. **ERP 页面导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
+6. **写操作（新增匹配）必须人工确认后执行**
+7. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
 8. **处理 HEE/悦希新品前先查当前待办** → `tasks/todo.md`；尚未补齐图片/识图特征的新品按待办中的标准 ERP 名称和编码识别，不能归为普通未知，也不得复用旧版视觉。装箱尺寸、箱规和组合规则属于 `../order-review/`，不在这里维护。
-9. **运行 check/match 等 CLI 时** → 观察边界只看 `docs/INDEX.md §1「脚本自治边界」`；正常执行不由 Agent 实时监工。
+9. **CLI 启动后的观察边界** → 只看 `docs/INDEX.md §1「脚本自治边界」`；正常执行不由 Agent 实时监工。
+
+## RULE OWNERS
+
+- **业务流程、比较规则、完成门禁** → `docs/INDEX.md`
+- **ChatGPT + CodexPro / 本机 Terminal / 图片桥接** → `docs/chatgpt-codexpro-operations.md`
+- **自动匹配状态机、故障分级、中断恢复** → `docs/matching-stability.md`
+- **当前未完成事项** → `tasks/todo.md`；已完成规则不得继续留在 TODO
+- `SKILL.md` 只做导航和极短摘要；若摘要与权威文档冲突，以对应 Rule Owner 为准。
 
 ## ENTRY MAP
 
@@ -32,7 +40,7 @@ entry: cli.js
 | `lib/cdp.js` | CDP HTTP proxy 客户端（localhost:3456），fallback 直连 | 写浏览器操作时 |
 | `lib/targets.js` | 查找 ERP 浏览器 tab ID（优先 pinned，失效时按 URL 回退） | 需要定位 ERP 标签时 |
 | `lib/navigate.js` | ERP 页面导航（reload→登录→切tab） | ERP 页面跳转时 |
-| `lib/erp-lock.js` | ERP 操作锁（acquireErpLock/releaseErpLock）暂停 aftersales | 任何 ERP 操作（navigateErp 自动调用） |
+| `lib/erp-lock.js` | 售后并发保护：正式 check/match 前验证售后已由用户手动停止；最终核查全部通过后恢复售后 | 正式商品匹配入口与最终完成收尾 |
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/sku-identity.js` | `productCode + platformCode` 记录键和图片文件名 | 处理重复平台编码或图片路径时 |

@@ -38,7 +38,7 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 | `SKILL.md` | 代码入口和运行时导航 |
 | `docs/INDEX.md` | 完整业务流程与数据契约 |
 | `docs/matching-stability.md` | ERP 状态机、故障优先级和恢复方法 |
-| `docs/chatgpt-codexpro-operations.md` | ChatGPT 通过 CodexPro 操作时的图片桥接、时间边界和本地 Codex 交接 |
+| `docs/chatgpt-codexpro-operations.md` | ChatGPT + CodexPro 模式下正式命令的本机 Terminal 路由、运行回看边界、图片桥接与 target 规则 |
 | `docs/preflight-brand.md` | 新品牌建档门禁 |
 
 ## 安全边界
@@ -47,6 +47,7 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 - 品牌只在首次 `check --brand <品牌>` 指定一次，随后写入本轮记录并自动继承；缺失或冲突立即停止。
 - 已有匹配异常由脚本报告、用户在平台人工修正；自动流程不得换绑覆盖，修正后先回读 ERP。
 - 同一个 ERP 标签页只能有一个商品匹配进程操作，禁止并行调试。
+- 正式商品匹配开始前先由用户手动停止售后系统；异常/中断后保持停止，只有最终核查全部通过才自动恢复售后。
 - `match` 任一 SKU 失败必须立即停止；先判断 ERP 当前中间状态，再决定续跑。
 - 默认不提交 `data/` 运行时产物；只提交代码、规则和文档。
 

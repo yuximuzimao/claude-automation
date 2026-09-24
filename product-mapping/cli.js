@@ -1,6 +1,7 @@
 'use strict';
 const { getTargetIds, getErpTargetId } = require('./lib/targets');
 const { ok, fail } = require('./lib/result');
+const { ensureAftersalesPaused, resumeAftersales } = require('./lib/erp-lock');
 
 const [,, cmd, ...args] = process.argv;
 
@@ -144,6 +145,7 @@ async function main() {
   // ── 只需 ERP tab 的命令（不调用 getTargetIds，避免鲸灵 tab 未开时报错） ──
   if (cmd === 'download-products') {
     if (!opts.shop) { console.error('用法: node cli.js download-products --shop <店铺>'); process.exit(1); }
+    await ensureAftersalesPaused();
     const cdp = require('./lib/cdp');
     const { downloadProducts } = require('./lib/ops/download-products');
     const targets = await cdp.getTargets();
@@ -158,22 +160,19 @@ async function main() {
   // match 只操作 ERP，对已确认的 sku-records 执行写入；不应被无关的鲸灵 tab 阻塞
   if (cmd === 'match') {
     if (!opts.shop) { console.error('用法: node cli.js match --shop <店铺> [--limit N]'); process.exit(1); }
+    await ensureAftersalesPaused();
     const limitIdx = args.indexOf('--limit');
     const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1]) : Infinity;
     const erpId = await getErpTargetId();
     const { main: matchMain } = require('./lib/auto-match2');
-    const { releaseErpLock } = require('./lib/erp-lock');
-    try {
-      await matchMain(erpId, opts.shop, limit, opts.brand);
-    } finally {
-      await releaseErpLock();
-    }
+    await matchMain(erpId, opts.shop, limit, opts.brand);
     return;
   }
 
   // 匹配后的 check 可复用已确认活动范围，只需 ERP tab
   if (cmd === 'check' && args.includes('--reuse-active')) {
     if (!opts.shop) { console.error('用法: node cli.js check --shop <店铺> --reuse-active --skip-download'); process.exit(1); }
+    await ensureAftersalesPaused();
     const erpId = await getErpTargetId();
     const { runCheck } = require('./lib/check');
     const result = await runCheck(null, erpId, opts.shop, {
@@ -181,6 +180,25 @@ async function main() {
       skipDownload: args.includes('--skip-download'),
       brand: opts.brand,
     });
+
+    const skuTotal = (result.products || []).reduce((sum, product) => sum + ((product.skus || []).length), 0);
+    const summary = result.summary || {};
+    const complete = skuTotal > 0
+      && summary.notInCorr === 0
+      && summary.recognitionDone === skuTotal
+      && summary.comparisonMatch === skuTotal
+      && summary.comparisonMismatch === 0
+      && summary.comparisonPending === 0
+      && summary.pendingVisualReview === 0
+      && summary.unmatchedAwaitingMatch === 0;
+
+    if (complete) {
+      await resumeAftersales();
+      console.error('[check] 完成门禁全部通过，售后系统已自动恢复');
+    } else {
+      console.error('[check] 尚未达到最终完成门禁，售后系统保持停止');
+    }
+
     console.log(JSON.stringify(result, null, 2));
     return;
   }
@@ -226,6 +244,7 @@ async function main() {
         console.error('用法: node cli.js check --shop <店铺名> --brand <品牌>');
         process.exit(1);
       }
+      await ensureAftersalesPaused();
       const { runCheck } = require('./lib/check');
       const result = await runCheck(jlId, erpId, opts.shop, {
         brand: opts.brand,
@@ -245,6 +264,7 @@ async function main() {
         console.error('用法: node cli.js mark-suite <店铺> <货号> <平台编码>');
         process.exit(1);
       }
+      await ensureAftersalesPaused();
       const { main: markMain } = require('./lib/mark-suite');
       await markMain(erpId, shopName, productCode, platformCode);
       break;
@@ -262,6 +282,7 @@ async function main() {
         console.error('品牌必须明确指定，例如: kgos, hee, ritekoko');
         process.exit(1);
       }
+      await ensureAftersalesPaused();
       const { matchOne } = require('./lib/match-one');
       const result = await matchOne(erpId, jlId, opts.shop, productCode, { from: fromStep, brand: explicitBrand });
       console.log(JSON.stringify(result, null, 2));

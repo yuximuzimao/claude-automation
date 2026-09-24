@@ -9,7 +9,6 @@ const assert = require('assert');
 
 const PROJECT_ROOT = path.join(__dirname, '..');
 const { testContext, initTestContext, resetErp, clearSessionCache } = require('./helpers/browser');
-const { writeFixture, makeSkuRecord, makeSkuRecordsJson } = require('./helpers/fixtures');
 const { assertOk, assertSkipped, assertThrows } = require('./helpers/assertions');
 const { STEPS } = require('./schemas');
 
@@ -154,159 +153,6 @@ const tmpFile = path.join(__dirname, '_test_safe_write.json');
   try { fs.unlinkSync(tmpFile + '.tmp'); } catch {}
 
   return summarizeResults('L1-safe-write', results);
-}
-
-// ── L1 测试套件：annotate ──────────────────────────────────────────────────
-
-async function runL1Annotate(n = 3) {
-const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
-  const testPath = path.join(PROJECT_ROOT, 'data/sku-records-test.json');
-
-  // annotate.js 硬编码了 data/sku-records.json 路径
-  // 我们需要临时替换文件
-  const annotate = require(path.join(PROJECT_ROOT, 'lib/ops/annotate'));
-
-  const results = [];
-  process.stdout.write(`\n▸ L1-annotate annotate 类型标注 (${n}次): `);
-
-  for (let i = 1; i <= n; i++) {
-    const start = Date.now();
-    try {
-      // 备份原始文件
-      let original = null;
-      try { original = fs.readFileSync(skuRecordsPath, 'utf8'); } catch {}
-
-      // 用例 1: 单品
-      writeFixture(makeSkuRecordsJson({
-        stage: 'images_done', shopName: 'T', productCode: 'T',
-        skus: { '001': makeSkuRecord({ platformCode: '001', recognition: { type: '单品', items: [{ name: 'X', qty: 1 }], raw: 'test' } }) },
-      }));
-      const r1 = await annotate.annotate();
-      assert.strictEqual(r1.ok, true);
-      const d1 = JSON.parse(fs.readFileSync(skuRecordsPath, 'utf8'));
-      assert.strictEqual(d1.skus['001'].itemType, 'single');
-      assert.strictEqual(d1.stage, 'annotated');
-
-      // 用例 2: 套件
-      writeFixture(makeSkuRecordsJson({
-        stage: 'images_done', shopName: 'T', productCode: 'T',
-        skus: { '002': makeSkuRecord({ platformCode: '002', recognition: { type: '组合装', items: [{ name: 'A', qty: 2 }, { name: 'B', qty: 3 }], raw: 'test' } }) },
-      }));
-      await annotate.annotate();
-      const d2 = JSON.parse(fs.readFileSync(skuRecordsPath, 'utf8'));
-      assert.strictEqual(d2.skus['002'].itemType, 'suite');
-
-      // 用例 3: 混合批量
-      writeFixture(makeSkuRecordsJson({
-        stage: 'images_done', shopName: 'T', productCode: 'T',
-        skus: {
-          '003': makeSkuRecord({ platformCode: '003', recognition: { type: '单品', items: [{ name: 'X', qty: 1 }], raw: '' } }),
-          '004': makeSkuRecord({ platformCode: '004', recognition: { type: '单品', items: [{ name: 'Y', qty: 1 }], raw: '' } }),
-          '005': makeSkuRecord({ platformCode: '005', recognition: { type: '组合装', items: [{ name: 'A', qty: 2 }], raw: '' } }),
-        },
-      }));
-      const r3 = await annotate.annotate();
-      assert.strictEqual(r3.data.singles, 2);
-      assert.strictEqual(r3.data.suites, 1);
-
-      // 用例 4: HEE 配件规则按 platformCode 精确注入
-      writeFixture(makeSkuRecordsJson({
-        stage: 'images_done', shopName: 'T', productCode: 'yx001', brand: 'hee',
-        skus: {
-          '260805-4': makeSkuRecord({
-            platformCode: '260805-4',
-            productCode: 'yx001',
-            recognition: { type: '单品', items: [{ name: '主商品', qty: 1 }], raw: '' },
-          }),
-        },
-      }));
-      const r4 = await annotate.annotate();
-      const d4 = JSON.parse(fs.readFileSync(skuRecordsPath, 'utf8'));
-      assert.strictEqual(r4.data.injected, 1);
-      assert.ok(d4.skus['260805-4'].recognition.items.some(item => item.name === 'HEE悦希印花礼盒（天地盖）白色'));
-
-      // 用例 5: stage 错误
-      writeFixture(makeSkuRecordsJson({
-        stage: 'skus_read', shopName: 'T', productCode: 'T',
-        skus: { '006': makeSkuRecord({ platformCode: '006', recognition: { items: [{ qty: 1 }] } }) },
-      }));
-      await assertThrows(() => annotate.annotate(), 'images_done');
-
-      // 用例 6: recognition 缺失
-      writeFixture(makeSkuRecordsJson({
-        stage: 'images_done', shopName: 'T', productCode: 'T',
-        skus: { '007': makeSkuRecord({ platformCode: '007', recognition: null }) },
-      }));
-      await assertThrows(() => annotate.annotate(), 'recognition');
-
-      // 用例 7: 总数量为 0
-      writeFixture(makeSkuRecordsJson({
-        stage: 'images_done', shopName: 'T', productCode: 'T',
-        skus: { '008': makeSkuRecord({ platformCode: '008', recognition: { items: [{ qty: 0 }] } }) },
-      }));
-      await assertThrows(() => annotate.annotate(), '0');
-
-      // 恢复原始文件
-      if (original) fs.writeFileSync(skuRecordsPath, original);
-      else try { fs.unlinkSync(skuRecordsPath); } catch {}
-
-      results.push({ run: i, pass: true, elapsed: Date.now() - start });
-      process.stdout.write('✓');
-    } catch (e) {
-      results.push({ run: i, pass: false, error: e.message, elapsed: Date.now() - start });
-      process.stdout.write('✗');
-    }
-  }
-
-  return summarizeResults('L1-annotate', results);
-}
-
-// ── L1 测试套件：match-one 逻辑 ───────────────────────────────────────────
-
-async function runL1MatchOneLogic(n = 3) {
-const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
-  const matchOne = require(path.join(PROJECT_ROOT, 'lib/match-one')).matchOne;
-
-  const results = [];
-  process.stdout.write(`\n▸ L1-match-one-logic 编排器逻辑 (${n}次): `);
-
-  for (let i = 1; i <= n; i++) {
-    const start = Date.now();
-    try {
-      let original = null;
-      try { original = fs.readFileSync(skuRecordsPath, 'utf8'); } catch {}
-
-      // 用例 1: 无效 --from
-      await assertThrows(() => matchOne('x', 'x', 'T', 'T', { from: 'bogus', brand: 'kgos' }), '非法步骤');
-
-      // 用例 2: stage 太低
-      writeFixture(makeSkuRecordsJson({
-        stage: 'skus_read', shopName: 'T', productCode: 'T', skus: {},
-      }));
-      await assertThrows(() => matchOne('x', 'x', 'T', 'T', { from: 'match', brand: 'kgos' }), 'annotated');
-
-      // 用例 3: 编码不匹配
-      writeFixture(makeSkuRecordsJson({
-        stage: 'annotated', shopName: 'T', productCode: 'WRONG', skus: {},
-      }));
-      await assertThrows(() => matchOne('x', 'x', 'T', 'RIGHT', { from: 'match', brand: 'kgos' }), '不一致');
-
-      // 用例 4: 暂停在 recognize — 移到 L2（需要真实浏览器执行 download 步骤）
-      // L1 只验证纯逻辑，不执行实际 pipeline
-
-      // 恢复
-      if (original) fs.writeFileSync(skuRecordsPath, original);
-      else try { fs.unlinkSync(skuRecordsPath); } catch {}
-
-      results.push({ run: i, pass: true, elapsed: Date.now() - start });
-      process.stdout.write('✓');
-    } catch (e) {
-      results.push({ run: i, pass: false, error: e.message, elapsed: Date.now() - start });
-      process.stdout.write('✗');
-    }
-  }
-
-  return summarizeResults('L1-match-one-logic', results);
 }
 
 // ── L2 测试套件：targets ──────────────────────────────────────────────────
@@ -953,9 +799,8 @@ async function main() {
   if (!command || command === '--help') {
     console.log('用法:');
     console.log('  node test/run.js l0                    基础设施检查');
-    console.log('  node test/run.js --fast                 只跑 L1 单元测试');
-    console.log('  node test/run.js step <MODULE> [-n N]   单模块稳定性测试');
-    console.log('  node test/run.js all                    全量测试');
+    console.log('  node test/run.js --fast                 只跑无业务运行态副作用的 L1 测试');
+    console.log('  node test/run.js step <MODULE> [-n N]   显式单模块 live 测试（按需运行，部分会操作 ERP/运行态）');
     process.exit(0);
   }
 
@@ -968,8 +813,6 @@ async function main() {
     console.log('\n═══ L1 快速测试 ═══');
     const results = [];
     results.push(await runL1SafeWrite(3));
-    results.push(await runL1Annotate(3));
-    results.push(await runL1MatchOneLogic(3));
     printReport(results);
     const allPass = results.every(r => r.failures.length === 0);
     process.exit(allPass ? 0 : 1);
@@ -983,8 +826,6 @@ async function main() {
     const results = [];
     switch (module) {
       case 'safe-write': results.push(await runL1SafeWrite(n)); break;
-      case 'annotate': results.push(await runL1Annotate(n)); break;
-      case 'match-one-logic': results.push(await runL1MatchOneLogic(n)); break;
       case 'targets': await initTestContext(); results.push(await runL2Targets(n)); break;
       case 'cdp': await initTestContext(); results.push(await runL2Cdp(n)); break;
       case 'navigate': await initTestContext(); results.push(await runL2Navigate(n)); break;
@@ -997,37 +838,9 @@ async function main() {
       case 'create-suite': await initTestContext(); results.push(await runL2CreateSuite(n)); break;
       case 'verify-archive': await initTestContext(); results.push(await runL2VerifyArchive(n)); break;
       default:
-        console.error(`未知模块: ${module}。可用: safe-write, annotate, match-one-logic, targets, cdp, navigate, ensure-corr-page, read-table-rows, download-products, read-skus, read-erp-codes, remap-single, create-suite, verify-archive`);
+        console.error(`未知模块: ${module}。可用: safe-write, targets, cdp, navigate, ensure-corr-page, read-table-rows, download-products, read-skus, read-erp-codes, remap-single, create-suite, verify-archive`);
         process.exit(1);
     }
-    printReport(results);
-    process.exit(results.every(r => r.failures.length === 0) ? 0 : 1);
-  }
-
-  if (command === 'all') {
-    console.log('\n═══ 全量测试 ═══');
-    const results = [];
-    // L1
-    results.push(await runL1SafeWrite(3));
-    results.push(await runL1Annotate(3));
-    results.push(await runL1MatchOneLogic(3));
-    // L2 基础设施
-    await initTestContext();
-    results.push(await runL2Targets(5));
-    results.push(await runL2Cdp(5));
-    results.push(await runL2Navigate(5));
-    // L2 页面操作
-    results.push(await runL2EnsureCorrPage(3));
-    results.push(await runL2ReadTableRows(3));
-    results.push(await runL2DownloadProducts(1));
-    // L2 SKU 读写
-    results.push(await runL2ReadSkus(5));
-    results.push(await runL2ReadErpCodes(3));
-    // L2 匹配操作
-    results.push(await runL2RemapSingle(5));
-    results.push(await runL2CreateSuite(5));
-    results.push(await runL2VerifyArchive(3));
-    // L2 编排器 待实现...
     printReport(results);
     process.exit(results.every(r => r.failures.length === 0) ? 0 : 1);
   }

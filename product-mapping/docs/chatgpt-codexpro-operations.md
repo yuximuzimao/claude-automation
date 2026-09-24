@@ -1,168 +1,102 @@
-# ChatGPT 通过 CodexPro 操作商品匹配的运行手册
+# ChatGPT + CodexPro 商品匹配运行契约
 
-本文只描述 **ChatGPT 对话模型通过 CodexPro 连接本地工作区** 时的交互层限制和规避流程，不替代商品匹配业务规则。
+本文是 **ChatGPT 对话模型通过 CodexPro 操作本地商品匹配项目时的唯一执行环境规则**。
 
-业务流程仍以 `docs/INDEX.md` 和 `docs/matching-stability.md` 为准；其中 `docs/INDEX.md §1「脚本自治边界」` 是脚本运行期间是否允许观察/轮询的唯一详细规则。本地 Codex 直接在终端执行时，不需要套用本文中专属于 ChatGPT/CodexPro 的图片桥接和前台调用限制，但同样必须遵守该自治边界。
+它只回答“命令由谁启动、在哪里持续运行、什么时候重新介入、图片怎样进入当前对话”。业务流程、比较规则和完成门禁仍由 `docs/INDEX.md` 负责；ERP 中断恢复由 `docs/matching-stability.md` 负责。其它文档只能指向本文，不得再维护另一套 CodexPro/Terminal 执行策略。
 
-## 1. 开始前先确认执行模式
+## 1. 正式命令固定走本机 Terminal
 
-每次任务开始先明确由谁负责哪一段：
+不要再判断“这次 SKU 少不少年”“预计会不会超过 CodexPro 时限”。只按命令类型路由。
 
-| 工作 | 推荐执行者 |
-|---|---|
-| 阅读规则、审计方案、与用户确认识图和写入范围 | ChatGPT |
-| AI 视觉识图 | 当前对话中具备视觉能力的模型 |
-| 大批量、长时间浏览器写操作 | 本地 Codex / 本地终端；启动后让脚本自行运行，不做模型级实时轮询 |
-| 小范围只读探针、文件修改、短命令验证 | ChatGPT + CodexPro |
-| 匹配后的结构化自动核对 | 任一执行端，结果必须落到同一份报告；正常完成后只做一次终态审计 |
+### 必须由本机 Terminal 持续运行
 
-不要默认 ChatGPT + CodexPro 与本地 Codex 拥有相同的文件、图片和进程交互能力。
+ChatGPT + CodexPro 模式下，以下正式商品匹配命令**禁止**用 CodexPro 前台 `bash` 承载业务进程：
 
-## 2. 本地图片不能直接进入 ChatGPT 视觉通道
+- 首次 `node cli.js check --shop <店铺> --brand <品牌>`；
+- 匹配前 / 匹配后的 `node cli.js check --shop <店铺> --reuse-active --skip-download`；
+- `node cli.js match --shop <店铺>`；
+- `node cli.js match-one ...`；
+- 正式流程中的 `download-products`、`mark-suite`。
 
-### 已验证事实
+CodexPro 只允许执行一个很短的“启动动作”，把实际 Node 命令交给用户本机 Terminal。当前 macOS 工作区的固定方式是通过短 `osascript` 调用让 Terminal 执行 `cd /Users/chat/claude/product-mapping && <实际 Node 命令>`；CodexPro 只负责发起这一次 Terminal 命令，不用 `nohup`、后台 shell 或持续会话承载业务进程。Terminal 中的 Node 进程随后独立运行，不受 CodexPro 单次前台调用时限影响。
 
-- `codexpro.read` 适合读取文本文件，不会把本地 JPG/PNG/WebP 的像素交给 ChatGPT 视觉模型。
-- CodexPro 命令输出主要是文本；把整张图片转成 base64 再分块返回，体积大、容易截断，也不会自动变成可供视觉理解的图片附件。
-- 本地路径存在不代表当前 ChatGPT 对话可以直接看到该图片。
-- OCR 或本地视觉模型只能作为用户明确允许的辅助，不能在用户要求“由当前模型亲自识图”时替代视觉判断。
+这是一条**命令类别规则**，不是“长任务建议”。即使只有少量 SKU，也不要把正式 `check/match` 改回 CodexPro 前台执行。
 
-### 标准图片桥接流程
+### 可以直接使用 CodexPro 的工作
 
-1. 首次 `check` 完成后，保留原图和 `platformCode` 映射。
-2. 生成联系表，建议每张 2×4：
-   - 每格必须显示 `platformCode | productCode`；
-   - 保留 SKU 文案；
-   - 同时生成 `manifest.json`，记录 sheet、格位和原图路径。
-3. 图片较多时先上传联系表；只有模糊项再补原图，不要一开始上传几十张散图。
-4. 让用户明确授权“把图片附加到当前 ChatGPT 输入框但不发送”。
-5. 重新枚举 Chrome target，精确确认当前会话 URL/标题，不能复用旧 targetId。
-6. 找当前页面的文件输入框，例如 `#upload-photos` 或 `input[type=file]`，通过 CDP 附加文件。
-7. 只读核对附件文件名和数量；**不得点击发送、不得模拟 Enter**。
-8. 用户手动发送后，由当前 ChatGPT 视觉模型逐格完成 AI 识图，并按 manifest 写回 `recognition`。
-9. 联系表无法确认的 SKU 单独补原图，再判断；禁止凭缩略图猜测。
-10. 生成 `preview-match` 时展示“最终匹配明细”：AI 识图商品与自动注入配件放在同一张表中，配件只换字体颜色；用户确认覆盖两者的商品名称和数量。
+- 读取、搜索、编辑项目文件；
+- `node --check`、无业务运行态副作用的快速测试；
+- `targets`、短只读探针和定向诊断；
+- `preview-match`、`verify-table` 等短时间本地生成；
+- 已结束任务的一次终态报告审计。
 
-### 本轮可复用的临时工具
+## 2. 启动后的交互方式
 
-本次曾在 `_sandbox/` 中使用：
+正式命令启动到本机 Terminal 后：
 
-- `make-contact-sheets.py`
-- `make-master-sheet.py`
-- `inspect-chatgpt-upload.js`
-- `upload-contact-sheets-to-chatgpt.js`
-- `verify-chatgpt-attachments.js`
+1. ChatGPT 只确认“命令已经在本机 Terminal 启动”，不能把启动成功说成业务完成。
+2. 正常运行期间不轮询日志、DOM、`targets`、`auto-match-log.json` 或运行时 JSON；详细自治边界只看 `docs/INDEX.md §1`。
+3. 用户自己观察 Terminal。只有用户明确说“完成了 / 停了 / 卡住了 / 中断了 / 看下状态”时，ChatGPT 才重新介入。
+4. 重新介入时先读一次当前终态或故障状态；不得因为之前的进程已经结束就从头重跑。
+5. 若是中断或异常，按 `docs/matching-stability.md §4` 从 ERP 当前可观察状态恢复。
+6. 最终 `check --reuse-active --skip-download` 通过全部完成门禁后，CLI 会自动恢复售后系统；未通过或异常时售后保持停止。
 
-这些脚本是实战辅助，不是稳定业务入口。使用前必须重新检查 ChatGPT DOM 和 targetId，不能假设页面结构永久不变。
+正式流程开始前，用户需要先手动停止售后系统。CLI 会验证暂停状态；没有停止时拒绝进入正式商品匹配。
 
-## 3. CodexPro 前台命令有时间和输出边界
+## 3. 为什么不再使用“预计时长”判断
 
-### 时间边界
+CodexPro 的 `bash` 是前台调用，时限和进程持有能力由当前工具环境决定。真实 `check/match` 耗时受 ERP 页面、SKU 数量、网络和保存等待影响，事前无法可靠预测。
 
-CodexPro 的单次 `bash` 调用是前台、有限时长执行。本轮工具配置的上限为 180 秒；未来必须以当时的工具 schema / server config 为准，不能把 180 秒视为永久常量。大批量 ERP 写入通常仍可能超过单次调用时长。
+因此本项目不再保留：
 
-因此：
+- “50 个 SKU 才算长任务”；
+- “少量 SKU 可以先试 CodexPro”；
+- “快超时了再转本机”；
+- “超时后再决定要不要换执行端”。
 
-- 50 个 SKU 之类的长任务优先交给本地 Codex/终端持续执行；
-- ChatGPT + CodexPro 只适合短批次，且脚本必须具备可靠的断点续跑；
-- 不要承诺后台继续运行；工具调用结束或超时后，进程可能已经被终止。
+这些判断都会重新引入同一个错误入口。
 
-### 超时不等于业务操作完全失败
+## 4. 本地图片进入当前 ChatGPT 视觉通道
 
-命令被 `SIGTERM` 或工具超时终止时，可能已经：
+CodexPro 的文本读取不能把本地 JPG/PNG/WebP 像素直接交给当前 ChatGPT 视觉模型。用户要求由当前对话模型识图时，使用以下桥接：
 
-- 输出了完整或部分读取结果；
-- 完成了某些页面状态变化；
-- 写入了部分 SKU；
-- 卡在 ERP 写流程中间状态。
+1. 首次 check 完成后保留 `productCode + platformCode` 与原图映射。
+2. 生成联系表；每格显示 `platformCode | productCode` 和 SKU 文案，同时生成 manifest。
+3. 优先上传联系表；模糊项再补原图。
+4. 只有用户明确允许后，才可把文件附加到当前 ChatGPT 输入框。
+5. 附件操作前重新枚举 ChatGPT target，按当前 URL/标题确认，禁止复用旧 targetId。
+6. 只附加并核对文件名/数量；不得点击发送或模拟 Enter。
+7. 用户手动发送后，由当前 ChatGPT 视觉模型识图并写回 recognition。
+8. OCR、本地 YOLO 或其它模型只能作为用户明确允许的辅助，不能冒充当前对话模型的识图结论。
 
-重新执行前必须检查：
+`_sandbox/` 中的联系表和上传辅助脚本属于临时工具，不是稳定业务入口；使用前必须重新核对当前 ChatGPT DOM。
 
-1. stdout/stderr 已输出到哪里；
-2. `auto-match-log.json` 的 done/failed/scope；
-3. 目标 SKU 当前是否已有 `erpCode`；
-4. 是否已经出现“复制为套件”；
-5. 是否存在残留弹窗或勾选状态。
+## 5. CodexPro 工具边界
 
-禁止把“CodexPro 返回 timeout”直接解释为“什么都没发生”，也禁止不检查状态就从头重跑。
-
-### 输出边界
-
-大型 JSON、完整 DOM、base64 和全量报告容易超过工具返回上限。应采用：
-
-- 先统计、再定向读取；
-- 按 platformCode 或货号过滤；
-- 大文件分行读取；
-- DOM 只返回目标行、按钮、可见弹窗和关键 Vue 状态。
-
-### 工具使用边界
-
-ChatGPT 侧应优先使用 CodexPro 的结构化工具，而不是把本地 Codex 的终端习惯原样搬过来：
-
-- 开始时打开/确认 workspace，并持续复用同一个 `workspace_id`；
-- 文件内容用 `read`，定位用 `search`，精确修改用 `edit`/`write`，改动审查用 `show_changes`；
-- `bash` 用于受控的测试、脚本和短探针，不用 shell `cat`/重定向代替文件工具，也不把交互式终端当作稳定后台会话；
-- 工具返回被截断时缩小范围继续读取，不根据半段输出补猜其余内容；
-- CodexPro 工具能力和允许的命令可能由当前服务器配置决定，调用前以本轮实际 schema 为准。
-
-## 4. 浏览器 target 和页面状态不是固定资源
-
-- Chrome targetId 会因关闭、重开、刷新或代理映射而变化。
-- 每次关键动作前重新枚举 target，按 URL 精确确认 ERP、鲸灵和当前 ChatGPT 会话。
-- `match` 和后置 `check --reuse-active --skip-download` 只依赖 ERP；若外层 CLI 因鲸灵 tab 缺失而阻塞，应修正依赖边界，不要临时打开错误鲸灵页面。
-- 诊断动作也可能改变页面：打开“换”弹窗、输入搜索条件、翻页都会污染后续自动化状态。诊断结束必须关闭弹窗、清筛选或强制走 `navigateErp()` 重新建立干净状态。
-- 记录时要区分“业务脚本自动点击”和“ChatGPT 为诊断主动打开”。本轮“换对应商品”是诊断操作，不是匹配脚本误点。
-
-## 5. 长批量任务的推荐交接方式
-
-当 ChatGPT 已完成识图并得到用户确认后，交给本地 Codex 的 handoff 至少包含以下内容。handoff 只负责一次性启动和终态返回；脚本正常运行期间不得让 Codex 以读取日志、DOM、`auto-match-log.json` 等方式高频监工，详细边界统一见 `docs/INDEX.md §1`：
-
-- 店铺和品牌；
-- 当前活动 SKU 总数、已匹配数、待匹配数；
-- 已确认的 `sku-records.json` 不得重做识图；
-- 是否已经下载平台商品；
-- 是否允许写 ERP；
-- stop-on-error 要求；
-- 中断恢复规则；
-- 最终执行命令；
-- 完成门禁。
-
-示例完成门禁：
-
-```text
-recognitionDone = SKU总数
-comparisonMatch = SKU总数
-comparisonMismatch = 0
-comparisonPending = 0
-pendingVisualReview = 0
-未匹配 SKU = 0
-```
-
-本地 Codex 完成后，ChatGPT 只需审计结构化报告和异常项；自动核对全部通过时，不再要求用户人工重复检查 ERP 组合。
+- 打开工作区后持续复用同一个 `workspace_id`。
+- 文件内容用 `read`，定位用 `search`，修改用 `edit/write`，审查改动用 `show_changes`。
+- CodexPro `bash` 只用于短测试、短探针和“启动本机 Terminal”这一瞬时动作。
+- 大型 JSON / DOM / base64 不直接整块返回；先统计，再定向读取。
+- 浏览器 target 会变化；关键诊断前重新枚举并按 URL/标题核对。
+- 诊断动作可能污染页面状态；正式续跑前必须清理诊断残留或重新建立干净页面状态。
 
 ## 6. 禁止事项
 
-- 禁止反复尝试用 base64 把本地图片“塞进”CodexPro 文本输出。
-- 禁止在未授权时把文件附加到用户当前 ChatGPT 输入框。
-- 禁止自动点击 ChatGPT 的发送按钮。
-- 禁止把 OCR、本地 YOLO 或其他模型结果冒充当前对话模型的 AI 识图结论。
-- 禁止用一个 180 秒前台调用承载整批长时间 ERP 写入，然后假设会持续运行。
-- 禁止在 CodexPro 超时后直接重跑写操作而不检查 ERP 中间状态。
-- 禁止复用过期 targetId。
-- 禁止让诊断用弹窗、搜索条件或页码残留进入正式写流程。
+- 禁止用 CodexPro 前台 `bash` 直接跑正式 `check/match`，即使看起来这次可能很快。
+- 禁止正常运行期间为了“看看进度”持续轮询。
+- 禁止 CodexPro timeout 后不检查 ERP 中间状态就重跑写操作。
+- 禁止把本地图片转 base64 文本冒充视觉输入。
+- 禁止未授权附加文件、自动发送 ChatGPT 消息或复用过期 targetId。
+- 禁止让诊断弹窗、筛选条件或页码残留进入正式写流程。
 
-## 7. ChatGPT + CodexPro 预检清单
+## 7. 启动前最小检查
 
-在开始下一轮商品匹配前确认：
+ChatGPT + CodexPro 开始一次正式商品匹配时，只确认：
 
-- [ ] 已读 `SKILL.md`、`docs/INDEX.md`、`docs/matching-stability.md` 和本文；
-- [ ] 已决定长批量由本地 Codex执行，还是由具备断点续跑的短批 CodexPro 调用执行；
-- [ ] 如需由当前对话模型完成 AI 识图，已提前规划联系表和 manifest，而不是任务中途再尝试图片传输；
-- [ ] 已明确用户是否允许将图片附加到当前 ChatGPT 输入框；
-- [ ] 当前 ERP / 鲸灵 / ChatGPT target 均已在关键动作前重新枚举并按 URL/标题核对；
-- [ ] 识图结果、品牌和活动范围已落到共享文件，可由本地 Codex直接继承；
-- [ ] 后置核查使用结构化自动比较，只有自动核对异常才进入人工复核。
+- 已读本文，正式 check/match 将固定交给本机 Terminal；
+- 用户已手动停止售后系统；
+- 首次 check 所需店铺 / 品牌 / JL 当前页面已明确；
+- 如需当前 ChatGPT 识图，已提前规划图片桥接；
+- 脚本正常运行后不监工，等待用户主动通知完成或异常。
 
-## 8. 实战来源
-
-本手册来源于 `docs/archive/2026-07-25-lanze-match/chatgpt-codexpro-session.md`。历史记录描述当时发生了什么；本文描述下次应怎么做。
+历史实战证据见 `docs/archive/2026-09-22-hee-922-maoye-handoff/`。历史只说明规则来源，不再作为执行入口。

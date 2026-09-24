@@ -13,20 +13,6 @@ const STEPS = {
     resetTarget: null, // 无浏览器
   },
 
-  'L1-annotate': {
-    id: 'L1-annotate',
-    name: 'annotate 类型标注',
-    level: 'L1',
-    resetTarget: null,
-  },
-
-  'L1-match-one-logic': {
-    id: 'L1-match-one-logic',
-    name: 'match-one 编排器逻辑',
-    level: 'L1',
-    resetTarget: null,
-  },
-
   // ── L2 基础设施测试 ─────────────────────────────────────
 
   'L2-targets': {
