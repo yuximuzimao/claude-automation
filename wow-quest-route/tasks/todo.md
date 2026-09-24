@@ -89,7 +89,7 @@
 
 ## D. 多组数据成熟后
 
-- [ ] **接入Leatrix Plus系统飞行时间静态表。** 来源为`.ai-bridge/Leatrix_Plus.zip`（toc版本3.80.12，addon_version内部构建号548699，zip SHA256=`0516c2f75c64a4bc4504a477794e0b8c094389c2db362650279395cdf96665b2`）；解析`Leatrix_Plus_Flight_Horde.lua`/`Leatrix_Plus_Flight_Alliance.lua`，转换成项目自己的带版本/来源的派生飞行时间数据并长期保存在项目内，转换验收后删除`.ai-bridge/Leatrix_Plus.zip`。诺森德`[113]`中key为按顺序连接的飞行节点归一化坐标序列、value为总秒数，注释保留节点名。系统飞行时间默认以Leatrix静态表为基准，覆盖此前用户手工墙钟得到的粗略系统飞行时间；用户实测只保留为历史校验样本，不再反向覆盖Leatrix值。当前交叉验证：新阿加曼德→银色比武场Leatrix为449秒（7:29），用户粗测7:20，相差9秒。
+- [ ] **接入Leatrix Plus系统飞行时间静态表。** 来源为`data/sources/leatrix/Leatrix_Plus.zip`（toc版本3.80.12，addon_version内部构建号548699，zip SHA256=`0516c2f75c64a4bc4504a477794e0b8c094389c2db362650279395cdf96665b2`）；解析`Leatrix_Plus_Flight_Horde.lua`/`Leatrix_Plus_Flight_Alliance.lua`，转换成项目自己的带版本/来源的派生飞行时间数据并长期保存在项目内，转换验收后删除该原始ZIP。诺森德`[113]`中key为按顺序连接的飞行节点归一化坐标序列、value为总秒数，注释保留节点名。系统飞行时间默认以Leatrix静态表为基准，覆盖此前用户手工墙钟得到的粗略系统飞行时间；用户实测只保留为历史校验样本，不再反向覆盖Leatrix值。当前交叉验证：新阿加曼德→银色比武场Leatrix为449秒（7:29），用户粗测7:20，相差9秒。
 - [ ] **重算最终墙钟与金币模型。** 第一组DK只建立真实基线；等多组重复实跑后，再以稳定墙钟、地图收益、失败率和泰坦碎片收益形成正式长期模型。单任务金币/奖励物/SellPrice基础事实读取Task Card `rewards`；路线级预测统一走Stage 9 `lib/route_economy.py`，旧`data/route-atlas/quest-reward-economy.json`仅保留历史证据且不得重建。实跑金币/泰坦碎片按Economy Observation原样记录，未给市场估值时只保留数量，不折成精确金币。
 - [ ] **统一复盘高难/低收益任务。** 等多组实跑后，再把精英、个人高操作、长随机尾任务分成`长期保留 / 条件保留 / 永久不做`，不因首轮单次体验直接永久化。
 - [ ] **按经济表做最终漏单/收益对账。** 等路线稳定后，用届时最新Journey与Task Card `rewards`派生的经济汇总对账；奎尔德拉24799—24801需残破剑柄，不计普通漏单。

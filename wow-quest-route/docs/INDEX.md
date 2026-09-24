@@ -59,6 +59,7 @@
 | 视频提取方法 | `video-extraction/README.md` |
 | 当前视频恢复点 | `video-extraction/CURRENT.md` |
 | 后处理计划 | `video-extraction/POST-EXTRACTION-PLAN.md` |
+| 逐集事实检查点 | `../data/sources/video-extraction/` |
 
 ## 历史
 

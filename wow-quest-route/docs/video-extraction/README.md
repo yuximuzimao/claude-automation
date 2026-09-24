@@ -29,7 +29,7 @@
 
 1. `docs/video-extraction/README.md`
 2. `docs/video-extraction/CURRENT.md`
-3. 常规正序/回补连续处理中读上一已处理集的`.ai-bridge/wow-video-extraction/episode-*-extraction.md`
+3. 常规正序/回补连续处理中读上一已处理集的`data/sources/video-extraction/episode-*-extraction.md`
 4. 如需机器结构，再读该集对应`episode-*-events.json`
 
 当前从正序第53集切换到回补第1集是特殊边界：第1集开始前读`episode-53-extraction.md`作为阶段恢复点，不存在`episode-0`；完成第1集后，再按1→2→…→12使用上一回补集检查点。
@@ -116,8 +116,8 @@ Questie只用于名称和结构校准，不能替代视频证据证明某动作�
 每集完成后立即写：
 
 ```text
-/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-N-extraction.md
-/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-N-events.json
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-N-extraction.md
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-N-events.json
 ```
 
 原始截图、OCR和中间筛选保存在：
@@ -139,8 +139,8 @@ docs/archive/video/
 NEAT归档只保存阶段结果、证据边界、错误修正和下一次约束，不复制整份单集时间轴。每次做NEAT归档时必须同步核对：
 
 - `docs/video-extraction/CURRENT.md`；
-- `/Users/chat/claude/.ai-bridge/wow-video-extraction/progress.json`；
-- `/Users/chat/claude/.ai-bridge/wow-video-extraction/CURRENT.md`；
+- `data/sources/video-extraction/progress.json`；
+- `data/sources/video-extraction/CURRENT.md`；
 - `tasks/todo.md`。
 
 这些状态不得指向不同的下一集。项目`CURRENT.md`仍是唯一人类主状态，`progress.json`用于机器恢复。

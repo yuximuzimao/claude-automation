@@ -11,7 +11,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-VIDEO_ROOT = ROOT.parent / ".ai-bridge" / "wow-video-extraction"
+VIDEO_ROOT = ROOT / "data" / "sources" / "video-extraction"
 OUT_DIR = ROOT / "data" / "video-route"
 ARCHIVE_DIR = ROOT / "docs" / "archive" / "analysis"
 QUESTIE_ZIP = ROOT / "_sandbox" / "sources" / "Questie-v11.32.3.zip"

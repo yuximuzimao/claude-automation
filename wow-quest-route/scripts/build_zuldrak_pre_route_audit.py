@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-VIDEO_ROOT = ROOT.parent / ".ai-bridge" / "wow-video-extraction"
+VIDEO_ROOT = ROOT / "data" / "sources" / "video-extraction"
 FOUNDATION = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
 CLUSTERS = ROOT / "data/route-atlas/zuldrak-target-clusters.json"
 OVERRIDES = ROOT / "data/route-atlas/zuldrak-task-overrides.json"
