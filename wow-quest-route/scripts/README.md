@@ -81,7 +81,7 @@
 | `check_workbench_js.py` | 用真实浏览器检查候选workbench JS初始化/运行时错误；不解释业务数据。 |
 | `check_workbench_resume_playback.py` | 验证候选页Profile/step恢复、播放和HUD交互行为；只检查UI合同。 |
 | `download_route_map_assets.py` | 下载/缓存Route Atlas地图底图资源 |
-| `enrich_35_55_task_loot.py` | 为35–55候选研究数据补掉落/奖励证据；正式单任务事实仍以Task Card为准。 |
+| `enrich_35_55_task_loot.py` | 为35–55候选研究数据补掉落/奖励证据；运行时必须用`--database`显式提供AzerothCore WotLK五份SQL所在目录，正式单任务事实仍以Task Card为准。 |
 | `enrich_task_card_rewards.py` | 单task_id精确补Task Card rewards；AzerothCore提供金币/奖励物/SellPrice，Questie补zhCN名、full XP、声望；逐任务迁移使用 |
 | `export_a_route_task_details.py` | 导出旧A路线任务明细供分析 |
 | `export_icecrown_entry_tasks.py` | 导出冰冠入口任务集合 |

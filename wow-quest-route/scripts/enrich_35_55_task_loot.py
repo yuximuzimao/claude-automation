@@ -295,13 +295,21 @@ def time_from_item_objective(objective: dict[str, Any], level: int) -> dict[str,
 def main() -> None:
     parser = argparse.ArgumentParser(description="Enrich the 35-55 task foundation with AzerothCore WotLK loot rates")
     parser.add_argument("--foundation", default="data/routes/horde/blood-elf/35-55-task-foundation.json")
-    parser.add_argument("--database", default="_sandbox/azerothcore-database-wotlk/extracted")
+    parser.add_argument(
+        "--database",
+        required=True,
+        type=Path,
+        help="Directory containing the five extracted AzerothCore WotLK world database SQL files",
+    )
     parser.add_argument("--output", default="data/routes/horde/blood-elf/35-55-task-foundation-enriched.json")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[1]
     payload = json.loads((root / args.foundation).read_text(encoding="utf-8"))
-    database = root / args.database
+    database = args.database.expanduser()
+    if not database.is_absolute():
+        database = root / database
+    database = database.resolve()
 
     wanted_npcs: set[int] = set()
     wanted_objects: set[int] = set()
