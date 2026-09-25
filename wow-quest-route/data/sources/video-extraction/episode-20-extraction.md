@@ -97,7 +97,7 @@ Questie中存在两项中文同名任务：
 
 ## 文件与恢复点
 
-原始证据与OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep20/`：
+原始证据与OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`：
 
 - `coarse/`：55个60秒粗扫帧；
 - `fine5-opening/`：开场0—90秒，5秒间隔；

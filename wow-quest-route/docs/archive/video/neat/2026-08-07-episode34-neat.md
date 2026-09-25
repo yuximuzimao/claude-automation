@@ -1,6 +1,6 @@
 # NEAT会话归档：2026-08-07 第34集《北风苔原 69-70》与视频恢复状态统一
 
-状态：阶段归档。本轮完成第34集逐集事实提取、证据审计和跨对话恢复状态统一；第35集未打开、未截图、未处理。单集逐任务正文仍以`/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-34-extraction.md`和`episode-34-events.json`为准，本归档只保存阶段结论、证据边界、错误修正和后续约束。
+状态：阶段归档。本轮完成第34集逐集事实提取、证据审计和跨对话恢复状态统一；第35集未打开、未截图、未处理。单集逐任务正文仍以`/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-34-extraction.md`和`episode-34-events.json`为准，本归档只保存阶段结论、证据边界、错误修正和后续约束。
 
 ## N — 当前目标与最终状态
 
@@ -66,7 +66,7 @@
 - 逐任务时间轴、经验、任务ID和片尾状态只保存在单集Markdown/JSON检查点。
 - `docs/video-extraction/README.md`只保存长期稳定的方法与证据规则。
 - `docs/video-extraction/CURRENT.md`是项目内唯一人类当前状态。
-- `.ai-bridge/wow-video-extraction/progress.json`是机器恢复状态，必须与项目CURRENT同步。
+- `data/sources/video-extraction/progress.json`是机器恢复状态，必须与项目CURRENT同步。
 - NEAT会话归档只保存阶段结果、证据边界、错误修正和下一次约束，不复制整份单集正文。
 
 ### 2. 等级证据规则
@@ -88,7 +88,7 @@
 
 1. `docs/video-extraction/README.md`；
 2. `docs/video-extraction/CURRENT.md`；
-3. `/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-34-extraction.md`；
+3. `/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-34-extraction.md`；
 4. 必要时读`episode-34-events.json`。
 
 不得预加载全部已完成集、整份NEAT、实时五开路线或全部候选数据。
@@ -111,7 +111,7 @@
 ### 问题三：重复恢复文件长期不同步
 
 - 项目`docs/video-extraction/CURRENT.md`已经推进到第35集。
-- `.ai-bridge/wow-video-extraction/progress.json`、`.ai-bridge/wow-video-extraction/CURRENT.md`、桥接README、`docs/NEXT_CHAT_HANDOFF.md`和`tasks/todo.md`仍停在第26集或更早。
+- `data/sources/video-extraction/progress.json`、`data/sources/video-extraction/CURRENT.md`、桥接README、`docs/NEXT_CHAT_HANDOFF.md`和`tasks/todo.md`仍停在第26集或更早。
 - 影响：新对话或代理可能绕过主CURRENT，从错误集数恢复并重复处理第26—34集。
 - 修正：本次归档同步更新所有恢复入口为“已完成13—34集，下一集35”；今后每完成一集，必须把机器状态与分流入口纳入最终一致性校验。
 

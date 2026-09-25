@@ -95,6 +95,6 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep25/`。正式计入的14个截图目录共826帧，全部通过暂停状态与媒体时长校验。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。正式计入的14个截图目录共826帧，全部通过暂停状态与媒体时长校验。
 
 下一集是第26集《地狱火半岛59-60》，BVID `BV12XijBmEhq`，时长53:41。该信息来自当前页面合集状态；本轮没有导航、播放、截图或处理第26集。

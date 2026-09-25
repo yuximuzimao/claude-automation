@@ -60,7 +60,7 @@
 | 当前视频恢复点 | `video-extraction/CURRENT.md` |
 | 后处理计划 | `video-extraction/POST-EXTRACTION-PLAN.md` |
 | 逐集事实检查点 | `../data/sources/video-extraction/` |
-| 原始截图证据说明 | `../data/sources/video-extraction/RAW-EVIDENCE.md` |
+| 原始截图证据退役记录 | `../data/sources/video-extraction/RAW-EVIDENCE.md` |
 | 视频取证工具 | `../scripts/video-extraction/README.md` |
 
 ## 历史

@@ -1,12 +1,15 @@
-# 视频原始截图证据
+# 视频原始截图证据退役记录
 
-`raw-evidence/video-ep1`至`video-ep53`保存视频拆解时生成的原始截图、OCR文本和截图manifest，用于必要时离线复核单集事实。
+2026-09-25，用户确认删除视频拆解阶段产生的原始截图、OCR文本和截图manifest。已删除内容约27.2 GiB，覆盖第1—53集。
 
-- 规模：约27.2 GiB、29,000余个文件；53集齐全。
-- 日常入口：路线研究优先读取同目录的`episode-N-extraction.md`、`episode-N-events.json`以及`data/video-route/`派生索引，不默认加载原始截图。
-- 使用条件：只有逐集事实与派生索引不足以裁决具体画面时，才进入对应`raw-evidence/video-epN/`。
-- 可重建性：视频仍在线时，可依据检查点保存的BVID与manifest时间重新截图；外部视频失效后，这里是唯一的本地像素级证据。
-- Git：原始证据体积过大，按精确目录规则忽略，不提交仓库。
-- 备份：工作区周备份精确排除本目录，避免每周重复复制约27GB；2026-09-20及更早的现有工作区备份仍包含旧位置的原始证据。
+继续保留的正式结果：
 
-视频取证工具见`../../../scripts/video-extraction/README.md`。
+- `episode-N-extraction.md`：53集人可读事实、证据判断与缺口；
+- `episode-N-events.json`：53集机器事件；
+- `data/video-route/`：全集事件、地图顺序、邻接与跨集边界索引；
+- `docs/video-extraction/`：取证方法、证据边界和完成状态；
+- `scripts/video-extraction/`：暂停打开、显式seek截图、OCR和文本筛选工具。
+
+如果以后必须重新核验画面，先从单集检查点取得BVID和时间范围，再按`../../../scripts/video-extraction/README.md`重新取证；临时截图统一写入`_sandbox/video-extraction/video-epN/`，结论写回正式检查点后删除临时文件。
+
+删除时，2026-08-23至2026-09-20的多份工作区周备份仍包含旧位置的原始证据；这些备份会按保留8份的策略逐周轮换，不作为长期现役入口。

@@ -174,6 +174,6 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep28/`。正式计入12个截图目录共1007帧，全部通过暂停状态、截图成功、帧数和媒体时长校验。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。正式计入12个截图目录共1007帧，全部通过暂停状态、截图成功、帧数和媒体时长校验。
 
 下一集是第29集《地狱火半岛 64》，BVID `BV1MtqcBCEZs`，合集标注时长38:48（2328秒）。该信息来自当前页面合集状态；本轮没有导航、播放、截图或处理第29集。

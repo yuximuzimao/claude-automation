@@ -110,15 +110,15 @@
 
 ## 文件与恢复点
 
-- 粗扫帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/coarse/`
-- 粗扫OCR：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/coarse-ocr.txt`
-- 开场5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine5-start/`
-- 首次藏宝海湾5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine5-booty-start/`
-- 血帆首环1秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine1-bloodsail-chain/`
-- 野外20秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine20-jungle/`
-- 泰希斯5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine5-tethis/`
-- 交付区5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine5-hub/`
-- 血帆营地20秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine20-bloodsail/`
-- 最终回城5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine5-final-hub/`
-- 结尾10秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep17/fine10-end/`
+- 粗扫帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 粗扫OCR：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 开场5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 首次藏宝海湾5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 血帆首环1秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 野外20秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 泰希斯5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 交付区5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 血帆营地20秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 最终回城5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 结尾10秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
 - 本检查点可独立用于下一次继续，不依赖当前聊天上下文。

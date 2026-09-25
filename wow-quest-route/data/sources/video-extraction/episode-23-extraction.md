@@ -100,7 +100,7 @@ Questie中存在三项连续同名任务：
 
 ## 文件与恢复点
 
-原始证据与OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep23/`：
+原始证据与OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`：
 
 - `coarse/`：49帧；
 - `fine5-opening/`：73帧；

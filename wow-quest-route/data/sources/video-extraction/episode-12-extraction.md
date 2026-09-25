@@ -146,7 +146,7 @@
 
 原始证据和OCR位于：
 
-`/Users/chat/claude/wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep12/`
+`data/sources/video-extraction/RAW-EVIDENCE.md`
 
 正式证据：
 

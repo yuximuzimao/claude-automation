@@ -176,6 +176,6 @@ Questie中存在两个同名任务。本集任务由泰雷多尔的诺兰妮提�
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep30/`。正式计入10个截图目录共530帧，全部通过暂停状态、截图成功、帧数和媒体时长校验。等级识别辅助裁切不计入正式帧数。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。正式计入10个截图目录共530帧，全部通过暂停状态、截图成功、帧数和媒体时长校验。等级识别辅助裁切不计入正式帧数。
 
 下一集是第31集《纳格兰 66》，BVID `BV1kDiyBXEc7`，合集标注时长54:22（3262秒）。该信息来自当前页面合集状态；本轮没有导航、播放、截图或处理第31集。

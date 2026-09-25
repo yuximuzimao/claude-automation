@@ -122,7 +122,7 @@
 本轮明确排除了另一个窗口正在处理的所有视频工作：
 
 - 未修改`docs/video-extraction/`；
-- 未修改`../.ai-bridge/wow-video-extraction/`；
+- 未修改`data/sources/video-extraction/`；
 - 未修改任何`episode-*.json`/`episode-*-extraction.md`；
 - 工作区若显示这些文件仍在变化，属于并行视频处理窗口，不纳入本NEAT的任务路线修改范围，也不做清理/回滚。
 

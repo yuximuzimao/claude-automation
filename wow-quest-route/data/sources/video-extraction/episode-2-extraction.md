@@ -107,7 +107,7 @@ Questie基础经验×2校准任务经验合计：`15420`。
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep2/`。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。
 
 正式证据：
 

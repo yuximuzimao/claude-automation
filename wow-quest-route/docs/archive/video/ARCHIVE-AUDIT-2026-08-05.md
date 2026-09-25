@@ -14,14 +14,14 @@
 检查点：
 
 ```text
-/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-19-extraction.md
-/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-19-events.json
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-19-extraction.md
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-19-events.json
 ```
 
 原始证据：
 
 ```text
-/Users/chat/claude/wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep19/
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/RAW-EVIDENCE.md
 ```
 
 证据统计：
@@ -76,8 +76,8 @@ docs/video-extraction/POST-EXTRACTION-PLAN.md
 ### 单集事实
 
 ```text
-/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-N-extraction.md
-/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-N-events.json
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-N-extraction.md
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-N-events.json
 ```
 
 每集独立，不把逐任务细节堆入总规则。
@@ -85,7 +85,7 @@ docs/video-extraction/POST-EXTRACTION-PLAN.md
 ### 机器恢复状态
 
 ```text
-/Users/chat/claude/.ai-bridge/wow-video-extraction/progress.json
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/progress.json
 ```
 
 保存完成集数组、下一集元数据、文件入口和恢复指令。

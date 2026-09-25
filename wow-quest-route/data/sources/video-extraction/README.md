@@ -20,10 +20,10 @@
 - `CURRENT.md`：桥接目录的简要恢复副本，不得取代项目主`CURRENT.md`；
 - `checkpoint-00-current-state.md`：开始视频拆解前的实时游戏状态，禁止混入逐集第一遍事实提取。
 
-原始截图和OCR不在本目录，位于：
+原始截图、OCR文本和截图manifest已于2026-09-25清理。保留内容、恢复来源与重新取证方式见：
 
 ```text
-/Users/chat/claude/wow-quest-route/data/sources/video-extraction/raw-evidence/video-epN/
+data/sources/video-extraction/RAW-EVIDENCE.md
 ```
 
 NEAT阶段归档位于：

@@ -120,13 +120,13 @@ Questie只用于名称和结构校准，不能替代视频证据证明某动作�
 /Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-N-events.json
 ```
 
-原始截图、OCR和中间筛选保存在：
+重新取证时，原始截图、OCR和中间筛选临时保存在：
 
 ```text
-wow-quest-route/data/sources/video-extraction/raw-evidence/video-epN/
+wow-quest-route/_sandbox/video-extraction/video-epN/
 ```
 
-完成后更新`CURRENT.md`，并关闭本轮为定位和处理该集而打开的B站标签。
+完成后把新结论写回对应逐集检查点，删除临时证据，并关闭本轮为定位和处理该集而打开的B站标签。
 
 ### 3.7 NEAT阶段归档与恢复状态同步
 
