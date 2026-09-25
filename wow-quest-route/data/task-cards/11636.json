@@ -55,10 +55,10 @@
     "接取：驭风大师图波尔。",
     "与战歌要塞的亚尼谈一谈，让他把你安全地送往海滩边。到达加尔鲁什码头后去找歼灭者格雷克罗。",
     "交付：Annihilator Grek'lor。",
-    "五号需要依次与亚尼交互进入任务飞毯；这是“依次交互”而不是依次拾取，独立标签尚未裁决，所以fivebox状态继续保留待实测。"
+    "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，实际可连续切号与亚尼交互进入任务飞毯。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -97,11 +97,22 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-rule-2026-09-25-sequential-interaction",
+      "source_type": "user_live",
+      "source_ref": "user classification decision 2026-09-25: personal interaction objectives use not_shared; execution details remain in notes",
+      "observed_at": "2026-09-25",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "五号需要依次与亚尼交互进入任务飞毯；这是依次交互，不是依次拾取。",
+      "text": "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，可连续切号交互。",
       "scope": "route_profile:borean-fivebox",
       "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
       "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"

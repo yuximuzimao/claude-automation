@@ -55,7 +55,7 @@
     "交付：魔导师卡尔琳达。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -66,7 +66,9 @@
       "observed_at": "2026-09-17",
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
-      "supports_fields": ["guide"]
+      "supports_fields": [
+        "guide"
+      ]
     },
     {
       "evidence_id": "evidence-foundation-migration",
@@ -106,6 +108,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-rule-2026-09-25-sequential-interaction",
+      "source_type": "user_live",
+      "source_ref": "user classification decision 2026-09-25: personal interaction objectives use not_shared; execution details remain in notes",
+      "observed_at": "2026-09-25",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],
