@@ -47,6 +47,19 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 
 旧实现完整比较 `window.location.hash`，因此把正确页面误判成导航失败。最终修复只比较 `?` 前的完整路由：同一路由允许保留查询参数，不同路由和相似前缀仍然拒绝。长期规则已写入 `docs/INDEX.md` #81 和 `docs/ops-erp.md`，实现由 `lib/erp/navigate.js` 的 `matchesErpRoute()` 统一承载。
 
+### 6. 顺丰运单跳过百度物流补证
+
+2026-09-25 确认顺丰物流在百度搜索中需要额外验证，无法为售后推理提供有效补证。继续打开百度页只会浪费时间，还会把无意义的验证结果记成查询失败。
+
+最终规则：
+
+- `SF` 开头的快递单号在创建百度标签页前直接跳过，不区分大小写。
+- 候选中只有顺丰时，整次百度补证标记为“未尝试”，不生成失败记录，不触发重新推理。
+- 顺丰与其他快递混合时，只查询非顺丰单号，`skippedTrackings` 保留跳过记录供审计。
+- 跳过顺丰不改变鲸灵＋ERP 双源得出的原安全结论。
+
+实现在 `lib/external-logistics-baidu.js`；业务真值已写入 `docs/flow-5.3.md`，数据字段已写入 `docs/collect-schema.md`。
+
 ## 验证
 
 - `node --test test/product/archive-subitems.test.js`：6/6 通过；新增用例覆盖特殊规格查询、1.0旧款、特殊→普通连续查询，以及 `yx005` 严格退货编码核对。
@@ -54,6 +67,7 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - `lib/` 修改均按 `/aftersales-restart` 规则在 op-queue 空闲时重启；重启不自动重新采集现有工单。
 - Hash 路由修复新增正反边界测试，并在主工作区完成 `496/496` 全量回归；关键生产状态文件测试前后校验值一致。
 - 服务重启后，用户对工单 `100001789395328690402` 重新采集：ERP 售后入库成功读取 1 条已收货记录，3 件均为良品，`collectErrors=[]`；推理结果为高置信 `approve`，既有自动门禁执行成功，queue 最终状态为 `auto_executed`。
+- 顺丰跳过修复先通过 8 项百度物流定向测试，再通过 `499/499` 全量回归；生产缓存测试前后校验值一致。服务在 op-queue 空闲后安全重启，未自动重跑现有工单。代码提交为 `b46812f`。
 
 ## 当前权威入口
 
@@ -64,3 +78,6 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - `skip` 视觉状态防错规则：`SKILL.md` failure pattern #36
 - ERP Hash 路由匹配规则：`docs/INDEX.md` #81、`docs/ops-erp.md`
 - ERP 路由实现与回归：`lib/erp/navigate.js`、`test/server/erp-scan-readiness.test.js`
+- 顺丰跳过百度补证的业务规则：`docs/flow-5.3.md`
+- 百度补证数据合约：`docs/collect-schema.md`
+- 百度补证实现与回归：`lib/external-logistics-baidu.js`、`test/external-logistics-baidu.test.js`

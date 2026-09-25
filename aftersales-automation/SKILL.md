@@ -28,6 +28,7 @@ entry: cli.js
 | `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` + `createReminder()` | 提取快递单号或通过「创建提醒」快捷指令创建5分钟后待办时 |
 | `lib/result.js` | `ok()/fail()` JSON 封包 | 新增 CLI 命令时 |
 | `lib/constants.js` | 共享常量（扫描时间/关键词/红灯） | 查常量定义时 |
+| `lib/external-logistics-baidu.js` | 仅退款物流异常的百度补证；已有退回证据的运单不查，`SF` 开头的顺丰单号在打开百度前跳过 | 改百度物流卡片解析、异常补证候选或顺丰过滤时 |
 | `lib/erp/navigate.js` | ERP 页面导航+登录恢复（最长文件） | ERP 页面跳转/登录异常时 |
 | `lib/erp/search.js` | ERP 订单搜索，`READ_ROWS_JS` 解析订单状态 | 查 ERP 订单数据时 |
 | `lib/erp/aftersale.js` | ERP 售后工单搜索（退货快递单号） | 退货核验时 |
