@@ -89,10 +89,10 @@
 
 ## 文件与恢复点
 
-- 粗扫帧：`wow-quest-route/.ai-bridge/video-ep14/coarse/`
-- 粗扫OCR：`wow-quest-route/.ai-bridge/video-ep14/coarse-ocr.txt`
-- 10秒精查帧：`wow-quest-route/.ai-bridge/video-ep14/fine10/`
-- 10秒精查OCR：`wow-quest-route/.ai-bridge/video-ep14/fine10-ocr.txt`
-- 5秒精查帧：`wow-quest-route/.ai-bridge/video-ep14/fine5a/`、`fine5b/`
-- 5秒精查OCR：`wow-quest-route/.ai-bridge/video-ep14/fine5a-ocr.txt`、`fine5b-ocr.txt`
+- 粗扫帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 粗扫OCR：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 10秒精查帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 10秒精查OCR：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 5秒精查帧：`data/sources/video-extraction/RAW-EVIDENCE.md`、`fine5b/`
+- 5秒精查OCR：`data/sources/video-extraction/RAW-EVIDENCE.md`、`fine5b-ocr.txt`
 - 本检查点可独立用于下一次继续，不依赖当前聊天上下文。

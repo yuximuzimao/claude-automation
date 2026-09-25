@@ -120,18 +120,18 @@
 
 ## 文件与恢复点
 
-- 粗扫帧：`wow-quest-route/.ai-bridge/video-ep18/coarse/`
-- 开场5秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine5-start/`
-- 荆棘谷10秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine10-jungle/`
-- 藏宝海湾5秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine5-booty/`
-- 讨债后续1秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine1-debt-followup/`
-- 藏宝海湾清理1秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine1-booty-cleanup/`
-- 藏宝海湾后1秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine1-post-booty/`
-- 中段20秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine20-middle/`
-- 暴风城5秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine5-stormwind/`
-- 塞拉摩5秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine5-theramore/`
-- 塞拉摩放弃任务1秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine1-abandon/`
-- 结尾20秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine20-end/`
-- 最后45秒5秒帧：`wow-quest-route/.ai-bridge/video-ep18/fine5-final/`
-- 各目录对应OCR和解析文本均保存在`wow-quest-route/.ai-bridge/video-ep18/`。
+- 粗扫帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 开场5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 荆棘谷10秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 藏宝海湾5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 讨债后续1秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 藏宝海湾清理1秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 藏宝海湾后1秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 中段20秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 暴风城5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 塞拉摩5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 塞拉摩放弃任务1秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 结尾20秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 最后45秒5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 各目录对应OCR和解析文本均保存在`data/sources/video-extraction/RAW-EVIDENCE.md`。
 - 本检查点可独立恢复，不依赖当前聊天上下文。

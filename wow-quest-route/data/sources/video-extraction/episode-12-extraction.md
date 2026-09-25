@@ -6,7 +6,7 @@
 - CID：`35005796336`
 - 时长：01:05:30（3930秒；正式取样覆盖0—3929秒）
 - 系列序号：12/53；这是第1—12集回补的最后一集。
-- 处理方式：重新取得Chrome CDP后，用`.ai-bridge/bili-open-paused-bvid.js`在导航前禁止自动播放。B站打开时恢复在约1807秒，因此先显式`pause()+currentTime=0`并再次确认`paused=true`后才开始正式取样；全程只显式seek截图，没有连续播放。
+- 处理方式：重新取得Chrome CDP后，用`scripts/video-extraction/bili-open-paused-bvid.js`在导航前禁止自动播放。B站打开时恢复在约1807秒，因此先显式`pause()+currentTime=0`并再次确认`paused=true`后才开始正式取样；全程只显式seek截图，没有连续播放。
 - 正式证据：60秒全片粗扫67帧；20秒任务中心层71帧；5秒关键层100帧；片尾2秒层44帧；片尾1秒层35帧；合计317帧、17个manifest。317/317截图成功、seek匹配且全部`paused=true`，覆盖0—3929秒。
 - Questie校准：`Questie-v11.32.3`；只用于中文任务名、ID、NPC、唯一前后续与动作确认后的低清数字修复。视频动作证据优先。
 - 范围：只做事实提取，不做路线评价、联盟→部落映射或POST-EXTRACTION整合。
@@ -146,7 +146,7 @@
 
 原始证据和OCR位于：
 
-`/Users/chat/claude/wow-quest-route/.ai-bridge/video-ep12/`
+`data/sources/video-extraction/RAW-EVIDENCE.md`
 
 正式证据：
 

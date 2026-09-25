@@ -16,6 +16,10 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function isSfTracking(tracking) {
+  return /^SF/i.test(String(tracking || '').trim());
+}
+
 function trackingOfPackage(pkg) {
   const text = String(pkg && pkg.text || '');
   const match = text.match(/物流单号[：:]\s*\n?([A-Za-z0-9-]+)/);
@@ -136,6 +140,15 @@ async function queryBaiduLogistics(tracking, customDependencies) {
   if (!/^[A-Za-z0-9-]{8,40}$/.test(normalized)) {
     return { success: false, tracking: normalized, error: '非法快递单号' };
   }
+  if (isSfTracking(normalized)) {
+    return {
+      success: false,
+      skipped: true,
+      tracking: normalized,
+      reason: 'sf_verification_required',
+      error: '顺丰物流查询需要验证，已跳过百度搜索',
+    };
+  }
 
   let targetId = null;
   let closeError = null;
@@ -199,17 +212,22 @@ async function supplementBaiduLogisticsIfNeeded(collectedData, decision, options
     return { attempted: false, changed: false, trackings: [] };
   }
   const candidates = findUnconfirmedShippedTrackings(collectedData);
-  if (!candidates.length) return { attempted: false, changed: false, trackings: [] };
+  const skippedTrackings = candidates.filter(isSfTracking);
+  const queryCandidates = candidates.filter(tracking => !isSfTracking(tracking));
+  if (!queryCandidates.length) {
+    return { attempted: false, changed: false, trackings: [], skippedTrackings };
+  }
 
   const query = options.queryBaiduLogistics || queryBaiduLogistics;
   const external = {
     source: 'baidu',
     attemptedAt: new Date().toISOString(),
-    attemptedTrackings: [...candidates],
+    attemptedTrackings: [...queryCandidates],
+    skippedTrackings,
     results: [],
     errors: [],
   };
-  for (const tracking of candidates) {
+  for (const tracking of queryCandidates) {
     const result = await query(tracking);
     if (result && result.success) external.results.push(result);
     else external.errors.push({ tracking, error: result && result.error || '百度物流查询失败' });
@@ -219,7 +237,8 @@ async function supplementBaiduLogisticsIfNeeded(collectedData, decision, options
     attempted: true,
     changed: external.results.length > 0,
     confirmedReturn: external.results.some(result => result.confirmedReturn),
-    trackings: candidates,
+    trackings: queryCandidates,
+    skippedTrackings,
   };
 }
 
@@ -250,6 +269,7 @@ function mergeExternalLogisticsIntoErp(cd) {
 module.exports = {
   extractBaiduLogisticsCard,
   classifyCard,
+  isSfTracking,
   findUnconfirmedShippedTrackings,
   isLogisticsBlockingDecision,
   queryBaiduLogistics,

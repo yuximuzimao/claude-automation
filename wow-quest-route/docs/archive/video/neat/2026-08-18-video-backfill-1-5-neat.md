@@ -23,9 +23,9 @@
 
 1. `docs/video-extraction/README.md`：永久方法与证据规则；
 2. `docs/video-extraction/CURRENT.md`：当前唯一视频恢复点；
-3. `/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-5-extraction.md`：最近一集人工检查点；
-4. `/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-5-events.json`：最近一集机器结构；
-5. `/Users/chat/claude/.ai-bridge/wow-video-extraction/progress.json`：机器进度。
+3. `/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-5-extraction.md`：最近一集人工检查点；
+4. `/Users/chat/claude/wow-quest-route/data/sources/video-extraction/episode-5-events.json`：最近一集机器结构；
+5. `/Users/chat/claude/wow-quest-route/data/sources/video-extraction/progress.json`：机器进度。
 
 ## 本阶段已经锁定的方法边界
 
@@ -130,8 +130,8 @@
 
 - 永久方法：`docs/video-extraction/README.md`。
 - 当前恢复点：`docs/video-extraction/CURRENT.md`。
-- 单集详细事实：`.ai-bridge/wow-video-extraction/episode-N-extraction.md/json`。
-- 机器进度：`.ai-bridge/wow-video-extraction/progress.json`。
+- 单集详细事实：`data/sources/video-extraction/episode-N-extraction.md/json`。
+- 机器进度：`data/sources/video-extraction/progress.json`。
 - 阶段历史/NEAT：`docs/archive/video/`。
 - 全集后计划：`docs/video-extraction/POST-EXTRACTION-PLAN.md`。
 

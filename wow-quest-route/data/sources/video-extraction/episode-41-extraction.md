@@ -130,7 +130,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep41/`。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。
 
 正式证据批次：
 

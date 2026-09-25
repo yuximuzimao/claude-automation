@@ -4,7 +4,7 @@
 - CID：`35418867332`
 - 时长：01:08:55（4135秒；页面媒体实际约4134.08秒，正式取样覆盖到4134秒）
 - 系列序号：45/53
-- 处理方式：使用`.ai-bridge/bili-open-paused-bvid.js`打开后确认`hasVideo=true`、`paused=true`、`currentTime=0`、`duration=4135`；全程仅显式跳转截图，没有连续播放。
+- 处理方式：使用`scripts/video-extraction/bili-open-paused-bvid.js`打开后确认`hasVideo=true`、`paused=true`、`currentTime=0`、`duration=4135`；全程仅显式跳转截图，没有连续播放。
 - 正式证据：60秒粗扫70帧、20秒全片层208帧、5秒关键事件层293帧，共571帧。
 - 校验：全部正式截图调用成功且取样记录保持`paused=true`；OCR已覆盖全部正式批次。
 - Questie校准：任务名、ID、严格前后置、掉落触发与基础经验来自`Questie-v11.32.3`；本视频任务经验继续约为Questie基础经验的2倍。
@@ -115,7 +115,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep45/`。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。
 
 正式证据：
 

@@ -102,10 +102,10 @@
 
 ## 文件与恢复点
 
-- 粗扫帧：`wow-quest-route/.ai-bridge/video-ep15/coarse/`
-- 粗扫OCR：`wow-quest-route/.ai-bridge/video-ep15/coarse-ocr.txt`
-- 开场5秒帧：`wow-quest-route/.ai-bridge/video-ep15/fine5-start/`
-- 任务日志5秒帧：`wow-quest-route/.ai-bridge/video-ep15/fine5-log/`
-- 结尾10秒帧：`wow-quest-route/.ai-bridge/video-ep15/fine10-end/`
-- 结尾补充5秒帧：`wow-quest-route/.ai-bridge/video-ep15/fine5-end-a/`、`fine5-end-b/`
+- 粗扫帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 粗扫OCR：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 开场5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 任务日志5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 结尾10秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`
+- 结尾补充5秒帧：`data/sources/video-extraction/RAW-EVIDENCE.md`、`fine5-end-b/`
 - 本检查点可独立用于下一次继续，不依赖当前聊天上下文。

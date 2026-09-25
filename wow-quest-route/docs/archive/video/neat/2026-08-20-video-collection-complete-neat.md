@@ -20,7 +20,7 @@
 - 正序第13—53集完成；回补第1—12集完成，回补12/12。
 - 每集保留原始截图/OCR/manifest证据；严格区分目标完成、奖励窗口、最终交付、追踪栏状态和剪辑缺口。
 - 最终浏览器视频目标已经关闭；没有下一集。
-- 单集事实仍以`.ai-bridge/wow-video-extraction/episode-N-*`为真值，本NEAT不复制53集时间轴。
+- 单集事实仍以`data/sources/video-extraction/episode-N-*`为真值，本NEAT不复制53集时间轴。
 
 ## 3. POST索引与审计资产
 
@@ -93,7 +93,7 @@
 视频专项至此关闭：
 
 - `docs/video-extraction/CURRENT.md`只保留“已完成”和后续按需读取方式；
-- `.ai-bridge/wow-video-extraction/progress.json`状态为`video_collection_complete`，`next_episode=null`、`next_stage=null`；
+- `data/sources/video-extraction/progress.json`状态为`video_collection_complete`，`next_episode=null`、`next_stage=null`；
 - `tasks/todo.md`不再保留视频专项未完成项；
 - `docs/video-extraction/POST-EXTRACTION-PLAN.md`保留为已执行的方法记录，不再是待办入口。
 

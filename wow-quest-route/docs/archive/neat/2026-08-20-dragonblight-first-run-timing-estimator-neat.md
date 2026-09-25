@@ -3,7 +3,7 @@
 ## 本轮边界
 
 - 本轮只归档魔兽任务路线侧：龙骨首组步骤1—11实跑、路线纠错、五开机制、Route Atlas估时器修正与文档架构清理。
-- `docs/video-extraction/CURRENT.md`、`../.ai-bridge/wow-video-extraction/*`及正在处理的最后一集视频明确排除；本轮不读取其业务内容、不修改、不暂存、不提交。
+- `docs/video-extraction/CURRENT.md`、`data/sources/video-extraction/*`及正在处理的最后一集视频明确排除；本轮不读取其业务内容、不修改、不暂存、不提交。
 - 当前项目唯一执行入口仍为`docs/verified-routes/CURRENT.md`；永久规则仍从`docs/rules/README.md`渐进式加载。
 
 ## 当前首组恢复点

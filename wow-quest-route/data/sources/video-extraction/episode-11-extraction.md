@@ -4,7 +4,7 @@
 - CID：`34999305144`
 - 时长：00:50:16（3016秒；正式取样覆盖0—3015秒）
 - 系列序号：11/53；当前为第1—12集回补阶段。
-- 处理方式：重新取得Chrome CDP后，用`.ai-bridge/bili-open-paused-bvid.js`在导航前禁止自动播放。打开时播放器意外停在6秒，因此先显式`pause()+currentTime=0`并再次确认`paused=true`后才开始取样；全程只显式seek截图，没有连续播放。
+- 处理方式：重新取得Chrome CDP后，用`scripts/video-extraction/bili-open-paused-bvid.js`在导航前禁止自动播放。打开时播放器意外停在6秒，因此先显式`pause()+currentTime=0`并再次确认`paused=true`后才开始取样；全程只显式seek截图，没有连续播放。
 - 正式证据：60秒全片粗扫52帧；20秒任务中心层52帧；5秒关键层125帧；合计229帧、14个manifest。229/229截图成功、seek时间匹配且全部`paused=true`，覆盖0—3015秒。
 - Questie校准：`Questie-v11.32.3`；只用于中文任务名、ID、NPC、唯一前后续和静态经验校准，视频动作证据优先。
 - 范围：只做事实提取，不做路线评价或联盟→部落映射。
@@ -162,7 +162,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep11/`。
+原始证据和OCR位于`data/sources/video-extraction/RAW-EVIDENCE.md`。
 
 正式证据：
 

@@ -1,0 +1,311 @@
+{
+  "base_row_totals": {
+    "creature": 152979,
+    "creature_spawn_entry": 11086,
+    "gameobject": 105328,
+    "gameobject_spawn_entry": 4416
+  },
+  "executed_target_statements": 696,
+  "ignored_target_mentions": [],
+  "repo": "/private/tmp/codex-respawn-proxy.Zhrwa1/wotlk-db",
+  "revision": "7d3ffab46ed8805678355fbdf77ccfaafb30c2ab",
+  "schemas": {
+    "creature": [
+      "guid",
+      "id",
+      "map",
+      "spawnMask",
+      "phaseMask",
+      "position_x",
+      "position_y",
+      "position_z",
+      "orientation",
+      "spawntimesecsmin",
+      "spawntimesecsmax",
+      "spawndist",
+      "MovementType"
+    ],
+    "creature_spawn_entry": [
+      "guid",
+      "entry"
+    ],
+    "gameobject": [
+      "guid",
+      "id",
+      "map",
+      "spawnMask",
+      "phaseMask",
+      "position_x",
+      "position_y",
+      "position_z",
+      "orientation",
+      "rotation0",
+      "rotation1",
+      "rotation2",
+      "rotation3",
+      "spawntimesecsmin",
+      "spawntimesecsmax"
+    ],
+    "gameobject_spawn_entry": [
+      "guid",
+      "entry"
+    ]
+  },
+  "target_changes_by_file": [
+    {
+      "creature": [
+        17721,
+        17722,
+        17723,
+        17724,
+        17725,
+        17770,
+        17798,
+        17800,
+        17801,
+        17802,
+        17803,
+        17805,
+        17871,
+        17882,
+        17885,
+        17890,
+        17893,
+        17938,
+        17957,
+        17958,
+        17959,
+        17960,
+        17961,
+        17975,
+        18105,
+        21126,
+        21127,
+        21218,
+        21220,
+        21221,
+        21224,
+        21225,
+        21226,
+        21227,
+        21228,
+        21229,
+        21230,
+        21231,
+        21232,
+        21251,
+        21263,
+        21298,
+        21299,
+        21301,
+        21339,
+        21694,
+        21863,
+        23956,
+        23960,
+        23961,
+        24069,
+        24078,
+        24079,
+        24080,
+        24082,
+        24084,
+        24085,
+        26626,
+        26635,
+        26727,
+        26728,
+        26729,
+        26734,
+        26735,
+        26830,
+        28419,
+        30111,
+        30179,
+        30276,
+        30277,
+        30278,
+        30285,
+        30286,
+        30287,
+        30319
+      ],
+      "file": "Updates/Instances/000_setup.sql",
+      "gameobject": [
+        181278,
+        182054
+      ]
+    },
+    {
+      "creature": [
+        17721,
+        17722,
+        17798,
+        17800,
+        17801,
+        17802,
+        17803,
+        17805,
+        21694
+      ],
+      "file": "Updates/Instances/545_steamvault.sql",
+      "gameobject": [
+        181278
+      ]
+    },
+    {
+      "creature": [
+        17723,
+        17724,
+        17725,
+        17770,
+        17871,
+        17882,
+        17885,
+        18105
+      ],
+      "file": "Updates/Instances/546_underbog.sql",
+      "gameobject": [
+        181278,
+        182054
+      ]
+    },
+    {
+      "creature": [
+        17890,
+        17893,
+        17938,
+        17957,
+        17958,
+        17959,
+        17960,
+        17961,
+        21126,
+        21127
+      ],
+      "file": "Updates/Instances/547_slave_pens_WoTLK.sql",
+      "gameobject": [
+        181278
+      ]
+    },
+    {
+      "creature": [
+        21218,
+        21220,
+        21221,
+        21224,
+        21225,
+        21226,
+        21227,
+        21228,
+        21229,
+        21230,
+        21231,
+        21232,
+        21251,
+        21263,
+        21298,
+        21299,
+        21301,
+        21339,
+        21863
+      ],
+      "file": "Updates/Instances/548_serpentshrine_cavern.sql",
+      "gameobject": []
+    },
+    {
+      "creature": [
+        17975
+      ],
+      "file": "Updates/Instances/553_botanica.sql",
+      "gameobject": []
+    },
+    {
+      "creature": [],
+      "file": "Updates/Instances/555_shadow_labyrinth.sql",
+      "gameobject": [
+        181278
+      ]
+    },
+    {
+      "creature": [],
+      "file": "Updates/Instances/556_sethekk_halls.sql",
+      "gameobject": [
+        181278
+      ]
+    },
+    {
+      "creature": [],
+      "file": "Updates/Instances/557_mana_tombs.sql",
+      "gameobject": [
+        181278
+      ]
+    },
+    {
+      "creature": [],
+      "file": "Updates/Instances/558_auchenai_crypts.sql",
+      "gameobject": [
+        181278
+      ]
+    },
+    {
+      "creature": [
+        23956,
+        23960,
+        23961,
+        24069,
+        24078,
+        24079,
+        24080,
+        24082,
+        24084,
+        24085,
+        28419
+      ],
+      "file": "Updates/Instances/574_utgrade_keep.sql",
+      "gameobject": []
+    },
+    {
+      "creature": [
+        26727,
+        26728,
+        26729,
+        26734,
+        26735
+      ],
+      "file": "Updates/Instances/576_nexus.sql",
+      "gameobject": []
+    },
+    {
+      "creature": [
+        26626,
+        26635,
+        26830
+      ],
+      "file": "Updates/Instances/600_draktharon_keep.sql",
+      "gameobject": []
+    },
+    {
+      "creature": [
+        30111,
+        30179,
+        30276,
+        30277,
+        30278,
+        30285,
+        30286,
+        30287,
+        30319
+      ],
+      "file": "Updates/Instances/619_ahn_kahet.sql",
+      "gameobject": []
+    }
+  ],
+  "undefined_mysql_variables_coerced_to_null": [
+    [
+      "Updates/Instances/631_icecrown_citadel.sql",
+      "COGUID"
+    ]
+  ],
+  "update_files": 172
+}
