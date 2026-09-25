@@ -93,7 +93,7 @@ Stage 14 结果是可删除重建的 workflow audit，不是业务真源。
 
 ## 7. 正式Final Audit操作
 
-- 当前14张正式Profile的项目级cutover机械审计：`python3 scripts/audit_generated_cutover.py`。该脚本只审计，不重算业务owner、不写正式页面。
+- 当前全部正式Profile的项目级cutover机械审计：`python3 scripts/audit_generated_cutover.py`。该脚本只审计，不重算业务owner、不写正式页面。
 - Review Trigger属于Selection owner；Final Audit只消费已经生成的review结果，不维护第二套Review操作入口。
 
 ## 8. 失败恢复

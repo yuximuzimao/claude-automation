@@ -36,7 +36,7 @@
 
 ## 架构迁移
 
-只有SOP分类为`ARCHITECTURE_MIGRATION`，或用户明确要求迁移/旧链退役，才读取对应迁移计划或历史。当前迁移历史：`docs/analysis/2026-09-21-route-lifecycle-migration-history.md`；实时未完成事项仍只看`tasks/todo.md`。
+只有SOP分类为`ARCHITECTURE_MIGRATION`，或用户明确要求迁移/旧链退役，才读取对应迁移计划或历史。当前迁移历史：`docs/archive/analysis/2026-09-21-route-lifecycle-migration-history.md`；实时未完成事项仍只看`tasks/todo.md`。
 
 每次新迁移按当次目标建立自己的计划，不复制旧迁移Stage模板。
 
