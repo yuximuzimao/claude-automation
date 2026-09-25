@@ -6,11 +6,13 @@ const assert = require('node:assert/strict');
 const {
   extractBaiduLogisticsCard,
   findUnconfirmedShippedTrackings,
+  isSfTracking,
   queryBaiduLogistics,
   supplementBaiduLogisticsIfNeeded,
 } = require('../lib/external-logistics-baidu');
 
 const TRACKING = 'YT7641388739489';
+const SF_TRACKING = 'SF0220494895377';
 const RETURN_CARD = `
 圆通速递
 查询
@@ -90,6 +92,23 @@ test('真实浏览器查询契约：命中目标搜索词后读取物流卡，�
   ]);
 });
 
+test('顺丰单号在创建百度页之前直接跳过', async () => {
+  let created = false;
+  const result = await queryBaiduLogistics(SF_TRACKING, {
+    createTarget: async () => {
+      created = true;
+      throw new Error('不应创建百度页');
+    },
+  });
+
+  assert.equal(isSfTracking(SF_TRACKING), true);
+  assert.equal(isSfTracking(SF_TRACKING.toLowerCase()), true);
+  assert.equal(result.success, false);
+  assert.equal(result.skipped, true);
+  assert.equal(result.reason, 'sf_verification_required');
+  assert.equal(created, false);
+});
+
 test('异常补证只查询现有平台/ERP没有确认退回的已发货运单', async () => {
   const cd = collectedData();
   assert.deepEqual(findUnconfirmedShippedTrackings(cd), [TRACKING]);
@@ -116,6 +135,61 @@ test('异常补证只查询现有平台/ERP没有确认退回的已发货运单'
   assert.equal(result.attempted, true);
   assert.deepEqual(queried, [TRACKING]);
   assert.equal(cd.externalLogistics.results[0].confirmedReturn, true);
+});
+
+test('异常补证候选只有顺丰时不查百度，也不记为查询失败', async () => {
+  const cd = collectedData();
+  cd.giftErpSearches[0].rows.rows[0].tracking = SF_TRACKING;
+  cd.giftErpSearches[0].rows.rows[0].trackings = [SF_TRACKING];
+  cd.erpLogistics.results[1].tracking = SF_TRACKING;
+
+  let called = false;
+  const result = await supplementBaiduLogisticsIfNeeded(cd, {
+    action: 'escalate',
+    rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift' }],
+  }, {
+    type: '仅退款',
+    queryBaiduLogistics: async () => {
+      called = true;
+      return { success: false };
+    },
+  });
+
+  assert.equal(result.attempted, false);
+  assert.deepEqual(result.skippedTrackings, [SF_TRACKING]);
+  assert.equal(called, false);
+  assert.equal(cd.externalLogistics, undefined);
+});
+
+test('顺丰与其他快递混合时只查询非顺丰单号', async () => {
+  const cd = collectedData();
+  cd.giftErpSearches[0].rows.rows.push({
+    status: '卖家已发货',
+    tracking: SF_TRACKING,
+    trackings: [SF_TRACKING],
+  });
+  cd.erpLogistics.results.push({
+    tracking: SF_TRACKING,
+    logisticsText: '2026-09-05 20:38:32\n快件已揽收并发往下一站',
+  });
+
+  const queried = [];
+  const result = await supplementBaiduLogisticsIfNeeded(cd, {
+    action: 'escalate',
+    rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift' }],
+  }, {
+    type: '仅退款',
+    queryBaiduLogistics: async tracking => {
+      queried.push(tracking);
+      return { success: false, tracking, error: '未查到' };
+    },
+  });
+
+  assert.equal(result.attempted, true);
+  assert.deepEqual(queried, [TRACKING]);
+  assert.deepEqual(result.skippedTrackings, [SF_TRACKING]);
+  assert.deepEqual(cd.externalLogistics.attemptedTrackings, [TRACKING]);
+  assert.deepEqual(cd.externalLogistics.skippedTrackings, [SF_TRACKING]);
 });
 
 test('ERP行仍是待发货但物流已有真实揽收节点时仍可进入异常补证，等待揽收则不可', () => {

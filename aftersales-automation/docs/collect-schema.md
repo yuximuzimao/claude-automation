@@ -174,6 +174,7 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
   source: 'baidu',
   attemptedAt: string,
   attemptedTrackings: string[],
+  skippedTrackings: string[], // SF 开头的顺丰单号：因需额外验证，打开百度前直接跳过
   results: [
     {
       tracking: string,
@@ -190,7 +191,7 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 }
 ```
 
-百度补证不是常规第三物流源：已有退回证据的运单不得再次查询；查询失败不写 `collectErrors`、不重试、不改变原推理的安全结论。成功结果只与同一 `tracking` 的 ERP/鲸灵文本合并后复用原 `hasConfirmedReturn()` 等规则，不新增独立退款判定。
+百度补证不是常规第三物流源：已有退回证据的运单不得再次查询；`SF` 开头的顺丰单号不执行百度查询，也不记为查询失败；其他查询失败不写 `collectErrors`、不重试、不改变原推理的安全结论。成功结果只与同一 `tracking` 的 ERP/鲸灵文本合并后复用原 `hasConfirmedReturn()` 等规则，不新增独立退款判定。
 
 ---
 
