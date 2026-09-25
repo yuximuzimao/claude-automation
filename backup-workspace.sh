@@ -3,7 +3,7 @@ set -euo pipefail
 
 BACKUP_SOURCE_DIR="${WORKSPACE_BACKUP_SOURCE_DIR:-/Users/chat/claude}"
 BACKUP_DIR="${WORKSPACE_BACKUP_DIR:-/Users/chat/backups}"
-BACKUP_KEEP="${WORKSPACE_BACKUP_KEEP:-8}"
+BACKUP_KEEP="${WORKSPACE_BACKUP_KEEP:-1}"
 CASE_FILE="${ORDER_REVIEW_CASE_FILE:-/Users/chat/Library/Application Support/Order Review/cases.json}"
 EVENT_FILE="${ORDER_REVIEW_EVENT_FILE:-/Users/chat/Library/Application Support/Order Review/recommendation-events.jsonl}"
 CASE_BACKUP_DIR="${ORDER_REVIEW_CASE_BACKUP_DIR:-/Users/chat/Library/Application Support/Order Review/backups}"
