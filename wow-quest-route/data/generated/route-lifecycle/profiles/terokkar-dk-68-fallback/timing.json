@@ -1,0 +1,205 @@
+{
+  "center_minutes": null,
+  "complete": false,
+  "component_rows": [
+    {
+      "component": "move",
+      "edge_id": "a0011->a0016",
+      "seconds": 0.0,
+      "step_id": "step-04"
+    },
+    {
+      "action_ids": [
+        "a0002",
+        "a0003",
+        "a0004"
+      ],
+      "component": "accept_turnin",
+      "seconds": 67.8,
+      "step_id": "step-01",
+      "visit_id": "a0001"
+    },
+    {
+      "action_ids": [
+        "a0012",
+        "a0013",
+        "a0014"
+      ],
+      "component": "accept_turnin",
+      "seconds": 67.8,
+      "step_id": "step-03",
+      "visit_id": "a0011"
+    }
+  ],
+  "input_fingerprint": "d70fb622f4250d3a34235096db7a93ac41819fa843dbeb343eaecafb1aa99725",
+  "issues": [
+    {
+      "edge_id": "a0001->a0005",
+      "kind": "map_dimensions_required",
+      "profile_id": "terokkar-dk-68-fallback",
+      "severity": "requirement",
+      "step_id": "step-02",
+      "zone_id": 3519
+    },
+    {
+      "edge_id": "a0005->a0007",
+      "kind": "map_dimensions_required",
+      "profile_id": "terokkar-dk-68-fallback",
+      "severity": "requirement",
+      "step_id": "step-02",
+      "zone_id": 3519
+    },
+    {
+      "edge_id": "a0007->a0009",
+      "kind": "map_dimensions_required",
+      "profile_id": "terokkar-dk-68-fallback",
+      "severity": "requirement",
+      "step_id": "step-02",
+      "zone_id": 3519
+    },
+    {
+      "edge_id": "a0009->a0011",
+      "kind": "map_dimensions_required",
+      "profile_id": "terokkar-dk-68-fallback",
+      "severity": "requirement",
+      "step_id": "step-03",
+      "zone_id": 3519
+    },
+    {
+      "action_id": "a0017",
+      "edge_id": "a0016->a0018",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "fixed_transport",
+      "severity": "requirement",
+      "step_id": "step-04"
+    },
+    {
+      "action_id": "a0006",
+      "kind": "timing_rule_ref_required",
+      "severity": "requirement",
+      "step_id": "step-02",
+      "task_id": 10913
+    },
+    {
+      "action_id": "a0008",
+      "kind": "timing_rule_ref_required",
+      "severity": "requirement",
+      "step_id": "step-02",
+      "task_id": 10877
+    },
+    {
+      "action_id": "a0010",
+      "kind": "timing_rule_ref_required",
+      "severity": "requirement",
+      "step_id": "step-02",
+      "task_id": 10873
+    },
+    {
+      "detail": {
+        "basis": "unresolved",
+        "matching_observation_ids": [],
+        "missing_component_uncertainty": [
+          "accept_turnin_seconds"
+        ]
+      },
+      "kind": "timing_range_model_required",
+      "scope": "step",
+      "severity": "requirement",
+      "step_id": "step-01"
+    }
+  ],
+  "known_seconds": 135.6,
+  "model_id": "component-wall-clock-v2",
+  "point_estimate_complete": false,
+  "profile_id": "terokkar-dk-68-fallback",
+  "range_basis": null,
+  "range_minutes": null,
+  "status": "requirements",
+  "steps": [
+    {
+      "center_minutes": 1.13,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 67.8,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 67.8,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "unresolved",
+        "matching_observation_ids": [],
+        "missing_component_uncertainty": [
+          "accept_turnin_seconds"
+        ]
+      },
+      "range_minutes": null,
+      "step_id": "step-01",
+      "title": "沙塔尔前哨站：接三任务",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 0.0,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 0.0,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-02",
+      "title": "尸体区 → 恐怖圣物 → 灵网山脊",
+      "unresolved_component_count": 6
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 67.8,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 67.8,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-03",
+      "title": "返回沙塔尔前哨站交三任务",
+      "unresolved_component_count": 1
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 0.0,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 0.0,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-04",
+      "title": "沙塔斯 → 奥格瑞玛",
+      "unresolved_component_count": 1
+    }
+  ],
+  "summary": {
+    "error_count": 0,
+    "issue_count": 9,
+    "range_model_status": "requirements",
+    "requirement_count": 9,
+    "step_count": 4
+  }
+}

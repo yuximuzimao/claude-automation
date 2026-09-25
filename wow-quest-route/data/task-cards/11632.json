@@ -85,13 +85,27 @@
   "guide": [
     "接取：伊斯里克斯的甲壳。",
     "带着伊斯里克斯的甲壳去见战歌要塞的萨鲁法尔大王。",
-    "交付：萨鲁法尔大王。"
+    "交付：萨鲁法尔大王。",
+    "伊斯里克斯事件触发时，同一具收割者伊斯里克斯尸体的甲壳可让五号依次拾取；没有事件就按现有路线直接跳过，不等待。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -119,10 +133,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《寒风中的怪兽……》：只在路过时检查伊斯里克斯事件；事件正在进行才击杀收割者伊斯里克斯并拾取甲壳接任务，没有事件就直接继续，不等待。\n这里直接炉石回战歌，不从瓦雷杜斯一带骑回要塞。《寒风中的怪兽……》仅在此前伊斯里克斯事件分支已接时交；未接则跳过。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "text": "只在路过时检查伊斯里克斯事件；事件进行中才击杀并拾取甲壳，同一具尸体可让五号依次拾取。没有事件就直接继续，不等待。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
     }
   }
 }

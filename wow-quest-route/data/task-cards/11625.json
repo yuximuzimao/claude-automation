@@ -43,13 +43,27 @@
   "guide": [
     "接取：维赫亚。",
     "裂鞭海岸的维赫亚要你前往裂鞭废墟的东北角，杀死拉格纳·德拉卡伦并取回纳兹亚的三叉戟。",
-    "交付：维赫亚。"
+    "交付：维赫亚。",
+    "击杀拉格纳·德拉卡伦后，同一具尸体的纳兹亚三叉戟可让五号依次拾取。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -77,10 +91,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《纳兹亚的三叉戟》：击杀拉格纳·德拉卡伦并拾取纳兹亚的三叉戟。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "击杀拉格纳·德拉卡伦后，同一具尸体的纳兹亚三叉戟可让五号依次拾取。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
     }
   }
 }

@@ -1,0 +1,43 @@
+{
+  "characters": [],
+  "cost_coverage": "partial",
+  "gross_copper": null,
+  "gross_gph": null,
+  "input_fingerprint": "395d23739b903e17847bebc17ba4d0a81c6f9751c0d9d573dfe6e50d03fb19a9",
+  "issues": [
+    {
+      "kind": "upstream_stage8_requirements",
+      "profile_id": "terokkar-dk-68-fallback",
+      "severity": "requirement"
+    },
+    {
+      "kind": "economy_character_state_required",
+      "profile_id": "terokkar-dk-68-fallback",
+      "severity": "requirement"
+    },
+    {
+      "kind": "route_cost_coverage_incomplete",
+      "note": "No structured current-scope cost input was supplied; known cost remains zero with partial coverage.",
+      "severity": "requirement"
+    },
+    {
+      "kind": "fresh_complete_timing_required_for_gph",
+      "severity": "requirement",
+      "timing_input_fingerprint": "d70fb622f4250d3a34235096db7a93ac41819fa843dbeb343eaecafb1aa99725",
+      "timing_status": "requirements"
+    }
+  ],
+  "kind": "profile",
+  "known_cost_copper": 0,
+  "known_gross_copper": 0,
+  "matched_observation_count": 0,
+  "model_id": "wotlk-route-economy-v1",
+  "net_copper": null,
+  "net_gph": null,
+  "observation_comparisons": [],
+  "profile_id": "terokkar-dk-68-fallback",
+  "status": "requirements",
+  "timing_input_fingerprint": "d70fb622f4250d3a34235096db7a93ac41819fa843dbeb343eaecafb1aa99725",
+  "turnins": [],
+  "xp_input_fingerprint": "ec64f05d12045a95fc0eff9dff81e99c6c1e94ad1ff59e3477d8e6cba0ab84dd"
+}

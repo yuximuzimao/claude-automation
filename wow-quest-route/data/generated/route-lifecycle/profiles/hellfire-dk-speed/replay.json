@@ -60,12 +60,6 @@
     "a0096": "executed",
     "a0098": "executed",
     "a0100": "executed",
-    "a0101": "executed",
-    "a0102": "executed",
-    "a0103": "executed",
-    "a0104": "executed",
-    "a0106": "executed",
-    "a0107": "executed",
     "a0109": "executed",
     "a0110": "maybe",
     "a0112": "executed",
@@ -94,7 +88,6 @@
     "a0144": "executed",
     "a0145": "executed",
     "a0146": "executed",
-    "a0147": "executed",
     "a0148": "executed",
     "a0151": "executed",
     "a0152": "executed",
@@ -103,7 +96,6 @@
     "a0156": "executed",
     "a0157": "executed",
     "a0158": "maybe",
-    "a0160": "executed",
     "a0162": "executed",
     "a0163": "executed",
     "a0165": "executed",
@@ -117,7 +109,6 @@
     "a0177": "executed",
     "a0178": "executed",
     "a0179": "executed",
-    "a0180": "executed",
     "a0181": "executed",
     "a0182": "executed",
     "a0183": "executed",
@@ -465,30 +456,6 @@
         "task_id": 10238
       },
       {
-        "action_id": "a0101",
-        "kind": "min_level",
-        "required_min_level": 58,
-        "resolver": "derived_xp",
-        "task_id": 10629
-      },
-      {
-        "action_id": "a0101",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 10629
-      },
-      {
-        "action_id": "a0104",
-        "kind": "min_level",
-        "required_min_level": 58,
-        "resolver": "derived_xp",
-        "task_id": 10630
-      },
-      {
-        "action_id": "a0104",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 10630
-      },
-      {
         "action_id": "a0110",
         "kind": "min_level",
         "required_min_level": 58,
@@ -669,18 +636,6 @@
         "task_id": 9387
       },
       {
-        "action_id": "a0147",
-        "kind": "min_level",
-        "required_min_level": 61,
-        "resolver": "derived_xp",
-        "task_id": 9376
-      },
-      {
-        "action_id": "a0147",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 9376
-      },
-      {
         "action_id": "a0148",
         "kind": "min_level",
         "required_min_level": 61,
@@ -705,42 +660,6 @@
         "task_id": 9373
       },
       {
-        "action_id": "a0163",
-        "kind": "min_level",
-        "required_min_level": 60,
-        "resolver": "derived_xp",
-        "task_id": 10367
-      },
-      {
-        "action_id": "a0163",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 10367
-      },
-      {
-        "action_id": "a0168",
-        "kind": "min_level",
-        "required_min_level": 60,
-        "resolver": "derived_xp",
-        "task_id": 10368
-      },
-      {
-        "action_id": "a0168",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 10368
-      },
-      {
-        "action_id": "a0173",
-        "kind": "min_level",
-        "required_min_level": 60,
-        "resolver": "derived_xp",
-        "task_id": 10369
-      },
-      {
-        "action_id": "a0173",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 10369
-      },
-      {
         "action_id": "a0179",
         "kind": "min_level",
         "required_min_level": 60,
@@ -775,6 +694,42 @@
         "action_id": "a0184",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 10286
+      },
+      {
+        "action_id": "a0163",
+        "kind": "min_level",
+        "required_min_level": 60,
+        "resolver": "derived_xp",
+        "task_id": 10367
+      },
+      {
+        "action_id": "a0163",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 10367
+      },
+      {
+        "action_id": "a0168",
+        "kind": "min_level",
+        "required_min_level": 60,
+        "resolver": "derived_xp",
+        "task_id": 10368
+      },
+      {
+        "action_id": "a0168",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 10368
+      },
+      {
+        "action_id": "a0173",
+        "kind": "min_level",
+        "required_min_level": 60,
+        "resolver": "derived_xp",
+        "task_id": 10369
+      },
+      {
+        "action_id": "a0173",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 10369
       },
       {
         "action_id": "a0194",
@@ -1671,54 +1626,6 @@
         "task_id": 10238
       },
       {
-        "action_id": "a0101",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 58,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              10238
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 10629
-      },
-      {
-        "action_id": "a0104",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 58,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              10629
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 10630
-      },
-      {
         "action_id": "a0110",
         "checks": [
           {
@@ -2181,40 +2088,6 @@
         "task_id": 9387
       },
       {
-        "action_id": "a0147",
-        "checks": [
-          {
-            "kind": "faction",
-            "status": "pass",
-            "value": "horde"
-          },
-          {
-            "kind": "race",
-            "status": "pass",
-            "value": "orc"
-          },
-          {
-            "kind": "min_level",
-            "required": 61,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "required_external_state",
-            "task_ids": [
-              9375
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 9376
-      },
-      {
         "action_id": "a0148",
         "checks": [
           {
@@ -2257,78 +2130,6 @@
           }
         ],
         "task_id": 9373
-      },
-      {
-        "action_id": "a0163",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 60,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "required_external_state",
-            "task_ids": [
-              10403
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 10367
-      },
-      {
-        "action_id": "a0168",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 60,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              10367
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 10368
-      },
-      {
-        "action_id": "a0173",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 60,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              10368
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 10369
       },
       {
         "action_id": "a0179",
@@ -2431,6 +2232,71 @@
           }
         ],
         "task_id": 10286
+      },
+      {
+        "action_id": "a0163",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 60,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 10367
+      },
+      {
+        "action_id": "a0168",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 60,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              10367
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 10368
+      },
+      {
+        "action_id": "a0173",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 60,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              10368
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 10369
       },
       {
         "action_id": "a0194",
@@ -2617,26 +2483,7 @@
         "task_id": 10351
       }
     ],
-    "external_state_requirements": [
-      {
-        "action_id": "a0147",
-        "kind": "any_completed_task",
-        "relation": "pre_any",
-        "required_task_ids": [
-          9375
-        ],
-        "task_id": 9376
-      },
-      {
-        "action_id": "a0163",
-        "kind": "any_completed_task",
-        "relation": "pre_any",
-        "required_task_ids": [
-          10403
-        ],
-        "task_id": 10367
-      }
-    ]
+    "external_state_requirements": []
   },
   "flight": {
     "entry_state_known": false,
@@ -2704,7 +2551,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "5df9781dedc543b94a02d2613ca6c82d5c2f18c986bb8e3b24e4cbacd66ba115",
+  "input_fingerprint": "fde0aed67a65b91bf9b8645f30a7642ceee009a32d1329d869ad6b84236e244e",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",
@@ -2736,7 +2583,7 @@
   },
   "reputation": {
     "definite_task_reward_delta": {
-      "911": 2625,
+      "911": 2375,
       "941": 350,
       "942": 970,
       "947": 6435
@@ -2760,7 +2607,6 @@
       9366,
       9370,
       9374,
-      9376,
       9387,
       9391,
       9400,
@@ -2804,8 +2650,6 @@
       10391,
       10392,
       10442,
-      10629,
-      10630,
       10792,
       10809,
       10813,

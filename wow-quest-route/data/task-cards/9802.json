@@ -69,6 +69,17 @@
   "timing_rule_ref": null,
   "evidence": [
     {
+      "evidence_id": "evidence-user-live-2026-09-18-route-supply",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-18",
+      "observed_at": "2026-09-18",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    },
+    {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
       "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9802",
@@ -95,10 +106,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《赞加沼泽的植物》：只有五号都已自然累计10株未鉴定过的植物时才交；不足就继续保留，不专门补刷。\n《赞加沼泽的植物》：沿后续路线自然累计未鉴定过的植物，不为它单独刷；到后续塞纳里奥回访时五号都够10株再交。",
+      "text": "《赞加沼泽的植物》：五号各需10株未鉴定过的植物。2026-09-18首轮沿当前路线自然累计到回访时只够约1个号；后续组为稳定执行，进入赞加前从拍卖行额外准备40株，路上自然所得补足其余10株，不为本任务单独刷。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "user live-run report 2026-09-18",
+      "reason": "首轮五开实跑已证明旧“等待五号自然凑齐”策略会造成缺口；改为当前稳定预备口径。"
     }
   }
 }

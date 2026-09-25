@@ -76,14 +76,23 @@
   },
   "guide": [
     "接取：药剂师艾瑟森。",
-    "前往地狱火半岛的沙纳尔废墟，从伊利达雷监工身上收集5个恶魔精华。完成任务后返回猎鹰岗哨，向药剂师艾瑟森复命。",
+    "前往沙纳尔废墟，从伊利达雷监工身上分别为每个角色收集5个恶魔精华；本轮实测不共享，实际掉落波动较大。",
     "交付：药剂师艾瑟森。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide","fivebox.status"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

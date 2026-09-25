@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "task_id": 10479,
+  "identity": {
+    "name_zhcn": "证明你的力量",
+    "name_en": "Proving Your Strength",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 67,
+    "min_level": 65,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 941,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 11650
+  },
+  "guide": [
+    "接取：监护者布罗克。",
+    "加拉达尔的监护者布罗克要你从纳格兰的食人魔身上收集10串黑曜石作战念珠。",
+    "交付：监护者布罗克。",
+    "本任务五开进度不共享；黑曜石作战念珠需要各号分别完成。",
+    "《证明你的力量》五号不共享；嘲颅废墟怪集中，正式路线在离开该区域前一次刷够。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-19",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-19; Questie Journey used for event order",
+      "observed_at": "2026-09-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10479",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk reward database + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "《证明你的力量》五号不共享；嘲颅废墟怪集中，正式路线在离开该区域前一次刷够。",
+      "scope": "route_profile:nagrand-fivebox-67-68",
+      "source_ref": "user live-run report 2026-09-19",
+      "reason": "2026-09-19纳格兰五开实跑确认的执行信息。"
+    }
+  }
+}

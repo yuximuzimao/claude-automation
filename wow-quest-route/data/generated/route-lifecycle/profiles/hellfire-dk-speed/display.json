@@ -3,7 +3,7 @@
     "display_name": "地狱火半岛（DK专用）",
     "footer": "塞纳里奥哨站接《塞纳里奥远征队》后直接越境赞加；下一张切换“赞加沼泽（DK专用）”。",
     "map_image": "maps/3483-hellfire-peninsula-hd.jpg",
-    "order": 101,
+    "order": 2,
     "publish_key": "hellfire_dk",
     "subtitle": "黑暗之门起步，依次完成东部前线、断背/塞斯高、萨尔玛北线、猎鹰/塞纳里奥任务簇，最后直接进入赞加。",
     "title": "地狱火半岛 · DK专用加速路线"
@@ -11,7 +11,7 @@
   "hearth_chain": [
     "萨尔玛"
   ],
-  "input_fingerprint": "837e709771c8fe320de8eaf791311a407ed51601ea1c8979e6d547dffa565468",
+  "input_fingerprint": "df7d3f1f25a23e4b67c62e6aadfed9d23da2ceda86d95284548aeda2495fbfc8",
   "issues": [
     {
       "display_name": "邪兽人尸体",
@@ -29,12 +29,6 @@
       "display_name": "纳拉杜",
       "kind": "location_display_matches_npc_name",
       "location_ref": "hellfire-dk-p050",
-      "severity": "advisory"
-    },
-    {
-      "display_name": "系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨",
-      "kind": "location_display_encodes_route_action",
-      "location_ref": "hellfire-dk-p052",
       "severity": "advisory"
     },
     {
@@ -1096,7 +1090,7 @@
         "location_ref": "hellfire-dk-p032",
         "location_role": "map_anchor",
         "ordinal": 34,
-        "step_id": "step-06",
+        "step_id": null,
         "visit_id": "a0105",
         "x": 54.39,
         "y": 31.57
@@ -1414,7 +1408,7 @@
     ]
   },
   "profile_id": "hellfire-dk-speed",
-  "profile_version": 1,
+  "profile_version": 2,
   "route_timing": {
     "center_minutes": null,
     "input_fingerprint": "cd999bd0f4099fc0aa7c6da3a03a936114bce2dbd012b747c4b9e861043d11cc",
@@ -2490,12 +2484,12 @@
           "task_id": 10229
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "战斗的号角",
           "note": "击杀塔沃斯少校取得顽强战斗号角。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10230
         },
         {
@@ -2763,21 +2757,21 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "战斗的号角",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "task_id": 10230
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "血之复仇",
           "note": "在联盟战旗旁使用顽强战斗号角召出乌尔特拉克，再击杀。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10250
         },
         {
@@ -2840,11 +2834,7 @@
         "a0097",
         "a0098",
         "a0099",
-        "a0100",
-        "a0101",
-        "a0102",
-        "a0103",
-        "a0104"
+        "a0100"
       ],
       "lines": [
         {
@@ -3005,8 +2995,7 @@
         },
         {
           "action_ids": [
-            "a0100",
-            "a0101"
+            "a0100"
           ],
           "actor": {
             "kind": "npc",
@@ -3017,53 +3006,9 @@
               "kind": "turnin",
               "name": "如何为地精效力",
               "task_id": 10238
-            },
-            {
-              "kind": "accept",
-              "name": "肮脏的工作",
-              "task_id": 10629
             }
           ],
-          "text": "工头拉泽克拉兹 → 交《如何为地精效力》 → 接《肮脏的工作》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0102"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "肮脏的工作",
-              "task_id": 10629
-            }
-          ],
-          "text": "↳ 做《肮脏的工作》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0103",
-            "a0104"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "工头拉泽克拉兹"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "肮脏的工作",
-              "task_id": 10629
-            },
-            {
-              "kind": "accept",
-              "name": "萨尔玛的地下",
-              "task_id": 10630
-            }
-          ],
-          "text": "工头拉泽克拉兹 → 交《肮脏的工作》 → 接《萨尔玛的地下》",
+          "text": "工头拉泽克拉兹 → 交《如何为地精效力》",
           "type": "task_action"
         }
       ],
@@ -3089,12 +3034,12 @@
           "task_id": 9400
         },
         {
-          "badge": null,
+          "badge": "special",
           "name": "铸魔营地：暴虐",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "task_id": 10390
         },
         {
@@ -3114,24 +3059,6 @@
           "note_visible": true,
           "pending": false,
           "task_id": 10238
-        },
-        {
-          "badge": "not_shared",
-          "name": "肮脏的工作",
-          "note": "用哨子召地狱犬，击杀野猪喂食后从地狱犬残渣取得钥匙。",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": false,
-          "task_id": 10629
-        },
-        {
-          "badge": null,
-          "name": "萨尔玛的地下",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 10630
         }
       ],
       "timing": {
@@ -3143,9 +3070,6 @@
     },
     {
       "action_ids": [
-        "a0105",
-        "a0106",
-        "a0107",
         "a0108",
         "a0109",
         "a0110",
@@ -3162,48 +3086,6 @@
         "a0121"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0105"
-          ],
-          "location_ref": "hellfire-dk-p032",
-          "task_refs": [],
-          "text": "萨尔玛地下",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0106"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "萨尔玛的地下",
-              "task_id": 10630
-            }
-          ],
-          "text": "↳ 做《萨尔玛的地下》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0107"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "工头拉泽克拉兹"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "萨尔玛的地下",
-              "task_id": 10630
-            }
-          ],
-          "text": "工头拉泽克拉兹 → 交《萨尔玛的地下》",
-          "type": "task_action"
-        },
         {
           "action_ids": [
             "a0108"
@@ -3380,21 +3262,12 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
-          "name": "萨尔玛的地下",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 10630
-        },
-        {
-          "badge": null,
+          "badge": "special",
           "name": "铸魔营地：暴虐",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10390
         },
         {
@@ -3407,21 +3280,21 @@
           "task_id": 10393
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "军团的火炮",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10391
         },
         {
-          "badge": null,
+          "badge": "special",
           "name": "深渊之门",
           "note": "击杀战争使者阿利萨玛尔取得钥匙，再摧毁怨恨符文。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10392
         }
       ],
@@ -3430,7 +3303,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "萨尔玛地下 → 铸魔营地 → 深渊之门"
+      "title": "铸魔营地 → 深渊之门"
     },
     {
       "action_ids": [
@@ -3674,12 +3547,12 @@
           "task_id": 9401
         },
         {
-          "badge": null,
+          "badge": "special",
           "name": "深渊之门",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "task_id": 10392
         },
         {
@@ -3692,12 +3565,12 @@
           "task_id": 10136
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "痛苦与黑暗",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "task_id": 10389
         },
         {
@@ -3745,7 +3618,6 @@
         "a0144",
         "a0145",
         "a0146",
-        "a0147",
         "a0148",
         "a0149",
         "a0150",
@@ -3758,7 +3630,13 @@
         "a0157",
         "a0158",
         "a0159",
-        "a0160",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
         "a0161",
         "a0162",
         "a0163",
@@ -3875,24 +3753,6 @@
             }
           ],
           "text": "药剂师艾瑟森 → 接《堕落之源》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0147"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "塔雷里斯·晨光"
-          },
-          "task_refs": [
-            {
-              "kind": "accept",
-              "name": "朝圣者的困境",
-              "task_id": 9376
-            }
-          ],
-          "text": "塔雷里斯·晨光 → 接《朝圣者的困境》",
           "type": "task_action"
         },
         {
@@ -4015,22 +3875,85 @@
           ],
           "location_ref": "hellfire-dk-p045",
           "task_refs": [],
-          "text": "尘羽峡谷营地",
+          "text": "猎鹰岗哨·中途回访",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0160"
+            "a0177",
+            "a0178",
+            "a0179"
           ],
-          "actor": null,
+          "actor": {
+            "kind": "npc",
+            "name": "游侠队长维恩雷"
+          },
           "task_refs": [
             {
-              "kind": "objective",
-              "name": "朝圣者的困境",
-              "task_id": 9376
+              "kind": "turnin",
+              "name": "大裂隙",
+              "task_id": 9340
+            },
+            {
+              "kind": "turnin",
+              "name": "通缉：黑色利爪",
+              "task_id": 9466
+            },
+            {
+              "kind": "accept",
+              "name": "点燃灯塔",
+              "task_id": 9391
             }
           ],
-          "text": "↳ 做《朝圣者的困境》",
+          "text": "游侠队长维恩雷 → 交《大裂隙》、《通缉：黑色利爪》 → 接《点燃灯塔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0181",
+            "a0182"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "阴沉的利亚森"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "邪恶之血",
+              "task_id": 9366
+            },
+            {
+              "kind": "accept",
+              "name": "阻止净化",
+              "task_id": 9370
+            }
+          ],
+          "text": "阴沉的利亚森 → 交《邪恶之血》 → 接《阻止净化》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0183",
+            "a0184"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "魔导师卡尔琳达"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "埃雷利恩的日记",
+              "task_id": 9374
+            },
+            {
+              "kind": "accept",
+              "name": "埃雷利恩的秘密",
+              "task_id": 10286
+            }
+          ],
+          "text": "魔导师卡尔琳达 → 交《埃雷利恩的日记》 → 接《埃雷利恩的秘密》",
           "type": "task_action"
         },
         {
@@ -4140,12 +4063,12 @@
           "task_id": 9466
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪恶之血",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9366
         },
         {
@@ -4158,22 +4081,13 @@
           "task_id": 9374
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "堕落之源",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9387
-        },
-        {
-          "badge": null,
-          "name": "朝圣者的困境",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9376
         },
         {
           "badge": null,
@@ -4194,12 +4108,12 @@
           "task_id": 10136
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "痛苦与黑暗",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10389
         },
         {
@@ -4210,6 +4124,33 @@
           "note_visible": true,
           "pending": true,
           "task_id": 9373
+        },
+        {
+          "badge": "shared",
+          "name": "点燃灯塔",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 9391
+        },
+        {
+          "badge": "shared",
+          "name": "阻止净化",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": false,
+          "task_id": 9370
+        },
+        {
+          "badge": null,
+          "name": "埃雷利恩的秘密",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 10286
         },
         {
           "badge": null,
@@ -4226,7 +4167,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 沙纳尔"
+      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 猎鹰回交 → 沙纳尔"
     },
     {
       "action_ids": [
@@ -4241,14 +4182,6 @@
         "a0174",
         "a0175",
         "a0176",
-        "a0177",
-        "a0178",
-        "a0179",
-        "a0180",
-        "a0181",
-        "a0182",
-        "a0183",
-        "a0184",
         "a0185",
         "a0187",
         "a0186",
@@ -4392,102 +4325,6 @@
         },
         {
           "action_ids": [
-            "a0177",
-            "a0178",
-            "a0179"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "游侠队长维恩雷"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "大裂隙",
-              "task_id": 9340
-            },
-            {
-              "kind": "turnin",
-              "name": "通缉：黑色利爪",
-              "task_id": 9466
-            },
-            {
-              "kind": "accept",
-              "name": "点燃灯塔",
-              "task_id": 9391
-            }
-          ],
-          "text": "游侠队长维恩雷 → 交《大裂隙》、《通缉：黑色利爪》 → 接《点燃灯塔》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0180"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "塔雷里斯·晨光"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "朝圣者的困境",
-              "task_id": 9376
-            }
-          ],
-          "text": "塔雷里斯·晨光 → 交《朝圣者的困境》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0181",
-            "a0182"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "阴沉的利亚森"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "邪恶之血",
-              "task_id": 9366
-            },
-            {
-              "kind": "accept",
-              "name": "阻止净化",
-              "task_id": 9370
-            }
-          ],
-          "text": "阴沉的利亚森 → 交《邪恶之血》 → 接《阻止净化》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0183",
-            "a0184"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "魔导师卡尔琳达"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "埃雷利恩的日记",
-              "task_id": 9374
-            },
-            {
-              "kind": "accept",
-              "name": "埃雷利恩的秘密",
-              "task_id": 10286
-            }
-          ],
-          "text": "魔导师卡尔琳达 → 交《埃雷利恩的日记》 → 接《埃雷利恩的秘密》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
             "a0185"
           ],
           "actor": {
@@ -4519,7 +4356,7 @@
           ],
           "location_ref": "hellfire-dk-p052",
           "task_refs": [],
-          "text": "系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨",
+          "text": "萨尔玛",
           "type": "location"
         },
         {
@@ -4596,93 +4433,21 @@
           "task_id": 10368
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "阿尔泽斯之死",
           "note": "对无情的阿尔泽斯使用长者法杖后再击杀。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10369
         },
         {
-          "badge": null,
-          "name": "大裂隙",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9340
-        },
-        {
-          "badge": null,
-          "name": "通缉：黑色利爪",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9466
-        },
-        {
-          "badge": null,
-          "name": "点燃灯塔",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9391
-        },
-        {
-          "badge": null,
-          "name": "朝圣者的困境",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9376
-        },
-        {
-          "badge": null,
-          "name": "邪恶之血",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9366
-        },
-        {
-          "badge": null,
-          "name": "阻止净化",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9370
-        },
-        {
-          "badge": null,
-          "name": "埃雷利恩的日记",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9374
-        },
-        {
-          "badge": null,
-          "name": "埃雷利恩的秘密",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 10286
-        },
-        {
-          "badge": null,
+          "badge": "not_shared",
           "name": "堕落之源",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "task_id": 9387
         },
         {
@@ -4704,12 +4469,12 @@
           "task_id": 10136
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "痛苦与黑暗",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "task_id": 10389
         }
       ],
@@ -4718,7 +4483,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "沙纳尔后半 → 猎鹰岗哨回交"
+      "title": "沙纳尔后半 → 猎鹰 → 萨尔玛 → 猎鹰"
     },
     {
       "action_ids": [
@@ -4947,30 +4712,30 @@
           "task_id": 10287
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "埃雷利恩的\"恋人\"",
-          "note": "诱使薇拉离岗后使用惩戒卷轴。",
+          "note": "进入地狱火前让任意一个角色准备1份塞纳里奥烈酒；做到《埃雷利恩的“恋人”》时直接使用，不为取酒单独折返。诱使薇拉离岗后使用惩戒卷轴。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9472
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "阻止净化",
           "note": "放置信号宝石后击杀召出的德莱尼学者。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9370
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "点燃灯塔",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9391
         }
       ],
@@ -5422,12 +5187,12 @@
           "task_id": 10349
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "自然的治愈",
           "note": "在缚地者法阵使用新生之种。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 10351
         }
       ],

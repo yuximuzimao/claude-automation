@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "task_id": 9991,
+  "identity": {
+    "name_zhcn": "侦查大地",
+    "name_en": "Survey the Land",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 68,
+    "min_level": 66,
+    "pre_any": [
+      9982,
+      9983
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [],
+    "no_money_from_xp": false,
+    "full_xp": 3050
+  },
+  "guide": [
+    "接取：受难者奥图里斯。",
+    "好好享受这趟旅程吧。调查完毕之后跟奥图里斯谈一谈。",
+    "交付：受难者奥图里斯。",
+    "接取后会自动进入侦察飞行并完成侦察流程，不需要玩家自己跑图。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-19",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-19; Questie Journey used for event order",
+      "observed_at": "2026-09-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override",
+        "presentation.action_display_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9991",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk reward database + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "接取后会自动进入侦察飞行并完成侦察流程，不需要玩家自己跑图。",
+      "scope": "all",
+      "source_ref": "user live-run report 2026-09-19",
+      "reason": "2026-09-19五开实跑确认的最短必要执行提示。"
+    },
+    "action_display_override": {
+      "suppress_kinds": [
+        "accept"
+      ],
+      "scope": "route_profile:nagrand-fivebox-67-68",
+      "source_ref": "user correction 2026-09-25",
+      "reason": "《侦查大地》接取与自动侦察启动为同一操作；玩家路线只显示“做→交”，内部accept仍保留供任务状态校验。"
+    }
+  }
+}

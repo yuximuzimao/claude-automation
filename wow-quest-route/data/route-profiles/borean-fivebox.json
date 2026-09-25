@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "borean-fivebox",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "北风苔原",
@@ -17,7 +17,7 @@
   },
   "display": {
     "publish_key": "borean",
-    "order": 4,
+    "order": 6,
     "title": "北风苔原 · 68+ 尽量清图升级路线",
     "display_name": "北风苔原",
     "subtitle": "从飞艇抵达战歌要塞开始，能吃满经验的任务尽量清；做到《横贯冰原》后自然转入龙骨荒野。",
@@ -932,6 +932,18 @@
     },
     {
       "kind": "location",
+      "location_ref": "borean-p046",
+      "action_id": "a0127"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12471,
+      "location_ref": "borean-p046",
+      "npc_name": "被俘虏的海象人",
+      "action_id": "a0128"
+    },
+    {
+      "kind": "location",
       "location_ref": "borean-p045",
       "action_id": "a0124"
     },
@@ -943,23 +955,18 @@
       "action_id": "a0125"
     },
     {
+      "kind": "turnin",
+      "task_id": 12471,
+      "location_ref": "borean-p045",
+      "npc_name": "卡鲁克",
+      "action_id": "a0133"
+    },
+    {
       "kind": "accept",
       "task_id": 11613,
       "location_ref": "borean-p045",
       "npc_name": "卡鲁克",
       "action_id": "a0126"
-    },
-    {
-      "kind": "location",
-      "location_ref": "borean-p046",
-      "action_id": "a0127"
-    },
-    {
-      "kind": "accept",
-      "task_id": 12471,
-      "location_ref": "borean-p046",
-      "npc_name": "被俘虏的海象人",
-      "action_id": "a0128"
     },
     {
       "kind": "location",
@@ -983,13 +990,6 @@
       "location_ref": "borean-p048",
       "npc_name": "卡鲁克",
       "action_id": "a0132"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 12471,
-      "location_ref": "borean-p048",
-      "npc_name": "卡鲁克",
-      "action_id": "a0133"
     },
     {
       "kind": "accept",
@@ -4915,19 +4915,19 @@
     },
     {
       "step_id": "step-13",
-      "title": "裂鞭海岸 → 卡鲁克",
-      "summary": "先找卡鲁克交《找到卡鲁克！》并接《卡鲁克的誓言》；再救出被俘虏的海象人接《残忍的科瓦迪尔》，完成斯卡迪尔击杀后回卡鲁克一起交付。",
+      "title": "被俘虏的海象人 → 卡鲁克 → 斯卡迪尔营地 → 卡鲁克",
+      "summary": "从纳萨姆平原往裂鞭海岸时先顺路处理被俘虏的海象人并接《残忍的科瓦迪尔》；再到卡鲁克一次性交《找到卡鲁克！》《残忍的科瓦迪尔》并接《卡鲁克的誓言》，完成斯卡迪尔击杀后回卡鲁克交付并接《残忍的贾梅尔》。",
       "action_ids": [
-        "a0124",
-        "a0125",
-        "a0126",
         "a0127",
         "a0128",
+        "a0124",
+        "a0125",
+        "a0133",
+        "a0126",
         "a0129",
         "a0130",
         "a0131",
         "a0132",
-        "a0133",
         "a0134"
       ]
     },
@@ -8460,6 +8460,11 @@
       "date": "2026-09-19",
       "kind": "architecture_migration",
       "summary": "Closed Borean -> Dragonblight at Wartook Iceborn. Questie verifies Task 11930 turn-in NPC Wartook at Dragonblight zone 65/(12.75,51.7); corrected the old mixed-frame Borean endpoint coordinates and added matching handoff_ref to the Dragonblight first visit."
+    },
+    {
+      "date": "2026-09-25",
+      "kind": "live_run_route_correction",
+      "summary": "吸收2026-09-20→09-21北风首跑：裂鞭海岸先经过被俘虏的海象人，再到卡鲁克一次性交《找到卡鲁克！》《残忍的科瓦迪尔》并接《卡鲁克的誓言》，删除旧路线先到卡鲁克再回海象人的折返。其它前16步顺序与实跑核对后无须因《使者》漏交而修改；那次折返属于执行失误。"
     }
   ]
 }

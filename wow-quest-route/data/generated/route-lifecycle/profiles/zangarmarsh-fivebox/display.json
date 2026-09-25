@@ -3,7 +3,7 @@
     "display_name": "赞加沼泽",
     "footer": "交《偷回蘑菇》后，从莉萨奥方向前往纳格兰。",
     "map_image": "maps/3521-zangarmarsh-hd.jpg",
-    "order": 2,
+    "order": 3,
     "publish_key": "zang",
     "subtitle": "从塞纳里奥庇护所开始，完成赞加主体路线后由莉萨奥方向进入纳格兰。",
     "title": "赞加沼泽 · 五开升级路线"
@@ -11,7 +11,7 @@
   "hearth_chain": [
     "萨布拉金"
   ],
-  "input_fingerprint": "26dc8de496ab302555d3ed6f5821774d6232b6e64e048c8ea3b9ce686c307e2a",
+  "input_fingerprint": "c5d5103032bc9c42d316828f36b07920105e1764ee6889c11cc464f1a75890ca",
   "issues": [
     {
       "display_name": "观察者杰哈恩",
@@ -652,7 +652,7 @@
         "to_visit_id": "a0225"
       }
     ],
-    "input_fingerprint": "2b96daf4e791026a092a7f3c41de890580aae61f6feb8090411b489afad7363d",
+    "input_fingerprint": "d34ca434b70d6138110276509c76131c9c780ba712cb1ad2ed1235852825d0dd",
     "status": "pass",
     "visits": [
       {
@@ -1228,7 +1228,7 @@
     ]
   },
   "profile_id": "zangarmarsh-fivebox",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
     "center_minutes": null,
@@ -1817,21 +1817,21 @@
           "task_id": 9817
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "古树的祝福",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9785
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "暗泽部族",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9747
         },
         {
@@ -1853,12 +1853,12 @@
           "task_id": 9728
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "逃离暗泽村",
           "note": "五号都接好任务后只跑一次护送即可。\n五号都接好任务后一起护送凯拉返回塞纳里奥庇护所；保持队伍跟随。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9752
         },
         {
@@ -2804,7 +2804,6 @@
       "action_ids": [
         "a0087",
         "a0088",
-        "a0090",
         "a0089",
         "a0091",
         "a0092",
@@ -2817,7 +2816,6 @@
         "a0099",
         "a0100",
         "a0101",
-        "a0103",
         "a0102",
         "a0104",
         "a0105",
@@ -2851,15 +2849,6 @@
           ],
           "text": "↳ 做《恢复平衡》",
           "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0090"
-          ],
-          "action_kind": "taxi",
-          "task_refs": [],
-          "text": "系统飞行：萨布拉金 → 塞纳里奥庇护所",
-          "type": "route_action"
         },
         {
           "action_ids": [
@@ -3046,15 +3035,6 @@
         },
         {
           "action_ids": [
-            "a0103"
-          ],
-          "action_kind": "taxi",
-          "task_refs": [],
-          "text": "系统飞行：塞纳里奥庇护所 → 沼泽鼠岗哨",
-          "type": "route_action"
-        },
-        {
-          "action_ids": [
             "a0102"
           ],
           "location_ref": "zang-p020",
@@ -3142,7 +3122,7 @@
         }
       ],
       "step_id": "step-05",
-      "summary": "完成陆地第四泵后乘系统鸟回塞纳里奥集中交付，再乘系统鸟到沼泽鼠；《沼牙的威胁》在这次自然回访时交并接出《对方的尊重》。",
+      "summary": "完成陆地第四泵后普通骑行回塞纳里奥集中交付，再继续骑行到沼泽鼠；《沼牙的威胁》在这次自然回访时交并接出《对方的尊重》。",
       "task_presentations": [
         {
           "badge": null,
@@ -3312,7 +3292,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "沼光湖 → 塞纳里奥庇护所 → 沼泽鼠岗哨"
+      "title": "沼光湖 → 骑行塞纳里奥庇护所 → 骑行沼泽鼠岗哨"
     },
     {
       "action_ids": [

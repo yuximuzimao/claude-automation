@@ -53,14 +53,23 @@
   },
   "guide": [
     "接取：纳兹格雷尔。",
-    "杀掉阿利萨玛尔，找到燃烧军团传送门钥匙，利用它毁掉怨恨符文，然后返回萨尔玛向纳兹格雷尔复命。",
+    "任务主体进度共享；阿利萨玛尔只需击杀一次，但五个角色都必须从同一具尸体依次拾取燃烧军团传送门钥匙，之后才能完成摧毁怨恨符文。",
     "交付：纳兹格雷尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide","fivebox.status"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

@@ -49,10 +49,19 @@
     "交付：伊卡因。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17-18",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17/18; Questie Journey timestamps used for sequence only",
+      "observed_at": "2026-09-18",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",

@@ -453,6 +453,59 @@
             "reason": {
               "type": "string",
               "minLength": 1
+            },
+            "show_on": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "accept",
+                  "objective",
+                  "turnin"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          }
+        },
+        "action_display_override": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "suppress_kinds",
+            "scope",
+            "source_ref",
+            "reason"
+          ],
+          "properties": {
+            "suppress_kinds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "accept",
+                  "objective",
+                  "turnin"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "scope": {
+              "type": "string",
+              "pattern": "^(all|route_profile:[a-z0-9][a-z0-9-]*)$"
+            },
+            "source_ref": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
             }
           }
         }

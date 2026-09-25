@@ -81,13 +81,27 @@
   "guide": [
     "接取：维赫亚。",
     "潜入裂鞭废墟北部的海面下，在一座冰山下面找到利维洛斯，使用纳兹亚的三叉戟杀死它，然后返回裂鞭海岸的北边，向卡鲁克复命。",
-    "交付：卡鲁克。"
+    "交付：卡鲁克。",
+    "对利维洛斯使用三叉戟并击杀后的任务完成进度五开共享。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -115,10 +129,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《使者》：目标在水下冰山底部；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "《使者》：目标在水下冰山底部；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。\n对利维洛斯使用三叉戟并击杀后的任务完成进度五开共享。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "北风苔原五开实跑确认的共享/拾取/执行机制；保留仍有价值的旧位置提示。"
     }
   }
 }

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "task_id": 10873,
+  "identity": {
+    "name_zhcn": "夜间的绑架",
+    "name_en": "Taken in the Night",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 65,
+    "min_level": 63,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 33000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {
+        "faction_id": 935,
+        "amount": 250
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 11000
+  },
+  "guide": [
+    "接取/交付：白骨荒野·沙塔尔前哨站，斥候纳弗林。",
+    "前往灵网山脊解救6名被网住的沙塔尔战士。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-19",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-19; Questie Journey events 444-452",
+      "observed_at": "2026-09-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=10873",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk reward database + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": null,
+    "action_display_override": null
+  }
+}

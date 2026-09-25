@@ -52,13 +52,27 @@
   "guide": [
     "接取：加拉达尔布告牌。",
     "杀死顾问佐尔布、5个战槌萨满祭司和5个战槌劫掠者，完成任务后向监护者布罗克复命。",
-    "交付：监护者布罗克。"
+    "交付：监护者布罗克。",
+    "两个通缉之一；2026-09-19五开实测共享。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-19",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-19",
+      "observed_at": "2026-09-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -86,10 +100,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《通缉：顾问佐尔布》：击杀顾问佐尔布、5名战槌萨满祭司和5名战槌劫掠者。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "两个通缉之一；2026-09-19五开实测共享。",
+      "scope": "route_profile:nagrand-fivebox-67-68",
+      "source_ref": "user live-run report 2026-09-19",
+      "reason": "2026-09-19纳格兰五开实跑确认的执行信息。"
     }
   }
 }

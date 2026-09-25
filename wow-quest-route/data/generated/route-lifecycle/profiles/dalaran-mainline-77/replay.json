@@ -1,0 +1,215 @@
+{
+  "action_execution": {
+    "a0002": "executed",
+    "a0003": "executed",
+    "a0005": "executed",
+    "a0007": "executed",
+    "a0009": "executed",
+    "a0013": "executed",
+    "a0015": "executed",
+    "a0019": "executed"
+  },
+  "availability": {
+    "deferred_gates": [
+      {
+        "action_id": "a0003",
+        "kind": "min_level",
+        "required_min_level": 68,
+        "resolver": "derived_xp",
+        "task_id": 12790
+      },
+      {
+        "action_id": "a0003",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12790
+      },
+      {
+        "action_id": "a0009",
+        "kind": "min_level",
+        "required_min_level": 76,
+        "resolver": "derived_xp",
+        "task_id": 12521
+      },
+      {
+        "action_id": "a0009",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12521
+      },
+      {
+        "action_id": "a0013",
+        "kind": "min_level",
+        "required_min_level": 75,
+        "resolver": "derived_xp",
+        "task_id": 12974
+      },
+      {
+        "action_id": "a0013",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12974
+      },
+      {
+        "action_id": "a0015",
+        "kind": "min_level",
+        "required_min_level": 77,
+        "resolver": "derived_xp",
+        "task_id": 12853
+      },
+      {
+        "action_id": "a0015",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12853
+      }
+    ],
+    "events": [
+      {
+        "action_id": "a0003",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 68,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12790
+      },
+      {
+        "action_id": "a0009",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 76,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12521
+      },
+      {
+        "action_id": "a0013",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 75,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "exclusive_with",
+            "must_be_absent": [
+              12954
+            ],
+            "status": "required_external_state"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12974
+      },
+      {
+        "action_id": "a0015",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 77,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12853
+      }
+    ],
+    "external_state_requirements": [
+      {
+        "action_id": "a0013",
+        "kind": "absent_completed_or_active_tasks",
+        "relation": "exclusive_with",
+        "required_absent_task_ids": [
+          12954
+        ],
+        "task_id": 12974
+      }
+    ]
+  },
+  "flight": {
+    "entry_state_known": false,
+    "events": [
+      {
+        "action_id": "a0011",
+        "flight_point": "达拉然",
+        "kind": "open_flight_point"
+      }
+    ],
+    "guaranteed_opened_by_exit": [
+      "达拉然"
+    ],
+    "required_entry_flight_points": []
+  },
+  "hearth": {
+    "entry_state_known": true,
+    "events": [],
+    "final_location": "阿格玛之锤",
+    "final_state_known": true,
+    "required_entry_locations": []
+  },
+  "input_fingerprint": "2ef712f4be5c41f2e413b44b7440b0e1bfa335adcbe249e3fffa2d0ac4f52361",
+  "issues": [
+    {
+      "kind": "actual_entry_active_tasks_required",
+      "reason": "Profile entry_requirements are minimum lower bounds; an actual entry RouteState is required to prove duplicate-accept legality and quest-log capacity.",
+      "severity": "requirement"
+    }
+  ],
+  "kind": "route_replay",
+  "profile_id": "dalaran-mainline-77",
+  "quest_log": {
+    "entry_state_known": false,
+    "final_active_task_ids": [
+      12521,
+      12974
+    ],
+    "final_maybe_active_task_ids": [],
+    "peak_upper_bound": null
+  },
+  "reputation": {
+    "definite_task_reward_delta": {
+      "1090": 20
+    },
+    "possible_task_reward_delta": {}
+  },
+  "status": "requirements",
+  "task_state": {
+    "entry_active_state_known": false,
+    "entry_completed_state_known": false,
+    "final_active_state_known": false,
+    "final_active_task_ids": [
+      12521,
+      12974
+    ],
+    "final_maybe_active_task_ids": [],
+    "known_completed_task_ids": [
+      12790,
+      12791,
+      12853
+    ],
+    "maybe_completed_task_ids": []
+  }
+}

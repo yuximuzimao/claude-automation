@@ -82,10 +82,19 @@
     "交付：游侠队长维恩雷。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17-18",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17/18; Questie Journey timestamps used for sequence only",
+      "observed_at": "2026-09-18",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

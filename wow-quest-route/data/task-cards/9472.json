@@ -62,14 +62,26 @@
   },
   "guide": [
     "接取：魔导师卡尔琳达。",
-    "猎鹰岗哨的魔导师卡尔琳达要你诱使薇拉·火语离开岗哨，然后对她使用卡尔琳达的惩戒卷轴。",
+    "猎鹰岗哨的魔导师卡尔琳达要你诱使薇拉·火语离开岗哨，然后对她使用卡尔琳达的惩戒卷轴。若要首次经过地狱火时直接完成，进地狱火前让任意一个角色预先携带1份塞纳里奥烈酒即可；本轮实测任务进度五号共享。",
     "交付：魔导师卡尔琳达。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17-18",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17/18; Questie Journey timestamps used for sequence only",
+      "observed_at": "2026-09-18",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
+      ]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",
@@ -113,10 +125,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】诱使薇拉离岗后使用惩戒卷轴。",
+      "text": "进入地狱火前让任意一个角色准备1份塞纳里奥烈酒；做到《埃雷利恩的“恋人”》时直接使用，不为取酒单独折返。诱使薇拉离岗后使用惩戒卷轴。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json#hellfire_dk.point53",
-      "reason": "候选Publisher语义对账补回旧正式页面短备注；暂不在本轮判断是否可由任务追踪/guide完全替代，留待备注专项优化。"
+      "source_ref": "user live-run report 2026-09-18",
+      "reason": "当前尚无统一“路线前置准备”展示入口；先把已确认准备物保存在Task Card备注，后续统一设计前置准备提示。"
     }
   }
 }

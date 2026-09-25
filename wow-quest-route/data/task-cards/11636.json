@@ -54,13 +54,26 @@
   "guide": [
     "接取：驭风大师图波尔。",
     "与战歌要塞的亚尼谈一谈，让他把你安全地送往海滩边。到达加尔鲁什码头后去找歼灭者格雷克罗。",
-    "交付：Annihilator Grek'lor。"
+    "交付：Annihilator Grek'lor。",
+    "五号需要依次与亚尼交互进入任务飞毯；这是“依次交互”而不是依次拾取，独立标签尚未裁决，所以fivebox状态继续保留待实测。"
   ],
   "fivebox": {
     "status": "pending"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -88,10 +101,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "text": "五号需要依次与亚尼交互进入任务飞毯；这是依次交互，不是依次拾取。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
     }
   }
 }

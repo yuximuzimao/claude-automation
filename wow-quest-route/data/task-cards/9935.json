@@ -52,13 +52,27 @@
   "guide": [
     "接取：加拉达尔布告牌。",
     "杀死巫婆吉塞尔达以及任意10名基尔索罗成员，完成任务后向加拉达尔的监护者布罗克复命。",
-    "交付：监护者布罗克。"
+    "交付：监护者布罗克。",
+    "两个通缉之一；2026-09-19五开实测共享。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-19",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-19",
+      "observed_at": "2026-09-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -86,10 +100,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "text": "两个通缉之一；2026-09-19五开实测共享。",
+      "scope": "route_profile:nagrand-fivebox-67-68",
+      "source_ref": "user live-run report 2026-09-19",
+      "reason": "2026-09-19纳格兰五开实跑确认的执行信息。"
     }
   }
 }

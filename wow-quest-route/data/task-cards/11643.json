@@ -54,13 +54,27 @@
   "guide": [
     "接取：莫布。",
     "回音海岸的莫布要求你为他取回坦克零件气动装配器。",
-    "交付：莫布。"
+    "交付：莫布。",
+    "固定的坦克零件气动装配器可由五个角色对同一来源依次拾取；岸边小屋位置沿用现有备注。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -88,10 +102,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《莫布的坦克零件气动装配器》：固定零件在约(32.4,49.2)岸边小屋内，不在屋外地面。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "固定零件在约(32.4,49.2)岸边小屋内，不在屋外地面；同一来源可让五号依次拾取。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
     }
   }
 }

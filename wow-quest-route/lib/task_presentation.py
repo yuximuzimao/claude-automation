@@ -120,6 +120,18 @@ def project_task_presentation(
             fivebox_status=str(fivebox_status),
         )
     )
+    note_show_on = [] if note_override is None else [str(value) for value in note_override.get("show_on", [])]
+
+    action_display_override = _scoped_override(
+        presentation.get("action_display_override"),
+        profile_id=profile_id,
+        kind="action_display_override",
+    )
+    suppress_kinds = (
+        []
+        if action_display_override is None
+        else [str(value) for value in action_display_override.get("suppress_kinds", [])]
+    )
 
     pending = fivebox_status == "pending"
 
@@ -129,5 +141,7 @@ def project_task_presentation(
         "badge": badge,
         "note": note,
         "note_override_applied": note_override is not None,
+        "note_show_on": note_show_on,
+        "suppress_action_kinds": suppress_kinds,
         "pending": pending,
     }

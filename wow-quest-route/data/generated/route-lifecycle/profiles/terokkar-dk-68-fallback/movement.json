@@ -1,0 +1,229 @@
+{
+  "canonical_edge_count": 6,
+  "edges": [
+    {
+      "cross_zone": false,
+      "edge_id": "a0001->a0005",
+      "from_location_ref": "terokkar-fallback-p001",
+      "from_visit_id": "a0001",
+      "from_zone_id": 3519,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "terokkar-fallback-p002",
+      "to_visit_id": "a0005",
+      "to_zone_id": 3519
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0005->a0007",
+      "from_location_ref": "terokkar-fallback-p002",
+      "from_visit_id": "a0005",
+      "from_zone_id": 3519,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "terokkar-fallback-p003",
+      "to_visit_id": "a0007",
+      "to_zone_id": 3519
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0007->a0009",
+      "from_location_ref": "terokkar-fallback-p003",
+      "from_visit_id": "a0007",
+      "from_zone_id": 3519,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "terokkar-fallback-p004",
+      "to_visit_id": "a0009",
+      "to_zone_id": 3519
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0009->a0011",
+      "from_location_ref": "terokkar-fallback-p004",
+      "from_visit_id": "a0009",
+      "from_zone_id": 3519,
+      "legacy_transport": null,
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "terokkar-fallback-p005",
+      "to_visit_id": "a0011",
+      "to_zone_id": 3519
+    },
+    {
+      "cross_zone": true,
+      "edge_id": "a0011->a0016",
+      "from_location_ref": "terokkar-fallback-p005",
+      "from_visit_id": "a0011",
+      "from_zone_id": 3519,
+      "legacy_transport": null,
+      "movement_action": {
+        "action_id": "a0015",
+        "action_kind": "move",
+        "from_name": "沙塔尔前哨站",
+        "movement_mode": "ride",
+        "operation_kind": "move",
+        "to_name": "沙塔斯·奥格瑞玛传送门"
+      },
+      "movement_action_id": "a0015",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "move",
+      "source": "canonical_profile",
+      "to_location_ref": "terokkar-fallback-shattrath-portal",
+      "to_visit_id": "a0016",
+      "to_zone_id": 3703
+    },
+    {
+      "cross_zone": true,
+      "edge_id": "a0016->a0018",
+      "from_location_ref": "terokkar-fallback-shattrath-portal",
+      "from_visit_id": "a0016",
+      "from_zone_id": 3703,
+      "legacy_transport": null,
+      "movement_action": {
+        "action_id": "a0017",
+        "action_kind": "fixed_transport",
+        "from_name": "沙塔斯·奥格瑞玛传送门",
+        "operation_kind": "fixed_transport",
+        "to_name": "奥格瑞玛"
+      },
+      "movement_action_id": "a0017",
+      "operation_kind": "fixed_transport",
+      "source": "canonical_profile",
+      "to_location_ref": "terokkar-fallback-orgrimmar",
+      "to_visit_id": "a0018",
+      "to_zone_id": 1637
+    }
+  ],
+  "exit_movement_actions": [],
+  "input_fingerprint": "f67f00c85da98026074930747b8537fa6184cceab56fc340fbf156e890db1893",
+  "issues": [],
+  "migration_candidate_count": 0,
+  "primary_zone_id": 3519,
+  "profile_id": "terokkar-dk-68-fallback",
+  "status": "pass",
+  "unresolved_edge_count": 0,
+  "visits": [
+    {
+      "display_name": "沙塔尔前哨站",
+      "handoff_ref": null,
+      "incoming_movement": null,
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-p001",
+      "location_role": "map_anchor",
+      "ordinal": 1,
+      "visit_id": "a0001",
+      "x": 31.03,
+      "y": 76.15,
+      "zone_id": 3519
+    },
+    {
+      "display_name": "白骨荒野·尸体区",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-p002",
+      "location_role": "map_anchor",
+      "ordinal": 2,
+      "visit_id": "a0005",
+      "x": 34.58,
+      "y": 76.08,
+      "zone_id": 3519
+    },
+    {
+      "display_name": "被遗弃的篷车·恐怖圣物",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-p003",
+      "location_role": "map_anchor",
+      "ordinal": 3,
+      "visit_id": "a0007",
+      "x": 43.92,
+      "y": 76.4,
+      "zone_id": 3519
+    },
+    {
+      "display_name": "灵网山脊",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-p004",
+      "location_role": "map_anchor",
+      "ordinal": 4,
+      "visit_id": "a0009",
+      "x": 54.27,
+      "y": 81.82,
+      "zone_id": 3519
+    },
+    {
+      "display_name": "沙塔尔前哨站",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-p005",
+      "location_role": "map_anchor",
+      "ordinal": 5,
+      "visit_id": "a0011",
+      "x": 31.03,
+      "y": 76.15,
+      "zone_id": 3519
+    },
+    {
+      "display_name": "沙塔斯·奥格瑞玛传送门",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0015",
+        "kind": "action"
+      },
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-shattrath-portal",
+      "location_role": "transition_context",
+      "ordinal": 6,
+      "visit_id": "a0016",
+      "x": null,
+      "y": null,
+      "zone_id": 3703
+    },
+    {
+      "display_name": "奥格瑞玛",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0017",
+        "kind": "action"
+      },
+      "legacy_transport": null,
+      "location_ref": "terokkar-fallback-orgrimmar",
+      "location_role": "transition_context",
+      "ordinal": 7,
+      "visit_id": "a0018",
+      "x": null,
+      "y": null,
+      "zone_id": 1637
+    }
+  ]
+}

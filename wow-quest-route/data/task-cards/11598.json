@@ -56,13 +56,27 @@
   "guide": [
     "接取：拉兹格尔大王。",
     "战歌要塞的拉兹格尔大王要你杀死15只尼鲁巴尔蛛魔。",
-    "交付：拉兹格尔大王。"
+    "交付：拉兹格尔大王。",
+    "五开实测共享；击杀尼鲁巴尔蛛魔由主控完成即可同步全队。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -90,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "text": "五开实测共享；击杀尼鲁巴尔蛛魔由主控完成即可同步全队。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "北风苔原五开实跑确认的共享/拾取/执行机制；保留仍有价值的旧位置提示。"
     }
   }
 }

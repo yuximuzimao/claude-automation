@@ -1,0 +1,271 @@
+{
+  "schema_version": 2,
+  "profile_id": "terokkar-dk-68-fallback",
+  "version": 1,
+  "status": "draft",
+  "scope": {
+    "route_scope": "泰罗卡森林",
+    "character_profile": "dk-twohand-blood-current",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "primary_zone_id": 3519
+  },
+  "entry_requirements": {
+    "active_task_ids": []
+  },
+  "goal": {
+    "summary": "独立的68级前补经验小路线：在白骨荒野只做《恐怖圣物》《不适当的葬礼》《夜间的绑架》三项；交完后经沙塔斯传送门前往奥格瑞玛。"
+  },
+  "display": {
+    "publish_key": "terokkar_dk_68_fallback",
+    "order": 5,
+    "title": "泰罗卡森林 · 68级补经验三任务",
+    "display_name": "泰罗卡68补经验",
+    "subtitle": "白骨荒野三任务小路线；需要补经验时单独执行。",
+    "footer": "三项交完后跑到沙塔斯的奥格瑞玛传送门，传送到奥格瑞玛后结束本路线。",
+    "map_image": "maps/3519-terokkar-forest-hd.jpg"
+  },
+  "task_ids": [
+    10877,
+    10913,
+    10873
+  ],
+  "actions": [
+    {
+      "action_id": "a0001",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-p001"
+    },
+    {
+      "action_id": "a0002",
+      "kind": "accept",
+      "task_id": 10877,
+      "location_ref": "terokkar-fallback-p001",
+      "npc_name": "沃尔昆"
+    },
+    {
+      "action_id": "a0003",
+      "kind": "accept",
+      "task_id": 10913,
+      "location_ref": "terokkar-fallback-p001",
+      "npc_name": "指挥官拉瓦伊"
+    },
+    {
+      "action_id": "a0004",
+      "kind": "accept",
+      "task_id": 10873,
+      "location_ref": "terokkar-fallback-p001",
+      "npc_name": "斥候纳弗林"
+    },
+    {
+      "action_id": "a0005",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-p002"
+    },
+    {
+      "action_id": "a0006",
+      "kind": "objective",
+      "task_id": 10913,
+      "location_ref": "terokkar-fallback-p002"
+    },
+    {
+      "action_id": "a0007",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-p003"
+    },
+    {
+      "action_id": "a0008",
+      "kind": "objective",
+      "task_id": 10877,
+      "location_ref": "terokkar-fallback-p003"
+    },
+    {
+      "action_id": "a0009",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-p004"
+    },
+    {
+      "action_id": "a0010",
+      "kind": "objective",
+      "task_id": 10873,
+      "location_ref": "terokkar-fallback-p004"
+    },
+    {
+      "action_id": "a0011",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-p005"
+    },
+    {
+      "action_id": "a0012",
+      "kind": "turnin",
+      "task_id": 10877,
+      "location_ref": "terokkar-fallback-p005",
+      "npc_name": "沃尔昆"
+    },
+    {
+      "action_id": "a0013",
+      "kind": "turnin",
+      "task_id": 10913,
+      "location_ref": "terokkar-fallback-p005",
+      "npc_name": "指挥官拉瓦伊"
+    },
+    {
+      "action_id": "a0014",
+      "kind": "turnin",
+      "task_id": 10873,
+      "location_ref": "terokkar-fallback-p005",
+      "npc_name": "斥候纳弗林"
+    },
+    {
+      "action_id": "a0015",
+      "kind": "move",
+      "movement_mode": "ride",
+      "location_ref": "terokkar-fallback-shattrath-portal",
+      "from_name": "沙塔尔前哨站",
+      "to_name": "沙塔斯·奥格瑞玛传送门"
+    },
+    {
+      "action_id": "a0016",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-shattrath-portal"
+    },
+    {
+      "action_id": "a0017",
+      "kind": "fixed_transport",
+      "location_ref": "terokkar-fallback-orgrimmar",
+      "from_name": "沙塔斯·奥格瑞玛传送门",
+      "to_name": "奥格瑞玛"
+    },
+    {
+      "action_id": "a0018",
+      "kind": "location",
+      "location_ref": "terokkar-fallback-orgrimmar"
+    }
+  ],
+  "step_groups": [
+    {
+      "step_id": "step-01",
+      "title": "沙塔尔前哨站：接三任务",
+      "summary": null,
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004"
+      ]
+    },
+    {
+      "step_id": "step-02",
+      "title": "尸体区 → 恐怖圣物 → 灵网山脊",
+      "summary": null,
+      "action_ids": [
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010"
+      ]
+    },
+    {
+      "step_id": "step-03",
+      "title": "返回沙塔尔前哨站交三任务",
+      "summary": null,
+      "action_ids": [
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014"
+      ]
+    },
+    {
+      "step_id": "step-04",
+      "title": "沙塔斯 → 奥格瑞玛",
+      "summary": null,
+      "action_ids": [
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018"
+      ]
+    }
+  ],
+  "geometry": {
+    "locations": {
+      "terokkar-fallback-p001": {
+        "display_name": "沙塔尔前哨站",
+        "x": 31.03,
+        "y": 76.15
+      },
+      "terokkar-fallback-p002": {
+        "display_name": "白骨荒野·尸体区",
+        "x": 34.58,
+        "y": 76.08,
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "terokkar-fallback-p003": {
+        "display_name": "被遗弃的篷车·恐怖圣物",
+        "x": 43.92,
+        "y": 76.4,
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "terokkar-fallback-p004": {
+        "display_name": "灵网山脊",
+        "x": 54.27,
+        "y": 81.82,
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "terokkar-fallback-p005": {
+        "display_name": "沙塔尔前哨站",
+        "x": 31.03,
+        "y": 76.15,
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "terokkar-fallback-shattrath-portal": {
+        "display_name": "沙塔斯·奥格瑞玛传送门",
+        "location_role": "transition_context",
+        "x": null,
+        "y": null,
+        "zone_id": 3703,
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0015"
+        }
+      },
+      "terokkar-fallback-orgrimmar": {
+        "display_name": "奥格瑞玛",
+        "location_role": "transition_context",
+        "x": null,
+        "y": null,
+        "zone_id": 1637,
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0017"
+        }
+      }
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-09-25",
+      "kind": "live_run_route_creation",
+      "summary": "根据2026-09-19第二组DK实跑，把10877/10913/10873整理成独立泰罗卡三任务补经验路线；不引入等级条件或Program分支。"
+    },
+    {
+      "date": "2026-09-25",
+      "kind": "route_handoff",
+      "summary": "按用户要求补齐路线结束转场：三任务交完后前往沙塔斯奥格瑞玛传送门，并固定交通到奥格瑞玛。"
+    }
+  ]
+}

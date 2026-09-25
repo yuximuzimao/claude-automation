@@ -87,13 +87,27 @@
   "guide": [
     "接取：瓦托尔。",
     "北风苔原回音海岸的瓦托尔要你利用海象人火炬烧毁停泊在帕尔依和加尔鲁什码头的4艘克瓦迪尔船只——毒蛇之喉、库尔达卡、伯尔之锤和伯尔之砧。",
-    "交付：瓦托尔。"
+    "交付：瓦托尔。",
+    "烧毁四艘船的任务进度五开共享；主控按路线依次使用火炬即可。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -121,10 +135,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《烧毁船只》不是靠清船上怪自动完成，四艘船都要主动使用任务火炬。四船位置已按本圈①→④顺序排好。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "四艘船都要主动使用任务火炬，不能靠清船上怪自动完成；四船进度五开共享，主控按本圈顺序处理即可。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
     }
   }
 }

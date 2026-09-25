@@ -1,0 +1,591 @@
+{
+  "display": {
+    "display_name": "泰罗卡68补经验",
+    "footer": "三项交完后跑到沙塔斯的奥格瑞玛传送门，传送到奥格瑞玛后结束本路线。",
+    "order": 5,
+    "publish_key": "terokkar_dk_68_fallback",
+    "subtitle": "白骨荒野三任务小路线；需要补经验时单独执行。",
+    "title": "泰罗卡森林 · 68级补经验三任务"
+  },
+  "hearth_chain": [],
+  "input_fingerprint": "fa069275df24f88fb4f7921682e6bc21fc33248a99296c24fe0c6b797390ce66",
+  "issues": [],
+  "kind": "publisher_payload",
+  "map": {
+    "geometry": {
+      "edges": [
+        {
+          "edge_id": "a0001->a0005",
+          "from_location_ref": "terokkar-fallback-p001",
+          "from_visit_id": "a0001",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "terokkar-fallback-p002",
+          "to_visit_id": "a0005"
+        },
+        {
+          "edge_id": "a0005->a0007",
+          "from_location_ref": "terokkar-fallback-p002",
+          "from_visit_id": "a0005",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "terokkar-fallback-p003",
+          "to_visit_id": "a0007"
+        },
+        {
+          "edge_id": "a0007->a0009",
+          "from_location_ref": "terokkar-fallback-p003",
+          "from_visit_id": "a0007",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "terokkar-fallback-p004",
+          "to_visit_id": "a0009"
+        },
+        {
+          "edge_id": "a0009->a0011",
+          "from_location_ref": "terokkar-fallback-p004",
+          "from_visit_id": "a0009",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "terokkar-fallback-p005",
+          "to_visit_id": "a0011"
+        },
+        {
+          "edge_id": "a0011->a0016",
+          "from_location_ref": "terokkar-fallback-p005",
+          "from_visit_id": "a0011",
+          "movement_action_id": "a0015",
+          "movement_mode": "ride",
+          "operation_kind": "move",
+          "source": "canonical_profile",
+          "to_location_ref": "terokkar-fallback-shattrath-portal",
+          "to_visit_id": "a0016"
+        },
+        {
+          "edge_id": "a0016->a0018",
+          "from_location_ref": "terokkar-fallback-shattrath-portal",
+          "from_visit_id": "a0016",
+          "movement_action_id": "a0017",
+          "movement_mode": null,
+          "operation_kind": "fixed_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "terokkar-fallback-orgrimmar",
+          "to_visit_id": "a0018"
+        }
+      ],
+      "input_fingerprint": "f67f00c85da98026074930747b8537fa6184cceab56fc340fbf156e890db1893",
+      "status": "pass",
+      "visits": [
+        {
+          "display_name": "沙塔尔前哨站",
+          "location_ref": "terokkar-fallback-p001",
+          "location_role": "map_anchor",
+          "ordinal": 1,
+          "step_id": "step-01",
+          "visit_id": "a0001",
+          "x": 31.03,
+          "y": 76.15
+        },
+        {
+          "display_name": "白骨荒野·尸体区",
+          "location_ref": "terokkar-fallback-p002",
+          "location_role": "map_anchor",
+          "ordinal": 2,
+          "step_id": "step-02",
+          "visit_id": "a0005",
+          "x": 34.58,
+          "y": 76.08
+        },
+        {
+          "display_name": "被遗弃的篷车·恐怖圣物",
+          "location_ref": "terokkar-fallback-p003",
+          "location_role": "map_anchor",
+          "ordinal": 3,
+          "step_id": "step-02",
+          "visit_id": "a0007",
+          "x": 43.92,
+          "y": 76.4
+        },
+        {
+          "display_name": "灵网山脊",
+          "location_ref": "terokkar-fallback-p004",
+          "location_role": "map_anchor",
+          "ordinal": 4,
+          "step_id": "step-02",
+          "visit_id": "a0009",
+          "x": 54.27,
+          "y": 81.82
+        },
+        {
+          "display_name": "沙塔尔前哨站",
+          "location_ref": "terokkar-fallback-p005",
+          "location_role": "map_anchor",
+          "ordinal": 5,
+          "step_id": "step-03",
+          "visit_id": "a0011",
+          "x": 31.03,
+          "y": 76.15
+        },
+        {
+          "display_name": "沙塔斯·奥格瑞玛传送门",
+          "location_ref": "terokkar-fallback-shattrath-portal",
+          "location_role": "transition_context",
+          "ordinal": 6,
+          "step_id": "step-04",
+          "visit_id": "a0016",
+          "x": null,
+          "y": null
+        },
+        {
+          "display_name": "奥格瑞玛",
+          "location_ref": "terokkar-fallback-orgrimmar",
+          "location_role": "transition_context",
+          "ordinal": 7,
+          "step_id": "step-04",
+          "visit_id": "a0018",
+          "x": null,
+          "y": null
+        }
+      ]
+    },
+    "image": "maps/3519-terokkar-forest-hd.jpg",
+    "labels": []
+  },
+  "profile_id": "terokkar-dk-68-fallback",
+  "profile_version": 1,
+  "program_id": null,
+  "publishable": true,
+  "route_timing": {
+    "center_minutes": null,
+    "input_fingerprint": "d70fb622f4250d3a34235096db7a93ac41819fa843dbeb343eaecafb1aa99725",
+    "range_minutes": null,
+    "status": "requirements"
+  },
+  "schema_version": 1,
+  "stage11_input_fingerprint": "87a8f836a9b8fa47dd2dfcdf0e1fb83556eff0ab052b9111da259ab603924cff",
+  "status": "pass",
+  "steps": [
+    {
+      "action_ids": [
+        "a0001",
+        "a0002",
+        "a0003",
+        "a0004"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0001"
+          ],
+          "location_ref": "terokkar-fallback-p001",
+          "task_refs": [],
+          "text": "沙塔尔前哨站",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0002"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "沃尔昆"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "恐怖圣物",
+              "task_id": 10877
+            }
+          ],
+          "text": "沃尔昆 → 接《恐怖圣物》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0003"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "指挥官拉瓦伊"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "不适当的葬礼",
+              "task_id": 10913
+            }
+          ],
+          "text": "指挥官拉瓦伊 → 接《不适当的葬礼》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0004"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候纳弗林"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "夜间的绑架",
+              "task_id": 10873
+            }
+          ],
+          "text": "斥候纳弗林 → 接《夜间的绑架》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-01",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "恐怖圣物",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10877
+        },
+        {
+          "badge": null,
+          "name": "不适当的葬礼",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10913
+        },
+        {
+          "badge": null,
+          "name": "夜间的绑架",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10873
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "沙塔尔前哨站：接三任务"
+    },
+    {
+      "action_ids": [
+        "a0005",
+        "a0006",
+        "a0007",
+        "a0008",
+        "a0009",
+        "a0010"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0005"
+          ],
+          "location_ref": "terokkar-fallback-p002",
+          "task_refs": [],
+          "text": "白骨荒野·尸体区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0006"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "不适当的葬礼",
+              "task_id": 10913
+            }
+          ],
+          "text": "↳ 做《不适当的葬礼》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0007"
+          ],
+          "location_ref": "terokkar-fallback-p003",
+          "task_refs": [],
+          "text": "被遗弃的篷车·恐怖圣物",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0008"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "恐怖圣物",
+              "task_id": 10877
+            }
+          ],
+          "text": "↳ 做《恐怖圣物》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0009"
+          ],
+          "location_ref": "terokkar-fallback-p004",
+          "task_refs": [],
+          "text": "灵网山脊",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0010"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "夜间的绑架",
+              "task_id": 10873
+            }
+          ],
+          "text": "↳ 做《夜间的绑架》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-02",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "不适当的葬礼",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10913
+        },
+        {
+          "badge": null,
+          "name": "恐怖圣物",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10877
+        },
+        {
+          "badge": null,
+          "name": "夜间的绑架",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10873
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "尸体区 → 恐怖圣物 → 灵网山脊"
+    },
+    {
+      "action_ids": [
+        "a0011",
+        "a0012",
+        "a0013",
+        "a0014"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0011"
+          ],
+          "location_ref": "terokkar-fallback-p005",
+          "task_refs": [],
+          "text": "沙塔尔前哨站",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0012"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "沃尔昆"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "恐怖圣物",
+              "task_id": 10877
+            }
+          ],
+          "text": "沃尔昆 → 交《恐怖圣物》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0013"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "指挥官拉瓦伊"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "不适当的葬礼",
+              "task_id": 10913
+            }
+          ],
+          "text": "指挥官拉瓦伊 → 交《不适当的葬礼》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0014"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "斥候纳弗林"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "夜间的绑架",
+              "task_id": 10873
+            }
+          ],
+          "text": "斥候纳弗林 → 交《夜间的绑架》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-03",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "恐怖圣物",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10877
+        },
+        {
+          "badge": null,
+          "name": "不适当的葬礼",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10913
+        },
+        {
+          "badge": null,
+          "name": "夜间的绑架",
+          "note": null,
+          "note_override_applied": false,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10873
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "返回沙塔尔前哨站交三任务"
+    },
+    {
+      "action_ids": [
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0015"
+          ],
+          "action_kind": "move",
+          "task_refs": [],
+          "text": "陆路：沙塔尔前哨站 → 沙塔斯·奥格瑞玛传送门",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0016"
+          ],
+          "location_ref": "terokkar-fallback-shattrath-portal",
+          "task_refs": [],
+          "text": "沙塔斯·奥格瑞玛传送门",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0017"
+          ],
+          "action_kind": "fixed_transport",
+          "task_refs": [],
+          "text": "固定交通：沙塔斯·奥格瑞玛传送门 → 奥格瑞玛",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0018"
+          ],
+          "location_ref": "terokkar-fallback-orgrimmar",
+          "task_refs": [],
+          "text": "奥格瑞玛",
+          "type": "location"
+        }
+      ],
+      "step_id": "step-04",
+      "summary": "",
+      "task_presentations": [],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "沙塔斯 → 奥格瑞玛"
+    }
+  ]
+}

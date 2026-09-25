@@ -46,13 +46,27 @@
   "guide": [
     "接取：被俘虏的海象人。",
     "将海象人囚犯的情况告诉卡鲁克。",
-    "交付：卡鲁克。"
+    "交付：卡鲁克。",
+    "先清掉触发战斗并等被俘虏的海象人变为可接任务状态；动作够快时五号可依次接取。若NPC状态在五号全部接完前重置，剩余角色需要再次触发战斗，因此可能要打第二轮。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -80,10 +94,13 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《残忍的科瓦迪尔》：先清掉周围科瓦迪尔并击杀出现的娜迦，救出海象人；等他变成可接任务NPC后再接任务。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "先清掉触发战斗并等被俘虏的海象人变为可接任务状态；动作够快时五号可依次接取。若状态在五号全部接完前重置，剩余角色需要再次触发战斗，可能要打第二轮。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。",
+      "show_on": [
+        "accept"
+      ]
     }
   }
 }
