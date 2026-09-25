@@ -4,7 +4,7 @@
 - CID：`34869348372`
 - 时长：01:10:44（合集4244秒；媒体实际约4243.04秒，正式取样覆盖到4243秒）
 - 系列序号：2/53；当前为第1—12集回补阶段。
-- 处理方式：重新取得Chrome CDP后，用`.ai-bridge/bili-open-paused-bvid.js`在导航前禁止自动播放；全程只显式seek截图，没有连续播放。
+- 处理方式：重新取得Chrome CDP后，用`scripts/video-extraction/bili-open-paused-bvid.js`在导航前禁止自动播放；全程只显式seek截图，没有连续播放。
 - 正式证据：60秒粗扫72帧、20秒全片层213帧、5秒关键/补缺层319帧，共604帧、21个manifest；另对《通缉：霍格》接取边界做1秒级补证6帧。
 - Questie校准：`Questie-v11.32.3`；任务完成与状态以视频动作证据为准，Questie只校准名称/ID/前后置/NPC/基础经验×2。
 - 范围：只做事实提取，不做路线评价或联盟→部落映射。
@@ -107,7 +107,7 @@ Questie基础经验×2校准任务经验合计：`15420`。
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep2/`。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep2/`。
 
 正式证据：
 

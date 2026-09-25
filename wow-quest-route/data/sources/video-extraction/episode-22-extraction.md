@@ -96,7 +96,7 @@ Questie中存在三项连续同名任务：
 
 ## 文件与恢复点
 
-原始证据与OCR位于`wow-quest-route/.ai-bridge/video-ep22/`：
+原始证据与OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep22/`：
 
 - `coarse-a/`：31帧；
 - `coarse-b/`：32帧；

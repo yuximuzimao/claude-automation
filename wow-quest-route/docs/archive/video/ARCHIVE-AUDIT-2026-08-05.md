@@ -21,7 +21,7 @@
 原始证据：
 
 ```text
-/Users/chat/claude/wow-quest-route/.ai-bridge/video-ep19/
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep19/
 ```
 
 证据统计：

@@ -123,6 +123,6 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep24/`。14个截图目录共775帧，全部通过暂停状态与媒体时长校验。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep24/`。14个截图目录共775帧，全部通过暂停状态与媒体时长校验。
 
 下一集是第25集《东瘟57-58》，BVID `BV1iVi7BPEtL`，时长47:50。该信息来自当前页面`__INITIAL_STATE__.videoData.ugc_season`；本轮没有导航、播放、截图或处理第25集。

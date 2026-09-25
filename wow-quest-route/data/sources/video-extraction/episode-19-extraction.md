@@ -128,7 +128,7 @@
 
 ## 文件与恢复点
 
-原始证据与OCR均位于`wow-quest-route/.ai-bridge/video-ep19/`：
+原始证据与OCR均位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep19/`：
 
 - `coarse/`：46个60秒粗扫帧；
 - `fine5-start/`：开场0—180秒，5秒间隔；

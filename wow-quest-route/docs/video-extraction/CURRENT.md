@@ -22,7 +22,7 @@ B站合集《魔兽世界时光服 骑士升级1-80》的专项处理已经全�
 - `data/video-route/cross-episode-gaps.json`：跨集证据边界；
 - 外域 2026-08-20 POST 终审仅作为历史证据保留在 `docs/archive/analysis/video-route-outland-reverse-audit.md`；若赞加/纳格兰路线以后发生足以触发复审的重构，应基于上述 canonical 视频索引重新执行整图反向审查，不复用旧 audit JSON；
 - `data/sources/video-extraction/episode-N-extraction.md` / `episode-N-events.json`：需要追溯单集事实时再读；
-- `wow-quest-route/.ai-bridge/video-epN/`：只有需要重新核验某条原始画面证据时才进入。
+- `wow-quest-route/data/sources/video-extraction/raw-evidence/video-epN/`：只有需要重新核验某条原始画面证据时才进入。
 
 视频只服务两个目的：共同保留任务的顺序/邻接参考，以及遗漏/纠错审计。视频作者的任务选择、联盟任务、单号时长都不能直接覆盖本项目自己的部落五开路线判断。
 

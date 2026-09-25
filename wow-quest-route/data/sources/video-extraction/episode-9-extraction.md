@@ -137,7 +137,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep9/`。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep9/`。
 
 正式证据：
 

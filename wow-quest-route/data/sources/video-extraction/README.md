@@ -23,7 +23,7 @@
 原始截图和OCR不在本目录，位于：
 
 ```text
-/Users/chat/claude/wow-quest-route/.ai-bridge/video-epN/
+/Users/chat/claude/wow-quest-route/data/sources/video-extraction/raw-evidence/video-epN/
 ```
 
 NEAT阶段归档位于：

@@ -143,7 +143,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep42/`。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep42/`。
 
 正式证据：
 

@@ -155,6 +155,7 @@ tar czf "$ARCHIVE_TEMP" \
   --exclude='product-detect/weights' \
   --exclude='douyin-workout/videos' \
   --exclude='douyin-workout/output' \
+  --exclude='wow-quest-route/data/sources/video-extraction/raw-evidence' \
   . \
   -C "$STAGING_DIR" order-review-data
 

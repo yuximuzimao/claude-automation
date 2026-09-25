@@ -4,6 +4,8 @@
 
 当前顶层共有 **115 个 `.py` 文件**。
 
+视频取证与OCR辅助工具位于[`video-extraction/`](video-extraction/README.md)，只在需要重新核验原始视频画面时按视频流程调用。
+
 | 文件 | 当前用途 |
 | --- | --- |
 | `analyze_dragonblight_reachability.py` | 分析龙骨荒野可达性 |

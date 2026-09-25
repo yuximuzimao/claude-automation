@@ -4,7 +4,7 @@
 - CID：`35419654968`
 - 时长：54:46（3286秒；页面媒体实际约3285.84秒，正式取样覆盖到3285秒）
 - 系列序号：46/53
-- 处理方式：重新取得Chrome CDP后，用`.ai-bridge/bili-open-paused-bvid.js`在导航前禁止自动播放；打开后确认`hasVideo=true`、`paused=true`、`currentTime=0`、`duration=3286`。全程只显式seek截图，没有连续播放。
+- 处理方式：重新取得Chrome CDP后，用`scripts/video-extraction/bili-open-paused-bvid.js`在导航前禁止自动播放；打开后确认`hasVideo=true`、`paused=true`、`currentTime=0`、`duration=3286`。全程只显式seek截图，没有连续播放。
 - 正式证据：60秒粗扫56帧、20秒全片层166帧、5秒关键事件层301帧，共523帧。
 - Questie校准：使用`Questie-v11.32.3`校准任务名、ID、联盟分支、严格前后置和基础经验；本视频任务经验继续约为Questie基础经验的2倍。
 - 范围：只做事实提取，不评价或改路线。
@@ -102,7 +102,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep46/`。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep46/`。
 
 正式证据：
 

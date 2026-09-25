@@ -3,7 +3,7 @@
 - 视频：`BV1unkTB3Ejj`
 - 时长：60:09（3609秒；正式取样覆盖到3608秒）
 - 系列序号：44/53
-- 处理方式：使用`.ai-bridge/bili-open-paused-bvid.js`打开后确认`hasVideo=true`、`paused=true`、`currentTime=0`、`duration=3609`；全程仅显式跳转截图，没有连续播放。
+- 处理方式：使用`scripts/video-extraction/bili-open-paused-bvid.js`打开后确认`hasVideo=true`、`paused=true`、`currentTime=0`、`duration=3609`；全程仅显式跳转截图，没有连续播放。
 - 正式证据：60秒粗扫61帧、20秒全片层182帧、5秒关键事件层304帧，共547帧。
 - 校验：全部正式截图调用成功，取样记录均保持`paused=true`；OCR已覆盖全部正式批次。
 - Questie校准：任务名、ID、NPC、严格前后置和基础经验来自`Questie-v11.32.3`；视频任务经验继续约为Questie基础经验的2倍。
@@ -103,7 +103,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep44/`。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep44/`。
 
 正式证据：
 

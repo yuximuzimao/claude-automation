@@ -112,7 +112,7 @@ Questie中存在两项中文同名任务：
 
 ## 文件与恢复点
 
-原始证据与OCR位于`wow-quest-route/.ai-bridge/video-ep21/`：
+原始证据与OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep21/`：
 
 - `coarse-a/`：0—1620秒，28个60秒粗扫帧；
 - `coarse-b/`：1680—3300秒，28个60秒粗扫帧；

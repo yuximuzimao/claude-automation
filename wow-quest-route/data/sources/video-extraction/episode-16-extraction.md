@@ -96,11 +96,11 @@
 
 ## 文件与恢复点
 
-- 粗扫帧：`wow-quest-route/.ai-bridge/video-ep16/coarse/`
-- 粗扫OCR：`wow-quest-route/.ai-bridge/video-ep16/coarse-ocr.txt`
-- 开场10秒帧：`wow-quest-route/.ai-bridge/video-ep16/fine10-start/`
-- 水元素与精英目标10秒帧：`wow-quest-route/.ai-bridge/video-ep16/fine10-mid-a/`
-- 升级区间5秒帧：`wow-quest-route/.ai-bridge/video-ep16/fine5-level/`
-- 中后段20秒帧：`wow-quest-route/.ai-bridge/video-ep16/fine20-mid-b/`
-- 结尾5秒帧：`wow-quest-route/.ai-bridge/video-ep16/fine5-end/`
+- 粗扫帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/coarse/`
+- 粗扫OCR：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/coarse-ocr.txt`
+- 开场10秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/fine10-start/`
+- 水元素与精英目标10秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/fine10-mid-a/`
+- 升级区间5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/fine5-level/`
+- 中后段20秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/fine20-mid-b/`
+- 结尾5秒帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep16/fine5-end/`
 - 本检查点可独立用于下一次继续，不依赖当前聊天上下文。

@@ -4,7 +4,7 @@
 - CID：`35447770013`
 - 时长：01:13:32（4412秒；媒体实际约4411.88秒，正式取样覆盖到4411秒）
 - 系列序号：47/53
-- 处理方式：重新取得Chrome CDP后，用`.ai-bridge/bili-open-paused-bvid.js`在导航前禁止自动播放；全程只显式seek截图，没有连续播放。
+- 处理方式：重新取得Chrome CDP后，用`scripts/video-extraction/bili-open-paused-bvid.js`在导航前禁止自动播放；全程只显式seek截图，没有连续播放。
 - 正式证据：60秒粗扫75帧、20秒全片层222帧、5秒关键事件层453帧，共750帧。
 - 临时证据：最初一次60秒粗扫因30秒外层超时，仅留下`coarse-01/` 17张无manifest临时帧，**不计入正式证据**。
 - Questie校准：`Questie-v11.32.3`；视频任务经验继续约为Questie基础经验×2。
@@ -124,7 +124,7 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep47/`。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep47/`。
 
 正式证据：
 

@@ -105,6 +105,6 @@
 
 ## 文件与恢复点
 
-原始证据和OCR位于`wow-quest-route/.ai-bridge/video-ep26/`。正式计入6个截图目录共533帧，全部通过暂停状态、截图成功与媒体时长校验。
+原始证据和OCR位于`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep26/`。正式计入6个截图目录共533帧，全部通过暂停状态、截图成功与媒体时长校验。
 
 下一集是第27集《地狱火半岛 城墙 61》，BVID `BV1j8ijBeEfZ`，合集标注时长46:29（2789秒）。该信息来自当前页面合集状态；本轮没有导航、播放、截图或处理第27集。

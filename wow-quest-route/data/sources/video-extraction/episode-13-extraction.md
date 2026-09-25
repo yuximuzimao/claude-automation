@@ -67,8 +67,8 @@
 
 ## 文件与恢复点
 
-- 粗扫帧：`wow-quest-route/.ai-bridge/video-ep13/coarse/`
-- 粗扫OCR：`wow-quest-route/.ai-bridge/video-ep13/coarse-ocr.txt`
-- 精查帧：`wow-quest-route/.ai-bridge/video-ep13/fine10/`
-- 精查OCR：`wow-quest-route/.ai-bridge/video-ep13/fine10-ocr.txt`
+- 粗扫帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep13/coarse/`
+- 粗扫OCR：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep13/coarse-ocr.txt`
+- 精查帧：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep13/fine10/`
+- 精查OCR：`wow-quest-route/data/sources/video-extraction/raw-evidence/video-ep13/fine10-ocr.txt`
 - 本检查点可独立用于下一次继续，不依赖当前聊天上下文。
