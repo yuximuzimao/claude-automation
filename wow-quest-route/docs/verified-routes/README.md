@@ -9,9 +9,8 @@
 - 当前Route Atlas派生数据：`../../data/generated/route-lifecycle/`（由现役owner生成，不是业务真源）。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`；纯文本玩家页：`../../data/routes/player-view/`。
 - 旧聚合`workbench-routes.json`只在`../archive/generated/route-atlas/`保留为历史证据，不参与当前生成链。
-- 最新阶段NEAT：[`../archive/neat/2026-09-17-route-lifecycle-stage8-and-dk-live-anchor-neat.md`](../archive/neat/2026-09-17-route-lifecycle-stage8-and-dk-live-anchor-neat.md)，记录Stage 1–7闭合、Stage 8 XP收口恢复点、Stage 4当前两条业务blocked的真实含义，以及本轮地狱火DK实跑唯一续接锚点。
-- 上一阶段NEAT：[`../archive/neat/2026-09-16-route-lifecycle-sop-validation-handoff-neat.md`](../archive/neat/2026-09-16-route-lifecycle-sop-validation-handoff-neat.md)，记录Route Lifecycle SOP逐stage验证入口、Stage 1–3实现候选状态、Stage 3循环验证纠偏及恢复纪律。
-- 更早历史统一从[`../archive/README.md`](../archive/README.md)按日期/主题定向查找，不在当前入口维护长链索引。
+- 最新阶段NEAT：[`../archive/neat/2026-09-25-dk-live-run-closure-and-group-comparison-neat.md`](../archive/neat/2026-09-25-dk-live-run-closure-and-group-comparison-neat.md)，记录第二组DK从出生区到北风当前暂停点的实跑闭合、第一组圣骑/第二组DK的63→68同口径时间对比，以及本轮最终裁决。
+- Route Lifecycle迁移历史统一从[`../archive/analysis/2026-09-21-route-lifecycle-migration-history.md`](../archive/analysis/2026-09-21-route-lifecycle-migration-history.md)考古；更早NEAT和旧路线从[`../archive/README.md`](../archive/README.md)按日期/主题定向查找，不在当前入口维护长链索引。
 
 ## 仍有效的路线与支撑文档
 

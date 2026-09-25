@@ -14,7 +14,7 @@
 | `analyze_questie_journey.py` | 分析Questie历程 |
 | `analyze_route_atlas_geometry.py` | 分析Route Atlas几何 |
 | `audit_all_route_profiles.py` | 只读批量包装唯一`rebuild_route_profile.audit_profile()`，逐正式Profile汇总Stage 1–14 implementation/artifact状态与Stage 14 issue counts；可选读取统一XP/Economy/Review JSON输入，不修改Route Profile或Generated Product。 |
-| `audit_generated_cutover.py` | 只读14张正式Route当前generated artifacts与真源schema/依赖指纹，调用现有Stage 14/project gate做最终cutover机械审计；不会重跑任何业务owner，也不会写正式页面。动态XP/Economy/Review缺完整runtime时明确保留requirements，不伪造pass。 |
+| `audit_generated_cutover.py` | 只读当前全部正式Route的generated artifacts与真源schema/依赖指纹，调用现有Stage 14/project gate做最终cutover机械审计；不会重跑任何业务owner，也不会写正式页面。动态XP/Economy/Review缺完整runtime时明确保留requirements，不伪造pass。 |
 | `audit_hd_route_maps.py` | 核对高清路线地图资源/配准 |
 | `audit_icecrown_draft_readiness.py` | 冰冠维护期非阻塞review queue；只检查现役结构/机制风险，旧`level_80_economy`已退出review触发，经济完整性统一交Stage 9/10 |
 | `audit_route_atlas_player_text.py` | 直接读取当前Publisher结构化步骤，检查Route Display/Task Presentation已定义的玩家可见文字机械规则。 |
@@ -22,7 +22,7 @@
 | `audit_route_objective_anchors.py` | 用当前Route Profile执行坐标与Questie目标刷新坐标做空间审计；缺外部Questie证据时明确返回requirements。 |
 | `audit_sholazar_whole_map_merge.py` | 索拉查整图合并/访问次数核对 |
 | `audit_workbench_browser.py` | 直接打开当前正式Route Atlas页面，检查页面可加载、地图/HUD/步骤/控件等基本运行状态；不与旧页面对拍。 |
-| `audit_workbench_surface_semantics.py` | 对14张候选路线做玩家表面语义、任务标签与接/做/交样式机械检查；只验证Stage 13输出。 |
+| `audit_workbench_surface_semantics.py` | 对当前Route集合做玩家表面语义、任务标签与接/做/交样式机械检查；只验证Stage 13输出。 |
 | `audit_workbench_visible_task_semantics.py` | 浏览器层核对可见任务动作、标签和颜色是否与Publisher结构一致；不从DOM反推Task Card/Profile。 |
 | `audit_zangarmarsh_global_solver_input.py` | 全局求解器输入内部实现；CLI已退役，当前wrapper可能复用 |
 | `audit_zangarmarsh_task_profiles.py` | 赞加任务画像内部实现；CLI已退役，当前refiner可能复用 |

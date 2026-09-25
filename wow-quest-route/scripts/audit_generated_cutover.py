@@ -25,6 +25,7 @@ REQUIRED_CUTOVER_PROFILE_IDS = [
     "hellfire-fivebox",
     "zangarmarsh-fivebox",
     "nagrand-fivebox-67-68",
+    "terokkar-dk-68-fallback",
     "borean-fivebox",
     "dragonblight-fivebox",
     "dalaran-mainline-77",
