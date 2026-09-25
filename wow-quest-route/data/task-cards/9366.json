@@ -51,14 +51,23 @@
   },
   "guide": [
     "接取：阴沉的利亚森。",
-    "猎鹰岗哨的阴沉的利亚森要你前往阿苟纳之池，从恐惧魔身上收集6份邪血样本。",
+    "前往阿苟纳之池，从恐惧魔身上分别为每个角色收集6份邪血样本；本轮实测不共享。",
     "交付：阴沉的利亚森。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide","fivebox.status"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

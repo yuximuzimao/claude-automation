@@ -53,14 +53,23 @@
   },
   "guide": [
     "接取：史学家奥尔森。",
-    "从塔沃斯少校那里拿到顽强战斗号角，把它交给断背岗哨的史学家奥尔森。",
+    "击杀塔沃斯少校一次后，同一具尸体可供五个角色依次拾取顽强战斗号角。",
     "交付：史学家奥尔森。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide","fivebox.status"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

@@ -87,13 +87,27 @@
   "guide": [
     "接取：瓦托尔。",
     "北风苔原回音海岸的瓦托尔要你利用古代水手的号角召唤舵手奥拉布斯并杀死他。",
-    "交付：瓦托尔。"
+    "交付：瓦托尔。",
+    "召唤并击杀舵手奥拉布斯的完成进度五开共享。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -121,10 +135,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《舵手奥拉布斯》：在战歌码头最西端旗帜/塔附近约(26.8,54.8)使用古代水手的号角触发事件。",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "text": "在战歌码头最西端旗帜/塔附近约(26.8,54.8)使用古代水手的号角触发；召唤并击杀奥拉布斯的完成进度五开共享。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
     }
   }
 }

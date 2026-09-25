@@ -93,3 +93,28 @@ def test_migrated_note_projection_keeps_only_execution_value() -> None:
     projected = project_task_presentation(card, profile_id="route-a")
     assert projected["note"] == "五号分别点击机关；机关约90秒刷新。"
     assert "《测试任务》" not in projected["note"]
+
+
+def test_action_display_override_and_note_show_on_are_profile_scoped_presentation_only() -> None:
+    card = _card("special")
+    card["presentation"] = {
+        "note_override": {
+            "text": "接取阶段有特殊操作。",
+            "scope": "route_profile:route-a",
+            "source_ref": "fixture",
+            "reason": "fixture",
+            "show_on": ["accept"],
+        },
+        "action_display_override": {
+            "suppress_kinds": ["accept"],
+            "scope": "route_profile:route-a",
+            "source_ref": "fixture",
+            "reason": "fixture",
+        },
+    }
+    a = project_task_presentation(card, profile_id="route-a")
+    b = project_task_presentation(card, profile_id="route-b")
+    assert a["note_show_on"] == ["accept"]
+    assert a["suppress_action_kinds"] == ["accept"]
+    assert b["note_show_on"] == []
+    assert b["suppress_action_kinds"] == []

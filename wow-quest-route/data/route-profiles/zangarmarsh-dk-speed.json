@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "zangarmarsh-dk-speed",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "赞加沼泽",
@@ -20,19 +20,18 @@
   },
   "display": {
     "publish_key": "zang_dk",
-    "order": 102,
+    "order": 4,
     "title": "赞加沼泽 · DK专用加速路线",
     "display_name": "赞加沼泽（DK专用）",
-    "subtitle": "塞纳里奥东部任务簇 → 萨布拉金 → 西部高效率任务 → 安葛洛什收尾，之后直接进入纳格兰原路线。",
+    "subtitle": "塞纳里奥东部任务簇 → 萨布拉金 → 西部高效率任务 → 安葛洛什收尾；经验不足时继续进入纳格兰 · 五开68冲刺路线。",
     "footer": "若进入纳格兰前经验明显不足：优先补《蛮沼之灵》→《灵魂之盟？》，再补《亮顶蘑菇》；否则直接切换原“纳格兰”路线。",
     "map_image": "maps/3521-zangarmarsh-hd.jpg"
   },
   "task_ids": [
     9912,
     9716,
-    9876,
-    9778,
     9697,
+    9701,
     9895,
     9730,
     9817,
@@ -62,7 +61,8 @@
     9911,
     9822,
     9823,
-    10118
+    10118,
+    9797
   ],
   "actions": [
     {
@@ -87,20 +87,6 @@
       "location_ref": "zang_dk-p001",
       "npc_name": "伊谢尔·风歌",
       "action_id": "a0003"
-    },
-    {
-      "kind": "accept",
-      "task_id": 9876,
-      "location_ref": "zang_dk-p001",
-      "npc_name": "伊谢尔·风歌",
-      "action_id": "a0004"
-    },
-    {
-      "kind": "accept",
-      "task_id": 9778,
-      "location_ref": "zang_dk-p001",
-      "npc_name": "伊谢尔·风歌",
-      "action_id": "a0005"
     },
     {
       "kind": "accept",
@@ -152,13 +138,6 @@
       "action_id": "a0012"
     },
     {
-      "kind": "turnin",
-      "task_id": 9778,
-      "location_ref": "zang_dk-p001",
-      "npc_name": "监护者哈穆特",
-      "action_id": "a0013"
-    },
-    {
       "kind": "location",
       "location_ref": "zang_dk-p002",
       "action_id": "a0014"
@@ -191,6 +170,12 @@
       "location_ref": "zang_dk-p004",
       "npc_name": "唤风者塔鲁·黑蹄",
       "action_id": "a0019"
+    },
+    {
+      "kind": "bind_hearth",
+      "location_ref": "zang_dk-p004",
+      "target_name": "塞纳里奥庇护所",
+      "action_id": "a0147"
     },
     {
       "kind": "location",
@@ -226,6 +211,23 @@
       "task_id": 9752,
       "location_ref": "zang_dk-p006",
       "action_id": "a0025"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang_dk-p038",
+      "action_id": "a0148"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9895,
+      "location_ref": "zang_dk-p038",
+      "action_id": "a0149"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "zang_dk-p007",
+      "target_name": "塞纳里奥庇护所",
+      "action_id": "a0150"
     },
     {
       "kind": "location",
@@ -349,12 +351,6 @@
       "action_id": "a0043"
     },
     {
-      "kind": "objective",
-      "task_id": 9895,
-      "location_ref": "zang_dk-p009",
-      "action_id": "a0044"
-    },
-    {
       "kind": "location",
       "location_ref": "zang_dk-p010",
       "action_id": "a0045"
@@ -432,18 +428,6 @@
       "task_id": 9817,
       "location_ref": "zang_dk-p013",
       "action_id": "a0057"
-    },
-    {
-      "kind": "location",
-      "location_ref": "zang_dk-p014",
-      "action_id": "a0058"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9876,
-      "location_ref": "zang_dk-p014",
-      "npc_name": "观察者杰哈恩",
-      "action_id": "a0059"
     },
     {
       "kind": "location",
@@ -565,13 +549,6 @@
       "action_id": "a0078"
     },
     {
-      "kind": "taxi",
-      "location_ref": "zang_dk-p019",
-      "from_name": "萨布拉金",
-      "to_name": "塞纳里奥庇护所",
-      "action_id": "a0080"
-    },
-    {
       "kind": "location",
       "location_ref": "zang_dk-p019",
       "action_id": "a0079"
@@ -655,13 +632,6 @@
       "action_id": "a0090"
     },
     {
-      "kind": "taxi",
-      "location_ref": "zang_dk-p020",
-      "from_name": "塞纳里奥庇护所",
-      "to_name": "沼泽鼠岗哨",
-      "action_id": "a0092"
-    },
-    {
       "kind": "location",
       "location_ref": "zang_dk-p020",
       "action_id": "a0091"
@@ -704,55 +674,6 @@
       "action_id": "a0098"
     },
     {
-      "kind": "use_hearth",
-      "location_ref": "zang_dk-p023",
-      "target_name": "萨布拉金",
-      "action_id": "a0100"
-    },
-    {
-      "kind": "location",
-      "location_ref": "zang_dk-p023",
-      "action_id": "a0099"
-    },
-    {
-      "kind": "location",
-      "location_ref": "zang_dk-p024",
-      "action_id": "a0101"
-    },
-    {
-      "kind": "objective",
-      "task_id": 9814,
-      "location_ref": "zang_dk-p024",
-      "action_id": "a0102"
-    },
-    {
-      "kind": "objective",
-      "task_id": 9841,
-      "location_ref": "zang_dk-p024",
-      "action_id": "a0103"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9814,
-      "location_ref": "zang_dk-p024",
-      "npc_name": "巫医托尔加什",
-      "action_id": "a0104"
-    },
-    {
-      "kind": "accept",
-      "task_id": 9816,
-      "location_ref": "zang_dk-p024",
-      "npc_name": "巫医托尔加什",
-      "action_id": "a0105"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9841,
-      "location_ref": "zang_dk-p024",
-      "npc_name": "加巴林卡",
-      "action_id": "a0106"
-    },
-    {
       "kind": "location",
       "location_ref": "zang_dk-p025",
       "action_id": "a0107"
@@ -792,6 +713,53 @@
       "action_id": "a0111"
     },
     {
+      "kind": "accept",
+      "task_id": 9701,
+      "location_ref": "zang_dk-p026",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0151"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang_dk-p039",
+      "action_id": "a0152"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9701,
+      "location_ref": "zang_dk-p039",
+      "action_id": "a0153"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang_dk-p026",
+      "action_id": "a0154"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9701,
+      "location_ref": "zang_dk-p026",
+      "npc_name": "观察者莉萨奥",
+      "action_id": "a0155"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang_dk-p024",
+      "action_id": "a0101"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9814,
+      "location_ref": "zang_dk-p024",
+      "action_id": "a0102"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9841,
+      "location_ref": "zang_dk-p024",
+      "action_id": "a0103"
+    },
+    {
       "kind": "location",
       "location_ref": "zang_dk-p027",
       "action_id": "a0112"
@@ -812,17 +780,6 @@
       "task_id": 10117,
       "location_ref": "zang_dk-p028",
       "action_id": "a0115"
-    },
-    {
-      "kind": "location",
-      "location_ref": "zang_dk-p029",
-      "action_id": "a0116"
-    },
-    {
-      "kind": "objective",
-      "task_id": 9816,
-      "location_ref": "zang_dk-p029",
-      "action_id": "a0117"
     },
     {
       "kind": "location",
@@ -872,18 +829,25 @@
       "action_id": "a0125"
     },
     {
+      "kind": "turnin",
+      "task_id": 9814,
+      "location_ref": "zang_dk-p024",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0104"
+    },
+    {
       "kind": "accept",
-      "task_id": 9822,
-      "location_ref": "zang_dk-p032",
-      "npc_name": "暗影猎手德恩加",
-      "action_id": "a0126"
+      "task_id": 9816,
+      "location_ref": "zang_dk-p024",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0105"
     },
     {
       "kind": "turnin",
-      "task_id": 9816,
-      "location_ref": "zang_dk-p032",
-      "npc_name": "巫医托尔加什",
-      "action_id": "a0127"
+      "task_id": 9841,
+      "location_ref": "zang_dk-p024",
+      "npc_name": "加巴林卡",
+      "action_id": "a0106"
     },
     {
       "kind": "turnin",
@@ -908,6 +872,24 @@
       "action_id": "a0129"
     },
     {
+      "kind": "accept",
+      "task_id": 9822,
+      "location_ref": "zang_dk-p032",
+      "npc_name": "暗影猎手德恩加",
+      "action_id": "a0126"
+    },
+    {
+      "kind": "location",
+      "location_ref": "zang_dk-p029",
+      "action_id": "a0116"
+    },
+    {
+      "kind": "objective",
+      "task_id": 9816,
+      "location_ref": "zang_dk-p029",
+      "action_id": "a0117"
+    },
+    {
       "kind": "location",
       "location_ref": "zang_dk-p033",
       "action_id": "a0130"
@@ -928,6 +910,13 @@
       "kind": "location",
       "location_ref": "zang_dk-p034",
       "action_id": "a0132"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9816,
+      "location_ref": "zang_dk-p032",
+      "npc_name": "巫医托尔加什",
+      "action_id": "a0127"
     },
     {
       "kind": "turnin",
@@ -998,39 +987,22 @@
       "action_id": "a0144"
     },
     {
-      "kind": "turnin",
-      "task_id": 9903,
+      "kind": "accept",
+      "task_id": 9797,
       "location_ref": "zang_dk-p037",
-      "npc_name": "苏尔加亚",
-      "when": {
-        "kind": "task_complete",
-        "task_id": 9903
-      },
-      "action_id": "a0145"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9904,
-      "location_ref": "zang_dk-p037",
-      "npc_name": "苏尔加亚",
-      "when": {
-        "kind": "task_complete",
-        "task_id": 9904
-      },
-      "action_id": "a0146"
+      "npc_name": "信使加兹格里戈",
+      "action_id": "a0156"
     }
   ],
   "step_groups": [
     {
       "step_id": "step-01",
-      "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所",
+      "title": "塞纳里奥庇护所 → 暗泽村 → 沼泽之鞭 → 炉石回庇护所",
       "summary": null,
       "action_ids": [
         "a0001",
         "a0002",
         "a0003",
-        "a0004",
-        "a0005",
         "a0006",
         "a0007",
         "a0008",
@@ -1038,19 +1010,22 @@
         "a0010",
         "a0011",
         "a0012",
-        "a0013",
         "a0014",
         "a0015",
         "a0016",
         "a0017",
         "a0018",
         "a0019",
+        "a0147",
         "a0020",
         "a0021",
         "a0022",
         "a0023",
         "a0024",
         "a0025",
+        "a0148",
+        "a0149",
+        "a0150",
         "a0026",
         "a0027",
         "a0028",
@@ -1076,7 +1051,6 @@
         "a0041",
         "a0042",
         "a0043",
-        "a0044",
         "a0045",
         "a0046",
         "a0047",
@@ -1087,7 +1061,7 @@
     },
     {
       "step_id": "step-03",
-      "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩",
+      "title": "环礁湖 → 毒蛇湖",
       "summary": null,
       "action_ids": [
         "a0051",
@@ -1096,9 +1070,7 @@
         "a0054",
         "a0055",
         "a0056",
-        "a0057",
-        "a0058",
-        "a0059"
+        "a0057"
       ]
     },
     {
@@ -1129,10 +1101,9 @@
     },
     {
       "step_id": "step-05",
-      "title": "塞纳里奥庇护所 → 沼泽鼠岗哨",
+      "title": "萨布拉金骑行 → 塞纳里奥庇护所 → 骑行沼泽鼠岗哨",
       "summary": null,
       "action_ids": [
-        "a0080",
         "a0079",
         "a0081",
         "a0082",
@@ -1144,7 +1115,6 @@
         "a0088",
         "a0089",
         "a0090",
-        "a0092",
         "a0091",
         "a0093",
         "a0094"
@@ -1152,77 +1122,73 @@
     },
     {
       "step_id": "step-06",
-      "title": "黑钉 → 沼泽鼠岗哨 → 炉石萨布拉金",
+      "title": "黑钉 → 昂古拉 → 莉萨奥 → 观察孢子人",
       "summary": null,
       "action_ids": [
         "a0095",
         "a0096",
         "a0097",
         "a0098",
-        "a0100",
-        "a0099"
-      ]
-    },
-    {
-      "step_id": "step-07",
-      "title": "萨布拉金 → 昂古拉 → 莉萨奥 → 恐爪",
-      "summary": null,
-      "action_ids": [
-        "a0101",
-        "a0102",
-        "a0103",
-        "a0104",
-        "a0105",
-        "a0106",
         "a0107",
         "a0108",
         "a0109",
         "a0110",
         "a0111",
-        "a0112",
-        "a0113"
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155"
       ]
     },
     {
-      "step_id": "step-08",
-      "title": "穆玛基 → 鱼人笼 → 格罗阿克 → 多头蛇之王",
+      "step_id": "step-07",
+      "title": "爆顶蘑菇 → 抽血者 → 恐爪 → 两个通缉 → 多头蛇",
       "summary": null,
       "action_ids": [
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0112",
+        "a0113",
         "a0114",
         "a0115",
-        "a0116",
-        "a0117",
         "a0118",
         "a0119",
         "a0120",
-        "a0121"
-      ]
-    },
-    {
-      "step_id": "step-09",
-      "title": "炉石萨布拉金 → 战斗迫近 → 回萨布拉金",
-      "summary": null,
-      "action_ids": [
+        "a0121",
         "a0123",
         "a0122",
         "a0124",
         "a0125",
-        "a0126",
-        "a0127",
+        "a0104",
+        "a0105",
+        "a0106",
         "a0128",
         "a0129",
+        "a0126"
+      ]
+    },
+    {
+      "step_id": "step-08",
+      "title": "鱼人 + 战斗迫近 → 炉石萨布拉金",
+      "summary": null,
+      "action_ids": [
+        "a0116",
+        "a0117",
         "a0130",
         "a0131",
         "a0133",
         "a0132",
+        "a0127",
         "a0134",
         "a0135",
         "a0136"
       ]
     },
     {
-      "step_id": "step-10",
-      "title": "匕潭失落者 → 安葛洛什 → 炉石萨布拉金",
+      "step_id": "step-09",
+      "title": "警告匕潭失落者 → 你死我活 → 炉石 → 支援加拉达尔",
       "summary": null,
       "action_ids": [
         "a0137",
@@ -1233,8 +1199,7 @@
         "a0141",
         "a0143",
         "a0144",
-        "a0145",
-        "a0146"
+        "a0156"
       ]
     }
   ],
@@ -1301,7 +1266,12 @@
         "display_name": "塞纳里奥庇护所",
         "x": 78.4,
         "y": 62.02,
-        "phase": "opening"
+        "phase": "opening",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0150"
+        }
       },
       "zang_dk-p008": {
         "display_name": "沼泽鼠岗哨",
@@ -1369,17 +1339,6 @@
           "mode": "ride"
         }
       },
-      "zang_dk-p014": {
-        "display_name": "观察者杰哈恩",
-        "x": 80.75,
-        "y": 36.27,
-        "phase": "east",
-        "transport": "ride",
-        "incoming_movement": {
-          "kind": "self_move",
-          "mode": "ride"
-        }
-      },
       "zang_dk-p015": {
         "display_name": "萨布拉金",
         "x": 32.38,
@@ -1429,10 +1388,10 @@
         "x": 78.4,
         "y": 62.02,
         "phase": "east",
-        "transport": "taxi",
+        "transport": "ride",
         "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0080"
+          "kind": "self_move",
+          "mode": "ride"
         }
       },
       "zang_dk-p020": {
@@ -1440,10 +1399,10 @@
         "x": 85.28,
         "y": 54.75,
         "phase": "east",
-        "transport": "taxi",
+        "transport": "ride",
         "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0092"
+          "kind": "self_move",
+          "mode": "ride"
         }
       },
       "zang_dk-p021": {
@@ -1466,17 +1425,6 @@
         "incoming_movement": {
           "kind": "self_move",
           "mode": "ride"
-        }
-      },
-      "zang_dk-p023": {
-        "display_name": "萨布拉金",
-        "x": 32.38,
-        "y": 51.96,
-        "phase": "west",
-        "transport": "hearth",
-        "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0100"
         }
       },
       "zang_dk-p024": {
@@ -1632,6 +1580,28 @@
           "kind": "action",
           "action_id": "a0142"
         }
+      },
+      "zang_dk-p038": {
+        "display_name": "暗光带·沼泽之鞭",
+        "x": 82.07,
+        "y": 71.39,
+        "phase": "opening",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang_dk-p039": {
+        "display_name": "孢殖林",
+        "x": 19.02,
+        "y": 62.43,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
       }
     }
   },
@@ -1645,6 +1615,16 @@
       "date": "2026-09-18",
       "kind": "architecture_migration",
       "summary": "Semantic-parity cleanup: reviewed legacy script transports on these target points are not player-visible arrival actions in the old route. Remove the ambiguous migration hint; preserve all task/action text and keep arrival movement unresolved."
+    },
+    {
+      "date": "2026-09-25",
+      "kind": "live_run_route_correction",
+      "summary": "吸收2026-09-18首轮DK实跑：移除开场不可接的《失踪的先遣队》和低收益《监护者哈穆特》，开场临时炉石绑定塞纳里奥并把《崩溃的平衡》并入护送回程；删除不存在的萨布拉金→塞纳里奥系统飞行，步骤6不再强制炉石；新增《观察孢子人》，并按实跑将西部任务合并为一次BOSS环线→炉石交接→鱼人+战斗迫近→最终炉石，结束接《支援加拉达尔》。补经验跨图链留待9/19对比后裁决。"
+    },
+    {
+      "date": "2026-09-25",
+      "kind": "live_run_transport_correction",
+      "summary": "用户纠正：塞纳里奥庇护所没有飞行点；删除误加的开飞行点动作与旧“塞纳里奥庇护所→沼泽鼠岗哨”系统飞行，改为普通骑行。"
     }
   ]
 }

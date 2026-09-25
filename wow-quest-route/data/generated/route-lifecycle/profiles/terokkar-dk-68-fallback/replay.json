@@ -1,0 +1,157 @@
+{
+  "action_execution": {
+    "a0002": "executed",
+    "a0003": "executed",
+    "a0004": "executed",
+    "a0006": "executed",
+    "a0008": "executed",
+    "a0010": "executed",
+    "a0012": "executed",
+    "a0013": "executed",
+    "a0014": "executed"
+  },
+  "availability": {
+    "deferred_gates": [
+      {
+        "action_id": "a0002",
+        "kind": "min_level",
+        "required_min_level": 63,
+        "resolver": "derived_xp",
+        "task_id": 10877
+      },
+      {
+        "action_id": "a0002",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 10877
+      },
+      {
+        "action_id": "a0003",
+        "kind": "min_level",
+        "required_min_level": 63,
+        "resolver": "derived_xp",
+        "task_id": 10913
+      },
+      {
+        "action_id": "a0003",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 10913
+      },
+      {
+        "action_id": "a0004",
+        "kind": "min_level",
+        "required_min_level": 63,
+        "resolver": "derived_xp",
+        "task_id": 10873
+      },
+      {
+        "action_id": "a0004",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 10873
+      }
+    ],
+    "events": [
+      {
+        "action_id": "a0002",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 63,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 10877
+      },
+      {
+        "action_id": "a0003",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 63,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 10913
+      },
+      {
+        "action_id": "a0004",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 63,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 10873
+      }
+    ],
+    "external_state_requirements": []
+  },
+  "flight": {
+    "entry_state_known": false,
+    "events": [],
+    "guaranteed_opened_by_exit": [],
+    "required_entry_flight_points": []
+  },
+  "hearth": {
+    "entry_state_known": false,
+    "events": [],
+    "final_location": null,
+    "final_state_known": false,
+    "required_entry_locations": []
+  },
+  "input_fingerprint": "a669bc1669d2c369ef2ad38ac5cdb7bcbca2adbc8da37f6f3ac89376c1c1885d",
+  "issues": [
+    {
+      "kind": "actual_entry_active_tasks_required",
+      "reason": "Profile entry_requirements are minimum lower bounds; an actual entry RouteState is required to prove duplicate-accept legality and quest-log capacity.",
+      "severity": "requirement"
+    }
+  ],
+  "kind": "route_replay",
+  "profile_id": "terokkar-dk-68-fallback",
+  "quest_log": {
+    "entry_state_known": false,
+    "final_active_task_ids": [],
+    "final_maybe_active_task_ids": [],
+    "peak_upper_bound": null
+  },
+  "reputation": {
+    "definite_task_reward_delta": {
+      "1011": 250,
+      "935": 500
+    },
+    "possible_task_reward_delta": {}
+  },
+  "status": "requirements",
+  "task_state": {
+    "entry_active_state_known": false,
+    "entry_completed_state_known": false,
+    "final_active_state_known": false,
+    "final_active_task_ids": [],
+    "final_maybe_active_task_ids": [],
+    "known_completed_task_ids": [
+      10873,
+      10877,
+      10913
+    ],
+    "maybe_completed_task_ids": []
+  }
+}

@@ -469,3 +469,42 @@ def test_incremental_task_identity_refresh_updates_only_task_text_and_presentati
     assert "《任务甲新名字》" in refreshed["steps"][0]["lines"][1]["text"]
     assert "《任务甲新名字》" in refreshed["steps"][1]["lines"][0]["text"]
     assert refreshed["steps"][0]["task_presentations"][0]["name"] == "任务甲新名字"
+
+
+def test_task_presentation_can_hide_accept_line_without_changing_route_actions() -> None:
+    profile = _profile()
+    cards = _cards()
+    cards[1]["presentation"]["action_display_override"] = {
+        "suppress_kinds": ["accept"],
+        "scope": "route_profile:display-fixture",
+        "source_ref": "fixture",
+        "reason": "fixture",
+    }
+    result = project_route_display(
+        profile,
+        cards=cards,
+        movement_report=_movement(),
+        timing_report=_timing(),
+        upstream_statuses={},
+    )
+    first = result["steps"][0]
+    assert "a2" in first["action_ids"]
+    assert all("《任务甲》" not in line["text"] for line in first["lines"])
+    assert any("《任务乙》" in line["text"] for line in first["lines"])
+
+
+def test_note_override_can_be_visible_on_accept_action() -> None:
+    profile = _profile()
+    cards = _cards()
+    cards[1]["presentation"]["note_override"]["show_on"] = ["accept"]
+    result = project_route_display(
+        profile,
+        cards=cards,
+        movement_report=_movement(),
+        timing_report=_timing(),
+        upstream_statuses={},
+    )
+    first = result["steps"][0]
+    p = next(row for row in first["task_presentations"] if row["task_id"] == 1)
+    assert p["note_visible"] is True
+    assert p["note"] == "必须先点任务物。"

@@ -54,13 +54,27 @@
   "guide": [
     "接取：莫布。",
     "回音海岸的莫布要求你收集10块超强度金属板。",
-    "交付：莫布。"
+    "交付：莫布。",
+    "超强度金属板五号不共享，需要分别收集到各自任务数量。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-20-21",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21; Questie Journey used for event order",
+      "observed_at": "2026-09-21",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -88,10 +102,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "text": "超强度金属板五号不共享，需要分别收集到各自任务数量。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
+      "reason": "北风苔原五开实跑确认的共享/拾取/执行机制；保留仍有价值的旧位置提示。"
     }
   }
 }

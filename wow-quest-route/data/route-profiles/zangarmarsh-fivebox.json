@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "zangarmarsh-fivebox",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "赞加沼泽",
@@ -19,7 +19,7 @@
   },
   "display": {
     "publish_key": "zang",
-    "order": 2,
+    "order": 3,
     "title": "赞加沼泽 · 五开升级路线",
     "display_name": "赞加沼泽",
     "subtitle": "从塞纳里奥庇护所开始，完成赞加主体路线后由莉萨奥方向进入纳格兰。",
@@ -638,13 +638,6 @@
       "action_id": "a0088"
     },
     {
-      "kind": "taxi",
-      "location_ref": "zang-p019",
-      "from_name": "萨布拉金",
-      "to_name": "塞纳里奥庇护所",
-      "action_id": "a0090"
-    },
-    {
       "kind": "location",
       "location_ref": "zang-p019",
       "action_id": "a0089"
@@ -733,13 +726,6 @@
         "task_id": 9802
       },
       "action_id": "a0101"
-    },
-    {
-      "kind": "taxi",
-      "location_ref": "zang-p020",
-      "from_name": "塞纳里奥庇护所",
-      "to_name": "沼泽鼠岗哨",
-      "action_id": "a0103"
     },
     {
       "kind": "location",
@@ -1662,12 +1648,11 @@
     },
     {
       "step_id": "step-05",
-      "title": "沼光湖 → 塞纳里奥庇护所 → 沼泽鼠岗哨",
-      "summary": "完成陆地第四泵后乘系统鸟回塞纳里奥集中交付，再乘系统鸟到沼泽鼠；《沼牙的威胁》在这次自然回访时交并接出《对方的尊重》。",
+      "title": "沼光湖 → 骑行塞纳里奥庇护所 → 骑行沼泽鼠岗哨",
+      "summary": "完成陆地第四泵后普通骑行回塞纳里奥集中交付，再继续骑行到沼泽鼠；《沼牙的威胁》在这次自然回访时交并接出《对方的尊重》。",
       "action_ids": [
         "a0087",
         "a0088",
-        "a0090",
         "a0089",
         "a0091",
         "a0092",
@@ -1680,7 +1665,6 @@
         "a0099",
         "a0100",
         "a0101",
-        "a0103",
         "a0102",
         "a0104",
         "a0105",
@@ -2102,10 +2086,10 @@
         "x": 78.4,
         "y": 62.02,
         "phase": "east",
-        "transport": "taxi",
+        "transport": "ride",
         "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0090"
+          "kind": "self_move",
+          "mode": "ride"
         }
       },
       "zang-p020": {
@@ -2113,10 +2097,10 @@
         "x": 85.28,
         "y": 54.75,
         "phase": "east",
-        "transport": "taxi",
+        "transport": "ride",
         "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0103"
+          "kind": "self_move",
+          "mode": "ride"
         }
       },
       "zang-p021": {
@@ -2538,6 +2522,11 @@
       "date": "2026-09-18",
       "kind": "architecture_migration",
       "summary": "Semantic-parity cleanup: reviewed legacy script transports on these target points are not player-visible arrival actions in the old route. Remove the ambiguous migration hint; preserve all task/action text and keep arrival movement unresolved."
+    },
+    {
+      "date": "2026-09-25",
+      "kind": "transport_correction",
+      "summary": "用户实跑纠正：塞纳里奥庇护所没有飞行点；删除萨布拉金→塞纳里奥庇护所、塞纳里奥庇护所→沼泽鼠岗哨两段错误系统飞行，均改为普通骑行。"
     }
   ]
 }

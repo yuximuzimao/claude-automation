@@ -2455,13 +2455,6 @@
             "status": "deferred"
           },
           {
-            "kind": "pre_any",
-            "status": "required_external_state",
-            "task_ids": [
-              10403
-            ]
-          },
-          {
             "kind": "repeatability",
             "status": "deferred",
             "value": "entry_completion_unknown"
@@ -2854,15 +2847,6 @@
           9375
         ],
         "task_id": 9376
-      },
-      {
-        "action_id": "a0179",
-        "kind": "any_completed_task",
-        "relation": "pre_any",
-        "required_task_ids": [
-          10403
-        ],
-        "task_id": 10367
       }
     ]
   },
@@ -2932,7 +2916,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "ba141e4bf4e1d8d3cae7119b0bd16f0869ccde28ce372e1296c0e5e45fd48c18",
+  "input_fingerprint": "7f84355d06a08d5004077f1cbad2a2709ec5722ecd79734ec0e6db2783a7280a",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",

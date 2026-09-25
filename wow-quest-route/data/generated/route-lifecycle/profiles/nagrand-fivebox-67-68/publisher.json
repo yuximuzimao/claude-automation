@@ -1,16 +1,16 @@
 {
   "display": {
     "display_name": "纳格兰",
-    "footer": "最低号到68后立即结束，不再执行第4步。",
-    "order": 3,
+    "footer": "最低号到68后立即结束后续任务并转入诺森德阶段。",
+    "order": 5,
     "publish_key": "nagrand",
-    "subtitle": "适用于67级新号；最低号到68即结束。",
-    "title": "纳格兰 · 67→68五开冲刺路线"
+    "subtitle": "不同批次可带着不同等级/经验进入；从当前步骤继续做，最低号到68立即结束。",
+    "title": "纳格兰 · 五开68冲刺路线"
   },
   "hearth_chain": [
     "加拉达尔"
   ],
-  "input_fingerprint": "d584b2add1457bb2ed1f6ed636032dbb1bda933eb4f7c3c8f33d62dcfe213d0d",
+  "input_fingerprint": "cc24c4005581dd5bcaadf0a25f6e534b82ca83a8a18676ae3c81448b80b769ea",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -160,7 +160,7 @@
           "to_visit_id": "a0047"
         }
       ],
-      "input_fingerprint": "b08b9c15e0f608f27742aaba82dafb4b4b5a830ea7bc3a1a0a82ef4ed025b012",
+      "input_fingerprint": "500501e03298da7ea1b69ca8f2225b729c3e93b6e2fe49e5d7f8d6421b6cc4d9",
       "status": "pass",
       "visits": [
         {
@@ -198,7 +198,7 @@
           "location_ref": "nagrand-p004",
           "location_role": "map_anchor",
           "ordinal": 4,
-          "step_id": "step-02",
+          "step_id": "step-01",
           "visit_id": "a0014",
           "x": 71.16,
           "y": 82.36
@@ -208,7 +208,7 @@
           "location_ref": "nagrand-p005",
           "location_role": "map_anchor",
           "ordinal": 5,
-          "step_id": "step-02",
+          "step_id": "step-01",
           "visit_id": "a0016",
           "x": 68.0,
           "y": 61.0
@@ -218,7 +218,7 @@
           "location_ref": "nagrand-p006",
           "location_role": "map_anchor",
           "ordinal": 6,
-          "step_id": "step-02",
+          "step_id": "step-01",
           "visit_id": "a0019",
           "x": 67.5,
           "y": 42.0
@@ -268,7 +268,7 @@
           "location_ref": "nagrand-p011",
           "location_role": "map_anchor",
           "ordinal": 11,
-          "step_id": "step-03",
+          "step_id": "step-04",
           "visit_id": "a0036",
           "x": 71.52,
           "y": 40.62
@@ -410,7 +410,7 @@
     ]
   },
   "profile_id": "nagrand-fivebox-67-68",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
@@ -420,7 +420,7 @@
     "status": "requirements"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "1e913a5139afb26f3fb7781d77702e829ea139ad01ea708cbe963b49845cdce0",
+  "stage11_input_fingerprint": "9cce102124d6ccbe3fbfbe42c2c5d510f0294556aa9b4827aa7b7a1e2a704028",
   "status": "pass",
   "steps": [
     {
@@ -437,7 +437,13 @@
         "a0010",
         "a0011",
         "a0012",
-        "a0013"
+        "a0013",
+        "a0014",
+        "a0015",
+        "a0016",
+        "a0017",
+        "a0018",
+        "a0019"
       ],
       "lines": [
         {
@@ -491,7 +497,7 @@
           ],
           "location_ref": "nagrand-p002",
           "task_refs": [],
-          "text": "加拉达尔",
+          "text": "加拉达尔任务区",
           "type": "location"
         },
         {
@@ -552,6 +558,114 @@
           "action_ids": [
             "a0009"
           ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知古库斯"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "邪恶的信仰",
+              "task_id": 9863
+            }
+          ],
+          "text": "先知古库斯 → 接《邪恶的信仰》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0010"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知考尔胡克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "失踪的战斗小队",
+              "task_id": 9864
+            }
+          ],
+          "text": "先知考尔胡克 → 接《失踪的战斗小队》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0011"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知玛加迪"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "暗血领袖",
+              "task_id": 9867
+            }
+          ],
+          "text": "先知玛加迪 → 接《暗血领袖》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0012"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "元素师亚尔哈"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "元素王座",
+              "task_id": 9870
+            }
+          ],
+          "text": "元素师亚尔哈 → 接《元素王座》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0013"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "监护者布罗克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "证明你的力量",
+              "task_id": 10479
+            }
+          ],
+          "text": "监护者布罗克 → 接《证明你的力量》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0014"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "德拉吉亚"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "失踪的玛格汉车队",
+              "task_id": 9944
+            }
+          ],
+          "text": "德拉吉亚 → 接《失踪的玛格汉车队》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0015"
+          ],
           "location_ref": "nagrand-p003",
           "task_refs": [],
           "text": "奈辛瓦里狩猎队",
@@ -559,8 +673,8 @@
         },
         {
           "action_ids": [
-            "a0010",
-            "a0011"
+            "a0016",
+            "a0017"
           ],
           "actor": {
             "kind": "npc",
@@ -583,7 +697,7 @@
         },
         {
           "action_ids": [
-            "a0012"
+            "a0018"
           ],
           "actor": {
             "kind": "npc",
@@ -601,7 +715,7 @@
         },
         {
           "action_ids": [
-            "a0013"
+            "a0019"
           ],
           "actor": {
             "kind": "npc",
@@ -619,15 +733,17 @@
         }
       ],
       "step_id": "step-01",
-      "summary": "从赞加南路进入加拉达尔，交任务、开飞行点并绑定炉石；接完本地任务后去奈辛瓦里接三条狩猎任务。",
+      "summary": "",
       "task_presentations": [
         {
           "badge": null,
           "name": "支援加拉达尔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 9797
         },
         {
@@ -635,53 +751,131 @@
           "name": "奈辛瓦里狩猎队",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 10114
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "通缉：巫婆吉塞尔达",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9935
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "通缉：顾问佐尔布",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9939
         },
         {
           "badge": null,
+          "name": "邪恶的信仰",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9863
+        },
+        {
+          "badge": null,
+          "name": "失踪的战斗小队",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9864
+        },
+        {
+          "badge": null,
+          "name": "暗血领袖",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9867
+        },
+        {
+          "badge": null,
+          "name": "元素王座",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9870
+        },
+        {
+          "badge": "not_shared",
+          "name": "证明你的力量",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10479
+        },
+        {
+          "badge": null,
+          "name": "失踪的玛格汉车队",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9944
+        },
+        {
+          "badge": "shared",
           "name": "狩猎风鹏",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9854
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎塔布羊",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9857
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎裂蹄牛",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9789
         }
       ],
@@ -690,66 +884,33 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "加拉达尔 → 奈辛瓦里狩猎队"
+      "title": "加拉达尔 → 奈辛瓦里：起手任务"
     },
     {
       "action_ids": [
-        "a0014",
-        "a0015",
-        "a0016",
-        "a0017",
-        "a0018",
-        "a0019",
         "a0020",
-        "a0022",
         "a0021",
+        "a0022",
         "a0023",
         "a0024",
         "a0025",
         "a0026",
-        "a0027",
-        "a0028",
-        "a0029",
-        "a0030"
+        "a0027"
       ],
       "lines": [
         {
           "action_ids": [
-            "a0014"
+            "a0020"
           ],
           "location_ref": "nagrand-p004",
           "task_refs": [],
-          "text": "基尔索罗堡垒 / 吉塞尔达",
+          "text": "塔拉南侧羊牛走廊",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0015"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "通缉：巫婆吉塞尔达",
-              "task_id": 9935
-            }
-          ],
-          "text": "↳ 做《通缉：巫婆吉塞尔达》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0016"
-          ],
-          "location_ref": "nagrand-p005",
-          "task_refs": [],
-          "text": "塔拉附近塔布羊 / 裂蹄牛走廊",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0017",
-            "a0018"
+            "a0021",
+            "a0022"
           ],
           "actor": null,
           "task_refs": [
@@ -769,16 +930,16 @@
         },
         {
           "action_ids": [
-            "a0019"
+            "a0023"
           ],
-          "location_ref": "nagrand-p006",
+          "location_ref": "nagrand-p005",
           "task_refs": [],
-          "text": "绕山风鹏刷新带",
+          "text": "东部风鹏刷新带",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0020"
+            "a0024"
           ],
           "actor": null,
           "task_refs": [
@@ -793,7 +954,25 @@
         },
         {
           "action_ids": [
-            "a0022"
+            "a0025"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "呼嚎之风（任务物品）"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "呼嚎之风",
+              "task_id": 9861
+            }
+          ],
+          "text": "呼嚎之风（任务物品） → 接《呼嚎之风》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0026"
           ],
           "action_kind": "use_hearth",
           "task_refs": [],
@@ -802,43 +981,111 @@
         },
         {
           "action_ids": [
-            "a0021"
+            "a0027"
           ],
-          "location_ref": "nagrand-p007",
+          "location_ref": "nagrand-p006",
           "task_refs": [],
           "text": "加拉达尔",
           "type": "location"
+        }
+      ],
+      "step_id": "step-02",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "狩猎塔布羊",
+          "note": "《狩猎裂蹄牛》本任务沿同一条南向走廊同时完成。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9857
         },
         {
+          "badge": "shared",
+          "name": "狩猎裂蹄牛",
+          "note": "《狩猎塔布羊》沿同一条南向走廊同时完成。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9789
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎风鹏",
+          "note": "塔拉羊牛完成后再绕山去东部/中东部密集刷新带，不单独折返。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9854
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "呼嚎之风",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9861
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "第一轮狩猎 → 呼嚎之风 → 炉石加拉达尔"
+    },
+    {
+      "action_ids": [
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035"
+      ],
+      "lines": [
+        {
           "action_ids": [
-            "a0023"
+            "a0028"
           ],
           "actor": {
             "kind": "npc",
-            "name": "监护者布罗克"
+            "name": "塞雷斯蒂"
           },
           "task_refs": [
             {
-              "kind": "turnin",
-              "name": "通缉：巫婆吉塞尔达",
-              "task_id": 9935
+              "kind": "accept",
+              "name": "他叫奥图里斯......",
+              "task_id": 9983
             }
           ],
-          "text": "监护者布罗克 → 交《通缉：巫婆吉塞尔达》",
+          "text": "塞雷斯蒂 → 接《他叫奥图里斯......》",
           "type": "task_action"
         },
         {
           "action_ids": [
-            "a0024"
+            "a0029"
           ],
-          "location_ref": "nagrand-p008",
+          "location_ref": "nagrand-p007",
           "task_refs": [],
           "text": "奈辛瓦里狩猎队",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0025"
+            "a0030"
           ],
           "actor": {
             "kind": "npc",
@@ -856,7 +1103,7 @@
         },
         {
           "action_ids": [
-            "a0026"
+            "a0031"
           ],
           "actor": {
             "kind": "npc",
@@ -874,7 +1121,7 @@
         },
         {
           "action_ids": [
-            "a0027"
+            "a0032"
           ],
           "actor": {
             "kind": "npc",
@@ -892,7 +1139,7 @@
         },
         {
           "action_ids": [
-            "a0028"
+            "a0033"
           ],
           "actor": {
             "kind": "npc",
@@ -910,7 +1157,7 @@
         },
         {
           "action_ids": [
-            "a0029"
+            "a0034"
           ],
           "actor": {
             "kind": "npc",
@@ -928,7 +1175,7 @@
         },
         {
           "action_ids": [
-            "a0030"
+            "a0035"
           ],
           "actor": {
             "kind": "npc",
@@ -945,70 +1192,84 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-02",
-      "summary": "先完成《通缉：巫婆吉塞尔达》，继续到塔拉附近完成塔布羊和裂蹄牛，再绕山完成风鹏；三狩猎和吉塞尔达都完成后炉石回加拉达尔集中交付，再去奈辛瓦里接后续。",
+      "step_id": "step-03",
+      "summary": "",
       "task_presentations": [
         {
           "badge": null,
-          "name": "通缉：巫婆吉塞尔达",
-          "note": "",
+          "name": "他叫奥图里斯......",
+          "note": null,
           "note_override_applied": true,
-          "note_visible": true,
+          "note_show_on": [],
+          "note_visible": false,
           "pending": true,
-          "task_id": 9935
+          "suppress_action_kinds": [],
+          "task_id": 9983
         },
         {
-          "badge": null,
-          "name": "狩猎塔布羊",
-          "note": "《狩猎裂蹄牛》：沿同一条南向走廊同时完成。\n《狩猎风鹏》本任务《狩猎裂蹄牛》：共享：",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9857
-        },
-        {
-          "badge": null,
-          "name": "狩猎裂蹄牛",
-          "note": "《狩猎塔布羊》本任务：沿同一条南向走廊同时完成。\n《狩猎风鹏》《狩猎塔布羊》本任务：共享：",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9789
-        },
-        {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎风鹏",
-          "note": "塔拉羊牛完成后再绕山去东部/中东部密集刷新带，不单独折返。\n《狩猎塔布羊》《狩猎裂蹄牛》：共享：",
+          "note": null,
           "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9854
         },
         {
-          "badge": null,
-          "name": "狩猎风鹏",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9855
-        },
-        {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎塔布羊",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
-          "task_id": 9858
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9857
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎裂蹄牛",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9789
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎风鹏",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9855
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎塔布羊",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9858
+        },
+        {
+          "badge": "shared",
+          "name": "狩猎裂蹄牛",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9850
         }
       ],
@@ -1017,36 +1278,38 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "基尔索罗 → 塔拉羊牛 → 绕山风鹏 → 加拉达尔 → 奈辛瓦里"
+      "title": "加拉达尔接奥图里斯线 → 奈辛瓦里第二轮"
     },
     {
       "action_ids": [
-        "a0031",
-        "a0032",
-        "a0033",
-        "a0034",
-        "a0035",
         "a0036",
         "a0037",
         "a0038",
         "a0039",
         "a0040",
         "a0041",
-        "a0042"
+        "a0042",
+        "a0043",
+        "a0044",
+        "a0045",
+        "a0046",
+        "a0047",
+        "a0048",
+        "a0049"
       ],
       "lines": [
         {
           "action_ids": [
-            "a0031"
+            "a0036"
           ],
-          "location_ref": "nagrand-p009",
+          "location_ref": "nagrand-p008",
           "task_refs": [],
-          "text": "西部风鹏刷新带",
+          "text": "西部饥饿风鹏刷新带",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0032"
+            "a0037"
           ],
           "actor": null,
           "task_refs": [
@@ -1061,17 +1324,17 @@
         },
         {
           "action_ids": [
-            "a0033"
+            "a0038"
           ],
-          "location_ref": "nagrand-p010",
+          "location_ref": "nagrand-p009",
           "task_refs": [],
-          "text": "中部草原",
+          "text": "中部草原羊牛",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0034",
-            "a0035"
+            "a0039",
+            "a0040"
           ],
           "actor": null,
           "task_refs": [
@@ -1091,7 +1354,34 @@
         },
         {
           "action_ids": [
-            "a0036"
+            "a0041"
+          ],
+          "location_ref": "nagrand-p010",
+          "task_refs": [],
+          "text": "星界财团招募员",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0042"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "星界财团招募员"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "星界财团需要你！",
+              "task_id": 9913
+            }
+          ],
+          "text": "星界财团招募员 → 接《星界财团需要你！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0043"
           ],
           "location_ref": "nagrand-p011",
           "task_refs": [],
@@ -1100,7 +1390,7 @@
         },
         {
           "action_ids": [
-            "a0037"
+            "a0044"
           ],
           "actor": {
             "kind": "npc",
@@ -1118,7 +1408,7 @@
         },
         {
           "action_ids": [
-            "a0038"
+            "a0045"
           ],
           "actor": {
             "kind": "npc",
@@ -1136,7 +1426,7 @@
         },
         {
           "action_ids": [
-            "a0039"
+            "a0046"
           ],
           "actor": {
             "kind": "npc",
@@ -1154,7 +1444,7 @@
         },
         {
           "action_ids": [
-            "a0040"
+            "a0047"
           ],
           "actor": {
             "kind": "npc",
@@ -1172,7 +1462,7 @@
         },
         {
           "action_ids": [
-            "a0041"
+            "a0048"
           ],
           "actor": {
             "kind": "npc",
@@ -1190,7 +1480,7 @@
         },
         {
           "action_ids": [
-            "a0042"
+            "a0049"
           ],
           "actor": {
             "kind": "npc",
@@ -1207,43 +1497,62 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-03",
-      "summary": "完成饥饿的风鹏及后续塔布羊、裂蹄牛目标，回奈辛瓦里交任务后立即检查最低号经验；到68直接结束。",
+      "step_id": "step-04",
+      "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎风鹏",
           "note": "饥饿的风鹏主要向西侧移动完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9855
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎塔布羊",
           "note": "《狩猎裂蹄牛》：沿中部路径边走边杀，不必围着单一坐标刷。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9858
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "狩猎裂蹄牛",
           "note": "《狩猎塔布羊》本任务：沿中部路径边走边杀，不必围着单一坐标刷。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 9850
+        },
+        {
+          "badge": null,
+          "name": "星界财团需要你！",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9913
         },
         {
           "badge": null,
           "name": "狩猎风鹏",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 9856
         },
         {
@@ -1251,8 +1560,10 @@
           "name": "狩猎塔布羊",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 9859
         },
         {
@@ -1260,8 +1571,10 @@
           "name": "狩猎裂蹄牛",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 9851
         }
       ],
@@ -1270,38 +1583,833 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "西部风鹏 → 中部草原 → 奈辛瓦里"
+      "title": "第二轮狩猎 → 顺路接星界财团 → 高级狩猎"
     },
     {
       "action_ids": [
-        "a0043",
-        "a0044",
-        "a0045",
-        "a0046",
-        "a0047",
-        "a0048",
-        "a0049",
         "a0050",
         "a0051",
         "a0052",
         "a0053",
         "a0054",
         "a0055",
-        "a0056"
+        "a0056",
+        "a0057",
+        "a0058",
+        "a0159",
+        "a0059",
+        "a0060",
+        "a0061",
+        "a0062",
+        "a0063",
+        "a0064",
+        "a0065",
+        "a0066",
+        "a0067",
+        "a0068",
+        "a0069",
+        "a0070"
       ],
       "lines": [
         {
           "action_ids": [
-            "a0043"
+            "a0050"
           ],
           "location_ref": "nagrand-p012",
           "task_refs": [],
-          "text": "【最低号未到68】战槌山 / 顾问佐尔布",
+          "text": "玛格汉车队",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0044"
+            "a0051"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者尤尔雷"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "失踪的玛格汉车队",
+              "task_id": 9944
+            }
+          ],
+          "text": "长者尤尔雷 → 交《失踪的玛格汉车队》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0052"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "小萨鲁法尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "失踪的战斗小队",
+              "task_id": 9864
+            }
+          ],
+          "text": "小萨鲁法尔 → 交《失踪的战斗小队》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0053"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者安格雷兹"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "寻找幸存者",
+              "task_id": 9948
+            }
+          ],
+          "text": "长者安格雷兹 → 接《寻找幸存者》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0054"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者尤尔雷"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "战槌之战",
+              "task_id": 9945
+            }
+          ],
+          "text": "长者尤尔雷 → 接《战槌之战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0055"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "小萨鲁法尔"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "我们曾是战士",
+              "task_id": 9865
+            }
+          ],
+          "text": "小萨鲁法尔 → 接《我们曾是战士》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0056"
+          ],
+          "location_ref": "nagrand-p013",
+          "task_refs": [],
+          "text": "受难者奥图里斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0057"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "受难者奥图里斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "他叫奥图里斯......",
+              "task_id": 9983
+            }
+          ],
+          "text": "受难者奥图里斯 → 交《他叫奥图里斯......》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0159"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "侦查大地",
+              "task_id": 9991
+            }
+          ],
+          "text": "↳ 做《侦查大地》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0059",
+            "a0060"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "受难者奥图里斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "侦查大地",
+              "task_id": 9991
+            },
+            {
+              "kind": "accept",
+              "name": "争取时间",
+              "task_id": 9999
+            }
+          ],
+          "text": "受难者奥图里斯 → 交《侦查大地》 → 接《争取时间》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0061"
+          ],
+          "location_ref": "nagrand-p014",
+          "task_refs": [],
+          "text": "日泉岗哨·暗血区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0062",
+            "a0063",
+            "a0064"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "邪恶的信仰",
+              "task_id": 9863
+            },
+            {
+              "kind": "objective",
+              "name": "暗血领袖",
+              "task_id": 9867
+            },
+            {
+              "kind": "objective",
+              "name": "我们曾是战士",
+              "task_id": 9865
+            }
+          ],
+          "text": "↳ 做《邪恶的信仰》、《暗血领袖》、《我们曾是战士》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0065",
+            "a0066"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "玛格汉俘虏"
+          },
+          "location_ref": "nagrand-p015",
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "卡达什图腾",
+              "task_id": 9868
+            }
+          ],
+          "text": "日泉岗哨·玛格汉俘虏 → 接《卡达什图腾》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0067"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "卡达什图腾",
+              "task_id": 9868
+            }
+          ],
+          "text": "↳ 做《卡达什图腾》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0068"
+          ],
+          "location_ref": "nagrand-p016",
+          "task_refs": [],
+          "text": "玛格汉车队",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0069",
+            "a0070"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "小萨鲁法尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "我们曾是战士",
+              "task_id": 9865
+            },
+            {
+              "kind": "accept",
+              "name": "他要游历世界......",
+              "task_id": 9866
+            }
+          ],
+          "text": "小萨鲁法尔 → 交《我们曾是战士》 → 接《他要游历世界......》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-05",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "失踪的玛格汉车队",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9944
+        },
+        {
+          "badge": null,
+          "name": "失踪的战斗小队",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9864
+        },
+        {
+          "badge": null,
+          "name": "寻找幸存者",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9948
+        },
+        {
+          "badge": "shared",
+          "name": "战槌之战",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9945
+        },
+        {
+          "badge": "shared",
+          "name": "我们曾是战士",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9865
+        },
+        {
+          "badge": null,
+          "name": "他叫奥图里斯......",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9983
+        },
+        {
+          "badge": null,
+          "name": "侦查大地",
+          "note": "接取后会自动进入侦察飞行并完成侦察流程，不需要玩家自己跑图。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [
+            "accept"
+          ],
+          "task_id": 9991
+        },
+        {
+          "badge": "shared",
+          "name": "争取时间",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9999
+        },
+        {
+          "badge": null,
+          "name": "邪恶的信仰",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9863
+        },
+        {
+          "badge": null,
+          "name": "暗血领袖",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9867
+        },
+        {
+          "badge": null,
+          "name": "卡达什图腾",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9868
+        },
+        {
+          "badge": null,
+          "name": "他要游历世界......",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9866
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "车队 → 侦查大地 → 暗血三任务 → 护送"
+    },
+    {
+      "action_ids": [
+        "a0071",
+        "a0072",
+        "a0073",
+        "a0074",
+        "a0075",
+        "a0076",
+        "a0077",
+        "a0078",
+        "a0079"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0071"
+          ],
+          "location_ref": "nagrand-p017",
+          "task_refs": [],
+          "text": "铸魔营地任务区",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0072"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "争取时间",
+              "task_id": 9999
+            }
+          ],
+          "text": "↳ 做《争取时间》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0073"
+          ],
+          "location_ref": "nagrand-p018",
+          "task_refs": [],
+          "text": "受难者奥图里斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0074",
+            "a0075"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "受难者奥图里斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "争取时间",
+              "task_id": 9999
+            },
+            {
+              "kind": "accept",
+              "name": "主规划师",
+              "task_id": 10001
+            }
+          ],
+          "text": "受难者奥图里斯 → 交《争取时间》 → 接《主规划师》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0076"
+          ],
+          "location_ref": "nagrand-p019",
+          "task_refs": [],
+          "text": "莫尔葛主规划师",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0077"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "主规划师",
+              "task_id": 10001
+            }
+          ],
+          "text": "↳ 做《主规划师》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0078"
+          ],
+          "location_ref": "nagrand-p020",
+          "task_refs": [],
+          "text": "受难者奥图里斯",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0079"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "受难者奥图里斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "主规划师",
+              "task_id": 10001
+            }
+          ],
+          "text": "受难者奥图里斯 → 交《主规划师》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-06",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "争取时间",
+          "note": "不要同时拉多只任务怪；单拉处理，避免连续死亡。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9999
+        },
+        {
+          "badge": null,
+          "name": "主规划师",
+          "note": "可以完成本任务，不需要因为强度预先放弃。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10001
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "争取时间 → 主规划师：第一次来就做完"
+    },
+    {
+      "action_ids": [
+        "a0080",
+        "a0081",
+        "a0082",
+        "a0083",
+        "a0084",
+        "a0085",
+        "a0086",
+        "a0087",
+        "a0088",
+        "a0089",
+        "a0090",
+        "a0091",
+        "a0092",
+        "a0093",
+        "a0094",
+        "a0095",
+        "a0096",
+        "a0097",
+        "a0098",
+        "a0099",
+        "a0100"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0080"
+          ],
+          "location_ref": "nagrand-p021",
+          "task_refs": [],
+          "text": "战槌山·幸存者/战槌之战",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0081",
+            "a0082"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "寻找幸存者",
+              "task_id": 9948
+            },
+            {
+              "kind": "objective",
+              "name": "战槌之战",
+              "task_id": 9945
+            }
+          ],
+          "text": "↳ 做《寻找幸存者》、《战槌之战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0083"
+          ],
+          "location_ref": "nagrand-p022",
+          "task_refs": [],
+          "text": "玛格汉车队",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0084"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者安格雷兹"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "寻找幸存者",
+              "task_id": 9948
+            }
+          ],
+          "text": "长者安格雷兹 → 交《寻找幸存者》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0085",
+            "a0086"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者尤尔雷"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "战槌之战",
+              "task_id": 9945
+            },
+            {
+              "kind": "accept",
+              "name": "掠夺者考瓦尔",
+              "task_id": 9946
+            }
+          ],
+          "text": "长者尤尔雷 → 交《战槌之战》 → 接《掠夺者考瓦尔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0087"
+          ],
+          "location_ref": "nagrand-p023",
+          "task_refs": [],
+          "text": "掠夺者考瓦尔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0088"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "掠夺者考瓦尔",
+              "task_id": 9946
+            }
+          ],
+          "text": "↳ 做《掠夺者考瓦尔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0089"
+          ],
+          "location_ref": "nagrand-p024",
+          "task_refs": [],
+          "text": "玛格汉车队",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0090"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "长者尤尔雷"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "掠夺者考瓦尔",
+              "task_id": 9946
+            }
+          ],
+          "text": "长者尤尔雷 → 交《掠夺者考瓦尔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0091"
+          ],
+          "location_ref": "nagrand-p025",
+          "task_refs": [],
+          "text": "鲜血竞技场·断蹄",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0092"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "古尔戈索克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "鲜血竞技场：断蹄",
+              "task_id": 9962
+            }
+          ],
+          "text": "古尔戈索克 → 接《鲜血竞技场：断蹄》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0093"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "鲜血竞技场：断蹄",
+              "task_id": 9962
+            }
+          ],
+          "text": "↳ 做《鲜血竞技场：断蹄》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0094"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "巨魔仆从伍迪"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "鲜血竞技场：断蹄",
+              "task_id": 9962
+            }
+          ],
+          "text": "巨魔仆从伍迪 → 交《鲜血竞技场：断蹄》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0095"
+          ],
+          "location_ref": "nagrand-p026",
+          "task_refs": [],
+          "text": "战槌山·顾问佐尔布",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0096"
           ],
           "actor": null,
           "task_refs": [
@@ -1316,16 +2424,217 @@
         },
         {
           "action_ids": [
-            "a0045"
+            "a0097"
           ],
-          "location_ref": "nagrand-p013",
+          "location_ref": "nagrand-p027",
           "task_refs": [],
-          "text": "【最低号未到68】加拉达尔",
+          "text": "嘲颅废墟·证明你的力量",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0046"
+            "a0098"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "证明你的力量",
+              "task_id": 10479
+            }
+          ],
+          "text": "↳ 做《证明你的力量》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0099"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：加拉达尔",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0100"
+          ],
+          "location_ref": "nagrand-p028",
+          "task_refs": [],
+          "text": "加拉达尔",
+          "type": "location"
+        }
+      ],
+      "step_id": "step-07",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "寻找幸存者",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9948
+        },
+        {
+          "badge": "shared",
+          "name": "战槌之战",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9945
+        },
+        {
+          "badge": null,
+          "name": "掠夺者考瓦尔",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9946
+        },
+        {
+          "badge": "shared",
+          "name": "鲜血竞技场：断蹄",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9962
+        },
+        {
+          "badge": "shared",
+          "name": "通缉：顾问佐尔布",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9939
+        },
+        {
+          "badge": "not_shared",
+          "name": "证明你的力量",
+          "note": "五号不共享；嘲颅废墟怪集中，正式路线在离开该区域前一次刷够。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10479
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "战槌山 → 考瓦尔 → 顺路断蹄/佐尔布 → 嘲颅刷满念珠 → 炉石"
+    },
+    {
+      "action_ids": [
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0112",
+        "a0113"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0101"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知古库斯"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "邪恶的信仰",
+              "task_id": 9863
+            }
+          ],
+          "text": "先知古库斯 → 交《邪恶的信仰》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0102"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知玛加迪"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "暗血领袖",
+              "task_id": 9867
+            }
+          ],
+          "text": "先知玛加迪 → 交《暗血领袖》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0103"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "先知考尔胡克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "他要游历世界......",
+              "task_id": 9866
+            }
+          ],
+          "text": "先知考尔胡克 → 交《他要游历世界......》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0104"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "加尔鲁什"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "卡达什图腾",
+              "task_id": 9868
+            }
+          ],
+          "text": "加尔鲁什 → 交《卡达什图腾》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0105",
+            "a0106"
           ],
           "actor": {
             "kind": "npc",
@@ -1336,25 +2645,627 @@
               "kind": "turnin",
               "name": "通缉：顾问佐尔布",
               "task_id": 9939
+            },
+            {
+              "kind": "turnin",
+              "name": "证明你的力量",
+              "task_id": 10479
             }
           ],
-          "text": "监护者布罗克 → 交《通缉：顾问佐尔布》",
+          "text": "监护者布罗克 → 交《通缉：顾问佐尔布》、《证明你的力量》",
           "type": "task_action"
         },
         {
           "action_ids": [
-            "a0047"
+            "a0107"
           ],
-          "location_ref": "nagrand-p014",
+          "location_ref": "nagrand-p029",
           "task_refs": [],
-          "text": "【最低号未到68】奈辛瓦里高级狩猎",
+          "text": "元素王座",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0048",
-            "a0049",
-            "a0050"
+            "a0108"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "元素师沙尔瓦克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "元素王座",
+              "task_id": 9870
+            }
+          ],
+          "text": "元素师沙尔瓦克 → 交《元素王座》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0109",
+            "a0110"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "元素师莫格"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "呼嚎之风",
+              "task_id": 9861
+            },
+            {
+              "kind": "accept",
+              "name": "暗血腐蚀者",
+              "task_id": 9862
+            }
+          ],
+          "text": "元素师莫格 → 交《呼嚎之风》 → 接《暗血腐蚀者》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0111"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "元素师温塔格"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "地下的滋扰",
+              "task_id": 9818
+            }
+          ],
+          "text": "元素师温塔格 → 接《地下的滋扰》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0112",
+            "a0113"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "戈达乌"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "地下的滋扰",
+              "task_id": 9818
+            },
+            {
+              "kind": "accept",
+              "name": "被折磨的地灵",
+              "task_id": 9819
+            }
+          ],
+          "text": "戈达乌 → 交《地下的滋扰》 → 接《被折磨的地灵》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-08",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "邪恶的信仰",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9863
+        },
+        {
+          "badge": null,
+          "name": "暗血领袖",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9867
+        },
+        {
+          "badge": null,
+          "name": "他要游历世界......",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9866
+        },
+        {
+          "badge": null,
+          "name": "卡达什图腾",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9868
+        },
+        {
+          "badge": "shared",
+          "name": "通缉：顾问佐尔布",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9939
+        },
+        {
+          "badge": "not_shared",
+          "name": "证明你的力量",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10479
+        },
+        {
+          "badge": null,
+          "name": "元素王座",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9870
+        },
+        {
+          "badge": "sequential_loot",
+          "name": "呼嚎之风",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9861
+        },
+        {
+          "badge": "shared",
+          "name": "暗血腐蚀者",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9862
+        },
+        {
+          "badge": null,
+          "name": "地下的滋扰",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9818
+        },
+        {
+          "badge": "shared",
+          "name": "被折磨的地灵",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9819
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "加拉达尔集中交付 → 元素王座"
+    },
+    {
+      "action_ids": [
+        "a0114",
+        "a0115",
+        "a0116",
+        "a0117",
+        "a0118",
+        "a0119",
+        "a0120",
+        "a0121",
+        "a0122",
+        "a0123",
+        "a0124",
+        "a0125"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0114"
+          ],
+          "location_ref": "nagrand-p030",
+          "task_refs": [],
+          "text": "被折磨的地灵",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0115"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "被折磨的地灵",
+              "task_id": 9819
+            }
+          ],
+          "text": "↳ 做《被折磨的地灵》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0116"
+          ],
+          "location_ref": "nagrand-p031",
+          "task_refs": [],
+          "text": "基尔索罗堡垒·巫婆吉塞尔达",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0117"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "通缉：巫婆吉塞尔达",
+              "task_id": 9935
+            }
+          ],
+          "text": "↳ 做《通缉：巫婆吉塞尔达》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0118"
+          ],
+          "location_ref": "nagrand-p032",
+          "task_refs": [],
+          "text": "班塔尔（从塔拉下方绕行，不走吊桥）",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0119"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "狩猎裂蹄牛",
+              "task_id": 9851
+            }
+          ],
+          "text": "↳ 做《狩猎裂蹄牛》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0120"
+          ],
+          "location_ref": "nagrand-p033",
+          "task_refs": [],
+          "text": "埃瑞斯码头",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0121"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "杰赫"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "星界财团需要你！",
+              "task_id": 9913
+            }
+          ],
+          "text": "杰赫 → 交《星界财团需要你！》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0122"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "沙德雷克"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "象牙生意",
+              "task_id": 9914
+            }
+          ],
+          "text": "沙德雷克 → 接《象牙生意》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0123"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "杰赫"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "偷盗贼的东西......能算偷么？",
+              "task_id": 9882
+            }
+          ],
+          "text": "杰赫 → 接《偷盗贼的东西......能算偷么？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0124",
+            "a0125"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "瑟利德"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "加瓦克希",
+              "task_id": 9900
+            },
+            {
+              "kind": "accept",
+              "name": "安全问题",
+              "task_id": 9925
+            }
+          ],
+          "text": "瑟利德 → 接《加瓦克希》、《安全问题》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-09",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "被折磨的地灵",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9819
+        },
+        {
+          "badge": "shared",
+          "name": "通缉：巫婆吉塞尔达",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9935
+        },
+        {
+          "badge": null,
+          "name": "狩猎裂蹄牛",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9851
+        },
+        {
+          "badge": null,
+          "name": "星界财团需要你！",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9913
+        },
+        {
+          "badge": null,
+          "name": "象牙生意",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9914
+        },
+        {
+          "badge": null,
+          "name": "偷盗贼的东西......能算偷么？",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9882
+        },
+        {
+          "badge": "shared",
+          "name": "加瓦克希",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9900
+        },
+        {
+          "badge": "shared",
+          "name": "安全问题",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9925
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "地灵 → 吉塞尔达 → 绕塔拉下方杀班塔尔 → 埃瑞斯码头"
+    },
+    {
+      "action_ids": [
+        "a0126",
+        "a0127",
+        "a0128",
+        "a0129",
+        "a0130",
+        "a0131",
+        "a0132",
+        "a0133",
+        "a0134",
+        "a0135",
+        "a0136",
+        "a0137",
+        "a0138",
+        "a0139",
+        "a0140",
+        "a0141"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0126"
+          ],
+          "location_ref": "nagrand-p034",
+          "task_refs": [],
+          "text": "沃舒古水晶/空灵爪牙",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0127",
+            "a0128"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "偷盗贼的东西......能算偷么？",
+              "task_id": 9882
+            },
+            {
+              "kind": "objective",
+              "name": "安全问题",
+              "task_id": 9925
+            }
+          ],
+          "text": "↳ 做《偷盗贼的东西......能算偷么？》、《安全问题》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0129"
+          ],
+          "location_ref": "nagrand-p035",
+          "task_refs": [],
+          "text": "加瓦克希",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0130"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "加瓦克希",
+              "task_id": 9900
+            }
+          ],
+          "text": "↳ 做《加瓦克希》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0131"
+          ],
+          "location_ref": "nagrand-p036",
+          "task_refs": [],
+          "text": "沿路雷象·象牙",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0132"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "象牙生意",
+              "task_id": 9914
+            }
+          ],
+          "text": "↳ 做《象牙生意》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0133"
+          ],
+          "location_ref": "nagrand-p037",
+          "task_refs": [],
+          "text": "巴克洛尔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0134"
           ],
           "actor": null,
           "task_refs": [
@@ -1362,42 +3273,264 @@
               "kind": "objective",
               "name": "狩猎塔布羊",
               "task_id": 9859
-            },
+            }
+          ],
+          "text": "↳ 做《狩猎塔布羊》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0135"
+          ],
+          "location_ref": "nagrand-p038",
+          "task_refs": [],
+          "text": "暗血腐蚀者",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0136"
+          ],
+          "actor": null,
+          "task_refs": [
             {
               "kind": "objective",
-              "name": "狩猎裂蹄牛",
-              "task_id": 9851
-            },
+              "name": "暗血腐蚀者",
+              "task_id": 9862
+            }
+          ],
+          "text": "↳ 做《暗血腐蚀者》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0137"
+          ],
+          "location_ref": "nagrand-p039",
+          "task_refs": [],
+          "text": "裂肠者",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0138"
+          ],
+          "actor": null,
+          "task_refs": [
             {
               "kind": "objective",
               "name": "狩猎风鹏",
               "task_id": 9856
             }
           ],
-          "text": "↳ 做《狩猎塔布羊》、《狩猎裂蹄牛》、《狩猎风鹏》",
+          "text": "↳ 做《狩猎风鹏》",
           "type": "task_action"
         },
         {
           "action_ids": [
-            "a0051"
+            "a0139"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：加拉达尔",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0140"
+          ],
+          "location_ref": "nagrand-p040",
+          "task_refs": [],
+          "text": "加拉达尔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0141"
           ],
           "actor": {
             "kind": "npc",
-            "name": "哈罗德·兰恩"
+            "name": "监护者布罗克"
           },
           "task_refs": [
             {
               "kind": "turnin",
-              "name": "狩猎塔布羊",
-              "task_id": 9859
+              "name": "通缉：巫婆吉塞尔达",
+              "task_id": 9935
             }
           ],
-          "text": "哈罗德·兰恩 → 交《狩猎塔布羊》",
+          "text": "监护者布罗克 → 交《通缉：巫婆吉塞尔达》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-10",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "偷盗贼的东西......能算偷么？",
+          "note": "沃舒古水晶碎片可交易；可由主号集中击杀/拾取后再分给其余角色。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9882
+        },
+        {
+          "badge": "shared",
+          "name": "安全问题",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9925
+        },
+        {
+          "badge": "shared",
+          "name": "加瓦克希",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9900
+        },
+        {
+          "badge": null,
+          "name": "象牙生意",
+          "note": "本路线第一次到埃瑞斯码头就接；之后沿路顺手收集象牙，尽量在《终极挑战》前凑够3对，避免打完塔丝克后再专门补跑。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9914
+        },
+        {
+          "badge": null,
+          "name": "狩猎塔布羊",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9859
+        },
+        {
+          "badge": "shared",
+          "name": "暗血腐蚀者",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9862
+        },
+        {
+          "badge": null,
+          "name": "狩猎风鹏",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9856
+        },
+        {
+          "badge": "shared",
+          "name": "通缉：巫婆吉塞尔达",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9935
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "沃舒古 → 象牙 → 高级羊/暗血/风鹏 → 炉石交吉塞尔达"
+    },
+    {
+      "action_ids": [
+        "a0142",
+        "a0143",
+        "a0144",
+        "a0145",
+        "a0146",
+        "a0147",
+        "a0148",
+        "a0149"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0142"
+          ],
+          "location_ref": "nagrand-p041",
+          "task_refs": [],
+          "text": "元素王座",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0143"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "元素师莫格"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "暗血腐蚀者",
+              "task_id": 9862
+            }
+          ],
+          "text": "元素师莫格 → 交《暗血腐蚀者》",
           "type": "task_action"
         },
         {
           "action_ids": [
-            "a0052"
+            "a0144"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "戈达乌"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "被折磨的地灵",
+              "task_id": 9819
+            }
+          ],
+          "text": "戈达乌 → 交《被折磨的地灵》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0145"
+          ],
+          "location_ref": "nagrand-p042",
+          "task_refs": [],
+          "text": "奈辛瓦里狩猎队",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0146"
           ],
           "actor": {
             "kind": "npc",
@@ -1415,7 +3548,7 @@
         },
         {
           "action_ids": [
-            "a0053"
+            "a0147"
           ],
           "actor": {
             "kind": "npc",
@@ -1433,7 +3566,25 @@
         },
         {
           "action_ids": [
-            "a0054"
+            "a0148"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "哈罗德·兰恩"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "狩猎塔布羊",
+              "task_id": 9859
+            }
+          ],
+          "text": "哈罗德·兰恩 → 交《狩猎塔布羊》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0149"
           ],
           "actor": {
             "kind": "npc",
@@ -1448,10 +3599,110 @@
           ],
           "text": "赫米特·奈辛瓦里 → 接《终极挑战》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-11",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "暗血腐蚀者",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9862
+        },
+        {
+          "badge": "shared",
+          "name": "被折磨的地灵",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9819
+        },
+        {
+          "badge": null,
+          "name": "狩猎裂蹄牛",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9851
+        },
+        {
+          "badge": null,
+          "name": "狩猎风鹏",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9856
+        },
+        {
+          "badge": null,
+          "name": "狩猎塔布羊",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9859
+        },
+        {
+          "badge": null,
+          "name": "终极挑战",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9852
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "元素王座交任务 → 奈辛瓦里接终极挑战"
+    },
+    {
+      "action_ids": [
+        "a0150",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155",
+        "a0156",
+        "a0157",
+        "a0158"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0150"
+          ],
+          "location_ref": "nagrand-p043",
+          "task_refs": [],
+          "text": "塔丝克",
+          "type": "location"
         },
         {
           "action_ids": [
-            "a0055"
+            "a0151"
           ],
           "actor": null,
           "task_refs": [
@@ -1466,7 +3717,16 @@
         },
         {
           "action_ids": [
-            "a0056"
+            "a0152"
+          ],
+          "location_ref": "nagrand-p044",
+          "task_refs": [],
+          "text": "奈辛瓦里狩猎队",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0153"
           ],
           "actor": {
             "kind": "npc",
@@ -1481,63 +3741,142 @@
           ],
           "text": "赫米特·奈辛瓦里 → 交《终极挑战》",
           "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0154"
+          ],
+          "location_ref": "nagrand-p045",
+          "task_refs": [],
+          "text": "埃瑞斯码头",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0155"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "沙德雷克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "象牙生意",
+              "task_id": 9914
+            }
+          ],
+          "text": "沙德雷克 → 交《象牙生意》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0156"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "杰赫"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "偷盗贼的东西......能算偷么？",
+              "task_id": 9882
+            }
+          ],
+          "text": "杰赫 → 交《偷盗贼的东西......能算偷么？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0157",
+            "a0158"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "瑟利德"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "加瓦克希",
+              "task_id": 9900
+            },
+            {
+              "kind": "turnin",
+              "name": "安全问题",
+              "task_id": 9925
+            }
+          ],
+          "text": "瑟利德 → 交《加瓦克希》、《安全问题》",
+          "type": "task_action"
         }
       ],
-      "step_id": "step-04",
-      "summary": "仅最低号仍未到68时继续：先做《通缉：顾问佐尔布》，仍不足再做奈辛瓦里高级狩猎；每次交任务后都检查最低号，到68立即结束。",
+      "step_id": "step-12",
+      "summary": "",
       "task_presentations": [
-        {
-          "badge": null,
-          "name": "通缉：顾问佐尔布",
-          "note": "击杀顾问佐尔布、5名战槌萨满祭司和5名战槌劫掠者。",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9939
-        },
-        {
-          "badge": null,
-          "name": "狩猎塔布羊",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9859
-        },
-        {
-          "badge": null,
-          "name": "狩猎裂蹄牛",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9851
-        },
-        {
-          "badge": null,
-          "name": "狩猎风鹏",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9856
-        },
         {
           "badge": null,
           "name": "终极挑战",
           "note": "只在三条高级狩猎全部交完仍未68时启用；击杀塔丝克后，确认每个仍需要任务物的角色都取得塔丝克之心再离开。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 9852
+        },
+        {
+          "badge": null,
+          "name": "象牙生意",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9914
+        },
+        {
+          "badge": null,
+          "name": "偷盗贼的东西......能算偷么？",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9882
+        },
+        {
+          "badge": "shared",
+          "name": "加瓦克希",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9900
+        },
+        {
+          "badge": "shared",
+          "name": "安全问题",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9925
         }
       ],
       "timing": {
         "center_minutes": null,
         "range_minutes": null,
-        "status": "requirements"
+        "status": "unavailable"
       },
-      "title": "【最低号未到68】战槌山 → 奈辛瓦里高级狩猎"
+      "title": "终极挑战 → 奈辛瓦里 → 埃瑞斯码头收尾"
     }
   ]
 }

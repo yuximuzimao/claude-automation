@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "task_id": 9946,
+  "identity": {
+    "name_zhcn": "掠夺者考瓦尔",
+    "name_en": "Cho'war the Pillager",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 67,
+    "min_level": 65,
+    "pre_any": [
+      9945
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 74000,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 25775,
+        "quantity": 1,
+        "name_zhcn": "食人魔杀手指环",
+        "name_en": "Ogre Slayer's Band",
+        "sell_price_each_copper": 38775,
+        "sell_price_total_copper": 38775
+      },
+      {
+        "item_id": 25776,
+        "quantity": 1,
+        "name_zhcn": "食人魔杀手坠饰",
+        "name_en": "Ogre Slayer's Pendant",
+        "sell_price_each_copper": 38775,
+        "sell_price_total_copper": 38775
+      },
+      {
+        "item_id": 25777,
+        "quantity": 1,
+        "name_zhcn": "食人魔杀手披风",
+        "name_en": "Ogre Slayer's Cover",
+        "sell_price_each_copper": 22952,
+        "sell_price_total_copper": 22952
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 38775,
+    "gear_sale_max_copper": 38775,
+    "reputation_rewards": [
+      {
+        "faction_id": 941,
+        "amount": 350
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 14600
+  },
+  "guide": [
+    "接取：长者尤尔雷。",
+    "纳格兰玛格汉车队的长者尤尔雷要求你杀死掠夺者考瓦尔，并将考瓦尔的徽记带回来复命。",
+    "交付：长者尤尔雷。"
+  ],
+  "fivebox": {
+    "status": "pending"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 sha256=3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861; effective quest row task_id=9946",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-rewards-azerothcore",
+      "source_type": "local_db",
+      "source_ref": "azerothcore/azerothcore-wotlk reward database + Questie 11.34.0 zhCN/xp/reputation",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB; Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "rewards"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "Task Card creation from current evidence owners",
+      "reason": "当前无额外玩家执行备注；显式保持为空。"
+    }
+  }
+}

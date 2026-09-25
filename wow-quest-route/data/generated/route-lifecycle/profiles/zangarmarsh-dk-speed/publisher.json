@@ -2,15 +2,16 @@
   "display": {
     "display_name": "赞加沼泽（DK专用）",
     "footer": "若进入纳格兰前经验明显不足：优先补《蛮沼之灵》→《灵魂之盟？》，再补《亮顶蘑菇》；否则直接切换原“纳格兰”路线。",
-    "order": 102,
+    "order": 4,
     "publish_key": "zang_dk",
-    "subtitle": "塞纳里奥东部任务簇 → 萨布拉金 → 西部高效率任务 → 安葛洛什收尾，之后直接进入纳格兰原路线。",
+    "subtitle": "塞纳里奥东部任务簇 → 萨布拉金 → 西部高效率任务 → 安葛洛什收尾；经验不足时继续进入纳格兰 · 五开68冲刺路线。",
     "title": "赞加沼泽 · DK专用加速路线"
   },
   "hearth_chain": [
+    "塞纳里奥庇护所",
     "萨布拉金"
   ],
-  "input_fingerprint": "c4427b59a4daf7f7211fbff6753a90d0b8ca310b40716f9c151d94612b8f5da3",
+  "input_fingerprint": "c0a1eb56a2555300afe9ee458bcedd016db56747327b91f7246f1db2bd708770",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -551,7 +552,7 @@
           "location_ref": "zang_dk-p014",
           "location_role": "map_anchor",
           "ordinal": 14,
-          "step_id": "step-03",
+          "step_id": null,
           "visit_id": "a0058",
           "x": 80.75,
           "y": 36.27
@@ -641,7 +642,7 @@
           "location_ref": "zang_dk-p023",
           "location_role": "map_anchor",
           "ordinal": 23,
-          "step_id": "step-06",
+          "step_id": null,
           "visit_id": "a0099",
           "x": 32.38,
           "y": 51.96
@@ -661,7 +662,7 @@
           "location_ref": "zang_dk-p025",
           "location_role": "map_anchor",
           "ordinal": 25,
-          "step_id": "step-07",
+          "step_id": "step-06",
           "visit_id": "a0107",
           "x": 32.81,
           "y": 59.53
@@ -671,7 +672,7 @@
           "location_ref": "zang_dk-p026",
           "location_role": "map_anchor",
           "ordinal": 26,
-          "step_id": "step-07",
+          "step_id": "step-06",
           "visit_id": "a0109",
           "x": 23.32,
           "y": 66.21
@@ -691,7 +692,7 @@
           "location_ref": "zang_dk-p028",
           "location_role": "map_anchor",
           "ordinal": 28,
-          "step_id": "step-08",
+          "step_id": "step-07",
           "visit_id": "a0114",
           "x": 23.78,
           "y": 26.75
@@ -711,7 +712,7 @@
           "location_ref": "zang_dk-p030",
           "location_role": "map_anchor",
           "ordinal": 30,
-          "step_id": "step-08",
+          "step_id": "step-07",
           "visit_id": "a0118",
           "x": 34.82,
           "y": 34.83
@@ -721,7 +722,7 @@
           "location_ref": "zang_dk-p031",
           "location_role": "map_anchor",
           "ordinal": 31,
-          "step_id": "step-08",
+          "step_id": "step-07",
           "visit_id": "a0120",
           "x": 42.23,
           "y": 41.42
@@ -731,7 +732,7 @@
           "location_ref": "zang_dk-p032",
           "location_role": "map_anchor",
           "ordinal": 32,
-          "step_id": "step-09",
+          "step_id": "step-07",
           "visit_id": "a0122",
           "x": 32.38,
           "y": 51.96
@@ -741,7 +742,7 @@
           "location_ref": "zang_dk-p033",
           "location_role": "map_anchor",
           "ordinal": 33,
-          "step_id": "step-09",
+          "step_id": "step-08",
           "visit_id": "a0130",
           "x": 19.88,
           "y": 27.09
@@ -751,7 +752,7 @@
           "location_ref": "zang_dk-p034",
           "location_role": "map_anchor",
           "ordinal": 34,
-          "step_id": "step-09",
+          "step_id": "step-08",
           "visit_id": "a0132",
           "x": 32.38,
           "y": 51.96
@@ -761,7 +762,7 @@
           "location_ref": "zang_dk-p035",
           "location_role": "map_anchor",
           "ordinal": 35,
-          "step_id": "step-10",
+          "step_id": "step-09",
           "visit_id": "a0137",
           "x": 25.13,
           "y": 23.78
@@ -771,7 +772,7 @@
           "location_ref": "zang_dk-p036",
           "location_role": "map_anchor",
           "ordinal": 36,
-          "step_id": "step-10",
+          "step_id": "step-09",
           "visit_id": "a0139",
           "x": 18.6,
           "y": 7.0
@@ -781,7 +782,7 @@
           "location_ref": "zang_dk-p037",
           "location_role": "map_anchor",
           "ordinal": 37,
-          "step_id": "step-10",
+          "step_id": "step-09",
           "visit_id": "a0141",
           "x": 32.38,
           "y": 51.96
@@ -918,7 +919,7 @@
     ]
   },
   "profile_id": "zangarmarsh-dk-speed",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": null,
   "publishable": true,
   "route_timing": {
@@ -928,7 +929,7 @@
     "status": "requirements"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "e84715eb3a8476627b83e4068b41d320d523fc30fca3e2e6a71668ec6ca94550",
+  "stage11_input_fingerprint": "730d7d5a65b5dfbdae69b808f531596bf1b526ca6dca94a989a58ffdd44bc171",
   "status": "pass",
   "steps": [
     {
@@ -936,8 +937,6 @@
         "a0001",
         "a0002",
         "a0003",
-        "a0004",
-        "a0005",
         "a0006",
         "a0007",
         "a0008",
@@ -945,19 +944,22 @@
         "a0010",
         "a0011",
         "a0012",
-        "a0013",
         "a0014",
         "a0015",
         "a0016",
         "a0017",
         "a0018",
         "a0019",
+        "a0147",
         "a0020",
         "a0021",
         "a0022",
         "a0023",
         "a0024",
         "a0025",
+        "a0148",
+        "a0149",
+        "a0150",
         "a0026",
         "a0027",
         "a0028",
@@ -1000,9 +1002,7 @@
         },
         {
           "action_ids": [
-            "a0003",
-            "a0004",
-            "a0005"
+            "a0003"
           ],
           "actor": {
             "kind": "npc",
@@ -1013,19 +1013,9 @@
               "kind": "accept",
               "name": "暗泽湖的异常",
               "task_id": 9716
-            },
-            {
-              "kind": "accept",
-              "name": "失踪的先遣队",
-              "task_id": 9876
-            },
-            {
-              "kind": "accept",
-              "name": "监护者哈穆特",
-              "task_id": 9778
             }
           ],
-          "text": "伊谢尔·风歌 → 接《暗泽湖的异常》、《失踪的先遣队》、《监护者哈穆特》",
+          "text": "伊谢尔·风歌 → 接《暗泽湖的异常》",
           "type": "task_action"
         },
         {
@@ -1144,24 +1134,6 @@
         },
         {
           "action_ids": [
-            "a0013"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "监护者哈穆特"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "监护者哈穆特",
-              "task_id": 9778
-            }
-          ],
-          "text": "监护者哈穆特 → 交《监护者哈穆特》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
             "a0014"
           ],
           "location_ref": "zang_dk-p002",
@@ -1234,6 +1206,15 @@
           ],
           "text": "唤风者塔鲁·黑蹄 → 交《古树的祝福》",
           "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0147"
+          ],
+          "action_kind": "bind_hearth",
+          "task_refs": [],
+          "text": "绑定炉石：塞纳里奥庇护所",
+          "type": "route_action"
         },
         {
           "action_ids": [
@@ -1315,6 +1296,39 @@
           ],
           "text": "↳ 做《逃离暗泽村》",
           "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0148"
+          ],
+          "location_ref": "zang_dk-p038",
+          "task_refs": [],
+          "text": "暗光带·沼泽之鞭",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0149"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "崩溃的平衡",
+              "task_id": 9895
+            }
+          ],
+          "text": "↳ 做《崩溃的平衡》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0150"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：塞纳里奥庇护所",
+          "type": "route_action"
         },
         {
           "action_ids": [
@@ -1478,24 +1492,6 @@
         },
         {
           "badge": null,
-          "name": "失踪的先遣队",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9876
-        },
-        {
-          "badge": null,
-          "name": "监护者哈穆特",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9778
-        },
-        {
-          "badge": null,
           "name": "观察者莉萨奥",
           "note": null,
           "note_override_applied": true,
@@ -1506,9 +1502,9 @@
         {
           "badge": null,
           "name": "崩溃的平衡",
-          "note": null,
+          "note": "",
           "note_override_applied": true,
-          "note_visible": false,
+          "note_visible": true,
           "pending": true,
           "task_id": 9895
         },
@@ -1531,21 +1527,21 @@
           "task_id": 9817
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "古树的祝福",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9785
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "暗泽部族",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9747
         },
         {
@@ -1558,12 +1554,12 @@
           "task_id": 9802
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "逃离暗泽村",
           "note": "五号都接好任务后只跑一次护送即可。\n五号都接好任务后一起护送凯拉返回塞纳里奥庇护所；保持队伍跟随。",
           "note_override_applied": true,
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "task_id": 9752
         },
         {
@@ -1617,7 +1613,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所"
+      "title": "塞纳里奥庇护所 → 暗泽村 → 沼泽之鞭 → 炉石回庇护所"
     },
     {
       "action_ids": [
@@ -1628,7 +1624,6 @@
         "a0041",
         "a0042",
         "a0043",
-        "a0044",
         "a0045",
         "a0046",
         "a0047",
@@ -1720,8 +1715,7 @@
         },
         {
           "action_ids": [
-            "a0043",
-            "a0044"
+            "a0043"
           ],
           "actor": null,
           "task_refs": [
@@ -1729,14 +1723,9 @@
               "kind": "objective",
               "name": "沼牙的威胁",
               "task_id": 9770
-            },
-            {
-              "kind": "objective",
-              "name": "崩溃的平衡",
-              "task_id": 9895
             }
           ],
-          "text": "↳ 做《沼牙的威胁》、《崩溃的平衡》",
+          "text": "↳ 做《沼牙的威胁》",
           "type": "task_action"
         },
         {
@@ -1832,15 +1821,6 @@
         },
         {
           "badge": null,
-          "name": "崩溃的平衡",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9895
-        },
-        {
-          "badge": null,
           "name": "阴冷之地",
           "note": "",
           "note_override_applied": true,
@@ -1891,9 +1871,7 @@
         "a0054",
         "a0055",
         "a0056",
-        "a0057",
-        "a0058",
-        "a0059"
+        "a0057"
       ],
       "lines": [
         {
@@ -1973,33 +1951,6 @@
           ],
           "text": "↳ 做《恢复平衡》、《血鳞纳迦的领袖》",
           "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0058"
-          ],
-          "location_ref": "zang_dk-p014",
-          "task_refs": [],
-          "text": "观察者杰哈恩",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0059"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "观察者杰哈恩"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "失踪的先遣队",
-              "task_id": 9876
-            }
-          ],
-          "text": "观察者杰哈恩 → 交《失踪的先遣队》",
-          "type": "task_action"
         }
       ],
       "step_id": "step-03",
@@ -2040,15 +1991,6 @@
           "note_visible": true,
           "pending": true,
           "task_id": 9817
-        },
-        {
-          "badge": null,
-          "name": "失踪的先遣队",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9876
         }
       ],
       "timing": {
@@ -2056,7 +1998,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩"
+      "title": "环礁湖 → 毒蛇湖"
     },
     {
       "action_ids": [
@@ -2422,7 +2364,6 @@
     },
     {
       "action_ids": [
-        "a0080",
         "a0079",
         "a0081",
         "a0082",
@@ -2434,21 +2375,11 @@
         "a0088",
         "a0089",
         "a0090",
-        "a0092",
         "a0091",
         "a0093",
         "a0094"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0080"
-          ],
-          "action_kind": "taxi",
-          "task_refs": [],
-          "text": "系统飞行：萨布拉金 → 塞纳里奥庇护所",
-          "type": "route_action"
-        },
         {
           "action_ids": [
             "a0079"
@@ -2628,15 +2559,6 @@
         },
         {
           "action_ids": [
-            "a0092"
-          ],
-          "action_kind": "taxi",
-          "task_refs": [],
-          "text": "系统飞行：塞纳里奥庇护所 → 沼泽鼠岗哨",
-          "type": "route_action"
-        },
-        {
-          "action_ids": [
             "a0091"
           ],
           "location_ref": "zang_dk-p020",
@@ -2786,7 +2708,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "塞纳里奥庇护所 → 沼泽鼠岗哨"
+      "title": "萨布拉金骑行 → 塞纳里奥庇护所 → 骑行沼泽鼠岗哨"
     },
     {
       "action_ids": [
@@ -2794,8 +2716,16 @@
         "a0096",
         "a0097",
         "a0098",
-        "a0100",
-        "a0099"
+        "a0107",
+        "a0108",
+        "a0109",
+        "a0110",
+        "a0111",
+        "a0151",
+        "a0152",
+        "a0153",
+        "a0154",
+        "a0155"
       ],
       "lines": [
         {
@@ -2847,134 +2777,6 @@
             }
           ],
           "text": "里维伊 → 交《对方的尊重》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0100"
-          ],
-          "action_kind": "use_hearth",
-          "task_refs": [],
-          "text": "使用炉石：萨布拉金",
-          "type": "route_action"
-        },
-        {
-          "action_ids": [
-            "a0099"
-          ],
-          "location_ref": "zang_dk-p023",
-          "task_refs": [],
-          "text": "萨布拉金",
-          "type": "location"
-        }
-      ],
-      "step_id": "step-06",
-      "summary": "",
-      "task_presentations": [
-        {
-          "badge": null,
-          "name": "对方的尊重",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9898
-        }
-      ],
-      "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
-      },
-      "title": "黑钉 → 沼泽鼠岗哨 → 炉石萨布拉金"
-    },
-    {
-      "action_ids": [
-        "a0101",
-        "a0102",
-        "a0103",
-        "a0104",
-        "a0105",
-        "a0106",
-        "a0107",
-        "a0108",
-        "a0109",
-        "a0110",
-        "a0111",
-        "a0112",
-        "a0113"
-      ],
-      "lines": [
-        {
-          "action_ids": [
-            "a0101"
-          ],
-          "location_ref": "zang_dk-p024",
-          "task_refs": [],
-          "text": "萨布拉金",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0102",
-            "a0103"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "爆顶蘑菇",
-              "task_id": 9814
-            },
-            {
-              "kind": "objective",
-              "name": "清除沼光抽血者",
-              "task_id": 9841
-            }
-          ],
-          "text": "↳ 做《爆顶蘑菇》、《清除沼光抽血者》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0104",
-            "a0105"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "巫医托尔加什"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "爆顶蘑菇",
-              "task_id": 9814
-            },
-            {
-              "kind": "accept",
-              "name": "你见过鱼人吗？",
-              "task_id": 9816
-            }
-          ],
-          "text": "巫医托尔加什 → 交《爆顶蘑菇》 → 接《你见过鱼人吗？》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0106"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "加巴林卡"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "清除沼光抽血者",
-              "task_id": 9841
-            }
-          ],
-          "text": "加巴林卡 → 交《清除沼光抽血者》",
           "type": "task_action"
         },
         {
@@ -3051,58 +2853,85 @@
         },
         {
           "action_ids": [
-            "a0112"
+            "a0151"
           ],
-          "location_ref": "zang_dk-p027",
+          "actor": {
+            "kind": "npc",
+            "name": "观察者莉萨奥"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "观察孢子人",
+              "task_id": 9701
+            }
+          ],
+          "text": "观察者莉萨奥 → 接《观察孢子人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0152"
+          ],
+          "location_ref": "zang_dk-p039",
           "task_refs": [],
-          "text": "恐爪刷新点",
+          "text": "孢殖林",
           "type": "location"
         },
         {
           "action_ids": [
-            "a0113"
+            "a0153"
           ],
           "actor": null,
           "task_refs": [
             {
               "kind": "objective",
-              "name": "猎杀恐爪",
-              "task_id": 9904
+              "name": "观察孢子人",
+              "task_id": 9701
             }
           ],
-          "text": "↳ 做《猎杀恐爪》",
+          "text": "↳ 做《观察孢子人》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0154"
+          ],
+          "location_ref": "zang_dk-p026",
+          "task_refs": [],
+          "text": "莉萨奥营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0155"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "观察者莉萨奥"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "观察孢子人",
+              "task_id": 9701
+            }
+          ],
+          "text": "观察者莉萨奥 → 交《观察孢子人》",
           "type": "task_action"
         }
       ],
-      "step_id": "step-07",
+      "step_id": "step-06",
       "summary": "",
       "task_presentations": [
         {
           "badge": null,
-          "name": "爆顶蘑菇",
-          "note": "围绕萨布拉金本地专门转一圈拾取，不要只沿主路等顺手收齐。",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9814
-        },
-        {
-          "badge": null,
-          "name": "清除沼光抽血者",
+          "name": "对方的尊重",
           "note": "",
           "note_override_applied": true,
           "note_visible": true,
           "pending": true,
-          "task_id": 9841
-        },
-        {
-          "badge": null,
-          "name": "你见过鱼人吗？",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9816
+          "task_id": 9898
         },
         {
           "badge": null,
@@ -3124,12 +2953,12 @@
         },
         {
           "badge": null,
-          "name": "猎杀恐爪",
-          "note": "经过刷新点时目标在场就做；不等刷新，未完成继续保留。\n《多头蛇之王》本任务：只交已经完成的任务；仍未完成就跳过，不等待刷新。",
+          "name": "观察孢子人",
+          "note": "",
           "note_override_applied": true,
           "note_visible": true,
           "pending": true,
-          "task_id": 9904
+          "task_id": 9701
         }
       ],
       "timing": {
@@ -3137,20 +2966,87 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "萨布拉金 → 昂古拉 → 莉萨奥 → 恐爪"
+      "title": "黑钉 → 昂古拉 → 莉萨奥 → 观察孢子人"
     },
     {
       "action_ids": [
+        "a0101",
+        "a0102",
+        "a0103",
+        "a0112",
+        "a0113",
         "a0114",
         "a0115",
-        "a0116",
-        "a0117",
         "a0118",
         "a0119",
         "a0120",
-        "a0121"
+        "a0121",
+        "a0123",
+        "a0122",
+        "a0124",
+        "a0125",
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0128",
+        "a0129",
+        "a0126"
       ],
       "lines": [
+        {
+          "action_ids": [
+            "a0101"
+          ],
+          "location_ref": "zang_dk-p024",
+          "task_refs": [],
+          "text": "萨布拉金",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0102",
+            "a0103"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "爆顶蘑菇",
+              "task_id": 9814
+            },
+            {
+              "kind": "objective",
+              "name": "清除沼光抽血者",
+              "task_id": 9841
+            }
+          ],
+          "text": "↳ 做《爆顶蘑菇》、《清除沼光抽血者》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0112"
+          ],
+          "location_ref": "zang_dk-p027",
+          "task_refs": [],
+          "text": "恐爪刷新点",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0113"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "猎杀恐爪",
+              "task_id": 9904
+            }
+          ],
+          "text": "↳ 做《猎杀恐爪》",
+          "type": "task_action"
+        },
         {
           "action_ids": [
             "a0114"
@@ -3173,30 +3069,6 @@
             }
           ],
           "text": "↳ 做《通缉：穆玛基酋长》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0116"
-          ],
-          "location_ref": "zang_dk-p029",
-          "task_refs": [],
-          "text": "匕潭鱼人笼点",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0117"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "你见过鱼人吗？",
-              "task_id": 9816
-            }
-          ],
-          "text": "↳ 做《你见过鱼人吗？》",
           "type": "task_action"
         },
         {
@@ -3246,74 +3118,7 @@
           ],
           "text": "↳ 做《多头蛇之王》",
           "type": "task_action"
-        }
-      ],
-      "step_id": "step-08",
-      "summary": "",
-      "task_presentations": [
-        {
-          "badge": null,
-          "name": "通缉：穆玛基酋长",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 10117
         },
-        {
-          "badge": null,
-          "name": "你见过鱼人吗？",
-          "note": "到匕潭村约(26.8,22.6)的任务点使用任务提供的鱼人笼完成目标。",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9816
-        },
-        {
-          "badge": null,
-          "name": "通缉：格罗阿克",
-          "note": "",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9820
-        },
-        {
-          "badge": null,
-          "name": "多头蛇之王",
-          "note": "经过固定刷新点时目标在场就做；不等刷新，未完成继续保留。\n《猎杀恐爪》：只交已经完成的任务；仍未完成就跳过，不等待刷新。",
-          "note_override_applied": true,
-          "note_visible": true,
-          "pending": true,
-          "task_id": 9903
-        }
-      ],
-      "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
-      },
-      "title": "穆玛基 → 鱼人笼 → 格罗阿克 → 多头蛇之王"
-    },
-    {
-      "action_ids": [
-        "a0123",
-        "a0122",
-        "a0124",
-        "a0125",
-        "a0126",
-        "a0127",
-        "a0128",
-        "a0129",
-        "a0130",
-        "a0131",
-        "a0133",
-        "a0132",
-        "a0134",
-        "a0135",
-        "a0136"
-      ],
-      "lines": [
         {
           "action_ids": [
             "a0123"
@@ -3335,8 +3140,7 @@
         {
           "action_ids": [
             "a0124",
-            "a0125",
-            "a0126"
+            "a0125"
           ],
           "actor": {
             "kind": "npc",
@@ -3352,19 +3156,15 @@
               "kind": "turnin",
               "name": "通缉：格罗阿克",
               "task_id": 9820
-            },
-            {
-              "kind": "accept",
-              "name": "战斗迫近",
-              "task_id": 9822
             }
           ],
-          "text": "暗影猎手德恩加 → 交《通缉：穆玛基酋长》、《通缉：格罗阿克》 → 接《战斗迫近》",
+          "text": "暗影猎手德恩加 → 交《通缉：穆玛基酋长》、《通缉：格罗阿克》",
           "type": "task_action"
         },
         {
           "action_ids": [
-            "a0127"
+            "a0104",
+            "a0105"
           ],
           "actor": {
             "kind": "npc",
@@ -3373,11 +3173,34 @@
           "task_refs": [
             {
               "kind": "turnin",
+              "name": "爆顶蘑菇",
+              "task_id": 9814
+            },
+            {
+              "kind": "accept",
               "name": "你见过鱼人吗？",
               "task_id": 9816
             }
           ],
-          "text": "巫医托尔加什 → 交《你见过鱼人吗？》",
+          "text": "巫医托尔加什 → 交《爆顶蘑菇》 → 接《你见过鱼人吗？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0106"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "加巴林卡"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "清除沼光抽血者",
+              "task_id": 9841
+            }
+          ],
+          "text": "加巴林卡 → 交《清除沼光抽血者》",
           "type": "task_action"
         },
         {
@@ -3414,6 +3237,146 @@
             }
           ],
           "text": "若已完成：苏尔加亚 → 交《猎杀恐爪》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0126"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "暗影猎手德恩加"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "战斗迫近",
+              "task_id": 9822
+            }
+          ],
+          "text": "暗影猎手德恩加 → 接《战斗迫近》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-07",
+      "summary": "",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "爆顶蘑菇",
+          "note": "围绕萨布拉金本地专门转一圈拾取，不要只沿主路等顺手收齐。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 9814
+        },
+        {
+          "badge": null,
+          "name": "清除沼光抽血者",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 9841
+        },
+        {
+          "badge": null,
+          "name": "猎杀恐爪",
+          "note": "经过刷新点时目标在场就做；不等刷新，未完成继续保留。\n《多头蛇之王》本任务：只交已经完成的任务；仍未完成就跳过，不等待刷新。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 9904
+        },
+        {
+          "badge": null,
+          "name": "通缉：穆玛基酋长",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 10117
+        },
+        {
+          "badge": null,
+          "name": "通缉：格罗阿克",
+          "note": "",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 9820
+        },
+        {
+          "badge": null,
+          "name": "多头蛇之王",
+          "note": "经过固定刷新点时目标在场就做；不等刷新，未完成继续保留。\n《猎杀恐爪》：只交已经完成的任务；仍未完成就跳过，不等待刷新。",
+          "note_override_applied": true,
+          "note_visible": true,
+          "pending": true,
+          "task_id": 9903
+        },
+        {
+          "badge": null,
+          "name": "你见过鱼人吗？",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 9816
+        },
+        {
+          "badge": null,
+          "name": "战斗迫近",
+          "note": null,
+          "note_override_applied": true,
+          "note_visible": false,
+          "pending": true,
+          "task_id": 9822
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "爆顶蘑菇 → 抽血者 → 恐爪 → 两个通缉 → 多头蛇"
+    },
+    {
+      "action_ids": [
+        "a0116",
+        "a0117",
+        "a0130",
+        "a0131",
+        "a0133",
+        "a0132",
+        "a0127",
+        "a0134",
+        "a0135",
+        "a0136"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0116"
+          ],
+          "location_ref": "zang_dk-p029",
+          "task_refs": [],
+          "text": "匕潭鱼人笼点",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0117"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "你见过鱼人吗？",
+              "task_id": 9816
+            }
+          ],
+          "text": "↳ 做《你见过鱼人吗？》",
           "type": "task_action"
         },
         {
@@ -3460,6 +3423,24 @@
         },
         {
           "action_ids": [
+            "a0127"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "巫医托尔加什"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "你见过鱼人吗？",
+              "task_id": 9816
+            }
+          ],
+          "text": "巫医托尔加什 → 交《你见过鱼人吗？》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
             "a0134",
             "a0135",
             "a0136"
@@ -3489,26 +3470,17 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-09",
+      "step_id": "step-08",
       "summary": "",
       "task_presentations": [
         {
           "badge": null,
-          "name": "通缉：穆玛基酋长",
-          "note": null,
+          "name": "你见过鱼人吗？",
+          "note": "到匕潭村约(26.8,22.6)的任务点使用任务提供的鱼人笼完成目标。",
           "note_override_applied": true,
-          "note_visible": false,
+          "note_visible": true,
           "pending": true,
-          "task_id": 10117
-        },
-        {
-          "badge": null,
-          "name": "通缉：格罗阿克",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9820
+          "task_id": 9816
         },
         {
           "badge": null,
@@ -3518,33 +3490,6 @@
           "note_visible": true,
           "pending": true,
           "task_id": 9822
-        },
-        {
-          "badge": null,
-          "name": "你见过鱼人吗？",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9816
-        },
-        {
-          "badge": null,
-          "name": "多头蛇之王",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9903
-        },
-        {
-          "badge": null,
-          "name": "猎杀恐爪",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9904
         },
         {
           "badge": null,
@@ -3570,7 +3515,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "炉石萨布拉金 → 战斗迫近 → 回萨布拉金"
+      "title": "鱼人 + 战斗迫近 → 炉石萨布拉金"
     },
     {
       "action_ids": [
@@ -3582,8 +3527,7 @@
         "a0141",
         "a0143",
         "a0144",
-        "a0145",
-        "a0146"
+        "a0156"
       ],
       "lines": [
         {
@@ -3678,42 +3622,24 @@
         },
         {
           "action_ids": [
-            "a0145"
+            "a0156"
           ],
           "actor": {
             "kind": "npc",
-            "name": "苏尔加亚"
+            "name": "信使加兹格里戈"
           },
           "task_refs": [
             {
-              "kind": "turnin",
-              "name": "多头蛇之王",
-              "task_id": 9903
+              "kind": "accept",
+              "name": "支援加拉达尔",
+              "task_id": 9797
             }
           ],
-          "text": "若已完成：苏尔加亚 → 交《多头蛇之王》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0146"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "苏尔加亚"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "猎杀恐爪",
-              "task_id": 9904
-            }
-          ],
-          "text": "若已完成：苏尔加亚 → 交《猎杀恐爪》",
+          "text": "信使加兹格里戈 → 接《支援加拉达尔》",
           "type": "task_action"
         }
       ],
-      "step_id": "step-10",
+      "step_id": "step-09",
       "summary": "",
       "task_presentations": [
         {
@@ -3736,21 +3662,12 @@
         },
         {
           "badge": null,
-          "name": "多头蛇之王",
+          "name": "支援加拉达尔",
           "note": null,
           "note_override_applied": true,
           "note_visible": false,
           "pending": true,
-          "task_id": 9903
-        },
-        {
-          "badge": null,
-          "name": "猎杀恐爪",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 9904
+          "task_id": 9797
         }
       ],
       "timing": {
@@ -3758,7 +3675,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "匕潭失落者 → 安葛洛什 → 炉石萨布拉金"
+      "title": "警告匕潭失落者 → 你死我活 → 炉石 → 支援加拉达尔"
     }
   ]
 }

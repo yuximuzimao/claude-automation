@@ -3,7 +3,7 @@
     "display_name": "北风苔原",
     "footer": "完成《横贯冰原》后按任务引导进入龙骨荒野。",
     "map_image": "maps/3537-borean-tundra-hd.jpg",
-    "order": 4,
+    "order": 6,
     "publish_key": "borean",
     "subtitle": "从飞艇抵达战歌要塞开始，能吃满经验的任务尽量清；做到《横贯冰原》后自然转入龙骨荒野。",
     "title": "北风苔原 · 68+ 尽量清图升级路线"
@@ -11,7 +11,7 @@
   "hearth_chain": [
     "战歌要塞"
   ],
-  "input_fingerprint": "015d7faa6d7a3f69da8bb231e76a68d50f7f52a859fe73cb4eca4af06d4ccb8e",
+  "input_fingerprint": "24629426e651815b430be685bbb49bce7cdcfc394c0b0cbbb06b89dea787642f",
   "issues": [
     {
       "display_name": "暗影密探卢瑟尔",
@@ -2699,7 +2699,7 @@
         "to_visit_id": "a0724"
       }
     ],
-    "input_fingerprint": "1f988e76f38303ffb359540acf5c024dccbe8ac5d9ada7cc04d50e05d0c3ffb0",
+    "input_fingerprint": "373a6be10ed8eb531248b0f7100b3f02926f2faf9c061d8642ee361f4998f5a9",
     "status": "pass",
     "visits": [
       {
@@ -5005,7 +5005,7 @@
     ]
   },
   "profile_id": "borean-fivebox",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
     "center_minutes": null,
@@ -5115,8 +5115,10 @@
           "name": "地狱咆哮的堡垒",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11585
         },
         {
@@ -5124,8 +5126,10 @@
           "name": "战歌要塞的防御",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11596
         }
       ],
@@ -5292,17 +5296,21 @@
           "name": "战歌要塞的防御",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11596
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "夺回巨石采掘场",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11598
         },
         {
@@ -5310,8 +5318,10 @@
           "name": "耐心是我们不需要的美德",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11606
         },
         {
@@ -5319,8 +5329,10 @@
           "name": "前往牦牛村",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11888
         },
         {
@@ -5328,8 +5340,10 @@
           "name": "被掠走的苦工",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11611
         }
       ],
@@ -5469,12 +5483,14 @@
       "summary": "从采掘场西侧一路扫到东侧，同时完成《夺回巨石采掘场》《耐心是我们不需要的美德》《被掠走的苦工》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "夺回巨石采掘场",
-          "note": "",
+          "note": "击杀尼鲁巴尔蛛魔由主控完成即可同步全队。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11598
         },
         {
@@ -5482,8 +5498,10 @@
           "name": "耐心是我们不需要的美德",
           "note": "军需箱是地面拾取物，五号不共享；同一个军需箱只能一个角色拾取，五号必须分别拾取，以最低角色15/15为离开条件。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11606
         },
         {
@@ -5491,8 +5509,10 @@
           "name": "被掠走的苦工",
           "note": "蛛网释放苦工的任务进度五号共享；主控释放即可同步推进全队，不需要五号分别点蛛网。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11611
         }
       ],
@@ -5646,8 +5666,10 @@
           "name": "被掠走的苦工",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11611
         },
         {
@@ -5655,26 +5677,32 @@
           "name": "耐心是我们不需要的美德",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11606
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "活埋了那些蟑螂！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11608
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "夺回巨石采掘场",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11598
         },
         {
@@ -5682,8 +5710,10 @@
           "name": "切断虫源",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11602
         },
         {
@@ -5691,8 +5721,10 @@
           "name": "隐藏的真相",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11614
         }
       ],
@@ -5880,12 +5912,14 @@
       "summary": "按东→南→西→北四个虫孔一圈完成《活埋了那些蟑螂！》，沿途同步完成《切断虫源》；西侧顺路找暗影密探卢瑟尔交接《隐藏的真相》《尼鲁巴尔的秘密》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "活埋了那些蟑螂！",
-          "note": "",
+          "note": "四个虫孔的爆破进度由主控完成即可同步全队。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11608
         },
         {
@@ -5893,8 +5927,10 @@
           "name": "切断虫源",
           "note": "蛛卵摧毁进度五号共享，只需主控完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11602
         },
         {
@@ -5902,8 +5938,10 @@
           "name": "隐藏的真相",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11614
         },
         {
@@ -5911,8 +5949,10 @@
           "name": "尼鲁巴尔的秘密",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11615
         }
       ],
@@ -6033,12 +6073,14 @@
       "summary": "回战歌依次交《活埋了那些蟑螂！》《切断虫源》《尼鲁巴尔的秘密》，接《驭风大师图波尔》《通知地狱咆哮》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "活埋了那些蟑螂！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11608
         },
         {
@@ -6046,8 +6088,10 @@
           "name": "切断虫源",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11602
         },
         {
@@ -6055,8 +6099,10 @@
           "name": "驭风大师图波尔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11634
         },
         {
@@ -6064,8 +6110,10 @@
           "name": "尼鲁巴尔的秘密",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11615
         },
         {
@@ -6073,8 +6121,10 @@
           "name": "通知地狱咆哮",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11616
         }
       ],
@@ -6216,17 +6266,21 @@
           "name": "驭风大师图波尔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11634
         },
         {
           "badge": null,
           "name": "魔法飞毯",
-          "note": "",
+          "note": "五号需要依次与亚尼交互进入任务飞毯；这是依次交互，不是依次拾取。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11636
         },
         {
@@ -6234,8 +6288,10 @@
           "name": "通知地狱咆哮",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11616
         },
         {
@@ -6243,8 +6299,10 @@
           "name": "增援来了……",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11618
         }
       ],
@@ -6383,8 +6441,10 @@
           "name": "魔法飞毯",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11636
         },
         {
@@ -6392,44 +6452,54 @@
           "name": "坦克可不会自己修好！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11642
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "莫布的坦克零件气动装配器",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11643
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "超强度金属板！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11644
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "深入迷雾",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11655
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "古代水手的号角",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11660
         }
       ],
@@ -6560,39 +6630,47 @@
       "summary": "先进入南侧岸边小屋拿固定零件，再在同一克瓦迪尔怪区一起完成三条掉落任务；顺路接《逃离迷雾》并完成小穆图护送。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "莫布的坦克零件气动装配器",
-          "note": "固定零件在约(32.4,49.2)岸边小屋内，不在屋外地面。",
+          "note": "固定零件在约(32.4,49.2)岸边小屋内，不在屋外地面；同一来源可让五号依次拾取。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11643
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "超强度金属板！",
-          "note": "",
+          "note": "超强度金属板五号不共享，需要分别收集到各自任务数量。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11644
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "深入迷雾",
-          "note": "",
+          "note": "海象人的圣物五号不共享，需要分别完成各自收集。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11655
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "古代水手的号角",
-          "note": "",
+          "note": "古代水手的号角可由五个角色对同一掉落来源依次拾取。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11660
         },
         {
@@ -6600,8 +6678,10 @@
           "name": "逃离迷雾",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11664
         }
       ],
@@ -6783,26 +6863,32 @@
           "name": "逃离迷雾",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11664
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "莫布的坦克零件气动装配器",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11643
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "超强度金属板！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11644
         },
         {
@@ -6810,44 +6896,54 @@
           "name": "坦克准备就绪！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11651
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "深入迷雾",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11655
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "烧毁船只",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11656
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "古代水手的号角",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11660
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "舵手奥拉布斯",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11661
         },
         {
@@ -6855,8 +6951,10 @@
           "name": "纳萨姆平原",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11652
         }
       ],
@@ -7006,21 +7104,25 @@
       "summary": "沿海岸依次点燃伯尔之锤、库尔达卡、毒蛇之喉、伯尔之砧；途中在战歌码头尽头吹号角完成《舵手奥拉布斯》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "烧毁船只",
-          "note": "不是靠清船上怪自动完成，四艘船都要主动使用任务火炬。四船位置已按本圈①→④顺序排好。",
+          "note": "四艘船都要主动使用任务火炬，不能靠清船上怪自动完成；四船进度五开共享，主控按本圈顺序处理即可。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11656
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "舵手奥拉布斯",
-          "note": "在战歌码头最西端旗帜/塔附近约(26.8,54.8)使用古代水手的号角触发事件。",
+          "note": "在战歌码头最西端旗帜/塔附近约(26.8,54.8)使用古代水手的号角触发；召唤并击杀奥拉布斯的完成进度五开共享。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11661
         }
       ],
@@ -7135,12 +7237,14 @@
       "summary": "向瓦托尔交《烧毁船只》《舵手奥拉布斯》并接《找到卡鲁克！》，随后五号分别使用部落攻城坦克完成《纳萨姆平原》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "烧毁船只",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11656
         },
         {
@@ -7148,17 +7252,21 @@
           "name": "找到卡鲁克！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11662
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "舵手奥拉布斯",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11661
         },
         {
@@ -7166,8 +7274,10 @@
           "name": "纳萨姆平原",
           "note": "五号分别上部落攻城坦克执行。\n单号最长约3分钟。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11652
         }
       ],
@@ -7180,52 +7290,19 @@
     },
     {
       "action_ids": [
-        "a0124",
-        "a0125",
-        "a0126",
         "a0127",
         "a0128",
+        "a0124",
+        "a0125",
+        "a0133",
+        "a0126",
         "a0129",
         "a0130",
         "a0131",
         "a0132",
-        "a0133",
         "a0134"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0124"
-          ],
-          "location_ref": "borean-p045",
-          "task_refs": [],
-          "text": "裂鞭海岸",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0125",
-            "a0126"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "卡鲁克"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "找到卡鲁克！",
-              "task_id": 11662
-            },
-            {
-              "kind": "accept",
-              "name": "卡鲁克的誓言",
-              "task_id": 11613
-            }
-          ],
-          "text": "卡鲁克 → 交《找到卡鲁克！》 → 接《卡鲁克的誓言》",
-          "type": "task_action"
-        },
         {
           "action_ids": [
             "a0127",
@@ -7244,6 +7321,45 @@
             }
           ],
           "text": "裂鞭海岸·被俘虏的海象人 → 接《残忍的科瓦迪尔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0124"
+          ],
+          "location_ref": "borean-p045",
+          "task_refs": [],
+          "text": "裂鞭海岸",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0125",
+            "a0133",
+            "a0126"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "卡鲁克"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "找到卡鲁克！",
+              "task_id": 11662
+            },
+            {
+              "kind": "turnin",
+              "name": "残忍的科瓦迪尔",
+              "task_id": 12471
+            },
+            {
+              "kind": "accept",
+              "name": "卡鲁克的誓言",
+              "task_id": 11613
+            }
+          ],
+          "text": "卡鲁克 → 交《找到卡鲁克！》、《残忍的科瓦迪尔》 → 接《卡鲁克的誓言》",
           "type": "task_action"
         },
         {
@@ -7282,7 +7398,6 @@
         {
           "action_ids": [
             "a0132",
-            "a0133",
             "a0134"
           ],
           "actor": {
@@ -7296,30 +7411,40 @@
               "task_id": 11613
             },
             {
-              "kind": "turnin",
-              "name": "残忍的科瓦迪尔",
-              "task_id": 12471
-            },
-            {
               "kind": "accept",
               "name": "残忍的贾梅尔",
               "task_id": 11619
             }
           ],
-          "text": "卡鲁克 → 交《卡鲁克的誓言》、《残忍的科瓦迪尔》 → 接《残忍的贾梅尔》",
+          "text": "卡鲁克 → 交《卡鲁克的誓言》 → 接《残忍的贾梅尔》",
           "type": "task_action"
         }
       ],
       "step_id": "step-13",
-      "summary": "先找卡鲁克交《找到卡鲁克！》并接《卡鲁克的誓言》；再救出被俘虏的海象人接《残忍的科瓦迪尔》，完成斯卡迪尔击杀后回卡鲁克一起交付。",
+      "summary": "从纳萨姆平原往裂鞭海岸时先顺路处理被俘虏的海象人并接《残忍的科瓦迪尔》；再到卡鲁克一次性交《找到卡鲁克！》《残忍的科瓦迪尔》并接《卡鲁克的誓言》，完成斯卡迪尔击杀后回卡鲁克交付并接《残忍的贾梅尔》。",
       "task_presentations": [
+        {
+          "badge": "special",
+          "name": "残忍的科瓦迪尔",
+          "note": "先清掉触发战斗并等被俘虏的海象人变为可接任务状态；动作够快时五号可依次接取。若状态在五号全部接完前重置，剩余角色需要再次触发战斗，可能要打第二轮。",
+          "note_override_applied": true,
+          "note_show_on": [
+            "accept"
+          ],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12471
+        },
         {
           "badge": null,
           "name": "找到卡鲁克！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11662
         },
         {
@@ -7327,26 +7452,21 @@
           "name": "卡鲁克的誓言",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11613
         },
         {
-          "badge": null,
-          "name": "残忍的科瓦迪尔",
-          "note": null,
-          "note_override_applied": true,
-          "note_visible": false,
-          "pending": true,
-          "task_id": 12471
-        },
-        {
-          "badge": null,
+          "badge": "shared",
           "name": "残忍的贾梅尔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11619
         }
       ],
@@ -7355,7 +7475,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "裂鞭海岸 → 卡鲁克"
+      "title": "被俘虏的海象人 → 卡鲁克 → 斯卡迪尔营地 → 卡鲁克"
     },
     {
       "action_ids": [
@@ -7464,12 +7584,14 @@
       "summary": "击杀残忍的贾梅尔后回卡鲁克交任务并接《父亲的话》，再到蛇鳞神殿找维赫亚交《父亲的话》并接《纳兹亚的三叉戟》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "残忍的贾梅尔",
-          "note": "",
+          "note": "击杀残忍的贾梅尔完成进度五开共享。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11619
         },
         {
@@ -7477,17 +7599,21 @@
           "name": "父亲的话",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11620
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "纳兹亚的三叉戟",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11625
         }
       ],
@@ -7624,21 +7750,25 @@
       "summary": "在裂鞭废墟东北部击杀拉格纳取得三叉戟，交给维赫亚接《使者》；再下潜到北部冰山下用三叉戟处理利维洛斯，最后回卡鲁克交任务。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "纳兹亚的三叉戟",
-          "note": "击杀拉格纳·德拉卡伦并拾取纳兹亚的三叉戟。",
+          "note": "击杀拉格纳·德拉卡伦后，同一具尸体的纳兹亚三叉戟可让五号依次拾取。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11625
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "使者",
-          "note": "目标在水下冰山底部；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。",
+          "note": "目标在水下冰山底部；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。\n对利维洛斯使用三叉戟并击杀后的任务完成进度五开共享。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11626
         }
       ],
@@ -7778,8 +7908,10 @@
           "name": "纳萨姆平原",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11652
         },
         {
@@ -7787,8 +7919,10 @@
           "name": "危在旦夕",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11574
         },
         {
@@ -7796,17 +7930,21 @@
           "name": "立即前往博古洛克前哨站！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12486
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "寒风中的怪兽……",
-          "note": "只在路过时检查伊斯里克斯事件；事件正在进行才击杀收割者伊斯里克斯并拾取甲壳接任务，没有事件就直接继续，不等待。\n这里直接炉石回战歌，不从瓦雷杜斯一带骑回要塞。本任务仅在此前伊斯里克斯事件分支已接时交；未接则跳过。",
+          "note": "只在路过时检查伊斯里克斯事件；事件进行中才击杀并拾取甲壳，同一具尸体可让五号依次拾取。没有事件就直接继续，不等待。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11632
         }
       ],
@@ -7914,8 +8052,10 @@
           "name": "增援来了……",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11618
         },
         {
@@ -7923,8 +8063,10 @@
           "name": "战歌农场",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11686
         },
         {
@@ -7932,8 +8074,10 @@
           "name": "慈悲为怀",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11676
         },
         {
@@ -7941,8 +8085,10 @@
           "name": "该死的猪",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11688
         }
       ],
@@ -8077,8 +8223,10 @@
           "name": "战歌农场",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11686
         },
         {
@@ -8086,8 +8234,10 @@
           "name": "慈悲为怀",
           "note": "主控击杀恩其拉通灵领主/战歌畸变体取得5把天灾牢笼钥匙，开5个囚笼即可同步全队。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11676
         },
         {
@@ -8095,8 +8245,10 @@
           "name": "该死的猪",
           "note": "击杀10只亡灵猪。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11688
         }
       ],
@@ -8266,8 +8418,10 @@
           "name": "战歌农场",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11686
         },
         {
@@ -8275,8 +8429,10 @@
           "name": "暗影密探盖特莱",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11703
         },
         {
@@ -8284,8 +8440,10 @@
           "name": "慈悲为怀",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11676
         },
         {
@@ -8293,8 +8451,10 @@
           "name": "该死的猪",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11688
         },
         {
@@ -8302,8 +8462,10 @@
           "name": "把它们活着带回去",
           "note": "对感染的科多兽使用托普的科多兽缰绳，骑回农夫托普后必须按载具栏“交付/放下科多”才计数；每号完成8只，任务缰绳有效10分钟。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11690
         }
       ],
@@ -8389,8 +8551,10 @@
           "name": "暗影密探盖特莱",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11703
         },
         {
@@ -8398,8 +8562,10 @@
           "name": "愚蠢的努力",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11705
         }
       ],
@@ -8601,12 +8767,14 @@
       "summary": "炉石回战歌交《愚蠢的努力》并接诺克链；把联盟逃兵送到东侧十字路口并使用信号枪后，再找图古克和劳莉丝接血孢平原任务。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "寒风中的怪兽……",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11632
         },
         {
@@ -8614,8 +8782,10 @@
           "name": "愚蠢的努力",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11705
         },
         {
@@ -8623,8 +8793,10 @@
           "name": "诺克·血怒",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11709
         },
         {
@@ -8632,8 +8804,10 @@
           "name": "逃兵快递，30分钟送到否则免费",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11711
         },
         {
@@ -8641,8 +8815,10 @@
           "name": "清除北地狗头人",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11714
         },
         {
@@ -8650,8 +8826,10 @@
           "name": "奇妙的血孢",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11716
         }
       ],
@@ -8929,8 +9107,10 @@
           "name": "清除北地狗头人",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11714
         },
         {
@@ -8938,8 +9118,10 @@
           "name": "奇妙的血孢",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11716
         },
         {
@@ -8947,8 +9129,10 @@
           "name": "授粉的巨蛾",
           "note": "本任务目标在巨蛋旁边非常集中，两条任务应合并处理。蛋位于迦莫斯洞穴上方高处约(48.55,59.04)，不是洞内；既然本来就为巨蛾到这里，就不要把蛋拖到迦莫斯洞穴之后再单独爬山。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11717
         },
         {
@@ -8956,8 +9140,10 @@
           "name": "巨大的蛾卵",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11724
         },
         {
@@ -8965,8 +9151,10 @@
           "name": "完美的测试对象",
           "note": "是原地使用任务花，不需要再去野外找“测试对象”；接到后就在劳莉丝身边用掉即可。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11719
         },
         {
@@ -8974,8 +9162,10 @@
           "name": "攻打迦莫斯",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11720
         },
         {
@@ -8983,8 +9173,10 @@
           "name": "折磨者迦莫斯拉",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11721
         }
       ],
@@ -9106,8 +9298,10 @@
           "name": "折磨者迦莫斯拉",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11721
         },
         {
@@ -9115,8 +9309,10 @@
           "name": "迦莫斯的战利品",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11722
         },
         {
@@ -9124,8 +9320,10 @@
           "name": "地狱咆哮的勇士",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11916
         }
       ],
@@ -9334,8 +9532,10 @@
           "name": "决战奈辛瓦里",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11864
         },
         {
@@ -9343,8 +9543,10 @@
           "name": "敌人的耳环",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11866
         },
         {
@@ -9352,8 +9554,10 @@
           "name": "帮助弱小",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11876
         },
         {
@@ -9361,8 +9565,10 @@
           "name": "死不足惜",
           "note": "不是直接击杀猎户；对可交互的驯鹿陷阱使用一堆人造毛皮触发目标。陷阱主要在仁德会南侧约(56—58,46—52)。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11865
         },
         {
@@ -9370,8 +9576,10 @@
           "name": "欢乐的蚌壳",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11869
         },
         {
@@ -9379,8 +9587,10 @@
           "name": "尼达尔，犀牛之王……",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11884
         }
       ],
@@ -9478,8 +9688,10 @@
           "name": "海象人的先祖",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11605
         },
         {
@@ -9487,8 +9699,10 @@
           "name": "夺回采掘场",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11612
         },
         {
@@ -9496,8 +9710,10 @@
           "name": "帮助弱小",
           "note": "必须找“被困的猛犸幼崽”并使用任务锤，不是杀附近怪；个别陷阱若不计数直接换下一只。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11876
         }
       ],
@@ -9706,8 +9922,10 @@
           "name": "死不足惜",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11865
         },
         {
@@ -9715,8 +9933,10 @@
           "name": "驯鹿杀手之死",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11868
         },
         {
@@ -9724,8 +9944,10 @@
           "name": "欢乐的蚌壳",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11869
         },
         {
@@ -9733,8 +9955,10 @@
           "name": "遗弃海岸",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11870
         },
         {
@@ -9742,8 +9966,10 @@
           "name": "帮助弱小",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11876
         },
         {
@@ -9751,8 +9977,10 @@
           "name": "库诺克的智慧",
           "note": "不是纯跑腿交付，接任务后会带着猛犸幼崽孤儿；必须让幼崽跟到库诺克附近才完成。路上不要把跟随目标甩丢。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11878
         },
         {
@@ -9760,8 +9988,10 @@
           "name": "尼达尔，犀牛之王……",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11884
         },
         {
@@ -9769,8 +9999,10 @@
           "name": "猛犸毁灭者卡奥",
           "note": "卡奥死后战戟生成在地面，不是从尸体直接拾取。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11879
         }
       ],
@@ -9901,8 +10133,10 @@
           "name": "海象人的先祖",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11605
         },
         {
@@ -9910,8 +10144,10 @@
           "name": "夺回采掘场",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11612
         },
         {
@@ -9919,8 +10155,10 @@
           "name": "失落的灵魂",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11607
         },
         {
@@ -9928,8 +10166,10 @@
           "name": "别让他们逃了！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11617
         }
       ],
@@ -10060,8 +10300,10 @@
           "name": "失落的灵魂",
           "note": "目标看起来是普通海象人工匠/萨满，不会显示成明显幽灵；对他们使用邪恶之核。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11607
         },
         {
@@ -10069,8 +10311,10 @@
           "name": "别让他们逃了！",
           "note": "东/西平台要从采掘场外侧上沿/悬崖边取得投掷角度，站在坑底可能超出射程；北约(52.3,31.9)、西约(51.0,34.0)、东约(52.7,34.6)。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11617
         },
         {
@@ -10078,8 +10322,10 @@
           "name": "寻找古器",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11609
         },
         {
@@ -10087,8 +10333,10 @@
           "name": "拜访馆长",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11623
         }
       ],
@@ -10267,8 +10515,10 @@
           "name": "寻找古器",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11609
         },
         {
@@ -10276,8 +10526,10 @@
           "name": "拜访馆长",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11623
         },
         {
@@ -10285,8 +10537,10 @@
           "name": "先祖的回归",
           "note": "克苏克约(50.9,32.4)、萨加尼约(52.8,34.0)、塔克勒特约(52.3,31.2)；站在对应石像前使用背包里的任务仪式物品并等待完成提示。塔克勒特的石像是倒着/躺着的，更容易漏。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11610
         }
       ],
@@ -10470,8 +10724,10 @@
           "name": "猛犸毁灭者卡奥",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11879
         },
         {
@@ -10479,8 +10735,10 @@
           "name": "驯鹿杀手之死",
           "note": "卡琳在较高地形。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11868
         },
         {
@@ -10488,8 +10746,10 @@
           "name": "遗弃海岸",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11870
         },
         {
@@ -10497,8 +10757,10 @@
           "name": "不可容忍",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11871
         },
         {
@@ -10506,8 +10768,10 @@
           "name": "敌人的耳环",
           "note": "北海雇佣兵和北海暴徒都会掉耳环；在这里补齐，不再回库姆亚湖刷水下潜水员。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11866
         },
         {
@@ -10515,8 +10779,10 @@
           "name": "罪恶的蛤蜊主宰……",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11872
         }
       ],
@@ -10707,8 +10973,10 @@
           "name": "罪恶的蛤蜊主宰……",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11872
         },
         {
@@ -10716,8 +10984,10 @@
           "name": "驯鹿杀手之死",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11868
         },
         {
@@ -10725,8 +10995,10 @@
           "name": "敌人的耳环",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11866
         },
         {
@@ -10734,8 +11006,10 @@
           "name": "刺杀哈罗德·兰恩",
           "note": "战斗需要时可使用任务提供的塞纳里奥号角求援。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11892
         }
       ],
@@ -10879,8 +11153,10 @@
           "name": "战斗到底！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11949
         },
         {
@@ -10888,8 +11164,10 @@
           "name": "穆希特的智慧",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11950
         },
         {
@@ -10897,8 +11175,10 @@
           "name": "神灵的眷顾",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11961
         }
       ],
@@ -11058,8 +11338,10 @@
           "name": "神灵的眷顾",
           "note": "伊鲁克尸体约(67.6,50.4)，在水面与海底之间的半深处，不在岸边也不漂在水面；从尸体拾取伊斯利鲁克的图腾。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11961
         },
         {
@@ -11067,8 +11349,10 @@
           "name": "情势扭转",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11968
         },
         {
@@ -11076,8 +11360,10 @@
           "name": "前往莫亚基港口",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12117
         }
       ],
@@ -11308,8 +11594,10 @@
           "name": "前往牦牛村",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11888
         },
         {
@@ -11317,8 +11605,10 @@
           "name": "他们想干什么？",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11890
         },
         {
@@ -11326,8 +11616,10 @@
           "name": "地狱咆哮的勇士",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11916
         },
         {
@@ -11335,8 +11627,10 @@
           "name": "侦查虫孔",
           "note": "三个点都不是走到坐标自动完成，必须分别在南部/西北/东北虫孔附近使用任务地图。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11684
         },
         {
@@ -11344,8 +11638,10 @@
           "name": "运货行动！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11881
         },
         {
@@ -11353,8 +11649,10 @@
           "name": "先知赫米萨",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11674
         }
       ],
@@ -11648,8 +11946,10 @@
           "name": "应急的物资",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11887
         },
         {
@@ -11657,8 +11957,10 @@
           "name": "运货行动！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11881
         },
         {
@@ -11666,8 +11968,10 @@
           "name": "元素的力量",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11893
         },
         {
@@ -11675,8 +11979,10 @@
           "name": "侦查虫孔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11684
         },
         {
@@ -11684,8 +11990,10 @@
           "name": "元素之心",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11685
         },
         {
@@ -11693,8 +12001,10 @@
           "name": "他们想干什么？",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11890
         },
         {
@@ -11702,8 +12012,10 @@
           "name": "风暴的主宰",
           "note": "狂乱风暴不是常驻怪；在村内风暴图腾约(77.1,38.7)主动触发。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11895
         },
         {
@@ -11711,8 +12023,10 @@
           "name": "闪电的力量",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11896
         },
         {
@@ -11720,8 +12034,10 @@
           "name": "灵魂的解脱",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11899
         },
         {
@@ -11729,8 +12045,10 @@
           "name": "净化水池",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11906
         }
       ],
@@ -11820,8 +12138,10 @@
           "name": "元素的力量",
           "note": "必须先放风魂图腾再杀；图腾有效范围有限，离图腾太远的击杀不计能量。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11893
         },
         {
@@ -11829,8 +12149,10 @@
           "name": "闪电的力量",
           "note": "不要打机械侏儒，必须先用闪电棒再杀机器人。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11896
         },
         {
@@ -11838,8 +12160,10 @@
           "name": "灵魂的解脱",
           "note": "对机械侏儒尸体使用祖母的捕魂器。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11899
         },
         {
@@ -11847,8 +12171,10 @@
           "name": "净化水池",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11906
         }
       ],
@@ -11996,8 +12322,10 @@
           "name": "先知赫米萨",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11674
         },
         {
@@ -12005,8 +12333,10 @@
           "name": "死亡的解脱",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11675
         },
         {
@@ -12014,8 +12344,10 @@
           "name": "阻止瘟疫",
           "note": "目标在洞穴里面，不在地表。洞穴入口约(74.8,14.2)，锅在洞内约(78,18)一带；到Questie平面坐标附近看不到锅时先找洞口。进入后对瘟疫锅使用赫米萨的净化之种。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11677
         }
       ],
@@ -12184,8 +12516,10 @@
           "name": "阻止瘟疫",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11677
         },
         {
@@ -12193,8 +12527,10 @@
           "name": "找到萨安·钢角",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11678
         },
         {
@@ -12202,8 +12538,10 @@
           "name": "坠落的浮空城",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11683
         },
         {
@@ -12211,8 +12549,10 @@
           "name": "博士和巫妖领主",
           "note": "目标在塔尔拉玛斯顶层。到平面坐标附近找不到目标时不要在地面绕，继续沿建筑结构上到顶层再找。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11687
         },
         {
@@ -12220,8 +12560,10 @@
           "name": "报告坏消息",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11689
         }
       ],
@@ -12383,8 +12725,10 @@
           "name": "报告坏消息",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11689
         },
         {
@@ -12392,8 +12736,10 @@
           "name": "元素的力量",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11893
         },
         {
@@ -12401,8 +12747,10 @@
           "name": "修修补补",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11894
         },
         {
@@ -12410,8 +12758,10 @@
           "name": "闪电的力量",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11896
         },
         {
@@ -12419,8 +12769,10 @@
           "name": "机械副官",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11907
         },
         {
@@ -12428,8 +12780,10 @@
           "name": "灵魂的解脱",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11899
         },
         {
@@ -12437,8 +12791,10 @@
           "name": "击败机甲专家",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11909
         },
         {
@@ -12446,8 +12802,10 @@
           "name": "净化水池",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11906
         }
       ],
@@ -12511,8 +12869,10 @@
           "name": "修修补补",
           "note": "在蒸汽喷口使用未处理的鹿皮。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11894
         },
         {
@@ -12520,8 +12880,10 @@
           "name": "机械副官",
           "note": "四个目标不是常驻怪，必须分别操作四座泵站阀门召出。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11907
         },
         {
@@ -12529,8 +12891,10 @@
           "name": "击败机甲专家",
           "note": "手册和麦卡佐德都在泵站顶部圆形指挥小屋；先研究手册才会刷出麦卡佐德。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11909
         }
       ],
@@ -12702,8 +13066,10 @@
           "name": "修修补补",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11894
         },
         {
@@ -12711,8 +13077,10 @@
           "name": "天灾的外衣",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11628
         },
         {
@@ -12720,8 +13088,10 @@
           "name": "机械副官",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11907
         },
         {
@@ -12729,8 +13099,10 @@
           "name": "击败机甲专家",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11909
         },
         {
@@ -12738,8 +13110,10 @@
           "name": "腐化的土地",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11630
         }
       ],
@@ -12877,8 +13251,10 @@
           "name": "腐化的土地",
           "note": "地面拾取天灾泥土。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11630
         },
         {
@@ -12886,8 +13262,10 @@
           "name": "元素之心",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11685
         },
         {
@@ -12895,8 +13273,10 @@
           "name": "乔装潜入",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11633
         },
         {
@@ -12904,8 +13284,10 @@
           "name": "元素愤怒号角",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11695
         }
       ],
@@ -12981,8 +13363,10 @@
           "name": "元素愤怒号角",
           "note": "击杀水池旁酋长取得钥匙，用钥匙开启水中的小台宝珠，取得上半截号角。\n击杀水池旁酋长取得钥匙，用钥匙开启水中的小台宝珠，取得下半截号角。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11695
         }
       ],
@@ -13132,8 +13516,10 @@
           "name": "乔装潜入",
           "note": "穿魔法天灾外衣潜入；恩其拉憎恶能识破伪装。鲜血尖塔需从外侧楼梯上到二楼中央触发侦察。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11633
         },
         {
@@ -13141,8 +13527,10 @@
           "name": "力量之语",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11640
         },
         {
@@ -13150,8 +13538,10 @@
           "name": "勇猛的进攻",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11641
         },
         {
@@ -13159,8 +13549,10 @@
           "name": "中和瘟疫之锅",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11647
         },
         {
@@ -13168,8 +13560,10 @@
           "name": "元素愤怒号角",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11695
         },
         {
@@ -13177,8 +13571,10 @@
           "name": "天崩地裂",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11706
         }
       ],
@@ -13418,8 +13814,10 @@
           "name": "力量之语",
           "note": "三名高阶祭司都在此前侦察的尖塔内；鲜血尖塔的安多拉斯在上层。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11640
         },
         {
@@ -13427,8 +13825,10 @@
           "name": "勇猛的进攻",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11641
         },
         {
@@ -13436,8 +13836,10 @@
           "name": "中和瘟疫之锅",
           "note": "在东(87.7,29.9)、中(86.2,22.8)、西(85.6,20.1)三口锅旁使用先知埃恩雷的图腾。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11647
         },
         {
@@ -13445,8 +13847,10 @@
           "name": "鲜血尖塔",
           "note": "完成《乔装潜入》后，约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11654
         },
         {
@@ -13454,8 +13858,10 @@
           "name": "击碎宝珠！",
           "note": "鲜血宝珠主要在一楼，二楼也有。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11659
         },
         {
@@ -13463,8 +13869,10 @@
           "name": "过关斩将",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11898
         }
       ],
@@ -13684,8 +14092,10 @@
           "name": "天崩地裂",
           "note": "在南部虫孔约(70.3,36.7)使用元素愤怒号角触发塌陷，随后击杀出现的克里卡希斯。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11706
         },
         {
@@ -13693,8 +14103,10 @@
           "name": "过关斩将",
           "note": "先用外部传送器约(86.6,28.6)进入纳克萨纳尔，处理残忍的范瑟雷与邪恶的卢修恩；再用内部传送器约(86.8,30.1)上层击杀瓦拉纳王子。瓦拉纳王子引导紫色光束时停止攻击，该阶段会反伤。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11898
         },
         {
@@ -13702,8 +14114,10 @@
           "name": "牦牛村的陷落",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11929
         }
       ],
@@ -13812,8 +14226,10 @@
           "name": "危在旦夕",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11574
         },
         {
@@ -13821,8 +14237,10 @@
           "name": "越狱",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11587
         },
         {
@@ -13830,8 +14248,10 @@
           "name": "监视裂谷：悬崖异常",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11576
         }
       ],
@@ -13969,8 +14389,10 @@
           "name": "越狱",
           "note": "先杀蓝玉法师猎手取得蓝玉监狱钥匙，再用钥匙开启奥术牢笼。牢笼集中在约(41.8,39.2)。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11587
         },
         {
@@ -13978,8 +14400,10 @@
           "name": "监视裂谷：悬崖异常",
           "note": "约(34.3,42.2)的紫色裂隙处主动使用奥术测量器，不会靠到达坐标自动完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11576
         },
         {
@@ -13987,8 +14411,10 @@
           "name": "调查",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11590
         },
         {
@@ -13996,8 +14422,10 @@
           "name": "监视裂谷：峭壁断层",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11582
         }
       ],
@@ -14135,8 +14563,10 @@
           "name": "调查",
           "note": "把蓝玉巫师打到低血量后使用奥术镣铐捕获，再带回琥珀崖。注意别直接打死，镣铐有施法时间。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11590
         },
         {
@@ -14144,8 +14574,10 @@
           "name": "监视裂谷：峭壁断层",
           "note": "约(43.9,28.6)下潜到海底紫色裂谷处使用奥术测量器。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11582
         },
         {
@@ -14153,8 +14585,10 @@
           "name": "苔原上的审讯",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11646
         },
         {
@@ -14162,8 +14596,10 @@
           "name": "监视裂谷：冬鳞洞穴",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12728
         }
       ],
@@ -14379,8 +14815,10 @@
           "name": "苔原上的审讯",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11646
         },
         {
@@ -14388,8 +14826,10 @@
           "name": "说服的艺术",
           "note": "目标就在诺曼提斯旁边的椅子上；对被封印的蓝玉巫师反复使用任务提供的催眠魔杖，直到任务完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11648
         },
         {
@@ -14397,8 +14837,10 @@
           "name": "分享情报",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11663
         },
         {
@@ -14406,8 +14848,10 @@
           "name": "与时间赛跑",
           "note": "到蓝玉营地最大的圆形平台，对审讯者莎尔兰德的护盾使用任务提供的护盾破坏道具；她落地后击杀。死亡后会出现锁箱，从锁箱拾取莎尔兰德的断裂钥匙，不是直接摸尸体。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11671
         },
         {
@@ -14415,8 +14859,10 @@
           "name": "重铸钥匙",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11679
         },
         {
@@ -14424,8 +14870,10 @@
           "name": "准备飞翔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11680
         }
       ],
@@ -14609,8 +15057,10 @@
           "name": "准备飞翔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11680
         },
         {
@@ -14618,8 +15068,10 @@
           "name": "营救艾瓦诺尔",
           "note": "启动前先下普通坐骑并停稳。落地后按任务脚本完成营救；完成后由艾瓦诺尔的脚本直接送回琥珀崖，不要自己跳崖离开。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11681
         },
         {
@@ -14627,8 +15079,10 @@
           "name": "苏雷斯塔兹",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11682
         },
         {
@@ -14636,8 +15090,10 @@
           "name": "飞越裂谷",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11733
         }
       ],
@@ -14846,8 +15302,10 @@
           "name": "飞越裂谷",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11733
         },
         {
@@ -14855,8 +15313,10 @@
           "name": "监测数据",
           "note": "四个点都是固定地质监测仪，必须主动点击读取数据；南(28.5,35.0)、西(22.5,23.8)、东北(31.5,20.4)、中央(28.3,28.5)。\n监测仪需要主动点击；本段依次处理东北(31.5,20.4)与中央(28.3,28.5)，不要只到坐标附近等待自动完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11900
         },
         {
@@ -14864,8 +15324,10 @@
           "name": "古树的秘密",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11910
         },
         {
@@ -14873,8 +15335,10 @@
           "name": "冰冷的草莓",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11912
         },
         {
@@ -14882,8 +15346,10 @@
           "name": "基本的训练",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11918
         }
       ],
@@ -15115,8 +15581,10 @@
           "name": "监测数据",
           "note": "四个点都是固定地质监测仪，必须主动点击读取数据；南(28.5,35.0)、西(22.5,23.8)、东北(31.5,20.4)、中央(28.3,28.5)。\n监测仪需要主动点击；本段依次处理东北(31.5,20.4)与中央(28.3,28.5)，不要只到坐标附近等待自动完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11900
         },
         {
@@ -15124,8 +15592,10 @@
           "name": "古树的秘密",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11910
         },
         {
@@ -15133,8 +15603,10 @@
           "name": "冰冷的草莓",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11912
         },
         {
@@ -15142,8 +15614,10 @@
           "name": "基本的训练",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11918
         },
         {
@@ -15151,8 +15625,10 @@
           "name": "保持隐蔽",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11914
         },
         {
@@ -15160,8 +15636,10 @@
           "name": "蓝龙的卵",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11936
         }
       ],
@@ -15330,8 +15808,10 @@
           "name": "保持隐蔽",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11914
         },
         {
@@ -15339,8 +15819,10 @@
           "name": "蓝龙的卵",
           "note": "先杀考达拉龙人取得冰霜战斧，再由主控用战斧打碎蓝龙卵。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11936
         },
         {
@@ -15348,8 +15830,10 @@
           "name": "奇怪……",
           "note": "来源怪必须是人形的考达拉缚法者，常带一只蓝色猎犬；主要在考达拉西北/北部约(33—35,26—30)。击杀后拾取闪光碎片触发任务；不要误刷名称相近的考达拉织法者。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11941
         },
         {
@@ -15357,8 +15841,10 @@
           "name": "猎龙",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11919
         },
         {
@@ -15366,8 +15852,10 @@
           "name": "牢笼",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11943
         }
       ],
@@ -15573,8 +16061,10 @@
           "name": "牢笼",
           "note": "能量核心与牢笼外壳进度同步；主控完成两名目标即可。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11943
         },
         {
@@ -15582,8 +16072,10 @@
           "name": "猎龙",
           "note": "对空中的魔枢雏龙使用莱洛拉斯的长矛；这是捕获任务，不要把目标打死。命中后等待捕获生效，再带回莱洛拉斯。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11919
         },
         {
@@ -15591,8 +16083,10 @@
           "name": "破译密码",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11931
         },
         {
@@ -15600,8 +16094,10 @@
           "name": "克莉斯塔萨",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11946
         },
         {
@@ -15609,8 +16105,10 @@
           "name": "诱饵",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11951
         }
       ],
@@ -15824,8 +16322,10 @@
           "name": "诱饵",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11951
         },
         {
@@ -15833,8 +16333,10 @@
           "name": "破译密码",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11931
         },
         {
@@ -15842,8 +16344,10 @@
           "name": "莎拉苟萨的末日",
           "note": "莎拉苟萨不在地面常驻。先使用任务给的强化奥术牢笼联系克莉斯塔萨并选择准备就绪，脚本会送到高处平台；到平台后使用奥术能量源召出莎拉苟萨。击杀后仍通过克莉斯塔萨脚本返回。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11957
         },
         {
@@ -15851,8 +16355,10 @@
           "name": "集结红龙",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11967
         }
       ],
@@ -15967,8 +16473,10 @@
           "name": "集结红龙",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11967
         },
         {
@@ -15976,8 +16484,10 @@
           "name": "触动陷阱",
           "note": "到信号火焰约(25.4,21.8)，站在火焰旁使用任务物品莱洛拉斯的火花触发事件；到坐标不会自动完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11969
         }
       ],
@@ -16291,8 +16801,10 @@
           "name": "攻击！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11592
         },
         {
@@ -16300,8 +16812,10 @@
           "name": "亡者的尊严",
           "note": "主控对地上的车队卫兵或工人尸体使用任务火把。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11593
         },
         {
@@ -16309,8 +16823,10 @@
           "name": "让他们安息",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11594
         },
         {
@@ -16318,8 +16834,10 @@
           "name": "立即前往博古洛克前哨站！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12486
         },
         {
@@ -16327,8 +16845,10 @@
           "name": "睿智的气元素",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11624
         },
         {
@@ -16336,8 +16856,10 @@
           "name": "国王姆嘎姆嘎",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11702
         }
       ],
@@ -16547,8 +17069,10 @@
           "name": "睿智的气元素",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11624
         },
         {
@@ -16556,8 +17080,10 @@
           "name": "沸点",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11627
         },
         {
@@ -16565,8 +17091,10 @@
           "name": "国王姆嘎姆嘎",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11702
         },
         {
@@ -16574,8 +17102,10 @@
           "name": "学习沟通",
           "note": "只需击杀一次斯卡德尔；同一具尸体可供五个角色依次使用空贝壳，每号各操作一次。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11571
         },
         {
@@ -16583,8 +17113,10 @@
           "name": "冬鳞鱼人的贸易",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11559
         }
       ],
@@ -16961,8 +17493,10 @@
           "name": "冬鳞鱼人的贸易",
           "note": "优先拾取地面的冬鳞蚌壳；地面不够时再杀冬鳞巡滩者、智者或战士补缺。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11559
         },
         {
@@ -16970,8 +17504,10 @@
           "name": "救救蝌蚪！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11560
         },
         {
@@ -16979,8 +17515,10 @@
           "name": "就是他们！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11561
         },
         {
@@ -16988,8 +17526,10 @@
           "name": "我被敲竹杠了！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11562
         },
         {
@@ -16997,8 +17537,10 @@
           "name": "咕噜咕噜呜啦哇啦！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11563
         },
         {
@@ -17006,8 +17548,10 @@
           "name": "美味炖鲸肉",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11564
         },
         {
@@ -17015,8 +17559,10 @@
           "name": "备用的鱼人服",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11565
         },
         {
@@ -17024,8 +17570,10 @@
           "name": "决不投降！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11566
         }
       ],
@@ -17240,8 +17788,10 @@
           "name": "监视裂谷：冬鳞洞穴",
           "note": "在异常点附近主动使用奥术测量器取得读数，不会自动完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12728
         },
         {
@@ -17249,8 +17799,10 @@
           "name": "钥匙管理者呜啦咕噜",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11569
         },
         {
@@ -17258,8 +17810,10 @@
           "name": "逃离冬鳞洞穴",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11570
         },
         {
@@ -17267,8 +17821,10 @@
           "name": "决不投降！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11566
         }
       ],
@@ -17487,8 +18043,10 @@
           "name": "沸点",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11627
         },
         {
@@ -17496,8 +18054,10 @@
           "name": "风暴微粒",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11649
         },
         {
@@ -17505,8 +18065,10 @@
           "name": "返回灵语者身边",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11629
         },
         {
@@ -17514,8 +18076,10 @@
           "name": "空气的幻象",
           "note": "就在斯纳尔芬旁的图腾使用因波莉安的原始精华完成，不需要去野外找幻象目标。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11631
         },
         {
@@ -17523,8 +18087,10 @@
           "name": "先知格雷姆沃克之魂",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11635
         },
         {
@@ -17532,8 +18098,10 @@
           "name": "向犸格莫斯复仇",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11639
         }
       ],
@@ -17719,8 +18287,10 @@
           "name": "先知格雷姆沃克之魂",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11635
         },
         {
@@ -17728,8 +18298,10 @@
           "name": "卡加尼舒",
           "note": "拿到神像后还要对洞内先知格雷姆沃克的残骸使用，不能只击杀卡加尼舒。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11637
         },
         {
@@ -17737,8 +18309,10 @@
           "name": "向犸格莫斯复仇",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11639
         },
         {
@@ -17746,8 +18320,10 @@
           "name": "落叶归根",
           "note": "接任务后立即拾取先知格雷姆沃克灵魂脚下的遗骸，再离开洞穴。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11638
         }
       ],
@@ -17820,8 +18396,10 @@
           "name": "监视裂谷：冬鳞洞穴",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12728
         }
       ],
@@ -17930,8 +18508,10 @@
           "name": "横贯冰原",
           "note": "留到北风其余任务完成后再接。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 11930
         }
       ],

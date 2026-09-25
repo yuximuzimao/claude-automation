@@ -250,7 +250,17 @@ def _merge_location_with_repeated_npc(lines: list[dict[str, Any]]) -> list[dict[
     return merged
 
 
-def _note_visible_for_task(task_id: int, step_actions: list[dict[str, Any]]) -> bool:
+def _note_visible_for_task(
+    task_id: int,
+    step_actions: list[dict[str, Any]],
+    presentation: dict[str, Any] | None = None,
+) -> bool:
+    explicit_kinds = set((presentation or {}).get("note_show_on") or [])
+    if explicit_kinds:
+        return any(
+            action.get("task_id") == task_id and action.get("kind") in explicit_kinds
+            for action in step_actions
+        )
     for action in step_actions:
         if action.get("task_id") != task_id:
             continue
@@ -412,18 +422,23 @@ def project_route_display(
                     }
                 )
                 continue
-            pending_actions.append(action)
             task_id = action.get("task_id")
-            if isinstance(task_id, int) and task_id not in step_task_ids:
-                step_task_ids.append(task_id)
-                route_task_ids.add(task_id)
+            if isinstance(task_id, int):
+                projected_task = project_task_presentation(cards[task_id], profile_id=profile_id)
+                if str(action.get("kind")) not in set(projected_task.get("suppress_action_kinds") or []):
+                    pending_actions.append(action)
+                if task_id not in step_task_ids:
+                    step_task_ids.append(task_id)
+                    route_task_ids.add(task_id)
+            else:
+                pending_actions.append(action)
         flush_actions()
         lines = _merge_location_with_repeated_npc(lines)
 
         presentations: list[dict[str, Any]] = []
         for task_id in step_task_ids:
             projected = project_task_presentation(cards[task_id], profile_id=profile_id)
-            note_visible = _note_visible_for_task(task_id, step_actions)
+            note_visible = _note_visible_for_task(task_id, step_actions, projected)
             projected["note_visible"] = note_visible
             if not note_visible:
                 projected["note"] = None

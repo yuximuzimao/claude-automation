@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "hellfire-dk-speed",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "Hellfire Peninsula",
@@ -17,7 +17,7 @@
   },
   "display": {
     "publish_key": "hellfire_dk",
-    "order": 101,
+    "order": 2,
     "title": "地狱火半岛 · DK专用加速路线",
     "display_name": "地狱火半岛（DK专用）",
     "subtitle": "黑暗之门起步，依次完成东部前线、断背/塞斯高、萨尔玛北线、猎鹰/塞纳里奥任务簇，最后直接进入赞加。",
@@ -50,8 +50,6 @@
     10390,
     10236,
     10238,
-    10629,
-    10630,
     10393,
     10391,
     10392,
@@ -67,7 +65,6 @@
     9366,
     9374,
     9387,
-    9376,
     10442,
     9373,
     10367,
@@ -726,51 +723,6 @@
       "action_id": "a0100"
     },
     {
-      "kind": "accept",
-      "task_id": 10629,
-      "location_ref": "hellfire-dk-p031",
-      "npc_name": "工头拉泽克拉兹",
-      "action_id": "a0101"
-    },
-    {
-      "kind": "objective",
-      "task_id": 10629,
-      "location_ref": "hellfire-dk-p031",
-      "action_id": "a0102"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 10629,
-      "location_ref": "hellfire-dk-p031",
-      "npc_name": "工头拉泽克拉兹",
-      "action_id": "a0103"
-    },
-    {
-      "kind": "accept",
-      "task_id": 10630,
-      "location_ref": "hellfire-dk-p031",
-      "npc_name": "工头拉泽克拉兹",
-      "action_id": "a0104"
-    },
-    {
-      "kind": "location",
-      "location_ref": "hellfire-dk-p032",
-      "action_id": "a0105"
-    },
-    {
-      "kind": "objective",
-      "task_id": 10630,
-      "location_ref": "hellfire-dk-p032",
-      "action_id": "a0106"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 10630,
-      "location_ref": "hellfire-dk-p032",
-      "npc_name": "工头拉泽克拉兹",
-      "action_id": "a0107"
-    },
-    {
       "kind": "location",
       "location_ref": "hellfire-dk-p033",
       "action_id": "a0108"
@@ -1027,13 +979,6 @@
     },
     {
       "kind": "accept",
-      "task_id": 9376,
-      "location_ref": "hellfire-dk-p042",
-      "npc_name": "塔雷里斯·晨光",
-      "action_id": "a0147"
-    },
-    {
-      "kind": "accept",
       "task_id": 10442,
       "location_ref": "hellfire-dk-p042",
       "npc_name": "驯鹰者德蕾娜·河风",
@@ -1107,10 +1052,53 @@
       "action_id": "a0159"
     },
     {
-      "kind": "objective",
-      "task_id": 9376,
+      "kind": "turnin",
+      "task_id": 9340,
       "location_ref": "hellfire-dk-p045",
-      "action_id": "a0160"
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0177"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9466,
+      "location_ref": "hellfire-dk-p045",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0178"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9391,
+      "location_ref": "hellfire-dk-p045",
+      "npc_name": "游侠队长维恩雷",
+      "action_id": "a0179"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9366,
+      "location_ref": "hellfire-dk-p045",
+      "npc_name": "阴沉的利亚森",
+      "action_id": "a0181"
+    },
+    {
+      "kind": "accept",
+      "task_id": 9370,
+      "location_ref": "hellfire-dk-p045",
+      "npc_name": "阴沉的利亚森",
+      "action_id": "a0182"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 9374,
+      "location_ref": "hellfire-dk-p045",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0183"
+    },
+    {
+      "kind": "accept",
+      "task_id": 10286,
+      "location_ref": "hellfire-dk-p045",
+      "npc_name": "魔导师卡尔琳达",
+      "action_id": "a0184"
     },
     {
       "kind": "location",
@@ -1207,62 +1195,6 @@
       "kind": "location",
       "location_ref": "hellfire-dk-p051",
       "action_id": "a0176"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9340,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "游侠队长维恩雷",
-      "action_id": "a0177"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9466,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "游侠队长维恩雷",
-      "action_id": "a0178"
-    },
-    {
-      "kind": "accept",
-      "task_id": 9391,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "游侠队长维恩雷",
-      "action_id": "a0179"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9376,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "塔雷里斯·晨光",
-      "action_id": "a0180"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9366,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "阴沉的利亚森",
-      "action_id": "a0181"
-    },
-    {
-      "kind": "accept",
-      "task_id": 9370,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "阴沉的利亚森",
-      "action_id": "a0182"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 9374,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "魔导师卡尔琳达",
-      "action_id": "a0183"
-    },
-    {
-      "kind": "accept",
-      "task_id": 10286,
-      "location_ref": "hellfire-dk-p051",
-      "npc_name": "魔导师卡尔琳达",
-      "action_id": "a0184"
     },
     {
       "kind": "turnin",
@@ -1703,21 +1635,14 @@
         "a0097",
         "a0098",
         "a0099",
-        "a0100",
-        "a0101",
-        "a0102",
-        "a0103",
-        "a0104"
+        "a0100"
       ]
     },
     {
       "step_id": "step-06",
-      "title": "萨尔玛地下 → 铸魔营地 → 深渊之门",
+      "title": "铸魔营地 → 深渊之门",
       "summary": null,
       "action_ids": [
-        "a0105",
-        "a0106",
-        "a0107",
         "a0108",
         "a0109",
         "a0110",
@@ -1760,7 +1685,7 @@
     },
     {
       "step_id": "step-08",
-      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 沙纳尔",
+      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 猎鹰回交 → 沙纳尔",
       "summary": null,
       "action_ids": [
         "a0139",
@@ -1771,7 +1696,6 @@
         "a0144",
         "a0145",
         "a0146",
-        "a0147",
         "a0148",
         "a0149",
         "a0150",
@@ -1784,7 +1708,13 @@
         "a0157",
         "a0158",
         "a0159",
-        "a0160",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
         "a0161",
         "a0162",
         "a0163",
@@ -1794,7 +1724,7 @@
     },
     {
       "step_id": "step-09",
-      "title": "沙纳尔后半 → 猎鹰岗哨回交",
+      "title": "沙纳尔后半 → 猎鹰 → 萨尔玛 → 猎鹰",
       "summary": null,
       "action_ids": [
         "a0166",
@@ -1808,14 +1738,6 @@
         "a0174",
         "a0175",
         "a0176",
-        "a0177",
-        "a0178",
-        "a0179",
-        "a0180",
-        "a0181",
-        "a0182",
-        "a0183",
-        "a0184",
         "a0185",
         "a0187",
         "a0186",
@@ -2232,18 +2154,6 @@
           "mode": "ride"
         }
       },
-      "hellfire-dk-p032": {
-        "display_name": "萨尔玛地下",
-        "x": 54.39,
-        "y": 31.57,
-        "phase": "mine",
-        "transport": "ride",
-        "show_map_label": false,
-        "incoming_movement": {
-          "kind": "self_move",
-          "mode": "ride"
-        }
-      },
       "hellfire-dk-p033": {
         "display_name": "铸魔营地：暴虐",
         "x": 61.8,
@@ -2379,12 +2289,12 @@
         }
       },
       "hellfire-dk-p045": {
-        "display_name": "尘羽峡谷营地",
-        "x": 22.11,
-        "y": 68.3,
-        "phase": "fissure",
+        "display_name": "猎鹰岗哨·中途回访",
+        "x": 27.05,
+        "y": 60.24,
+        "phase": "falcon",
         "transport": "ride",
-        "show_map_label": false,
+        "show_map_label": true,
         "incoming_movement": {
           "kind": "self_move",
           "mode": "ride"
@@ -2463,7 +2373,7 @@
         }
       },
       "hellfire-dk-p052": {
-        "display_name": "系统飞行：猎鹰岗哨 → 萨尔玛 → 猎鹰岗哨",
+        "display_name": "萨尔玛",
         "x": 55.02,
         "y": 35.96,
         "phase": "falcon",

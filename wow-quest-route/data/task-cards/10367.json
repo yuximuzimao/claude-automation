@@ -17,9 +17,7 @@
   "availability": {
     "quest_level": 62,
     "min_level": 60,
-    "pre_any": [
-      10403
-    ],
+    "pre_any": [],
     "pre_all": [],
     "parent_active": [],
     "exclusive_with": [],
@@ -42,7 +40,7 @@
   },
   "guide": [
     "接取：纳拉杜。",
-    "沙纳尔废墟的纳拉杜要你在附近的小屋中找到沙纳尔钥匙。",
+    "附近小屋内的固定金属箱需要五个角色依次交互并取得各自的沙纳尔钥匙。",
     "交付：纳拉杜。"
   ],
   "fivebox": {
@@ -50,6 +48,15 @@
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["availability","guide"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

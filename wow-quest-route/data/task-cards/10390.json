@@ -53,14 +53,24 @@
   },
   "guide": [
     "接取：纳兹格雷尔。",
-    "萨尔玛的纳兹格雷尔命令你攻击铸魔营地：暴虐，杀死10个甘尔葛仆从，然后将剃刀电锯的徽记带回去交给纳兹格雷尔。",
+    "甘尔葛仆从击杀进度共享；剃刀电锯只需击杀一次，同一具尸体的任务徽记由五个角色依次拾取。",
+    "本轮实测剃刀电锯同时必定掉落《邪恶的计划》的任务起始物燃烧军团信件。",
     "交付：纳兹格雷尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide","fivebox.status"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",

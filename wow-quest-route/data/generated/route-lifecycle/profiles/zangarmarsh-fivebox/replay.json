@@ -2240,32 +2240,13 @@
         "action_id": "a0071",
         "flight_point": "萨布拉金",
         "kind": "open_flight_point"
-      },
-      {
-        "action_id": "a0090",
-        "from": "萨布拉金",
-        "kind": "taxi",
-        "missing_entry_flight_points": [
-          "塞纳里奥庇护所"
-        ],
-        "to": "塞纳里奥庇护所"
-      },
-      {
-        "action_id": "a0103",
-        "from": "塞纳里奥庇护所",
-        "kind": "taxi",
-        "missing_entry_flight_points": [],
-        "to": "沼泽鼠岗哨"
       }
     ],
     "guaranteed_opened_by_exit": [
-      "塞纳里奥庇护所",
       "沼泽鼠岗哨",
       "萨布拉金"
     ],
-    "required_entry_flight_points": [
-      "塞纳里奥庇护所"
-    ]
+    "required_entry_flight_points": []
   },
   "hearth": {
     "entry_state_known": false,
@@ -2311,7 +2292,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "3286282f4345e57b84acf50d70f82061fa34a6deb16a689004d71680e2f79244",
+  "input_fingerprint": "5b6073ad46ff7514d7a7bdb64babb1e885d40d4518d592e486a0bf760aec8d2e",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",

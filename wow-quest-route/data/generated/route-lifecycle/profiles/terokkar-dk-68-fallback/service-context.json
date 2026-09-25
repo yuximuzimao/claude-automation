@@ -1,0 +1,122 @@
+{
+  "background_layers": [],
+  "foreground_services": [
+    {
+      "location_ref": "terokkar-fallback-p002",
+      "service_action_id": "a0006",
+      "task_id": 10913,
+      "visit_id": "a0005",
+      "x": 34.58,
+      "y": 76.08,
+      "zone_id": 3519
+    },
+    {
+      "location_ref": "terokkar-fallback-p003",
+      "service_action_id": "a0008",
+      "task_id": 10877,
+      "visit_id": "a0007",
+      "x": 43.92,
+      "y": 76.4,
+      "zone_id": 3519
+    },
+    {
+      "location_ref": "terokkar-fallback-p004",
+      "service_action_id": "a0010",
+      "task_id": 10873,
+      "visit_id": "a0009",
+      "x": 54.27,
+      "y": 81.82,
+      "zone_id": 3519
+    }
+  ],
+  "input_fingerprint": "f9b6b02ee70fc0263dcb2d266e4916a581203bcc5a645828f8a63b1cb2139616",
+  "issues": [],
+  "profile_id": "terokkar-dk-68-fallback",
+  "spatial_instances": [
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0006"
+      ],
+      "instance_id": "visit-a0005",
+      "location_ref": "terokkar-fallback-p002",
+      "visit_id": "a0005",
+      "x": 34.58,
+      "y": 76.08,
+      "zone_id": 3519
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0008"
+      ],
+      "instance_id": "visit-a0007",
+      "location_ref": "terokkar-fallback-p003",
+      "visit_id": "a0007",
+      "x": 43.92,
+      "y": 76.4,
+      "zone_id": 3519
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0010"
+      ],
+      "instance_id": "visit-a0009",
+      "location_ref": "terokkar-fallback-p004",
+      "visit_id": "a0009",
+      "x": 54.27,
+      "y": 81.82,
+      "zone_id": 3519
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "background_layer_count": 0,
+    "foreground_service_count": 3,
+    "shared_service_override_count": 0,
+    "spatial_instance_count": 3,
+    "target_cluster_count": 3
+  },
+  "target_clusters": [
+    {
+      "action_ids": [
+        "a0006"
+      ],
+      "cluster_id": "objective-a0006",
+      "source": "objective_action",
+      "task_ids": [
+        10913
+      ],
+      "visit_ids": [
+        "a0005"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0008"
+      ],
+      "cluster_id": "objective-a0008",
+      "source": "objective_action",
+      "task_ids": [
+        10877
+      ],
+      "visit_ids": [
+        "a0007"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0010"
+      ],
+      "cluster_id": "objective-a0010",
+      "source": "objective_action",
+      "task_ids": [
+        10873
+      ],
+      "visit_ids": [
+        "a0009"
+      ]
+    }
+  ]
+}

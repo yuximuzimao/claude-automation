@@ -50,13 +50,22 @@
     "full_xp": 4850
   },
   "guide": [
-    "剃刀电锯自然掉落燃烧军团信件后可接取《邪恶的计划》。"
+    "本轮实测剃刀电锯必定掉落燃烧军团信件；取得后可接取《邪恶的计划》。"
   ],
   "fivebox": {
     "status": "pending"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide"]
+    },
     {
       "evidence_id": "evidence-legacy-route-condition",
       "source_type": "legacy_migration",

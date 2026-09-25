@@ -779,18 +779,6 @@
         "task_id": 11662
       },
       {
-        "action_id": "a0126",
-        "kind": "min_level",
-        "required_min_level": 68,
-        "resolver": "derived_xp",
-        "task_id": 11613
-      },
-      {
-        "action_id": "a0126",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 11613
-      },
-      {
         "action_id": "a0128",
         "kind": "min_level",
         "required_min_level": 68,
@@ -801,6 +789,18 @@
         "action_id": "a0128",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 12471
+      },
+      {
+        "action_id": "a0126",
+        "kind": "min_level",
+        "required_min_level": 68,
+        "resolver": "derived_xp",
+        "task_id": 11613
+      },
+      {
+        "action_id": "a0126",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 11613
       },
       {
         "action_id": "a0134",
@@ -3289,23 +3289,6 @@
         "task_id": 11662
       },
       {
-        "action_id": "a0126",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 68,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 11613
-      },
-      {
         "action_id": "a0128",
         "checks": [
           {
@@ -3321,6 +3304,23 @@
           }
         ],
         "task_id": 12471
+      },
+      {
+        "action_id": "a0126",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 68,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 11613
       },
       {
         "action_id": "a0134",
@@ -7216,7 +7216,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "a7b38281b3266e81e926a37ffc6d944f74ac2a6843153658c1ea0bccf5d80907",
+  "input_fingerprint": "d2f6be8fe04a4452b56b4cb46d04aeb25b06e1fc645457048a93412458f206a7",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",

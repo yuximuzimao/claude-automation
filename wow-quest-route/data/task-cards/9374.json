@@ -51,7 +51,7 @@
   },
   "guide": [
     "接取：魔导师卡尔琳达。",
-    "地狱火半岛猎鹰岗哨的魔导师卡尔琳达要你前往阿苟纳之池，找回埃雷利恩的日记。",
+    "阿苟纳之池的固定任务物需要五个角色依次交互取得；取得后各自在背包中使用即可推进《埃雷利恩的日记》。",
     "交付：魔导师卡尔琳达。"
   ],
   "fivebox": {
@@ -59,6 +59,15 @@
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-09-17",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-09-17",
+      "observed_at": "2026-09-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide"]
+    },
     {
       "evidence_id": "evidence-foundation-migration",
       "source_type": "legacy_migration",
