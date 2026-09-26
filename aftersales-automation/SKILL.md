@@ -18,7 +18,7 @@ entry: cli.js
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
 | `cli.js` | CLI 入口，18 个命令的路由分发 | 需要了解可用命令或新增命令时 |
-| `server.js` | Express 服务（port 3457），队列管理 + Web 面板 + 定时扫描调度。定时扫描已恢复，走 opQueue scan 新路径并遵守 scanEnabled；legacy scan-all 不作为当前前端/A1处理入口 | 改 API/队列/定时任务时 |
+| `server.js` | Express 服务（port 3457），队列管理 + Web 面板 + 定时扫描调度。启动清理保留最新 500 条 simulation，同时通过 `lib/server/simulation-retention.js` 额外保护所有未归档工单引用的旧明细。定时扫描走 opQueue scan 并遵守 scanEnabled；legacy scan-all 不作为当前前端/A1处理入口 | 改 API/队列/定时任务/启动数据清理时 |
 | `lib/infer.js` | 规则推理引擎，主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/after-sales-platform-stage.js` | 平台工单阶段观察与窄状态分类；所有阶段留存，当前只让“换货+待商家二次发货”进入人工观察分支 | 改平台阶段留存、分类或观察期升级时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
@@ -75,7 +75,7 @@ entry: cli.js
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
 | `lib/server/routes.js` | Express API 路由 | 改 API 端点时 |
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
-| `lib/server/data.js` | JSON/jsonl 数据持久化；反馈洞察用 `markFeedbackInsighted(ids)` 写 `insightedAt`，保留原文 | 改数据读写或收口手动洞察时 |
+| `lib/server/data.js` | JSON/jsonl 数据持久化；统计累计处理量合并 live queue、归档 case 和现存 live simulation 并按工单号去重，评价正确率只按每单最新明确评价计算；反馈洞察用 `markFeedbackInsighted(ids)` 写 `insightedAt`，保留原文 | 改数据读写、统计口径或收口手动洞察时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，固定 48h，忽略前端传入的 thresholdHours / accounts / disableAutoExecute 等可篡改参数；是否自动执行由 Step14 的 shouldAutoExecute + executionJournal 决定 | 改 A1 后端入口或入队参数时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。固定批次失败会持久写入账号 `error/expired` 状态；紧急停止使用 AbortController + 步骤间检查点；定时自动扫描在浏览器操作前先启动 10 秒状态窗并持续推送店铺/工单进度，详见 `docs/ops-queue.md` | 改队列/执行/重新采集/停止/定时扫描进度逻辑时 |
 | `lib/server/scan-hud.js` + `scripts/scan-status-hud.js` | macOS 定时扫描浮动状态窗：10 秒预告倒计时、店铺/工单实时进度、异常/停止/完成终态后自动关闭；只观察队列状态，不改变业务决策 | 改自动扫描提醒、状态窗文案或显示字段时 |
@@ -83,7 +83,7 @@ entry: cli.js
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
-| `public/app.js` | 前端主逻辑 — 7 个一级 Tab 渲染、统计复盘折叠状态与历史记录内嵌、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
+| `public/app.js` | 前端主逻辑 — 7 个一级 Tab 渲染、“已自动执行”每页 10 条分页、统计累计口径与历史记录内嵌、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类/统计逻辑时 |
 | `public/index.html` | 前端 HTML 骨架 — 7 个一级 Tab 结构、模版、header 控件 | 改页面结构时 |
 | `public/style.css` | 前端样式 — 紧急度颜色、面板布局、响应式 | 改样式时 |
 | `test/server/return-inbound-ui.test.js` | 退货入库 Web 集成契约：逐条结果、独立停止按钮、仅在单条边界中断 | 改退货入库前端或 op-queue 中断语义时 |

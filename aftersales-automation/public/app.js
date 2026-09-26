@@ -972,6 +972,11 @@ function renderCard(item, sim, mode, prevSims = [], seqNum = null) {
   const actionLabel = activeSim && activeSim.decision
     ? decisionDisplayLabel(activeSim.decision)
     : DECISION_LABELS.pending;
+  const decisionTagHtml = activeSim && activeSim.decision
+    ? `<span class="decision-tag ${action}">${DECISION_ICONS[action]} ${h(actionLabel || action)}</span>`
+    : ['auto_executed', 'auto_executing'].includes(item.status)
+      ? ''
+      : `<span class="decision-tag pending">${DECISION_ICONS.pending} ${DECISION_LABELS.pending}</span>`;
   const fbStatus = activeSim && activeSim.feedbackStatus || 'pending';
   const statusClass = 'tag-status-' + item.status;
 
@@ -989,7 +994,7 @@ function renderCard(item, sim, mode, prevSims = [], seqNum = null) {
       <span class="tag tag-${item.mode}">${item.mode === 'live' ? '实际' : '训练'}</span>
       ${(function(){ if (['auto_executed','auto_executing'].includes(item.status)) return ''; var cd = item.deadlineAt ? formatCountdown(item.deadlineAt) : null; if (cd) return '<span class="tag tag-urgency ' + cd.className + '" data-deadline="' + item.deadlineAt + '">\u23f0 ' + cd.text + '</span>'; return item.urgency ? '<span class="tag tag-urgency">\u23f0 ' + item.urgency + '</span>' : ''; })()}
       <span class="tag ${statusClass}">${STATUS_CN[item.status] || item.status}</span>
-      <span class="decision-tag ${action}">${DECISION_ICONS[action]} ${h(actionLabel || action)}</span>
+      ${decisionTagHtml}
       ${fbTagHtml}
     </div>
   </div>
@@ -1029,8 +1034,12 @@ function renderBody(item, sim, mode) {
     return `<p style="font-size:13px;padding:4px 0"><span style="color:var(--gray-400)">待采集…</span></p>`;
   }
   if (!sim || !sim.collectedData) {
-    const liveMsg = `运行：<code>node collect.js --sim</code>`;
-    return `<p style="font-size:13px;padding:4px 0">${liveMsg}</p>`;
+    const message = ['auto_executed', 'auto_executing'].includes(item.status)
+      ? '执行状态已保留，但推理明细缺失。请先核对历史备份，再决定是否归档。'
+      : mode === 'live'
+        ? '暂无可显示的采集明细，请使用页面操作重新采集。'
+        : '暂无训练采集明细。';
+    return `<p style="font-size:13px;padding:4px 0">${message}</p>`;
   }
 
   const cd = sim.collectedData;
