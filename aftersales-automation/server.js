@@ -79,6 +79,7 @@ const express = require('express');
 const routes = require('./lib/server/routes');
 const opQueue = require('./lib/server/op-queue');
 const { SCAN_HOURS } = require('./lib/constants');
+const { retainSimulationLines } = require('./lib/server/simulation-retention');
 const { getNextWanwuScanAt } = require('./wanwu/schedule');
 
 const PORT = process.env.PORT || 3457;
@@ -250,7 +251,7 @@ app.listen(PORT, async () => {
 });
 
 // ── 启动时数据清理 ────────────────────────────────────────────────────
-// simulations.jsonl: 保留最新 500 条（循环缓冲）
+// simulations.jsonl: 保留最新 500 条，并额外保护所有未归档工单引用的明细
 // queue.json: 清理 30 天前的 done 条目
 function startupDataCleanup() {
   const SIM_FILE = path.join(__dirname, 'data/simulations.jsonl');
@@ -261,9 +262,21 @@ function startupDataCleanup() {
   try {
     const lines = fs.readFileSync(SIM_FILE, 'utf8').split('\n').filter(l => l.trim());
     if (lines.length > SIM_MAX) {
-      const kept = lines.slice(-SIM_MAX);
-      fs.writeFileSync(SIM_FILE, kept.join('\n') + '\n');
-      console.log(`[cleanup] simulations.jsonl: ${lines.length} → ${kept.length} 条（保留最新 ${SIM_MAX}）`);
+      const db = require('./lib/server/data');
+      const activeQueueItemIds = new Set((db.readQueue().items || [])
+        .filter(item => item && item.status !== 'done')
+        .map(item => String(item.id)));
+      const retained = retainSimulationLines(lines, activeQueueItemIds, SIM_MAX);
+      const tmp = `${SIM_FILE}.tmp`;
+      fs.writeFileSync(tmp, retained.lines.join('\n') + '\n');
+      fs.renameSync(tmp, SIM_FILE);
+      console.log(
+        `[cleanup] simulations.jsonl: ${lines.length} → ${retained.lines.length} 条`
+        + `（最新 ${SIM_MAX} + 保护未归档旧明细 ${retained.protectedOlderCount} 条）`
+      );
+      if (retained.malformedOlderCount > 0) {
+        console.warn(`[cleanup] simulations.jsonl: 保留 ${retained.malformedOlderCount} 条无法解析的旧数据供人工排查`);
+      }
     }
   } catch (e) {
     if (e.code !== 'ENOENT') console.error('[cleanup] simulations.jsonl 清理失败:', e.message);

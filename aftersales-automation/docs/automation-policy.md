@@ -30,6 +30,8 @@
 
 顶部累计指标不使用会被定期裁剪的 `simulations.jsonl` 行数：
 
+`simulations.jsonl` 启动清理保留最新 500 条作为循环缓冲，但所有 `status !== done` 的未归档 queue item 所引用的明细必须额外保留。不得因重启或达到 500 条上限，让仍在三个实际工单页面中的工单丢失推理依据。
+
 | 指标 | 口径 |
 |---|---|
 | 累计处理工单 | 合并实际 queue、归档 case 和现存 live simulation，排除未处理 `pending`，按工单号去重 |
