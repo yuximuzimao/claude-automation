@@ -147,10 +147,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《永恒之龙的秘密》：不共享：40码内不能同时放多个沙漏；按2+2+1三批防守，首组实测纯事件/战斗约10分钟。\n【需要单独修正优化】《永恒之龙的秘密》首组实跑确认：沙漏防守进度不共享；40码内不能同时放置多个沙漏。五号采用2+2+1三批完成（两号双控、两号双控、最后一号单做），三批纯战斗/事件总计约10分钟，不含前后跑路。固定路线按三批执行。",
+      "text": "40码内不能同时放多个沙漏；五号按2+2+1三批完成防守。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12470",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

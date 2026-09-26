@@ -51,7 +51,7 @@
     "交付：高阶神谕者索乌塞。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -77,6 +77,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-ordinary-kill-batch-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 remaining-pending audit: current task completion is ordinary group kill credit; any retained note only changes location/tactics/route usage, not per-character completion mechanics. Classified shared under execution-and-mechanics baseline.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

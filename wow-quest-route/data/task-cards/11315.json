@@ -46,7 +46,7 @@
     "交付：鲁莉尔蕾。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -73,14 +73,25 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-derived-pure-kill-audit-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 post-note audit: current Questie objective contains only ordinary kill credit and no personal task stage; current execution-and-mechanics baseline classifies it shared.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《野蛮之藤》：击杀血色常春藤取得藤蔓；与《堕落的姐妹》同片处理。",
+      "text": "击杀血色常春藤取得藤蔓。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

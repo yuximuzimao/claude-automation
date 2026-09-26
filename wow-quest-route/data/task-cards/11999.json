@@ -120,10 +120,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《寻找线索》首组龙骨实跑确认：完成进度不共享，五个角色都必须各自取得线索物并右键打开。本轮运气较差出现明显长尾；是否同一具法师猎手尸体可供五号分别拾取尚未单独确认。\n《寻找线索》：不共享：五号各自取得线索并右键打开。\n《寻找线索》的交付NPC在阿格玛，不在眠月花园。",
+      "text": "五号各自取得线索并右键打开；交付NPC在阿格玛，不在眠月花园。同一具法师猎手尸体能否供五号分别拾取仍未确认。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.11999 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《过犹不及》：共享：先对西莱图斯先知使用混乱魔精，等其变为弱化状态后再击杀；不要把Boss拉下祭坛台阶，脱离原区域会闪避并恢复原强度。使用魔精后也不要隐身/强制脱战，否则弱化状态可能重置，击杀将不计任务。\n【需要单独修正优化】《过犹不及》2026-09-06至07祖达克首组实跑：共享：先对西莱图斯先知使用混乱魔精，再击杀。",
+      "text": "先对西莱图斯先知使用混乱魔精，等其弱化后再击杀；不要把Boss拉下祭坛，也不要用隐身/强制脱战重置弱化状态。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12516",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

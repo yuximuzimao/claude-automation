@@ -165,10 +165,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《海洋女神》：不共享：五号分别点击深海珍珠。珍珠约1分40秒刷新，五号串行至少等待4次；做完的角色游到岸边后走陆路，不要一路游回。\n【需要单独修正优化】《海洋女神》首组龙骨实跑确认：任务不共享，五个角色必须分别点击深海珍珠触发。实测从一次点击开始到珍珠再次可点击约1分40秒，五号串行至少有4次刷新等待（约6分40秒）。触发后的角色应游到岸边，再从陆地跑回/向集合方向移动，不从水里一路游回珍珠。",
+      "text": "五号分别点击深海珍珠；珍珠约1分40秒刷新。完成的角色上岸后走陆路，不要一路游回。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12032",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

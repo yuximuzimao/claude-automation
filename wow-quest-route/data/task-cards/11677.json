@@ -143,10 +143,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《阻止瘟疫》：共享：目标在洞穴里面，不在地表。洞穴入口约(74.8,14.2)，锅在洞内约(78,18)一带；到Questie平面坐标附近看不到锅时先找洞口。进入后对瘟疫锅使用赫米萨的净化之种。\n【需要单独修正优化】《阻止瘟疫》对亡者之穴瘟疫锅使用净化之种后，任务进度五号共享；主控完成一次即可同步全队，不需要五个角色分别对锅操作。",
+      "text": "目标在洞穴内；入口约(74.8,14.2)，锅约(78,18)。进入后对瘟疫锅使用赫米萨的净化之种。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11677",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

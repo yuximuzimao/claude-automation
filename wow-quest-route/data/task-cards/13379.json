@@ -52,7 +52,7 @@
     "交付：边缘技师塔兹拉。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -78,6 +78,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-fivebox-baseline-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "docs/rules/execution-and-mechanics.md §4 baseline; Questie start/finish are NPCs, no intermediate objective/event, and Task Card has no special execution note.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

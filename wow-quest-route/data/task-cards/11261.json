@@ -92,7 +92,7 @@
     "交付：灰烬图腾酋长。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -119,14 +119,25 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-derived-no-independent-mechanism-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 remaining-pending audit: this task has no independent fivebox operation; completion is report/turn-in/meta-chain handoff after prerequisite work.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《斯克恩的征服者！》：要求《可怕而必要的手段》、《燃烧吧，斯克恩，燃烧吧！》、《危险的塔楼》全部完成。",
+      "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

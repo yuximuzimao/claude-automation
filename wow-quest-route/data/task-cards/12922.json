@@ -44,7 +44,7 @@
     "交付：弗约恩之砧。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -70,6 +70,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-from-preserved-live-note-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "Current Task Card presentation.note_override preserves prior live-run classification explicitly stating shared/not_shared; 2026-09-26 audit promoted that already-recorded fact into fivebox.status.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

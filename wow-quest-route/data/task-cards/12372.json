@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《保卫龙眠神殿》首组确认：碧蓝巨龙/幼龙击杀只要五号处于有效距离即可共享；‘破坏碧蓝巨龙圣地’不共享，五个角色必须分别骑龙到圣地各执行一次。任务在向德弗雷斯塔兹领主报到后中层原地解锁；固定练级路线每组首次经过做一次，不安排每日重复。\n《保卫龙眠神殿》：共享：巨龙/幼龙击杀在有效距离内同步；不共享：破坏碧蓝巨龙圣地，五号必须分别骑龙各执行1次。\n《保卫龙眠神殿》每组首次经过做一次，不安排日常重复。",
+      "text": "巨龙/幼龙击杀在有效距离内同步；破坏碧蓝巨龙圣地不共享，五号必须分别骑龙各执行1次。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12372 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

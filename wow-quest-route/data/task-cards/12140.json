@@ -155,10 +155,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《洛纳乌克万岁！》：共享：主控触发并看完整个事件脚本即可同步全队。\n【需要单独修正优化】《洛纳乌克万岁！》首组龙骨实跑确认：主控触发并完成事件脚本后五号共享完成。",
+      "text": "主控触发后要看完整个事件脚本，完成后五号同步。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12140",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

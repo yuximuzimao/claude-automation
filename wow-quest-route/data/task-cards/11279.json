@@ -108,10 +108,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "五号分别对灰烬龙巢地面的始祖幼龙蛋使用提灵哈斯特的瘟疫罐，等喷洒完整生效并孵出染疫幼龙后再击杀并拾取样本；不要在任务物施法完成前提前攻击。\n【需要单独修正优化】《绿色的龙卵和龙崽》嚎风峡湾首组实跑确认：不共享，五号分别完成。",
+      "text": "对灰烬龙巢地面的始祖幼龙蛋使用提灵哈斯特的瘟疫罐，等喷洒完整生效并孵出染疫幼龙后再击杀并拾取样本；不要在任务物施法完成前提前攻击。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11279",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和已由fivebox标签表达的重复状态，只保留会改变当前任务执行的最短提醒。"
     }
   }
 }

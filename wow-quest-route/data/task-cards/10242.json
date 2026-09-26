@@ -57,7 +57,7 @@
     "交付：药剂师阿尔布雷克。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -83,6 +83,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-batch-audit-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 remaining-pending audit: transport/report-only task with no independent fivebox completion mechanism.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

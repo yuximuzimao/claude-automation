@@ -55,7 +55,7 @@
     "交付：博学者兰德维尔。"
   ],
   "fivebox": {
-    "status": "special"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -104,14 +104,25 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-note-audit-13001-status",
+      "source_type": "derived",
+      "source_ref": "Existing user-live execution note reclassified under current execution-and-mechanics fivebox rules during 2026-09-26 note audit.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《打造霍迪尔之矛》：不共享：五号分别取3块永冻碎片和3张坚韧猛犸象毛皮；永冻碎片同一刷新位置可连续给多个角色拾取。\n【需要单独修正优化】永冻碎片和坚韧猛犸象毛皮均不共享，五个角色分别完成自己的数量；永冻碎片同一刷新位置可由多个角色连续拾取，不必等待下一次刷新。",
+      "text": "五号分别取3块永冻碎片和3张坚韧猛犸象毛皮；永冻碎片同一刷新位置可连续给多个角色拾取。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13001",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

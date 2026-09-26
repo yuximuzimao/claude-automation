@@ -108,10 +108,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《雷铸徽记》：不共享：同一具死亡铁巨人只能挖一次；谁用钻石尖镐，直接出的雷铸之眼归谁。若刷出伏击者，其掉落也按普通怪个人掉落处理，收齐各号8只眼。\n【需要单独修正优化】《雷铸徽记》首组实跑确认：同一具死亡铁巨人不能由多个角色重复挖取；谁使用钻石尖镐，直接产出的雷铸之眼就归谁。若刷出伏击者，其掉落也按普通怪个人掉落处理。整条任务按不共享执行。",
+      "text": "同一具死亡铁巨人只能挖一次；谁用钻石尖镐，直接出的雷铸之眼归谁。伏击者掉落也按个人掉落处理。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12985",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

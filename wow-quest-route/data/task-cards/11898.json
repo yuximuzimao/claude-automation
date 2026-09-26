@@ -82,7 +82,7 @@
     "交付：冬风酋长。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -108,6 +108,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-pure-kill-audit-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 post-note audit: current Questie objective contains only ordinary kill credit and no personal task stage; current execution-and-mechanics baseline classifies it shared.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

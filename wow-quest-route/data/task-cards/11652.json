@@ -143,10 +143,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《纳萨姆平原》用户实跑给出的量级为最长约3分钟/号。五号按分别完成计，当前整队任务自身服务时间采用不超过约15分钟的保守上限；这是上限口径，不作为15分钟平均值。\n《纳萨姆平原》：不共享：五号分别上部落攻城坦克执行。\n《纳萨姆平原》：使用坦克完成100个天灾目标、救援并指认指挥官；五号分别完成，实跑单号最长约3分钟。",
+      "text": "五号分别上部落攻城坦克，完成100个天灾目标、救援并指认指挥官。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.11652 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

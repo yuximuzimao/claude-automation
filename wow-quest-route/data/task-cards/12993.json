@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《巨像的威胁》：不共享：攻击/防御规格说明书在尼达维里尔下层固定位置；同一刷新点可五号连续拾取。\n【需要单独修正优化】《巨像的威胁》不共享；攻击/防御规格说明书同一固定刷新点可由五个角色连续拾取。",
+      "text": "攻击/防御规格说明书在尼达维里尔下层固定位置；同一刷新点可五号连续拾取。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12993",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

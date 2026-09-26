@@ -102,10 +102,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《爆顶蘑菇》：围绕萨布拉金本地专门转一圈拾取，不要只沿主路等顺手收齐。\n【需要单独修正优化】《爆顶蘑菇》不能因为刷新点数量看似覆盖主体路线就按0秒背景采集。首组实跑需要围绕萨布拉金专门转一圈拾取；该本地圈可以自然接入后续西部路线。当前只确认空间服务形态，真实圈耗时仍待后续实跑记录。",
+      "text": "围绕萨布拉金本地专门转一圈拾取，不要只沿主路等顺手收齐。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.9814",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和已由fivebox标签表达的重复状态，只保留会改变当前任务执行的最短提醒。"
     }
   }
 }

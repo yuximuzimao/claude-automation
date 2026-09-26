@@ -108,10 +108,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《猎杀间谍》：共享：对座狼尸体使用灵体座狼之牙召唤灵体冰霜座狼，跟随找到并击杀雷铸间谍；每次击杀后回尸体重新召唤，共3次，主控完成即可同步五号。\n【需要单独修正优化】《猎杀间谍》首组实跑确认：任务进度五号共享，只需主控完成共享目标。",
+      "text": "对座狼尸体使用灵体座狼之牙召唤灵体冰霜座狼，跟随找到并击杀雷铸间谍；每次击杀后回尸体重新召唤，共3次。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12994",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

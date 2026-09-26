@@ -58,7 +58,7 @@
     "任务交接位于龙眠神殿的特定楼层；使用神殿幼龙/运输NPC前往上层，不要只在地面层寻找。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -96,14 +96,25 @@
       "supports_fields": [
         "guide"
       ]
+    },
+    {
+      "evidence_id": "evidence-derived-fivebox-baseline-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "execution-and-mechanics baseline: transfer/report-only task has no fivebox completion mechanism",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "交任务在龙眠神殿上层；使用神殿幼龙/运输NPC上楼，不要只在地面层寻找。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

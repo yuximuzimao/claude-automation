@@ -116,10 +116,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《污染的能量》：共享：通灵符文只需主控右键摧毁。\n【需要单独修正优化】《污染的能量》首组实测：摧毁通灵符文进度五号共享；主控右键摧毁固定符文即可，不需要五号分别互动。",
+      "text": "通灵符文是奈萨里奥之喉洞穴内的固定物体，进入洞内右键摧毁。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12265",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

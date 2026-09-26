@@ -130,10 +130,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《不知所踪！》索拉查首组实跑确认：任务物本身按个人取得；但戒指一旦实际掉落，同一枚掉落可由五号依次拾取，因此掉落命中后不需要再为其余角色重新刷出四次。\n《不知所踪！》：15只风险投资公司目标完成后戒指仍没齐，就继续刷挖掘者/恶棍；五号都1/1才离开。\n《不知所踪！》：不共享：戒指一旦掉落，同一枚掉落可由五号依次拾取；固定在第一次斯温迪格林挖掘场完成，五号都1/1再离开。",
+      "text": "戒指一旦实际掉落，同一枚掉落可供五号依次拾取；五号都1/1再离开。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12624 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

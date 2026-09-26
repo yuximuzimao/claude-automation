@@ -58,7 +58,7 @@
     "交付：库尔迪拉·织亡者。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -85,14 +85,25 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-recovered-2026-08-30-13329",
+      "source_type": "user_live",
+      "source_ref": "Recovered from user live-run conversation dated 2026-08-30: explicit fivebox classification for this task.",
+      "observed_at": "2026-08-30",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "对冰冠劫掠者尸体使用强酸溶解，单纯击杀不会推进。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

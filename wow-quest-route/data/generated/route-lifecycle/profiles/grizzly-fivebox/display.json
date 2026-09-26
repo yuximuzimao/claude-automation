@@ -11,7 +11,7 @@
   "hearth_chain": [
     "征服堡"
   ],
-  "input_fingerprint": "fa25ce88bb32655357783d3ebb37dd193e06ef00deadac30be74ff8aa033bee2",
+  "input_fingerprint": "a47b4a3a359f164d0de7c999ef7b2cf688b2642cee80eb1a141a928f82459c64",
   "issues": [
     {
       "display_name": "盲眼卢娜",
@@ -2063,8 +2063,10 @@
           "name": "前往征服堡，自求多福吧！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12487
         },
         {
@@ -2072,44 +2074,54 @@
           "name": "征服者的指派",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12468
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "缚焰者的秘密",
-          "note": "《赚外快》《灰狼的毛皮》本任务：不共享：任务物为个人掉落，五号分别拾取。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12256
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "显示力量",
           "note": "击杀进度五号同步。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12257
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "灰狼的毛皮",
-          "note": "《赚外快》本任务《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12175
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "赚外快",
-          "note": "《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12436
         },
         {
@@ -2117,8 +2129,10 @@
           "name": "替代品",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12176
         },
         {
@@ -2126,8 +2140,10 @@
           "name": "沃德伦的领主",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12259
         }
       ],
@@ -2294,19 +2310,23 @@
         {
           "badge": "not_shared",
           "name": "寻找溶解剂",
-          "note": "按单个场景物交互/拾取处理，五号依次获取 Element 115；拾取后开始短时限返程，立即原路返回古图尔并尽量不进战斗。",
+          "note": "五号分别获取Element 115；拾取后开始短时限返程，立即原路返回古图尔并尽量不进战斗。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12433
         },
         {
           "badge": "shared",
           "name": "沃德伦的领主",
-          "note": "西侧约(26.6,78.0)骑烈焰使者，领主在塔顶约(27.1,72.9)；贴到近身后优先卡CD用翼击眩晕，眩晕间隙补两种火焰技能，别在远距离吃弓箭/齐射。",
+          "note": "西侧约(26.6,78.0)骑烈焰使者，领主在塔顶约(27.1,72.9)；贴近后优先用翼击眩晕，避免远距离吃弓箭/齐射。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12259
         },
         {
@@ -2314,17 +2334,21 @@
           "name": "前往欧尼瓦营地",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12451
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "我的敌人的朋友",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12412
         }
       ],
@@ -2634,21 +2658,25 @@
       "summary": "银溪镇完成《我的敌人的朋友》并取得米克哈尔日记，北侧补灰熊皮；回征服堡按真实NPC推进克雷娜、高戈娜和休尼克三条线。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "我的敌人的朋友",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12412
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "米克哈尔的日记",
           "note": "来源怪为银溪猎人；击杀后拾取掉落的任务起始物“米克哈尔的日记”，五号分别右键接任务。离开前确认五号日志里都有任务。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12423
         },
         {
@@ -2656,17 +2684,21 @@
           "name": "替代品",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12176
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "攻击银溪镇",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12413
         },
         {
@@ -2674,8 +2706,10 @@
           "name": "高戈娜",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12424
         },
         {
@@ -2683,8 +2717,10 @@
           "name": "顺藤摸瓜",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12422
         },
         {
@@ -2692,8 +2728,10 @@
           "name": "休尼克的掩饰",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12177
         },
         {
@@ -2701,8 +2739,10 @@
           "name": "给克雷娜送货",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12178
         },
         {
@@ -2710,8 +2750,10 @@
           "name": "白肩鹰的眼睛",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12453
         },
         {
@@ -2719,8 +2761,10 @@
           "name": "狩猎巨魔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12208
         }
       ],
@@ -3030,35 +3074,43 @@
           "name": "狩猎巨魔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12208
         },
         {
           "badge": "shared",
           "name": "抓巨魔",
-          "note": "",
+          "note": "让巴德先把巨魔打昏，再对昏迷目标使用赏金猎人的笼子。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11984
         },
         {
           "badge": "shared",
           "name": "停战？",
-          "note": "",
+          "note": "在达库鲁的笼子附近使用钝刻刀，再与达库鲁对话。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11989
         },
         {
           "badge": "not_shared",
           "name": "幻象之瓶",
-          "note": "水草叶、3片朦胧叶和水晶瓶都齐再离开；水晶瓶在花岗岩之泉商人购买，一次购买直接得到5个，只需买一次。",
+          "note": "水草叶、3片朦胧叶和水晶瓶都齐再离开；水晶瓶在花岗岩之泉商人购买，一次购买直接得到5个。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11990
         },
         {
@@ -3066,17 +3118,21 @@
           "name": "解读象形文字",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11991
         },
         {
           "badge": "shared",
           "name": "清理天灾",
-          "note": "",
+          "note": "把僵化巨魔尸体拖到马克·菲尔森处，再用高温处理掉。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12484
         },
         {
@@ -3084,8 +3140,10 @@
           "name": "蘑菇汤！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12483
         },
         {
@@ -3093,8 +3151,10 @@
           "name": "净化天灾巨魔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12029
         }
       ],
@@ -3402,19 +3462,23 @@
         {
           "badge": "not_shared",
           "name": "解读象形文字",
-          "note": "冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像，召唤NPC不共享。当前号背包里若还有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。",
+          "note": "冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像。交任务前若背包有超出需求的多余魔精，先移走。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11991
         },
         {
           "badge": "not_shared",
           "name": "必要的牺牲",
-          "note": "所需魔精由五号依次拾取，预言者之眼也需要五号依次交互取得，再分别到火盆完成交付。",
+          "note": "所需魔精由五号分别取得，预言者之眼也要五号分别交互，再各自在火盆完成交付。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12007
         },
         {
@@ -3422,8 +3486,10 @@
           "name": "蘑菇汤！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12483
         },
         {
@@ -3431,8 +3497,10 @@
           "name": "古树精华宝石",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12042
         },
         {
@@ -3440,8 +3508,10 @@
           "name": "净化天灾巨魔",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12029
         },
         {
@@ -3449,17 +3519,21 @@
           "name": "顺藤摸瓜",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12422
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "攻击银溪镇",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12413
         },
         {
@@ -3467,8 +3541,10 @@
           "name": "尽在掌控",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12802
         },
         {
@@ -3476,8 +3552,10 @@
           "name": "灰尘之声",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12068
         }
       ],
@@ -3590,12 +3668,14 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "攻击银溪镇",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12413
         },
         {
@@ -3603,8 +3683,10 @@
           "name": "盲眼卢娜",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12425
         },
         {
@@ -3612,8 +3694,10 @@
           "name": "沃达希尔的陨落",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12207
         },
         {
@@ -3621,8 +3705,10 @@
           "name": "地下的黑暗",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12213
         },
         {
@@ -3630,8 +3716,10 @@
           "name": "征服斗兽场：斗熊！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12427
         }
       ],
@@ -3916,17 +4004,21 @@
           "name": "征服斗兽场：斗熊！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12427
         },
         {
           "badge": "shared",
           "name": "征服斗兽场：疯狂的熊怪",
-          "note": "实战关键不是原地清图腾，而是持续跑动拉开；1防骑可直接单挑完成，保持移动并打断闪电链即可。",
+          "note": "持续跑动拉开并打断闪电链；1防骑可直接完成，不要原地硬吃图腾/法术。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12428
         },
         {
@@ -3934,8 +4026,10 @@
           "name": "征服斗兽场：鲜血与金属",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12429
         },
         {
@@ -3943,8 +4037,10 @@
           "name": "征服斗兽场：九死一生",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12430
         },
         {
@@ -3952,8 +4048,10 @@
           "name": "征服斗兽场：摊牌",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12431
         }
       ],
@@ -4192,8 +4290,10 @@
           "name": "净化天灾巨魔",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12029
         },
         {
@@ -4201,8 +4301,10 @@
           "name": "蘑菇汤！",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12483
         },
         {
@@ -4210,35 +4312,43 @@
           "name": "跟我的小朋友打招呼",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12190
         },
         {
           "badge": "not_shared",
           "name": "沃达希尔的陨落",
-          "note": "五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12207
         },
         {
           "badge": "shared",
           "name": "地下的黑暗",
-          "note": "《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；本任务共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；《白肩鹰的眼睛》共享，可沿三洞路线顺手完成。",
+          "note": "三处洞穴目标由主号完成即可同步五号。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12213
         },
         {
           "badge": "shared",
           "name": "白肩鹰的眼睛",
-          "note": "《沃达希尔的陨落》不共享：五号分别收集6份软泥样本；《地下的黑暗》共享：三处洞穴到尽头黑烟前使用任务宝珠，主号完成即可同步；本任务共享，可沿三洞路线顺手完成。",
+          "note": "主号对白肩鹰使用银色羽毛即可同步五号进度。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12453
         },
         {
@@ -4246,26 +4356,32 @@
           "name": "盲眼卢娜",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12425
         },
         {
           "badge": "not_shared",
           "name": "卢娜的要求",
-          "note": "五号分别收集4份薄纱之尘。《梦游体验》不共享，五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。",
+          "note": "五号分别收集4份薄纱之尘。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12328
         },
         {
           "badge": "not_shared",
           "name": "梦游体验",
-          "note": "《卢娜的要求》不共享，五号分别收集4份薄纱之尘。本任务不共享，五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。",
+          "note": "五号分别在卢娜水晶球旁喝药并看完整视觉事件；若效果不自动结束，再取消buff。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12327
         },
         {
@@ -4273,8 +4389,10 @@
           "name": "命运与巧合",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12329
         }
       ],
@@ -4495,8 +4613,10 @@
           "name": "前往欧尼瓦营地",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12451
         },
         {
@@ -4504,8 +4624,10 @@
           "name": "新的盟友",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12074
         },
         {
@@ -4513,8 +4635,10 @@
           "name": "惊吓野马",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12415
         },
         {
@@ -4522,8 +4646,10 @@
           "name": "不速之“客”",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12195
         },
         {
@@ -4531,17 +4657,21 @@
           "name": "熊的美食",
           "note": "五号分别对鱼群使用任务渔网，不需要钓鱼专业。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12279
         },
         {
           "badge": "not_shared",
           "name": "破损的日记",
-          "note": "索尔莫丹外约(64.3,19.8)五号分别拾取地面的破损日记并接任务；书页就在周围战场地面，每号分别收集8张，最后各自在背包把书页与不完整日记合成完整日记再下山。",
+          "note": "索尔莫丹外约(64.3,19.8)五号分别拾取破损日记并接任务；周围战场收8张书页后各自在背包合成完整日记。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12026
         }
       ],
@@ -4752,8 +4882,10 @@
           "name": "白肩鹰的眼睛",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12453
         },
         {
@@ -4761,8 +4893,10 @@
           "name": "沃达希尔的陨落",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12207
         },
         {
@@ -4770,8 +4904,10 @@
           "name": "地下的黑暗",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12213
         },
         {
@@ -4779,8 +4915,10 @@
           "name": "可能的关联",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12229
         },
         {
@@ -4788,8 +4926,10 @@
           "name": "熊神的后代",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12231
         },
         {
@@ -4797,8 +4937,10 @@
           "name": "不速之“客”",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12195
         },
         {
@@ -4806,8 +4948,10 @@
           "name": "有趣的计划",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12165
         },
         {
@@ -4815,8 +4959,10 @@
           "name": "惊吓野马",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12415
         },
         {
@@ -4824,8 +4970,10 @@
           "name": "熊的美食",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12279
         },
         {
@@ -4833,8 +4981,10 @@
           "name": "破损的日记",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12026
         },
         {
@@ -4842,8 +4992,10 @@
           "name": "翻译日记",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12054
         }
       ],
@@ -5020,28 +5172,34 @@
         {
           "badge": "sequential_loot",
           "name": "翻译日记",
-          "note": "目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。",
+          "note": "目标只需击杀一次，同一尸体可由五号依次拾取任务物。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12054
         },
         {
           "badge": null,
           "name": "可能的关联",
-          "note": "《翻译日记》目标只需击杀一次，五号依次拾取；本任务推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；《熊神的后代》共享。",
+          "note": "推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12229
         },
         {
           "badge": "shared",
           "name": "熊神的后代",
-          "note": "《翻译日记》目标只需击杀一次，五号依次拾取；《可能的关联》推荐在约(54.2,41.9)灰喉堡上山入口右侧水域附近刷；本任务共享。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12231
         },
         {
@@ -5049,8 +5207,10 @@
           "name": "摧毁树苗",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12241
         },
         {
@@ -5058,8 +5218,10 @@
           "name": "沃达希尔的种子",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12242
         },
         {
@@ -5067,17 +5229,21 @@
           "name": "符文中的预言",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12058
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "“钢铁之子”",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12073
         }
       ],
@@ -5462,44 +5628,54 @@
           "name": "新的盟友",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12074
         },
         {
           "badge": "shared",
           "name": "巨石横飞",
-          "note": "《鼓舞士气》均共享；主号完成即可同步五号。",
+          "note": "主号投掷巨石即可同步五号。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11982
         },
         {
           "badge": "shared",
           "name": "鼓舞士气",
-          "note": "《巨石横飞》本任务均共享；主号完成即可同步五号。",
+          "note": "主号使用大地碎片并处理后续目标即可同步五号。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12070
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "攻破防线",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 11985
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "“钢铁之子”",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12073
         },
         {
@@ -5507,8 +5683,10 @@
           "name": "符文中的预言",
           "note": "三块符文板由主号读取即可同步五号。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12058
         },
         {
@@ -5516,8 +5694,10 @@
           "name": "加弗洛克",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12081
         },
         {
@@ -5525,8 +5705,10 @@
           "name": "跟我的小朋友打招呼",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12190
         },
         {
@@ -5534,17 +5716,21 @@
           "name": "等肉下锅",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12113
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "心灵的创伤",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12114
         },
         {
@@ -5552,17 +5738,21 @@
           "name": "孤胆英雄……",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12116
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "压制符文",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12093
         },
         {
@@ -5570,8 +5760,10 @@
           "name": "以洛肯之名",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12204
         }
       ],
@@ -5826,26 +6018,32 @@
           "name": "命运与巧合",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12329
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "萨莎的狩猎",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12134
         },
         {
           "badge": "not_shared",
           "name": "阿纳托雷",
-          "note": "去至日村找塔季娅娜，对她使用镇静飞镖触发坐骑/带回脚本；一个号完成后其余号留在原地等塔季娅娜刷新，再依次完成。",
+          "note": "去至日村找塔季娅娜并使用镇静飞镖；一个号完成后，其余号留在原地等她刷新，再依次完成。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12330
         },
         {
@@ -5853,17 +6051,21 @@
           "name": "姐姐的誓言",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12411
         },
         {
           "badge": "not_shared",
           "name": "摧毁树苗",
-          "note": "完成后本组直接炉石回征服堡。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12241
         },
         {
@@ -5871,8 +6073,10 @@
           "name": "沃达希尔的种子",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12242
         },
         {
@@ -5880,8 +6084,10 @@
           "name": "乌索克，巨熊之神",
           "note": "击败乌索克后对尸体使用净化灰烬；1防骑+4惩戒可让NPC助手负责治疗。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12236
         }
       ],
@@ -6058,8 +6264,10 @@
           "name": "乌索克，巨熊之神",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12236
         },
         {
@@ -6067,8 +6275,10 @@
           "name": "姐姐的誓言",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12411
         },
         {
@@ -6076,17 +6286,21 @@
           "name": "狼人的末日",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12164
         },
         {
           "badge": "shared",
           "name": "以洛肯之名",
-          "note": "《潜在的能量》均共享。\n先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
+          "note": "先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12204
         }
       ],
@@ -6418,48 +6632,58 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "压制符文",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12093
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "心灵的创伤",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12114
         },
         {
           "badge": "not_shared",
           "name": "孤胆英雄……",
-          "note": "启动护送前先确认本任务《灰尘之声》的遗迹内目标已完成。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12116
         },
         {
           "badge": null,
           "name": "灰尘之声",
-          "note": "先携带，进入Drakil'jin遗迹再完成。\n启动护送前先确认《孤胆英雄……》本任务的遗迹内目标已完成。",
+          "note": "先收集达卡莱石板和5份神圣魔精，再在达库鲁火盆处使用药剂召唤影像。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12068
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "喔——哒！！",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12082
         },
         {
@@ -6467,26 +6691,32 @@
           "name": "达卡古尔之槌",
           "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12120
         },
         {
           "badge": "special",
           "name": "死后相见",
-          "note": "敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。",
+          "note": "敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12121
         },
         {
           "badge": "not_shared",
           "name": "冷静一下，伙计",
-          "note": "《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；本任务不共享，五号分别完成。",
+          "note": "先从箱子取得永恒休眠之雪，对上古阿卡莱幽魂使用后再收集灵魂微粒。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12137
         }
       ],
@@ -6715,8 +6945,10 @@
           "name": "冷静一下，伙计",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12137
         },
         {
@@ -6724,8 +6956,10 @@
           "name": "金亚拉克的末日",
           "note": "按任务流程灌注供品并在墓穴外锣旁完成最终事件即可。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12152
         },
         {
@@ -6733,35 +6967,43 @@
           "name": "狼人的末日",
           "note": "按三前置Boss → 阿鲁高之影的脚本顺序完成即可。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12164
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "压制符文",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12093
         },
         {
           "badge": "shared",
           "name": "潜在的能量",
-          "note": "《以洛肯之名》本任务均共享。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12094
         },
         {
           "badge": "shared",
           "name": "以洛肯之名",
-          "note": "《潜在的能量》均共享。\n先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
+          "note": "先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12204
         }
       ],
@@ -7044,62 +7286,76 @@
           "name": "以洛肯之名",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12204
         },
         {
           "badge": "sequential_loot",
           "name": "监工的制服",
-          "note": "目标打一次后五号依次拾取；《有趣的计划》不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。",
+          "note": "目标只需击杀一次，同一尸体可由五号依次拾取任务物。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12201
         },
         {
           "badge": "not_shared",
           "name": "有趣的计划",
-          "note": "《监工的制服》目标打一次后五号依次拾取；本任务不共享，三张蓝图为个人掉落，五号分别收集并在背包合成；最下方建筑内任务怪最密。",
+          "note": "三张蓝图都是个人掉落，五号分别收集并在背包合成；最下方建筑内目标最密。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12165
         },
         {
           "badge": "shared",
           "name": "活灵活现",
-          "note": "《收集零件》不共享，五号分别拾取零件。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12202
         },
         {
           "badge": "not_shared",
           "name": "收集零件",
-          "note": "《活灵活现》共享；本任务不共享，五号分别拾取零件。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12196
         },
         {
           "badge": "shared",
           "name": "洛肯的命令",
-          "note": "《我们有能源》两名目标各打一次，同一尸体能量核心由五号依次拾取；本任务共享。读取基座后保持已完成未交，伪装留到铁领主结束。",
+          "note": "",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12203
         },
         {
           "badge": "sequential_loot",
           "name": "我们有能源",
-          "note": "两名目标各打一次，同一尸体能量核心由五号依次拾取；《洛肯的命令》共享。读取基座后保持已完成未交，伪装留到铁领主结束。",
+          "note": "两名目标各击杀一次，同一尸体上的能量核心可由五号依次拾取。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12197
         }
       ],
@@ -7295,17 +7551,21 @@
           "name": "我们有能源",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12197
         },
         {
           "badge": "shared",
           "name": "……我们没有能源",
-          "note": "五个角色分别召出的战争魔像都能对同一只闪电斥候各记1次充能；一只怪可直接记5次，两只怪即可完成全队。",
+          "note": "五个角色分别召出的战争魔像都能对同一只闪电斥候各记1次充能；一只怪可直接贡献5次进度。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12198
         },
         {
@@ -7313,8 +7573,10 @@
           "name": "击败铁领主",
           "note": "穿伪装上楼/乘电梯，使用魔像控制器；铁领主死亡后继续利用魔像/载具离开。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12199
         },
         {
@@ -7322,8 +7584,10 @@
           "name": "洛肯的命令",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12203
         }
       ],
@@ -7474,26 +7738,32 @@
           "name": "潜在的能量",
           "note": null,
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": false,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12094
         },
         {
           "badge": "shared",
           "name": "终获解救",
-          "note": "符文破坏者失败时目标会被削弱，可等冷却后再次使用。《等肉下锅》先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。",
+          "note": "符文破坏者失败时目标会被削弱，可等冷却后再次使用。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": false,
+          "suppress_action_kinds": [],
           "task_id": 12099
         },
         {
           "badge": null,
           "name": "等肉下锅",
-          "note": "《终获解救》共享；符文破坏者失败时目标会被削弱，可等冷却后再次使用。本任务先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。",
+          "note": "狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环。",
           "note_override_applied": true,
+          "note_show_on": [],
           "note_visible": true,
           "pending": true,
+          "suppress_action_kinds": [],
           "task_id": 12113
         }
       ],

@@ -88,10 +88,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。",
+      "text": "先从箱子取得永恒休眠之雪，对上古阿卡莱幽魂使用后再收集灵魂微粒。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《拯救盖米尔》祖达克首组实跑确认：不共享，女妖精华与硅藻土按各号自己的任务进度完成。\n《拯救盖米尔》：不共享：本段先收女妖精华；硅藻土在交《黑锋哨站》后回黑锋哨站入口补齐。\n《拯救盖米尔》：不共享：这里补齐硅藻土；离开入口前确认五号材料都齐。",
+      "text": "女妖精华与硅藻土按各号自己的任务进度完成。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12914 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

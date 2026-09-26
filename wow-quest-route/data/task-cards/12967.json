@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《元素之战》：不共享：五号分别骑亚米尔德旁的斯诺里，用载具技能完成《元素之战》。\n【需要单独修正优化】《元素之战》首组实跑确认：任务进度不共享，五个角色需要分别完成载具击杀目标。",
+      "text": "五号分别骑亚米尔德旁的斯诺里，用载具技能完成目标。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12967",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

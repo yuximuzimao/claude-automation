@@ -120,10 +120,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《血之魔典》：来源怪为冰雾村阿努巴尔教徒；击杀后拾取掉落的任务起始物并右键接任务。必须先交《死亡名单：高阶教徒扎古斯》后才会进入掉落池；五号都接到任务后再离开。\n【需要单独修正优化】《血之魔典》不能在《死亡名单：扎古斯》完成前刷。首组实测确认扎古斯本体不掉；先回阿格玛交12056，再到冰雾村击杀阿努巴尔教徒获取魔典并右键接12057。该任务必须作为固定路线任务，不再按条件掉落触发处理。",
+      "text": "必须先交《死亡名单：高阶教徒扎古斯》后，冰雾村阿努巴尔教徒才会掉落血之魔典；拾取后右键接任务，五号都接到再离开。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12057",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

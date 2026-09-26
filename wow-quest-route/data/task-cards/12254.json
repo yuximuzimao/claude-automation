@@ -110,10 +110,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "斯崔特主教只杀一次；同一具尸体可供五号分别拾取各自祈祷之书。小礼拜堂约(69,76)，不是大修道院楼上。\n【需要单独修正优化】《祈祷之书》首组实跑确认：斯崔特主教只需击杀一次，同一具尸体可供五个角色分别拾取各自的祈祷之书。",
+      "text": "斯崔特主教只杀一次；同一具尸体可供五号分别拾取祈祷之书。小礼拜堂约(69,76)，不是大修道院楼上。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12254",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

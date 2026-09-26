@@ -47,7 +47,7 @@
     "交付：巨魔仆从伍迪。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -73,6 +73,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-boss-kill-batch-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 remaining-pending audit: task completion is a common group kill/Boss defeat with no per-character completion stage; retained note, if any, is combat tactics only.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

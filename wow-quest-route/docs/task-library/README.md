@@ -93,13 +93,14 @@
 
 `fivebox.status`只承担一个职责：给五开执行和玩家标签提供**粗粒度、明确、稳定**的总体分类。
 
-当前只有五类：
+当前只有六类：
 
 - `shared` → 共享；
 - `not_shared` → 不共享；
 - `sequential_loot` → 依次拾取；
 - `special` → 特殊；
-- `pending` → 待实测。
+- `pending` → 待实测；
+- `not_applicable` → 无需五开标签。
 
 ### 3.1 分类边界
 
@@ -118,6 +119,8 @@
 - 其它需要看`guide`才能正确执行的混合/条件机制。
 
 `pending`：现有证据不能确认总体五开分类。无需另外建立“五开open question”机器层；后续实测确认后直接修改status，并把可靠事实补进guide/evidence。
+
+`not_applicable`：任务本身没有需要判断的五开完成机制，例如纯接取→跑到另一NPC交付的传话/转场任务；这类任务不显示fivebox标签，也不应为了“凑一个状态”进入待实测。
 
 ### 3.2 不再建立stage分类
 
@@ -229,7 +232,7 @@ Evidence Index由`scripts/build_task_evidence_index.py`生成到`_sandbox/task-e
 
 需要新增或修改Task Card时，先按Route Lifecycle SOP确认这确实属于`TASK_FACT`，再以本文件定义的Task Card字段职责和证据规则修改对应稳定`task_id`。Evidence Index只帮助集中查看证据，不自动替人判断共享机制、路线删留、Presentation文案或其它需要语义判断的内容。
 
-旧Task Card迁移脚本、review queue、fivebox type mapping和workbench动作ID对照均已完成使命并进入`docs/archive/`；它们不是当前操作入口。迁移时遗留但仍未完成的fivebox实测事项已经转入唯一`tasks/todo.md`，对应Task Card继续用`fivebox.status=pending`表达未知，后续随自然实跑验证。
+旧Task Card迁移脚本、review queue、fivebox type mapping和workbench动作ID对照均已完成使命并进入`docs/archive/`；它们不是当前操作入口。当前正式路线所有仍未确认的fivebox任务由`tasks/fivebox-pending.md`维护唯一完整验证清单，`tasks/todo.md`只保留该清单的工作入口；对应Task Card继续用`fivebox.status=pending`表达未知，后续随自然实跑验证。
 
 ## 11. 修改验收
 
@@ -239,7 +242,7 @@ Evidence Index由`scripts/build_task_evidence_index.py`生成到`_sandbox/task-e
 - task_id与文件名一致；
 - 当前字段有来源或明确未知；
 - 没有Route Profile决策泄漏进Task Card；
-- fivebox.status只使用五个固定分类；
+- fivebox.status只使用六个固定分类；
 - mixed/条件机制没有被粗暴伪装成纯shared/not_shared；
 - Route Profile仍能通过task_id引用；
 - 玩家备注与fivebox状态相互独立。

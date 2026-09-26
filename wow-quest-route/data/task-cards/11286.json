@@ -133,10 +133,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《钢铁之门的古器》嚎风峡湾首组实跑确认：不共享，五号分别收集。正式foundation显示该任务无前置；首组Journey也确认可在首次到钢铁之门、接《裂木森林的囚犯》时直接一起接，不应拖到后期11287链后。\n《钢铁之门的古器》：没有前置；首次到钢铁之门时就和《裂木森林的囚犯》一起接，不要拖到后期11287链。\n不共享：五号分别去钢铁之门大坑/遗迹拾取10件古器；目标是地面可拾取物，不要在上层营地刷矮人等掉落。",
+      "text": "古器是钢铁之门大坑/遗迹的地面拾取物，不要在上层营地刷矮人。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.11286 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

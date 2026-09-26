@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《危险的材料》：不共享：沃尔塔鲁斯内拾取5块已采集的荒芜水晶；点击水晶时伪装可能失效，逐号操作时留意重新伪装。\n【需要单独修正优化】《危险的材料》祖达克首组实跑确认：不共享，五号分别完成。",
+      "text": "沃尔塔鲁斯内拾取5块已采集的荒芜水晶；点击水晶时伪装可能失效，逐号操作时留意重新伪装。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12677",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

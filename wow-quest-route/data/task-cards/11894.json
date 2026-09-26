@@ -138,10 +138,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《修修补补》：不共享：在蒸汽喷口使用未处理的鹿皮。\n【需要单独修正优化】《修修补补》的蒸汽熟化鹿皮进度不共享；五个角色必须分别把未经熟化的鹿皮带到蒸汽喷口旁使用并各自做到5/5，以最低进度角色完成为离开条件。",
+      "text": "五号分别把未经熟化的鹿皮带到蒸汽喷口旁使用并各自做到5/5。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11894",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

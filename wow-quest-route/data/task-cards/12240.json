@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《解决方案》：共享：伐木场中央约(68,74)使用白蚁，引出工头卡雷基后主控击杀即可。\n【需要单独修正优化】《解决方案》首组实跑确认：使用白蚁引出工头卡雷基并击杀后的任务进度五号共享；只需主控完成一次。",
+      "text": "伐木场中央约(68,74)使用白蚁，引出工头卡雷基后主控击杀即可。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12240",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

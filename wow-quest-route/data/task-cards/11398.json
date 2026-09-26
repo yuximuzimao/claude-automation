@@ -108,10 +108,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《天灾装置》：不共享；任务起始物由冷原海岸亡灵鱼人掉落，五号需要按掉落依次拾取并分别接任务；离开前确认五号都已经接到。\n【需要单独修正优化】《天灾装置》嚎风峡湾首组实跑确认：任务起始物需要五号按掉落逐个取得并分别拾取/接取，不能只靠一号获得后同步全队。",
+      "text": "任务起始物由冷原海岸亡灵鱼人掉落；五号按掉落分别取得并接任务，离开前确认都已接到。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11398",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和已由fivebox标签表达的重复状态，只保留会改变当前任务执行的最短提醒。"
     }
   }
 }

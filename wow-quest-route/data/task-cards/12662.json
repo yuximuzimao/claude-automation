@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《击落赫布金》：共享：点击赫布达卡建筑坡道底部的大鼓（约64，52），等赫布金骑蝙蝠下来后击杀。可用任务物“蝙蝠网”困住落地的蝙蝠，减少同时承伤；用网不是完成条件。\n【需要单独修正优化】《击落赫布金》2026-09-06至07祖达克首组实跑：共享：点击赫布达卡建筑坡道底部的大鼓（约64，52），等赫布金骑蝙蝠下来后击杀。可用任务物“蝙蝠网”困住落地的蝙蝠，减少同时承伤；用网不是完成条件。",
+      "text": "点击赫布达卡建筑坡道底部的大鼓（约64,52）引下赫布金后击杀；蝙蝠网只用于控蝙蝠，不是完成条件。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12662",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

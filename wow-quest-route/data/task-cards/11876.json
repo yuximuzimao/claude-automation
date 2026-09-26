@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《帮助弱小》：共享：必须找“被困的猛犸幼崽”并使用任务锤，不是杀附近怪；个别陷阱若不计数直接换下一只。\n【需要单独修正优化】《帮助弱小》营救被困猛犸幼崽的数量进度五号共享；主控使用陷阱破坏锤释放幼崽即可同步推进全队，不需要五号分别操作。猛犸幼崽区紧邻冷石采掘场Hub，后续从零路线在这里顺手接《海象人的先祖》和《夺回采掘场》。",
+      "text": "对“被困的猛犸幼崽”使用陷阱破坏锤；主控释放即可同步全队，个别陷阱不计数就换下一只。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11876",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

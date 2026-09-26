@@ -110,10 +110,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《放置霍迪尔之盔》：不共享：丹尼芬雷北侧约(64.2,59.2)矮冰柱顶端使用宣告石板，五号分别操作。\n【需要单独修正优化】宣告石板进度不共享；五个角色需要分别使用。",
+      "text": "丹尼芬雷北侧约(64.2,59.2)矮冰柱顶端使用宣告石板；五号分别操作。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12987",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -49,7 +49,7 @@
     "交付：护园者尼瑟拉。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -75,6 +75,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-fivebox-baseline-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "docs/rules/execution-and-mechanics.md §4 baseline; Questie objective is ordinary kill credit only and Task Card guide/note contains no task-item/use/event/vehicle/escort/summon/dialogue-trigger/personal stage.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

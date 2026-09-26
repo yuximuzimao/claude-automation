@@ -102,10 +102,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "与库尔迪拉对话进入阴影界，在阴影位面击杀6名暗影折磨者；需要重进时再次对话。\n《毁灭的力量》需要《邪能之约》《邪恶之约》《冰霜之约》都已完成；前两颗此前已经交过。",
+      "text": "与库尔迪拉对话进入阴影界，在阴影位面击杀6名暗影折磨者；需要重进时再次对话。开始前需已完成《邪能之约》《邪恶之约》《冰霜之约》。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

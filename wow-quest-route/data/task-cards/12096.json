@@ -155,10 +155,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《强化古树》：共享：树皮只需主控取得一份并强化古树。\n【需要单独修正优化】《强化古树》首组龙骨实跑确认：所需树皮只需要一个角色取得；主控对古树执行强化后任务进度五号共享，不需要五号各拿一份树皮。",
+      "text": "树皮只需主控取得一份并强化古树即可同步全队。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12096",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

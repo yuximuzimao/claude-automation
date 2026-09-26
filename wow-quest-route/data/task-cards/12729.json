@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《诸神的指引》祖达克首组实跑确认：按共享执行；两种精华掉落后可由五号依次拾取，无需逐号重打。\n《诸神的指引》：共享：典狱官精华同样由五号依次拾取，确认五号都拿到后再离开。\n《诸神的指引》：共享：守卫者精华掉落后五号依次拾取，无需逐号重打。",
+      "text": "两种精华都只需对应目标掉落一次；同一掉落可供五号依次拾取。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12729 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

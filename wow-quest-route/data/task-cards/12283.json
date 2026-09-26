@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《寻找真相》：不共享：阿比迪斯日记在楼上，五号必须分别拾取自己的日记；到平面坐标后先找楼梯。\n【需要单独修正优化】《寻找真相》首组实跑确认：阿比迪斯日记不共享，五个角色必须分别拾取自己的日记。",
+      "text": "阿比迪斯日记在楼上；五号分别拾取自己的日记，到平面坐标后先找楼梯。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12283",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

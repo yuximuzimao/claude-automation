@@ -9,6 +9,7 @@ STATUS_TO_BADGE = {
     "sequential_loot": "sequential_loot",
     "special": "special",
     "pending": None,
+    "not_applicable": None,
 }
 DEFERRED_NOTE_OPTIMIZATION_MARKER = "【需要单独修正优化】"
 PROCESS_PREFIX_RE = re.compile(

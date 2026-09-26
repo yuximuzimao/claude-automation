@@ -155,10 +155,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《确保他们不再站起来！》：共享：主控对15具血色先锋军尸体使用老鼠箱即可同步全队。\n【需要单独修正优化】《确保他们不再站起来！》首组实跑确认：对血色先锋军尸体使用老鼠箱后的15具尸体进度五号共享；主控处理尸体即可。用户从怨毒镇去翡翠圣地途中顺路完成，证明这条应与《通缉：血色先锋军》《物资掠夺》一起前移到新壁炉谷第一圈，而不是后面单独折返。",
+      "text": "主控对15具血色先锋军尸体使用老鼠箱即可同步全队。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12211",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

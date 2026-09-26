@@ -85,7 +85,7 @@
     "交付：米斯希尔萨·阿奈尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -111,6 +111,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-recovered-2026-08-30-13361",
+      "source_type": "user_live",
+      "source_ref": "Recovered from user live-run conversation dated 2026-08-30: explicit fivebox classification for this task.",
+      "observed_at": "2026-08-30",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

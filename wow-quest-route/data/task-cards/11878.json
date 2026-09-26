@@ -51,7 +51,7 @@
     "交付：巨兽库诺克。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -78,14 +78,35 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-09-27-borean-dk-second-run",
+      "source_type": "user_live",
+      "source_ref": "2026-09-27 user correction to second DK Borean live run: 《库诺克的智慧》是顺路交接任务，只有接与交，没有独立做任务过程。",
+      "observed_at": "2026-09-27",
+      "version_scope": "WotLK China live server; second DK fivebox run",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox",
+        "presentation.action_display_override",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《库诺克的智慧》不是纯跑腿交付，接任务后会带着猛犸幼崽孤儿；必须让幼崽跟到库诺克附近才完成。路上不要把跟随目标甩丢。",
+      "text": "接取后顺路带到库诺克交付即可，无需单独执行“做”动作。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-09-27 user live-run correction",
+      "reason": "实跑确认该任务只有接→交，删除旧版把它描述成独立执行任务的误导备注。"
+    },
+    "action_display_override": {
+      "suppress_kinds": [
+        "objective"
+      ],
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "2026-09-27 user live-run correction",
+      "reason": "实跑确认《库诺克的智慧》只有接取与交付，没有独立“做”过程；内部objective仍可保留用于任务状态校验，但玩家路线不显示。"
     }
   }
 }

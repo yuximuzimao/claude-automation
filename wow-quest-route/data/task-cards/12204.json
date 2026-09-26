@@ -95,10 +95,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《以洛肯之名》《潜在的能量》均共享。\n《以洛肯之名》先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
+      "text": "先找休·格兰斯对话，再去加弗洛克完成剩余对话。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

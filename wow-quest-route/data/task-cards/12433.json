@@ -112,10 +112,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "不共享：按单个场景物交互/拾取处理，五号依次获取 Element 115；拾取后开始短时限返程，立即原路返回古图尔并尽量不进战斗。\n【需要单独修正优化】《寻找溶解剂》按用户确认的任务机制规则处理：单个物品交互/拾取类型默认不共享，五号依次获取Element 115；本组未单独留下实跑记忆，因此这是按已确认机制类型规则锁定，而非逐号现场观察。",
+      "text": "五号分别获取Element 115；拾取后开始短时限返程，立即原路返回古图尔并尽量不进战斗。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12433",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

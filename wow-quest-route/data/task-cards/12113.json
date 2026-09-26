@@ -75,10 +75,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《终获解救》共享；符文破坏者失败时目标会被削弱，可等冷却后再次使用。《等肉下锅》先在约(72,37)同片顺手打；狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环，两种目标都有。",
+      "text": "狼肉缺口优先去65—66,43，66,43洞内狼刷新快；想少跑动可在68,39营地/墓地附近循环。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

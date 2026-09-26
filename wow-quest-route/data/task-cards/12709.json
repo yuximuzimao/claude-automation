@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《妖术宝箱》：不共享：开启宝箱可能随机中妖术；附近魔化蒂基面具战士会掉蒂基妖术清除器，先刷一些清除器再开箱；如果中了持续掉血类妖术，及时用清除器解除。\n【需要单独修正优化】《妖术宝箱》祖达克首组实跑确认：不共享，五号分别完成宝箱收集。",
+      "text": "开启宝箱可能随机中妖术；附近魔化蒂基面具战士会掉蒂基妖术清除器，先准备一些再开箱。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12709",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

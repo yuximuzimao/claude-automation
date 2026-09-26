@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《邪恶之约》：不共享：五号轮流分别完成邪恶宝石操作；目标在坑内且刷新很快。\n【需要单独修正优化】《邪恶之约》首组龙骨实跑确认：瓦伦哈尔位于下陷地形/坑内，五个角色需要轮流分别完成邪恶宝石操作；目标刷新很快，逐号执行可连续完成。空间上与《红玉丁香》非常接近，适合并入同一步。",
+      "text": "五号轮流分别完成邪恶宝石操作；目标在坑内且刷新很快。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12126",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《日常计划》首组实跑确认：兵营、修道院、海滩三份血色先锋军日常命令均不共享，五个角色都必须分别拾取自己的三份文件。\n《日常计划》：不共享：五号分别拾取一楼楼梯附近桌上的兵营命令。上楼后由主控对指挥官乔丹使用强制魔棒。\n修道院命令在一楼图书馆翼后室约(73.5,72.6)，不需要上楼；五号分别拾取。\n海滩命令约(71.6,80.4)，在帐篷/篝火旁箱子上；确认五号三份命令都齐再回怨毒镇。",
+      "text": "兵营、修道院、海滩三份命令都要五号分别拾取。修道院命令在一楼图书馆翼后室约(73.5,72.6)；海滩命令约(71.6,80.4)。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12234 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -113,10 +113,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《牢笼》：共享：能量核心与牢笼外壳进度同步；主控完成两名目标即可。\n【需要单独修正优化】《牢笼》首组实跑确认能量核心与牢笼外壳的任务进度五号共享；主控分别击杀战争使者戈德拉克和塞鲁利恩将军并取得对应任务物即可同步全队，不需要五个角色各刷一套掉落物。",
+      "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11943",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

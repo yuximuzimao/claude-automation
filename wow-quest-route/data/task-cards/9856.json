@@ -71,7 +71,7 @@
     "交付：\"好儿子\"沙度·远行者。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -97,6 +97,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-legacy-player-view-nagrand-shared-2026-09-26",
+      "source_type": "legacy_migration",
+      "source_ref": "docs/archive/routes/2026-09-route-lifecycle-publisher-cutover/player-view-next/nagrand.md; preserved note explicitly states the three Nagrand hunting quests are shared.",
+      "observed_at": "2026-09-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

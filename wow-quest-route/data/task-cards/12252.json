@@ -155,10 +155,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《拷问者里克拉夫》：共享：主控连续使用审讯工具5次再击杀。兵营正门约(70,72)：右→左→左，第二次左转过拱门后找右侧向下楼梯。审讯时停普攻/反伤。\n【需要单独修正优化】《拷问者里克拉夫》首组实跑确认：对拷问者连续使用审讯工具5次的任务进度五号共享；主控完成一轮审讯即可。",
+      "text": "主控连续使用审讯工具5次再击杀；审讯时停普攻/反伤。兵营正门约(70,72)，目标在内部下层。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12252",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

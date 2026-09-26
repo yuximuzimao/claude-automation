@@ -124,10 +124,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《阿纳托雷》不共享：去至日村找塔季娅娜，对她使用镇静飞镖触发坐骑/带回脚本；一个号完成后其余号留在原地等塔季娅娜刷新，再依次完成。\n【需要单独修正优化】《阿纳托雷》灰熊丘陵首组实跑确认：不共享；一个角色完成后，其余角色需要留在原地等待目标刷新，再依次使用任务道具并完成脚本。",
+      "text": "去至日村找塔季娅娜并使用镇静飞镖；一个号完成后，其余号留在原地等她刷新，再依次完成。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12330",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -120,10 +120,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《测试药剂》：共享：主控对指定血色士兵使用1次即可同步全队。\n【需要单独修正优化】《测试药剂》首组怨毒镇实测：进度五号共享，只需主控对指定血色士兵使用一次药剂；不需要五号分别操作。",
+      "text": "贴近血色俘虏/士兵使用凋零药剂瓶；不是普通击杀。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12206",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

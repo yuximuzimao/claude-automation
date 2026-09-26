@@ -102,10 +102,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《学习沟通》：不共享：只需击杀一次斯卡德尔；同一具尸体可供五个角色依次使用空贝壳，每号各操作一次。\n【需要单独修正优化】《学习沟通》进度不共享，但同一具斯卡德尔尸体可供五个角色依次使用空贝壳；只需击杀一次，随后五号对同一尸体各操作一次即可。",
+      "text": "斯卡德尔只需击杀一次；五号分别对同一具尸体使用空贝壳。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11571",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

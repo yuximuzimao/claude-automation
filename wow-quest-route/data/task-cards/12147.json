@@ -120,10 +120,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《古怪的暗示》：来源怪为峡谷中的冰拳；击杀后拾取掉落的“纹饰战斗号角”，五号分别右键接任务。冰拳只杀一次，同一具尸体可供五号分别拾取号角。\n【需要单独修正优化】《古怪的暗示》首组回忆：冰拳一次击杀后，同一具尸体的纹饰战斗号角五个角色都能分别拾取。固定路线因此不再前段提前杀冰拳，而是在接到《峡谷追击》后一次击杀同时完成正式计数并让五号取得号角。",
+      "text": "冰拳只需击杀一次，同一具尸体可供五号分别拾取纹饰战斗号角。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12147",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

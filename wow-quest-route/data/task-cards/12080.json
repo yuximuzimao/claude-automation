@@ -144,10 +144,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "真正拉Boss前再用佐特防护药剂。药剂一次性，死亡后消失且不能重领；不要提前使用。\n【需要单独修正优化】《冰虫之母》首组龙骨实跑：打拉特尔博尔时发生一次死亡，已使用的佐特防护药剂无法通过返回NPC重新取得，最终无药剂强打完成；死亡、复活和误跑NPC属于本轮异常墙钟，不应回写为任务正常固有耗时。路线应把药剂保留到真正拉Boss前再用。",
+      "text": "真正拉Boss前再用佐特防护药剂；药剂一次性，死亡后消失且不能重领，不要提前使用。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12080",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

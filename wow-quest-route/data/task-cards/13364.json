@@ -102,7 +102,7 @@
     "交付：大领主提里奥·弗丁。"
   ],
   "fivebox": {
-    "status": "shared"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -151,14 +151,25 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-note-audit-13364-status",
+      "source_type": "derived",
+      "source_ref": "Existing user-live execution note reclassified under current execution-and-mechanics fivebox rules during 2026-09-26 note audit.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《提里奥的尝试》本轮实跑确认：共享；五号必须都先装备侍僧兜帽并贴近提里奥，再由一个号互动启动事件即可同步。",
+      "text": "五号必须都先装备侍僧兜帽并贴近提里奥，再由一个号互动启动事件即可同步。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13364",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

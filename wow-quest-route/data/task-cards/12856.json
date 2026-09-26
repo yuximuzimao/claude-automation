@@ -46,7 +46,7 @@
     "交付：布莉亚娜。"
   ],
   "fivebox": {
-    "status": "shared"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -95,14 +95,25 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-note-audit-12856-status",
+      "source_type": "derived",
+      "source_ref": "Existing user-live execution note reclassified under current execution-and-mechanics fivebox rules during 2026-09-26 note audit.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《冰冷的心》：共享：先单号上龙快速救囚犯，落地换满血龙；五号都上龙后保持近距离一起做。\n【需要单独修正优化】《冰冷的心》首组实跑确认：五号都与始祖幼龙互动并各自上龙后，保持较近距离一起执行可共享进度。实跑操作为先用一个号快速救囚犯，落地后换满血龙，再让五号一起出发。",
+      "text": "五号都要与始祖幼龙互动并各自上龙；保持较近距离一起执行时进度可共享。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12856",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

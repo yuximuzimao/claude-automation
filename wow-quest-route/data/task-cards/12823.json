@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《完美的计划》：共享：霜胆祭坛在洞穴最上层；沿路有怪，可顺路完成《无所畏惧》。主控到祭坛放置炸药并撤出即可同步五号。\n【需要单独修正优化】《完美的计划》实跑确认：霜胆祭坛放炸药动作共享，只需主控完成一次。",
+      "text": "霜胆祭坛在洞穴最上层；主控放置炸药并撤出即可同步五号。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12823",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

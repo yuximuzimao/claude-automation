@@ -51,7 +51,7 @@
     "交付：瑟里纳尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -78,14 +78,25 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-derived-ordinary-kill-batch-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 remaining-pending audit: current task completion is ordinary group kill credit; any retained note only changes location/tactics/route usage, not per-character completion mechanics. Classified shared under execution-and-mechanics baseline.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "《无路可逃》事件刷出的怪也计入本任务；先做事件，再补剩余击杀目标。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "跨任务备注归属审计：该信息直接影响当前任务执行，因此从关联任务备注迁入当前任务。"
     }
   }
 }

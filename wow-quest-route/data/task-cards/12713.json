@@ -129,10 +129,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《背叛》：共享：与达库鲁对话传送到沃尔塔鲁斯顶部后，伪装失效是正常流程；等提示出现后立刻用统御权杖控制平台边缘的荒芜之血巨魔，让宠物主攻达库鲁。优先循环重击/击昏，自己躲开达库鲁投出的荒芜水晶及留下的毒雾；角色掉血时用巨魔的灌注技能回血。第一只巨魔快死时靠近下一只，死亡后再控第二只，避免空档吃暗影箭。剧情结束后五号分别拾取最后道具，并各自使用最后愿望传送回痛苦之匣。\n【需要单独修正优化】《背叛》祖达克首组实跑确认：Boss战斗共享；结尾任务道具需要五号分别拾取，返回痛苦之匣也需要五号分别交互传送。",
+      "text": "Boss战共享；剧情结束后五号分别拾取最后道具，并各自使用最后愿望传送回痛苦之匣。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12713",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

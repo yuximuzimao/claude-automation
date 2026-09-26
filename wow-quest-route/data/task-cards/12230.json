@@ -110,10 +110,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《收取炸弹》：不共享：优先拾取地面炸弹，缺的再杀攻城锻造师；怪物掉落时同一具尸体不能供五号分别拾取。\n【需要单独修正优化】《收取炸弹》首组实跑确认：炸弹既可以直接拾取地面物品，也可以由攻城锻造师掉落；进度不共享，五个角色都需要取得自己的炸弹。怪物掉落时同一具尸体不能供五号分别拾取，因此不能按一次击杀五号轮流摸尸处理。固定执行优先顺手捡地面炸弹，掉落则只计当前实际可拾取角色自己的进度。",
+      "text": "优先拾取地面炸弹，缺口再杀攻城锻造师；怪物掉落时同一具尸体不能供五号分别拾取。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12230",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

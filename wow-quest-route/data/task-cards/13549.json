@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《拎尾巴》：共享：脱战后对冰霜豹、冰爪熊使用图基尼的吹管，等动物睡倒，再右键选择掀尾巴检查。雌性计数，雄性会攻击；各找到3只雌性即可，无须护送回营地。\n【需要单独修正优化】《拎尾巴》2026-09-06至07祖达克首组实跑：共享：脱战后对冰霜豹、冰爪熊使用图基尼的吹管，等动物睡倒，再右键选择掀尾巴检查。雌性计数，雄性会攻击；各找到3只雌性即可，无须护送回营地。",
+      "text": "脱战后对冰霜豹、冰爪熊使用图基尼的吹管，等动物睡倒后掀尾巴检查；雌性计数，雄性会攻击。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13549",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

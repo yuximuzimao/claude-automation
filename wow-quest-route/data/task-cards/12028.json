@@ -116,10 +116,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《灵魂视界》：不共享：五号分别触发一次；脚本自动飞行，无需操纵。\n【需要单独修正优化】《灵魂视界》首组单号测试确认不共享；五个角色都要各自触发一次。但脚本飞行自动进行、基本无需操纵，因此逐号开始飞行的额外操作成本很低。",
+      "text": "五号分别触发一次；脚本自动飞行，无需操纵。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12028",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

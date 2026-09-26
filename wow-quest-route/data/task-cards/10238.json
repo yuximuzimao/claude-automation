@@ -124,10 +124,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《如何为地精效力》地狱火半岛DK第二组实跑确认：营救三名地精的任务进度共享，主控执行即可同步队伍。",
+      "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.10238",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和已由fivebox标签表达的重复状态，只保留会改变当前任务执行的最短提醒。"
     }
   }
 }

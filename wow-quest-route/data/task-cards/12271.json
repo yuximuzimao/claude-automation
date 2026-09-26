@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《强制魔棒》：来源怪为兵营地下的拷问者里克拉夫；击杀后拾取掉落的“强制魔棒”任务起始物，五号分别右键接任务。同一掉落来源可供五号分别拾取。\n【需要单独修正优化】《强制魔棒》首组实跑确认：任务起始魔棒可由五个角色从同一掉落来源分别拾取；同一来源处理一次后五号依次拾取并各自右键接任务。",
+      "text": "任务起始物由兵营地下的拷问者里克拉夫掉落；同一掉落来源可供五号分别拾取魔棒并各自右键接任务。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12271",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

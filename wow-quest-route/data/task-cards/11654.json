@@ -88,10 +88,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《鲜血尖塔》：完成《乔装潜入》后，约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。",
+      "text": "约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

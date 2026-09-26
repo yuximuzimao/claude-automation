@@ -112,10 +112,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《耐心是我们不需要的美德》军需箱是地面拾取物，五号不共享；同一个军需箱只能一个角色拾取，五号必须分别拾取，以最低角色15/15为离开条件。",
+      "text": "军需箱是地面拾取物，同一个箱子只能一个角色拾取；五号分别做到15/15。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11606",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -105,10 +105,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《追查诺甘农之核》：不共享：克罗娜便笺和索雷地图两份固定文档都要五号分别拾取；同一刷新点可五号连续拾取。\n【需要单独修正优化】《追查诺甘农之核》两份固定文档五号分别拾取；同一刷新点可连续拾取。",
+      "text": "克罗娜便笺和索雷地图两份固定文档都要五号分别拾取；同一刷新点可连续拾取。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13273",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

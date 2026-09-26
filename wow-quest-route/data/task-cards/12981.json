@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《热与冷》：不共享：每号先杀怪取得6份任务道具，再分别使用6次并拾取后续目标物；与霜原湖当前任务顺路完成。\n【需要单独修正优化】《热与冷》首组实跑确认：不共享。每个角色都要自行杀怪取得6份任务道具，再分别使用6次任务道具并拾取后续目标物；本次在霜原湖任务区与其它任务顺路完成。",
+      "text": "每号先杀怪取得6份任务道具，再分别使用6次并拾取后续目标物。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12981",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

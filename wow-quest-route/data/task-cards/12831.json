@@ -97,10 +97,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《未被遗忘》：不共享：水晶蛛网洞穴最东北约(47,71)，杀紫色冰尖爬行者取毒囊；冰尖毒囊一次拾取只供一个角色，五号分别取得。\n【需要单独修正优化】《未被遗忘》首组实跑确认：冰尖毒囊一次拾取只供一个角色，五号分别取得。",
+      "text": "水晶蛛网洞穴最东北约(47,71)杀紫色冰尖爬行者取毒囊；一次拾取只供一个角色。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12831",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

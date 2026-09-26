@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《护甲板的秘密》：共享：护甲板的秘密只需与随从托克互动一次，五号同步完成。\n【需要单独修正优化】《护甲板的秘密》只需与随从托克互动一次，五号同步完成。",
+      "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12980",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

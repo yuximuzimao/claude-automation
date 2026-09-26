@@ -54,10 +54,11 @@
   "guide": [
     "接取：普雷玛·巨角。",
     "杀死迦莫斯拉，将他的像章交给北风苔原血孢平原的普雷玛·巨角。",
+    "迦莫斯拉位于迦莫斯洞穴底层；击杀后任务物可由五号依次拾取。",
     "交付：普雷玛·巨角。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -84,14 +85,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-09-26",
+      "source_type": "user_live",
+      "source_ref": "2026-09-26第二组DK北风实跑：用户现场确认《折磨者迦莫斯拉》任务物五号依次拾取，且位置提示需要保留。",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "迦莫斯拉在迦莫斯洞穴底层；击杀后五号依次拾取任务物。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "2026-09-26 second DK Borean live run",
+      "reason": "用户实跑确认位置提示对现场执行有价值，并确认任务物为五号依次拾取。"
     }
   }
 }

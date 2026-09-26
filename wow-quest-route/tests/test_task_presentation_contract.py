@@ -19,12 +19,14 @@ def test_fivebox_status_is_the_player_label_source() -> None:
     assert project_task_presentation(_card("not_shared"), profile_id="route-a")["badge"] == "not_shared"
     assert project_task_presentation(_card("sequential_loot"), profile_id="route-a")["badge"] == "sequential_loot"
     assert project_task_presentation(_card("special"), profile_id="route-a")["badge"] == "special"
+    assert project_task_presentation(_card("not_applicable"), profile_id="route-a")["badge"] is None
 
 
 def test_pending_is_only_a_fivebox_status() -> None:
     assert project_task_presentation(_card("pending"), profile_id="route-a")["pending"] is True
     assert project_task_presentation(_card("shared"), profile_id="route-a")["pending"] is False
     assert project_task_presentation(_card("special"), profile_id="route-a")["pending"] is False
+    assert project_task_presentation(_card("not_applicable"), profile_id="route-a")["pending"] is False
 
 
 def test_note_override_is_independent_from_fivebox_label_and_can_be_explicitly_empty() -> None:

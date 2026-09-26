@@ -48,7 +48,7 @@
     "交付：大德鲁伊拉索留斯。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -74,6 +74,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-fivebox-baseline-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "execution-and-mechanics baseline: transfer/report-only task has no fivebox completion mechanism",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

@@ -30,7 +30,8 @@ def main() -> None:
         for profile_id in args.profile_ids
     ]
     report = write_player_assets(payloads, output_dir=args.output_dir)
-    print(json.dumps(report, ensure_ascii=False, indent=2))
+    summary = {key: value for key, value in report.items() if key != "player_views"}
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

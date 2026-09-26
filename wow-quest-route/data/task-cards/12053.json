@@ -155,10 +155,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《部落的力量》：不共享：五号各自插1面旗；可在同一地点连续插旗并共同守完事件。\n【需要单独修正优化】《部落的力量》首组龙骨实跑确认：任务完成不共享，五个角色都要各自插旗；但可以在同一位置连续/同时插旗并共同完成防守，不需要分五轮跑。",
+      "text": "五号各自插1面旗；可以在同一地点连续插旗并共同守完事件，不需要分五轮。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12053",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

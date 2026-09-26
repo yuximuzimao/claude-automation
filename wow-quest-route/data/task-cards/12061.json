@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《投影和计划》：共享：五号一起进入并完成脚本飞行即可同步。\n【需要单独修正优化】《投影和计划》首组龙骨实跑确认：五个角色都进入并飞过投影脚本时，任务共享完成。尚未测试仅主控进入、其余四号留在原地是否也会同步，因此固定路线暂时让五号一起飞。",
+      "text": "五号一起进入并完成脚本飞行即可同步；尚未验证只有主控进入时其余四号是否会同步。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12061",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《狂暴》：共享：带着督军佐尔玛兹的钥匙到阿卡里身边，逐一打开固定在他四周的4个锁链锚点；四个都解开才算释放。完成后直接炉石回希姆托加。\n【需要单独修正优化】《狂暴》祖达克首组实跑确认：共享；完成阿卡里释放后直接炉石回希姆托加更合适。",
+      "text": "带督军佐尔玛兹的钥匙到阿卡里身边，逐一打开四个锁链锚点；四个都解开才算释放。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12721",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -84,7 +84,7 @@
     "交付：大德鲁伊拉索留斯。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -110,6 +110,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-09-27-borean-dk-second-run",
+      "source_type": "user_live",
+      "source_ref": "2026-09-27 second DK Borean live run",
+      "observed_at": "2026-09-27",
+      "version_scope": "WotLK China live server; second DK fivebox run",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

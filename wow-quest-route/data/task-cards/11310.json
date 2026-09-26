@@ -121,10 +121,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《集中处理》：只有完成《重要零件》后才解锁，因此需要再次进入感染区。到哈尔格林使用憎恶组装包进入载具：先用2号技能聚怪/雷霆一击，把3—5只目标拉到身边，再用1号自爆；自爆后重新召唤继续。击杀点离角色本体过远可能不计进度，别让憎恶跑得太远再炸。",
+      "text": "使用憎恶组装包进入载具：先用2号技能聚3—5只目标，再用1号自爆；离角色本体过远可能不计进度。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

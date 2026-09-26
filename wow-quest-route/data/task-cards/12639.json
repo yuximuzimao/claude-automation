@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《冻土精华》：不共享：\n【需要单独修正优化】《冻土精华》2026-09-06至07祖达克首组实跑：不共享：",
+      "text": "元素裂隙被摧毁时会刷出冻土元素；击杀后冻土精华由五号分别拾取。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12639",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "跨任务备注归属审计：该信息直接影响当前任务执行，因此从关联任务备注迁入当前任务。"
     }
   }
 }

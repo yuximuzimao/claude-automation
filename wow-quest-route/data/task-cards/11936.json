@@ -104,10 +104,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《蓝龙的卵》：共享：先杀考达拉龙人取得冰霜战斧，再由主控用战斧打碎蓝龙卵。\n【需要单独修正优化】《蓝龙的卵》实际先击杀5只考达拉龙人取得5把冰霜战斧，再用战斧打碎5枚蓝龙卵；冰霜战斧为100%掉落。打碎龙卵的任务进度五号共享，主控完成5只怪+5次交互即可同步全队，不需要五个角色分别操作。",
+      "text": "先杀5只考达拉龙人取得5把冰霜战斧，再由主控用战斧打碎5枚蓝龙卵。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11936",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

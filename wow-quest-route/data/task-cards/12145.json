@@ -91,7 +91,7 @@
     "沿峡谷中的雪怪足迹一路追踪到冰拳，而不是只找终点坐标；在足迹尽头击杀冰拳。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -128,6 +128,17 @@
       "confidence": "verified",
       "supports_fields": [
         "guide"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-fivebox-baseline-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "docs/rules/execution-and-mechanics.md §4 baseline: current objective is ordinary kill credit; existing note only adds location/route/tactical context and no personal task stage.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

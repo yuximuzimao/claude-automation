@@ -108,10 +108,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "不共享：五号分别在酒桶处取得《酒里有什么？》所需样本。\n【需要单独修正优化】《酒里有什么？》嚎风峡湾首组实跑确认：不共享；首次到药剂师营地即可与《疯狂的研究》《比鱼人更恶臭……》一起接，首组Journey确认在西侧开场即完成，不应拖到后期回访。",
+      "text": "五号分别在酒桶处取得所需样本。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11298",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

@@ -110,10 +110,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《风暴的主宰》：共享：狂乱风暴不是常驻怪；在村内风暴图腾约(77.1,38.7)主动触发。\n【需要单独修正优化】《风暴的主宰》只需主控触发并击败一次狂乱风暴，五个角色任务进度同步完成，不需要五号重复召唤/击杀。",
+      "text": "狂乱风暴不是常驻怪；在村内风暴图腾约(77.1,38.7)主动触发，主控完成一次即可同步。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11895",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

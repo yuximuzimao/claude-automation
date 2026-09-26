@@ -58,7 +58,7 @@
     "在怨毒镇东侧/大门附近骑乘被遗忘者凋零扩散器，使用载具凋零炸弹击杀营地外所需天灾目标。"
   ],
   "fivebox": {
-    "status": "shared"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -118,14 +118,25 @@
       "supports_fields": [
         "guide"
       ]
+    },
+    {
+      "evidence_id": "evidence-note-audit-12218-distance-condition",
+      "source_type": "derived",
+      "source_ref": "Existing user-live note states vehicle kill credit shares only while other characters remain within effective range; execution-and-mechanics classifies distance-conditioned sharing as special.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《传达好消息》：共享：其他四号保持在有效距离，主控开凋零战车杀30名饥饿死尸即可。\n【需要单独修正优化】《传达好消息》首组实跑确认：凋零战车击杀进度可共享，只要其他角色保持在附近有效距离内；主控开战车完成30只，其他四号不需要分别跑载具。",
+      "text": "其他四号必须保持在附近有效距离；主控开凋零战车杀30名饥饿死尸。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12218",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

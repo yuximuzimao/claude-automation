@@ -97,10 +97,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《巨石横飞》灰熊丘陵首组实跑确认：共享；主号投掷巨石推进目标即可同步五号。\n《巨石横飞》《鼓舞士气》均共享；主号完成即可同步五号。",
+      "text": "主号投掷巨石即可同步五号。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.11982 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

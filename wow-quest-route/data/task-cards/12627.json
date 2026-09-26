@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《横扫金亚莱》：共享：分别点击蓝、绿、紫、红四口大锅，完成破坏。\n【需要单独修正优化】《横扫金亚莱》2026-09-06至07祖达克首组实跑：共享：分别点击蓝、绿、紫、红四口大锅，完成破坏。",
+      "text": "蓝、绿、紫、红四口大锅由主控分别点击破坏即可同步。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12627",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

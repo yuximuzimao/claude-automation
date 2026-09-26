@@ -143,10 +143,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《铸造钥石》：共享：创世神殿顶部约(45.5,49)找布莱恩完成合成钥石事件；一号触发即可同步五号。\n【需要单独修正优化】《铸造钥石》首组实跑确认：合成钥石事件一号触发即可同步五号。",
+      "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13285",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

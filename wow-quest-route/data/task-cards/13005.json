@@ -79,7 +79,7 @@
     "交付：托里姆。"
   ],
   "fivebox": {
-    "status": "special"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《土灵的誓言》：共享：先用峭壁号角召土灵援军，再由主控完成击杀目标即可同步五号。\n【需要单独修正优化】《土灵的誓言》首组实跑确认：进度共享。",
+      "text": "先用峭壁号角召土灵援军，再由主控完成击杀目标即可同步五号。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.13005",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注/标签一致性审计：按已有用户实跑证据纠正fivebox状态，并只保留当前任务自身执行信息。"
     }
   }
 }

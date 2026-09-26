@@ -171,10 +171,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《野生动物的疫苗》：共享：主控对活目标使用疫苗包即可同步全队，不是击杀。\n【需要单独修正优化】《野生动物的疫苗》首组龙骨实跑确认：疫苗接种进度五号共享；主控对活着的雪落麋鹿/极地灰熊使用疫苗包即可同步全队。",
+      "text": "主控对活着的雪落麋鹿或极地灰熊使用疫苗包即可同步全队，不要击杀目标。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12111",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

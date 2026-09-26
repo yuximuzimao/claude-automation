@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《死后相见》灰熊丘陵首组实跑确认：敲锣触发时任务完成进度共享，但五个角色仍都要分别敲锣进入脚本，否则未亲自触发的角色无法正常交任务。\n《死后相见》敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务；《冷静一下，伙计》不共享，五号分别完成。",
+      "text": "敲锣时完成进度共享，但五号仍必须分别敲锣进入脚本，否则未亲自触发的号无法交任务。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12121 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

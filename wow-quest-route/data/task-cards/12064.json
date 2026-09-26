@@ -159,10 +159,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《阿努巴尔的束缚》：三名钥匙目标各杀一次；每具尸体可供五号分别拾取钥匙。西诺克在南侧高台连排大房子内约(25.7,44.2)。\n【需要单独修正优化】《阿努巴尔的束缚》首组龙骨实跑确认：安诺科拉、提瓦克斯、西诺克各只需击杀一次；每具命名怪尸体可由五个角色分别拾取各自钥匙。",
+      "text": "三名钥匙目标各杀一次；每具尸体可供五号分别拾取钥匙。西诺克在南侧高台连排大房子内约(25.7,44.2)。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12064",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

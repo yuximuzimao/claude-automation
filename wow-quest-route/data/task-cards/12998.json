@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《风暴之心》：共享：奥迪斯入口在山体南侧约(32.4,63.8)，可直接飞入；进洞后继续向里，从地板裂口下降，风暴之心约(36.1,60.9)，一号互动即可同步。\n【需要单独修正优化】《风暴之心》首组实跑确认：固定物只需一号互动即可同步五号。",
+      "text": "奥迪斯入口在山体南侧约(32.4,63.8)，可直接飞入；从地板裂口下降，风暴之心约(36.1,60.9)。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12998",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

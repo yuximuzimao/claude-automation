@@ -46,7 +46,7 @@
     "交付：希姆托加。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -72,6 +72,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-from-preserved-live-note-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "Current preserved execution note explicitly requires per-character objective items/progress; 2026-09-26 audit promotes that recorded fact into fivebox.status=not_shared.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

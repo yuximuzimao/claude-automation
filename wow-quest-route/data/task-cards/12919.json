@@ -92,7 +92,7 @@
     "交付：北伐军战士马克拉尔。"
   ],
   "fivebox": {
-    "status": "shared"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -141,14 +141,25 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-note-audit-12919-distance-condition",
+      "source_type": "derived",
+      "source_ref": "Existing user-live note states shared credit can be lost when other characters are too far away; current rules classify distance-conditioned sharing as special.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《风暴之王的复仇》：共享：开始载具战斗前先把其余角色移动到Boss附近，避免距离过远丢失共享信用。目标是100只天灾 + 天选者奥贾尔、纳瓦留斯王子、塞穆；纳瓦留斯施放灵魂偏转时暂停输出，避免反伤。盖米尔血量不足时选中风暴云用3号抓取技能吸收，可回血并补充技能资源；塞穆通常要在纳瓦留斯死后才进入本任务阶段。\n【需要单独修正优化】《风暴之王的复仇》祖达克首组实跑确认：共享；开始载具战斗前先把其余角色移动到Boss附近，避免距离过远丢失共享信用。",
+      "text": "开始载具战斗前先把其余角色移动到Boss附近，避免距离过远丢失共享信用；纳瓦留斯施放灵魂偏转时暂停输出，盖米尔血量不足时抓取风暴云回血。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12919",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

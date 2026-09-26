@@ -148,10 +148,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《母龙之怒》：共享：接到任务后其余四号取消骑乘跟随即可，由主控完成母龙目标，队伍同步。\n【需要单独修正优化】《母龙之怒》索拉查首组实跑确认：共享；接到任务后其余四号可取消骑乘跟随，由主控完成即可同步。",
+      "text": "其余四号取消骑乘跟随，由主控完成母龙目标即可同步。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12614",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

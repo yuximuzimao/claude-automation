@@ -118,10 +118,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《灰尘之声》先携带，进入Drakil'jin遗迹再完成。\n启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。",
+      "text": "先收集达卡莱石板和5份神圣魔精，再在达库鲁火盆处使用药剂召唤影像。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

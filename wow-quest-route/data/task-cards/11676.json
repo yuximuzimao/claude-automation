@@ -110,10 +110,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《慈悲为怀》：共享：主控击杀恩其拉通灵领主/战歌畸变体取得5把天灾牢笼钥匙，开5个囚笼即可同步全队。\n【需要单独修正优化】《慈悲为怀》释放天灾囚犯的数量进度五号共享；主控拿到牢笼钥匙后开笼即可同步推进全队，其他四号无需分别开同一批囚笼。",
+      "text": "主控取得5把天灾牢笼钥匙并打开5个囚笼即可同步全队。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11676",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

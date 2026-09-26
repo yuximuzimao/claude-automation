@@ -110,10 +110,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "共享。五个角色分别召出的战争魔像都能对同一只闪电斥候各记1次充能；一只怪可直接记5次，两只怪即可完成全队。\n【需要单独修正优化】《……我们没有能源》灰熊丘陵首组实跑确认：共享。五个角色分别召出的战争魔像都能对同一只闪电斥候计一次充能，因此一只怪可直接贡献5次进度，两只怪即可完成全队。",
+      "text": "五个角色分别召出的战争魔像都能对同一只闪电斥候各记1次充能；一只怪可直接贡献5次进度。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12198",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

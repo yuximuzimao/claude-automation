@@ -20,10 +20,6 @@
 
 读`docs/verified-routes/DK-COMBAT-NOTES.md`。
 
-### 55—80全世界候选母版
-
-只有明确处理候选母版时读`docs/DK_55_80_WORLD_TASKS.md`。
-
 ### 视频拆解
 
 读`docs/video-extraction/README.md`，需要恢复当前视频进度时再读`docs/video-extraction/CURRENT.md`。

@@ -47,7 +47,7 @@
     "目标位于北侧水晶裂痕洞穴内部，应从洞口沿洞内路径寻找，不要追地表坐标。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -85,14 +85,25 @@
       "supports_fields": [
         "guide"
       ]
+    },
+    {
+      "evidence_id": "evidence-derived-ordinary-kill-batch-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 remaining-pending audit: current task completion is ordinary group kill credit; any retained note only changes location/tactics/route usage, not per-character completion mechanics. Classified shared under execution-and-mechanics baseline.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "目标在水晶裂痕北端洞穴内部；从洞口沿洞内路线找，不要追地表坐标。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
+      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
     }
   }
 }

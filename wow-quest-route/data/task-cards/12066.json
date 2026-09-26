@@ -122,10 +122,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《海岸上的魔法焦点》：共享：主控杀船长取得控制指环，再到大型魔网拱门使用即可同步全队。\n【需要单独修正优化】《海岸上的魔法焦点》首组龙骨实跑确认：任务进度五号共享；主控取得控制指环并在魔网焦点完成操作即可同步全队。",
+      "text": "主控杀船长取得控制指环，再到大型魔网拱门使用即可同步全队。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12066",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -132,10 +132,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《解读象形文字》：不共享：冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像，召唤NPC不共享。当前号背包里若还有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。\n【需要单独修正优化】《解读象形文字》灰熊丘陵首组实跑确认：不共享；冰冻魔精可在角色间交易，每号都要自己在火盆用药剂召唤达库鲁影像，召唤出的NPC不共享。当前号背包里若有超过任务所需的多余冰冻魔精会无法正常交任务，交前先把多余魔精移走。",
+      "text": "冰冻魔精可交易；每号都要自己在火盆使用药剂召唤达库鲁影像。交任务前若背包有超出需求的多余魔精，先移走。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11991",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

@@ -159,10 +159,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《切断虫源》：共享：蛛卵摧毁进度五号共享，只需主控完成。\n【需要单独修正优化】《切断虫源》摧毁尼鲁巴尔蛛卵簇的进度五号共享；只需主控沿四虫孔路线摧毁，其他角色无需分别操作。",
+      "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11602",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

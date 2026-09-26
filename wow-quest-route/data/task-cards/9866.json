@@ -82,7 +82,7 @@
     "交付：先知考尔胡克。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -108,6 +108,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-derived-nagrand-transfer-audit-2026-09-26",
+      "source_type": "derived",
+      "source_ref": "2026-09-26 pending audit: task has no independent fivebox completion mechanism; it is report/find/talk/automatic travel only under current guide/Questie facts.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

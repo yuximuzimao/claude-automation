@@ -53,7 +53,7 @@
     "交付：凯尔坦修士。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -79,6 +79,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-rule-escort-shared-2026-09-26-13229",
+      "source_type": "user_live",
+      "source_ref": "2026-09-26 user-confirmed global fivebox rule: escort task completion is shared.",
+      "observed_at": "2026-09-26",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox"
       ]
     }
   ],

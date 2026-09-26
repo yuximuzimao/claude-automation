@@ -105,10 +105,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《拼图游戏》：不共享：五号分别收6个磁盘碎片并合成磁盘；有人抢怪时直接换发明家图书馆其它刷新点，不原地等待。\n【需要单独修正优化】《拼图游戏》不共享，五号分别收集磁盘碎片并完成自己的拼图。",
+      "text": "五号分别收6个磁盘碎片并合成磁盘；有人抢怪时换发明家图书馆其它刷新点，不原地等待。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12926",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
     }
   }
 }

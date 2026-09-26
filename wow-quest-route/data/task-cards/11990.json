@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《幻象之瓶》：不共享：水草叶、3片朦胧叶和水晶瓶都齐再离开；水晶瓶在花岗岩之泉商人购买，一次购买直接得到5个，只需买一次。\n【需要单独修正优化】《幻象之瓶》灰熊丘陵首组实跑确认：不共享；水晶瓶一次购买直接得到5个，不需要五个角色分别购买。",
+      "text": "水草叶、3片朦胧叶和水晶瓶都齐再离开；水晶瓶在花岗岩之泉商人购买，一次购买直接得到5个。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.11990",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note audit",
+      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程和重复状态，只保留当前任务执行必要信息。"
     }
   }
 }

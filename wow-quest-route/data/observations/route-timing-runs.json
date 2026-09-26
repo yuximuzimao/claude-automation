@@ -1763,6 +1763,86 @@
       "actual_minutes": null,
       "status": "second_run_mechanics_and_route_validation_extracted",
       "selection_conclusion": "这是第二次北风实跑，可用于验证前16步路线与五开机制；但因漏交《使者》产生额外折返，本轮总墙钟仍不作为clean baseline。"
+    },
+    {
+      "run_id": "2026-09-26-borean-dk-second-run-continuation-1856-2030",
+      "date": "2026-09-26",
+      "route_key": "borean_dk_second_run_continuation",
+      "profile_ids": [
+        "borean-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "borean-fivebox": 1
+      },
+      "run_kind": "second_borean_fivebox_run_continuation_with_known_task_failure_retry",
+      "time_precision": "user_reported_minute",
+      "source": "2026-09-26用户现场实跑反馈：18:56从战歌要塞出发执行《增援来了……》后续，20:30返回黑锋要塞学技能并暂停。",
+      "effective_start_local": "2026-09-26T18:56:00+08:00",
+      "effective_end_local": "2026-09-26T20:30:00+08:00",
+      "actual_minutes": 94,
+      "route_window": "战歌要塞出发执行《增援来了……》后续，完成战歌农场/血孢/迦莫斯拉一带任务后返回黑锋要塞学技能暂停；末端跨图返回包含在用户本段墙钟中，因此不是纯北风Profile基线。",
+      "actual_contains_learning_or_route_errors": true,
+      "calibration_eligible": false,
+      "contamination": [
+        "《愚蠢的努力》执行时一名角色掉落导致任务失败；该角色额外单独重新接取并重做一次，产生非路线固有额外耗时。"
+      ],
+      "route_lessons_applied": [
+        "确认《战歌农场》共享；《愚蠢的努力》共享，本轮异常仅是单角色失败重做，不改变共享机制。",
+        "确认《逃兵快递，30分钟送到否则免费》《奇妙的血孢》《授粉的巨蛾》《完美的测试对象》不共享；《逃兵快递……》虽可顺路一起执行，但个人完成机制仍归不共享。",
+        "《巨大的蛾卵》为纯交接任务，不需要fivebox标签。",
+        "确认《折磨者迦莫斯拉》任务物可五号依次拾取，并补充位置提示：迦莫斯洞穴底层。"
+      ],
+      "status": "continuation_mechanics_and_runtime_recorded"
+    },
+    {
+      "run_id": "2026-09-26-borean-dk-second-run-continuation-2147-2303",
+      "date": "2026-09-26",
+      "route_key": "borean_dk_second_run_continuation",
+      "profile_ids": [
+        "borean-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "borean-fivebox": 1
+      },
+      "run_kind": "second_borean_fivebox_run_continuation_with_wrong_turn",
+      "time_precision": "questie_second_plus_user_reported_pause",
+      "source": "2026-09-27用户现场反馈 + 更新后的Questie Journey；按用户修正口径，忽略暂停期间顺手完成的《寒风中的怪兽……》，从其后的首个正式路线交接事件计时，到本次交完《驯鹿杀手之死》暂停。",
+      "journey_anchors": {
+        "excluded_pause_incidental_local": "2026-09-26T20:39:39+08:00",
+        "excluded_pause_incidental_event": "接《寒风中的怪兽……》；暂停期间顺手完成，不计入本段",
+        "segment_start_local": "2026-09-26T21:47:31+08:00",
+        "segment_start_event": "交《决战奈辛瓦里》",
+        "segment_end_local": "2026-09-26T23:03:27+08:00",
+        "segment_end_event": "完成《驯鹿杀手之死》"
+      },
+      "actual_minutes": 75.9333,
+      "actual_display": "1小时15分56秒（约76分钟）",
+      "route_window": "21:47:31交《决战奈辛瓦里》→23:03:27完成《驯鹿杀手之死》并暂停。",
+      "estimate_comparison": {
+        "comparable_window": "21:47:31交《决战奈辛瓦里》→23:01:24交《先祖的回归》，对应正式路线步骤24-29；避开提前回交《驯鹿杀手之死》造成的边界错位。",
+        "actual_minutes": 73.8833,
+        "estimated_center_minutes": 44.9,
+        "estimated_range_minutes": [
+          35.4,
+          54.3
+        ],
+        "delta_vs_center_minutes": 28.9833,
+        "ratio_vs_center": 1.6455,
+        "delta_vs_range_high_minutes": 19.5833,
+        "interpretation": "本次实跑比旧中心估时约慢65%，且高于旧区间上沿约19分35秒；虽含《驯鹿杀手之死》错误绕路的几分钟污染，但差距明显大于该污染本身，说明当前北风Timing模型偏乐观。单次污染样本不足以直接重标全局参数，后续自然实跑继续采样后再校准。"
+      },
+      "actual_contains_learning_or_route_errors": true,
+      "calibration_eligible": false,
+      "contamination": [
+        "本来应先交《库诺克的智慧》，实际走错路先去做《驯鹿杀手之死》，额外产生几分钟跑路；这是执行失误，不是固定路线成本。"
+      ],
+      "route_lessons_applied": [
+        "更正：《驯鹿杀手之死》共享。",
+        "更正：《库诺克的智慧》是顺路交接任务，只有接与交，没有独立“做”过程，因此fivebox状态为not_applicable，玩家路线隐藏objective。",
+        "确认《敌人的耳环》《寻找古器》不共享。",
+        "确认《死不足惜》《失落的灵魂》《别让他们逃了！》《先祖的回归》《猛犸毁灭者卡奥》共享。"
+      ],
+      "status": "continuation_mechanics_runtime_and_timing_recorded"
     }
   ]
 }

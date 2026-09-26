@@ -99,10 +99,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《封印裂隙》：共享：直接攻击并摧毁元素裂隙，无须任务道具。裂隙将被打掉时会刷出冻土元素，击杀后各号分别拾取《冻土精华》。\n【需要单独修正优化】《封印裂隙》2026-09-06至07祖达克首组实跑：共享：直接攻击并摧毁元素裂隙，无须任务道具。裂隙将被打掉时会刷出冻土元素，击杀后各号分别拾取《冻土精华》。",
+      "text": "直接攻击并摧毁元素裂隙，无需任务道具；主控完成即可同步五号。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json + data/observations/fivebox-task-types.json#tasks.12640",
-      "reason": "无损迁移：旧fivebox备注暂不做Presentation优化；仅该段以【需要单独修正优化】标记，后续专项搜索处理。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

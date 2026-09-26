@@ -145,10 +145,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "【需要单独修正优化】《该死的鹰身人！》首组龙骨实跑确认：鹰身人击杀进度五号共享。与同区《抢木材》不同，不需要五号分别重复击杀。\n《该死的鹰身人！》：共享：主控清鹰身人即可同步。\n不要只刷普通鹰身人漏掉命名目标冷风女王。",
+      "text": "鹰身人击杀进度共享；不要漏掉命名目标冷风女王。",
       "scope": "all",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12052 + docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "无损迁移：旧正式workbench存在多条/多任务共用备注；先逐字保全到Task Presentation，后续前端专项审计再精简，不在当前数据迁移阶段丢信息。"
+      "source_ref": "2026-09-26 Route Atlas note ownership audit",
+      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
     }
   }
 }

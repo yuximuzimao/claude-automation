@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -12,6 +13,7 @@ RULE_INDEX = RULES / "README.md"
 CLAUDE = ROOT / "CLAUDE.md"
 SOP = ROOT / "docs/verified-routes/ROUTE-DESIGN-PROCESS.md"
 TODO = ROOT / "tasks/todo.md"
+FIVEBOX_PENDING = ROOT / "tasks/fivebox-pending.md"
 DK_STARTING_ZONE = ROOT / "docs/verified-routes/DK-STARTING-ZONE-NOTES.md"
 ARCHIVED_SCRIPTS = ROOT / "docs/archive/scripts"
 SCRIPTS_README = ROOT / "scripts/README.md"
@@ -49,6 +51,7 @@ def _active_routing_docs() -> list[Path]:
         CLAUDE,
         SOP,
         TODO,
+        FIVEBOX_PENDING,
         ROOT / "docs/verified-routes/CURRENT.md",
         ROOT / "docs/task-library/README.md",
         ROOT / "tests/README.md",
@@ -212,6 +215,35 @@ def test_unfinished_human_decisions_live_only_in_todo() -> None:
     blockers = re.findall(r"^- \[ \] \[CUTOVER-BLOCKER:([^\]]+)\]", text, flags=re.MULTILINE)
     assert blockers == []
     assert len(blockers) == len(set(blockers))
+
+
+def test_fivebox_pending_checklist_matches_formal_route_pending_tasks() -> None:
+    checklist = FIVEBOX_PENDING.read_text(encoding="utf-8")
+    checklist_ids = [
+        int(match)
+        for match in re.findall(r"^- \[ \] (\d+)《", checklist, flags=re.MULTILINE)
+    ]
+    assert len(checklist_ids) == len(set(checklist_ids))
+
+    formal_task_ids: set[int] = set()
+    for path in sorted((ROOT / "data/route-profiles").glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if not data.get("profile_id"):
+            continue
+        for action in data.get("actions", []):
+            task_id = action.get("task_id")
+            if isinstance(task_id, int):
+                formal_task_ids.add(task_id)
+
+    pending_ids = set()
+    for task_id in formal_task_ids:
+        card = json.loads((ROOT / f"data/task-cards/{task_id}.json").read_text(encoding="utf-8"))
+        if card.get("fivebox", {}).get("status") == "pending":
+            pending_ids.add(task_id)
+
+    assert set(checklist_ids) == pending_ids
+    todo = TODO.read_text(encoding="utf-8")
+    assert "tasks/fivebox-pending.md" in todo
 
 
 def test_removed_intermediate_layers_do_not_exist_or_reenter_active_docs() -> None:
