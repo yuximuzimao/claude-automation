@@ -269,34 +269,91 @@ function appendCase(c) {
 
 // ── Stats ─────────────────────────────────────────────────────────
 
-function computeStats() {
-  const sims = readSimulations();
-  const feedbacks = readFeedback();
-  const fbMap = {};
-  feedbacks.forEach(f => { fbMap[f.simulationId] = f; });
+function computeStatsFromData({ simulations = [], feedbacks = [], queueItems = [], archivedCases = [] } = {}) {
+  const workOrderKey = item => String(item && item.workOrderNum || '').trim();
+  const processedStatuses = new Set([
+    'simulated', 'waiting', 'auto_executing', 'auto_executed',
+    'confirmed', 'executed', 'done',
+  ]);
+  const liveSimulations = simulations.filter(simulation => simulation && simulation.mode === 'live');
+  const liveQueueItems = queueItems.filter(item => item && item.mode === 'live');
 
-  const judged = sims.filter(s => fbMap[s.id]);
-  const positive = judged.filter(s => fbMap[s.id].verdict === 'positive').length;
-  const negative = judged.filter(s => fbMap[s.id].verdict === 'negative').length;
+  const processedWorkOrders = new Set();
+  for (const item of archivedCases) {
+    const key = workOrderKey(item);
+    if (key) processedWorkOrders.add(key);
+  }
+  for (const item of liveQueueItems) {
+    const key = workOrderKey(item);
+    if (key && processedStatuses.has(item.status)) processedWorkOrders.add(key);
+  }
+  for (const simulation of liveSimulations) {
+    const key = workOrderKey(simulation);
+    if (key && simulation.decision) processedWorkOrders.add(key);
+  }
+
+  const latestSimulationByWorkOrder = new Map();
+  const simulationById = new Map();
+  for (const simulation of liveSimulations) {
+    if (simulation.id) simulationById.set(simulation.id, simulation);
+    const key = workOrderKey(simulation);
+    if (!key) continue;
+    const previous = latestSimulationByWorkOrder.get(key);
+    if (!previous || String(previous.createdAt || '') <= String(simulation.createdAt || '')) {
+      latestSimulationByWorkOrder.set(key, simulation);
+    }
+  }
+
+  const latestCaseByWorkOrder = new Map();
+  for (const archivedCase of archivedCases) {
+    const key = workOrderKey(archivedCase);
+    if (!key) continue;
+    const previous = latestCaseByWorkOrder.get(key);
+    if (!previous || String(previous.addedAt || '') <= String(archivedCase.addedAt || '')) {
+      latestCaseByWorkOrder.set(key, archivedCase);
+    }
+  }
+
+  // 一个工单可能被多次评价；累计指标只采用该工单最后一次人工判断。
+  const latestFeedbackByWorkOrder = new Map();
+  for (const feedback of feedbacks) {
+    const key = workOrderKey(feedback);
+    if (!key || !processedWorkOrders.has(key)) continue;
+    const previous = latestFeedbackByWorkOrder.get(key);
+    if (!previous || String(previous.createdAt || '') <= String(feedback.createdAt || '')) {
+      latestFeedbackByWorkOrder.set(key, feedback);
+    }
+  }
+  const judged = [...latestFeedbackByWorkOrder.values()]
+    .filter(feedback => feedback.verdict === 'positive' || feedback.verdict === 'negative');
+  const positive = judged.filter(feedback => feedback.verdict === 'positive').length;
+  const negative = judged.filter(feedback => feedback.verdict === 'negative').length;
 
   const byAction = {};
   const byRule = {};
   const byType = {};
 
-  judged.forEach(s => {
-    const action = s.decision && s.decision.action || 'unknown';
-    const verdict = fbMap[s.id].verdict;
+  judged.forEach(feedback => {
+    const key = workOrderKey(feedback);
+    const source = simulationById.get(feedback.simulationId)
+      || latestSimulationByWorkOrder.get(key)
+      || latestCaseByWorkOrder.get(key)
+      || {};
+    const action = source.decision && source.decision.action || 'unknown';
+    const verdict = feedback.verdict;
 
     if (!byAction[action]) byAction[action] = { total: 0, positive: 0, negative: 0 };
     byAction[action].total++;
     byAction[action][verdict]++;
 
-    const type = s.collectedData && s.collectedData.ticket && s.collectedData.ticket.type || 'unknown';
+    const type = source.type
+      || source.collectedData && source.collectedData.ticket && source.collectedData.ticket.type
+      || 'unknown';
     if (!byType[type]) byType[type] = { total: 0, positive: 0, negative: 0 };
     byType[type].total++;
     byType[type][verdict]++;
 
-    const rules = s.decision && s.decision.rulesApplied || [];
+    const rules = source.decision && source.decision.rulesApplied || [];
     rules.forEach(r => {
       const doc = r.doc || 'unknown';
       if (!byRule[doc]) byRule[doc] = { total: 0, positive: 0, negative: 0 };
@@ -307,15 +364,28 @@ function computeStats() {
 
   return {
     generatedAt: new Date().toISOString(),
-    total: sims.length,
+    total: processedWorkOrders.size,
+    processedTotal: processedWorkOrders.size,
+    archivedCount: archivedCases.length,
+    activeCount: liveQueueItems.filter(item => item.status !== 'done').length,
     feedbackCount: judged.length,
     positive,
     negative,
-    accuracy: sims.length > 0 ? Math.round(((sims.length - negative) / sims.length) * 1000) / 1000 : null,
+    accuracy: judged.length > 0 ? Math.round((positive / judged.length) * 1000) / 1000 : null,
     byAction,
     byRule,
     byType,
   };
+}
+
+function computeStats() {
+  const archivedCases = readCases({ limit: Number.MAX_SAFE_INTEGER }).items;
+  return computeStatsFromData({
+    simulations: readSimulations(),
+    feedbacks: readFeedback(),
+    queueItems: readQueue().items || [],
+    archivedCases,
+  });
 }
 
 // ── Action Dismissed（快递行动已标记处理，7天 TTL）────────────────────
@@ -364,7 +434,7 @@ module.exports = {
   readFeedback, appendFeedback, revokeFeedback, markFeedbackInsighted, unmarkFeedbackInsighted,
   readCases, appendCase,
   readDismissed, addDismissed, isDismissed, removeDismissed,
-  computeStats,
+  computeStats, computeStatsFromData,
   readIntercepts, addIntercept, hasIntercept, removeIntercept,
   INTERCEPT_TTL_MS,
 };

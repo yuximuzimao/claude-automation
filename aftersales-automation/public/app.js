@@ -679,6 +679,37 @@ function formatCountdown(deadlineAt) {
 
 // ── 实际工单 ─────────────────────────────────────────────────────
 // ── 实际工单（三标签页共享数据源）────────────────────────────────
+const AUTO_PAGE_SIZE = 10;
+let autoPage = 1;
+
+function renderAutoPagination(page, totalPages, total) {
+  const start = (page - 1) * AUTO_PAGE_SIZE + 1;
+  const end = Math.min(page * AUTO_PAGE_SIZE, total);
+  const canPrev = page > 1;
+  const canNext = page < totalPages;
+  const pageNums = [];
+  for (let i = Math.max(1, page - 2); i <= Math.min(totalPages, page + 2); i++) {
+    pageNums.push(i);
+  }
+
+  return `
+<div class="pagination">
+  <span class="pagination-info">第 ${start}–${end} 条，共 ${total} 条</span>
+  <div class="pagination-btns">
+    <button class="pg-btn" onclick="loadAutoPage(1)" ${!canPrev ? 'disabled' : ''}>«</button>
+    <button class="pg-btn" onclick="loadAutoPage(${page - 1})" ${!canPrev ? 'disabled' : ''}>‹</button>
+    ${pageNums.map(n => `<button class="pg-btn${n === page ? ' pg-active' : ''}" onclick="loadAutoPage(${n})">${n}</button>`).join('')}
+    <button class="pg-btn" onclick="loadAutoPage(${page + 1})" ${!canNext ? 'disabled' : ''}>›</button>
+    <button class="pg-btn" onclick="loadAutoPage(${totalPages})" ${!canNext ? 'disabled' : ''}>»</button>
+  </div>
+</div>`;
+}
+
+function loadAutoPage(page) {
+  autoPage = page;
+  return loadAllLiveTabs();
+}
+
 async function loadAllLiveTabs() {
   const [queue, sims] = await Promise.all([
     api('/queue?mode=live'),
@@ -702,11 +733,15 @@ async function loadAllLiveTabs() {
     arr.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
   );
 
-  function renderItem(item, idx) {
+  function renderItemWithSequence(item, seqNum) {
     const allSims = simsByQueueItem[item.id] || [];
     const latestSim = allSims[allSims.length - 1] || null;
     const prevSims = allSims.slice(0, -1);
-    return renderCard(item, latestSim, 'live', prevSims, idx + 1);
+    return renderCard(item, latestSim, 'live', prevSims, seqNum);
+  }
+
+  function renderItem(item, idx) {
+    return renderItemWithSequence(item, idx + 1);
   }
 
   const AUTO_STATUSES = ['auto_executed', 'auto_executing'];
@@ -731,9 +766,22 @@ async function loadAllLiveTabs() {
   const autoCountEl = document.getElementById('auto-count');
   if (autoCountEl) autoCountEl.textContent = autoItems.length;
   const autoEl = document.getElementById('auto-list');
-  if (autoEl) autoEl.innerHTML = autoItems.length
-    ? autoItems.map(renderItem).join('')
-    : '<div class="empty-state">暂无自动执行工单。</div>';
+  if (autoEl) {
+    if (autoItems.length) {
+      const totalPages = Math.max(1, Math.ceil(autoItems.length / AUTO_PAGE_SIZE));
+      autoPage = Math.min(Math.max(1, autoPage), totalPages);
+      const autoStart = (autoPage - 1) * AUTO_PAGE_SIZE;
+      const autoPageItems = autoItems.slice(autoStart, autoStart + AUTO_PAGE_SIZE);
+      const cardsHtml = autoPageItems
+        .map((item, idx) => renderItemWithSequence(item, autoStart + idx + 1))
+        .join('');
+      const pagination = renderAutoPagination(autoPage, totalPages, autoItems.length);
+      autoEl.innerHTML = pagination + cardsHtml + pagination;
+    } else {
+      autoPage = 1;
+      autoEl.innerHTML = '<div class="empty-state">暂无自动执行工单。</div>';
+    }
+  }
 
   // Tab 3: 等待重查
   const waitingItems = items.filter(i => i.status === 'waiting');
@@ -1521,13 +1569,14 @@ async function loadStats() {
   ]);
   const el = document.getElementById('stats-content');
   const accuracy = stats.accuracy !== null ? (stats.accuracy * 100).toFixed(1) + '%' : '—';
+  const accuracyClass = stats.accuracy === null ? '' : stats.accuracy >= 0.9 ? 'green' : stats.accuracy < 0.7 ? 'red' : '';
 
   const cardsHtml = `
 <div class="stats-grid">
-  <div class="stat-card"><div class="stat-number">${accuracy}</div><div class="stat-label">整体正确率</div></div>
-  <div class="stat-card"><div class="stat-number">${stats.total||0}</div><div class="stat-label">累计推理</div></div>
-  <div class="stat-card"><div class="stat-number green">${stats.positive||0}</div><div class="stat-label">✅ 正确</div></div>
-  <div class="stat-card"><div class="stat-number red">${stats.negative||0}</div><div class="stat-label">❌ 错误</div></div>
+  <div class="stat-card"><div class="stat-number">${stats.processedTotal||0}</div><div class="stat-label">累计处理工单</div><div class="stat-note">实际工单，按工单号去重</div></div>
+  <div class="stat-card"><div class="stat-number">${stats.archivedCount||0}</div><div class="stat-label">已归档记录</div><div class="stat-note">与历史记录口径一致</div></div>
+  <div class="stat-card"><div class="stat-number">${stats.feedbackCount||0}</div><div class="stat-label">已人工评价</div><div class="stat-note">每张工单只取最新评价</div></div>
+  <div class="stat-card"><div class="stat-number ${accuracyClass}">${accuracy}</div><div class="stat-label">人工评价正确率</div><div class="stat-note">${stats.positive||0} 正确 · ${stats.negative||0} 错误</div></div>
 </div>`;
 
   // 反馈洞察：有说明的好评/差评是待处理材料，生成后的洞察记录是已处理结果。

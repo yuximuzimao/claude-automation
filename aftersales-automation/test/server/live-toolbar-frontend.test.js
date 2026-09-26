@@ -79,6 +79,14 @@ test('历史记录并入统计复盘，保持完整详情并改为每页10条', 
   assert.match(opQueueJs, /decision: sim\.decision/);
 });
 
+test('已自动执行页每页显示10条并复用历史归档分页样式', () => {
+  assert.match(appJs, /const AUTO_PAGE_SIZE = 10/);
+  assert.match(appJs, /const autoPageItems = autoItems\.slice\(autoStart, autoStart \+ AUTO_PAGE_SIZE\)/);
+  assert.match(appJs, /renderAutoPagination\(autoPage, totalPages, autoItems\.length\)/);
+  assert.match(appJs, /onclick="loadAutoPage\(/);
+  assert.match(appJs, /renderItemWithSequence\(item, autoStart \+ idx \+ 1\)/);
+});
+
 test('统计复盘三大区块记住上次展开状态，历史记录仅展开后加载', () => {
   assert.match(appJs, /STATS_SECTION_DEFAULTS = \{ branches: true, insights: false, history: false \}/);
   assert.match(appJs, /localStorage\.setItem\(STATS_SECTION_STATE_KEY/);
