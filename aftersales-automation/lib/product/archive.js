@@ -12,12 +12,17 @@ const { ok, fail } = require('../result');
 
 // 悦希仅这 4 个已确认单品的对应表 erpCode 实际是「规格商家编码」，不是主商家编码。
 // 其余商品保持原来的主商家编码查询路径，避免扩大影响面。
-const SPEC_CODE_ONLY_ARCHIVE_CODES = new Set([
-  '6940079096228', // yx005 悦希舒缓焕颜精华乳100ml
-  '6940079096211', // yx004 悦希舒缓焕颜精粹水100ml
-  '6975183893203', // yx003 悦希氨基酸表活焕颜洁面膏100g
-  '6975183893197', // yx002 悦希玻色因抗皱紧致焕颜面霜50g（1.0旧款）
+const SPEC_CODE_ONLY_ARCHIVE_CODES = new Map([
+  ['6940079096228', 'yx005'], // 悦希舒缓焕颜精华乳100ml
+  ['6940079096211', 'yx004'], // 悦希舒缓焕颜精粹水100ml
+  ['6975183893203', 'yx003'], // 悦希氨基酸表活焕颜洁面膏100g
+  ['6975183893197', 'yx002'], // 悦希玻色因抗皱紧致焕颜面霜50g（1.0旧款）
 ]);
+
+function normalizeArchiveReturnSpecCode(specCode) {
+  const code = String(specCode == null ? '' : specCode).trim();
+  return SPEC_CODE_ONLY_ARCHIVE_CODES.get(code) || code;
+}
 
 // 切换查询类型为「精确查询」（见 docs/erp-query.md §2）
 const SET_EXACT_QUERY_JS = `(function(){
@@ -388,4 +393,4 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
   }
 }
 
-module.exports = { productArchive };
+module.exports = { productArchive, normalizeArchiveReturnSpecCode };

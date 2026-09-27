@@ -1,6 +1,8 @@
 'use strict';
 
 const { getGiftShipmentState } = require('./gift-shipment-status');
+const { EXEMPT_ACCESSORY_KEYWORDS } = require('./constants');
+const { normalizeArchiveReturnSpecCode } = require('./product/archive');
 
 function idOf(value) {
   return value == null ? '' : String(value).trim();
@@ -41,12 +43,14 @@ function expectedItemsOf(collectedData, workOrderNum, countedGiftIds) {
     const items = archiveItems(archive);
     if (!items) return { error: `关联工单 ${workOrderNum} 的子订单 ${orderId || '未知'} 缺少商品档案` };
     for (const item of items) {
-      const specCode = idOf(item && item.specCode);
+      const name = idOf(item && item.name);
+      if (EXEMPT_ACCESSORY_KEYWORDS.some(keyword => name.includes(keyword))) continue;
+      const specCode = normalizeArchiveReturnSpecCode(item && item.specCode);
       const qty = Number(item && item.qty) * multiplier;
       if (!specCode || !Number.isFinite(qty) || qty <= 0) {
         return { error: `关联工单 ${workOrderNum} 的子订单 ${orderId || '未知'} 商品档案不完整` };
       }
-      result.push({ specCode, name: item.name || specCode, qty });
+      result.push({ specCode, name: name || specCode, qty });
     }
   }
 
@@ -62,12 +66,14 @@ function expectedItemsOf(collectedData, workOrderNum, countedGiftIds) {
       const items = archiveItems(collectedData.giftProductArchive);
       if (!items) return { error: `关联工单 ${workOrderNum} 的赠品子订单 ${giftOrderId} 缺少商品档案` };
       for (const item of items) {
-        const specCode = idOf(item && item.specCode);
+        const name = idOf(item && item.name);
+        if (EXEMPT_ACCESSORY_KEYWORDS.some(keyword => name.includes(keyword))) continue;
+        const specCode = normalizeArchiveReturnSpecCode(item && item.specCode);
         const qty = Number(item && item.qty);
         if (!specCode || !Number.isFinite(qty) || qty <= 0) {
           return { error: `关联工单 ${workOrderNum} 的赠品商品档案不完整` };
         }
-        result.push({ specCode, name: item.name || specCode, qty });
+        result.push({ specCode, name: name || specCode, qty });
       }
       if (countedGiftIds) countedGiftIds.add(giftOrderId);
     }

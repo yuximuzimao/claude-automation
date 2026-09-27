@@ -195,6 +195,30 @@ test('平台关联工单使用不同子订单时合并逐规格应退数量', ()
   });
 });
 
+test('共用退货单沿用免退配件规则，并把悦希固定历史查询编码归一为 ERP 入库编码', () => {
+  const current = collected({ workOrderNum: 'WO-1', subOrderId: 'SUB-1', usedBy: ['WO-2'] });
+  const related = collected({ workOrderNum: 'WO-2', subOrderId: 'SUB-2' });
+  current.productArchives = [{
+    subOrderId: 'SUB-1',
+    outerId: 'COMBO-1',
+    subItems: [
+      { name: '悦希氨基酸表活焕颜洁面膏100g', specCode: '6975183893203', qty: 1 },
+      { name: 'HEE悦希印花礼盒（天地盖）白色', specCode: 'yxyhlhtdgbs', qty: 1 },
+      { name: 'HEE悦希印花礼袋-白', specCode: '6976299500146', qty: 1 },
+      { name: 'HEE悦希雪梨纸', specCode: '6976299500122', qty: 1 },
+    ],
+  }];
+
+  assert.deepEqual(resolveSharedReturnGroup(current, [{ workOrderNum: 'WO-2', collectedData: related }]), {
+    mode: 'combined_applications',
+    workOrderNums: ['WO-1', 'WO-2'],
+    expectedItems: [
+      { specCode: 'yx003', name: '悦希氨基酸表活焕颜洁面膏100g', qty: 1 },
+      { specCode: 'SPEC-SUB-2', name: '商品SPEC-SUB-2', qty: 1 },
+    ],
+  });
+});
+
 test('关联工单主品申请数量缺失、为零或非法时不得默认按一件汇总', () => {
   for (const invalidQty of [undefined, 0, '未知']) {
     const current = collected({ workOrderNum: 'WO-1', subOrderId: 'SUB-1', usedBy: ['WO-2'] });
