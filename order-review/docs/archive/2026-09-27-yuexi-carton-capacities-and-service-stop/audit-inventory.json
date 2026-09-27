@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-09-27",
+  "scope": "order-review active knowledge, yuexi original carton capacities, simulator service stop, directly relevant history and agent memory",
+  "activeKnowledge": [
+    {"file": "AGENTS.md", "decision": "keep", "reason": "ERP safety and data boundaries remain accurate; no runtime history added"},
+    {"file": "CLAUDE.md", "decision": "keep", "reason": "thin startup and safety pointer remains accurate"},
+    {"file": "README.md", "decision": "keep", "reason": "human overview remains current and delegates dynamic state to CURRENT"},
+    {"file": "SKILL.md", "decision": "updated", "reason": "latest NEAT evidence and archive paths are discoverable"},
+    {"file": "tasks/todo.md", "decision": "keep", "reason": "only unfinished work remains; confirmed carton capacities are not todo items"},
+    {"file": "docs/INDEX.md", "decision": "updated", "reason": "latest NEAT archive route added"},
+    {"file": "docs/CURRENT.md", "decision": "updated", "reason": "3466 service stop and main-only launch boundary recorded"},
+    {"file": "docs/usage.md", "decision": "updated", "reason": "manual simulator lifecycle clarified and stale workspace backup retention corrected from eight to one"},
+    {"file": "docs/rules/README.md", "decision": "keep", "reason": "authority routing remains correct"},
+    {"file": "docs/rules/erp-execution.md", "decision": "keep", "reason": "ERP execution gates were not changed"},
+    {"file": "docs/2026-07-23-package-rule-foundation.md", "decision": "updated", "reason": "permanent dedicated original carton scope includes the five newly confirmed capacities"},
+    {"file": "docs/2026-09-08-packing-simulator-plan.md", "decision": "keep", "reason": "design and manual-start boundary remain accurate; dynamic runtime state stays in CURRENT"},
+    {"file": "docs/2026-09-12-packing-algorithm-research.md", "decision": "keep", "reason": "1-N carton algorithm architecture was unaffected"}
+  ],
+  "history": {
+    "indexRead": "docs/archive/README.md",
+    "fullHistoryRead": [
+      "docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md",
+      "docs/archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md"
+    ],
+    "otherHistoryDecision": "enumerated_only",
+    "newArchive": "docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md"
+  },
+  "informationArchitecture": {
+    "currentTruth": "docs/CURRENT.md",
+    "unfinishedWork": "tasks/todo.md",
+    "stableBusinessRules": "docs/2026-07-23-package-rule-foundation.md",
+    "humanOperations": "docs/usage.md",
+    "historicalEvidence": "docs/archive/",
+    "structuralChangeRequired": false
+  },
+  "agentMemory": {
+    "index": "/Users/chat/.claude/projects/-Users-chat-claude/memory/MEMORY.md",
+    "projectMemory": "/Users/chat/.claude/projects/-Users-chat-claude/memory/project_order_review.md",
+    "decision": "update project memory only",
+    "reason": "simulator fixed entry remains available but current service is intentionally stopped; no new global principle"
+  },
+  "runtime": {
+    "packingSimulatorPort3466": "stopped_no_listener",
+    "orderReviewFloatingWindow": "running_single_instance"
+  }
+}
