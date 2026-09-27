@@ -31,7 +31,7 @@
 
 - `../src/README.md`：正式代码模块边界与依赖方向。
 - `../tests/README.md`：验证策略。
-- 正式代码尚未开始，不存在现役 CLI/daemon 入口。
+- 现役代码入口与实现阶段以 `../src/README.md` 和 `CURRENT.md` 为准。
 
 ## 运行时私密数据
 
