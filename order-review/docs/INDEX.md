@@ -16,8 +16,9 @@
 | 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（HEE 6 个新品视觉待办） |
 | ERP正式身份参考快照 | `../../product-mapping/data/products/erp-identities.json`（2026-09-11的200条只读快照，不定义在售目录） |
 | 历史阶段 | [档案索引](archive/README.md) |
-| 2026-09-25包裹历史身份修正与案例审计 | [最新NEAT](archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md) |
-| 2026-09-17资料补充与拆分停点收口 | [最新NEAT](archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md) |
+| 2026-09-27悦希原箱箱规与服务收口 | [最新NEAT](archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md) |
+| 2026-09-25包裹历史身份修正与案例审计 | [NEAT](archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md) |
+| 2026-09-17资料补充与拆分停点收口 | [NEAT](archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md) |
 | 前一阶段资料规划 | [2026-09-09 NEAT](archive/2026-09-09-packing-simulator-planning/neat-handoff.md) |
 | P1页面/资料/实验服务历史收口 | [2026-09-11 NEAT](archive/2026-09-11-packing-simulator-p1/neat-handoff.md)（现行规则以CURRENT为准） |
 | worktree→main最终对账与主干接管 | [2026-09-13 NEAT](archive/2026-09-13-packing-worktree-reconciliation/neat-handoff.md) |

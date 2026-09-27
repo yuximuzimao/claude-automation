@@ -23,7 +23,7 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 | 尺寸与单箱求解 | 纸箱/规则 `data/packing-dimensions.json`；单品尺寸 `data/packing-product-dimensions.json`；`dimension_catalog.py`、`carton_packing.py` |
 | 案例/备份/回放 | `docs/usage.md`；`case_repository.py`、`case_restore.py`、`case_replay.py`、`packing_case_audit.py` |
 | 界面 | 审单浮窗：`src/order_review/ui.py`；装箱实验：`src/order_review/packing_simulator_web.py`、`packing_simulator_service.py`、`packing_simulator_static/` |
-| 本阶段证据 | 2026-09-25包裹历史身份与案例审计：`docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md`；2026-09-17资料补充与拆分停点：`docs/archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md` |
+| 本阶段证据 | 2026-09-27悦希原箱箱规与服务收口：`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md`；2026-09-25包裹历史身份与案例审计：`docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md` |
 
 ## CORE FLOWS
 
@@ -49,7 +49,7 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 - `docs/rules/README.md`、`docs/rules/erp-execution.md`
 - `docs/2026-07-23-package-rule-foundation.md`
 - `docs/2026-09-08-packing-simulator-plan.md`、`docs/2026-09-12-packing-algorithm-research.md`
-- `docs/archive/README.md`、`docs/archive/2026-09-17-packing-data-and-split-confirm-only/`、`docs/archive/2026-09-13-packing-worktree-reconciliation/`
+- `docs/archive/README.md`、`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/`、`docs/archive/2026-09-25-package-history-identity-and-data-audit/`
 - `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
 - `src/order_review/`、`tests/`、`pyproject.toml`

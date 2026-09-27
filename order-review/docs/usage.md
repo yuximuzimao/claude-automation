@@ -37,6 +37,8 @@ zsh run-packing-simulator.sh
 
 启动器会从自身目录定位代码；服务已运行时直接打开固定地址，端口被其他程序占用时明确报错，
 不会偷偷改用其他端口。日志固定写入 `~/Library/Logs/order-review-packing-simulator.log`。
+装箱服务只在需要实验时手动启动，不随审单浮窗启动，也不作为长期托管服务；当前是否运行以
+[`CURRENT`](CURRENT.md)为准。
 
 页面包含“装箱实验 / 包装资料”两个入口。实验页只显示商品简称、数量、纸箱名和结果；
 商品编码、商品/纸箱尺寸及原始资料字段放在包装资料页。KGOS当前仍是单箱实验：留空时系统
@@ -138,7 +140,7 @@ PYTHONPATH=src python3.13 -m order_review.case_restore \
 
 执行恢复前必须先退出审单悬浮窗；命令会尝试获取单实例锁，程序仍在运行时直接拒绝恢复。恢复来源按实际读取字节重新校验：当前正式文件有效时先创建 `pre-restore`，当前文件损坏时原样隔离为 `cases.corrupt-时间戳.json`，然后原子恢复并再次校验。恢复失败时来源备份和故障文件均保留，不会静默删除或自动掩盖问题。
 
-根工作区备份脚本 `/Users/chat/claude/backup-workspace.sh` 会纳入有效案例和已经存在的推荐事件文件，默认按时间保留 8 代工作区归档。若案例校验失败或正式 `cases.json` 缺失：
+根工作区备份脚本 `/Users/chat/claude/backup-workspace.sh` 会纳入有效案例和已经存在的推荐事件文件，默认只保留最新 1 份工作区归档。若案例校验失败或正式 `cases.json` 缺失：
 
 - 校验失败的故障文件改名为 `cases.invalid.json`，不会冒充正式案例。
 - 归档附带跨前缀统一排序后时间最新的 3 个有效应用内案例备份。

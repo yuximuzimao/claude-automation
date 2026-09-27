@@ -170,3 +170,9 @@
 - [NEAT交接](2026-09-25-package-history-identity-and-data-audit/neat-handoff.md)：历史包裹方案改按 ERP 商家编码识别实际商品，平台链接、SKU、规格和活动名称只保留作来源与执行核对；泥膜真实案例验证、正式库完整性审计和浮窗重启结果均在其中。
 - `2026-09-25-package-history-identity-and-data-audit/audit-inventory.json`：本轮活跃知识区、历史抽查、记忆与信息架构处置记录。
 - 审计发现的两条历史缺失候选已由用户在2026-09-25明确选择忽略，不恢复、不进入待办；除非用户以后重新明确要求，不得据此改写正式案例库。
+
+## 2026-09-27 悦希原箱箱规与装箱服务收口
+
+- [NEAT交接](2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md)：保湿喷雾2.0、焕颜霜3.0、悦颜霜及慕斯油正装/体验装的正式原箱容量、尺寸边界、主分支合入与3466服务停用结果。
+- `2026-09-27-yuexi-carton-capacities-and-service-stop/audit-inventory.json`：本轮活跃知识区、历史抽查、记忆和信息架构处置记录。
+- 当前箱规与服务状态仍以 `../CURRENT.md`、根本规则和正式数据为准；本归档只保存阶段证据。
