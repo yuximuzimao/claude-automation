@@ -75,7 +75,7 @@ runtime/
 ## 生命周期
 
 - screenshot：默认不落盘；诊断截图完成后清理。
-- raw OCR：至少保留到对应 batch 完成并通过基本验证；后续保留周期可再决定。
+- raw OCR：按 `schemas/capture-page.schema.json` 保存单页 records，至少保留到对应 batch 完成并通过基本验证；后续保留周期可再决定。
 - normalized messages：长期本地保留，作为增量锚点与历史复查依据。
 - current.md：可覆盖为下一 completed batch，但上一批消息仍在 messages 中。
 - reports：默认本地长期保留，除非用户决定清理。

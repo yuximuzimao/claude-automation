@@ -20,6 +20,7 @@
 | `docs/CURRENT.md` | 当前开发阶段与已验证事实 | 继续当前工作时 |
 | `docs/ARCHITECTURE.md` | 稳定模块边界与数据流 | 设计/实现跨模块功能时 |
 | `docs/rules/README.md` | 永久规则路由 | 需要规则判断时 |
+| `schemas/capture-page.schema.json` | 单页原始OCR捕获的数据契约 | 改capture输出/normalize输入时 |
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
 | `tests/README.md` | 验证层级与测试边界 | 写/跑测试时 |

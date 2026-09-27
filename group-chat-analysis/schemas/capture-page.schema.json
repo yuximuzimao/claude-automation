@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "capture-page.schema.json",
+  "title": "Group Chat Capture Page",
+  "description": "QQ聊天记录窗口单页窗口级捕获的原始OCR输出。页级元数据只保存一次，OCR block继承batch/page/group上下文。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "batch_id",
+    "group_key",
+    "group_display",
+    "page_index",
+    "captured_at",
+    "source",
+    "window",
+    "content_region",
+    "blocks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "一次capture batch生成一次；同一incomplete batch恢复时保持不变，不按页重新生成。"
+    },
+    "group_key": {
+      "type": "string",
+      "minLength": 1,
+      "description": "本地稳定群标识，不要求也不应默认使用真实QQ群号。"
+    },
+    "group_display": {
+      "type": ["string", "null"],
+      "description": "本页捕获时QQ界面可见的目标群名称；属于私密运行数据。"
+    },
+    "page_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "从0开始的采集顺序。0代表本批最先捕获的页面；向历史方向滚动时递增。它不是聊天时间顺序。"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "实际完成本页像素捕获的时间。"
+    },
+    "source": {
+      "const": "qq_history_window_ocr"
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "frame_points",
+        "capture_size_pixels"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "系统窗口标题，用于审计本页确实来自预期QQ聊天记录窗口。"
+        },
+        "frame_points": {
+          "$ref": "#/$defs/screenFrame"
+        },
+        "capture_size_pixels": {
+          "$ref": "#/$defs/pixelSize"
+        }
+      }
+    },
+    "content_region": {
+      "$ref": "#/$defs/normalizedBBox",
+      "description": "动态定位得到的聊天正文候选区域，使用与Vision bbox相同的归一化坐标系。Normalize只在该区域内重建消息。"
+    },
+    "blocks": {
+      "type": "array",
+      "description": "Apple Vision原始OCR block。保留原文、置信度和几何，不在capture层猜测昵称/正文/时间语义。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "block_index",
+          "text",
+          "bbox",
+          "confidence"
+        ],
+        "properties": {
+          "block_index": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "本页内的原始block序号，仅用于追踪；Normalize不得把它当视觉顺序真值。"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Apple Vision返回的原始识别文本；capture层不得模型改写或语义纠错。"
+          },
+          "bbox": {
+            "$ref": "#/$defs/normalizedBBox"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "normalizedBBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "width": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "description": "相对完整窗口捕获图像的Vision归一化矩形；原点在左下角。"
+    },
+    "screenFrame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {"type": "number"},
+        "y": {"type": "number"},
+        "width": {"type": "number", "exclusiveMinimum": 0},
+        "height": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "description": "macOS窗口全局frame（points），仅用于采集审计/诊断，不作为Normalize身份或去重依据。"
+    },
+    "pixelSize": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

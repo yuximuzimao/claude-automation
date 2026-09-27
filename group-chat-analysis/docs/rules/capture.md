@@ -60,9 +60,18 @@
 
 - 使用 macOS Apple Vision。
 - 优先内存中的图像对象直接 OCR。
-- 保留每个识别块的 text、bbox、confidence 和当前 page_index。
 - 识别语言至少覆盖简体中文和英文。
 - OCR低置信文本仍可保留到 raw 层，但不得擅自“纠正”为模型猜测文本。
+
+### capture 输出契约
+
+单页 raw 输出必须符合 `schemas/capture-page.schema.json`；字段、类型、必填项与坐标约定只以该 Schema 为准，本规则不维护第二份字段定义。
+
+稳定行为语义：
+- batch/group/page/window 等公共上下文只存页级 envelope，不在每个 OCR block 重复；
+- `page_index` 表示采集顺序，不表示聊天时间顺序；
+- 同一 incomplete batch 恢复时沿用原 `batch_id`；
+- capture 只保存 Apple Vision 看到的原始 OCR 结果，不判断“昵称/时间/正文”等消息语义。
 
 ## 滚动
 

@@ -51,7 +51,7 @@ CodexPro 读取 current.md
 
 输入：官方 QQ 当前 UI、目标群配置、上次采集状态。
 
-输出：带 bbox / confidence / 屏幕批次位置的 OCR blocks。
+输出：符合 `schemas/capture-page.schema.json` 的单页 raw record；页级保存 batch/group/page/window 元数据，blocks 保留 text / bbox / confidence。
 
 不得：
 - 判断哪些魔兽信息重要；

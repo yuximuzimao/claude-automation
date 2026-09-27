@@ -8,12 +8,9 @@ OCR block 不是消息。Normalize 层必须先根据几何位置、相邻关系
 
 ## 输入
 
-每个 OCR block 至少有：
-- text；
-- bbox；
-- confidence；
-- page_index；
-- batch_id。
+Normalize 的正式输入是符合 `schemas/capture-page.schema.json` 的 page records；输入字段与类型只以该 Schema 为准。
+
+Normalize 读取 block 时继承所属 page 的 batch/group/page 上下文。`page_index` 只表示采集顺序，不能直接当作聊天时间顺序；窗口 frame 只用于来源审计/诊断，不作为消息身份或跨页去重依据。
 
 ## 输出
 

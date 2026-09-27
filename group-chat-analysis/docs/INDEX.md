@@ -24,7 +24,8 @@
 
 ## 数据契约
 
-- `../schemas/message-record.schema.json`：单条规范化文字消息。
+- `../schemas/capture-page.schema.json`：单页窗口级捕获 + Apple Vision OCR 的原始输出；页级元数据与 OCR blocks 分离。
+- `../schemas/message-record.schema.json`：Normalize 后的单条规范化消息。
 - 后续如状态机需要独立版本化，再新增明确 schema；不把临时实现字段提前固化。
 
 ## 代码与测试
