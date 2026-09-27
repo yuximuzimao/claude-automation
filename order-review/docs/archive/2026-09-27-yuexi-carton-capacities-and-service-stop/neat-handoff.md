@@ -33,4 +33,5 @@
 
 - 当前箱规与服务状态看 `docs/CURRENT.md`；长期原箱语义看根本规则第7.4节；具体数值看 `data/packing-dimensions.json`。
 - 咖啡约70盒原箱下限、慕斯两款原箱外尺寸、焕颜霜3.0新外箱尺寸等未决资料继续按 `tasks/todo.md` 和资料目录处理。
+- 三相精华油5ml小样已有视觉特征但缺ERP主商家编码，已登记到工作区 `product-mapping/tasks/todo.md`；不得在审单侧猜编码。
 - 完整 `pack_order()` 1～N箱外层仍是算法主线；本轮不接入浮窗、不修改ERP执行流程。

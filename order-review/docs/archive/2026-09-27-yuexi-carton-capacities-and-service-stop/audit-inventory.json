@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "auditedAt": "2026-09-27",
-  "scope": "order-review active knowledge, yuexi original carton capacities, simulator service stop, directly relevant history and agent memory",
+  "scope": "order-review active knowledge, yuexi original carton capacities, simulator service stop, product-mapping identity todo, directly relevant history and agent memory",
   "activeKnowledge": [
     {"file": "AGENTS.md", "decision": "keep", "reason": "ERP safety and data boundaries remain accurate; no runtime history added"},
     {"file": "CLAUDE.md", "decision": "keep", "reason": "thin startup and safety pointer remains accurate"},
@@ -39,6 +39,11 @@
     "projectMemory": "/Users/chat/.claude/projects/-Users-chat-claude/memory/project_order_review.md",
     "decision": "update project memory only",
     "reason": "simulator fixed entry remains available but current service is intentionally stopped; no new global principle"
+  },
+  "crossProject": {
+    "file": "../../../../product-mapping/tasks/todo.md",
+    "decision": "updated",
+    "reason": "three-phase essence oil 5ml has visual features but lacks a confirmed ERP main merchant code; unfinished identity work belongs to the product-mapping todo"
   },
   "runtime": {
     "packingSimulatorPort3466": "stopped_no_listener",
