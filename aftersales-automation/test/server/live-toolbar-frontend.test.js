@@ -4,6 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const vm = require('node:vm');
 
 const BASE = path.join(__dirname, '../..');
 const indexHtml = fs.readFileSync(path.join(BASE, 'public/index.html'), 'utf8');
@@ -17,6 +18,16 @@ function section(id) {
   const next = indexHtml.indexOf('</section>', start);
   assert.notEqual(next, -1, `${id} section closes`);
   return indexHtml.slice(start, next);
+}
+
+function loadActionDedupeHelpers() {
+  const start = appJs.indexOf('function normalizeActionTracking(');
+  const end = appJs.indexOf('// 从 collectedData 中收集所有需拦截的发货快递单号', start);
+  assert.notEqual(start, -1, 'action dedupe helper start exists');
+  assert.notEqual(end, -1, 'action dedupe helper end exists');
+  const context = {};
+  vm.runInNewContext(`${appJs.slice(start, end)}\nthis.dedupeActionItems = dedupeActionItems;`, context);
+  return context.dedupeActionItems;
 }
 
 test('pending toolbar has store filter and batch actions send explicit pending scope', () => {
@@ -63,6 +74,26 @@ test('混合签收分支只展示并记录显式可拦截单号', () => {
   assert.match(appJs, /getShipRows\(cd, decision\)/);
   assert.match(opQueueJs, /Array\.isArray\(sim\.decision\.interceptTrackings\)/);
   assert.match(opQueueJs, /extractShippedTrackings\(cd\)/);
+});
+
+test('快递行动按运单号去重并保留全部关联工单', () => {
+  const dedupeActionItems = loadActionDedupeHelpers();
+  const result = dedupeActionItems([
+    { tracking: ' yt-duplicate ', workOrderNum: 'WO-LATE', accountNum: 2, deadlineAt: '2026-09-28T12:00:00.000Z' },
+    { tracking: 'YT-DUPLICATE', workOrderNum: 'WO-EARLY', accountNum: 1, deadlineAt: '2026-09-27T12:00:00.000Z' },
+    { tracking: 'YT-UNIQUE', workOrderNum: 'WO-ONLY', accountNum: 3, deadlineAt: null },
+  ]);
+
+  assert.equal(result.length, 2);
+  assert.equal(result[0].tracking, 'YT-DUPLICATE');
+  assert.equal(result[0].workOrderNum, 'WO-EARLY');
+  assert.deepEqual(
+    Array.from(result[0].relatedOrders, relation => relation.workOrderNum),
+    ['WO-LATE', 'WO-EARLY']
+  );
+  assert.equal(result[1].tracking, 'YT-UNIQUE');
+  assert.match(appJs, /const uniqueIntercepts = dedupeActionItems\(intercepts\)/);
+  assert.match(appJs, /关联 \$\{relatedOrders\.length\} 个工单/);
 });
 
 test('历史记录并入统计复盘，保持完整详情并改为每页10条', () => {

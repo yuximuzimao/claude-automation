@@ -1874,6 +1874,54 @@ function groupByBrand(items) {
   return map;
 }
 
+function normalizeActionTracking(tracking) {
+  return String(tracking || '').trim().toUpperCase();
+}
+
+function actionDeadlineMs(deadlineAt) {
+  const ms = deadlineAt ? new Date(deadlineAt).getTime() : NaN;
+  return Number.isFinite(ms) ? ms : Number.POSITIVE_INFINITY;
+}
+
+// 同一运单可能同时关联多张售后工单。快递行动按运单执行，因此一条运单只展示一次，
+// 同时保留全部关联工单，避免去重后丢失核对入口。
+function dedupeActionItems(items) {
+  const records = new Map();
+  (items || []).forEach(item => {
+    const key = normalizeActionTracking(item && item.tracking);
+    if (!key) return;
+
+    let record = records.get(key);
+    if (!record) {
+      record = {
+        primary: { ...item, tracking: String(item.tracking).trim() },
+        relatedOrders: [],
+        relatedKeys: new Set(),
+      };
+      records.set(key, record);
+    } else if (actionDeadlineMs(item.deadlineAt) < actionDeadlineMs(record.primary.deadlineAt)) {
+      record.primary = { ...item, tracking: String(item.tracking).trim() };
+    }
+
+    const relationKey = `${item.accountNum || ''}:${item.workOrderNum || ''}`;
+    if (!record.relatedKeys.has(relationKey)) {
+      record.relatedKeys.add(relationKey);
+      record.relatedOrders.push({
+        workOrderNum: item.workOrderNum,
+        accountNum: item.accountNum,
+        accountNote: item.accountNote,
+        brand: item.brand,
+        deadlineAt: item.deadlineAt,
+      });
+    }
+  });
+
+  return Array.from(records.values()).map(record => ({
+    ...record.primary,
+    relatedOrders: record.relatedOrders,
+  }));
+}
+
 // 从 collectedData 中收集所有需拦截的发货快递单号（主订单+赠品，含分包）
 function getShipRows(cd, decision) {
   if (Array.isArray(decision && decision.interceptTrackings) && decision.interceptTrackings.length) {
@@ -1918,7 +1966,8 @@ async function loadActionBadge() {
     const items = (queue.items || []).filter(i => ACTIVE.includes(i.status));
     const simsByQueueId = {};
     (sims || []).forEach(s => { if (!simsByQueueId[s.queueItemId]) simsByQueueId[s.queueItemId] = []; simsByQueueId[s.queueItemId].push(s); });
-    let count = 0;
+    const interceptItems = [];
+    const returnItems = [];
     for (const item of items) {
       const allSims = simsByQueueId[item.id] || [];
       const sim = allSims[allSims.length - 1];
@@ -1927,11 +1976,16 @@ async function loadActionBadge() {
       const reason = sim.decision.reason || '';
       if (sim.decision.action === 'escalate' || sim.decision.action === 'reject') {
         if (!ticket.returnTracking && (reason.includes('拦截') || reason.includes('在途'))) {
-          count += getShipRows(sim.collectedData, sim.decision).filter(t => !dismissed || !dismissed[t]).length;
+          getShipRows(sim.collectedData, sim.decision)
+            .filter(t => !dismissed || !dismissed[t])
+            .forEach(tracking => interceptItems.push({ tracking }));
         }
-        if (isReturnWaitingAction(ticket, sim.decision) && !(dismissed && dismissed[ticket.returnTracking])) count++;
+        if (isReturnWaitingAction(ticket, sim.decision) && !(dismissed && dismissed[ticket.returnTracking])) {
+          returnItems.push({ tracking: ticket.returnTracking });
+        }
       }
     }
+    const count = dedupeActionItems(interceptItems).length + dedupeActionItems(returnItems).length;
     const badgeEl = document.getElementById('action-tab-count');
     if (badgeEl) badgeEl.textContent = count || '';
   } catch(e) {}
@@ -2035,7 +2089,12 @@ async function loadActionList() {
     }
   }
 
-  const totalCount = intercepts.length + returnsWaiting.length;
+  const uniqueIntercepts = dedupeActionItems(intercepts);
+  const uniqueReturnsWaiting = dedupeActionItems(returnsWaiting);
+  const uniqueDismissedIntercepts = dedupeActionItems(dismissedIntercepts);
+  const uniqueDismissedReturns = dedupeActionItems(dismissedReturns);
+
+  const totalCount = uniqueIntercepts.length + uniqueReturnsWaiting.length;
   const badgeEl = document.getElementById('action-tab-count');
   if (badgeEl) badgeEl.textContent = totalCount || '';
   const countEl = document.getElementById('action-count');
@@ -2044,13 +2103,13 @@ async function loadActionList() {
   const el = document.getElementById('action-content');
   if (!el) return;
 
-  if (!intercepts.length && !returnsWaiting.length && !dismissedIntercepts.length && !dismissedReturns.length) {
+  if (!uniqueIntercepts.length && !uniqueReturnsWaiting.length && !uniqueDismissedIntercepts.length && !uniqueDismissedReturns.length) {
     el.innerHTML = '<div class="empty-state">暂无需要操作的快递单号。</div>';
     return;
   }
 
-  el.innerHTML = renderActionPanel('🚨 待拦截快递', '发出的包裹仍在途，需联系快递拦截', intercepts, 'intercept', dismissedIntercepts) +
-                 renderActionPanel('📦 退货待入库', '客户已寄回，等待仓库拆包入库确认', returnsWaiting, 'return', dismissedReturns);
+  el.innerHTML = renderActionPanel('🚨 待拦截快递', '发出的包裹仍在途，需联系快递拦截', uniqueIntercepts, 'intercept', uniqueDismissedIntercepts) +
+                 renderActionPanel('📦 退货待入库', '客户已寄回，等待仓库拆包入库确认', uniqueReturnsWaiting, 'return', uniqueDismissedReturns);
 }
 
 function renderActionPanel(title, subtitle, items, panelType, dismissedItems = []) {
@@ -2065,12 +2124,22 @@ function renderActionPanel(title, subtitle, items, panelType, dismissedItems = [
     const rows = list.map(item => {
       const cd = formatCountdown(item.deadlineAt);
       const urgencyHtml = cd ? `<span class="tag tag-urgency ${cd.className}" style="font-size:10px;padding:1px 6px">⏰ ${cd.text}</span>` : '';
+      const relatedOrders = item.relatedOrders && item.relatedOrders.length
+        ? item.relatedOrders
+        : [{ workOrderNum: item.workOrderNum, accountNum: item.accountNum }];
+      const orderLabel = relatedOrders.length > 1
+        ? `关联 ${relatedOrders.length} 个工单`
+        : relatedOrders[0].workOrderNum;
+      const viewButtons = relatedOrders.map((related, index) => {
+        const label = relatedOrders.length > 1 ? `查看${index + 1}` : '查看';
+        return `<button class="btn-ghost btn-sm" onclick="openTicket('${h(related.workOrderNum)}',${related.accountNum || 'null'},this)" title="${h(related.workOrderNum)}">${label}</button>`;
+      }).join('');
       return `<div class="action-tracking-row">
         <input type="checkbox" class="action-cb" data-tracking="${h(item.tracking)}" data-won="${h(item.workOrderNum)}">
         <span class="action-tracking-num">${h(item.tracking)}</span>
-        <span class="action-wono">${h(item.workOrderNum)}</span>
+        <span class="action-wono">${h(orderLabel)}</span>
         ${urgencyHtml}
-        <button class="btn-ghost btn-sm" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)" style="margin-left:auto">查看</button>
+        <span style="margin-left:auto;display:flex;gap:4px;flex-wrap:wrap">${viewButtons}</span>
       </div>`;
     }).join('');
 
