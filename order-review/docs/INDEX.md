@@ -13,7 +13,7 @@
 | 单品装箱尺寸、零体积配件与仓库排除项 | `../data/packing-product-dimensions.json` |
 | 不得自行解释的活动原文 | `../data/packing-campaign-notes-2026-09-08.txt` |
 | 历史回放固定问题集 | `../data/replay-problem-set.json` |
-| 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（HEE 6 个新品视觉待办） |
+| 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（以商品匹配当前待办为准，不在审单侧固定数量） |
 | ERP正式身份参考快照 | `../../product-mapping/data/products/erp-identities.json`（2026-09-11的200条只读快照，不定义在售目录） |
 | 历史阶段 | [档案索引](archive/README.md) |
 | 2026-09-27悦希原箱箱规与服务收口 | [最新NEAT](archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md) |
