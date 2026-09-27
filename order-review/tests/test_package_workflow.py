@@ -552,6 +552,64 @@ def test_same_order_saved_plan_short_circuits_candidate_generation(
     assert repeated.recommendations.candidates == ()
 
 
+def test_saved_plan_matches_same_erp_product_across_platform_listing_changes(
+    tmp_path,
+):
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    historical_order = OrderSnapshot(
+        is_expanded=True,
+        order_numbers=("ORDER-HISTORY",),
+        products=[
+            Product(
+                title="悦希净颜泥膜（泥膜）",
+                standard_name="HEE悦希净颜清洁泥膜 100g",
+                short_name="悦希净颜泥膜",
+                quantity=2,
+                merchant_code="6940079050947",
+                spu_id="yxnm",
+                sku_id="113669417",
+                platform_spec="泥膜 2支装;HEE悦希",
+                platform_name="129元2支 HEE悦希净颜清洁泥膜",
+                platform_order_number="ORDER-HISTORY",
+            )
+        ],
+    )
+    historical = PackagePlanWorkflow(repository)
+    historical.load_order(historical_order)
+    historical.start_single_package()
+    saved = historical.confirm()
+
+    current = PackagePlanWorkflow(repository)
+    current.load_order(
+        OrderSnapshot(
+            is_expanded=True,
+            order_numbers=("ORDER-CURRENT",),
+            products=[
+                Product(
+                    title="悦希净颜泥膜（泥膜）",
+                    standard_name="HEE悦希净颜清洁泥膜 100g",
+                    short_name="悦希净颜泥膜",
+                    quantity=2,
+                    merchant_code="6940079050947",
+                    spu_id="yxnm-ms",
+                    sku_id="133185852",
+                    platform_spec="泥膜 1支装;HEE悦希",
+                    platform_name="02【秒杀】HEE悦希净颜清洁泥膜",
+                    platform_order_number="ORDER-CURRENT",
+                )
+            ],
+        )
+    )
+
+    assert current.historical_case is None
+    assert current.selected_recommendation is not None
+    assert current.selected_recommendation.match_type == MATCH_EXACT_STRUCTURE
+    assert current.selected_recommendation.source_case_ids == (saved.case_id,)
+    assert current.auto_adopted_recommendation is True
+    assert current.draft is not None
+    assert "完全匹配的历史方案" in current.load_notice
+
+
 def test_editing_same_order_saves_linked_order_version(tmp_path):
     repository = JsonCaseRepository(tmp_path / "cases.json")
     first = PackagePlanWorkflow(repository)

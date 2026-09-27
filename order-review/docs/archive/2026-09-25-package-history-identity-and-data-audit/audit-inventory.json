@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-09-25",
+  "scope": "order-review active knowledge, package history identity change, case data audit, directly relevant history and agent memory",
+  "activeKnowledge": [
+    {"file": "AGENTS.md", "decision": "updated", "reason": "stable boundary between ERP product identity, platform listing metadata and package history"},
+    {"file": "CLAUDE.md", "decision": "keep", "reason": "startup and safety routing remain accurate and concise"},
+    {"file": "README.md", "decision": "keep", "reason": "human overview remains accurate and delegates package semantics to usage and rules"},
+    {"file": "SKILL.md", "decision": "updated", "reason": "latest package identity and data-audit archive is discoverable"},
+    {"file": "tasks/todo.md", "decision": "keep", "reason": "only unfinished work remains; two ignored historical candidates are intentionally not added"},
+    {"file": "docs/INDEX.md", "decision": "updated", "reason": "latest NEAT archive route added"},
+    {"file": "docs/CURRENT.md", "decision": "updated", "reason": "current package history identity and validation status"},
+    {"file": "docs/usage.md", "decision": "updated", "reason": "human-facing history matching behavior"},
+    {"file": "docs/rules/README.md", "decision": "keep", "reason": "stable authority routing remains correct"},
+    {"file": "docs/rules/erp-execution.md", "decision": "keep", "reason": "ERP execution gates were not changed"},
+    {"file": "docs/2026-07-23-package-rule-foundation.md", "decision": "updated", "reason": "permanent package product identity semantics"},
+    {"file": "docs/2026-09-08-packing-simulator-plan.md", "decision": "keep", "reason": "packing experiment design is separate and remains accurate"},
+    {"file": "docs/2026-09-12-packing-algorithm-research.md", "decision": "keep", "reason": "1-N carton algorithm architecture was unaffected"}
+  ],
+  "history": {
+    "indexRead": "docs/archive/README.md",
+    "fullHistoryRead": [
+      "docs/archive/2026-08-03-save-plan-and-case-correction/neat-handoff.md",
+      "docs/archive/2026-08-29-historical-composition-evidence-boundary/neat-handoff.md",
+      "docs/archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md"
+    ],
+    "otherHistoryDecision": "enumerated_only",
+    "newArchive": "docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md"
+  },
+  "informationArchitecture": {
+    "currentTruth": "docs/CURRENT.md",
+    "unfinishedWork": "tasks/todo.md",
+    "stableBusinessRules": "docs/2026-07-23-package-rule-foundation.md",
+    "erpExecutionRules": "docs/rules/erp-execution.md",
+    "humanOperations": "docs/usage.md",
+    "historicalEvidence": "docs/archive/",
+    "structuralChangeRequired": false
+  },
+  "agentMemory": {
+    "index": "/Users/chat/.claude/projects/-Users-chat-claude/memory/MEMORY.md",
+    "projectMemory": "/Users/chat/.claude/projects/-Users-chat-claude/memory/project_order_review.md",
+    "decision": "updated",
+    "reason": "stable merchant-code package history identity added; ignored historical candidates remain only in project archive"
+  }
+}

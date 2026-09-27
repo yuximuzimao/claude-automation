@@ -1,6 +1,8 @@
 from order_review.models import OrderSnapshot, Product
 from order_review.order_identity import (
     order_structure_signature,
+    package_order_structure_signature,
+    package_total_product_signature,
     same_order_signature,
     total_product_signature,
 )
@@ -86,3 +88,51 @@ def test_same_order_signature_refuses_to_guess_without_reliable_order_mapping():
     )
 
     assert same_order_signature(snapshot) is None
+
+
+def test_package_identity_uses_erp_merchant_code_not_platform_listing_metadata():
+    historical = source(
+        [
+            Product(
+                title="悦希净颜泥膜（泥膜）",
+                standard_name="HEE悦希净颜清洁泥膜 100g",
+                short_name="悦希净颜泥膜",
+                quantity=2,
+                merchant_code="6940079050947",
+                spu_id="yxnm",
+                sku_id="113669417",
+                platform_spec="泥膜 2支装;HEE悦希",
+                platform_name="129元2支 HEE悦希净颜清洁泥膜",
+                platform_order_number="ORDER-HISTORY",
+            )
+        ]
+    )
+    current = source(
+        [
+            Product(
+                title="悦希净颜泥膜（泥膜）",
+                standard_name="HEE悦希净颜清洁泥膜 100g",
+                short_name="悦希净颜泥膜",
+                quantity=2,
+                merchant_code="6940079050947",
+                spu_id="yxnm-ms",
+                sku_id="133185852",
+                platform_spec="泥膜 1支装;HEE悦希",
+                platform_name="02【秒杀】HEE悦希净颜清洁泥膜",
+                platform_order_number="ORDER-CURRENT",
+            )
+        ]
+    )
+
+    assert historical.products[0].match_key != current.products[0].match_key
+    assert (
+        historical.products[0].package_match_key
+        == current.products[0].package_match_key
+    )
+    assert same_order_signature(historical) != same_order_signature(current)
+    assert package_order_structure_signature(
+        historical
+    ) == package_order_structure_signature(current)
+    assert package_total_product_signature(
+        historical
+    ) == package_total_product_signature(current)

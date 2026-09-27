@@ -164,3 +164,9 @@
 - [NEAT交接](2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md)：七条咖啡及多款正式原箱资料、无效尺寸边界、装箱实验交互待办，以及浮窗拆分在二次确认后立即停止的当前安全边界。
 - `2026-09-17-packing-data-and-split-confirm-only/audit-inventory.json`：本轮活跃知识区、历史抽查和处置结果。
 - 当前状态仍以 `../CURRENT.md` 为准；本归档只保存2026-09-17阶段收口证据。
+
+## 2026-09-25 包裹历史商品身份与案例审计
+
+- [NEAT交接](2026-09-25-package-history-identity-and-data-audit/neat-handoff.md)：历史包裹方案改按 ERP 商家编码识别实际商品，平台链接、SKU、规格和活动名称只保留作来源与执行核对；泥膜真实案例验证、正式库完整性审计和浮窗重启结果均在其中。
+- `2026-09-25-package-history-identity-and-data-audit/audit-inventory.json`：本轮活跃知识区、历史抽查、记忆与信息架构处置记录。
+- 审计发现的两条历史缺失候选已由用户在2026-09-25明确选择忽略，不恢复、不进入待办；除非用户以后重新明确要求，不得据此改写正式案例库。

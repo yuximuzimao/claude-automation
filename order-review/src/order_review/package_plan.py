@@ -123,12 +123,16 @@ class SourceProduct:
 
     @property
     def package_match_key(self) -> tuple[str, ...]:
-        """用于包裹方案复用的身份；仅对白名单内等体积口味做归组。"""
+        """用于包裹方案复用的身份；平台销售链接不改变实际发货商品。"""
         group = package_equivalence_group(
             self.merchant_code,
             self.main_merchant_code,
         )
         if group is None:
+            merchant_code = self.merchant_code.strip()
+            if merchant_code:
+                return ("erp-merchant-code", merchant_code)
+            # 缺少 ERP 商家编码时保持保守，不依据名称或平台文案猜测同一商品。
             return self.match_key
         return (
             PACKAGE_EQUIVALENCE_KEY_PREFIX,
