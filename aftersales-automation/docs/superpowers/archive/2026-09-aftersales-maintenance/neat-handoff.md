@@ -70,6 +70,22 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - 只要赠品出现快递单号、已发货类状态，或任一赠品子订单缺少完整 ERP 搜索结果，就不能按未发货排除，继续保留原来的严格核对或人工分支。
 - 未发货状态集合统一由 `lib/gift-shipment-status.js` 提供；`lib/infer.js` 的仅退款与退货退款、`lib/return-item-proof.js` 的严格证明、`lib/return-tracking-group.js` 的共用退货单汇总都复用同一判定，避免再次分叉。
 
+### 8. 共用退货单应退规格复用普通退货归一口径
+
+2026-09-28 工单 `100001790389913108938` 与 `100001790408060598463` 共用退货单号 `YT2594352836222`。ERP 实际有 3 条已收货记录，共 15 件良品、0 次品，和两张当前有效申请的实际销售商品完全对应；旧结果却上报“退货数量不足”。
+
+根因不是关联组业务定义错误，而是 `lib/return-tracking-group.js` 在构造合并后的 `expectedItems` 时没有继续复用普通退货核对的两条既有规则：
+
+- 套件里的悦希印花礼盒、印花礼袋、雪梨纸本来属于免退包装配件，普通退货核对会排除；关联组却重新计入了 3 套包装。
+- 套件子品中的悦希洁面仍带查询条码 `6975183893203`，ERP 入库实际核对编码是固定映射后的 `yx003`；关联组直接按原始 `subItems.specCode` 汇总，导致洁面也被误报为 0 件。
+
+最终采用最小修复，不改重复退货单号的当前/历史语义：
+
+- `return-tracking-group.js` 直接复用 `EXEMPT_ACCESSORY_KEYWORDS`，主品和赠品汇总时都先排除免退包装。
+- `lib/product/archive.js` 将原有 4 个悦希固定历史例外从“只判断是否特殊查询”收口为同一张查询码→ERP核对码映射，并导出 `normalizeArchiveReturnSpecCode()`；普通编码原样返回。
+- 关联组汇总套件子品时统一经过上述编码归一，不做商品名称模糊匹配，也不新增通用 fallback。
+- 当前业务规则已补到 `docs/flow-5.1.md`，4 个编码的唯一映射仍由 `docs/erp-query.md` 维护。
+
 ## 验证
 
 - `node --test test/product/archive-subitems.test.js`：6/6 通过；新增用例覆盖特殊规格查询、1.0旧款、特殊→普通连续查询，以及 `yx005` 严格退货编码核对。
@@ -79,6 +95,7 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - 服务重启后，用户对工单 `100001789395328690402` 重新采集：ERP 售后入库成功读取 1 条已收货记录，3 件均为良品，`collectErrors=[]`；推理结果为高置信 `approve`，既有自动门禁执行成功，queue 最终状态为 `auto_executed`。
 - 顺丰跳过修复先通过 8 项百度物流定向测试，再通过 `499/499` 全量回归；生产缓存测试前后校验值一致。服务在 op-queue 空闲后安全重启，未自动重跑现有工单。代码提交为 `b46812f`。
 - 未发货赠品修复的关键回归 `51/51`、全量回归 `513/513` 全部通过；实际工单 `100001790128606330655` 重新推理时识别 `766627714` 为「待打印快递单 + 无快递单号 → 未发货」，只核对主品 12 件并得到 `approve`。修复提交为 `d46ec3b`，合入主干后按 `/aftersales-restart` 在空闲队列下重启服务；2026-09-28 用户完成实际复测并确认成功。
+- 共用退货单归一修复新增定向回归后，`test/return-tracking-group.test.js` 15/15、`test/infer/refund-return-shared-tracking.test.js` 12/12、商品档案既有测试 6/6 均通过，最终全量 `npm test` 为 `514/514`。用两张目标工单的当前生产采集数据只做本地重新计算，两张均从误报 `escalate` 变为严格核对通过的 `approve`，且仍保持 `requiresHumanReview=true`、`autoExecutionBlocked=true`、`humanTriggeredExecutionAllowed=true`；未自动执行退款。修复提交为 `be49cb8`，服务在 op-queue 空闲时从 PID `27127` 安全重启到 `34224`。随后用户实际复测确认通过。
 
 ## 当前权威入口
 
@@ -94,5 +111,7 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - 百度补证实现与回归：`lib/external-logistics-baidu.js`、`test/external-logistics-baidu.test.js`
 - 赠品未发货的当前业务规则：`docs/INDEX.md` §3.3、`docs/flow-5.1.md`
 - 赠品未发货的统一事实判定：`lib/gift-shipment-status.js`
+- 共用退货单当前/历史关联语义与汇总规则：`docs/INDEX.md §3.4.1`、`docs/flow-5.1.md`
+- 悦希 4 个特殊查询码与最终 ERP 核对码映射：`docs/erp-query.md`
 - 退货退款应用位置：`lib/infer.js`、`lib/return-item-proof.js`、`lib/return-tracking-group.js`
-- 回归测试：`test/infer/refund-return-gift-shipment.test.js`、`test/return-item-proof.test.js`、`test/return-tracking-group.test.js`
+- 回归测试：`test/infer/refund-return-gift-shipment.test.js`、`test/infer/refund-return-shared-tracking.test.js`、`test/return-item-proof.test.js`、`test/return-tracking-group.test.js`
