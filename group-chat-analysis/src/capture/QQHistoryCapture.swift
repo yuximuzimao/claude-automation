@@ -98,10 +98,12 @@ struct QQHistoryCapture {
     private static let qqBundleID = "com.tencent.qq"
     private static let minimumWindowWidth: CGFloat = 500
     private static let minimumWindowHeight: CGFloat = 400
-    private static let preferredWindowWidth: CGFloat = 1200
-    private static let preferredWindowHeight: CGFloat = 900
-    private static let resizeRightMargin: CGFloat = 160
-    private static let resizeBottomMargin: CGFloat = 140
+    private static let preferredWindowWidth: CGFloat = 1562
+    private static let preferredWindowHeight: CGFloat = 978
+    private static let resizeRightMargin: CGFloat = 20
+    private static let resizeBottomMargin: CGFloat = 80
+    private static let preferredRightReserve: CGFloat = 726
+    private static let minimumLeftMargin: CGFloat = 40
     private static let historyScrollRatio: CGFloat = 630.0 / 1033.0
 
     @MainActor
@@ -121,52 +123,99 @@ struct QQHistoryCapture {
     }
 
     @MainActor
-    static func enlargeHistoryWindowIfNeeded(
+    static func prepareHistoryWindow(
         expectedTitle: String
     ) async throws {
-        let target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+        var target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
 
-        guard
-            target.frame.width < preferredWindowWidth ||
-            target.frame.height < preferredWindowHeight
-        else {
-            return
+        if target.frame.width < preferredWindowWidth ||
+            target.frame.height < preferredWindowHeight {
+            if let displayBounds = displayBounds(containing: CGPoint(
+                x: target.frame.midX,
+                y: target.frame.midY
+            )) {
+                let start = CGPoint(
+                    x: target.frame.maxX - 2,
+                    y: target.frame.maxY - 2
+                )
+                let destination = CGPoint(
+                    x: min(displayBounds.maxX - resizeRightMargin, target.frame.minX + preferredWindowWidth - 2),
+                    y: min(displayBounds.maxY - resizeBottomMargin, target.frame.minY + preferredWindowHeight - 2)
+                )
+
+                if destination.x > start.x + 40 ||
+                    destination.y > start.y + 40 {
+                    postMouse(.mouseMoved, at: start)
+                    try await Task.sleep(nanoseconds: 200_000_000)
+                    postMouse(.leftMouseDown, at: start)
+                    try await Task.sleep(nanoseconds: 120_000_000)
+
+                    let steps = 24
+                    for step in 1...steps {
+                        let t = CGFloat(step) / CGFloat(steps)
+                        let point = CGPoint(
+                            x: start.x + (destination.x - start.x) * t,
+                            y: start.y + (destination.y - start.y) * t
+                        )
+                        postMouse(.leftMouseDragged, at: point)
+                        try await Task.sleep(nanoseconds: 30_000_000)
+                    }
+
+                    postMouse(.leftMouseUp, at: destination)
+                    try await Task.sleep(nanoseconds: 700_000_000)
+                    target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+                }
+            }
         }
 
-        guard let displayBounds = displayBounds(containing: CGPoint(
+        try await shiftHistoryWindowLeftIfNeeded(target)
+        _ = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+    }
+
+    @MainActor
+    private static func shiftHistoryWindowLeftIfNeeded(
+        _ target: SCWindow
+    ) async throws {
+        guard let screen = displayBounds(containing: CGPoint(
             x: target.frame.midX,
             y: target.frame.midY
         )) else {
             return
         }
 
-        let start = CGPoint(
-            x: target.frame.maxX - 2,
-            y: target.frame.maxY - 2
-        )
-        let destination = CGPoint(
-            x: max(start.x, displayBounds.maxX - resizeRightMargin),
-            y: max(start.y, displayBounds.maxY - resizeBottomMargin)
-        )
-
-        guard
-            destination.x > start.x + 40 ||
-            destination.y > start.y + 40
-        else {
+        let currentRightGap = screen.maxX - target.frame.maxX
+        guard currentRightGap + 5 < preferredRightReserve else {
             return
         }
 
+        let desiredDX = (screen.maxX - preferredRightReserve) - target.frame.maxX
+        let minimumDX = (screen.minX + minimumLeftMargin) - target.frame.minX
+        let dx = max(desiredDX, minimumDX)
+
+        guard dx < -5 else {
+            return
+        }
+
+        let start = CGPoint(
+            x: target.frame.midX,
+            y: target.frame.minY + 22
+        )
+        let destination = CGPoint(
+            x: start.x + dx,
+            y: start.y
+        )
+
         postMouse(.mouseMoved, at: start)
-        try await Task.sleep(nanoseconds: 200_000_000)
+        try await Task.sleep(nanoseconds: 180_000_000)
         postMouse(.leftMouseDown, at: start)
         try await Task.sleep(nanoseconds: 120_000_000)
 
-        let steps = 24
+        let steps = 18
         for step in 1...steps {
             let t = CGFloat(step) / CGFloat(steps)
             let point = CGPoint(
                 x: start.x + (destination.x - start.x) * t,
-                y: start.y + (destination.y - start.y) * t
+                y: start.y
             )
             postMouse(.leftMouseDragged, at: point)
             try await Task.sleep(nanoseconds: 30_000_000)
@@ -174,8 +223,6 @@ struct QQHistoryCapture {
 
         postMouse(.leftMouseUp, at: destination)
         try await Task.sleep(nanoseconds: 700_000_000)
-
-        _ = try await validatedHistoryWindow(expectedTitle: expectedTitle)
     }
 
     @MainActor

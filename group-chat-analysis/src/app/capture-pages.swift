@@ -70,7 +70,7 @@ struct CapturePagesMain {
         do {
             let args = try CapturePagesArguments.parse(CommandLine.arguments)
             try await QQHistoryCapture.activateQQForSession()
-            try await QQHistoryCapture.enlargeHistoryWindowIfNeeded(expectedTitle: args.expectedTitle)
+            try await QQHistoryCapture.prepareHistoryWindow(expectedTitle: args.expectedTitle)
 
             signalUser(
                 title: title,

@@ -56,7 +56,7 @@ struct CaptureOnceMain {
         do {
             let args = try CaptureOnceArguments.parse(CommandLine.arguments)
             try await QQHistoryCapture.activateQQForSession()
-            try await QQHistoryCapture.enlargeHistoryWindowIfNeeded(expectedTitle: args.expectedTitle)
+            try await QQHistoryCapture.prepareHistoryWindow(expectedTitle: args.expectedTitle)
             let page = try await QQHistoryCapture.capturePage(
                 groupKey: args.groupKey,
                 expectedTitle: args.expectedTitle,
