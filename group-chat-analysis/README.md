@@ -21,6 +21,7 @@
 - 文档导航：`docs/INDEX.md`
 - 当前待办：`tasks/todo.md`
 - 架构：`docs/ARCHITECTURE.md`
+- 当前正式采集入口：`src/app/capture-once.swift`
 - 每日分析输入（运行时）：`runtime/inbox/current.md`
 
 项目进度与下一恢复点只以 `docs/CURRENT.md` 和 `tasks/todo.md` 为准。

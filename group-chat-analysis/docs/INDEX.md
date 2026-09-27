@@ -24,8 +24,9 @@
 
 ## 数据契约
 
+- `../schemas/capture-page.schema.json`：单个聊天记录页面的原始 OCR capture 契约。
 - `../schemas/message-record.schema.json`：单条规范化文字消息。
-- 后续如状态机需要独立版本化，再新增明确 schema；不把临时实现字段提前固化。
+- batch/state 当前只在 `rules/storage.md` 固化最小语义；等增量锚点算法实测完成、确实需要迁移时再新增独立 schema。
 
 ## 代码与测试
 
