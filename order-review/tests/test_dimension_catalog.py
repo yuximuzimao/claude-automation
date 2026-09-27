@@ -36,6 +36,11 @@ FIG_JELLY_CODE = "6980319670009"
 ENZYME_TRIAL_CODE = "6979499760037"
 YUEXI_SUNSCREEN_CODE = "6950328271429"
 YUEXI_REPAIR_GIFT_BOX_CODE = "6950328273508"
+YUEXI_MOISTURIZING_SPRAY_2_CODE = "6950328273270"
+YUEXI_REJUVENATING_CREAM_3_CODE = "6950328225903"
+YUEXI_PLEASANT_CREAM_CODE = "6950328260188"
+YUEXI_MOUSSE_OIL_CODE = "6970240607946"
+YUEXI_MOUSSE_OIL_TRIAL_CODE = "6970240607953"
 
 
 @pytest.fixture(scope="module")
@@ -291,6 +296,73 @@ def test_newly_confirmed_original_cartons_preserve_capacity_and_grid(
     assert arrangement.item_orientation == DimensionsMm(*orientation)
     inner = DimensionsMm(*(value - 5 for value in dimensions))
     assert arrangement.occupied_dimensions.fits_inside(inner)
+
+
+@pytest.mark.parametrize(
+    "carton_id,merchant_code,capacity,dimensions",
+    (
+        (
+            "original-yuexi-moisturizing-spray-2-60",
+            YUEXI_MOISTURIZING_SPRAY_2_CODE,
+            60,
+            (295, 248, 320),
+        ),
+        (
+            "original-yuexi-rejuvenating-cream-3-60",
+            YUEXI_REJUVENATING_CREAM_3_CODE,
+            60,
+            None,
+        ),
+        (
+            "original-yuexi-pleasant-cream-72",
+            YUEXI_PLEASANT_CREAM_CODE,
+            72,
+            (440, 430, 186),
+        ),
+        (
+            "original-yuexi-mousse-oil-48",
+            YUEXI_MOUSSE_OIL_CODE,
+            48,
+            None,
+        ),
+        (
+            "original-yuexi-mousse-oil-trial-48",
+            YUEXI_MOUSSE_OIL_TRIAL_CODE,
+            48,
+            None,
+        ),
+    ),
+)
+def test_new_yuexi_original_carton_capacities_are_exact_closed_units(
+    catalog,
+    carton_id,
+    merchant_code,
+    capacity,
+    dimensions,
+):
+    original = catalog.original_carton(carton_id)
+
+    assert original.capacity == capacity
+    assert original.minimum_shippable_quantity == capacity
+    assert original.accepts_closed_unit({merchant_code: capacity})
+    assert not original.accepts_closed_unit({merchant_code: capacity - 1})
+    assert not original.allow_mixed_eligible_products
+    assert not original.allow_other_products
+    assert original.confirmed_arrangement is None
+    if dimensions is None:
+        assert original.dimensions is None
+        assert original.dimension_type == DimensionType.UNKNOWN
+    else:
+        assert original.dimensions == DimensionsMm(*dimensions)
+        assert original.dimension_type == DimensionType.OUTER
+
+
+def test_moisturizing_spray_2_capacity_does_not_expand_to_legacy_product(catalog):
+    original = catalog.original_carton(
+        "original-yuexi-moisturizing-spray-2-60"
+    )
+
+    assert not original.accepts_closed_unit({"6940079052996": 60})
 
 
 def test_unknown_original_carton_dimensions_do_not_block_confirmed_capacity(catalog):

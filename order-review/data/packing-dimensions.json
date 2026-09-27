@@ -351,6 +351,76 @@
         "grid": [2, 5, 2],
         "itemOrientationMm": [228, 55, 190]
       }
+    },
+    {
+      "cartonId": "original-yuexi-moisturizing-spray-2-60",
+      "displayName": "悦希保湿喷雾2.0原箱60盒",
+      "brandId": "yuexi",
+      "capacity": 60,
+      "dimensionsMm": [295, 248, 320],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6950328273270"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-yuexi-rejuvenating-cream-3-60",
+      "displayName": "悦希焕颜霜3.0原箱60盒",
+      "brandId": "yuexi",
+      "capacity": 60,
+      "dimensionsMm": null,
+      "dimensionType": "unknown",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6950328225903"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-yuexi-pleasant-cream-72",
+      "displayName": "悦希悦颜霜原箱72盒",
+      "brandId": "yuexi",
+      "capacity": 72,
+      "dimensionsMm": [440, 430, 186],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6950328260188"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-yuexi-mousse-oil-48",
+      "displayName": "悦希慕斯油正装原箱48盒",
+      "brandId": "yuexi",
+      "capacity": 48,
+      "dimensionsMm": null,
+      "dimensionType": "unknown",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6970240607946"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-yuexi-mousse-oil-trial-48",
+      "displayName": "悦希慕斯油体验装原箱48盒",
+      "brandId": "yuexi",
+      "capacity": 48,
+      "dimensionsMm": null,
+      "dimensionType": "unknown",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6970240607953"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
     }
   ],
   "confirmedCapacities": [
@@ -1094,8 +1164,8 @@
       "note": "用户2026-09-17确认每箱60盒；已转为正式产品原箱。按统一内径余量计算的12×5×1规则排列也可容纳60盒。"
     },
     {
-      "label": "悦希保湿喷雾产品原箱",
-      "displayName": "悦希保湿喷雾产品原箱（新旧款共用，容量待确认）",
+      "label": "悦希保湿喷雾旧款产品原箱",
+      "displayName": "悦希保湿喷雾旧款产品原箱（容量待确认）",
       "recordType": "carton_pending_integration",
       "brandId": "yuexi",
       "cartonId": "pending-original-yuexi-moisturizing-spray",
@@ -1103,11 +1173,11 @@
       "dimensionType": "outer",
       "evidenceSource": "user_provided",
       "confirmedAt": "2026-09-17",
-      "allowedMerchantCodes": ["6940079052996", "6950328273270"],
-      "allowMixedEligibleProducts": true,
-      "status": "dimensions_and_equal_size_scope_confirmed_pending_capacity_and_product_dimensions",
+      "allowedMerchantCodes": ["6940079052996"],
+      "allowMixedEligibleProducts": false,
+      "status": "dimensions_confirmed_pending_capacity_and_product_dimensions",
       "missingField": "capacity, productDimensionsMm",
-      "note": "用户确认悦希保湿喷雾旧款与2.0大小相同，因此共同关联该原箱；当前没有单瓶尺寸和每箱数量，不进入正式求解规则。"
+      "note": "用户此前确认旧款与2.0大小相同；2026-09-27只确认2.0每箱60盒，因此2.0已转为正式产品原箱，旧款容量仍待确认。"
     },
     {
       "label": "悦希微珠精华产品原箱",
@@ -1201,8 +1271,8 @@
     },
     {
       "label": "悦希悦颜霜产品原箱",
-      "displayName": "悦希悦颜霜产品原箱（容量待确认）",
-      "recordType": "carton_pending_integration",
+      "displayName": "悦希悦颜霜产品原箱72盒（已确认）",
+      "recordType": "resolved_original_carton_measurement",
       "brandId": "yuexi",
       "cartonId": "pending-original-yuexi-pleasnt-cream",
       "dimensionsMm": [440, 430, 186],
@@ -1210,8 +1280,11 @@
       "evidenceSource": "user_provided",
       "confirmedAt": "2026-09-17",
       "allowedMerchantCodes": ["6950328260188"],
-      "status": "dimensions_confirmed_pending_capacity_and_product_dimensions",
-      "missingField": "capacity, productDimensionsMm"
+      "status": "resolved_to_dedicated_original_carton",
+      "supersededByCartonId": "original-yuexi-pleasant-cream-72",
+      "capacity": 72,
+      "missingField": "productDimensionsMm",
+      "note": "用户2026-09-27确认每箱72盒；已转为正式产品原箱。单品尺寸仍未登记，因此暂不进行三维摆放。"
     },
     {
       "label": "印花礼盒空盒产品原箱20个",
@@ -1264,7 +1337,7 @@
       "geometricGridCapacityEstimate": 25,
       "geometricEstimateWithoutInnerReduction": 50,
       "geometricEstimateBasis": "单盒76×76×85mm；外箱156mm一边可直接排两层76mm，但统一预留5mm后只剩151mm，只能排一层，推算结果对真实内径高度非常敏感。",
-      "note": "用户2026-09-17确认本次原箱数据作废。只作废原箱记录，不影响焕颜霜3.0商品身份及既有单品尺寸。此条仅保留追溯，不进入页面候选或正式求解。"
+      "note": "用户2026-09-17确认该组外箱尺寸作废；2026-09-27另行确认每箱60盒。旧尺寸继续只作追溯，不进入几何计算；60盒容量已用无尺寸正式原箱记录。"
     },
     {
       "label": "KGO糖果2.0产品原箱",
@@ -1398,9 +1471,9 @@
       ],
       "dimensionSource": "user_provided",
       "confirmedAt": "2026-09-08",
-      "status": "dimensions_confirmed_pending_carton_scope",
-      "missingField": "confirmedCartonScope",
-      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "status": "dimensions_and_original_carton_capacity_confirmed_pending_carton_dimensions",
+      "missingField": "originalCartonDimensionsMm",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。2026-09-27确认每箱60盒；此前报送的原箱尺寸已作废，新的原箱外尺寸仍待补。",
       "reportedDimensionsMm": [
         76,
         76,
@@ -1444,9 +1517,9 @@
       ],
       "dimensionSource": "user_provided",
       "confirmedAt": "2026-09-08",
-      "status": "dimensions_confirmed_pending_carton_scope",
-      "missingField": "confirmedCartonScope",
-      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "status": "dimensions_and_original_carton_capacity_confirmed_pending_carton_dimensions",
+      "missingField": "originalCartonDimensionsMm",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。2026-09-27确认正装每箱48盒，原箱外尺寸仍待补。",
       "reportedDimensionsMm": [
         48,
         48,
@@ -1467,9 +1540,9 @@
       ],
       "dimensionSource": "user_provided",
       "confirmedAt": "2026-09-08",
-      "status": "dimensions_confirmed_pending_carton_scope",
-      "missingField": "confirmedCartonScope",
-      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "status": "dimensions_and_original_carton_capacity_confirmed_pending_carton_dimensions",
+      "missingField": "originalCartonDimensionsMm",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。2026-09-27确认体验装每箱48盒，原箱外尺寸仍待补。",
       "reportedDimensionsMm": [
         39.5,
         39.5,

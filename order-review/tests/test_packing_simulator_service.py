@@ -35,6 +35,7 @@ def test_catalog_view_keeps_full_brand_skeleton_and_pending_records(tmp_path):
     assert "pending-original-yuexi-sunscreen" not in pending_cartons
     assert "pending-original-yuexi-repair-gift-box" not in pending_cartons
     assert "pending-original-yuexi-rejuvenating-cream-3" not in pending_cartons
+    assert "pending-original-yuexi-pleasnt-cream" not in pending_cartons
     rejected_black_tea = next(
         item
         for item in view["sections"]["pending"]
@@ -49,6 +50,11 @@ def test_catalog_view_keeps_full_brand_skeleton_and_pending_records(tmp_path):
         "original-enzyme-4-trial-72",
         "original-yuexi-sunscreen-60",
         "original-yuexi-repair-gift-box-20",
+        "original-yuexi-moisturizing-spray-2-60",
+        "original-yuexi-rejuvenating-cream-3-60",
+        "original-yuexi-pleasant-cream-72",
+        "original-yuexi-mousse-oil-48",
+        "original-yuexi-mousse-oil-trial-48",
     } <= original_ids
     assert view["sections"]["packingUnits"]
     assert view["sections"]["fitChecks"]
