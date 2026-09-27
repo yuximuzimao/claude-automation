@@ -60,6 +60,16 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 
 实现在 `lib/external-logistics-baidu.js`；业务真值已写入 `docs/flow-5.3.md`，数据字段已写入 `docs/collect-schema.md`。
 
+### 7. 退货退款未发货赠品不再要求退回
+
+2026-09-27 工单 `100001790128606330655` 暴露了退货退款赠品判断缺口：赠品子订单 `766627714` 在 ERP 为「待打印快递单」且没有快递单号，实际没有发出；旧 `inferRefundReturn()` 仍因存在赠品商品档案，把赠品子品无条件加入应退集合，导致主品 12 件已全部良品入库后仍被误报为赠品缺失。
+
+最终统一为一条保守规则：
+
+- 只有每个赠品子订单都成功查到 ERP，且全部 ERP 行都属于「待审核 / 待打印快递单 / 待发货」、完全没有快递单号，才能证明赠品未发货，并从退货退款的应退清单中排除。
+- 只要赠品出现快递单号、已发货类状态，或任一赠品子订单缺少完整 ERP 搜索结果，就不能按未发货排除，继续保留原来的严格核对或人工分支。
+- 未发货状态集合统一由 `lib/gift-shipment-status.js` 提供；`lib/infer.js` 的仅退款与退货退款、`lib/return-item-proof.js` 的严格证明、`lib/return-tracking-group.js` 的共用退货单汇总都复用同一判定，避免再次分叉。
+
 ## 验证
 
 - `node --test test/product/archive-subitems.test.js`：6/6 通过；新增用例覆盖特殊规格查询、1.0旧款、特殊→普通连续查询，以及 `yx005` 严格退货编码核对。
@@ -68,6 +78,7 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - Hash 路由修复新增正反边界测试，并在主工作区完成 `496/496` 全量回归；关键生产状态文件测试前后校验值一致。
 - 服务重启后，用户对工单 `100001789395328690402` 重新采集：ERP 售后入库成功读取 1 条已收货记录，3 件均为良品，`collectErrors=[]`；推理结果为高置信 `approve`，既有自动门禁执行成功，queue 最终状态为 `auto_executed`。
 - 顺丰跳过修复先通过 8 项百度物流定向测试，再通过 `499/499` 全量回归；生产缓存测试前后校验值一致。服务在 op-queue 空闲后安全重启，未自动重跑现有工单。代码提交为 `b46812f`。
+- 未发货赠品修复的关键回归 `51/51`、全量回归 `513/513` 全部通过；实际工单 `100001790128606330655` 重新推理时识别 `766627714` 为「待打印快递单 + 无快递单号 → 未发货」，只核对主品 12 件并得到 `approve`。修复提交为 `d46ec3b`，合入主干后按 `/aftersales-restart` 在空闲队列下重启服务；2026-09-28 用户完成实际复测并确认成功。
 
 ## 当前权威入口
 
@@ -81,3 +92,7 @@ neat 审计时发现，特殊商品的条码型编码只负责在档案V2里定�
 - 顺丰跳过百度补证的业务规则：`docs/flow-5.3.md`
 - 百度补证数据合约：`docs/collect-schema.md`
 - 百度补证实现与回归：`lib/external-logistics-baidu.js`、`test/external-logistics-baidu.test.js`
+- 赠品未发货的当前业务规则：`docs/INDEX.md` §3.3、`docs/flow-5.1.md`
+- 赠品未发货的统一事实判定：`lib/gift-shipment-status.js`
+- 退货退款应用位置：`lib/infer.js`、`lib/return-item-proof.js`、`lib/return-tracking-group.js`
+- 回归测试：`test/infer/refund-return-gift-shipment.test.js`、`test/return-item-proof.test.js`、`test/return-tracking-group.test.js`

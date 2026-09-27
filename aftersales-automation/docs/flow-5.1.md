@@ -40,7 +40,7 @@ node cli.js read-ticket <工单号>
 **afterSaleNum 计算规则（⚠️ 必须用，不能靠名字推断）：**
 - 应退主商品单品数 = 档案V2.subItemNum × afterSaleNum
 - afterSaleNum=2 → 退2件套装，应退单品数成倍增加
-- 赠品数量始终1份，不随 afterSaleNum 倍增
+- 当前生产不采集赠品 afterSaleNum；赠品按真实 `giftSubBizOrderId` 对应的一套商品档案计算。共用退货单关联组继续按 `INDEX §3.4.1` 对同一赠品子订单去重
 
 ### Step 2：查退货商品明细
 
@@ -178,7 +178,7 @@ node cli.js reject <工单号> <原因> "<详情文案>" <图片URL>
 ## 决策快速参考
 
 ```
-鲸灵读详情（记录货号/赠品/退货快递单号/afterSaleNum/售后说明）
+鲸灵读详情（记录货号/赠品/退货快递单号/主品 afterSaleNum/售后说明）
   ↓
 商品对应表+档案V2 → 核实单品明细（必查）
   ↓
@@ -203,6 +203,6 @@ ERP售后工单新版 → 搜退货快递单号 → 展开所有入库行 → �
 - `[∞/永久保留]` **#13 包裹数以ERP为准**：包裹数量必须以 ERP 订单管理搜索结果行数为准，鲸灵弹窗 tab 数可能少于实际包裹数
 - `[∞/永久保留]` **#15 逐一核验再同意**：ERP 搜完后必须逐一核验所有包裹物流退回状态，不能搜完直接同意
 - `[∞/永久保留]` **#31 部分退货金额固定人工核对**：“退未拆的”不等于违规，但当前没有逐子订单支付金额，系统不能可靠计算部分退款比例或推荐金额；确认真实少退后交给人工处理。
-- `[∞/永久保留]` **#36 必读 afterSaleNum**：必须从 subBizOrderDetailDTO 读 `afterSaleNum`，不能靠 attr1 文字推断应退数量；应退主商品总数 = subItemNum × afterSaleNum；赠品不倍增
+- `[∞/永久保留]` **#36 必读主品 afterSaleNum**：必须从 `subBizOrderDetailDTO` 读主品 `afterSaleNum`，不能靠 attr1 文字推断应退数量；应退主商品总数 = subItemNum × afterSaleNum。赠品当前按真实 `giftSubBizOrderId` 对应的一套商品档案计算，不用主品 afterSaleNum 放大
 - `[∞/永久保留]` **#44 仅退款多包裹**：必须核对「ERP发货套数 vs 买家申请套数」，ERP发货总件数 ÷ subItemNum > afterSaleNum → 上报人工
 - `[∞/永久保留]` **#45 数量不符先包裹核验**：数量不符时禁止直接判"少退"，必须先做包裹级核验区分在途拦截件和真实少退
