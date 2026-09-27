@@ -334,20 +334,29 @@ async function loadWanwuStatus() {
 // ── Tab ──────────────────────────────────────────────────────────
 let currentTab = 'pending';
 const liveTabStoreFilters = { pending: 'all', waiting: 'all' };
+async function activateTab(tabKey) {
+  const btn = document.querySelector(`.tab-btn[data-tab="${tabKey}"]`);
+  const tabEl = document.getElementById('tab-' + tabKey);
+  if (!btn || !tabEl) return false;
+
+  currentTab = tabKey;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  tabEl.classList.add('active');
+
+  let loadTask = Promise.resolve();
+  if (['pending', 'auto', 'waiting-tab'].includes(currentTab)) loadTask = loadAllLiveTabs();
+  if (currentTab === 'action') loadTask = loadActionList(); else loadActionBadge();
+  if (currentTab === 'return-inbound') { /* 无需加载，等用户操作 */ }
+  if (currentTab === 'stats') loadTask = loadStats();
+  if (currentTab === 'accounts') loadTask = loadAccounts();
+  await loadTask;
+  return true;
+}
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    currentTab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    const tabEl = document.getElementById('tab-' + currentTab);
-    if (tabEl) tabEl.classList.add('active');
-    if (['pending', 'auto', 'waiting-tab'].includes(currentTab)) loadAllLiveTabs();
-    if (currentTab === 'action') loadActionList(); else loadActionBadge();
-    if (currentTab === 'return-inbound') { /* 无需加载，等用户操作 */ }
-    if (currentTab === 'stats') loadStats();
-    if (currentTab === 'accounts') loadAccounts();
-  });
+  btn.addEventListener('click', () => activateTab(btn.dataset.tab));
 });
 
 // ── API ──────────────────────────────────────────────────────────
@@ -1908,6 +1917,8 @@ function dedupeActionItems(items) {
       record.relatedKeys.add(relationKey);
       record.relatedOrders.push({
         workOrderNum: item.workOrderNum,
+        queueItemId: item.queueItemId,
+        status: item.status,
         accountNum: item.accountNum,
         accountNote: item.accountNote,
         brand: item.brand,
@@ -1920,6 +1931,19 @@ function dedupeActionItems(items) {
     ...record.primary,
     relatedOrders: record.relatedOrders,
   }));
+}
+
+function renderActionOrderLinks(item) {
+  const relatedOrders = item.relatedOrders && item.relatedOrders.length
+    ? item.relatedOrders
+    : [{ workOrderNum: item.workOrderNum, queueItemId: item.queueItemId }];
+  return relatedOrders.map(related => (
+    `<button type="button" class="btn-ghost btn-sm" ` +
+    `onclick="jumpToActionWorkOrder('${h(related.queueItemId)}')" ` +
+    `title="跳转到工单 ${h(related.workOrderNum)}" ` +
+    `style="border:0;background:none;padding:0;color:var(--blue);font-family:'SF Mono','Fira Code',monospace;text-decoration:underline;text-underline-offset:2px">` +
+    `${h(related.workOrderNum)}</button>`
+  )).join('<span style="color:var(--gray-400)">；</span>');
 }
 
 // 从 collectedData 中收集所有需拦截的发货快递单号（主订单+赠品，含分包）
@@ -2060,6 +2084,8 @@ async function loadActionList() {
     const brand = extractBrand(item.accountNote);
     const base = {
       workOrderNum: item.workOrderNum,
+      queueItemId: item.id,
+      status: item.status,
       accountNote: item.accountNote,
       brand,
       deadlineAt: item.deadlineAt,
@@ -2112,6 +2138,44 @@ async function loadActionList() {
                  renderActionPanel('📦 退货待入库', '客户已寄回，等待仓库拆包入库确认', uniqueReturnsWaiting, 'return', uniqueDismissedReturns);
 }
 
+async function jumpToActionWorkOrder(queueItemId) {
+  try {
+    const queue = await api('/queue?mode=live');
+    const item = (queue.items || []).find(candidate => candidate.id === queueItemId);
+    if (!item || item.status === 'done') {
+      showToast('该工单已移出当前列表，可在统计复盘的历史记录中查看', 'error');
+      return;
+    }
+    if (['auto_executed', 'auto_executing'].includes(item.status)) {
+      showToast('该工单已进入“已自动执行”，请在对应标签中查看');
+      return;
+    }
+
+    const isWaiting = item.status === 'waiting';
+    const targetTab = isWaiting ? 'waiting-tab' : 'pending';
+    const filterKey = isWaiting ? 'waiting' : 'pending';
+    liveTabStoreFilters[filterKey] = 'all';
+    await activateTab(targetTab);
+
+    const card = document.getElementById('card-' + queueItemId);
+    if (!card) {
+      showToast('工单状态刚刚发生变化，请刷新后重试', 'error');
+      return;
+    }
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const previousOutline = card.style.outline;
+    const previousOffset = card.style.outlineOffset;
+    card.style.outline = '3px solid var(--blue)';
+    card.style.outlineOffset = '3px';
+    setTimeout(() => {
+      card.style.outline = previousOutline;
+      card.style.outlineOffset = previousOffset;
+    }, 1800);
+  } catch (error) {
+    showToast('工单定位失败：' + error.message, 'error');
+  }
+}
+
 function renderActionPanel(title, subtitle, items, panelType, dismissedItems = []) {
   if (!items.length && !dismissedItems.length) return '';
 
@@ -2124,22 +2188,11 @@ function renderActionPanel(title, subtitle, items, panelType, dismissedItems = [
     const rows = list.map(item => {
       const cd = formatCountdown(item.deadlineAt);
       const urgencyHtml = cd ? `<span class="tag tag-urgency ${cd.className}" style="font-size:10px;padding:1px 6px">⏰ ${cd.text}</span>` : '';
-      const relatedOrders = item.relatedOrders && item.relatedOrders.length
-        ? item.relatedOrders
-        : [{ workOrderNum: item.workOrderNum, accountNum: item.accountNum }];
-      const orderLabel = relatedOrders.length > 1
-        ? `关联 ${relatedOrders.length} 个工单`
-        : relatedOrders[0].workOrderNum;
-      const viewButtons = relatedOrders.map((related, index) => {
-        const label = relatedOrders.length > 1 ? `查看${index + 1}` : '查看';
-        return `<button class="btn-ghost btn-sm" onclick="openTicket('${h(related.workOrderNum)}',${related.accountNum || 'null'},this)" title="${h(related.workOrderNum)}">${label}</button>`;
-      }).join('');
       return `<div class="action-tracking-row">
         <input type="checkbox" class="action-cb" data-tracking="${h(item.tracking)}" data-won="${h(item.workOrderNum)}">
         <span class="action-tracking-num">${h(item.tracking)}</span>
-        <span class="action-wono">${h(orderLabel)}</span>
+        <span class="action-wono" style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">${renderActionOrderLinks(item)}</span>
         ${urgencyHtml}
-        <span style="margin-left:auto;display:flex;gap:4px;flex-wrap:wrap">${viewButtons}</span>
       </div>`;
     }).join('');
 
@@ -2164,7 +2217,7 @@ function renderActionPanel(title, subtitle, items, panelType, dismissedItems = [
     ${dismissedItems.map(item => `
     <div class="action-tracking-row action-tracking-dismissed">
       <span class="action-tracking-num">${h(item.tracking)}</span>
-      <span class="action-wono">${h(item.workOrderNum)}</span>
+      <span class="action-wono" style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">${renderActionOrderLinks(item)}</span>
       <span style="font-size:11px;color:var(--gray-400);margin-left:4px">${h(item.brand)}</span>
       <button class="btn-ghost btn-sm" style="margin-left:auto;color:var(--blue);font-size:11px" onclick="undismiss('${h(item.tracking)}','${panelType}')">取消标记</button>
     </div>`).join('')}

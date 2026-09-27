@@ -25,9 +25,14 @@ function loadActionDedupeHelpers() {
   const end = appJs.indexOf('// 从 collectedData 中收集所有需拦截的发货快递单号', start);
   assert.notEqual(start, -1, 'action dedupe helper start exists');
   assert.notEqual(end, -1, 'action dedupe helper end exists');
-  const context = {};
-  vm.runInNewContext(`${appJs.slice(start, end)}\nthis.dedupeActionItems = dedupeActionItems;`, context);
-  return context.dedupeActionItems;
+  const context = {
+    h: value => String(value || ''),
+  };
+  vm.runInNewContext(
+    `${appJs.slice(start, end)}\nthis.dedupeActionItems = dedupeActionItems; this.renderActionOrderLinks = renderActionOrderLinks;`,
+    context
+  );
+  return context;
 }
 
 test('pending toolbar has store filter and batch actions send explicit pending scope', () => {
@@ -77,11 +82,11 @@ test('混合签收分支只展示并记录显式可拦截单号', () => {
 });
 
 test('快递行动按运单号去重并保留全部关联工单', () => {
-  const dedupeActionItems = loadActionDedupeHelpers();
+  const { dedupeActionItems, renderActionOrderLinks } = loadActionDedupeHelpers();
   const result = dedupeActionItems([
-    { tracking: ' yt-duplicate ', workOrderNum: 'WO-LATE', accountNum: 2, deadlineAt: '2026-09-28T12:00:00.000Z' },
-    { tracking: 'YT-DUPLICATE', workOrderNum: 'WO-EARLY', accountNum: 1, deadlineAt: '2026-09-27T12:00:00.000Z' },
-    { tracking: 'YT-UNIQUE', workOrderNum: 'WO-ONLY', accountNum: 3, deadlineAt: null },
+    { tracking: ' yt-duplicate ', workOrderNum: 'WO-LATE', queueItemId: 'q-late', status: 'simulated', accountNum: 2, deadlineAt: '2026-09-28T12:00:00.000Z' },
+    { tracking: 'YT-DUPLICATE', workOrderNum: 'WO-EARLY', queueItemId: 'q-early', status: 'waiting', accountNum: 1, deadlineAt: '2026-09-27T12:00:00.000Z' },
+    { tracking: 'YT-UNIQUE', workOrderNum: 'WO-ONLY', queueItemId: 'q-only', status: 'simulated', accountNum: 3, deadlineAt: null },
   ]);
 
   assert.equal(result.length, 2);
@@ -91,9 +96,19 @@ test('快递行动按运单号去重并保留全部关联工单', () => {
     Array.from(result[0].relatedOrders, relation => relation.workOrderNum),
     ['WO-LATE', 'WO-EARLY']
   );
+  assert.deepEqual(
+    Array.from(result[0].relatedOrders, relation => relation.queueItemId),
+    ['q-late', 'q-early']
+  );
   assert.equal(result[1].tracking, 'YT-UNIQUE');
+  const links = renderActionOrderLinks(result[0]);
+  assert.match(links, />WO-LATE<\/button><span[^>]*>；<\/span><button/);
+  assert.match(links, />WO-EARLY<\/button>/);
+  assert.doesNotMatch(links, /关联 2 个工单/);
   assert.match(appJs, /const uniqueIntercepts = dedupeActionItems\(intercepts\)/);
-  assert.match(appJs, /关联 \$\{relatedOrders\.length\} 个工单/);
+  assert.match(appJs, /async function jumpToActionWorkOrder\(queueItemId\)/);
+  assert.match(appJs, /const targetTab = isWaiting \? 'waiting-tab' : 'pending'/);
+  assert.match(appJs, /card\.scrollIntoView\(\{ behavior: 'smooth', block: 'center' \}\)/);
 });
 
 test('历史记录并入统计复盘，保持完整详情并改为每页10条', () => {
