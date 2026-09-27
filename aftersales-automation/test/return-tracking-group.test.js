@@ -222,6 +222,21 @@ test('赠品按商品档案的一份数量汇总，不读取赠品 afterSaleNum 
   });
 });
 
+test('共用退货单中明确未发货的赠品不计入应退汇总', () => {
+  const current = collected({ workOrderNum: 'WO-1', subOrderId: 'SUB-1', usedBy: ['WO-2'] });
+  const related = collected({ workOrderNum: 'WO-2', subOrderId: 'SUB-2' });
+  current.ticket.gifts = [{ id: 'GIFT-1' }];
+  current.giftProductArchive = archive('GIFT-1', 'SPEC-GIFT', 1);
+  current.giftErpSearches = [{
+    subOrderId: 'GIFT-1',
+    rows: { rows: [{ status: '待打印快递单', tracking: null, trackings: [] }] },
+  }];
+
+  const result = resolveSharedReturnGroup(current, [{ workOrderNum: 'WO-2', collectedData: related }]);
+  assert.equal(result.mode, 'combined_applications');
+  assert.equal(result.expectedItems.some(item => item.specCode === 'SPEC-GIFT'), false);
+});
+
 test('多个当前有效工单重复显示同一赠品子订单时只累计一套赠品', () => {
   const current = collected({ workOrderNum: 'WO-1', subOrderId: 'SUB-1', usedBy: ['WO-2'] });
   const related = collected({ workOrderNum: 'WO-2', subOrderId: 'SUB-1' });

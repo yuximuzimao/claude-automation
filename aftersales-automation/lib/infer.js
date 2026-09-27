@@ -13,6 +13,7 @@
 
 const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, EXEMPT_ACCESSORY_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
 const { proveReturnItems } = require('./return-item-proof');
+const { DEFINITELY_UNSHIPPED_STATUSES, getGiftShipmentState } = require('./gift-shipment-status');
 const { mergeExternalLogisticsIntoErp } = require('./external-logistics-baidu');
 
 // 解析 urgency 字符串（如 "1天3小时" / "3小时"）为总小时数
@@ -110,12 +111,11 @@ function getAggregatedErpStatus(cd, field) {
   if (!rows.length) return { raw: null, statuses: [], hasShipped: false, allNotShipped: false, hasTracking: false };
   const statuses = [...new Set(rows.map(r => r.status).filter(Boolean))];
   const SHIPPED = ['卖家已发货', '交易成功', '交易关闭'];
-  const NOT_SHIPPED = ['待审核', '待打印快递单', '待发货'];
   return {
     raw: rows[0].status || null,
     statuses,
     hasShipped: statuses.some(s => SHIPPED.includes(s)),
-    allNotShipped: statuses.length > 0 && statuses.every(s => NOT_SHIPPED.includes(s)),
+    allNotShipped: statuses.length > 0 && statuses.every(s => DEFINITELY_UNSHIPPED_STATUSES.has(s)),
     hasTracking: rows.some(r => !!(r.tracking || (r.trackings && r.trackings.length))),
   };
 }
@@ -504,9 +504,8 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     return fin(escalate('赠品ERP状态未获取，需人工核查'));
   }
 
-  const noTrackingStatuses = ['待审核', '待打印快递单', '待发货'];
   const abnormalNoTrackingRow = allRows.find(row =>
-    getRowTrackings(row).length === 0 && !noTrackingStatuses.includes(row.status)
+    getRowTrackings(row).length === 0 && !DEFINITELY_UNSHIPPED_STATUSES.has(row.status)
   );
   if (abnormalNoTrackingRow) {
     const status = abnormalNoTrackingRow.status || '未知';
@@ -1367,6 +1366,15 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   // ── 逐商品对比（有 productArchive 时）────────────────────────────
   const subOrders = ticket.subOrders || [];
   const gifts = ticket.gifts || [];
+  const giftShipmentState = getGiftShipmentState(cd);
+  const giftDefinitelyUnshipped = gifts.length > 0 && giftShipmentState.definitelyUnshipped;
+  if (giftDefinitelyUnshipped) {
+    s({
+      type: 'check',
+      condition: '赠品是否实际发出',
+      result: `否（${giftShipmentState.statuses.join('/')}，无快递单号）`,
+    });
+  }
 
   // 合并所有子订单的商品档案（多子订单各需独立 product-match）
   const productArchives = cd.productArchives || [];
@@ -1404,9 +1412,9 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }));
   }
 
-  // 赠品商品档案：合并到 expectedItems 一起参与逐商品匹配
-  // 如果赠品是单品（type=0, subItems 为空），用赠品档案的 title 作为1个 expected item
-  const giftArchive = cd.giftProductArchive;
+  // 只有实际发出或无法明确证明未发出的赠品才进入应退集合。
+  // 待审核/待打印快递单/待发货且无快递单号，沿用既有仅退款规则按未发货处理。
+  const giftArchive = giftDefinitelyUnshipped ? null : cd.giftProductArchive;
   let giftArchiveSubItems = (giftArchive && giftArchive.subItems && giftArchive.subItems.length > 0)
     ? giftArchive.subItems
     : [];
@@ -1584,13 +1592,15 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     expectedMainQty += (so.afterSaleNum || 1);
   });
   let expectedGiftQty = 0;
-  gifts.forEach(g => {
-    const attr = g.attr1 || '';
-    const parts = attr.split(/[+＋、]/).filter(Boolean);
-    expectedGiftQty += parts.length > 0 ? parts.length : 1;
-  });
+  if (!giftDefinitelyUnshipped) {
+    gifts.forEach(g => {
+      const attr = g.attr1 || '';
+      const parts = attr.split(/[+＋、]/).filter(Boolean);
+      expectedGiftQty += parts.length > 0 ? parts.length : 1;
+    });
+  }
   const expectedQty = expectedMainQty + expectedGiftQty;
-  const qtyDesc = gifts.length > 0 ? `主品${expectedMainQty}件+赠品${expectedGiftQty}件` : `${expectedMainQty}件`;
+  const qtyDesc = expectedGiftQty > 0 ? `主品${expectedMainQty}件+赠品${expectedGiftQty}件` : `${expectedMainQty}件`;
 
   s({ type: 'check', condition: `良品 ${totalGood} ≥ 应退 ${expectedQty}（${qtyDesc}，无商品档案按单品算）`, result: totalGood >= expectedQty });
 

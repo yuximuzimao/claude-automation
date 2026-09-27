@@ -43,6 +43,22 @@ test('主品和赠品为同规格时合并应退数量，数量相等才是精�
   assert.deepEqual(proof.receivedGoodBySpec, { 'SPEC-A': 2 });
 });
 
+test('赠品明确未发货时不计入应退规格，主品精确退回即可通过', () => {
+  const data = collected({
+    giftErpSearches: [{
+      subOrderId: 'gift-1',
+      rows: { rows: [{ status: '待打印快递单', tracking: null, trackings: [] }] },
+    }],
+  });
+  data.erpAftersale.rows[0].items[0].qtyGood = 1;
+  data.erpAftersale.rows[0].returnQty = 1;
+
+  const proof = proveReturnItems(data);
+  assert.equal(proof.outcome, 'exact');
+  assert.equal(proof.giftOutcome, 'none');
+  assert.deepEqual(proof.expectedBySpec, { 'SPEC-A': 1 });
+});
+
 test('实退少于主品加赠品应退数量时是少退', () => {
   const data = collected();
   data.erpAftersale.rows[0].items[0].qtyGood = 1;

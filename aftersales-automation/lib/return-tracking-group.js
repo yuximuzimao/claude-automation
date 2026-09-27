@@ -1,5 +1,7 @@
 'use strict';
 
+const { getGiftShipmentState } = require('./gift-shipment-status');
+
 function idOf(value) {
   return value == null ? '' : String(value).trim();
 }
@@ -49,10 +51,11 @@ function expectedItemsOf(collectedData, workOrderNum, countedGiftIds) {
   }
 
   const gifts = ticket.gifts || [];
-  if (gifts.length > 1) {
+  const giftReturnExpected = gifts.length > 0 && !getGiftShipmentState(collectedData).definitelyUnshipped;
+  if (giftReturnExpected && gifts.length > 1) {
     return { error: `关联工单 ${workOrderNum} 有多个赠品子订单，现有记录不足以逐个核对` };
   }
-  if (gifts.length === 1) {
+  if (giftReturnExpected && gifts.length === 1) {
     const giftOrderId = idOf(gifts[0] && gifts[0].id);
     if (!giftOrderId) return { error: `关联工单 ${workOrderNum} 的赠品子订单号缺失` };
     if (!countedGiftIds || !countedGiftIds.has(giftOrderId)) {

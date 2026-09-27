@@ -1,6 +1,7 @@
 'use strict';
 
 const { EXEMPT_ACCESSORY_KEYWORDS } = require('./constants');
+const { getGiftShipmentState } = require('./gift-shipment-status');
 
 function text(value) {
   return value == null ? '' : String(value).trim();
@@ -42,6 +43,8 @@ function proveReturnItems(collectedData) {
   const ticket = cd.ticket || {};
   const mainOrders = ticket.subOrders || [];
   const gifts = ticket.gifts || [];
+  const giftShipmentState = getGiftShipmentState(cd);
+  const giftReturnExpected = gifts.length > 0 && !giftShipmentState.definitelyUnshipped;
   const missingFacts = [];
   const mainExpected = new Map();
   const giftExpected = new Map();
@@ -67,9 +70,9 @@ function proveReturnItems(collectedData) {
     addExpected(mainExpected, items, multiplier, '主品', missingFacts);
   }
 
-  if (gifts.length > 1) {
+  if (giftReturnExpected && gifts.length > 1) {
     missingFacts.push('多个赠品子订单只有单个赠品档案，无法逐个核对');
-  } else if (gifts.length === 1) {
+  } else if (giftReturnExpected && gifts.length === 1) {
     const items = archiveItems(cd.giftProductArchive);
     const rawMultiplier = gifts[0] && gifts[0].afterSaleNum;
     const multiplier = rawMultiplier == null || rawMultiplier === '' ? 1 : Number(rawMultiplier);
@@ -134,7 +137,7 @@ function proveReturnItems(collectedData) {
     return {
       outcome: 'incomplete',
       mainOutcome: mainExpected.size ? 'incomplete' : 'missing',
-      giftOutcome: gifts.length ? 'incomplete' : 'none',
+      giftOutcome: giftReturnExpected ? 'incomplete' : 'none',
       missingFacts: [...new Set(missingFacts)],
       expectedBySpec: mapToObject(expected),
       receivedGoodBySpec: mapToObject(receivedGood),
@@ -157,7 +160,7 @@ function proveReturnItems(collectedData) {
   return {
     outcome,
     mainOutcome: outcome,
-    giftOutcome: gifts.length ? outcome : 'none',
+    giftOutcome: giftReturnExpected ? outcome : 'none',
     missingFacts: [],
     expectedBySpec: mapToObject(expected),
     receivedGoodBySpec: mapToObject(receivedGood),
