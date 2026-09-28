@@ -62,7 +62,6 @@
 ## Codex / Claude Code 协作
 
 - 本工作区仍保留 Claude Code 项目规则；Codex 不应覆盖或稀释这些规则。
-- DeepSeek Harness Desktop 只用于个人非商业、低风险的小型任务；安装状态、配置入口、工作区规则继承和完整性边界见 `docs/deepseek-harness-desktop.md`，不得把它扩大到售后、审单、ERP、账号或其它真实业务写操作。
 - 启动后先读 `CLAUDE.md` → `docs/HANDOFF.md`（如果存在）→ `docs/codex-handoff/inbox.json`（检查是否有 Claude Code 发来的协作请求）→ `git status` → `git log --oneline -5`，了解 Claude Code 最新状态。
 - 完成工作后更新 `docs/HANDOFF.md`（如果做了实质性改动），确保 Claude Code 下次启动能接上。
 - `codex-plugin-cc` 适合做审查和救援：普通审查用 `/codex:review`，挑战设计和风险假设用 `/codex:adversarial-review`。
