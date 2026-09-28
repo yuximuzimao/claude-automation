@@ -29,20 +29,18 @@ src/
 
 ## 语言边界
 
-在 capture 路径完成实测定型前，不锁死正式实现语言。
+阶段 1 已验证 macOS 原生 ScreenCaptureKit、Apple Vision 和 Accessibility 能覆盖当前 capture 所需能力，因此正式 capture 实现默认以 Swift 为主。Normalize/store 是否继续使用 Swift，等其数据接口和 batch/state 定型后再决定。
 
-已知 Apple Vision / macOS 窗口捕获的原生能力使 Swift 成为 capture 的强候选；最终选择要等“QQ全屏窗口级捕获实验”完成后再定。
-
-如果后续采用 Swift capture + 其它语言的数据处理，也必须通过明确文件/进程接口隔离，不把两套运行时互相嵌死。
+如果后续采用 Swift capture + 其它语言的数据处理，必须通过明确文件/进程接口隔离，不把两套运行时互相嵌死。
 
 ## 正式入口门禁
 
-创建现役入口前必须先确定：
+当前门禁状态：
 
-1. 全屏下窗口级捕获是否稳定；
-2. 聊天区动态定位方式；
-3. capture 输出数据结构；
-4. runtime batch/state 最小格式；
-5. 首个端到端 dry-run 成功标准。
+1. QQ“聊天记录”独立窗口的窗口级捕获：已验证；
+2. 聊天正文动态定位：已验证；
+3. capture 输出数据结构：已由 `schemas/capture-page.schema.json` 固化；
+4. runtime batch/state 最小格式：待确定；
+5. 首个端到端 dry-run 成功标准：待和 batch/state 一起最终确认。
 
-在此之前，实验代码只能留在工作区根 `_sandbox/`，不能假装是正式 src。
+因此目前仍不创建正式 `src` 入口；bbox 重建等实验继续留在工作区根 `_sandbox/`。等 4/5 完成后再把已验证实验迁入唯一现役实现。
