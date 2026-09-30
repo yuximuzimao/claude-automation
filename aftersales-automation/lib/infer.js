@@ -82,9 +82,13 @@ function observeGiftOutboundLogistics(cd) {
       .map(result => String(result.logisticsText || '').trim())
       .filter(Boolean);
     const returned = logisticsTexts.some(hasConfirmedReturn);
+    const returnedSigned = logisticsTexts.some(text =>
+      /已退回签收|退回签收|退回商家后.*签收|到达商家仓库/.test(text)
+    );
     return {
       tracking,
       returned,
+      returnedSigned,
       hasLogistics: logisticsTexts.length > 0,
     };
   });
@@ -93,6 +97,8 @@ function observeGiftOutboundLogistics(cd) {
     trackings,
     packages,
     returnedCount: packages.filter(pkg => pkg.returned).length,
+    returnedSignedCount: packages.filter(pkg => pkg.returnedSigned).length,
+    allReturnedSigned: packages.length > 0 && packages.every(pkg => pkg.returnedSigned),
   };
 }
 
@@ -1525,7 +1531,8 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         return mainName.includes(giftNameNorm) || giftNameNorm.includes(mainName);
       });
       if (sameItemMain) {
-        // 合并：增加期望数，重新判断状态
+        // 合并：保留主品/赠品各自期望数，避免后续把“赠品未进本次退货入库”误写成“主品少退”。
+        sameItemMain.giftExpectedQty = (sameItemMain.giftExpectedQty || 0) + expQty;
         sameItemMain.expectedQty += expQty;
         sameItemMain.status = sameItemMain.receivedQty >= sameItemMain.expectedQty ? 'ok' : 'short';
         sameItemMain.source = '主品+赠品';
@@ -1557,6 +1564,27 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 
     // 输出匹配结果
     matchResults.forEach(m => {
+      if (m.source === '主品+赠品' && m.status !== 'ok') {
+        const giftExpectedQty = m.giftExpectedQty || 0;
+        const mainExpectedQty = Math.max(0, m.expectedQty - giftExpectedQty);
+        const mainComplete = m.receivedQty >= mainExpectedQty;
+        s({
+          type: 'check',
+          condition: `[主+赠]${m.expected}`,
+          result: mainComplete
+            ? `△ 主品期望${mainExpectedQty}件，入库${m.receivedQty}件（主品完整）；赠品另${giftExpectedQty}件未在本次退货入库，转查赠品独立物流`
+            : `✗ 主品期望${mainExpectedQty}件，入库${m.receivedQty}件；赠品另${giftExpectedQty}件，主品本身已不足`,
+        });
+        return;
+      }
+      if (m.source === '赠品' && m.status !== 'ok') {
+        s({
+          type: 'check',
+          condition: `[赠]${m.expected}`,
+          result: `△ 本次退货入库${m.receivedQty}件/应退${m.expectedQty}件；转查赠品独立发货物流`,
+        });
+        return;
+      }
       const label = m.status === 'ok' ? '✓' : m.status === 'short' ? '✗不足' : '✗缺失';
       const srcTag = m.source === '赠品' ? '[赠]' : '';
       s({ type: 'check', condition: `${srcTag}${m.expected}`, result: `${label} 期望${m.expectedQty}件，入库${m.receivedQty}件${m.matched ? `（匹配：${m.matched}）` : ''}` });
@@ -1573,6 +1601,14 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     const hasShortage = matchResults.some(m => m.status !== 'ok');
     if (hasShortage) {
       const shortItems = matchResults.filter(m => m.status !== 'ok');
+      const mainShortItems = shortItems.filter(m => {
+        if (m.source === '赠品') return false;
+        if (m.source === '主品+赠品') {
+          const mainExpectedQty = Math.max(0, m.expectedQty - (m.giftExpectedQty || 0));
+          return m.receivedQty < mainExpectedQty;
+        }
+        return true;
+      });
       const shortDesc = shortItems.map(m => {
         const name = (m.expected || '').replace(/\s+/g, '');
         if (m.status === 'missing') return `${name}（退货里没有）`;
@@ -1580,8 +1616,9 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       }).join('，');
 
       const hasGiftShortage = shortItems.some(m => m.source === '赠品' || m.source === '主品+赠品');
+      let giftOutbound = null;
       if (hasGiftShortage) {
-        const giftOutbound = observeGiftOutboundLogistics(cd);
+        giftOutbound = observeGiftOutboundLogistics(cd);
         const giftSubOrderId = (gifts[0] && gifts[0].id) || '未知';
         if (giftOutbound.packages.length > 0) {
           s({
@@ -1590,29 +1627,43 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
             value: `子订单${giftSubOrderId}，共${giftOutbound.packages.length}个运单：${giftOutbound.trackings.join('、')}`,
           });
           giftOutbound.packages.forEach(pkg => {
-            const result = pkg.returned
-              ? '现有物流规则识别到退回证据'
-              : pkg.hasLogistics
-                ? '已采集物流，但未识别到明确退回证据'
-                : '未采集到可核验物流';
+            const result = pkg.returnedSigned
+              ? '已退回签收'
+              : pkg.returned
+                ? '识别到退回节点，但尚未确认退回签收'
+                : pkg.hasLogistics
+                  ? '已采集物流，但未识别到明确退回证据'
+                  : '未采集到可核验物流';
             s({ type: 'check', condition: `[赠品物流]${pkg.tracking}`, result });
           });
           s({
             type: 'read',
             label: '赠品发货物流观察',
-            value: `${giftOutbound.returnedCount}/${giftOutbound.packages.length}个包裹识别到退回证据；当前仅供人工复核，不改变赠品入库不足的异常结论`,
+            value: `${giftOutbound.returnedSignedCount}/${giftOutbound.packages.length}个包裹已退回签收，${giftOutbound.returnedCount}/${giftOutbound.packages.length}个包裹识别到退回证据；当前仅供人工复核，不改变自动放行条件`,
           });
         } else {
           s({
             type: 'read',
             label: '赠品发货物流观察',
-            value: `子订单${giftSubOrderId}未取得可核验运单号；当前仅供人工复核，不改变赠品入库不足的异常结论`,
+            value: `子订单${giftSubOrderId}未取得可核验运单号；当前仅供人工复核，不改变自动放行条件`,
           });
         }
       }
 
-      s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
-      issues.push({ type: 'shortage', message: `退货数量不足：${shortDesc}` });
+      if (hasGiftShortage && mainShortItems.length === 0 && giftOutbound && giftOutbound.allReturnedSigned) {
+        const packageCount = giftOutbound.packages.length;
+        s({
+          type: 'branch',
+          text: `人工观察 → 主品已完整入库，赠品${packageCount}个包裹均已退回签收；实际退回商品不存在少退`,
+        });
+        issues.push({
+          type: 'gift-returned-observation',
+          message: `主品已完整退回；赠品${packageCount}个包裹均已退回签收，实际退回商品不存在少退；赠品未进入本次退货入库记录，当前观察期需人工确认`,
+        });
+      } else {
+        s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
+        issues.push({ type: 'shortage', message: `退货数量不足：${shortDesc}` });
+      }
     }
 
     // 汇总所有问题统一上报

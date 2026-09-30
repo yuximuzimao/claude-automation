@@ -161,7 +161,9 @@ async function readAllErpLogistics(targetId) {
     if (!rowCount || rowCount === 0) return ok({ results: [], note: '无ERP行' });
 
     const results = [];
-    for (let i = 0; i < rowCount; i++) {
+    // 从后往前读取：打开/关闭某一行详情后，ERP 列表 DOM 可能收缩，
+    // 高位索引会消失；逆序读取可保证剩余低位索引继续有效。
+    for (let i = rowCount - 1; i >= 0; i--) {
       try {
         const r = await readErpLogistics(targetId, i);
         if (r.success) {
