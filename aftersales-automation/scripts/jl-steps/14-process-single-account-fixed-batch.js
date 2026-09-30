@@ -810,52 +810,9 @@ function buildFailureProcessed(ticket, error) {
   };
 }
 
-function buildMissingWaitingRescanProcessed(queueItem, latestSimulation, observedAt = new Date().toISOString()) {
-  const reason = '等待重查工单未出现于本次完整48小时清单，无法确认当前平台阶段和剩余时效；请人工打开工单核对。';
-  const previousCollectedData = latestSimulation && latestSimulation.collectedData;
-  const previousTicket = previousCollectedData && previousCollectedData.ticket;
-  return {
-    status: 'simulated',
-    internalStatus: 'waiting_rescan_missing_from_48h_list',
-    collectedData: {
-      ...(previousCollectedData || {}),
-      ticket: {
-        ...(previousTicket || {}),
-        workOrderNum: queueItem.workOrderNum,
-      },
-      waitingRescanAbsence: {
-        observedAt,
-        source: 'fixed_batch_48h_reconciliation',
-        previousSimulationId: latestSimulation && latestSimulation.id || null,
-      },
-    },
-    decision: {
-      action: 'escalate',
-      reason,
-      reasonCode: 'WAITING_RESCAN_MISSING_FROM_48H_LIST',
-      confidence: 'low',
-      inferredAt: observedAt,
-      requiresHumanReview: true,
-      autoExecutionBlocked: true,
-      humanTriggeredExecutionAllowed: false,
-      rulesApplied: [{
-        doc: 'INDEX',
-        section: '3.1',
-        summary: '自动等待重查项未出现于本次完整48小时清单→异常转待确认',
-      }],
-      warnings: ['不能据此推断工单已关闭、已处理或已超时。'],
-      context: {
-        workOrderNum: queueItem.workOrderNum,
-        waitingRescanMissingFrom48hList: true,
-      },
-    },
-  };
-}
-
 function createReconcileWaitingRescanAbsences(db) {
-  if (!db || typeof db.readQueue !== 'function' || typeof db.readSimulations !== 'function' ||
-      typeof db.appendSimulation !== 'function' || typeof db.updateQueueItem !== 'function') {
-    throw new Error('reconcileWaitingRescanAbsences 缺少 queue/simulation 数据依赖');
+  if (!db || typeof db.readQueue !== 'function' || typeof db.deleteQueueItem !== 'function') {
+    throw new Error('reconcileWaitingRescanAbsences 缺少 queue 删除数据依赖');
   }
   return async ({ account, snapshot, observedAt = new Date().toISOString() }) => {
     const accountNum = String(account && account.accountNum || '').trim();
@@ -871,38 +828,16 @@ function createReconcileWaitingRescanAbsences(db) {
     );
     if (candidates.length === 0) return [];
 
-    const latestSimulationByQueueItem = new Map();
-    for (const simulation of db.readSimulations()) {
-      if (simulation && simulation.queueItemId) {
-        latestSimulationByQueueItem.set(simulation.queueItemId, simulation);
-      }
-    }
-
     const reconciled = [];
     for (const queueItem of candidates) {
-      const latestSimulation = latestSimulationByQueueItem.get(queueItem.id) || null;
-      const processed = buildMissingWaitingRescanProcessed(queueItem, latestSimulation, observedAt);
-      const ticket = processed.collectedData.ticket;
-      const simulation = buildSimulationPayload({
-        account,
-        queueItem,
-        ticket,
-        processed,
-        source: 'waiting_rescan_missing',
-      });
-      db.appendSimulation(simulation);
-      const updated = db.updateQueueItem(queueItem.id, {
-        status: 'simulated',
-        waitingRescan: false,
-        hint: processed.decision.reason,
-      });
-      if (!updated) throw new Error(`等待重查异常写回失败: ${queueItem.workOrderNum}`);
+      const deleted = db.deleteQueueItem(queueItem.id);
+      if (!deleted) throw new Error(`等待重查缺失项删除失败: ${queueItem.workOrderNum}`);
       reconciled.push({
         workOrderNum: queueItem.workOrderNum,
         queueItemId: queueItem.id,
-        status: 'simulated',
-        persistedSimulationId: simulation.id,
-        decision: processed.decision,
+        status: 'deleted',
+        deletedAt: observedAt,
+        reasonCode: 'WAITING_RESCAN_MISSING_FROM_48H_LIST',
       });
     }
     return reconciled;
@@ -1586,7 +1521,6 @@ module.exports = {
   createRefreshList,
   createCircuitReader,
   createAutoExecutionGate,
-  buildMissingWaitingRescanProcessed,
   createReconcileWaitingRescanAbsences,
   locateWorkOrderOnFreshList,
   processOpenedDetail,

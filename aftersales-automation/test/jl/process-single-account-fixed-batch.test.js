@@ -12,7 +12,6 @@ const {
   createRefreshList,
   createCircuitReader,
   createAutoExecutionGate,
-  buildMissingWaitingRescanProcessed,
   createReconcileWaitingRescanAbsences,
   loadDefaultDependencies,
   resolveSharedReturnGroupForBatch,
@@ -38,7 +37,7 @@ const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
 const ORDER_1 = '100001781188621717210';
 const ORDER_2 = '100001781188621717211';
 
-test('完整48小时清单缺失的自动等待重查项转待确认，不按扫描间隔判逾期', async () => {
+test('完整48小时清单缺失的自动等待重查项直接从queue删除', async () => {
   const missingOrder = '100001781188621717212';
   const otherAccountOrder = '100001781188621717213';
   const manuallyWaitingOrder = '100001781188621717214';
@@ -50,25 +49,12 @@ test('完整48小时清单缺失的自动等待重查项转待确认，不按扫
       { id: 'q-manual', workOrderNum: manuallyWaitingOrder, accountNum: '3', mode: 'live', status: 'waiting', waitingRescan: false },
     ],
   };
-  const previousSimulation = {
-    id: 'sim-previous',
-    queueItemId: 'q-missing',
-    collectedData: {
-      ticket: { workOrderNum: missingOrder, type: '退货退款', returnTracking: 'YT1234567890123' },
-      erpAftersale: { rows: [] },
-    },
-    decision: { action: 'reject', waitingRescan: true },
-  };
-  const simulations = [previousSimulation];
   const db = {
     readQueue: () => queue,
-    readSimulations: () => simulations,
-    appendSimulation: simulation => simulations.push(simulation),
-    updateQueueItem: (id, patch) => {
-      const item = queue.items.find(candidate => candidate.id === id);
-      if (!item) return null;
-      Object.assign(item, patch);
-      return item;
+    deleteQueueItem: id => {
+      const before = queue.items.length;
+      queue.items = queue.items.filter(item => item.id !== id);
+      return queue.items.length < before;
     },
   };
   const reconcile = createReconcileWaitingRescanAbsences(db);
@@ -79,26 +65,17 @@ test('完整48小时清单缺失的自动等待重查项转待确认，不按扫
     observedAt,
   });
 
-  assert.equal(result.length, 1);
-  assert.equal(result[0].workOrderNum, missingOrder);
-  assert.equal(queue.items.find(item => item.id === 'q-missing').status, 'simulated');
-  assert.equal(queue.items.find(item => item.id === 'q-missing').waitingRescan, false);
+  assert.deepEqual(result, [{
+    workOrderNum: missingOrder,
+    queueItemId: 'q-missing',
+    status: 'deleted',
+    deletedAt: observedAt,
+    reasonCode: 'WAITING_RESCAN_MISSING_FROM_48H_LIST',
+  }]);
+  assert.equal(queue.items.some(item => item.id === 'q-missing'), false);
   assert.equal(queue.items.find(item => item.id === 'q-present').status, 'waiting');
   assert.equal(queue.items.find(item => item.id === 'q-other').status, 'waiting');
   assert.equal(queue.items.find(item => item.id === 'q-manual').status, 'waiting');
-
-  const anomaly = simulations.at(-1);
-  assert.equal(anomaly.source, 'waiting_rescan_missing');
-  assert.equal(anomaly.decision.action, 'escalate');
-  assert.equal(anomaly.decision.reasonCode, 'WAITING_RESCAN_MISSING_FROM_48H_LIST');
-  assert.equal(anomaly.decision.humanTriggeredExecutionAllowed, false);
-  assert.equal(anomaly.collectedData.ticket.returnTracking, 'YT1234567890123');
-  assert.deepEqual(anomaly.collectedData.erpAftersale, { rows: [] });
-  assert.deepEqual(anomaly.collectedData.waitingRescanAbsence, {
-    observedAt,
-    source: 'fixed_batch_48h_reconciliation',
-    previousSimulationId: 'sim-previous',
-  });
 
   const second = await reconcile({
     account: { accountNum: '3', matchedNote: '测试店铺' },
@@ -106,20 +83,6 @@ test('完整48小时清单缺失的自动等待重查项转待确认，不按扫
     observedAt: '2026-08-15T08:00:00.000Z',
   });
   assert.deepEqual(second, []);
-  assert.equal(simulations.length, 2);
-});
-
-test('等待重查缺失结果明确表示无法确认平台终态', () => {
-  const processed = buildMissingWaitingRescanProcessed(
-    { id: 'q-1', workOrderNum: ORDER_1 },
-    null,
-    '2026-08-15T00:00:00.000Z'
-  );
-  assert.equal(processed.status, 'simulated');
-  assert.match(processed.decision.reason, /未出现于本次完整48小时清单/);
-  assert.match(processed.decision.warnings.join('；'), /不能据此推断工单已关闭/);
-  assert.equal(processed.decision.requiresHumanReview, true);
-  assert.equal(processed.decision.autoExecutionBlocked, true);
 });
 
 function page(currentPage, tickets, options = {}) {
