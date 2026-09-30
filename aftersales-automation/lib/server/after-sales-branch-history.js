@@ -18,6 +18,10 @@ const BRANCHES = Object.freeze({
     label: '退货退款 / 已入库 / 真实多退 / 同意退款',
     automationStatus: 'candidate',
   },
+  'refund_return.gift_returned.manual_approve': {
+    label: '退货退款 / 主品完整 / 赠品全部明确退回 / 人工确认同意退款',
+    automationStatus: 'manual_only',
+  },
   'refund_return.received.short.manual': {
     label: '退货退款 / 已入库 / 少退或缺失 / 人工处理',
     automationStatus: 'manual_only',
@@ -255,6 +259,7 @@ const RULE_BRANCHES = Object.freeze({
   '共用退货单入库行完整性不足→上报人工': 'refund_return.shared.incomplete.manual',
   '历史已退款占用超过当前可证明入库数量→上报人工': 'refund_return.shared.incomplete.manual',
   '超售后期无理由退货→拒绝': 'refund_return.no_tracking.overdue.reject',
+  '主品完整且赠品全部包裹已明确进入退回链路→仅允许人工确认后同意退款': 'refund_return.gift_returned.manual_approve',
 });
 
 const REGISTERED_RULE_SUMMARIES = new Set([

@@ -83,7 +83,7 @@ function observeGiftOutboundLogistics(cd) {
       .filter(Boolean);
     const returned = logisticsTexts.some(hasConfirmedReturn);
     const returnedSigned = logisticsTexts.some(text =>
-      /已退回签收|退回签收|退回商家后.*签收|到达商家仓库/.test(text)
+      /已退回签收|退回签收|退回商家后.*签收/.test(text)
     );
     return {
       tracking,
@@ -98,6 +98,7 @@ function observeGiftOutboundLogistics(cd) {
     packages,
     returnedCount: packages.filter(pkg => pkg.returned).length,
     returnedSignedCount: packages.filter(pkg => pkg.returnedSigned).length,
+    allReturned: packages.length > 0 && packages.every(pkg => pkg.returned),
     allReturnedSigned: packages.length > 0 && packages.every(pkg => pkg.returnedSigned),
   };
 }
@@ -1650,16 +1651,24 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         }
       }
 
-      if (hasGiftShortage && mainShortItems.length === 0 && giftOutbound && giftOutbound.allReturnedSigned) {
+      if (hasGiftShortage && mainShortItems.length === 0 && giftOutbound && giftOutbound.allReturned) {
         const packageCount = giftOutbound.packages.length;
+        const giftReturnSummary = giftOutbound.allReturnedSigned
+          ? `赠品${packageCount}个包裹均已退回签收`
+          : `赠品${packageCount}个包裹均已进入明确退回链路（退回途中/到达商家仓库/已退回签收）`;
         s({
           type: 'branch',
-          text: `人工观察 → 主品已完整入库，赠品${packageCount}个包裹均已退回签收；实际退回商品不存在少退`,
+          text: `推荐人工确认后同意退款 → 主品已完整入库，${giftReturnSummary}；实际退回商品不存在少退`,
         });
-        issues.push({
-          type: 'gift-returned-observation',
-          message: `主品已完整退回；赠品${packageCount}个包裹均已退回签收，实际退回商品不存在少退；赠品未进入本次退货入库记录，当前观察期需人工确认`,
-        });
+        const decision = approve(
+          `主品已完整退回；${giftReturnSummary}，实际退回商品不存在少退；人工确认后可同意退款`,
+          [{ doc: 'flow-5.1', section: 'Step4b', summary: '主品完整且赠品全部包裹已明确进入退回链路→仅允许人工确认后同意退款' }]
+        );
+        decision.requiresHumanReview = true;
+        decision.autoExecutionBlocked = true;
+        decision.humanTriggeredExecutionAllowed = true;
+        decision.recommendedActionLabel = '同意退款';
+        return fin(decision);
       } else {
         s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
         issues.push({ type: 'shortage', message: `退货数量不足：${shortDesc}` });

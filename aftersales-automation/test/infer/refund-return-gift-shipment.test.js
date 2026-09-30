@@ -80,7 +80,7 @@ test('赠品已发货状态即使无单号也不能按明确未发货排除', ()
   assert.match(decision.reason, /赠品|退货里没有|退货数量不足/);
 });
 
-test('赠品未入库时逐个展示同一赠品子订单的多包裹退回物流，但仍保持人工异常', () => {
+test('赠品未入库但全部包裹已退回签收时允许人工确认后同意退款', () => {
   const data = collectedGiftReturn();
   data.giftErpSearches[0].rows.rows = [{
     status: '交易关闭',
@@ -90,16 +90,21 @@ test('赠品未入库时逐个展示同一赠品子订单的多包裹退回物�
   data.erpLogistics = {
     results: [
       { tracking: 'GIFT-TRACK-1', logisticsText: '2026-09-29 15:41 已退回签收' },
-      { tracking: 'GIFT-TRACK-2', logisticsText: '2026-09-29 16:10 到达商家仓库' },
+      { tracking: 'GIFT-TRACK-2', logisticsText: '2026-09-29 16:10 已退回签收' },
     ],
   };
 
   const decision = infer(data);
 
-  assert.equal(decision.action, 'escalate');
+  assert.equal(decision.action, 'approve');
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
+  assert.equal(decision.recommendedActionLabel, '同意退款');
   assert.match(decision.reason, /主品已完整退回/);
   assert.match(decision.reason, /赠品2个包裹均已退回签收/);
   assert.match(decision.reason, /实际退回商品不存在少退/);
+  assert.match(decision.reason, /人工确认后可同意退款/);
   assert.doesNotMatch(decision.reason, /退货数量不足/);
   assert.ok(decision.steps.some(step => step.label === '赠品发货包裹' && /共2个运单/.test(String(step.value))));
   assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-1' && /已退回签收/.test(String(step.result))));
@@ -126,6 +131,32 @@ test('赠品多包裹只有部分识别到退回时逐包裹保留差异', () =>
   assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-1' && /已退回签收/.test(String(step.result))));
   assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-2' && /未识别到明确退回证据/.test(String(step.result))));
   assert.ok(decision.steps.some(step => step.label === '赠品发货物流观察' && /1\/2个包裹/.test(String(step.value))));
+});
+
+test('赠品全部包裹已进入退回途中或到达商家仓库时也允许人工确认后同意退款', () => {
+  const data = collectedGiftReturn();
+  data.giftErpSearches[0].rows.rows = [{
+    status: '交易关闭',
+    trackings: ['GIFT-TRACK-1', 'GIFT-TRACK-2'],
+  }];
+  data.erpLogistics = {
+    results: [
+      { tracking: 'GIFT-TRACK-1', logisticsText: '2026-09-29 17:56:59 您的快件已被转运中心安排退回，正在退回途中' },
+      { tracking: 'GIFT-TRACK-2', logisticsText: '2026-09-30 11:44:35 到达商家仓库' },
+    ],
+  };
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'approve');
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
+  assert.equal(decision.recommendedActionLabel, '同意退款');
+  assert.match(decision.reason, /全部.*明确退回链路|均已进入明确退回链路/);
+  assert.match(decision.reason, /人工确认后可同意退款/);
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-1' && /退回节点/.test(String(step.result))));
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-2' && /退回节点/.test(String(step.result))));
 });
 
 test('仅有等待发件人确认的退回请求不算明确退回证据', () => {
@@ -180,7 +211,11 @@ test('主品与赠品含同款商品时，赠品全部退回签收不得误写�
 
   const decision = infer(data);
 
-  assert.equal(decision.action, 'escalate');
+  assert.equal(decision.action, 'approve');
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
+  assert.equal(decision.recommendedActionLabel, '同意退款');
   assert.doesNotMatch(decision.reason, /退货数量不足|主品.*不足/);
   assert.match(decision.reason, /实际退回商品不存在少退/);
   assert.ok(decision.steps.some(step =>

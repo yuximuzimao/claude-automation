@@ -80,6 +80,18 @@ test('同一退货核对规则必须拆开精确退回和真实多退', () => {
   assert.notEqual(exact.caseId, excess.caseId);
 });
 
+test('赠品全部明确退回的人工同意退款分支必须保持 manual_only，不能进入无人自动', () => {
+  const result = classifySimulation(makeSimulation({
+    action: 'approve',
+    ruleSection: 'Step4b',
+    ruleSummary: '主品完整且赠品全部包裹已明确进入退回链路→仅允许人工确认后同意退款',
+    reason: '主品已完整退回；赠品全部包裹已明确退回；人工确认后可同意退款',
+  }), { type: '退货退款' });
+
+  assert.equal(result.branchId, 'refund_return.gift_returned.manual_approve');
+  assert.equal(result.automationStatus, 'manual_only');
+});
+
 test('部分签收且部分可拦截的新拒绝结果登记为候选分支', () => {
   const result = classifySimulation(makeSimulation({
     action: 'reject',
