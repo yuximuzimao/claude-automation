@@ -14,7 +14,7 @@
   platformStageAssessment: Object | null, // 可选，命中观察期状态分支时保存原综合推理对照
   erpSearch:      Object | null,   // 第一个主商品子订单结果（旧字段兼容）
   erpSearches:    Object[],        // 全部主商品子订单 ERP 搜索结果
-  erpLogistics:   Object | null,   // 可选，仅退款-已发货 ERP 补充物流源
+  erpLogistics:   Object | null,   // 可选，ERP 发货物流文本；用于仅退款已发货判断和退货退款赠品物流观察
   externalLogistics: Object | null,// 可选，仅退款物流异常时的百度真实页面补证结果
   logistics:      Object | null,   // 可选，鲸灵发货物流
   erpAftersale:   Object | null,   // 退货退款/换货有 returnTracking 时必填
@@ -147,7 +147,7 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 
 ---
 
-## `erpLogistics` 字段（ERP物流文本，仅退款-已发货时采集）
+## `erpLogistics` 字段（ERP 发货物流文本）
 
 ```js
 {
@@ -161,7 +161,7 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 }
 ```
 
-旧快照 `{ logisticsText: string }` 继续兼容。
+旧快照 `{ logisticsText: string }` 继续兼容。当前除仅退款已发货判断外，退货退款在确认赠品未随本次退货入库/不足时，也会按赠品 ERP 发货行的运单号读取这里的物流文本，用于区分已签收、驿站待取、仍在运输和已进入退回链路；这些状态由推理层从原始文本派生，不新增 schema 字段。
 
 ---
 

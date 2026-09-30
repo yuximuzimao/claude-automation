@@ -85,10 +85,19 @@ function observeGiftOutboundLogistics(cd) {
     const returnedSigned = logisticsTexts.some(text =>
       /已退回签收|退回签收|退回商家后.*签收/.test(text)
     );
+    const signed = !returned && logisticsTexts.some(text =>
+      SIGNED_KEYWORDS.some(keyword => text.includes(keyword))
+      || /已投递|已领取|已派送至本人/.test(text)
+    );
+    const yizhan = !returned && !signed && logisticsTexts.some(text =>
+      YIZHAN_KEYWORDS.some(keyword => text.includes(keyword))
+    );
     return {
       tracking,
       returned,
       returnedSigned,
+      signed,
+      yizhan,
       hasLogistics: logisticsTexts.length > 0,
     };
   });
@@ -98,9 +107,46 @@ function observeGiftOutboundLogistics(cd) {
     packages,
     returnedCount: packages.filter(pkg => pkg.returned).length,
     returnedSignedCount: packages.filter(pkg => pkg.returnedSigned).length,
+    signedCount: packages.filter(pkg => pkg.signed).length,
+    yizhanCount: packages.filter(pkg => pkg.yizhan).length,
+    inTransitCount: packages.filter(pkg => pkg.hasLogistics && !pkg.returned && !pkg.signed && !pkg.yizhan).length,
+    unknownCount: packages.filter(pkg => !pkg.hasLogistics).length,
     allReturned: packages.length > 0 && packages.every(pkg => pkg.returned),
     allReturnedSigned: packages.length > 0 && packages.every(pkg => pkg.returnedSigned),
   };
+}
+
+function summarizeGiftOutboundState(giftOutbound) {
+  const packageCount = giftOutbound && giftOutbound.packages ? giftOutbound.packages.length : 0;
+  if (!packageCount) return '赠品未取得可核验运单号';
+  if (giftOutbound.allReturnedSigned) return `赠品${packageCount}个包裹均已退回签收`;
+  if (giftOutbound.allReturned) return `赠品${packageCount}个包裹均已进入明确退回链路`;
+
+  if (packageCount === 1) {
+    const pkg = giftOutbound.packages[0];
+    if (pkg.returnedSigned) return '赠品1个包裹已退回签收';
+    if (pkg.returned) return '赠品1个包裹已进入退回链路';
+    if (pkg.signed) return '赠品1个包裹已签收，暂无退回证据';
+    if (pkg.yizhan) return '赠品1个包裹在驿站待取，暂无退回证据';
+    if (pkg.hasLogistics) return '赠品1个包裹仍在运输，暂无退回证据';
+    return '赠品1个包裹暂无可核验物流状态';
+  }
+
+  const parts = [];
+  if (giftOutbound.returnedSignedCount) parts.push(`${giftOutbound.returnedSignedCount}个已退回签收`);
+  const returningCount = giftOutbound.returnedCount - giftOutbound.returnedSignedCount;
+  if (returningCount > 0) parts.push(`${returningCount}个已进入退回链路`);
+  if (giftOutbound.signedCount) parts.push(`${giftOutbound.signedCount}个已签收未退回`);
+  if (giftOutbound.yizhanCount) parts.push(`${giftOutbound.yizhanCount}个驿站待取`);
+  if (giftOutbound.inTransitCount) parts.push(`${giftOutbound.inTransitCount}个仍在运输`);
+  if (giftOutbound.unknownCount) parts.push(`${giftOutbound.unknownCount}个物流状态未知`);
+
+  const suffix = giftOutbound.returnedCount === 0
+    ? '，暂无退回证据'
+    : giftOutbound.returnedCount < packageCount
+      ? '，仍有包裹未退回'
+      : '';
+  return `赠品${packageCount}个包裹：${parts.join('、')}${suffix}`;
 }
 
 const NOT_PICKED_UP_KEYWORDS = ['未揽收', '等待揽收', '尚未揽收'];
@@ -1667,6 +1713,15 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       }).join('，');
 
       const hasGiftShortage = shortItems.some(m => m.source === '赠品' || m.source === '主品+赠品');
+      const giftMatchResults = matchResults.filter(m =>
+        m.source === '赠品' || (m.source === '主品+赠品' && (m.giftExpectedQty || 0) > 0)
+      );
+      const allGiftCompletelyMissing = giftMatchResults.length > 0 && giftMatchResults.every(m => {
+        if (m.source === '赠品') return m.receivedQty === 0;
+        const mainExpectedQty = Math.max(0, m.expectedQty - (m.giftExpectedQty || 0));
+        const giftReceivedQty = Math.max(0, m.receivedQty - mainExpectedQty);
+        return giftReceivedQty === 0;
+      });
       let giftOutbound = null;
       if (hasGiftShortage) {
         giftOutbound = observeGiftOutboundLogistics(cd);
@@ -1682,9 +1737,13 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
               ? '已退回签收'
               : pkg.returned
                 ? '识别到退回节点，但尚未确认退回签收'
-                : pkg.hasLogistics
-                  ? '已采集物流，但未识别到明确退回证据'
-                  : '未采集到可核验物流';
+                : pkg.signed
+                  ? '已签收，未识别到明确退回证据'
+                  : pkg.yizhan
+                    ? '驿站待取，未识别到明确退回证据'
+                    : pkg.hasLogistics
+                      ? '仍在运输/配送，未识别到明确退回证据'
+                      : '未采集到可核验物流';
             s({ type: 'check', condition: `[赠品物流]${pkg.tracking}`, result });
           });
           s({
@@ -1719,6 +1778,16 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         decision.humanTriggeredExecutionAllowed = true;
         decision.recommendedActionLabel = '同意退款';
         return fin(decision);
+      } else if (hasGiftShortage && mainShortItems.length === 0 && allGiftCompletelyMissing) {
+        const giftStateSummary = summarizeGiftOutboundState(giftOutbound);
+        s({
+          type: 'branch',
+          text: `上报 → 主品已完整入库；整套赠品未随本次退货入库；${giftStateSummary}`,
+        });
+        issues.push({
+          type: 'shortage',
+          message: `主品已完整退回；整套赠品未随本次退货入库；${giftStateSummary}`,
+        });
       } else {
         s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
         issues.push({ type: 'shortage', message: `退货数量不足：${shortDesc}` });

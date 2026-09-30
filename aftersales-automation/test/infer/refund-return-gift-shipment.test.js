@@ -70,14 +70,83 @@ test('赠品待打印但已有快递单号时不能按未发货排除，缺少�
   }));
 
   assert.equal(decision.action, 'escalate');
-  assert.match(decision.reason, /赠品|退货里没有|退货数量不足/);
+  assert.match(decision.reason, /主品已完整退回/);
+  assert.match(decision.reason, /整套赠品未随本次退货入库/);
+  assert.match(decision.reason, /赠品1个包裹暂无可核验物流状态/);
+  assert.doesNotMatch(decision.reason, /退货数量不足/);
 });
 
 test('赠品已发货状态即使无单号也不能按明确未发货排除', () => {
   const decision = infer(collectedGiftReturn({ status: '卖家已发货' }));
 
   assert.equal(decision.action, 'escalate');
-  assert.match(decision.reason, /赠品|退货里没有|退货数量不足/);
+  assert.match(decision.reason, /主品已完整退回/);
+  assert.match(decision.reason, /整套赠品未随本次退货入库/);
+  assert.match(decision.reason, /赠品未取得可核验运单号/);
+  assert.doesNotMatch(decision.reason, /退货数量不足/);
+});
+
+test('整套赠品未入库且赠品已签收未退回时，最终原因直接展示赠品物流状态', () => {
+  const data = collectedGiftReturn({
+    status: '交易成功',
+    tracking: 'GIFT-TRACK-1',
+    trackings: ['GIFT-TRACK-1'],
+  });
+  data.giftProductArchive.subItems = [
+    { name: '赠品A', specCode: 'SPEC-GIFT-A', qty: 1 },
+    { name: '赠品B', specCode: 'SPEC-GIFT-B', qty: 1 },
+  ];
+  data.erpLogistics = {
+    results: [{
+      tracking: 'GIFT-TRACK-1',
+      logisticsText: '2026-09-30 13:13:02 您的快件已投递，收件人:档口',
+    }],
+  };
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'escalate');
+  assert.match(decision.reason, /主品已完整退回/);
+  assert.match(decision.reason, /整套赠品未随本次退货入库/);
+  assert.match(decision.reason, /赠品1个包裹已签收，暂无退回证据/);
+  assert.doesNotMatch(decision.reason, /赠品A|赠品B|退货数量不足/);
+  assert.ok(decision.steps.some(step =>
+    step.condition === '[赠品物流]GIFT-TRACK-1'
+    && /已签收/.test(String(step.result))
+    && /未识别到明确退回证据/.test(String(step.result))
+  ));
+});
+
+test('只缺赠品中的一部分时仍列具体缺失商品，不误写成整套赠品未退', () => {
+  const data = collectedGiftReturn({
+    status: '交易成功',
+    tracking: 'GIFT-TRACK-1',
+    trackings: ['GIFT-TRACK-1'],
+  });
+  data.giftProductArchive.subItems = [
+    { name: '赠品A', specCode: 'SPEC-GIFT-A', qty: 1 },
+    { name: '赠品B', specCode: 'SPEC-GIFT-B', qty: 1 },
+  ];
+  data.erpAftersale.rows[0].returnQty = 2;
+  data.erpAftersale.rows[0].items.push({
+    name: '赠品A',
+    specCode: 'SPEC-GIFT-A',
+    qtyGood: 1,
+    qtyBad: 0,
+  });
+  data.erpLogistics = {
+    results: [{
+      tracking: 'GIFT-TRACK-1',
+      logisticsText: '2026-09-30 13:13:02 您的快件已投递，收件人:档口',
+    }],
+  };
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'escalate');
+  assert.match(decision.reason, /赠品B/);
+  assert.match(decision.reason, /退货数量不足/);
+  assert.doesNotMatch(decision.reason, /整套赠品未随本次退货入库/);
 });
 
 test('赠品未入库但全部包裹已退回签收时允许人工确认后同意退款', () => {
