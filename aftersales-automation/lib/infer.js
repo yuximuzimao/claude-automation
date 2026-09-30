@@ -1485,19 +1485,61 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }
 
     const matchResults = [];  // { expected: item, expectedQty, matched, receivedQty, status }
-    const usedReceived = new Set();  // 已匹配的入库项索引
 
-    // 主品子品匹配
+    // 同一退货单下，只统计明确“卖家已收到退货”的行；同规格跨 ERP 行先合计，再与应退总量比较。
+    // 这避免同一规格分散在多个入库行时，被旧的一次性“占用整行”算法制造出假缺件。
+    const groupedReceived = [];
+    const receivedIndexByKey = new Map();
+    receivedItems.forEach(ri => {
+      const specCode = String(ri.specCode || '').trim();
+      const nameNorm = String(ri.name || '').replace(/\s+/g, '');
+      const key = specCode ? `spec:${specCode}` : `name:${nameNorm}`;
+      let idx = receivedIndexByKey.get(key);
+      if (idx === undefined) {
+        idx = groupedReceived.length;
+        receivedIndexByKey.set(key, idx);
+        groupedReceived.push({ ...ri, qtyGood: 0, qtyBad: 0 });
+      }
+      groupedReceived[idx].qtyGood += Number(ri.qtyGood) || 0;
+      groupedReceived[idx].qtyBad += Number(ri.qtyBad) || 0;
+    });
+    const usedReceived = new Set();  // 已匹配的“规格汇总项”索引
+
+    const groupedMainExpected = [];
+    const mainExpectedIndexByKey = new Map();
     archiveSubItems.forEach(exp => {
       const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
       if (isExempt) return;
       const afterSaleNum = resolveMainAfterSaleNum(exp);
       const expQty = (exp.qty || 1) * afterSaleNum;
+      const specCode = String(exp.specCode || '').trim();
+      const nameNorm = String(exp.name || '').replace(/\s+/g, '');
+      const key = specCode ? `spec:${specCode}` : `name:${nameNorm}`;
+      let idx = mainExpectedIndexByKey.get(key);
+      if (idx === undefined) {
+        idx = groupedMainExpected.length;
+        mainExpectedIndexByKey.set(key, idx);
+        groupedMainExpected.push({ ...exp, expectedQty: 0 });
+      }
+      groupedMainExpected[idx].expectedQty += expQty;
+    });
+
+    // 主品按规格汇总后匹配
+    groupedMainExpected.forEach(exp => {
+      const expQty = exp.expectedQty;
 
       let bestIdx = -1;
       let bestScore = 0;
-      receivedItems.forEach((ri, idx) => {
+      groupedReceived.forEach((ri, idx) => {
         if (usedReceived.has(idx)) return;
+        const expSpec = String(exp.specCode || '').trim();
+        const riSpec = String(ri.specCode || '').trim();
+        if (expSpec && riSpec && expSpec === riSpec) {
+          bestIdx = idx;
+          bestScore = Number.MAX_SAFE_INTEGER;
+          return;
+        }
+        if (bestScore === Number.MAX_SAFE_INTEGER) return;
         const nameA = (exp.name || '').replace(/\s+/g, '');
         const nameB = (ri.name || '').replace(/\s+/g, '');
         if (nameA.includes(nameB) || nameB.includes(nameA)) {
@@ -1508,11 +1550,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 
       if (bestIdx >= 0) {
         usedReceived.add(bestIdx);
-        const ri = receivedItems[bestIdx];
+        const ri = groupedReceived[bestIdx];
         const status = ri.qtyGood >= expQty ? 'ok' : 'short';
-        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status, source: '主品' });
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status, source: '主品', specCode: exp.specCode || ri.specCode || '' });
       } else {
-        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing', source: '主品' });
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing', source: '主品', specCode: exp.specCode || '' });
       }
     });
 
@@ -1540,11 +1582,19 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         return;
       }
 
-      // 赠品和主品不同 → 独立匹配
+      // 赠品和主品不同 → 在已收货规格汇总中独立匹配
       let bestIdx = -1;
       let bestScore = 0;
-      receivedItems.forEach((ri, idx) => {
+      groupedReceived.forEach((ri, idx) => {
         if (usedReceived.has(idx)) return;
+        const expSpec = String(exp.specCode || '').trim();
+        const riSpec = String(ri.specCode || '').trim();
+        if (expSpec && riSpec && expSpec === riSpec) {
+          bestIdx = idx;
+          bestScore = Number.MAX_SAFE_INTEGER;
+          return;
+        }
+        if (bestScore === Number.MAX_SAFE_INTEGER) return;
         const nameA = giftNameNorm;
         const nameB = (ri.name || '').replace(/\s+/g, '');
         if (nameA.includes(nameB) || nameB.includes(nameA)) {
@@ -1555,11 +1605,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 
       if (bestIdx >= 0) {
         usedReceived.add(bestIdx);
-        const ri = receivedItems[bestIdx];
+        const ri = groupedReceived[bestIdx];
         const status = ri.qtyGood >= expQty ? 'ok' : 'short';
-        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status, source: '赠品' });
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status, source: '赠品', specCode: exp.specCode || ri.specCode || '' });
       } else {
-        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing', source: '赠品' });
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing', source: '赠品', specCode: exp.specCode || '' });
       }
     });
 
@@ -1592,7 +1642,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     });
 
     // 检查赠品是否在入库中（未匹配的入库项可能是赠品或 archive 缺失的品类）
-    const unmatchedReceived = receivedItems.filter((_, idx) => !usedReceived.has(idx));
+    const unmatchedReceived = groupedReceived.filter((_, idx) => !usedReceived.has(idx));
     if (unmatchedReceived.length > 0) {
       const giftDesc = unmatchedReceived.map(i => `${i.name}(${i.qtyGood}件)`).join('、');
       s({ type: 'read', label: '入库额外项（可能为赠品）', value: giftDesc });
