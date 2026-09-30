@@ -80,6 +80,85 @@ test('赠品已发货状态即使无单号也不能按明确未发货排除', ()
   assert.match(decision.reason, /赠品|退货里没有|退货数量不足/);
 });
 
+test('赠品未入库时逐个展示同一赠品子订单的多包裹退回物流，但仍保持人工异常', () => {
+  const data = collectedGiftReturn();
+  data.giftErpSearches[0].rows.rows = [{
+    status: '交易关闭',
+    tracking: 'GIFT-TRACK-1',
+    trackings: ['GIFT-TRACK-1', 'GIFT-TRACK-2'],
+  }];
+  data.erpLogistics = {
+    results: [
+      { tracking: 'GIFT-TRACK-1', logisticsText: '2026-09-29 15:41 已退回签收' },
+      { tracking: 'GIFT-TRACK-2', logisticsText: '2026-09-29 16:10 到达商家仓库' },
+    ],
+  };
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'escalate');
+  assert.match(decision.reason, /赠品|退货里没有|退货数量不足/);
+  assert.ok(decision.steps.some(step => step.label === '赠品发货包裹' && /共2个运单/.test(String(step.value))));
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-1' && /退回证据/.test(String(step.result))));
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-2' && /退回证据/.test(String(step.result))));
+  assert.ok(decision.steps.some(step => step.label === '赠品发货物流观察' && /2\/2个包裹/.test(String(step.value)) && /不改变/.test(String(step.value))));
+});
+
+test('赠品多包裹只有部分识别到退回时逐包裹保留差异', () => {
+  const data = collectedGiftReturn();
+  data.giftErpSearches[0].rows.rows = [{
+    status: '交易关闭',
+    trackings: ['GIFT-TRACK-1', 'GIFT-TRACK-2'],
+  }];
+  data.erpLogistics = {
+    results: [
+      { tracking: 'GIFT-TRACK-1', logisticsText: '2026-09-29 15:41 已退回签收' },
+      { tracking: 'GIFT-TRACK-2', logisticsText: '2026-09-29 15:50 快件正在运输中' },
+    ],
+  };
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'escalate');
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-1' && /退回证据/.test(String(step.result))));
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-2' && /未识别到明确退回证据/.test(String(step.result))));
+  assert.ok(decision.steps.some(step => step.label === '赠品发货物流观察' && /1\/2个包裹/.test(String(step.value))));
+});
+
+test('仅有等待发件人确认的退回请求不算明确退回证据', () => {
+  const data = collectedGiftReturn({
+    status: '交易关闭',
+    tracking: 'GIFT-TRACK-1',
+    trackings: ['GIFT-TRACK-1'],
+  });
+  data.erpLogistics = {
+    results: [{ tracking: 'GIFT-TRACK-1', logisticsText: '收件人要求退回，等待发件人确认' }],
+  };
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'escalate');
+  assert.ok(decision.steps.some(step => step.condition === '[赠品物流]GIFT-TRACK-1' && /未识别到明确退回证据/.test(String(step.result))));
+});
+
+test('赠品已经随本次退货入库时不增加赠品发货物流观察', () => {
+  const data = collectedGiftReturn({
+    status: '交易关闭',
+    tracking: 'GIFT-TRACK-1',
+    trackings: ['GIFT-TRACK-1'],
+  });
+  data.erpLogistics = {
+    results: [{ tracking: 'GIFT-TRACK-1', logisticsText: '2026-09-29 15:41 已退回签收' }],
+  };
+  data.erpAftersale.rows[0].returnQty = 2;
+  data.erpAftersale.rows[0].items.push({ name: '赠品', specCode: 'SPEC-GIFT', qtyGood: 1, qtyBad: 0 });
+
+  const decision = infer(data);
+
+  assert.equal(decision.action, 'approve');
+  assert.equal(decision.steps.some(step => step.label === '赠品发货物流观察'), false);
+});
+
 test('多个赠品子订单只查到其中一个时不得把全部赠品判成未发货', () => {
   const data = collectedGiftReturn();
   data.ticket.gifts.push({ id: 'GIFT-2' });

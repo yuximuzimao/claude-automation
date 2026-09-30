@@ -69,6 +69,33 @@ function getPackageTracking(pkg) {
   return match ? match[1] : null;
 }
 
+function observeGiftOutboundLogistics(cd) {
+  const rows = getErpRows(cd, 'giftErpSearch');
+  const trackings = [...new Set(rows.flatMap(getRowTrackings))];
+  const erpResults = (cd.erpLogistics && Array.isArray(cd.erpLogistics.results))
+    ? cd.erpLogistics.results
+    : [];
+
+  const packages = trackings.map(tracking => {
+    const matchingResults = erpResults.filter(result => result && result.tracking === tracking);
+    const logisticsTexts = matchingResults
+      .map(result => String(result.logisticsText || '').trim())
+      .filter(Boolean);
+    const returned = logisticsTexts.some(hasConfirmedReturn);
+    return {
+      tracking,
+      returned,
+      hasLogistics: logisticsTexts.length > 0,
+    };
+  });
+
+  return {
+    trackings,
+    packages,
+    returnedCount: packages.filter(pkg => pkg.returned).length,
+  };
+}
+
 const NOT_PICKED_UP_KEYWORDS = ['未揽收', '等待揽收', '尚未揽收'];
 const ACTUAL_SHIPMENT_RE = /揽收|在途|派件|签收|入站|到达|离开|运输/;
 
@@ -1551,6 +1578,39 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         if (m.status === 'missing') return `${name}（退货里没有）`;
         return `${name}（退了${m.receivedQty}件，应退${m.expectedQty}件）`;
       }).join('，');
+
+      const hasGiftShortage = shortItems.some(m => m.source === '赠品' || m.source === '主品+赠品');
+      if (hasGiftShortage) {
+        const giftOutbound = observeGiftOutboundLogistics(cd);
+        const giftSubOrderId = (gifts[0] && gifts[0].id) || '未知';
+        if (giftOutbound.packages.length > 0) {
+          s({
+            type: 'read',
+            label: '赠品发货包裹',
+            value: `子订单${giftSubOrderId}，共${giftOutbound.packages.length}个运单：${giftOutbound.trackings.join('、')}`,
+          });
+          giftOutbound.packages.forEach(pkg => {
+            const result = pkg.returned
+              ? '现有物流规则识别到退回证据'
+              : pkg.hasLogistics
+                ? '已采集物流，但未识别到明确退回证据'
+                : '未采集到可核验物流';
+            s({ type: 'check', condition: `[赠品物流]${pkg.tracking}`, result });
+          });
+          s({
+            type: 'read',
+            label: '赠品发货物流观察',
+            value: `${giftOutbound.returnedCount}/${giftOutbound.packages.length}个包裹识别到退回证据；当前仅供人工复核，不改变赠品入库不足的异常结论`,
+          });
+        } else {
+          s({
+            type: 'read',
+            label: '赠品发货物流观察',
+            value: `子订单${giftSubOrderId}未取得可核验运单号；当前仅供人工复核，不改变赠品入库不足的异常结论`,
+          });
+        }
+      }
+
       s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
       issues.push({ type: 'shortage', message: `退货数量不足：${shortDesc}` });
     }
