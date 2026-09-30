@@ -1425,12 +1425,31 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 
   if (archiveSubItems.length > 0) {
     // ── 逐商品匹配 ──────────────────────────────────────────────
-    const afterSaleNum = (subOrders[0] && subOrders[0].afterSaleNum) || 1;
-    // afterSaleNum 一致性断言（多子订单应共享同一值，不匹配时打日志）
-    if (subOrders.length > 1) {
-      const nums = subOrders.map(function(s){ return s.afterSaleNum; });
-      if (new Set(nums).size > 1) console.error('[WARN] afterSaleNum mismatch:', nums);
+    // 每个主子订单必须使用自己的 afterSaleNum，禁止跨子订单复用第一个倍数。
+    // 旧单子订单仅有一条且历史档案没有 _subOrderId 时，仍兼容使用唯一子订单。
+    const subOrderById = new Map(subOrders.map(order => [String(order.id), order]));
+    function resolveMainAfterSaleNum(exp) {
+      let order = null;
+      if (exp._subOrderId !== undefined && exp._subOrderId !== null && exp._subOrderId !== '') {
+        order = subOrderById.get(String(exp._subOrderId)) || null;
+      } else if (subOrders.length === 1) {
+        order = subOrders[0];
+      }
+      if (!order) return null;
+      const qty = Number(order.afterSaleNum);
+      return Number.isFinite(qty) && qty > 0 ? qty : null;
     }
+
+    const unresolvedMainItem = archiveSubItems.find(exp => {
+      const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
+      return !isExempt && resolveMainAfterSaleNum(exp) === null;
+    });
+    if (unresolvedMainItem) {
+      const subOrderLabel = unresolvedMainItem._subOrderId || '缺失';
+      s({ type: 'branch', text: '上报 → 主商品无法确定对应子订单倍数，禁止猜测数量' });
+      return fin(escalate(`主商品数量归属不完整（商品：${unresolvedMainItem.name || '未知'}，子订单：${subOrderLabel}），无法确定 afterSaleNum，需人工核查`));
+    }
+
     const matchResults = [];  // { expected: item, expectedQty, matched, receivedQty, status }
     const usedReceived = new Set();  // 已匹配的入库项索引
 
@@ -1438,6 +1457,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     archiveSubItems.forEach(exp => {
       const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
       if (isExempt) return;
+      const afterSaleNum = resolveMainAfterSaleNum(exp);
       const expQty = (exp.qty || 1) * afterSaleNum;
 
       let bestIdx = -1;
