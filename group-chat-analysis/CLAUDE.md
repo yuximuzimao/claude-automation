@@ -8,8 +8,9 @@
 2. 读 `tasks/todo.md`。
 3. 读 `docs/INDEX.md`。
 4. 继续当前开发时读 `docs/CURRENT.md`。
-5. 只按当前任务从 `docs/rules/README.md` 加载对应规则。
-6. 跨模块设计/实现才读 `docs/ARCHITECTURE.md`。
+5. 跨 agent 接续时读 `docs/HANDOFF.md`。
+6. 只按当前任务从 `docs/rules/README.md` 加载对应规则。
+7. 跨模块设计/实现才读 `docs/ARCHITECTURE.md`。
 
 ## 稳定项目目标
 

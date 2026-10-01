@@ -18,10 +18,12 @@
 | `tasks/todo.md` | 唯一当前待办 | 每次进入项目 |
 | `docs/INDEX.md` | 文档/数据导航 | 每次进入项目 |
 | `docs/CURRENT.md` | 当前开发阶段与已验证事实 | 继续当前工作时 |
+| `docs/HANDOFF.md` | Codex/Claude 当前交接与验证结果 | 跨 agent 接续工作时 |
 | `docs/ARCHITECTURE.md` | 稳定模块边界与数据流 | 设计/实现跨模块功能时 |
 | `docs/rules/README.md` | 永久规则路由 | 需要规则判断时 |
 | `schemas/capture-page.schema.json` | 单页原始OCR捕获的数据契约 | 改capture输出/normalize输入时 |
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
+| `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
 | `tests/README.md` | 验证层级与测试边界 | 写/跑测试时 |
 

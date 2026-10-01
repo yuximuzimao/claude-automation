@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "batch-state.schema.json",
+  "title": "Group Chat Capture Batch State",
+  "description": "Private runtime state for resumable capture. This schema never stores screenshots or avatar evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "batch_id",
+    "status",
+    "started_at",
+    "updated_at",
+    "next_page_index",
+    "last_completed_batch",
+    "last_success_at",
+    "groups"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": ["incomplete", "completed", "analyzed"]
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "next_page_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Next page index in this batch; page_index follows capture-page.schema.json and is not reset per group."
+    },
+    "last_completed_batch": {
+      "type": ["string", "null"]
+    },
+    "last_success_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "groups": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/groupProgress"
+      }
+    }
+  },
+  "$defs": {
+    "groupProgress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "last_page_index",
+        "last_completed_anchor"
+      ],
+      "properties": {
+        "last_page_index": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "last_completed_anchor": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/anchorMessage"
+          }
+        }
+      }
+    },
+    "anchorMessage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "content_text", "sender_display", "timestamp_text"],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "content_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sender_display": {
+          "type": ["string", "null"]
+        },
+        "timestamp_text": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}
