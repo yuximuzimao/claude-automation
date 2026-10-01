@@ -51,7 +51,7 @@ CodexPro 读取 current.md
 
 输入：官方 QQ 当前 UI、目标群配置、上次采集状态。
 
-输出：符合 `schemas/capture-page.schema.json` 的单页 raw record；页级保存 batch/group/page/window 元数据，blocks 保留 text / bbox / confidence。
+输出：符合 `schemas/capture-page.schema.json` 的单页 raw record；页级保存 batch/group/page/window 元数据，blocks 保留 text / bbox / confidence。为当前批次的相邻页归一化，采集适配器可额外在内存中提供消息行对应的头像圆圈局部指纹；该临时视觉证据不写入 raw Schema 或长期状态。
 
 不得：
 - 判断哪些魔兽信息重要；
@@ -63,11 +63,11 @@ CodexPro 读取 current.md
 
 只负责“这些 OCR block 组成了哪些消息”。
 
-输入：OCR blocks。
+输入：OCR blocks，以及仅供当前批次使用的可选头像圆圈局部指纹。
 
-输出：符合 `schemas/message-record.schema.json` 的消息记录。
+输出：符合 `schemas/message-record.schema.json` 的消息记录。头像指纹只参与当前批次相似昵称的发送者确认，不进入持久化消息记录。
 
-确定性优先；所有规则都必须可测试。
+确定性优先；所有规则都必须可测试。活跃人员明细不在 normalize 层按发言数推断，交由 Analyze 阶段结合消息的信息价值、证据质量和后续关注价值判断。
 
 ### store
 
@@ -78,7 +78,11 @@ CodexPro 读取 current.md
 - 失败后从安全位置恢复；
 - 后续增量采集；
 - 批次级原子性或明确的 completed/incomplete 状态；
+- 批次级严格递进的页恢复位置，以及每群的连续增量锚点；
+- completed 前禁止生成 `current.md`，analyzed 不覆盖 completed 消息；
 - 不因分析失败而丢采集结果。
+
+阶段 2-3 原型的状态契约位于 `schemas/batch-state.schema.json`，确定性转换测试位于 `tests/test_batch_state.py`；正式 `src/store` 入口仍等待端到端 dry-run 门禁。
 
 ### inbox builder
 

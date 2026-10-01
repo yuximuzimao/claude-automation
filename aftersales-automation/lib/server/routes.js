@@ -289,6 +289,9 @@ router.post('/simulations/:id/execute', (req, res) => {
   if (sim.decision.action === 'skip' && sim.decision.manualArchiveOnly === true) {
     return res.status(400).json({ error: '当前无需平台操作，请人工确认后手动归档' });
   }
+  if (!['approve', 'reject'].includes(sim.decision.action)) {
+    return res.status(400).json({ error: '当前结果没有可执行的平台同意/拒绝动作' });
+  }
   if (sim.decision.humanTriggeredExecutionAllowed === false) {
     return res.status(400).json({ error: '当前结果不可执行，请先完成必要核验或重新采集' });
   }

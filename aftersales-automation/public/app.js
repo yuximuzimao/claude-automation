@@ -1193,7 +1193,8 @@ function renderActions(item, sim, mode) {
       && sim.decision.manualExecutionAllowedWhileWaiting === true
       && sim.decision.reasonCode === 'INTERCEPT_WAITING';
     const manualArchiveOnly = sim.decision.action === 'skip' && sim.decision.manualArchiveOnly === true;
-    const canExecute = !executed && !manualArchiveOnly
+    const hasPlatformExecutionAction = sim.decision.action === 'approve' || sim.decision.action === 'reject';
+    const canExecute = !executed && !manualArchiveOnly && hasPlatformExecutionAction
       && sim.decision.humanTriggeredExecutionAllowed !== false
       && (item.status !== 'waiting' || isWaitingIntercept);
     const humanReviewHint = manualArchiveOnly

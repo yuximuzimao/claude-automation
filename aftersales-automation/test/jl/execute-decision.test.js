@@ -83,6 +83,35 @@ test('混合签收分支使用独立拒绝原因和含单号详细文案', () =>
   });
 });
 
+test('赠品已签收未退回分支使用固化拒绝文案，拒绝外部参数覆盖', () => {
+  const copy = resolveRejectCopy({
+    decision: {
+      action: 'reject',
+      reasonCode: 'GIFT_NOT_RETURNED_SIGNED',
+      reason: '主品完整退回，赠品已签收未退回',
+      rejectReason: '其他',
+      rejectDetail: '已收到退回主商品，但赠品暂未收到退回，请将赠品一并退回后再申请退款',
+    },
+    rejectReason: '外部原因',
+    rejectDetail: '外部覆盖文案',
+  });
+
+  assert.deepEqual(copy, {
+    reason: '其他',
+    detail: '已收到退回主商品，但赠品暂未收到退回，请将赠品一并退回后再申请退款',
+  });
+});
+
+test('赠品已签收未退回分支缺少固化拒绝字段时禁止兜底', () => {
+  assert.throws(() => resolveRejectCopy({
+    decision: {
+      action: 'reject',
+      reasonCode: 'GIFT_NOT_RETURNED_SIGNED',
+      reason: '主品完整退回，赠品已签收未退回',
+    },
+  }), /禁止使用推理结果兜底/);
+});
+
 test('拦截件缺少分支拒绝原因或独立文案时禁止兜底', () => {
   assert.throws(() => resolveRejectCopy({
     decision: {

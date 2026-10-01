@@ -1778,6 +1778,31 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         decision.humanTriggeredExecutionAllowed = true;
         decision.recommendedActionLabel = '同意退款';
         return fin(decision);
+      } else if (
+        hasGiftShortage
+        && mainShortItems.length === 0
+        && allGiftCompletelyMissing
+        && giftOutbound
+        && giftOutbound.signedCount > 0
+      ) {
+        const giftStateSummary = summarizeGiftOutboundState(giftOutbound);
+        s({
+          type: 'branch',
+          text: `推荐人工拒绝退款 → 主品已完整入库；整套赠品未随本次退货入库；${giftStateSummary}`,
+        });
+        const decision = reject(
+          `主品已完整退回；整套赠品未随本次退货入库；${giftStateSummary}`,
+          ['⚠️ 赠品未退回分支禁止无人自动执行；人工核对无误后可执行拒绝退款'],
+          [{ doc: 'flow-5.1', section: 'Step4b', summary: '主品完整且整套赠品已签收未退回→仅允许人工确认后拒绝退款' }],
+        );
+        decision.reasonCode = 'GIFT_NOT_RETURNED_SIGNED';
+        decision.rejectReason = '其他';
+        decision.rejectDetail = '已收到退回主商品，但赠品暂未收到退回，请将赠品一并退回后再申请退款';
+        decision.requiresHumanReview = true;
+        decision.autoExecutionBlocked = true;
+        decision.humanTriggeredExecutionAllowed = true;
+        decision.recommendedActionLabel = '拒绝退款';
+        return fin(decision);
       } else if (hasGiftShortage && mainShortItems.length === 0 && allGiftCompletelyMissing) {
         const giftStateSummary = summarizeGiftOutboundState(giftOutbound);
         s({

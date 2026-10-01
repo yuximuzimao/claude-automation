@@ -65,12 +65,15 @@ runtime/
 
 ## 批次状态
 
-采集必须区分：
-- `incomplete`：中途中断/失败，不得生成正式 current.md；
-- `completed`：达到本轮停止条件且规范化/去重完成，可以生成 current.md；
-- `analyzed`：GPT已处理 current.md。
+批次状态使用 `schemas/batch-state.schema.json` 描述，正式运行时保存到 `runtime/state/`。采集必须区分：
 
-分析失败不得让 completed 消息丢失。
+- `incomplete`：中途中断/失败，保留批次下一页恢复位置和各群最近页，不得生成正式 current.md；
+- `completed`：达到本轮停止条件且规范化/去重完成，可以生成 current.md；
+- `analyzed`：GPT 已处理 current.md，但不改变已完成消息。
+
+批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级只保存该群最近页和增量锚点。每群增量锚点必须是连续消息序列；只有 completed batch 才能更新为新的已完成锚点。
+
+状态只保存 batch 标识、状态、时间、页恢复位置和脱敏结构化锚点所需字段；不得保存截图、头像圆圈指纹或长期昵称别名。分析失败不得让 completed 消息丢失。
 
 ## 生命周期
 

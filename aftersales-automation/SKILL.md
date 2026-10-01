@@ -99,7 +99,7 @@ entry: cli.js
 3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
 4. 步骤 14 是当前固定清单生产入口：首次读取 `<=48h` 清单作为不可变快照；逐单定位、打开详情 tab、采集、推理、自动执行判定、写回原 queue/simulation、关闭详情 tab。前端“处理工单”按钮已接入正式入口；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，未命中则写回 simulated/waiting。自动执行中断后的 recovery 仅有本地状态收口能力，无外部 CLI/API/UI；当前实际处理以重采覆盖或手动处理后归档为主。
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
-   - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
+   - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行平台决策（仅 approve/reject）或 `collectTicketTargetAware` + `inferDecision`。`escalate` 只表示人工处理结论，不是平台执行动作，禁止从“执行操作”入口写备注后伪装成执行成功。
    - 换货/商责的“必须人工确认”只阻断扫描中的无人自动执行，不移除单笔或人工发起的批量执行入口。严格退回核验通过且有明确动作时设置 `humanTriggeredExecutionAllowed: true`；核验异常、缺少依据或没有确定动作时不得进入批量 approve/reject。
    - `lib/jl/execute-decision.js` 按工单类型分派平台按钮：换货只认“同意换货/拒绝换货”，退款只认退款/退货按钮；精确按钮缺失时失败即停，禁止跨类型兜底。
    - `execReinfer` 直接转调 `execReprocessOne`。

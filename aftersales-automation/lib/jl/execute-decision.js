@@ -22,7 +22,12 @@ function getExecutionLabels(type, action) {
 }
 
 function resolveRejectCopy({ decision, rejectReason, rejectDetail }) {
-  const requiresSeparatedCopy = ['INTERCEPT_WAITING', 'INTERCEPT_TIMEOUT', 'MIXED_SIGNED_INTERCEPTABLE'].includes(decision.reasonCode);
+  const requiresSeparatedCopy = [
+    'INTERCEPT_WAITING',
+    'INTERCEPT_TIMEOUT',
+    'MIXED_SIGNED_INTERCEPTABLE',
+    'GIFT_NOT_RETURNED_SIGNED',
+  ].includes(decision.reasonCode);
 
   if (requiresSeparatedCopy) {
     if (!decision.rejectReason || !decision.rejectDetail) {

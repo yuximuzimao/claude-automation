@@ -92,6 +92,19 @@ test('赠品全部明确退回的人工同意退款分支必须保持 manual_onl
   assert.equal(result.automationStatus, 'manual_only');
 });
 
+test('整套赠品已签收未退回的人工拒绝分支保持 manual_only', () => {
+  const result = classifySimulation(makeSimulation({
+    action: 'reject',
+    ruleSection: 'Step4b',
+    ruleSummary: '主品完整且整套赠品已签收未退回→仅允许人工确认后拒绝退款',
+    reason: '主品已完整退回；整套赠品未随本次退货入库；赠品1个包裹已签收，暂无退回证据',
+  }), { type: '退货退款' });
+
+  assert.equal(result.branchId, 'refund_return.gift_not_returned.manual_reject');
+  assert.equal(result.automationStatus, 'manual_only');
+  assert.match(result.branchLabel, /拒绝退款/);
+});
+
 test('部分签收且部分可拦截的新拒绝结果登记为候选分支', () => {
   const result = classifySimulation(makeSimulation({
     action: 'reject',

@@ -1369,23 +1369,11 @@ async function execExecute(op) {
   const { action } = sim.decision;
   let result;
 
-  if (action === 'escalate') {
-    // ── escalate：直接在列表页添加备注，无需打开详情 ──────────────────
-    const { addNote } = require('../jl/add-note');
-    result = await addNote(listTargetId, sim.workOrderNum, `【待人工】${sim.decision.reason}`);
-    if (!result.success) throw new Error(result.error || '备注失败');
+  if (action !== 'approve' && action !== 'reject') {
+    throw new Error(`当前决策 ${action || '空'} 没有可执行的平台同意/拒绝动作`);
+  }
 
-    // 工单取消 → 清理关联的拦截记录
-    if (sim.decision.reason && sim.decision.reason.includes('取消')) {
-      try {
-        const cd = sim.collectedData || {};
-        const allShipTrackings = extractShippedTrackings(cd);
-        allShipTrackings.forEach(t => {
-          if (db.hasIntercept(t)) { db.removeIntercept(t); log(`[${sim.workOrderNum}] 工单取消，已清理拦截: ${t}`); }
-        });
-      } catch(e) { log(`cancel-intercept-cleanup 失败（非致命）: ${e.message}`); }
-    }
-  } else {
+  {
     // ── approve / reject：物理点击处理按钮，打开详情 tab ─────────────
     const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
     const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');

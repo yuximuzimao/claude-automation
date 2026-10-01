@@ -7,6 +7,7 @@
 | 需求 | 入口 |
 | --- | --- |
 | 当前做到哪里、已验证什么、下一步是什么 | `CURRENT.md` |
+| Codex/Claude 当前交接与已完成验证 | `HANDOFF.md` |
 | 理解整体模块/data flow | `ARCHITECTURE.md` |
 | 当前待办 | `../tasks/todo.md` |
 
@@ -26,7 +27,7 @@
 
 - `../schemas/capture-page.schema.json`：单页窗口级捕获 + Apple Vision OCR 的原始输出；页级元数据与 OCR blocks 分离。
 - `../schemas/message-record.schema.json`：Normalize 后的单条规范化消息。
-- 后续如状态机需要独立版本化，再新增明确 schema；不把临时实现字段提前固化。
+- `../schemas/batch-state.schema.json`：可恢复批次的状态、页恢复位置和每群已完成连续锚点；不包含截图、头像指纹或昵称别名。
 
 ## 代码与测试
 

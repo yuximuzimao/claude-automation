@@ -40,7 +40,8 @@ src/
 1. QQ“聊天记录”独立窗口的窗口级捕获：已验证；
 2. 聊天正文动态定位：已验证；
 3. capture 输出数据结构：已由 `schemas/capture-page.schema.json` 固化；
-4. runtime batch/state 最小格式：待确定；
-5. 首个端到端 dry-run 成功标准：待和 batch/state 一起最终确认。
+4. runtime batch/state 最小格式：已由 `schemas/batch-state.schema.json` 和 `tests/test_batch_state.py` 固化为原型；
+5. 真实 QQ 当前批次头像圆圈证据：尚未接入 capture/normalize 边界；
+6. 首个端到端 dry-run 成功标准：仍待最终确认。
 
-因此目前仍不创建正式 `src` 入口；bbox 重建等实验继续留在工作区根 `_sandbox/`。等 4/5 完成后再把已验证实验迁入唯一现役实现。
+因此目前仍不创建正式 `src` 入口；bbox 重建等实验继续留在工作区根 `_sandbox/`。等当前批次头像证据接入并通过端到端 dry-run 后，再把已验证实验迁入唯一现役实现。

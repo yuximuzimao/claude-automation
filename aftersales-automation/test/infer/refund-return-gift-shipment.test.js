@@ -105,7 +105,14 @@ test('整套赠品未入库且赠品已签收未退回时，最终原因直接�
 
   const decision = infer(data);
 
-  assert.equal(decision.action, 'escalate');
+  assert.equal(decision.action, 'reject');
+  assert.equal(decision.reasonCode, 'GIFT_NOT_RETURNED_SIGNED');
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
+  assert.equal(decision.recommendedActionLabel, '拒绝退款');
+  assert.equal(decision.rejectReason, '其他');
+  assert.equal(decision.rejectDetail, '已收到退回主商品，但赠品暂未收到退回，请将赠品一并退回后再申请退款');
   assert.match(decision.reason, /主品已完整退回/);
   assert.match(decision.reason, /整套赠品未随本次退货入库/);
   assert.match(decision.reason, /赠品1个包裹已签收，暂无退回证据/);
