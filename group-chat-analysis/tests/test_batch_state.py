@@ -247,6 +247,16 @@ class BatchStateTests(unittest.TestCase):
 
         self.assertIn("next_page_index", batch_properties)
         self.assertNotIn("next_page_index", group_properties)
+        self.assertNotIn(
+            "minItems", group_properties["last_completed_anchor"]
+        )
+        completed_gate = schema["allOf"][0]
+        self.assertEqual(
+            completed_gate["then"]["properties"]["groups"][
+                "additionalProperties"
+            ]["properties"]["last_completed_anchor"]["minItems"],
+            MIN_ANCHOR_COUNT,
+        )
 
     def test_new_batch_is_incomplete_and_resume_preserves_progress(self) -> None:
         first = self.store.start_batch(

@@ -55,6 +55,30 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": ["completed", "analyzed"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "groups": {
+            "additionalProperties": {
+              "properties": {
+                "last_completed_anchor": {
+                  "minItems": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "groupProgress": {
       "type": "object",
@@ -70,7 +94,6 @@
         },
         "last_completed_anchor": {
           "type": "array",
-          "minItems": 2,
           "items": {
             "$ref": "#/$defs/anchorMessage"
           }
