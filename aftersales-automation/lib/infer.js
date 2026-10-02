@@ -941,6 +941,22 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       }
       if (giftNotReturned.length > 0) {
         const giftDesc = giftPkgStatuses.map(p => p.label).join('；');
+        const giftTransit = giftNotReturned.filter(p => p.status === 'transit');
+        if (giftTransit.length === giftNotReturned.length) {
+          s({ type: 'branch', text: `拒绝退款 → 主品全部退回，但赠品仍在途需拦截: ${giftDesc}` });
+          return fin(withInterceptRejectCopy({
+            ...reject(
+              `主品已退回，但赠品${giftDesc}`,
+              [],
+              [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '主品退回但赠品未退回→上报人工' }]
+            ),
+            reasonCode: 'GIFT_INTERCEPTABLE_AFTER_MAIN_RETURNED',
+            requiresHumanReview: true,
+            autoExecutionBlocked: true,
+            humanTriggeredExecutionAllowed: true,
+            recommendedActionLabel: '拒绝退款',
+          }, INTERCEPT_REJECT_REASON_TRANSIT));
+        }
         s({ type: 'branch', text: `上报 → 主品全部退回，但赠品未退回: ${giftDesc}` });
         return fin(escalate(`主品已退回，但赠品${giftDesc}，需人工确认`, {
           rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '主品退回但赠品未退回→上报人工' }],

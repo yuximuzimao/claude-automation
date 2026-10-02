@@ -172,6 +172,31 @@ test('赠品带单号且仍在途时与主品使用相同规则并阻止退款',
   assert.equal(checkedLogistics(decision), true);
 });
 
+test('主品已退回但赠品仍在途需拦截时，结果为人工可执行拒绝退款', () => {
+  const mainTracking = 'SF5155509795897';
+  const giftTracking = 'YT7647492977333';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', mainTracking)],
+    giftRows: [trackedRow('卖家已发货', giftTracking)],
+    erpLogs: [
+      { tracking: mainTracking, logisticsText: '客户拒收，快件已安排退回商家' },
+      { tracking: giftTracking, logisticsText: '揽收\n在途运输中' },
+    ],
+    packages: [packageText(mainTracking, '客户拒收，快件已安排退回商家')],
+  });
+
+  assert.equal(decision.action, 'reject');
+  assert.equal(decision.reasonCode, 'GIFT_INTERCEPTABLE_AFTER_MAIN_RETURNED');
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
+  assert.equal(decision.recommendedActionLabel, '拒绝退款');
+  assert.equal(decision.rejectReason, '已通知快递拦截暂未退回');
+  assert.match(decision.rejectDetail, /已通知快递拦截暂未退回/);
+  assert.match(decision.reason, new RegExp(giftTracking));
+  assert.equal(decision.waitingRescan, undefined);
+});
+
 test('百度补证命中赠品退回节点后，与主品退回证据合并并允许继续退款判断', () => {
   const mainTracking = 'YT7641388201852';
   const giftTracking = 'YT7641388739489';
