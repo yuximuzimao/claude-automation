@@ -206,6 +206,7 @@ test('共用退货单沿用免退配件规则，并把悦希固定历史查询�
       { name: 'HEE悦希印花礼盒（天地盖）白色', specCode: 'yxyhlhtdgbs', qty: 1 },
       { name: 'HEE悦希印花礼袋-白', specCode: '6976299500146', qty: 1 },
       { name: 'HEE悦希雪梨纸', specCode: '6976299500122', qty: 1 },
+      { name: 'HEE悦希修颜礼盒(蓝色)手提袋礼袋', specCode: 'yxxyld', qty: 2 },
     ],
   }];
 

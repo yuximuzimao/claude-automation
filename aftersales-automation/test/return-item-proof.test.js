@@ -107,6 +107,7 @@ test('现有免退包装耗材不计入应退规格', () => {
     { name: 'HEE悦希印花礼袋-白', specCode: 'BAG', qty: 1 },
     { name: 'HEE悦希雪梨纸', specCode: 'PAPER', qty: 1 },
     { name: 'HEE悦希印花礼盒（天地盖）白色', specCode: 'BOX', qty: 1 },
+    { name: 'HEE悦希修颜礼盒(蓝色)手提袋礼袋', specCode: 'yxxyld', qty: 2 },
   );
 
   assert.equal(proveReturnItems(data).outcome, 'exact');
