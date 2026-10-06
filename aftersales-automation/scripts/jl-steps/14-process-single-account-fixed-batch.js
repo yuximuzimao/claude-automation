@@ -471,36 +471,6 @@ async function cleanupCurrentAccountJlTargets(context, dependencies) {
   return { closedTargetIds: closeIds };
 }
 
-function applyInboundSharedReturnLinks(collectedData, currentWorkOrderNum, sharedReturnContext) {
-  const ticket = collectedData && collectedData.ticket;
-  const records = sharedReturnContext && sharedReturnContext.collectedDataByWorkOrder;
-  const currentNum = String(currentWorkOrderNum || ticket && ticket.workOrderNum || '');
-  if (!ticket || !currentNum || !(records instanceof Map)) return;
-
-  const inboundWorkOrderNums = [];
-  for (const [otherNum, otherCollectedData] of records.entries()) {
-    if (String(otherNum) === currentNum) continue;
-    const otherTicket = otherCollectedData && otherCollectedData.ticket;
-    const linkedNums = Array.isArray(otherTicket && otherTicket.returnTrackingUsedBy)
-      ? otherTicket.returnTrackingUsedBy.map(String)
-      : [];
-    if (linkedNums.includes(currentNum)) inboundWorkOrderNums.push(String(otherNum));
-  }
-  if (!inboundWorkOrderNums.length) return;
-
-  ticket.returnTrackingMultiUse = true;
-  ticket.returnTrackingUsedBy = [...new Set([
-    ...(Array.isArray(ticket.returnTrackingUsedBy) ? ticket.returnTrackingUsedBy.map(String) : []),
-    ...inboundWorkOrderNums,
-  ])];
-  ticket.returnTrackingAssociationSources = [...new Set([
-    ...(Array.isArray(ticket.returnTrackingAssociationSources)
-      ? ticket.returnTrackingAssociationSources.map(String)
-      : []),
-    ...inboundWorkOrderNums,
-  ])];
-}
-
 async function processOpenedDetail(context, dependencies) {
   assertNotAborted(context && context.abortSignal);
   const collectedData = await dependencies.collectDetail(context);
@@ -510,7 +480,6 @@ async function processOpenedDetail(context, dependencies) {
   if (sharedReturnContext && sharedReturnContext.collectedDataByWorkOrder instanceof Map && currentWorkOrderNum) {
     sharedReturnContext.collectedDataByWorkOrder.set(String(currentWorkOrderNum), collectedData);
   }
-  applyInboundSharedReturnLinks(collectedData, currentWorkOrderNum, sharedReturnContext);
   const platformStage = getTicketPlatformStage(context && context.ticket);
   collectedData.platformStage = platformStage;
   if (collectedData.ticket && collectedData.ticket.returnTrackingMultiUse &&
@@ -567,15 +536,6 @@ async function processOpenedDetail(context, dependencies) {
   const auto = await dependencies.shouldAutoExecute(decision, collectedData, queueItem);
   assertNotAborted(context && context.abortSignal);
   if (!auto) return { status: 'simulated', collectedData, decision };
-  if (context && context.deferRefundReturnAutoUntilBatchComplete === true &&
-      context.ticket && context.ticket.type === '退货退款') {
-    return {
-      status: 'deferred_auto_execution',
-      collectedData,
-      decision,
-      autoBlockedReason: '退货退款自动执行等待当前批次关联关系采集完成',
-    };
-  }
   if (typeof dependencies.assertAutoExecutionAllowed === 'function') {
     const gate = await dependencies.assertAutoExecutionAllowed({ ...context, collectedData, decision });
     assertNotAborted(context && context.abortSignal);
@@ -612,13 +572,8 @@ async function processOpenedDetail(context, dependencies) {
 }
 
 function buildDeferredSafetyPlaceholder(processed) {
-  const isSharedReturn = processed && processed.status === 'deferred_shared_return';
-  const pendingNums = isSharedReturn
-    ? (processed.pendingSharedReturnWorkOrderNums || []).map(String).filter(Boolean)
-    : [];
-  const reason = isSharedReturn
-    ? `共用退货单关联组尚未采齐${pendingNums.length ? `（等待工单：${pendingNums.join('、')}）` : ''}，暂不可执行`
-    : '退货退款自动执行正在等待本批次关联关系采集完成，暂不可执行';
+  const pendingNums = (processed.pendingSharedReturnWorkOrderNums || []).map(String).filter(Boolean);
+  const reason = `共用退货单关联组尚未采齐${pendingNums.length ? `（等待工单：${pendingNums.join('、')}）` : ''}，暂不可执行`;
   return {
     status: 'simulated',
     collectedData: processed.collectedData,
@@ -665,7 +620,7 @@ async function processOpenedDetailAndPersist(context, dependencies, options = {}
   }
 
   const processed = await processOpenedDetail(context, dependencies);
-  if (processed && ['deferred_shared_return', 'deferred_auto_execution'].includes(processed.status)) {
+  if (processed && processed.status === 'deferred_shared_return') {
     const persisted = await dependencies.persistOutcome({
       account: context.account,
       queueItem: context.queueItem,
@@ -674,26 +629,24 @@ async function processOpenedDetailAndPersist(context, dependencies, options = {}
       source: options.source || 'fixed_batch',
     });
     const relatedSafetyPlaceholders = [];
-    if (processed.status === 'deferred_shared_return') {
-      const batchItemsByWorkOrder = context.sharedReturnContext &&
-        context.sharedReturnContext.batchItemsByWorkOrder;
-      if (batchItemsByWorkOrder instanceof Map) {
-        for (const pendingNum of processed.pendingSharedReturnWorkOrderNums || []) {
-          const relatedItem = batchItemsByWorkOrder.get(String(pendingNum));
-          if (!relatedItem || String(pendingNum) === String(context.ticket.workOrderNum)) continue;
-          const relatedPersisted = await dependencies.persistOutcome({
-            account: context.account,
-            queueItem: relatedItem.queueItem,
-            ticket: relatedItem.ticket,
-            processed: buildRelatedSharedReturnPlaceholder(relatedItem, context.ticket.workOrderNum),
-            source: options.source || 'fixed_batch',
-          });
-          relatedItem.persistedSimulationId = relatedPersisted && relatedPersisted.id;
-          relatedSafetyPlaceholders.push({
-            workOrderNum: String(pendingNum),
-            persisted: relatedPersisted,
-          });
-        }
+    const batchItemsByWorkOrder = context.sharedReturnContext &&
+      context.sharedReturnContext.batchItemsByWorkOrder;
+    if (batchItemsByWorkOrder instanceof Map) {
+      for (const pendingNum of processed.pendingSharedReturnWorkOrderNums || []) {
+        const relatedItem = batchItemsByWorkOrder.get(String(pendingNum));
+        if (!relatedItem || String(pendingNum) === String(context.ticket.workOrderNum)) continue;
+        const relatedPersisted = await dependencies.persistOutcome({
+          account: context.account,
+          queueItem: relatedItem.queueItem,
+          ticket: relatedItem.ticket,
+          processed: buildRelatedSharedReturnPlaceholder(relatedItem, context.ticket.workOrderNum),
+          source: options.source || 'fixed_batch',
+        });
+        relatedItem.persistedSimulationId = relatedPersisted && relatedPersisted.id;
+        relatedSafetyPlaceholders.push({
+          workOrderNum: String(pendingNum),
+          persisted: relatedPersisted,
+        });
       }
     }
     return { processed, persisted, persistedSafetyPlaceholder: true, relatedSafetyPlaceholders };
@@ -1197,12 +1150,10 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         disableAutoExecute: options.disableAutoExecute === true,
         sharedReturnContext,
         allowSharedReturnDefer: true,
-        deferRefundReturnAutoUntilBatchComplete: true,
       }, dependencies, { source: 'fixed_batch' });
       const { processed, persisted } = outcome;
       Object.assign(item, processed);
-      if (persisted && persisted.queueStatus &&
-          !['deferred_shared_return', 'deferred_auto_execution'].includes(processed.status)) {
+      if (persisted && persisted.queueStatus && processed.status !== 'deferred_shared_return') {
         item.status = persisted.queueStatus;
       }
       item.persistedSimulationId = persisted && persisted.id;
@@ -1318,138 +1269,6 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       await reportProgress(dependencies, item);
       error.batch = { success: false, account: accountResult, snapshot, items };
       throw error;
-    }
-    await reportProgress(dependencies, item);
-  }
-
-  // 普通退货退款即使命中自动分支，也要等当前批次所有详情采集完再执行。
-  // 这样后出现的工单若反向关联到它，能先把它改判为共用退货单人工确认，避免单向提示导致提前退款。
-  const deferredAutoExecutionItems = processableItems.filter(item => item.status === 'deferred_auto_execution');
-  for (const item of deferredAutoExecutionItems) {
-    assertNotAborted(options.abortSignal);
-    await assertBatchAllowed();
-    item.status = 'processing';
-    await reportProgress(dependencies, item);
-    let detailTargetId = null;
-    let processingError = null;
-
-    try {
-      let autoEligibleAfterBatch = false;
-      const evaluationDependencies = {
-        ...dependencies,
-        collectDetail: async () => item.collectedData,
-        shouldAutoExecute: async (decision, collectedData, queueItem) => {
-          autoEligibleAfterBatch = await dependencies.shouldAutoExecute(decision, collectedData, queueItem);
-          return false;
-        },
-      };
-      const evaluated = await processOpenedDetail({
-        account: accountResult,
-        listTargetId: prepared.targetId,
-        detailTargetId: null,
-        erpTargetId,
-        ticket: item.ticket,
-        queueItem: item.queueItem,
-        abortSignal: options.abortSignal,
-        sharedReturnContext,
-        allowSharedReturnDefer: false,
-        deferRefundReturnAutoUntilBatchComplete: false,
-      }, evaluationDependencies);
-      if (evaluated && ['deferred_shared_return', 'deferred_auto_execution'].includes(evaluated.status)) {
-        throw new Error(`工单 ${item.workOrderNum} 批次回算后仍处于等待状态`);
-      }
-
-      if (!autoEligibleAfterBatch) {
-        const persisted = await dependencies.persistOutcome({
-          account: accountResult,
-          queueItem: item.queueItem,
-          ticket: item.ticket,
-          processed: evaluated,
-          source: 'fixed_batch',
-        });
-        Object.assign(item, evaluated);
-        if (persisted && persisted.queueStatus) item.status = persisted.queueStatus;
-        item.persistedSimulationId = persisted && persisted.id;
-      } else {
-        const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum);
-        assertNotAborted(options.abortSignal);
-        item.location = located;
-        if (!located || !located.found) throw new Error('自动执行前无法重新定位工单');
-        const opened = await dependencies.clickWorkOrderAction(item.workOrderNum, { targetId: prepared.targetId });
-        if (!opened || !opened.success || !opened.newTargetId) throw stepError('自动执行前重新打开目标工单失败', opened);
-        detailTargetId = opened.newTargetId;
-        item.detailTargetId = detailTargetId;
-        assertNotAborted(options.abortSignal);
-
-        const outcome = await processOpenedDetailAndPersist({
-          account: accountResult,
-          listTargetId: prepared.targetId,
-          detailTargetId,
-          erpTargetId,
-          ticket: item.ticket,
-          queueItem: item.queueItem,
-          abortSignal: options.abortSignal,
-          sharedReturnContext,
-          allowSharedReturnDefer: false,
-          deferRefundReturnAutoUntilBatchComplete: false,
-        }, dependencies, { source: 'fixed_batch' });
-        const { processed, persisted } = outcome;
-        Object.assign(item, processed);
-        if (persisted && persisted.queueStatus) item.status = persisted.queueStatus;
-        item.persistedSimulationId = persisted && persisted.id;
-      }
-    } catch (error) {
-      processingError = error;
-      if (!detailTargetId && Array.isArray(error.newTargetIds)) {
-        for (const unexpectedTargetId of error.newTargetIds) {
-          try {
-            await closeAndVerifyDetailTarget(unexpectedTargetId, dependencies, {
-              account: accountResult,
-              listTargetId: prepared.targetId,
-            });
-          } catch (cleanupError) {
-            processingError = cleanupError;
-            break;
-          }
-        }
-      }
-    } finally {
-      if (detailTargetId) {
-        try {
-          await closeAndVerifyDetailTarget(detailTargetId, dependencies, {
-            account: accountResult,
-            listTargetId: prepared.targetId,
-          });
-          item.detailClosed = true;
-        } catch (closeError) {
-          processingError = closeError;
-        }
-      }
-    }
-
-    if (processingError) {
-      if (isAbortError(processingError)) throw processingError;
-      const failureProcessed = buildFailureProcessed(item.ticket, processingError);
-      try {
-        const persisted = await dependencies.persistOutcome({
-          account: accountResult,
-          queueItem: item.queueItem,
-          ticket: item.ticket,
-          processed: failureProcessed,
-        });
-        Object.assign(item, failureProcessed, {
-          status: 'simulated',
-          error: processingError.message,
-          persistedSimulationId: persisted && persisted.id,
-        });
-      } catch (persistError) {
-        item.status = 'failed';
-        item.error = `${processingError.message}; 写回失败: ${persistError.message}`;
-        processingError.persistError = persistError;
-      }
-      await reportProgress(dependencies, item);
-      processingError.batch = { success: false, account: accountResult, snapshot, items };
-      throw processingError;
     }
     await reportProgress(dependencies, item);
   }

@@ -368,20 +368,20 @@ test('同批次关联工单第一张先到时延迟到组齐后回算，不受�
   assert.equal(fixture.calls.some(call => call[0] === 'execute'), false);
 });
 
-test('同批次单向关联即使被关联工单先处理，也先延迟自动执行并在批次末改走共享人工分支', async () => {
+test('平台已标复用工单先到时，只延迟该工单；被点名但自身未标复用的工单仍立即自动执行', async () => {
   const fixture = batchDependencies();
   fixture.urgent.forEach(ticket => { ticket.type = '退货退款'; });
   const subOrders = { [ORDER_1]: 'SUB-1', [ORDER_2]: 'SUB-2' };
 
   fixture.dependencies.collectDetail = async ({ ticket }) => {
-    const isAssociationSource = ticket.workOrderNum === ORDER_2;
+    const isAssociationSource = ticket.workOrderNum === ORDER_1;
     const subOrderId = subOrders[ticket.workOrderNum];
     return {
       ticket: {
         workOrderNum: ticket.workOrderNum,
         returnTracking: 'TRACK-ONE-WAY',
         returnTrackingMultiUse: isAssociationSource || undefined,
-        returnTrackingUsedBy: isAssociationSource ? [ORDER_1] : undefined,
+        returnTrackingUsedBy: isAssociationSource ? [ORDER_2] : undefined,
         subOrders: [{ id: subOrderId, afterSaleNum: 1 }],
         gifts: [],
       },
@@ -402,33 +402,47 @@ test('同批次单向关联即使被关联工单先处理，也先延迟自动�
 
   const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
 
-  assert.ok(result.items.every(item => item.collectedData.sharedReturnGroup.mode === 'combined_applications'));
-  assert.ok(result.items.every(item => item.status === 'simulated'));
-  assert.equal(fixture.calls.some(call => call[0] === 'execute'), false);
+  assert.equal(result.items[0].collectedData.sharedReturnGroup.mode, 'combined_applications');
+  assert.equal(result.items[0].status, 'simulated');
+  assert.equal(result.items[1].collectedData.sharedReturnGroup, undefined);
+  assert.equal(result.items[1].status, 'auto_executed');
+  assert.deepEqual(
+    fixture.calls.filter(call => call[0] === 'execute').map(call => call[1]),
+    [ORDER_2]
+  );
   assert.deepEqual(
     fixture.calls.filter(call => call[0] === 'persistOutcome').map(call => [call[1], call[3]]),
-    [[ORDER_1, 'escalate'], [ORDER_2, 'approve'], [ORDER_1, 'approve']]
+    [[ORDER_1, 'escalate'], [ORDER_2, 'escalate'], [ORDER_2, 'approve'], [ORDER_1, 'approve']]
   );
 });
 
-test('批次采集完成后仍无关联的普通退货退款会重新打开详情并保留原自动执行能力', async () => {
+test('普通退货退款未标复用时首次采集后立即自动执行，不重开详情也不二次采集', async () => {
   const fixture = batchDependencies();
   fixture.urgent[0].type = '退货退款';
+  const collectCounts = new Map();
+  fixture.dependencies.collectDetail = async ({ detailTargetId, ticket }) => {
+    collectCounts.set(ticket.workOrderNum, (collectCounts.get(ticket.workOrderNum) || 0) + 1);
+    return {
+      ticket: { workOrderNum: ticket.workOrderNum },
+      detailTargetId,
+    };
+  };
 
   const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
 
   assert.equal(result.items[0].status, 'auto_executed');
   assert.deepEqual(
     fixture.calls.filter(call => call[0] === 'open').map(call => call[1]),
-    [ORDER_1, ORDER_2, ORDER_1]
+    [ORDER_1, ORDER_2]
   );
+  assert.deepEqual(Object.fromEntries(collectCounts), { [ORDER_1]: 1, [ORDER_2]: 1 });
   assert.deepEqual(
     fixture.calls.filter(call => call[0] === 'execute').map(call => call[1]),
     [ORDER_1]
   );
   assert.deepEqual(
     fixture.calls.filter(call => call[0] === 'persistOutcome').map(call => [call[1], call[3]]),
-    [[ORDER_1, 'escalate'], [ORDER_2, 'manual'], [ORDER_1, 'approve']]
+    [[ORDER_1, 'approve'], [ORDER_2, 'manual']]
   );
 });
 
