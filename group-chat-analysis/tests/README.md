@@ -6,7 +6,8 @@
 
 可用合成/脱敏 fixture，覆盖：
 
-- Swift `capture-step` typecheck、正文区/MAD/dhash/Schema 纯函数回归；
+- Swift `capture-step` / `open-history` typecheck、正文区/MAD/dhash/Schema 纯函数回归；
+- 安全切群纯门禁：左侧会话唯一候选、目标头部复核、`聊天记录` tooltip 精确确认；
 - bbox 视觉行/消息/fragment 重建与媒体 OCR unknown 降级；
 - 时间文本解析；
 - 相邻屏最长连续重叠；

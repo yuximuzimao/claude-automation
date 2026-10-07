@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**阶段 0/1 已完成；阶段 2 的单群采集、规范化、持久化和中断恢复链已经完成。下一步进入阶段 3：安全切换两个目标群，然后做首次全量。**
+**阶段 0/1/2 已完成；阶段 3 的两个目标群安全切换也已实机跑通。下一步是把两群串进同一首次全量批次，并定义可验证的历史边界。**
 
 正式入口现在唯一是 `python3 -m src.app.run_capture`。Python runner 独占 batch state 推进；Swift `capture-step` 只执行单次当前页/滚动页捕获，不再维护第二套恢复逻辑。旧 capture worktree 已不再是运行依赖。
 
@@ -23,16 +23,19 @@
 11. `messages.jsonl` 继续使用 Schema 校验、`fsync` + 原子 replace、同 batch 幂等恢复；完成顺序固定为 **messages durable → state completed → current.md**。
 12. 新唯一 runner 已真实跑通 3 页：state 最终 `completed`，`pending_capture=null`，并生成 canonical messages/current.md；completed 后删除 current.md 再重跑可纯本地重建，约 0.1 秒且不触碰 QQ。
 13. 文件级故障注入已实际验证：`pending current + raw 已存在` 可无捕获恢复；`pending scroll + raw 缺失` 会保留 pending/next_page_index 并停止，不会再发滚轮。
-14. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **70/70 通过**；其中 Swift 纯测试会实际调用 raw writer 的 fsync/原子写入路径。
+14. 正式 `open-history` 已实机验证两个目标群往返：会话列表先用 OCR 找唯一目标行并限制在左侧安全区；选中后重新核对聊天头部；只有 hover 后局部 OCR 精确得到 `聊天记录` 才点击历史按钮；最后要求历史窗口标题精确匹配目标群。任何一步不满足都停止。
+15. 两个历史窗口精确标题已确认：`魔兽世界无限+时光服玩家群`、`魔兽世界2无限国服备战总群`。实测切换时成员数 1815/1777 只作为额外证据，不写成长期身份条件。
+16. 重新打开历史窗口时暴露了正文区潜伏 bug：聊天正文 `坐下）表情` 曾被误当过滤工具栏，导致 content_region 高度从正常约 `0.852` 截成 `0.192`。现已改为“同一水平带至少两个过滤控件共同出现”才可定义工具栏，并完成真实页回归。
+17. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **71/71 通过**；其中包含安全切群纯门禁、正文工具栏反例以及 raw writer 的 fsync/原子写入路径。
 
 ## 尚未验证 / 尚未实现
 
-- 两个目标群的安全定位/切换尚未正式设计和实测；不得用盲点坐标或可能碰到输入/发送控件的方式切群。
+- 单群 runner 仍按固定页数工作；尚未把两个目标群串进同一 completed batch，也没有正式的首次全量历史边界判定。
 - Apple Vision 长时间大量连续页面的性能/稳定性、首次全量历史边界、每日增量停止锚点尚未验证。
 - 语音和文件继续延期；无 OCR 的纯图片/表情按 v1 文字优先目标忽略。
 
 ## 下一恢复点
 
-直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 3：先设计并验证两个目标群的安全切换，再做首次全量；在切换验证通过前不启动双群全量。**
+直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 3：把两个已验证目标群串进同一可恢复批次，并为首次全量建立可验证的历史边界；通过后再启动真实全量。**
 
 这里的 `dhash512` 是临时视口连续性证据，不是头像指纹。头像/昵称视觉身份辅助仍不属于 v1 去重门禁。

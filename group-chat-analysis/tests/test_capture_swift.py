@@ -17,6 +17,7 @@ CAPTURE_SOURCES = [
     ROOT / "src/capture/ChangeDetector.swift",
     ROOT / "src/capture/QQHistoryCapture.swift",
     ROOT / "src/capture/RawPageWriter.swift",
+    ROOT / "src/capture/ConversationSwitcher.swift",
 ]
 
 
@@ -35,6 +36,21 @@ class SwiftCaptureTests(unittest.TestCase):
             text=True,
         )
 
+    def test_open_history_typechecks(self) -> None:
+        subprocess.run(
+            [
+                "swiftc",
+                "-typecheck",
+                str(ROOT / "src/capture/CaptureModels.swift"),
+                str(ROOT / "src/capture/ConversationSwitcher.swift"),
+                str(ROOT / "src/app/open-history.swift"),
+            ],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
     def test_pure_capture_contracts(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             binary = Path(tempdir) / "capture-pure-tests"
@@ -46,6 +62,7 @@ class SwiftCaptureTests(unittest.TestCase):
                     str(ROOT / "src/capture/ContentRegion.swift"),
                     str(ROOT / "src/capture/ChangeDetector.swift"),
                     str(ROOT / "src/capture/RawPageWriter.swift"),
+                    str(ROOT / "src/capture/ConversationSwitcher.swift"),
                     str(ROOT / "tests/swift/CapturePureTests.swift"),
                     "-o",
                     str(binary),

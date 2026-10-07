@@ -17,6 +17,8 @@ src/
 
 - `app/run_capture.py`：唯一正式运行入口；独占 state 推进、pending/raw reconcile、normalize/finalize 编排。
 - `app/capture-step.swift`：内部单步 current/scroll capture；不维护恢复状态。
+- `app/open-history.swift`：安全打开指定群的聊天记录窗口；只调用经过视觉/位置/标题多重门禁的切群适配器。
+- `capture/ConversationSwitcher.swift`：主 QQ 左侧会话 OCR 唯一定位 → 选中后头部复核 → `聊天记录` tooltip 精确确认 → 历史窗口标题精确匹配；任一门禁失败即停止。
 - `capture/WindowPreparation.swift`：唯一同标题 AXWindow，设置/读回几何，再等待唯一同标题 SCK frame 稳定；无鼠标拖窗 fallback。
 - `capture/QQHistoryCapture.swift` / `ChangeDetector.swift`：窗口级 SCK、Vision OCR、正文安全滚轮、有限 MAD 稳定门禁；MAD 仅容忍 `<=3px` SCK 尺寸漂移。
 - `capture/VisualFingerprint.swift`：`dhash512` 视口连续性门禁，当前阈值 20；只用于发滚轮前确认仍停留在上一 durable raw 对应视口。
@@ -31,8 +33,8 @@ src/
 
 尚未完成：
 
-- 两个目标群的安全定位/切换。
-- 首次全量、长时间 Vision 稳定性、每日增量。
+- 两个目标群共用一个可恢复 completed batch 的正式编排。
+- 首次全量历史边界、长时间 Vision 稳定性、每日增量。
 
 ## 依赖方向
 
@@ -65,8 +67,8 @@ v1 的错误成本不对称：**漏真实消息 > 多保留重复消息**。
 
 ## 进入首次全量前的最后门禁
 
-单群唯一 runner 与中断恢复已经通过。首次全量前只剩：
+单群 runner、中断恢复以及两个目标群安全切换已经通过。首次全量前只剩：
 
-1. 两个目标群的安全定位/切换；
-2. 切换后重新确认精确目标群/窗口身份；
-3. 通过后才允许双群首次全量。
+1. 两群共用一个 batch 的串行编排；
+2. 可验证的首次全量历史边界；
+3. 两项通过后才允许真实双群全量。

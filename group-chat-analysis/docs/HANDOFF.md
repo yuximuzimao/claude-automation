@@ -13,6 +13,8 @@
 
 旧批量 Swift CLI 已删除，避免第二入口；旧 capture worktree 已不再是运行依赖。
 
+阶段 3 的安全切群也已实机往返验证：`src/capture/ConversationSwitcher.swift` + `src/app/open-history.swift` 只在“左侧会话 OCR 唯一命中 → 选中后头部复核 → tooltip 精确为 `聊天记录` → 历史窗口标题精确匹配”全部成立时执行。两个目标历史窗口标题已确认，真实成员数只作为当次额外证据，不进入长期身份配置。
+
 ## 当前关键契约
 
 - 错误成本：**漏真实消息 > 多保留重复消息**。
@@ -27,7 +29,7 @@
 
 ## 验证
 
-`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **70/70 通过**。
+`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **71/71 通过**。
 
 真实验证包括：
 - 唯一 runner 实跑 3 页并 completed；
@@ -35,8 +37,10 @@
 - `pending + raw 已存在` 可不触发 capture 直接恢复；
 - `pending scroll + raw 缺失` 保留状态并停止，不再次滚动；
 - completed 后删除 current.md 可纯本地重建，不触碰 QQ；
-- MAD 回弹、SCK 小尺寸漂移、bbox/assembly、message store/finalize 均有确定性回归。
+- MAD 回弹、SCK 小尺寸漂移、bbox/assembly、message store/finalize 均有确定性回归；
+- 两个目标群正式 `open-history` 往返成功，系统窗口标题分别精确匹配目标；
+- 正文消息包含“表情”时不再误截工具栏，真实页 content_region 高度由错误约 `0.192` 恢复到约 `0.852`。
 
 ## 下一步
 
-按 `tasks/todo.md` 顶部进入阶段 3：先设计并验证两个目标群的安全切换，再做首次全量。切换验证通过前不要启动双群全量。
+按 `tasks/todo.md` 顶部继续阶段 3：把两个已验证目标群串进同一可恢复 batch，并建立首次全量的可验证历史边界；两项通过前不要启动真实双群全量。

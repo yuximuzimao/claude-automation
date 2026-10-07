@@ -22,14 +22,16 @@ struct ContentRegionLocator {
     private static let bottomEdge = 0.02
 
     static func locate(from blocks: [CaptureOCRBlock]) throws -> CaptureBBox {
-        let toolbar = blocks.filter { isToolbarText($0.text) }
+        let filterCandidates = blocks.filter { isFilterToolbarText($0.text) }
+        let toolbar = bestToolbarRow(from: filterCandidates)
         guard toolbar.count >= 2 else {
             throw ContentRegionError.toolbarNotFound
         }
 
-        // Vision coordinates use a bottom-left origin. The message stream sits
-        // below the filter toolbar, so the toolbar's lowest observed edge is a
-        // dynamic upper bound for content.
+        // Vision coordinates use a bottom-left origin. Toolbar words may also
+        // appear inside chat text (for example a message containing “表情”).
+        // Only a co-linear row of at least two filter controls may define the
+        // upper content boundary; isolated keyword hits are never sufficient.
         let toolbarBottom = toolbar.map(\.bbox.y).min() ?? 1.0
         let top = toolbarBottom - topMargin
 
@@ -56,7 +58,37 @@ struct ContentRegionLocator {
         if value.contains("搜索") || (value.contains("搜") && value.count <= 5) {
             return true
         }
+        return isFilterToolbarText(text)
+    }
+
+    private static func isFilterToolbarText(_ text: String) -> Bool {
+        let value = compact(text)
         return toolbarTokens.contains { value.contains($0) }
+    }
+
+    private static func bestToolbarRow(from candidates: [CaptureOCRBlock]) -> [CaptureOCRBlock] {
+        let rowTolerance = 0.035
+        var best: [CaptureOCRBlock] = []
+        var bestMidY = -Double.infinity
+
+        for anchor in candidates {
+            let anchorMidY = anchor.bbox.y + anchor.bbox.height / 2.0
+            var row: [CaptureOCRBlock] = []
+            var midYTotal = 0.0
+            for candidate in candidates {
+                let candidateMidY = candidate.bbox.y + candidate.bbox.height / 2.0
+                if Swift.abs(candidateMidY - anchorMidY) <= rowTolerance {
+                    row.append(candidate)
+                    midYTotal += candidateMidY
+                }
+            }
+            let midY = midYTotal / Double(max(1, row.count))
+            if row.count > best.count || (row.count == best.count && midY > bestMidY) {
+                best = row
+                bestMidY = midY
+            }
+        }
+        return best
     }
 
     static func isTimeOnly(_ text: String) -> Bool {

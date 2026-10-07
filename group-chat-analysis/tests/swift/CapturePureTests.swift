@@ -75,6 +75,74 @@ private func testContentRegion() throws {
     try expect(region.contains(midX: 0.09, midY: 0.77), "message block should be inside content region")
 }
 
+private func testContentRegionIgnoresToolbarWordsInsideMessages() throws {
+    let blocks = [
+        block(0, "Q搜索", x: 0.02, y: 0.93),
+        block(1, "全部", x: 0.02, y: 0.884),
+        block(2, "图片/视频", x: 0.06, y: 0.886),
+        block(3, "表情 文件 链接", x: 0.12, y: 0.886, width: 0.11),
+        block(4, "筛选", x: 0.956, y: 0.889, width: 0.03),
+        block(5, "玩家甲 23:10", x: 0.04, y: 0.30),
+        block(6, "0/1 在篝火旁使用/sit（/", x: 0.08, y: 0.24),
+        block(7, "坐下）表情", x: 0.08, y: 0.22),
+    ]
+    let region = try ContentRegionLocator.locate(from: blocks)
+    try expect(region.maxY > 0.84, "isolated message toolbar word must not lower the toolbar boundary")
+    try expect(region.contains(midX: 0.10, midY: 0.23), "message containing 表情 must remain inside content")
+}
+
+private func testConversationSwitcherPureGates() throws {
+    let blocks = [
+        block(0, "魔兽世界2无限国服备战..", x: 0.10, y: 0.48, width: 0.15, height: 0.02),
+        block(1, "魔兽世界2无限国服备战总群（1777）", x: 0.33, y: 0.91, width: 0.21, height: 0.02),
+        block(2, "群聊成员 1777", x: 0.86, y: 0.66, width: 0.09, height: 0.02),
+    ]
+    let candidate = try QQConversationSwitcher.conversationCandidate(
+        from: blocks,
+        prefix: "魔兽世界2无限国服备战"
+    )
+    try expect(candidate.blockIndex == 0, "only the safe left-list candidate may be selected")
+
+    let target = QQConversationTarget(
+        groupKey: "group-b",
+        conversationPrefix: "魔兽世界2无限国服备战",
+        headerContains: "国服备战总群",
+        expectedHistoryTitle: "魔兽世界2无限国服备战总群"
+    )
+    try expect(
+        QQConversationSwitcher.verifiesTarget(blocks, target: target),
+        "selected target must be verified by its stable header text"
+    )
+    let wrongHeader = QQConversationTarget(
+        groupKey: "group-b",
+        conversationPrefix: target.conversationPrefix,
+        headerContains: "另一个群",
+        expectedHistoryTitle: target.expectedHistoryTitle
+    )
+    try expect(
+        !QQConversationSwitcher.verifiesTarget(blocks, target: wrongHeader),
+        "wrong header text must reject target verification"
+    )
+    try expect(
+        QQConversationSwitcher.isVerifiedHistoryTooltip(["聊天记录"]),
+        "exact chat-history tooltip must pass"
+    )
+    try expect(
+        !QQConversationSwitcher.isVerifiedHistoryTooltip(["语音通话"]),
+        "unrelated tooltip must fail"
+    )
+
+    do {
+        _ = try QQConversationSwitcher.conversationCandidate(
+            from: [block(0, "魔兽世界2无限国服备战", x: 0.45, y: 0.48, width: 0.15)],
+            prefix: "魔兽世界2无限国服备战"
+        )
+        throw TestFailure.failed("matching text outside the left list must not be clickable")
+    } catch ConversationSwitchError.unsafeConversationCandidate {
+        // Expected.
+    }
+}
+
 private func testMAD() throws {
     let black = try solidImage(0)
     let sameBlack = try solidImage(0)
@@ -205,6 +273,8 @@ struct CapturePureTestsMain {
     static func main() async {
         do {
             try testContentRegion()
+            try testContentRegionIgnoresToolbarWordsInsideMessages()
+            try testConversationSwitcherPureGates()
             try testMAD()
             try await testChangeDetectorRejectsReturnToBaseline()
             try testVisualFingerprintDistance()

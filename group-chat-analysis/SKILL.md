@@ -27,6 +27,8 @@
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
 | `src/app/run_capture.py` | 唯一正式运行入口与 pending/raw 恢复编排 | 改长任务运行/恢复时 |
 | `src/app/capture-step.swift` | 内部单步 current/scroll capture | 改 Swift 单步执行边界时 |
+| `src/app/open-history.swift` | 安全打开目标群聊天记录窗口 | 改两群切换入口时 |
+| `src/capture/ConversationSwitcher.swift` | 会话 OCR 定位、目标复核、聊天记录 tooltip/窗口门禁 | 改 QQ 群切换安全逻辑时 |
 | `src/capture/` | AX/SCK/Vision/变化检测/dhash/raw 写入 | 改 QQ 捕获与滚动时 |
 | `src/normalize/page_reconstruct.py` | 单页 bbox→消息/fragment/media unknown | 改几何重建时 |
 | `src/normalize/assemble.py` | 同群多页组装与 Schema records | 改跨页组装时 |
