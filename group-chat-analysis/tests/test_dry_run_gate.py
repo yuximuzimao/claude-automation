@@ -64,8 +64,22 @@ class DryRunGateTests(unittest.TestCase):
         self.store.start_batch(
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
+        self.store.begin_capture(
+            "batch-1",
+            "group-a",
+            0,
+            mode="current",
+            started_at="2026-01-01T00:01:00Z",
+        )
         self.store.record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
+        )
+        self.store.begin_capture(
+            "batch-1",
+            "group-a",
+            1,
+            mode="scroll",
+            started_at="2026-01-01T00:02:00Z",
         )
         self.store.record_page(
             "batch-1", "group-a", 1, updated_at="2026-01-01T00:02:00Z"

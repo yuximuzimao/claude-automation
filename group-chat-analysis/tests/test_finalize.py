@@ -55,6 +55,13 @@ class FinalizeBatchTests(unittest.TestCase):
             started_at="2026-01-01T00:00:00Z",
             group_keys=["group-a"],
         )
+        self.state.begin_capture(
+            "batch-1",
+            "group-a",
+            0,
+            mode="current",
+            started_at="2026-01-01T00:01:00Z",
+        )
         self.state.record_page(
             "batch-1",
             "group-a",

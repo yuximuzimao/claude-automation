@@ -55,6 +55,7 @@ struct CaptureWindowInfo: Codable, Equatable {
 
 struct RawCapturePage: Codable, Equatable {
     let schemaVersion: String
+    let visualFingerprint: String
     let batchID: String
     let groupKey: String
     let groupDisplay: String?
@@ -67,6 +68,7 @@ struct RawCapturePage: Codable, Equatable {
 
     enum CodingKeys: String, CodingKey {
         case schemaVersion = "schema_version"
+        case visualFingerprint = "visual_fingerprint"
         case batchID = "batch_id"
         case groupKey = "group_key"
         case groupDisplay = "group_display"

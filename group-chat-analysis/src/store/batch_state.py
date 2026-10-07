@@ -7,6 +7,7 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
+import tempfile
 
 
 SCHEMA_PATH = Path(__file__).resolve().parents[2] / "schemas" / "batch-state.schema.json"
@@ -15,6 +16,7 @@ STATE_SCHEMA_VERSION = _SCHEMA["properties"]["schema_version"]["const"]
 STATE_STATUSES = frozenset(_SCHEMA["properties"]["status"]["enum"])
 STATE_KEYS = frozenset(_SCHEMA["properties"])
 GROUP_PROGRESS_KEYS = frozenset(_SCHEMA["$defs"]["groupProgress"]["properties"])
+PENDING_CAPTURE_KEYS = frozenset(_SCHEMA["$defs"]["pendingCapture"]["properties"])
 ANCHOR_KEYS = frozenset(_SCHEMA["$defs"]["anchorMessage"]["properties"])
 MIN_ANCHOR_COUNT = _SCHEMA["allOf"][0]["then"]["properties"]["groups"][
     "additionalProperties"
@@ -84,6 +86,28 @@ class BatchStateStore:
         if not cls._valid_datetime(state["updated_at"]):
             raise StateError("updated_at must be a valid date-time")
 
+        pending = state["pending_capture"]
+        if pending is not None:
+            if not isinstance(pending, dict) or set(pending) != PENDING_CAPTURE_KEYS:
+                raise StateError("pending_capture fields do not match the state contract")
+            if state["status"] != "incomplete":
+                raise StateError("only an incomplete batch may have pending_capture")
+            if pending["mode"] not in {"current", "scroll"}:
+                raise StateError("pending_capture mode is invalid")
+            if not isinstance(pending["group_key"], str) or not pending["group_key"]:
+                raise StateError("pending_capture group_key is invalid")
+            pending_groups = state["groups"]
+            if not isinstance(pending_groups, dict) or pending["group_key"] not in pending_groups:
+                raise StateError("pending_capture group is not part of the batch")
+            if (
+                not isinstance(pending["page_index"], int)
+                or isinstance(pending["page_index"], bool)
+                or pending["page_index"] < 0
+            ):
+                raise StateError("pending_capture page_index is invalid")
+            if not cls._valid_datetime(pending["started_at"]):
+                raise StateError("pending_capture started_at must be a valid date-time")
+
         next_page_index = state["next_page_index"]
         if (
             not isinstance(next_page_index, int)
@@ -91,6 +115,8 @@ class BatchStateStore:
             or next_page_index < 0
         ):
             raise StateError("next_page_index must be non-negative")
+        if pending is not None and pending["page_index"] != next_page_index:
+            raise StateError("pending_capture must target next_page_index")
 
         last_completed_batch = state["last_completed_batch"]
         if last_completed_batch is not None and not isinstance(last_completed_batch, str):
@@ -182,6 +208,7 @@ class BatchStateStore:
             "status": "incomplete",
             "started_at": started_at,
             "updated_at": started_at,
+            "pending_capture": None,
             "next_page_index": 0,
             "last_completed_batch": previous["last_completed_batch"] if previous is not None else None,
             "last_success_at": previous["last_success_at"] if previous is not None else None,
@@ -195,6 +222,39 @@ class BatchStateStore:
                 for group_key in group_keys
             },
         }
+        self._write(state)
+        return state
+
+    def begin_capture(
+        self,
+        batch_id: str,
+        group_key: str,
+        page_index: int,
+        *,
+        mode: str,
+        started_at: str,
+    ) -> dict:
+        state = self._require_incomplete(batch_id)
+        if state["pending_capture"] is not None:
+            raise StateError("cannot start a new capture while pending_capture exists")
+        if group_key not in state["groups"]:
+            raise StateError("group is not part of the active batch")
+        if page_index != state["next_page_index"]:
+            raise StateError("capture page_index must equal next_page_index")
+        if mode not in {"current", "scroll"}:
+            raise StateError("capture mode must be current or scroll")
+        if not self._valid_datetime(started_at):
+            raise StateError("started_at must be a valid date-time")
+        if mode == "scroll" and state["groups"][group_key]["last_page_index"] is None:
+            raise StateError("scroll capture requires a previous page for the group")
+
+        state["pending_capture"] = {
+            "group_key": group_key,
+            "page_index": page_index,
+            "mode": mode,
+            "started_at": started_at,
+        }
+        state["updated_at"] = started_at
         self._write(state)
         return state
 
@@ -218,8 +278,14 @@ class BatchStateStore:
             or page_index != state["next_page_index"]
         ):
             raise StateError("page_index must continue from the recovery point")
+        pending = state["pending_capture"]
+        if pending is None:
+            raise StateError("record_page requires a matching pending_capture")
+        if pending["group_key"] != group_key or pending["page_index"] != page_index:
+            raise StateError("record_page does not match pending_capture")
 
         group["last_page_index"] = page_index
+        state["pending_capture"] = None
         state["next_page_index"] = page_index + 1
         state["updated_at"] = updated_at
         self._write(state)
@@ -233,6 +299,8 @@ class BatchStateStore:
         completed_at: str,
     ) -> dict:
         state = self._require_incomplete(batch_id)
+        if state["pending_capture"] is not None:
+            raise StateError("cannot complete a batch while capture is pending")
         if not self._valid_datetime(completed_at):
             raise StateError("completed_at must be a valid date-time")
         if set(anchors) != set(state["groups"]):
@@ -298,9 +366,31 @@ class BatchStateStore:
     def _write(self, state: dict) -> None:
         self._validate_state(state)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        temporary = self.path.with_name(self.path.name + ".tmp")
-        temporary.write_text(
-            json.dumps(state, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
+        file_descriptor, temporary_name = tempfile.mkstemp(
+            prefix=f".{self.path.name}.tmp-",
+            dir=self.path.parent,
         )
-        os.replace(temporary, self.path)
+        temporary = Path(temporary_name)
+        try:
+            with os.fdopen(file_descriptor, "w", encoding="utf-8") as handle:
+                handle.write(json.dumps(state, ensure_ascii=False, indent=2) + "\n")
+                handle.flush()
+                os.fsync(handle.fileno())
+            os.replace(temporary, self.path)
+            self._fsync_parent()
+        except Exception:
+            try:
+                temporary.unlink(missing_ok=True)
+            except OSError:
+                pass
+            raise
+
+    def _fsync_parent(self) -> None:
+        try:
+            directory_fd = os.open(self.path.parent, os.O_RDONLY)
+        except OSError:
+            return
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)

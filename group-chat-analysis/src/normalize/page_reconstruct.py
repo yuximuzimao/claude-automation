@@ -15,6 +15,7 @@ _SCHEMA = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
 CAPTURE_REQUIRED = frozenset(_SCHEMA["required"])
 CAPTURE_SCHEMA_VERSION = _SCHEMA["properties"]["schema_version"]["const"]
 CAPTURE_SOURCE = _SCHEMA["properties"]["source"]["const"]
+CAPTURE_FINGERPRINT_RE = re.compile(r"^dhash512:[0-9a-f]{128}$")
 
 DATE_RE = re.compile(r"^\s*(\d{4})[/-](\d{1,2})[/-](\d{1,2})\s*$")
 HEADER_RE = re.compile(r"^\s*(.*?)\s*[•.]?\s*(\d{1,2}:\d{2})\s*$")
@@ -126,6 +127,9 @@ def validate_capture_page(page: object) -> dict:
         raise PageReconstructionError("capture page has unknown fields")
     if page["schema_version"] != CAPTURE_SCHEMA_VERSION:
         raise PageReconstructionError("unsupported capture schema version")
+    fingerprint = page["visual_fingerprint"]
+    if not isinstance(fingerprint, str) or CAPTURE_FINGERPRINT_RE.fullmatch(fingerprint) is None:
+        raise PageReconstructionError("visual_fingerprint is invalid")
     if page["source"] != CAPTURE_SOURCE:
         raise PageReconstructionError("unsupported capture source")
     if not isinstance(page["page_index"], int) or isinstance(page["page_index"], bool) or page["page_index"] < 0:

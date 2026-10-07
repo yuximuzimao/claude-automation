@@ -19,6 +19,35 @@ class BatchStateTests(unittest.TestCase):
         self.addCleanup(self.tempdir.cleanup)
         self.store = BatchStateStore(Path(self.tempdir.name) / "state.json")
 
+    def _record_page(
+        self,
+        batch_id: str,
+        group_key: str,
+        page_index: int,
+        *,
+        updated_at: str,
+    ) -> dict:
+        state = self.store.load()
+        mode = (
+            "scroll"
+            if state is not None
+            and state["groups"][group_key]["last_page_index"] is not None
+            else "current"
+        )
+        self.store.begin_capture(
+            batch_id,
+            group_key,
+            page_index,
+            mode=mode,
+            started_at=updated_at,
+        )
+        return self.store.record_page(
+            batch_id,
+            group_key,
+            page_index,
+            updated_at=updated_at,
+        )
+
     def test_schema_keeps_page_recovery_at_batch_level(self) -> None:
         schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
         batch_properties = schema["properties"]
@@ -38,7 +67,7 @@ class BatchStateTests(unittest.TestCase):
         first = self.store.start_batch(
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
-        self.store.record_page(
+        self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
         )
 
@@ -76,14 +105,14 @@ class BatchStateTests(unittest.TestCase):
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
         with self.assertRaises(StateError):
-            self.store.record_page(
+            self._record_page(
                 "batch-1", "group-a", 1, updated_at="2026-01-01T00:01:00Z"
             )
-        self.store.record_page(
+        self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:02:00Z"
         )
         with self.assertRaises(StateError):
-            self.store.record_page(
+            self._record_page(
                 "batch-1", "group-a", 0, updated_at="2026-01-01T00:03:00Z"
             )
 
@@ -102,7 +131,7 @@ class BatchStateTests(unittest.TestCase):
         self.store.start_batch(
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
-        self.store.record_page(
+        self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
         )
         with self.assertRaises(StateError):
@@ -119,7 +148,7 @@ class BatchStateTests(unittest.TestCase):
             group_keys=["group-a", "group-b"],
         )
         for page_index, group_key in enumerate(("group-a", "group-b")):
-            self.store.record_page(
+            self._record_page(
                 "batch-1", group_key, page_index, updated_at="2026-01-01T00:01:00Z"
             )
 
@@ -147,7 +176,7 @@ class BatchStateTests(unittest.TestCase):
         self.store.start_batch(
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
-        self.store.record_page(
+        self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
         )
         self.store.complete_batch(
@@ -172,7 +201,7 @@ class BatchStateTests(unittest.TestCase):
         self.store.start_batch(
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
-        self.store.record_page(
+        self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
         )
         self.store.complete_batch(
@@ -188,7 +217,7 @@ class BatchStateTests(unittest.TestCase):
         self.assertEqual(analyzed["status"], "analyzed")
         self.assertTrue(self.store.can_build_inbox("batch-1"))
         with self.assertRaises(StateError):
-            self.store.record_page(
+            self._record_page(
                 "batch-1", "group-a", 1, updated_at="2026-01-01T00:04:00Z"
             )
 

@@ -83,8 +83,19 @@ private func testMAD() throws {
 
     let quiet = try SparseRGBMAD.measure(black, sameBlack, region: region, step: 4)
     let changed = try SparseRGBMAD.measure(black, white, region: region, step: 4)
+    let onePixelSmaller = try solidImage(0, width: 31, height: 32)
+    let smallDrift = try SparseRGBMAD.measure(black, onePixelSmaller, region: region, step: 4)
     try expect(quiet == 0, "identical frames must have zero MAD")
     try expect(changed >= 250, "black/white frames should produce a large MAD")
+    try expect(smallDrift == 0, "small SCK size drift should compare on the common crop")
+
+    let largeDrift = try solidImage(0, width: 28, height: 32)
+    do {
+        _ = try SparseRGBMAD.measure(black, largeDrift, region: region, step: 4)
+        throw TestFailure.failed("large frame-size drift must be rejected")
+    } catch PixelDiffError.sizeMismatch {
+        // Expected.
+    }
 }
 
 private func testChangeDetectorRejectsReturnToBaseline() async throws {
@@ -113,9 +124,26 @@ private func testChangeDetectorRejectsReturnToBaseline() async throws {
     }
 }
 
-private func testCaptureSchemaShape() throws {
-    let page = RawCapturePage(
-        schemaVersion: "1",
+private func testVisualFingerprintDistance() throws {
+    let zero = "dhash512:" + String(repeating: "0", count: 128)
+    let fourBits = "dhash512:" + String(repeating: "0", count: 127) + "f"
+    let twoBits = "dhash512:" + String(repeating: "0", count: 127) + "3"
+    let twentyBits = "dhash512:" + String(repeating: "0", count: 123) + "fffff"
+    let twentyOneBits = "dhash512:" + String(repeating: "0", count: 122) + "1fffff"
+    let distance = try VisualFingerprint.distance(zero, fourBits)
+    let sameViewport = try VisualFingerprint.sameViewport(zero, twoBits)
+    let thresholdAccepted = try VisualFingerprint.sameViewport(zero, twentyBits)
+    let thresholdRejected = try VisualFingerprint.sameViewport(zero, twentyOneBits)
+    try expect(distance == 4, "dHash Hamming distance should count differing bits")
+    try expect(sameViewport, "small dHash distance should be accepted as the same viewport")
+    try expect(thresholdAccepted, "20-bit distance should be accepted at the calibrated boundary")
+    try expect(!thresholdRejected, "21-bit distance should be rejected above the calibrated boundary")
+}
+
+private func samplePage() -> RawCapturePage {
+    RawCapturePage(
+        schemaVersion: "2",
+        visualFingerprint: "dhash512:" + String(repeating: "0", count: 128),
         batchID: "batch-test",
         groupKey: "group-a",
         groupDisplay: "测试群",
@@ -130,6 +158,10 @@ private func testCaptureSchemaShape() throws {
         contentRegion: CaptureBBox(x: 0, y: 0.02, width: 0.92, height: 0.84),
         blocks: [block(0, "正文", x: 0.05, y: 0.5)]
     )
+}
+
+private func testCaptureSchemaShape() throws {
+    let page = samplePage()
 
     let encoded = try JSONEncoder().encode(page)
     guard let object = try JSONSerialization.jsonObject(with: encoded) as? [String: Any] else {
@@ -151,6 +183,23 @@ private func testCaptureSchemaShape() throws {
     }
 }
 
+private func testRawWriterPersistsAndRefusesOverwrite() throws {
+    let directory = URL(fileURLWithPath: NSTemporaryDirectory())
+        .appendingPathComponent("group-chat-raw-writer-\(UUID().uuidString)")
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let destination = directory.appendingPathComponent("page-000000.json")
+
+    try writeRawPageAtomically(samplePage(), to: destination.path)
+    try expect(FileManager.default.fileExists(atPath: destination.path), "raw writer must persist destination")
+
+    do {
+        try writeRawPageAtomically(samplePage(), to: destination.path)
+        throw TestFailure.failed("raw writer must refuse overwrite")
+    } catch RawPageWriterError.outputAlreadyExists {
+        // Expected.
+    }
+}
+
 @main
 struct CapturePureTestsMain {
     static func main() async {
@@ -158,7 +207,9 @@ struct CapturePureTestsMain {
             try testContentRegion()
             try testMAD()
             try await testChangeDetectorRejectsReturnToBaseline()
+            try testVisualFingerprintDistance()
             try testCaptureSchemaShape()
+            try testRawWriterPersistsAndRefusesOverwrite()
             print("CapturePureTests OK")
         } catch {
             fputs("CapturePureTests FAILED: \(error)\n", stderr)

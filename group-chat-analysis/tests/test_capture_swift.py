@@ -11,6 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 CAPTURE_SOURCES = [
     ROOT / "src/capture/CaptureModels.swift",
+    ROOT / "src/capture/VisualFingerprint.swift",
     ROOT / "src/capture/ContentRegion.swift",
     ROOT / "src/capture/WindowPreparation.swift",
     ROOT / "src/capture/ChangeDetector.swift",
@@ -20,13 +21,13 @@ CAPTURE_SOURCES = [
 
 
 class SwiftCaptureTests(unittest.TestCase):
-    def test_full_capture_cli_typechecks(self) -> None:
+    def test_capture_step_typechecks(self) -> None:
         subprocess.run(
             [
                 "swiftc",
                 "-typecheck",
                 *map(str, CAPTURE_SOURCES),
-                str(ROOT / "src/app/capture-pages.swift"),
+                str(ROOT / "src/app/capture-step.swift"),
             ],
             cwd=ROOT,
             check=True,
@@ -41,6 +42,7 @@ class SwiftCaptureTests(unittest.TestCase):
                 [
                     "swiftc",
                     str(ROOT / "src/capture/CaptureModels.swift"),
+                    str(ROOT / "src/capture/VisualFingerprint.swift"),
                     str(ROOT / "src/capture/ContentRegion.swift"),
                     str(ROOT / "src/capture/ChangeDetector.swift"),
                     str(ROOT / "src/capture/RawPageWriter.swift"),

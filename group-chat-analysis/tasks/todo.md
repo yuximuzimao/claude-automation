@@ -4,27 +4,26 @@
 
 ## 下一步（新窗口从这里开始）
 
-**阶段 2-5：把已经跑通的正式模块收成唯一运行入口，并做真实中断恢复故障注入。** capture、bbox 重建、跨页去重、messages/state/current 提交链和真实 3 页 dry-run 已完成；首次全量前最后缺的是“杀进程后能从 raw/state 安全继续”，而不是继续扩展识别规则。
+**阶段 3：安全切换两个目标群，然后做首次全量。** 阶段 2 已完成唯一 runner、中断恢复和真实 3 页验证；下一步不要再扩展识别规则，先解决“如何确定地切到目标群且绝不碰发送/确认控件”。
 
-## B. 阶段 2 — 消息重建与完整保存
+## B. 阶段 2 — 已完成，不再作为待办维护
 
-- [ ] **建立唯一运行入口。** 统一编排 Swift capture、raw page、batch state、normalize/assembly、`messages.jsonl` 和 `current.md`；不得重新实现第二套 state/Schema 规则。失败时保留 raw + incomplete，不生成伪 completed。
-- [ ] **中断恢复故障注入。** 至少验证：页已写但 state 未更新、state 已记录但下一页未写、已滚动但下一页未落盘、messages 已提交但 state 未 completed、state completed 但 current.md 未生成。每种情况都必须可判定、可恢复或明确停止，不能猜当前位置继续滚。
-
-已完成的阶段 2 能力不再作为待办重复维护：
-- 正式 Swift capture（AX 窗口准备、SCK 几何稳定、Vision OCR、正文区、安全滚轮、MAD 门禁）；
-- 正式 bbox/视觉行/消息头/页边缘 fragment 重建；
-- 媒体 OCR 的窄门禁 unknown 降级；
+现役能力包括：
+- 唯一正式入口 `python3 -m src.app.run_capture`，Swift 仅保留内部单步 `capture-step`；
+- batch-state v2 `pending_capture`，顺序固定为 pending → 单步副作用 → raw durable → record_page；
+- capture-page v2 `dhash512` 视口连续性门禁，当前阈值 `<=20`；
+- AX/SCK/Vision、正文区、安全滚轮、MAD、`<=3px` SCK 尺寸漂移容忍；
+- bbox/视觉行/fragment/media unknown 重建；
 - 相邻页保守去重与新→旧/旧→新顺序转换；
-- `messages.jsonl` 原子幂等持久化；
-- `incomplete/completed/analyzed` 状态与 `current.md` 恢复；
-- 一个真实目标群的 3 页全链 dry-run。
+- `messages.jsonl` 原子幂等持久化与 messages → completed → current 恢复；
+- `pending current`、durable raw 晋升、`pending scroll` 硬停、completed current 重建等故障注入；
+- 一个真实目标群的 3 页唯一 runner 全链验证。
 
-无 OCR 的纯图片/表情、语音、文件不属于 v1 文字优先阻塞项。头像指纹也不再是 v1 门禁；只有真实运行证明重复量已影响分析时才重新评估。
+无 OCR 的纯图片/表情、语音、文件不属于 v1 文字优先阻塞项。视口 dHash 不是头像身份指纹；头像/昵称视觉身份辅助仍不属于 v1 去重门禁。
 
 ## C. 阶段 3 — 两群与首次全量抓取
 
-- [ ] **安全切换两个目标群。** 先设计并验证群定位/切换，不允许盲点坐标或可能触发发送/确认的 UI 动作。
+- [ ] **安全切换两个目标群。** 先设计并验证群定位/切换，不允许盲点坐标或可能触发发送/确认的 UI 动作；切换后必须重新用精确窗口标题/群标识确认目标群，再允许 capture。
 - [ ] **首次全量抓取。** 明确历史边界后抓取两个群文字；允许长任务分批恢复，但最终只把经过完整性确认的 batch 标为 completed。
 - [ ] **人工抽样/程序性完整性审计。** 重点检查漏页、乱序、误去重、其它群污染，不要求用户逐条人眼核对。
 

@@ -31,13 +31,15 @@ struct SparseRGBMAD {
         region: CaptureBBox,
         step: Int = 8
     ) throws -> Double {
-        guard lhs.width == rhs.width, lhs.height == rhs.height else {
+        let widthDrift = abs(lhs.width - rhs.width)
+        let heightDrift = abs(lhs.height - rhs.height)
+        guard widthDrift <= 3, heightDrift <= 3 else {
             throw PixelDiffError.sizeMismatch
         }
-        let left = try rgbaBytes(lhs)
-        let right = try rgbaBytes(rhs)
-        let width = lhs.width
-        let height = lhs.height
+        let width = min(lhs.width, rhs.width)
+        let height = min(lhs.height, rhs.height)
+        let left = try rgbaBytes(lhs, width: width, height: height)
+        let right = try rgbaBytes(rhs, width: width, height: height)
 
         let minX = max(0, Int((region.x * Double(width)).rounded(.down)))
         let maxX = min(width, Int((region.maxX * Double(width)).rounded(.up)))
@@ -64,9 +66,11 @@ struct SparseRGBMAD {
         return total / Double(channels)
     }
 
-    private static func rgbaBytes(_ image: CGImage) throws -> [UInt8] {
-        let width = image.width
-        let height = image.height
+    private static func rgbaBytes(
+        _ image: CGImage,
+        width: Int,
+        height: Int
+    ) throws -> [UInt8] {
         let bytesPerRow = width * 4
         var bytes = [UInt8](repeating: 0, count: bytesPerRow * height)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -86,7 +90,10 @@ struct SparseRGBMAD {
                 return false
             }
             context.interpolationQuality = .none
-            context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+            context.draw(
+                image,
+                in: CGRect(x: 0, y: 0, width: image.width, height: image.height)
+            )
             return true
         }
         guard created else {

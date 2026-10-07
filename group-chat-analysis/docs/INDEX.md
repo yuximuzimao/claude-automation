@@ -32,7 +32,9 @@
 ## 代码与测试
 
 - `../src/README.md`：正式代码模块边界、依赖方向与当前门禁。
-- `../src/capture/`：AX/SCK/Vision、正文区、滚动/MAD 与 raw 原子写入。
+- `../src/app/run_capture.py`：唯一正式运行入口与 pending/raw 恢复编排。
+- `../src/app/capture-step.swift`：内部单步 current/scroll capture。
+- `../src/capture/`：AX/SCK/Vision、正文区、滚动/MAD、dhash 视口门禁与 raw 原子写入。
 - `../src/normalize/page_reconstruct.py`：单页 bbox→视觉行→消息/fragment/media unknown。
 - `../src/normalize/assemble.py`：同群连续 capture pages → Schema message records。
 - `../src/normalize/overlap.py`：相邻页保守去重与 capture 页方向转换。

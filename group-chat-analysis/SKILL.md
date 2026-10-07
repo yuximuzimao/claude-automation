@@ -25,7 +25,9 @@
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
-| `src/capture/` | AX/SCK/Vision/变化检测/raw 写入 | 改 QQ 捕获与滚动时 |
+| `src/app/run_capture.py` | 唯一正式运行入口与 pending/raw 恢复编排 | 改长任务运行/恢复时 |
+| `src/app/capture-step.swift` | 内部单步 current/scroll capture | 改 Swift 单步执行边界时 |
+| `src/capture/` | AX/SCK/Vision/变化检测/dhash/raw 写入 | 改 QQ 捕获与滚动时 |
 | `src/normalize/page_reconstruct.py` | 单页 bbox→消息/fragment/media unknown | 改几何重建时 |
 | `src/normalize/assemble.py` | 同群多页组装与 Schema records | 改跨页组装时 |
 | `src/normalize/overlap.py` | 相邻页保守去重与 capture→聊天顺序转换 | 改跨页去重/顺序时 |

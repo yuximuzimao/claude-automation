@@ -21,7 +21,8 @@ def raw_block(index: int, text: str, x: float, y: float, width: float, height: f
 
 def page(blocks: list[dict], *, region_y: float = 0.10, region_height: float = 0.75) -> dict:
     return {
-        "schema_version": "1",
+        "schema_version": "2",
+        "visual_fingerprint": "dhash512:" + "0" * 128,
         "batch_id": "batch-1",
         "group_key": "group-a",
         "group_display": "测试群",

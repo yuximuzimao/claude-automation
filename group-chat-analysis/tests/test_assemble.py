@@ -18,7 +18,8 @@ def block(index: int, text: str, y: float, height: float, *, x: float = 0.04, wi
 
 def capture_page(index: int, lines: list[tuple[str, float, float]], *, group: str = "group-a") -> dict:
     return {
-        "schema_version": "1",
+        "schema_version": "2",
+        "visual_fingerprint": "dhash512:" + f"{index:0128x}",
         "batch_id": "batch-1",
         "group_key": group,
         "group_display": "测试群",

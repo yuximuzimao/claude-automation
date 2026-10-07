@@ -12,6 +12,7 @@ enum QQHistoryCaptureError: Error, CustomStringConvertible {
     case historyWindowNotFound(String)
     case ambiguousHistoryWindows(String)
     case historyWindowChanged
+    case viewportMismatch(Int)
     case captureFailed
     case noOCRResults
     case safeScrollAnchorNotFound
@@ -29,6 +30,8 @@ enum QQHistoryCaptureError: Error, CustomStringConvertible {
             return "More than one visible QQ window exactly matched title: \(title)"
         case .historyWindowChanged:
             return "QQ history window changed during capture."
+        case let .viewportMismatch(distance):
+            return "Current QQ viewport no longer matches the last durable raw page (dHash distance=\(distance)); refusing to scroll."
         case .captureFailed:
             return "Failed to capture the QQ history window."
         case .noOCRResults:
@@ -89,6 +92,15 @@ struct QQHistoryCapture {
         let target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
         guard target.windowID == previousPage.windowID else {
             throw QQHistoryCaptureError.historyWindowChanged
+        }
+        let currentImage = try await captureImage(target)
+        let currentFingerprint = try VisualFingerprint.make(currentImage)
+        let fingerprintDistance = try VisualFingerprint.distance(
+            currentFingerprint,
+            previousPage.record.visualFingerprint
+        )
+        guard fingerprintDistance <= VisualFingerprint.sameViewportMaximumDistance else {
+            throw QQHistoryCaptureError.viewportMismatch(fingerprintDistance)
         }
 
         let anchor = try safeScrollPoint(
@@ -214,9 +226,11 @@ struct QQHistoryCapture {
             throw QQHistoryCaptureError.noOCRResults
         }
         let region = try ContentRegionLocator.locate(from: blocks)
+        let fingerprint = try VisualFingerprint.make(image)
         let title = target.title ?? expectedTitle
         let page = RawCapturePage(
-            schemaVersion: "1",
+            schemaVersion: "2",
+            visualFingerprint: fingerprint,
             batchID: batchID,
             groupKey: groupKey,
             groupDisplay: title,

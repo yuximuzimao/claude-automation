@@ -11,6 +11,7 @@
     "status",
     "started_at",
     "updated_at",
+    "pending_capture",
     "next_page_index",
     "last_completed_batch",
     "last_success_at",
@@ -18,7 +19,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1"
+      "const": "2"
     },
     "batch_id": {
       "type": "string",
@@ -34,6 +35,13 @@
     "updated_at": {
       "type": "string",
       "format": "date-time"
+    },
+    "pending_capture": {
+      "anyOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/pendingCapture"}
+      ],
+      "description": "Intent marker written before a capture side effect. A pending scroll without a durable target raw page means viewport position is uncertain and automatic scrolling must stop."
     },
     "next_page_index": {
       "type": "integer",
@@ -80,6 +88,17 @@
     }
   ],
   "$defs": {
+    "pendingCapture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["group_key", "page_index", "mode", "started_at"],
+      "properties": {
+        "group_key": {"type": "string", "minLength": 1},
+        "page_index": {"type": "integer", "minimum": 0},
+        "mode": {"enum": ["current", "scroll"]},
+        "started_at": {"type": "string", "format": "date-time"}
+      }
+    },
     "groupProgress": {
       "type": "object",
       "additionalProperties": false,

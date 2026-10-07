@@ -7,6 +7,7 @@
   "additionalProperties": false,
   "required": [
     "schema_version",
+    "visual_fingerprint",
     "batch_id",
     "group_key",
     "group_display",
@@ -19,7 +20,12 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1"
+      "const": "2"
+    },
+    "visual_fingerprint": {
+      "type": "string",
+      "pattern": "^dhash512:[0-9a-f]{128}$",
+      "description": "Private runtime perceptual fingerprint of the captured window pixels. Used only to verify viewport continuity before scrolling; not a message identity signal."
     },
     "batch_id": {
       "type": "string",

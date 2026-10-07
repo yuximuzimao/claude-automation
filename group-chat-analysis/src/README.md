@@ -6,7 +6,7 @@
 
 ```text
 src/
-  app/          # 薄 CLI / 后续唯一编排入口
+  app/          # 唯一 Python runner + 内部 Swift 单步 capture
   capture/      # QQ窗口准备、SCK捕获、Vision OCR、变化检测、raw写入
   normalize/    # 单页消息重建、fragment保留、跨页保守去重/顺序转换
   store/        # message-record、canonical messages、batch/state、finalize
@@ -15,22 +15,24 @@ src/
 
 当前已有：
 
+- `app/run_capture.py`：唯一正式运行入口；独占 state 推进、pending/raw reconcile、normalize/finalize 编排。
+- `app/capture-step.swift`：内部单步 current/scroll capture；不维护恢复状态。
 - `capture/WindowPreparation.swift`：唯一同标题 AXWindow，设置/读回几何，再等待唯一同标题 SCK frame 稳定；无鼠标拖窗 fallback。
-- `capture/QQHistoryCapture.swift` / `ChangeDetector.swift`：窗口级 SCK、Vision OCR、正文安全滚轮、有限 MAD 稳定门禁；最终帧必须仍明显不同于 baseline。
-- `capture/CaptureModels.swift` / `RawPageWriter.swift`：当前 capture Schema 对齐的数据结构与 raw 原子写入。
+- `capture/QQHistoryCapture.swift` / `ChangeDetector.swift`：窗口级 SCK、Vision OCR、正文安全滚轮、有限 MAD 稳定门禁；MAD 仅容忍 `<=3px` SCK 尺寸漂移。
+- `capture/VisualFingerprint.swift`：`dhash512` 视口连续性门禁，当前阈值 20；只用于发滚轮前确认仍停留在上一 durable raw 对应视口。
+- `capture/CaptureModels.swift` / `RawPageWriter.swift`：capture-page v2 数据结构与 raw 原子写入。
 - `normalize/page_reconstruct.py`：正文区、视觉行、消息头/正文、页边缘 fragment、system、媒体 OCR unknown 降级；原始单页上→下新→旧，完整候选输出旧→新。
 - `normalize/assemble.py` / `overlap.py`：按同群连续 page_index 组装，fragment 不静默丢失，只删除高置信相邻页连续重叠。
 - `store/message_record.py`：从正式 Schema 读取字段/枚举/const 真值并校验。
 - `store/message_store.py`：canonical `messages.jsonl` 的 fsync + 原子 replace、同 batch 幂等重试与冲突拒绝。
-- `store/batch_state.py`：`incomplete/completed/analyzed`、全 batch 页恢复位置、群级连续锚点和原子 state replace。
-- `store/finalize.py`：唯一完成顺序 `messages durable → state completed → current.md`，支持两个跨文件崩溃窗口恢复。
+- `store/batch_state.py`：batch-state v2 `pending_capture`、`incomplete/completed/analyzed`、全 batch 页恢复位置、群级连续锚点和原子 state replace。
+- `store/finalize.py`：唯一完成顺序 `messages durable → state completed → current.md`，支持跨文件崩溃恢复。
 - `inbox/builder.py`：只从 completed/analyzed 的 canonical records 生成 current.md，非法或不一致输入不得覆盖旧文件。
 
 尚未完成：
 
-- 把现有模块收成**唯一正式运行入口**，在采集期间同步/reconcile raw 与 state，并实现真正可恢复的长任务编排。
-- 对“页已写/刚滚动/下一页未写”等捕获中断点做故障注入。
-- 双群切换、首次全量、每日增量。
+- 两个目标群的安全定位/切换。
+- 首次全量、长时间 Vision 稳定性、每日增量。
 
 ## 依赖方向
 
@@ -63,8 +65,8 @@ v1 的错误成本不对称：**漏真实消息 > 多保留重复消息**。
 
 ## 进入首次全量前的最后门禁
 
-一个目标群的真实 3 页 `capture → normalize → messages → state → current.md` 已通过。首次全量前只剩：
+单群唯一 runner 与中断恢复已经通过。首次全量前只剩：
 
-1. 唯一运行入口；
-2. 捕获过程真实中断/恢复故障注入；
-3. 通过后再验证两个目标群的安全切换。
+1. 两个目标群的安全定位/切换；
+2. 切换后重新确认精确目标群/窗口身份；
+3. 通过后才允许双群首次全量。
