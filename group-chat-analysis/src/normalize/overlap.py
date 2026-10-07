@@ -1,9 +1,10 @@
 """Conservative adjacent-page overlap removal for normalized messages.
 
-Capture pages are produced newest-first as ``page_index`` increases toward
-history.  Message lists inside one page are still visual/chronological
-old-to-new.  The helpers here keep that distinction explicit so callers do not
-silently invert the final chat order.
+Capture pages are produced newest-page-first as ``page_index`` increases toward
+history.  The raw QQ page itself is visually newest-message-first; the formal
+page reconstruction layer must reverse complete candidates to chronological
+old-to-new before calling these helpers.  This module therefore accepts only
+old-to-new message lists and keeps page-order reversal explicit.
 """
 
 from __future__ import annotations

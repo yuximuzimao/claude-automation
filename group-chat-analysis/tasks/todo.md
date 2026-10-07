@@ -4,18 +4,23 @@
 
 ## 下一步（新窗口从这里开始）
 
-**阶段 2-4：把真实 QQ capture 与 bbox 消息重建接到现役 `src`，再跑一个群 3–5 页真实 dry-run。** 去重、batch/state、message-record 校验和 current.md builder 已正式化；当前缺的是正式 capture 适配器、bbox→消息重建、messages.jsonl 持久化与真实端到端验证。
+**阶段 2-5：把已经跑通的正式模块收成唯一运行入口，并做真实中断恢复故障注入。** capture、bbox 重建、跨页去重、messages/state/current 提交链和真实 3 页 dry-run 已完成；首次全量前最后缺的是“杀进程后能从 raw/state 安全继续”，而不是继续扩展识别规则。
 
 ## B. 阶段 2 — 消息重建与完整保存
 
-- [ ] **迁移真实 capture 到现役入口。** 只复用旧 capture worktree 已验证的 ScreenCaptureKit / Vision / 安全滚轮能力；窗口准备必须按现役规则使用 Accessibility 设置/读回几何，不复活鼠标拖窗口方案；输出必须符合当前 `capture-page.schema.json`，并接入现役变化检测门禁。
-- [ ] **实现正式 bbox 消息重建。** 按 `docs/rules/normalization.md` 已实测规则实现视觉行归并、消息头/正文分组、页边缘残片、系统消息和 unknown 非文字占位；语音/文件继续延期，不阻塞 v1。
-- [ ] **实现规范化消息库。** 把通过 `src/store/message_record.py` 校验的 canonical 记录安全写入 `runtime/messages/messages.jsonl`；必须先设计清楚 incomplete/completed 与消息文件之间的崩溃恢复顺序，不能出现 state 已 completed 但消息未落盘的伪完成。
-- [ ] **真实 3–5 页 dry-run。** 一个目标群、小范围历史，验证 capture 顺序转聊天顺序、误去重/漏去重、OCR轻微差异、页恢复点、messages 持久化和 current.md 门禁。证据不足的重复允许保留，真实消息不得因去重丢失。
+- [ ] **建立唯一运行入口。** 统一编排 Swift capture、raw page、batch state、normalize/assembly、`messages.jsonl` 和 `current.md`；不得重新实现第二套 state/Schema 规则。失败时保留 raw + incomplete，不生成伪 completed。
+- [ ] **中断恢复故障注入。** 至少验证：页已写但 state 未更新、state 已记录但下一页未写、已滚动但下一页未落盘、messages 已提交但 state 未 completed、state completed 但 current.md 未生成。每种情况都必须可判定、可恢复或明确停止，不能猜当前位置继续滚。
 
-已完成的阶段 2 基础契约不再作为待办重复维护：相邻页保守去重、`batch-state`、message-record 校验、current.md builder、合成 dry-run 已进入正式 `src`，测试直接覆盖正式实现。
+已完成的阶段 2 能力不再作为待办重复维护：
+- 正式 Swift capture（AX 窗口准备、SCK 几何稳定、Vision OCR、正文区、安全滚轮、MAD 门禁）；
+- 正式 bbox/视觉行/消息头/页边缘 fragment 重建；
+- 媒体 OCR 的窄门禁 unknown 降级；
+- 相邻页保守去重与新→旧/旧→新顺序转换；
+- `messages.jsonl` 原子幂等持久化；
+- `incomplete/completed/analyzed` 状态与 `current.md` 恢复；
+- 一个真实目标群的 3 页全链 dry-run。
 
-头像指纹不再是 v1 门禁。只有真实 dry-run 证明保守去重产生的重复量已经影响实际使用时，才重新评估视觉身份辅助。
+无 OCR 的纯图片/表情、语音、文件不属于 v1 文字优先阻塞项。头像指纹也不再是 v1 门禁；只有真实运行证明重复量已影响分析时才重新评估。
 
 ## C. 阶段 3 — 两群与首次全量抓取
 

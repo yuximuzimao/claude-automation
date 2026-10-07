@@ -6,7 +6,8 @@
 
 可用合成/脱敏 fixture，覆盖：
 
-- bbox 行/消息重建；
+- Swift capture 全量 typecheck、正文区/MAD/Schema 纯函数回归；
+- bbox 视觉行/消息/fragment 重建与媒体 OCR unknown 降级；
 - 时间文本解析；
 - 相邻屏最长连续重叠；
 - OCR轻微差异下的受控锚点匹配；
@@ -15,6 +16,7 @@
 - `message_type` / `timestamp_text` 兼容性与两条最小重叠强锚点；
 - capture 页“新→旧”到最终消息“旧→新”的方向转换；
 - batch/state 的恢复点、状态转换和连续锚点门禁；
+- canonical messages 原子/幂等提交与 messages→completed→current 崩溃恢复；
 - current.md 构建顺序；
 - message-record 校验与 Schema 结构真值同步。
 
@@ -26,9 +28,10 @@
 
 - 正确识别 QQ/目标群；
 - 聊天区定位；
-- 窗口级捕获或屏幕裁剪 fallback；
+- AX 设置/读回后 SCK 窗口几何真正稳定；
+- 窗口级捕获（不使用整屏裁剪 fallback）；
 - 滚轮只影响消息区；
-- 图像变化检测；
+- 图像变化检测与“变化后回到 baseline”拒绝；
 - Vision OCR；
 - 不发生任何聊天写操作。
 

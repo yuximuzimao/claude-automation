@@ -1,39 +1,44 @@
 # 正式代码模块边界
 
-本文件只定义正式代码职责，避免实验代码与现役实现混在一起。
+本文件只定义现役代码职责，避免实验代码与正式实现混在一起。
 
 ## 当前正式模块
 
 ```text
 src/
-  normalize/    # 相邻页保守去重、capture 顺序转聊天顺序
-  store/        # batch/state 原子状态 + message-record 契约校验
-  inbox/        # completed batch 的 current.md 原子生成
+  app/          # 薄 CLI / 后续唯一编排入口
+  capture/      # QQ窗口准备、SCK捕获、Vision OCR、变化检测、raw写入
+  normalize/    # 单页消息重建、fragment保留、跨页保守去重/顺序转换
+  store/        # message-record、canonical messages、batch/state、finalize
+  inbox/        # completed/analyzed batch → current.md
 ```
 
 当前已有：
 
-- `normalize/overlap.py`：只对高置信相邻页连续序列去重。相似昵称不归并；一侧昵称缺失时宁可保留重复；`message_type` 与双方可见时间必须兼容。`merge_capture_order_pages()` 明确接收 `page_index` 递增的“新→旧”采集页并输出“旧→新”消息。
-- `store/batch_state.py`：`incomplete/completed/analyzed` 状态、批次级页恢复位置、连续增量锚点和原子 state replace。
-- `store/message_record.py`：从 `schemas/message-record.schema.json` 读取字段、枚举和 const 真值，统一做持久化边界校验；不再在测试或 inbox 各维护一份 Schema 副本。
-- `inbox/builder.py`：只有 completed/analyzed batch 才能生成 `runtime/inbox/current.md`；全部记录先过正式 message-record 校验，非法输入不得覆盖上一份 current.md。
+- `capture/WindowPreparation.swift`：唯一同标题 AXWindow，设置/读回几何，再等待唯一同标题 SCK frame 稳定；无鼠标拖窗 fallback。
+- `capture/QQHistoryCapture.swift` / `ChangeDetector.swift`：窗口级 SCK、Vision OCR、正文安全滚轮、有限 MAD 稳定门禁；最终帧必须仍明显不同于 baseline。
+- `capture/CaptureModels.swift` / `RawPageWriter.swift`：当前 capture Schema 对齐的数据结构与 raw 原子写入。
+- `normalize/page_reconstruct.py`：正文区、视觉行、消息头/正文、页边缘 fragment、system、媒体 OCR unknown 降级；原始单页上→下新→旧，完整候选输出旧→新。
+- `normalize/assemble.py` / `overlap.py`：按同群连续 page_index 组装，fragment 不静默丢失，只删除高置信相邻页连续重叠。
+- `store/message_record.py`：从正式 Schema 读取字段/枚举/const 真值并校验。
+- `store/message_store.py`：canonical `messages.jsonl` 的 fsync + 原子 replace、同 batch 幂等重试与冲突拒绝。
+- `store/batch_state.py`：`incomplete/completed/analyzed`、全 batch 页恢复位置、群级连续锚点和原子 state replace。
+- `store/finalize.py`：唯一完成顺序 `messages durable → state completed → current.md`，支持两个跨文件崩溃窗口恢复。
+- `inbox/builder.py`：只从 completed/analyzed 的 canonical records 生成 current.md，非法或不一致输入不得覆盖旧文件。
 
-尚未正式落地：
+尚未完成：
 
-- `capture/`：真实 QQ / ScreenCaptureKit / Vision / AX 窗口准备适配器；旧 capture worktree 只能作为参考，不能直接 merge。
-- bbox → 消息候选的正式重建实现。
-- `runtime/messages/messages.jsonl` 的正式持久化与跨文件崩溃恢复编排。
-- 唯一 app/CLI 编排入口。
-
-目录只在真正有现役代码时创建，不用空目录或占位文件污染仓库。
+- 把现有模块收成**唯一正式运行入口**，在采集期间同步/reconcile raw 与 state，并实现真正可恢复的长任务编排。
+- 对“页已写/刚滚动/下一页未写”等捕获中断点做故障注入。
+- 双群切换、首次全量、每日增量。
 
 ## 依赖方向
 
-目标依赖方向为：
+目标依赖方向：
 
 `app → capture → normalize → store → inbox`
 
-app 负责调用各模块；底层模块通过明确数据结构传递，不允许：
+app 只负责编排；底层模块通过明确数据结构传递，不允许：
 
 - capture 调用 GPT；
 - normalize 操作 QQ；
@@ -41,29 +46,25 @@ app 负责调用各模块；底层模块通过明确数据结构传递，不允�
 - inbox 修改 canonical messages；
 - 任一模块直接写魔兽或其它项目。
 
-## 去重安全优先级
+## 安全优先级
 
-v1 的错误成本不对称：**漏掉真实消息 > 多保留一条重复消息**。
+v1 的错误成本不对称：**漏真实消息 > 多保留重复消息**。
 
 因此：
 
 1. 不做全局 `sender+text` 去重。
-2. 不做相似昵称身份归并；头像指纹不再是 v1 正式入口门禁。
+2. 不做相似昵称身份归并；头像指纹不是 v1 门禁。
 3. 一侧 sender 缺失时不做破坏性去重。
-4. 两条消息的最小重叠必须再有强锚点；匿名正文锚点至少 8 个规范化字符。
-5. 同一重复消息的 canonical 选择先保留更完整正文，再比较元数据完整度与 OCR confidence。
-6. 证据不足就保留两份，后续可在分析层容忍重复，不能在 Normalize 层猜删。
+4. 两条消息的最小重叠必须有额外强锚点；匿名正文锚点至少 8 个规范化字符。
+5. canonical 先保留更完整正文，再比较元数据完整度与 OCR confidence。
+6. 页边缘/坏头部可见文字证据不足时宁可保留重复，不能猜删。
+7. 图片内 OCR 命中窄媒体门禁时降级为 unknown，不作为用户直接聊天正文送入 GPT。
+8. completed state 永远不能领先于 canonical messages 的可靠持久化。
 
-## 正式入口门禁
+## 进入首次全量前的最后门禁
 
-当前已经完成：
+一个目标群的真实 3 页 `capture → normalize → messages → state → current.md` 已通过。首次全量前只剩：
 
-1. capture raw Schema；
-2. batch/state Schema 与正式实现；
-3. 相邻页保守去重正式实现；
-4. capture 页方向 → 聊天时间方向的显式转换；
-5. message-record 正式校验；
-6. current.md 正式 builder；
-7. 单元/合成 dry-run 已直接测试正式 `src`，不再测试测试文件里的实现副本。
-
-下一门禁是把真实 QQ capture 与 bbox 消息重建接入这些正式模块，并在一个目标群上跑小范围真实 dry-run。通过之前不做首次全量抓取。
+1. 唯一运行入口；
+2. 捕获过程真实中断/恢复故障注入；
+3. 通过后再验证两个目标群的安全切换。

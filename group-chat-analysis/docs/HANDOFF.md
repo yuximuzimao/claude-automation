@@ -2,47 +2,41 @@
 
 ## 当前完成
 
-阶段 2 的确定性核心已经从测试原型迁入正式 `src`：
+阶段 2 的真实链已进入正式 `src` 并完成一个目标群的 3 页真实 dry-run：
 
-- `src/normalize/overlap.py`：相邻页保守去重 + capture 页顺序转聊天时间顺序。
-- `src/store/batch_state.py`：可恢复 batch/state。
-- `src/store/message_record.py`：从正式 JSON Schema 读取结构真值并做运行时 record 校验。
-- `src/inbox/builder.py`：completed/analyzed batch 的 current.md 原子生成。
+- `src/capture/`：AX 精确窗口准备、SCK 几何稳定、窗口级捕获、Vision OCR、正文区定位、安全滚轮、MAD 稳定门禁、raw 原子写入。
+- `src/normalize/page_reconstruct.py`：视觉行、消息头/正文、页边缘 fragment、system、媒体 OCR unknown 降级。
+- `src/normalize/assemble.py` + `overlap.py`：单页新→旧转旧→新、跨页保守连续序列去重、可见 fragment 保留。
+- `src/store/message_store.py`：canonical `messages.jsonl` Schema 校验、fsync + 原子 replace、同 batch 幂等恢复。
+- `src/store/finalize.py`：messages durable → state completed → current.md 的固定提交顺序与恢复。
+- `src/store/batch_state.py` / `message_record.py` / `src/inbox/builder.py`：继续作为唯一状态、记录和分析输入边界。
 
-测试已删除对应实现副本，`tests/test_normalize_overlap.py`、`tests/test_batch_state.py`、`tests/test_dry_run_gate.py` 现在直接测试正式模块。
+真实 3 页测试只写临时 canonical store，没有污染正式 runtime。最终 assembly 为 24 条记录，可靠消除 2 条重复；1 条嵌入图片 OCR 被降级为 unknown，current.md 不包含图片内 OCR。
 
 ## 当前关键契约
 
-- v1 的优先级是“漏真实消息 > 多一条重复消息”。
-- 只做相邻/近邻页面连续序列去重，不做全局 `sender+text` 唯一化。
-- 相似昵称不归并；一侧昵称缺失时不做破坏性去重。
-- `message_type` 必须一致；双方存在 `timestamp_text` 时必须兼容。
-- 正文受控模糊阈值为 `0.90`。
-- 默认最小连续重叠为 2 条；只有两条时必须再有昵称、时间或至少 8 个规范化字符的匿名精确正文强锚点。
-- canonical 重复消息先保留更完整正文，再比较元数据完整度和 OCR confidence。
-- `page_index` 递增代表从最新向历史采集；`merge_capture_order_pages()` 负责显式转成最终旧→新顺序。
-- incomplete batch 不生成 current.md；analyzed 只能复现原 completed 输入；非法 message record 不得覆盖旧 current.md。
-- 头像指纹不是 v1 门禁，只有真实 dry-run 证明重复量已经影响使用时才重新评估。
+- 错误成本：**漏真实消息 > 多保留重复消息**。
+- QQ 历史窗口单页视觉上→下是新→旧；单页重建结束后才反转完整消息为旧→新。`page_index` 递增表示向更旧页面采集。
+- 只做相邻页连续序列去重；不做全局 `sender+text` 唯一化。
+- 相似昵称不归并；一侧 sender 缺失不做破坏性去重；`message_type` 和双方已识别时间必须兼容。
+- 正文模糊阈值 `0.90`；最小连续重叠 2 条，两条重叠还需额外强锚点。
+- 页边缘 fragment 不直接丢弃；无法可靠确认的可见文字宁可重复保留。
+- 媒体 OCR 只有命中窄几何门禁才降级为 unknown；无 OCR 的纯图片/表情按 v1 文字优先目标忽略。
+- `messages.jsonl` 必须先可靠落盘，之后才能 completed；current.md 是 completed 后可重建派生物。
+- 头像指纹不是 v1 门禁。
 
 ## 验证
 
-`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **40/40 通过**。
+`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **63/63 通过**。
 
-新增回归覆盖包括：
-
-- 不同 `message_type` 不得去重；
-- 双方已识别但不同时间不得去重；
-- 一侧昵称缺失不得破坏性去重；
-- 两条匿名短文本不足以确认重叠；
-- 高 confidence 的截短 OCR 不得覆盖更完整正文；
-- capture 的“新→旧”页面必须先转换后再全局合并；
-- 合成 dry-run 全程使用正式 `src.normalize/src.store/src.inbox`，不再通过测试副本得到假绿。
+真实验证包括：
+- AX 扰动/恢复 + SCK frame 稳定；
+- 3 页捕获，两次 630px 滚动均满足“明显变化后稳定”的 MAD 门禁；
+- raw → bbox → assembly → canonical messages → completed state → current.md 全链；
+- 图片内 OCR 不进入 current.md；
+- messages/state/current 两个崩溃窗口的合成恢复；
+- “画面先变化又回 baseline”不得误判为新页。
 
 ## 下一步
 
-按 `tasks/todo.md` 顶部执行阶段 2-4：
-
-1. 从旧 capture worktree 只迁移仍有效的 ScreenCaptureKit / Vision / 安全滚轮能力；窗口准备改用现役 Accessibility 设置/读回方案，并适配当前 capture Schema 与变化检测门禁。
-2. 把已验证 bbox 规则实现到正式 normalize。
-3. 设计并实现 `messages.jsonl` 与 batch state 的崩溃安全持久化顺序。
-4. 在一个目标群上跑 3–5 页真实 dry-run，通过后才进入两群切换和首次全量。
+按 `tasks/todo.md` 顶部执行阶段 2-5：把现役模块收成唯一正式运行入口，并对捕获过程做中断故障注入。重点不是继续扩识别规则，而是确认“页已写、刚滚动、下一页未写”等状态都能确定恢复或安全停止。通过后删除旧 capture worktree，进入双群切换与首次全量。

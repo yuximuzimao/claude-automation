@@ -16,6 +16,7 @@ from .message_record import (
     MessageRecordError,
     validate_message_record,
 )
+from .message_store import MessageStore, MessageStoreError
 
 __all__ = [
     "MIN_ANCHOR_COUNT",
@@ -30,4 +31,6 @@ __all__ = [
     "MESSAGE_TYPES",
     "MessageRecordError",
     "validate_message_record",
+    "MessageStore",
+    "MessageStoreError",
 ]

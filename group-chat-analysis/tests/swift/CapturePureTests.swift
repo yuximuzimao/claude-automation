@@ -1,0 +1,168 @@
+import CoreGraphics
+import Foundation
+
+private enum TestFailure: Error, CustomStringConvertible {
+    case failed(String)
+
+    var description: String {
+        switch self {
+        case let .failed(message): return message
+        }
+    }
+}
+
+private func expect(_ condition: @autoclosure () -> Bool, _ message: String) throws {
+    if !condition() {
+        throw TestFailure.failed(message)
+    }
+}
+
+private func block(
+    _ index: Int,
+    _ text: String,
+    x: Double,
+    y: Double,
+    width: Double = 0.08,
+    height: Double = 0.02,
+    confidence: Double = 1.0
+) -> CaptureOCRBlock {
+    CaptureOCRBlock(
+        blockIndex: index,
+        text: text,
+        bbox: CaptureBBox(x: x, y: y, width: width, height: height),
+        confidence: confidence
+    )
+}
+
+private func solidImage(_ value: UInt8, width: Int = 32, height: Int = 32) throws -> CGImage {
+    let bytesPerRow = width * 4
+    var bytes = [UInt8](repeating: value, count: bytesPerRow * height)
+    for index in stride(from: 3, to: bytes.count, by: 4) {
+        bytes[index] = 255
+    }
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue |
+        CGImageAlphaInfo.premultipliedLast.rawValue
+    return try bytes.withUnsafeMutableBytes { buffer in
+        guard let context = CGContext(
+            data: buffer.baseAddress,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: bytesPerRow,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo
+        ), let image = context.makeImage() else {
+            throw TestFailure.failed("could not create synthetic image")
+        }
+        return image
+    }
+}
+
+private func testContentRegion() throws {
+    let blocks = [
+        block(0, "Q搜索", x: 0.02, y: 0.93),
+        block(1, "全部", x: 0.02, y: 0.887),
+        block(2, "图片/视频", x: 0.07, y: 0.887),
+        block(3, "筛选", x: 0.95, y: 0.887, width: 0.03),
+        block(4, "玩家甲 12:34", x: 0.05, y: 0.80),
+        block(5, "正文", x: 0.05, y: 0.76),
+    ]
+    let region = try ContentRegionLocator.locate(from: blocks)
+    try expect(region.x == 0.0, "content region should begin at normalized left edge")
+    try expect(region.maxY < 0.887, "content region must stay below toolbar")
+    try expect(region.maxX < 0.95, "content region must stay left of filter controls")
+    try expect(region.contains(midX: 0.09, midY: 0.77), "message block should be inside content region")
+}
+
+private func testMAD() throws {
+    let black = try solidImage(0)
+    let sameBlack = try solidImage(0)
+    let white = try solidImage(255)
+    let region = CaptureBBox(x: 0, y: 0, width: 1, height: 1)
+
+    let quiet = try SparseRGBMAD.measure(black, sameBlack, region: region, step: 4)
+    let changed = try SparseRGBMAD.measure(black, white, region: region, step: 4)
+    try expect(quiet == 0, "identical frames must have zero MAD")
+    try expect(changed >= 250, "black/white frames should produce a large MAD")
+}
+
+private func testChangeDetectorRejectsReturnToBaseline() async throws {
+    let black = try solidImage(0)
+    let white = try solidImage(255)
+    let region = CaptureBBox(x: 0, y: 0, width: 1, height: 1)
+    var frames = [white, black, black, black]
+
+    let result = try await ScrollChangeDetector.waitForStableChange(
+        baseline: black,
+        region: region
+    ) {
+        if frames.isEmpty {
+            return black
+        }
+        return frames.removeFirst()
+    }
+
+    switch result {
+    case .uncertain:
+        return
+    case .changedAndStable:
+        throw TestFailure.failed("returning to baseline must not be accepted as a new stable page")
+    case .noChange:
+        throw TestFailure.failed("a transient large change must not be reported as never changed")
+    }
+}
+
+private func testCaptureSchemaShape() throws {
+    let page = RawCapturePage(
+        schemaVersion: "1",
+        batchID: "batch-test",
+        groupKey: "group-a",
+        groupDisplay: "测试群",
+        pageIndex: 0,
+        capturedAt: "2026-01-01T00:00:00Z",
+        source: "qq_history_window_ocr",
+        window: CaptureWindowInfo(
+            title: "测试群",
+            framePoints: CaptureScreenFrame(x: 1, y: 2, width: 1000, height: 700),
+            captureSizePixels: CapturePixelSize(width: 1000, height: 700)
+        ),
+        contentRegion: CaptureBBox(x: 0, y: 0.02, width: 0.92, height: 0.84),
+        blocks: [block(0, "正文", x: 0.05, y: 0.5)]
+    )
+
+    let encoded = try JSONEncoder().encode(page)
+    guard let object = try JSONSerialization.jsonObject(with: encoded) as? [String: Any] else {
+        throw TestFailure.failed("encoded capture page is not an object")
+    }
+    let schemaData = try Data(contentsOf: URL(fileURLWithPath: "schemas/capture-page.schema.json"))
+    guard let schema = try JSONSerialization.jsonObject(with: schemaData) as? [String: Any],
+          let required = schema["required"] as? [String] else {
+        throw TestFailure.failed("capture schema required fields unavailable")
+    }
+
+    try expect(Set(object.keys) == Set(required), "encoded capture page top-level keys drifted from schema")
+    try expect(object["captured_at"] as? String == "2026-01-01T00:00:00Z", "captured_at key missing")
+    try expect(object["content_region"] != nil, "content_region key missing")
+    if let window = object["window"] as? [String: Any] {
+        try expect(Set(window.keys) == Set(["title", "frame_points", "capture_size_pixels"]), "window keys drifted")
+    } else {
+        throw TestFailure.failed("window object missing")
+    }
+}
+
+@main
+struct CapturePureTestsMain {
+    static func main() async {
+        do {
+            try testContentRegion()
+            try testMAD()
+            try await testChangeDetectorRejectsReturnToBaseline()
+            try testCaptureSchemaShape()
+            print("CapturePureTests OK")
+        } catch {
+            fputs("CapturePureTests FAILED: \(error)\n", stderr)
+            exit(1)
+        }
+    }
+}

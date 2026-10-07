@@ -85,12 +85,12 @@ runtime/
 
 ## 原子性
 
-正式实现时，写 current.md 和 completed 状态应避免“写了一半就被视为完成”。
+正式实现时，canonical messages、completed 状态和 current.md 必须避免“写了一半就被视为完成”。错误成本以**completed state 绝不能领先于 canonical messages**为最高优先级。
 
-优先：
-1. 写临时文件；
-2. 校验；
-3. 原子 rename/replace；
-4. 再更新 completed state。
+现役提交顺序固定为：
+1. 先校验本批全部 message records；
+2. 用临时文件 + `fsync` + 原子 replace 更新 `runtime/messages/messages.jsonl`；同一 batch 重试必须幂等，内容不同则拒绝；
+3. canonical messages 已持久化并回读校验后，才允许把 batch state 从 `incomplete` 更新为 `completed`；
+4. `current.md` 是可重建派生物，completed 后再原子生成。若崩溃发生在 state completed 与 current.md 之间，重启后从 canonical messages 重建；若发现 state 已 completed 但 canonical messages 缺失/不一致，视为数据损坏并停止，禁止静默补写。
 
-具体技术由实现决定，但语义不得改变。
+因此允许短暂存在“messages 已落盘但 state 仍 incomplete”的可恢复窗口；禁止出现“state completed 但 messages 尚未可靠落盘”的伪完成。
