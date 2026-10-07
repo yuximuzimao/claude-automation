@@ -9,7 +9,7 @@
 - 当前Route Atlas派生数据：`../../data/generated/route-lifecycle/`（由现役owner生成，不是业务真源）。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`；纯文本玩家页：`../../data/routes/player-view/`。
 - 旧聚合`workbench-routes.json`只在`../archive/generated/route-atlas/`保留为历史证据，不参与当前生成链。
-- 最新阶段NEAT：[`../archive/neat/2026-09-25-dk-live-run-closure-and-group-comparison-neat.md`](../archive/neat/2026-09-25-dk-live-run-closure-and-group-comparison-neat.md)，记录第二组DK从出生区到北风当前暂停点的实跑闭合、第一组圣骑/第二组DK的63→68同口径时间对比，以及本轮最终裁决。
+- 最新阶段NEAT：[`../archive/neat/2026-10-08-borean-dk-second-run-continuation-neat.md`](../archive/neat/2026-10-08-borean-dk-second-run-continuation-neat.md)，记录第二组DK北风苔原续跑、8项Fivebox事实、00:15暂停点、Timing Observation和玩家产物刷新。
 - Route Lifecycle迁移历史统一从[`../archive/analysis/2026-09-21-route-lifecycle-migration-history.md`](../archive/analysis/2026-09-21-route-lifecycle-migration-history.md)考古；更早NEAT和旧路线从[`../archive/README.md`](../archive/README.md)按日期/主题定向查找，不在当前入口维护长链索引。
 
 ## 仍有效的路线与支撑文档

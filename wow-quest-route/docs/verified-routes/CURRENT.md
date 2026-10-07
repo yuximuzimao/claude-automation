@@ -23,7 +23,7 @@
 - 实跑反馈 / Route Lifecycle分类：`ROUTE-DESIGN-PROCESS.md`
 - 文件与规则导航：`../INDEX.md`
 - DK职业配置：`DK-COMBAT-NOTES.md`
-- 本轮阶段归档：`../archive/neat/2026-09-27-borean-dk-second-run-neat.md`
+- 本轮阶段归档：`../archive/neat/2026-10-08-borean-dk-second-run-continuation-neat.md`
 - 架构迁移考古：`../archive/analysis/2026-09-21-route-lifecycle-migration-history.md`
 
 ## 下一次继续时

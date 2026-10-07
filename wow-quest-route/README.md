@@ -2,11 +2,11 @@
 
 面向国服泰坦重铸“时光”服的五开练级与任务打金路线项目。项目把单任务事实、正式路线、实跑状态、模型和玩家页面分开维护，最终提供可离线使用的Route Atlas执行页。
 
-当前唯一正式执行页：
+当前唯一正式执行页由Route Lifecycle / Publisher生成：
 
 `data/routes/route-atlas-workbench.html`
 
-地图资源位于同级`data/routes/maps/`。当前迁移中的候选页尚未替代这份正式页面。
+地图资源位于同级`data/routes/maps/`。历史候选页和迁移期对拍产物只保存在`docs/archive/`，不属于当前执行入口。
 
 ## 从哪里开始
 
