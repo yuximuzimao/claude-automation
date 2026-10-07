@@ -4,16 +4,18 @@
 
 ## 下一步（新窗口从这里开始）
 
-**阶段 2-3：接入真实 capture 的当前批次头像证据，并把合成门禁迁移到正式入口。** batch/state 契约、Schema、合成 dry-run 门禁和确定性测试已完成；正式 `src` 入口仍等待可靠头像证据边界与真实 QQ 端到端验证。
+**阶段 2-4：把真实 QQ capture 与 bbox 消息重建接到现役 `src`，再跑一个群 3–5 页真实 dry-run。** 去重、batch/state、message-record 校验和 current.md builder 已正式化；当前缺的是正式 capture 适配器、bbox→消息重建、messages.jsonl 持久化与真实端到端验证。
 
 ## B. 阶段 2 — 消息重建与完整保存
 
-- [x] **补齐系统消息和可见非文字占位的 bbox 实测。** 30 页真实 QQ 历史扫描确认：系统消息为居中的独立文字行，代表样本约为归一化 `x=0.465–0.470`、`width=0.059–0.068`、`height=0.016–0.023`，对应约 `93–107 × 16–22 px`；图片区域主要出现在消息列左侧，已观察到约 `x=68 px`、宽 `148–150 px`、高 `114–150 px` 的区域，部分区域无 Vision OCR 文本；另见独立的小型表情/贴纸视觉内容。v1 使用 Schema 现有的 `message_type=unknown`，并在 `content_text` 写入中性标记“非文字内容（图片/表情等，未解析）”，不区分图片、表情、动图等 subtype。语音和文件在本轮没有可靠样本，明确延期，不套用普通文字规则，也不阻塞后续实现。
-- [x] **实现相邻屏连续序列去重原型。** `tests/test_normalize_overlap.py` 实现最长连续左页尾部/右页序列匹配与合并：默认至少 2 条连续消息；两条序列还需昵称/时间锚点或长正文精确锚点；正文 OCR 模糊阈值为 `0.90`。相似昵称只在规范化后同长度、恰好一个字符差异且当前批次头像圆圈指纹一致时通过；单符号昵称只做精确匹配。禁止全局 `sender+text` 去重；正式入口待真实头像证据与 dry-run 门禁后迁移。
-- [ ] **接入真实 capture 的当前批次头像圆圈证据。** 在 capture/normalize 边界只提供内存中的头像圆圈裁剪指纹；裁剪不可靠、头像不一致或跨批次时均不得确认昵称归并，不把截图或别名表写入 runtime。当前只有字符串指纹契约测试，尚未完成 QQ 截图定位、裁剪归一化和鲁棒指纹实现。
-- [x] **实现 batch/state 契约原型。** `schemas/batch-state.schema.json` 和 `tests/test_batch_state.py` 固化 `incomplete/completed/analyzed`、批次级严格递进页恢复位置、群级最近页与 completed 前的连续锚点门禁、原子 replace 写入；正式 `src/store` 入口待端到端 dry-run。
-- [ ] **实现规范化消息库。** 写入 `runtime/messages/messages.jsonl` 并校验 `schemas/message-record.schema.json`。
-- [ ] **生成稳定分析入口。** completed batch 生成 `runtime/inbox/current.md`，其中包含本批全部待分析文字。
+- [ ] **迁移真实 capture 到现役入口。** 只复用旧 capture worktree 已验证的 ScreenCaptureKit / Vision / 安全滚轮能力；窗口准备必须按现役规则使用 Accessibility 设置/读回几何，不复活鼠标拖窗口方案；输出必须符合当前 `capture-page.schema.json`，并接入现役变化检测门禁。
+- [ ] **实现正式 bbox 消息重建。** 按 `docs/rules/normalization.md` 已实测规则实现视觉行归并、消息头/正文分组、页边缘残片、系统消息和 unknown 非文字占位；语音/文件继续延期，不阻塞 v1。
+- [ ] **实现规范化消息库。** 把通过 `src/store/message_record.py` 校验的 canonical 记录安全写入 `runtime/messages/messages.jsonl`；必须先设计清楚 incomplete/completed 与消息文件之间的崩溃恢复顺序，不能出现 state 已 completed 但消息未落盘的伪完成。
+- [ ] **真实 3–5 页 dry-run。** 一个目标群、小范围历史，验证 capture 顺序转聊天顺序、误去重/漏去重、OCR轻微差异、页恢复点、messages 持久化和 current.md 门禁。证据不足的重复允许保留，真实消息不得因去重丢失。
+
+已完成的阶段 2 基础契约不再作为待办重复维护：相邻页保守去重、`batch-state`、message-record 校验、current.md builder、合成 dry-run 已进入正式 `src`，测试直接覆盖正式实现。
+
+头像指纹不再是 v1 门禁。只有真实 dry-run 证明保守去重产生的重复量已经影响实际使用时，才重新评估视觉身份辅助。
 
 ## C. 阶段 3 — 两群与首次全量抓取
 

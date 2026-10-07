@@ -31,7 +31,11 @@
 
 ## 代码与测试
 
-- `../src/README.md`：正式代码模块边界与依赖方向。
+- `../src/README.md`：正式代码模块边界、依赖方向与当前门禁。
+- `../src/normalize/overlap.py`：相邻页保守去重与 capture 页方向转换。
+- `../src/store/batch_state.py`：可恢复 batch/state。
+- `../src/store/message_record.py`：message-record 正式运行时校验。
+- `../src/inbox/builder.py`：completed batch 的 current.md builder。
 - `../tests/README.md`：验证策略。
 - 现役代码入口与实现阶段以 `../src/README.md` 和 `CURRENT.md` 为准。
 

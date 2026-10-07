@@ -51,7 +51,7 @@ CodexPro 读取 current.md
 
 输入：官方 QQ 当前 UI、目标群配置、上次采集状态。
 
-输出：符合 `schemas/capture-page.schema.json` 的单页 raw record；页级保存 batch/group/page/window 元数据，blocks 保留 text / bbox / confidence。为当前批次的相邻页归一化，采集适配器可额外在内存中提供消息行对应的头像圆圈局部指纹；该临时视觉证据不写入 raw Schema 或长期状态。
+输出：符合 `schemas/capture-page.schema.json` 的单页 raw record；页级保存 batch/group/page/window 元数据，blocks 保留 text / bbox / confidence。capture 只提供可验证的视觉/OCR事实，不承担发送者身份猜测。
 
 不得：
 - 判断哪些魔兽信息重要；
@@ -63,9 +63,9 @@ CodexPro 读取 current.md
 
 只负责“这些 OCR block 组成了哪些消息”。
 
-输入：OCR blocks，以及仅供当前批次使用的可选头像圆圈局部指纹。
+输入：OCR blocks 与所属 page 的 batch/group/page 几何上下文。
 
-输出：符合 `schemas/message-record.schema.json` 的消息记录。头像指纹只参与当前批次相似昵称的发送者确认，不进入持久化消息记录。
+输出：符合 `schemas/message-record.schema.json` 的消息记录。v1 不做相似昵称身份归并；证据不足时保留重复，不在 Normalize 层猜测发送者身份。
 
 确定性优先；所有规则都必须可测试。活跃人员明细不在 normalize 层按发言数推断，交由 Analyze 阶段结合消息的信息价值、证据质量和后续关注价值判断。
 
@@ -82,7 +82,7 @@ CodexPro 读取 current.md
 - completed 前禁止生成 `current.md`，analyzed 不覆盖 completed 消息；
 - 不因分析失败而丢采集结果。
 
-阶段 2-3 原型的状态契约位于 `schemas/batch-state.schema.json`，确定性转换测试位于 `tests/test_batch_state.py`；正式 `src/store` 入口仍等待端到端 dry-run 门禁。
+状态契约由 `schemas/batch-state.schema.json` 定义，正式实现位于 `src/store/batch_state.py`，确定性转换测试位于 `tests/test_batch_state.py`；真实 QQ 端到端 dry-run 仍是进入首次全量前的门禁。
 
 ### inbox builder
 

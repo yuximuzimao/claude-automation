@@ -1,0 +1,306 @@
+"""Resumable capture batch state with atomic JSON replacement."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import datetime
+import json
+import os
+from pathlib import Path
+
+
+SCHEMA_PATH = Path(__file__).resolve().parents[2] / "schemas" / "batch-state.schema.json"
+_SCHEMA = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+STATE_SCHEMA_VERSION = _SCHEMA["properties"]["schema_version"]["const"]
+STATE_STATUSES = frozenset(_SCHEMA["properties"]["status"]["enum"])
+STATE_KEYS = frozenset(_SCHEMA["properties"])
+GROUP_PROGRESS_KEYS = frozenset(_SCHEMA["$defs"]["groupProgress"]["properties"])
+ANCHOR_KEYS = frozenset(_SCHEMA["$defs"]["anchorMessage"]["properties"])
+MIN_ANCHOR_COUNT = _SCHEMA["allOf"][0]["then"]["properties"]["groups"][
+    "additionalProperties"
+]["properties"]["last_completed_anchor"]["minItems"]
+
+
+class StateError(ValueError):
+    """Raised when state is invalid or a transition would lose capture data."""
+
+
+@dataclass(frozen=True)
+class Anchor:
+    sequence: int
+    content_text: str
+    sender_display: str | None = None
+    timestamp_text: str | None = None
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "sequence": self.sequence,
+            "content_text": self.content_text,
+            "sender_display": self.sender_display,
+            "timestamp_text": self.timestamp_text,
+        }
+
+
+class BatchStateStore:
+    """Small JSON state store with explicit incomplete/completed transitions."""
+
+    def __init__(self, path: Path) -> None:
+        self.path = path
+
+    def load(self) -> dict | None:
+        if not self.path.exists():
+            return None
+        try:
+            state = json.loads(self.path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise StateError("batch state is not valid JSON") from exc
+        self._validate_state(state)
+        return state
+
+    @staticmethod
+    def _valid_datetime(value: object) -> bool:
+        if not isinstance(value, str) or "T" not in value:
+            return False
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return False
+        return parsed.tzinfo is not None
+
+    @classmethod
+    def _validate_state(cls, state: object) -> None:
+        if not isinstance(state, dict):
+            raise StateError("batch state must be an object")
+        if set(state) != STATE_KEYS:
+            raise StateError("batch state fields do not match the state contract")
+        if state["schema_version"] != STATE_SCHEMA_VERSION:
+            raise StateError("unsupported batch state schema version")
+        if not isinstance(state["batch_id"], str) or not state["batch_id"]:
+            raise StateError("batch_id is required")
+        if state["status"] not in STATE_STATUSES:
+            raise StateError("unsupported batch state status")
+        if not cls._valid_datetime(state["started_at"]):
+            raise StateError("started_at must be a valid date-time")
+        if not cls._valid_datetime(state["updated_at"]):
+            raise StateError("updated_at must be a valid date-time")
+
+        next_page_index = state["next_page_index"]
+        if (
+            not isinstance(next_page_index, int)
+            or isinstance(next_page_index, bool)
+            or next_page_index < 0
+        ):
+            raise StateError("next_page_index must be non-negative")
+
+        last_completed_batch = state["last_completed_batch"]
+        if last_completed_batch is not None and not isinstance(last_completed_batch, str):
+            raise StateError("last_completed_batch must be a string or null")
+
+        last_success_at = state["last_success_at"]
+        if last_success_at is not None and not cls._valid_datetime(last_success_at):
+            raise StateError("last_success_at must be a valid date-time or null")
+
+        groups = state["groups"]
+        if not isinstance(groups, dict) or not groups:
+            raise StateError("at least one group is required")
+
+        captured_last_pages: list[int] = []
+        for group_key, progress in groups.items():
+            if not isinstance(group_key, str) or not group_key:
+                raise StateError("group keys must be non-empty strings")
+            if not isinstance(progress, dict) or set(progress) != GROUP_PROGRESS_KEYS:
+                raise StateError("group progress fields do not match the state contract")
+
+            last_page = progress["last_page_index"]
+            if last_page is not None:
+                if (
+                    not isinstance(last_page, int)
+                    or isinstance(last_page, bool)
+                    or last_page < 0
+                ):
+                    raise StateError("last_page_index must be non-negative or null")
+                if last_page >= next_page_index:
+                    raise StateError("last_page_index must be before next_page_index")
+                captured_last_pages.append(last_page)
+
+            anchors = progress["last_completed_anchor"]
+            if not isinstance(anchors, list):
+                raise StateError("last_completed_anchor must be an array")
+            for anchor in anchors:
+                if not isinstance(anchor, dict) or set(anchor) != ANCHOR_KEYS:
+                    raise StateError("invalid completed anchor fields")
+                sequence = anchor["sequence"]
+                if (
+                    not isinstance(sequence, int)
+                    or isinstance(sequence, bool)
+                    or sequence < 0
+                    or not isinstance(anchor["content_text"], str)
+                    or not anchor["content_text"]
+                ):
+                    raise StateError("invalid completed anchor")
+                for field in ("sender_display", "timestamp_text"):
+                    if anchor[field] is not None and not isinstance(anchor[field], str):
+                        raise StateError("invalid completed anchor")
+
+            if state["status"] in {"completed", "analyzed"} and len(anchors) < MIN_ANCHOR_COUNT:
+                raise StateError("completed state requires continuous anchors")
+
+        if captured_last_pages:
+            if max(captured_last_pages) != next_page_index - 1:
+                raise StateError("next_page_index must follow the latest captured page")
+        elif next_page_index != 0:
+            raise StateError("next_page_index must be zero before the first captured page")
+
+    def start_batch(
+        self,
+        batch_id: str,
+        *,
+        started_at: str,
+        group_keys: list[str],
+    ) -> dict:
+        if (
+            not batch_id
+            or not group_keys
+            or any(not isinstance(group_key, str) or not group_key for group_key in group_keys)
+            or len(set(group_keys)) != len(group_keys)
+            or not self._valid_datetime(started_at)
+        ):
+            raise StateError("valid batch_id, started_at, and unique group_keys are required")
+
+        previous = self.load()
+        if previous is not None and previous["status"] == "incomplete":
+            if previous["batch_id"] != batch_id:
+                raise StateError("cannot replace an incomplete batch")
+            if set(previous["groups"]) != set(group_keys):
+                raise StateError("cannot resume an incomplete batch with different groups")
+            return previous
+
+        previous_groups = previous["groups"] if previous is not None else {}
+        state = {
+            "schema_version": STATE_SCHEMA_VERSION,
+            "batch_id": batch_id,
+            "status": "incomplete",
+            "started_at": started_at,
+            "updated_at": started_at,
+            "next_page_index": 0,
+            "last_completed_batch": previous["last_completed_batch"] if previous is not None else None,
+            "last_success_at": previous["last_success_at"] if previous is not None else None,
+            "groups": {
+                group_key: {
+                    "last_page_index": None,
+                    "last_completed_anchor": previous_groups.get(group_key, {}).get(
+                        "last_completed_anchor", []
+                    ),
+                }
+                for group_key in group_keys
+            },
+        }
+        self._write(state)
+        return state
+
+    def record_page(
+        self,
+        batch_id: str,
+        group_key: str,
+        page_index: int,
+        *,
+        updated_at: str,
+    ) -> dict:
+        state = self._require_incomplete(batch_id)
+        if not self._valid_datetime(updated_at):
+            raise StateError("updated_at must be a valid date-time")
+        group = state["groups"].get(group_key)
+        if group is None:
+            raise StateError("group is not part of the active batch")
+        if (
+            not isinstance(page_index, int)
+            or isinstance(page_index, bool)
+            or page_index != state["next_page_index"]
+        ):
+            raise StateError("page_index must continue from the recovery point")
+
+        group["last_page_index"] = page_index
+        state["next_page_index"] = page_index + 1
+        state["updated_at"] = updated_at
+        self._write(state)
+        return state
+
+    def complete_batch(
+        self,
+        batch_id: str,
+        *,
+        anchors: dict[str, list[Anchor]],
+        completed_at: str,
+    ) -> dict:
+        state = self._require_incomplete(batch_id)
+        if not self._valid_datetime(completed_at):
+            raise StateError("completed_at must be a valid date-time")
+        if set(anchors) != set(state["groups"]):
+            raise StateError("a completed batch needs an anchor for every group")
+
+        for group_key, group_anchors in anchors.items():
+            if state["groups"][group_key]["last_page_index"] is None:
+                raise StateError("each group needs at least one captured page")
+            if len(group_anchors) < MIN_ANCHOR_COUNT:
+                raise StateError("each group needs a continuous anchor sequence")
+            if any(not item.content_text for item in group_anchors):
+                raise StateError("anchor content_text must be non-empty")
+            sequences = [item.sequence for item in group_anchors]
+            if any(
+                not isinstance(sequence, int)
+                or isinstance(sequence, bool)
+                or sequence < 0
+                for sequence in sequences
+            ):
+                raise StateError("anchor sequence must be non-negative")
+            if sequences != list(range(sequences[0], sequences[0] + len(sequences))):
+                raise StateError("anchor sequence must be adjacent and ordered")
+            state["groups"][group_key]["last_completed_anchor"] = [
+                item.as_dict() for item in group_anchors
+            ]
+
+        state["status"] = "completed"
+        state["updated_at"] = completed_at
+        state["last_completed_batch"] = batch_id
+        state["last_success_at"] = completed_at
+        self._write(state)
+        return state
+
+    def mark_analyzed(self, batch_id: str, *, analyzed_at: str) -> dict:
+        state = self.load()
+        if state is None or state["batch_id"] != batch_id:
+            raise StateError("batch does not exist")
+        if state["status"] != "completed":
+            raise StateError("only a completed batch can be analyzed")
+        if not self._valid_datetime(analyzed_at):
+            raise StateError("analyzed_at must be a valid date-time")
+        state["status"] = "analyzed"
+        state["updated_at"] = analyzed_at
+        self._write(state)
+        return state
+
+    def can_build_inbox(self, batch_id: str) -> bool:
+        state = self.load()
+        return bool(
+            state is not None
+            and state["batch_id"] == batch_id
+            and state["status"] in {"completed", "analyzed"}
+        )
+
+    def _require_incomplete(self, batch_id: str) -> dict:
+        state = self.load()
+        if state is None or state["batch_id"] != batch_id:
+            raise StateError("batch does not exist")
+        if state["status"] != "incomplete":
+            raise StateError("batch is no longer incomplete")
+        return state
+
+    def _write(self, state: dict) -> None:
+        self._validate_state(state)
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = self.path.with_name(self.path.name + ".tmp")
+        temporary.write_text(
+            json.dumps(state, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        os.replace(temporary, self.path)

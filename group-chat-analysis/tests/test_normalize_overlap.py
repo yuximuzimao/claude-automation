@@ -1,305 +1,17 @@
-"""Stage 2-2 prototype for adjacent capture-page overlap removal.
-
-The formal ``src/normalize`` entry is intentionally not created yet; the
-current-batch avatar boundary and end-to-end dry-run gate are still open. This
-module keeps the
-deterministic overlap contract executable and can move into that entry without
-changing its behavior once the gate opens.
-"""
+"""Regression tests for the formal conservative overlap implementation."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
-from difflib import SequenceMatcher
-import re
-import unicodedata
 import unittest
 
-
-MIN_OVERLAP_COUNT = 2
-FUZZY_TEXT_THRESHOLD = 0.90
-SHORT_TEXT_LENGTH = 4
-SENDER_SUBSTITUTION_COUNT = 1
-
-
-@dataclass
-class Message:
-    """The fields needed to compare adjacent normalized messages."""
-
-    content_text: str
-    sender_display: str | None = None
-    timestamp_text: str | None = None
-    message_type: str = "text"
-    ocr_confidence: float | None = None
-    # Ephemeral current-batch fingerprint of the avatar circle; never persisted.
-    avatar_fingerprint: str | None = None
-
-
-@dataclass(frozen=True)
-class AvatarObservation:
-    """Current-batch avatar-circle result supplied by capture."""
-
-    fingerprint: str | None = None
-    reliable: bool = False
-
-    def usable_fingerprint(self) -> str | None:
-        if not self.reliable or not self.fingerprint:
-            return None
-        fingerprint = self.fingerprint.strip()
-        return fingerprint or None
-
-
-class CurrentBatchAvatarEvidence:
-    """Ephemeral capture/normalize boundary for avatar-circle fingerprints."""
-
-    def __init__(self, batch_id: str) -> None:
-        if not batch_id:
-            raise ValueError("batch_id is required")
-        self.batch_id = batch_id
-        self._by_observation: dict[str, str | None] = {}
-        self._bound_messages: list[Message] = []
-        self._closed = False
-
-    def put(
-        self,
-        batch_id: str,
-        observation_id: str,
-        observation: AvatarObservation,
-    ) -> None:
-        self._require_active(batch_id)
-        if not observation_id:
-            raise ValueError("observation_id is required")
-        self._by_observation[observation_id] = observation.usable_fingerprint()
-
-    def lookup(self, batch_id: str, observation_id: str) -> str | None:
-        if self._closed or batch_id != self.batch_id:
-            return None
-        return self._by_observation.get(observation_id)
-
-    def bind(
-        self,
-        message: Message,
-        *,
-        batch_id: str,
-        observation_id: str,
-    ) -> Message:
-        self._require_active(batch_id)
-        bound = replace(
-            message,
-            avatar_fingerprint=self.lookup(batch_id, observation_id),
-        )
-        self._bound_messages.append(bound)
-        return bound
-
-    def close(self) -> None:
-        for message in self._bound_messages:
-            message.avatar_fingerprint = None
-        self._bound_messages.clear()
-        self._by_observation.clear()
-        self._closed = True
-
-    def _require_active(self, batch_id: str) -> None:
-        if self._closed or batch_id != self.batch_id:
-            raise ValueError("avatar evidence is limited to its active batch")
-
-
-def persisted_message_fields(message: Message) -> dict[str, object]:
-    """Return the message fields allowed past the ephemeral evidence boundary."""
-
-    return {
-        "content_text": message.content_text,
-        "sender_display": message.sender_display,
-        "timestamp_text": message.timestamp_text,
-        "message_type": message.message_type,
-        "ocr_confidence": message.ocr_confidence,
-    }
-
-
-@dataclass(frozen=True)
-class OverlapMatch:
-    """A contiguous match from the left page tail into the right page."""
-
-    left_start: int
-    right_start: int
-    count: int
-
-    @property
-    def right_end(self) -> int:
-        return self.right_start + self.count
-
-
-def _text_key(value: str | None) -> str:
-    if value is None:
-        return ""
-    normalized = unicodedata.normalize("NFKC", value)
-    return re.sub(r"\s+", "", normalized).casefold()
-
-
-def _similar_text(left: str, right: str) -> bool:
-    left_key = _text_key(left)
-    right_key = _text_key(right)
-    if left_key == right_key:
-        return True
-    if min(len(left_key), len(right_key)) < SHORT_TEXT_LENGTH:
-        return False
-    return SequenceMatcher(None, left_key, right_key).ratio() >= FUZZY_TEXT_THRESHOLD
-
-
-def _similar_sender(left: Message, right: Message) -> bool:
-    """Match senders exactly or confirm one OCR drift with the avatar circle.
-
-    A missing sender is unknown rather than a positive identity signal. Similar
-    names are only accepted when the current-batch avatar fingerprints match;
-    no cross-batch nickname alias is inferred here.
-    """
-
-    left_key = _text_key(left.sender_display)
-    right_key = _text_key(right.sender_display)
-    if left_key == right_key and left_key:
-        return True
-    if not left_key or not right_key:
-        return True
-    if len(left_key) != len(right_key):
-        return False
-    if len(left_key) == 1:
-        return False
-    differences = sum(a != b for a, b in zip(left_key, right_key))
-    if differences != SENDER_SUBSTITUTION_COUNT:
-        return False
-    return (
-        bool(left.avatar_fingerprint)
-        and bool(right.avatar_fingerprint)
-        and left.avatar_fingerprint == right.avatar_fingerprint
-    )
-
-
-def _similar_optional(left: str | None, right: str | None) -> bool:
-    """Treat an absent OCR field as unknown, not as evidence of a mismatch."""
-
-    if left is None or right is None:
-        return True
-    return _similar_text(left, right)
-
-
-def messages_match(left: Message, right: Message) -> bool:
-    """Match one message conservatively, without using a global message key."""
-
-    if left.message_type != right.message_type:
-        return False
-    return (
-        _similar_text(left.content_text, right.content_text)
-        and _similar_sender(left, right)
-        and _similar_optional(left.timestamp_text, right.timestamp_text)
-    )
-
-
-def _two_message_overlap_is_confirmed(
-    left_page: list[Message],
-    right_page: list[Message],
-    left_start: int,
-    right_start: int,
-) -> bool:
-    """Require a second identity signal for the minimum two-message match."""
-
-    for offset in range(MIN_OVERLAP_COUNT):
-        left = left_page[left_start + offset]
-        right = right_page[right_start + offset]
-        if left.sender_display is not None and right.sender_display is not None:
-            return True
-        if left.timestamp_text is not None and right.timestamp_text is not None:
-            return True
-        if (
-            _text_key(left.content_text) == _text_key(right.content_text)
-            and len(_text_key(left.content_text)) >= 8
-        ):
-            return True
-    return False
-
-
-def find_overlap(
-    left_page: list[Message],
-    right_page: list[Message],
-    *,
-    min_count: int = MIN_OVERLAP_COUNT,
-) -> OverlapMatch | None:
-    """Find the longest contiguous left-tail/right-page overlap.
-
-    ``right_start`` is allowed to be non-zero because a page can begin with a
-    retained edge candidate before the first complete overlap message. Ties
-    choose the earliest right-page position. A one-message match is rejected
-    by default because it cannot distinguish a repeated short message from a
-    page overlap.
-    """
-
-    if min_count < 2 or not left_page or not right_page:
-        raise ValueError("min_count must be at least 2 and pages must be non-empty")
-
-    max_count = min(len(left_page), len(right_page))
-    for count in range(max_count, min_count - 1, -1):
-        left_start = len(left_page) - count
-        for right_start in range(len(right_page) - count + 1):
-            if not all(
-                messages_match(left_page[left_start + offset], right_page[right_start + offset])
-                for offset in range(count)
-            ):
-                continue
-            if count == MIN_OVERLAP_COUNT and not _two_message_overlap_is_confirmed(
-                left_page,
-                right_page,
-                left_start,
-                right_start,
-            ):
-                continue
-            return OverlapMatch(left_start, right_start, count)
-    return None
-
-
-def _canonical_message(left: Message, right: Message) -> Message:
-    """Keep the more complete/high-confidence observation for an overlap."""
-
-    if left.ocr_confidence is None and right.ocr_confidence is not None:
-        return right
-    if right.ocr_confidence is None and left.ocr_confidence is not None:
-        return left
-    if (right.ocr_confidence or 0) > (left.ocr_confidence or 0):
-        return right
-    if len(_text_key(right.content_text)) > len(_text_key(left.content_text)):
-        return right
-    return left
-
-
-def merge_adjacent_pages(
-    left_page: list[Message],
-    right_page: list[Message],
-    *,
-    min_count: int = MIN_OVERLAP_COUNT,
-) -> tuple[list[Message], OverlapMatch | None]:
-    """Merge two pages in capture order and remove only a confirmed overlap.
-
-    When the overlap starts in the middle of the right page, records before it
-    are inserted between the non-overlapping left prefix and the canonical
-    overlap. This preserves page order instead of silently dropping records.
-    A missing match leaves both pages untouched.
-    """
-
-    match = find_overlap(left_page, right_page, min_count=min_count)
-    if match is None:
-        return list(left_page) + list(right_page), None
-
-    canonical = [
-        _canonical_message(
-            left_page[match.left_start + offset],
-            right_page[match.right_start + offset],
-        )
-        for offset in range(match.count)
-    ]
-    merged = (
-        list(left_page[: match.left_start])
-        + list(right_page[: match.right_start])
-        + canonical
-        + list(right_page[match.right_end :])
-    )
-    return merged, match
+from src.normalize import (
+    Message,
+    OverlapMatch,
+    find_overlap,
+    merge_adjacent_pages,
+    merge_capture_order_pages,
+    messages_match,
+)
 
 
 class AdjacentOverlapTests(unittest.TestCase):
@@ -317,201 +29,80 @@ class AdjacentOverlapTests(unittest.TestCase):
 
     def test_requires_a_sequence_not_a_single_repeated_message(self) -> None:
         repeated = Message("好的", sender_display="甲")
-
         match = find_overlap([Message("older"), repeated], [repeated, Message("newer")])
-
         self.assertIsNone(match)
 
     def test_same_text_from_different_senders_is_not_an_overlap(self) -> None:
-        left = [
-            Message("same", sender_display="甲"),
-            Message("tail", sender_display="甲"),
-        ]
-        right = [
-            Message("same", sender_display="乙"),
-            Message("tail", sender_display="乙"),
-        ]
-
+        left = [Message("same", sender_display="甲"), Message("tail", sender_display="甲")]
+        right = [Message("same", sender_display="乙"), Message("tail", sender_display="乙")]
         self.assertIsNone(find_overlap(left, right))
 
-    def test_allows_controlled_ocr_difference_in_a_long_sequence(self) -> None:
-        left = [
-            Message(
-                "玩家正在测试重叠",
-                sender_display="二电六鸟法部落",
-                avatar_fingerprint="avatar-a",
-            ),
-            Message(
-                "孩子保住了那个女的大概率就跟定你了",
-                sender_display="二电六鸟法部落",
-                avatar_fingerprint="avatar-a",
-            ),
-        ]
-        right = [
-            Message(
-                "玩家正在测试重叠",
-                sender_display="二电六乌法部落",
-                avatar_fingerprint="avatar-a",
-            ),
-            Message(
-                "孩子保住了那个女的大概率就跟定你了",
-                sender_display="二电六乌法部落",
-                avatar_fingerprint="avatar-a",
-            ),
-            Message("newer", sender_display="丙"),
-        ]
-
-        match = find_overlap(left, right)
-
-        self.assertEqual(match, OverlapMatch(left_start=0, right_start=0, count=2))
-
-    def test_reliable_current_batch_avatar_evidence_binds_to_message(self) -> None:
-        evidence = CurrentBatchAvatarEvidence("batch-1")
-        evidence.put(
-            "batch-1",
-            "observation-1",
-            AvatarObservation(" avatar-a ", reliable=True),
-        )
-
-        bound = evidence.bind(
-            Message("内容", sender_display="甲"),
-            batch_id="batch-1",
-            observation_id="observation-1",
-        )
-
-        self.assertEqual(bound.avatar_fingerprint, "avatar-a")
-
-    def test_unreliable_or_empty_avatar_evidence_stays_unresolved(self) -> None:
-        evidence = CurrentBatchAvatarEvidence("batch-1")
-        evidence.put(
-            "batch-1",
-            "unreliable",
-            AvatarObservation("avatar-a", reliable=False),
-        )
-        evidence.put(
-            "batch-1",
-            "empty",
-            AvatarObservation("   ", reliable=True),
-        )
-
-        self.assertIsNone(evidence.lookup("batch-1", "unreliable"))
-        self.assertIsNone(evidence.lookup("batch-1", "empty"))
-
-    def test_avatar_evidence_cannot_cross_batch_or_survive_close(self) -> None:
-        evidence = CurrentBatchAvatarEvidence("batch-1")
-        evidence.put(
-            "batch-1",
-            "observation-1",
-            AvatarObservation("avatar-a", reliable=True),
-        )
-
-        self.assertIsNone(evidence.lookup("batch-2", "observation-1"))
-        with self.assertRaises(ValueError):
-            evidence.put(
-                "batch-2",
-                "observation-2",
-                AvatarObservation("avatar-b", reliable=True),
-            )
-
-        bound = evidence.bind(
-            Message(
-                "内容",
-                sender_display="二电六鸟法部落",
-            ),
-            batch_id="batch-1",
-            observation_id="observation-1",
-        )
-        evidence.close()
-        self.assertIsNone(evidence.lookup("batch-1", "observation-1"))
-        self.assertIsNone(bound.avatar_fingerprint)
-
-    def test_persisted_message_fields_exclude_avatar_evidence(self) -> None:
-        message = Message("内容", avatar_fingerprint="avatar-a")
-
-        persisted = persisted_message_fields(message)
-
-        self.assertNotIn("avatar_fingerprint", persisted)
-        self.assertEqual(persisted["content_text"], "内容")
-
-    def test_similar_sender_requires_same_avatar(self) -> None:
-        left = Message(
-            "相似昵称",
-            sender_display="二电六鸟法部落",
-            avatar_fingerprint="avatar-a",
-        )
-        right = Message(
-            "相似昵称",
-            sender_display="二电六乌法部落",
-            avatar_fingerprint="avatar-b",
-        )
-
-        self.assertFalse(messages_match(left, right))
-
-    def test_similar_sender_without_avatar_stays_unconfirmed(self) -> None:
+    def test_similar_nicknames_are_not_merged_without_exact_identity(self) -> None:
         left = Message("相似昵称", sender_display="二电六鸟法部落")
         right = Message("相似昵称", sender_display="二电六乌法部落")
-
         self.assertFalse(messages_match(left, right))
 
-    def test_exact_single_symbol_sender_matches_without_avatar(self) -> None:
-        left = Message("单符号昵称", sender_display="、")
-        right = Message("单符号昵称", sender_display="、")
-
-        self.assertTrue(messages_match(left, right))
-
-    def test_different_single_symbol_senders_do_not_match_with_same_avatar(self) -> None:
-        left = Message(
-            "单符号昵称",
-            sender_display="、",
-            avatar_fingerprint="avatar-a",
-        )
-        right = Message(
-            "单符号昵称",
-            sender_display="。",
-            avatar_fingerprint="avatar-a",
-        )
-
+    def test_one_missing_sender_is_not_destructively_deduplicated(self) -> None:
+        left = Message("同一段正文", sender_display="甲")
+        right = Message("同一段正文", sender_display=None)
         self.assertFalse(messages_match(left, right))
 
-    def test_same_avatar_confirms_similar_sender_in_current_batch(self) -> None:
-        left = Message(
-            "相似昵称",
-            sender_display="二电六鸟法部落",
-            avatar_fingerprint="avatar-a",
-        )
-        right = Message(
-            "相似昵称",
-            sender_display="二电六乌法部落",
-            avatar_fingerprint="avatar-a",
-        )
-
+    def test_both_missing_senders_can_match_on_other_evidence(self) -> None:
+        left = Message("这是足够长的完全相同正文", timestamp_text="12:30")
+        right = Message("这是足够长的完全相同正文", timestamp_text="12:30")
         self.assertTrue(messages_match(left, right))
 
-    def test_different_length_or_multiple_edits_are_not_candidates(self) -> None:
-        left = Message(
-            "相似昵称",
-            sender_display="二电六鸟法部落",
-            avatar_fingerprint="avatar-a",
-        )
-        different_length = Message(
-            "相似昵称",
-            sender_display="二电六乌法部落A",
-            avatar_fingerprint="avatar-a",
-        )
-        multiple_edits = Message(
-            "相似昵称",
-            sender_display="二电六乌法部洛",
-            avatar_fingerprint="avatar-a",
-        )
+    def test_message_type_must_match(self) -> None:
+        left = Message("相同内容", sender_display="甲", message_type="text")
+        right = Message("相同内容", sender_display="甲", message_type="system")
+        self.assertFalse(messages_match(left, right))
 
-        self.assertFalse(messages_match(left, different_length))
-        self.assertFalse(messages_match(left, multiple_edits))
+    def test_two_observed_timestamps_must_be_compatible(self) -> None:
+        left = Message("相同内容", sender_display="甲", timestamp_text="12:30")
+        right = Message("相同内容", sender_display="甲", timestamp_text="12:31")
+        self.assertFalse(messages_match(left, right))
 
-    def test_middle_overlap_preserves_right_page_prefix(self) -> None:
-        left = [Message("left-1"), Message("overlap-1"), Message("overlap-2")]
-        right = [Message("edge"), Message("overlap-1"), Message("overlap-2"), Message("right")]
+    def test_missing_timestamp_remains_unknown(self) -> None:
+        left = Message("相同内容", sender_display="甲", timestamp_text="12:30")
+        right = Message("相同内容", sender_display="甲", timestamp_text=None)
+        self.assertTrue(messages_match(left, right))
 
-        merged, match = merge_adjacent_pages(left, right)
+    def test_controlled_body_ocr_difference_can_match_with_exact_sender(self) -> None:
+        left = [
+            Message("玩家正在测试连续消息重叠", sender_display="甲"),
+            Message("孩子保住了那个女的大概率就跟定你了", sender_display="甲"),
+        ]
+        right = [
+            Message("玩家正在测试连续消息重叠。", sender_display="甲"),
+            Message("孩子保住了那个女的大概率就跟定你了", sender_display="甲"),
+            Message("newer", sender_display="乙"),
+        ]
+        self.assertEqual(find_overlap(left, right), OverlapMatch(0, 0, 2))
+
+    def test_two_short_anonymous_messages_are_not_enough_evidence(self) -> None:
+        left = [Message("abcd"), Message("efgh")]
+        right = [Message("abcd"), Message("efgh")]
+        self.assertIsNone(find_overlap(left, right))
+
+    def test_two_long_exact_anonymous_messages_can_confirm_overlap(self) -> None:
+        left = [Message("12345678"), Message("abcdefgh")]
+        right = [Message("12345678"), Message("abcdefgh")]
+        self.assertEqual(find_overlap(left, right), OverlapMatch(0, 0, 2))
+
+    def test_middle_overlap_preserves_newer_page_prefix(self) -> None:
+        older = [
+            Message("left-1"),
+            Message("overlap-1", sender_display="甲"),
+            Message("overlap-2", sender_display="甲"),
+        ]
+        newer = [
+            Message("edge"),
+            Message("overlap-1", sender_display="甲"),
+            Message("overlap-2", sender_display="甲"),
+            Message("right"),
+        ]
+
+        merged, match = merge_adjacent_pages(older, newer)
 
         self.assertEqual(match, OverlapMatch(left_start=1, right_start=1, count=2))
         self.assertEqual(
@@ -519,29 +110,67 @@ class AdjacentOverlapTests(unittest.TestCase):
             ["left-1", "edge", "overlap-1", "overlap-2", "right"],
         )
 
-    def test_prefers_higher_confidence_observation(self) -> None:
-        left = [
-            Message("这是用于测试重叠的完整消息", ocr_confidence=0.5),
-            Message("anchor", ocr_confidence=0.5),
+    def test_more_complete_text_beats_higher_ocr_confidence(self) -> None:
+        older = [
+            Message(
+                "这是用于测试重叠的一条非常完整消息内容",
+                sender_display="甲",
+                ocr_confidence=0.60,
+            ),
+            Message("锚点消息", sender_display="甲", ocr_confidence=0.60),
         ]
-        right = [
-            Message("这是用于测试重叠的完整消 息", ocr_confidence=0.9),
-            Message("anchor", ocr_confidence=0.9),
+        newer = [
+            Message(
+                "这是用于测试重叠的一条非常完整消息内",
+                sender_display="甲",
+                ocr_confidence=0.95,
+            ),
+            Message("锚点消息", sender_display="甲", ocr_confidence=0.95),
         ]
 
-        merged, match = merge_adjacent_pages(left, right)
+        merged, match = merge_adjacent_pages(older, newer)
 
-        self.assertEqual(match, OverlapMatch(left_start=0, right_start=0, count=2))
-        self.assertEqual(merged[0], right[0])
+        self.assertEqual(match, OverlapMatch(0, 0, 2))
+        self.assertEqual(merged[0].content_text, "这是用于测试重叠的一条非常完整消息内容")
+
+    def test_equal_length_observation_prefers_higher_confidence(self) -> None:
+        older = [
+            Message("这是用于测试的一条足够长完整消息A", sender_display="甲", ocr_confidence=0.5),
+            Message("锚点消息", sender_display="甲", ocr_confidence=0.5),
+        ]
+        newer = [
+            Message("这是用于测试的一条足够长完整消息B", sender_display="甲", ocr_confidence=0.9),
+            Message("锚点消息", sender_display="甲", ocr_confidence=0.9),
+        ]
+
+        merged, match = merge_adjacent_pages(older, newer)
+
+        self.assertEqual(match, OverlapMatch(0, 0, 2))
+        self.assertEqual(merged[0], newer[0])
+
+    def test_capture_page_order_is_reversed_before_global_merge(self) -> None:
+        newest_page = [
+            Message("A", sender_display="甲"),
+            Message("B", sender_display="甲"),
+            Message("C", sender_display="乙"),
+        ]
+        older_page = [
+            Message("X", sender_display="丙"),
+            Message("A", sender_display="甲"),
+            Message("B", sender_display="甲"),
+        ]
+
+        merged, matches = merge_capture_order_pages([newest_page, older_page])
+
+        self.assertEqual(matches, [OverlapMatch(left_start=1, right_start=0, count=2)])
+        self.assertEqual([item.content_text for item in merged], ["X", "A", "B", "C"])
 
     def test_no_match_keeps_both_pages(self) -> None:
-        left = [Message("one"), Message("two")]
-        right = [Message("three"), Message("four")]
-
-        merged, match = merge_adjacent_pages(left, right)
-
+        older = [Message("one"), Message("two")]
+        newer = [Message("three"), Message("four")]
+        merged, match = merge_adjacent_pages(older, newer)
         self.assertIsNone(match)
-        self.assertEqual(merged, left + right)
+        self.assertEqual(merged, older + newer)
 
 
 if __name__ == "__main__":

@@ -25,6 +25,10 @@
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
+| `src/normalize/overlap.py` | 相邻页保守去重与 capture→聊天顺序转换 | 改跨页去重/顺序时 |
+| `src/store/batch_state.py` | 可恢复 batch/state | 改恢复点/状态机时 |
+| `src/store/message_record.py` | message-record 正式运行时校验 | 改消息持久化契约时 |
+| `src/inbox/builder.py` | completed batch → current.md | 改分析输入生成时 |
 | `tests/README.md` | 验证层级与测试边界 | 写/跑测试时 |
 
 ## CORE FLOWS

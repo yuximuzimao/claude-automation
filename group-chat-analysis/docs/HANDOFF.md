@@ -2,31 +2,47 @@
 
 ## 当前完成
 
-阶段 2-2 已完成一个可执行的相邻屏连续序列去重原型，文件为 `tests/test_normalize_overlap.py`。阶段 2-3 已完成 batch/state 契约原型和合成 dry-run 门禁，文件为 `schemas/batch-state.schema.json`、`tests/test_batch_state.py` 与 `tests/test_dry_run_gate.py`；这些原型都暂不进入正式 `src/`，因为 QQ capture 的头像定位/指纹实现和真实采集端到端门禁尚未完成。
+阶段 2 的确定性核心已经从测试原型迁入正式 `src`：
 
-已新增合成端到端 dry-run 门禁原型 `tests/test_dry_run_gate.py`：它串起相邻页合并、消息记录字段校验、batch `incomplete/completed/analyzed` 状态，以及 `current.md` 的原子生成。该测试用于先固化状态与文件边界，不代表真实 QQ capture 已通过验收。
+- `src/normalize/overlap.py`：相邻页保守去重 + capture 页顺序转聊天时间顺序。
+- `src/store/batch_state.py`：可恢复 batch/state。
+- `src/store/message_record.py`：从正式 JSON Schema 读取结构真值并做运行时 record 校验。
+- `src/inbox/builder.py`：completed/analyzed batch 的 current.md 原子生成。
 
-当前默认契约：
+测试已删除对应实现副本，`tests/test_normalize_overlap.py`、`tests/test_batch_state.py`、`tests/test_dry_run_gate.py` 现在直接测试正式模块。
 
-- 比较相邻捕获页，不做全局 `sender+text` 去重。
-- 匹配最长的左页尾部到右页序列，允许右页从保留的页边缘候选之后开始重叠。
-- 默认最小连续重叠为 2 条消息；两条消息还需昵称、时间或长正文精确锚点。
-- 正文 OCR 模糊匹配阈值为 `0.90`；昵称不使用全局相似度身份规则。相似昵称必须规范化后同长度、恰好一个字符差异，并且当前批次头像圆圈局部指纹一致；单符号昵称只做精确匹配。
-- 头像圆圈指纹只在当前批次内存中使用，不写入 Schema、长期状态或昵称别名；头像不一致或无法可靠裁剪时不确认相似昵称，批次关闭时已绑定对象上的临时证据也会清除。
-- 单符号昵称只做精确匹配；不同单符号即使头像相同也不归并。
-- 合并重叠记录时优先较高 OCR 置信度，其次选择正文更完整的版本；没有可靠重叠就原样保留两页。
-- completed/analyzed inbox 只接受 active batch 声明的群和连续 message sequence；analyzed 只能复现现有 `current.md`，不能替换为另一组记录。
+## 当前关键契约
+
+- v1 的优先级是“漏真实消息 > 多一条重复消息”。
+- 只做相邻/近邻页面连续序列去重，不做全局 `sender+text` 唯一化。
+- 相似昵称不归并；一侧昵称缺失时不做破坏性去重。
+- `message_type` 必须一致；双方存在 `timestamp_text` 时必须兼容。
+- 正文受控模糊阈值为 `0.90`。
+- 默认最小连续重叠为 2 条；只有两条时必须再有昵称、时间或至少 8 个规范化字符的匿名精确正文强锚点。
+- canonical 重复消息先保留更完整正文，再比较元数据完整度和 OCR confidence。
+- `page_index` 递增代表从最新向历史采集；`merge_capture_order_pages()` 负责显式转成最终旧→新顺序。
+- incomplete batch 不生成 current.md；analyzed 只能复现原 completed 输入；非法 message record 不得覆盖旧 current.md。
+- 头像指纹不是 v1 门禁，只有真实 dry-run 证明重复量已经影响使用时才重新评估。
 
 ## 验证
 
-`python3 -m unittest tests/test_normalize_overlap.py` 当前通过 17 项测试，覆盖精确重叠、单条重复拒绝、不同发送者同文、可靠/不可靠当前批次头像证据、批次关闭后证据失效、带相同头像的受控 OCR 差异、相似昵称头像冲突/缺失、单符号昵称冲突、长度/多字符差异拒绝、页内偏移、canonical 选择和无重叠保留。
+`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **40/40 通过**。
 
-`python3 -m unittest tests/test_batch_state.py` 当前通过 9 项测试，覆盖 batch-level 页索引 Schema 契约、incomplete 恢复、未完成批次保护、批次级页索引连续性、连续 anchor 序号、每群捕获页门禁、completed 锚点门禁、跨批次携带已完成锚点和 analyzed 状态。
+新增回归覆盖包括：
 
-`python3 -m unittest tests.test_normalize_overlap tests.test_batch_state tests.test_dry_run_gate` 当前通过 33 项测试；7 项 dry-run 检查覆盖：incomplete 不生成或覆盖 current.md、completed 才开放 inbox 门禁、相邻页重叠只保留一次、群白名单和 message sequence 门禁、非法记录不覆盖上一份 current.md、analyzed 只能重建相同输入且不包含头像指纹或昵称别名。
-
-30 页真实诊断扫描的校准结果已写入 `docs/CURRENT.md`。原始 OCR block 签名只作为阈值证据，不能替代规范化消息 batch 的最终复核；runtime 原文、昵称、bbox 和日志不应提交。
+- 不同 `message_type` 不得去重；
+- 双方已识别但不同时间不得去重；
+- 一侧昵称缺失不得破坏性去重；
+- 两条匿名短文本不足以确认重叠；
+- 高 confidence 的截短 OCR 不得覆盖更完整正文；
+- capture 的“新→旧”页面必须先转换后再全局合并；
+- 合成 dry-run 全程使用正式 `src.normalize/src.store/src.inbox`，不再通过测试副本得到假绿。
 
 ## 下一步
 
-执行 `tasks/todo.md` 顶部的阶段 2-3：在 capture/normalize 边界接入当前批次头像圆圈指纹，并定义正式 dry-run 门禁。之后再把去重和 batch/state 原型迁移到正式 `src/normalize`、`src/store` 入口，用端到端 dry-run 复核误去重、漏去重、恢复点、跨页顺序和 `current.md` 生成条件。
+按 `tasks/todo.md` 顶部执行阶段 2-4：
+
+1. 从旧 capture worktree 只迁移仍有效的 ScreenCaptureKit / Vision / 安全滚轮能力；窗口准备改用现役 Accessibility 设置/读回方案，并适配当前 capture Schema 与变化检测门禁。
+2. 把已验证 bbox 规则实现到正式 normalize。
+3. 设计并实现 `messages.jsonl` 与 batch state 的崩溃安全持久化顺序。
+4. 在一个目标群上跑 3–5 页真实 dry-run，通过后才进入两群切换和首次全量。
