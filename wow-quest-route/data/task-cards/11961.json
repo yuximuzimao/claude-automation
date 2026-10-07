@@ -48,10 +48,11 @@
   "guide": [
     "接取：长者穆希特。",
     "尼约德海湾的长者穆希特要你潜入水中找到伊鲁克的尸体，取回伊斯利鲁克的图腾。",
+    "任务进度不共享；五号需要依次对伊鲁克尸体交互，各自取得伊斯利鲁克的图腾。",
     "交付：长者穆希特。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -77,6 +78,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《神灵的眷顾》需要五号依次交互，各自取得任务物；按项目规则归为不共享。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

@@ -54,10 +54,11 @@
   "guide": [
     "接取：多莱安·霜蹄。",
     "牦牛村的多莱安·霜蹄要你利用风魂图腾收集10只蒸汽狂怒者的能量。",
+    "任务进度不共享；五号可同时放下各自的风魂图腾，再一起击杀蒸汽狂怒者。",
     "交付：多莱安·霜蹄。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -84,14 +85,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《元素的力量》进度不共享，但五号可以同时放下各自的风魂图腾。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《元素的力量》：必须先放风魂图腾再杀；图腾有效范围有限，离图腾太远的击杀不计能量。",
+      "text": "《元素的力量》：必须先放风魂图腾再杀；图腾有效范围有限，离图腾太远的击杀不计能量；五号可以同时放下各自的图腾。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-10-08 second DK Borean live run",
+      "reason": "保留图腾生效范围提醒，并补充用户实测确认的五号同时放图腾操作。"
     }
   }
 }

@@ -54,10 +54,11 @@
   "guide": [
     "接取：天空大地先知。",
     "利用风暴的力量削弱并摧毁15名机器人（不包括那些机械侏儒）。你可以在菲兹兰克泵站周围的池塘中找到它们。 /  / 完成任务后回到北风苔原的牦牛村，向天空大地先知复命。",
+    "任务进度共享；主控使用闪电棒削弱并击杀机器人即可同步推进全队。",
     "交付：天空大地先知。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -83,6 +84,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《闪电的力量》任务进度共享。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

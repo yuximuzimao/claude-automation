@@ -54,10 +54,11 @@
   "guide": [
     "接取：天空大地先知。",
     "调查菲兹兰克泵站周围的区域，然后返回北风苔原的牦牛村，向天空大地先知汇报你的发现。",
+    "调查目标由角色进入区域自动完成；跟随号随队经过时会自然完成，无需单独操作。",
     "交付：天空大地先知。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -83,6 +84,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《他们想干什么？》只是走进区域自动完成，跟随号会自然完成，无需五开标签。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

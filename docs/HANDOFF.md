@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-09-27
+更新时间：2026-10-08
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
@@ -9,7 +9,7 @@
 
 LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 核对基线一致。`/api/save` 使用 ETag/If-Match 拒绝旧标签页整文件覆盖，428/409/200 路径均已在线验证。
 
-魔兽当前状态：灰熊丘陵已完成并冻结，首组正在实跑嚎风峡湾；当前恢复点为新阿加曼德首轮接任务阶段。唯一真值见 `wow-quest-route/docs/verified-routes/CURRENT.md`，后续只按Journey和现场反馈修受影响任务簇。
+魔兽当前状态：当前执行组为第二组兽人双手鲜血DK×5，正在继续北风苔原第二次实跑。2026-10-08 00:15已在牦牛村完成集中交接并暂停，下一步回菲兹兰克泵站执行现役Profile `step-40`，完成《修修补补》《机械副官》《击败机甲专家》。唯一真值见 `wow-quest-route/docs/verified-routes/CURRENT.md`，后续只按Journey和现场反馈修受影响任务簇。
 
 魔兽工程收尾（2026-09-11）：赞加步骤10/13的《多头蛇之王》《猎杀恐爪》条件交付已重新物化到正式Route Atlas JSON/HTML；生成器中《赞加沼泽的植物》《枯萎的孢芽》条件语义也已收口。Python 3.13隔离环境可安装`test` extra，指定player-text pytest已通过；原`tasks/codex-handoff.md`已归档到项目`docs/archive/neat/`。
 

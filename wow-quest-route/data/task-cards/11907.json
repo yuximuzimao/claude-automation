@@ -95,10 +95,11 @@
   "guide": [
     "接取：天空大地先知。",
     "摧毁托奇、ED-210、麦克斯·布拉斯托和研磨者，然后返回北风苔原的牦牛村，向天空大地先知复命。",
+    "四名副官的完成进度共享；主控操作四座泵站阀门召出并击杀即可同步推进全队。",
     "交付：天空大地先知。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -124,6 +125,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《机械副官》四名目标的完成进度共享。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

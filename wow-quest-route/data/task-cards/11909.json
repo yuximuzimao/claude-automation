@@ -95,10 +95,11 @@
   "guide": [
     "接取：塔迦祖母。",
     "研究机甲专家的手册，并将机甲专家麦卡佐德的徽记带回北风苔原的牦牛村，向塔迦祖母汇报你获胜的消息。",
+    "机甲专家麦卡佐德的徽记可由五号从同一具尸体依次拾取。",
     "交付：塔迦祖母。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -124,6 +125,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《击败机甲专家》击杀后的任务物可由五号依次拾取。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

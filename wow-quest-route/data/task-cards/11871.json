@@ -48,10 +48,11 @@
   "guide": [
     "接取：圣职者莉安德拉。",
     "遗弃海岸的圣职者莉安德拉要求你找回12个动物杂货箱。",
+    "五开进度不共享；每个角色都要分别找回12个动物杂货箱。",
     "交付：圣职者莉安德拉。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -77,6 +78,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-08",
+      "source_type": "user_live",
+      "source_ref": "2026-10-08第二组DK北风继续实测反馈：用户确认《不可容忍》五开进度不共享。",
+      "observed_at": "2026-10-08",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],
