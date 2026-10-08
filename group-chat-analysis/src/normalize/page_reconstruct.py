@@ -268,7 +268,7 @@ def _is_header(line: VisualLine, body_height: float) -> tuple[str | None, str] |
     parts = _header_parts(line.text)
     if parts is None:
         return None
-    if line.bbox.height > body_height * 0.95:
+    if line.bbox.height > body_height * 1.05:
         return None
     return parts
 

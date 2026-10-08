@@ -34,7 +34,7 @@
 
 ## 验证
 
-`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **95/95 通过**。
+`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **96/96 通过**。
 
 真实验证包括：
 - 唯一 runner 实跑 3 页并 completed；

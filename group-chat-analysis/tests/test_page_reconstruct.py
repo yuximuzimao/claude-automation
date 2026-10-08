@@ -76,6 +76,20 @@ class PageReconstructTests(unittest.TestCase):
         self.assertEqual(message.timestamp_text, "09:10")
         self.assertEqual(message.content_text, "一段正文")
 
+    def test_header_nearly_same_height_as_body_is_still_recognized(self) -> None:
+        blocks = [
+            raw_block(0, "玩家甲 09:10", 0.04, 0.70, 0.09, 0.0190),
+            raw_block(1, "第一条正文", 0.04, 0.66, 0.10, 0.0188),
+            raw_block(2, "玩家乙 09:09", 0.04, 0.48, 0.09, 0.0150),
+            raw_block(3, "第二条正文", 0.04, 0.44, 0.10, 0.0188),
+        ]
+
+        result = reconstruct_page(page(blocks, region_y=0.20, region_height=0.60))
+
+        by_sender = {item.sender_display: item for item in result.messages}
+        self.assertEqual(by_sender["玩家甲"].timestamp_text, "09:10")
+        self.assertEqual(by_sender["玩家甲"].content_text, "第一条正文")
+
     def test_time_only_header_keeps_sender_unknown(self) -> None:
         blocks = [
             raw_block(0, ".09:10", 0.04, 0.65, 0.05, 0.014),

@@ -35,7 +35,7 @@
 23. 程序性完整性审计通过：全局 `page_index 0–1146` 连续无缺页/重复；两个群 canonical sequence 各自从 0 连续；无未知 group、无重复 `record_id`；state 中两个连续消息 anchor 均准确对应各群 canonical 尾部。
 24. 每日增量已实现：新的 incremental batch 每群首次进入时必须重新打开“聊天记录”刷新快照；同一未完成 batch 已有 durable raw 时恢复不重开。每抓完 durable 页就检查上一 completed 的连续 `start_anchor`；命中后只提交 anchor 之后的新消息。0/1 条新消息、分片恢复、completed 本地重建、历史边界先于 anchor 的硬失败均有回归。
 25. 真实 baseline 离线验证通过：第一次全量的两组 anchor 都只在各自 canonical 最尾部命中（5700/5700、1593/1593），裁剪后均为 0；真实 v3 state 副本可确定性升级 v4，并把两组真实尾部 anchor 精确复制到新 incremental `start_anchor`。
-26. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **95/95 通过**。
+26. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **96/96 通过**。
 
 ## 尚未验证 / 尚未实现
 
