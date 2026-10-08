@@ -4,9 +4,9 @@
 
 ## 当前阶段
 
-**阶段 0/1/2 已完成；阶段 3 的两个目标群安全切换也已实机跑通。下一步是把两群串进同一首次全量批次，并定义可验证的历史边界。**
+**阶段 0/1/2 已完成；阶段 3 的安全切群、两群同 batch 编排、历史边界门禁和安全分片都已实现并通过确定性测试。下一步是启动真实首次全量，并在完成后做完整性审计。**
 
-正式入口现在唯一是 `python3 -m src.app.run_capture`。Python runner 独占 batch state 推进；Swift `capture-step` 只执行单次当前页/滚动页捕获，不再维护第二套恢复逻辑。旧 capture worktree 已不再是运行依赖。
+正式入口仍唯一是 `python3 -m src.app.run_capture`。固定页数诊断继续使用原参数；首次全量使用 `--full --batch-id <id>`，从本机 `config/local.json` 读取两群与窗口参数。Python runner 独占 batch state 推进；Swift `capture-step` 只执行单次 current/scroll 副作用，`open-history` 只作为内部安全切群执行器。
 
 ## 当前已验证事实
 
@@ -15,7 +15,7 @@
 3. SCK 偶发 1–3px 捕获尺寸漂移已实测。MAD 只容忍 `<=3px` 并把两帧渲染到共同尺寸比较；更大漂移硬停。最终帧若回到 baseline，也不得判为新页。
 4. `capture-page.schema.json` 已升级为 v2：除原始 OCR 外保存私密 `dhash512` 视口指纹。该指纹**只**用于滚动前验证当前视口仍是上一份 durable raw 对应页面，不参与昵称/消息身份或去重。
 5. 512-bit dHash 当前门槛为 Hamming distance `<=20`。同一未滚动视口连续 6 次实测为 `18,0,0,0,0`；三个不同真实页距离为 `46/49/31`。超过 20 时在发滚轮前停止。
-6. `batch-state.schema.json` 已升级为 v2，新增 `pending_capture`。唯一顺序是 **pending intent → Swift 单步副作用 → raw durable → record_page**；`record_page()` 没有匹配 pending 时不能推进状态。
+6. `batch-state.schema.json` 已升级为 v3：保留 v2 的 `pending_capture`，并新增每群 `capture_complete`。唯一页提交顺序仍是 **pending intent → Swift 单步副作用 → raw durable → record_page**；只有每个群都 `capture_complete=true` 才允许整个 batch completed。旧 v2 状态会确定性迁移：completed/analyzed→true，incomplete→false。
 7. `pending current + raw 缺失` 可安全重试；`pending + raw 已落盘` 直接晋升 durable raw，不重复捕获；`pending scroll + 目标 raw 缺失` 视口位置不确定，必须硬停，禁止再次滚动；没有 pending 却凭空出现 next raw 也硬停。
 8. 当前 QQ 单页视觉从上到下是**新→旧**；`reconstruct_page()` 完成视觉判断后把完整候选反转为**旧→新**。页边缘 fragment 不静默丢弃，证据不足宁可保留重复。
 9. 嵌入图片 OCR 命中窄几何门禁时降级为 `unknown / 非文字内容（图片/表情等，未解析）`；图片内文字不进入 GPT 输入。无 OCR 的纯图片/表情、语音、文件继续不阻塞 v1。
@@ -26,16 +26,19 @@
 14. 正式 `open-history` 已实机验证两个目标群往返：会话列表先用 OCR 找唯一目标行并限制在左侧安全区；选中后重新核对聊天头部；只有 hover 后局部 OCR 精确得到 `聊天记录` 才点击历史按钮；最后要求历史窗口标题精确匹配目标群。任何一步不满足都停止。
 15. 两个历史窗口精确标题已确认：`魔兽世界无限+时光服玩家群`、`魔兽世界2无限国服备战总群`。实测切换时成员数 1815/1777 只作为额外证据，不写成长期身份条件。
 16. 重新打开历史窗口时暴露了正文区潜伏 bug：聊天正文 `坐下）表情` 曾被误当过滤工具栏，导致 content_region 高度从正常约 `0.852` 截成 `0.192`。现已改为“同一水平带至少两个过滤控件共同出现”才可定义工具栏，并完成真实页回归。
-17. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **71/71 通过**；其中包含安全切群纯门禁、正文工具栏反例以及 raw writer 的 fsync/原子写入路径。
+17. 两群同 batch 编排已完成：`page_index` 继续按整个 batch 全局递增；第一群结束后 batch 仍保持 incomplete，只有第二群也 `capture_complete` 后才统一 normalize / messages durable / state completed / current.md。
+18. 首次全量历史边界采用连续两次独立 `NO_CHANGE`：每次滚动前都先用上一 durable 页的 dHash 验证视口、重新定位正文锚点、QQ 必须前台且历史窗口标题唯一；任一次出现变化都会清零 no-change 连续计数。
+19. 首次全量默认每次最多新增 20 页。达到分片预算只在 raw 已 durable、`pending_capture=null` 的安全点返回 incomplete，不切下一个群、不标记 capture_complete；恢复已有 durable 页时禁止重新打开历史窗口，避免把视口重置到最新。
+20. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **79/79 通过**；新增覆盖 v2→v3 状态迁移、两群同 batch、双 no-change 边界、安全分片、已有 durable 页不重开历史窗口、状态冲突时 UI 前硬停。
 
 ## 尚未验证 / 尚未实现
 
-- 单群 runner 仍按固定页数工作；尚未把两个目标群串进同一 completed batch，也没有正式的首次全量历史边界判定。
-- Apple Vision 长时间大量连续页面的性能/稳定性、首次全量历史边界、每日增量停止锚点尚未验证。
+- 两群同 batch 与历史边界逻辑尚未经过真实长时间首次全量验证；当前只有确定性测试与既有 3 页/切群实机验证。
+- Apple Vision 长时间大量连续页面的性能/稳定性、真实首次全量最终边界、每日增量停止锚点尚未验证。
 - 语音和文件继续延期；无 OCR 的纯图片/表情按 v1 文字优先目标忽略。
 
 ## 下一恢复点
 
-直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 3：把两个已验证目标群串进同一可恢复批次，并为首次全量建立可验证的历史边界；通过后再启动真实全量。**
+直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 3：用 `--full` 按 20 页安全分片启动真实首次全量；每轮结束检查 state/raw 连续性，直到两个群都 capture_complete，再做完整性审计。**
 
 这里的 `dhash512` 是临时视口连续性证据，不是头像指纹。头像/昵称视觉身份辅助仍不属于 v1 去重门禁。

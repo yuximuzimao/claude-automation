@@ -25,7 +25,8 @@
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
-| `src/app/run_capture.py` | 唯一正式运行入口与 pending/raw 恢复编排 | 改长任务运行/恢复时 |
+| `src/app/run_capture.py` | 唯一正式运行入口；固定页数诊断与 `--full` 首次全量 | 改运行/恢复 CLI 时 |
+| `src/app/full_capture.py` | 两群首次全量薄编排、历史边界与安全分片 | 改首次全量编排时 |
 | `src/app/capture-step.swift` | 内部单步 current/scroll capture | 改 Swift 单步执行边界时 |
 | `src/app/open-history.swift` | 安全打开目标群聊天记录窗口 | 改两群切换入口时 |
 | `src/capture/ConversationSwitcher.swift` | 会话 OCR 定位、目标复核、聊天记录 tooltip/窗口门禁 | 改 QQ 群切换安全逻辑时 |

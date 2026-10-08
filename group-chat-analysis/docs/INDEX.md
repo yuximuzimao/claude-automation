@@ -32,7 +32,8 @@
 ## 代码与测试
 
 - `../src/README.md`：正式代码模块边界、依赖方向与当前门禁。
-- `../src/app/run_capture.py`：唯一正式运行入口与 pending/raw 恢复编排。
+- `../src/app/run_capture.py`：唯一正式运行入口；固定页数诊断与 `--full` 首次全量。
+- `../src/app/full_capture.py`：两群首次全量薄编排、双 no-change 历史边界与安全分片。
 - `../src/app/capture-step.swift`：内部单步 current/scroll capture。
 - `../src/app/open-history.swift`：安全打开目标群聊天记录窗口。
 - `../src/capture/ConversationSwitcher.swift`：会话 OCR 定位、目标复核、`聊天记录` tooltip 与历史窗口标题门禁。

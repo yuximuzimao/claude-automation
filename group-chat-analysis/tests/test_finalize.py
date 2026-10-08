@@ -68,6 +68,11 @@ class FinalizeBatchTests(unittest.TestCase):
             0,
             updated_at="2026-01-01T00:01:00Z",
         )
+        self.state.mark_group_capture_complete(
+            "batch-1",
+            "group-a",
+            completed_at="2026-01-01T00:01:30Z",
+        )
 
     def test_finalize_persists_messages_before_completed_state_and_builds_inbox(self) -> None:
         content = finalize_batch(

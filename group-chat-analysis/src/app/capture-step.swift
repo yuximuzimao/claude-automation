@@ -160,6 +160,15 @@ struct CaptureStepMain {
             print(
                 "CAPTURED page=\(page.record.pageIndex) fingerprint=\(page.record.visualFingerprint) blocks=\(page.record.blocks.count)"
             )
+        } catch let error as CaptureStepCLIError {
+            switch error {
+            case let .scrollNoChange(maxBaselineMAD):
+                print("NO_CHANGE max_baseline_mad=\(String(format: "%.4f", maxBaselineMAD))")
+                exit(10)
+            default:
+                fputs("ERROR \(error)\n", stderr)
+                exit(1)
+            }
         } catch {
             fputs("ERROR \(error)\n", stderr)
             exit(1)

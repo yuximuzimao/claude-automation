@@ -8,6 +8,7 @@ import tempfile
 import unittest
 
 from src.app.run_capture import (
+    CaptureNoChange,
     CaptureRunConfig,
     CaptureRunner,
     RecoveryRequired,
@@ -224,6 +225,84 @@ class RuntimeRunnerTests(unittest.TestCase):
         self.assertFalse(
             (self.runtime / "raw/batch-1/group-a/page-000001.json").exists()
         )
+
+    def test_history_boundary_requires_two_consecutive_no_change_results(self) -> None:
+        config = CaptureRunConfig(
+            **{**self.config.__dict__, "page_count": None, "boundary_confirmations": 2}
+        )
+        calls = []
+        no_change_attempts = 0
+
+        def capture_until_boundary(config, mode, page_index, output, previous) -> None:
+            nonlocal no_change_attempts
+            calls.append((mode, page_index))
+            if mode == "current":
+                self.write_page(config, mode, page_index, output, previous)
+                return
+            if page_index == 1:
+                self.write_page(config, mode, page_index, output, previous)
+                return
+            no_change_attempts += 1
+            raise CaptureNoChange("boundary")
+
+        result = CaptureRunner(
+            self.root,
+            config,
+            step_executor=capture_until_boundary,
+            now=self.now,
+        ).run()
+
+        self.assertEqual(result.status, "completed")
+        self.assertEqual(calls, [("current", 0), ("scroll", 1), ("scroll", 2), ("scroll", 2)])
+        self.assertEqual(no_change_attempts, 2)
+        state = BatchStateStore(self.runtime / "state" / "batch-state.json").load()
+        self.assertTrue(state["groups"]["group-a"]["capture_complete"])
+        self.assertEqual(state["next_page_index"], 2)
+
+    def test_two_groups_share_one_batch_and_finalize_only_after_both_complete(self) -> None:
+        groups = ("group-a", "group-b")
+
+        def write_group_page(config, _mode, page_index, output: Path, _previous) -> None:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(
+                json.dumps(raw_page("batch-1", config.group_key, page_index), ensure_ascii=False),
+                encoding="utf-8",
+            )
+
+        first_config = CaptureRunConfig(
+            **{**self.config.__dict__, "batch_group_keys": groups}
+        )
+        first = CaptureRunner(
+            self.root,
+            first_config,
+            step_executor=write_group_page,
+            now=self.now,
+        ).run()
+        self.assertEqual(first.status, "incomplete")
+        self.assertFalse(first.current_path.exists())
+
+        second_config = CaptureRunConfig(
+            **{
+                **self.config.__dict__,
+                "group_key": "group-b",
+                "expected_title": "测试群B",
+                "batch_group_keys": groups,
+            }
+        )
+        second = CaptureRunner(
+            self.root,
+            second_config,
+            step_executor=write_group_page,
+            now=self.now,
+        ).run()
+
+        self.assertEqual(second.status, "completed")
+        self.assertEqual(second.pages, 2)
+        self.assertEqual(second.messages, 4)
+        state = BatchStateStore(self.runtime / "state" / "batch-state.json").load()
+        self.assertEqual(state["groups"]["group-a"]["last_page_index"], 0)
+        self.assertEqual(state["groups"]["group-b"]["last_page_index"], 1)
+        self.assertTrue(all(item["capture_complete"] for item in state["groups"].values()))
 
     def test_completed_state_can_rebuild_missing_current_without_capture(self) -> None:
         first = self.runner().run()

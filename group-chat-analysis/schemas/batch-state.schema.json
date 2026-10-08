@@ -19,7 +19,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "2"
+      "const": "3"
     },
     "batch_id": {
       "type": "string",
@@ -77,6 +77,9 @@
           "groups": {
             "additionalProperties": {
               "properties": {
+                "capture_complete": {
+                  "const": true
+                },
                 "last_completed_anchor": {
                   "minItems": 2
                 }
@@ -103,10 +106,14 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "capture_complete",
         "last_page_index",
         "last_completed_anchor"
       ],
       "properties": {
+        "capture_complete": {
+          "type": "boolean"
+        },
         "last_page_index": {
           "type": ["integer", "null"],
           "minimum": 0

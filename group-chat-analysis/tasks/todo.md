@@ -4,13 +4,13 @@
 
 ## 下一步（新窗口从这里开始）
 
-**阶段 3：把两个已验证目标群串进同一可恢复批次，并建立首次全量历史边界。** 安全切群已经实机往返验证；下一步不要继续扩识别规则，先解决“两个群如何共用一个 completed batch”以及“怎样证明已经到历史边界”。
+**阶段 3：启动真实首次全量。** 两群同 batch、双 no-change 历史边界、安全分片与恢复门禁都已实现；下一步用唯一 `--full` 入口按 20 页分片抓取，直到两个群都 `capture_complete`，然后做完整性审计。
 
 ## B. 阶段 2 — 已完成，不再作为待办维护
 
 现役能力包括：
 - 唯一正式入口 `python3 -m src.app.run_capture`，Swift 仅保留内部单步 `capture-step`；
-- batch-state v2 `pending_capture`，顺序固定为 pending → 单步副作用 → raw durable → record_page；
+- batch-state v3：保留 `pending_capture`，新增每群 `capture_complete`；顺序固定为 pending → 单步副作用 → raw durable → record_page；
 - capture-page v2 `dhash512` 视口连续性门禁，当前阈值 `<=20`；
 - AX/SCK/Vision、正文区、安全滚轮、MAD、`<=3px` SCK 尺寸漂移容忍；
 - bbox/视觉行/fragment/media unknown 重建；
@@ -24,7 +24,8 @@
 ## C. 阶段 3 — 两群与首次全量抓取
 
 - [x] **安全切换两个目标群。** 已验证：左侧会话 OCR 唯一定位 + 安全区门禁 → 选中后头部复核 → hover 后局部 OCR 精确确认 `聊天记录` → 打开后历史窗口标题精确匹配。任何一步不满足即停止。
-- [ ] **两群同批次编排 + 首次全量抓取。** 先让两个群共用一个可恢复 batch，并建立可验证的历史边界；允许长任务分批恢复，但最终只把两个群都经过完整性确认的 batch 标为 completed。
+- [x] **两群同批次编排 + 历史边界/安全分片。** 已实现全局 page_index、每群 capture_complete、连续两次 NO_CHANGE 边界、20 页安全分片、恢复时不重开已有 durable 页群。
+- [ ] **真实首次全量抓取。** 用 `python3 -m src.app.run_capture --full --batch-id <id>` 分片执行，直到两个群都 capture_complete；每轮结束检查 state/raw 连续性，不允许中途伪 completed。
 - [ ] **人工抽样/程序性完整性审计。** 重点检查漏页、乱序、误去重、其它群污染，不要求用户逐条人眼核对。
 
 ## D. 阶段 4 — GPT 分析

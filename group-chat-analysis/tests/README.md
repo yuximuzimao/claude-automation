@@ -16,7 +16,7 @@
 - 保守发送者匹配：相似昵称不归并、一侧昵称缺失不破坏性去重；
 - `message_type` / `timestamp_text` 兼容性与两条最小重叠强锚点；
 - capture 页“新→旧”到最终消息“旧→新”的方向转换；
-- batch-state v2 `pending_capture`、页恢复点、状态转换和连续锚点门禁；
+- batch-state v3：`pending_capture`、每群 `capture_complete`、v2 迁移、页恢复点、状态转换和连续锚点门禁；
 - 唯一 runner 的 pending/raw reconcile、stray raw 拒绝、pending scroll 硬停等故障注入；
 - canonical messages 原子/幂等提交与 messages→completed→current 崩溃恢复；
 - current.md 构建顺序；

@@ -106,6 +106,15 @@ class DryRunGateTests(unittest.TestCase):
                 for record in selected
             ]
 
+        state = self.store.load()
+        if state is None:
+            raise AssertionError("test state is missing")
+        for group_key in state["groups"]:
+            self.store.mark_group_capture_complete(
+                "batch-1",
+                group_key,
+                completed_at="2026-01-01T00:02:30Z",
+            )
         self.store.complete_batch(
             "batch-1",
             anchors=anchors,

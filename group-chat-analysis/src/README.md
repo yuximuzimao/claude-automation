@@ -15,8 +15,9 @@ src/
 
 当前已有：
 
-- `app/run_capture.py`：唯一正式运行入口；独占 state 推进、pending/raw reconcile、normalize/finalize 编排。
-- `app/capture-step.swift`：内部单步 current/scroll capture；不维护恢复状态。
+- `app/run_capture.py`：唯一正式运行入口；同时承载固定页数诊断和 `--full` 首次全量模式，独占 state 推进、pending/raw reconcile、normalize/finalize 编排。
+- `app/full_capture.py`：首次全量的薄编排层；按本机配置串行两个群，控制安全切群、双 no-change 边界和每轮页预算，不复制底层恢复状态机。
+- `app/capture-step.swift`：内部单步 current/scroll capture；不维护恢复状态；滚动确认无变化时使用专用退出码交给 Python 状态机处理。
 - `app/open-history.swift`：安全打开指定群的聊天记录窗口；只调用经过视觉/位置/标题多重门禁的切群适配器。
 - `capture/ConversationSwitcher.swift`：主 QQ 左侧会话 OCR 唯一定位 → 选中后头部复核 → `聊天记录` tooltip 精确确认 → 历史窗口标题精确匹配；任一门禁失败即停止。
 - `capture/WindowPreparation.swift`：唯一同标题 AXWindow，设置/读回几何，再等待唯一同标题 SCK frame 稳定；无鼠标拖窗 fallback。
@@ -27,14 +28,14 @@ src/
 - `normalize/assemble.py` / `overlap.py`：按同群连续 page_index 组装，fragment 不静默丢失，只删除高置信相邻页连续重叠。
 - `store/message_record.py`：从正式 Schema 读取字段/枚举/const 真值并校验。
 - `store/message_store.py`：canonical `messages.jsonl` 的 fsync + 原子 replace、同 batch 幂等重试与冲突拒绝。
-- `store/batch_state.py`：batch-state v2 `pending_capture`、`incomplete/completed/analyzed`、全 batch 页恢复位置、群级连续锚点和原子 state replace。
+- `store/batch_state.py`：batch-state v3；保留 `pending_capture`，新增每群 `capture_complete`，支持 v2 确定性迁移、全 batch 页恢复位置、群级连续锚点和原子 state replace。
 - `store/finalize.py`：唯一完成顺序 `messages durable → state completed → current.md`，支持跨文件崩溃恢复。
 - `inbox/builder.py`：只从 completed/analyzed 的 canonical records 生成 current.md，非法或不一致输入不得覆盖旧文件。
 
 尚未完成：
 
-- 两个目标群共用一个可恢复 completed batch 的正式编排。
-- 首次全量历史边界、长时间 Vision 稳定性、每日增量。
+- 真实双群首次全量与完成后的漏页/乱序/误去重审计。
+- 长时间 Vision 稳定性实测、每日增量。
 
 ## 依赖方向
 
@@ -65,10 +66,11 @@ v1 的错误成本不对称：**漏真实消息 > 多保留重复消息**。
 7. 图片内 OCR 命中窄媒体门禁时降级为 unknown，不作为用户直接聊天正文送入 GPT。
 8. completed state 永远不能领先于 canonical messages 的可靠持久化。
 
-## 进入首次全量前的最后门禁
+## 首次全量运行门禁
 
-单群 runner、中断恢复以及两个目标群安全切换已经通过。首次全量前只剩：
+首次全量的代码门禁已全部满足：两群同 batch、双 no-change 历史边界、状态冲突 UI 前硬停、已有 durable 页不重开历史窗口、20 页安全分片均有确定性测试。真实运行要求：
 
-1. 两群共用一个 batch 的串行编排；
-2. 可验证的首次全量历史边界；
-3. 两项通过后才允许真实双群全量。
+1. 只使用唯一 `--full` 入口与本机 `config/local.json`；
+2. 每轮最多新增 20 页，在 `pending_capture=null` 的安全点结束；
+3. 同一 incomplete batch 恢复时沿用原 batch_id，不创建新批次；
+4. 两群都 capture_complete 后才允许 finalized current.md，并立即做完整性审计。

@@ -56,8 +56,25 @@ class BatchStateStore:
             state = json.loads(self.path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise StateError("batch state is not valid JSON") from exc
+        if isinstance(state, dict) and state.get("schema_version") == "2":
+            state = self._upgrade_v2_state(state)
+            self._write(state)
         self._validate_state(state)
         return state
+
+    @staticmethod
+    def _upgrade_v2_state(state: dict) -> dict:
+        upgraded = json.loads(json.dumps(state))
+        upgraded["schema_version"] = STATE_SCHEMA_VERSION
+        capture_complete = upgraded.get("status") in {"completed", "analyzed"}
+        groups = upgraded.get("groups")
+        if not isinstance(groups, dict):
+            raise StateError("legacy batch state groups are invalid")
+        for progress in groups.values():
+            if not isinstance(progress, dict):
+                raise StateError("legacy group progress is invalid")
+            progress["capture_complete"] = capture_complete
+        return upgraded
 
     @staticmethod
     def _valid_datetime(value: object) -> bool:
@@ -137,6 +154,10 @@ class BatchStateStore:
             if not isinstance(progress, dict) or set(progress) != GROUP_PROGRESS_KEYS:
                 raise StateError("group progress fields do not match the state contract")
 
+            capture_complete = progress["capture_complete"]
+            if not isinstance(capture_complete, bool):
+                raise StateError("capture_complete must be boolean")
+
             last_page = progress["last_page_index"]
             if last_page is not None:
                 if (
@@ -148,6 +169,13 @@ class BatchStateStore:
                 if last_page >= next_page_index:
                     raise StateError("last_page_index must be before next_page_index")
                 captured_last_pages.append(last_page)
+
+            if capture_complete and last_page is None:
+                raise StateError("capture_complete group needs at least one captured page")
+            if state["status"] in {"completed", "analyzed"} and not capture_complete:
+                raise StateError("completed state requires capture_complete for every group")
+            if pending is not None and pending["group_key"] == group_key and capture_complete:
+                raise StateError("capture_complete group cannot have pending_capture")
 
             anchors = progress["last_completed_anchor"]
             if not isinstance(anchors, list):
@@ -214,6 +242,7 @@ class BatchStateStore:
             "last_success_at": previous["last_success_at"] if previous is not None else None,
             "groups": {
                 group_key: {
+                    "capture_complete": False,
                     "last_page_index": None,
                     "last_completed_anchor": previous_groups.get(group_key, {}).get(
                         "last_completed_anchor", []
@@ -239,6 +268,8 @@ class BatchStateStore:
             raise StateError("cannot start a new capture while pending_capture exists")
         if group_key not in state["groups"]:
             raise StateError("group is not part of the active batch")
+        if state["groups"][group_key]["capture_complete"]:
+            raise StateError("cannot capture more pages for a capture_complete group")
         if page_index != state["next_page_index"]:
             raise StateError("capture page_index must equal next_page_index")
         if mode not in {"current", "scroll"}:
@@ -291,6 +322,62 @@ class BatchStateStore:
         self._write(state)
         return state
 
+    def record_no_change(
+        self,
+        batch_id: str,
+        group_key: str,
+        page_index: int,
+        *,
+        updated_at: str,
+    ) -> dict:
+        state = self._require_incomplete(batch_id)
+        if not self._valid_datetime(updated_at):
+            raise StateError("updated_at must be a valid date-time")
+        group = state["groups"].get(group_key)
+        if group is None:
+            raise StateError("group is not part of the active batch")
+        if group["capture_complete"]:
+            raise StateError("capture_complete group cannot record no-change")
+        pending = state["pending_capture"]
+        if pending is None:
+            raise StateError("record_no_change requires a pending_capture")
+        if (
+            pending["group_key"] != group_key
+            or pending["page_index"] != page_index
+            or pending["mode"] != "scroll"
+        ):
+            raise StateError("record_no_change requires the matching pending scroll")
+        if page_index != state["next_page_index"]:
+            raise StateError("no-change page_index must equal next_page_index")
+
+        state["pending_capture"] = None
+        state["updated_at"] = updated_at
+        self._write(state)
+        return state
+
+    def mark_group_capture_complete(
+        self,
+        batch_id: str,
+        group_key: str,
+        *,
+        completed_at: str,
+    ) -> dict:
+        state = self._require_incomplete(batch_id)
+        if state["pending_capture"] is not None:
+            raise StateError("cannot complete group capture while capture is pending")
+        if not self._valid_datetime(completed_at):
+            raise StateError("completed_at must be a valid date-time")
+        group = state["groups"].get(group_key)
+        if group is None:
+            raise StateError("group is not part of the active batch")
+        if group["last_page_index"] is None:
+            raise StateError("group capture needs at least one captured page")
+        if not group["capture_complete"]:
+            group["capture_complete"] = True
+            state["updated_at"] = completed_at
+            self._write(state)
+        return state
+
     def complete_batch(
         self,
         batch_id: str,
@@ -307,6 +394,8 @@ class BatchStateStore:
             raise StateError("a completed batch needs an anchor for every group")
 
         for group_key, group_anchors in anchors.items():
+            if not state["groups"][group_key]["capture_complete"]:
+                raise StateError("each group capture must be complete before batch completion")
             if state["groups"][group_key]["last_page_index"] is None:
                 raise StateError("each group needs at least one captured page")
             if len(group_anchors) < MIN_ANCHOR_COUNT:

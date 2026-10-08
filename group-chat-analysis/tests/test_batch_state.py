@@ -48,6 +48,19 @@ class BatchStateTests(unittest.TestCase):
             updated_at=updated_at,
         )
 
+    def _complete_group(
+        self,
+        batch_id: str,
+        group_key: str,
+        *,
+        completed_at: str,
+    ) -> dict:
+        return self.store.mark_group_capture_complete(
+            batch_id,
+            group_key,
+            completed_at=completed_at,
+        )
+
     def test_schema_keeps_page_recovery_at_batch_level(self) -> None:
         schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
         batch_properties = schema["properties"]
@@ -55,8 +68,13 @@ class BatchStateTests(unittest.TestCase):
 
         self.assertIn("next_page_index", batch_properties)
         self.assertNotIn("next_page_index", group_properties)
+        self.assertIn("capture_complete", group_properties)
         self.assertNotIn("minItems", group_properties["last_completed_anchor"])
         completed_gate = schema["allOf"][0]
+        self.assertTrue(
+            completed_gate["then"]["properties"]["groups"]["additionalProperties"]
+            ["properties"]["capture_complete"]["const"]
+        )
         self.assertEqual(
             completed_gate["then"]["properties"]["groups"]["additionalProperties"]
             ["properties"]["last_completed_anchor"]["minItems"],
@@ -79,6 +97,22 @@ class BatchStateTests(unittest.TestCase):
         self.assertEqual(resumed["started_at"], "2026-01-01T00:00:00Z")
         self.assertEqual(resumed["next_page_index"], 1)
         self.assertFalse(self.store.can_build_inbox("batch-1"))
+
+    def test_v2_state_is_migrated_without_guessing_incomplete_group_completion(self) -> None:
+        state = self.store.start_batch(
+            "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
+        )
+        legacy = json.loads(json.dumps(state))
+        legacy["schema_version"] = "2"
+        legacy["groups"]["group-a"].pop("capture_complete")
+        self.store.path.write_text(json.dumps(legacy), encoding="utf-8")
+
+        migrated = self.store.load()
+
+        self.assertEqual(migrated["schema_version"], "3")
+        self.assertFalse(migrated["groups"]["group-a"]["capture_complete"])
+        persisted = json.loads(self.store.path.read_text(encoding="utf-8"))
+        self.assertEqual(persisted["schema_version"], "3")
 
     def test_incomplete_batch_cannot_be_replaced(self) -> None:
         self.store.start_batch(
@@ -134,6 +168,9 @@ class BatchStateTests(unittest.TestCase):
         self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
         )
+        self._complete_group(
+            "batch-1", "group-a", completed_at="2026-01-01T00:01:30Z"
+        )
         with self.assertRaises(StateError):
             self.store.complete_batch(
                 "batch-1",
@@ -150,6 +187,9 @@ class BatchStateTests(unittest.TestCase):
         for page_index, group_key in enumerate(("group-a", "group-b")):
             self._record_page(
                 "batch-1", group_key, page_index, updated_at="2026-01-01T00:01:00Z"
+            )
+            self._complete_group(
+                "batch-1", group_key, completed_at="2026-01-01T00:01:30Z"
             )
 
         with self.assertRaises(StateError):
@@ -179,6 +219,9 @@ class BatchStateTests(unittest.TestCase):
         self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
         )
+        self._complete_group(
+            "batch-1", "group-a", completed_at="2026-01-01T00:01:30Z"
+        )
         self.store.complete_batch(
             "batch-1",
             anchors={"group-a": [Anchor(0, "a1"), Anchor(1, "a2")]},
@@ -203,6 +246,9 @@ class BatchStateTests(unittest.TestCase):
         )
         self._record_page(
             "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
+        )
+        self._complete_group(
+            "batch-1", "group-a", completed_at="2026-01-01T00:01:30Z"
         )
         self.store.complete_batch(
             "batch-1",

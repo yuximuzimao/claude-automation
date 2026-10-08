@@ -71,7 +71,7 @@ runtime/
 - `completed`：达到本轮停止条件且规范化/去重完成，可以生成 current.md；
 - `analyzed`：GPT 已处理 current.md，但不改变已完成消息，也不能用另一组记录改写现有 current.md。
 
-batch-state v2 新增 `pending_capture`，唯一页提交顺序为 **pending intent → capture side effect → raw durable → record_page**。`record_page()` 只能消费与 group/page 完全匹配的 pending，随后清空 pending 并推进 `next_page_index`。
+batch-state v3 保留 `pending_capture`，并新增每群 `capture_complete`。唯一页提交顺序仍为 **pending intent → capture side effect → raw durable → record_page**；`record_page()` 只能消费与 group/page 完全匹配的 pending，随后清空 pending 并推进全 batch 的 `next_page_index`。只有所有群都 `capture_complete=true`，才允许整个 batch completed。
 
 恢复语义：
 - `pending current` 且 raw 缺失：当前页捕获没有滚动副作用，可以重试同一页；

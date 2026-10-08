@@ -24,18 +24,25 @@ class RecoveryRequired(CaptureRunError):
     """Raised when viewport state is uncertain and automatic scrolling must stop."""
 
 
+class CaptureNoChange(CaptureRunError):
+    """Raised when a verified scroll attempt produced no viewport change."""
+
+
 @dataclass(frozen=True)
 class CaptureRunConfig:
     batch_id: str
     group_key: str
     expected_title: str
-    page_count: int
+    page_count: int | None
     window_x: float
     window_y: float
     window_width: float
     window_height: float
     scroll_pixels: int = 630
     runtime_root: Path = Path("runtime")
+    batch_group_keys: tuple[str, ...] = ()
+    boundary_confirmations: int = 2
+    max_new_pages: int | None = None
 
 
 @dataclass(frozen=True)
@@ -66,6 +73,7 @@ class CaptureRunner:
     ) -> None:
         self.project_root = project_root.resolve()
         self.config = config
+        self.batch_group_keys = config.batch_group_keys or (config.group_key,)
         self.runtime_root = (
             config.runtime_root
             if config.runtime_root.is_absolute()
@@ -98,12 +106,39 @@ class CaptureRunner:
         state = self.state_store.start_batch(
             self.config.batch_id,
             started_at=self.now(),
-            group_keys=[self.config.group_key],
+            group_keys=list(self.batch_group_keys),
         )
+        if state["groups"][self.config.group_key]["capture_complete"]:
+            return self._finish_or_report_incomplete(state)
+
         state = self._reconcile_pending(state)
         self._reject_stray_next_raw(state)
+        no_change_streak = 0
+        new_pages = 0
 
-        while self._captured_pages(state) < self.config.page_count:
+        while True:
+            if (
+                self.config.page_count is not None
+                and self._captured_pages(state) >= self.config.page_count
+            ):
+                state = self.state_store.mark_group_capture_complete(
+                    self.config.batch_id,
+                    self.config.group_key,
+                    completed_at=self.now(),
+                )
+                break
+            if (
+                self.config.max_new_pages is not None
+                and new_pages >= self.config.max_new_pages
+            ):
+                return CaptureRunResult(
+                    batch_id=self.config.batch_id,
+                    status="incomplete",
+                    pages=self._captured_pages(state),
+                    messages=0,
+                    current_path=self.current_path,
+                )
+
             pending = state["pending_capture"]
             if pending is None:
                 page_index = state["next_page_index"]
@@ -123,6 +158,8 @@ class CaptureRunner:
             else:
                 page_index = pending["page_index"]
                 mode = pending["mode"]
+                if pending["group_key"] != self.config.group_key:
+                    raise RecoveryRequired("pending capture belongs to another group")
                 if mode == "scroll":
                     raise RecoveryRequired(
                         "pending scroll has no durable target raw page; viewport position is uncertain, so automatic scrolling is stopped"
@@ -130,7 +167,27 @@ class CaptureRunner:
 
             output = self._page_path(page_index)
             previous = self._previous_page_path(state, page_index, mode)
-            self.step_executor(self.config, mode, page_index, output, previous)
+            try:
+                self.step_executor(self.config, mode, page_index, output, previous)
+            except CaptureNoChange:
+                if mode != "scroll":
+                    raise CaptureRunError("no-change is only valid for scroll capture")
+                state = self.state_store.record_no_change(
+                    self.config.batch_id,
+                    self.config.group_key,
+                    page_index,
+                    updated_at=self.now(),
+                )
+                no_change_streak += 1
+                if no_change_streak >= self.config.boundary_confirmations:
+                    state = self.state_store.mark_group_capture_complete(
+                        self.config.batch_id,
+                        self.config.group_key,
+                        completed_at=self.now(),
+                    )
+                    break
+                continue
+
             page = self._load_expected_raw(output, page_index)
             state = self.state_store.record_page(
                 self.config.batch_id,
@@ -138,45 +195,69 @@ class CaptureRunner:
                 page_index,
                 updated_at=str(page["captured_at"]),
             )
+            new_pages += 1
+            no_change_streak = 0
 
-        pages = self._load_recorded_pages(state)
-        assembled = assemble_capture_pages(pages)
+        return self._finish_or_report_incomplete(state)
+
+    def _finish_or_report_incomplete(self, state: dict) -> CaptureRunResult:
+        if not all(
+            progress["capture_complete"] for progress in state["groups"].values()
+        ):
+            return CaptureRunResult(
+                batch_id=self.config.batch_id,
+                status="incomplete",
+                pages=self._captured_pages(state),
+                messages=0,
+                current_path=self.current_path,
+            )
+
+        records, page_count = self._assemble_all_groups(state)
         finalize_batch(
             state_store=self.state_store,
             message_store=self.message_store,
             batch_id=self.config.batch_id,
-            records=assembled.records,
+            records=records,
             completed_at=self.now(),
             current_destination=self.current_path,
         )
         return CaptureRunResult(
             batch_id=self.config.batch_id,
             status="completed",
-            pages=len(pages),
-            messages=len(assembled.records),
+            pages=page_count,
+            messages=len(records),
             current_path=self.current_path,
         )
 
     def _rebuild_completed(self, state: dict) -> CaptureRunResult:
-        if set(state["groups"]) != {self.config.group_key}:
-            raise CaptureRunError("completed state group does not match runner group")
-        pages = self._load_recorded_pages(state)
-        assembled = assemble_capture_pages(pages)
+        if set(state["groups"]) != set(self.batch_group_keys):
+            raise CaptureRunError("completed state groups do not match runner groups")
+        records, page_count = self._assemble_all_groups(state)
         finalize_batch(
             state_store=self.state_store,
             message_store=self.message_store,
             batch_id=self.config.batch_id,
-            records=assembled.records,
+            records=records,
             completed_at=self.now(),
             current_destination=self.current_path,
         )
         return CaptureRunResult(
             batch_id=self.config.batch_id,
             status=str(state["status"]),
-            pages=len(pages),
-            messages=len(assembled.records),
+            pages=page_count,
+            messages=len(records),
             current_path=self.current_path,
         )
+
+    def _assemble_all_groups(self, state: dict) -> tuple[list[dict[str, object]], int]:
+        records: list[dict[str, object]] = []
+        page_count = 0
+        for group_key in self.batch_group_keys:
+            pages = self._load_recorded_pages(state, group_key=group_key)
+            assembled = assemble_capture_pages(pages)
+            records.extend(assembled.records)
+            page_count += len(pages)
+        return records, page_count
 
     def _reconcile_pending(self, state: dict) -> dict:
         pending = state["pending_capture"]
@@ -216,27 +297,44 @@ class CaptureRunner:
                 "unrecorded raw page exists at or after next_page_index without pending_capture; refusing to infer how it was produced"
             )
 
-    def _captured_pages(self, state: dict) -> int:
-        last = state["groups"][self.config.group_key]["last_page_index"]
+    def _captured_pages(self, state: dict, *, group_key: str | None = None) -> int:
+        key = group_key or self.config.group_key
+        last = state["groups"][key]["last_page_index"]
         if last is None:
             return 0
-        paths = self._raw_paths_up_to(int(last))
+        paths = self._raw_paths_up_to(int(last), group_key=key)
         return len(paths)
 
-    def _load_recorded_pages(self, state: dict) -> list[dict]:
-        last = state["groups"][self.config.group_key]["last_page_index"]
+    def _load_recorded_pages(
+        self,
+        state: dict,
+        *,
+        group_key: str | None = None,
+    ) -> list[dict]:
+        key = group_key or self.config.group_key
+        last = state["groups"][key]["last_page_index"]
         if last is None:
-            raise CaptureRunError("batch has no recorded pages")
-        paths = self._raw_paths_up_to(int(last))
-        pages = [self._load_expected_raw(path, self._index_from_path(path)) for path in paths]
+            raise CaptureRunError(f"group {key} has no recorded pages")
+        paths = self._raw_paths_up_to(int(last), group_key=key)
+        pages = [
+            self._load_expected_raw(path, self._index_from_path(path), group_key=key)
+            for path in paths
+        ]
         if not pages:
-            raise CaptureRunError("recorded batch has no raw pages")
+            raise CaptureRunError(f"group {key} has no durable raw pages")
         return pages
 
-    def _raw_paths_up_to(self, last_page_index: int) -> list[Path]:
-        if not self.raw_dir.exists():
-            raise CaptureRunError("raw directory is missing")
-        paths = sorted(self.raw_dir.glob("page-*.json"))
+    def _raw_paths_up_to(
+        self,
+        last_page_index: int,
+        *,
+        group_key: str | None = None,
+    ) -> list[Path]:
+        key = group_key or self.config.group_key
+        raw_dir = self._raw_dir(key)
+        if not raw_dir.exists():
+            raise CaptureRunError(f"raw directory is missing for group {key}")
+        paths = sorted(raw_dir.glob("page-*.json"))
         expected = [
             path
             for path in paths
@@ -249,7 +347,14 @@ class CaptureRunner:
                 raise CaptureRunError("durable raw pages are not contiguous through state last_page_index")
         return expected
 
-    def _load_expected_raw(self, path: Path, page_index: int) -> dict:
+    def _load_expected_raw(
+        self,
+        path: Path,
+        page_index: int,
+        *,
+        group_key: str | None = None,
+    ) -> dict:
+        key = group_key or self.config.group_key
         try:
             page = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
@@ -257,8 +362,8 @@ class CaptureRunner:
         validate_capture_page(page)
         if page["batch_id"] != self.config.batch_id:
             raise CaptureRunError("raw page batch_id does not match active batch")
-        if page["group_key"] != self.config.group_key:
-            raise CaptureRunError("raw page group_key does not match active group")
+        if page["group_key"] != key:
+            raise CaptureRunError("raw page group_key does not match expected group")
         if page["page_index"] != page_index:
             raise CaptureRunError("raw page_index does not match its durable slot")
         return page
@@ -273,8 +378,11 @@ class CaptureRunner:
         self._load_expected_raw(previous, page_index - 1)
         return previous
 
+    def _raw_dir(self, group_key: str) -> Path:
+        return self.runtime_root / "raw" / self.config.batch_id / group_key
+
     def _page_path(self, page_index: int) -> Path:
-        return self.raw_dir / f"page-{page_index:06d}.json"
+        return self._raw_dir(self.config.group_key) / f"page-{page_index:06d}.json"
 
     @staticmethod
     def _index_from_path(path: Path) -> int:
@@ -286,8 +394,16 @@ class CaptureRunner:
     def _validate_config(self) -> None:
         if not self.config.batch_id or not self.config.group_key or not self.config.expected_title:
             raise CaptureRunError("batch_id, group_key, and expected_title are required")
-        if self.config.page_count < 1:
-            raise CaptureRunError("page_count must be at least one")
+        if self.config.group_key not in self.batch_group_keys:
+            raise CaptureRunError("group_key must be part of batch_group_keys")
+        if len(set(self.batch_group_keys)) != len(self.batch_group_keys):
+            raise CaptureRunError("batch_group_keys must be unique")
+        if self.config.page_count is not None and self.config.page_count < 1:
+            raise CaptureRunError("page_count must be at least one when provided")
+        if self.config.boundary_confirmations < 2:
+            raise CaptureRunError("boundary_confirmations must be at least two")
+        if self.config.max_new_pages is not None and self.config.max_new_pages < 1:
+            raise CaptureRunError("max_new_pages must be at least one when provided")
         if self.config.scroll_pixels <= 0:
             raise CaptureRunError("scroll_pixels must be positive")
 
@@ -319,7 +435,11 @@ class CaptureRunner:
         ]
         if previous is not None:
             command.extend(["--previous-raw", str(previous)])
-        subprocess.run(command, cwd=self.project_root, check=True)
+        result = subprocess.run(command, cwd=self.project_root, check=False)
+        if result.returncode == 10:
+            raise CaptureNoChange("verified scroll produced no viewport change")
+        if result.returncode != 0:
+            raise subprocess.CalledProcessError(result.returncode, command)
 
     def _build_capture_step(self) -> Path:
         build_dir = self.project_root / "build"
@@ -343,39 +463,75 @@ class CaptureRunner:
         return binary
 
 
-def parse_args() -> CaptureRunConfig:
-    parser = argparse.ArgumentParser(description="Run one resumable QQ group capture batch")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run resumable QQ group capture")
     parser.add_argument("--batch-id", required=True)
-    parser.add_argument("--group-key", required=True)
-    parser.add_argument("--expected-title", required=True)
-    parser.add_argument("--pages", type=int, required=True)
-    parser.add_argument("--window-x", type=float, required=True)
-    parser.add_argument("--window-y", type=float, required=True)
-    parser.add_argument("--window-width", type=float, required=True)
-    parser.add_argument("--window-height", type=float, required=True)
+    parser.add_argument("--full", action="store_true", help="capture all groups from config/local.json to history boundary")
+    parser.add_argument("--config", type=Path, default=Path("config/local.json"))
+    parser.add_argument("--max-new-pages", type=int, default=20)
+    parser.add_argument("--group-key")
+    parser.add_argument("--expected-title")
+    parser.add_argument("--pages", type=int)
+    parser.add_argument("--window-x", type=float)
+    parser.add_argument("--window-y", type=float)
+    parser.add_argument("--window-width", type=float)
+    parser.add_argument("--window-height", type=float)
     parser.add_argument("--scroll-pixels", type=int, default=630)
     parser.add_argument("--runtime-root", type=Path, default=Path("runtime"))
     args = parser.parse_args()
-    return CaptureRunConfig(
-        batch_id=args.batch_id,
-        group_key=args.group_key,
-        expected_title=args.expected_title,
-        page_count=args.pages,
-        window_x=args.window_x,
-        window_y=args.window_y,
-        window_width=args.window_width,
-        window_height=args.window_height,
-        scroll_pixels=args.scroll_pixels,
-        runtime_root=args.runtime_root,
+    if args.full:
+        return args
+
+    required = (
+        args.group_key,
+        args.expected_title,
+        args.pages,
+        args.window_x,
+        args.window_y,
+        args.window_width,
+        args.window_height,
     )
+    if any(value is None for value in required):
+        parser.error("bounded mode requires --group-key, --expected-title, --pages and window geometry")
+    return args
 
 
 def main() -> None:
     project_root = Path(__file__).resolve().parents[2]
-    config = parse_args()
+    args = parse_args()
     try:
-        result = CaptureRunner(project_root, config).run()
-    except (CaptureRunError, RecoveryRequired, StateError, subprocess.CalledProcessError) as exc:
+        if args.full:
+            from .full_capture import FullCaptureRunner, load_local_full_capture_config
+
+            config_path = args.config if args.config.is_absolute() else project_root / args.config
+            config = load_local_full_capture_config(
+                config_path,
+                batch_id=args.batch_id,
+                runtime_root=args.runtime_root,
+                max_new_pages_per_run=args.max_new_pages,
+            )
+            result = FullCaptureRunner(project_root, config).run()
+        else:
+            config = CaptureRunConfig(
+                batch_id=args.batch_id,
+                group_key=args.group_key,
+                expected_title=args.expected_title,
+                page_count=args.pages,
+                window_x=args.window_x,
+                window_y=args.window_y,
+                window_width=args.window_width,
+                window_height=args.window_height,
+                scroll_pixels=args.scroll_pixels,
+                runtime_root=args.runtime_root,
+            )
+            result = CaptureRunner(project_root, config).run()
+    except (
+        CaptureRunError,
+        RecoveryRequired,
+        StateError,
+        ValueError,
+        subprocess.CalledProcessError,
+    ) as exc:
         raise SystemExit(f"ERROR {exc}") from exc
     print(
         f"DONE batch={result.batch_id} status={result.status} "
