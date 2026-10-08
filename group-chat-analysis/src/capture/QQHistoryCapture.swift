@@ -206,7 +206,10 @@ struct QQHistoryCapture {
         }
         let common = previousTexts.intersection(currentTexts)
         let jaccard = Double(common.count) / Double(union.count)
-        return jaccard <= 0.40
+        // Low-motion scrolls can advance only part of a viewport.  Preserving
+        // that high-overlap page is safer than issuing another scroll and
+        // risking skipped messages; adjacent-page dedup can remove duplicates.
+        return jaccard <= 0.85
     }
 
     private static func normalizedContentTexts(_ page: RawCapturePage) -> Set<String> {

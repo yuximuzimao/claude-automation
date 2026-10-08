@@ -30,7 +30,7 @@
 18. 首次全量历史边界采用连续两次独立 `NO_CHANGE`：每次滚动前都先用上一 durable 页的 dHash 验证视口、重新定位正文锚点、QQ 必须前台且历史窗口标题唯一；任一次出现变化都会清零 no-change 连续计数。
 19. 首次全量默认每次最多新增 20 页。达到分片预算只在 raw 已 durable、`pending_capture=null` 的安全点返回 incomplete，不切下一个群、不标记 capture_complete；恢复已有 durable 页时禁止重新打开历史窗口，避免把视口重置到最新。
 20. 真实首次全量 `first-full-20261008` 已完成：第一群 `page 0–890` 共 **891 页 / 5700 条 canonical messages**；第二群 `page 891–1146` 共 **256 页 / 1593 条 canonical messages**；合计 **1147 页 / 7293 条**。
-21. 首次全量期间补齐了低运动滚屏模糊区门禁：`MAD 2.00–2.50` 只有最终相邻帧稳定，且新旧正文 OCR 各至少 8 条、Jaccard `<=0.40` 时才补证为新页；高重叠部分推进页宁可多保留，由后续相邻页去重处理。
+21. 低运动滚屏模糊区门禁已继续用真实增量校准：`MAD 2.00–2.50` 只有最终相邻帧稳定，且新旧正文 OCR 各至少 8 条、Jaccard `<=0.85` 时才保守保存为新/部分推进页；真实增量 page 33 观测到 Jaccard `0.706` 的部分推进。高重叠页宁可多保留，由后续相邻页去重处理，避免再次滚动跳过消息。
 22. 1147 页中唯一异常页 `wow-infinite-2/page-001038.json` 是“日期 + 3 个消息头、无正文 OCR”；现已改为 header-only fragment fallback，不生成伪正文。修复后真实 **1147/1147 页逐页 reconstruct bad=0**。
 23. 程序性完整性审计通过：全局 `page_index 0–1146` 连续无缺页/重复；两个群 canonical sequence 各自从 0 连续；无未知 group、无重复 `record_id`；state 中两个连续消息 anchor 均准确对应各群 canonical 尾部。
 24. 每日增量已实现：新的 incremental batch 每群首次进入时必须重新打开“聊天记录”刷新快照；同一未完成 batch 已有 durable raw 时恢复不重开。每抓完 durable 页就检查上一 completed 的连续 `start_anchor`；命中后只提交 anchor 之后的新消息。0/1 条新消息、分片恢复、completed 本地重建、历史边界先于 anchor 的硬失败均有回归。

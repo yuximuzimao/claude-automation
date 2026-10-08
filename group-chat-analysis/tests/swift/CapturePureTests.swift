@@ -329,13 +329,22 @@ private func testAmbiguousScrollOCRFallback() throws {
         "low-overlap OCR pages should confirm an ambiguous low-motion scroll"
     )
 
-    let mostlySame = pageWithTexts(
+    let partialScroll = pageWithTexts(
         ["共享1", "共享2", "共享3", "旧4", "旧5", "旧6", "旧7", "旧8", "新9", "新10"],
         pageIndex: 1
     )
     try expect(
-        !QQHistoryCapture.isClearlyDifferentByOCR(previous: previous, current: mostlySame),
-        "high-overlap OCR pages must not confirm a new viewport"
+        QQHistoryCapture.isClearlyDifferentByOCR(previous: previous, current: partialScroll),
+        "high-overlap partial scroll should be preserved rather than risk a second scroll"
+    )
+
+    let identical = pageWithTexts(
+        ["共享1", "共享2", "共享3", "旧4", "旧5", "旧6", "旧7", "旧8", "旧9", "旧10"],
+        pageIndex: 1
+    )
+    try expect(
+        !QQHistoryCapture.isClearlyDifferentByOCR(previous: previous, current: identical),
+        "identical OCR pages must remain uncertain"
     )
 
     let sparse = pageWithTexts(["A1", "A2", "A3", "A4", "A5", "A6", "A7"], pageIndex: 1)
