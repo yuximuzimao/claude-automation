@@ -285,6 +285,66 @@ private func samplePage() -> RawCapturePage {
     )
 }
 
+private func pageWithTexts(_ texts: [String], pageIndex: Int) -> RawCapturePage {
+    let blocks = texts.enumerated().map { index, text in
+        block(
+            index,
+            text,
+            x: 0.05,
+            y: 0.78 - Double(index) * 0.035,
+            width: 0.20,
+            height: 0.02
+        )
+    }
+    return RawCapturePage(
+        schemaVersion: "2",
+        visualFingerprint: "dhash512:" + String(repeating: "0", count: 128),
+        batchID: "batch-test",
+        groupKey: "group-a",
+        groupDisplay: "测试群",
+        pageIndex: pageIndex,
+        capturedAt: "2026-01-01T00:00:00Z",
+        source: "qq_history_window_ocr",
+        window: CaptureWindowInfo(
+            title: "测试群",
+            framePoints: CaptureScreenFrame(x: 1, y: 2, width: 1000, height: 700),
+            captureSizePixels: CapturePixelSize(width: 1000, height: 700)
+        ),
+        contentRegion: CaptureBBox(x: 0, y: 0.02, width: 0.92, height: 0.84),
+        blocks: blocks
+    )
+}
+
+private func testAmbiguousScrollOCRFallback() throws {
+    let previous = pageWithTexts(
+        ["共享1", "共享2", "共享3", "旧4", "旧5", "旧6", "旧7", "旧8", "旧9", "旧10"],
+        pageIndex: 0
+    )
+    let clearlyNew = pageWithTexts(
+        ["共享1", "共享2", "共享3", "新4", "新5", "新6", "新7", "新8", "新9", "新10"],
+        pageIndex: 1
+    )
+    try expect(
+        QQHistoryCapture.isClearlyDifferentByOCR(previous: previous, current: clearlyNew),
+        "low-overlap OCR pages should confirm an ambiguous low-motion scroll"
+    )
+
+    let mostlySame = pageWithTexts(
+        ["共享1", "共享2", "共享3", "旧4", "旧5", "旧6", "旧7", "旧8", "新9", "新10"],
+        pageIndex: 1
+    )
+    try expect(
+        !QQHistoryCapture.isClearlyDifferentByOCR(previous: previous, current: mostlySame),
+        "high-overlap OCR pages must not confirm a new viewport"
+    )
+
+    let sparse = pageWithTexts(["A1", "A2", "A3", "A4", "A5", "A6", "A7"], pageIndex: 1)
+    try expect(
+        !QQHistoryCapture.isClearlyDifferentByOCR(previous: previous, current: sparse),
+        "sparse OCR evidence must remain uncertain"
+    )
+}
+
 private func testCaptureSchemaShape() throws {
     let page = samplePage()
 
@@ -337,6 +397,7 @@ struct CapturePureTestsMain {
             try await testChangeDetectorAcceptsDelayedStability()
             try await testChangeDetectorAllowsFingerprintStableDynamicNoise()
             try testVisualFingerprintDistance()
+            try testAmbiguousScrollOCRFallback()
             try testCaptureSchemaShape()
             try testRawWriterPersistsAndRefusesOverwrite()
             print("CapturePureTests OK")

@@ -21,7 +21,7 @@ enum PixelDiffError: Error, CustomStringConvertible {
 enum ScrollStabilityResult {
     case changedAndStable(CGImage, baselineMAD: Double, adjacentMAD: Double)
     case noChange(maxBaselineMAD: Double)
-    case uncertain(lastBaselineMAD: Double, lastAdjacentMAD: Double?)
+    case uncertain(CGImage, lastBaselineMAD: Double, lastAdjacentMAD: Double?)
 }
 
 struct SparseRGBMAD {
@@ -182,6 +182,7 @@ struct ScrollChangeDetector {
         }
 
         return .uncertain(
+            previous,
             lastBaselineMAD: lastBaselineMAD,
             lastAdjacentMAD: lastAdjacentMAD
         )

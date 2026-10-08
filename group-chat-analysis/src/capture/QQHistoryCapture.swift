@@ -150,7 +150,37 @@ struct QQHistoryCapture {
             )
         case let .noChange(maxBaselineMAD):
             return (nil, .noChange(maxBaselineMAD: maxBaselineMAD))
-        case let .uncertain(lastBaselineMAD, lastAdjacentMAD):
+        case let .uncertain(image, lastBaselineMAD, lastAdjacentMAD):
+            if lastBaselineMAD > ScrollChangeDetector.dynamicNoiseThreshold,
+               lastBaselineMAD < ScrollChangeDetector.changedThreshold,
+               let lastAdjacentMAD,
+               lastAdjacentMAD <= ScrollChangeDetector.quietThreshold {
+                let current = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+                guard current.windowID == target.windowID else {
+                    throw QQHistoryCaptureError.historyWindowChanged
+                }
+                let candidate = try makeCapturedPage(
+                    image: image,
+                    capturedAt: ISO8601DateFormatter().string(from: Date()),
+                    target: current,
+                    groupKey: groupKey,
+                    expectedTitle: expectedTitle,
+                    batchID: batchID,
+                    pageIndex: pageIndex
+                )
+                if isClearlyDifferentByOCR(
+                    previous: previousPage.record,
+                    current: candidate.record
+                ) {
+                    return (
+                        candidate,
+                        .changedAndStable(
+                            baselineMAD: lastBaselineMAD,
+                            adjacentMAD: lastAdjacentMAD
+                        )
+                    )
+                }
+            }
             return (
                 nil,
                 .uncertain(
@@ -159,6 +189,45 @@ struct QQHistoryCapture {
                 )
             )
         }
+    }
+
+    static func isClearlyDifferentByOCR(
+        previous: RawCapturePage,
+        current: RawCapturePage
+    ) -> Bool {
+        let previousTexts = normalizedContentTexts(previous)
+        let currentTexts = normalizedContentTexts(current)
+        guard previousTexts.count >= 8, currentTexts.count >= 8 else {
+            return false
+        }
+        let union = previousTexts.union(currentTexts)
+        guard !union.isEmpty else {
+            return false
+        }
+        let common = previousTexts.intersection(currentTexts)
+        let jaccard = Double(common.count) / Double(union.count)
+        return jaccard <= 0.40
+    }
+
+    private static func normalizedContentTexts(_ page: RawCapturePage) -> Set<String> {
+        var result = Set<String>()
+        for block in page.blocks {
+            let midX = block.bbox.x + block.bbox.width / 2.0
+            let midY = block.bbox.y + block.bbox.height / 2.0
+            guard page.contentRegion.contains(midX: midX, midY: midY) else {
+                continue
+            }
+            let normalized = block.text.replacingOccurrences(
+                of: "\\s+",
+                with: "",
+                options: .regularExpression
+            )
+            guard normalized.count >= 2 else {
+                continue
+            }
+            result.insert(normalized)
+        }
+        return result
     }
 
     @MainActor

@@ -61,6 +61,7 @@ class SwiftCaptureTests(unittest.TestCase):
                     str(ROOT / "src/capture/VisualFingerprint.swift"),
                     str(ROOT / "src/capture/ContentRegion.swift"),
                     str(ROOT / "src/capture/ChangeDetector.swift"),
+                    str(ROOT / "src/capture/QQHistoryCapture.swift"),
                     str(ROOT / "src/capture/RawPageWriter.swift"),
                     str(ROOT / "src/capture/ConversationSwitcher.swift"),
                     str(ROOT / "tests/swift/CapturePureTests.swift"),
