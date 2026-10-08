@@ -2,35 +2,67 @@
   "artifacts": {
     "profiles/borean-fivebox/display.json": {
       "artifact_kind": "display",
-      "input_fingerprint": "513a6efe3dd4d28b6c58733d834eed6500bd606f98675339206367c46b606938",
+      "input_fingerprint": "cfc8cc5268f1a3f5c82e8c979e59754a0e4123266a0fb5c55370c092a1ae05f8",
       "owner": "route_display",
       "scope_id": "borean-fivebox",
       "scope_kind": "profiles",
-      "sha256": "847e7abf58c7089353aa9065c0eb4b0625c7064d0c0c44c3f6e4071310e75ddc"
+      "sha256": "c1fc4302ce68283b0631946550129c10ed39da5db24cae2daf6c230a0cfde82b"
+    },
+    "profiles/borean-fivebox/economy.json": {
+      "artifact_kind": "economy",
+      "input_fingerprint": "43c33e65e264d8c75d7f8731192c10453ce9e9f2f85f493ebf02a22eabf3d686",
+      "owner": "route_economy",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "6ec56d26bcf671d3a3c84e71d5cea7a6dd3c8970802fb89a62551dde47e6ab9b"
     },
     "profiles/borean-fivebox/movement.json": {
       "artifact_kind": "movement",
-      "input_fingerprint": "11ed2684ee9ce52e7a6235da558493e7d53b9f99a59792d2620062bf3bca7122",
+      "input_fingerprint": "2c4dede7e2156747c59ecf33026c9e98796587e3b5fd7f1654e7377a93a54413",
       "owner": "route_movement",
       "scope_id": "borean-fivebox",
       "scope_kind": "profiles",
-      "sha256": "9ea9122f676f47dcef8c871499f92193752ce812542e89a998afb00a7d263ab6"
+      "sha256": "96f3ff9df5c145a7aa97c0f66f4c9bcc29178efd51ee08d1d4dc44dc9fb0215d"
     },
     "profiles/borean-fivebox/publisher.json": {
       "artifact_kind": "publisher",
-      "input_fingerprint": "e9c540f0456b9ccfc2a4c2ead44ba79a37f71bddc88d1b629f44f453cda1a7ba",
+      "input_fingerprint": "c635d3f7e4398244f9715cf23fd2f33b6f7db3440862184e0213e59d53a2bd80",
       "owner": "route_publisher_payload",
       "scope_id": "borean-fivebox",
       "scope_kind": "profiles",
-      "sha256": "4a8ef7a79eaf694a97314088ab47217a2b95ae823ad665514fe19440918cd67f"
+      "sha256": "9f085df6fc2692f1e5b26feaffb12ada11a39faefdb66e31efcbd98f82fc568d"
     },
     "profiles/borean-fivebox/replay.json": {
       "artifact_kind": "replay",
-      "input_fingerprint": "d2f6be8fe04a4452b56b4cb46d04aeb25b06e1fc645457048a93412458f206a7",
+      "input_fingerprint": "89047d60ffa3169412ccdf8e4e719e991e1254621ea61fe2032325751c575fb8",
       "owner": "route_replay",
       "scope_id": "borean-fivebox",
       "scope_kind": "profiles",
-      "sha256": "d1dbdd9f23a2fec040502d9ba2308f260863a167dd07e0107ea37c9d7ad1ab2a"
+      "sha256": "5f227445c39acea8ddce0769e5515cdc8bbaf2c08d8b368f61c7a7e73366c2fe"
+    },
+    "profiles/borean-fivebox/service-context.json": {
+      "artifact_kind": "service-context",
+      "input_fingerprint": "3d5e4f8d387c1e724dc72dee33509e3efdbd76eb3212d6f339002e1f01fffb6d",
+      "owner": "route_service_context",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "8999e1528b5c4247c9059480d905f5d5bbad3bcd6ea810b3165a4d3bd43039ef"
+    },
+    "profiles/borean-fivebox/timing.json": {
+      "artifact_kind": "timing",
+      "input_fingerprint": "11844c29f4b80971a6d11b773eec4587c470c0e027784736c840e42897373fe0",
+      "owner": "route_timing",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "301c823e5c0aadd7464e923ea3db47af227fdb32fcbd775fd1e500f491412493"
+    },
+    "profiles/borean-fivebox/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "bee181fb5d48145e034a997bba6b435e11ac1d1ec5779e2174f96c7f39e10c24",
+      "owner": "route_xp",
+      "scope_id": "borean-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "b9c9d7db3f11c386d1db491b81dcca0d6b12c49aae6b1d8174f4fb7a2a6a245e"
     },
     "profiles/dalaran-mainline-77/display.json": {
       "artifact_kind": "display",
@@ -658,11 +690,11 @@
     },
     "programs/horde-fivebox-full-clear/continuity.json": {
       "artifact_kind": "continuity",
-      "input_fingerprint": "6104a056b86cb4baea0277425ecc09ff04c15470baa5c31cc4d8871106a099a3",
+      "input_fingerprint": "cc32605f576c1a6cdc9f74520efc9fc4fe87c42b756f019055068109e6c994a0",
       "owner": "route_continuity",
       "scope_id": "horde-fivebox-full-clear",
       "scope_kind": "programs",
-      "sha256": "0fcbef14adacf33a8c7d8491328ecb49f923e6fde236eba9b9d13d5d1be2e675"
+      "sha256": "5937ae0bd898854bd3706bd2126e0d33580f1569b7ea2f6583bea7392b19ecfc"
     },
     "programs/horde-fivebox-full-clear/economy.json": {
       "artifact_kind": "economy",

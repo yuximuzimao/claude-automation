@@ -5093,18 +5093,6 @@
           "task_id": 11662
         },
         {
-          "action_id": "a0126",
-          "kind": "min_level",
-          "required_min_level": 68,
-          "resolver": "derived_xp",
-          "task_id": 11613
-        },
-        {
-          "action_id": "a0126",
-          "kind": "once_task_entry_completion_unknown",
-          "task_id": 11613
-        },
-        {
           "action_id": "a0128",
           "kind": "min_level",
           "required_min_level": 68,
@@ -5115,6 +5103,18 @@
           "action_id": "a0128",
           "kind": "once_task_entry_completion_unknown",
           "task_id": 12471
+        },
+        {
+          "action_id": "a0126",
+          "kind": "min_level",
+          "required_min_level": 68,
+          "resolver": "derived_xp",
+          "task_id": 11613
+        },
+        {
+          "action_id": "a0126",
+          "kind": "once_task_entry_completion_unknown",
+          "task_id": 11613
         },
         {
           "action_id": "a0134",
@@ -7136,9 +7136,9 @@
         {
           "from": "nagrand-fivebox-67-68",
           "gate": {
-            "action_id": "a0126",
+            "action_id": "a0128",
             "kind": "once_task_entry_completion_unknown",
-            "task_id": 11613
+            "task_id": 12471
           },
           "kind": "unresolved_entry_task_state",
           "severity": "unknown",
@@ -7147,9 +7147,9 @@
         {
           "from": "nagrand-fivebox-67-68",
           "gate": {
-            "action_id": "a0128",
+            "action_id": "a0126",
             "kind": "once_task_entry_completion_unknown",
-            "task_id": 12471
+            "task_id": 11613
           },
           "kind": "unresolved_entry_task_state",
           "severity": "unknown",
@@ -42785,7 +42785,7 @@
     ],
     "opened_flight_points_known": false
   },
-  "input_fingerprint": "6104a056b86cb4baea0277425ecc09ff04c15470baa5c31cc4d8871106a099a3",
+  "input_fingerprint": "cc32605f576c1a6cdc9f74520efc9fc4fe87c42b756f019055068109e6c994a0",
   "issues": [
     {
       "from": "program:horde-fivebox-full-clear",
@@ -44737,9 +44737,9 @@
     {
       "from": "nagrand-fivebox-67-68",
       "gate": {
-        "action_id": "a0126",
+        "action_id": "a0128",
         "kind": "once_task_entry_completion_unknown",
-        "task_id": 11613
+        "task_id": 12471
       },
       "kind": "unresolved_entry_task_state",
       "severity": "unknown",
@@ -44748,9 +44748,9 @@
     {
       "from": "nagrand-fivebox-67-68",
       "gate": {
-        "action_id": "a0128",
+        "action_id": "a0126",
         "kind": "once_task_entry_completion_unknown",
-        "task_id": 12471
+        "task_id": 11613
       },
       "kind": "unresolved_entry_task_state",
       "severity": "unknown",
@@ -55260,7 +55260,7 @@
   ],
   "kind": "route_program",
   "member_input_fingerprints": {
-    "borean-fivebox": "9a70a63f65a4f866789be292ed614e937e802d10994f926156793f8398b03e96",
+    "borean-fivebox": "5fcbcc59e03ef322717288c1fca29c8a694041ddc645be2ac6afdd565abefc7b",
     "dalaran-mainline-77": "92041127ed1030b7cff9af8c864b5cda4796656f3ac7cd17f6b76c384c3f6221",
     "dragonblight-fivebox": "c30fdb752f284abb9c255b0bfbc5b6ecd653b0161459c7af70f4558847500c9e",
     "grizzly-fivebox": "867852c9004a88a3a934618132880a1b49e16c8ec984d4a81e3b744ca29e62ac",

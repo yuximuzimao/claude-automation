@@ -48,10 +48,11 @@
   "guide": [
     "接取：图书馆员多纳森。",
     "琥珀崖的多纳森要你使用蓝玉护盾炸药摧毁蓝玉营地的魔法护盾，然后击败莎尔兰德，夺取她的钥匙。",
-    "交付：图书馆员多纳森。"
+    "交付：图书馆员多纳森。",
+    "目标击杀只做一次；随后五个角色依次交互完成个人环节。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -78,14 +79,26 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《与时间赛跑》：到蓝玉营地最大的圆形平台，对审讯者莎尔兰德的护盾使用任务提供的护盾破坏道具；她落地后击杀。死亡后会出现锁箱，从锁箱拾取莎尔兰德的断裂钥匙，不是直接摸尸体。",
+      "text": "《与时间赛跑》：到蓝玉营地最大的圆形平台，对审讯者莎尔兰德的护盾使用任务提供的护盾破坏道具；她落地后击杀。死亡后会出现锁箱，从锁箱拾取莎尔兰德的断裂钥匙，不是直接摸尸体。 五开：只打一遍；击杀后五号依次交互。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "user live-run report 2026-10-09",
+      "reason": "在既有攻略备注后补充本次实跑确认的五开执行方式。"
     }
   }
 }

@@ -51,7 +51,7 @@
     "交付：图书馆员盖伦。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -77,6 +77,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

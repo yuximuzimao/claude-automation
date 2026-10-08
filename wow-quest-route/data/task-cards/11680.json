@@ -48,7 +48,8 @@
   "guide": [
     "接取：苏雷斯塔兹。",
     "当你准备好营救艾瓦诺尔时，将莎尔兰德的钥匙交给战斗法师安斯姆。",
-    "交付：战斗法师安斯姆。"
+    "交付：战斗法师安斯姆。",
+    "五开交任务时从跟随号开始，主控最后；任务飞行会让仍处于跟随状态的角色追跑，存在从高处掉落风险。"
   ],
   "fivebox": {
     "status": "not_applicable"
@@ -89,14 +90,26 @@
       "supports_fields": [
         "fivebox"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
-      "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "text": "五开交任务时从跟随号开始，主控最后；任务飞行会让仍处于跟随状态的角色追跑，存在从高处掉落风险。",
+      "scope": "route_profile:borean-fivebox",
+      "source_ref": "user live-run report 2026-10-09",
+      "reason": "保留既有执行备注，追加第二组DK实跑确认的任务飞行跟随跌落风险。"
     }
   }
 }

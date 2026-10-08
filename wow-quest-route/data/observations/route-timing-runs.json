@@ -1897,6 +1897,71 @@
         ]
       },
       "status": "continuation_mechanics_runtime_and_timing_recorded"
+    },
+    {
+      "run_id": "2026-10-08-09-borean-dk-second-run-2350-0244",
+      "date": "2026-10-08",
+      "continuation_date": "2026-10-09",
+      "route_key": "borean_dk_second_run_continuation",
+      "profile_ids": [
+        "borean-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "borean-fivebox": 2
+      },
+      "run_kind": "second_borean_fivebox_run_continuation",
+      "time_precision": "user_minute_start_plus_journey_second_endpoint",
+      "source": "2026-10-09用户现场反馈 + Questie Journey；用户记录23:50开始，Journey末端02:43:54接完考达拉第一批任务。",
+      "questie_source_sha256": "4e67f602f879b0135fcd70ad6a0671044fc6f3c28cd5bd86abcd1ac62e83f799",
+      "journey_anchors": {
+        "user_start_local": "2026-10-08T23:50:00+08:00",
+        "business_start": "泵站三任务已接齐后开始执行",
+        "journey_last_event_local": "2026-10-09T02:43:54+08:00",
+        "journey_last_event": "接《古树的秘密》；考达拉第一批任务已接齐",
+        "user_stop_local": "2026-10-09T02:44:00+08:00"
+      },
+      "actual_minutes": 173.9,
+      "actual_display": "2小时53分54秒（用户停止口径约2小时54分）",
+      "route_window": "从泵站《修修补补》《机械副官》《击败机甲专家》三任务已接齐开始，经牦牛村/恩其拉、DK回黑锋学习《复活盟友》、琥珀崖裂谷链，至考达拉第一批任务接齐。",
+      "actual_contains_learning_or_route_errors": false,
+      "calibration_eligible": false,
+      "calibration_note": "本段可用于第一/第二组同范围实际效率对比，但含DK职业回黑锋学习技能这一职业特有操作，且琥珀崖实际执行顺序尚未按本次新路线顺序重跑，因此不直接重标通用Timing参数。",
+      "first_group_same_scope_comparison": {
+        "first_group_effective_minutes": 218.2667,
+        "second_group_minutes": 173.9,
+        "delta_minutes": 44.3667,
+        "second_group_faster_percent": 20.33,
+        "scope": "泵站三任务已接齐 → 考达拉第一批任务接齐；第一组剔除琥珀崖段中间长暂停，沿用既有16:38恢复口径。",
+        "subsegments": [
+          {
+            "name": "泵站开始→交《牦牛村的陷落》",
+            "first_group_minutes": 171.4667,
+            "second_group_minutes": 138.5167,
+            "second_group_faster_percent": 19.22
+          },
+          {
+            "name": "《牦牛村的陷落》交完→琥珀崖初始任务接齐",
+            "first_group_minutes": 10.55,
+            "second_group_minutes": 8.9833,
+            "second_group_faster_percent": 14.85
+          },
+          {
+            "name": "琥珀崖有效恢复段→考达拉第一批任务接齐",
+            "first_group_minutes": 36.25,
+            "second_group_minutes": 26.4,
+            "second_group_faster_percent": 27.17
+          }
+        ],
+        "interpretation": "本段整体以及三个可比子区段，第二组均比第一组快超过10%；当前这一段支持“第二组普遍快至少约10%”的观察，但仍属于实际运营效率对比，不等同于纯职业速度差。"
+      },
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-09T02:44:00+08:00",
+        "level": 72,
+        "xp_percent_range": "66.8%-67.5%",
+        "location": "考达拉",
+        "state": "已接完考达拉第一批任务"
+      },
+      "status": "continuation_mechanics_runtime_route_and_timing_recorded"
     }
   ]
 }

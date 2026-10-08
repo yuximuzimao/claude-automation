@@ -55,7 +55,8 @@
     "接取：驭风大师图波尔。",
     "与战歌要塞的亚尼谈一谈，让他把你安全地送往海滩边。到达加尔鲁什码头后去找歼灭者格雷克罗。",
     "交付：Annihilator Grek'lor。",
-    "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，实际可连续切号与亚尼交互进入任务飞毯。"
+    "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，实际可连续切号与亚尼交互进入任务飞毯。",
+    "五开交任务时从跟随号开始，主控最后；任务飞行会让仍处于跟随状态的角色追跑，存在从高处掉落风险。"
   ],
   "fivebox": {
     "status": "not_shared"
@@ -108,14 +109,26 @@
       "supports_fields": [
         "fivebox"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，可连续切号交互。",
+      "text": "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，可连续切号交互。 五开交任务时从跟随号开始，主控最后；任务飞行会让仍处于跟随状态的角色追跑，存在从高处掉落风险。",
       "scope": "route_profile:borean-fivebox",
-      "source_ref": "user live-run report 2026-09-20 to 2026-09-21",
-      "reason": "合并旧位置提示与本次五开实跑机制，删除重复和项目内部措辞。"
+      "source_ref": "user live-run report 2026-10-09",
+      "reason": "保留既有执行备注，追加第二组DK实跑确认的任务飞行跟随跌落风险。"
     }
   }
 }

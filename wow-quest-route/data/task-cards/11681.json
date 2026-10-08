@@ -81,10 +81,11 @@
   "guide": [
     "接取：战斗法师安斯姆。",
     "琥珀崖的安斯姆要你和他手下的战斗法师飞往蓝玉营地，搭救艾瓦诺尔女士，然后返回琥珀崖的法师塔中，向艾瓦诺尔女士复命。",
-    "交付：大法师艾瓦诺尔。"
+    "交付：大法师艾瓦诺尔。",
+    "按任务脚本完成即可，不需要额外fivebox标签。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -110,6 +111,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "borean-fivebox",
-  "version": 2,
+  "version": 3,
   "status": "draft",
   "scope": {
     "route_scope": "北风苔原",
@@ -2915,6 +2915,29 @@
     },
     {
       "kind": "location",
+      "location_ref": "borean-p148",
+      "action_id": "a0458"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11706,
+      "location_ref": "borean-p148",
+      "action_id": "a0459"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p149",
+      "action_id": "a0460"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 11706,
+      "location_ref": "borean-p149",
+      "npc_name": "驯风者巴兰",
+      "action_id": "a0461"
+    },
+    {
+      "kind": "location",
       "location_ref": "borean-p145",
       "action_id": "a0443"
     },
@@ -3015,29 +3038,6 @@
       "location_ref": "borean-p147",
       "npc_name": "冬风酋长",
       "action_id": "a0457"
-    },
-    {
-      "kind": "location",
-      "location_ref": "borean-p148",
-      "action_id": "a0458"
-    },
-    {
-      "kind": "objective",
-      "task_id": 11706,
-      "location_ref": "borean-p148",
-      "action_id": "a0459"
-    },
-    {
-      "kind": "location",
-      "location_ref": "borean-p149",
-      "action_id": "a0460"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 11706,
-      "location_ref": "borean-p149",
-      "npc_name": "驯风者巴兰",
-      "action_id": "a0461"
     },
     {
       "kind": "location",
@@ -3212,17 +3212,6 @@
     },
     {
       "kind": "location",
-      "location_ref": "borean-p157",
-      "action_id": "a0488"
-    },
-    {
-      "kind": "objective",
-      "task_id": 11590,
-      "location_ref": "borean-p157",
-      "action_id": "a0489"
-    },
-    {
-      "kind": "location",
       "location_ref": "borean-p158",
       "action_id": "a0490"
     },
@@ -3231,6 +3220,17 @@
       "task_id": 11582,
       "location_ref": "borean-p158",
       "action_id": "a0491"
+    },
+    {
+      "kind": "location",
+      "location_ref": "borean-p157",
+      "action_id": "a0488"
+    },
+    {
+      "kind": "objective",
+      "task_id": 11590,
+      "location_ref": "borean-p157",
+      "action_id": "a0489"
     },
     {
       "kind": "location",
@@ -5459,9 +5459,13 @@
     },
     {
       "step_id": "step-45",
-      "title": "恩其拉·力量之语 / 鲜血尖塔 → 牦牛村",
-      "summary": "在恩其拉完成《力量之语》《勇猛的进攻》《中和瘟疫之锅》《鲜血尖塔》《击碎宝珠！》，随后回牦牛村交接并接《过关斩将》。",
+      "title": "天崩地裂 → 恩其拉·力量之语 / 鲜血尖塔 → 牦牛村",
+      "summary": "接《天崩地裂》后先完成并交付，再进入恩其拉完成《力量之语》《勇猛的进攻》《中和瘟疫之锅》《鲜血尖塔》《击碎宝珠！》，随后回牦牛村交接并接《过关斩将》。",
       "action_ids": [
+        "a0458",
+        "a0459",
+        "a0460",
+        "a0461",
         "a0443",
         "a0444",
         "a0445",
@@ -5481,13 +5485,9 @@
     },
     {
       "step_id": "step-46",
-      "title": "天崩地裂 / 过关斩将 → 牦牛村",
-      "summary": "完成《天崩地裂》《过关斩将》后回牦牛村交接《牦牛村的陷落》；暂不接《横贯冰原》。",
+      "title": "过关斩将 → 牦牛村",
+      "summary": "完成《过关斩将》后回牦牛村交接《牦牛村的陷落》；暂不接《横贯冰原》。",
       "action_ids": [
-        "a0458",
-        "a0459",
-        "a0460",
-        "a0461",
         "a0462",
         "a0463",
         "a0464",
@@ -5534,13 +5534,13 @@
     },
     {
       "step_id": "step-49",
-      "title": "调查 / 峭壁断层 → 琥珀崖",
-      "summary": "完成《调查》《监视裂谷：峭壁断层》，回琥珀崖交付并接《苔原上的审讯》《监视裂谷：冬鳞洞穴》。",
+      "title": "峭壁断层 / 调查 → 琥珀崖",
+      "summary": "先完成《监视裂谷：峭壁断层》，再完成《调查》，回琥珀崖交付并接《苔原上的审讯》《监视裂谷：冬鳞洞穴》。",
       "action_ids": [
-        "a0488",
-        "a0489",
         "a0490",
         "a0491",
+        "a0488",
+        "a0489",
         "a0492",
         "a0493",
         "a0494",
@@ -8465,6 +8465,11 @@
       "date": "2026-09-25",
       "kind": "live_run_route_correction",
       "summary": "吸收2026-09-20→09-21北风首跑：裂鞭海岸先经过被俘虏的海象人，再到卡鲁克一次性交《找到卡鲁克！》《残忍的科瓦迪尔》并接《卡鲁克的誓言》，删除旧路线先到卡鲁克再回海象人的折返。其它前16步顺序与实跑核对后无须因《使者》漏交而修改；那次折返属于执行失误。"
+    },
+    {
+      "date": "2026-10-09",
+      "kind": "live_run_route_correction",
+      "summary": "吸收第二组DK北风实跑：接《天崩地裂》后立即做并交，再进入恩其拉任务组；琥珀崖后续把《调查》调整到《监视裂谷：峭壁断层》之后。仅改变这两处正式动作顺序，action_id保持稳定。"
     }
   ]
 }

@@ -54,10 +54,11 @@
   "guide": [
     "接取：一瓶新鲜血液。",
     "搜寻鲜血尖塔，找到这瓶新鲜血液的更多线索。",
-    "交付：踏雪者戈鲁姆。"
+    "交付：踏雪者戈鲁姆。",
+    "该任务只需要接取和交付，没有独立“做”过程；交任务目标在鲜血尖塔内部的一具尸体。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -84,14 +85,26 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。",
+      "text": "约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。 只接/交；交任务在鲜血尖塔里面的一具尸体。",
       "scope": "all",
-      "source_ref": "2026-09-26 Route Atlas note ownership audit",
-      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
+      "source_ref": "user live-run report 2026-10-09",
+      "reason": "补充第二组DK实跑确认的必要执行位置，不改其它既有任务备注。"
     }
   }
 }

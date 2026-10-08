@@ -654,24 +654,9 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0122->a0124",
+      "edge_id": "a0122->a0127",
       "from_location_ref": "borean-p044",
       "from_visit_id": "a0122",
-      "from_zone_id": 3537,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "borean-p045",
-      "to_visit_id": "a0124",
-      "to_zone_id": 3537
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0124->a0127",
-      "from_location_ref": "borean-p045",
-      "from_visit_id": "a0124",
       "from_zone_id": 3537,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -684,9 +669,24 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0127->a0129",
+      "edge_id": "a0127->a0124",
       "from_location_ref": "borean-p046",
       "from_visit_id": "a0127",
+      "from_zone_id": 3537,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "borean-p045",
+      "to_visit_id": "a0124",
+      "to_zone_id": 3537
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0124->a0129",
+      "from_location_ref": "borean-p045",
+      "from_visit_id": "a0124",
       "from_zone_id": 3537,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -2164,9 +2164,39 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0436->a0443",
+      "edge_id": "a0436->a0458",
       "from_location_ref": "borean-p144",
       "from_visit_id": "a0436",
+      "from_zone_id": 3537,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "borean-p148",
+      "to_visit_id": "a0458",
+      "to_zone_id": 3537
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0458->a0460",
+      "from_location_ref": "borean-p148",
+      "from_visit_id": "a0458",
+      "from_zone_id": 3537,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "borean-p149",
+      "to_visit_id": "a0460",
+      "to_zone_id": 3537
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0460->a0443",
+      "from_location_ref": "borean-p149",
+      "from_visit_id": "a0460",
       "from_zone_id": 3537,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -2209,39 +2239,9 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0452->a0458",
+      "edge_id": "a0452->a0462",
       "from_location_ref": "borean-p147",
       "from_visit_id": "a0452",
-      "from_zone_id": 3537,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "borean-p148",
-      "to_visit_id": "a0458",
-      "to_zone_id": 3537
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0458->a0460",
-      "from_location_ref": "borean-p148",
-      "from_visit_id": "a0458",
-      "from_zone_id": 3537,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "borean-p149",
-      "to_visit_id": "a0460",
-      "to_zone_id": 3537
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0460->a0462",
-      "from_location_ref": "borean-p149",
-      "from_visit_id": "a0460",
       "from_zone_id": 3537,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -2391,24 +2391,9 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0483->a0488",
+      "edge_id": "a0483->a0490",
       "from_location_ref": "borean-p156",
       "from_visit_id": "a0483",
-      "from_zone_id": 3537,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "borean-p157",
-      "to_visit_id": "a0488",
-      "to_zone_id": 3537
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0488->a0490",
-      "from_location_ref": "borean-p157",
-      "from_visit_id": "a0488",
       "from_zone_id": 3537,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -2421,9 +2406,24 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0490->a0492",
+      "edge_id": "a0490->a0488",
       "from_location_ref": "borean-p158",
       "from_visit_id": "a0490",
+      "from_zone_id": 3537,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "borean-p157",
+      "to_visit_id": "a0488",
+      "to_zone_id": 3537
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0488->a0492",
+      "from_location_ref": "borean-p157",
+      "from_visit_id": "a0488",
       "from_zone_id": 3537,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -3543,7 +3543,7 @@
     }
   ],
   "exit_movement_actions": [],
-  "input_fingerprint": "11ed2684ee9ce52e7a6235da558493e7d53b9f99a59792d2620062bf3bca7122",
+  "input_fingerprint": "2c4dede7e2156747c59ecf33026c9e98796587e3b5fd7f1654e7377a93a54413",
   "issues": [],
   "migration_candidate_count": 0,
   "primary_zone_id": 3537,
@@ -4253,22 +4253,6 @@
       "zone_id": 3537
     },
     {
-      "display_name": "裂鞭海岸",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "borean-p045",
-      "location_role": "map_anchor",
-      "ordinal": 45,
-      "visit_id": "a0124",
-      "x": 47.13,
-      "y": 75.48,
-      "zone_id": 3537
-    },
-    {
       "display_name": "裂鞭海岸·被俘虏的海象人",
       "handoff_ref": null,
       "incoming_movement": {
@@ -4278,10 +4262,26 @@
       "legacy_transport": "ride",
       "location_ref": "borean-p046",
       "location_role": "map_anchor",
-      "ordinal": 46,
+      "ordinal": 45,
       "visit_id": "a0127",
       "x": 44.2,
       "y": 77.85,
+      "zone_id": 3537
+    },
+    {
+      "display_name": "裂鞭海岸",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "borean-p045",
+      "location_role": "map_anchor",
+      "ordinal": 46,
+      "visit_id": "a0124",
+      "x": 47.13,
+      "y": 75.48,
       "zone_id": 3537
     },
     {
@@ -5853,54 +5853,6 @@
       "zone_id": 3537
     },
     {
-      "display_name": "圣城恩其拉",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "borean-p145",
-      "location_role": "map_anchor",
-      "ordinal": 145,
-      "visit_id": "a0443",
-      "x": 87.6,
-      "y": 23.0,
-      "zone_id": 3537
-    },
-    {
-      "display_name": "鲜血尖塔·踏雪者戈鲁姆",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "borean-p146",
-      "location_role": "map_anchor",
-      "ordinal": 146,
-      "visit_id": "a0448",
-      "x": 87.57,
-      "y": 19.94,
-      "zone_id": 3537
-    },
-    {
-      "display_name": "牦牛村",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "borean-p147",
-      "location_role": "map_anchor",
-      "ordinal": 147,
-      "visit_id": "a0452",
-      "x": 76.0,
-      "y": 37.4,
-      "zone_id": 3537
-    },
-    {
       "display_name": "南部虫孔",
       "handoff_ref": null,
       "incoming_movement": {
@@ -5910,7 +5862,7 @@
       "legacy_transport": "ride",
       "location_ref": "borean-p148",
       "location_role": "map_anchor",
-      "ordinal": 148,
+      "ordinal": 145,
       "visit_id": "a0458",
       "x": 70.29,
       "y": 37.42,
@@ -5926,10 +5878,58 @@
       "legacy_transport": "ride",
       "location_ref": "borean-p149",
       "location_role": "map_anchor",
-      "ordinal": 149,
+      "ordinal": 146,
       "visit_id": "a0460",
       "x": 75.58,
       "y": 35.77,
+      "zone_id": 3537
+    },
+    {
+      "display_name": "圣城恩其拉",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "borean-p145",
+      "location_role": "map_anchor",
+      "ordinal": 147,
+      "visit_id": "a0443",
+      "x": 87.6,
+      "y": 23.0,
+      "zone_id": 3537
+    },
+    {
+      "display_name": "鲜血尖塔·踏雪者戈鲁姆",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "borean-p146",
+      "location_role": "map_anchor",
+      "ordinal": 148,
+      "visit_id": "a0448",
+      "x": 87.57,
+      "y": 19.94,
+      "zone_id": 3537
+    },
+    {
+      "display_name": "牦牛村",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "borean-p147",
+      "location_role": "map_anchor",
+      "ordinal": 149,
+      "visit_id": "a0452",
+      "x": 76.0,
+      "y": 37.4,
       "zone_id": 3537
     },
     {
@@ -6077,22 +6077,6 @@
       "zone_id": 3537
     },
     {
-      "display_name": "蓝玉营地",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "borean-p157",
-      "location_role": "map_anchor",
-      "ordinal": 159,
-      "visit_id": "a0488",
-      "x": 42.2,
-      "y": 39.3,
-      "zone_id": 3537
-    },
-    {
       "display_name": "峭壁断层异常",
       "handoff_ref": null,
       "incoming_movement": {
@@ -6102,10 +6086,26 @@
       "legacy_transport": "ride",
       "location_ref": "borean-p158",
       "location_role": "map_anchor",
-      "ordinal": 160,
+      "ordinal": 159,
       "visit_id": "a0490",
       "x": 43.86,
       "y": 28.64,
+      "zone_id": 3537
+    },
+    {
+      "display_name": "蓝玉营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "borean-p157",
+      "location_role": "map_anchor",
+      "ordinal": 160,
+      "visit_id": "a0488",
+      "x": 42.2,
+      "y": 39.3,
       "zone_id": 3537
     },
     {

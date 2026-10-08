@@ -54,10 +54,11 @@
   "guide": [
     "接取：冬风酋长。",
     "牦牛村的冬风酋长要你穿上魔法天灾外衣进入圣城恩其拉，侦察鲜血尖塔、苦痛尖塔和凋零尖塔。",
-    "交付：冬风酋长。"
+    "交付：冬风酋长。",
+    "五号一起变身进入即可；不需要单独fivebox标签。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -83,6 +84,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-09",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-09; Questie Journey used for event order/timestamps where noted",
+      "observed_at": "2026-10-09",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

@@ -1,0 +1,43 @@
+{
+  "characters": [],
+  "cost_coverage": "partial",
+  "gross_copper": null,
+  "gross_gph": null,
+  "input_fingerprint": "43c33e65e264d8c75d7f8731192c10453ce9e9f2f85f493ebf02a22eabf3d686",
+  "issues": [
+    {
+      "kind": "upstream_stage8_requirements",
+      "profile_id": "borean-fivebox",
+      "severity": "requirement"
+    },
+    {
+      "kind": "economy_character_state_required",
+      "profile_id": "borean-fivebox",
+      "severity": "requirement"
+    },
+    {
+      "kind": "route_cost_coverage_incomplete",
+      "note": "No structured current-scope cost input was supplied; known cost remains zero with partial coverage.",
+      "severity": "requirement"
+    },
+    {
+      "kind": "fresh_complete_timing_required_for_gph",
+      "severity": "requirement",
+      "timing_input_fingerprint": "11844c29f4b80971a6d11b773eec4587c470c0e027784736c840e42897373fe0",
+      "timing_status": "requirements"
+    }
+  ],
+  "kind": "profile",
+  "known_cost_copper": 0,
+  "known_gross_copper": 0,
+  "matched_observation_count": 0,
+  "model_id": "wotlk-route-economy-v1",
+  "net_copper": null,
+  "net_gph": null,
+  "observation_comparisons": [],
+  "profile_id": "borean-fivebox",
+  "status": "requirements",
+  "timing_input_fingerprint": "11844c29f4b80971a6d11b773eec4587c470c0e027784736c840e42897373fe0",
+  "turnins": [],
+  "xp_input_fingerprint": "bee181fb5d48145e034a997bba6b435e11ac1d1ec5779e2174f96c7f39e10c24"
+}

@@ -11,7 +11,7 @@
   "hearth_chain": [
     "战歌要塞"
   ],
-  "input_fingerprint": "513a6efe3dd4d28b6c58733d834eed6500bd606f98675339206367c46b606938",
+  "input_fingerprint": "cfc8cc5268f1a3f5c82e8c979e59754a0e4123266a0fb5c55370c092a1ae05f8",
   "issues": [
     {
       "display_name": "暗影密探卢瑟尔",
@@ -4177,7 +4177,7 @@
         "location_ref": "borean-p148",
         "location_role": "map_anchor",
         "ordinal": 148,
-        "step_id": "step-46",
+        "step_id": "step-45",
         "visit_id": "a0458",
         "x": 70.29,
         "y": 37.42
@@ -4187,7 +4187,7 @@
         "location_ref": "borean-p149",
         "location_role": "map_anchor",
         "ordinal": 149,
-        "step_id": "step-46",
+        "step_id": "step-45",
         "visit_id": "a0460",
         "x": 75.58,
         "y": 35.77
@@ -5005,7 +5005,7 @@
     ]
   },
   "profile_id": "borean-fivebox",
-  "profile_version": 2,
+  "profile_version": 3,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
     "center_minutes": null,
@@ -6275,7 +6275,7 @@
         {
           "badge": "not_shared",
           "name": "魔法飞毯",
-          "note": "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，可连续切号交互。",
+          "note": "五号需要依次与亚尼交互进入任务飞毯；五号分别完成，可连续切号交互。 五开交任务时从跟随号开始，主控最后；任务飞行会让仍处于跟随状态的角色追跑，存在从高处掉落风险。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -11973,13 +11973,13 @@
           "task_id": 11684
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "元素之心",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11685
         },
@@ -13060,13 +13060,13 @@
           "task_id": 11894
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "天灾的外衣",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11628
         },
@@ -13093,13 +13093,13 @@
           "task_id": 11909
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "腐化的土地",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11630
         }
@@ -13234,24 +13234,24 @@
       "summary": "先完成《腐化的土地》《元素之心》，再回牦牛村分别交付并接《乔装潜入》《元素愤怒号角》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "腐化的土地",
           "note": "地面拾取天灾泥土。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11630
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "元素之心",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11685
         },
@@ -13262,18 +13262,18 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11633
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "元素愤怒号角",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11695
         }
@@ -13346,13 +13346,13 @@
       "summary": "依次取得元素愤怒号角的上、下半截。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "元素愤怒号角",
           "note": "击杀水池旁酋长取得钥匙，用钥匙开启水中的小台宝珠，取得上半截号角。\n击杀水池旁酋长取得钥匙，用钥匙开启水中的小台宝珠，取得下半截号角。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11695
         }
@@ -13505,18 +13505,18 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11633
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "力量之语",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11640
         },
@@ -13532,35 +13532,35 @@
           "task_id": 11641
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "中和瘟疫之锅",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11647
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "元素愤怒号角",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11695
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "天崩地裂",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11706
         }
@@ -13574,6 +13574,10 @@
     },
     {
       "action_ids": [
+        "a0458",
+        "a0459",
+        "a0460",
+        "a0461",
         "a0443",
         "a0444",
         "a0445",
@@ -13591,6 +13595,57 @@
         "a0457"
       ],
       "lines": [
+        {
+          "action_ids": [
+            "a0458"
+          ],
+          "location_ref": "borean-p148",
+          "task_refs": [],
+          "text": "南部虫孔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0459"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "天崩地裂",
+              "task_id": 11706
+            }
+          ],
+          "text": "↳ 做《天崩地裂》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0460"
+          ],
+          "location_ref": "borean-p149",
+          "task_refs": [],
+          "text": "驯风者巴兰",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0461"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "驯风者巴兰"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "天崩地裂",
+              "task_id": 11706
+            }
+          ],
+          "text": "驯风者巴兰 → 交《天崩地裂》",
+          "type": "task_action"
+        },
         {
           "action_ids": [
             "a0443"
@@ -13794,16 +13849,27 @@
         }
       ],
       "step_id": "step-45",
-      "summary": "在恩其拉完成《力量之语》《勇猛的进攻》《中和瘟疫之锅》《鲜血尖塔》《击碎宝珠！》，随后回牦牛村交接并接《过关斩将》。",
+      "summary": "接《天崩地裂》后先完成并交付，再进入恩其拉完成《力量之语》《勇猛的进攻》《中和瘟疫之锅》《鲜血尖塔》《击碎宝珠！》，随后回牦牛村交接并接《过关斩将》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
+          "name": "天崩地裂",
+          "note": "在南部虫孔约(70.3,36.7)使用元素愤怒号角触发塌陷，随后击杀出现的克里卡希斯。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11706
+        },
+        {
+          "badge": "sequential_loot",
           "name": "力量之语",
           "note": "三名高阶祭司都在此前侦察的尖塔内；鲜血尖塔的安多拉斯在上层。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11640
         },
@@ -13819,35 +13885,35 @@
           "task_id": 11641
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "中和瘟疫之锅",
           "note": "在东(87.7,29.9)、中(86.2,22.8)、西(85.6,20.1)三口锅旁使用先知埃恩雷的图腾。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11647
         },
         {
           "badge": null,
           "name": "鲜血尖塔",
-          "note": "约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。",
+          "note": "约(87.6,20.5)的达斯·血痕掉落鲜血瓶并触发任务。 只接/交；交任务在鲜血尖塔里面的一具尸体。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11654
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "击碎宝珠！",
           "note": "鲜血宝珠主要在一楼，二楼也有。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11659
         },
@@ -13868,14 +13934,10 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "恩其拉·力量之语 / 鲜血尖塔 → 牦牛村"
+      "title": "天崩地裂 → 恩其拉·力量之语 / 鲜血尖塔 → 牦牛村"
     },
     {
       "action_ids": [
-        "a0458",
-        "a0459",
-        "a0460",
-        "a0461",
         "a0462",
         "a0463",
         "a0464",
@@ -13890,57 +13952,6 @@
         "a0471"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0458"
-          ],
-          "location_ref": "borean-p148",
-          "task_refs": [],
-          "text": "南部虫孔",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0459"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "天崩地裂",
-              "task_id": 11706
-            }
-          ],
-          "text": "↳ 做《天崩地裂》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0460"
-          ],
-          "location_ref": "borean-p149",
-          "task_refs": [],
-          "text": "驯风者巴兰",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0461"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "驯风者巴兰"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "天崩地裂",
-              "task_id": 11706
-            }
-          ],
-          "text": "驯风者巴兰 → 交《天崩地裂》",
-          "type": "task_action"
-        },
         {
           "action_ids": [
             "a0462"
@@ -14072,19 +14083,8 @@
         }
       ],
       "step_id": "step-46",
-      "summary": "完成《天崩地裂》《过关斩将》后回牦牛村交接《牦牛村的陷落》；暂不接《横贯冰原》。",
+      "summary": "完成《过关斩将》后回牦牛村交接《牦牛村的陷落》；暂不接《横贯冰原》。",
       "task_presentations": [
-        {
-          "badge": null,
-          "name": "天崩地裂",
-          "note": "在南部虫孔约(70.3,36.7)使用元素愤怒号角触发塌陷，随后击杀出现的克里卡希斯。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": true,
-          "suppress_action_kinds": [],
-          "task_id": 11706
-        },
         {
           "badge": "shared",
           "name": "过关斩将",
@@ -14113,7 +14113,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "天崩地裂 / 过关斩将 → 牦牛村"
+      "title": "过关斩将 → 牦牛村"
     },
     {
       "action_ids": [
@@ -14220,24 +14220,24 @@
           "task_id": 11574
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "越狱",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11587
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：悬崖异常",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11576
         }
@@ -14372,46 +14372,46 @@
       "summary": "完成《越狱》《监视裂谷：悬崖异常》，回琥珀崖交付并接《调查》《监视裂谷：峭壁断层》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "越狱",
           "note": "先杀蓝玉法师猎手取得蓝玉监狱钥匙，再用钥匙开启奥术牢笼。牢笼集中在约(41.8,39.2)。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11587
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：悬崖异常",
           "note": "约(34.3,42.2)的紫色裂隙处主动使用奥术测量器，不会靠到达坐标自动完成。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11576
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "调查",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11590
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：峭壁断层",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11582
         }
@@ -14425,10 +14425,10 @@
     },
     {
       "action_ids": [
-        "a0488",
-        "a0489",
         "a0490",
         "a0491",
+        "a0488",
+        "a0489",
         "a0492",
         "a0493",
         "a0494",
@@ -14436,30 +14436,6 @@
         "a0496"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0488"
-          ],
-          "location_ref": "borean-p157",
-          "task_refs": [],
-          "text": "蓝玉营地",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0489"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "调查",
-              "task_id": 11590
-            }
-          ],
-          "text": "↳ 做《调查》",
-          "type": "task_action"
-        },
         {
           "action_ids": [
             "a0490"
@@ -14482,6 +14458,30 @@
             }
           ],
           "text": "↳ 做《监视裂谷：峭壁断层》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0488"
+          ],
+          "location_ref": "borean-p157",
+          "task_refs": [],
+          "text": "蓝玉营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0489"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "调查",
+              "task_id": 11590
+            }
+          ],
+          "text": "↳ 做《调查》",
           "type": "task_action"
         },
         {
@@ -14543,29 +14543,29 @@
         }
       ],
       "step_id": "step-49",
-      "summary": "完成《调查》《监视裂谷：峭壁断层》，回琥珀崖交付并接《苔原上的审讯》《监视裂谷：冬鳞洞穴》。",
+      "summary": "先完成《监视裂谷：峭壁断层》，再完成《调查》，回琥珀崖交付并接《苔原上的审讯》《监视裂谷：冬鳞洞穴》。",
       "task_presentations": [
         {
-          "badge": null,
-          "name": "调查",
-          "note": "把蓝玉巫师打到低血量后使用奥术镣铐捕获，再带回琥珀崖。注意别直接打死，镣铐有施法时间。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": true,
-          "suppress_action_kinds": [],
-          "task_id": 11590
-        },
-        {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：峭壁断层",
           "note": "约(43.9,28.6)下潜到海底紫色裂谷处使用奥术测量器。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11582
+        },
+        {
+          "badge": "shared",
+          "name": "调查",
+          "note": "把蓝玉巫师打到低血量后使用奥术镣铐捕获，再带回琥珀崖。注意别直接打死，镣铐有施法时间。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11590
         },
         {
           "badge": null,
@@ -14579,13 +14579,13 @@
           "task_id": 11646
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：冬鳞洞穴",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12728
         }
@@ -14595,7 +14595,7 @@
         "range_minutes": null,
         "status": "requirements"
       },
-      "title": "调查 / 峭壁断层 → 琥珀崖"
+      "title": "峭壁断层 / 调查 → 琥珀崖"
     },
     {
       "action_ids": [
@@ -14809,13 +14809,13 @@
           "task_id": 11646
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "说服的艺术",
           "note": "目标就在诺曼提斯旁边的椅子上；对被封印的蓝玉巫师反复使用任务提供的催眠魔杖，直到任务完成。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11648
         },
@@ -14831,13 +14831,13 @@
           "task_id": 11663
         },
         {
-          "badge": null,
+          "badge": "special",
           "name": "与时间赛跑",
-          "note": "到蓝玉营地最大的圆形平台，对审讯者莎尔兰德的护盾使用任务提供的护盾破坏道具；她落地后击杀。死亡后会出现锁箱，从锁箱拾取莎尔兰德的断裂钥匙，不是直接摸尸体。",
+          "note": "到蓝玉营地最大的圆形平台，对审讯者莎尔兰德的护盾使用任务提供的护盾破坏道具；她落地后击杀。死亡后会出现锁箱，从锁箱拾取莎尔兰德的断裂钥匙，不是直接摸尸体。 五开：只打一遍；击杀后五号依次交互。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11671
         },
@@ -15057,7 +15057,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11681
         },
@@ -17771,13 +17771,13 @@
       "summary": "进入冬鳞洞穴后完成裂谷监测，推进钥匙任务并接护送；沿同一洞穴路线完成《决不投降！》，随护送出洞后回避难所交付。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：冬鳞洞穴",
           "note": "在异常点附近主动使用奥术测量器取得读数，不会自动完成。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12728
         },
@@ -18379,13 +18379,13 @@
       "summary": "从博古洛克乘系统鸟回琥珀崖，向图书馆员盖伦交《监视裂谷：冬鳞洞穴》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监视裂谷：冬鳞洞穴",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12728
         }
