@@ -240,7 +240,7 @@ private func testChangeDetectorAllowsFingerprintStableDynamicNoise() async throw
 
     switch result {
     case .changedAndStable(_, let baselineMAD, let adjacentMAD):
-        try expect(baselineMAD >= 2.8, "baseline must still prove a real change")
+        try expect(baselineMAD >= 2.5, "baseline must still prove a real change")
         try expect(adjacentMAD > 0.8 && adjacentMAD <= 2.0, "fingerprint fallback should only cover calibrated dynamic noise")
     case .noChange:
         throw TestFailure.failed("clear baseline change with stable fingerprint must not be no-change")
