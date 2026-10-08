@@ -76,7 +76,8 @@ batch-state v3 保留 `pending_capture`，并新增每群 `capture_complete`。�
 恢复语义：
 - `pending current` 且 raw 缺失：当前页捕获没有滚动副作用，可以重试同一页；
 - pending 对应 raw 已完整落盘：直接校验并晋升该 raw，不重复 capture；
-- `pending scroll` 且目标 raw 缺失：无法证明滚轮是否已经发生，必须保留 incomplete 并停止，禁止再次滚动；
+- Swift 明确以 pre-scroll 专用退出码证明失败发生在发滚轮之前：允许只撤销该 pending，不推进 page_index、不计 NO_CHANGE；
+- `pending scroll` 且目标 raw 缺失，但没有 pre-scroll 证据：无法证明滚轮是否已经发生，必须保留 incomplete 并停止，禁止再次滚动；
 - 没有 pending 却出现 `next_page_index` 对应 raw：来源无法证明，必须停止，不得猜测晋升。
 
 批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级只保存该群最近页和增量锚点。每群增量锚点必须是连续消息序列；只有 completed batch 才能更新为新的已完成锚点。

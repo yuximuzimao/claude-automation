@@ -28,6 +28,10 @@ class CaptureNoChange(CaptureRunError):
     """Raised when a verified scroll attempt produced no viewport change."""
 
 
+class CapturePreScrollRejected(CaptureRunError):
+    """Raised when capture-step rejected a scroll before any scroll side effect."""
+
+
 @dataclass(frozen=True)
 class CaptureRunConfig:
     batch_id: str
@@ -169,6 +173,18 @@ class CaptureRunner:
             previous = self._previous_page_path(state, page_index, mode)
             try:
                 self.step_executor(self.config, mode, page_index, output, previous)
+            except CapturePreScrollRejected:
+                if mode != "scroll":
+                    raise CaptureRunError("pre-scroll rejection is only valid for scroll capture")
+                self.state_store.abort_pending_capture(
+                    self.config.batch_id,
+                    self.config.group_key,
+                    page_index,
+                    updated_at=self.now(),
+                )
+                raise RecoveryRequired(
+                    "scroll was rejected before any scroll side effect; pending_capture was safely cleared, retry after the viewport is stable"
+                )
             except CaptureNoChange:
                 if mode != "scroll":
                     raise CaptureRunError("no-change is only valid for scroll capture")
@@ -438,6 +454,8 @@ class CaptureRunner:
         result = subprocess.run(command, cwd=self.project_root, check=False)
         if result.returncode == 10:
             raise CaptureNoChange("verified scroll produced no viewport change")
+        if result.returncode == 11:
+            raise CapturePreScrollRejected("capture-step rejected before scroll side effect")
         if result.returncode != 0:
             raise subprocess.CalledProcessError(result.returncode, command)
 

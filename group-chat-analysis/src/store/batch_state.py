@@ -355,6 +355,27 @@ class BatchStateStore:
         self._write(state)
         return state
 
+    def abort_pending_capture(
+        self,
+        batch_id: str,
+        group_key: str,
+        page_index: int,
+        *,
+        updated_at: str,
+    ) -> dict:
+        state = self._require_incomplete(batch_id)
+        if not self._valid_datetime(updated_at):
+            raise StateError("updated_at must be a valid date-time")
+        pending = state["pending_capture"]
+        if pending is None:
+            raise StateError("abort_pending_capture requires a pending_capture")
+        if pending["group_key"] != group_key or pending["page_index"] != page_index:
+            raise StateError("abort_pending_capture does not match pending_capture")
+        state["pending_capture"] = None
+        state["updated_at"] = updated_at
+        self._write(state)
+        return state
+
     def mark_group_capture_complete(
         self,
         batch_id: str,

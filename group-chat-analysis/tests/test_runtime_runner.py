@@ -9,6 +9,7 @@ import unittest
 
 from src.app.run_capture import (
     CaptureNoChange,
+    CapturePreScrollRejected,
     CaptureRunConfig,
     CaptureRunner,
     RecoveryRequired,
@@ -225,6 +226,39 @@ class RuntimeRunnerTests(unittest.TestCase):
         self.assertFalse(
             (self.runtime / "raw/batch-1/group-a/page-000001.json").exists()
         )
+
+    def test_pre_scroll_rejection_clears_pending_without_advancing_page(self) -> None:
+        state_store = BatchStateStore(self.runtime / "state" / "batch-state.json")
+        state_store.start_batch(
+            "batch-1", started_at=self.now(), group_keys=["group-a"]
+        )
+        state_store.begin_capture(
+            "batch-1", "group-a", 0, mode="current", started_at=self.now()
+        )
+        first_path = self.runtime / "raw/batch-1/group-a/page-000000.json"
+        self.write_page(self.config, "current", 0, first_path, None)
+        state_store.record_page(
+            "batch-1", "group-a", 0, updated_at="2026-01-01T00:00:00Z"
+        )
+
+        def reject_before_scroll(_config, mode, page_index, _output, _previous) -> None:
+            self.assertEqual((mode, page_index), ("scroll", 1))
+            raise CapturePreScrollRejected("viewport gate")
+
+        with self.assertRaises(RecoveryRequired):
+            self.runner(reject_before_scroll, page_count=2).run()
+
+        state = state_store.load()
+        self.assertIsNone(state["pending_capture"])
+        self.assertEqual(state["next_page_index"], 1)
+        self.assertEqual(state["groups"]["group-a"]["last_page_index"], 0)
+        self.assertFalse(
+            (self.runtime / "raw/batch-1/group-a/page-000001.json").exists()
+        )
+
+        result = self.runner(page_count=2).run()
+        self.assertEqual(result.status, "completed")
+        self.assertEqual(result.pages, 2)
 
     def test_history_boundary_requires_two_consecutive_no_change_results(self) -> None:
         config = CaptureRunConfig(

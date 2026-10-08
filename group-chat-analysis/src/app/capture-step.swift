@@ -169,6 +169,15 @@ struct CaptureStepMain {
                 fputs("ERROR \(error)\n", stderr)
                 exit(1)
             }
+        } catch let error as QQHistoryCaptureError {
+            switch error {
+            case .viewportMismatch, .safeScrollAnchorNotFound:
+                fputs("PRE_SCROLL_REJECTED \(error)\n", stderr)
+                exit(11)
+            default:
+                fputs("ERROR \(error)\n", stderr)
+                exit(1)
+            }
         } catch {
             fputs("ERROR \(error)\n", stderr)
             exit(1)
