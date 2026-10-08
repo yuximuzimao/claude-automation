@@ -49,8 +49,11 @@
 - v2/v3 batch-state 可确定性迁移到 v4 `capture`，不猜成 incremental；真实 v3 completed state 副本迁移后，两群尾部 anchor 可精确复制到新 incremental `start_anchor`；
 - 首次全量真实 1147/1147 页逐页 reconstruct `bad=0`；全局 page 0–1146 连续无缺页/重复；canonical 共 7293 条，两个群 sequence 各自连续，无未知 group、无重复 record_id；
 - header-only 异常页保守降级为 fragment，不生成伪正文；低运动滚屏模糊区通过 OCR Jaccard 二次证据补判；
-- incremental 确定性回归覆盖：双群新 batch 各重开一次历史窗口、分片恢复不重开、anchor 后裁剪、0/1 新消息、completed 本地重建、历史边界先于 anchor 硬停；真实 baseline 两组 anchor 均只在 canonical 尾部命中并裁剪为 0。
+- incremental 确定性回归覆盖：双群新 batch 各重开一次历史窗口、分片恢复不重开、anchor 后裁剪、0/1 新消息、completed 本地重建、历史边界先于 anchor 硬停；真实 baseline 两组 anchor 均只在 canonical 尾部命中并裁剪为 0；
+- 第一次真实增量 `incremental-20261009-001` 已 completed：95 个 raw pages，最终新增 611 条 canonical（第一群 609 / 第二群 2）；旧 anchor 均未重复入库，sequence 连续、record_id 无重复、新 completed anchor 正确前滚；
+- 真实增量继续校准了部分滚动页和消息头高度：OCR Jaccard 模糊区上限保守放宽到 0.85，header 高度门槛调整为 `1.05×body`；全套 **96/96** 通过；
+- 第一版分析报告已生成到 `runtime/reports/2026-10-09-incremental-001.md`，包含打金信号、副本/版本、装备讨论、玩家黑话速查与待核验项。
 
 ## 下一步
 
-按 `tasks/todo.md` 顶部做第一次真实增量：合入 main 后用新的 batch id 执行 `--incremental`；确认 QQ 重新打开历史窗口后出现首次全量期间的新消息，命中真实 `start_anchor` 后停止，并审计 anchor 不重复入库、sequence 连续、新 completed anchor 正确滚动。
+按 `tasks/todo.md` 顶部进入阶段 4：评审第一版日报/黑话词典格式，确认哪些栏目真正有用；随后再验证更大单日上下文的分块分析策略。黑话/简称优先结合群聊上下文，遇到不确定或时效性强的词再查公开资料核对。
