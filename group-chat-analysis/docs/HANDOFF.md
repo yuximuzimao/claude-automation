@@ -16,7 +16,7 @@
 
 阶段 3 的安全切群也已实机往返验证：`src/capture/ConversationSwitcher.swift` + `src/app/open-history.swift` 只在“左侧会话 OCR 唯一命中 → 选中后头部复核 → tooltip 精确为 `聊天记录` → 历史窗口标题精确匹配”全部成立时执行。两个目标历史窗口标题已确认，真实成员数只作为当次额外证据，不进入长期身份配置。
 
-两群首次全量编排也已完成：全 batch 共用递增 page_index；每群只有连续两次独立 `NO_CHANGE` 才 `capture_complete`；默认每轮最多新增 20 页，并且只在 durable raw + `pending_capture=null` 的安全点返回 incomplete。已有 durable 页的未完成群恢复时不主动重开历史窗口；状态冲突、群集合变化、`pending scroll + raw 缺失` 都在任何 QQ UI 动作前硬停。
+两群首次全量编排已经完成并通过真实长跑：`first-full-20261008` 最终得到第一群 891 页 / 5700 条 canonical、第二群 256 页 / 1593 条 canonical，合计 1147 页 / 7293 条。全 batch 共用递增 page_index；每群只有连续两次独立 `NO_CHANGE` 才 `capture_complete`；默认每轮最多新增 20 页，并且只在 durable raw + `pending_capture=null` 的安全点返回 incomplete。已有 durable 页的未完成群恢复时不主动重开历史窗口；状态冲突、群集合变化、`pending scroll + raw 缺失` 都在任何 QQ UI 动作前硬停。
 
 ## 当前关键契约
 
@@ -33,7 +33,7 @@
 
 ## 验证
 
-`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **79/79 通过**。
+`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **81/81 通过**。
 
 真实验证包括：
 - 唯一 runner 实跑 3 页并 completed；
@@ -45,8 +45,10 @@
 - 两个目标群正式 `open-history` 往返成功，系统窗口标题分别精确匹配目标；
 - 正文消息包含“表情”时不再误截工具栏，真实页 content_region 高度由错误约 `0.192` 恢复到约 `0.852`；
 - 两群同 batch、双 NO_CHANGE 边界、20 页安全分片、已有 durable 页恢复不重开历史窗口、状态冲突 UI 前硬停均有确定性回归；
-- v2 batch-state 可确定性迁移到 v3，不把旧 incomplete 群猜成 capture_complete。
+- v2 batch-state 可确定性迁移到 v3，不把旧 incomplete 群猜成 capture_complete；
+- 首次全量真实 1147/1147 页逐页 reconstruct `bad=0`；全局 page 0–1146 连续无缺页/重复；canonical 共 7293 条，两个群 sequence 各自连续，无未知 group、无重复 record_id；
+- header-only 异常页保守降级为 fragment，不生成伪正文；低运动滚屏模糊区通过 OCR Jaccard 二次证据补判。
 
 ## 下一步
 
-按 `tasks/todo.md` 顶部继续阶段 3：在 main 上用唯一 `--full` 入口和同一 batch_id 按 20 页安全分片启动真实首次全量；每轮结束检查 state/raw，两个群都 capture_complete 后立即做完整性审计。
+按 `tasks/todo.md` 顶部进入阶段 5：实现并验证每日增量。每个群开始增量前必须重新打开“聊天记录”窗口刷新最新快照；随后从最新向旧扫描，命中上一 completed batch 的连续消息 anchor 后停止，并只提交 anchor 之后的新消息。
