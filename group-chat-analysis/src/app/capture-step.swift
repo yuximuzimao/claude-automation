@@ -110,10 +110,22 @@ struct CaptureStepMain {
     static func main() async {
         do {
             let args = try CaptureStepArguments.parse(CommandLine.arguments)
-            try await QQWindowPreparer.prepare(
-                expectedTitle: args.expectedTitle,
-                geometry: args.geometry
-            )
+            if args.mode == "scroll" {
+                do {
+                    try await QQWindowPreparer.prepare(
+                        expectedTitle: args.expectedTitle,
+                        geometry: args.geometry
+                    )
+                } catch let error as WindowPreparationError {
+                    fputs("PRE_SCROLL_REJECTED \(error)\n", stderr)
+                    exit(11)
+                }
+            } else {
+                try await QQWindowPreparer.prepare(
+                    expectedTitle: args.expectedTitle,
+                    geometry: args.geometry
+                )
+            }
 
             let page: CapturedPage
             if args.mode == "current" {
