@@ -221,6 +221,34 @@ private func testChangeDetectorAcceptsDelayedStability() async throws {
     }
 }
 
+private func testChangeDetectorAllowsFingerprintStableDynamicNoise() async throws {
+    let black = try solidImage(0)
+    let gray10 = try solidImage(10)
+    let gray11 = try solidImage(11)
+    let region = CaptureBBox(x: 0, y: 0, width: 1, height: 1)
+    var frames = [gray10, gray11, gray11]
+
+    let result = try await ScrollChangeDetector.waitForStableChange(
+        baseline: black,
+        region: region
+    ) {
+        if frames.isEmpty {
+            return gray11
+        }
+        return frames.removeFirst()
+    }
+
+    switch result {
+    case .changedAndStable(_, let baselineMAD, let adjacentMAD):
+        try expect(baselineMAD >= 3.0, "baseline must still prove a real change")
+        try expect(adjacentMAD > 0.8 && adjacentMAD <= 2.0, "fingerprint fallback should only cover calibrated dynamic noise")
+    case .noChange:
+        throw TestFailure.failed("clear baseline change with stable fingerprint must not be no-change")
+    case .uncertain:
+        throw TestFailure.failed("calibrated dynamic noise should not block a stable changed page")
+    }
+}
+
 private func testVisualFingerprintDistance() throws {
     let zero = "dhash512:" + String(repeating: "0", count: 128)
     let fourBits = "dhash512:" + String(repeating: "0", count: 127) + "f"
@@ -307,6 +335,7 @@ struct CapturePureTestsMain {
             try testMAD()
             try await testChangeDetectorRejectsReturnToBaseline()
             try await testChangeDetectorAcceptsDelayedStability()
+            try await testChangeDetectorAllowsFingerprintStableDynamicNoise()
             try testVisualFingerprintDistance()
             try testCaptureSchemaShape()
             try testRawWriterPersistsAndRefusesOverwrite()

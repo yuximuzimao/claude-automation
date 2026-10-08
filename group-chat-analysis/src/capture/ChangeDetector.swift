@@ -105,7 +105,8 @@ struct SparseRGBMAD {
 
 struct ScrollChangeDetector {
     static let quietThreshold = 0.80
-    static let changedThreshold = 2.00
+    static let dynamicNoiseThreshold = 2.00
+    static let changedThreshold = 3.00
     static let checkpointsMilliseconds = [100, 250, 500, 1000, 1500, 2000]
 
     static func waitForStableChange(
@@ -114,9 +115,12 @@ struct ScrollChangeDetector {
         capture: @escaping () async throws -> CGImage
     ) async throws -> ScrollStabilityResult {
         var previous = baseline
+        var previousFingerprint = try VisualFingerprint.make(baseline)
+        let baselineFingerprint = previousFingerprint
         var previousCheckpoint = 0
         var everChanged = false
-        var allBaselineQuiet = true
+        var allBaselineWithinDynamicNoise = true
+        var allBaselineSameViewport = true
         var maxBaselineMAD = 0.0
         var lastBaselineMAD = 0.0
         var lastAdjacentMAD: Double?
@@ -127,6 +131,7 @@ struct ScrollChangeDetector {
             previousCheckpoint = checkpoint
 
             let current = try await capture()
+            let currentFingerprint = try VisualFingerprint.make(current)
             let baselineMAD = try SparseRGBMAD.measure(
                 baseline,
                 current,
@@ -137,29 +142,43 @@ struct ScrollChangeDetector {
                 current,
                 region: region
             )
+            let baselineSameViewport = try VisualFingerprint.sameViewport(
+                baselineFingerprint,
+                currentFingerprint
+            )
+            let adjacentSameViewport = try VisualFingerprint.sameViewport(
+                previousFingerprint,
+                currentFingerprint
+            )
             lastBaselineMAD = baselineMAD
             lastAdjacentMAD = adjacentMAD
             maxBaselineMAD = max(maxBaselineMAD, baselineMAD)
 
-            if baselineMAD > quietThreshold {
-                allBaselineQuiet = false
+            if baselineMAD > dynamicNoiseThreshold {
+                allBaselineWithinDynamicNoise = false
+            }
+            if !baselineSameViewport {
+                allBaselineSameViewport = false
             }
             if baselineMAD >= changedThreshold {
                 everChanged = true
             }
-            if everChanged &&
-                baselineMAD >= changedThreshold &&
-                adjacentMAD <= quietThreshold {
+            let stableNow = adjacentMAD <= quietThreshold ||
+                (adjacentMAD <= dynamicNoiseThreshold && adjacentSameViewport)
+            if everChanged && baselineMAD >= changedThreshold && stableNow {
                 return .changedAndStable(
                     current,
                     baselineMAD: baselineMAD,
                     adjacentMAD: adjacentMAD
                 )
             }
-            if checkpoint >= 500 && allBaselineQuiet {
+            if checkpoint >= 500 &&
+                allBaselineWithinDynamicNoise &&
+                allBaselineSameViewport {
                 return .noChange(maxBaselineMAD: maxBaselineMAD)
             }
             previous = current
+            previousFingerprint = currentFingerprint
         }
 
         return .uncertain(
