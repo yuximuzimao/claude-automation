@@ -192,6 +192,35 @@ private func testChangeDetectorRejectsReturnToBaseline() async throws {
     }
 }
 
+private func testChangeDetectorAcceptsDelayedStability() async throws {
+    let black = try solidImage(0)
+    let white = try solidImage(255)
+    let gray128 = try solidImage(128)
+    let gray64 = try solidImage(64)
+    let gray32 = try solidImage(32)
+    let region = CaptureBBox(x: 0, y: 0, width: 1, height: 1)
+    var frames = [white, gray128, gray64, gray32, gray32]
+
+    let result = try await ScrollChangeDetector.waitForStableChange(
+        baseline: black,
+        region: region
+    ) {
+        if frames.isEmpty {
+            return gray32
+        }
+        return frames.removeFirst()
+    }
+
+    switch result {
+    case .changedAndStable:
+        return
+    case .noChange:
+        throw TestFailure.failed("a delayed changed page must not be reported as no-change")
+    case .uncertain:
+        throw TestFailure.failed("a page stable by 1500ms should be accepted")
+    }
+}
+
 private func testVisualFingerprintDistance() throws {
     let zero = "dhash512:" + String(repeating: "0", count: 128)
     let fourBits = "dhash512:" + String(repeating: "0", count: 127) + "f"
@@ -277,6 +306,7 @@ struct CapturePureTestsMain {
             try testConversationSwitcherPureGates()
             try testMAD()
             try await testChangeDetectorRejectsReturnToBaseline()
+            try await testChangeDetectorAcceptsDelayedStability()
             try testVisualFingerprintDistance()
             try testCaptureSchemaShape()
             try testRawWriterPersistsAndRefusesOverwrite()
