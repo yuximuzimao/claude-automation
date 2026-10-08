@@ -104,6 +104,23 @@ class PageReconstructTests(unittest.TestCase):
         self.assertEqual(message.content_text, "第一行")
         self.assertTrue(any(fragment.kind == "orphan" and "疑似漏头部" in fragment.text for fragment in result.fragments))
 
+    def test_header_only_page_is_preserved_as_fragments(self) -> None:
+        blocks = [
+            raw_block(0, "2026/10/08", 0.01, 0.82, 0.06, 0.014),
+            raw_block(1, "玩家甲 13:27", 0.04, 0.64, 0.09, 0.015),
+            raw_block(2, "玩家乙 13:26", 0.04, 0.43, 0.09, 0.014),
+            raw_block(3, "玩家丙 13:21", 0.04, 0.10, 0.09, 0.016),
+        ]
+
+        result = reconstruct_page(page(blocks, region_y=0.02, region_height=0.85))
+
+        self.assertEqual(result.messages, ())
+        self.assertEqual([item.kind for item in result.fragments], ["header_only"] * 3)
+        self.assertEqual(
+            [item.sender_display for item in result.fragments],
+            ["玩家甲", "玩家乙", "玩家丙"],
+        )
+
     def test_dense_small_ocr_under_one_header_is_degraded_to_unknown_media(self) -> None:
         blocks = [
             raw_block(0, "玩家甲 09:10", 0.04, 0.78, 0.09, 0.014),

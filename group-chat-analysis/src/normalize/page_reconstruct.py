@@ -247,9 +247,21 @@ def _estimate_body_height(lines: list[VisualLine]) -> float:
         for line in lines
         if _header_parts(line.text) is None and DATE_RE.match(line.text) is None
     ]
-    if not fallback:
-        raise PageReconstructionError("cannot estimate body text height")
-    return median(fallback)
+    if fallback:
+        return median(fallback)
+
+    header_heights = [
+        line.bbox.height
+        for line in lines
+        if _header_parts(line.text) is not None
+    ]
+    if header_heights:
+        # A header-only page usually means the visible message bodies are
+        # non-text/media or OCR missed them. Keep the headers as fragments
+        # instead of failing the entire batch; this height is only structural.
+        return median(header_heights) * 1.25
+
+    raise PageReconstructionError("cannot estimate body text height")
 
 
 def _is_header(line: VisualLine, body_height: float) -> tuple[str | None, str] | None:
