@@ -106,7 +106,7 @@ struct SparseRGBMAD {
 struct ScrollChangeDetector {
     static let quietThreshold = 0.80
     static let dynamicNoiseThreshold = 2.00
-    static let changedThreshold = 3.00
+    static let changedThreshold = 2.80
     static let checkpointsMilliseconds = [100, 250, 500, 1000, 1500, 2000]
 
     static func waitForStableChange(
