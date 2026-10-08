@@ -16,8 +16,9 @@
 - 保守发送者匹配：相似昵称不归并、一侧昵称缺失不破坏性去重；
 - `message_type` / `timestamp_text` 兼容性与两条最小重叠强锚点；
 - capture 页“新→旧”到最终消息“旧→新”的方向转换；
-- batch-state v3：`pending_capture`、每群 `capture_complete`、v2 迁移、页恢复点、状态转换和连续锚点门禁；
+- batch-state v4：`pending_capture`、每群 `capture_complete`、`batch_kind/start_anchor`、v2/v3 迁移、页恢复点、状态转换和连续锚点门禁；
 - 唯一 runner 的 pending/raw reconcile、stray raw 拒绝、pending scroll 硬停等故障注入；
+- incremental：连续 anchor 停止/裁剪、重复 anchor 取最早匹配、双群新 batch 重开历史窗口、分片续跑不重开、0/1 新消息、历史边界先于 anchor 硬停、completed 本地重建；
 - canonical messages 原子/幂等提交与 messages→completed→current 崩溃恢复；
 - current.md 构建顺序；
 - message-record 校验与 Schema 结构真值同步。

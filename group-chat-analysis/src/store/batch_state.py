@@ -14,6 +14,7 @@ SCHEMA_PATH = Path(__file__).resolve().parents[2] / "schemas" / "batch-state.sch
 _SCHEMA = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
 STATE_SCHEMA_VERSION = _SCHEMA["properties"]["schema_version"]["const"]
 STATE_STATUSES = frozenset(_SCHEMA["properties"]["status"]["enum"])
+STATE_BATCH_KINDS = frozenset(_SCHEMA["properties"]["batch_kind"]["enum"])
 STATE_KEYS = frozenset(_SCHEMA["properties"])
 GROUP_PROGRESS_KEYS = frozenset(_SCHEMA["$defs"]["groupProgress"]["properties"])
 PENDING_CAPTURE_KEYS = frozenset(_SCHEMA["$defs"]["pendingCapture"]["properties"])
@@ -56,24 +57,35 @@ class BatchStateStore:
             state = json.loads(self.path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise StateError("batch state is not valid JSON") from exc
-        if isinstance(state, dict) and state.get("schema_version") == "2":
-            state = self._upgrade_v2_state(state)
+        if isinstance(state, dict) and state.get("schema_version") in {"2", "3"}:
+            state = self._upgrade_legacy_state(state)
             self._write(state)
         self._validate_state(state)
         return state
 
     @staticmethod
-    def _upgrade_v2_state(state: dict) -> dict:
+    def _upgrade_legacy_state(state: dict) -> dict:
         upgraded = json.loads(json.dumps(state))
-        upgraded["schema_version"] = STATE_SCHEMA_VERSION
-        capture_complete = upgraded.get("status") in {"completed", "analyzed"}
+        legacy_version = upgraded.get("schema_version")
         groups = upgraded.get("groups")
         if not isinstance(groups, dict):
             raise StateError("legacy batch state groups are invalid")
-        for progress in groups.values():
-            if not isinstance(progress, dict):
-                raise StateError("legacy group progress is invalid")
-            progress["capture_complete"] = capture_complete
+        if legacy_version == "2":
+            capture_complete = upgraded.get("status") in {"completed", "analyzed"}
+            for progress in groups.values():
+                if not isinstance(progress, dict):
+                    raise StateError("legacy group progress is invalid")
+                progress["capture_complete"] = capture_complete
+                progress["start_anchor"] = []
+        elif legacy_version == "3":
+            for progress in groups.values():
+                if not isinstance(progress, dict):
+                    raise StateError("legacy group progress is invalid")
+                progress["start_anchor"] = []
+        else:
+            raise StateError("unsupported legacy batch state schema version")
+        upgraded["batch_kind"] = "capture"
+        upgraded["schema_version"] = STATE_SCHEMA_VERSION
         return upgraded
 
     @staticmethod
@@ -96,6 +108,8 @@ class BatchStateStore:
             raise StateError("unsupported batch state schema version")
         if not isinstance(state["batch_id"], str) or not state["batch_id"]:
             raise StateError("batch_id is required")
+        if state["batch_kind"] not in STATE_BATCH_KINDS:
+            raise StateError("unsupported batch_kind")
         if state["status"] not in STATE_STATUSES:
             raise StateError("unsupported batch state status")
         if not cls._valid_datetime(state["started_at"]):
@@ -177,26 +191,35 @@ class BatchStateStore:
             if pending is not None and pending["group_key"] == group_key and capture_complete:
                 raise StateError("capture_complete group cannot have pending_capture")
 
-            anchors = progress["last_completed_anchor"]
-            if not isinstance(anchors, list):
-                raise StateError("last_completed_anchor must be an array")
-            for anchor in anchors:
-                if not isinstance(anchor, dict) or set(anchor) != ANCHOR_KEYS:
-                    raise StateError("invalid completed anchor fields")
-                sequence = anchor["sequence"]
-                if (
-                    not isinstance(sequence, int)
-                    or isinstance(sequence, bool)
-                    or sequence < 0
-                    or not isinstance(anchor["content_text"], str)
-                    or not anchor["content_text"]
-                ):
-                    raise StateError("invalid completed anchor")
-                for field in ("sender_display", "timestamp_text"):
-                    if anchor[field] is not None and not isinstance(anchor[field], str):
-                        raise StateError("invalid completed anchor")
+            anchor_sets = {
+                "start_anchor": progress["start_anchor"],
+                "last_completed_anchor": progress["last_completed_anchor"],
+            }
+            for anchor_name, anchors in anchor_sets.items():
+                if not isinstance(anchors, list):
+                    raise StateError(f"{anchor_name} must be an array")
+                for anchor in anchors:
+                    if not isinstance(anchor, dict) or set(anchor) != ANCHOR_KEYS:
+                        raise StateError("invalid anchor fields")
+                    sequence = anchor["sequence"]
+                    if (
+                        not isinstance(sequence, int)
+                        or isinstance(sequence, bool)
+                        or sequence < 0
+                        or not isinstance(anchor["content_text"], str)
+                        or not anchor["content_text"]
+                    ):
+                        raise StateError("invalid anchor")
+                    for field in ("sender_display", "timestamp_text"):
+                        if anchor[field] is not None and not isinstance(anchor[field], str):
+                            raise StateError("invalid anchor")
+                sequences = [anchor["sequence"] for anchor in anchors]
+                if sequences and sequences != list(range(sequences[0], sequences[0] + len(sequences))):
+                    raise StateError(f"{anchor_name} sequence must be adjacent and ordered")
 
-            if state["status"] in {"completed", "analyzed"} and len(anchors) < MIN_ANCHOR_COUNT:
+            if state["batch_kind"] == "incremental" and len(progress["start_anchor"]) < MIN_ANCHOR_COUNT:
+                raise StateError("incremental batch requires a continuous start_anchor")
+            if state["status"] in {"completed", "analyzed"} and len(progress["last_completed_anchor"]) < MIN_ANCHOR_COUNT:
                 raise StateError("completed state requires continuous anchors")
 
         if captured_last_pages:
@@ -211,9 +234,11 @@ class BatchStateStore:
         *,
         started_at: str,
         group_keys: list[str],
+        batch_kind: str = "capture",
     ) -> dict:
         if (
             not batch_id
+            or batch_kind not in STATE_BATCH_KINDS
             or not group_keys
             or any(not isinstance(group_key, str) or not group_key for group_key in group_keys)
             or len(set(group_keys)) != len(group_keys)
@@ -225,6 +250,8 @@ class BatchStateStore:
         if previous is not None and previous["status"] == "incomplete":
             if previous["batch_id"] != batch_id:
                 raise StateError("cannot replace an incomplete batch")
+            if previous["batch_kind"] != batch_kind:
+                raise StateError("cannot resume an incomplete batch with different batch_kind")
             if set(previous["groups"]) != set(group_keys):
                 raise StateError("cannot resume an incomplete batch with different groups")
             return previous
@@ -233,6 +260,7 @@ class BatchStateStore:
         state = {
             "schema_version": STATE_SCHEMA_VERSION,
             "batch_id": batch_id,
+            "batch_kind": batch_kind,
             "status": "incomplete",
             "started_at": started_at,
             "updated_at": started_at,
@@ -244,6 +272,11 @@ class BatchStateStore:
                 group_key: {
                     "capture_complete": False,
                     "last_page_index": None,
+                    "start_anchor": (
+                        previous_groups.get(group_key, {}).get("last_completed_anchor", [])
+                        if batch_kind == "incremental"
+                        else []
+                    ),
                     "last_completed_anchor": previous_groups.get(group_key, {}).get(
                         "last_completed_anchor", []
                     ),

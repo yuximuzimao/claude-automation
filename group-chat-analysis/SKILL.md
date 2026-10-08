@@ -25,8 +25,9 @@
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
-| `src/app/run_capture.py` | 唯一正式运行入口；固定页数诊断与 `--full` 首次全量 | 改运行/恢复 CLI 时 |
-| `src/app/full_capture.py` | 两群首次全量薄编排、历史边界与安全分片 | 改首次全量编排时 |
+| `src/app/run_capture.py` | 唯一正式运行入口；固定页数诊断、`--full`、`--incremental` | 改运行/恢复 CLI 时 |
+| `src/app/full_capture.py` | 两群安全串行基础编排、首次全量历史边界与安全分片 | 改双群/首次全量编排时 |
+| `src/app/incremental_capture.py` | 两群每日增量、强制刷新历史快照与 anchor 停止 | 改增量编排时 |
 | `src/app/capture-step.swift` | 内部单步 current/scroll capture | 改 Swift 单步执行边界时 |
 | `src/app/open-history.swift` | 安全打开目标群聊天记录窗口 | 改两群切换入口时 |
 | `src/capture/ConversationSwitcher.swift` | 会话 OCR 定位、目标复核、聊天记录 tooltip/窗口门禁 | 改 QQ 群切换安全逻辑时 |
@@ -34,6 +35,7 @@
 | `src/normalize/page_reconstruct.py` | 单页 bbox→消息/fragment/media unknown | 改几何重建时 |
 | `src/normalize/assemble.py` | 同群多页组装与 Schema records | 改跨页组装时 |
 | `src/normalize/overlap.py` | 相邻页保守去重与 capture→聊天顺序转换 | 改跨页去重/顺序时 |
+| `src/normalize/incremental.py` | 上一 completed anchor 匹配、裁剪与新增消息重编号 | 改增量停止/裁剪时 |
 | `src/store/batch_state.py` | 可恢复 batch/state | 改恢复点/状态机时 |
 | `src/store/message_record.py` | message-record 正式运行时校验 | 改消息持久化契约时 |
 | `src/store/message_store.py` | canonical messages.jsonl 原子/幂等持久化 | 改消息库时 |

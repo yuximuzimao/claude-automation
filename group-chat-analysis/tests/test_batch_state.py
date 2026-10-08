@@ -109,10 +109,83 @@ class BatchStateTests(unittest.TestCase):
 
         migrated = self.store.load()
 
-        self.assertEqual(migrated["schema_version"], "3")
+        self.assertEqual(migrated["schema_version"], "4")
+        self.assertEqual(migrated["batch_kind"], "capture")
         self.assertFalse(migrated["groups"]["group-a"]["capture_complete"])
+        self.assertEqual(migrated["groups"]["group-a"]["start_anchor"], [])
         persisted = json.loads(self.store.path.read_text(encoding="utf-8"))
-        self.assertEqual(persisted["schema_version"], "3")
+        self.assertEqual(persisted["schema_version"], "4")
+
+    def test_v3_state_is_migrated_to_capture_with_empty_start_anchor(self) -> None:
+        state = self.store.start_batch(
+            "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
+        )
+        legacy = json.loads(json.dumps(state))
+        legacy["schema_version"] = "3"
+        legacy.pop("batch_kind")
+        legacy["groups"]["group-a"].pop("start_anchor")
+        self.store.path.write_text(json.dumps(legacy), encoding="utf-8")
+
+        migrated = self.store.load()
+
+        self.assertEqual(migrated["schema_version"], "4")
+        self.assertEqual(migrated["batch_kind"], "capture")
+        self.assertEqual(migrated["groups"]["group-a"]["start_anchor"], [])
+
+    def test_incremental_batch_copies_previous_completed_anchor_as_start_anchor(self) -> None:
+        self.store.start_batch(
+            "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
+        )
+        self._record_page(
+            "batch-1", "group-a", 0, updated_at="2026-01-01T00:01:00Z"
+        )
+        self._complete_group(
+            "batch-1", "group-a", completed_at="2026-01-01T00:01:30Z"
+        )
+        anchors = [Anchor(4, "old-1", "Alice", "09:01"), Anchor(5, "old-2", "Bob", "09:02")]
+        self.store.complete_batch(
+            "batch-1",
+            anchors={"group-a": anchors},
+            completed_at="2026-01-01T00:02:00Z",
+        )
+
+        incremental = self.store.start_batch(
+            "batch-2",
+            started_at="2026-01-02T00:00:00Z",
+            group_keys=["group-a"],
+            batch_kind="incremental",
+        )
+
+        self.assertEqual(incremental["batch_kind"], "incremental")
+        self.assertEqual(
+            incremental["groups"]["group-a"]["start_anchor"],
+            [item.as_dict() for item in anchors],
+        )
+        self.assertEqual(
+            incremental["groups"]["group-a"]["last_completed_anchor"],
+            [item.as_dict() for item in anchors],
+        )
+
+    def test_incremental_batch_without_previous_anchor_is_rejected(self) -> None:
+        with self.assertRaises(StateError):
+            self.store.start_batch(
+                "batch-1",
+                started_at="2026-01-01T00:00:00Z",
+                group_keys=["group-a"],
+                batch_kind="incremental",
+            )
+
+    def test_incomplete_batch_cannot_resume_with_different_batch_kind(self) -> None:
+        self.store.start_batch(
+            "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
+        )
+        with self.assertRaises(StateError):
+            self.store.start_batch(
+                "batch-1",
+                started_at="2026-01-01T00:01:00Z",
+                group_keys=["group-a"],
+                batch_kind="incremental",
+            )
 
     def test_incomplete_batch_cannot_be_replaced(self) -> None:
         self.store.start_batch(

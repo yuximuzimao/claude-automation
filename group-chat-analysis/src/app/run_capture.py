@@ -11,9 +11,10 @@ import subprocess
 from typing import Callable
 
 from src.normalize.assemble import assemble_capture_pages
+from src.normalize.incremental import find_anchor_end, reindex_new_records_after_anchor
 from src.normalize.page_reconstruct import validate_capture_page
 from src.store import BatchStateStore, MessageStore, StateError
-from src.store.finalize import finalize_batch
+from src.store.finalize import finalize_batch, finalize_incremental_batch
 
 
 class CaptureRunError(RuntimeError):
@@ -47,6 +48,7 @@ class CaptureRunConfig:
     batch_group_keys: tuple[str, ...] = ()
     boundary_confirmations: int = 2
     max_new_pages: int | None = None
+    batch_kind: str = "capture"
 
 
 @dataclass(frozen=True)
@@ -111,12 +113,16 @@ class CaptureRunner:
             self.config.batch_id,
             started_at=self.now(),
             group_keys=list(self.batch_group_keys),
+            batch_kind=self.config.batch_kind,
         )
         if state["groups"][self.config.group_key]["capture_complete"]:
             return self._finish_or_report_incomplete(state)
 
         state = self._reconcile_pending(state)
         self._reject_stray_next_raw(state)
+        state, anchor_found = self._mark_incremental_anchor_if_found(state)
+        if anchor_found:
+            return self._finish_or_report_incomplete(state)
         no_change_streak = 0
         new_pages = 0
 
@@ -196,6 +202,10 @@ class CaptureRunner:
                 )
                 no_change_streak += 1
                 if no_change_streak >= self.config.boundary_confirmations:
+                    if self.config.batch_kind == "incremental":
+                        raise RecoveryRequired(
+                            "history boundary was reached before the previous completed anchor; refusing to complete incremental capture"
+                        )
                     state = self.state_store.mark_group_capture_complete(
                         self.config.batch_id,
                         self.config.group_key,
@@ -213,8 +223,31 @@ class CaptureRunner:
             )
             new_pages += 1
             no_change_streak = 0
+            state, anchor_found = self._mark_incremental_anchor_if_found(state)
+            if anchor_found:
+                break
 
         return self._finish_or_report_incomplete(state)
+
+    def _mark_incremental_anchor_if_found(self, state: dict) -> tuple[dict, bool]:
+        if self.config.batch_kind != "incremental":
+            return state, False
+        progress = state["groups"][self.config.group_key]
+        if progress["capture_complete"]:
+            return state, True
+        if progress["last_page_index"] is None:
+            return state, False
+        anchors = progress["start_anchor"]
+        pages = self._load_recorded_pages(state, group_key=self.config.group_key)
+        assembled = assemble_capture_pages(pages)
+        if find_anchor_end(assembled.records, anchors) is None:
+            return state, False
+        completed = self.state_store.mark_group_capture_complete(
+            self.config.batch_id,
+            self.config.group_key,
+            completed_at=self.now(),
+        )
+        return completed, True
 
     def _finish_or_report_incomplete(self, state: dict) -> CaptureRunResult:
         if not all(
@@ -229,7 +262,12 @@ class CaptureRunner:
             )
 
         records, page_count = self._assemble_all_groups(state)
-        finalize_batch(
+        finalizer = (
+            finalize_incremental_batch
+            if self.config.batch_kind == "incremental"
+            else finalize_batch
+        )
+        finalizer(
             state_store=self.state_store,
             message_store=self.message_store,
             batch_id=self.config.batch_id,
@@ -246,10 +284,17 @@ class CaptureRunner:
         )
 
     def _rebuild_completed(self, state: dict) -> CaptureRunResult:
+        if state.get("batch_kind") != self.config.batch_kind:
+            raise CaptureRunError("completed state batch_kind does not match runner mode")
         if set(state["groups"]) != set(self.batch_group_keys):
             raise CaptureRunError("completed state groups do not match runner groups")
         records, page_count = self._assemble_all_groups(state)
-        finalize_batch(
+        finalizer = (
+            finalize_incremental_batch
+            if self.config.batch_kind == "incremental"
+            else finalize_batch
+        )
+        finalizer(
             state_store=self.state_store,
             message_store=self.message_store,
             batch_id=self.config.batch_id,
@@ -271,7 +316,13 @@ class CaptureRunner:
         for group_key in self.batch_group_keys:
             pages = self._load_recorded_pages(state, group_key=group_key)
             assembled = assemble_capture_pages(pages)
-            records.extend(assembled.records)
+            group_records = list(assembled.records)
+            if self.config.batch_kind == "incremental":
+                group_records = reindex_new_records_after_anchor(
+                    group_records,
+                    state["groups"][group_key]["start_anchor"],
+                )
+            records.extend(group_records)
             page_count += len(pages)
         return records, page_count
 
@@ -410,6 +461,10 @@ class CaptureRunner:
     def _validate_config(self) -> None:
         if not self.config.batch_id or not self.config.group_key or not self.config.expected_title:
             raise CaptureRunError("batch_id, group_key, and expected_title are required")
+        if self.config.batch_kind not in {"capture", "incremental"}:
+            raise CaptureRunError("batch_kind must be capture or incremental")
+        if self.config.batch_kind == "incremental" and self.config.page_count is not None:
+            raise CaptureRunError("incremental capture cannot use a fixed page_count")
         if self.config.group_key not in self.batch_group_keys:
             raise CaptureRunError("group_key must be part of batch_group_keys")
         if len(set(self.batch_group_keys)) != len(self.batch_group_keys):
@@ -484,7 +539,9 @@ class CaptureRunner:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run resumable QQ group capture")
     parser.add_argument("--batch-id", required=True)
-    parser.add_argument("--full", action="store_true", help="capture all groups from config/local.json to history boundary")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--full", action="store_true", help="capture all groups from config/local.json to history boundary")
+    mode.add_argument("--incremental", action="store_true", help="capture only messages newer than the previous completed anchors")
     parser.add_argument("--config", type=Path, default=Path("config/local.json"))
     parser.add_argument("--max-new-pages", type=int, default=20)
     parser.add_argument("--group-key")
@@ -497,7 +554,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--scroll-pixels", type=int, default=630)
     parser.add_argument("--runtime-root", type=Path, default=Path("runtime"))
     args = parser.parse_args()
-    if args.full:
+    if args.full or args.incremental:
         return args
 
     required = (
@@ -518,7 +575,7 @@ def main() -> None:
     project_root = Path(__file__).resolve().parents[2]
     args = parse_args()
     try:
-        if args.full:
+        if args.full or args.incremental:
             from .full_capture import FullCaptureRunner, load_local_full_capture_config
 
             config_path = args.config if args.config.is_absolute() else project_root / args.config
@@ -528,7 +585,12 @@ def main() -> None:
                 runtime_root=args.runtime_root,
                 max_new_pages_per_run=args.max_new_pages,
             )
-            result = FullCaptureRunner(project_root, config).run()
+            if args.incremental:
+                from .incremental_capture import IncrementalCaptureRunner
+
+                result = IncrementalCaptureRunner(project_root, config).run()
+            else:
+                result = FullCaptureRunner(project_root, config).run()
         else:
             config = CaptureRunConfig(
                 batch_id=args.batch_id,

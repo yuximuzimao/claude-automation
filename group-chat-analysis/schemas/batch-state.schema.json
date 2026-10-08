@@ -8,6 +8,7 @@
   "required": [
     "schema_version",
     "batch_id",
+    "batch_kind",
     "status",
     "started_at",
     "updated_at",
@@ -19,11 +20,14 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "3"
+      "const": "4"
     },
     "batch_id": {
       "type": "string",
       "minLength": 1
+    },
+    "batch_kind": {
+      "enum": ["capture", "incremental"]
     },
     "status": {
       "enum": ["incomplete", "completed", "analyzed"]
@@ -108,6 +112,7 @@
       "required": [
         "capture_complete",
         "last_page_index",
+        "start_anchor",
         "last_completed_anchor"
       ],
       "properties": {
@@ -117,6 +122,12 @@
         "last_page_index": {
           "type": ["integer", "null"],
           "minimum": 0
+        },
+        "start_anchor": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/anchorMessage"
+          }
         },
         "last_completed_anchor": {
           "type": "array",

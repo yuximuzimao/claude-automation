@@ -32,8 +32,9 @@
 ## 代码与测试
 
 - `../src/README.md`：正式代码模块边界、依赖方向与当前门禁。
-- `../src/app/run_capture.py`：唯一正式运行入口；固定页数诊断与 `--full` 首次全量。
-- `../src/app/full_capture.py`：两群首次全量薄编排、双 no-change 历史边界与安全分片。
+- `../src/app/run_capture.py`：唯一正式运行入口；固定页数诊断、`--full` 首次全量与 `--incremental` 每日增量。
+- `../src/app/full_capture.py`：两群安全串行基础编排、首次全量双 no-change 历史边界与安全分片。
+- `../src/app/incremental_capture.py`：两群每日增量、历史窗口刷新与上一 completed anchor 停止。
 - `../src/app/capture-step.swift`：内部单步 current/scroll capture。
 - `../src/app/open-history.swift`：安全打开目标群聊天记录窗口。
 - `../src/capture/ConversationSwitcher.swift`：会话 OCR 定位、目标复核、`聊天记录` tooltip 与历史窗口标题门禁。
@@ -41,6 +42,7 @@
 - `../src/normalize/page_reconstruct.py`：单页 bbox→视觉行→消息/fragment/media unknown。
 - `../src/normalize/assemble.py`：同群连续 capture pages → Schema message records。
 - `../src/normalize/overlap.py`：相邻页保守去重与 capture 页方向转换。
+- `../src/normalize/incremental.py`：上一 completed anchor 匹配、裁剪与新增消息重编号。
 - `../src/store/batch_state.py`：可恢复 batch/state。
 - `../src/store/message_record.py`：message-record 正式运行时校验。
 - `../src/store/message_store.py`：canonical messages.jsonl 原子/幂等持久化。

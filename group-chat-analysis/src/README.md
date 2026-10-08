@@ -15,8 +15,9 @@ src/
 
 当前已有：
 
-- `app/run_capture.py`：唯一正式运行入口；同时承载固定页数诊断和 `--full` 首次全量模式，独占 state 推进、pending/raw reconcile、normalize/finalize 编排。
-- `app/full_capture.py`：首次全量的薄编排层；按本机配置串行两个群，控制安全切群、双 no-change 边界和每轮页预算，不复制底层恢复状态机。
+- `app/run_capture.py`：唯一正式运行入口；承载固定页数诊断、`--full` 首次全量和 `--incremental` 每日增量，独占 state 推进、pending/raw reconcile、normalize/finalize 编排。
+- `app/full_capture.py`：双群安全串行基础编排；首次全量使用双 no-change 边界和每轮页预算，不复制底层恢复状态机。
+- `app/incremental_capture.py`：复用 full runner 的串行/恢复能力；新增量 batch 每群先重开历史窗口刷新快照，命中上一 completed `start_anchor` 后停止；已有 durable 页的同批次恢复不重开。
 - `app/capture-step.swift`：内部单步 current/scroll capture；不维护恢复状态；滚动确认无变化时使用专用退出码交给 Python 状态机处理。
 - `app/open-history.swift`：安全打开指定群的聊天记录窗口；只调用经过视觉/位置/标题多重门禁的切群适配器。
 - `capture/ConversationSwitcher.swift`：主 QQ 左侧会话 OCR 唯一定位 → 选中后头部复核 → `聊天记录` tooltip 精确确认 → 历史窗口标题精确匹配；任一门禁失败即停止。
@@ -26,16 +27,17 @@ src/
 - `capture/CaptureModels.swift` / `RawPageWriter.swift`：capture-page v2 数据结构与 raw 原子写入。
 - `normalize/page_reconstruct.py`：正文区、视觉行、消息头/正文、页边缘 fragment、system、媒体 OCR unknown 降级；原始单页上→下新→旧，完整候选输出旧→新。
 - `normalize/assemble.py` / `overlap.py`：按同群连续 page_index 组装，fragment 不静默丢失，只删除高置信相邻页连续重叠。
+- `normalize/incremental.py`：保守匹配上一 completed 连续 anchor；命中后裁掉 anchor 及更旧记录，只重编号真正新增消息；重复 anchor 序列取最早匹配以偏向多保留。
 - `store/message_record.py`：从正式 Schema 读取字段/枚举/const 真值并校验。
 - `store/message_store.py`：canonical `messages.jsonl` 的 fsync + 原子 replace、同 batch 幂等重试与冲突拒绝。
-- `store/batch_state.py`：batch-state v3；保留 `pending_capture`，新增每群 `capture_complete`，支持 v2 确定性迁移、全 batch 页恢复位置、群级连续锚点和原子 state replace。
-- `store/finalize.py`：唯一完成顺序 `messages durable → state completed → current.md`，支持跨文件崩溃恢复。
+- `store/batch_state.py`：batch-state v4；保留 `pending_capture` / 每群 `capture_complete`，新增 `batch_kind` 与 immutable `start_anchor`，支持 v2/v3 确定性迁移、全 batch 页恢复位置、群级连续锚点和原子 state replace。
+- `store/finalize.py`：capture 继续使用 `messages durable → state completed → current.md`；incremental 额外支持 0/1 新消息、anchor 滚动和 completed 本地重建。
 - `inbox/builder.py`：只从 completed/analyzed 的 canonical records 生成 current.md，非法或不一致输入不得覆盖旧文件。
 
 尚未完成：
 
-- 真实双群首次全量与完成后的漏页/乱序/误去重审计。
-- 长时间 Vision 稳定性实测、每日增量。
+- `--incremental` 的第一次真实 QQ 实跑与完成后新增消息/anchor 审计。
+- 手动增量多次稳定后的定时化决策。
 
 ## 依赖方向
 

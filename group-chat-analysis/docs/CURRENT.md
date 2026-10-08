@@ -4,9 +4,9 @@
 
 ## 当前阶段
 
-**阶段 0/1/2/3 已完成。真实首次全量已经完成并通过程序性完整性审计；下一步进入阶段 5 的每日增量锚点验证。**
+**阶段 0/1/2/3 已完成。真实首次全量已经完成并通过程序性完整性审计；阶段 5 的每日增量已实现并通过确定性/真实 baseline 离线验证，下一步只剩一次真实增量实跑。**
 
-正式入口仍唯一是 `python3 -m src.app.run_capture`。固定页数诊断继续使用原参数；首次全量使用 `--full --batch-id <id>`，从本机 `config/local.json` 读取两群与窗口参数。Python runner 独占 batch state 推进；Swift `capture-step` 只执行单次 current/scroll 副作用，`open-history` 只作为内部安全切群执行器。
+正式入口仍唯一是 `python3 -m src.app.run_capture`。固定页数诊断继续使用原参数；首次全量使用 `--full --batch-id <id>`；每日增量使用 `--incremental --batch-id <id>`，两种双群模式都从本机 `config/local.json` 读取目标群与窗口参数。Python runner 独占 batch state 推进；Swift `capture-step` 只执行单次 current/scroll 副作用，`open-history` 只作为内部安全切群执行器。
 
 ## 当前已验证事实
 
@@ -15,7 +15,7 @@
 3. SCK 偶发 1–3px 捕获尺寸漂移已实测。MAD 只容忍 `<=3px` 并把两帧渲染到共同尺寸比较；更大漂移硬停。最终帧若回到 baseline，也不得判为新页。
 4. `capture-page.schema.json` 已升级为 v2：除原始 OCR 外保存私密 `dhash512` 视口指纹。该指纹**只**用于滚动前验证当前视口仍是上一份 durable raw 对应页面，不参与昵称/消息身份或去重。
 5. 512-bit dHash 当前门槛为 Hamming distance `<=20`。同一未滚动视口连续 6 次实测为 `18,0,0,0,0`；三个不同真实页距离为 `46/49/31`。超过 20 时在发滚轮前停止。
-6. `batch-state.schema.json` 已升级为 v3：保留 v2 的 `pending_capture`，并新增每群 `capture_complete`。唯一页提交顺序仍是 **pending intent → Swift 单步副作用 → raw durable → record_page**；只有每个群都 `capture_complete=true` 才允许整个 batch completed。旧 v2 状态会确定性迁移：completed/analyzed→true，incomplete→false。
+6. `batch-state.schema.json` 已升级为 v4：保留 `pending_capture` / 每群 `capture_complete`，新增 `batch_kind=capture|incremental` 与不可变 `start_anchor`。旧 v2/v3 只确定性迁移为 `capture`；incremental 开始时从上一 completed 的尾部 anchor 复制 `start_anchor`。唯一页提交顺序仍是 **pending intent → Swift 单步副作用 → raw durable → record_page**。
 7. `pending current + raw 缺失` 可安全重试；`pending + raw 已落盘` 直接晋升 durable raw，不重复捕获；`pending scroll + 目标 raw 缺失` 视口位置不确定，必须硬停，禁止再次滚动；没有 pending 却凭空出现 next raw 也硬停。
 8. 当前 QQ 单页视觉从上到下是**新→旧**；`reconstruct_page()` 完成视觉判断后把完整候选反转为**旧→新**。页边缘 fragment 不静默丢弃，证据不足宁可保留重复。
 9. 嵌入图片 OCR 命中窄几何门禁时降级为 `unknown / 非文字内容（图片/表情等，未解析）`；图片内文字不进入 GPT 输入。无 OCR 的纯图片/表情、语音、文件继续不阻塞 v1。
@@ -33,16 +33,18 @@
 21. 首次全量期间补齐了低运动滚屏模糊区门禁：`MAD 2.00–2.50` 只有最终相邻帧稳定，且新旧正文 OCR 各至少 8 条、Jaccard `<=0.40` 时才补证为新页；高重叠部分推进页宁可多保留，由后续相邻页去重处理。
 22. 1147 页中唯一异常页 `wow-infinite-2/page-001038.json` 是“日期 + 3 个消息头、无正文 OCR”；现已改为 header-only fragment fallback，不生成伪正文。修复后真实 **1147/1147 页逐页 reconstruct bad=0**。
 23. 程序性完整性审计通过：全局 `page_index 0–1146` 连续无缺页/重复；两个群 canonical sequence 各自从 0 连续；无未知 group、无重复 `record_id`；state 中两个连续消息 anchor 均准确对应各群 canonical 尾部。
-24. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **81/81 通过**。
+24. 每日增量已实现：新的 incremental batch 每群首次进入时必须重新打开“聊天记录”刷新快照；同一未完成 batch 已有 durable raw 时恢复不重开。每抓完 durable 页就检查上一 completed 的连续 `start_anchor`；命中后只提交 anchor 之后的新消息。0/1 条新消息、分片恢复、completed 本地重建、历史边界先于 anchor 的硬失败均有回归。
+25. 真实 baseline 离线验证通过：第一次全量的两组 anchor 都只在各自 canonical 最尾部命中（5700/5700、1593/1593），裁剪后均为 0；真实 v3 state 副本可确定性升级 v4，并把两组真实尾部 anchor 精确复制到新 incremental `start_anchor`。
+26. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **95/95 通过**。
 
 ## 尚未验证 / 尚未实现
 
-- **每日增量停止锚点尚未正式实现/实跑。** 每个群开始增量前必须重新打开“聊天记录”窗口以刷新最新消息；不能只把已打开窗口滚回顶部，因为 QQ 历史窗口可能保持旧快照。
-- 增量必须从最新向旧扫描，命中上一 completed batch 的连续消息 anchor 后停止，并只提交 anchor 之后的新消息；不得再次扫到历史底部，也不得把 anchor 本身重复写入新 batch。
+- **每日增量尚未做真实 QQ 实跑。** 下一步用新的 batch id 执行一次 `--incremental`，验证重新打开历史窗口后能看到首次全量期间产生的新消息，并在真实 anchor 处停止，而不是再次扫到历史底部。
+- 真实增量完成后要审计：anchor 本身不进入新 batch、new message sequence 连续、两群新的 completed anchor 正确滚动；若某群 0 新消息也不得写入重复旧 anchor records。
 - 语音和文件继续延期；无 OCR 的纯图片/表情按 v1 文字优先目标忽略。
 
 ## 下一恢复点
 
-直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 5：实现并验证两群每日增量。每个群先强制重新打开历史记录窗口刷新快照，再从最新向旧扫描，命中上一 completed batch 的连续消息 anchor 后停止并只提交新增消息。**
+直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 5：合入增量实现后，用 `python3 -m src.app.run_capture --incremental --batch-id <new-id>` 做第一次真实增量；每群必须重新打开历史记录刷新快照，命中真实 `start_anchor` 后停止，并做新增消息/anchor 审计。**
 
 这里的 `dhash512` 是临时视口连续性证据，不是头像指纹。头像/昵称视觉身份辅助仍不属于 v1 去重门禁。

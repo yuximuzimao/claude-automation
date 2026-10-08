@@ -71,7 +71,7 @@ runtime/
 - `completed`：达到本轮停止条件且规范化/去重完成，可以生成 current.md；
 - `analyzed`：GPT 已处理 current.md，但不改变已完成消息，也不能用另一组记录改写现有 current.md。
 
-batch-state v3 保留 `pending_capture`，并新增每群 `capture_complete`。唯一页提交顺序仍为 **pending intent → capture side effect → raw durable → record_page**；`record_page()` 只能消费与 group/page 完全匹配的 pending，随后清空 pending 并推进全 batch 的 `next_page_index`。只有所有群都 `capture_complete=true`，才允许整个 batch completed。
+batch-state v4 保留 `pending_capture` / 每群 `capture_complete`，并新增 `batch_kind = capture | incremental` 与每群不可变 `start_anchor`。v2/v3 状态只确定性迁移为 `capture`，不得猜成 incremental。唯一页提交顺序仍为 **pending intent → capture side effect → raw durable → record_page**；`record_page()` 只能消费与 group/page 完全匹配的 pending，随后清空 pending 并推进全 batch 的 `next_page_index`。只有所有群都 `capture_complete=true`，才允许整个 batch completed。
 
 恢复语义：
 - `pending current` 且 raw 缺失：当前页捕获没有滚动副作用，可以重试同一页；
@@ -80,7 +80,7 @@ batch-state v3 保留 `pending_capture`，并新增每群 `capture_complete`。�
 - `pending scroll` 且目标 raw 缺失，但没有 pre-scroll 证据：无法证明滚轮是否已经发生，必须保留 incomplete 并停止，禁止再次滚动；
 - 没有 pending 却出现 `next_page_index` 对应 raw：来源无法证明，必须停止，不得猜测晋升。
 
-批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级只保存该群最近页和增量锚点。每群增量锚点必须是连续消息序列；只有 completed batch 才能更新为新的已完成锚点。
+批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级保存该群最近页、不可变 `start_anchor` 与最新 completed anchor。incremental batch 开始时 `start_anchor` 从上一 completed 尾部复制，整个 batch 生命周期内不得变化；只有本轮 completed 时才允许更新 `last_completed_anchor`。
 
 状态只保存 batch 标识、状态、时间、pending/页恢复位置和脱敏结构化锚点所需字段；不得保存截图、头像圆圈身份指纹或长期昵称别名。capture-page 的 `dhash512` 是 raw 层短期视口连续性证据，不是成员身份数据。分析失败不得让 completed 消息丢失。
 
@@ -101,7 +101,7 @@ batch-state v3 保留 `pending_capture`，并新增每群 `capture_complete`。�
 2. 单页 raw 同样先 `fsync` 临时文件、原子 move、再 `fsync` 目录，成功后才允许 `record_page` 清 pending/推进页号；
 3. 完成批次前先校验全部 message records；
 4. 用临时文件 + `fsync` + 原子 replace 更新 `runtime/messages/messages.jsonl`；同一 batch 重试必须幂等，内容不同则拒绝；
-5. canonical messages 已持久化并回读校验后，才允许把 batch state 从 `incomplete` 更新为 `completed`；
-6. `current.md` 是可重建派生物，completed 后再原子生成。若崩溃发生在 state completed 与 current.md 之间，重启后从 canonical messages 重建；若发现 state 已 completed 但 canonical messages 缺失/不一致，视为数据损坏并停止，禁止静默补写。
+5. canonical messages 已持久化并回读校验后，才允许把 batch state 从 `incomplete` 更新为 `completed`；**唯一例外是合法的 0 新消息 incremental batch**：它不写重复旧 anchor records，completed 证据由 durable raw + `start_anchor` 命中 + 原子 state 提供；
+6. `current.md` 是可重建派生物，completed 后再原子生成。若崩溃发生在 state completed 与 current.md 之间，重启后从当前 batch canonical messages（或合法的空 incremental batch）重建；非空 batch 若发现 state 已 completed 但 canonical messages 缺失/不一致，视为数据损坏并停止，禁止静默补写。
 
-因此允许短暂存在“messages 已落盘但 state 仍 incomplete”的可恢复窗口；禁止出现“state completed 但 messages 尚未可靠落盘”的伪完成。
+因此允许短暂存在“messages 已落盘但 state 仍 incomplete”的可恢复窗口；禁止非空 batch 出现“state completed 但 messages 尚未可靠落盘”的伪完成。

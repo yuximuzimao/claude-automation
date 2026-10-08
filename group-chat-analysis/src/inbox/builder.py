@@ -66,8 +66,8 @@ def build_current_inbox(
         grouped[group_key].append(record)
         group_display[group_key] = resolved_display
 
-    if set(grouped) != allowed_groups:
-        raise StateError("completed batch records must cover every active group")
+    if state["batch_kind"] == "capture" and set(grouped) != allowed_groups:
+        raise StateError("completed capture batch records must cover every active group")
 
     for group_key, messages in grouped.items():
         messages.sort(key=lambda item: int(item["sequence"]))
@@ -75,11 +75,12 @@ def build_current_inbox(
         if sequences != list(range(len(sequences))):
             raise StateError(f"{group_key} message sequences must be unique and contiguous")
 
-        by_sequence = {int(item["sequence"]): item for item in messages}
-        for anchor in state["groups"][group_key]["last_completed_anchor"]:
-            record = by_sequence.get(anchor["sequence"])
-            if record is None or not _record_matches_anchor(record, anchor):
-                raise StateError("completed anchor does not match supplied message records")
+        if state["batch_kind"] == "capture":
+            by_sequence = {int(item["sequence"]): item for item in messages}
+            for anchor in state["groups"][group_key]["last_completed_anchor"]:
+                record = by_sequence.get(anchor["sequence"])
+                if record is None or not _record_matches_anchor(record, anchor):
+                    raise StateError("completed anchor does not match supplied message records")
 
     lines = [
         "# 群聊分析输入",

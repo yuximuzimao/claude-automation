@@ -4,13 +4,13 @@
 
 ## 下一步（新窗口从这里开始）
 
-**阶段 5：实现并验证每日增量。** 首次全量已经完成并通过完整性审计；下一步每个群必须先重新打开“聊天记录”窗口刷新最新快照，再从最新向旧扫描，命中上一 completed batch 的连续消息 anchor 后停止，只提交新增消息。
+**阶段 5：做第一次真实每日增量。** 增量实现、v4 state、0/1 新消息、分片恢复和真实 baseline 离线 anchor 验证均已完成；下一步合入 main 后用 `--incremental` 实跑，确认两群重新打开历史窗口后能命中真实 `start_anchor` 并只提交新增消息。
 
 ## B. 阶段 2 — 已完成，不再作为待办维护
 
 现役能力包括：
 - 唯一正式入口 `python3 -m src.app.run_capture`，Swift 仅保留内部单步 `capture-step`；
-- batch-state v3：保留 `pending_capture`，新增每群 `capture_complete`；顺序固定为 pending → 单步副作用 → raw durable → record_page；
+- batch-state v4：保留 `pending_capture` / 每群 `capture_complete`，新增 `batch_kind` 与 incremental `start_anchor`；顺序固定为 pending → 单步副作用 → raw durable → record_page；
 - capture-page v2 `dhash512` 视口连续性门禁，当前阈值 `<=20`；
 - AX/SCK/Vision、正文区、安全滚轮、MAD、`<=3px` SCK 尺寸漂移容忍；
 - bbox/视觉行/fragment/media unknown 重建；
@@ -36,5 +36,6 @@
 
 ## E. 阶段 5 — 每日增量与自动化
 
-- [ ] **建立每日增量锚点。** 每个群开始增量前必须重新打开“聊天记录”窗口刷新最新快照；从最新向旧扫描，命中上次 completed 的连续消息 anchor 后停止，并只提交 anchor 之后的新消息。验证不会重复抓历史、不会把 anchor 本身重复写入新 batch，也不会漏掉跨日讨论。
+- [x] **实现每日增量锚点。** 已完成 `--incremental`、v4 `batch_kind/start_anchor`、新 batch 强制重开历史窗口、分片续跑不重开、连续 anchor 停止/裁剪、0/1 新消息与 completed 本地重建；真实首次全量两组 anchor 离线均精确命中 canonical 尾部。
+- [ ] **第一次真实增量实跑与审计。** 用新 batch id 抓两群；确认 anchor 本身不写入新 batch、新消息 sequence 连续、新 completed anchor 正确滚动，且不会再次扫到历史边界。
 - [ ] **稳定后再决定是否定时。** 只有手动增量流程多次稳定后才考虑每天一次的调度；调度失败必须可见且不得产生伪 completed。

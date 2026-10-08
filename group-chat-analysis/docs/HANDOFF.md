@@ -4,12 +4,13 @@
 
 阶段 2 已收口为单一正式链：
 
-- `src/app/run_capture.py`：唯一正式运行入口，兼容固定页数诊断与 `--full` 首次全量，独占 batch state 推进与恢复判断。
-- `src/app/full_capture.py`：首次全量薄编排层，负责按本机配置串行两群、双 no-change 边界与每轮安全页预算。
+- `src/app/run_capture.py`：唯一正式运行入口，兼容固定页数诊断、`--full` 首次全量与 `--incremental` 每日增量，独占 batch state 推进与恢复判断。
+- `src/app/full_capture.py`：双群安全串行基础编排，首次全量使用双 no-change 边界与每轮安全页预算。
+- `src/app/incremental_capture.py`：复用同一状态机；新 batch 每群强制重开历史窗口刷新快照，命中上一 completed `start_anchor` 后停止；分片恢复已有 durable 页时不重开。
 - `src/app/capture-step.swift`：内部单步执行器，只负责 current/scroll 一次捕获；无变化通过专用退出码交回 Python 状态机。
 - `src/capture/`：AX/SCK/Vision、正文区、安全滚轮、MAD、`dhash512` 视口连续性门禁、raw 原子写入。
 - `src/normalize/`：bbox 重建、fragment 保留、媒体 OCR unknown、相邻页保守去重与顺序转换。
-- `src/store/`：batch-state v3；保留 `pending_capture`，新增每群 `capture_complete`、v2 确定性迁移、canonical messages 与 finalize 崩溃恢复。
+- `src/store/`：batch-state v4；保留 `pending_capture` / 每群 `capture_complete`，新增 `batch_kind`、incremental `start_anchor`、v2/v3 确定性迁移、canonical messages 与 finalize 崩溃恢复。
 - `src/inbox/`：completed/analyzed → current.md。
 
 旧批量 Swift CLI 已删除，避免第二入口；旧 capture worktree 已不再是运行依赖。
@@ -33,7 +34,7 @@
 
 ## 验证
 
-`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **81/81 通过**。
+`python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **95/95 通过**。
 
 真实验证包括：
 - 唯一 runner 实跑 3 页并 completed；
@@ -45,10 +46,11 @@
 - 两个目标群正式 `open-history` 往返成功，系统窗口标题分别精确匹配目标；
 - 正文消息包含“表情”时不再误截工具栏，真实页 content_region 高度由错误约 `0.192` 恢复到约 `0.852`；
 - 两群同 batch、双 NO_CHANGE 边界、20 页安全分片、已有 durable 页恢复不重开历史窗口、状态冲突 UI 前硬停均有确定性回归；
-- v2 batch-state 可确定性迁移到 v3，不把旧 incomplete 群猜成 capture_complete；
+- v2/v3 batch-state 可确定性迁移到 v4 `capture`，不猜成 incremental；真实 v3 completed state 副本迁移后，两群尾部 anchor 可精确复制到新 incremental `start_anchor`；
 - 首次全量真实 1147/1147 页逐页 reconstruct `bad=0`；全局 page 0–1146 连续无缺页/重复；canonical 共 7293 条，两个群 sequence 各自连续，无未知 group、无重复 record_id；
-- header-only 异常页保守降级为 fragment，不生成伪正文；低运动滚屏模糊区通过 OCR Jaccard 二次证据补判。
+- header-only 异常页保守降级为 fragment，不生成伪正文；低运动滚屏模糊区通过 OCR Jaccard 二次证据补判；
+- incremental 确定性回归覆盖：双群新 batch 各重开一次历史窗口、分片恢复不重开、anchor 后裁剪、0/1 新消息、completed 本地重建、历史边界先于 anchor 硬停；真实 baseline 两组 anchor 均只在 canonical 尾部命中并裁剪为 0。
 
 ## 下一步
 
-按 `tasks/todo.md` 顶部进入阶段 5：实现并验证每日增量。每个群开始增量前必须重新打开“聊天记录”窗口刷新最新快照；随后从最新向旧扫描，命中上一 completed batch 的连续消息 anchor 后停止，并只提交 anchor 之后的新消息。
+按 `tasks/todo.md` 顶部做第一次真实增量：合入 main 后用新的 batch id 执行 `--incremental`；确认 QQ 重新打开历史窗口后出现首次全量期间的新消息，命中真实 `start_anchor` 后停止，并审计 anchor 不重复入库、sequence 连续、新 completed anchor 正确滚动。

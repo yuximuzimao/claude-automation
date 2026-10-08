@@ -88,12 +88,8 @@ v1 至少区分：
 
 ## 增量锚点
 
-每日增量停止锚点必须是一个**连续消息序列**，而不是单条句子。
+每日增量停止锚点必须是一个**连续消息序列**，而不是单条句子。当前正式最小锚点为上一 completed batch 的最后 2 条 canonical message，保存 `sender_display / content_text / timestamp_text / 相对顺序`；两条都必须按现有保守消息匹配规则连续命中，单条命中不足以停止。
 
-锚点建议包含若干条近期已完成消息的：
-- sender_display（若有）；
-- content_text；
-- timestamp_text（若有）；
-- 相对顺序。
+新增量 batch 把上一 completed 的尾部锚点复制为不可变 `start_anchor`。每抓完一份 durable raw 后，对当前已抓页面做保守组装；命中 `start_anchor` 后，anchor 本身及更旧消息全部裁掉，只把 anchor 之后的新消息重新从 sequence 0 编号并提交。若同一锚点序列在已抓范围里出现多次，选择**最早的确认匹配**，错误成本偏向多保留重复而不是误删真实新消息。
 
-命中阈值需通过真实数据实测后固化，不在架构阶段拍脑袋设数字。
+0 条或 1 条新消息也必须合法：0 条时不向 `messages.jsonl` 写旧 anchor；1 条时新的 completed anchor 由“旧最后一条 + 新消息”组成。下一批仍使用新的连续尾部 anchor。
