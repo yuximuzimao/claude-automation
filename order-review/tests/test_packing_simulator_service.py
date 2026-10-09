@@ -21,13 +21,21 @@ def test_catalog_view_keeps_full_brand_skeleton_and_pending_records(tmp_path):
     assert brands["kgos"]["packingStatus"] == "enabled_single_carton"
     assert brands["yuexi"]["packingStatus"] == "catalog_only"
 
-    active_cartons = {item["cartonId"] for item in view["sections"]["cartons"]}
+    cartons = {item["cartonId"]: item for item in view["sections"]["cartons"]}
+    active_cartons = {
+        carton_id for carton_id, item in cartons.items()
+        if item["inventoryStatus"] != "retired"
+    }
     pending_cartons = {
         item.get("cartonId") for item in view["sections"]["pendingCartons"]
     }
     assert "carton-16" in active_cartons
     assert "carton-17" in pending_cartons
-    assert "carton-18" in pending_cartons
+    assert "carton-18" not in pending_cartons
+    assert "carton-18" in active_cartons
+    assert "carton-13" not in active_cartons
+    assert cartons["carton-18"]["dimensionsMm"] == [215, 123, 123]
+    assert not cartons["carton-13"]["experimentSelectable"]
     assert "pending-original-yuexi-cleanser" in pending_cartons
     assert "pending-original-black-tea-new-measurement" not in pending_cartons
     assert "pending-original-kgos-candy-2" not in pending_cartons

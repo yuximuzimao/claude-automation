@@ -12,6 +12,7 @@
 | 纸箱、原箱、规则、待补与布局证据 | `../data/packing-dimensions.json` |
 | 单品装箱尺寸、零体积配件与仓库排除项 | `../data/packing-product-dimensions.json` |
 | 不得自行解释的活动原文 | `../data/packing-campaign-notes-2026-09-08.txt` |
+| 9月22日悦希活动组合公式、SKU份数与拆出组合原文 | `../data/packing-campaign-split-notes-09-22.md`（分批收录，待用户说明分析方式） |
 | 历史回放固定问题集 | `../data/replay-problem-set.json` |
 | 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（以商品匹配当前待办为准，不在审单侧固定数量） |
 | ERP正式身份参考快照 | `../../product-mapping/data/products/erp-identities.json`（2026-09-11的200条只读快照，不定义在售目录） |

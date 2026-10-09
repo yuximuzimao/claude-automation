@@ -52,4 +52,5 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 - `docs/archive/README.md`、`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/`、`docs/archive/2026-09-25-package-history-identity-and-data-audit/`
 - `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
+- `data/packing-campaign-split-notes-09-22.md`（9月22日悦希活动分批原文及用户解释）
 - `src/order_review/`、`tests/`、`pyproject.toml`

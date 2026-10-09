@@ -50,7 +50,7 @@ def catalog() -> DimensionCatalog:
 
 def test_catalog_preserves_dimension_evidence_and_inventory_state(catalog):
     assert catalog.schema_version == 2
-    assert len(catalog.cartons) == 16
+    assert len(catalog.cartons) == 17
     assert catalog.carton_name_semantics == "label_only"
     assert all(item.dimension_type == DimensionType.OUTER for item in catalog.cartons)
     assert [item.inventory_status for item in catalog.cartons[9:12]] == [
@@ -453,13 +453,15 @@ def test_black_tea_original_carton_preserves_confirmed_12_by_3_by_2_layout(catal
 def test_yuexi_scoped_and_fixed_cartons_are_not_general_candidates(catalog):
     candidate_ids = {item.carton_id for item in catalog.candidate_cartons()}
 
-    assert not {"carton-13", "carton-14", "carton-15", "carton-16"} & candidate_ids
-    yuexi_capacity = next(
-        item for item in catalog.confirmed_capacities if item.carton_id == "carton-13"
+    assert not {"carton-13", "carton-14", "carton-15", "carton-16", "carton-18"} & candidate_ids
+    assert catalog.carton("carton-13").inventory_status == InventoryStatus.RETIRED
+    new_carton = catalog.carton("carton-18")
+    assert new_carton.inventory_status == InventoryStatus.ACTIVE
+    assert new_carton.dimensions == DimensionsMm(215, 123, 123)
+    assert not any(
+        item.carton_id in {"carton-13", "carton-18"}
+        for item in catalog.confirmed_capacities
     )
-    assert yuexi_capacity.capacity == 4
-    assert not yuexi_capacity.scope_complete
-    assert yuexi_capacity.mixing_policy == "not_confirmed"
 
 
 def test_gift_box_products_use_saved_plan_and_xiuyan_has_fixed_bundle(catalog):
