@@ -21,6 +21,7 @@
 
 ## 当前关键契约
 
+- 项目任务先由 `docs/OPERATING-SOP.md` 分类，再只进入命中的规则 owner；`docs/rules/README.md` 只是 owner 目录，不维护第二套流程。
 - 错误成本：**漏真实消息 > 多保留重复消息**。
 - 状态推进顺序固定为 **pending intent → Swift 单步 → raw durable → record_page**。
 - `pending current + raw 缺失` 可安全重试；`pending scroll + raw 缺失` 必须硬停，禁止猜当前位置再次滚动。
@@ -53,9 +54,11 @@
 - 第一次真实增量 `incremental-20261009-001` 已 completed：95 个 raw pages，最终新增 611 条 canonical（第一群 609 / 第二群 2）；旧 anchor 均未重复入库，sequence 连续、record_id 无重复、新 completed anchor 正确前滚；
 - 真实增量继续校准了部分滚动页和消息头高度：OCR Jaccard 模糊区上限保守放宽到 0.85，header 高度门槛调整为 `1.05×body`；全套 **96/96** 通过；
 - 第一版报告已按当前魔兽项目重排为 `runtime/reports/2026-10-09-incremental-001-v2.md`，同时生成简洁页面 `runtime/reports/2026-10-09-intel-v1.html`；首轮评审已完成：重点发现只放真实有效信息，“没有发现/不触发修改”只作状态总结；删除“全部信息”一级页；“当前项目”暂保留；黑话继续保留“解释 + 原文”但必须支持同词多语境/多含义；
+- AIHOT 参考研究和页面 v2 设计方向已完成：先完整归组本批所有有意义话题，再按个人价值排序；热度不作为核心值，价值与可信度分开；每条实质信息按“事实信息 → 群聊原文 → AI 扩展分析”展示，纯黑话只进入独立词典；群聊项目只生成跨项目候选，未经用户确认和目标项目核验不得写入 `wow-quest-route`；
+- 已新增 `docs/OPERATING-SOP.md`，按魔兽项目的渐进式结构补齐“完整项目怎么跑”：SKILL 负责一级分流，SOP 分类日常增量/首次全量/恢复/分析/跨项目/自动化，capture、normalization、storage、analysis、privacy 各自继续作为唯一规则 owner。采集链已有正式 CLI；GPT 分析仍是人工触发，正式分析 runner 和 `analyzed` 入口尚未实现；
 - 首次全量 `first-full-20261008` 的 7293 条 canonical 只完成采集/审计，尚未做完整语义分析；历史覆盖策略尚未决定是否直接分析现有基线，或尽可能从“入群至今”重新补采。
-- 本阶段已归档到 `docs/archive/neat/2026-10-09-first-full-incremental-analysis-page-review.md`。
+- 已完成阶段归档：`docs/archive/neat/2026-10-09-first-full-incremental-analysis-page-review.md`、`docs/archive/neat/2026-10-09-aihot-analysis-page-v2-design.md`。
 
 ## 下一步
 
-按 `tasks/todo.md` 顶部进入阶段 4：重新设计分析页面 v2。先参考数字生命卡兹克的 AIHOT 热点总结页面，讨论价格/版本/热点/职业/任务/打金等有效信息如何更精细分层和倾向化排序；同时决定历史覆盖策略。方案未定前不要直接重跑大规模历史采集。
+按 `tasks/todo.md` 顶部进入阶段 4，并从 `docs/OPERATING-SOP.md` 分类为 `ANALYSIS_DESIGN`：先定义能表达分类、事实、原文、AI 扩展、价值等级、可信度、时间范围与页面去向的运行时结果结构，再用现有真实增量批次制作页面 v2 评审原型。评审稳定后再补正式分析 runner。历史覆盖策略仍需单独决定，方案未定前不要直接重跑大规模历史采集。

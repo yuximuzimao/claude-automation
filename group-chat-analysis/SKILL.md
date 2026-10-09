@@ -5,9 +5,10 @@
 1. 读 `tasks/todo.md`，确认当前尚未完成事项。
 2. 读 `docs/INDEX.md`，只做导航。
 3. 涉及当前实现阶段、已验证能力或下一恢复点时，读 `docs/CURRENT.md`。
-4. 涉及规则判断时，从 `docs/rules/README.md` 只加载对应主题。
-5. 涉及整体数据流或模块边界时，读 `docs/ARCHITECTURE.md`。
-6. 正式实现后，代码入口统一从 `src/` 的现役入口进入；在入口尚未创建前不得自行发明临时正式入口。
+4. 涉及采集、恢复、分析、页面设计、跨项目候选或自动化时，先进入 `docs/OPERATING-SOP.md` 分类，再只读命中的规则 owner。
+5. `docs/rules/README.md` 只用于查看 owner 目录，不承担任务分类。
+6. 涉及整体数据流或模块边界时，读 `docs/ARCHITECTURE.md`。
+7. 正式实现后，代码入口统一从 `src/` 的现役入口进入；在入口尚未创建前不得自行发明临时正式入口。
 
 ## ENTRY MAP
 
@@ -19,8 +20,9 @@
 | `docs/INDEX.md` | 文档/数据导航 | 每次进入项目 |
 | `docs/CURRENT.md` | 当前开发阶段与已验证事实 | 继续当前工作时 |
 | `docs/HANDOFF.md` | Codex/Claude 当前交接与验证结果 | 跨 agent 接续工作时 |
+| `docs/OPERATING-SOP.md` | 唯一任务分类与完整运行 SOP | 采集、恢复、分析、跨项目候选或自动化时 |
 | `docs/ARCHITECTURE.md` | 稳定模块边界与数据流 | 设计/实现跨模块功能时 |
-| `docs/rules/README.md` | 永久规则路由 | 需要规则判断时 |
+| `docs/rules/README.md` | 长期规则 owner 目录 | SOP 已完成分类、需要查看 owner 清单时 |
 | `schemas/capture-page.schema.json` | 单页原始OCR捕获的数据契约 | 改capture输出/normalize输入时 |
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
@@ -71,6 +73,7 @@
 | `src/` | 正式代码；模块边界见 `src/README.md` |
 | `schemas/` | 版本化数据契约 |
 | `docs/rules/` | 跨批次长期规则 |
+| `docs/OPERATING-SOP.md` | 项目唯一任务分类与运行 SOP |
 | `docs/archive/` | 历史方案/阶段归档，默认不加载 |
 | `tasks/` | 当前待办与临时教训 |
 | `tests/` | 确定性逻辑、采集适配器与回归验证 |

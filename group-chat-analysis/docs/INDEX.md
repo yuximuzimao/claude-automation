@@ -8,12 +8,13 @@
 | --- | --- |
 | 当前做到哪里、已验证什么、下一步是什么 | `CURRENT.md` |
 | Codex/Claude 当前交接与已完成验证 | `HANDOFF.md` |
+| 项目任务分类与完整运行 SOP | `OPERATING-SOP.md` |
 | 理解整体模块/data flow | `ARCHITECTURE.md` |
 | 当前待办 | `../tasks/todo.md` |
 
 ## 永久规则
 
-总入口：`rules/README.md`
+任务先从 `OPERATING-SOP.md` 分类；`rules/README.md` 只查看规则 owner 目录。
 
 | 主题 | 文档 |
 | --- | --- |

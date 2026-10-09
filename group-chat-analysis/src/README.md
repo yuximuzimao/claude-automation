@@ -36,7 +36,7 @@ src/
 
 尚未完成：
 
-- `--incremental` 的第一次真实 QQ 实跑与完成后新增消息/anchor 审计。
+- 正式 GPT 分析 runner、分析结果结构与页面 v2 生成流程；当前仍由 Codex/模型读取 `runtime/inbox/current.md` 人工执行分析。
 - 手动增量多次稳定后的定时化决策。
 
 ## 依赖方向

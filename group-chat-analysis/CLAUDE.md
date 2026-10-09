@@ -9,8 +9,9 @@
 3. 读 `docs/INDEX.md`。
 4. 继续当前开发时读 `docs/CURRENT.md`。
 5. 跨 agent 接续时读 `docs/HANDOFF.md`。
-6. 只按当前任务从 `docs/rules/README.md` 加载对应规则。
-7. 跨模块设计/实现才读 `docs/ARCHITECTURE.md`。
+6. 涉及采集、恢复、分析、页面设计、跨项目候选或自动化时，先读 `docs/OPERATING-SOP.md` 分类，再只加载命中的规则 owner。
+7. `docs/rules/README.md` 只做 owner 目录，不做任务分类。
+8. 跨模块设计/实现才读 `docs/ARCHITECTURE.md`。
 
 ## 稳定项目目标
 
