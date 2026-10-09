@@ -19,6 +19,7 @@
 - Agent：先读 `SKILL.md`
 - 当前状态：`docs/CURRENT.md`
 - 文档导航：`docs/INDEX.md`
+- 完整运行与任务分类：`docs/OPERATING-SOP.md`
 - 当前待办：`tasks/todo.md`
 - 架构：`docs/ARCHITECTURE.md`
 - 每日分析输入（运行时）：`runtime/inbox/current.md`
