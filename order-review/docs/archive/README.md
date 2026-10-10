@@ -4,6 +4,10 @@
 
 当前状态：`../CURRENT.md`；使用入口：`../../README.md`。长期业务约束：`../2026-07-23-package-rule-foundation.md`。
 
+## 2026-10-10 悦希活动批量拆单与 SKU 清单发现
+
+- `2026-10-10-yuexi-campaign-batch-automation-neat/neat-handoff.md`：收口 9 月 22 日悦希活动的公式、SKU ID 批量筛选、赠品大促例外、商品对应表隐藏 SKU 数据和跨项目链接身份规则。原始活动资料继续保留在 `data/`；本归档记录阶段结论和后续入口。
+
 ## 2026-07-10 初始悬浮窗实现
 
 - `2026-07-10-initial-floating-window/implementation-plan.md`：第一版只读悬浮窗的已完成实现计划。

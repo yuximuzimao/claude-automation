@@ -12,11 +12,12 @@
 | 纸箱、原箱、规则、待补与布局证据 | `../data/packing-dimensions.json` |
 | 单品装箱尺寸、零体积配件与仓库排除项 | `../data/packing-product-dimensions.json` |
 | 不得自行解释的活动原文 | `../data/packing-campaign-notes-2026-09-08.txt` |
-| 9月22日悦希活动组合公式、SKU份数与拆出组合原文 | `../data/packing-campaign-split-notes-09-22.md`（分批收录，待用户说明分析方式） |
+| 9月22日悦希活动组合公式、SKU份数与拆出组合原文 | `../data/packing-campaign-split-notes-09-22.md`（现役原始资料，含真实 ERP 对照和活动定义） |
 | 历史回放固定问题集 | `../data/replay-problem-set.json` |
 | 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（以商品匹配当前待办为准，不在审单侧固定数量） |
 | ERP正式身份参考快照 | `../../product-mapping/data/products/erp-identities.json`（2026-09-11的200条只读快照，不定义在售目录） |
 | 历史阶段 | [档案索引](archive/README.md) |
+| 2026-10-10悦希活动批量拆单与 SKU 清单调查 | [NEAT归档](archive/2026-10-10-yuexi-campaign-batch-automation-neat/neat-handoff.md) |
 | 2026-09-27悦希原箱箱规与服务收口 | [最新NEAT](archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md) |
 | 2026-09-25包裹历史身份修正与案例审计 | [NEAT](archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md) |
 | 2026-09-17资料补充与拆分停点收口 | [NEAT](archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md) |
