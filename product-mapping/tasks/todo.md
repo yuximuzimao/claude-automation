@@ -14,6 +14,11 @@
 
 ## P1：值得在下次相关改动时完成
 
+- [ ] **对应表只读输出补充平台 SKU ID**
+  - 需求来源：2026-10-10审单活动批量处理设计。ERP 商品对应表 Vue 数据中的 `skuItemPlatform.skuId` 包含订单筛选所需的数字 SKU ID，但当前 `lib/correspondence.js` 的纯读取结果只保留 `productCode + platformCode` 链接身份和商品明细。
+  - 目标：在不改变现有匹配主键、不触发下载或写操作的前提下，补充 `platformSkuId`、平台商品 `numIid`、规格 `outerId`、店铺和规格说明等只读字段，供 `order-review` 生成活动批次 SKU 清单。
+  - 边界：重复 `platformCode` 仍按 `productCode + platformCode` 分开；跨店铺记录不合并；字段缺失必须显式报告，不能从拼接字符串静默猜测。
+
 - [ ] **统一套件页面操作实现**
   - 触发条件：下一次需要修改 `auto-match2.js`、`mark-suite.js` 或 `ops/create-suite.js` 任一套件流程。
   - 目标：搜索、单选、hover 标记、中间态恢复、弹窗清理和结果验证只保留一个权威实现。
