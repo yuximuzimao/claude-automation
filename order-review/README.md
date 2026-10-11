@@ -1,7 +1,8 @@
 # 审单悬浮窗
 
-快麦 ERP 待审核订单的桌面辅助工具，用于查看原订单、编辑包裹方案、复用历史，
-并在用户逐单点击后执行受保护的审核或拆分。原订单信息与包裹决策分开保存。
+快麦ERP审单项目，以装箱辅助验证、日常审单浮窗和活动批量处理三种工具服务不同场景。
+现役浮窗支持查看原订单、编辑方案、复用历史及逐单受保护审核/拆分；批量工具仍待资料核对与逐环节验证。
+原订单信息与包裹决策分开保存。
 
 ## 开始使用
 
@@ -15,8 +16,9 @@ PYTHONPATH=src python3.13 -m order_review.app
 ## 接手开发
 
 - Agent 从 [SKILL.md](SKILL.md) 开始。
+- [项目总SOP](docs/OPERATING-SOP.md)统一说明三种工具分工、现有资料核对、活动前准备与运行时操作。
 - [当前状态](docs/CURRENT.md)区分已实现能力、未验证场景和实验进度。
-- [装箱实验计划](docs/2026-09-08-packing-simulator-plan.md)记录页面/资料边界；[算法研究](docs/2026-09-12-packing-algorithm-research.md)是当前1～N箱架构依据。本地实验页已存在，但尚未接入正式审单浮窗。
+- [装箱实验计划](docs/2026-09-08-packing-simulator-plan.md)记录页面/资料边界；[算法研究](docs/2026-09-12-packing-algorithm-research.md)保留可选1～N箱结构。装箱以按需验证为主，具体实现与浮窗接入状态见CURRENT。
 - [待办](tasks/todo.md)与[文档索引](docs/INDEX.md)给出具体入口。
 - [根本规则](docs/2026-07-23-package-rule-foundation.md)规定方案语义；[安全边界](AGENTS.md)约束真实ERP操作。
 

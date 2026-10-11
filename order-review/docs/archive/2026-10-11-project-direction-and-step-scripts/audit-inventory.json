@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-11",
+  "scope": "order-review项目总SOP/既有规则与知识架构；工作区HANDOFF仅审单段；Claude审单记忆条目",
+  "activeKnowledge": [
+    {
+      "file": ".pytest_cache/README.md",
+      "role": "项目资料",
+      "review": "全文读回/评估",
+      "decision": "新增"
+    },
+    {
+      "file": "AGENTS.md",
+      "role": "安全边界与按需路由",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "CLAUDE.md",
+      "role": "Claude启动与安全路由",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "README.md",
+      "role": "人类概览",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "SKILL.md",
+      "role": "项目一级导航",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "data/packing-campaign-split-notes-09-22.md",
+      "role": "现役原始资料与历史样本证据",
+      "review": "全文读回/评估",
+      "decision": "不用改",
+      "reason": "原始资料逐字保留；现行工作方式以总SOP为准"
+    },
+    {
+      "file": "docs/2026-07-23-package-rule-foundation.md",
+      "role": "订单与包裹业务语义",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/2026-09-08-packing-simulator-plan.md",
+      "role": "装箱页面和数据设计契约",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/2026-09-12-packing-algorithm-research.md",
+      "role": "装箱技术研究参考",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/CURRENT.md",
+      "role": "唯一当前状态",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/INDEX.md",
+      "role": "文件导航",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/OPERATING-SOP.md",
+      "role": "唯一项目总SOP：工具分工、资料核对、前置准备与活动执行",
+      "review": "全文读回/评估",
+      "decision": "新增"
+    },
+    {
+      "file": "docs/rules/README.md",
+      "role": "专项规则导航",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/rules/erp-execution.md",
+      "role": "现役ERP执行关卡",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/usage.md",
+      "role": "运行与数据维护",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "tasks/todo.md",
+      "role": "唯一未完成任务台账",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    }
+  ],
+  "history": [
+    {
+      "file": "docs/archive/2026-07-10-initial-floating-window/implementation-plan.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-22-package-plan/requirements.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-22-read-only-order-view/design.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-23-package-rule-foundation/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-24-single-package-review-alignment/README.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-24-single-package-review-alignment/erp-page-evidence.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-24-single-package-review-alignment/split-order-future-notes.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-24-stage-a-safety-closure/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-27-freight-and-single-item-default/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-28-single-package-audit-v1/execution-plan.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-28-single-package-audit-v1/feasibility-audit.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-28-single-package-audit-v1/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-28-single-package-audit-v1/post-v1-roadmap.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-29-mixed-split-v1/execution-plan.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-29-mixed-split-v1/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-30-memory-and-composition/historical-package-composition.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-30-memory-and-composition/memory-stability-direction.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-30-memory-and-composition/memory-stability-worklog.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-07-30-mixed-split-and-audit/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-03-save-plan-and-case-correction/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-05-split-scroll-and-direct-review/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-06-split-result-stability/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-12-reading-and-window-stability/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-14-carton-packing-foundation/approximate-recommendation-direction.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-14-carton-packing-foundation/carton-data-collection.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-14-carton-packing-foundation/carton-packing-foundation.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-14-carton-packing-foundation/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-27-split-transition-wait-timing/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-28-split-single-pass-verification/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-08-29-historical-composition-evidence-boundary/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-09-packing-simulator-planning/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-09-packing-simulator-planning/previous-implementation-state.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-11-packing-simulator-p1/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-13-packing-worktree-reconciliation/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "全文读回/评估",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "全文读回/评估",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "机械枚举/索引评估，未重复全文考古",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "全文读回/评估",
+      "decision": "不用改"
+    },
+    {
+      "file": "docs/archive/2026-10-10-yuexi-campaign-batch-automation-neat/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    },
+    {
+      "file": "docs/archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md",
+      "role": "阶段历史证据",
+      "review": "全文读回/评估",
+      "decision": "新增"
+    },
+    {
+      "file": "docs/archive/README.md",
+      "role": "阶段历史证据",
+      "review": "全文读回/评估",
+      "decision": "已改"
+    }
+  ],
+  "workspace": {
+    "read": [
+      "CLAUDE.md",
+      "docs/git.md",
+      "docs/new-project-template.md",
+      "docs/HANDOFF.md",
+      "docs/codex-handoff/inbox.json"
+    ],
+    "pendingRequests": 0,
+    "handoffDecision": "仅更新审单段与日期，其他既有未提交改动保留"
+  },
+  "agentMemory": {
+    "codex": "无独立记忆；项目AGENTS承载安全边界与规则路由",
+    "claudeIndex": "机械枚举记忆文件，全文读索引及审单项目记忆；仅更新审单条目，其余项目记忆不在本轮范围",
+    "claudeProjectMemory": "更新为总SOP薄指针，移除重复当前状态/待办"
+  },
+  "authority": {
+    "orderPackage": "docs/2026-07-23-package-rule-foundation.md",
+    "current": "docs/CURRENT.md",
+    "unfinished": "tasks/todo.md",
+    "history": "docs/archive/",
+    "overallSop": "docs/OPERATING-SOP.md"
+  },
+  "validation": {
+    "localLinksChecked": 84,
+    "brokenLinks": [],
+    "completedTasksRemoved": true,
+    "sourceTestsAndOriginalDataUnchanged": true,
+    "observedConcurrentChangesExcluded": [
+      "group-chat-analysis/SKILL.md",
+      "group-chat-analysis/docs/OPERATING-SOP.md",
+      "group-chat-analysis/src/README.md"
+    ],
+    "pytest": "未运行；仅文档修改，不启动UI或ERP",
+    "businessOperations": "未执行",
+    "newWindowsServicesPorts": "未创建",
+    "directionSafetyReview": "总SOP已全文读回，流程阶段、完整规则覆盖、权限和下一对话入口已核对",
+    "singleOverallSop": true,
+    "temporarySplitRuleDocumentsRemoved": true
+  },
+  "crossProject": "商品匹配项目代码/规则/数据不变；审单侧只记录复用现有身份与未来只读交接"
+}

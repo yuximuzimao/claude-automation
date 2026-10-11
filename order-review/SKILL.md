@@ -1,6 +1,6 @@
 ---
 name: order-review
-description: 审单项目导航：原订单读取、本地包裹方案、受控ERP执行和独立装箱实验/1～N箱算法。
+description: 审单项目导航：装箱辅助、日常浮窗、活动资料核对与逐环节批量工具。
 ---
 
 # 订单审核系统导航
@@ -16,25 +16,28 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 
 | 任务 | 入口 |
 |---|---|
-| 接手装箱实验/算法 | `tasks/todo.md` → `docs/CURRENT.md` → `docs/2026-09-12-packing-algorithm-research.md` → `docs/2026-09-08-packing-simulator-plan.md` |
+| 项目整体流程、工具分工与活动资料/脚本 | 总SOP `docs/OPERATING-SOP.md`；具体任务见 `tasks/todo.md`，原始资料见PATHS |
+| 接手装箱实验/算法 | `docs/OPERATING-SOP.md` → `docs/CURRENT.md` → 按需读 `docs/2026-09-12-packing-algorithm-research.md` / `docs/2026-09-08-packing-simulator-plan.md` |
 | 包裹业务规则 | `docs/rules/README.md` → `docs/2026-07-23-package-rule-foundation.md` |
 | ERP审核/拆分与读取 | `docs/rules/erp-execution.md`；`src/order_review/audit_runner.py`、`split_runner.py`、`erp_reader.py` |
 | 原单、草稿和推荐 | `package_plan.py`、`package_workflow.py`、`recommendations.py`（均在`src/order_review/`） |
 | 尺寸与单箱求解 | 纸箱/规则 `data/packing-dimensions.json`；单品尺寸 `data/packing-product-dimensions.json`；`dimension_catalog.py`、`carton_packing.py` |
 | 案例/备份/回放 | `docs/usage.md`；`case_repository.py`、`case_restore.py`、`case_replay.py`、`packing_case_audit.py` |
 | 界面 | 审单浮窗：`src/order_review/ui.py`；装箱实验：`src/order_review/packing_simulator_web.py`、`packing_simulator_service.py`、`packing_simulator_static/` |
-| 本阶段证据 | 2026-09-27悦希原箱箱规与服务收口：`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md`；2026-09-25包裹历史身份与案例审计：`docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md` |
+| 历史证据 | `docs/archive/README.md` 按阶段查阅；方向修正证据：`docs/archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md` |
 
 ## CORE FLOWS
 
 - 日常审单：读取原订单 → 恢复/编辑本地方案 → 用户逐单点击。单包按受保护审核链执行；多包当前只运行到拆分二次确认，随后由人工回ERP核对。
 - 装箱实验：只读快照/实验副本 → 标准ERP身份与装箱资料 → 指定箱型与约束 → 计算/独立校验 → 展示；历史人工方案只在求解完成后对照。
+- 活动批量：进入总SOP的活动流程，先区分历史资料核对、活动前置准备和活动中执行；不能混成一个数据流。具体脚本和页面动作按环节验证。
 - 商品身份：`features.json` 只贡献 `erpName`；正式简称/编码可由200条只读快照补全；视觉标签、特征、别名和活动 `sku-records` 不参与装箱身份。
 - 资料补充：保留完整名称、简称及原始尺寸 → 核实来源与估计轴 → 更新资料 → 读回；不自动扩大白名单。
 
 ## FAILURE PATTERNS
 
 - 同一SKU不等于同一固定组合；组合相同比例也不能自动推断为同一套餐。
+- 商品对应表不等于活动全集，原笔记不等于完整规则；装箱几何可放不等于最终应合并发货。
 - 几何UNKNOWN不等于装不下；规则支持不等于三维求解成功。
 - 完整底面支撑已从几何硬条件拆成稳定性指标；部分支撑方案可以是几何有效结果，但必须展示最低支撑覆盖率并保留实物复核，不能自动升级成运输稳定结论。
 - 礼盒内部商品不能与封装礼盒重复计体积；礼袋估计厚度不能标成实测。
@@ -47,9 +50,11 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 - `tasks/todo.md`
 - `docs/INDEX.md`、`docs/CURRENT.md`、`docs/usage.md`
 - `docs/rules/README.md`、`docs/rules/erp-execution.md`
+- `docs/OPERATING-SOP.md`
 - `docs/2026-07-23-package-rule-foundation.md`
 - `docs/2026-09-08-packing-simulator-plan.md`、`docs/2026-09-12-packing-algorithm-research.md`
 - `docs/archive/README.md`、`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/`、`docs/archive/2026-09-25-package-history-identity-and-data-audit/`
+- `docs/archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md`、`docs/archive/2026-10-11-project-direction-and-step-scripts/audit-inventory.json`
 - `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
 - `data/packing-campaign-split-notes-09-22.md`（9月22日悦希活动分批原文及用户解释）

@@ -4,9 +4,16 @@
 
 当前状态：`../CURRENT.md`；使用入口：`../../README.md`。长期业务约束：`../2026-07-23-package-rule-foundation.md`。
 
+## 2026-10-11 项目方向与逐环节脚本
+
+- [NEAT交接](2026-10-11-project-direction-and-step-scripts/neat-handoff.md)：三种工具分工、装箱辅助目标、历史资料核对与前置准备/活动执行的区别、完整规则覆盖、赠品分类和逐环节脚本方向。
+- `2026-10-11-project-direction-and-step-scripts/audit-inventory.json`：本轮Markdown职责盘点、已读范围、处置与文档校验记录。
+- 整体流程已进入唯一项目总SOP `../OPERATING-SOP.md`；下次接手任务只看`../../tasks/todo.md`，从现有资料与历史子订单核对开始。本轮未进行真实ERP操作或开发脚本。
+
 ## 2026-10-10 悦希活动批量拆单与 SKU 清单发现
 
 - `2026-10-10-yuexi-campaign-batch-automation-neat/neat-handoff.md`：收口 9 月 22 日悦希活动的公式、SKU ID 批量筛选、赠品大促例外、商品对应表隐藏 SKU 数据和跨项目链接身份规则。原始活动资料继续保留在 `data/`；本归档记录阶段结论和后续入口。
+- 本阶段的“生成完整133条活动清单”等设想已被2026-10-11方向修正取代；保留只读调查证据，不用其旧排期驱动后续工作。
 
 ## 2026-07-10 初始悬浮窗实现
 
