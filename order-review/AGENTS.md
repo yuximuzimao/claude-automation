@@ -64,7 +64,7 @@
 
 先读 `SKILL.md` → `tasks/todo.md` → `docs/INDEX.md`；当前实现与授权范围以
 `docs/CURRENT.md` 为准。修改 ERP 执行或读取时再读 `docs/rules/erp-execution.md`；
-继续活动资料核对时按索引进入活动专项；继续装箱实验或算法时读取 `CURRENT`、当前待办、项目方向，再按需读算法研究和阶段计划。NEAT等历史归档只作追溯，不能驱动现役实现。
+继续活动资料核对时按总SOP进入 `docs/rules/activity-batch.md`；继续装箱实验或算法时按总SOP进入 `docs/rules/packing-assistance.md`，再按需读算法研究和阶段计划。NEAT等历史归档只作追溯，不能驱动现役实现。
 
 ## 数据与运行安全
 

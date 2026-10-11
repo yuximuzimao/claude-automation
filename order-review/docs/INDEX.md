@@ -5,6 +5,8 @@
 | 需要什么 | 去哪里 |
 |---|---|
 | 项目整体流程、三种工具分工、活动资料核对/准备/执行与逐环节脚本 | [项目总SOP](OPERATING-SOP.md) |
+| 活动批量 owner | [activity-batch](rules/activity-batch.md) |
+| 装箱辅助 owner | [packing-assistance](rules/packing-assistance.md) |
 | 单箱内核与可选1～N箱技术研究 | [算法研究](2026-09-12-packing-algorithm-research.md) |
 | 装箱实验现状与阶段边界 | [CURRENT](CURRENT.md)；[完整计划](2026-09-08-packing-simulator-plan.md) |
 | 已确认的业务边界 | [规则路由](rules/README.md)；[根本规则](2026-07-23-package-rule-foundation.md) |

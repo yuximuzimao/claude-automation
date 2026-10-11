@@ -5,7 +5,7 @@
 1. 读 `SKILL.md`，按导航读取 `tasks/todo.md`、`docs/INDEX.md` 和 `docs/CURRENT.md`。
 2. `AGENTS.md` 是本项目共同遵守的ERP安全与数据边界，Claude Code同样适用。
 3. 涉及包裹判断时读根本规则；涉及ERP执行时再读执行关卡文档，均由INDEX导航。
-4. 项目方向、资料核对、活动准备与逐环节脚本统一进入总SOP `docs/OPERATING-SOP.md`。
+4. 项目分类进入总SOP `docs/OPERATING-SOP.md`；活动批量进入 `docs/rules/activity-batch.md`，装箱辅助进入 `docs/rules/packing-assistance.md`。
 
 ## 稳定边界
 

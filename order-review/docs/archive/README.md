@@ -8,7 +8,7 @@
 
 - [NEAT交接](2026-10-11-project-direction-and-step-scripts/neat-handoff.md)：三种工具分工、装箱辅助目标、历史资料核对与前置准备/活动执行的区别、完整规则覆盖、赠品分类和逐环节脚本方向。
 - `2026-10-11-project-direction-and-step-scripts/audit-inventory.json`：本轮Markdown职责盘点、已读范围、处置与文档校验记录。
-- 整体流程已进入唯一项目总SOP `../OPERATING-SOP.md`；下次接手任务只看`../../tasks/todo.md`，从现有资料与历史子订单核对开始。本轮未进行真实ERP操作或开发脚本。
+- 分类入口进入唯一项目总SOP `../OPERATING-SOP.md`；活动规则进入`../rules/activity-batch.md`，装箱规则进入`../rules/packing-assistance.md`。下次接手任务只看`../../tasks/todo.md`，从现有资料与历史子订单核对开始。本轮未进行真实ERP操作或开发脚本。
 
 ## 2026-10-10 悦希活动批量拆单与 SKU 清单发现
 

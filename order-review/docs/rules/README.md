@@ -4,6 +4,8 @@
 |---|---|
 | 整体项目流程、工具分工、活动资料与逐环节推进 | [项目总SOP](../OPERATING-SOP.md) |
 | 原订单、固定组合、历史方案、分包原则、包装证据 | [根本业务规则](../2026-07-23-package-rule-foundation.md) |
+| 活动范围、前置资料、历史核对、批次流程与逐环节脚本 | [活动批量 owner](activity-batch.md) |
+| 装箱辅助用途、结果含义、数据边界与浮窗关系 | [装箱辅助 owner](packing-assistance.md) |
 | ERP页面读取、单包审核、混合拆分当前停点与暂停的后半段 | [执行关卡](erp-execution.md) |
 | 最小安全红线、案例与测试隔离 | [AGENTS](../../AGENTS.md) |
 

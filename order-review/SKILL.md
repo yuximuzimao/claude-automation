@@ -16,7 +16,9 @@ description: 审单项目导航：装箱辅助、日常浮窗、活动资料核�
 
 | 任务 | 入口 |
 |---|---|
-| 项目整体流程、工具分工与活动资料/脚本 | 总SOP `docs/OPERATING-SOP.md`；具体任务见 `tasks/todo.md`，原始资料见PATHS |
+| 项目分类与下一入口 | 总SOP `docs/OPERATING-SOP.md` |
+| 活动资料、历史核对与批量脚本 | `docs/rules/activity-batch.md`；具体任务见 `tasks/todo.md` |
+| 装箱辅助与结果解释 | `docs/rules/packing-assistance.md`；算法/页面技术细节按该owner继续分流 |
 | 接手装箱实验/算法 | `docs/OPERATING-SOP.md` → `docs/CURRENT.md` → 按需读 `docs/2026-09-12-packing-algorithm-research.md` / `docs/2026-09-08-packing-simulator-plan.md` |
 | 包裹业务规则 | `docs/rules/README.md` → `docs/2026-07-23-package-rule-foundation.md` |
 | ERP审核/拆分与读取 | `docs/rules/erp-execution.md`；`src/order_review/audit_runner.py`、`split_runner.py`、`erp_reader.py` |
@@ -30,7 +32,7 @@ description: 审单项目导航：装箱辅助、日常浮窗、活动资料核�
 
 - 日常审单：读取原订单 → 恢复/编辑本地方案 → 用户逐单点击。单包按受保护审核链执行；多包当前只运行到拆分二次确认，随后由人工回ERP核对。
 - 装箱实验：只读快照/实验副本 → 标准ERP身份与装箱资料 → 指定箱型与约束 → 计算/独立校验 → 展示；历史人工方案只在求解完成后对照。
-- 活动批量：进入总SOP的活动流程，先区分历史资料核对、活动前置准备和活动中执行；不能混成一个数据流。具体脚本和页面动作按环节验证。
+- 活动批量：进入`docs/rules/activity-batch.md`，先区分历史资料核对、活动前置准备和活动中执行；不能混成一个数据流。
 - 商品身份：`features.json` 只贡献 `erpName`；正式简称/编码可由200条只读快照补全；视觉标签、特征、别名和活动 `sku-records` 不参与装箱身份。
 - 资料补充：保留完整名称、简称及原始尺寸 → 核实来源与估计轴 → 更新资料 → 读回；不自动扩大白名单。
 
@@ -51,6 +53,7 @@ description: 审单项目导航：装箱辅助、日常浮窗、活动资料核�
 - `docs/INDEX.md`、`docs/CURRENT.md`、`docs/usage.md`
 - `docs/rules/README.md`、`docs/rules/erp-execution.md`
 - `docs/OPERATING-SOP.md`
+- `docs/rules/activity-batch.md`、`docs/rules/packing-assistance.md`
 - `docs/2026-07-23-package-rule-foundation.md`
 - `docs/2026-09-08-packing-simulator-plan.md`、`docs/2026-09-12-packing-algorithm-research.md`
 - `docs/archive/README.md`、`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/`、`docs/archive/2026-09-25-package-history-identity-and-data-audit/`

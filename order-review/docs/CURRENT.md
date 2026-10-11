@@ -77,4 +77,4 @@
 - 历史 worktree `order-review-packing-simulator` 的 P1 文件已逐项对账：应保留内容已迁回或按当前规则重建；视觉 `productKey`、KGOS/HEE `pending-products` 等错误设计明确废弃。用户完成 main 页面首轮实测后，本地旧 worktree 已删除；远端旧分支仅作历史备份，后续不得回抄业务数据或规则。
 - 固定3466入口只允许从 `/Users/chat/claude/order-review` 的 main 启动，`/api/catalog` 的 `dimensionCatalogPath` 指向 main 的 `data/packing-dimensions.json`。页面首轮实测暴露的三视角空状态遮罩问题已修复，Canvas现场确认可见；当前服务按用户要求保持停止。
 - 当前主干 API 资料口径为2个品牌、商品目录83条、尺寸商品21条、运输纸箱17条（其中1条已弃用、16种现用）、待补/追溯资料38项（其中待确认纸箱16种）、正式产品原箱16种。历史 worktree 数量不再作为验收目标；当前数量来自现役身份和已确认包装资料。
-- 页面当前作为单箱内核的人工3D复核入口；后续用途与优先级按2026-10-11项目方向和当前待办安排，不保留任何worktree回退依赖。
+- 页面当前作为单箱内核的人工3D复核入口；后续用途与优先级按装箱辅助 owner和当前待办安排，不保留任何worktree回退依赖。

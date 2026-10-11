@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "auditedAt": "2026-10-11",
-  "scope": "order-review项目总SOP/既有规则与知识架构；工作区HANDOFF仅审单段；Claude审单记忆条目",
+  "scope": "order-review项目总SOP分类入口与四个业务owner/既有规则知识架构；工作区HANDOFF仅审单段；Claude审单记忆条目",
   "activeKnowledge": [
     {
       "file": ".pytest_cache/README.md",
@@ -72,7 +72,7 @@
     },
     {
       "file": "docs/OPERATING-SOP.md",
-      "role": "唯一项目总SOP：工具分工、资料核对、前置准备与活动执行",
+      "role": "项目分类与分流SOP，不承载业务正文",
       "review": "全文读回/评估",
       "decision": "新增"
     },
@@ -364,7 +364,9 @@
     "current": "docs/CURRENT.md",
     "unfinished": "tasks/todo.md",
     "history": "docs/archive/",
-    "overallSop": "docs/OPERATING-SOP.md"
+    "overallSop": "docs/OPERATING-SOP.md",
+    "activityBatch": "docs/rules/activity-batch.md",
+    "packingAssistance": "docs/rules/packing-assistance.md"
   },
   "validation": {
     "localLinksChecked": 84,
