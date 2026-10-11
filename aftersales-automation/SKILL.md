@@ -84,7 +84,7 @@ entry: cli.js
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
-| `public/app.js` | 前端主逻辑 — 7 个一级 Tab 渲染、“已自动执行”每页 10 条分页、统计累计口径与历史记录内嵌、快递行动分类 `isReturnWaitingAction()`、按运单号去重、关联工单内页定位、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类/统计逻辑时 |
+| `public/app.js` | 前端主逻辑 — 7 个一级 Tab 渲染、“已自动执行”每页 10 条分页、统计累计口径与历史记录内嵌、按 `decision.courierActions` 展示和统一过滤快递行动、按运单号去重、关联工单内页定位、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类/统计逻辑时 |
 | `public/index.html` | 前端 HTML 骨架 — 7 个一级 Tab 结构、模版、header 控件 | 改页面结构时 |
 | `public/style.css` | 前端样式 — 紧急度颜色、面板布局、响应式 | 改样式时 |
 | `test/server/return-inbound-ui.test.js` | 退货入库 Web 集成契约：逐条结果、独立停止按钮、仅在单条边界中断 | 改退货入库前端或 op-queue 中断语义时 |
@@ -200,7 +200,7 @@ await cdp.navigate(targetId, 'https://...');
 | 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
 | 15 | ~~刷新状态/check-session 全链路~~ **已删除（2026-06-16 停旧系统）** | 原批量检测会短时连续登录多个账号。账号状态只允许通过店铺管理“打开后台”的安全编排或 A1 单账号流程确认；不要重建批量刷新状态功能。 |
 | 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 `inferRefundOnly`（flow-5.3）的 safeToWait 3 条路径在 hoursUntilNextScan 为 null 时直接调用 `.toFixed(1)` → TypeError。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复。注意：flow-5.1 已改为简单阈值（`remaining > REMIND_HOURS`），不涉及 margin 计算。 |
-| 19 | 全项目重复代码 → 提取共享函数 | 快递单号提取和待办创建统一由 `lib/helpers.js` 提供。`createReminder()` 当前调用用户的「创建提醒」快捷指令并设置5分钟后提醒；扫描中的拦截/取消拦截只创建分类汇总待办。 |
+| 19 | 全项目重复代码 → 提取共享函数 | 快递单号提取和待办创建统一由 `lib/helpers.js` 提供。`createReminder()` 当前调用用户的「创建提醒」快捷指令并设置5分钟后提醒；快递行动由 `decision.courierActions` 统一驱动，取消拦截不属于当前行动模型。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
 | 22 | scan-all 切账号后不写 current-session | 多账号扫描会改变同一个 SCRM tab 的实际账号。成功 `jl.js inject` 后必须写 `data/current-session.json`；否则后续 collect/reprocess 可能误判「已经是目标账号」并跳过注入，读不到工单后错误推进 queue。 |

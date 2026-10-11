@@ -239,6 +239,27 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 }
 ```
 
+## `decision.courierActions` 字段（快递行动引用）
+
+推理分支在需要后续物流处理时输出结构化行动；前端不得再从 `decision.reason` 文案猜测是否需要拦截。
+
+```js
+[
+  {
+    type: 'intercept' | 'return_wait',
+    tracking: string,
+    status: 'not_picked_up' | 'transit' | 'yizhan' | 'returned' | 'signed' | 'unknown' | 'waiting_receipt',
+    source: 'branch' | 'customer_return' | 'legacy-fallback'
+  }
+]
+```
+
+- `intercept`：发出包裹的拦截候选；快递行动页面统一过滤明确已退回、已签收和未知状态。
+- `return_wait`：客户退货单等待仓库确认入库，覆盖无入库记录或 ERP 有记录但未确认收货的等待/时效分支。
+- 已自动处理工单仍可携带 `intercept`；页面标记“已自动处理”，但不把自动处理状态当作拦截成功。
+- 旧 simulation 缺少该字段或错误保存为空数组时，读取展示层按已登记的分支规则补齐，不修改原始运行数据。
+- 客户取消或工单消失不生成 `cancel_intercept` 行动；取消状态仍按平台状态分支观察和收口。
+
 ---
 
 ## `collectErrors` 约定
