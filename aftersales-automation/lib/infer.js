@@ -237,6 +237,89 @@ function withInterceptRejectCopy(decision, rejectReason) {
   };
 }
 
+const INTERCEPT_ACTION_REASON_CODES = new Set([
+  'INTERCEPT_WAITING',
+  'INTERCEPT_TIMEOUT',
+  'MIXED_SIGNED_INTERCEPTABLE',
+  'GIFT_INTERCEPTABLE_AFTER_MAIN_RETURNED',
+]);
+
+const RETURN_WAIT_RULE_SUMMARIES = new Set([
+  '未入库+剩余>12h→等待重查',
+  '有记录未入库+剩余>12h→等待重查',
+  '未入库+剩余≤12h→拒绝',
+  '有记录未入库+剩余≤12h→拒绝',
+]);
+
+function classifyCourierTracking(cd, tracking) {
+  const target = String(tracking || '');
+  const texts = [
+    ...((cd.erpLogistics && Array.isArray(cd.erpLogistics.results))
+      ? cd.erpLogistics.results.filter(result => String(result?.tracking || '') === target).map(result => result.logisticsText || '')
+      : []),
+    ...((cd.logistics && Array.isArray(cd.logistics.packages))
+      ? cd.logistics.packages.filter(pkg => getPackageTracking(pkg) === target).map(pkg => pkg.text || '')
+      : []),
+  ].filter(Boolean).map(String);
+  if (texts.some(hasConfirmedReturn)) return 'returned';
+  if (texts.some(text => SIGNED_KEYWORDS.some(keyword => text.includes(keyword)))) return 'signed';
+  if (texts.some(text => YIZHAN_KEYWORDS.some(keyword => text.includes(keyword)))) return 'yizhan';
+  if (texts.some(text => NOT_PICKED_UP_KEYWORDS.some(keyword => text.includes(keyword)))) return 'not_picked_up';
+  if (texts.some(text => ACTUAL_SHIPMENT_RE.test(text))) return 'transit';
+  return 'unknown';
+}
+
+function allCollectedTrackings(cd) {
+  return [...new Set([
+    ...getErpRows(cd, 'erpSearch').flatMap(getRowTrackings),
+    ...getErpRows(cd, 'giftErpSearch').flatMap(getRowTrackings),
+  ])];
+}
+
+function buildCourierActions(cd, ticket, decision, queueItem) {
+  if (!decision || !cd) return [];
+  const summaryTexts = (decision.rulesApplied || []).map(rule => String(rule?.summary || ''));
+  const explicitTrackings = Array.isArray(decision.interceptTrackings)
+    ? [...new Set(decision.interceptTrackings.filter(Boolean).map(String))]
+    : [];
+  const safeRefundApprove = queueItem?.type === '仅退款'
+    && decision.action === 'approve'
+    && summaryTexts.includes('全部ERP行逐行核验通过→同意退款');
+  const interceptBranch = explicitTrackings.length > 0
+    || INTERCEPT_ACTION_REASON_CODES.has(String(decision.reasonCode || ''))
+    || safeRefundApprove;
+  const actions = [];
+  if (interceptBranch) {
+    const trackings = explicitTrackings.length ? explicitTrackings : allCollectedTrackings(cd);
+    const safeTrackingOutcomes = safeRefundApprove
+      ? evaluateRefundOnlyTrackings(cd, [
+        ...getErpRows(cd, 'erpSearch'),
+        ...getErpRows(cd, 'giftErpSearch'),
+      ]).outcomes
+      : [];
+    const outcomeByTracking = new Map(safeTrackingOutcomes.map(item => [String(item.tracking), item.outcome]));
+    for (const tracking of trackings) {
+      actions.push({
+        type: 'intercept',
+        tracking,
+        status: outcomeByTracking.get(String(tracking)) || classifyCourierTracking(cd, tracking),
+        source: 'branch',
+      });
+    }
+  }
+  const returnWaitBranch = decision.reasonCode === 'WAREHOUSE_NOT_RECEIVED'
+    || summaryTexts.some(summary => RETURN_WAIT_RULE_SUMMARIES.has(summary));
+  if (returnWaitBranch && String(ticket?.returnTracking || '').trim()) {
+    actions.push({
+      type: 'return_wait',
+      tracking: String(ticket.returnTracking).trim(),
+      status: 'waiting_receipt',
+      source: 'customer_return',
+    });
+  }
+  return actions;
+}
+
 // 有拦截记录时不创建重复拦截提醒
 function interceptWarnings(cd) {
   return cd.intercepted ? [] : ['需创建快递拦截提醒'];
@@ -951,6 +1034,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
               [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '主品退回但赠品未退回→上报人工' }]
             ),
             reasonCode: 'GIFT_INTERCEPTABLE_AFTER_MAIN_RETURNED',
+            interceptTrackings: giftTransit.map(item => item.tr),
             requiresHumanReview: true,
             autoExecutionBlocked: true,
             humanTriggeredExecutionAllowed: true,
@@ -1918,7 +2002,16 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 function inferDecision(sim, queueItem) {
   const steps = [];
   function s(step) { steps.push(step); return step; }
-  function fin(decision) { return { ...decision, steps }; }
+  function fin(decision) {
+    const finalized = { ...decision, steps };
+    finalized.courierActions = buildCourierActions(
+      sim.collectedData || {},
+      sim.collectedData?.ticket || {},
+      finalized,
+      queueItem || {},
+    );
+    return finalized;
+  }
 
   const cd = sim.collectedData || {};
   const type = queueItem.type;

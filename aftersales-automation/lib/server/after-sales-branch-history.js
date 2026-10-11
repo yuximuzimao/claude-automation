@@ -150,6 +150,10 @@ const BRANCHES = Object.freeze({
     label: '商责售后原因 / 人工处理',
     automationStatus: 'manual_only',
   },
+  'merchant_fault.logistics_no_record.manual': {
+    label: '商责 / 快递无物流记录 / 人工处理',
+    automationStatus: 'manual_only',
+  },
   'global.cancelled.wait_archive': {
     label: '客户取消或取消中 / 等待归档',
     automationStatus: 'manual_only',
@@ -284,6 +288,22 @@ function hasExcess(decision) {
   return /多退|多\d+件|比期望多/.test(text);
 }
 
+function readDecisionStepValue(decision, label) {
+  const steps = Array.isArray(decision?.steps) ? decision.steps : [];
+  const step = steps.find(item => String(item?.label || '').trim() === label);
+  return step && step.value != null ? String(step.value).trim() : '';
+}
+
+function resolveOrderType(simulation, queueItem = {}) {
+  const direct = [
+    queueItem.type,
+    simulation?.collectedData?.ticket?.type,
+    simulation?.orderType,
+    simulation?.type,
+  ].map(value => String(value || '').trim()).find(Boolean);
+  return direct || readDecisionStepValue(simulation?.decision, '工单类型');
+}
+
 function classifyRule(decision, collectedData) {
   const summaries = (decision.rulesApplied || []).map(rule => rule && rule.summary).filter(Boolean);
 
@@ -327,7 +347,8 @@ function classifySimulation(simulation, queueItem = {}) {
   const decision = simulation && simulation.decision;
   const ticket = simulation?.collectedData?.ticket || {};
   const reason = ticket.afterSaleReason;
-  const orderType = queueItem.type || simulation?.collectedData?.ticket?.type || simulation?.orderType;
+  const orderType = resolveOrderType(simulation, queueItem);
+  const logisticsNoRecord = String(reason || '').trim() === '快递无物流记录';
   const specialNoTracking = decision?.action === 'escalate'
     && orderType === '退货退款'
     && !String(ticket.returnTracking || '').trim()
@@ -356,7 +377,9 @@ function classifySimulation(simulation, queueItem = {}) {
     ? manualReviewBranches[decision.manualReviewKind]
     : null;
   let ruleClassification = null;
-  if (platformStageBranchId) {
+  if (logisticsNoRecord) {
+    ruleClassification = { branchId: 'merchant_fault.logistics_no_record.manual' };
+  } else if (platformStageBranchId) {
     ruleClassification = {
       branchId: platformStageBranchId,
       caseId: `platform_stage.${decision.platformStageCaseId}`,
@@ -446,6 +469,75 @@ function latestByWorkOrder(simulations) {
   return [...latest.values()];
 }
 
+function workOrderKeyOf(record) {
+  return String(record?.workOrderNum || record?.queueItemId || record?.id || '');
+}
+
+function recordTimestamp(record) {
+  return record?.__source === 'case'
+    ? Date.parse(record.addedAt || '')
+    : Date.parse(record?.createdAt || '');
+}
+
+/**
+ * 将仍在 simulation 缓冲区中的快照和已归档 case 合并为一条最近观察记录。
+ * 同一工单只保留窗口内时间最新的一条；归档记录缺少决策字段时，回填同工单最近 simulation 的证据。
+ */
+function mergeRecentRecords(simulations, archivedCases, cutoffMs, nowMs) {
+  const fallbackSimulationsByWorkOrder = new Map();
+  for (const simulation of simulations || []) {
+    const key = workOrderKeyOf(simulation);
+    if (!key) continue;
+    if (!fallbackSimulationsByWorkOrder.has(key)) fallbackSimulationsByWorkOrder.set(key, []);
+    fallbackSimulationsByWorkOrder.get(key).push(simulation);
+  }
+  for (const records of fallbackSimulationsByWorkOrder.values()) {
+    records.sort((a, b) => String(a.createdAt || '').localeCompare(String(b.createdAt || '')));
+  }
+  const candidates = [
+    ...(simulations || []).map(record => ({ ...record, __source: 'simulation' })),
+    ...(archivedCases || []).map(record => ({ ...record, __source: 'case' })),
+  ].filter(record => {
+    const at = recordTimestamp(record);
+    return Number.isFinite(at)
+      && at >= cutoffMs
+      && at <= nowMs
+      && workOrderKeyOf(record);
+  });
+  const grouped = new Map();
+  for (const record of candidates) {
+    const key = workOrderKeyOf(record);
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(record);
+  }
+
+  return [...grouped.entries()].map(([key, records]) => {
+    records.sort((a, b) => {
+      const timeDiff = recordTimestamp(a) - recordTimestamp(b);
+      if (timeDiff) return timeDiff;
+      return (a.__source === 'case' ? 1 : 0) - (b.__source === 'case' ? 1 : 0);
+    });
+    const latest = records[records.length - 1];
+    const latestSimulation = [...records]
+      .reverse()
+      .find(record => record.__source === 'simulation')
+      || [...(fallbackSimulationsByWorkOrder.get(key) || [])]
+        .reverse()
+        .find(record => {
+          const at = Date.parse(record.createdAt || '');
+          return Number.isFinite(at) && at <= recordTimestamp(latest);
+        });
+    const merged = { ...(latestSimulation || {}) };
+    for (const [field, value] of Object.entries(latest)) {
+      if (value !== undefined && value !== null) merged[field] = value;
+    }
+    merged.__sourceRecords = records;
+    merged.__eventAt = new Date(recordTimestamp(latest)).toISOString();
+    merged.__workOrderKey = key;
+    return merged;
+  });
+}
+
 function summarizeHistory({
   simulations = [],
   feedbacks = [],
@@ -461,6 +553,7 @@ function summarizeHistory({
     const createdAt = Date.parse(simulation.createdAt || '');
     return Number.isFinite(createdAt) && createdAt >= cutoffMs && createdAt <= nowMs;
   });
+  const recentRecords = mergeRecentRecords(simulations, archivedCases, cutoffMs, nowMs);
   const queueById = new Map(queueItems.map(item => [item.id, item]));
   const queueByWorkOrder = new Map(queueItems
     .filter(item => item.workOrderNum)
@@ -474,12 +567,22 @@ function summarizeHistory({
       caseByWorkOrder.set(key, item);
     }
   }
+  const recentCaseByWorkOrder = new Map();
+  for (const item of archivedCases) {
+    const addedAt = Date.parse(item.addedAt || '');
+    if (!item.workOrderNum || !Number.isFinite(addedAt) || addedAt < cutoffMs || addedAt > nowMs) continue;
+    const key = String(item.workOrderNum);
+    const previous = recentCaseByWorkOrder.get(key);
+    if (!previous || String(previous.addedAt || '') <= String(item.addedAt || '')) {
+      recentCaseByWorkOrder.set(key, item);
+    }
+  }
   const resolveQueueItem = simulation => queueById.get(simulation.queueItemId)
     || queueByWorkOrder.get(String(simulation.workOrderNum || ''))
     || caseByWorkOrder.get(String(simulation.workOrderNum || ''))
     || {};
   const isHinted = simulation => Boolean(simulation?.decision?.hinted || resolveQueueItem(simulation).hint);
-  const latest = latestByWorkOrder(recent).filter(simulation => !isHinted(simulation));
+  const latest = recentRecords.filter(simulation => !isHinted(simulation));
   const recentById = new Map(recent.map(simulation => [simulation.id, simulation]));
   const recentByWorkOrder = new Map();
   for (const simulation of recent) {
@@ -487,13 +590,14 @@ function summarizeHistory({
     if (!recentByWorkOrder.has(key)) recentByWorkOrder.set(key, []);
     recentByWorkOrder.get(key).push(simulation);
   }
+  const recentRecordByWorkOrder = new Map(latest.map(record => [workOrderKeyOf(record), record]));
   for (const items of recentByWorkOrder.values()) {
     items.sort((a, b) => String(a.createdAt || '').localeCompare(String(b.createdAt || '')));
   }
   const journalCaseByWorkOrder = new Map();
   for (const [workOrderKey, record] of Object.entries(journal || {})) {
     const succeededAt = Date.parse(record?.pageActionSucceededAt || '');
-    if (!Number.isFinite(succeededAt)) continue;
+    if (!Number.isFinite(succeededAt) || succeededAt < cutoffMs || succeededAt > nowMs) continue;
     const sourceSimulation = (recentByWorkOrder.get(String(workOrderKey)) || [])
       .map(simulation => ({
         simulation,
@@ -501,10 +605,12 @@ function summarizeHistory({
       }))
       .filter(item => Number.isFinite(item.distanceMs) && item.distanceMs <= 5 * 60 * 1000)
       .sort((a, b) => a.distanceMs - b.distanceMs)[0]?.simulation;
-    if (!sourceSimulation || sourceSimulation.decision?.hinted) continue;
+    const sourceRecord = sourceSimulation
+      || recentRecordByWorkOrder.get(String(workOrderKey));
+    if (!sourceRecord || sourceRecord.decision?.hinted) continue;
     journalCaseByWorkOrder.set(
       String(workOrderKey),
-      classifySimulation(sourceSimulation, resolveQueueItem(sourceSimulation)).caseId,
+      classifySimulation(sourceRecord, resolveQueueItem(sourceRecord)).caseId,
     );
   }
   const feedbackByWorkOrderAndCase = new Map();
@@ -512,8 +618,8 @@ function summarizeHistory({
     const simulation = recentById.get(feedback.simulationId);
     if (!simulation || isHinted(simulation)) continue;
     const classification = classifySimulation(simulation, resolveQueueItem(simulation));
-    const workOrderKey = String(simulation.workOrderNum || simulation.queueItemId || simulation.id || '');
-    const key = `${workOrderKey}\u0000${classification.caseId}`;
+    const currentWorkOrderKey = workOrderKeyOf(simulation);
+    const key = `${currentWorkOrderKey}\u0000${classification.caseId}`;
     const previous = feedbackByWorkOrderAndCase.get(key);
     if (!previous || String(previous.createdAt || '') <= String(feedback.createdAt || '')) {
       feedbackByWorkOrderAndCase.set(key, feedback);
@@ -541,15 +647,19 @@ function summarizeHistory({
     const group = groups.get(classification.caseId);
     group.occurrenceCount += 1;
 
-    const workOrderKey = String(simulation.workOrderNum || simulation.queueItemId || simulation.id || '');
-    const feedback = feedbackByWorkOrderAndCase.get(`${workOrderKey}\u0000${classification.caseId}`);
+    const currentWorkOrderKey = workOrderKeyOf(simulation);
+    const feedback = feedbackByWorkOrderAndCase.get(`${currentWorkOrderKey}\u0000${classification.caseId}`);
     if (feedback?.verdict === 'positive') group.positiveCount += 1;
     if (feedback?.verdict === 'negative') group.negativeCount += 1;
 
     if (journalCaseByWorkOrder.get(String(simulation.workOrderNum || '')) === classification.caseId) {
       group.autoSuccessCount += 1;
     }
-    const archivedSource = caseByWorkOrder.get(String(simulation.workOrderNum || ''))?.groundTruth?.source;
+    const archivedCase = recentCaseByWorkOrder.get(String(simulation.workOrderNum || ''))
+      || (caseByWorkOrder.get(String(simulation.workOrderNum || ''))?.addedAt
+        ? null
+        : caseByWorkOrder.get(String(simulation.workOrderNum || '')));
+    const archivedSource = archivedCase?.groundTruth?.source;
     const archivedAsExecution = ['executed', 'batch_executed'].includes(archivedSource);
     const archivedManually = archivedSource === 'manual_handled';
     const executedThroughSystem = archivedAsExecution
@@ -575,6 +685,10 @@ function summarizeHistory({
     generatedAt: new Date(nowMs).toISOString(),
     cutoffAt: new Date(cutoffMs).toISOString(),
     totalSimulations: recent.length,
+    recentArchivedCases: archivedCases.filter(item => {
+      const addedAt = Date.parse(item.addedAt || '');
+      return Number.isFinite(addedAt) && addedAt >= cutoffMs && addedAt <= nowMs;
+    }).length,
     uniqueWorkOrders: latest.length,
     unregisteredCount: cases.filter(item => !item.registered).reduce((sum, item) => sum + item.occurrenceCount, 0),
     cases,

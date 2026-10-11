@@ -15,6 +15,10 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 审单交接（2026-10-11）：已完成项目总SOP更新与NEAT归档；整体方向、工具分工、活动资料核对、前置准备与活动执行统一见 `order-review/docs/OPERATING-SOP.md`，不另设增量规则。下个对话按 `order-review/SKILL.md` → `tasks/todo.md` → `docs/CURRENT.md` 接手，从现有9月22日悦希资料与历史子订单核对开始，不自动开始完整清单提取、批量写操作或1～N箱开发。现役能力与权限只见CURRENT/AGENTS，阶段证据见 `order-review/docs/archive/2026-10-11-project-direction-and-step-scripts/`。
 
+售后自动化统计修正（2026-10-10）：用户确认将平台售后类型“快递无物流记录”固定归入推理和统计的商责人工分支 `merchant_fault.logistics_no_record.manual`，不得继承仅退款物流候选或自动门禁；统计分支页的卡片继续以“分支条件 → 处理结果”为主，新增“平台工单类型”辅助辨认。最近30天分支统计已改为合并窗口内 `simulations.jsonl` 与 `cases.jsonl`，按工单号取最新观察记录，再用自动执行 journal 作为成功证据；旧记录缺少结构化类型时从决策步骤“工单类型”回退读取。相关代码、测试和口径见 `aftersales-automation/lib/constants.js`、`lib/infer.js`、`lib/server/after-sales-branch-history.js`、`public/app.js`、`docs/automation-policy.md`。
+
+快递行动统一化（2026-10-11）：用户确认分支只输出结构化 `decision.courierActions`，快递行动页面统一过滤明确已退回、已签收和未知状态，按运单号去重并保留关联工单；已自动处理工单仍可展示未揽收/在途/驿站行动并标记“已自动处理”。行动类型保留 `intercept` 与 `return_wait`，取消拦截不纳入新模型；赠品进入退回链路但未全部入库不进入快递行动。初次交付漏掉时效充足的退货待入库分支，导致4张等待工单消失；已补新推理及旧记录/空数组的显示映射并重启，使用服务实际脚本和API数据核验4张明细、徽章和关联工单跳转。错误原因和强制“修改前预测、修改后实数对照”验收方法已写入 `aftersales-automation/tasks/lessons.md`、`aftersales-automation/docs/ops-testing.md`；新增回归在 `aftersales-automation/test/server/courier-actions-display.test.js`。
+
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认只保留最新 1 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`，新备份成功后替换上一份。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。

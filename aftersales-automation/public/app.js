@@ -1714,7 +1714,7 @@ function renderAfterSalesBranches(report) {
       <div class="branch-card-header">
         <div>
           <div class="branch-card-reason">${h(item.afterSaleReason)}</div>
-          <div class="branch-card-type">售后类型 · ${h(item.orderType)}</div>
+          <div class="branch-card-type">平台工单类型 · ${h(item.orderType)}</div>
         </div>
         <span class="branch-status ${tier}">${statusLabels[tier]}</span>
       </div>
@@ -1766,7 +1766,7 @@ function renderAfterSalesBranches(report) {
     </summary>
     <div class="stats-section-body">
       <div class="branch-section-note">
-        最近30天有效工单 ${validWorkOrders} 单 · 正常固定分支 ${cases.length} 个。历史会自动刷新，但不会自动学习或自行开放权限。
+        最近30天有效工单 ${validWorkOrders} 单（共 ${Number(report.uniqueWorkOrders || validWorkOrders)} 单，按工单去重）· 已合并当前采集 ${Number(report.totalSimulations || 0)} 条和已归档 ${Number(report.recentArchivedCases || 0)} 条记录 · 正常固定分支 ${cases.length} 个。历史会自动刷新，但不会自动学习或自行开放权限。
       </div>
       <div class="branch-overview">
         <div class="branch-overview-card is-enabled"><div class="branch-overview-value">${tiers.enabled.length}</div><div class="branch-overview-label">已授权自动</div></div>
@@ -1969,15 +1969,80 @@ function getShipRows(cd, decision) {
   return result;
 }
 
-function isReturnWaitingAction(ticket, decision) {
-  if (!ticket || !ticket.returnTracking || !decision) return false;
-  const reason = decision.reason || '';
-  return decision.waitingRescan === true ||
-    decision.reasonCode === 'WAREHOUSE_NOT_RECEIVED' ||
-    reason.includes('拆包') ||
-    reason.includes('尚未入库') ||
-    reason.includes('在途') ||
-    reason.includes('仓库未收到退货');
+function classifyActionTracking(cd, tracking) {
+  const target = String(tracking || '');
+  const texts = [
+    ...(((cd && cd.erpLogistics && Array.isArray(cd.erpLogistics.results))
+      ? cd.erpLogistics.results : [])
+      .filter(result => String(result && result.tracking || '') === target)
+      .map(result => result.logisticsText || '')),
+    ...(((cd && cd.logistics && Array.isArray(cd.logistics.packages))
+      ? cd.logistics.packages : [])
+      .filter(pkg => {
+        const match = String(pkg && pkg.text || '').match(/物流单号[：:]\s*\n?(\S+)/);
+        return match && match[1] === target;
+      })
+      .map(pkg => pkg.text || '')),
+  ].filter(Boolean).map(String);
+  if (texts.some(text => /退回商家|安排退回|拒收|退件|退回|到达商家仓库/.test(text))) return 'returned';
+  if (texts.some(text => /已签收|签收成功|本人签收|代签收|前台签收|放置门口|投递门口|放门口/.test(text))) return 'signed';
+  if (texts.some(text => /驿站待取件|已到驿站|驿站自提|到驿站|投递驿站|快递柜|菜鸟驿站|代收点|丰巢/.test(text))) return 'yizhan';
+  if (texts.some(text => /未揽收|等待揽收|尚未揽收/.test(text))) return 'not_picked_up';
+  if (texts.some(text => /揽收|在途|派件|入站|到达|离开|运输/.test(text))) return 'transit';
+  return 'unknown';
+}
+
+function getCourierActionsForSimulation(sim, item) {
+  const decision = sim && sim.decision;
+  const cd = sim && sim.collectedData || {};
+  if (!decision) return [];
+  const summaries = (decision.rulesApplied || []).map(rule => String(rule && rule.summary || ''));
+  const returnWaitSummaries = new Set([
+    '未入库+剩余>12h→等待重查',
+    '有记录未入库+剩余>12h→等待重查',
+    '未入库+剩余≤12h→拒绝',
+    '有记录未入库+剩余≤12h→拒绝',
+  ]);
+  const returnTracking = String(cd.ticket && cd.ticket.returnTracking || '').trim();
+  const returnWaitBranch = returnTracking && (decision.reasonCode === 'WAREHOUSE_NOT_RECEIVED'
+    || summaries.some(summary => returnWaitSummaries.has(summary)));
+  function includeReturnWait(actions) {
+    // 旧记录可能缺字段，也可能由旧生成器错误写成空数组；读取时补齐，不重采、不改原数据。
+    if (returnWaitBranch && !actions.some(action => action.type === 'return_wait')) {
+      actions.push({ type: 'return_wait', tracking: returnTracking, status: 'waiting_receipt', source: 'customer_return' });
+    }
+    return actions;
+  }
+  if (Array.isArray(decision.courierActions)) {
+    return includeReturnWait(decision.courierActions.map(action => ({
+      ...action,
+      status: action.status || classifyActionTracking(cd, action.tracking),
+    })));
+  }
+
+  // 兼容旧 simulation：只从结构化拦截单号/规则码恢复候选，不再读取 reason 文案。
+  const reasonCodes = new Set([
+    'INTERCEPT_WAITING',
+    'INTERCEPT_TIMEOUT',
+    'MIXED_SIGNED_INTERCEPTABLE',
+    'GIFT_INTERCEPTABLE_AFTER_MAIN_RETURNED',
+  ]);
+  const explicit = Array.isArray(decision.interceptTrackings)
+    ? [...new Set(decision.interceptTrackings.filter(Boolean).map(String))]
+    : [];
+  const safeApprove = item && item.type === '仅退款'
+    && decision.action === 'approve'
+    && summaries.includes('全部ERP行逐行核验通过→同意退款');
+  const trackings = explicit.length || reasonCodes.has(decision.reasonCode) || safeApprove
+    ? (explicit.length ? explicit : getShipRows(cd, decision))
+    : [];
+  const actions = trackings.map(tracking => ({
+    type: 'intercept',
+    tracking,
+    status: classifyActionTracking(cd, tracking),
+    source: 'legacy-fallback',
+  }));
+  return includeReturnWait(actions);
 }
 
 async function loadActionBadge() {
@@ -1987,7 +2052,7 @@ async function loadActionBadge() {
       api('/simulations?mode=live'),
       api('/action-dismissed').catch(() => ({})),
     ]);
-    const ACTIVE = ['waiting', 'simulated'];
+    const ACTIVE = ['waiting', 'simulated', 'auto_executed', 'auto_executing'];
     const items = (queue.items || []).filter(i => ACTIVE.includes(i.status));
     const simsByQueueId = {};
     (sims || []).forEach(s => { if (!simsByQueueId[s.queueItemId]) simsByQueueId[s.queueItemId] = []; simsByQueueId[s.queueItemId].push(s); });
@@ -1998,17 +2063,16 @@ async function loadActionBadge() {
       const sim = allSims[allSims.length - 1];
       if (!sim || !sim.collectedData || !sim.decision) continue;
       const ticket = sim.collectedData.ticket || {};
-      const reason = sim.decision.reason || '';
-      if (sim.decision.action === 'escalate' || sim.decision.action === 'reject') {
-        if (!ticket.returnTracking && (reason.includes('拦截') || reason.includes('在途'))) {
-          getShipRows(sim.collectedData, sim.decision)
-            .filter(t => !dismissed || !dismissed[t])
-            .forEach(tracking => interceptItems.push({ tracking }));
+      const actions = getCourierActionsForSimulation(sim, item);
+      actions.forEach(action => {
+        if (action.type === 'intercept' && !['returned', 'signed', 'unknown'].includes(action.status)
+          && !(dismissed && dismissed[action.tracking])) {
+          interceptItems.push({ tracking: action.tracking, status: action.status });
         }
-        if (isReturnWaitingAction(ticket, sim.decision) && !(dismissed && dismissed[ticket.returnTracking])) {
-          returnItems.push({ tracking: ticket.returnTracking });
+        if (action.type === 'return_wait' && !(dismissed && dismissed[action.tracking])) {
+          returnItems.push({ tracking: action.tracking, status: action.status });
         }
-      }
+      });
     }
     const count = dedupeActionItems(interceptItems).length + dedupeActionItems(returnItems).length;
     const badgeEl = document.getElementById('action-tab-count');
@@ -2059,7 +2123,7 @@ async function loadActionList() {
     api('/action-dismissed').catch(() => ({})),
   ]);
 
-  const ACTIVE = ['waiting', 'simulated', 'pending', 'collecting', 'inferring'];
+  const ACTIVE = ['waiting', 'simulated', 'pending', 'collecting', 'inferring', 'auto_executed', 'auto_executing'];
   const items = (queue.items || []).filter(i => ACTIVE.includes(i.status));
 
   const simsByQueueId = {};
@@ -2081,7 +2145,6 @@ async function loadActionList() {
     const cd = sim.collectedData;
     const ticket = cd.ticket || {};
     const decision = sim.decision;
-    const reason = (decision && decision.reason) || '';
     const brand = extractBrand(item.accountNote);
     const base = {
       workOrderNum: item.workOrderNum,
@@ -2093,25 +2156,16 @@ async function loadActionList() {
       accountNum: item.accountNum,
     };
 
-    // 待拦截：决策含"拦截"或"在途"，且 returnTracking 为空（发出包裹拦截，非退货）
-    // 包含主订单所有分包快递单号 + 赠品子订单对应的快递单号
-    if (decision && (decision.action === 'escalate' || decision.action === 'reject') && !ticket.returnTracking &&
-        (reason.includes('拦截') || reason.includes('在途'))) {
-      getShipRows(cd, decision).forEach(tracking => {
-        if (dismissed && dismissed[tracking]) {
-          dismissedIntercepts.push({ ...base, tracking });
-        } else {
-          intercepts.push({ ...base, tracking });
-        }
-      });
-    }
-
-    // 退货待入库：由 isReturnWaitingAction 统一判断（waitingRescan / WAREHOUSE_NOT_RECEIVED / 关键词）
-    if (isReturnWaitingAction(ticket, decision)) {
-      if (dismissed && dismissed[ticket.returnTracking]) {
-        dismissedReturns.push({ ...base, tracking: ticket.returnTracking });
-      } else {
-        returnsWaiting.push({ ...base, tracking: ticket.returnTracking });
+    for (const action of getCourierActionsForSimulation(sim, item)) {
+      const actionItem = { ...base, tracking: action.tracking, courierStatus: action.status, processed: ['auto_executed', 'auto_executing'].includes(item.status) };
+      const marked = dismissed && dismissed[action.tracking];
+      if (action.type === 'intercept') {
+        if (['returned', 'signed', 'unknown'].includes(action.status)) continue;
+        if (marked) dismissedIntercepts.push(actionItem);
+        else intercepts.push(actionItem);
+      } else if (action.type === 'return_wait') {
+        if (marked) dismissedReturns.push(actionItem);
+        else returnsWaiting.push(actionItem);
       }
     }
   }
@@ -2148,7 +2202,13 @@ async function jumpToActionWorkOrder(queueItemId) {
       return;
     }
     if (['auto_executed', 'auto_executing'].includes(item.status)) {
-      showToast('该工单已进入“已自动执行”，请在对应标签中查看');
+      await activateTab('auto');
+      const autoCard = document.getElementById('card-' + queueItemId);
+      if (!autoCard) { showToast('工单状态刚刚发生变化，请刷新后重试', 'error'); return; }
+      autoCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      autoCard.style.outline = '3px solid var(--blue)';
+      autoCard.style.outlineOffset = '3px';
+      setTimeout(() => { autoCard.style.outline = ''; autoCard.style.outlineOffset = ''; }, 1800);
       return;
     }
 
@@ -2189,10 +2249,20 @@ function renderActionPanel(title, subtitle, items, panelType, dismissedItems = [
     const rows = list.map(item => {
       const cd = formatCountdown(item.deadlineAt);
       const urgencyHtml = cd ? `<span class="tag tag-urgency ${cd.className}" style="font-size:10px;padding:1px 6px">⏰ ${cd.text}</span>` : '';
+      const statusLabel = item.courierStatus === 'not_picked_up'
+        ? '未揽收'
+        : item.courierStatus === 'transit'
+          ? '在途'
+          : item.courierStatus === 'yizhan'
+            ? '驿站待取'
+            : '';
+      const processedLabel = item.processed ? '<span class="tag tag-type">已自动处理</span>' : '';
       return `<div class="action-tracking-row">
         <input type="checkbox" class="action-cb" data-tracking="${h(item.tracking)}" data-won="${h(item.workOrderNum)}">
         <span class="action-tracking-num">${h(item.tracking)}</span>
         <span class="action-wono" style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">${renderActionOrderLinks(item)}</span>
+        ${statusLabel ? `<span class="tag tag-type">${statusLabel}</span>` : ''}
+        ${processedLabel}
         ${urgencyHtml}
       </div>`;
     }).join('');

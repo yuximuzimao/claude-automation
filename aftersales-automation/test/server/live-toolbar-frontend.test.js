@@ -76,7 +76,7 @@ test('等待重查卡片只为显式拦截件保留人工提前拒绝按钮', ()
 
 test('混合签收分支只展示并记录显式可拦截单号', () => {
   assert.match(appJs, /Array\.isArray\(decision && decision\.interceptTrackings\)/);
-  assert.match(appJs, /getShipRows\(sim\.collectedData, sim\.decision\)/);
+  assert.match(appJs, /getCourierActionsForSimulation\(sim, item\)/);
   assert.match(appJs, /getShipRows\(cd, decision\)/);
   assert.match(opQueueJs, /Array\.isArray\(sim\.decision\.interceptTrackings\)/);
   assert.match(opQueueJs, /extractShippedTrackings\(cd\)/);

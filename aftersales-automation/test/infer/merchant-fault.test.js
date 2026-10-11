@@ -41,6 +41,17 @@ describe('P0-1: MERCHANT_FAULT_REASONS 包含"质量问题"', () => {
     assert.ok(result.reason.includes('商责'));
   });
 
+  it('afterSaleReason="快递无物流记录" → 归入商责人工处理', () => {
+    const fixture = loadFixture('fb-1778868858729.json');
+    fixture.queueItem.type = '仅退款';
+    fixture.collectedData.ticket.afterSaleReason = '快递无物流记录';
+    const result = inferDecision(makeSim(fixture), fixture.queueItem);
+
+    assert.equal(result.action, 'escalate');
+    assert.ok(result.reason.includes('商责'));
+    assert.ok((result.rulesApplied || []).some(rule => rule.summary === '商责原因→上报人工'));
+  });
+
   it('afterSaleReason="卖家发错货"的退货申请 → 推荐人工拒绝退货，禁止自动执行', () => {
     const fixture = loadFixture('fb-1778868858729.json');
     fixture.queueItem.type = '退货退款';

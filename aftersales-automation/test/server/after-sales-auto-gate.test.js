@@ -207,6 +207,12 @@ test('安全物流分支只授权多拍拍错，其他售后原因保持人工',
   assert.equal(shouldAutoExecute(refundOnlySafeTrackingDecision(), data, { type: '仅退款' }), false);
 });
 
+test('快递无物流记录归入商责后不得沿用安全物流自动门禁', () => {
+  const data = refundOnlySafeTrackingData('快递无物流记录');
+
+  assert.equal(shouldAutoExecute(refundOnlySafeTrackingDecision(), data, { type: '仅退款' }), false);
+});
+
 test('安全物流分支出现任一在途、未知、额外运单或采集错误时禁止自动执行', () => {
   const inTransit = refundOnlySafeTrackingData();
   inTransit.erpLogistics.results[1].logisticsText = '快件已揽收，正在运输中';

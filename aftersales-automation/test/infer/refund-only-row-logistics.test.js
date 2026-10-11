@@ -170,6 +170,9 @@ test('赠品带单号且仍在途时与主品使用相同规则并阻止退款',
   assert.equal(decision.reasonCode, 'INTERCEPT_WAITING');
   assert.equal(decision.rejectReason, '已通知快递拦截暂未退回');
   assert.equal(checkedLogistics(decision), true);
+  assert.deepEqual(decision.courierActions.map(item => [item.type, item.tracking, item.status]), [
+    ['intercept', tracking, 'transit'],
+  ]);
 });
 
 test('主品已退回但赠品仍在途需拦截时，结果为人工可执行拒绝退款', () => {
@@ -194,6 +197,9 @@ test('主品已退回但赠品仍在途需拦截时，结果为人工可执行�
   assert.equal(decision.rejectReason, '已通知快递拦截暂未退回');
   assert.match(decision.rejectDetail, /已通知快递拦截暂未退回/);
   assert.match(decision.reason, new RegExp(giftTracking));
+  assert.deepEqual(decision.courierActions.map(item => [item.type, item.tracking, item.status]), [
+    ['intercept', giftTracking, 'transit'],
+  ]);
   assert.equal(decision.waitingRescan, undefined);
 });
 

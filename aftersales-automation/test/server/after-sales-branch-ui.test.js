@@ -107,7 +107,7 @@ test('分支页只展示采集和归类正常的数据，并按自动化价值�
   assert.ok(enabledTier >= 0 && enabledTier < candidateTier);
   assert.ok(candidateTier < manualTier);
   assert.doesNotMatch(html, /错误搜索结果|ERP 少读一行|资料是否缺失/);
-  assert.match(html, /最近30天有效工单 9 单 · 正常固定分支 3 个/);
+  assert.match(html, /最近30天有效工单 9 单（共 20 单，按工单去重）· 已合并当前采集 0 条和已归档 0 条记录 · 正常固定分支 3 个/);
   assert.match(html, /branch-tier branch-tier-manual/);
   assert.doesNotMatch(html, /branch-tier branch-tier-manual" open/);
 });
@@ -133,7 +133,7 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
   ] });
 
   assert.ok(html.indexOf('多拍/拍错/不想要') < html.indexOf('拒收'));
-  assert.match(html, /售后类型[\s\S]*仅退款/);
+  assert.match(html, /平台工单类型[\s\S]*仅退款/);
   assert.match(html, /必须满足[\s\S]*主品与赠品均未发货/);
   assert.match(html, /处理结果[\s\S]*同意退款/);
   assert.match(html, /出现次数[\s\S]*16/);

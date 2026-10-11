@@ -191,6 +191,31 @@ test('仅开放多拍拍错的主品赠品均未发货分支，其他原因保�
   assert.notEqual(enabled.caseId, candidate.caseId);
 });
 
+test('快递无物流记录按商责人工分支归类，不继承仅退款物流候选', () => {
+  const simulation = makeSimulation({
+    afterSaleReason: '快递无物流记录',
+    action: 'approve',
+    ruleSummary: '全部ERP行逐行核验通过→同意退款',
+  });
+  simulation.decision.steps = [{ type: 'read', label: '工单类型', value: '仅退款' }];
+
+  const result = classifySimulation(simulation, { type: '仅退款' });
+
+  assert.equal(result.branchId, 'merchant_fault.logistics_no_record.manual');
+  assert.equal(result.automationStatus, 'manual_only');
+  assert.equal(result.orderType, '仅退款');
+});
+
+test('缺少落库工单类型时，从决策步骤还原平台工单类型', () => {
+  const simulation = makeSimulation();
+  simulation.decision.steps = [{ type: 'read', label: '工单类型', value: '仅退款' }];
+
+  const result = classifySimulation(simulation, {});
+
+  assert.equal(result.orderType, '仅退款');
+  assert.notEqual(result.branchId, 'global.order_type_missing.manual');
+});
+
 test('多拍拍错的安全物流分支已授权，其他售后原因仍保持候选', () => {
   const makeSafeTrackingSimulation = afterSaleReason => ({
     collectedData: { ticket: { afterSaleReason } },
@@ -291,6 +316,35 @@ test('历史汇总按工单去重，只采用30天内最新结果', () => {
   assert.equal(report.cases.length, 1);
   assert.equal(report.cases[0].occurrenceCount, 1);
   assert.equal(report.cases[0].positiveCount, 1);
+  assert.equal(report.cases[0].autoSuccessCount, 1);
+});
+
+test('最近30天统计合并已归档 case 与 simulation，同一工单只计一次', () => {
+  const simulation = makeSimulation({
+    id: 'sim-archived',
+    workOrderNum: 'wo-archived',
+    createdAt: '2026-07-10T00:00:00.000Z',
+  });
+  const report = summarizeHistory({
+    simulations: [simulation],
+    archivedCases: [{
+      id: 'case-archived',
+      workOrderNum: 'wo-archived',
+      type: '退货退款',
+      addedAt: '2026-07-11T00:00:00.000Z',
+      groundTruth: { source: 'auto_executed' },
+      decision: simulation.decision,
+      collectedData: simulation.collectedData,
+    }],
+    journal: {
+      'wo-archived': { pageActionSucceededAt: '2026-07-10T00:01:00.000Z' },
+    },
+    now: new Date('2026-07-18T00:00:00.000Z'),
+  });
+
+  assert.equal(report.uniqueWorkOrders, 1);
+  assert.equal(report.cases.length, 1);
+  assert.equal(report.cases[0].occurrenceCount, 1);
   assert.equal(report.cases[0].autoSuccessCount, 1);
 });
 
