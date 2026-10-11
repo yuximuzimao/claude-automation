@@ -226,6 +226,12 @@ Timing只负责把这些动作换算成墙钟。
 
 ## 10. clean baseline与实跑时间
 
+### 10.0 历史组件模型迁移基线
+
+Route Lifecycle切换期间，旧版组件模型的中心值与区间保存在当前`model-config`的`legacy_step_baselines`中，作为**迁移残差**使用。它不是第二套玩家输入，也不是实跑观察：Timing先计算当前Profile已经具备的Movement、Hub和任务服务成本，再用基线补齐尚未完成结构化迁移的部分。
+
+当某个步骤的当前输入全部闭合时，该步骤自动停止使用基线；后续实跑只通过本文件规定的Observation校准当前模型。页面、HTML和人工备注不得直接读取或修改基线数字。
+
 ### clean baseline
 
 默认预测口径：

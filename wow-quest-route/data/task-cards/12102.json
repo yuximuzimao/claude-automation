@@ -57,7 +57,7 @@
     "交付：辛塔尔·玛菲奥斯博士。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -84,11 +84,20 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-11",
+      "source_type": "user_live",
+      "source_ref": "2026-10-10 22:01—2026-10-11 03:38 第二组DK北风苔原→龙骨荒野实跑反馈",
+      "observed_at": "2026-10-11",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《红玉丁香》先携带，后面经过目标区再做。",
+      "text": "采集红玉丁香时顺手击杀洞内达莉亚·日触；必掉红玉胸针，拾取后立即右键接《红玉巨龙圣地的命运》。",
       "scope": "all",
       "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
       "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"

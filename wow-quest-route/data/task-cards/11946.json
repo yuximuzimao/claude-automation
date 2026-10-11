@@ -48,10 +48,11 @@
   "guide": [
     "接取：克莉斯塔萨。",
     "当你做好与玛里苟斯战斗的准备之后，与克莉斯塔萨谈一谈。 /  / 如果你把奥术牢笼弄丢了，可以去找永生之盾的莱洛拉斯。",
-    "交付：克莉斯塔萨。"
+    "交付：克莉斯塔萨。",
+    "这是纯交接任务，不需要fivebox标签；交接前需使用任务物“强化奥术牢笼”寻找克莉斯塔萨。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -78,14 +79,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11946; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "交接前先使用任务物“强化奥术牢笼”寻找克莉斯塔萨，再与NPC对话。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "user_live:2026-10-10",
+      "reason": "2026-10-09至2026-10-10北风第二组DK实跑反馈。"
     }
   }
 }

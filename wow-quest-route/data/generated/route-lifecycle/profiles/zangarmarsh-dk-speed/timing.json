@@ -1,6 +1,6 @@
 {
-  "center_minutes": null,
-  "complete": false,
+  "center_minutes": 152.408,
+  "complete": true,
   "component_rows": [
     {
       "component": "move",
@@ -34,8 +34,8 @@
     },
     {
       "component": "move",
-      "edge_id": "a0022->a0026",
-      "seconds": 59.085929146131285,
+      "edge_id": "a0022->a0148",
+      "seconds": 34.2049729471148,
       "step_id": "step-01"
     },
     {
@@ -76,14 +76,8 @@
     },
     {
       "component": "move",
-      "edge_id": "a0055->a0058",
-      "seconds": 57.10715606188319,
-      "step_id": "step-03"
-    },
-    {
-      "component": "move",
-      "edge_id": "a0058->a0060",
-      "seconds": 177.70209557983185,
+      "edge_id": "a0055->a0060",
+      "seconds": 120.60741830442319,
       "step_id": "step-04"
     },
     {
@@ -91,6 +85,18 @@
       "edge_id": "a0060->a0069",
       "seconds": 33.2103099173574,
       "step_id": "step-04"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0074->a0079",
+      "seconds": 166.99370516321645,
+      "step_id": "step-05"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0079->a0091",
+      "seconds": 30.22107454120708,
+      "step_id": "step-05"
     },
     {
       "component": "move",
@@ -106,87 +112,96 @@
     },
     {
       "component": "move",
-      "edge_id": "a0099->a0101",
-      "seconds": 0.0,
-      "step_id": "step-07"
-    },
-    {
-      "component": "move",
-      "edge_id": "a0101->a0107",
-      "seconds": 18.190840233670407,
-      "step_id": "step-07"
+      "edge_id": "a0097->a0107",
+      "seconds": 187.72133784242595,
+      "step_id": "step-06"
     },
     {
       "component": "move",
       "edge_id": "a0107->a0109",
       "seconds": 37.64331735785623,
+      "step_id": "step-06"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0109->a0152",
+      "seconds": 17.897417039909826,
+      "step_id": "step-06"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0152->a0154",
+      "seconds": 17.897417039909826,
+      "step_id": "step-06"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0154->a0101",
+      "seconds": 47.143319682357465,
       "step_id": "step-07"
     },
     {
       "component": "move",
-      "edge_id": "a0109->a0112",
-      "seconds": 49.05073010725896,
+      "edge_id": "a0101->a0112",
+      "seconds": 39.06958957990008,
       "step_id": "step-07"
     },
     {
       "component": "move",
       "edge_id": "a0112->a0114",
       "seconds": 45.869112572866285,
-      "step_id": "step-08"
+      "step_id": "step-07"
     },
     {
       "component": "move",
-      "edge_id": "a0114->a0116",
-      "seconds": 14.734655074732142,
-      "step_id": "step-08"
-    },
-    {
-      "component": "move",
-      "edge_id": "a0116->a0118",
-      "seconds": 41.045623182301355,
-      "step_id": "step-08"
+      "edge_id": "a0114->a0118",
+      "seconds": 44.11098819178333,
+      "step_id": "step-07"
     },
     {
       "component": "move",
       "edge_id": "a0118->a0120",
       "seconds": 30.934361270695142,
+      "step_id": "step-07"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0122->a0116",
+      "seconds": 73.08782244568695,
       "step_id": "step-08"
     },
     {
       "component": "move",
-      "edge_id": "a0122->a0130",
-      "seconds": 74.56891245839681,
-      "step_id": "step-09"
+      "edge_id": "a0116->a0130",
+      "seconds": 27.10705117115833,
+      "step_id": "step-08"
     },
     {
       "component": "move",
       "edge_id": "a0132->a0137",
       "seconds": 72.32068247908087,
-      "step_id": "step-10"
+      "step_id": "step-09"
     },
     {
       "component": "move",
       "edge_id": "a0137->a0139",
       "seconds": 46.51878696453991,
-      "step_id": "step-10"
+      "step_id": "step-09"
     },
     {
       "action_ids": [
         "a0002",
         "a0003",
-        "a0004",
-        "a0005",
         "a0006",
         "a0007",
         "a0008",
         "a0009",
         "a0010",
         "a0011",
-        "a0012",
-        "a0013"
+        "a0012"
       ],
       "component": "accept_turnin",
-      "seconds": 154.2,
+      "seconds": 125.39999999999999,
       "step_id": "step-01",
       "visit_id": "a0001"
     },
@@ -235,15 +250,6 @@
       "seconds": 67.8,
       "step_id": "step-02",
       "visit_id": "a0037"
-    },
-    {
-      "action_ids": [
-        "a0059"
-      ],
-      "component": "accept_turnin",
-      "seconds": 48.6,
-      "step_id": "step-03",
-      "visit_id": "a0058"
     },
     {
       "action_ids": [
@@ -307,65 +313,78 @@
     },
     {
       "action_ids": [
-        "a0104",
-        "a0105",
-        "a0106"
+        "a0110",
+        "a0151"
       ],
       "component": "accept_turnin",
-      "seconds": 67.8,
-      "step_id": "step-07",
-      "visit_id": "a0101"
+      "seconds": 58.2,
+      "step_id": "step-06",
+      "visit_id": "a0109"
     },
     {
       "action_ids": [
-        "a0110"
+        "a0155"
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-07",
-      "visit_id": "a0109"
+      "step_id": "step-06",
+      "visit_id": "a0154"
     },
     {
       "action_ids": [
         "a0124",
         "a0125",
-        "a0126",
-        "a0127"
+        "a0104",
+        "a0105",
+        "a0106",
+        "a0126"
       ],
       "component": "accept_turnin",
-      "seconds": 77.4,
-      "step_id": "step-09",
+      "seconds": 96.6,
+      "step_id": "step-07",
       "visit_id": "a0122"
     },
     {
       "action_ids": [
+        "a0127",
         "a0134",
         "a0135",
         "a0136"
       ],
       "component": "accept_turnin",
-      "seconds": 67.8,
-      "step_id": "step-09",
+      "seconds": 77.4,
+      "step_id": "step-08",
       "visit_id": "a0132"
     },
     {
       "action_ids": [
         "a0143",
-        "a0144"
+        "a0144",
+        "a0156"
       ],
       "component": "accept_turnin",
-      "seconds": 58.2,
-      "step_id": "step-10",
+      "seconds": 67.8,
+      "step_id": "step-09",
       "visit_id": "a0141"
     }
   ],
-  "input_fingerprint": "e0dd521fb84527498dd947c58b6ba3ee63fa2ceb5f860b21958310167364f95c",
+  "input_fingerprint": "2e7032a3575b935fe86043bc1610cc0a6c1239f413ffd323b8dcd1cf935bef60",
   "issues": [
+    {
+      "action_id": "a0150",
+      "edge_id": "a0148->a0026",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "hearth",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-01"
+    },
     {
       "edge_id": "a0069->a0071",
       "kind": "self_move_calibration_required",
       "movement_mode": "swim",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04"
     },
     {
@@ -373,356 +392,384 @@
       "edge_id": "a0071->a0074",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04"
-    },
-    {
-      "edge_id": "a0074->a0079",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-05"
-    },
-    {
-      "edge_id": "a0079->a0091",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-05"
-    },
-    {
-      "action_id": "a0100",
-      "edge_id": "a0097->a0099",
-      "kind": "movement_action_timing_input_required",
-      "operation_kind": "hearth",
-      "severity": "requirement",
-      "step_id": "step-06"
     },
     {
       "action_id": "a0123",
       "edge_id": "a0120->a0122",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
-      "step_id": "step-09"
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-07"
     },
     {
       "action_id": "a0133",
       "edge_id": "a0130->a0132",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
-      "step_id": "step-09"
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-08"
     },
     {
       "action_id": "a0142",
       "edge_id": "a0139->a0141",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
-      "step_id": "step-10"
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-09"
     },
     {
       "action_id": "a0054",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 9731
     },
     {
       "action_id": "a0082",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 9731
     },
     {
       "action_id": "a0090",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 9802
     },
     {
       "action_id": "a0108",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
-      "step_id": "step-07",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-06",
       "task_id": 9911
     },
     {
       "action_id": "a0111",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
-      "step_id": "step-07",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-06",
       "task_id": 9911
     },
     {
       "action_id": "a0128",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
-      "step_id": "step-09",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-07",
       "task_id": 9903
     },
     {
       "action_id": "a0129",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
-      "step_id": "step-09",
-      "task_id": 9904
-    },
-    {
-      "action_id": "a0145",
-      "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
-      "step_id": "step-10",
-      "task_id": 9903
-    },
-    {
-      "action_id": "a0146",
-      "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
-      "step_id": "step-10",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-07",
       "task_id": 9904
     },
     {
       "action_id": "a0015",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 9785
     },
     {
       "action_id": "a0017",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 9785
     },
     {
       "action_id": "a0021",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 9716
     },
     {
       "action_id": "a0023",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 9747
     },
     {
       "action_id": "a0025",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 9752
     },
     {
+      "action_id": "a0149",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-01",
+      "task_id": 9895
+    },
+    {
       "action_id": "a0030",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 9718
     },
     {
       "action_id": "a0043",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 9770
     },
     {
-      "action_id": "a0044",
-      "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-02",
-      "task_id": 9895
-    },
-    {
       "action_id": "a0046",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 9788
     },
     {
       "action_id": "a0047",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 10096
     },
     {
       "action_id": "a0048",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 9894
     },
     {
       "action_id": "a0050",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 9720
     },
     {
       "action_id": "a0052",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 9720
     },
     {
       "action_id": "a0053",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 9730
     },
     {
       "action_id": "a0056",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 9720
     },
     {
       "action_id": "a0057",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 9817
     },
     {
       "action_id": "a0070",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "task_id": 9720
     },
     {
       "action_id": "a0072",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "task_id": 9845
     },
     {
       "action_id": "a0073",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "task_id": 9731
     },
     {
       "action_id": "a0096",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "task_id": 9898
     },
     {
+      "action_id": "a0153",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-06",
+      "task_id": 9701
+    },
+    {
       "action_id": "a0102",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 9814
     },
     {
       "action_id": "a0103",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 9841
     },
     {
       "action_id": "a0113",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 9904
     },
     {
       "action_id": "a0115",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-08",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-07",
       "task_id": 10117
-    },
-    {
-      "action_id": "a0117",
-      "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-08",
-      "task_id": 9816
     },
     {
       "action_id": "a0119",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-08",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-07",
       "task_id": 9820
     },
     {
       "action_id": "a0121",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-08",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-07",
       "task_id": 9903
+    },
+    {
+      "action_id": "a0117",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-08",
+      "task_id": 9816
     },
     {
       "action_id": "a0131",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-09",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-08",
       "task_id": 9822
     },
     {
       "action_id": "a0138",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-10",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-09",
       "task_id": 10118
     },
     {
       "action_id": "a0140",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
-      "step_id": "step-10",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-09",
       "task_id": 9823
     }
   ],
-  "known_seconds": 2608.518,
+  "known_seconds": 9144.489,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": false,
+  "point_estimate_complete": true,
   "profile_id": "zangarmarsh-dk-speed",
-  "range_basis": null,
-  "range_minutes": null,
-  "status": "requirements",
+  "range_basis": {
+    "basis": "sum_of_step_ranges",
+    "legacy_baseline_steps": 9
+  },
+  "range_minutes": [
+    116.0,
+    204.0
+  ],
+  "status": "pass",
   "steps": [
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 8.387,
+      "complete": true,
       "components": {
-        "accept_turnin_seconds": 376.8,
-        "move_seconds": 180.123,
+        "accept_turnin_seconds": 348.0,
+        "move_seconds": 155.242,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 556.923,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 503.242,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        6.0,
+        11.0
+      ],
       "step_id": "step-01",
-      "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所",
-      "unresolved_component_count": 6
+      "title": "塞纳里奥庇护所 → 暗泽村 → 沼泽之鞭 → 炉石回庇护所",
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.021,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 173.448,
@@ -731,163 +778,201 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 241.248,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        3.0,
+        6.0
+      ],
       "step_id": "step-02",
       "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵",
-      "unresolved_component_count": 6
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
-      "components": {
-        "accept_turnin_seconds": 48.6,
-        "move_seconds": 157.694,
-        "objective_service_seconds": 0.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 206.294,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-03",
-      "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩",
-      "unresolved_component_count": 5
-    },
-    {
-      "center_minutes": null,
-      "complete": false,
-      "components": {
-        "accept_turnin_seconds": 164.4,
-        "move_seconds": 210.912,
-        "objective_service_seconds": 0.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 375.312,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-04",
-      "title": "萨布拉金 → 沼光湖第四泵 → 水域排水口 → 炉石萨布拉金",
-      "unresolved_component_count": 5
-    },
-    {
-      "center_minutes": null,
-      "complete": false,
-      "components": {
-        "accept_turnin_seconds": 174.0,
-        "move_seconds": 0.0,
-        "objective_service_seconds": 0.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 174.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-05",
-      "title": "塞纳里奥庇护所 → 沼泽鼠岗哨",
-      "unresolved_component_count": 4
-    },
-    {
-      "center_minutes": null,
-      "complete": false,
-      "components": {
-        "accept_turnin_seconds": 48.6,
-        "move_seconds": 255.465,
-        "objective_service_seconds": 0.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 304.065,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-06",
-      "title": "黑钉 → 沼泽鼠岗哨 → 炉石萨布拉金",
-      "unresolved_component_count": 2
-    },
-    {
-      "center_minutes": null,
-      "complete": false,
-      "components": {
-        "accept_turnin_seconds": 116.4,
-        "move_seconds": 104.885,
-        "objective_service_seconds": 0.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 221.285,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-07",
-      "title": "萨布拉金 → 昂古拉 → 莉萨奥 → 恐爪",
-      "unresolved_component_count": 5
-    },
-    {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 28.0,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
-        "move_seconds": 132.584,
+        "move_seconds": 100.586,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 132.584,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1680.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1579.414,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        22.0,
+        35.0
+      ],
+      "step_id": "step-03",
+      "title": "环礁湖 → 毒蛇湖",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 22.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 164.4,
+        "move_seconds": 153.818,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 1320.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1001.782,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        17.0,
+        29.0
+      ],
+      "step_id": "step-04",
+      "title": "萨布拉金 → 沼光湖第四泵 → 水域排水口 → 炉石萨布拉金",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 12.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 174.0,
+        "move_seconds": 197.215,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 720.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 348.785,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        10.0,
+        16.0
+      ],
+      "step_id": "step-05",
+      "title": "萨布拉金骑行 → 塞纳里奥庇护所 → 骑行沼泽鼠岗哨",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 12.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 155.4,
+        "move_seconds": 516.624,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 720.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 47.976,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        9.0,
+        17.0
+      ],
+      "step_id": "step-06",
+      "title": "黑钉 → 昂古拉 → 莉萨奥 → 观察孢子人",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 20.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 96.6,
+        "move_seconds": 207.127,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 1200.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 896.273,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        15.0,
+        28.0
+      ],
+      "step_id": "step-07",
+      "title": "爆顶蘑菇 → 抽血者 → 恐爪 → 两个通缉 → 多头蛇",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 28.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 77.4,
+        "move_seconds": 100.195,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 1680.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1502.405,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        21.0,
+        37.0
+      ],
       "step_id": "step-08",
-      "title": "穆玛基 → 鱼人笼 → 格罗阿克 → 多头蛇之王",
-      "unresolved_component_count": 4
+      "title": "鱼人 + 战斗迫近 → 炉石萨布拉金",
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 18.0,
+      "complete": true,
       "components": {
-        "accept_turnin_seconds": 145.2,
-        "move_seconds": 74.569,
-        "objective_service_seconds": 0.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 219.769,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-09",
-      "title": "炉石萨布拉金 → 战斗迫近 → 回萨布拉金",
-      "unresolved_component_count": 5
-    },
-    {
-      "center_minutes": null,
-      "complete": false,
-      "components": {
-        "accept_turnin_seconds": 58.2,
+        "accept_turnin_seconds": 67.8,
         "move_seconds": 118.839,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 177.039,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-10",
-      "title": "匕潭失落者 → 安葛洛什 → 炉石萨布拉金",
-      "unresolved_component_count": 5
+      "known_seconds": 1080.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 893.361,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
+      },
+      "range_minutes": [
+        13.0,
+        25.0
+      ],
+      "step_id": "step-09",
+      "title": "警告匕潭失落者 → 你死我活 → 炉石 → 支援加拉达尔",
+      "unresolved_component_count": 0
     }
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 47,
-    "range_model_status": "requirements",
-    "requirement_count": 47,
-    "step_count": 10
+    "issue_count": 44,
+    "range_model_status": "resolved",
+    "requirement_count": 0,
+    "step_count": 9
   }
 }

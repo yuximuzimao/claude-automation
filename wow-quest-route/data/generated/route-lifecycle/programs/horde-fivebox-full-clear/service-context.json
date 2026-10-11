@@ -1,5 +1,5 @@
 {
-  "input_fingerprint": "a30ff856b6299941c1930a532c998755b27d407a2d48b1db761de7e80242743f",
+  "input_fingerprint": "fd34335d8ee85eeab34f963f011fcc378278058201c47469fb4b470902ae2390",
   "issues": [],
   "kind": "route_program",
   "member_reports": {
@@ -870,6 +870,15 @@
           "zone_id": 3537
         },
         {
+          "location_ref": "borean-p148",
+          "service_action_id": "a0459",
+          "task_id": 11706,
+          "visit_id": "a0458",
+          "x": 70.29,
+          "y": 37.42,
+          "zone_id": 3537
+        },
+        {
           "location_ref": "borean-p145",
           "service_action_id": "a0444",
           "task_id": 11640,
@@ -906,15 +915,6 @@
           "zone_id": 3537
         },
         {
-          "location_ref": "borean-p148",
-          "service_action_id": "a0459",
-          "task_id": 11706,
-          "visit_id": "a0458",
-          "x": 70.29,
-          "y": 37.42,
-          "zone_id": 3537
-        },
-        {
           "location_ref": "borean-p150-inner",
           "service_action_id": "a0465",
           "task_id": 11898,
@@ -942,21 +942,21 @@
           "zone_id": 3537
         },
         {
-          "location_ref": "borean-p157",
-          "service_action_id": "a0489",
-          "task_id": 11590,
-          "visit_id": "a0488",
-          "x": 42.2,
-          "y": 39.3,
-          "zone_id": 3537
-        },
-        {
           "location_ref": "borean-p158",
           "service_action_id": "a0491",
           "task_id": 11582,
           "visit_id": "a0490",
           "x": 43.86,
           "y": 28.64,
+          "zone_id": 3537
+        },
+        {
+          "location_ref": "borean-p157",
+          "service_action_id": "a0489",
+          "task_id": 11590,
+          "visit_id": "a0488",
+          "x": 42.2,
+          "y": 39.3,
           "zone_id": 3537
         },
         {
@@ -1419,7 +1419,7 @@
           "zone_id": 3537
         }
       ],
-      "input_fingerprint": "4e39bb6d99aab5ee33c1242af9f3e5a0f22320e6600e960c15a5d8ddcca9edc8",
+      "input_fingerprint": "f0d7db47a2a2ae4131ca87e0fac0c0f01b41d36ba89a7235db4756cd62d1d706",
       "issues": [],
       "profile_id": "borean-fivebox",
       "spatial_instances": [
@@ -4767,7 +4767,7 @@
           "zone_id": 4395
         }
       ],
-      "input_fingerprint": "92384d9e76f899df075c0857af01939ce99c30f763dd3dd5397b3e3bd36266e5",
+      "input_fingerprint": "58beb1f02feeafc6f4d7e074720f07dc13ba61010d93a43fa713ed0e2e4ae3e7",
       "issues": [],
       "profile_id": "dalaran-mainline-77",
       "spatial_instances": [
@@ -5178,6 +5178,24 @@
           "visit_id": "a0231",
           "x": 47.44,
           "y": 51.82,
+          "zone_id": 65
+        },
+        {
+          "location_ref": "dragonblight-p195",
+          "service_action_id": "a0614",
+          "task_id": 12090,
+          "visit_id": "a0613",
+          "x": 47.2,
+          "y": 58.04,
+          "zone_id": 65
+        },
+        {
+          "location_ref": "dragonblight-p198",
+          "service_action_id": "a0622",
+          "task_id": 12097,
+          "visit_id": "a0621",
+          "x": 51.08,
+          "y": 32.75,
           "zone_id": 65
         },
         {
@@ -5829,7 +5847,7 @@
           "zone_id": 65
         }
       ],
-      "input_fingerprint": "3b59eb94134c3f312feab923d8d60dfb8d71233f2424b8ec08d8f42d27134cd2",
+      "input_fingerprint": "9dfc86451a7729efc767347940ae807448778436c7008577bc7ff4107a237346",
       "issues": [],
       "profile_id": "dragonblight-fivebox",
       "spatial_instances": [
@@ -6869,15 +6887,39 @@
           "x": 38.16,
           "y": 18.71,
           "zone_id": 65
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0614"
+          ],
+          "instance_id": "visit-a0613",
+          "location_ref": "dragonblight-p195",
+          "visit_id": "a0613",
+          "x": 47.2,
+          "y": 58.04,
+          "zone_id": 65
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0622"
+          ],
+          "instance_id": "visit-a0621",
+          "location_ref": "dragonblight-p198",
+          "visit_id": "a0621",
+          "x": 51.08,
+          "y": 32.75,
+          "zone_id": 65
         }
       ],
       "status": "pass",
       "summary": {
         "background_layer_count": 0,
-        "foreground_service_count": 113,
+        "foreground_service_count": 115,
         "shared_service_override_count": 0,
-        "spatial_instance_count": 84,
-        "target_cluster_count": 113
+        "spatial_instance_count": 86,
+        "target_cluster_count": 115
       },
       "target_clusters": [
         {
@@ -8348,6 +8390,32 @@
           "visit_ids": [
             "a0608"
           ]
+        },
+        {
+          "action_ids": [
+            "a0614"
+          ],
+          "cluster_id": "objective-a0614",
+          "source": "objective_action",
+          "task_ids": [
+            12090
+          ],
+          "visit_ids": [
+            "a0613"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0622"
+          ],
+          "cluster_id": "objective-a0622",
+          "source": "objective_action",
+          "task_ids": [
+            12097
+          ],
+          "visit_ids": [
+            "a0621"
+          ]
         }
       ]
     },
@@ -9011,7 +9079,7 @@
           "zone_id": 394
         }
       ],
-      "input_fingerprint": "80aad105d20f52b95bdb7951524cfd5c3ceda18f5e477eff347abda395cb1cf9",
+      "input_fingerprint": "65cbd6f773f6dc028c70f8fd9cb2ab78d4c1658785318d1cf002ae67207fda3f",
       "issues": [],
       "profile_id": "grizzly-fivebox",
       "spatial_instances": [
@@ -10745,7 +10813,7 @@
           "zone_id": 3483
         }
       ],
-      "input_fingerprint": "94fe2fcdbf701f193c9c45270728f610290356134fa636d0a5766c0103036537",
+      "input_fingerprint": "3e52003de0c1ca259eb2b0148d59c7381f9b9ba6155d5bd374ff66f0c277686d",
       "issues": [],
       "profile_id": "hellfire-fivebox",
       "spatial_instances": [
@@ -12487,7 +12555,7 @@
           "zone_id": 495
         }
       ],
-      "input_fingerprint": "b6be8a05645aeed5b733ff7e692ae20d53b6a480bbcae504d8a9e941af6803fa",
+      "input_fingerprint": "7a2e67004bc666451b19e7825729a3a202f7dd1435d08305e35bf6bc1389e221",
       "issues": [],
       "profile_id": "howling-fivebox",
       "spatial_instances": [
@@ -15554,7 +15622,7 @@
           "zone_id": 210
         }
       ],
-      "input_fingerprint": "daf554950e8ca93eb128dc5029de43ad46b21b268c70ee889471dad4eb1dc81e",
+      "input_fingerprint": "b3a53bc0506b89f97efbb7ae713460f129b584b745eb3152027610265f5008c8",
       "issues": [],
       "profile_id": "icecrown-fivebox",
       "spatial_instances": [
@@ -18547,370 +18615,971 @@
       "foreground_services": [
         {
           "location_ref": "nagrand-p004",
-          "service_action_id": "a0015",
-          "task_id": 9935,
-          "visit_id": "a0014",
-          "x": 71.16,
-          "y": 82.36,
-          "zone_id": 3518
-        },
-        {
-          "location_ref": "nagrand-p005",
-          "service_action_id": "a0017",
+          "service_action_id": "a0021",
           "task_id": 9857,
-          "visit_id": "a0016",
-          "x": 68,
-          "y": 61,
+          "visit_id": "a0020",
+          "x": 66.35,
+          "y": 62.32,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p004",
+          "service_action_id": "a0022",
+          "task_id": 9789,
+          "visit_id": "a0020",
+          "x": 66.35,
+          "y": 62.32,
           "zone_id": 3518
         },
         {
           "location_ref": "nagrand-p005",
-          "service_action_id": "a0018",
-          "task_id": 9789,
-          "visit_id": "a0016",
-          "x": 68,
-          "y": 61,
+          "service_action_id": "a0024",
+          "task_id": 9854,
+          "visit_id": "a0023",
+          "x": 65.22,
+          "y": 40.69,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p006",
-          "service_action_id": "a0020",
-          "task_id": 9854,
-          "visit_id": "a0019",
-          "x": 67.5,
-          "y": 42,
+          "location_ref": "nagrand-p008",
+          "service_action_id": "a0037",
+          "task_id": 9855,
+          "visit_id": "a0036",
+          "x": 49.0,
+          "y": 60.36,
           "zone_id": 3518
         },
         {
           "location_ref": "nagrand-p009",
-          "service_action_id": "a0032",
-          "task_id": 9855,
-          "visit_id": "a0031",
-          "x": 49.01,
-          "y": 60.47,
-          "zone_id": 3518
-        },
-        {
-          "location_ref": "nagrand-p010",
-          "service_action_id": "a0034",
+          "service_action_id": "a0039",
           "task_id": 9858,
-          "visit_id": "a0033",
-          "x": 54.5,
-          "y": 48,
+          "visit_id": "a0038",
+          "x": 50.64,
+          "y": 41.41,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p010",
-          "service_action_id": "a0035",
+          "location_ref": "nagrand-p009",
+          "service_action_id": "a0040",
           "task_id": 9850,
-          "visit_id": "a0033",
-          "x": 54.5,
-          "y": 48,
+          "visit_id": "a0038",
+          "x": 50.64,
+          "y": 41.41,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p012",
-          "service_action_id": "a0044",
+          "location_ref": "nagrand-p013",
+          "service_action_id": "a0159",
+          "task_id": 9991,
+          "visit_id": "a0056",
+          "x": 27.34,
+          "y": 43.09,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p014",
+          "service_action_id": "a0062",
+          "task_id": 9863,
+          "visit_id": "a0061",
+          "x": 32.16,
+          "y": 43.12,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p014",
+          "service_action_id": "a0063",
+          "task_id": 9867,
+          "visit_id": "a0061",
+          "x": 32.16,
+          "y": 43.12,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p014",
+          "service_action_id": "a0064",
+          "task_id": 9865,
+          "visit_id": "a0061",
+          "x": 32.16,
+          "y": 43.12,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p015",
+          "service_action_id": "a0067",
+          "task_id": 9868,
+          "visit_id": "a0065",
+          "x": 31.33,
+          "y": 44.13,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p017",
+          "service_action_id": "a0072",
+          "task_id": 9999,
+          "visit_id": "a0071",
+          "x": 21.39,
+          "y": 42.9,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p019",
+          "service_action_id": "a0077",
+          "task_id": 10001,
+          "visit_id": "a0076",
+          "x": 20.57,
+          "y": 42.48,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p021",
+          "service_action_id": "a0081",
+          "task_id": 9948,
+          "visit_id": "a0080",
+          "x": 27.15,
+          "y": 24.55,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p021",
+          "service_action_id": "a0082",
+          "task_id": 9945,
+          "visit_id": "a0080",
+          "x": 27.15,
+          "y": 24.55,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p023",
+          "service_action_id": "a0088",
+          "task_id": 9946,
+          "visit_id": "a0087",
+          "x": 26.03,
+          "y": 13.94,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p025",
+          "service_action_id": "a0093",
+          "task_id": 9962,
+          "visit_id": "a0091",
+          "x": 42.78,
+          "y": 20.7,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p026",
+          "service_action_id": "a0096",
           "task_id": 9939,
-          "visit_id": "a0043",
-          "x": 46.48,
-          "y": 18.19,
+          "visit_id": "a0095",
+          "x": 46.11,
+          "y": 22.42,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p014",
-          "service_action_id": "a0048",
-          "task_id": 9859,
-          "visit_id": "a0047",
-          "x": 41.4,
-          "y": 61.57,
+          "location_ref": "nagrand-p027",
+          "service_action_id": "a0098",
+          "task_id": 10479,
+          "visit_id": "a0097",
+          "x": 43.64,
+          "y": 29.26,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p014",
-          "service_action_id": "a0049",
+          "location_ref": "nagrand-p030",
+          "service_action_id": "a0115",
+          "task_id": 9819,
+          "visit_id": "a0114",
+          "x": 64.37,
+          "y": 57.14,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p031",
+          "service_action_id": "a0117",
+          "task_id": 9935,
+          "visit_id": "a0116",
+          "x": 70.13,
+          "y": 79.26,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p032",
+          "service_action_id": "a0119",
           "task_id": 9851,
-          "visit_id": "a0047",
+          "visit_id": "a0118",
           "x": 41.4,
           "y": 61.57,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p014",
-          "service_action_id": "a0050",
+          "location_ref": "nagrand-p034",
+          "service_action_id": "a0127",
+          "task_id": 9882,
+          "visit_id": "a0126",
+          "x": 35.61,
+          "y": 71.11,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p034",
+          "service_action_id": "a0128",
+          "task_id": 9925,
+          "visit_id": "a0126",
+          "x": 35.61,
+          "y": 71.11,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p035",
+          "service_action_id": "a0130",
+          "task_id": 9900,
+          "visit_id": "a0129",
+          "x": 41.51,
+          "y": 71.42,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p036",
+          "service_action_id": "a0132",
+          "task_id": 9914,
+          "visit_id": "a0131",
+          "x": 47.63,
+          "y": 52.65,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p037",
+          "service_action_id": "a0134",
+          "task_id": 9859,
+          "visit_id": "a0133",
+          "x": 26.1,
+          "y": 53.12,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p038",
+          "service_action_id": "a0136",
+          "task_id": 9862,
+          "visit_id": "a0135",
+          "x": 32.16,
+          "y": 43.86,
+          "zone_id": 3518
+        },
+        {
+          "location_ref": "nagrand-p039",
+          "service_action_id": "a0138",
           "task_id": 9856,
-          "visit_id": "a0047",
-          "x": 41.4,
-          "y": 61.57,
+          "visit_id": "a0137",
+          "x": 31.01,
+          "y": 30.98,
           "zone_id": 3518
         },
         {
-          "location_ref": "nagrand-p014",
-          "service_action_id": "a0055",
+          "location_ref": "nagrand-p043",
+          "service_action_id": "a0151",
           "task_id": 9852,
-          "visit_id": "a0047",
-          "x": 41.4,
-          "y": 61.57,
+          "visit_id": "a0150",
+          "x": 44.24,
+          "y": 65.16,
           "zone_id": 3518
         }
       ],
-      "input_fingerprint": "041a2700ee79ffc2ab99aaf72c2e5f11a6a803232a5ae6443a03d293e703d041",
+      "input_fingerprint": "44cbd73cb098067e5081a130b08453eaf6a2a37744bc72453853faa60a320ef9",
       "issues": [],
       "profile_id": "nagrand-fivebox-67-68",
       "spatial_instances": [
         {
           "basis": "canonical_visit_occurrence",
           "cluster_ids": [
-            "objective-a0015"
+            "objective-a0021",
+            "objective-a0022"
           ],
-          "instance_id": "visit-a0014",
+          "instance_id": "visit-a0020",
           "location_ref": "nagrand-p004",
-          "visit_id": "a0014",
-          "x": 71.16,
-          "y": 82.36,
+          "visit_id": "a0020",
+          "x": 66.35,
+          "y": 62.32,
           "zone_id": 3518
         },
         {
           "basis": "canonical_visit_occurrence",
           "cluster_ids": [
-            "objective-a0017",
-            "objective-a0018"
+            "objective-a0024"
           ],
-          "instance_id": "visit-a0016",
+          "instance_id": "visit-a0023",
           "location_ref": "nagrand-p005",
-          "visit_id": "a0016",
-          "x": 68,
-          "y": 61,
+          "visit_id": "a0023",
+          "x": 65.22,
+          "y": 40.69,
           "zone_id": 3518
         },
         {
           "basis": "canonical_visit_occurrence",
           "cluster_ids": [
-            "objective-a0020"
+            "objective-a0037"
           ],
-          "instance_id": "visit-a0019",
-          "location_ref": "nagrand-p006",
-          "visit_id": "a0019",
-          "x": 67.5,
-          "y": 42,
+          "instance_id": "visit-a0036",
+          "location_ref": "nagrand-p008",
+          "visit_id": "a0036",
+          "x": 49.0,
+          "y": 60.36,
           "zone_id": 3518
         },
         {
           "basis": "canonical_visit_occurrence",
           "cluster_ids": [
-            "objective-a0032"
+            "objective-a0039",
+            "objective-a0040"
           ],
-          "instance_id": "visit-a0031",
+          "instance_id": "visit-a0038",
           "location_ref": "nagrand-p009",
-          "visit_id": "a0031",
-          "x": 49.01,
-          "y": 60.47,
+          "visit_id": "a0038",
+          "x": 50.64,
+          "y": 41.41,
           "zone_id": 3518
         },
         {
           "basis": "canonical_visit_occurrence",
           "cluster_ids": [
-            "objective-a0034",
-            "objective-a0035"
+            "objective-a0159"
           ],
-          "instance_id": "visit-a0033",
-          "location_ref": "nagrand-p010",
-          "visit_id": "a0033",
-          "x": 54.5,
-          "y": 48,
+          "instance_id": "visit-a0056",
+          "location_ref": "nagrand-p013",
+          "visit_id": "a0056",
+          "x": 27.34,
+          "y": 43.09,
           "zone_id": 3518
         },
         {
           "basis": "canonical_visit_occurrence",
           "cluster_ids": [
-            "objective-a0044"
+            "objective-a0062",
+            "objective-a0063",
+            "objective-a0064"
           ],
-          "instance_id": "visit-a0043",
-          "location_ref": "nagrand-p012",
-          "visit_id": "a0043",
-          "x": 46.48,
-          "y": 18.19,
-          "zone_id": 3518
-        },
-        {
-          "basis": "canonical_visit_occurrence",
-          "cluster_ids": [
-            "objective-a0048",
-            "objective-a0049",
-            "objective-a0050",
-            "objective-a0055"
-          ],
-          "instance_id": "visit-a0047",
+          "instance_id": "visit-a0061",
           "location_ref": "nagrand-p014",
-          "visit_id": "a0047",
+          "visit_id": "a0061",
+          "x": 32.16,
+          "y": 43.12,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0067"
+          ],
+          "instance_id": "visit-a0065",
+          "location_ref": "nagrand-p015",
+          "visit_id": "a0065",
+          "x": 31.33,
+          "y": 44.13,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0072"
+          ],
+          "instance_id": "visit-a0071",
+          "location_ref": "nagrand-p017",
+          "visit_id": "a0071",
+          "x": 21.39,
+          "y": 42.9,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0077"
+          ],
+          "instance_id": "visit-a0076",
+          "location_ref": "nagrand-p019",
+          "visit_id": "a0076",
+          "x": 20.57,
+          "y": 42.48,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0081",
+            "objective-a0082"
+          ],
+          "instance_id": "visit-a0080",
+          "location_ref": "nagrand-p021",
+          "visit_id": "a0080",
+          "x": 27.15,
+          "y": 24.55,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0088"
+          ],
+          "instance_id": "visit-a0087",
+          "location_ref": "nagrand-p023",
+          "visit_id": "a0087",
+          "x": 26.03,
+          "y": 13.94,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0093"
+          ],
+          "instance_id": "visit-a0091",
+          "location_ref": "nagrand-p025",
+          "visit_id": "a0091",
+          "x": 42.78,
+          "y": 20.7,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0096"
+          ],
+          "instance_id": "visit-a0095",
+          "location_ref": "nagrand-p026",
+          "visit_id": "a0095",
+          "x": 46.11,
+          "y": 22.42,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0098"
+          ],
+          "instance_id": "visit-a0097",
+          "location_ref": "nagrand-p027",
+          "visit_id": "a0097",
+          "x": 43.64,
+          "y": 29.26,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0115"
+          ],
+          "instance_id": "visit-a0114",
+          "location_ref": "nagrand-p030",
+          "visit_id": "a0114",
+          "x": 64.37,
+          "y": 57.14,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0117"
+          ],
+          "instance_id": "visit-a0116",
+          "location_ref": "nagrand-p031",
+          "visit_id": "a0116",
+          "x": 70.13,
+          "y": 79.26,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0119"
+          ],
+          "instance_id": "visit-a0118",
+          "location_ref": "nagrand-p032",
+          "visit_id": "a0118",
           "x": 41.4,
           "y": 61.57,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0127",
+            "objective-a0128"
+          ],
+          "instance_id": "visit-a0126",
+          "location_ref": "nagrand-p034",
+          "visit_id": "a0126",
+          "x": 35.61,
+          "y": 71.11,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0130"
+          ],
+          "instance_id": "visit-a0129",
+          "location_ref": "nagrand-p035",
+          "visit_id": "a0129",
+          "x": 41.51,
+          "y": 71.42,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0132"
+          ],
+          "instance_id": "visit-a0131",
+          "location_ref": "nagrand-p036",
+          "visit_id": "a0131",
+          "x": 47.63,
+          "y": 52.65,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0134"
+          ],
+          "instance_id": "visit-a0133",
+          "location_ref": "nagrand-p037",
+          "visit_id": "a0133",
+          "x": 26.1,
+          "y": 53.12,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0136"
+          ],
+          "instance_id": "visit-a0135",
+          "location_ref": "nagrand-p038",
+          "visit_id": "a0135",
+          "x": 32.16,
+          "y": 43.86,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0138"
+          ],
+          "instance_id": "visit-a0137",
+          "location_ref": "nagrand-p039",
+          "visit_id": "a0137",
+          "x": 31.01,
+          "y": 30.98,
+          "zone_id": 3518
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-a0151"
+          ],
+          "instance_id": "visit-a0150",
+          "location_ref": "nagrand-p043",
+          "visit_id": "a0150",
+          "x": 44.24,
+          "y": 65.16,
           "zone_id": 3518
         }
       ],
       "status": "pass",
       "summary": {
         "background_layer_count": 0,
-        "foreground_service_count": 12,
+        "foreground_service_count": 30,
         "shared_service_override_count": 0,
-        "spatial_instance_count": 7,
-        "target_cluster_count": 12
+        "spatial_instance_count": 24,
+        "target_cluster_count": 30
       },
       "target_clusters": [
         {
           "action_ids": [
-            "a0015"
+            "a0021"
           ],
-          "cluster_id": "objective-a0015",
-          "source": "objective_action",
-          "task_ids": [
-            9935
-          ],
-          "visit_ids": [
-            "a0014"
-          ]
-        },
-        {
-          "action_ids": [
-            "a0017"
-          ],
-          "cluster_id": "objective-a0017",
+          "cluster_id": "objective-a0021",
           "source": "objective_action",
           "task_ids": [
             9857
           ],
           "visit_ids": [
-            "a0016"
+            "a0020"
           ]
         },
         {
           "action_ids": [
-            "a0018"
+            "a0022"
           ],
-          "cluster_id": "objective-a0018",
+          "cluster_id": "objective-a0022",
           "source": "objective_action",
           "task_ids": [
             9789
           ],
           "visit_ids": [
-            "a0016"
+            "a0020"
           ]
         },
         {
           "action_ids": [
-            "a0020"
+            "a0024"
           ],
-          "cluster_id": "objective-a0020",
+          "cluster_id": "objective-a0024",
           "source": "objective_action",
           "task_ids": [
             9854
           ],
           "visit_ids": [
-            "a0019"
+            "a0023"
           ]
         },
         {
           "action_ids": [
-            "a0032"
+            "a0037"
           ],
-          "cluster_id": "objective-a0032",
+          "cluster_id": "objective-a0037",
           "source": "objective_action",
           "task_ids": [
             9855
           ],
           "visit_ids": [
-            "a0031"
+            "a0036"
           ]
         },
         {
           "action_ids": [
-            "a0034"
+            "a0039"
           ],
-          "cluster_id": "objective-a0034",
+          "cluster_id": "objective-a0039",
           "source": "objective_action",
           "task_ids": [
             9858
           ],
           "visit_ids": [
-            "a0033"
+            "a0038"
           ]
         },
         {
           "action_ids": [
-            "a0035"
+            "a0040"
           ],
-          "cluster_id": "objective-a0035",
+          "cluster_id": "objective-a0040",
           "source": "objective_action",
           "task_ids": [
             9850
           ],
           "visit_ids": [
-            "a0033"
+            "a0038"
           ]
         },
         {
           "action_ids": [
-            "a0044"
+            "a0062"
           ],
-          "cluster_id": "objective-a0044",
+          "cluster_id": "objective-a0062",
+          "source": "objective_action",
+          "task_ids": [
+            9863
+          ],
+          "visit_ids": [
+            "a0061"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0063"
+          ],
+          "cluster_id": "objective-a0063",
+          "source": "objective_action",
+          "task_ids": [
+            9867
+          ],
+          "visit_ids": [
+            "a0061"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0064"
+          ],
+          "cluster_id": "objective-a0064",
+          "source": "objective_action",
+          "task_ids": [
+            9865
+          ],
+          "visit_ids": [
+            "a0061"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0067"
+          ],
+          "cluster_id": "objective-a0067",
+          "source": "objective_action",
+          "task_ids": [
+            9868
+          ],
+          "visit_ids": [
+            "a0065"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0072"
+          ],
+          "cluster_id": "objective-a0072",
+          "source": "objective_action",
+          "task_ids": [
+            9999
+          ],
+          "visit_ids": [
+            "a0071"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0077"
+          ],
+          "cluster_id": "objective-a0077",
+          "source": "objective_action",
+          "task_ids": [
+            10001
+          ],
+          "visit_ids": [
+            "a0076"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0081"
+          ],
+          "cluster_id": "objective-a0081",
+          "source": "objective_action",
+          "task_ids": [
+            9948
+          ],
+          "visit_ids": [
+            "a0080"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0082"
+          ],
+          "cluster_id": "objective-a0082",
+          "source": "objective_action",
+          "task_ids": [
+            9945
+          ],
+          "visit_ids": [
+            "a0080"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0088"
+          ],
+          "cluster_id": "objective-a0088",
+          "source": "objective_action",
+          "task_ids": [
+            9946
+          ],
+          "visit_ids": [
+            "a0087"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0093"
+          ],
+          "cluster_id": "objective-a0093",
+          "source": "objective_action",
+          "task_ids": [
+            9962
+          ],
+          "visit_ids": [
+            "a0091"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0096"
+          ],
+          "cluster_id": "objective-a0096",
           "source": "objective_action",
           "task_ids": [
             9939
           ],
           "visit_ids": [
-            "a0043"
+            "a0095"
           ]
         },
         {
           "action_ids": [
-            "a0048"
+            "a0098"
           ],
-          "cluster_id": "objective-a0048",
+          "cluster_id": "objective-a0098",
           "source": "objective_action",
           "task_ids": [
-            9859
+            10479
           ],
           "visit_ids": [
-            "a0047"
+            "a0097"
           ]
         },
         {
           "action_ids": [
-            "a0049"
+            "a0115"
           ],
-          "cluster_id": "objective-a0049",
+          "cluster_id": "objective-a0115",
+          "source": "objective_action",
+          "task_ids": [
+            9819
+          ],
+          "visit_ids": [
+            "a0114"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0117"
+          ],
+          "cluster_id": "objective-a0117",
+          "source": "objective_action",
+          "task_ids": [
+            9935
+          ],
+          "visit_ids": [
+            "a0116"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0119"
+          ],
+          "cluster_id": "objective-a0119",
           "source": "objective_action",
           "task_ids": [
             9851
           ],
           "visit_ids": [
-            "a0047"
+            "a0118"
           ]
         },
         {
           "action_ids": [
-            "a0050"
+            "a0127"
           ],
-          "cluster_id": "objective-a0050",
+          "cluster_id": "objective-a0127",
+          "source": "objective_action",
+          "task_ids": [
+            9882
+          ],
+          "visit_ids": [
+            "a0126"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0128"
+          ],
+          "cluster_id": "objective-a0128",
+          "source": "objective_action",
+          "task_ids": [
+            9925
+          ],
+          "visit_ids": [
+            "a0126"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0130"
+          ],
+          "cluster_id": "objective-a0130",
+          "source": "objective_action",
+          "task_ids": [
+            9900
+          ],
+          "visit_ids": [
+            "a0129"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0132"
+          ],
+          "cluster_id": "objective-a0132",
+          "source": "objective_action",
+          "task_ids": [
+            9914
+          ],
+          "visit_ids": [
+            "a0131"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0134"
+          ],
+          "cluster_id": "objective-a0134",
+          "source": "objective_action",
+          "task_ids": [
+            9859
+          ],
+          "visit_ids": [
+            "a0133"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0136"
+          ],
+          "cluster_id": "objective-a0136",
+          "source": "objective_action",
+          "task_ids": [
+            9862
+          ],
+          "visit_ids": [
+            "a0135"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0138"
+          ],
+          "cluster_id": "objective-a0138",
           "source": "objective_action",
           "task_ids": [
             9856
           ],
           "visit_ids": [
-            "a0047"
+            "a0137"
           ]
         },
         {
           "action_ids": [
-            "a0055"
+            "a0151"
           ],
-          "cluster_id": "objective-a0055",
+          "cluster_id": "objective-a0151",
           "source": "objective_action",
           "task_ids": [
             9852
           ],
           "visit_ids": [
-            "a0047"
+            "a0150"
+          ]
+        },
+        {
+          "action_ids": [
+            "a0159"
+          ],
+          "cluster_id": "objective-a0159",
+          "source": "objective_action",
+          "task_ids": [
+            9991
+          ],
+          "visit_ids": [
+            "a0056"
           ]
         }
       ]
@@ -19434,7 +20103,7 @@
           "zone_id": 3711
         }
       ],
-      "input_fingerprint": "10c9997b44a898b864e97381d767811453770f8c9b23f70193541cf6ce10dc53",
+      "input_fingerprint": "6b6ed989225c8ce586dfda7ee90bfb69d3ef7a8dee1e9fea5e3228cd920fa540",
       "issues": [],
       "profile_id": "sholazar-fivebox",
       "spatial_instances": [
@@ -21553,7 +22222,7 @@
           "zone_id": 67
         }
       ],
-      "input_fingerprint": "ac363fed37a610e042ef07289251b728165746a40ce6c36be126fe5c70769612",
+      "input_fingerprint": "fb9fe90b30c7d51d6771b6aa8e951ca91f98aae848fc2d2953adff8737dfa234",
       "issues": [],
       "profile_id": "storm-peaks-fivebox",
       "spatial_instances": [
@@ -23678,7 +24347,7 @@
       "background_layers": [
         {
           "end_action_id": "a0101",
-          "end_ordinal": 99,
+          "end_ordinal": 98,
           "end_policy": "carry_if_incomplete",
           "foreground_objective_action_ids": [],
           "service_id": "zang-9802-background",
@@ -23736,12 +24405,12 @@
         },
         {
           "end_action_id": "a0197",
-          "end_ordinal": 195,
+          "end_ordinal": 193,
           "end_policy": "fill_if_incomplete",
           "foreground_objective_action_ids": [],
           "service_id": "zang-9806-background",
           "start_action_id": "a0145",
-          "start_ordinal": 143,
+          "start_ordinal": 141,
           "task_id": 9806,
           "visit_ids": [
             "a0147",
@@ -24198,7 +24867,7 @@
           "zone_id": 3521
         }
       ],
-      "input_fingerprint": "aeab684ae0562f6f2a0efda4dc259ec536d9c17ed0b446361eb7848b4e776976",
+      "input_fingerprint": "03a67598a75602214c032787a6a7090fe72dc33c79cac71be3a368cd6c5fb350",
       "issues": [],
       "profile_id": "zangarmarsh-fivebox",
       "spatial_instances": [
@@ -25973,7 +26642,7 @@
           "zone_id": 66
         }
       ],
-      "input_fingerprint": "c18101dd90ef471cf69073c7fcad17241a2e4b75abb0703ecec6da0c491c378a",
+      "input_fingerprint": "3879d4b8574ccafd84e8ae319fbf39f1610f74d4295c50bd1e85feb924a7bdee",
       "issues": [],
       "profile_id": "zuldrak-fivebox",
       "spatial_instances": [

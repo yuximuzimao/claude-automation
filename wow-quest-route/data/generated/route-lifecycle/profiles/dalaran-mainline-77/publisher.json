@@ -10,7 +10,7 @@
   "hearth_chain": [
     "阿格玛之锤"
   ],
-  "input_fingerprint": "17dd89c796c9b0e8be550163484fc1171c62021b79f007a51a96534a62f6a34e",
+  "input_fingerprint": "3bbabce02c993873f91b4ea8c1911ad0ffe20d7aa36b58310f48113aa3885ba7",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -127,7 +127,7 @@
           "to_visit_id": "visit-k3-handoff"
         }
       ],
-      "input_fingerprint": "9d1a55fbc6a2ead32e403a7b32de54c27cf1a6e8031a24cbafb9b2b31caa1188",
+      "input_fingerprint": "b316c477be79c2fef665d9dfb27927166966b5cac0a8b685c4d9d9c7918bca44",
       "status": "pass",
       "visits": [
         {
@@ -286,13 +286,16 @@
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "79c5596a31b6d145266c9b17c97c98e9adb5bb365778f28a04a895ea567c6fe2",
-    "range_minutes": null,
-    "status": "requirements"
+    "center_minutes": 23.0,
+    "input_fingerprint": "573182cff3fc46e2b0737cd0e4be0a59f9ca97c5376028de72073942a6850d68",
+    "range_minutes": [
+      15.0,
+      34.0
+    ],
+    "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "339a3ae0c924f233b49fafd8a8c880b782d58ea50de821b9e9aa744ec4733d2f",
+  "stage11_input_fingerprint": "e8080453970386ab8db21fe51200194bce9347fae7ca1468c1da83bc3f3908b2",
   "status": "pass",
   "steps": [
     {
@@ -461,9 +464,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.0,
+        "range_minutes": [
+          4.0,
+          9.0
+        ],
+        "status": "pass"
       },
       "title": "紫罗兰之门：魔法王国达拉然 → 来去如风"
     },
@@ -530,9 +536,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.0,
+        "range_minutes": [
+          2.0,
+          5.0
+        ],
+        "status": "pass"
       },
       "title": "克拉苏斯平台：索拉查引导 + 达拉然飞行点"
     },
@@ -612,9 +621,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.0,
+        "range_minutes": [
+          4.0,
+          9.0
+        ],
+        "status": "pass"
       },
       "title": "达拉然下水道：祖达克/风暴引导"
     },
@@ -711,9 +723,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.0,
+        "range_minutes": [
+          5.0,
+          11.0
+        ],
+        "status": "pass"
       },
       "title": "紫罗兰之门 → K3"
     }

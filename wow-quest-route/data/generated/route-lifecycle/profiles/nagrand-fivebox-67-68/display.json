@@ -11,7 +11,7 @@
   "hearth_chain": [
     "加拉达尔"
   ],
-  "input_fingerprint": "34e1e00dbb0353339f687bd207f02a3a59059630a5191550821476997326fd5e",
+  "input_fingerprint": "003fe00601ae426ebc69740ce63c666f54712a01b65925c8d3248848ca1347f9",
   "issues": [
     {
       "display_name": "星界财团招募员",
@@ -53,7 +53,7 @@
         "to_visit_id": "a0005"
       },
       {
-        "edge_id": "a0005->a0009",
+        "edge_id": "a0005->a0015",
         "from_location_ref": "nagrand-p002",
         "from_visit_id": "a0005",
         "movement_action_id": null,
@@ -61,131 +61,472 @@
         "operation_kind": "self_move",
         "source": "canonical_profile",
         "to_location_ref": "nagrand-p003",
-        "to_visit_id": "a0009"
+        "to_visit_id": "a0015"
       },
       {
-        "edge_id": "a0009->a0014",
+        "edge_id": "a0015->a0020",
         "from_location_ref": "nagrand-p003",
-        "from_visit_id": "a0009",
+        "from_visit_id": "a0015",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
         "to_location_ref": "nagrand-p004",
-        "to_visit_id": "a0014"
+        "to_visit_id": "a0020"
       },
       {
-        "edge_id": "a0014->a0016",
+        "edge_id": "a0020->a0023",
         "from_location_ref": "nagrand-p004",
-        "from_visit_id": "a0014",
+        "from_visit_id": "a0020",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
         "to_location_ref": "nagrand-p005",
-        "to_visit_id": "a0016"
+        "to_visit_id": "a0023"
       },
       {
-        "edge_id": "a0016->a0019",
+        "edge_id": "a0023->a0027",
         "from_location_ref": "nagrand-p005",
-        "from_visit_id": "a0016",
+        "from_visit_id": "a0023",
+        "movement_action_id": "a0026",
+        "movement_mode": null,
+        "operation_kind": "hearth",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p006",
+        "to_visit_id": "a0027"
+      },
+      {
+        "edge_id": "a0027->a0029",
+        "from_location_ref": "nagrand-p006",
+        "from_visit_id": "a0027",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
-        "to_location_ref": "nagrand-p006",
-        "to_visit_id": "a0019"
-      },
-      {
-        "edge_id": "a0019->a0021",
-        "from_location_ref": "nagrand-p006",
-        "from_visit_id": "a0019",
-        "movement_action_id": "a0022",
-        "movement_mode": null,
-        "operation_kind": "hearth",
-        "source": "canonical_profile",
         "to_location_ref": "nagrand-p007",
-        "to_visit_id": "a0021"
+        "to_visit_id": "a0029"
       },
       {
-        "edge_id": "a0021->a0024",
+        "edge_id": "a0029->a0036",
         "from_location_ref": "nagrand-p007",
-        "from_visit_id": "a0021",
+        "from_visit_id": "a0029",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
         "to_location_ref": "nagrand-p008",
-        "to_visit_id": "a0024"
-      },
-      {
-        "edge_id": "a0024->a0031",
-        "from_location_ref": "nagrand-p008",
-        "from_visit_id": "a0024",
-        "movement_action_id": null,
-        "movement_mode": "ride",
-        "operation_kind": "self_move",
-        "source": "canonical_profile",
-        "to_location_ref": "nagrand-p009",
-        "to_visit_id": "a0031"
-      },
-      {
-        "edge_id": "a0031->a0033",
-        "from_location_ref": "nagrand-p009",
-        "from_visit_id": "a0031",
-        "movement_action_id": null,
-        "movement_mode": "ride",
-        "operation_kind": "self_move",
-        "source": "canonical_profile",
-        "to_location_ref": "nagrand-p010",
-        "to_visit_id": "a0033"
-      },
-      {
-        "edge_id": "a0033->a0036",
-        "from_location_ref": "nagrand-p010",
-        "from_visit_id": "a0033",
-        "movement_action_id": null,
-        "movement_mode": "ride",
-        "operation_kind": "self_move",
-        "source": "canonical_profile",
-        "to_location_ref": "nagrand-p011",
         "to_visit_id": "a0036"
       },
       {
-        "edge_id": "a0036->a0043",
-        "from_location_ref": "nagrand-p011",
+        "edge_id": "a0036->a0038",
+        "from_location_ref": "nagrand-p008",
         "from_visit_id": "a0036",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
-        "to_location_ref": "nagrand-p012",
+        "to_location_ref": "nagrand-p009",
+        "to_visit_id": "a0038"
+      },
+      {
+        "edge_id": "a0038->a0041",
+        "from_location_ref": "nagrand-p009",
+        "from_visit_id": "a0038",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p010",
+        "to_visit_id": "a0041"
+      },
+      {
+        "edge_id": "a0041->a0043",
+        "from_location_ref": "nagrand-p010",
+        "from_visit_id": "a0041",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p011",
         "to_visit_id": "a0043"
       },
       {
-        "edge_id": "a0043->a0045",
-        "from_location_ref": "nagrand-p012",
+        "edge_id": "a0043->a0050",
+        "from_location_ref": "nagrand-p011",
         "from_visit_id": "a0043",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
-        "to_location_ref": "nagrand-p013",
-        "to_visit_id": "a0045"
+        "to_location_ref": "nagrand-p012",
+        "to_visit_id": "a0050"
       },
       {
-        "edge_id": "a0045->a0047",
+        "edge_id": "a0050->a0056",
+        "from_location_ref": "nagrand-p012",
+        "from_visit_id": "a0050",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p013",
+        "to_visit_id": "a0056"
+      },
+      {
+        "edge_id": "a0056->a0061",
         "from_location_ref": "nagrand-p013",
-        "from_visit_id": "a0045",
+        "from_visit_id": "a0056",
         "movement_action_id": null,
         "movement_mode": "ride",
         "operation_kind": "self_move",
         "source": "canonical_profile",
         "to_location_ref": "nagrand-p014",
-        "to_visit_id": "a0047"
+        "to_visit_id": "a0061"
+      },
+      {
+        "edge_id": "a0061->a0065",
+        "from_location_ref": "nagrand-p014",
+        "from_visit_id": "a0061",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p015",
+        "to_visit_id": "a0065"
+      },
+      {
+        "edge_id": "a0065->a0068",
+        "from_location_ref": "nagrand-p015",
+        "from_visit_id": "a0065",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p016",
+        "to_visit_id": "a0068"
+      },
+      {
+        "edge_id": "a0068->a0071",
+        "from_location_ref": "nagrand-p016",
+        "from_visit_id": "a0068",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p017",
+        "to_visit_id": "a0071"
+      },
+      {
+        "edge_id": "a0071->a0073",
+        "from_location_ref": "nagrand-p017",
+        "from_visit_id": "a0071",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p018",
+        "to_visit_id": "a0073"
+      },
+      {
+        "edge_id": "a0073->a0076",
+        "from_location_ref": "nagrand-p018",
+        "from_visit_id": "a0073",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p019",
+        "to_visit_id": "a0076"
+      },
+      {
+        "edge_id": "a0076->a0078",
+        "from_location_ref": "nagrand-p019",
+        "from_visit_id": "a0076",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p020",
+        "to_visit_id": "a0078"
+      },
+      {
+        "edge_id": "a0078->a0080",
+        "from_location_ref": "nagrand-p020",
+        "from_visit_id": "a0078",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p021",
+        "to_visit_id": "a0080"
+      },
+      {
+        "edge_id": "a0080->a0083",
+        "from_location_ref": "nagrand-p021",
+        "from_visit_id": "a0080",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p022",
+        "to_visit_id": "a0083"
+      },
+      {
+        "edge_id": "a0083->a0087",
+        "from_location_ref": "nagrand-p022",
+        "from_visit_id": "a0083",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p023",
+        "to_visit_id": "a0087"
+      },
+      {
+        "edge_id": "a0087->a0089",
+        "from_location_ref": "nagrand-p023",
+        "from_visit_id": "a0087",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p024",
+        "to_visit_id": "a0089"
+      },
+      {
+        "edge_id": "a0089->a0091",
+        "from_location_ref": "nagrand-p024",
+        "from_visit_id": "a0089",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p025",
+        "to_visit_id": "a0091"
+      },
+      {
+        "edge_id": "a0091->a0095",
+        "from_location_ref": "nagrand-p025",
+        "from_visit_id": "a0091",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p026",
+        "to_visit_id": "a0095"
+      },
+      {
+        "edge_id": "a0095->a0097",
+        "from_location_ref": "nagrand-p026",
+        "from_visit_id": "a0095",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p027",
+        "to_visit_id": "a0097"
+      },
+      {
+        "edge_id": "a0097->a0100",
+        "from_location_ref": "nagrand-p027",
+        "from_visit_id": "a0097",
+        "movement_action_id": "a0099",
+        "movement_mode": null,
+        "operation_kind": "hearth",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p028",
+        "to_visit_id": "a0100"
+      },
+      {
+        "edge_id": "a0100->a0107",
+        "from_location_ref": "nagrand-p028",
+        "from_visit_id": "a0100",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p029",
+        "to_visit_id": "a0107"
+      },
+      {
+        "edge_id": "a0107->a0114",
+        "from_location_ref": "nagrand-p029",
+        "from_visit_id": "a0107",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p030",
+        "to_visit_id": "a0114"
+      },
+      {
+        "edge_id": "a0114->a0116",
+        "from_location_ref": "nagrand-p030",
+        "from_visit_id": "a0114",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p031",
+        "to_visit_id": "a0116"
+      },
+      {
+        "edge_id": "a0116->a0118",
+        "from_location_ref": "nagrand-p031",
+        "from_visit_id": "a0116",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p032",
+        "to_visit_id": "a0118"
+      },
+      {
+        "edge_id": "a0118->a0120",
+        "from_location_ref": "nagrand-p032",
+        "from_visit_id": "a0118",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p033",
+        "to_visit_id": "a0120"
+      },
+      {
+        "edge_id": "a0120->a0126",
+        "from_location_ref": "nagrand-p033",
+        "from_visit_id": "a0120",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p034",
+        "to_visit_id": "a0126"
+      },
+      {
+        "edge_id": "a0126->a0129",
+        "from_location_ref": "nagrand-p034",
+        "from_visit_id": "a0126",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p035",
+        "to_visit_id": "a0129"
+      },
+      {
+        "edge_id": "a0129->a0131",
+        "from_location_ref": "nagrand-p035",
+        "from_visit_id": "a0129",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p036",
+        "to_visit_id": "a0131"
+      },
+      {
+        "edge_id": "a0131->a0133",
+        "from_location_ref": "nagrand-p036",
+        "from_visit_id": "a0131",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p037",
+        "to_visit_id": "a0133"
+      },
+      {
+        "edge_id": "a0133->a0135",
+        "from_location_ref": "nagrand-p037",
+        "from_visit_id": "a0133",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p038",
+        "to_visit_id": "a0135"
+      },
+      {
+        "edge_id": "a0135->a0137",
+        "from_location_ref": "nagrand-p038",
+        "from_visit_id": "a0135",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p039",
+        "to_visit_id": "a0137"
+      },
+      {
+        "edge_id": "a0137->a0140",
+        "from_location_ref": "nagrand-p039",
+        "from_visit_id": "a0137",
+        "movement_action_id": "a0139",
+        "movement_mode": null,
+        "operation_kind": "hearth",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p040",
+        "to_visit_id": "a0140"
+      },
+      {
+        "edge_id": "a0140->a0142",
+        "from_location_ref": "nagrand-p040",
+        "from_visit_id": "a0140",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p041",
+        "to_visit_id": "a0142"
+      },
+      {
+        "edge_id": "a0142->a0145",
+        "from_location_ref": "nagrand-p041",
+        "from_visit_id": "a0142",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p042",
+        "to_visit_id": "a0145"
+      },
+      {
+        "edge_id": "a0145->a0150",
+        "from_location_ref": "nagrand-p042",
+        "from_visit_id": "a0145",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p043",
+        "to_visit_id": "a0150"
+      },
+      {
+        "edge_id": "a0150->a0152",
+        "from_location_ref": "nagrand-p043",
+        "from_visit_id": "a0150",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p044",
+        "to_visit_id": "a0152"
+      },
+      {
+        "edge_id": "a0152->a0154",
+        "from_location_ref": "nagrand-p044",
+        "from_visit_id": "a0152",
+        "movement_action_id": null,
+        "movement_mode": "ride",
+        "operation_kind": "self_move",
+        "source": "canonical_profile",
+        "to_location_ref": "nagrand-p045",
+        "to_visit_id": "a0154"
       }
     ],
-    "input_fingerprint": "500501e03298da7ea1b69ca8f2225b729c3e93b6e2fe49e5d7f8d6421b6cc4d9",
+    "input_fingerprint": "b6b5a316604898a8f66f4269dc2c6ea9c2735313efe63b52ce0ffcd26d4bfc53",
     "status": "pass",
     "visits": [
       {
@@ -199,7 +540,7 @@
         "y": 37.45
       },
       {
-        "display_name": "加拉达尔",
+        "display_name": "加拉达尔任务区",
         "location_ref": "nagrand-p002",
         "location_role": "map_anchor",
         "ordinal": 2,
@@ -214,79 +555,79 @@
         "location_role": "map_anchor",
         "ordinal": 3,
         "step_id": "step-01",
-        "visit_id": "a0009",
+        "visit_id": "a0015",
         "x": 71.52,
         "y": 40.62
       },
       {
-        "display_name": "基尔索罗堡垒 / 吉塞尔达",
+        "display_name": "塔拉南侧羊牛走廊",
         "location_ref": "nagrand-p004",
         "location_role": "map_anchor",
         "ordinal": 4,
-        "step_id": "step-01",
-        "visit_id": "a0014",
-        "x": 71.16,
-        "y": 82.36
+        "step_id": "step-02",
+        "visit_id": "a0020",
+        "x": 66.35,
+        "y": 62.32
       },
       {
-        "display_name": "塔拉附近塔布羊 / 裂蹄牛走廊",
+        "display_name": "东部风鹏刷新带",
         "location_ref": "nagrand-p005",
         "location_role": "map_anchor",
         "ordinal": 5,
-        "step_id": "step-01",
-        "visit_id": "a0016",
-        "x": 68.0,
-        "y": 61.0
-      },
-      {
-        "display_name": "绕山风鹏刷新带",
-        "location_ref": "nagrand-p006",
-        "location_role": "map_anchor",
-        "ordinal": 6,
-        "step_id": "step-01",
-        "visit_id": "a0019",
-        "x": 67.5,
-        "y": 42.0
+        "step_id": "step-02",
+        "visit_id": "a0023",
+        "x": 65.22,
+        "y": 40.69
       },
       {
         "display_name": "加拉达尔",
-        "location_ref": "nagrand-p007",
+        "location_ref": "nagrand-p006",
         "location_role": "map_anchor",
-        "ordinal": 7,
+        "ordinal": 6,
         "step_id": "step-02",
-        "visit_id": "a0021",
+        "visit_id": "a0027",
         "x": 55.37,
         "y": 37.45
       },
       {
         "display_name": "奈辛瓦里狩猎队",
-        "location_ref": "nagrand-p008",
+        "location_ref": "nagrand-p007",
         "location_role": "map_anchor",
-        "ordinal": 8,
-        "step_id": "step-02",
-        "visit_id": "a0024",
+        "ordinal": 7,
+        "step_id": "step-03",
+        "visit_id": "a0029",
         "x": 71.52,
         "y": 40.62
       },
       {
-        "display_name": "西部风鹏刷新带",
+        "display_name": "西部饥饿风鹏刷新带",
+        "location_ref": "nagrand-p008",
+        "location_role": "map_anchor",
+        "ordinal": 8,
+        "step_id": "step-04",
+        "visit_id": "a0036",
+        "x": 49.0,
+        "y": 60.36
+      },
+      {
+        "display_name": "中部草原羊牛",
         "location_ref": "nagrand-p009",
         "location_role": "map_anchor",
         "ordinal": 9,
-        "step_id": "step-03",
-        "visit_id": "a0031",
-        "x": 49.01,
-        "y": 60.47
+        "step_id": "step-04",
+        "visit_id": "a0038",
+        "x": 50.64,
+        "y": 41.41
       },
       {
-        "display_name": "中部草原",
+        "display_name": "星界财团招募员",
         "location_ref": "nagrand-p010",
         "location_role": "map_anchor",
         "ordinal": 10,
-        "step_id": "step-03",
-        "visit_id": "a0033",
-        "x": 54.5,
-        "y": 48.0
+        "step_id": "step-04",
+        "visit_id": "a0041",
+        "x": 51.53,
+        "y": 52.27
       },
       {
         "display_name": "奈辛瓦里狩猎队",
@@ -294,39 +635,349 @@
         "location_role": "map_anchor",
         "ordinal": 11,
         "step_id": "step-04",
-        "visit_id": "a0036",
+        "visit_id": "a0043",
         "x": 71.52,
         "y": 40.62
       },
       {
-        "display_name": "【最低号未到68】战槌山 / 顾问佐尔布",
+        "display_name": "玛格汉车队",
         "location_ref": "nagrand-p012",
         "location_role": "map_anchor",
         "ordinal": 12,
-        "step_id": "step-04",
-        "visit_id": "a0043",
-        "x": 46.48,
-        "y": 18.19
+        "step_id": "step-05",
+        "visit_id": "a0050",
+        "x": 32.36,
+        "y": 36.15
       },
       {
-        "display_name": "【最低号未到68】加拉达尔",
+        "display_name": "受难者奥图里斯",
         "location_ref": "nagrand-p013",
         "location_role": "map_anchor",
         "ordinal": 13,
-        "step_id": "step-04",
-        "visit_id": "a0045",
+        "step_id": "step-05",
+        "visit_id": "a0056",
+        "x": 27.34,
+        "y": 43.09
+      },
+      {
+        "display_name": "日泉岗哨·暗血区",
+        "location_ref": "nagrand-p014",
+        "location_role": "map_anchor",
+        "ordinal": 14,
+        "step_id": "step-05",
+        "visit_id": "a0061",
+        "x": 32.16,
+        "y": 43.12
+      },
+      {
+        "display_name": "日泉岗哨·玛格汉俘虏",
+        "location_ref": "nagrand-p015",
+        "location_role": "map_anchor",
+        "ordinal": 15,
+        "step_id": "step-05",
+        "visit_id": "a0065",
+        "x": 31.33,
+        "y": 44.13
+      },
+      {
+        "display_name": "玛格汉车队",
+        "location_ref": "nagrand-p016",
+        "location_role": "map_anchor",
+        "ordinal": 16,
+        "step_id": "step-05",
+        "visit_id": "a0068",
+        "x": 32.36,
+        "y": 36.15
+      },
+      {
+        "display_name": "铸魔营地任务区",
+        "location_ref": "nagrand-p017",
+        "location_role": "map_anchor",
+        "ordinal": 17,
+        "step_id": "step-06",
+        "visit_id": "a0071",
+        "x": 21.39,
+        "y": 42.9
+      },
+      {
+        "display_name": "受难者奥图里斯",
+        "location_ref": "nagrand-p018",
+        "location_role": "map_anchor",
+        "ordinal": 18,
+        "step_id": "step-06",
+        "visit_id": "a0073",
+        "x": 27.34,
+        "y": 43.09
+      },
+      {
+        "display_name": "莫尔葛主规划师",
+        "location_ref": "nagrand-p019",
+        "location_role": "map_anchor",
+        "ordinal": 19,
+        "step_id": "step-06",
+        "visit_id": "a0076",
+        "x": 20.57,
+        "y": 42.48
+      },
+      {
+        "display_name": "受难者奥图里斯",
+        "location_ref": "nagrand-p020",
+        "location_role": "map_anchor",
+        "ordinal": 20,
+        "step_id": "step-06",
+        "visit_id": "a0078",
+        "x": 27.34,
+        "y": 43.09
+      },
+      {
+        "display_name": "战槌山·幸存者/战槌之战",
+        "location_ref": "nagrand-p021",
+        "location_role": "map_anchor",
+        "ordinal": 21,
+        "step_id": "step-07",
+        "visit_id": "a0080",
+        "x": 27.15,
+        "y": 24.55
+      },
+      {
+        "display_name": "玛格汉车队",
+        "location_ref": "nagrand-p022",
+        "location_role": "map_anchor",
+        "ordinal": 22,
+        "step_id": "step-07",
+        "visit_id": "a0083",
+        "x": 32.36,
+        "y": 36.15
+      },
+      {
+        "display_name": "掠夺者考瓦尔",
+        "location_ref": "nagrand-p023",
+        "location_role": "map_anchor",
+        "ordinal": 23,
+        "step_id": "step-07",
+        "visit_id": "a0087",
+        "x": 26.03,
+        "y": 13.94
+      },
+      {
+        "display_name": "玛格汉车队",
+        "location_ref": "nagrand-p024",
+        "location_role": "map_anchor",
+        "ordinal": 24,
+        "step_id": "step-07",
+        "visit_id": "a0089",
+        "x": 32.31,
+        "y": 36.15
+      },
+      {
+        "display_name": "鲜血竞技场·断蹄",
+        "location_ref": "nagrand-p025",
+        "location_role": "map_anchor",
+        "ordinal": 25,
+        "step_id": "step-07",
+        "visit_id": "a0091",
+        "x": 42.78,
+        "y": 20.7
+      },
+      {
+        "display_name": "战槌山·顾问佐尔布",
+        "location_ref": "nagrand-p026",
+        "location_role": "map_anchor",
+        "ordinal": 26,
+        "step_id": "step-07",
+        "visit_id": "a0095",
+        "x": 46.11,
+        "y": 22.42
+      },
+      {
+        "display_name": "嘲颅废墟·证明你的力量",
+        "location_ref": "nagrand-p027",
+        "location_role": "map_anchor",
+        "ordinal": 27,
+        "step_id": "step-07",
+        "visit_id": "a0097",
+        "x": 43.64,
+        "y": 29.26
+      },
+      {
+        "display_name": "加拉达尔",
+        "location_ref": "nagrand-p028",
+        "location_role": "map_anchor",
+        "ordinal": 28,
+        "step_id": "step-07",
+        "visit_id": "a0100",
         "x": 55.37,
         "y": 37.45
       },
       {
-        "display_name": "【最低号未到68】奈辛瓦里高级狩猎",
-        "location_ref": "nagrand-p014",
+        "display_name": "元素王座",
+        "location_ref": "nagrand-p029",
         "location_role": "map_anchor",
-        "ordinal": 14,
-        "step_id": "step-04",
-        "visit_id": "a0047",
+        "ordinal": 29,
+        "step_id": "step-08",
+        "visit_id": "a0107",
+        "x": 60.73,
+        "y": 22.38
+      },
+      {
+        "display_name": "被折磨的地灵",
+        "location_ref": "nagrand-p030",
+        "location_role": "map_anchor",
+        "ordinal": 30,
+        "step_id": "step-09",
+        "visit_id": "a0114",
+        "x": 64.37,
+        "y": 57.14
+      },
+      {
+        "display_name": "基尔索罗堡垒·巫婆吉塞尔达",
+        "location_ref": "nagrand-p031",
+        "location_role": "map_anchor",
+        "ordinal": 31,
+        "step_id": "step-09",
+        "visit_id": "a0116",
+        "x": 70.13,
+        "y": 79.26
+      },
+      {
+        "display_name": "班塔尔（从塔拉下方绕行，不走吊桥）",
+        "location_ref": "nagrand-p032",
+        "location_role": "map_anchor",
+        "ordinal": 32,
+        "step_id": "step-09",
+        "visit_id": "a0118",
         "x": 41.4,
         "y": 61.57
+      },
+      {
+        "display_name": "埃瑞斯码头",
+        "location_ref": "nagrand-p033",
+        "location_role": "map_anchor",
+        "ordinal": 33,
+        "step_id": "step-09",
+        "visit_id": "a0120",
+        "x": 31.36,
+        "y": 57.79
+      },
+      {
+        "display_name": "沃舒古水晶/空灵爪牙",
+        "location_ref": "nagrand-p034",
+        "location_role": "map_anchor",
+        "ordinal": 34,
+        "step_id": "step-10",
+        "visit_id": "a0126",
+        "x": 35.61,
+        "y": 71.11
+      },
+      {
+        "display_name": "加瓦克希",
+        "location_ref": "nagrand-p035",
+        "location_role": "map_anchor",
+        "ordinal": 35,
+        "step_id": "step-10",
+        "visit_id": "a0129",
+        "x": 41.51,
+        "y": 71.42
+      },
+      {
+        "display_name": "沿路雷象·象牙",
+        "location_ref": "nagrand-p036",
+        "location_role": "map_anchor",
+        "ordinal": 36,
+        "step_id": "step-10",
+        "visit_id": "a0131",
+        "x": 47.63,
+        "y": 52.65
+      },
+      {
+        "display_name": "巴克洛尔",
+        "location_ref": "nagrand-p037",
+        "location_role": "map_anchor",
+        "ordinal": 37,
+        "step_id": "step-10",
+        "visit_id": "a0133",
+        "x": 26.1,
+        "y": 53.12
+      },
+      {
+        "display_name": "暗血腐蚀者",
+        "location_ref": "nagrand-p038",
+        "location_role": "map_anchor",
+        "ordinal": 38,
+        "step_id": "step-10",
+        "visit_id": "a0135",
+        "x": 32.16,
+        "y": 43.86
+      },
+      {
+        "display_name": "裂肠者",
+        "location_ref": "nagrand-p039",
+        "location_role": "map_anchor",
+        "ordinal": 39,
+        "step_id": "step-10",
+        "visit_id": "a0137",
+        "x": 31.01,
+        "y": 30.98
+      },
+      {
+        "display_name": "加拉达尔",
+        "location_ref": "nagrand-p040",
+        "location_role": "map_anchor",
+        "ordinal": 40,
+        "step_id": "step-10",
+        "visit_id": "a0140",
+        "x": 55.37,
+        "y": 37.45
+      },
+      {
+        "display_name": "元素王座",
+        "location_ref": "nagrand-p041",
+        "location_role": "map_anchor",
+        "ordinal": 41,
+        "step_id": "step-11",
+        "visit_id": "a0142",
+        "x": 60.8,
+        "y": 22.38
+      },
+      {
+        "display_name": "奈辛瓦里狩猎队",
+        "location_ref": "nagrand-p042",
+        "location_role": "map_anchor",
+        "ordinal": 42,
+        "step_id": "step-11",
+        "visit_id": "a0145",
+        "x": 71.52,
+        "y": 40.62
+      },
+      {
+        "display_name": "塔丝克",
+        "location_ref": "nagrand-p043",
+        "location_role": "map_anchor",
+        "ordinal": 43,
+        "step_id": "step-12",
+        "visit_id": "a0150",
+        "x": 44.24,
+        "y": 65.16
+      },
+      {
+        "display_name": "奈辛瓦里狩猎队",
+        "location_ref": "nagrand-p044",
+        "location_role": "map_anchor",
+        "ordinal": 44,
+        "step_id": "step-12",
+        "visit_id": "a0152",
+        "x": 71.52,
+        "y": 40.82
+      },
+      {
+        "display_name": "埃瑞斯码头",
+        "location_ref": "nagrand-p045",
+        "location_role": "map_anchor",
+        "ordinal": 45,
+        "step_id": "step-12",
+        "visit_id": "a0154",
+        "x": 31.36,
+        "y": 57.79
       }
     ]
   },
@@ -334,10 +985,13 @@
   "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "1864f1ea9c1c525c03e815a2c37a196997f2f1d2192726fc8e424f136981a984",
-    "range_minutes": null,
-    "status": "requirements"
+    "center_minutes": 61.205,
+    "input_fingerprint": "b062eca3958900f4cc5a3ab686b137ee8772ba8ceb67bd190a2b2203d9862f90",
+    "range_minutes": [
+      36.037,
+      63.549
+    ],
+    "status": "pass"
   },
   "status": "pass",
   "steps": [
@@ -798,9 +1452,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.085,
+        "range_minutes": [
+          4.448,
+          5.722
+        ],
+        "status": "pass"
       },
       "title": "加拉达尔 → 奈辛瓦里：起手任务"
     },
@@ -956,9 +1613,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.445,
+        "range_minutes": [
+          1.59,
+          2.445
+        ],
+        "status": "pass"
       },
       "title": "第一轮狩猎 → 呼嚎之风 → 炉石加拉达尔"
     },
@@ -1192,9 +1852,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.313,
+        "range_minutes": [
+          2.888,
+          3.737
+        ],
+        "status": "pass"
       },
       "title": "加拉达尔接奥图里斯线 → 奈辛瓦里第二轮"
     },
@@ -1497,9 +2160,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.123,
+        "range_minutes": [
+          2.782,
+          6.123
+        ],
+        "status": "pass"
       },
       "title": "第二轮狩猎 → 顺路接星界财团 → 高级狩猎"
     },
@@ -1938,9 +2604,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 7.667,
+        "range_minutes": [
+          4.372,
+          7.667
+        ],
+        "status": "pass"
       },
       "title": "车队 → 侦查大地 → 暗血三任务 → 护送"
     },
@@ -2093,9 +2762,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 3.5,
+        "range_minutes": [
+          1.789,
+          3.5
+        ],
+        "status": "pass"
       },
       "title": "争取时间 → 主规划师：第一次来就做完"
     },
@@ -2454,9 +3126,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 7.145,
+        "range_minutes": [
+          4.174,
+          7.145
+        ],
+        "status": "pass"
       },
       "title": "战槌山 → 考瓦尔 → 顺路断蹄/佐尔布 → 嘲颅刷满念珠 → 炉石"
     },
@@ -2793,9 +3468,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 3.844,
+        "range_minutes": [
+          3.364,
+          4.324
+        ],
+        "status": "pass"
       },
       "title": "加拉达尔集中交付 → 元素王座"
     },
@@ -3068,9 +3746,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 5.873,
+        "range_minutes": [
+          2.385,
+          5.873
+        ],
+        "status": "pass"
       },
       "title": "地灵 → 吉塞尔达 → 绕塔拉下方杀班塔尔 → 埃瑞斯码头"
     },
@@ -3374,9 +4055,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 4.566,
+        "range_minutes": [
+          3.18,
+          4.87
+        ],
+        "status": "pass"
       },
       "title": "沃舒古 → 象牙 → 高级羊/暗血/风鹏 → 炉石交吉塞尔达"
     },
@@ -3590,9 +4274,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 3.774,
+        "range_minutes": [
+          3.276,
+          4.273
+        ],
+        "status": "pass"
       },
       "title": "元素王座交任务 → 奈辛瓦里接终极挑战"
     },
@@ -3790,9 +4477,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 7.87,
+        "range_minutes": [
+          1.789,
+          7.87
+        ],
+        "status": "pass"
       },
       "title": "终极挑战 → 奈辛瓦里 → 埃瑞斯码头收尾"
     }

@@ -52,10 +52,11 @@
   "guide": [
     "接取：步兵沃塔·怒拳。",
     "让20个牦牛人的灵魂安息，幽灵先知或者复苏的远行者都可以。完成任务之后回到钢腭的车队，向步兵沃塔·怒拳复命。",
-    "交付：步兵沃塔·怒拳。"
+    "交付：步兵沃塔·怒拳。",
+    "任务进度共享，主控完成即可同步全队。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -82,14 +83,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11594; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
       "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "user_live:2026-10-10",
+      "reason": "2026-10-09至2026-10-10北风第二组DK实跑反馈。"
     }
   }
 }

@@ -58,7 +58,7 @@
     "对指定的冰霜之魂目标使用冰霜宝石完成充能。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -96,6 +96,15 @@
       "supports_fields": [
         "guide"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-11",
+      "source_type": "user_live",
+      "source_ref": "2026-10-10 22:01—2026-10-11 03:38 第二组DK北风苔原→龙骨荒野实跑反馈",
+      "observed_at": "2026-10-11",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
     }
   ],
   "presentation": {

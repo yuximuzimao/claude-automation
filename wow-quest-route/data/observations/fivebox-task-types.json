@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-15",
+  "updated_at": "2026-10-12",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -301,9 +301,11 @@
       "note": "《猎龙》首组实跑确认任务进度五号共享；主控完成一次魔枢雏龙捕获并带回即可同步全队，不需要五个角色分别重复捕获。"
     },
     "11943": {
-      "type": "two_named_target_drop_progress_group_shared_confirmed",
+      "type": "two_named_target_drop_personal_sequential_loot_confirmed",
       "status": "user_confirmed",
-      "note": "《牢笼》首组实跑确认能量核心与牢笼外壳的任务进度五号共享；主控分别击杀战争使者戈德拉克和塞鲁利恩将军并取得对应任务物即可同步全队，不需要五个角色各刷一套掉落物。"
+      "note": "《牢笼》改为依次拾取；两件任务物击杀完成后由五号逐号拾取，收齐后再离开。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
     },
     "11894": {
       "type": "item_use_personal_confirmed",
@@ -396,9 +398,74 @@
       "note": "《抓虫子》首组龙骨实跑确认：幼虫进度不共享；五个角色要分别对幼虫使用坚固的箱子，并分别拾取自己的落地箱子。"
     },
     "11999": {
-      "type": "loot_and_item_trigger_personal_confirmed_same_corpse_unknown",
-      "status": "user_confirmed_partial",
-      "note": "《寻找线索》首组龙骨实跑确认：完成进度不共享，五个角色都必须各自取得线索物并右键打开。本轮运气较差出现明显长尾；是否同一具法师猎手尸体可供五号分别拾取尚未单独确认。"
+      "type": "loot_and_item_trigger_personal_separate_source_confirmed",
+      "status": "user_confirmed",
+      "note": "《寻找线索》第二组龙骨实跑确认：完成进度不共享，五个角色必须分别完成并各自取得线索后右键打开；不能按同一具尸体依次拾取处理。"
+    },
+    "12005": {
+      "type": "personal_task_item_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《阻碍协议》第二组龙骨实跑确认：任务物不共享，同一来源可由五号依次拾取。"
+    },
+    "12011": {
+      "type": "handoff_only_not_applicable_confirmed",
+      "status": "user_confirmed",
+      "note": "《大麻烦的征兆》第二组龙骨实跑确认：单纯交接任务，不需要fivebox标签。"
+    },
+    "12013": {
+      "type": "fixed_objective_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《阿坎尼姆斯的终结》第二组龙骨实跑确认：任务进度五号共享。"
+    },
+    "12016": {
+      "type": "personal_task_item_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《诱饵》第二组龙骨实跑确认：任务物不共享，同一来源可由五号依次拾取。"
+    },
+    "12031": {
+      "type": "scripted_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《解脱和安息》第二组龙骨实跑确认：事件进度五号共享。"
+    },
+    "12044": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《囤积矿石》第二组龙骨实跑确认：任务进度不共享。"
+    },
+    "12045": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《刨冰》第二组龙骨实跑确认：任务进度不共享。"
+    },
+    "12046": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《柔软的包装》第二组龙骨实跑确认：任务进度不共享。"
+    },
+    "12047": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《不会融化的东西》第二组龙骨实跑确认：任务进度不共享。"
+    },
+    "12049": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《难以下咽》第二组龙骨实跑确认：任务进度不共享。"
+    },
+    "12084": {
+      "type": "item_use_objective_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《森林上空》第二组龙骨实跑确认：任务进度五号共享。"
+    },
+    "12085": {
+      "type": "item_start_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《一封家书》第二组龙骨实跑确认：塔辛尼中尉掉落的部落信件可由五号依次拾取后分别右键接任务。"
+    },
+    "12110": {
+      "type": "item_use_objective_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《魔网能量线的终端》第二组龙骨实跑确认：任务进度五号共享。"
     },
     "12059": {
       "type": "named_single_kill_multi_person_item_start_confirmed",
@@ -407,13 +474,13 @@
     },
     "12061": {
       "type": "scripted_travel_group_shared_all_present_confirmed",
-      "status": "user_confirmed_partial",
-      "note": "《投影和计划》首组龙骨实跑确认：五个角色都进入并飞过投影脚本时，任务共享完成。尚未测试仅主控进入、其余四号留在原地是否也会同步，因此固定路线暂时让五号一起飞。"
+      "status": "user_confirmed",
+      "note": "《投影和计划》第二组龙骨实跑确认：五号一起进入并飞过投影脚本时共享完成；进入眠月花园区域后即可使用，不必跑到中心。"
     },
     "12080": {
-      "type": "named_elite_with_single_use_protection_consumable_failure_mode",
-      "status": "user_confirmed_failure_mode",
-      "note": "《冰虫之母》首组龙骨实跑：打拉特尔博尔时发生一次死亡，已使用的佐特防护药剂无法通过返回NPC重新取得，最终无药剂强打完成；死亡、复活和误跑NPC属于本轮异常墙钟，不应回写为任务正常固有耗时。路线应把药剂保留到真正拉Boss前再用。"
+      "type": "named_elite_sequential_loot_with_protection_consumable_confirmed",
+      "status": "user_confirmed",
+      "note": "《冰虫之母》第二组龙骨实跑确认：任务物可由五号依次拾取；佐特防护药剂保留到真正拉Boss前再用，药剂一次性且死亡后不会返还。"
     },
     "12066": {
       "type": "item_use_objective_group_shared_confirmed",
@@ -423,12 +490,12 @@
     "12096": {
       "type": "single_item_source_plus_object_use_group_shared_confirmed",
       "status": "user_confirmed",
-      "note": "《强化古树》首组龙骨实跑确认：所需树皮只需要一个角色取得；主控对古树执行强化后任务进度五号共享，不需要五号各拿一份树皮。"
+      "note": "《强化古树》第二组龙骨实跑确认：任务进度五号共享；主控需要取得三份树皮并完成三棵古树的强化。"
     },
     "12126": {
       "type": "named_target_item_use_personal_fast_respawn_confirmed",
       "status": "user_confirmed",
-      "note": "《邪恶之约》首组龙骨实跑确认：瓦伦哈尔位于下陷地形/坑内，五个角色需要轮流分别完成邪恶宝石操作；目标刷新很快，逐号执行可连续完成。空间上与《红玉丁香》非常接近，适合并入同一步。"
+      "note": "《邪恶之约》第二组龙骨实跑确认：瓦伦哈尔位于坑内，五号轮流分别完成邪恶宝石充能；目标刷新很快，少用持续伤害技能，避免未充能前把目标打死。"
     },
     "12111": {
       "type": "live_target_item_use_group_shared_confirmed",
@@ -466,14 +533,14 @@
       "note": "《海洋女神》首组龙骨实跑确认：任务不共享，五个角色必须分别点击深海珍珠触发。实测从一次点击开始到珍珠再次可点击约1分40秒，五号串行至少有4次刷新等待（约6分40秒）。触发后的角色应游到岸边，再从陆地跑回/向集合方向移动，不从水里一路游回珍珠。"
     },
     "12090": {
-      "type": "named_elite_first_group_power_gate_second_group_protection_retest_pending",
-      "status": "user_confirmed_first_group_defer_second_group_retest",
-      "note": "《通缉：吉加托尔》首组75级五开：第一次尝试团灭；第二次碰到别人正在打后再次尝试，最终五号死到只剩一个号才成功。该任务是12095→12097精英支线门槛，但不阻塞其它龙骨任务。首组练级基线仍延后；第二组已有1防骑+4惩戒且操作经验更高，需在自然等级重新实测，若稳定且快速则恢复首跑。"
+      "type": "named_elite_second_group_blood_dk_stable_confirmed",
+      "status": "user_confirmed_route_restored",
+      "note": "《通缉：吉加托尔》第二组75级血DK实跑确认：当前加点和队伍配置下几乎可以无死亡完成，恢复到龙骨自然路线。"
     },
     "12097": {
-      "type": "suggested_five_player_elite_first_group_power_gate_level80_easy_second_group_retest_pending",
-      "status": "user_confirmed_level80_easy_second_group_retest",
-      "note": "《萨拉斯塔，北地的灾祸》首组75级五开实测打不过；本次80级1防骑+4惩戒回访实测击杀非常轻松。任务没有后续，因此低等级若很费力可以安全延后，但这不是固定80级任务。当前首组不把它并入冰冠→龙骨跨图链；第二组在龙骨自然等级用1防骑+4惩戒重测，核心判断从‘能不能打’改为‘是否稳定且值得当场打’。"
+      "type": "suggested_five_player_elite_second_group_route_restored_loot_pending",
+      "status": "user_confirmed_route_restored_loot_pending",
+      "note": "《萨拉斯塔，北地的灾祸》第二组75级血DK实跑确认：当前配置下恢复到龙骨自然路线；萨拉斯塔冰冻之心的五开拾取方式仍需单独确认。"
     },
     "12449": {
       "type": "corpse_item_use_group_shared_confirmed",
@@ -2174,6 +2241,97 @@
       "status": "user_confirmed_model_rule_applied",
       "note": "《寻找溶解剂》按用户确认的任务机制规则处理：单个物品交互/拾取类型默认不共享，五号依次获取Element 115；本组未单独留下实跑记忆，因此这是按已确认机制类型规则锁定，而非逐号现场观察。",
       "confirmed_at": "2026-09-10"
+    },
+    "11592": {
+      "type": "scripted_followup_not_applicable_confirmed",
+      "status": "user_confirmed",
+      "note": "《攻击！》跟随主线推进即可完成，跟随号自然获得任务进度，不需要fivebox标签。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11594": {
+      "type": "quest_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《让他们安息》任务进度共享，主控完成即可同步全队。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11900": {
+      "type": "fixed_object_interaction_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《监测数据》任务进度共享；四个固定监测仪需要主动点击读取。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11910": {
+      "type": "personal_drop_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《古树的秘密》不共享，五号分别完成并拾取古树碎片。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11912": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《冰冷的草莓》不共享，五号分别收集冰莓。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11914": {
+      "type": "personal_drop_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《保持隐蔽》不共享，五号分别收集魔枢法力精华。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11931": {
+      "type": "personal_drop_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《破译密码》不共享，五号分别取得碧蓝书典和闪烁的符文。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11941": {
+      "type": "item_turnin_not_applicable_confirmed",
+      "status": "user_confirmed",
+      "note": "《奇怪……》只是任务物交接，不需要fivebox标签。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11946": {
+      "type": "item_trigger_turnin_not_applicable_confirmed",
+      "status": "user_confirmed",
+      "note": "《克莉斯塔萨》是纯交接任务，不需要fivebox标签；需先使用强化奥术牢笼寻找克莉斯塔萨。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11951": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《诱饵》不共享，五号分别收集晶化法力碎片。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11957": {
+      "type": "personal_scripted_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《莎拉苟萨的末日》需五号依次交互并依次拾取任务物；依次与NPC交互属于执行细节，fivebox标签归为依次拾取。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11967": {
+      "type": "npc_interaction_not_applicable_confirmed",
+      "status": "user_confirmed",
+      "note": "《集结红龙》是纯交接任务，不需要fivebox标签。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+    },
+    "11969": {
+      "type": "quest_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《触动陷阱》共享；用跟随号在信号火焰使用任务物触发，完成后主号带队先回永生之盾。",
+      "observed_at": "2026-10-10",
+      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
     }
   }
 }

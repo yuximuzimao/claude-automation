@@ -91,7 +91,7 @@
     "在冰雾村使用信号弹召唤并骑乘库卡隆战斗飞龙，用载具技能击杀荒芜兽。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "special"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -129,14 +129,23 @@
       "supports_fields": [
         "guide"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-11",
+      "source_type": "user_live",
+      "source_ref": "2026-10-10 22:01—2026-10-11 03:38 第二组DK北风苔原→龙骨荒野实跑反馈",
+      "observed_at": "2026-10-11",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status", "presentation.note_override"]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "在冰雾村使用信号枪召唤库卡隆作战双足飞龙，骑乘后用载具技能完成击杀。",
+      "text": "在冰雾村使用信号枪召唤库卡隆作战双足飞龙，主控骑乘后用载具技能完成击杀；其余号保持近距离即可吃到进度，不要拉开太远。",
       "scope": "all",
-      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
-      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
+      "source_ref": "user_live:2026-10-11",
+      "reason": "第二组DK实跑确认该任务存在距离条件，因此fivebox总体归特殊并保留最短执行提示。"
     }
   }
 }

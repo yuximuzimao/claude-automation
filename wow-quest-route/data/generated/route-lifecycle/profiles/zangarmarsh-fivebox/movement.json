@@ -267,16 +267,10 @@
       "from_location_ref": "zang-p018",
       "from_visit_id": "a0087",
       "from_zone_id": 3521,
-      "legacy_transport": "taxi",
-      "movement_action": {
-        "action_id": "a0090",
-        "action_kind": "taxi",
-        "from_name": "萨布拉金",
-        "operation_kind": "taxi",
-        "to_name": "塞纳里奥庇护所"
-      },
-      "movement_action_id": "a0090",
-      "operation_kind": "taxi",
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
       "source": "canonical_profile",
       "to_location_ref": "zang-p019",
       "to_visit_id": "a0089",
@@ -288,16 +282,10 @@
       "from_location_ref": "zang-p019",
       "from_visit_id": "a0089",
       "from_zone_id": 3521,
-      "legacy_transport": "taxi",
-      "movement_action": {
-        "action_id": "a0103",
-        "action_kind": "taxi",
-        "from_name": "塞纳里奥庇护所",
-        "operation_kind": "taxi",
-        "to_name": "沼泽鼠岗哨"
-      },
-      "movement_action_id": "a0103",
-      "operation_kind": "taxi",
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
       "source": "canonical_profile",
       "to_location_ref": "zang-p020",
       "to_visit_id": "a0102",
@@ -880,7 +868,7 @@
     }
   ],
   "exit_movement_actions": [],
-  "input_fingerprint": "ee30c251d386d785f6ab123c401eec41d30aac73f514686854b469fc40592401",
+  "input_fingerprint": "7874a2c5f0d09fc30593092de3f01a8b4136a51d44997e37f0d0570481c1a1d5",
   "issues": [],
   "migration_candidate_count": 0,
   "primary_zone_id": 3521,
@@ -1174,10 +1162,10 @@
       "display_name": "塞纳里奥庇护所",
       "handoff_ref": null,
       "incoming_movement": {
-        "action_id": "a0090",
-        "kind": "action"
+        "kind": "self_move",
+        "mode": "ride"
       },
-      "legacy_transport": "taxi",
+      "legacy_transport": "ride",
       "location_ref": "zang-p019",
       "location_role": "map_anchor",
       "ordinal": 19,
@@ -1190,10 +1178,10 @@
       "display_name": "沼泽鼠岗哨",
       "handoff_ref": null,
       "incoming_movement": {
-        "action_id": "a0103",
-        "kind": "action"
+        "kind": "self_move",
+        "mode": "ride"
       },
-      "legacy_transport": "taxi",
+      "legacy_transport": "ride",
       "location_ref": "zang-p020",
       "location_role": "map_anchor",
       "ordinal": 20,

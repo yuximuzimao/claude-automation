@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "task_id": 12090,
+  "identity": {
+    "name_zhcn": "通缉：吉加托尔",
+    "name_en": "Wanted: Gigantaur",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "partial"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 71,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 0,
+    "fixed_items": [],
+    "choice_items_desc_by_sell": [
+      {"item_id": 37969, "quantity": 1, "name_zhcn": null, "name_en": "Chaos Mender Cloak", "sell_price_each_copper": 0, "sell_price_total_copper": 0},
+      {"item_id": 38012, "quantity": 1, "name_zhcn": null, "name_en": "Lothalar Woodwalker Bracers", "sell_price_each_copper": 0, "sell_price_total_copper": 0},
+      {"item_id": 38055, "quantity": 1, "name_zhcn": null, "name_en": "Ridgehunter Gauntlets", "sell_price_each_copper": 0, "sell_price_total_copper": 0},
+      {"item_id": 38116, "quantity": 1, "name_zhcn": null, "name_en": "Plated Magnataur Leggings", "sell_price_each_copper": 0, "sell_price_total_copper": 0}
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 0,
+    "gear_sale_max_copper": 0,
+    "reputation_rewards": [
+      {"faction_id": 1085, "amount": 350}
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 25950
+  },
+  "guide": [
+    "接取：阿格玛之锤的通缉板。",
+    "击杀吉加托尔，然后返回阿格玛之锤向高尔特上尉复命。",
+    "交付：高尔特上尉。"
+  ],
+  "fivebox": {
+    "status": "shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "data/route-atlas/dragonblight-task-foundation.json#quest_id=12090",
+      "observed_at": null,
+      "version_scope": "Questie WotLK 11.34.0",
+      "confidence": "verified",
+      "supports_fields": ["identity", "availability", "guide"]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-12",
+      "source_type": "user_live",
+      "source_ref": "2026-10-11 17:44—2026-10-12 01:50 第二组血DK龙骨荒野实跑反馈",
+      "observed_at": "2026-10-12",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "",
+      "scope": "all",
+      "source_ref": "2026-10-12第二组DK实跑反馈",
+      "reason": "当前路线动作已表达接取、击杀和交付；不增加无实际帮助的备注。"
+    }
+  }
+}

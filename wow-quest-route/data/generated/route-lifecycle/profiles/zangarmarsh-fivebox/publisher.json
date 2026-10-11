@@ -10,7 +10,7 @@
   "hearth_chain": [
     "萨布拉金"
   ],
-  "input_fingerprint": "59a00106be5965f3e7724d72453cca23c93dacddf3f085cbd94fe39ffefbd40e",
+  "input_fingerprint": "e43ad272258b5eda11a7cd7dd563761a5710fdf33ad0ebf8188a45d2ea1c89fe",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -207,9 +207,9 @@
           "edge_id": "a0087->a0089",
           "from_location_ref": "zang-p018",
           "from_visit_id": "a0087",
-          "movement_action_id": "a0090",
-          "movement_mode": null,
-          "operation_kind": "taxi",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
           "source": "canonical_profile",
           "to_location_ref": "zang-p019",
           "to_visit_id": "a0089"
@@ -218,9 +218,9 @@
           "edge_id": "a0089->a0102",
           "from_location_ref": "zang-p019",
           "from_visit_id": "a0089",
-          "movement_action_id": "a0103",
-          "movement_mode": null,
-          "operation_kind": "taxi",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
           "source": "canonical_profile",
           "to_location_ref": "zang-p020",
           "to_visit_id": "a0102"
@@ -633,7 +633,7 @@
           "to_visit_id": "a0225"
         }
       ],
-      "input_fingerprint": "d34ca434b70d6138110276509c76131c9c780ba712cb1ad2ed1235852825d0dd",
+      "input_fingerprint": "3ee344136d4bb6932e6eb89c2b4cae88653ac86a9414c190acda018be9b4bacc",
       "status": "pass",
       "visits": [
         {
@@ -1342,13 +1342,16 @@
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "e920e078ab60795f2e70588def7e4e21e8a89ab4d315bd45196c32b74c4647ef",
-    "range_minutes": null,
-    "status": "requirements"
+    "center_minutes": 343.0,
+    "input_fingerprint": "bb81c9515f1f1e51d0855bd20e5a88188a281a9959e3525b80d280db67fb7260",
+    "range_minutes": [
+      270.9,
+      416.1
+    ],
+    "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "91592d7a3b9958f775ca83fbb773c6016714311d02dd8a711e667e4666a44336",
+  "stage11_input_fingerprint": "894a73e46877d3362dae2c9d0f5488be018c7aeff30ae4c488ab4a45a1ba687f",
   "status": "pass",
   "steps": [
     {
@@ -2055,9 +2058,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 10.0,
+        "range_minutes": [
+          8.5,
+          12.0
+        ],
+        "status": "pass"
       },
       "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所"
     },
@@ -2440,9 +2446,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.0,
+        "range_minutes": [
+          4.0,
+          6.5
+        ],
+        "status": "pass"
       },
       "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵"
     },
@@ -2650,9 +2659,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 30.0,
+        "range_minutes": [
+          23.4,
+          36.6
+        ],
+        "status": "pass"
       },
       "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩"
     },
@@ -2995,9 +3007,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 25.0,
+        "range_minutes": [
+          19.5,
+          30.5
+        ],
+        "status": "pass"
       },
       "title": "萨布拉金 → 水域排水口 → 炉石萨布拉金"
     },
@@ -3525,9 +3540,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 15.0,
+        "range_minutes": [
+          12.3,
+          17.7
+        ],
+        "status": "pass"
       },
       "title": "沼光湖 → 骑行塞纳里奥庇护所 → 骑行沼泽鼠岗哨"
     },
@@ -3845,9 +3863,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 35.0,
+        "range_minutes": [
+          27.3,
+          42.7
+        ],
+        "status": "pass"
       },
       "title": "死亡泥潭 → 孢子之翼 → 沼泽鼠岗哨 → 黑钉 → 炉石萨布拉金"
     },
@@ -4130,9 +4151,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 30.0,
+        "range_minutes": [
+          23.4,
+          36.6
+        ],
+        "status": "pass"
       },
       "title": "萨布拉金 → 蛮沼区 → 恐爪刷新点"
     },
@@ -4513,9 +4537,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 35.0,
+        "range_minutes": [
+          27.3,
+          42.7
+        ],
+        "status": "pass"
       },
       "title": "孢子村 → 莉萨奥 → 法恩森 → 孢殖林 → 孢子村"
     },
@@ -4684,9 +4711,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 22.0,
+        "range_minutes": [
+          18.0,
+          26.0
+        ],
+        "status": "pass"
       },
       "title": "丢弃的食物 → 昂古拉 → 莉萨奥"
     },
@@ -4903,9 +4933,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 42.0,
+        "range_minutes": [
+          32.8,
+          51.2
+        ],
+        "status": "pass"
       },
       "title": "血鳞区 → 穆玛基 → 匕潭鱼人笼 → 格罗阿克"
     },
@@ -5297,9 +5330,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 32.0,
+        "range_minutes": [
+          25.0,
+          39.0
+        ],
+        "status": "pass"
       },
       "title": "炉石萨布拉金 → 战斗迫近 → 孢子村 → 莉萨奥"
     },
@@ -5455,9 +5491,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 15.0,
+        "range_minutes": [
+          12.3,
+          17.7
+        ],
+        "status": "pass"
       },
       "title": "博哈姆 → 炉石萨布拉金"
     },
@@ -5600,9 +5639,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 35.0,
+        "range_minutes": [
+          27.3,
+          42.7
+        ],
+        "status": "pass"
       },
       "title": "昂古拉走廊 → 匕潭失落者 → 安葛洛什"
     },
@@ -5844,9 +5886,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 12.0,
+        "range_minutes": [
+          9.8,
+          14.2
+        ],
+        "status": "pass"
       },
       "title": "炉石萨布拉金 → 莉萨奥"
     }

@@ -1,12 +1,48 @@
 {
-  "center_minutes": null,
-  "complete": false,
+  "center_minutes": 290.351,
+  "complete": true,
   "component_rows": [
     {
       "component": "move",
       "edge_id": "visit-p121-return-echo->a0340",
       "seconds": 0.0,
       "step_id": "step-22"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0650->a0655",
+      "seconds": 28.0,
+      "step_id": "step-49"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0667->visit-rescue1-tournament-arrival",
+      "seconds": 106.0,
+      "step_id": "step-49"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0672->a0674",
+      "seconds": 74.0,
+      "step_id": "step-49"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0674->a0685",
+      "seconds": 84.0,
+      "step_id": "step-51"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0703->visit-rescue2-tournament-arrival",
+      "seconds": 141.0,
+      "step_id": "step-52"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0708->a0710",
+      "seconds": 74.0,
+      "step_id": "step-52"
     },
     {
       "action_ids": [
@@ -490,22 +526,20 @@
       "action_ids": [
         "a0091",
         "a0092",
-        "a0093",
         "a0094"
       ],
       "component": "accept_turnin",
-      "seconds": 77.4,
+      "seconds": 67.8,
       "step_id": "step-06",
       "visit_id": "a0090"
     },
     {
       "action_ids": [
         "a0100",
-        "a0101",
         "a0102"
       ],
       "component": "accept_turnin",
-      "seconds": 67.8,
+      "seconds": 58.2,
       "step_id": "step-06",
       "visit_id": "a0099"
     },
@@ -765,15 +799,6 @@
     },
     {
       "action_ids": [
-        "a0231"
-      ],
-      "component": "accept_turnin",
-      "seconds": 48.6,
-      "step_id": "step-15",
-      "visit_id": "a0229"
-    },
-    {
-      "action_ids": [
         "a0234"
       ],
       "component": "accept_turnin",
@@ -784,12 +809,11 @@
     {
       "action_ids": [
         "a0237",
-        "a0238",
         "a0239",
         "a0240"
       ],
       "component": "accept_turnin",
-      "seconds": 77.4,
+      "seconds": 67.8,
       "step_id": "step-15",
       "visit_id": "a0236"
     },
@@ -1586,13 +1610,14 @@
       "visit_id": "a0680"
     }
   ],
-  "input_fingerprint": "645c284ce4ae80c386c6601f341ecf724a4f9cb8a7bf1d7e4e4f98ad1fee3cb0",
+  "input_fingerprint": "c77ff683565d485cb6558ad752fad869fdc83a67ec3178b79555028cec6df4ca",
   "issues": [
     {
       "edge_id": "a0001->a0003",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1600,7 +1625,8 @@
       "edge_id": "a0003->a0005",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1608,7 +1634,8 @@
       "edge_id": "a0005->a0009",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1616,7 +1643,8 @@
       "edge_id": "a0009->a0013",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1624,7 +1652,8 @@
       "edge_id": "a0013->a0018",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1632,7 +1661,8 @@
       "edge_id": "a0018->a0020",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1640,7 +1670,8 @@
       "edge_id": "a0020->a0022",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1648,7 +1679,8 @@
       "edge_id": "a0022->a0024",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1656,7 +1688,8 @@
       "edge_id": "a0024->a0026",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "zone_id": 210
     },
@@ -1664,7 +1697,8 @@
       "edge_id": "a0026->a0277",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1672,7 +1706,8 @@
       "edge_id": "a0277->a0280",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1680,7 +1715,8 @@
       "edge_id": "a0280->a0283",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1688,7 +1724,8 @@
       "edge_id": "a0283->a0285",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1696,7 +1733,8 @@
       "edge_id": "a0285->a0287",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1704,7 +1742,8 @@
       "edge_id": "a0287->a0291",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1712,7 +1751,8 @@
       "edge_id": "a0291->a0295",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "zone_id": 210
     },
@@ -1720,7 +1760,8 @@
       "edge_id": "a0295->a0297",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1728,7 +1769,8 @@
       "edge_id": "a0297->a0300",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1736,7 +1778,8 @@
       "edge_id": "a0300->a0302",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1744,7 +1787,8 @@
       "edge_id": "a0302->a0304",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1752,7 +1796,8 @@
       "edge_id": "a0304->a0305",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1760,7 +1805,8 @@
       "edge_id": "a0305->a0308",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1768,7 +1814,8 @@
       "edge_id": "a0308->a0311",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1776,7 +1823,8 @@
       "edge_id": "a0311->a0313",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1784,7 +1832,8 @@
       "edge_id": "a0313->a0315",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "zone_id": 210
     },
@@ -1792,7 +1841,8 @@
       "edge_id": "a0315->a0317",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1800,7 +1850,8 @@
       "edge_id": "a0317->a0321",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1808,7 +1859,8 @@
       "edge_id": "a0321->a0323",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1816,7 +1868,8 @@
       "edge_id": "a0323->a0325",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1824,7 +1877,8 @@
       "edge_id": "a0325->a0327",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1832,7 +1886,8 @@
       "edge_id": "a0327->a0331",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1840,7 +1895,8 @@
       "edge_id": "a0331->a0336",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1848,7 +1904,8 @@
       "edge_id": "a0336->a0338",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "zone_id": 210
     },
@@ -1857,14 +1914,16 @@
       "edge_id": "a0338->visit-p121-return-echo",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21"
     },
     {
       "edge_id": "a0340->a0343",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "zone_id": 2817
     },
@@ -1872,21 +1931,24 @@
       "edge_id": "a0343->a0344",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "zone_id": 2817
     },
     {
       "edge_id": "a0344->visit-step22-vanguard-arrival",
       "kind": "flight_edge_binding_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22"
     },
     {
       "edge_id": "visit-step22-vanguard-arrival->a0346",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "zone_id": 210
     },
@@ -1894,7 +1956,8 @@
       "edge_id": "a0346->a0351",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1902,7 +1965,8 @@
       "edge_id": "a0351->a0354",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1910,7 +1974,8 @@
       "edge_id": "a0354->a0356",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1918,7 +1983,8 @@
       "edge_id": "a0356->a0359",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1926,7 +1992,8 @@
       "edge_id": "a0359->a0361",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1934,7 +2001,8 @@
       "edge_id": "a0361->a0363",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1942,7 +2010,8 @@
       "edge_id": "a0363->a0365",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1950,7 +2019,8 @@
       "edge_id": "a0365->a0367",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "zone_id": 210
     },
@@ -1958,7 +2028,8 @@
       "edge_id": "a0367->a0369",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "zone_id": 210
     },
@@ -1966,7 +2037,8 @@
       "edge_id": "a0369->a0371",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "zone_id": 210
     },
@@ -1974,7 +2046,8 @@
       "edge_id": "a0371->a0373",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "zone_id": 210
     },
@@ -1982,7 +2055,8 @@
       "edge_id": "a0373->a0375",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "zone_id": 210
     },
@@ -1990,7 +2064,8 @@
       "edge_id": "a0375->a0028",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "zone_id": 210
     },
@@ -1998,7 +2073,8 @@
       "edge_id": "a0028->a0030",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "zone_id": 210
     },
@@ -2006,7 +2082,8 @@
       "edge_id": "a0030->a0033",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "zone_id": 210
     },
@@ -2014,7 +2091,8 @@
       "edge_id": "a0033->a0035",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "zone_id": 210
     },
@@ -2022,7 +2100,8 @@
       "edge_id": "a0035->a0038",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "zone_id": 210
     },
@@ -2030,7 +2109,8 @@
       "edge_id": "a0038->a0040",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "zone_id": 210
     },
@@ -2038,7 +2118,8 @@
       "edge_id": "a0040->a0043",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "zone_id": 210
     },
@@ -2046,7 +2127,8 @@
       "edge_id": "a0043->a0045",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "zone_id": 210
     },
@@ -2054,7 +2136,8 @@
       "edge_id": "a0045->a0048",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "zone_id": 210
     },
@@ -2062,7 +2145,8 @@
       "edge_id": "a0048->a0050",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "zone_id": 210
     },
@@ -2070,7 +2154,8 @@
       "edge_id": "a0050->a0054",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "zone_id": 210
     },
@@ -2078,7 +2163,8 @@
       "edge_id": "a0054->a0057",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "zone_id": 210
     },
@@ -2086,7 +2172,8 @@
       "edge_id": "a0057->a0060",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "zone_id": 210
     },
@@ -2094,7 +2181,8 @@
       "edge_id": "a0060->a0062",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "zone_id": 210
     },
@@ -2102,7 +2190,8 @@
       "edge_id": "a0062->a0065",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "zone_id": 210
     },
@@ -2110,7 +2199,8 @@
       "edge_id": "a0065->a0070",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2118,7 +2208,8 @@
       "edge_id": "a0070->a0072",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2126,7 +2217,8 @@
       "edge_id": "a0072->a0074",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2134,7 +2226,8 @@
       "edge_id": "a0074->a0076",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2142,7 +2235,8 @@
       "edge_id": "a0076->a0079",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2150,7 +2244,8 @@
       "edge_id": "a0079->a0082",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2158,7 +2253,8 @@
       "edge_id": "a0082->a0087",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "zone_id": 210
     },
@@ -2166,7 +2262,8 @@
       "edge_id": "a0087->a0090",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "zone_id": 210
     },
@@ -2174,7 +2271,8 @@
       "edge_id": "a0090->a0095",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "zone_id": 210
     },
@@ -2182,7 +2280,8 @@
       "edge_id": "a0095->a0097",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "zone_id": 210
     },
@@ -2190,7 +2289,8 @@
       "edge_id": "a0097->a0099",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "zone_id": 210
     },
@@ -2198,7 +2298,8 @@
       "edge_id": "a0099->a0103",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "zone_id": 210
     },
@@ -2206,7 +2307,8 @@
       "edge_id": "a0103->a0110",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "zone_id": 210
     },
@@ -2214,7 +2316,8 @@
       "edge_id": "a0110->a0112",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "zone_id": 210
     },
@@ -2222,7 +2325,8 @@
       "edge_id": "a0112->a0117",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "zone_id": 210
     },
@@ -2230,7 +2334,8 @@
       "edge_id": "a0117->a0121",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2238,7 +2343,8 @@
       "edge_id": "a0121->a0123",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2246,7 +2352,8 @@
       "edge_id": "a0123->a0125",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2254,7 +2361,8 @@
       "edge_id": "a0125->a0129",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2262,7 +2370,8 @@
       "edge_id": "a0129->a0132",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2270,7 +2379,8 @@
       "edge_id": "a0132->a0134",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2278,7 +2388,8 @@
       "edge_id": "a0134->a0136",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "zone_id": 210
     },
@@ -2286,7 +2397,8 @@
       "edge_id": "a0136->a0138",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "zone_id": 210
     },
@@ -2294,7 +2406,8 @@
       "edge_id": "a0138->a0140",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "zone_id": 210
     },
@@ -2302,7 +2415,8 @@
       "edge_id": "a0140->a0142",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "zone_id": 210
     },
@@ -2310,7 +2424,8 @@
       "edge_id": "a0142->a0145",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "zone_id": 210
     },
@@ -2318,7 +2433,8 @@
       "edge_id": "a0145->a0147",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "zone_id": 210
     },
@@ -2326,7 +2442,8 @@
       "edge_id": "a0147->a0197",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-13",
       "zone_id": 210
     },
@@ -2334,7 +2451,8 @@
       "edge_id": "a0197->a0199",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-13",
       "zone_id": 210
     },
@@ -2342,7 +2460,8 @@
       "edge_id": "a0199->a0202",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "zone_id": 210
     },
@@ -2350,7 +2469,8 @@
       "edge_id": "a0202->a0205",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "zone_id": 210
     },
@@ -2358,7 +2478,8 @@
       "edge_id": "a0205->a0207",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "zone_id": 210
     },
@@ -2366,7 +2487,8 @@
       "edge_id": "a0207->a0210",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "zone_id": 210
     },
@@ -2374,7 +2496,8 @@
       "edge_id": "a0210->a0150",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2382,7 +2505,8 @@
       "edge_id": "a0150->a0153",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2390,7 +2514,8 @@
       "edge_id": "a0153->a0156",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2398,7 +2523,8 @@
       "edge_id": "a0156->a0160",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2406,7 +2532,8 @@
       "edge_id": "a0160->a0162",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2414,7 +2541,8 @@
       "edge_id": "a0162->a0164",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2422,7 +2550,8 @@
       "edge_id": "a0164->a0167",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2430,7 +2559,8 @@
       "edge_id": "a0167->a0173",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "zone_id": 210
     },
@@ -2438,7 +2568,8 @@
       "edge_id": "a0173->a0175",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "zone_id": 210
     },
@@ -2446,7 +2577,8 @@
       "edge_id": "a0175->a0177",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "zone_id": 210
     },
@@ -2454,7 +2586,8 @@
       "edge_id": "a0177->a0179",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "zone_id": 210
     },
@@ -2462,7 +2595,8 @@
       "edge_id": "a0179->a0182",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "zone_id": 210
     },
@@ -2470,7 +2604,8 @@
       "edge_id": "a0182->a0185",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "zone_id": 210
     },
@@ -2478,7 +2613,8 @@
       "edge_id": "a0185->a0187",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "zone_id": 210
     },
@@ -2486,7 +2622,8 @@
       "edge_id": "a0187->a0188",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "zone_id": 210
     },
@@ -2494,7 +2631,8 @@
       "edge_id": "a0188->a0192",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "zone_id": 210
     },
@@ -2502,7 +2640,8 @@
       "edge_id": "a0192->a0194",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "zone_id": 210
     },
@@ -2510,7 +2649,8 @@
       "edge_id": "a0194->a0213",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2518,7 +2658,8 @@
       "edge_id": "a0213->a0216",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2526,7 +2667,8 @@
       "edge_id": "a0216->a0218",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2534,7 +2676,8 @@
       "edge_id": "a0218->a0222",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2542,7 +2685,8 @@
       "edge_id": "a0222->a0225",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2550,7 +2694,8 @@
       "edge_id": "a0225->a0229",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2558,7 +2703,8 @@
       "edge_id": "a0229->a0233",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2566,7 +2712,8 @@
       "edge_id": "a0233->a0236",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "zone_id": 210
     },
@@ -2574,7 +2721,8 @@
       "edge_id": "a0236->a0378",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2582,7 +2730,8 @@
       "edge_id": "a0378->a0382",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2590,7 +2739,8 @@
       "edge_id": "a0382->a0384",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2598,7 +2748,8 @@
       "edge_id": "a0384->a0386",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2606,7 +2757,8 @@
       "edge_id": "a0386->a0389",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2614,7 +2766,8 @@
       "edge_id": "a0389->a0394",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2622,7 +2775,8 @@
       "edge_id": "a0394->a0396",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2630,7 +2784,8 @@
       "edge_id": "a0396->a0398",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2638,7 +2793,8 @@
       "edge_id": "a0398->a0241",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2646,7 +2802,8 @@
       "edge_id": "a0241->a0402",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "zone_id": 210
     },
@@ -2654,7 +2811,8 @@
       "edge_id": "a0402->a0275",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-18",
       "zone_id": 210
     },
@@ -2662,7 +2820,8 @@
       "edge_id": "a0275->a0409",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2670,7 +2829,8 @@
       "edge_id": "a0409->a0412",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2678,7 +2838,8 @@
       "edge_id": "a0412->a0415",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2686,7 +2847,8 @@
       "edge_id": "a0415->a0417",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2694,7 +2856,8 @@
       "edge_id": "a0417->a0420",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2702,7 +2865,8 @@
       "edge_id": "a0420->a0425",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2710,7 +2874,8 @@
       "edge_id": "a0425->a0427",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "zone_id": 210
     },
@@ -2718,7 +2883,8 @@
       "edge_id": "a0427->a0459",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2726,7 +2892,8 @@
       "edge_id": "a0459->a0465",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2734,7 +2901,8 @@
       "edge_id": "a0465->a0468",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2742,7 +2910,8 @@
       "edge_id": "a0468->a0472",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2750,7 +2919,8 @@
       "edge_id": "a0472->a0476",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2758,7 +2928,8 @@
       "edge_id": "a0476->a0479",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2766,7 +2937,8 @@
       "edge_id": "a0479->a0482",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2774,7 +2946,8 @@
       "edge_id": "a0482->a0486",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "zone_id": 210
     },
@@ -2782,7 +2955,8 @@
       "edge_id": "a0486->a0436",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "zone_id": 210
     },
@@ -2790,7 +2964,8 @@
       "edge_id": "a0436->a0437",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "zone_id": 210
     },
@@ -2798,7 +2973,8 @@
       "edge_id": "a0437->a0439",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "zone_id": 210
     },
@@ -2806,7 +2982,8 @@
       "edge_id": "a0439->a0441",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "zone_id": 210
     },
@@ -2814,7 +2991,8 @@
       "edge_id": "a0441->a0447",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-30",
       "zone_id": 210
     },
@@ -2822,7 +3000,8 @@
       "edge_id": "a0447->a0534",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "zone_id": 210
     },
@@ -2830,7 +3009,8 @@
       "edge_id": "a0534->a0536",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "zone_id": 210
     },
@@ -2838,7 +3018,8 @@
       "edge_id": "a0536->a0539",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "zone_id": 210
     },
@@ -2846,7 +3027,8 @@
       "edge_id": "a0539->a0541",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "zone_id": 210
     },
@@ -2854,7 +3036,8 @@
       "edge_id": "a0541->a0582",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-56",
       "zone_id": 210
     },
@@ -2862,7 +3045,8 @@
       "edge_id": "a0582->a0597",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "zone_id": 210
     },
@@ -2870,7 +3054,8 @@
       "edge_id": "a0597->a0599",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "zone_id": 210
     },
@@ -2878,7 +3063,8 @@
       "edge_id": "a0599->a0602",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "zone_id": 210
     },
@@ -2886,7 +3072,8 @@
       "edge_id": "a0602->a0406",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-26",
       "zone_id": 210
     },
@@ -2894,7 +3081,8 @@
       "edge_id": "a0406->a0629",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-44",
       "zone_id": 210
     },
@@ -2902,7 +3090,8 @@
       "edge_id": "a0629->a0632",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-44",
       "zone_id": 210
     },
@@ -2910,7 +3099,8 @@
       "edge_id": "a0632->a0634",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-44",
       "zone_id": 210
     },
@@ -2918,7 +3108,8 @@
       "edge_id": "a0634->a0244",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "zone_id": 210
     },
@@ -2926,7 +3117,8 @@
       "edge_id": "a0244->a0249",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "zone_id": 210
     },
@@ -2934,7 +3126,8 @@
       "edge_id": "a0249->a0252",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "zone_id": 210
     },
@@ -2942,7 +3135,8 @@
       "edge_id": "a0252->a0256",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "zone_id": 210
     },
@@ -2950,7 +3144,8 @@
       "edge_id": "a0256->a0258",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -2958,7 +3153,8 @@
       "edge_id": "a0258->a0261",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -2966,7 +3162,8 @@
       "edge_id": "a0261->a0263",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -2974,7 +3171,8 @@
       "edge_id": "a0263->a0266",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -2982,7 +3180,8 @@
       "edge_id": "a0266->a0268",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -2990,7 +3189,8 @@
       "edge_id": "a0268->a0271",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -2998,7 +3198,8 @@
       "edge_id": "a0271->a0273",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "zone_id": 210
     },
@@ -3006,7 +3207,8 @@
       "edge_id": "a0273->a0637",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "zone_id": 210
     },
@@ -3014,7 +3216,8 @@
       "edge_id": "a0637->a0641",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-46",
       "zone_id": 210
     },
@@ -3022,7 +3225,8 @@
       "edge_id": "a0641->a0644",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-47",
       "zone_id": 210
     },
@@ -3030,7 +3234,8 @@
       "edge_id": "a0644->a0646",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-47",
       "zone_id": 210
     },
@@ -3039,29 +3244,26 @@
       "edge_id": "a0646->a0648",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-47"
     },
     {
       "edge_id": "a0648->a0650",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-48",
       "zone_id": 210
-    },
-    {
-      "edge_id": "a0650->a0655",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-49"
     },
     {
       "action_id": "a0656",
       "edge_id": "a0655->a0657",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49"
     },
     {
@@ -3069,20 +3271,16 @@
       "edge_id": "a0657->a0667",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
-      "step_id": "step-49"
-    },
-    {
-      "edge_id": "a0667->visit-rescue1-tournament-arrival",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49"
     },
     {
       "edge_id": "visit-rescue1-tournament-arrival->a0669",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49",
       "zone_id": 210
     },
@@ -3090,35 +3288,26 @@
       "edge_id": "a0669->a0672",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49",
       "zone_id": 210
-    },
-    {
-      "edge_id": "a0672->a0674",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-49"
-    },
-    {
-      "edge_id": "a0674->a0685",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-51"
     },
     {
       "action_id": "a0686",
       "edge_id": "a0685->a0687",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "fixed_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51"
     },
     {
       "edge_id": "a0687->a0690",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "zone_id": 65
     },
@@ -3126,7 +3315,8 @@
       "edge_id": "a0690->a0692",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "zone_id": 65
     },
@@ -3134,7 +3324,8 @@
       "edge_id": "a0692->a0694",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "zone_id": 65
     },
@@ -3142,7 +3333,8 @@
       "edge_id": "a0694->a0696",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "zone_id": 65
     },
@@ -3150,7 +3342,8 @@
       "edge_id": "a0696->a0698",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "zone_id": 65
     },
@@ -3159,20 +3352,16 @@
       "edge_id": "a0698->a0703",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "fixed_transport",
-      "severity": "requirement",
-      "step_id": "step-52"
-    },
-    {
-      "edge_id": "a0703->visit-rescue2-tournament-arrival",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52"
     },
     {
       "edge_id": "visit-rescue2-tournament-arrival->a0705",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "zone_id": 210
     },
@@ -3180,22 +3369,18 @@
       "edge_id": "a0705->a0708",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "zone_id": 210
-    },
-    {
-      "edge_id": "a0708->a0710",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-52"
     },
     {
       "action_id": "a0714",
       "edge_id": "a0710->a0715",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53"
     },
     {
@@ -3203,7 +3388,8 @@
       "edge_id": "a0715->visit-p256-dalaran",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53"
     },
     {
@@ -3211,14 +3397,16 @@
       "edge_id": "visit-p256-dalaran->a0720",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53"
     },
     {
       "edge_id": "a0720->a0722",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "zone_id": 210
     },
@@ -3226,7 +3414,8 @@
       "edge_id": "a0722->a0724",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "zone_id": 210
     },
@@ -3234,7 +3423,8 @@
       "edge_id": "a0724->a0726",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "zone_id": 210
     },
@@ -3242,7 +3432,8 @@
       "edge_id": "a0726->a0450",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "zone_id": 210
     },
@@ -3250,7 +3441,8 @@
       "edge_id": "a0450->a0429",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "zone_id": 210
     },
@@ -3258,7 +3450,8 @@
       "edge_id": "a0429->a0432",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "zone_id": 210
     },
@@ -3266,7 +3459,8 @@
       "edge_id": "a0432->a0434",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "zone_id": 210
     },
@@ -3274,7 +3468,8 @@
       "edge_id": "a0434->a0452",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "zone_id": 210
     },
@@ -3282,7 +3477,8 @@
       "edge_id": "a0452->a0507",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "zone_id": 210
     },
@@ -3290,7 +3486,8 @@
       "edge_id": "a0507->a0509",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "zone_id": 210
     },
@@ -3298,7 +3495,8 @@
       "edge_id": "a0509->a0511",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "zone_id": 210
     },
@@ -3306,7 +3504,8 @@
       "edge_id": "a0511->a0513",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "zone_id": 210
     },
@@ -3314,7 +3513,8 @@
       "edge_id": "a0513->a0520",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "zone_id": 210
     },
@@ -3322,7 +3522,8 @@
       "edge_id": "a0520->a0522",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "zone_id": 210
     },
@@ -3330,7 +3531,8 @@
       "edge_id": "a0522->a0524",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "zone_id": 210
     },
@@ -3338,7 +3540,8 @@
       "edge_id": "a0524->a0526",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "zone_id": 210
     },
@@ -3346,7 +3549,8 @@
       "edge_id": "a0526->a0528",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "zone_id": 210
     },
@@ -3354,7 +3558,8 @@
       "edge_id": "a0528->a0585",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "zone_id": 210
     },
@@ -3362,7 +3567,8 @@
       "edge_id": "a0585->a0587",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "zone_id": 210
     },
@@ -3370,7 +3576,8 @@
       "edge_id": "a0587->a0589",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "zone_id": 210
     },
@@ -3378,7 +3585,8 @@
       "edge_id": "a0589->a0591",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "zone_id": 210
     },
@@ -3386,7 +3594,8 @@
       "edge_id": "a0591->a0489",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "zone_id": 210
     },
@@ -3394,7 +3603,8 @@
       "edge_id": "a0489->a0491",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "zone_id": 210
     },
@@ -3402,7 +3612,8 @@
       "edge_id": "a0491->a0496",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "zone_id": 210
     },
@@ -3410,7 +3621,8 @@
       "edge_id": "a0496->a0498",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "zone_id": 210
     },
@@ -3418,7 +3630,8 @@
       "edge_id": "a0498->a0501",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "zone_id": 210
     },
@@ -3426,7 +3639,8 @@
       "edge_id": "a0501->a0547",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "zone_id": 210
     },
@@ -3434,7 +3648,8 @@
       "edge_id": "a0547->a0549",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "zone_id": 210
     },
@@ -3442,7 +3657,8 @@
       "edge_id": "a0549->a0551",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "zone_id": 210
     },
@@ -3450,7 +3666,8 @@
       "edge_id": "a0551->a0605",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "zone_id": 210
     },
@@ -3458,7 +3675,8 @@
       "edge_id": "a0605->a0607",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "zone_id": 210
     },
@@ -3466,7 +3684,8 @@
       "edge_id": "a0607->a0609",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "zone_id": 210
     },
@@ -3474,7 +3693,8 @@
       "edge_id": "a0609->a0611",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "zone_id": 210
     },
@@ -3482,7 +3702,8 @@
       "edge_id": "a0611->a0616",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-42",
       "zone_id": 210
     },
@@ -3490,7 +3711,8 @@
       "edge_id": "a0616->a0618",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-42",
       "zone_id": 210
     },
@@ -3498,7 +3720,8 @@
       "edge_id": "a0618->a0677",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-50",
       "zone_id": 210
     },
@@ -3506,7 +3729,8 @@
       "edge_id": "a0677->a0555",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "zone_id": 210
     },
@@ -3514,7 +3738,8 @@
       "edge_id": "a0555->a0558",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "zone_id": 210
     },
@@ -3522,7 +3747,8 @@
       "edge_id": "a0558->a0560",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "zone_id": 210
     },
@@ -3530,7 +3756,8 @@
       "edge_id": "a0560->a0564",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "zone_id": 210
     },
@@ -3538,7 +3765,8 @@
       "edge_id": "a0564->a0569",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "zone_id": 210
     },
@@ -3546,7 +3774,8 @@
       "edge_id": "a0569->a0571",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "zone_id": 210
     },
@@ -3554,7 +3783,8 @@
       "edge_id": "a0571->a0573",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "zone_id": 210
     },
@@ -3562,7 +3792,8 @@
       "edge_id": "a0573->a0575",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "zone_id": 210
     },
@@ -3570,7 +3801,8 @@
       "edge_id": "a0575->a0622",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "zone_id": 210
     },
@@ -3578,7 +3810,8 @@
       "edge_id": "a0622->a0624",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "zone_id": 210
     },
@@ -3586,7 +3819,8 @@
       "edge_id": "a0624->a0626",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "zone_id": 210
     },
@@ -3595,14 +3829,16 @@
       "edge_id": "a0626->a0728",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54"
     },
     {
       "edge_id": "a0728->a0730",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3610,7 +3846,8 @@
       "edge_id": "a0730->a0734",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3618,7 +3855,8 @@
       "edge_id": "a0734->a0738",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3626,7 +3864,8 @@
       "edge_id": "a0738->a0742",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3634,7 +3873,8 @@
       "edge_id": "a0742->a0746",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3642,7 +3882,8 @@
       "edge_id": "a0746->a0749",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3650,7 +3891,8 @@
       "edge_id": "a0749->a0751",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3658,7 +3900,8 @@
       "edge_id": "a0751->a0754",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3666,7 +3909,8 @@
       "edge_id": "a0754->a0756",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "zone_id": 210
     },
@@ -3674,925 +3918,1093 @@
       "edge_id": "a0756->a0680",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-55",
       "zone_id": 210
     },
     {
+      "action_id": "a0093",
+      "kind": "conditional_hub_action_execution_maybe",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-06",
+      "task_id": 13043
+    },
+    {
+      "action_id": "a0101",
+      "kind": "conditional_hub_action_execution_maybe",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-06",
+      "task_id": 13043
+    },
+    {
+      "action_id": "a0231",
+      "kind": "conditional_hub_action_execution_maybe",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-15",
+      "task_id": 13136
+    },
+    {
+      "action_id": "a0238",
+      "kind": "conditional_hub_action_execution_maybe",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-15",
+      "task_id": 13136
+    },
+    {
       "action_id": "a0010",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 13829
     },
     {
       "action_id": "a0011",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 13838
     },
     {
       "action_id": "a0012",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 13839
     },
     {
       "action_id": "a0019",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-01",
       "task_id": 13677
     },
     {
       "action_id": "a0288",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 13040
     },
     {
       "action_id": "a0289",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 13008
     },
     {
       "action_id": "a0290",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 13039
     },
     {
       "action_id": "a0303",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "task_id": 13045
     },
     {
       "action_id": "a0312",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "task_id": 13086
     },
     {
       "action_id": "a0328",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 13118
     },
     {
       "action_id": "a0329",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 13122
     },
     {
       "action_id": "a0330",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 13110
     },
     {
       "action_id": "a0337",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 13125
     },
     {
       "action_id": "a0341",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "task_id": 13130
     },
     {
       "action_id": "a0342",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "task_id": 13135
     },
     {
       "action_id": "a0355",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "task_id": 13141
     },
     {
       "action_id": "a0029",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 12892
     },
     {
       "action_id": "a0034",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 12891
     },
     {
       "action_id": "a0039",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 12893
     },
     {
       "action_id": "a0044",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 12897
     },
     {
       "action_id": "a0063",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "task_id": 12939
     },
     {
       "action_id": "a0064",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-04",
       "task_id": 12955
     },
     {
       "action_id": "a0073",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 12943
     },
     {
       "action_id": "a0075",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 12949
     },
     {
       "action_id": "a0096",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "task_id": 13042
     },
     {
       "action_id": "a0098",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-06",
       "task_id": 13043
     },
     {
       "action_id": "a0104",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 12992
     },
     {
       "action_id": "a0105",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 12995
     },
     {
       "action_id": "a0106",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 13084
     },
     {
       "action_id": "a0107",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 12982
     },
     {
       "action_id": "a0108",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 13092
     },
     {
       "action_id": "a0109",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 13091
     },
     {
       "action_id": "a0111",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 13091
     },
     {
       "action_id": "a0122",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "task_id": 13069
     },
     {
       "action_id": "a0124",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "task_id": 13071
     },
     {
       "action_id": "a0131",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "task_id": 13059
     },
     {
       "action_id": "a0133",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08",
       "task_id": 13121
     },
     {
       "action_id": "a0141",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 13133
     },
     {
       "action_id": "a0146",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 13137
     },
     {
       "action_id": "a0198",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-13",
       "task_id": 13142
     },
     {
       "action_id": "a0206",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "task_id": 13214
     },
     {
       "action_id": "a0154",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "task_id": 12807
     },
     {
       "action_id": "a0163",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "task_id": 12810
     },
     {
       "action_id": "a0165",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "task_id": 12813
     },
     {
       "action_id": "a0166",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-10",
       "task_id": 12838
     },
     {
       "action_id": "a0176",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 12840
     },
     {
       "action_id": "a0178",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 12814
     },
     {
       "action_id": "a0186",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "task_id": 12815
     },
     {
       "action_id": "a0189",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "task_id": 12847
     },
     {
       "action_id": "a0193",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "task_id": 12852
     },
     {
       "action_id": "a0217",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 13117
     },
     {
       "action_id": "a0223",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 13119
     },
     {
       "action_id": "a0224",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 13120
     },
     {
       "action_id": "a0230",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 13134
     },
     {
       "action_id": "a0232",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 13136
     },
     {
       "action_id": "a0235",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 13229
     },
     {
       "action_id": "a0383",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13301
     },
     {
       "action_id": "a0385",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13310
     },
     {
       "action_id": "a0392",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13283
     },
     {
       "action_id": "a0395",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13330
     },
     {
       "action_id": "a0397",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13302
     },
     {
       "action_id": "a0400",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13308
     },
     {
       "action_id": "a0242",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13138
     },
     {
       "action_id": "a0243",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13140
     },
     {
       "action_id": "a0403",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13228
     },
     {
       "action_id": "a0405",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 13230
     },
     {
       "action_id": "a0426",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "task_id": 13237
     },
     {
       "action_id": "a0428",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "task_id": 13239
     },
     {
       "action_id": "a0469",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "task_id": 13259
     },
     {
       "action_id": "a0473",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "task_id": 13262
     },
     {
       "action_id": "a0483",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "task_id": 13275
     },
     {
       "action_id": "a0438",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "task_id": 13264
     },
     {
       "action_id": "a0440",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "task_id": 13277
     },
     {
       "action_id": "a0448",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-30",
       "task_id": 13278
     },
     {
       "action_id": "a0449",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-30",
       "task_id": 13279
     },
     {
       "action_id": "a0535",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "task_id": 13304
     },
     {
       "action_id": "a0540",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "task_id": 13305
     },
     {
       "action_id": "a0544",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "task_id": 13236
     },
     {
       "action_id": "a0600",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "task_id": 13349
     },
     {
       "action_id": "a0601",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "task_id": 13359
     },
     {
       "action_id": "a0633",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-44",
       "task_id": 13361
     },
     {
       "action_id": "a0250",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "task_id": 13152
     },
     {
       "action_id": "a0251",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "task_id": 13211
     },
     {
       "action_id": "a0257",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "task_id": 13144
     },
     {
       "action_id": "a0262",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "task_id": 13212
     },
     {
       "action_id": "a0267",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "task_id": 13220
     },
     {
       "action_id": "a0272",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-17",
       "task_id": 13235
     },
     {
       "action_id": "a0645",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-47",
       "task_id": 13364
     },
     {
       "action_id": "a0661",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49",
       "task_id": 13074
     },
     {
       "action_id": "a0693",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "task_id": 13343
     },
     {
       "action_id": "a0695",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "task_id": 13078
     },
     {
       "action_id": "a0718",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 13082
     },
     {
       "action_id": "a0451",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "task_id": 13351
     },
     {
       "action_id": "a0433",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "task_id": 13373
     },
     {
       "action_id": "a0508",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "task_id": 13352
     },
     {
       "action_id": "a0510",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "task_id": 13354
     },
     {
       "action_id": "a0512",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "task_id": 13355
     },
     {
       "action_id": "a0521",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 13356
     },
     {
       "action_id": "a0523",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 13358
     },
     {
       "action_id": "a0525",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 13358
     },
     {
       "action_id": "a0527",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 13366
     },
     {
       "action_id": "a0586",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "task_id": 13306
     },
     {
       "action_id": "a0588",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "task_id": 13367
     },
     {
       "action_id": "a0590",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-39",
       "task_id": 13367
     },
     {
       "action_id": "a0497",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "task_id": 13170
     },
     {
       "action_id": "a0499",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "task_id": 13169
     },
     {
       "action_id": "a0500",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "task_id": 13171
     },
     {
       "action_id": "a0548",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "task_id": 13172
     },
     {
       "action_id": "a0550",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "task_id": 13174
     },
     {
       "action_id": "a0606",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "task_id": 13313
     },
     {
       "action_id": "a0608",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "task_id": 13312
     },
     {
       "action_id": "a0610",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "task_id": 13307
     },
     {
       "action_id": "a0617",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-42",
       "task_id": 13329
     },
     {
       "action_id": "a0678",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-50",
       "task_id": 13316
     },
     {
       "action_id": "a0679",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-50",
       "task_id": 13328
     },
     {
       "action_id": "a0559",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "task_id": 13143
     },
     {
       "action_id": "a0563",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "task_id": 13145
     },
     {
       "action_id": "a0570",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "task_id": 13146
     },
     {
       "action_id": "a0572",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "task_id": 13147
     },
     {
       "action_id": "a0574",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "task_id": 13160
     },
     {
       "action_id": "a0623",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "task_id": 13163
     },
     {
       "action_id": "a0625",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "task_id": 13162
     },
     {
       "action_id": "a0731",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13215
     },
     {
       "action_id": "a0735",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13216
     },
     {
       "action_id": "a0739",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13217
     },
     {
       "action_id": "a0743",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13218
     },
     {
       "action_id": "a0747",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13219
     },
     {
       "action_id": "a0750",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13161
     },
     {
       "action_id": "a0755",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 13164
     }
   ],
-  "known_seconds": 9280.2,
+  "known_seconds": 17421.034,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": false,
+  "point_estimate_complete": true,
   "profile_id": "icecrown-fivebox",
-  "range_basis": null,
-  "range_minutes": null,
-  "status": "requirements",
+  "range_basis": {
+    "basis": "sum_of_step_ranges",
+    "legacy_baseline_steps": 56
+  },
+  "range_minutes": [
+    215.996,
+    398.0
+  ],
+  "status": "pass",
   "steps": [
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 10.349,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 388.2,
         "move_seconds": 0.0,
@@ -4600,17 +5012,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 388.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 620.928,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 232.728,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        7.735,
+        14.252
+      ],
       "step_id": "step-01",
       "title": "银色比武场首轮 → 奥格瑞姆之锤接双入口任务",
-      "unresolved_component_count": 13
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.666,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 330.0,
         "move_seconds": 0.0,
@@ -4618,17 +5037,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 330.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 459.947,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 129.947,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.729,
+        10.557
+      ],
       "step_id": "step-19",
       "title": "银色前线基地：天灾战术 + 致命剧毒 + 保卫前线",
-      "unresolved_component_count": 10
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.666,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 271.8,
         "move_seconds": 0.0,
@@ -4636,17 +5062,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 271.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 459.947,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 188.147,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.729,
+        10.557
+      ],
       "step_id": "step-20",
       "title": "银色前线基地：空中救兵 → 最后一道防线",
-      "unresolved_component_count": 11
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 9.582,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 339.6,
         "move_seconds": 0.0,
@@ -4654,17 +5087,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 339.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 574.934,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 235.334,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        7.162,
+        13.196
+      ],
       "step_id": "step-21",
       "title": "回音谷 / 天灾城：三任务同杀 → 三首领",
-      "unresolved_component_count": 13
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.216,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 0.0,
@@ -4672,17 +5112,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 67.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 252.971,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 185.171,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.151,
+        5.806
+      ],
       "step_id": "step-22",
       "title": "晶歌森林：公正堡材料 + 危险的能量",
-      "unresolved_component_count": 6
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.899,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 310.8,
         "move_seconds": 0.0,
@@ -4690,17 +5137,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 310.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 413.952,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 103.152,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.156,
+        9.501
+      ],
       "step_id": "step-23",
       "title": "北伐军之峰：插旗事件 → 开点 → 奥格瑞姆之锤",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.45,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 204.0,
         "move_seconds": 0.0,
@@ -4708,17 +5162,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 204.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 206.976,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 2.976,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.578,
+        4.751
+      ],
       "step_id": "step-24",
       "title": "奥格瑞姆之锤：银色北伐军链 → 东部任务",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.749,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 0.0,
@@ -4726,17 +5187,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 174.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 344.96,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 170.36,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.297,
+        7.918
+      ],
       "step_id": "step-02",
       "title": "暗影拱顶入口：乐趣十足 → 解放你的思想",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.833,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 0.0,
@@ -4744,17 +5212,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 106.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 229.973,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 123.173,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.865,
+        5.279
+      ],
       "step_id": "step-03",
       "title": "顽固的敌人 → 解锁暗影拱顶Hub",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.133,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 242.4,
         "move_seconds": 0.0,
@@ -4762,17 +5237,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 242.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 367.958,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 125.558,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.584,
+        8.446
+      ],
       "step_id": "step-04",
       "title": "暗影拱顶首轮：公爵 + 消灭竞争者 → Savage Ledge",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.666,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 300.6,
         "move_seconds": 0.0,
@@ -4780,35 +5262,49 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 300.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 459.947,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 159.347,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.729,
+        10.557
+      ],
       "step_id": "step-05",
       "title": "Ufrang短环：裁决令 + 钥匙 → 打开Jotunheim整包",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.983,
+      "complete": true,
       "components": {
-        "accept_turnin_seconds": 145.2,
+        "accept_turnin_seconds": 126.0,
         "move_seconds": 0.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 145.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 298.966,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 172.966,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.724,
+        6.862
+      ],
       "step_id": "step-06",
       "title": "白骨女巫预开：先拿骨头任务，再开始大范围杀维库人",
-      "unresolved_component_count": 6
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.899,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 145.2,
         "move_seconds": 0.0,
@@ -4816,17 +5312,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 145.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 413.952,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 268.752,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.156,
+        9.501
+      ],
       "step_id": "step-07",
       "title": "Jotunheim第一大圈：击杀 + 插旗 + 烧旗 + 囚犯 + 骨头 + 恐怖之水",
-      "unresolved_component_count": 11
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.516,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 213.6,
         "move_seconds": 0.0,
@@ -4834,17 +5337,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 213.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 390.955,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 177.355,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.87,
+        8.973
+      ],
       "step_id": "step-08",
       "title": "Jotunheim第二短圈：鱼叉 + 纵火 → 白骨女巫后续",
-      "unresolved_component_count": 11
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.599,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 0.0,
@@ -4852,17 +5362,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 165.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 275.968,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 110.968,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.438,
+        6.334
+      ],
       "step_id": "step-09",
       "title": "白骨女巫后半：古代英雄 → 接《女妖的复仇》",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.916,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 0.0,
@@ -4870,17 +5387,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 58.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 114.987,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 56.787,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        1.432,
+        2.639
+      ],
       "step_id": "step-13",
       "title": "巴拉加德：《女妖的复仇》→ 打开瓦哈拉斯",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.216,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 0.0,
@@ -4888,17 +5412,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 174.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 252.971,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 78.371,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.151,
+        5.806
+      ],
       "step_id": "step-14",
       "title": "瓦哈拉斯首轮：做到《堕落的英雄》→ 暗影拱顶顺交日常",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 9.582,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 310.2,
         "move_seconds": 0.0,
@@ -4906,17 +5437,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 310.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 574.934,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 264.734,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        7.162,
+        13.196
+      ],
       "step_id": "step-10",
       "title": "死亡高地 → 先锋军港口第一圈：鲨鱼 + 尸体 + 情报",
-      "unresolved_component_count": 12
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.833,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 0.0,
@@ -4924,17 +5462,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 116.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 229.973,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 113.573,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.865,
+        5.279
+      ],
       "step_id": "step-11",
       "title": "先锋军港口第二圈：两名船长 + 一只狮鹫整组交付",
-      "unresolved_component_count": 6
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.599,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 0.0,
@@ -4942,35 +5487,49 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 116.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 275.968,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 159.568,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.438,
+        6.334
+      ],
       "step_id": "step-12",
       "title": "先锋军港口：禁飞区 + 大教堂 → 元帅",
-      "unresolved_component_count": 8
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 10.732,
+      "complete": true,
       "components": {
-        "accept_turnin_seconds": 368.4,
+        "accept_turnin_seconds": 310.2,
         "move_seconds": 0.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 368.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 643.926,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 333.726,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        8.021,
+        14.78
+      ],
       "step_id": "step-15",
       "title": "黑色观察站前半：本地前置做完，带玛雷卡里斯两项东行",
-      "unresolved_component_count": 14
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 11.882,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 300.6,
         "move_seconds": 0.0,
@@ -4978,17 +5537,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 300.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 712.918,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 412.318,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        8.881,
+        16.363
+      ],
       "step_id": "step-25",
       "title": "第一次东行联合包：伊米海姆 / 矿洞 → 玛雷卡里斯 → 破碎前线",
-      "unresolved_component_count": 20
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 0.81,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 48.6,
         "move_seconds": 0.0,
@@ -4997,16 +5563,23 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 48.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.573,
+        1.056
+      ],
       "step_id": "step-18",
       "title": "奥格瑞姆之锤：顺交《我还没死！》",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.666,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 300.6,
         "move_seconds": 0.0,
@@ -5014,17 +5587,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 300.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 459.947,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 159.347,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.729,
+        10.557
+      ],
       "step_id": "step-27",
       "title": "奥格瑞姆之锤：破碎前线交接 → 知己知彼 / 爆炸油",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 11.499,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 494.4,
         "move_seconds": 0.0,
@@ -5032,17 +5612,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 494.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 689.92,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 195.52,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        8.594,
+        15.836
+      ],
       "step_id": "step-31",
       "title": "《机会》地下闭环：回收破碎前线 → 冰冠堡垒脚下 → 遗忘深渊 → 回舰",
-      "unresolved_component_count": 11
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.216,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 87.0,
         "move_seconds": 0.0,
@@ -5050,17 +5637,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 87.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 252.971,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 165.971,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.151,
+        5.806
+      ],
       "step_id": "step-29",
       "title": "莫德雷萨第一圈：憎恶爆破 + 对抗巨人",
-      "unresolved_component_count": 6
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.15,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 0.0,
@@ -5068,17 +5662,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 0.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 68.992,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 68.992,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.859,
+        1.584
+      ],
       "step_id": "step-30",
       "title": "莫德雷萨第二圈：污染者科普洛斯 / 化学常识 → 直入失落希望",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.983,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 0.0,
@@ -5086,17 +5687,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 135.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 298.966,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 163.366,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.724,
+        6.862
+      ],
       "step_id": "step-35",
       "title": "失落希望之谷：战地维修 → 召唤大军",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.916,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 0.0,
@@ -5104,17 +5712,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 77.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 114.987,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 37.587,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        1.432,
+        2.639
+      ],
       "step_id": "step-56",
       "title": "失落希望回舰：徒劳 / 莫德雷萨交付 → 冰霜巨龙的摇篮",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.066,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 0.0,
@@ -5122,17 +5737,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 106.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 183.979,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 77.179,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.292,
+        4.223
+      ],
       "step_id": "step-40",
       "title": "辛达苟萨之墓：冰霜巨龙的摇篮 + 巨龙的墓地",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.15,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 0.0,
@@ -5140,17 +5762,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 58.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 68.992,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 10.792,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.859,
+        1.584
+      ],
       "step_id": "step-26",
       "title": "沉默墓地：勇气的传说 → 弥留的英雄",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.066,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 0.0,
@@ -5158,17 +5787,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 116.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 183.979,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 67.579,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.292,
+        4.223
+      ],
       "step_id": "step-44",
       "title": "白骨之庭：寻求答案 → 猎人与王子 → 知识的负担",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.366,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 145.2,
         "move_seconds": 0.0,
@@ -5176,17 +5812,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 145.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 321.963,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 176.763,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.011,
+        7.39
+      ],
       "step_id": "step-16",
       "title": "黑色观察站第二阶段：看医生 / 净化的火焰 → 一举两得",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.516,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 223.2,
         "move_seconds": 0.0,
@@ -5194,17 +5837,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 223.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 390.955,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 167.755,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.87,
+        8.973
+      ],
       "step_id": "step-17",
       "title": "支离破碎 → 重新组合欧尔拉金 → 血肉巨人",
-      "unresolved_component_count": 10
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.533,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 0.0,
@@ -5212,17 +5862,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 67.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 91.989,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 24.189,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        1.146,
+        2.111
+      ],
       "step_id": "step-45",
       "title": "奥格瑞姆之锤：交冰霜巨龙 / 知识负担 → 银色北伐军的协助",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.15,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 0.0,
@@ -5230,17 +5887,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 58.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 68.992,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 10.792,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.859,
+        1.584
+      ],
       "step_id": "step-46",
       "title": "北伐军之峰：银色北伐军的协助 → 接《提里奥的尝试》",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 2.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 48.6,
         "move_seconds": 0.0,
@@ -5248,17 +5912,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 48.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 137.984,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 89.384,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        1.719,
+        3.167
+      ],
       "step_id": "step-47",
       "title": "黑暗大教堂：《提里奥的尝试》",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.15,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 0.0,
@@ -5266,71 +5937,99 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 58.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 68.992,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 10.792,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.859,
+        1.584
+      ],
       "step_id": "step-48",
       "title": "北伐军之峰：弥留的英雄 → 守护者的帮助",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 8.049,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 193.8,
-        "move_seconds": 0.0,
+        "move_seconds": 208.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 193.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 482.944,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 81.144,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        6.016,
+        11.085
+      ],
       "step_id": "step-49",
       "title": "月光林地：雷姆洛斯的救治",
-      "unresolved_component_count": 8
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.899,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 213.6,
-        "move_seconds": 0.0,
+        "move_seconds": 84.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 213.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 413.952,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 116.352,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.156,
+        9.501
+      ],
       "step_id": "step-51",
       "title": "龙眠神殿：阿莱克丝塔萨 + 克罗米",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.523,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
-        "move_seconds": 0.0,
+        "move_seconds": 215.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 116.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 331.4,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.151,
+        5.806
+      ],
       "step_id": "step-52",
       "title": "返回冰冠：阿莱克丝塔萨的恩赐 → 纳鲁的意志",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.749,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 204.0,
         "move_seconds": 0.0,
@@ -5338,17 +6037,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 204.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 344.96,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 140.96,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.297,
+        7.918
+      ],
       "step_id": "step-53",
       "title": "沙塔斯：纳鲁的恩赐 → 布雷登布莱德终章",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.366,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 184.2,
         "move_seconds": 0.0,
@@ -5356,17 +6062,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 184.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 321.963,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 137.763,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.011,
+        7.39
+      ],
       "step_id": "step-28",
       "title": "奥尔杜萨整块：预览 + 绿色科技 → 边缘科学",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.983,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 0.0,
@@ -5374,17 +6087,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 96.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 298.966,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 202.366,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.724,
+        6.862
+      ],
       "step_id": "step-33",
       "title": "奥尔杜萨：南门压制 → 北部四工头 + 三口锅 → 回舰",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.366,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 87.0,
         "move_seconds": 0.0,
@@ -5392,17 +6112,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 87.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 321.963,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 234.963,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.011,
+        7.39
+      ],
       "step_id": "step-34",
       "title": "奥尔杜萨：魔质重测 + 暗物质 + 研究论文 → 回舰",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.599,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 87.0,
         "move_seconds": 0.0,
@@ -5410,17 +6137,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 87.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 275.968,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 188.968,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.438,
+        6.334
+      ],
       "step_id": "step-39",
       "title": "奥尔杜萨第三轮：路障 / 奥鲁麦斯 → 南扫任务解锁",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.899,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 213.0,
         "move_seconds": 0.0,
@@ -5428,17 +6162,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 213.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 413.952,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 200.952,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.156,
+        9.501
+      ],
       "step_id": "step-32",
       "title": "暗影拱顶《离别礼物》→ 幻象观察者三任务",
-      "unresolved_component_count": 8
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.066,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 0.0,
@@ -5446,17 +6187,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 67.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 183.979,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 116.179,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.292,
+        4.223
+      ],
       "step_id": "step-36",
       "title": "哭泣采掘场：混乱之种 / 一片狼藉 → 狡诈者维雷斯",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.216,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 0.0,
@@ -5464,17 +6212,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 77.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 252.971,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 175.571,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.151,
+        5.806
+      ],
       "step_id": "step-41",
       "title": "奥尔杜萨南下：遮挡天空 / 铁墙壁垒 / 溅血的旗帜",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 2.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 0.0,
@@ -5482,17 +6237,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 67.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 137.984,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 70.184,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        1.719,
+        3.167
+      ],
       "step_id": "step-42",
       "title": "恐惧之门前：6只冰冠劫掠者 → 回舰解锁科雷萨两任务",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.15,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 0.0,
@@ -5500,17 +6262,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 0.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 68.992,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 68.992,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.859,
+        1.584
+      ],
       "step_id": "step-50",
       "title": "科雷萨：守卫者 + 三碎片",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.366,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 193.8,
         "move_seconds": 0.0,
@@ -5518,17 +6287,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 193.8,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 321.963,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 128.163,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.011,
+        7.39
+      ],
       "step_id": "step-37",
       "title": "苦难高地：狡诈者维雷斯 → 新兵 → 邪恶城堡",
-      "unresolved_component_count": 6
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.983,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 0.0,
@@ -5536,17 +6312,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 96.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 298.966,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 202.366,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.724,
+        6.862
+      ],
       "step_id": "step-38",
       "title": "玛雷卡里斯轻盈追迹者三任务：炸弹拖尸 + 挑起争端 + 12冰肤斥候",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 2.683,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 0.0,
@@ -5554,17 +6337,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 58.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 160.981,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 102.781,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        2.005,
+        3.695
+      ],
       "step_id": "step-43",
       "title": "玛雷卡里斯：本组完成冰霜骑士 + 鲜血骑士",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 11.499,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 388.2,
         "move_seconds": 0.0,
@@ -5572,17 +6362,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 388.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 689.92,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 301.72,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        8.594,
+        15.836
+      ],
       "step_id": "step-54",
       "title": "高难可选：瓦哈拉斯后续 + 邪恶骑士",
-      "unresolved_component_count": 17
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.15,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 0.0,
@@ -5590,20 +6387,27 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 58.2,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 68.992,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 10.792,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        0.859,
+        1.584
+      ],
       "step_id": "step-55",
       "title": "奥格瑞姆之锤：最终交付科雷萨两任务",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     }
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 392,
-    "range_model_status": "requirements",
-    "requirement_count": 392,
+    "issue_count": 390,
+    "range_model_status": "resolved",
+    "requirement_count": 0,
     "step_count": 56
   }
 }

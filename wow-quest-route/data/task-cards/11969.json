@@ -97,10 +97,11 @@
   "guide": [
     "接取：莱洛拉斯。",
     "莱洛拉斯要你在考达拉的信号火焰处使用莱洛拉斯的火花。",
-    "交付：莱洛拉斯。"
+    "交付：莱洛拉斯。",
+    "任务进度共享；由跟随号先使用任务物触发，完成后主号带队先回永生之盾。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -127,14 +128,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11969; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《触动陷阱》：到信号火焰约(25.4,21.8)，站在火焰旁使用任务物品莱洛拉斯的火花触发事件；到坐标不会自动完成。",
+      "text": "《触动陷阱》：到信号火焰约(25.4,21.8)，站在火焰旁使用任务物品莱洛拉斯的火花触发事件；到坐标不会自动完成。由跟随号先触发，任务完成后主号带队先回永生之盾。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "user_live:2026-10-10",
+      "reason": "2026-10-09至2026-10-10北风第二组DK实跑反馈；保留原有必要执行提示。"
     }
   }
 }

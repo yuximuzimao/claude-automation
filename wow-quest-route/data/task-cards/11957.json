@@ -81,10 +81,11 @@
   "guide": [
     "接取：克莉斯塔萨。",
     "克莉斯塔萨要你使用奥术能量源引出莎拉苟萨并打败她。",
-    "交付：克莉斯塔萨。"
+    "交付：克莉斯塔萨。",
+    "莎拉苟萨事件需要五号依次交互并依次拾取任务物，按顺序逐号完成。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -111,14 +112,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11957; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《莎拉苟萨的末日》：莎拉苟萨不在地面常驻。先使用任务给的强化奥术牢笼联系克莉斯塔萨并选择准备就绪，脚本会送到高处平台；到平台后使用奥术能量源召出莎拉苟萨。击杀后仍通过克莉斯塔萨脚本返回。",
+      "text": "《莎拉苟萨的末日》：莎拉苟萨不在地面常驻。先使用任务给的强化奥术牢笼联系克莉斯塔萨并选择准备就绪，脚本会送到高处平台；到平台后使用奥术能量源召出莎拉苟萨。击杀后仍通过克莉斯塔萨脚本返回。\n五号需依次交互并依次拾取任务物，一个角色完成当前交互后再切换下一个。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "user_live:2026-10-10",
+      "reason": "2026-10-09至2026-10-10北风第二组DK实跑反馈；保留原有必要执行提示。"
     }
   }
 }

@@ -1900,6 +1900,117 @@
         "actual_minutes": null,
         "status": "in_progress_waiting_for_full_journey"
       }
+    },
+    {
+      "observation_id": "route-run-2026-10-10-11-borean-dragonblight-dk-001",
+      "profile_id": null,
+      "profile_version": null,
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 1,
+      "action_scope": {
+        "start": {
+          "profile_id": "borean-fivebox",
+          "profile_version": 3,
+          "action_id": "a0631",
+          "anchor": "步骤60接11627《沸点》；用户计时22:01，Journey首个匹配事件22:02:20"
+        },
+        "profile_boundary": {
+          "from_profile_id": "borean-fivebox",
+          "to_profile_id": "dragonblight-fivebox",
+          "journey_local": "2026-10-11T00:13:43+08:00",
+          "anchor": "完成11930《横贯冰原》并进入龙骨；龙骨Profile从a0002交11930开始"
+        },
+        "end": {
+          "profile_id": "dragonblight-fivebox",
+          "profile_version": 1,
+          "action_id": "a0109",
+          "anchor": "步骤9交12072《该死的荒芜兽！》；Journey完成事件03:37:27，用户03:38停止"
+        }
+      },
+      "actual_minutes": 251.0,
+      "time_precision": "user_minute_plus_journey_second_boundaries",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_resource_competition",
+        "contains_first_run_learning_cost",
+        "contains_death_and_corpse_run",
+        "cross_profile_user_minute_boundary_not_exact_action_timestamp"
+      ],
+      "source_route_key": "borean_to_dragonblight_dk_second_run_continuation",
+      "source_record_ref": "data/observations/route-timing-runs.json#run_id=2026-10-10-11-borean-to-dragonblight-dk-second-run-2201-0338",
+      "source_record": {
+        "date": "2026-10-10/11",
+        "run_kind": "second_fivebox_run_borean_to_dragonblight_continuation",
+        "user_start_local": "2026-10-10T22:01:00+08:00",
+        "pause_windows": [
+          {
+            "start_local": "2026-10-11T01:09:00+08:00",
+            "end_local": "2026-10-11T02:35:00+08:00",
+            "minutes": 86.0
+          }
+        ],
+        "user_stop_local": "2026-10-11T03:38:00+08:00",
+        "journey_source_sha256": "50d367143bbca2e4bd3d20c1c0eb6ad1c5c57a906a39515244df93131284e89c",
+        "split_actual_minutes": {
+          "borean_steps_60_66": 132.717,
+          "dragonblight_steps_1_9_active": 117.733
+        },
+        "known_pollution": [
+          "冬鳞区域存在资源竞争与首次不熟悉蚌壳位置",
+          "《就是他们！》操作失误导致约2分钟死亡跑尸"
+        ],
+        "interpretation": "北风步骤60–66明显慢于当前模型，主要偏差集中步骤61/62；龙骨步骤1–9仍落在当前预测区间内。该样本保留为比较证据，不直接校准模型。"
+      }
+    },
+    {
+      "observation_id": "route-run-2026-10-11-12-dragonblight-dk-001",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": 1,
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 1,
+      "action_scope": {
+        "start": {
+          "profile_id": "dragonblight-fivebox",
+          "profile_version": 1,
+          "action_id": "a0110",
+          "anchor": "步骤10《恐怖之爪》继续"
+        },
+        "end": {
+          "profile_id": "dragonblight-fivebox",
+          "profile_version": 1,
+          "action_id": "a0294",
+          "anchor": "步骤25交《诱饵》；用户01:50停止"
+        }
+      },
+      "actual_minutes": 305.0,
+      "time_precision": "user_minute_with_explicit_pause",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "contains_route_order_correction",
+        "contains_first_run_restored_branch",
+        "user_minute_action_boundaries_only"
+      ],
+      "source_route_key": "dragonblight_dk_second_run_continuation",
+      "source_record_ref": "data/observations/route-timing-runs.json#run_id=2026-10-11-12-dragonblight-dk-second-run-1744-0150",
+      "source_record": {
+        "date": "2026-10-11/12",
+        "run_kind": "second_fivebox_run_dragonblight_continuation",
+        "user_start_local": "2026-10-11T17:44:00+08:00",
+        "pause_windows": [
+          {
+            "start_local": "2026-10-11T18:52:00+08:00",
+            "end_local": "2026-10-11T21:53:00+08:00",
+            "minutes": 181.0
+          }
+        ],
+        "user_stop_local": "2026-10-12T01:50:00+08:00",
+        "actual_minutes": 305.0,
+        "level_end": 75,
+        "xp_end": "约102万",
+        "interpretation": "本轮用于回写fivebox事实和路线错误；因步骤16/17、红玉丁香顺序及吉加托尔支线均发生结构修正，不直接校准旧Timing。"
+      }
     }
   ]
 }

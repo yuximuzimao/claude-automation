@@ -3980,35 +3980,16 @@
       "action_id": "a0606"
     },
     {
-      "kind": "move",
+      "kind": "fixed_transport",
       "location_ref": "borean-p185",
-      "to_name": "飞行管理员",
-      "action_id": "a0607",
-      "movement_mode": "ride"
+      "from_name": "图书馆员提艾蕾",
+      "to_name": "琥珀崖",
+      "action_id": "a0607"
     },
     {
       "kind": "location",
-      "location_ref": "borean-p186",
+      "location_ref": "borean-p187",
       "action_id": "a0608"
-    },
-    {
-      "kind": "taxi",
-      "location_ref": "borean-p186",
-      "from_name": "永生之盾",
-      "to_name": "琥珀崖",
-      "action_id": "a0609"
-    },
-    {
-      "kind": "location",
-      "location_ref": "borean-p187",
-      "action_id": "a0610"
-    },
-    {
-      "kind": "move",
-      "location_ref": "borean-p187",
-      "to_name": "琥珀崖",
-      "action_id": "a0611",
-      "movement_mode": "ride"
     },
     {
       "kind": "location",
@@ -5719,15 +5700,12 @@
     },
     {
       "step_id": "step-58",
-      "title": "永生之盾 → 系统鸟琥珀崖",
-      "summary": "考达拉任务结束后回永生之盾飞行管理员，乘系统鸟返回琥珀崖。",
+      "title": "永生之盾 → 图书馆员提艾蕾传送琥珀崖",
+      "summary": "考达拉任务结束后到图书馆员提艾蕾处，直接传送到琥珀崖；不再支付或等待系统飞行。",
       "action_ids": [
         "a0606",
         "a0607",
-        "a0608",
-        "a0609",
-        "a0610",
-        "a0611"
+        "a0608"
       ]
     },
     {
@@ -7942,26 +7920,15 @@
           "mode": "ride"
         }
       },
-      "borean-p186": {
-        "display_name": "永生之盾飞行点",
-        "x": 33.2,
-        "y": 34.45,
-        "phase": "transition",
-        "transport": "ride",
-        "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0607"
-        }
-      },
       "borean-p187": {
         "display_name": "琥珀崖",
         "x": 45.2,
         "y": 33.35,
         "phase": "transition",
-        "transport": "taxi",
+        "transport": "script",
         "incoming_movement": {
           "kind": "action",
-          "action_id": "a0609"
+          "action_id": "a0607"
         }
       },
       "borean-p188": {
@@ -7971,8 +7938,8 @@
         "phase": "quest",
         "transport": "ride",
         "incoming_movement": {
-          "kind": "action",
-          "action_id": "a0611"
+          "kind": "self_move",
+          "mode": "ride"
         }
       },
       "borean-p189": {
@@ -8470,6 +8437,11 @@
       "date": "2026-10-09",
       "kind": "live_run_route_correction",
       "summary": "吸收第二组DK北风实跑：接《天崩地裂》后立即做并交，再进入恩其拉任务组；琥珀崖后续把《调查》调整到《监视裂谷：峭壁断层》之后。仅改变这两处正式动作顺序，action_id保持稳定。"
+    },
+    {
+      "date": "2026-10-10",
+      "kind": "live_run_route_correction",
+      "summary": "吸收2026-10-09至10-10第二组DK北风实跑：步骤57路线动作保持不变；将跟随号触发《触动陷阱》及完成后主号带队回永生之盾写入任务备注；步骤58改为图书馆员提艾蕾直接传送琥珀崖，删除原系统飞行管理员与系统鸟链。"
     }
   ]
 }

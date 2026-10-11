@@ -119,24 +119,6 @@
       "zone_id": 3483
     },
     {
-      "location_ref": "hellfire-dk-p031",
-      "service_action_id": "a0102",
-      "task_id": 10629,
-      "visit_id": "a0099",
-      "x": 51.37,
-      "y": 30.52,
-      "zone_id": 3483
-    },
-    {
-      "location_ref": "hellfire-dk-p032",
-      "service_action_id": "a0106",
-      "task_id": 10630,
-      "visit_id": "a0105",
-      "x": 54.39,
-      "y": 31.57,
-      "zone_id": 3483
-    },
-    {
       "location_ref": "hellfire-dk-p033",
       "service_action_id": "a0109",
       "task_id": 10390,
@@ -224,15 +206,6 @@
       "visit_id": "a0155",
       "x": 33.37,
       "y": 65.08,
-      "zone_id": 3483
-    },
-    {
-      "location_ref": "hellfire-dk-p045",
-      "service_action_id": "a0160",
-      "task_id": 9376,
-      "visit_id": "a0159",
-      "x": 22.11,
-      "y": 68.3,
       "zone_id": 3483
     },
     {
@@ -326,7 +299,7 @@
       "zone_id": 3483
     }
   ],
-  "input_fingerprint": "3b5caf105dcccf55fb9c818c01bcb6cf9966edd1201118c956c0205135aa9fe6",
+  "input_fingerprint": "825bb9e846c34fa8d0cd60467e8317cbf2d2a55bd22006a2d765a9471db6e8d4",
   "issues": [],
   "profile_id": "hellfire-dk-speed",
   "spatial_instances": [
@@ -478,30 +451,6 @@
     {
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
-        "objective-a0102"
-      ],
-      "instance_id": "visit-a0099",
-      "location_ref": "hellfire-dk-p031",
-      "visit_id": "a0099",
-      "x": 51.37,
-      "y": 30.52,
-      "zone_id": 3483
-    },
-    {
-      "basis": "canonical_visit_occurrence",
-      "cluster_ids": [
-        "objective-a0106"
-      ],
-      "instance_id": "visit-a0105",
-      "location_ref": "hellfire-dk-p032",
-      "visit_id": "a0105",
-      "x": 54.39,
-      "y": 31.57,
-      "zone_id": 3483
-    },
-    {
-      "basis": "canonical_visit_occurrence",
-      "cluster_ids": [
         "objective-a0109"
       ],
       "instance_id": "visit-a0108",
@@ -573,18 +522,6 @@
       "visit_id": "a0155",
       "x": 33.37,
       "y": 65.08,
-      "zone_id": 3483
-    },
-    {
-      "basis": "canonical_visit_occurrence",
-      "cluster_ids": [
-        "objective-a0160"
-      ],
-      "instance_id": "visit-a0159",
-      "location_ref": "hellfire-dk-p045",
-      "visit_id": "a0159",
-      "x": 22.11,
-      "y": 68.3,
       "zone_id": 3483
     },
     {
@@ -711,10 +648,10 @@
   "status": "pass",
   "summary": {
     "background_layer_count": 0,
-    "foreground_service_count": 36,
+    "foreground_service_count": 33,
     "shared_service_override_count": 0,
-    "spatial_instance_count": 31,
-    "target_cluster_count": 36
+    "spatial_instance_count": 28,
+    "target_cluster_count": 33
   },
   "target_clusters": [
     {
@@ -888,32 +825,6 @@
     },
     {
       "action_ids": [
-        "a0102"
-      ],
-      "cluster_id": "objective-a0102",
-      "source": "objective_action",
-      "task_ids": [
-        10629
-      ],
-      "visit_ids": [
-        "a0099"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0106"
-      ],
-      "cluster_id": "objective-a0106",
-      "source": "objective_action",
-      "task_ids": [
-        10630
-      ],
-      "visit_ids": [
-        "a0105"
-      ]
-    },
-    {
-      "action_ids": [
         "a0109"
       ],
       "cluster_id": "objective-a0109",
@@ -1040,19 +951,6 @@
       ],
       "visit_ids": [
         "a0155"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0160"
-      ],
-      "cluster_id": "objective-a0160",
-      "source": "objective_action",
-      "task_ids": [
-        9376
-      ],
-      "visit_ids": [
-        "a0159"
       ]
     },
     {

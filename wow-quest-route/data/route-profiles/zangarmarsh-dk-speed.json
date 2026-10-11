@@ -732,7 +732,7 @@
     },
     {
       "kind": "location",
-      "location_ref": "zang_dk-p026",
+      "location_ref": "zang_dk-p026-return",
       "action_id": "a0154"
     },
     {
@@ -1596,6 +1596,17 @@
         "display_name": "孢殖林",
         "x": 19.02,
         "y": 62.43,
+        "phase": "west",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "zang_dk-p026-return": {
+        "display_name": "莉萨奥营地",
+        "x": 23.32,
+        "y": 66.21,
         "phase": "west",
         "transport": "ride",
         "incoming_movement": {

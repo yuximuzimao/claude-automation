@@ -46,10 +46,11 @@
   "guide": [
     "接取：闪耀的碎片。",
     "把闪耀的碎片交给永生之盾的莱洛拉斯。",
-    "交付：莱洛拉斯。"
+    "交付：莱洛拉斯。",
+    "任务只是将任务物交给莱洛拉斯的纯交接，不需要fivebox标签。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -75,6 +76,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11941; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

@@ -11,7 +11,7 @@
     "塞纳里奥庇护所",
     "萨布拉金"
   ],
-  "input_fingerprint": "aa776ce9480b78fd419c7b8ba96dfb1ad09c367bb897862f73628ca8a82df5fc",
+  "input_fingerprint": "d74df89cafb4c46794b609a489df1f6e9c8f5303f5a1e770345d211c8db1749d",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -73,13 +73,24 @@
           "to_visit_id": "a0022"
         },
         {
-          "edge_id": "a0022->a0026",
+          "edge_id": "a0022->a0148",
           "from_location_ref": "zang_dk-p006",
           "from_visit_id": "a0022",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
-          "source": "default_autonomous_move",
+          "source": "canonical_profile",
+          "to_location_ref": "zang_dk-p038",
+          "to_visit_id": "a0148"
+        },
+        {
+          "edge_id": "a0148->a0026",
+          "from_location_ref": "zang_dk-p038",
+          "from_visit_id": "a0148",
+          "movement_action_id": "a0150",
+          "movement_mode": null,
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
           "to_location_ref": "zang_dk-p007",
           "to_visit_id": "a0026"
         },
@@ -150,20 +161,9 @@
           "to_visit_id": "a0055"
         },
         {
-          "edge_id": "a0055->a0058",
+          "edge_id": "a0055->a0060",
           "from_location_ref": "zang_dk-p013",
           "from_visit_id": "a0055",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "zang_dk-p014",
-          "to_visit_id": "a0058"
-        },
-        {
-          "edge_id": "a0058->a0060",
-          "from_location_ref": "zang_dk-p014",
-          "from_visit_id": "a0058",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -208,9 +208,9 @@
           "edge_id": "a0074->a0079",
           "from_location_ref": "zang_dk-p018",
           "from_visit_id": "a0074",
-          "movement_action_id": "a0080",
-          "movement_mode": null,
-          "operation_kind": "taxi",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
           "source": "canonical_profile",
           "to_location_ref": "zang_dk-p019",
           "to_visit_id": "a0079"
@@ -219,9 +219,9 @@
           "edge_id": "a0079->a0091",
           "from_location_ref": "zang_dk-p019",
           "from_visit_id": "a0079",
-          "movement_action_id": "a0092",
-          "movement_mode": null,
-          "operation_kind": "taxi",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
           "source": "canonical_profile",
           "to_location_ref": "zang_dk-p020",
           "to_visit_id": "a0091"
@@ -249,31 +249,9 @@
           "to_visit_id": "a0097"
         },
         {
-          "edge_id": "a0097->a0099",
+          "edge_id": "a0097->a0107",
           "from_location_ref": "zang_dk-p022",
           "from_visit_id": "a0097",
-          "movement_action_id": "a0100",
-          "movement_mode": null,
-          "operation_kind": "hearth",
-          "source": "canonical_profile",
-          "to_location_ref": "zang_dk-p023",
-          "to_visit_id": "a0099"
-        },
-        {
-          "edge_id": "a0099->a0101",
-          "from_location_ref": "zang_dk-p023",
-          "from_visit_id": "a0099",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "zang_dk-p024",
-          "to_visit_id": "a0101"
-        },
-        {
-          "edge_id": "a0101->a0107",
-          "from_location_ref": "zang_dk-p024",
-          "from_visit_id": "a0101",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -293,9 +271,42 @@
           "to_visit_id": "a0109"
         },
         {
-          "edge_id": "a0109->a0112",
+          "edge_id": "a0109->a0152",
           "from_location_ref": "zang_dk-p026",
           "from_visit_id": "a0109",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "zang_dk-p039",
+          "to_visit_id": "a0152"
+        },
+        {
+          "edge_id": "a0152->a0154",
+          "from_location_ref": "zang_dk-p039",
+          "from_visit_id": "a0152",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "zang_dk-p026-return",
+          "to_visit_id": "a0154"
+        },
+        {
+          "edge_id": "a0154->a0101",
+          "from_location_ref": "zang_dk-p026-return",
+          "from_visit_id": "a0154",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "zang_dk-p024",
+          "to_visit_id": "a0101"
+        },
+        {
+          "edge_id": "a0101->a0112",
+          "from_location_ref": "zang_dk-p024",
+          "from_visit_id": "a0101",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -315,20 +326,9 @@
           "to_visit_id": "a0114"
         },
         {
-          "edge_id": "a0114->a0116",
+          "edge_id": "a0114->a0118",
           "from_location_ref": "zang_dk-p028",
           "from_visit_id": "a0114",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "zang_dk-p029",
-          "to_visit_id": "a0116"
-        },
-        {
-          "edge_id": "a0116->a0118",
-          "from_location_ref": "zang_dk-p029",
-          "from_visit_id": "a0116",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -359,9 +359,20 @@
           "to_visit_id": "a0122"
         },
         {
-          "edge_id": "a0122->a0130",
+          "edge_id": "a0122->a0116",
           "from_location_ref": "zang_dk-p032",
           "from_visit_id": "a0122",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "zang_dk-p029",
+          "to_visit_id": "a0116"
+        },
+        {
+          "edge_id": "a0116->a0130",
+          "from_location_ref": "zang_dk-p029",
+          "from_visit_id": "a0116",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -414,7 +425,7 @@
           "to_visit_id": "a0141"
         }
       ],
-      "input_fingerprint": "35a1cdd136846eee9a095fd268e0a8878464d7f8d4c49b9d58c595b09bf2ccf8",
+      "input_fingerprint": "ee0fdabce004f9646ae006a169b8fdad65d2fbffe96d32bb16a366981cd456cd",
       "status": "pass",
       "visits": [
         {
@@ -478,10 +489,20 @@
           "y": 85.54
         },
         {
+          "display_name": "暗光带·沼泽之鞭",
+          "location_ref": "zang_dk-p038",
+          "location_role": "map_anchor",
+          "ordinal": 7,
+          "step_id": "step-01",
+          "visit_id": "a0148",
+          "x": 82.07,
+          "y": 71.39
+        },
+        {
           "display_name": "塞纳里奥庇护所",
           "location_ref": "zang_dk-p007",
           "location_role": "map_anchor",
-          "ordinal": 7,
+          "ordinal": 8,
           "step_id": "step-01",
           "visit_id": "a0026",
           "x": 78.4,
@@ -491,7 +512,7 @@
           "display_name": "沼泽鼠岗哨",
           "location_ref": "zang_dk-p008",
           "location_role": "map_anchor",
-          "ordinal": 8,
+          "ordinal": 9,
           "step_id": "step-02",
           "visit_id": "a0037",
           "x": 85.28,
@@ -501,7 +522,7 @@
           "display_name": "东部湖区",
           "location_ref": "zang_dk-p009",
           "location_role": "map_anchor",
-          "ordinal": 9,
+          "ordinal": 10,
           "step_id": "step-02",
           "visit_id": "a0042",
           "x": 77.5,
@@ -511,7 +532,7 @@
           "display_name": "暗泽南缘",
           "location_ref": "zang_dk-p010",
           "location_role": "map_anchor",
-          "ordinal": 10,
+          "ordinal": 11,
           "step_id": "step-02",
           "visit_id": "a0045",
           "x": 72.5,
@@ -521,7 +542,7 @@
           "display_name": "暗泽湖抽水泵",
           "location_ref": "zang_dk-p011",
           "location_role": "map_anchor",
-          "ordinal": 11,
+          "ordinal": 12,
           "step_id": "step-02",
           "visit_id": "a0049",
           "x": 70.6,
@@ -531,7 +552,7 @@
           "display_name": "环礁湖",
           "location_ref": "zang_dk-p012",
           "location_role": "map_anchor",
-          "ordinal": 12,
+          "ordinal": 13,
           "step_id": "step-03",
           "visit_id": "a0051",
           "x": 65.1,
@@ -541,21 +562,11 @@
           "display_name": "毒蛇湖",
           "location_ref": "zang_dk-p013",
           "location_role": "map_anchor",
-          "ordinal": 13,
+          "ordinal": 14,
           "step_id": "step-03",
           "visit_id": "a0055",
           "x": 65.15,
           "y": 40.91
-        },
-        {
-          "display_name": "观察者杰哈恩",
-          "location_ref": "zang_dk-p014",
-          "location_role": "map_anchor",
-          "ordinal": 14,
-          "step_id": null,
-          "visit_id": "a0058",
-          "x": 80.75,
-          "y": 36.27
         },
         {
           "display_name": "萨布拉金",
@@ -638,30 +649,10 @@
           "y": 54.03
         },
         {
-          "display_name": "萨布拉金",
-          "location_ref": "zang_dk-p023",
-          "location_role": "map_anchor",
-          "ordinal": 23,
-          "step_id": null,
-          "visit_id": "a0099",
-          "x": 32.38,
-          "y": 51.96
-        },
-        {
-          "display_name": "萨布拉金",
-          "location_ref": "zang_dk-p024",
-          "location_role": "map_anchor",
-          "ordinal": 24,
-          "step_id": "step-07",
-          "visit_id": "a0101",
-          "x": 32.38,
-          "y": 51.96
-        },
-        {
           "display_name": "昂古拉刷新点",
           "location_ref": "zang_dk-p025",
           "location_role": "map_anchor",
-          "ordinal": 25,
+          "ordinal": 23,
           "step_id": "step-06",
           "visit_id": "a0107",
           "x": 32.81,
@@ -671,17 +662,47 @@
           "display_name": "莉萨奥营地",
           "location_ref": "zang_dk-p026",
           "location_role": "map_anchor",
-          "ordinal": 26,
+          "ordinal": 24,
           "step_id": "step-06",
           "visit_id": "a0109",
           "x": 23.32,
           "y": 66.21
         },
         {
+          "display_name": "孢殖林",
+          "location_ref": "zang_dk-p039",
+          "location_role": "map_anchor",
+          "ordinal": 25,
+          "step_id": "step-06",
+          "visit_id": "a0152",
+          "x": 19.02,
+          "y": 62.43
+        },
+        {
+          "display_name": "莉萨奥营地",
+          "location_ref": "zang_dk-p026-return",
+          "location_role": "map_anchor",
+          "ordinal": 26,
+          "step_id": "step-06",
+          "visit_id": "a0154",
+          "x": 23.32,
+          "y": 66.21
+        },
+        {
+          "display_name": "萨布拉金",
+          "location_ref": "zang_dk-p024",
+          "location_role": "map_anchor",
+          "ordinal": 27,
+          "step_id": "step-07",
+          "visit_id": "a0101",
+          "x": 32.38,
+          "y": 51.96
+        },
+        {
           "display_name": "恐爪刷新点",
           "location_ref": "zang_dk-p027",
           "location_role": "map_anchor",
-          "ordinal": 27,
+          "ordinal": 28,
           "step_id": "step-07",
           "visit_id": "a0112",
           "x": 22.31,
@@ -691,21 +712,11 @@
           "display_name": "穆玛基",
           "location_ref": "zang_dk-p028",
           "location_role": "map_anchor",
-          "ordinal": 28,
+          "ordinal": 29,
           "step_id": "step-07",
           "visit_id": "a0114",
           "x": 23.78,
           "y": 26.75
-        },
-        {
-          "display_name": "匕潭鱼人笼点",
-          "location_ref": "zang_dk-p029",
-          "location_role": "map_anchor",
-          "ordinal": 29,
-          "step_id": "step-08",
-          "visit_id": "a0116",
-          "x": 26.81,
-          "y": 22.6
         },
         {
           "display_name": "格罗阿克",
@@ -738,10 +749,20 @@
           "y": 51.96
         },
         {
+          "display_name": "匕潭鱼人笼点",
+          "location_ref": "zang_dk-p029",
+          "location_role": "map_anchor",
+          "ordinal": 33,
+          "step_id": "step-08",
+          "visit_id": "a0116",
+          "x": 26.81,
+          "y": 22.6
+        },
+        {
           "display_name": "战斗迫近",
           "location_ref": "zang_dk-p033",
           "location_role": "map_anchor",
-          "ordinal": 33,
+          "ordinal": 34,
           "step_id": "step-08",
           "visit_id": "a0130",
           "x": 19.88,
@@ -751,7 +772,7 @@
           "display_name": "萨布拉金",
           "location_ref": "zang_dk-p034",
           "location_role": "map_anchor",
-          "ordinal": 34,
+          "ordinal": 35,
           "step_id": "step-08",
           "visit_id": "a0132",
           "x": 32.38,
@@ -761,7 +782,7 @@
           "display_name": "匕潭失落者营地",
           "location_ref": "zang_dk-p035",
           "location_role": "map_anchor",
-          "ordinal": 35,
+          "ordinal": 36,
           "step_id": "step-09",
           "visit_id": "a0137",
           "x": 25.13,
@@ -771,7 +792,7 @@
           "display_name": "安葛洛什",
           "location_ref": "zang_dk-p036",
           "location_role": "map_anchor",
-          "ordinal": 36,
+          "ordinal": 37,
           "step_id": "step-09",
           "visit_id": "a0139",
           "x": 18.6,
@@ -781,7 +802,7 @@
           "display_name": "萨布拉金",
           "location_ref": "zang_dk-p037",
           "location_role": "map_anchor",
-          "ordinal": 37,
+          "ordinal": 38,
           "step_id": "step-09",
           "visit_id": "a0141",
           "x": 32.38,
@@ -923,13 +944,16 @@
   "program_id": null,
   "publishable": true,
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "e0dd521fb84527498dd947c58b6ba3ee63fa2ceb5f860b21958310167364f95c",
-    "range_minutes": null,
-    "status": "requirements"
+    "center_minutes": 152.408,
+    "input_fingerprint": "2e7032a3575b935fe86043bc1610cc0a6c1239f413ffd323b8dcd1cf935bef60",
+    "range_minutes": [
+      116.0,
+      204.0
+    ],
+    "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "ac006d8251dd8f31591b21ad94cdb6a7b57de47db0d1bce2e8fe120388a21f73",
+  "stage11_input_fingerprint": "d58a0ae8cd5ff9600e2953d5a6513d5047cba181974cc4662bb8278e39a0af9b",
   "status": "pass",
   "steps": [
     {
@@ -1639,9 +1663,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.387,
+        "range_minutes": [
+          6.0,
+          11.0
+        ],
+        "status": "pass"
       },
       "title": "塞纳里奥庇护所 → 暗泽村 → 沼泽之鞭 → 炉石回庇护所"
     },
@@ -1901,9 +1928,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.021,
+        "range_minutes": [
+          3.0,
+          6.0
+        ],
+        "status": "pass"
       },
       "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵"
     },
@@ -2046,9 +2076,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 28.0,
+        "range_minutes": [
+          22.0,
+          35.0
+        ],
+        "status": "pass"
       },
       "title": "环礁湖 → 毒蛇湖"
     },
@@ -2428,9 +2461,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 22.0,
+        "range_minutes": [
+          17.0,
+          29.0
+        ],
+        "status": "pass"
       },
       "title": "萨布拉金 → 沼光湖第四泵 → 水域排水口 → 炉石萨布拉金"
     },
@@ -2800,9 +2836,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 12.0,
+        "range_minutes": [
+          10.0,
+          16.0
+        ],
+        "status": "pass"
       },
       "title": "萨布拉金骑行 → 塞纳里奥庇护所 → 骑行沼泽鼠岗哨"
     },
@@ -2993,7 +3032,7 @@
           "action_ids": [
             "a0154"
           ],
-          "location_ref": "zang_dk-p026",
+          "location_ref": "zang_dk-p026-return",
           "task_refs": [],
           "text": "莉萨奥营地",
           "type": "location"
@@ -3066,9 +3105,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 12.0,
+        "range_minutes": [
+          9.0,
+          17.0
+        ],
+        "status": "pass"
       },
       "title": "黑钉 → 昂古拉 → 莉萨奥 → 观察孢子人"
     },
@@ -3455,9 +3497,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 20.0,
+        "range_minutes": [
+          15.0,
+          28.0
+        ],
+        "status": "pass"
       },
       "title": "爆顶蘑菇 → 抽血者 → 恐爪 → 两个通缉 → 多头蛇"
     },
@@ -3639,9 +3684,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 28.0,
+        "range_minutes": [
+          21.0,
+          37.0
+        ],
+        "status": "pass"
       },
       "title": "鱼人 + 战斗迫近 → 炉石萨布拉金"
     },
@@ -3805,9 +3853,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 18.0,
+        "range_minutes": [
+          13.0,
+          25.0
+        ],
+        "status": "pass"
       },
       "title": "警告匕潭失落者 → 你死我活 → 炉石 → 支援加拉达尔"
     }

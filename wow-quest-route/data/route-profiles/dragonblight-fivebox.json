@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "dragonblight-fivebox",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "龙骨荒野",
@@ -41,7 +41,10 @@
     12039,
     12056,
     12089,
+    12090,
     12091,
+    12095,
+    12097,
     12100,
     11999,
     12040,
@@ -418,6 +421,13 @@
       "action_id": "a0039"
     },
     {
+      "kind": "accept",
+      "task_id": 12090,
+      "location_ref": "dragonblight-p012",
+      "target_name": "通缉！",
+      "action_id": "a0612"
+    },
+    {
       "kind": "location",
       "location_ref": "dragonblight-p013",
       "action_id": "a0040"
@@ -516,6 +526,12 @@
       "task_id": 12100,
       "location_ref": "dragonblight-p019",
       "action_id": "a0056"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p020",
+      "target_name": "阿格玛之锤",
+      "action_id": "use-hearth-after-rotting-organs"
     },
     {
       "kind": "location",
@@ -1401,16 +1417,16 @@
       "action_id": "a0198"
     },
     {
-      "kind": "turnin",
-      "task_id": 12013,
-      "location_ref": "dragonblight-p065",
-      "npc_name": "伊瑟尼安·月影",
-      "action_id": "a0199"
-    },
-    {
       "kind": "location",
       "location_ref": "dragonblight-p066",
       "action_id": "a0200"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12013,
+      "location_ref": "dragonblight-p066",
+      "npc_name": "伊瑟尼安·月影",
+      "action_id": "a0199"
     },
     {
       "kind": "objective",
@@ -1428,6 +1444,12 @@
         "item_name": "古拉莫什的奇怪设备"
       },
       "action_id": "a0202"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "dragonblight-p067",
+      "target_name": "阿格玛之锤",
+      "action_id": "a0610"
     },
     {
       "kind": "location",
@@ -1616,6 +1638,17 @@
       "action_id": "a0230"
     },
     {
+      "kind": "accept",
+      "task_id": 12419,
+      "location_ref": "dragonblight-p074",
+      "target_name": "红玉胸针",
+      "when": {
+        "kind": "has_item",
+        "item_name": "红玉胸针"
+      },
+      "action_id": "a0611"
+    },
+    {
       "kind": "location",
       "location_ref": "dragonblight-p075",
       "action_id": "a0231"
@@ -1670,6 +1703,78 @@
       "location_ref": "dragonblight-p077",
       "npc_name": "索艾·鹰怒",
       "action_id": "a0239"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p195",
+      "action_id": "a0613"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12090,
+      "location_ref": "dragonblight-p195",
+      "action_id": "a0614"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p196",
+      "action_id": "a0615"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12090,
+      "location_ref": "dragonblight-p196",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0616"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12095,
+      "location_ref": "dragonblight-p196",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0617"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p197",
+      "action_id": "a0618"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12095,
+      "location_ref": "dragonblight-p197",
+      "npc_name": "洛坎",
+      "action_id": "a0619"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12097,
+      "location_ref": "dragonblight-p197",
+      "npc_name": "洛坎",
+      "action_id": "a0620"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p198",
+      "action_id": "a0621"
+    },
+    {
+      "kind": "objective",
+      "task_id": 12097,
+      "location_ref": "dragonblight-p198",
+      "action_id": "a0622"
+    },
+    {
+      "kind": "location",
+      "location_ref": "dragonblight-p199",
+      "action_id": "a0623"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12097,
+      "location_ref": "dragonblight-p199",
+      "npc_name": "高尔特上尉",
+      "action_id": "a0624"
     },
     {
       "kind": "location",
@@ -2328,17 +2433,6 @@
       "task_id": 12450,
       "location_ref": "dragonblight-p114",
       "action_id": "a0346"
-    },
-    {
-      "kind": "accept",
-      "task_id": 12419,
-      "location_ref": "dragonblight-p114",
-      "target_name": "红玉胸针",
-      "when": {
-        "kind": "has_item",
-        "item_name": "红玉胸针"
-      },
-      "action_id": "a0347"
     },
     {
       "kind": "location",
@@ -4037,7 +4131,7 @@
     {
       "step_id": "step-04",
       "title": "阿格玛之锤：黑血 / 通缉 / 腐烂器官 / 寻找线索",
-      "summary": "在阿格玛之锤接齐纳尔苏深渊、通缉、感染野兽和眠月花园任务；吉加托尔精英支线继续留80后。",
+      "summary": "在阿格玛之锤接齐纳尔苏深渊、通缉、感染野兽和眠月花园任务，同时接《通缉：吉加托尔》；当前第二组血DK路线保留吉加托尔支线。",
       "action_ids": [
         "a0034",
         "a0035",
@@ -4045,6 +4139,7 @@
         "a0037",
         "a0038",
         "a0039",
+        "a0612",
         "a0040",
         "a0041",
         "a0042",
@@ -4073,9 +4168,10 @@
     },
     {
       "step_id": "step-06",
-      "title": "阿格玛之锤：深渊交付 → 解锁血之魔典 → 红玉丁香",
-      "summary": "回阿格玛按NPC交深渊任务；交扎古斯后血之魔典才进入可刷状态，同时把医生链推进到《红玉丁香》。",
+      "title": "炉石阿格玛：深渊交付 → 解锁血之魔典 → 红玉丁香",
+      "summary": "做完《腐烂的器官》直接炉石回阿格玛，再按NPC交深渊任务；交扎古斯后血之魔典才进入可刷状态，同时把医生链推进到《红玉丁香》。",
       "action_ids": [
+        "use-hearth-after-rotting-organs",
         "a0057",
         "a0058",
         "a0059",
@@ -4271,8 +4367,8 @@
     },
     {
       "step_id": "step-16",
-      "title": "眠月花园 → 阿格玛 → 伊瑟尼安",
-      "summary": "完成《上层精灵的愤怒》《寻找线索》和凯尔多努斯；推进《阿坎尼姆斯的终结》后到阿格玛交线索/通缉，再回伊瑟尼安交任务。",
+      "title": "眠月花园 → 阿格玛 → 眠月花园",
+      "summary": "完成《上层精灵的愤怒》《寻找线索》和凯尔多努斯；到阿格玛交《寻找线索》并接《阻碍协议》，再回眠月花园交《阿坎尼姆斯的终结》。这段不依赖炉石冷却。",
       "action_ids": [
         "a0185",
         "a0186",
@@ -4288,17 +4384,18 @@
         "a0196",
         "a0197",
         "a0198",
+        "a0200",
         "a0199"
       ]
     },
     {
       "step_id": "step-17",
-      "title": "眠月花园 → 奇怪的设备 → 投影和计划",
-      "summary": "完成《阻碍协议》并从古拉莫什取得五份任务起始物；回阿格玛交接后五号一起进入《投影和计划》脚本。",
+      "title": "眠月花园 → 奇怪的设备 → 炉石阿格玛 → 投影和计划",
+      "summary": "在眠月花园完成《阻碍协议》并从古拉莫什取得五份任务起始物；拿到设备后炉石回阿格玛交接，再进入《投影和计划》脚本。",
       "action_ids": [
-        "a0200",
         "a0201",
         "a0202",
+        "a0610",
         "a0203",
         "a0204",
         "a0205",
@@ -4348,6 +4445,7 @@
       "action_ids": [
         "a0229",
         "a0230",
+        "a0611",
         "a0231",
         "a0232",
         "a0233",
@@ -4357,6 +4455,25 @@
         "a0237",
         "a0238",
         "a0239"
+      ]
+    },
+    {
+      "step_id": "step-20b",
+      "title": "吉加托尔 → 猎龙营地 → 萨拉斯塔",
+      "summary": "红玉丁香和邪恶之约结束后，顺路击杀吉加托尔；回阿格玛交任务并接《前往猎龙营地》，到猎龙营地接《萨拉斯塔，北地的灾祸》，击杀后回阿格玛交付。",
+      "action_ids": [
+        "a0613",
+        "a0614",
+        "a0615",
+        "a0616",
+        "a0617",
+        "a0618",
+        "a0619",
+        "a0620",
+        "a0621",
+        "a0622",
+        "a0623",
+        "a0624"
       ]
     },
     {
@@ -4527,14 +4644,13 @@
     {
       "step_id": "step-30",
       "title": "红玉巨龙圣地：烈焰之地 → 龙眠神殿的执事",
-      "summary": "交《重归尘土》接《烈焰之地》，进巨树下洞穴击杀达莉亚并取得红玉胸针；回瓦加斯塔兹交付并接《龙眠神殿的执事》。",
+      "summary": "交《重归尘土》接《烈焰之地》，进巨树下洞穴完成通灵师和堕落之源目标；回瓦加斯塔兹交付并接《龙眠神殿的执事》。",
       "action_ids": [
         "a0342",
         "a0343",
         "a0344",
         "a0345",
         "a0346",
-        "a0347",
         "a0348",
         "a0349",
         "a0350"
@@ -5162,10 +5278,10 @@
         "x": 38.17,
         "y": 46.33,
         "phase": "agmar",
-        "transport": "ride",
+        "transport": "hearth",
         "incoming_movement": {
-          "kind": "self_move",
-          "mode": "ride"
+          "kind": "action",
+          "action_id": "use-hearth-after-rotting-organs"
         }
       },
       "dragonblight-p021": {
@@ -5651,7 +5767,7 @@
         }
       },
       "dragonblight-p065": {
-        "display_name": "阿格玛之锤 → 眠月花园",
+        "display_name": "阿格玛之锤",
         "x": 38.05,
         "y": 46.22,
         "phase": "agmar",
@@ -5673,14 +5789,14 @@
         }
       },
       "dragonblight-p067": {
-        "display_name": "阿格玛之锤",
+        "display_name": "阿格玛之锤（炉石）",
         "x": 38.05,
         "y": 46.22,
         "phase": "agmar",
-        "transport": "ride",
+        "transport": "hearth",
         "incoming_movement": {
-          "kind": "self_move",
-          "mode": "ride"
+          "kind": "action",
+          "action_id": "a0610"
         }
       },
       "dragonblight-p068": {
@@ -5749,7 +5865,7 @@
         }
       },
       "dragonblight-p074": {
-        "display_name": "红玉丁香",
+        "display_name": "红玉丁香 → 达莉亚·日触",
         "x": 47.64,
         "y": 48.97,
         "phase": "central",
@@ -7065,6 +7181,61 @@
           "kind": "self_move",
           "mode": "ride"
         }
+      },
+      "dragonblight-p195": {
+        "display_name": "吉加托尔",
+        "x": 47.2,
+        "y": 58.04,
+        "phase": "central",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p196": {
+        "display_name": "阿格玛之锤·高尔特",
+        "x": 35.81,
+        "y": 48.39,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p197": {
+        "display_name": "猎龙营地·洛坎",
+        "x": 47.19,
+        "y": 33.03,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p198": {
+        "display_name": "萨拉斯塔",
+        "x": 51.08,
+        "y": 32.75,
+        "phase": "hunter",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
+      },
+      "dragonblight-p199": {
+        "display_name": "阿格玛之锤·高尔特",
+        "x": 35.81,
+        "y": 48.39,
+        "phase": "agmar",
+        "transport": "ride",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "ride"
+        }
       }
     }
   },
@@ -7078,6 +7249,11 @@
       "date": "2026-09-18",
       "kind": "architecture_migration",
       "summary": "Semantic-parity cleanup: removed reviewed legacy script location styles from 14 Dragonblight target points. Old player text contains task execution only at these arrivals; explicit Wyrmrest fixed transports already remain as canonical actions. Unknown arrivals stay unresolved."
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "user_live_route_correction",
+      "summary": "按第二组血DK实跑修正眠月花园/阿格玛交接顺序；设备任务后改为炉石回阿格玛；红玉丁香段提前接红玉胸针任务；恢复吉加托尔—猎龙营地—萨拉斯塔支线。"
     }
   ]
 }

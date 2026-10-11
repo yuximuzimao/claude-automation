@@ -225,6 +225,18 @@ def test_fivebox_pending_checklist_matches_formal_route_pending_tasks() -> None:
     ]
     assert len(checklist_ids) == len(set(checklist_ids))
 
+    section_matches = list(re.finditer(r"^## (.+?)（(\d+)）\s*$", checklist, flags=re.MULTILINE))
+    for index, match in enumerate(section_matches):
+        section_start = match.end()
+        section_end = section_matches[index + 1].start() if index + 1 < len(section_matches) else len(checklist)
+        section_text = checklist[section_start:section_end]
+        actual_count = len(re.findall(r"^- \[ \] \d+《", section_text, flags=re.MULTILINE))
+        declared_count = int(match.group(2))
+        assert declared_count == actual_count, (
+            f"fivebox pending section count stale: {match.group(1)} "
+            f"declares {declared_count}, actual {actual_count}"
+        )
+
     formal_task_ids: set[int] = set()
     for path in sorted((ROOT / "data/route-profiles").glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))

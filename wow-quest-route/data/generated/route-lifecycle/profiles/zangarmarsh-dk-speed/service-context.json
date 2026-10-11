@@ -47,6 +47,15 @@
       "zone_id": 3521
     },
     {
+      "location_ref": "zang_dk-p038",
+      "service_action_id": "a0149",
+      "task_id": 9895,
+      "visit_id": "a0148",
+      "x": 82.07,
+      "y": 71.39,
+      "zone_id": 3521
+    },
+    {
       "location_ref": "zang_dk-p007",
       "service_action_id": "a0030",
       "task_id": 9718,
@@ -59,15 +68,6 @@
       "location_ref": "zang_dk-p009",
       "service_action_id": "a0043",
       "task_id": 9770,
-      "visit_id": "a0042",
-      "x": 77.5,
-      "y": 70.5,
-      "zone_id": 3521
-    },
-    {
-      "location_ref": "zang_dk-p009",
-      "service_action_id": "a0044",
-      "task_id": 9895,
       "visit_id": "a0042",
       "x": 77.5,
       "y": 70.5,
@@ -182,6 +182,15 @@
       "zone_id": 3521
     },
     {
+      "location_ref": "zang_dk-p039",
+      "service_action_id": "a0153",
+      "task_id": 9701,
+      "visit_id": "a0152",
+      "x": 19.02,
+      "y": 62.43,
+      "zone_id": 3521
+    },
+    {
       "location_ref": "zang_dk-p024",
       "service_action_id": "a0102",
       "task_id": 9814,
@@ -218,15 +227,6 @@
       "zone_id": 3521
     },
     {
-      "location_ref": "zang_dk-p029",
-      "service_action_id": "a0117",
-      "task_id": 9816,
-      "visit_id": "a0116",
-      "x": 26.81,
-      "y": 22.6,
-      "zone_id": 3521
-    },
-    {
       "location_ref": "zang_dk-p030",
       "service_action_id": "a0119",
       "task_id": 9820,
@@ -242,6 +242,15 @@
       "visit_id": "a0120",
       "x": 42.23,
       "y": 41.42,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang_dk-p029",
+      "service_action_id": "a0117",
+      "task_id": 9816,
+      "visit_id": "a0116",
+      "x": 26.81,
+      "y": 22.6,
       "zone_id": 3521
     },
     {
@@ -272,7 +281,7 @@
       "zone_id": 3521
     }
   ],
-  "input_fingerprint": "52b95354e25d84c68fc64ae891907ed11791cde61622010c795224e333fcf8ba",
+  "input_fingerprint": "77b699d7873cc8b5a6ac71dfa9550144687d552b7feed2a3f2d2251298dd53b2",
   "issues": [],
   "profile_id": "zangarmarsh-dk-speed",
   "spatial_instances": [
@@ -340,8 +349,7 @@
     {
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
-        "objective-a0043",
-        "objective-a0044"
+        "objective-a0043"
       ],
       "instance_id": "visit-a0042",
       "location_ref": "zang_dk-p009",
@@ -547,15 +555,39 @@
       "x": 18.6,
       "y": 7.0,
       "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0149"
+      ],
+      "instance_id": "visit-a0148",
+      "location_ref": "zang_dk-p038",
+      "visit_id": "a0148",
+      "x": 82.07,
+      "y": 71.39,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0153"
+      ],
+      "instance_id": "visit-a0152",
+      "location_ref": "zang_dk-p039",
+      "visit_id": "a0152",
+      "x": 19.02,
+      "y": 62.43,
+      "zone_id": 3521
     }
   ],
   "status": "pass",
   "summary": {
     "background_layer_count": 0,
-    "foreground_service_count": 30,
+    "foreground_service_count": 31,
     "shared_service_override_count": 0,
-    "spatial_instance_count": 22,
-    "target_cluster_count": 30
+    "spatial_instance_count": 24,
+    "target_cluster_count": 31
   },
   "target_clusters": [
     {
@@ -644,19 +676,6 @@
       "source": "objective_action",
       "task_ids": [
         9770
-      ],
-      "visit_ids": [
-        "a0042"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0044"
-      ],
-      "cluster_id": "objective-a0044",
-      "source": "objective_action",
-      "task_ids": [
-        9895
       ],
       "visit_ids": [
         "a0042"
@@ -946,6 +965,32 @@
       ],
       "visit_ids": [
         "a0139"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0149"
+      ],
+      "cluster_id": "objective-a0149",
+      "source": "objective_action",
+      "task_ids": [
+        9895
+      ],
+      "visit_ids": [
+        "a0148"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0153"
+      ],
+      "cluster_id": "objective-a0153",
+      "source": "objective_action",
+      "task_ids": [
+        9701
+      ],
+      "visit_ids": [
+        "a0152"
       ]
     }
   ]

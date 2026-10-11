@@ -1,0 +1,281 @@
+{
+  "center_minutes": 23.0,
+  "complete": true,
+  "component_rows": [
+    {
+      "component": "move",
+      "edge_id": "visit-violet-stand->visit-k3-handoff",
+      "seconds": 0.0,
+      "step_id": "step-04"
+    },
+    {
+      "action_ids": [
+        "a0002",
+        "a0003"
+      ],
+      "component": "accept_turnin",
+      "seconds": 58.2,
+      "step_id": "step-01",
+      "visit_id": "a0001"
+    },
+    {
+      "action_ids": [
+        "a0007"
+      ],
+      "component": "accept_turnin",
+      "seconds": 48.6,
+      "step_id": "step-01",
+      "visit_id": "a0006"
+    },
+    {
+      "action_ids": [
+        "a0009"
+      ],
+      "component": "accept_turnin",
+      "seconds": 48.6,
+      "step_id": "step-02",
+      "visit_id": "a0008"
+    },
+    {
+      "action_ids": [
+        "a0013"
+      ],
+      "component": "accept_turnin",
+      "seconds": 48.6,
+      "step_id": "step-03",
+      "visit_id": "a0012"
+    },
+    {
+      "action_ids": [
+        "a0015"
+      ],
+      "component": "accept_turnin",
+      "seconds": 48.6,
+      "step_id": "step-03",
+      "visit_id": "a0014"
+    },
+    {
+      "action_ids": [
+        "a0019"
+      ],
+      "component": "accept_turnin",
+      "seconds": 48.6,
+      "step_id": "step-04",
+      "visit_id": "visit-k3-handoff"
+    }
+  ],
+  "input_fingerprint": "c977faafb8ca7143c43cce0ea7f25bf427e89a77dd717ab451e6375b831979db",
+  "issues": [
+    {
+      "edge_id": "a0001->a0004",
+      "kind": "map_dimensions_required",
+      "profile_id": "dalaran-mainline-77",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-01",
+      "zone_id": 4395
+    },
+    {
+      "action_id": "transport-12790-down",
+      "edge_id": "a0004->visit-12790-violet-stand",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "fixed_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-01"
+    },
+    {
+      "action_id": "transport-12790-up",
+      "edge_id": "visit-12790-violet-stand->a0006",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "fixed_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-01"
+    },
+    {
+      "edge_id": "a0006->a0008",
+      "kind": "map_dimensions_required",
+      "profile_id": "dalaran-mainline-77",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-02",
+      "zone_id": 4395
+    },
+    {
+      "edge_id": "a0008->a0010",
+      "kind": "map_dimensions_required",
+      "profile_id": "dalaran-mainline-77",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-02",
+      "zone_id": 4395
+    },
+    {
+      "edge_id": "a0010->a0012",
+      "kind": "map_dimensions_required",
+      "profile_id": "dalaran-mainline-77",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-03",
+      "zone_id": 4395
+    },
+    {
+      "edge_id": "a0012->a0014",
+      "kind": "map_dimensions_required",
+      "profile_id": "dalaran-mainline-77",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-03",
+      "zone_id": 4395
+    },
+    {
+      "edge_id": "a0014->a0016",
+      "kind": "map_dimensions_required",
+      "profile_id": "dalaran-mainline-77",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-04",
+      "zone_id": 4395
+    },
+    {
+      "action_id": "a0018",
+      "edge_id": "a0016->visit-violet-stand",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "fixed_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-04"
+    },
+    {
+      "action_id": "a0005",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-01",
+      "task_id": 12790
+    }
+  ],
+  "known_seconds": 1380.0,
+  "model_id": "component-wall-clock-v2",
+  "point_estimate_complete": true,
+  "profile_id": "dalaran-mainline-77",
+  "range_basis": {
+    "basis": "sum_of_step_ranges",
+    "legacy_baseline_steps": 4
+  },
+  "range_minutes": [
+    15.0,
+    34.0
+  ],
+  "status": "pass",
+  "steps": [
+    {
+      "center_minutes": 6.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 106.8,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 360.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 253.2,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dalaran-mainline-77-timing.json"
+      },
+      "range_minutes": [
+        4.0,
+        9.0
+      ],
+      "step_id": "step-01",
+      "title": "紫罗兰之门：魔法王国达拉然 → 来去如风",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 3.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 48.6,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 180.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 131.4,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dalaran-mainline-77-timing.json"
+      },
+      "range_minutes": [
+        2.0,
+        5.0
+      ],
+      "step_id": "step-02",
+      "title": "克拉苏斯平台：索拉查引导 + 达拉然飞行点",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 6.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 97.2,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 360.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 262.8,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dalaran-mainline-77-timing.json"
+      },
+      "range_minutes": [
+        4.0,
+        9.0
+      ],
+      "step_id": "step-03",
+      "title": "达拉然下水道：祖达克/风暴引导",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 8.0,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 48.6,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 480.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 431.4,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dalaran-mainline-77-timing.json"
+      },
+      "range_minutes": [
+        5.0,
+        11.0
+      ],
+      "step_id": "step-04",
+      "title": "紫罗兰之门 → K3",
+      "unresolved_component_count": 0
+    }
+  ],
+  "summary": {
+    "error_count": 0,
+    "issue_count": 10,
+    "range_model_status": "resolved",
+    "requirement_count": 0,
+    "step_count": 4
+  }
+}

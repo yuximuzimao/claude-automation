@@ -1,0 +1,1530 @@
+{
+  "background_layers": [
+    {
+      "end_action_id": "a0101",
+      "end_ordinal": 98,
+      "end_policy": "carry_if_incomplete",
+      "foreground_objective_action_ids": [],
+      "service_id": "zang-9802-background",
+      "start_action_id": "a0012",
+      "start_ordinal": 10,
+      "task_id": 9802,
+      "visit_ids": [
+        "a0015",
+        "a0017",
+        "a0019",
+        "a0021",
+        "a0023",
+        "a0027",
+        "a0038",
+        "a0046",
+        "a0053",
+        "a0057",
+        "a0059",
+        "a0064",
+        "a0068",
+        "a0070",
+        "a0079",
+        "a0082",
+        "a0087",
+        "a0089"
+      ]
+    },
+    {
+      "end_action_id": "a0067",
+      "end_ordinal": 65,
+      "end_policy": "fill_if_incomplete",
+      "foreground_objective_action_ids": [
+        "a0052",
+        "a0062",
+        "a0067"
+      ],
+      "service_id": "zang-9728-background",
+      "start_action_id": "a0014",
+      "start_ordinal": 12,
+      "task_id": 9728,
+      "visit_ids": [
+        "a0015",
+        "a0017",
+        "a0019",
+        "a0021",
+        "a0023",
+        "a0027",
+        "a0038",
+        "a0046",
+        "a0053",
+        "a0057",
+        "a0059",
+        "a0064"
+      ]
+    },
+    {
+      "end_action_id": "a0197",
+      "end_ordinal": 193,
+      "end_policy": "fill_if_incomplete",
+      "foreground_objective_action_ids": [],
+      "service_id": "zang-9806-background",
+      "start_action_id": "a0145",
+      "start_ordinal": 141,
+      "task_id": 9806,
+      "visit_ids": [
+        "a0147",
+        "a0150",
+        "a0154",
+        "a0158",
+        "a0161",
+        "a0164",
+        "a0166",
+        "a0168",
+        "a0170",
+        "a0174",
+        "a0176",
+        "a0178",
+        "a0180",
+        "a0183",
+        "a0185",
+        "a0193",
+        "a0195"
+      ]
+    }
+  ],
+  "foreground_services": [
+    {
+      "location_ref": "zang-p002",
+      "service_action_id": "a0016",
+      "task_id": 9785,
+      "visit_id": "a0015",
+      "x": 81.1,
+      "y": 63.87,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p003",
+      "service_action_id": "a0018",
+      "task_id": 9785,
+      "visit_id": "a0017",
+      "x": 78.97,
+      "y": 67.44,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p005",
+      "service_action_id": "a0022",
+      "task_id": 9716,
+      "visit_id": "a0021",
+      "x": 70.75,
+      "y": 80.15,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p006",
+      "service_action_id": "a0024",
+      "task_id": 9747,
+      "visit_id": "a0023",
+      "x": 83.38,
+      "y": 85.54,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p006",
+      "service_action_id": "a0026",
+      "task_id": 9752,
+      "visit_id": "a0023",
+      "x": 83.38,
+      "y": 85.54,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p007",
+      "service_action_id": "a0031",
+      "task_id": 9718,
+      "visit_id": "a0027",
+      "x": 78.4,
+      "y": 62.02,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p009",
+      "service_action_id": "a0047",
+      "task_id": 9770,
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p009",
+      "service_action_id": "a0048",
+      "task_id": 9895,
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p009",
+      "service_action_id": "a0049",
+      "task_id": 9773,
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p009",
+      "service_action_id": "a0050",
+      "task_id": 9769,
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p009",
+      "service_action_id": "a0051",
+      "task_id": 9774,
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p009",
+      "service_action_id": "a0052",
+      "task_id": 9728,
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p010",
+      "service_action_id": "a0054",
+      "task_id": 9788,
+      "visit_id": "a0053",
+      "x": 72.5,
+      "y": 94.8,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p010",
+      "service_action_id": "a0055",
+      "task_id": 10096,
+      "visit_id": "a0053",
+      "x": 72.5,
+      "y": 94.8,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p010",
+      "service_action_id": "a0056",
+      "task_id": 9894,
+      "visit_id": "a0053",
+      "x": 72.5,
+      "y": 94.8,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p011",
+      "service_action_id": "a0058",
+      "task_id": 9720,
+      "visit_id": "a0057",
+      "x": 70.6,
+      "y": 80.29,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p012",
+      "service_action_id": "a0060",
+      "task_id": 9720,
+      "visit_id": "a0059",
+      "x": 65.1,
+      "y": 68.67,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p012",
+      "service_action_id": "a0061",
+      "task_id": 9730,
+      "visit_id": "a0059",
+      "x": 65.1,
+      "y": 68.67,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p012",
+      "service_action_id": "a0062",
+      "task_id": 9728,
+      "visit_id": "a0059",
+      "x": 65.1,
+      "y": 68.67,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p013",
+      "service_action_id": "a0065",
+      "task_id": 9720,
+      "visit_id": "a0064",
+      "x": 65.15,
+      "y": 40.91,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p013",
+      "service_action_id": "a0066",
+      "task_id": 9817,
+      "visit_id": "a0064",
+      "x": 65.15,
+      "y": 40.91,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p013",
+      "service_action_id": "a0067",
+      "task_id": 9728,
+      "visit_id": "a0064",
+      "x": 65.15,
+      "y": 40.91,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p016",
+      "service_action_id": "a0080",
+      "task_id": 9845,
+      "visit_id": "a0079",
+      "x": 50.34,
+      "y": 40.87,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p016",
+      "service_action_id": "a0081",
+      "task_id": 9731,
+      "visit_id": "a0079",
+      "x": 50.34,
+      "y": 40.87,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p018",
+      "service_action_id": "a0088",
+      "task_id": 9720,
+      "visit_id": "a0087",
+      "x": 25.4,
+      "y": 42.86,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p022",
+      "service_action_id": "a0115",
+      "task_id": 9772,
+      "visit_id": "a0114",
+      "x": 82.5,
+      "y": 45.0,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p023",
+      "service_action_id": "a0118",
+      "task_id": 9899,
+      "visit_id": "a0117",
+      "x": 78.01,
+      "y": 45.41,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p025",
+      "service_action_id": "a0124",
+      "task_id": 9898,
+      "visit_id": "a0123",
+      "x": 49.75,
+      "y": 60.06,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p028",
+      "service_action_id": "a0130",
+      "task_id": 9814,
+      "visit_id": "a0129",
+      "x": 32.38,
+      "y": 51.96,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p028",
+      "service_action_id": "a0131",
+      "task_id": 9841,
+      "visit_id": "a0129",
+      "x": 32.38,
+      "y": 51.96,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p029",
+      "service_action_id": "a0138",
+      "task_id": 9846,
+      "visit_id": "a0137",
+      "x": 46.4,
+      "y": 61.3,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p031",
+      "service_action_id": "a0143",
+      "task_id": 9904,
+      "visit_id": "a0142",
+      "x": 22.31,
+      "y": 45.78,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p035",
+      "service_action_id": "a0155",
+      "task_id": 9739,
+      "visit_id": "a0154",
+      "x": 14.39,
+      "y": 61.05,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p035",
+      "service_action_id": "a0156",
+      "task_id": 9701,
+      "visit_id": "a0154",
+      "x": 14.39,
+      "y": 61.05,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p035",
+      "service_action_id": "a0157",
+      "task_id": 9743,
+      "visit_id": "a0154",
+      "x": 14.39,
+      "y": 61.05,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p039",
+      "service_action_id": "a0167",
+      "task_id": 9702,
+      "visit_id": "a0166",
+      "x": 30.11,
+      "y": 63.94,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p042",
+      "service_action_id": "a0175",
+      "task_id": 9726,
+      "visit_id": "a0174",
+      "x": 26.21,
+      "y": 40.63,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p043",
+      "service_action_id": "a0177",
+      "task_id": 10117,
+      "visit_id": "a0176",
+      "x": 23.78,
+      "y": 26.75,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p044",
+      "service_action_id": "a0179",
+      "task_id": 9816,
+      "visit_id": "a0178",
+      "x": 26.81,
+      "y": 22.6,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p045",
+      "service_action_id": "a0181",
+      "task_id": 9820,
+      "visit_id": "a0180",
+      "x": 34.82,
+      "y": 34.83,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p045",
+      "service_action_id": "a0182",
+      "task_id": 9708,
+      "visit_id": "a0180",
+      "x": 34.82,
+      "y": 34.83,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p046",
+      "service_action_id": "a0184",
+      "task_id": 9903,
+      "visit_id": "a0183",
+      "x": 42.23,
+      "y": 41.42,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p048",
+      "service_action_id": "a0194",
+      "task_id": 9822,
+      "visit_id": "a0193",
+      "x": 19.88,
+      "y": 27.09,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p051",
+      "service_action_id": "a0204",
+      "task_id": 9847,
+      "visit_id": "a0203",
+      "x": 44.36,
+      "y": 66.01,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p053",
+      "service_action_id": "a0212",
+      "task_id": 9842,
+      "visit_id": "a0211",
+      "x": 32.81,
+      "y": 59.53,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p054",
+      "service_action_id": "a0214",
+      "task_id": 10118,
+      "visit_id": "a0213",
+      "x": 25.13,
+      "y": 23.78,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p055",
+      "service_action_id": "a0216",
+      "task_id": 9709,
+      "visit_id": "a0215",
+      "x": 18.6,
+      "y": 7.0,
+      "zone_id": 3521
+    },
+    {
+      "location_ref": "zang-p055",
+      "service_action_id": "a0217",
+      "task_id": 9823,
+      "visit_id": "a0215",
+      "x": 18.6,
+      "y": 7.0,
+      "zone_id": 3521
+    }
+  ],
+  "input_fingerprint": "53ee5224dcf592797f8a877bcbc93b3622685e3766eda36f218db116215b6def",
+  "issues": [],
+  "profile_id": "zangarmarsh-fivebox",
+  "spatial_instances": [
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0016"
+      ],
+      "instance_id": "visit-a0015",
+      "location_ref": "zang-p002",
+      "visit_id": "a0015",
+      "x": 81.1,
+      "y": 63.87,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0018"
+      ],
+      "instance_id": "visit-a0017",
+      "location_ref": "zang-p003",
+      "visit_id": "a0017",
+      "x": 78.97,
+      "y": 67.44,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0022"
+      ],
+      "instance_id": "visit-a0021",
+      "location_ref": "zang-p005",
+      "visit_id": "a0021",
+      "x": 70.75,
+      "y": 80.15,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0024",
+        "objective-a0026"
+      ],
+      "instance_id": "visit-a0023",
+      "location_ref": "zang-p006",
+      "visit_id": "a0023",
+      "x": 83.38,
+      "y": 85.54,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0031"
+      ],
+      "instance_id": "visit-a0027",
+      "location_ref": "zang-p007",
+      "visit_id": "a0027",
+      "x": 78.4,
+      "y": 62.02,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0047",
+        "objective-a0048",
+        "objective-a0049",
+        "objective-a0050",
+        "objective-a0051",
+        "objective-a0052"
+      ],
+      "instance_id": "visit-a0046",
+      "location_ref": "zang-p009",
+      "visit_id": "a0046",
+      "x": 77.5,
+      "y": 70.5,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0054",
+        "objective-a0055",
+        "objective-a0056"
+      ],
+      "instance_id": "visit-a0053",
+      "location_ref": "zang-p010",
+      "visit_id": "a0053",
+      "x": 72.5,
+      "y": 94.8,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0058"
+      ],
+      "instance_id": "visit-a0057",
+      "location_ref": "zang-p011",
+      "visit_id": "a0057",
+      "x": 70.6,
+      "y": 80.29,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0060",
+        "objective-a0061",
+        "objective-a0062"
+      ],
+      "instance_id": "visit-a0059",
+      "location_ref": "zang-p012",
+      "visit_id": "a0059",
+      "x": 65.1,
+      "y": 68.67,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0065",
+        "objective-a0066",
+        "objective-a0067"
+      ],
+      "instance_id": "visit-a0064",
+      "location_ref": "zang-p013",
+      "visit_id": "a0064",
+      "x": 65.15,
+      "y": 40.91,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0080",
+        "objective-a0081"
+      ],
+      "instance_id": "visit-a0079",
+      "location_ref": "zang-p016",
+      "visit_id": "a0079",
+      "x": 50.34,
+      "y": 40.87,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0088"
+      ],
+      "instance_id": "visit-a0087",
+      "location_ref": "zang-p018",
+      "visit_id": "a0087",
+      "x": 25.4,
+      "y": 42.86,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0115"
+      ],
+      "instance_id": "visit-a0114",
+      "location_ref": "zang-p022",
+      "visit_id": "a0114",
+      "x": 82.5,
+      "y": 45.0,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0118"
+      ],
+      "instance_id": "visit-a0117",
+      "location_ref": "zang-p023",
+      "visit_id": "a0117",
+      "x": 78.01,
+      "y": 45.41,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0124"
+      ],
+      "instance_id": "visit-a0123",
+      "location_ref": "zang-p025",
+      "visit_id": "a0123",
+      "x": 49.75,
+      "y": 60.06,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0130",
+        "objective-a0131"
+      ],
+      "instance_id": "visit-a0129",
+      "location_ref": "zang-p028",
+      "visit_id": "a0129",
+      "x": 32.38,
+      "y": 51.96,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0138"
+      ],
+      "instance_id": "visit-a0137",
+      "location_ref": "zang-p029",
+      "visit_id": "a0137",
+      "x": 46.4,
+      "y": 61.3,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0143"
+      ],
+      "instance_id": "visit-a0142",
+      "location_ref": "zang-p031",
+      "visit_id": "a0142",
+      "x": 22.31,
+      "y": 45.78,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0155",
+        "objective-a0156",
+        "objective-a0157"
+      ],
+      "instance_id": "visit-a0154",
+      "location_ref": "zang-p035",
+      "visit_id": "a0154",
+      "x": 14.39,
+      "y": 61.05,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0167"
+      ],
+      "instance_id": "visit-a0166",
+      "location_ref": "zang-p039",
+      "visit_id": "a0166",
+      "x": 30.11,
+      "y": 63.94,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0175"
+      ],
+      "instance_id": "visit-a0174",
+      "location_ref": "zang-p042",
+      "visit_id": "a0174",
+      "x": 26.21,
+      "y": 40.63,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0177"
+      ],
+      "instance_id": "visit-a0176",
+      "location_ref": "zang-p043",
+      "visit_id": "a0176",
+      "x": 23.78,
+      "y": 26.75,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0179"
+      ],
+      "instance_id": "visit-a0178",
+      "location_ref": "zang-p044",
+      "visit_id": "a0178",
+      "x": 26.81,
+      "y": 22.6,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "zang-9708-9820-shared"
+      ],
+      "instance_id": "visit-a0180",
+      "location_ref": "zang-p045",
+      "visit_id": "a0180",
+      "x": 34.82,
+      "y": 34.83,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0184"
+      ],
+      "instance_id": "visit-a0183",
+      "location_ref": "zang-p046",
+      "visit_id": "a0183",
+      "x": 42.23,
+      "y": 41.42,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0194"
+      ],
+      "instance_id": "visit-a0193",
+      "location_ref": "zang-p048",
+      "visit_id": "a0193",
+      "x": 19.88,
+      "y": 27.09,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0204"
+      ],
+      "instance_id": "visit-a0203",
+      "location_ref": "zang-p051",
+      "visit_id": "a0203",
+      "x": 44.36,
+      "y": 66.01,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0212"
+      ],
+      "instance_id": "visit-a0211",
+      "location_ref": "zang-p053",
+      "visit_id": "a0211",
+      "x": 32.81,
+      "y": 59.53,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0214"
+      ],
+      "instance_id": "visit-a0213",
+      "location_ref": "zang-p054",
+      "visit_id": "a0213",
+      "x": 25.13,
+      "y": 23.78,
+      "zone_id": 3521
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0216",
+        "objective-a0217"
+      ],
+      "instance_id": "visit-a0215",
+      "location_ref": "zang-p055",
+      "visit_id": "a0215",
+      "x": 18.6,
+      "y": 7.0,
+      "zone_id": 3521
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "background_layer_count": 3,
+    "foreground_service_count": 48,
+    "shared_service_override_count": 1,
+    "spatial_instance_count": 30,
+    "target_cluster_count": 47
+  },
+  "target_clusters": [
+    {
+      "action_ids": [
+        "a0016"
+      ],
+      "cluster_id": "objective-a0016",
+      "source": "objective_action",
+      "task_ids": [
+        9785
+      ],
+      "visit_ids": [
+        "a0015"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0018"
+      ],
+      "cluster_id": "objective-a0018",
+      "source": "objective_action",
+      "task_ids": [
+        9785
+      ],
+      "visit_ids": [
+        "a0017"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0022"
+      ],
+      "cluster_id": "objective-a0022",
+      "source": "objective_action",
+      "task_ids": [
+        9716
+      ],
+      "visit_ids": [
+        "a0021"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0024"
+      ],
+      "cluster_id": "objective-a0024",
+      "source": "objective_action",
+      "task_ids": [
+        9747
+      ],
+      "visit_ids": [
+        "a0023"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0026"
+      ],
+      "cluster_id": "objective-a0026",
+      "source": "objective_action",
+      "task_ids": [
+        9752
+      ],
+      "visit_ids": [
+        "a0023"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0031"
+      ],
+      "cluster_id": "objective-a0031",
+      "source": "objective_action",
+      "task_ids": [
+        9718
+      ],
+      "visit_ids": [
+        "a0027"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0047"
+      ],
+      "cluster_id": "objective-a0047",
+      "source": "objective_action",
+      "task_ids": [
+        9770
+      ],
+      "visit_ids": [
+        "a0046"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0048"
+      ],
+      "cluster_id": "objective-a0048",
+      "source": "objective_action",
+      "task_ids": [
+        9895
+      ],
+      "visit_ids": [
+        "a0046"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0049"
+      ],
+      "cluster_id": "objective-a0049",
+      "source": "objective_action",
+      "task_ids": [
+        9773
+      ],
+      "visit_ids": [
+        "a0046"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0050"
+      ],
+      "cluster_id": "objective-a0050",
+      "source": "objective_action",
+      "task_ids": [
+        9769
+      ],
+      "visit_ids": [
+        "a0046"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0051"
+      ],
+      "cluster_id": "objective-a0051",
+      "source": "objective_action",
+      "task_ids": [
+        9774
+      ],
+      "visit_ids": [
+        "a0046"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0052"
+      ],
+      "cluster_id": "objective-a0052",
+      "source": "objective_action",
+      "task_ids": [
+        9728
+      ],
+      "visit_ids": [
+        "a0046"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0054"
+      ],
+      "cluster_id": "objective-a0054",
+      "source": "objective_action",
+      "task_ids": [
+        9788
+      ],
+      "visit_ids": [
+        "a0053"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0055"
+      ],
+      "cluster_id": "objective-a0055",
+      "source": "objective_action",
+      "task_ids": [
+        10096
+      ],
+      "visit_ids": [
+        "a0053"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0056"
+      ],
+      "cluster_id": "objective-a0056",
+      "source": "objective_action",
+      "task_ids": [
+        9894
+      ],
+      "visit_ids": [
+        "a0053"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0058"
+      ],
+      "cluster_id": "objective-a0058",
+      "source": "objective_action",
+      "task_ids": [
+        9720
+      ],
+      "visit_ids": [
+        "a0057"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0060"
+      ],
+      "cluster_id": "objective-a0060",
+      "source": "objective_action",
+      "task_ids": [
+        9720
+      ],
+      "visit_ids": [
+        "a0059"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0061"
+      ],
+      "cluster_id": "objective-a0061",
+      "source": "objective_action",
+      "task_ids": [
+        9730
+      ],
+      "visit_ids": [
+        "a0059"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0062"
+      ],
+      "cluster_id": "objective-a0062",
+      "source": "objective_action",
+      "task_ids": [
+        9728
+      ],
+      "visit_ids": [
+        "a0059"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0065"
+      ],
+      "cluster_id": "objective-a0065",
+      "source": "objective_action",
+      "task_ids": [
+        9720
+      ],
+      "visit_ids": [
+        "a0064"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0066"
+      ],
+      "cluster_id": "objective-a0066",
+      "source": "objective_action",
+      "task_ids": [
+        9817
+      ],
+      "visit_ids": [
+        "a0064"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0067"
+      ],
+      "cluster_id": "objective-a0067",
+      "source": "objective_action",
+      "task_ids": [
+        9728
+      ],
+      "visit_ids": [
+        "a0064"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0080"
+      ],
+      "cluster_id": "objective-a0080",
+      "source": "objective_action",
+      "task_ids": [
+        9845
+      ],
+      "visit_ids": [
+        "a0079"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0081"
+      ],
+      "cluster_id": "objective-a0081",
+      "source": "objective_action",
+      "task_ids": [
+        9731
+      ],
+      "visit_ids": [
+        "a0079"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0088"
+      ],
+      "cluster_id": "objective-a0088",
+      "source": "objective_action",
+      "task_ids": [
+        9720
+      ],
+      "visit_ids": [
+        "a0087"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0115"
+      ],
+      "cluster_id": "objective-a0115",
+      "source": "objective_action",
+      "task_ids": [
+        9772
+      ],
+      "visit_ids": [
+        "a0114"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0118"
+      ],
+      "cluster_id": "objective-a0118",
+      "source": "objective_action",
+      "task_ids": [
+        9899
+      ],
+      "visit_ids": [
+        "a0117"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0124"
+      ],
+      "cluster_id": "objective-a0124",
+      "source": "objective_action",
+      "task_ids": [
+        9898
+      ],
+      "visit_ids": [
+        "a0123"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0130"
+      ],
+      "cluster_id": "objective-a0130",
+      "source": "objective_action",
+      "task_ids": [
+        9814
+      ],
+      "visit_ids": [
+        "a0129"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0131"
+      ],
+      "cluster_id": "objective-a0131",
+      "source": "objective_action",
+      "task_ids": [
+        9841
+      ],
+      "visit_ids": [
+        "a0129"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0138"
+      ],
+      "cluster_id": "objective-a0138",
+      "source": "objective_action",
+      "task_ids": [
+        9846
+      ],
+      "visit_ids": [
+        "a0137"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0143"
+      ],
+      "cluster_id": "objective-a0143",
+      "source": "objective_action",
+      "task_ids": [
+        9904
+      ],
+      "visit_ids": [
+        "a0142"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0155"
+      ],
+      "cluster_id": "objective-a0155",
+      "source": "objective_action",
+      "task_ids": [
+        9739
+      ],
+      "visit_ids": [
+        "a0154"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0156"
+      ],
+      "cluster_id": "objective-a0156",
+      "source": "objective_action",
+      "task_ids": [
+        9701
+      ],
+      "visit_ids": [
+        "a0154"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0157"
+      ],
+      "cluster_id": "objective-a0157",
+      "source": "objective_action",
+      "task_ids": [
+        9743
+      ],
+      "visit_ids": [
+        "a0154"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0167"
+      ],
+      "cluster_id": "objective-a0167",
+      "source": "objective_action",
+      "task_ids": [
+        9702
+      ],
+      "visit_ids": [
+        "a0166"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0175"
+      ],
+      "cluster_id": "objective-a0175",
+      "source": "objective_action",
+      "task_ids": [
+        9726
+      ],
+      "visit_ids": [
+        "a0174"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0177"
+      ],
+      "cluster_id": "objective-a0177",
+      "source": "objective_action",
+      "task_ids": [
+        10117
+      ],
+      "visit_ids": [
+        "a0176"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0179"
+      ],
+      "cluster_id": "objective-a0179",
+      "source": "objective_action",
+      "task_ids": [
+        9816
+      ],
+      "visit_ids": [
+        "a0178"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0184"
+      ],
+      "cluster_id": "objective-a0184",
+      "source": "objective_action",
+      "task_ids": [
+        9903
+      ],
+      "visit_ids": [
+        "a0183"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0194"
+      ],
+      "cluster_id": "objective-a0194",
+      "source": "objective_action",
+      "task_ids": [
+        9822
+      ],
+      "visit_ids": [
+        "a0193"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0204"
+      ],
+      "cluster_id": "objective-a0204",
+      "source": "objective_action",
+      "task_ids": [
+        9847
+      ],
+      "visit_ids": [
+        "a0203"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0212"
+      ],
+      "cluster_id": "objective-a0212",
+      "source": "objective_action",
+      "task_ids": [
+        9842
+      ],
+      "visit_ids": [
+        "a0211"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0214"
+      ],
+      "cluster_id": "objective-a0214",
+      "source": "objective_action",
+      "task_ids": [
+        10118
+      ],
+      "visit_ids": [
+        "a0213"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0216"
+      ],
+      "cluster_id": "objective-a0216",
+      "source": "objective_action",
+      "task_ids": [
+        9709
+      ],
+      "visit_ids": [
+        "a0215"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0217"
+      ],
+      "cluster_id": "objective-a0217",
+      "source": "objective_action",
+      "task_ids": [
+        9823
+      ],
+      "visit_ids": [
+        "a0215"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0181",
+        "a0182"
+      ],
+      "cluster_id": "zang-9708-9820-shared",
+      "source": "route_service_override",
+      "task_ids": [
+        9708,
+        9820
+      ],
+      "visit_ids": [
+        "a0180"
+      ]
+    }
+  ]
+}

@@ -81,10 +81,11 @@
   "guide": [
     "接取：图书馆员塞尔拉。",
     "永生之盾的图书馆员塞尔拉要你杀死魔枢附近的奥术浮蛇，并收集5份魔枢法力精华。",
-    "交付：图书馆员塞尔拉。"
+    "交付：图书馆员塞尔拉。",
+    "魔枢法力精华收集不共享，五号需要分别完成各自进度。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -111,14 +112,27 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11914; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
       "text": "",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "user_live:2026-10-10",
+      "reason": "2026-10-09至2026-10-10北风第二组DK实跑反馈。"
     }
   }
 }

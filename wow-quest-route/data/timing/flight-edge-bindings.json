@@ -1,7 +1,146 @@
 {
   "schema_version": 1,
   "config_id": "route-timing-flight-edge-bindings-v1",
-  "profiles": {},
+  "profiles": {
+    "sholazar-fivebox": {
+      "a0001->visit-entry-dalaran": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.52:0.38:0.49:0.21"
+      }
+    },
+    "hellfire-fivebox": {
+      "a0192->a0202": {
+        "faction": "Horde",
+        "world_id": 1945,
+        "path_key": "0.65:0.50:0.54:0.57"
+      },
+      "a0202->a0207": {
+        "faction": "Horde",
+        "world_id": 1945,
+        "path_key": "0.65:0.50:0.54:0.57"
+      }
+    },
+    "dragonblight-fivebox": {
+      "a0583->a0587": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.54:0.52:0.48:0.44"
+      },
+      "visit-p191-top->a0603": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.54:0.52:0.48:0.44"
+      }
+    },
+    "storm-peaks-fivebox": {
+      "a0323->a0326": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.38:0.21:0.57:0.21:0.64:0.19:0.72:0.29"
+      }
+    },
+    "hellfire-dk-speed": {
+      "a0176->a0186": {
+        "faction": "Horde",
+        "world_id": 1945,
+        "path_key": "0.65:0.50:0.54:0.57"
+      },
+      "a0186->a0192": {
+        "faction": "Horde",
+        "world_id": 1945,
+        "path_key": "0.65:0.50:0.54:0.57"
+      }
+    },
+    "borean-fivebox": {
+      "a0714->a0716": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.17:0.53:0.18:0.47"
+      },
+      "a0716->a0720": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.17:0.53:0.29:0.54"
+      }
+    },
+    "icecrown-fivebox": {
+      "a0650->a0655": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.56:0.36:0.52:0.34"
+      },
+      "a0667->visit-rescue1-tournament-arrival": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.49:0.21:0.52:0.34:0.56:0.36"
+      },
+      "a0672->a0674": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.49:0.21:0.52:0.34"
+      },
+      "a0674->a0685": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.54:0.52:0.52:0.38:0.52:0.34"
+      },
+      "a0703->visit-rescue2-tournament-arrival": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.54:0.52:0.52:0.38:0.49:0.21"
+      },
+      "a0708->a0710": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.49:0.21:0.52:0.34"
+      }
+    },
+    "howling-fivebox": {
+      "a0168->a0170": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.74:0.71:0.85:0.73"
+      },
+      "a0183->a0185": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.74:0.71:0.85:0.73"
+      },
+      "a0431->a0434": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.74:0.62:0.84:0.59:0.84:0.51"
+      }
+    },
+    "grizzly-fivebox": {
+      "a0147->a0154": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.84:0.51:0.70:0.55"
+      },
+      "a0167->a0172": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.84:0.51:0.70:0.55"
+      },
+      "a0217->a0222": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.84:0.51:0.70:0.55"
+      },
+      "a0226->a0228": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.84:0.51:0.70:0.55"
+      },
+      "a0228->a0230": {
+        "faction": "Horde",
+        "world_id": 113,
+        "path_key": "0.84:0.51:0.70:0.55"
+      }
+    }
+  },
   "programs": {},
   "note": "Canonical taxi edges are bound here to imported Leatrix path keys. profiles binds Profile taxi edges; programs binds Route Program boundary-transition taxi operation_ids. Names/comments are lookup aids only; bindings must be reviewed against the actual canonical operation and never inferred from display text at runtime."
 }

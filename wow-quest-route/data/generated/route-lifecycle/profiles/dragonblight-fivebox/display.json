@@ -11,12 +11,12 @@
   "hearth_chain": [
     "阿格玛之锤"
   ],
-  "input_fingerprint": "b4c05d37c9b417facce0b7c8661f62e61222e3f2e26257a422910cba336caced",
+  "input_fingerprint": "7bfa7ab0a339b7fcc51cac43fbd42ff639295d4f1561fcc7e52614ad25db02a1",
   "issues": [
     {
-      "display_name": "阿格玛之锤 → 眠月花园",
+      "display_name": "红玉丁香 → 达莉亚·日触",
       "kind": "location_display_encodes_route_action",
-      "location_ref": "dragonblight-p065",
+      "location_ref": "dragonblight-p074",
       "severity": "advisory"
     },
     {
@@ -237,9 +237,9 @@
         "edge_id": "a0055->a0057",
         "from_location_ref": "dragonblight-p019",
         "from_visit_id": "a0055",
-        "movement_action_id": null,
-        "movement_mode": "ride",
-        "operation_kind": "self_move",
+        "movement_action_id": "use-hearth-after-rotting-organs",
+        "movement_mode": null,
+        "operation_kind": "hearth",
         "source": "canonical_profile",
         "to_location_ref": "dragonblight-p020",
         "to_visit_id": "a0057"
@@ -2170,7 +2170,7 @@
         "to_visit_id": "a0608"
       }
     ],
-    "input_fingerprint": "2ccc8be4b1c53e9be4a12da8b553d5f789f4a8d93362250467731d212e6af5f9",
+    "input_fingerprint": "4934cc9322e02ef9fa4b07a8dfc586e1af55132e1b1f860aa2f7ddb6ef71e764",
     "status": "pass",
     "visits": [
       {
@@ -2828,7 +2828,7 @@
         "location_ref": "dragonblight-p066",
         "location_role": "map_anchor",
         "ordinal": 66,
-        "step_id": "step-17",
+        "step_id": "step-16",
         "visit_id": "a0200",
         "x": 19.0,
         "y": 58.5
@@ -4126,13 +4126,16 @@
     ]
   },
   "profile_id": "dragonblight-fivebox",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "62f40b4af1ee1653a7548c9c227adef45f219235fa316fb83c363bb0051d8eb2",
-    "range_minutes": null,
-    "status": "requirements"
+    "center_minutes": 688.654,
+    "input_fingerprint": "34f02aa162adbcc0c850c781d4e5599864828a2627db77ba12fbebd563a501da",
+    "range_minutes": [
+      528.608,
+      849.699
+    ],
+    "status": "pass"
   },
   "status": "pass",
   "steps": [
@@ -4284,13 +4287,13 @@
           "task_id": 11977
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "深入密林",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11978
         },
@@ -4307,9 +4310,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 16.8,
+        "range_minutes": [
+          12.6,
+          21.0
+        ],
+        "status": "pass"
       },
       "title": "龙骨边界 → 西风避难营 → 东侧林地"
     },
@@ -4439,13 +4445,13 @@
       "summary": "回西风避难营交当前任务，完成共享的《部落的血誓》，再由艾米萨接出《阿格玛之锤》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "深入密林",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11978
         },
@@ -4484,9 +4490,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.1,
+        "range_minutes": [
+          5.4,
+          8.9
+        ],
+        "status": "pass"
       },
       "title": "西风避难营 → 部落的血誓 → 阿格玛之锤"
     },
@@ -4693,7 +4702,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12033
         },
@@ -4704,7 +4713,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12036
         },
@@ -4721,9 +4730,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.9,
+        "range_minutes": [
+          4.8,
+          7.0
+        ],
+        "status": "pass"
       },
       "title": "阿格玛之锤：主线 → 飞行点 / 炉石 → 萨鲁法尔的信"
     },
@@ -4735,6 +4747,7 @@
         "a0037",
         "a0038",
         "a0039",
+        "a0612",
         "a0040",
         "a0041",
         "a0042",
@@ -4833,6 +4846,24 @@
         },
         {
           "action_ids": [
+            "a0612"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "通缉！"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "通缉：吉加托尔",
+              "task_id": 12090
+            }
+          ],
+          "text": "通缉！ → 接《通缉：吉加托尔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
             "a0040"
           ],
           "location_ref": "dragonblight-p013",
@@ -4887,7 +4918,7 @@
         }
       ],
       "step_id": "step-04",
-      "summary": "在阿格玛之锤接齐纳尔苏深渊、通缉、感染野兽和眠月花园任务；吉加托尔精英支线继续留80后。",
+      "summary": "在阿格玛之锤接齐纳尔苏深渊、通缉、感染野兽和眠月花园任务，同时接《通缉：吉加托尔》；当前第二组血DK路线保留吉加托尔支线。",
       "task_presentations": [
         {
           "badge": "not_shared",
@@ -4901,13 +4932,13 @@
           "task_id": 12039
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "死亡名单：高阶教徒扎古斯",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12056
         },
@@ -4934,6 +4965,17 @@
           "task_id": 12091
         },
         {
+          "badge": "shared",
+          "name": "通缉：吉加托尔",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12090
+        },
+        {
           "badge": "sequential_loot",
           "name": "腐烂的器官",
           "note": null,
@@ -4957,9 +4999,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.818,
+        "range_minutes": [
+          3.352,
+          4.284
+        ],
+        "status": "pass"
       },
       "title": "阿格玛之锤：黑血 / 通缉 / 腐烂器官 / 寻找线索"
     },
@@ -5146,18 +5191,18 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12036
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "死亡名单：高阶教徒扎古斯",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12056
         },
@@ -5207,14 +5252,18 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 26.1,
+        "range_minutes": [
+          19.6,
+          32.6
+        ],
+        "status": "pass"
       },
       "title": "纳尔苏深渊：扎古斯 → 黑血 → 基里克斯 → 感染野兽"
     },
     {
       "action_ids": [
+        "use-hearth-after-rotting-organs",
         "a0057",
         "a0058",
         "a0059",
@@ -5230,6 +5279,15 @@
         "a0069"
       ],
       "lines": [
+        {
+          "action_ids": [
+            "use-hearth-after-rotting-organs"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：阿格玛之锤",
+          "type": "route_action"
+        },
         {
           "action_ids": [
             "a0057"
@@ -5391,7 +5449,7 @@
         }
       ],
       "step_id": "step-06",
-      "summary": "回阿格玛按NPC交深渊任务；交扎古斯后血之魔典才进入可刷状态，同时把医生链推进到《红玉丁香》。",
+      "summary": "做完《腐烂的器官》直接炉石回阿格玛，再按NPC交深渊任务；交扎古斯后血之魔典才进入可刷状态，同时把医生链推进到《红玉丁香》。",
       "task_presentations": [
         {
           "badge": null,
@@ -5411,7 +5469,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12036
         },
@@ -5438,24 +5496,24 @@
           "task_id": 12039
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "天灾的装备",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12048
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "死亡名单：高阶教徒扎古斯",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12056
         },
@@ -5482,23 +5540,26 @@
           "task_id": 12101
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "红玉丁香",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12102
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.4,
+        "range_minutes": [
+          4.4,
+          6.4
+        ],
+        "status": "pass"
       },
-      "title": "阿格玛之锤：深渊交付 → 解锁血之魔典 → 红玉丁香"
+      "title": "炉石阿格玛：深渊交付 → 解锁血之魔典 → 红玉丁香"
     },
     {
       "action_ids": [
@@ -5665,7 +5726,7 @@
         {
           "badge": "sequential_loot",
           "name": "阿努巴尔的束缚",
-          "note": "三名钥匙目标各杀一次；每具尸体可供五号分别拾取钥匙。西诺克在南侧高台连排大房子内约(25.7,44.2)。",
+          "note": "三名钥匙目标各杀一次；每具尸体可供五号分别拾取钥匙。操纵者安诺科拉约(24.9,43.9)，击碎者提瓦克斯约(25.3,39.1)，影怒者西诺克约(25.7,44.2)；西诺克在南侧高台连排大房子内。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -5674,13 +5735,13 @@
           "task_id": 12064
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "天灾的装备",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12048
         },
@@ -5691,7 +5752,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12057
         },
@@ -5708,9 +5769,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 16.1,
+        "range_minutes": [
+          12.1,
+          20.1
+        ],
+        "status": "pass"
       },
       "title": "冰雾祖母 → 班索克 → 三钥匙 / 魔典 / 军旗"
     },
@@ -5808,9 +5872,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.3,
+        "range_minutes": [
+          1.9,
+          2.7
+        ],
+        "status": "pass"
       },
       "title": "班索克 → 大酋长归来"
     },
@@ -6182,13 +6249,13 @@
           "task_id": 12071
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "天灾的装备",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12048
         },
@@ -6199,7 +6266,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12057
         },
@@ -6215,13 +6282,13 @@
           "task_id": 12115
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪能之约",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12125
         },
@@ -6237,32 +6304,35 @@
           "task_id": 12126
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冰霜之约",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12127
         },
         {
-          "badge": null,
+          "badge": "special",
           "name": "该死的荒芜兽！",
-          "note": "在冰雾村使用信号枪召唤库卡隆作战双足飞龙，骑乘后用载具技能完成击杀。",
+          "note": "在冰雾村使用信号枪召唤库卡隆作战双足飞龙，主控骑乘后用载具技能完成击杀；其余号保持近距离即可吃到进度，不要拉开太远。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12072
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 15.4,
+        "range_minutes": [
+          12.6,
+          18.2
+        ],
+        "status": "pass"
       },
       "title": "炉石阿格玛 → 三宝石 → 洛纳乌克 → 荒芜兽"
     },
@@ -6547,24 +6617,24 @@
           "task_id": 12469
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "囤积矿石",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12044
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "刨冰",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12045
         },
@@ -6581,9 +6651,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 20.0,
+        "range_minutes": [
+          15.0,
+          25.0
+        ],
+        "status": "pass"
       },
       "title": "恐怖之爪 → 猎龙营地 → 诺兹拉斯挖掘场"
     },
@@ -6739,54 +6812,57 @@
       "summary": "完成《刨冰》后由希弗里克斯接《柔软的包装》，刷满薄兽皮再回哨站接《不会融化的东西》和《难以下咽》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "刨冰",
           "note": "不要从右上悬崖直接跳去水晶裂痕，按正常坡路返回。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12045
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "柔软的包装",
           "note": "以最低进度角色12/12为离开条件。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12046
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "不会融化的东西",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12047
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "难以下咽",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12049
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 33.2,
+        "range_minutes": [
+          24.9,
+          41.5
+        ],
+        "status": "pass"
       },
       "title": "刨冰 → 柔软的包装 → 不会融化的东西"
     },
@@ -6925,24 +7001,24 @@
       "summary": "完成《不会融化的东西》《难以下咽》，回诺兹拉斯分别向希弗里克斯、辛克和纳尔弗交接鹰身人/伐木机任务。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "不会融化的东西",
           "note": "破碎骨片为地面固定拾取物。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12047
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "难以下咽",
           "note": "把冰虫打到低血量，等张嘴时扔炸药；爆炸后拾取烧焦冰虫肉。不要直接打死。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12049
         },
@@ -6970,9 +7046,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 16.1,
+        "range_minutes": [
+          12.1,
+          20.2
+        ],
+        "status": "pass"
       },
       "title": "破碎骨片 → 巨大冰虫 → 诺兹拉斯"
     },
@@ -7180,9 +7259,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 11.8,
+        "range_minutes": [
+          8.9,
+          14.8
+        ],
+        "status": "pass"
       },
       "title": "鹰身人 / 伐木机 → 冷风女王 → 水晶裂痕"
     },
@@ -7437,13 +7519,13 @@
           "task_id": 12077
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "冰虫之母",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12080
         },
@@ -7460,9 +7542,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.2,
+        "range_minutes": [
+          6.2,
+          10.3
+        ],
+        "status": "pass"
       },
       "title": "水晶裂痕：采集样本 → 恶心的生意 → 冰虫之母"
     },
@@ -7631,21 +7716,24 @@
           "task_id": 12079
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "冰虫之母",
           "note": "真正拉Boss前再用佐特防护药剂；药剂一次性，死亡后消失且不能重领，不要提前使用。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12080
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.8,
+        "range_minutes": [
+          6.6,
+          11.1
+        ],
+        "status": "pass"
       },
       "title": "冰心洞穴 → 拉特尔博尔 → 水晶裂痕 → 炉石阿格玛"
     },
@@ -7665,6 +7753,7 @@
         "a0196",
         "a0197",
         "a0198",
+        "a0200",
         "a0199"
       ],
       "lines": [
@@ -7794,7 +7883,7 @@
           ],
           "location_ref": "dragonblight-p065",
           "task_refs": [],
-          "text": "阿格玛之锤 → 眠月花园",
+          "text": "阿格玛之锤",
           "type": "location"
         },
         {
@@ -7823,6 +7912,15 @@
         },
         {
           "action_ids": [
+            "a0200"
+          ],
+          "location_ref": "dragonblight-p066",
+          "task_refs": [],
+          "text": "眠月花园",
+          "type": "location"
+        },
+        {
+          "action_ids": [
             "a0199"
           ],
           "actor": {
@@ -7841,7 +7939,7 @@
         }
       ],
       "step_id": "step-16",
-      "summary": "完成《上层精灵的愤怒》《寻找线索》和凯尔多努斯；推进《阿坎尼姆斯的终结》后到阿格玛交线索/通缉，再回伊瑟尼安交任务。",
+      "summary": "完成《上层精灵的愤怒》《寻找线索》和凯尔多努斯；到阿格玛交《寻找线索》并接《阻碍协议》，再回眠月花园交《阿坎尼姆斯的终结》。这段不依赖炉石冷却。",
       "task_presentations": [
         {
           "badge": "shared",
@@ -7857,7 +7955,7 @@
         {
           "badge": "not_shared",
           "name": "寻找线索",
-          "note": "五号各自取得线索并右键打开；交付NPC在阿格玛，不在眠月花园。同一具法师猎手尸体能否供五号分别拾取仍未确认。",
+          "note": "五号分别完成并各自取得线索，不能依次从同一具法师猎手尸体拾取；取得后右键打开。交付NPC在阿格玛，不在眠月花园。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -7877,40 +7975,43 @@
           "task_id": 12089
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "阿坎尼姆斯的终结",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12013
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阻碍协议",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12005
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 23.1,
+        "range_minutes": [
+          17.4,
+          28.9
+        ],
+        "status": "pass"
       },
-      "title": "眠月花园 → 阿格玛 → 伊瑟尼安"
+      "title": "眠月花园 → 阿格玛 → 眠月花园"
     },
     {
       "action_ids": [
-        "a0200",
         "a0201",
         "a0202",
+        "a0610",
         "a0203",
         "a0204",
         "a0205",
@@ -7920,15 +8021,6 @@
         "a0209"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0200"
-          ],
-          "location_ref": "dragonblight-p066",
-          "task_refs": [],
-          "text": "眠月花园",
-          "type": "location"
-        },
         {
           "action_ids": [
             "a0201"
@@ -7964,11 +8056,20 @@
         },
         {
           "action_ids": [
+            "a0610"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：阿格玛之锤",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
             "a0203"
           ],
           "location_ref": "dragonblight-p067",
           "task_refs": [],
-          "text": "阿格玛之锤",
+          "text": "阿格玛之锤（炉石）",
           "type": "location"
         },
         {
@@ -8057,16 +8158,16 @@
         }
       ],
       "step_id": "step-17",
-      "summary": "完成《阻碍协议》并从古拉莫什取得五份任务起始物；回阿格玛交接后五号一起进入《投影和计划》脚本。",
+      "summary": "在眠月花园完成《阻碍协议》并从古拉莫什取得五份任务起始物；拿到设备后炉石回阿格玛交接，再进入《投影和计划》脚本。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阻碍协议",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12005
         },
@@ -8084,7 +8185,7 @@
         {
           "badge": "shared",
           "name": "投影和计划",
-          "note": "五号一起进入并完成脚本飞行即可同步；尚未验证只有主控进入时其余四号是否会同步。",
+          "note": "五号一起进入并完成脚本飞行即可同步；进入眠月花园区域后即可使用，不必跑到中心才用，避免浪费时间。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -8105,11 +8206,14 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 9.9,
+        "range_minutes": [
+          7.4,
+          12.4
+        ],
+        "status": "pass"
       },
-      "title": "眠月花园 → 奇怪的设备 → 投影和计划"
+      "title": "眠月花园 → 奇怪的设备 → 炉石阿格玛 → 投影和计划"
     },
     {
       "action_ids": [
@@ -8259,13 +8363,13 @@
           "task_id": 12066
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "森林上空",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12084
         },
@@ -8282,9 +8386,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.7,
+        "range_minutes": [
+          6.3,
+          9.1
+        ],
+        "status": "pass"
       },
       "title": "投影和计划 → 灿烂海岸 → 罗萨洛尔任务"
     },
@@ -8433,20 +8540,20 @@
       "summary": "同区完成《森林上空》《强化古树》并取得《一封家书》；炉石回阿格玛后分别向夺日者影像、格莱弗和阿格玛大王交付。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "森林上空",
           "note": "取得护符后还要到魔网焦点拱门使用。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12084
         },
         {
           "badge": "shared",
           "name": "强化古树",
-          "note": "树皮只需主控取得一份并强化古树即可同步全队。",
+          "note": "树皮需要主控取得三份，依次强化三棵古树即可同步全队。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -8455,13 +8562,13 @@
           "task_id": 12096
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "一封家书",
-          "note": "来源怪为罗萨洛尔森林的塔辛尼；击杀后拾取掉落的部落信件任务起始物并右键接任务。",
+          "note": "塔辛尼中尉掉落部落信件；同一具尸体可供五号依次拾取，拿到后右键接本任务。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12085
         },
@@ -8478,9 +8585,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.6,
+        "range_minutes": [
+          6.2,
+          9.0
+        ],
+        "status": "pass"
       },
       "title": "罗萨洛尔森林 → 炉石阿格玛"
     },
@@ -8488,6 +8598,7 @@
       "action_ids": [
         "a0229",
         "a0230",
+        "a0611",
         "a0231",
         "a0232",
         "a0233",
@@ -8505,7 +8616,7 @@
           ],
           "location_ref": "dragonblight-p074",
           "task_refs": [],
-          "text": "红玉丁香",
+          "text": "红玉丁香 → 达莉亚·日触",
           "type": "location"
         },
         {
@@ -8521,6 +8632,24 @@
             }
           ],
           "text": "↳ 做《红玉丁香》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0611"
+          ],
+          "actor": {
+            "kind": "target",
+            "name": "红玉胸针"
+          },
+          "task_refs": [
+            {
+              "kind": "accept",
+              "name": "红玉巨龙圣地的命运",
+              "task_id": 12419
+            }
+          ],
+          "text": "红玉胸针 → 接《红玉巨龙圣地的命运》",
           "type": "task_action"
         },
         {
@@ -8636,20 +8765,31 @@
       "summary": "完成《红玉丁香》并在附近坑内让五号分别做《邪恶之约》；回阿格玛交两条任务并由索艾接《野生动物的疫苗》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "红玉丁香",
-          "note": "先携带，后面经过目标区再做。",
+          "note": "采集红玉丁香时顺手击杀洞内达莉亚·日触；必掉红玉胸针，拾取后立即右键接《红玉巨龙圣地的命运》。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12102
+        },
+        {
+          "badge": null,
+          "name": "红玉巨龙圣地的命运",
+          "note": "击杀红玉圣地洞内的达莉亚·日触，拾取必掉的红玉胸针后立即右键接任务。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
           "pending": true,
           "suppress_action_kinds": [],
-          "task_id": 12102
+          "task_id": 12419
         },
         {
           "badge": "not_shared",
           "name": "邪恶之约",
-          "note": "五号轮流分别完成邪恶宝石操作；目标在坑内且刷新很快。",
+          "note": "五号轮流分别完成邪恶宝石充能；少用持续伤害技能，避免目标在尚未充能前死亡。目标在坑内且刷新很快。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -8681,11 +8821,209 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.7,
+        "range_minutes": [
+          5.8,
+          9.6
+        ],
+        "status": "pass"
       },
       "title": "红玉丁香 → 邪恶之约 → 阿格玛疫苗链"
+    },
+    {
+      "action_ids": [
+        "a0613",
+        "a0614",
+        "a0615",
+        "a0616",
+        "a0617",
+        "a0618",
+        "a0619",
+        "a0620",
+        "a0621",
+        "a0622",
+        "a0623",
+        "a0624"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "a0613"
+          ],
+          "location_ref": "dragonblight-p195",
+          "task_refs": [],
+          "text": "吉加托尔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0614"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "通缉：吉加托尔",
+              "task_id": 12090
+            }
+          ],
+          "text": "↳ 做《通缉：吉加托尔》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0615"
+          ],
+          "location_ref": "dragonblight-p196",
+          "task_refs": [],
+          "text": "阿格玛之锤·高尔特",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0616",
+            "a0617"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高尔特上尉"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "通缉：吉加托尔",
+              "task_id": 12090
+            },
+            {
+              "kind": "accept",
+              "name": "前往猎龙营地",
+              "task_id": 12095
+            }
+          ],
+          "text": "高尔特上尉 → 交《通缉：吉加托尔》 → 接《前往猎龙营地》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0618",
+            "a0619",
+            "a0620"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "洛坎"
+          },
+          "location_ref": "dragonblight-p197",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "前往猎龙营地",
+              "task_id": 12095
+            },
+            {
+              "kind": "accept",
+              "name": "萨拉斯塔，北地的灾祸",
+              "task_id": 12097
+            }
+          ],
+          "text": "猎龙营地·洛坎 → 交《前往猎龙营地》 → 接《萨拉斯塔，北地的灾祸》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0621"
+          ],
+          "location_ref": "dragonblight-p198",
+          "task_refs": [],
+          "text": "萨拉斯塔",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0622"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "萨拉斯塔，北地的灾祸",
+              "task_id": 12097
+            }
+          ],
+          "text": "↳ 做《萨拉斯塔，北地的灾祸》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0623"
+          ],
+          "location_ref": "dragonblight-p199",
+          "task_refs": [],
+          "text": "阿格玛之锤·高尔特",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0624"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "高尔特上尉"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "萨拉斯塔，北地的灾祸",
+              "task_id": 12097
+            }
+          ],
+          "text": "高尔特上尉 → 交《萨拉斯塔，北地的灾祸》",
+          "type": "task_action"
+        }
+      ],
+      "step_id": "step-20b",
+      "summary": "红玉丁香和邪恶之约结束后，顺路击杀吉加托尔；回阿格玛交任务并接《前往猎龙营地》，到猎龙营地接《萨拉斯塔，北地的灾祸》，击杀后回阿格玛交付。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "通缉：吉加托尔",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12090
+        },
+        {
+          "badge": null,
+          "name": "前往猎龙营地",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12095
+        },
+        {
+          "badge": null,
+          "name": "萨拉斯塔，北地的灾祸",
+          "note": "先与洛坎对话召唤萨拉斯塔；冰冻之心的五开拾取方式仍待单独确认。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 12097
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
+      },
+      "title": "吉加托尔 → 猎龙营地 → 萨拉斯塔"
     },
     {
       "action_ids": [
@@ -8763,9 +9101,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.0,
+        "range_minutes": [
+          4.1,
+          5.9
+        ],
+        "status": "pass"
       },
       "title": "野生动物的疫苗 → 索艾"
     },
@@ -8877,9 +9218,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.28,
+        "range_minutes": [
+          1.972,
+          2.589
+        ],
+        "status": "pass"
       },
       "title": "莫亚基港口：库纳尼 / 莫伊 / 飞行点"
     },
@@ -9127,7 +9471,7 @@
         {
           "badge": "not_shared",
           "name": "不要浪费",
-          "note": "同一具狼獾人尸体只能一个角色拾取货物；五号分别做到6/6。",
+          "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -9138,7 +9482,7 @@
         {
           "badge": "not_shared",
           "name": "未来的种子",
-          "note": "幼崽为个人拾取，五号分别做满12只。",
+          "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -9192,9 +9536,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 19.1,
+        "range_minutes": [
+          14.3,
+          23.9
+        ],
+        "status": "pass"
       },
       "title": "飘雪林地 → 洛根 → 灵魂视界"
     },
@@ -9425,13 +9772,13 @@
           "task_id": 12106
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "魔网能量线的终端",
           "note": "湖内魔网焦点必须主动使用任务饰品取得第一段信息，不是路过自动计数。\n这里完成观察碧蓝巨龙圣地目标；不要把区域发现提示当成任务完成。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12110
         },
@@ -9447,24 +9794,24 @@
           "task_id": 12030
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "解脱和安息",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12031
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪能之约",
           "note": "把疯狂村民压到约35%以下再用血宝石，不要直接击杀。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12125
         },
@@ -9481,9 +9828,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 18.5,
+        "range_minutes": [
+          13.8,
+          23.1
+        ],
+        "status": "pass"
       },
       "title": "因度雷 → 长者玛纳洛 → 碧蓝圣地"
     },
@@ -9652,7 +10002,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12011
         },
@@ -9668,13 +10018,13 @@
           "task_id": 12009
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "诱饵",
           "note": "击杀基利瓦取得“双钳巨蟹”的肉。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12016
         },
@@ -9691,9 +10041,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 33.9,
+        "range_minutes": [
+          25.4,
+          42.4
+        ],
+        "status": "pass"
       },
       "title": "破损陷阱 → 螃蟹陷阱 → 诱饵 → 海洋女神"
     },
@@ -9917,13 +10270,13 @@
       "summary": "向图尔凯/图阿鲁交海线任务，完成《鱼钩上的肉》；炉石回阿格玛交《邪能之约》和魔网观察，再向高尔特交两条通缉。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "诱饵",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12016
         },
@@ -9950,24 +10303,24 @@
           "task_id": 12032
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪能之约",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12125
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "魔网能量线的终端",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12110
         },
@@ -10006,9 +10359,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.7,
+        "range_minutes": [
+          6.3,
+          9.1
+        ],
+        "status": "pass"
       },
       "title": "莫亚基 → 鱼钩 → 炉石阿格玛"
     },
@@ -10257,9 +10613,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.7,
+        "range_minutes": [
+          5.7,
+          7.9
+        ],
+        "status": "pass"
       },
       "title": "龙眠神殿：地面层 → 顶层任务"
     },
@@ -10442,9 +10801,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 21.7,
+        "range_minutes": [
+          16.3,
+          27.1
+        ],
+        "status": "pass"
       },
       "title": "害虫控制 → 峡谷追击 → 冰拳"
     },
@@ -10615,9 +10977,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 11.6,
+        "range_minutes": [
+          9.5,
+          13.6
+        ],
+        "status": "pass"
       },
       "title": "红玉巨龙圣地：白热化的战斗 → 重归尘土"
     },
@@ -10628,7 +10993,6 @@
         "a0344",
         "a0345",
         "a0346",
-        "a0347",
         "a0348",
         "a0349",
         "a0350"
@@ -10693,24 +11057,6 @@
         },
         {
           "action_ids": [
-            "a0347"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "红玉胸针"
-          },
-          "task_refs": [
-            {
-              "kind": "accept",
-              "name": "红玉巨龙圣地的命运",
-              "task_id": 12419
-            }
-          ],
-          "text": "红玉胸针 → 接《红玉巨龙圣地的命运》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
             "a0348"
           ],
           "location_ref": "dragonblight-p115",
@@ -10744,7 +11090,7 @@
         }
       ],
       "step_id": "step-30",
-      "summary": "交《重归尘土》接《烈焰之地》，进巨树下洞穴击杀达莉亚并取得红玉胸针；回瓦加斯塔兹交付并接《龙眠神殿的执事》。",
+      "summary": "交《重归尘土》接《烈焰之地》，进巨树下洞穴完成通灵师和堕落之源目标；回瓦加斯塔兹交付并接《龙眠神殿的执事》。",
       "task_presentations": [
         {
           "badge": "shared",
@@ -10760,24 +11106,13 @@
         {
           "badge": null,
           "name": "烈焰之地",
-          "note": "洞穴从中央巨树东南侧底部进入；达莉亚·日触只在这里处理。",
+          "note": "洞穴从中央巨树东南侧底部进入；完成6名冰冷通灵师和堕落之源目标。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
           "pending": true,
           "suppress_action_kinds": [],
           "task_id": 12450
-        },
-        {
-          "badge": null,
-          "name": "红玉巨龙圣地的命运",
-          "note": "来源怪为洞内的达莉亚·日触；击杀后拾取掉落的“红玉胸针”，右键接任务。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": true,
-          "suppress_action_kinds": [],
-          "task_id": 12419
         },
         {
           "badge": null,
@@ -10792,9 +11127,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.0,
+        "range_minutes": [
+          4.9,
+          7.1
+        ],
+        "status": "pass"
       },
       "title": "红玉巨龙圣地：烈焰之地 → 龙眠神殿的执事"
     },
@@ -11115,9 +11453,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 16.6,
+        "range_minutes": [
+          13.6,
+          19.5
+        ],
+        "status": "pass"
       },
       "title": "龙眠：地面层 → 顶层 → 中层 → 保卫龙眠"
     },
@@ -11331,9 +11672,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 16.3,
+        "range_minutes": [
+          12.2,
+          20.4
+        ],
+        "status": "pass"
       },
       "title": "裂骨者 → 奈萨里奥之喉 → 无路可逃"
     },
@@ -11526,9 +11870,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.0,
+        "range_minutes": [
+          6.6,
+          9.4
+        ],
+        "status": "pass"
       },
       "title": "敌人的意图 → 扫荡诅咒教派 / 污染的能量"
     },
@@ -11723,9 +12070,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.6,
+        "range_minutes": [
+          5.6,
+          7.8
+        ],
+        "status": "pass"
       },
       "title": "奈萨里奥的烈焰 → 龙眠地面层 / 顶层"
     },
@@ -11804,13 +12154,13 @@
       "summary": "晨曦之镜完成冰霜宝石并推进破冰者；北上击杀德拉古尔后，在青铜巨龙圣地按2+2+1完成五号个人沙漏防守。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冰霜之约",
           "note": "对指定冰雪亡魂使用冰霜宝石完成充能。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12127
         },
@@ -11838,9 +12188,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 14.3,
+        "range_minutes": [
+          10.7,
+          17.9
+        ],
+        "status": "pass"
       },
       "title": "晨曦之镜 → 德拉古尔 → 青铜巨龙圣地"
     },
@@ -12284,9 +12637,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 40.5,
+        "range_minutes": [
+          30.4,
+          50.6
+        ],
+        "status": "pass"
       },
       "title": "怨毒镇 → 遗忘海岸 → 翡翠龙泪"
     },
@@ -12584,9 +12940,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 77.9,
+        "range_minutes": [
+          58.4,
+          97.4
+        ],
+        "status": "pass"
       },
       "title": "新壁炉谷 → 翡翠巨龙圣地 → 奥雷托斯"
     },
@@ -12756,9 +13115,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.1,
+        "range_minutes": [
+          3.4,
+          4.8
+        ],
+        "status": "pass"
       },
       "title": "龙眠地面层 → 顶层：猛犸 / 翡翠 / 青铜交付"
     },
@@ -12911,9 +13273,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.9,
+        "range_minutes": [
+          7.3,
+          10.5
+        ],
+        "status": "pass"
       },
       "title": "德雷格玛尔 → 奥拉斯塔萨 → 戈洛塔尔"
     },
@@ -13175,9 +13540,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.655,
+        "range_minutes": [
+          3.184,
+          4.126
+        ],
+        "status": "pass"
       },
       "title": "怨毒镇：翡翠 / 血色交接"
     },
@@ -13446,9 +13814,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 12.1,
+        "range_minutes": [
+          9.1,
+          15.1
+        ],
+        "status": "pass"
       },
       "title": "新壁炉谷：毫不留情 / 补充坐骑 → 地下审讯"
     },
@@ -13738,9 +14109,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 19.8,
+        "range_minutes": [
+          14.9,
+          24.8
+        ],
+        "status": "pass"
       },
       "title": "怨毒镇东北：凋零战车 / 炸弹 / 图尔基德 / 北伐军"
     },
@@ -13897,9 +14271,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.6,
+        "range_minutes": [
+          5.0,
+          8.3
+        ],
+        "status": "pass"
       },
       "title": "新壁炉谷：卡雷基 / 默瑟 → 兵营乔丹 → 铁匠铺"
     },
@@ -14031,9 +14408,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.6,
+        "range_minutes": [
+          3.5,
+          5.8
+        ],
+        "status": "pass"
       },
       "title": "修道院命令 → 齐尔哈特 / 弩炮 → 海滩命令"
     },
@@ -14411,9 +14791,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 11.0,
+        "range_minutes": [
+          8.2,
+          13.7
+        ],
+        "status": "pass"
       },
       "title": "怨毒镇 → 斯古莉 → 祈祷之书 → 完美伪装 → 狼狈不堪"
     },
@@ -14541,9 +14924,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.9,
+        "range_minutes": [
+          3.6,
+          6.1
+        ],
+        "status": "pass"
       },
       "title": "寻找真相 → 罪人的愚行号"
     },
@@ -14700,9 +15086,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.4,
+        "range_minutes": [
+          5.2,
+          7.5
+        ],
+        "status": "pass"
       },
       "title": "怨毒镇 → 阿比迪斯将军 → 乌洛斯"
     },
@@ -14915,9 +15304,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 18.7,
+        "range_minutes": [
+          14.0,
+          23.3
+        ],
+        "status": "pass"
       },
       "title": "圣光据点 → 金萨卡拉 → 炉石阿格玛"
     },
@@ -15047,13 +15439,13 @@
       "summary": "向库尔迪拉交最后一颗冰霜宝石；三宝石齐后进入阴影界完成《毁灭的力量》，再把《翻译过的魔典》交给高尔特。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冰霜之约",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12127
         },
@@ -15081,9 +15473,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.5,
+        "range_minutes": [
+          3.7,
+          5.4
+        ],
+        "status": "pass"
       },
       "title": "冰霜之约 → 毁灭的力量 → 翻译过的魔典"
     },
@@ -15318,9 +15713,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.8,
+        "range_minutes": [
+          6.8,
+          9.2
+        ],
+        "status": "pass"
       },
       "title": "阿格玛 → 库卡隆先锋 → 系统鸟龙眠 → 红龙之翼"
     },
@@ -15580,9 +15978,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 9.9,
+        "range_minutes": [
+          7.4,
+          12.3
+        ],
+        "status": "pass"
       },
       "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门"
     }

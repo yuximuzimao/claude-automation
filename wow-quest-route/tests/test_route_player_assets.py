@@ -178,6 +178,14 @@ def test_workbench_embeds_stage12_payload_and_has_required_offline_controls() ->
     assert ".routeAction.bind_hearth{color:#cf9cff}" in html
     assert "row.classList.add('routeAction',String(line.action_kind))" in html
     assert "notesTitle','备注'" in html
+    assert ".taskNoteAnchor{position:relative;display:inline-block}" in html
+    assert ".noteDot{position:absolute;right:-5px;top:-2px;width:5px;height:5px;border-radius:50%;background:#e53935;pointer-events:none}" in html
+    assert "const hasNote=!!p&&p.note_visible!==false&&String(p.note||'').trim()" in html
+    assert "noteMarkedTasks=new Set()" in html
+    assert "hasNote&&!noteMarkedTasks.has(taskKey)" in html
+    assert "noteMarkedTasks.add(taskKey)" in html
+    assert "dot.setAttribute('aria-label','有备注')" in html
+    assert "dot.title='下方有备注'" in html
     assert "PingFang SC" in html
     assert r"bits.join('\n')" in html
     assert "bits.join('\n')" not in html

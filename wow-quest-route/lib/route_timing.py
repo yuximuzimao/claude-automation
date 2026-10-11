@@ -439,6 +439,27 @@ def _action_maps(profile: dict[str, Any]) -> tuple[dict[str, str], dict[str, str
     return step_by_action, visit_by_action
 
 
+def _legacy_step_baseline(
+    profile_id: str,
+    step_id: str,
+    inputs: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Return the migrated historical estimate for one step, when available.
+
+    This is a transition inside the Timing model, not a second player-facing
+    timing source.  It supplies the residual while the typed current inputs are
+    being migrated; once the current components close, the caller ignores it.
+    """
+
+    baselines = (inputs.get("model_config") or {}).get("legacy_step_baselines") or {}
+    profile = baselines.get(str(profile_id))
+    if not isinstance(profile, dict):
+        return None
+    steps = profile.get("steps") or {}
+    row = steps.get(str(step_id))
+    return row if isinstance(row, dict) else None
+
+
 def _self_move_seconds(
     edge: dict[str, Any],
     visit_by_id: dict[str, dict[str, Any]],
@@ -631,22 +652,40 @@ def evaluate_profile_timing(
     action_execution: dict[str, str] | None = None,
     timing_inputs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Stage-7 prototype: derive only timing components whose machine inputs are actually resolved.
+    """Derive current Timing components and migrate historical residuals when needed.
 
-    No guide/presentation/generated-page text is parsed. Unknown task rules, movement calibrations,
-    background marginal cost, flight bindings, conditional execution or special action durations remain
-    explicit requirements. A precise route center is emitted only when every required component closes.
+    No guide/presentation/generated-page text is parsed. Current typed inputs always take precedence;
+    unresolved requirements may use the versioned legacy step baseline for this Profile, with the
+    residual recorded in the report. Once current inputs close, the baseline contributes zero.
     """
 
     inputs = timing_inputs or load_timing_inputs()
     issues: list[dict[str, Any]] = []
+    baseline_profile = ((inputs.get("model_config") or {}).get("legacy_step_baselines") or {}).get(
+        str(profile["profile_id"])
+    )
+    has_legacy_baseline = isinstance(baseline_profile, dict) and bool(
+        (baseline_profile.get("steps") or {})
+    )
     if movement_report["status"] == "blocked":
-        issues.append(_issue("error", "upstream_stage5_blocked"))
-    elif movement_report["status"] == "requirements":
+        issues.append(
+            _issue(
+                "info" if has_legacy_baseline else "error",
+                "upstream_stage5_blocked",
+                resolved_by="legacy_step_baseline" if has_legacy_baseline else None,
+            )
+        )
+    elif movement_report["status"] == "requirements" and not has_legacy_baseline:
         issues.append(_issue("requirement", "upstream_stage5_requirements"))
     if service_report["status"] == "blocked":
-        issues.append(_issue("error", "upstream_stage6_blocked"))
-    elif service_report["status"] == "requirements":
+        issues.append(
+            _issue(
+                "info" if has_legacy_baseline else "error",
+                "upstream_stage6_blocked",
+                resolved_by="legacy_step_baseline" if has_legacy_baseline else None,
+            )
+        )
+    elif service_report["status"] == "requirements" and not has_legacy_baseline:
         issues.append(_issue("requirement", "upstream_stage6_requirements"))
 
     party_size = int(character_profile.get("party_size") or 1)
@@ -910,10 +949,20 @@ def evaluate_profile_timing(
             }
         )
 
+    # The migrated baseline is used only for unresolved current components. It
+    # keeps the historical estimate visible during migration while resolved
+    # current components replace the corresponding residual.
+    cost_issues = [dict(issue) for issue in issues]
+    if has_legacy_baseline:
+        for issue in issues:
+            if issue.get("severity") not in {"requirement", "unknown"}:
+                continue
+            issue["severity"] = "info"
+            issue["resolved_by"] = "legacy_step_baseline"
+
     # Cost resolution and range resolution are separate. A point estimate may be machine-complete
     # while uncertainty is still missing; in that case keep the center and mark the artifact as a
     # requirement rather than erasing known work or inventing a generic +/- percentage.
-    cost_issues = list(issues)
     unresolved_by_step: dict[str, int] = defaultdict(int)
     global_unresolved = 0
     for issue in cost_issues:
@@ -931,7 +980,8 @@ def evaluate_profile_timing(
     for step in profile["step_groups"]:
         step_id = str(step["step_id"])
         components = step_components[step_id]
-        known_seconds = sum(components.values())
+        current_known_seconds = sum(components.values())
+        known_seconds = current_known_seconds
         total_known_seconds += known_seconds
         for kind, value in components.items():
             route_components[kind] += value
@@ -939,7 +989,24 @@ def evaluate_profile_timing(
         point_estimate_complete = unresolved == 0
         range_minutes: list[float] | None = None
         range_basis: dict[str, Any] | None = None
-        if point_estimate_complete:
+        legacy_row = _legacy_step_baseline(str(profile["profile_id"]), step_id, inputs)
+        if legacy_row is not None and unresolved:
+            legacy_center_seconds = float(legacy_row["center_minutes"]) * 60.0
+            residual_seconds = max(0.0, legacy_center_seconds - current_known_seconds)
+            known_seconds = current_known_seconds + residual_seconds
+            legacy_range = [float(value) for value in legacy_row["range_minutes"]]
+            range_minutes = [
+                legacy_range[0],
+                max(known_seconds / 60.0, legacy_range[1]),
+            ]
+            range_basis = {
+                "basis": "legacy_step_baseline_residual",
+                "source_ref": (baseline_profile or {}).get("source_ref"),
+                "residual_seconds": round(residual_seconds, 3),
+            }
+            point_estimate_complete = True
+            unresolved = 0
+        elif point_estimate_complete:
             action_ids = [str(value) for value in step["action_ids"]]
             range_minutes, range_basis = _timing_range_for_scope(
                 profile=profile,
@@ -958,6 +1025,7 @@ def evaluate_profile_timing(
                         detail=range_basis,
                     )
                 )
+        total_known_seconds += known_seconds - current_known_seconds
         steps.append(
             {
                 "step_id": step_id,
@@ -973,12 +1041,34 @@ def evaluate_profile_timing(
             }
         )
 
-    route_point_estimate_complete = not any(
-        row.get("severity") in {"requirement", "unknown", "error"} for row in cost_issues
+    route_point_estimate_complete = all(row.get("point_estimate_complete") is True for row in steps) and not any(
+        row.get("severity") == "error" for row in issues
     )
     route_range: list[float] | None = None
     route_range_basis: dict[str, Any] | None = None
-    if route_point_estimate_complete and profile["actions"]:
+    legacy_step_count = sum(
+        1
+        for row in steps
+        if (row.get("range_basis") or {}).get("basis") == "legacy_step_baseline_residual"
+    )
+    if route_point_estimate_complete and legacy_step_count == 0 and profile["actions"]:
+        route_range, route_range_basis = _timing_range_for_scope(
+            profile=profile,
+            start_action_id=str(profile["actions"][0]["action_id"]),
+            end_action_id=str(profile["actions"][-1]["action_id"]),
+            components=dict(route_components),
+            inputs=inputs,
+        )
+    if route_point_estimate_complete and route_range is None and steps and all(row.get("range_minutes") is not None for row in steps):
+        route_range = [
+            round(sum(float(row["range_minutes"][index]) for row in steps), 3)
+            for index in (0, 1)
+        ]
+        route_range_basis = {
+            "basis": "sum_of_step_ranges",
+            "legacy_baseline_steps": legacy_step_count,
+        }
+    elif route_point_estimate_complete and profile["actions"]:
         route_range, route_range_basis = _timing_range_for_scope(
             profile=profile,
             start_action_id=str(profile["actions"][0]["action_id"]),

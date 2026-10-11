@@ -1,5 +1,5 @@
 {
-  "canonical_edge_count": 34,
+  "canonical_edge_count": 36,
   "edges": [
     {
       "cross_zone": false,
@@ -78,15 +78,35 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0022->a0026",
+      "edge_id": "a0022->a0148",
       "from_location_ref": "zang_dk-p006",
       "from_visit_id": "a0022",
       "from_zone_id": 3521,
-      "legacy_transport": null,
+      "legacy_transport": "ride",
       "movement_mode": "ride",
-      "movement_mode_source": "default_ground_mount",
+      "movement_mode_source": "explicit",
       "operation_kind": "self_move",
-      "source": "default_autonomous_move",
+      "source": "canonical_profile",
+      "to_location_ref": "zang_dk-p038",
+      "to_visit_id": "a0148",
+      "to_zone_id": 3521
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0148->a0026",
+      "from_location_ref": "zang_dk-p038",
+      "from_visit_id": "a0148",
+      "from_zone_id": 3521,
+      "legacy_transport": "hearth",
+      "movement_action": {
+        "action_id": "a0150",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "塞纳里奥庇护所"
+      },
+      "movement_action_id": "a0150",
+      "operation_kind": "hearth",
+      "source": "canonical_profile",
       "to_location_ref": "zang_dk-p007",
       "to_visit_id": "a0026",
       "to_zone_id": 3521
@@ -183,24 +203,9 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0055->a0058",
+      "edge_id": "a0055->a0060",
       "from_location_ref": "zang_dk-p013",
       "from_visit_id": "a0055",
-      "from_zone_id": 3521,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "zang_dk-p014",
-      "to_visit_id": "a0058",
-      "to_zone_id": 3521
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0058->a0060",
-      "from_location_ref": "zang_dk-p014",
-      "from_visit_id": "a0058",
       "from_zone_id": 3521,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -267,16 +272,10 @@
       "from_location_ref": "zang_dk-p018",
       "from_visit_id": "a0074",
       "from_zone_id": 3521,
-      "legacy_transport": "taxi",
-      "movement_action": {
-        "action_id": "a0080",
-        "action_kind": "taxi",
-        "from_name": "萨布拉金",
-        "operation_kind": "taxi",
-        "to_name": "塞纳里奥庇护所"
-      },
-      "movement_action_id": "a0080",
-      "operation_kind": "taxi",
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
       "source": "canonical_profile",
       "to_location_ref": "zang_dk-p019",
       "to_visit_id": "a0079",
@@ -288,16 +287,10 @@
       "from_location_ref": "zang_dk-p019",
       "from_visit_id": "a0079",
       "from_zone_id": 3521,
-      "legacy_transport": "taxi",
-      "movement_action": {
-        "action_id": "a0092",
-        "action_kind": "taxi",
-        "from_name": "塞纳里奥庇护所",
-        "operation_kind": "taxi",
-        "to_name": "沼泽鼠岗哨"
-      },
-      "movement_action_id": "a0092",
-      "operation_kind": "taxi",
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
       "source": "canonical_profile",
       "to_location_ref": "zang_dk-p020",
       "to_visit_id": "a0091",
@@ -335,44 +328,9 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0097->a0099",
+      "edge_id": "a0097->a0107",
       "from_location_ref": "zang_dk-p022",
       "from_visit_id": "a0097",
-      "from_zone_id": 3521,
-      "legacy_transport": "hearth",
-      "movement_action": {
-        "action_id": "a0100",
-        "action_kind": "use_hearth",
-        "operation_kind": "hearth",
-        "target_name": "萨布拉金"
-      },
-      "movement_action_id": "a0100",
-      "operation_kind": "hearth",
-      "source": "canonical_profile",
-      "to_location_ref": "zang_dk-p023",
-      "to_visit_id": "a0099",
-      "to_zone_id": 3521
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0099->a0101",
-      "from_location_ref": "zang_dk-p023",
-      "from_visit_id": "a0099",
-      "from_zone_id": 3521,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "zang_dk-p024",
-      "to_visit_id": "a0101",
-      "to_zone_id": 3521
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0101->a0107",
-      "from_location_ref": "zang_dk-p024",
-      "from_visit_id": "a0101",
       "from_zone_id": 3521,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -400,9 +358,54 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0109->a0112",
+      "edge_id": "a0109->a0152",
       "from_location_ref": "zang_dk-p026",
       "from_visit_id": "a0109",
+      "from_zone_id": 3521,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "zang_dk-p039",
+      "to_visit_id": "a0152",
+      "to_zone_id": 3521
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0152->a0154",
+      "from_location_ref": "zang_dk-p039",
+      "from_visit_id": "a0152",
+      "from_zone_id": 3521,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "zang_dk-p026-return",
+      "to_visit_id": "a0154",
+      "to_zone_id": 3521
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0154->a0101",
+      "from_location_ref": "zang_dk-p026-return",
+      "from_visit_id": "a0154",
+      "from_zone_id": 3521,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "zang_dk-p024",
+      "to_visit_id": "a0101",
+      "to_zone_id": 3521
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0101->a0112",
+      "from_location_ref": "zang_dk-p024",
+      "from_visit_id": "a0101",
       "from_zone_id": 3521,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -430,24 +433,9 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0114->a0116",
+      "edge_id": "a0114->a0118",
       "from_location_ref": "zang_dk-p028",
       "from_visit_id": "a0114",
-      "from_zone_id": 3521,
-      "legacy_transport": "ride",
-      "movement_mode": "ride",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
-      "source": "canonical_profile",
-      "to_location_ref": "zang_dk-p029",
-      "to_visit_id": "a0116",
-      "to_zone_id": 3521
-    },
-    {
-      "cross_zone": false,
-      "edge_id": "a0116->a0118",
-      "from_location_ref": "zang_dk-p029",
-      "from_visit_id": "a0116",
       "from_zone_id": 3521,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -495,9 +483,24 @@
     },
     {
       "cross_zone": false,
-      "edge_id": "a0122->a0130",
+      "edge_id": "a0122->a0116",
       "from_location_ref": "zang_dk-p032",
       "from_visit_id": "a0122",
+      "from_zone_id": 3521,
+      "legacy_transport": "ride",
+      "movement_mode": "ride",
+      "movement_mode_source": "explicit",
+      "operation_kind": "self_move",
+      "source": "canonical_profile",
+      "to_location_ref": "zang_dk-p029",
+      "to_visit_id": "a0116",
+      "to_zone_id": 3521
+    },
+    {
+      "cross_zone": false,
+      "edge_id": "a0116->a0130",
+      "from_location_ref": "zang_dk-p029",
+      "from_visit_id": "a0116",
       "from_zone_id": 3521,
       "legacy_transport": "ride",
       "movement_mode": "ride",
@@ -580,7 +583,7 @@
     }
   ],
   "exit_movement_actions": [],
-  "input_fingerprint": "35a1cdd136846eee9a095fd268e0a8878464d7f8d4c49b9d58c595b09bf2ccf8",
+  "input_fingerprint": "ee0fdabce004f9646ae006a169b8fdad65d2fbffe96d32bb16a366981cd456cd",
   "issues": [],
   "migration_candidate_count": 0,
   "primary_zone_id": 3521,
@@ -679,13 +682,32 @@
       "zone_id": 3521
     },
     {
-      "display_name": "塞纳里奥庇护所",
+      "display_name": "暗光带·沼泽之鞭",
       "handoff_ref": null,
-      "incoming_movement": null,
-      "legacy_transport": null,
-      "location_ref": "zang_dk-p007",
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "zang_dk-p038",
       "location_role": "map_anchor",
       "ordinal": 7,
+      "visit_id": "a0148",
+      "x": 82.07,
+      "y": 71.39,
+      "zone_id": 3521
+    },
+    {
+      "display_name": "塞纳里奥庇护所",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "action_id": "a0150",
+        "kind": "action"
+      },
+      "legacy_transport": "hearth",
+      "location_ref": "zang_dk-p007",
+      "location_role": "map_anchor",
+      "ordinal": 8,
       "visit_id": "a0026",
       "x": 78.4,
       "y": 62.02,
@@ -701,7 +723,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p008",
       "location_role": "map_anchor",
-      "ordinal": 8,
+      "ordinal": 9,
       "visit_id": "a0037",
       "x": 85.28,
       "y": 54.75,
@@ -717,7 +739,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p009",
       "location_role": "map_anchor",
-      "ordinal": 9,
+      "ordinal": 10,
       "visit_id": "a0042",
       "x": 77.5,
       "y": 70.5,
@@ -733,7 +755,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p010",
       "location_role": "map_anchor",
-      "ordinal": 10,
+      "ordinal": 11,
       "visit_id": "a0045",
       "x": 72.5,
       "y": 94.8,
@@ -749,7 +771,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p011",
       "location_role": "map_anchor",
-      "ordinal": 11,
+      "ordinal": 12,
       "visit_id": "a0049",
       "x": 70.6,
       "y": 80.29,
@@ -765,7 +787,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p012",
       "location_role": "map_anchor",
-      "ordinal": 12,
+      "ordinal": 13,
       "visit_id": "a0051",
       "x": 65.1,
       "y": 68.67,
@@ -781,26 +803,10 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p013",
       "location_role": "map_anchor",
-      "ordinal": 13,
+      "ordinal": 14,
       "visit_id": "a0055",
       "x": 65.15,
       "y": 40.91,
-      "zone_id": 3521
-    },
-    {
-      "display_name": "观察者杰哈恩",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "zang_dk-p014",
-      "location_role": "map_anchor",
-      "ordinal": 14,
-      "visit_id": "a0058",
-      "x": 80.75,
-      "y": 36.27,
       "zone_id": 3521
     },
     {
@@ -871,10 +877,10 @@
       "display_name": "塞纳里奥庇护所",
       "handoff_ref": null,
       "incoming_movement": {
-        "action_id": "a0080",
-        "kind": "action"
+        "kind": "self_move",
+        "mode": "ride"
       },
-      "legacy_transport": "taxi",
+      "legacy_transport": "ride",
       "location_ref": "zang_dk-p019",
       "location_role": "map_anchor",
       "ordinal": 19,
@@ -887,10 +893,10 @@
       "display_name": "沼泽鼠岗哨",
       "handoff_ref": null,
       "incoming_movement": {
-        "action_id": "a0092",
-        "kind": "action"
+        "kind": "self_move",
+        "mode": "ride"
       },
-      "legacy_transport": "taxi",
+      "legacy_transport": "ride",
       "location_ref": "zang_dk-p020",
       "location_role": "map_anchor",
       "ordinal": 20,
@@ -932,38 +938,6 @@
       "zone_id": 3521
     },
     {
-      "display_name": "萨布拉金",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "action_id": "a0100",
-        "kind": "action"
-      },
-      "legacy_transport": "hearth",
-      "location_ref": "zang_dk-p023",
-      "location_role": "map_anchor",
-      "ordinal": 23,
-      "visit_id": "a0099",
-      "x": 32.38,
-      "y": 51.96,
-      "zone_id": 3521
-    },
-    {
-      "display_name": "萨布拉金",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "zang_dk-p024",
-      "location_role": "map_anchor",
-      "ordinal": 24,
-      "visit_id": "a0101",
-      "x": 32.38,
-      "y": 51.96,
-      "zone_id": 3521
-    },
-    {
       "display_name": "昂古拉刷新点",
       "handoff_ref": null,
       "incoming_movement": {
@@ -973,7 +947,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p025",
       "location_role": "map_anchor",
-      "ordinal": 25,
+      "ordinal": 23,
       "visit_id": "a0107",
       "x": 32.81,
       "y": 59.53,
@@ -989,10 +963,58 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p026",
       "location_role": "map_anchor",
-      "ordinal": 26,
+      "ordinal": 24,
       "visit_id": "a0109",
       "x": 23.32,
       "y": 66.21,
+      "zone_id": 3521
+    },
+    {
+      "display_name": "孢殖林",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "zang_dk-p039",
+      "location_role": "map_anchor",
+      "ordinal": 25,
+      "visit_id": "a0152",
+      "x": 19.02,
+      "y": 62.43,
+      "zone_id": 3521
+    },
+    {
+      "display_name": "莉萨奥营地",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "zang_dk-p026-return",
+      "location_role": "map_anchor",
+      "ordinal": 26,
+      "visit_id": "a0154",
+      "x": 23.32,
+      "y": 66.21,
+      "zone_id": 3521
+    },
+    {
+      "display_name": "萨布拉金",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "zang_dk-p024",
+      "location_role": "map_anchor",
+      "ordinal": 27,
+      "visit_id": "a0101",
+      "x": 32.38,
+      "y": 51.96,
       "zone_id": 3521
     },
     {
@@ -1005,7 +1027,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p027",
       "location_role": "map_anchor",
-      "ordinal": 27,
+      "ordinal": 28,
       "visit_id": "a0112",
       "x": 22.31,
       "y": 45.78,
@@ -1021,26 +1043,10 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p028",
       "location_role": "map_anchor",
-      "ordinal": 28,
+      "ordinal": 29,
       "visit_id": "a0114",
       "x": 23.78,
       "y": 26.75,
-      "zone_id": 3521
-    },
-    {
-      "display_name": "匕潭鱼人笼点",
-      "handoff_ref": null,
-      "incoming_movement": {
-        "kind": "self_move",
-        "mode": "ride"
-      },
-      "legacy_transport": "ride",
-      "location_ref": "zang_dk-p029",
-      "location_role": "map_anchor",
-      "ordinal": 29,
-      "visit_id": "a0116",
-      "x": 26.81,
-      "y": 22.6,
       "zone_id": 3521
     },
     {
@@ -1092,6 +1098,22 @@
       "zone_id": 3521
     },
     {
+      "display_name": "匕潭鱼人笼点",
+      "handoff_ref": null,
+      "incoming_movement": {
+        "kind": "self_move",
+        "mode": "ride"
+      },
+      "legacy_transport": "ride",
+      "location_ref": "zang_dk-p029",
+      "location_role": "map_anchor",
+      "ordinal": 33,
+      "visit_id": "a0116",
+      "x": 26.81,
+      "y": 22.6,
+      "zone_id": 3521
+    },
+    {
       "display_name": "战斗迫近",
       "handoff_ref": null,
       "incoming_movement": {
@@ -1101,7 +1123,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p033",
       "location_role": "map_anchor",
-      "ordinal": 33,
+      "ordinal": 34,
       "visit_id": "a0130",
       "x": 19.88,
       "y": 27.09,
@@ -1117,7 +1139,7 @@
       "legacy_transport": "hearth",
       "location_ref": "zang_dk-p034",
       "location_role": "map_anchor",
-      "ordinal": 34,
+      "ordinal": 35,
       "visit_id": "a0132",
       "x": 32.38,
       "y": 51.96,
@@ -1133,7 +1155,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p035",
       "location_role": "map_anchor",
-      "ordinal": 35,
+      "ordinal": 36,
       "visit_id": "a0137",
       "x": 25.13,
       "y": 23.78,
@@ -1149,7 +1171,7 @@
       "legacy_transport": "ride",
       "location_ref": "zang_dk-p036",
       "location_role": "map_anchor",
-      "ordinal": 36,
+      "ordinal": 37,
       "visit_id": "a0139",
       "x": 18.6,
       "y": 7.0,
@@ -1165,7 +1187,7 @@
       "legacy_transport": "hearth",
       "location_ref": "zang_dk-p037",
       "location_role": "map_anchor",
-      "ordinal": 37,
+      "ordinal": 38,
       "visit_id": "a0141",
       "x": 32.38,
       "y": 51.96,

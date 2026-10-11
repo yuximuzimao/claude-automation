@@ -164,6 +164,28 @@ def test_unknown_task_rule_never_falls_back_to_default_minutes() -> None:
     assert not any(row.get("basis") == "historical_default" for row in report["component_rows"])
 
 
+def test_legacy_step_baseline_fills_only_unresolved_residual() -> None:
+    inputs = deepcopy(_inputs())
+    inputs["model_config"]["legacy_step_baselines"] = {
+        "synthetic-timing": {
+            "source_ref": "legacy-test",
+            "steps": {
+                "step-01": {
+                    "center_minutes": 12.0,
+                    "range_minutes": [9.0, 15.0],
+                }
+            },
+        }
+    }
+    report = _evaluate(_profile(), {100: _task_card(100)}, inputs)
+
+    assert report["status"] == "pass"
+    assert report["center_minutes"] == 12.0
+    assert report["range_minutes"] == [9.0, 15.0]
+    assert report["steps"][0]["range_basis"]["basis"] == "legacy_step_baseline_residual"
+    assert report["steps"][0]["unresolved_component_count"] == 0
+
+
 def test_self_move_with_unknown_coordinates_stays_requirement() -> None:
     profile = _profile()
     profile["geometry"]["locations"]["p2"]["x"] = None

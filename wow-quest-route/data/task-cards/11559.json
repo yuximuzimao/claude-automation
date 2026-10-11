@@ -46,7 +46,7 @@
     "交付：呀噜咕噜。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -95,14 +95,26 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-11",
+      "source_type": "user_live",
+      "source_ref": "2026-10-10 22:01—2026-10-11 03:38 第二组DK北风苔原→龙骨荒野实跑反馈",
+      "observed_at": "2026-10-11",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "优先拾取地面的冬鳞蚌壳；地面不足时再杀冬鳞鱼人补缺。五号之间是否共享拾取仍待实测。",
+      "text": "",
       "scope": "all",
-      "source_ref": "2026-09-26 Route Atlas note audit",
-      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
+      "source_ref": "user_live:2026-10-11",
+      "reason": "第二组DK实跑确认旧备注会误导执行：任务本身不共享，本次耗时偏长主要受抢怪/资源竞争和首次不熟悉拾取物位置影响；不把本次操作过程固化成长期备注。"
     }
   }
 }

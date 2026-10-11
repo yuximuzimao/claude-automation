@@ -1962,6 +1962,215 @@
         "state": "已接完考达拉第一批任务"
       },
       "status": "continuation_mechanics_runtime_route_and_timing_recorded"
+    },
+    {
+      "run_id": "2026-10-09-10-borean-dk-second-run-continuation-2256-0134",
+      "date": "2026-10-09",
+      "continuation_date": "2026-10-10",
+      "route_key": "borean_dk_second_run_continuation",
+      "profile_ids": [
+        "borean-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "borean-fivebox": 3
+      },
+      "run_kind": "second_borean_fivebox_run_continuation",
+      "time_precision": "user_minute_start_stop",
+      "source": "2026-10-10用户现场反馈；用户记录2026-10-09 22:56开始、2026-10-10 01:34停止。",
+      "journey_anchors": {
+        "user_start_local": "2026-10-09T22:56:00+08:00",
+        "business_start": "承接上一段考达拉第一批任务已接齐的恢复点",
+        "user_stop_local": "2026-10-10T01:34:00+08:00",
+        "journey_last_event": "完成本轮钢腭车队/博古洛克段现场验证并停止"
+      },
+      "actual_minutes": 158.0,
+      "actual_display": "2小时38分钟（用户分钟口径）",
+      "route_window": "从上一段考达拉第一批任务恢复点开始，完成考达拉后续任务机制验证并推进至钢腭车队/博古洛克段；本轮验证《攻击！》《让他们安息》等任务。",
+      "actual_contains_learning_or_route_errors": false,
+      "calibration_eligible": false,
+      "calibration_note": "本段核心产出是任务五开机制与路线动作纠正；未提供Journey秒级锚点，且包含本轮现场切号/机制确认，不直接重标通用Timing参数。",
+      "route_lessons_applied": [
+        "确认《监测数据》共享；《古树的秘密》《冰冷的草莓》《保持隐蔽》《诱饵》《破译密码》不共享。",
+        "确认《牢笼》改为五号依次拾取；《莎拉苟萨的末日》依次交互并拾取。",
+        "确认《奇怪……》《克莉斯塔萨》《集结红龙》《攻击！》不需要fivebox标签；《让他们安息》共享。",
+        "确认《触动陷阱》共享，由跟随号触发，完成后主号带队先回永生之盾。",
+        "步骤58改为图书馆员提艾蕾直接传送琥珀崖，不再使用系统飞行。"
+      ],
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-10T01:34:00+08:00",
+        "level": 73,
+        "xp_absolute_range": "7.6万—7.9万",
+        "location": "钢腭车队/博古洛克前哨站段",
+        "state": "本轮验证完成，下一次从步骤59后续交接继续"
+      },
+      "status": "continuation_mechanics_runtime_route_and_timing_recorded"
+    },
+    {
+      "run_id": "2026-10-10-11-borean-to-dragonblight-dk-second-run-2201-0338",
+      "date": "2026-10-10",
+      "continuation_date": "2026-10-11",
+      "route_key": "borean_to_dragonblight_dk_second_run_continuation",
+      "profile_ids": [
+        "borean-fivebox",
+        "dragonblight-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "borean-fivebox": 3,
+        "dragonblight-fivebox": 1
+      },
+      "run_kind": "second_fivebox_run_borean_to_dragonblight_continuation",
+      "time_precision": "user_minute_start_pause_resume_stop",
+      "source": "2026-10-11用户现场反馈；用户记录2026-10-10 22:01开始，2026-10-11 01:09—02:35暂停，03:38停止。",
+      "journey_anchors": {
+        "user_start_local": "2026-10-10T22:01:00+08:00",
+        "first_matching_journey_event_local": "2026-10-10T22:02:20+08:00",
+        "first_matching_journey_event": "接11627《沸点》",
+        "business_start": "北风步骤60《沸点》开始段；承接已完成的步骤59钢腭车队/博古洛克",
+        "dragonblight_entry_local": "2026-10-11T00:13:43+08:00",
+        "dragonblight_entry_event": "完成11930《横贯冰原》并接11977《牦牛人中的牛头人》",
+        "pause_start_local": "2026-10-11T01:09:00+08:00",
+        "resume_local": "2026-10-11T02:35:00+08:00",
+        "last_matching_journey_event_local": "2026-10-11T03:37:27+08:00",
+        "last_matching_journey_event": "完成12072《该死的荒芜兽！》",
+        "user_stop_local": "2026-10-11T03:38:00+08:00",
+        "journey_source_sha256": "50d367143bbca2e4bd3d20c1c0eb6ad1c5c57a906a39515244df93131284e89c"
+      },
+      "gross_minutes": 337.0,
+      "paused_minutes": 86.0,
+      "actual_minutes": 251.0,
+      "actual_display": "4小时11分钟（扣除1小时26分钟明确暂停）",
+      "route_window": "从北风苔原步骤59后续开始，完成北风末段并经《横贯冰原》进入龙骨荒野，推进至龙骨荒野步骤9《该死的荒芜兽！》完成。",
+      "actual_contains_learning_or_route_errors": true,
+      "calibration_eligible": false,
+      "calibration_note": "扣除明确暂停后的4小时11分钟仍含已知污染：冬鳞区域存在抢怪/资源竞争与首次不熟悉拾取物位置；《就是他们！》操作失误导致一号死亡并跑尸约2分钟。主号经验异常影响本段XP状态，但用户是在03:38停止后发现并执行恢复/补偿，因此故障处理与后续单独补约10万经验不计入这251分钟；异常XP与补偿刷怪均不得进入路线XP校准。",
+      "same_scope_model_comparison": {
+        "scope": "北风步骤60《沸点》开始段→步骤66完成，再到龙骨步骤1→9完成。用户22:01开始；Questie首个匹配事件22:02:20接《沸点》，因此总范围与当前模型步骤60→66 + 龙骨1→9高度一致。",
+        "model_center_minutes": 185.329,
+        "model_range_minutes": [143.505, 227.352],
+        "actual_minutes": 251.0,
+        "over_center_minutes": 65.671,
+        "over_center_percent": 35.43,
+        "over_upper_bound_minutes": 23.648,
+        "over_upper_bound_percent": 10.4,
+        "split": {
+          "borean_steps_60_66": {
+            "actual_minutes": 132.717,
+            "model_center_minutes": 86.411,
+            "model_range_minutes": [66.753, 106.168],
+            "over_center_minutes": 46.306,
+            "over_center_percent": 53.59,
+            "over_upper_bound_minutes": 26.549,
+            "journey_hotspots": "步骤60约5.65分钟 vs 预测6.5，基本正常；步骤61约50.02分钟 vs 28.6、步骤62约24.43分钟 vs 13.9，是最主要超时；步骤63约17.18 vs 13.3、步骤64约18.13 vs 12.3也偏慢；步骤66约8.12 vs 10.6反而快于预测。",
+            "note": "22:01用户起点→00:13:43《横贯冰原》完成。冬鳞资源竞争、首次不熟悉蚌壳位置与约2分钟跑尸主要落在这段，是总超时的主要来源；当前污染不足以支持直接重标每一步基线，但足以定位后续复跑重点。"
+          },
+          "dragonblight_steps_1_9": {
+            "journey_gross_minutes": 203.733,
+            "explicit_pause_minutes": 86.0,
+            "actual_active_minutes": 117.733,
+            "model_center_minutes": 98.918,
+            "model_range_minutes": [76.752, 121.184],
+            "over_center_minutes": 18.815,
+            "over_center_percent": 19.02,
+            "below_upper_bound_minutes": 3.451,
+            "note": "00:13:43《横贯冰原》完成→03:37:27《该死的荒芜兽！》完成，扣01:09—02:35暂停。第二组龙骨开局虽慢于中心值，但仍落在模型预测区间内。"
+          }
+        },
+        "note": "整段看起来超出预测上界约10.4%，拆开后可以确定主要偏差来自北风冬鳞收尾；龙骨步骤1—9本身仍在预测区间内。"
+      },
+      "first_group_comparison_boundary": {
+        "same_combined_scope_available": false,
+        "reason": "第一组圣骑在北风冬鳞收尾阶段持续边跑边改路线，项目历史已明确该长段墙钟不可靠，因此没有可用于‘北风步骤60→龙骨步骤9’完整同起终点的第一组总时间。",
+        "dragonblight_steps_1_9": {
+          "first_group_minutes_approx": 149.52,
+          "second_group_minutes": 117.733,
+          "second_group_faster_minutes": 31.787,
+          "second_group_faster_percent": 21.26,
+          "caveat": "第一组起点为步骤1任务接取完毕后的近似起点，且步骤7包含《血之魔典》前置错误纠错和寻找西诺克等首跑污染；因此21.26%是很有参考价值但并非纯职业差。"
+        },
+        "prior_borean_same_scope_reference": "此前另一个可比北风连续区间中，第二组约2小时53分54秒，第一组扣长暂停后约3小时38分16秒，第二组快约44分22秒（约20.3%）。"
+      },
+      "route_lessons_applied": [
+        "确认北风末段10项fivebox机制并从pending清单移除：冬鳞鱼人的贸易/美味炖鲸肉/风暴微粒不共享；咕噜咕噜呜啦哇啦！/决不投降！/钥匙管理者呜啦咕噜/卡加尼舒/落叶归根依次拾取；沸点/空气的幻象共享。",
+        "确认龙骨本段：深入密林/天灾的装备/邪能之约/冰霜之约不共享；死亡名单：高阶教徒扎古斯/红玉丁香依次拾取；萨鲁法尔的信/艾卓-尼鲁布的深渊/血之魔典不显示fivebox标签；该死的荒芜兽！为近距离条件的特殊机制。",
+        "钥匙管理者呜啦咕噜补充脱离视角后返回可加快NPC刷新；先知格雷姆沃克之魂补洞穴提示；横贯冰原补第二座桥前减速；阿努巴尔的束缚补齐三名钥匙目标坐标。",
+        "做完《腐烂的器官》后正式路线改为直接炉石阿格玛之锤。"
+      ],
+      "runtime_anomalies": [
+        {
+          "kind": "death_and_corpse_run",
+          "task": "就是他们！",
+          "estimated_minutes": 2.0,
+          "calibration_use": "exclude_as_pollution"
+        },
+        {
+          "kind": "resource_competition_and_learning",
+          "task": "冬鳞鱼人的贸易",
+          "calibration_use": "exclude_as_clean_task_time"
+        },
+        {
+          "kind": "xp_gain_anomaly",
+          "character": "主号",
+          "symptom": "经验获取约为其它号的一半",
+          "verified_recovery": "关闭经验获取后重新开启，现场确认恢复正常",
+          "estimated_xp_deficit": "约10万",
+          "followup": "后续单独刷怪补回缺口；补偿段不计入路线样本",
+          "reference": "docs/verified-routes/XP-ANOMALY-TROUBLESHOOTING.md"
+        }
+      ],
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-11T03:38:00+08:00",
+        "level": 74,
+        "xp_absolute_approx": "约41.7万",
+        "location": "龙骨荒野·阿格玛之锤",
+        "state": "步骤9《该死的荒芜兽！》完成；下一次从步骤10《恐怖之爪 → 猎龙营地 → 诺兹拉斯挖掘场》继续"
+      },
+      "status": "continuation_mechanics_runtime_route_and_timing_recorded_with_known_pollution"
+    },
+    {
+      "run_id": "2026-10-11-12-dragonblight-dk-second-run-1744-0150",
+      "date": "2026-10-11",
+      "continuation_date": "2026-10-12",
+      "route_key": "dragonblight_dk_second_run_continuation",
+      "profile_ids": ["dragonblight-fivebox"],
+      "profile_versions_at_run": {"dragonblight-fivebox": 1},
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 1,
+      "run_kind": "second_fivebox_run_dragonblight_continuation",
+      "time_precision": "user_minute_start_pause_resume_stop",
+      "source": "2026-10-12用户现场反馈；2026-10-11 17:44开始，2026-10-11 18:52—21:53暂停，2026-10-12 01:50停止。",
+      "journey_anchors": {
+        "user_start_local": "2026-10-11T17:44:00+08:00",
+        "pause_start_local": "2026-10-11T18:52:00+08:00",
+        "resume_local": "2026-10-11T21:53:00+08:00",
+        "user_stop_local": "2026-10-12T01:50:00+08:00",
+        "business_start": "龙骨荒野步骤10后续",
+        "business_end": "至少完成步骤25《诱饵》",
+        "journey_source": "用户已更新游戏历程；当前项目目录未保存该次Journey导出文件"
+      },
+      "gross_minutes": 486.0,
+      "paused_minutes": 181.0,
+      "actual_minutes": 305.0,
+      "actual_display": "5小时05分钟（扣除3小时01分钟明确暂停）",
+      "route_window": "从龙骨荒野步骤10继续，推进至步骤25《诱饵》完成；期间覆盖北风矿区后续、冰虫、眠月花园、罗萨洛尔森林、红玉丁香、莫亚基和因度雷任务链。",
+      "actual_contains_learning_or_route_errors": true,
+      "calibration_eligible": false,
+      "calibration_note": "本轮包含已发现的步骤16/17路线顺序错误、红玉丁香与红玉胸针任务接取顺序调整，以及吉加托尔支线恢复后的首次路线编排；暂停时间已扣除，但该样本仍只能作为路线修正和机制证据，不能直接校准旧步骤墙钟。",
+      "runtime_lessons": [
+        "囤积矿石、刨冰、柔软的包装、不会融化的东西、难以下咽不共享。",
+        "冰虫之母、阻碍协议、一封家书、诱饵按依次拾取处理。",
+        "寻找线索不共享，不能把同一尸体按依次拾取处理。",
+        "阿坎尼姆斯的终结、森林上空、投影和计划、魔网能量线的终端、解脱和安息共享；大麻烦的征兆不显示fivebox标签。",
+        "红玉丁香目标区应顺手处理达莉亚并立即接红玉胸针任务；邪恶之约要控制持续伤害。",
+        "第二组血DK恢复吉加托尔—猎龙营地—萨拉斯塔支线。"
+      ],
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-12T01:50:00+08:00",
+        "level": 75,
+        "xp_absolute_approx": "约102万",
+        "location": "龙骨荒野·《诱饵》完成后的路线段",
+        "state": "按当前反馈从步骤26《莫亚基 → 鱼钩 → 炉石阿格玛》继续"
+      },
+      "status": "continuation_mechanics_runtime_route_recorded_not_calibration_eligible"
     }
   ]
 }

@@ -56,7 +56,7 @@
     "塔辛尼中尉还会掉落部落信件；拾取并右键信件可接取《一封家书》。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -98,7 +98,7 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "《一封家书》：来源怪为罗萨洛尔森林的塔辛尼；击杀后拾取掉落的部落信件任务起始物并右键接任务。",
+      "text": "塔辛尼中尉掉落部落信件；同一具尸体可供五号依次拾取，拿到后右键接《一封家书》。",
       "scope": "all",
       "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
       "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"

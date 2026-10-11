@@ -223,7 +223,6 @@
     "a0343": "executed",
     "a0344": "executed",
     "a0346": "executed",
-    "a0347": "maybe",
     "a0349": "executed",
     "a0350": "executed",
     "a0352": "executed",
@@ -394,7 +393,16 @@
     "a0602": "executed",
     "a0605": "executed",
     "a0607": "executed",
-    "a0609": "executed"
+    "a0609": "executed",
+    "a0611": "maybe",
+    "a0612": "executed",
+    "a0614": "executed",
+    "a0616": "executed",
+    "a0617": "executed",
+    "a0619": "executed",
+    "a0620": "executed",
+    "a0622": "executed",
+    "a0624": "executed"
   },
   "availability": {
     "deferred_gates": [
@@ -553,6 +561,18 @@
         "action_id": "a0039",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 12091
+      },
+      {
+        "action_id": "a0612",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 12090
+      },
+      {
+        "action_id": "a0612",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12090
       },
       {
         "action_id": "a0041",
@@ -1135,6 +1155,18 @@
         "task_id": 12106
       },
       {
+        "action_id": "a0611",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 12419
+      },
+      {
+        "action_id": "a0611",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12419
+      },
+      {
         "action_id": "a0236",
         "kind": "min_level",
         "required_min_level": 71,
@@ -1157,6 +1189,30 @@
         "action_id": "a0239",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 12111
+      },
+      {
+        "action_id": "a0617",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 12095
+      },
+      {
+        "action_id": "a0617",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12095
+      },
+      {
+        "action_id": "a0620",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 12097
+      },
+      {
+        "action_id": "a0620",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12097
       },
       {
         "action_id": "a0246",
@@ -1428,18 +1484,6 @@
         "action_id": "a0344",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 12450
-      },
-      {
-        "action_id": "a0347",
-        "kind": "min_level",
-        "required_min_level": 71,
-        "resolver": "derived_xp",
-        "task_id": 12419
-      },
-      {
-        "action_id": "a0347",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 12419
       },
       {
         "action_id": "a0350",
@@ -2548,6 +2592,33 @@
           }
         ],
         "task_id": 12091
+      },
+      {
+        "action_id": "a0612",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12090
       },
       {
         "action_id": "a0041",
@@ -3895,6 +3966,23 @@
         "task_id": 12106
       },
       {
+        "action_id": "a0611",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12419
+      },
+      {
         "action_id": "a0236",
         "checks": [
           {
@@ -3961,6 +4049,75 @@
           }
         ],
         "task_id": 12111
+      },
+      {
+        "action_id": "a0617",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_all",
+            "status": "required_external_state",
+            "task_ids": [
+              12089,
+              12091
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12095
+      },
+      {
+        "action_id": "a0620",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              12095
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12097
       },
       {
         "action_id": "a0246",
@@ -4556,23 +4713,6 @@
           }
         ],
         "task_id": 12450
-      },
-      {
-        "action_id": "a0347",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 71,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 12419
       },
       {
         "action_id": "a0350",
@@ -6241,6 +6381,20 @@
         "task_id": 12791
       },
       {
+        "action_id": "a0617",
+        "kind": "completed_task",
+        "relation": "pre_all",
+        "required_task_id": 12089,
+        "task_id": 12095
+      },
+      {
+        "action_id": "a0617",
+        "kind": "completed_task",
+        "relation": "pre_all",
+        "required_task_id": 12091,
+        "task_id": 12095
+      },
+      {
         "action_id": "a0568",
         "kind": "absent_completed_or_active_tasks",
         "relation": "exclusive_with",
@@ -6316,6 +6470,12 @@
         "target": "阿格玛之锤"
       },
       {
+        "action_id": "use-hearth-after-rotting-organs",
+        "kind": "use_hearth",
+        "status": "used",
+        "target": "阿格玛之锤"
+      },
+      {
         "action_id": "a0087",
         "kind": "use_hearth",
         "status": "used",
@@ -6323,6 +6483,12 @@
       },
       {
         "action_id": "a0184",
+        "kind": "use_hearth",
+        "status": "used",
+        "target": "阿格玛之锤"
+      },
+      {
+        "action_id": "a0610",
         "kind": "use_hearth",
         "status": "used",
         "target": "阿格玛之锤"
@@ -6350,7 +6516,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "65a737e49fe2fbb2724377e54fcb243e59cd04c6a22379e83e15069708bfbaed",
+  "input_fingerprint": "da35c88ff914aec8434dea8427083c95efc9819d5f1239e5822ae5b2af14b167",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",
@@ -6391,7 +6557,7 @@
       "1064": 1560,
       "1067": 6120,
       "1073": 3220,
-      "1085": 7105,
+      "1085": 7465,
       "1090": 1950,
       "1091": 5945,
       "1106": 275
@@ -6469,8 +6635,11 @@
       12080,
       12084,
       12089,
+      12090,
       12091,
+      12095,
       12096,
+      12097,
       12100,
       12101,
       12102,

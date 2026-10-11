@@ -14,6 +14,7 @@
 | 圣骑战斗记录 | `verified-routes/PALADIN-COMBAT-NOTES.md` |
 | DK战斗记录 | `verified-routes/DK-COMBAT-NOTES.md` |
 | DK出生区任务攻略 | `verified-routes/DK-STARTING-ZONE-NOTES.md` |
+| 时光服经验获取异常处理 | `verified-routes/XP-ANOMALY-TROUBLESHOOTING.md` |
 | 当前正式Route Atlas页面 | `../data/routes/route-atlas-workbench.html` |
 
 ## 长期规则与数据字典
@@ -76,6 +77,6 @@
 - `archive/lib/`
 - `archive/tests/`
 - `archive/tasks/`
-- 最新阶段NEAT：`archive/neat/2026-10-08-borean-dk-second-run-continuation-neat.md`
+- 最新阶段NEAT：`archive/neat/2026-10-12-dragonblight-dk-live-route-closeout-neat.md`
 - Route Lifecycle架构迁移历史：`archive/analysis/2026-09-21-route-lifecycle-migration-history.md`
 - Publisher替代期页面/对拍产物：`archive/routes/2026-09-route-lifecycle-publisher-cutover/`

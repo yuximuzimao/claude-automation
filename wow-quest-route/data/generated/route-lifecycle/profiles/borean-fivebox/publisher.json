@@ -10,7 +10,7 @@
   "hearth_chain": [
     "战歌要塞"
   ],
-  "input_fingerprint": "c635d3f7e4398244f9715cf23fd2f33b6f7db3440862184e0213e59d53a2bd80",
+  "input_fingerprint": "988745c6d99d8ca5e93b4b0bafdfc7d9556ba19cacbcafbe1b138f693da95bd5",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -490,20 +490,9 @@
           "to_visit_id": "a0122"
         },
         {
-          "edge_id": "a0122->a0124",
+          "edge_id": "a0122->a0127",
           "from_location_ref": "borean-p044",
           "from_visit_id": "a0122",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "borean-p045",
-          "to_visit_id": "a0124"
-        },
-        {
-          "edge_id": "a0124->a0127",
-          "from_location_ref": "borean-p045",
-          "from_visit_id": "a0124",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -512,9 +501,20 @@
           "to_visit_id": "a0127"
         },
         {
-          "edge_id": "a0127->a0129",
+          "edge_id": "a0127->a0124",
           "from_location_ref": "borean-p046",
           "from_visit_id": "a0127",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "borean-p045",
+          "to_visit_id": "a0124"
+        },
+        {
+          "edge_id": "a0124->a0129",
+          "from_location_ref": "borean-p045",
+          "from_visit_id": "a0124",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -1590,9 +1590,31 @@
           "to_visit_id": "a0436"
         },
         {
-          "edge_id": "a0436->a0443",
+          "edge_id": "a0436->a0458",
           "from_location_ref": "borean-p144",
           "from_visit_id": "a0436",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "borean-p148",
+          "to_visit_id": "a0458"
+        },
+        {
+          "edge_id": "a0458->a0460",
+          "from_location_ref": "borean-p148",
+          "from_visit_id": "a0458",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "borean-p149",
+          "to_visit_id": "a0460"
+        },
+        {
+          "edge_id": "a0460->a0443",
+          "from_location_ref": "borean-p149",
+          "from_visit_id": "a0460",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -1623,31 +1645,9 @@
           "to_visit_id": "a0452"
         },
         {
-          "edge_id": "a0452->a0458",
+          "edge_id": "a0452->a0462",
           "from_location_ref": "borean-p147",
           "from_visit_id": "a0452",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "borean-p148",
-          "to_visit_id": "a0458"
-        },
-        {
-          "edge_id": "a0458->a0460",
-          "from_location_ref": "borean-p148",
-          "from_visit_id": "a0458",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "borean-p149",
-          "to_visit_id": "a0460"
-        },
-        {
-          "edge_id": "a0460->a0462",
-          "from_location_ref": "borean-p149",
-          "from_visit_id": "a0460",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -1744,20 +1744,9 @@
           "to_visit_id": "a0483"
         },
         {
-          "edge_id": "a0483->a0488",
+          "edge_id": "a0483->a0490",
           "from_location_ref": "borean-p156",
           "from_visit_id": "a0483",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
-          "source": "canonical_profile",
-          "to_location_ref": "borean-p157",
-          "to_visit_id": "a0488"
-        },
-        {
-          "edge_id": "a0488->a0490",
-          "from_location_ref": "borean-p157",
-          "from_visit_id": "a0488",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -1766,9 +1755,20 @@
           "to_visit_id": "a0490"
         },
         {
-          "edge_id": "a0490->a0492",
+          "edge_id": "a0490->a0488",
           "from_location_ref": "borean-p158",
           "from_visit_id": "a0490",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "borean-p157",
+          "to_visit_id": "a0488"
+        },
+        {
+          "edge_id": "a0488->a0492",
+          "from_location_ref": "borean-p157",
+          "from_visit_id": "a0488",
           "movement_action_id": null,
           "movement_mode": "ride",
           "operation_kind": "self_move",
@@ -2111,30 +2111,19 @@
           "from_location_ref": "borean-p185",
           "from_visit_id": "a0606",
           "movement_action_id": "a0607",
-          "movement_mode": "ride",
-          "operation_kind": "move",
+          "movement_mode": null,
+          "operation_kind": "fixed_transport",
           "source": "canonical_profile",
-          "to_location_ref": "borean-p186",
+          "to_location_ref": "borean-p187",
           "to_visit_id": "a0608"
         },
         {
-          "edge_id": "a0608->a0610",
-          "from_location_ref": "borean-p186",
-          "from_visit_id": "a0608",
-          "movement_action_id": "a0609",
-          "movement_mode": null,
-          "operation_kind": "taxi",
-          "source": "canonical_profile",
-          "to_location_ref": "borean-p187",
-          "to_visit_id": "a0610"
-        },
-        {
-          "edge_id": "a0610->a0612",
+          "edge_id": "a0608->a0612",
           "from_location_ref": "borean-p187",
-          "from_visit_id": "a0610",
-          "movement_action_id": "a0611",
+          "from_visit_id": "a0608",
+          "movement_action_id": null,
           "movement_mode": "ride",
-          "operation_kind": "move",
+          "operation_kind": "self_move",
           "source": "canonical_profile",
           "to_location_ref": "borean-p188",
           "to_visit_id": "a0612"
@@ -2536,7 +2525,7 @@
           "to_visit_id": "a0724"
         }
       ],
-      "input_fingerprint": "373a6be10ed8eb531248b0f7100b3f02926f2faf9c061d8642ee361f4998f5a9",
+      "input_fingerprint": "1641dda4aca5b2f3c4783210ce8f3cbc4a6e6170bde9296cbd1842fdee4cba21",
       "status": "pass",
       "visits": [
         {
@@ -2980,24 +2969,24 @@
           "y": 63.3
         },
         {
-          "display_name": "裂鞭海岸",
-          "location_ref": "borean-p045",
-          "location_role": "map_anchor",
-          "ordinal": 45,
-          "step_id": "step-13",
-          "visit_id": "a0124",
-          "x": 47.13,
-          "y": 75.48
-        },
-        {
           "display_name": "裂鞭海岸·被俘虏的海象人",
           "location_ref": "borean-p046",
           "location_role": "map_anchor",
-          "ordinal": 46,
+          "ordinal": 45,
           "step_id": "step-13",
           "visit_id": "a0127",
           "x": 44.2,
           "y": 77.85
+        },
+        {
+          "display_name": "裂鞭海岸",
+          "location_ref": "borean-p045",
+          "location_role": "map_anchor",
+          "ordinal": 46,
+          "step_id": "step-13",
+          "visit_id": "a0124",
+          "x": 47.13,
+          "y": 75.48
         },
         {
           "display_name": "裂鞭海岸·斯卡迪尔营地",
@@ -3980,40 +3969,10 @@
           "y": 37.25
         },
         {
-          "display_name": "圣城恩其拉",
-          "location_ref": "borean-p145",
-          "location_role": "map_anchor",
-          "ordinal": 145,
-          "step_id": "step-45",
-          "visit_id": "a0443",
-          "x": 87.6,
-          "y": 23.0
-        },
-        {
-          "display_name": "鲜血尖塔·踏雪者戈鲁姆",
-          "location_ref": "borean-p146",
-          "location_role": "map_anchor",
-          "ordinal": 146,
-          "step_id": "step-45",
-          "visit_id": "a0448",
-          "x": 87.57,
-          "y": 19.94
-        },
-        {
-          "display_name": "牦牛村",
-          "location_ref": "borean-p147",
-          "location_role": "map_anchor",
-          "ordinal": 147,
-          "step_id": "step-45",
-          "visit_id": "a0452",
-          "x": 76.0,
-          "y": 37.4
-        },
-        {
           "display_name": "南部虫孔",
           "location_ref": "borean-p148",
           "location_role": "map_anchor",
-          "ordinal": 148,
+          "ordinal": 145,
           "step_id": "step-45",
           "visit_id": "a0458",
           "x": 70.29,
@@ -4023,11 +3982,41 @@
           "display_name": "驯风者巴兰",
           "location_ref": "borean-p149",
           "location_role": "map_anchor",
-          "ordinal": 149,
+          "ordinal": 146,
           "step_id": "step-45",
           "visit_id": "a0460",
           "x": 75.58,
           "y": 35.77
+        },
+        {
+          "display_name": "圣城恩其拉",
+          "location_ref": "borean-p145",
+          "location_role": "map_anchor",
+          "ordinal": 147,
+          "step_id": "step-45",
+          "visit_id": "a0443",
+          "x": 87.6,
+          "y": 23.0
+        },
+        {
+          "display_name": "鲜血尖塔·踏雪者戈鲁姆",
+          "location_ref": "borean-p146",
+          "location_role": "map_anchor",
+          "ordinal": 148,
+          "step_id": "step-45",
+          "visit_id": "a0448",
+          "x": 87.57,
+          "y": 19.94
+        },
+        {
+          "display_name": "牦牛村",
+          "location_ref": "borean-p147",
+          "location_role": "map_anchor",
+          "ordinal": 149,
+          "step_id": "step-45",
+          "visit_id": "a0452",
+          "x": 76.0,
+          "y": 37.4
         },
         {
           "display_name": "纳克萨纳尔",
@@ -4120,24 +4109,24 @@
           "y": 33.35
         },
         {
-          "display_name": "蓝玉营地",
-          "location_ref": "borean-p157",
-          "location_role": "map_anchor",
-          "ordinal": 159,
-          "step_id": "step-49",
-          "visit_id": "a0488",
-          "x": 42.2,
-          "y": 39.3
-        },
-        {
           "display_name": "峭壁断层异常",
           "location_ref": "borean-p158",
           "location_role": "map_anchor",
-          "ordinal": 160,
+          "ordinal": 159,
           "step_id": "step-49",
           "visit_id": "a0490",
           "x": 43.86,
           "y": 28.64
+        },
+        {
+          "display_name": "蓝玉营地",
+          "location_ref": "borean-p157",
+          "location_role": "map_anchor",
+          "ordinal": 160,
+          "step_id": "step-49",
+          "visit_id": "a0488",
+          "x": 42.2,
+          "y": 39.3
         },
         {
           "display_name": "琥珀崖",
@@ -4450,22 +4439,12 @@
           "y": 34.54
         },
         {
-          "display_name": "永生之盾飞行点",
-          "location_ref": "borean-p186",
+          "display_name": "琥珀崖",
+          "location_ref": "borean-p187",
           "location_role": "map_anchor",
           "ordinal": 192,
           "step_id": "step-58",
           "visit_id": "a0608",
-          "x": 33.2,
-          "y": 34.45
-        },
-        {
-          "display_name": "琥珀崖",
-          "location_ref": "borean-p187",
-          "location_role": "map_anchor",
-          "ordinal": 193,
-          "step_id": "step-58",
-          "visit_id": "a0610",
           "x": 45.2,
           "y": 33.35
         },
@@ -4473,7 +4452,7 @@
           "display_name": "钢腭车队",
           "location_ref": "borean-p188",
           "location_role": "map_anchor",
-          "ordinal": 194,
+          "ordinal": 193,
           "step_id": "step-59",
           "visit_id": "a0612",
           "x": 48.45,
@@ -4483,7 +4462,7 @@
           "display_name": "钢腭车队战场",
           "location_ref": "borean-p189",
           "location_role": "map_anchor",
-          "ordinal": 195,
+          "ordinal": 194,
           "step_id": "step-59",
           "visit_id": "a0616",
           "x": 49.4,
@@ -4493,7 +4472,7 @@
           "display_name": "钢腭车队",
           "location_ref": "borean-p190",
           "location_role": "map_anchor",
-          "ordinal": 196,
+          "ordinal": 195,
           "step_id": "step-59",
           "visit_id": "a0620",
           "x": 48.45,
@@ -4503,7 +4482,7 @@
           "display_name": "博古洛克前哨站",
           "location_ref": "borean-p191",
           "location_role": "map_anchor",
-          "ordinal": 197,
+          "ordinal": 196,
           "step_id": "step-59",
           "visit_id": "a0623",
           "x": 50.28,
@@ -4513,7 +4492,7 @@
           "display_name": "因波莉安",
           "location_ref": "borean-p192",
           "location_role": "map_anchor",
-          "ordinal": 198,
+          "ordinal": 197,
           "step_id": "step-60",
           "visit_id": "a0629",
           "x": 46.57,
@@ -4523,7 +4502,7 @@
           "display_name": "火元素西米尔",
           "location_ref": "borean-p193",
           "location_role": "map_anchor",
-          "ordinal": 199,
+          "ordinal": 198,
           "step_id": "step-60",
           "visit_id": "a0632",
           "x": 50.2,
@@ -4533,7 +4512,7 @@
           "display_name": "水元素卓恩",
           "location_ref": "borean-p194",
           "location_role": "map_anchor",
-          "ordinal": 200,
+          "ordinal": 199,
           "step_id": "step-60",
           "visit_id": "a0634",
           "x": 45.6,
@@ -4543,7 +4522,7 @@
           "display_name": "冬鳞避难所",
           "location_ref": "borean-p195",
           "location_role": "map_anchor",
-          "ordinal": 201,
+          "ordinal": 200,
           "step_id": "step-60",
           "visit_id": "a0636",
           "x": 43.5,
@@ -4553,7 +4532,7 @@
           "display_name": "斯卡德尔尸体",
           "location_ref": "borean-p196",
           "location_role": "map_anchor",
-          "ordinal": 202,
+          "ordinal": 201,
           "step_id": "step-60",
           "visit_id": "a0639",
           "x": 42.0,
@@ -4563,7 +4542,7 @@
           "display_name": "冬鳞避难所",
           "location_ref": "borean-p197",
           "location_role": "map_anchor",
-          "ordinal": 203,
+          "ordinal": 202,
           "step_id": "step-60",
           "visit_id": "a0641",
           "x": 43.5,
@@ -4573,7 +4552,7 @@
           "display_name": "冬鳞鱼人外圈",
           "location_ref": "borean-p198",
           "location_role": "map_anchor",
-          "ordinal": 204,
+          "ordinal": 203,
           "step_id": "step-61",
           "visit_id": "a0644",
           "x": 40.0,
@@ -4583,7 +4562,7 @@
           "display_name": "冬鳞避难所",
           "location_ref": "borean-p199",
           "location_role": "map_anchor",
-          "ordinal": 205,
+          "ordinal": 204,
           "step_id": "step-61",
           "visit_id": "a0646",
           "x": 43.5,
@@ -4593,7 +4572,7 @@
           "display_name": "冬鳞鱼人外圈",
           "location_ref": "borean-p200",
           "location_role": "map_anchor",
-          "ordinal": 206,
+          "ordinal": 205,
           "step_id": "step-61",
           "visit_id": "a0650",
           "x": 39.5,
@@ -4603,7 +4582,7 @@
           "display_name": "冬鳞避难所",
           "location_ref": "borean-p201",
           "location_role": "map_anchor",
-          "ordinal": 207,
+          "ordinal": 206,
           "step_id": "step-61",
           "visit_id": "a0653",
           "x": 43.3,
@@ -4613,7 +4592,7 @@
           "display_name": "冬鳞避难所·姆姆咕咕 / 屠夫布咕布噜",
           "location_ref": "borean-p202",
           "location_role": "map_anchor",
-          "ordinal": 208,
+          "ordinal": 207,
           "step_id": "step-61",
           "visit_id": "a0657",
           "x": 42.0,
@@ -4623,7 +4602,7 @@
           "display_name": "幽光海湾",
           "location_ref": "borean-p203",
           "location_role": "map_anchor",
-          "ordinal": 209,
+          "ordinal": 208,
           "step_id": "step-61",
           "visit_id": "a0661",
           "x": 39.8,
@@ -4633,7 +4612,7 @@
           "display_name": "冬鳞避难所",
           "location_ref": "borean-p204",
           "location_role": "map_anchor",
-          "ordinal": 210,
+          "ordinal": 209,
           "step_id": "step-61",
           "visit_id": "a0664",
           "x": 42.0,
@@ -4643,7 +4622,7 @@
           "display_name": "冬鳞避难所·国王姆嘎姆嘎",
           "location_ref": "borean-p205",
           "location_role": "map_anchor",
-          "ordinal": 211,
+          "ordinal": 210,
           "step_id": "step-61",
           "visit_id": "a0668",
           "x": 43.5,
@@ -4653,7 +4632,7 @@
           "display_name": "冬鳞洞穴·裂谷异常",
           "location_ref": "borean-p206",
           "location_role": "map_anchor",
-          "ordinal": 212,
+          "ordinal": 211,
           "step_id": "step-62",
           "visit_id": "a0671",
           "x": 40.1,
@@ -4663,7 +4642,7 @@
           "display_name": "冬鳞洞穴·咕啦咕啦",
           "location_ref": "borean-p207",
           "location_role": "map_anchor",
-          "ordinal": 213,
+          "ordinal": 212,
           "step_id": "step-62",
           "visit_id": "a0673",
           "x": 37.8,
@@ -4673,7 +4652,7 @@
           "display_name": "钥匙管理者呜啦咕噜",
           "location_ref": "borean-p208",
           "location_role": "map_anchor",
-          "ordinal": 214,
+          "ordinal": 213,
           "step_id": "step-62",
           "visit_id": "a0675",
           "x": 39.17,
@@ -4683,7 +4662,7 @@
           "display_name": "冬鳞洞穴·咕啦咕啦 / 噜呱吧呱",
           "location_ref": "borean-p209",
           "location_role": "map_anchor",
-          "ordinal": 215,
+          "ordinal": 214,
           "step_id": "step-62",
           "visit_id": "a0677",
           "x": 37.84,
@@ -4693,7 +4672,7 @@
           "display_name": "冬鳞洞穴·克拉西姆斯",
           "location_ref": "borean-p210",
           "location_role": "map_anchor",
-          "ordinal": 216,
+          "ordinal": 215,
           "step_id": "step-62",
           "visit_id": "a0680",
           "x": 37.54,
@@ -4703,7 +4682,7 @@
           "display_name": "冬鳞避难所",
           "location_ref": "borean-p211",
           "location_role": "map_anchor",
-          "ordinal": 217,
+          "ordinal": 216,
           "step_id": "step-62",
           "visit_id": "a0683",
           "x": 43.5,
@@ -4713,7 +4692,7 @@
           "display_name": "因波莉安",
           "location_ref": "borean-p212",
           "location_role": "map_anchor",
-          "ordinal": 218,
+          "ordinal": 217,
           "step_id": "step-63",
           "visit_id": "a0686",
           "x": 46.57,
@@ -4723,7 +4702,7 @@
           "display_name": "狂怒的雷暴",
           "location_ref": "borean-p213",
           "location_role": "map_anchor",
-          "ordinal": 219,
+          "ordinal": 218,
           "step_id": "step-63",
           "visit_id": "a0689",
           "x": 43.95,
@@ -4733,7 +4712,7 @@
           "display_name": "因波莉安",
           "location_ref": "borean-p214",
           "location_role": "map_anchor",
-          "ordinal": 220,
+          "ordinal": 219,
           "step_id": "step-63",
           "visit_id": "a0691",
           "x": 46.57,
@@ -4743,7 +4722,7 @@
           "display_name": "博古洛克",
           "location_ref": "borean-p215",
           "location_role": "map_anchor",
-          "ordinal": 221,
+          "ordinal": 220,
           "step_id": "step-63",
           "visit_id": "a0694",
           "x": 50.28,
@@ -4753,7 +4732,7 @@
           "display_name": "犸格莫斯·先知格雷姆沃克的灵魂",
           "location_ref": "borean-p216",
           "location_role": "map_anchor",
-          "ordinal": 222,
+          "ordinal": 221,
           "step_id": "step-64",
           "visit_id": "a0701",
           "x": 56.17,
@@ -4763,7 +4742,7 @@
           "display_name": "犸格莫斯洞穴",
           "location_ref": "borean-p217",
           "location_role": "map_anchor",
-          "ordinal": 223,
+          "ordinal": 222,
           "step_id": "step-64",
           "visit_id": "a0704",
           "x": 56.0,
@@ -4773,7 +4752,7 @@
           "display_name": "先知格雷姆沃克遗骸",
           "location_ref": "borean-p218",
           "location_role": "map_anchor",
-          "ordinal": 224,
+          "ordinal": 223,
           "step_id": "step-64",
           "visit_id": "a0707",
           "x": 56.17,
@@ -4783,7 +4762,7 @@
           "display_name": "博古洛克前哨站",
           "location_ref": "borean-p219",
           "location_role": "map_anchor",
-          "ordinal": 225,
+          "ordinal": 224,
           "step_id": "step-64",
           "visit_id": "a0711",
           "x": 50.0,
@@ -4793,7 +4772,7 @@
           "display_name": "博古洛克飞行点",
           "location_ref": "borean-p220",
           "location_role": "map_anchor",
-          "ordinal": 226,
+          "ordinal": 225,
           "step_id": "step-65",
           "visit_id": "a0714",
           "x": 50.28,
@@ -4803,7 +4782,7 @@
           "display_name": "琥珀崖",
           "location_ref": "borean-p221",
           "location_role": "map_anchor",
-          "ordinal": 227,
+          "ordinal": 226,
           "step_id": "step-65",
           "visit_id": "a0716",
           "x": 44.98,
@@ -4813,7 +4792,7 @@
           "display_name": "牦牛村",
           "location_ref": "borean-p223",
           "location_role": "map_anchor",
-          "ordinal": 228,
+          "ordinal": 227,
           "step_id": "step-66",
           "visit_id": "a0720",
           "x": 75.89,
@@ -4823,7 +4802,7 @@
           "display_name": "陶拉努克撤离队",
           "location_ref": "borean-p224",
           "location_role": "map_anchor",
-          "ordinal": 229,
+          "ordinal": 228,
           "step_id": "step-66",
           "visit_id": "a0722",
           "x": 78.33,
@@ -4833,7 +4812,7 @@
           "display_name": "龙骨荒野边界·沃图克",
           "location_ref": "borean-p225",
           "location_role": "map_anchor",
-          "ordinal": 230,
+          "ordinal": 229,
           "step_id": "step-66",
           "visit_id": "a0724",
           "x": 12.75,
@@ -4910,13 +4889,16 @@
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "0cf188b71483cc6c76a30eb6b085c9dd43955c386cc1d9879ee74d69068588d1",
-    "range_minutes": null,
-    "status": "requirements"
+    "center_minutes": 662.527,
+    "input_fingerprint": "92af3cc508d4347d41f1976f9d9cbc6a5602bfb6458b0de0dc6fbf15b5d08e4c",
+    "range_minutes": [
+      512.274,
+      812.98
+    ],
+    "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "cfc8cc5268f1a3f5c82e8c979e59754a0e4123266a0fb5c55370c092a1ae05f8",
+  "stage11_input_fingerprint": "15622adaa219c74d1414c7328762e7c054bec80193f497fade1d619931906bbc",
   "status": "pass",
   "steps": [
     {
@@ -5038,9 +5020,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.456,
+        "range_minutes": [
+          2.161,
+          2.752
+        ],
+        "status": "pass"
       },
       "title": "战歌要塞"
     },
@@ -5252,9 +5237,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.705,
+        "range_minutes": [
+          3.251,
+          4.159
+        ],
+        "status": "pass"
       },
       "title": "战歌要塞 → 巨石采掘场"
     },
@@ -5421,9 +5409,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 23.0,
+        "range_minutes": [
+          17.3,
+          28.8
+        ],
+        "status": "pass"
       },
       "title": "巨石采掘场"
     },
@@ -5633,9 +5624,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.785,
+        "range_minutes": [
+          3.324,
+          4.245
+        ],
+        "status": "pass"
       },
       "title": "巨石采掘场 → 战歌要塞"
     },
@@ -5861,9 +5855,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.3,
+        "range_minutes": [
+          3.6,
+          5.1
+        ],
+        "status": "pass"
       },
       "title": "四虫孔与蛛卵一圈清"
     },
@@ -6033,9 +6030,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.992,
+        "range_minutes": [
+          2.626,
+          3.358
+        ],
+        "status": "pass"
       },
       "title": "战歌要塞"
     },
@@ -6211,9 +6211,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.2,
+        "range_minutes": [
+          2.6,
+          3.8
+        ],
+        "status": "pass"
       },
       "title": "开飞行点 → 通知地狱咆哮 → 魔法飞毯"
     },
@@ -6408,9 +6411,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.8,
+        "range_minutes": [
+          4.0,
+          5.7
+        ],
+        "status": "pass"
       },
       "title": "加尔鲁什码头 → 回音海岸"
     },
@@ -6590,9 +6596,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 22.4,
+        "range_minutes": [
+          16.8,
+          28.0
+        ],
+        "status": "pass"
       },
       "title": "固定零件 + 克瓦迪尔三任务 + 短护送"
     },
@@ -6863,9 +6872,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.325,
+        "range_minutes": [
+          3.803,
+          4.848
+        ],
+        "status": "pass"
       },
       "title": "回音海岸 → 加尔鲁什码头"
     },
@@ -7031,9 +7043,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.2,
+        "range_minutes": [
+          3.9,
+          6.5
+        ],
+        "status": "pass"
       },
       "title": "伯尔之锤 → 战歌码头 → 伯尔之砧"
     },
@@ -7186,9 +7201,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 17.5,
+        "range_minutes": [
+          13.1,
+          21.9
+        ],
+        "status": "pass"
       },
       "title": "海岸交付后直接上坦克做纳萨姆"
     },
@@ -7375,9 +7393,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.6,
+        "range_minutes": [
+          6.2,
+          8.9
+        ],
+        "status": "pass"
       },
       "title": "被俘虏的海象人 → 卡鲁克 → 斯卡迪尔营地 → 卡鲁克"
     },
@@ -7522,9 +7543,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.5,
+        "range_minutes": [
+          3.7,
+          5.3
+        ],
+        "status": "pass"
       },
       "title": "贾梅尔 → 父亲的话 → 维赫亚"
     },
@@ -7677,9 +7701,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.0,
+        "range_minutes": [
+          6.5,
+          9.4
+        ],
+        "status": "pass"
       },
       "title": "纳兹亚的三叉戟 → 使者 → 卡鲁克"
     },
@@ -7853,9 +7880,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.5,
+        "range_minutes": [
+          2.9,
+          4.1
+        ],
+        "status": "pass"
       },
       "title": "战歌要塞 → 伊斯里克斯事件"
     },
@@ -7997,9 +8027,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.275,
+        "range_minutes": [
+          1.992,
+          2.558
+        ],
+        "status": "pass"
       },
       "title": "战歌农场开局接任务"
     },
@@ -8157,9 +8190,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.0,
+        "range_minutes": [
+          5.2,
+          8.7
+        ],
+        "status": "pass"
       },
       "title": "农场三处侦察 + 囚犯/亡灵猪同圈"
     },
@@ -8374,9 +8410,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.1,
+        "range_minutes": [
+          5.0,
+          7.1
+        ],
+        "status": "pass"
       },
       "title": "战歌农场交付 → 科多救援"
     },
@@ -8474,9 +8513,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.4,
+        "range_minutes": [
+          2.7,
+          4.0
+        ],
+        "status": "pass"
       },
       "title": "暗影密探盖特莱 → 残忍的瓦雷杜斯"
     },
@@ -8738,9 +8780,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.1,
+        "range_minutes": [
+          5.1,
+          7.2
+        ],
+        "status": "pass"
       },
       "title": "炉石战歌 → 逃兵快递 → 图古克 / 劳莉丝"
     },
@@ -9085,9 +9130,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 26.1,
+        "range_minutes": [
+          19.6,
+          32.7
+        ],
+        "status": "pass"
       },
       "title": "血孢平原 → 巨蛾/蛾卵 → 迦莫斯链"
     },
@@ -9232,9 +9280,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.8,
+        "range_minutes": [
+          4.8,
+          6.8
+        ],
+        "status": "pass"
       },
       "title": "迦莫斯洞穴 → 血孢平原 → 战歌要塞"
     },
@@ -9499,9 +9550,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 9.3,
+        "range_minutes": [
+          7.6,
+          11.0
+        ],
+        "status": "pass"
       },
       "title": "仁德会·尼达尔 / 欢乐的蚌壳 / 死不足惜"
     },
@@ -9622,9 +9676,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.2,
+        "range_minutes": [
+          3.4,
+          4.9
+        ],
+        "status": "pass"
       },
       "title": "冷石采掘场 → 帮助弱小"
     },
@@ -9898,9 +9955,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.8,
+        "range_minutes": [
+          6.4,
+          9.2
+        ],
+        "status": "pass"
       },
       "title": "仁德会 → 库诺克 / 卡奥"
     },
@@ -10065,9 +10125,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 5.7,
+        "range_minutes": [
+          4.3,
+          7.2
+        ],
+        "status": "pass"
       },
       "title": "冷石采掘场·海象人的先祖 / 夺回采掘场"
     },
@@ -10232,9 +10295,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.5,
+        "range_minutes": [
+          3.7,
+          5.3
+        ],
+        "status": "pass"
       },
       "title": "冷石采掘场·失落的灵魂 / 别让他们逃了！"
     },
@@ -10436,9 +10502,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 13.4,
+        "range_minutes": [
+          10.0,
+          16.7
+        ],
+        "status": "pass"
       },
       "title": "冷石采掘场·寻找古器 / 先祖的回归"
     },
@@ -10678,9 +10747,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 32.8,
+        "range_minutes": [
+          24.6,
+          41.0
+        ],
+        "status": "pass"
       },
       "title": "仁德会南线：卡琳 → 遗弃海岸 / 不可容忍"
     },
@@ -10905,9 +10977,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.2,
+        "range_minutes": [
+          6.7,
+          9.6
+        ],
+        "status": "pass"
       },
       "title": "仁德会·蛤蜊主宰 / 刺杀哈罗德·兰恩"
     },
@@ -11074,9 +11149,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.4,
+        "range_minutes": [
+          6.1,
+          8.7
+        ],
+        "status": "pass"
       },
       "title": "卡斯卡拉·战斗到底 / 穆希特的智慧"
     },
@@ -11259,9 +11337,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.2,
+        "range_minutes": [
+          4.7,
+          7.8
+        ],
+        "status": "pass"
       },
       "title": "卡斯卡拉·神灵的眷顾 / 情势扭转"
     },
@@ -11548,9 +11629,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.8,
+        "range_minutes": [
+          4.0,
+          5.7
+        ],
+        "status": "pass"
       },
       "title": "牦牛村 → 三处虫孔"
     },
@@ -11944,9 +12028,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 12.5,
+        "range_minutes": [
+          9.4,
+          15.6
+        ],
+        "status": "pass"
       },
       "title": "应急的物资 / 运货行动 → 牦牛村"
     },
@@ -12070,9 +12157,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 31.4,
+        "range_minutes": [
+          23.6,
+          39.3
+        ],
+        "status": "pass"
       },
       "title": "元素的力量 / 菲兹兰克泵站"
     },
@@ -12243,9 +12333,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 10.5,
+        "range_minutes": [
+          7.9,
+          13.2
+        ],
+        "status": "pass"
       },
       "title": "赫米萨：死亡的解脱 → 阻止瘟疫"
     },
@@ -12459,9 +12552,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 20.8,
+        "range_minutes": [
+          15.6,
+          25.9
+        ],
+        "status": "pass"
       },
       "title": "阻止瘟疫交接 → 塔尔拉玛斯 → 报告坏消息"
     },
@@ -12701,9 +12797,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 2.478,
+        "range_minutes": [
+          2.164,
+          2.792
+        ],
+        "status": "pass"
       },
       "title": "牦牛村·任务交接"
     },
@@ -12790,9 +12889,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 13.0,
+        "range_minutes": [
+          9.7,
+          16.2
+        ],
+        "status": "pass"
       },
       "title": "菲兹兰克泵站·修修补补 / 机械副官 / 击败机甲专家"
     },
@@ -13009,9 +13111,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 10.4,
+        "range_minutes": [
+          7.8,
+          13.1
+        ],
+        "status": "pass"
       },
       "title": "牦牛村 → 天灾的外衣"
     },
@@ -13183,9 +13288,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 17.4,
+        "range_minutes": [
+          13.1,
+          21.8
+        ],
+        "status": "pass"
       },
       "title": "腐化的土地 / 元素之心 → 牦牛村"
     },
@@ -13262,9 +13370,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.9,
+        "range_minutes": [
+          2.9,
+          4.8
+        ],
+        "status": "pass"
       },
       "title": "元素愤怒号角·上下半截"
     },
@@ -13470,9 +13581,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 4.4,
+        "range_minutes": [
+          3.6,
+          5.2
+        ],
+        "status": "pass"
       },
       "title": "恩其拉·乔装潜入 → 牦牛村"
     },
@@ -13834,9 +13948,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 14.9,
+        "range_minutes": [
+          11.2,
+          18.7
+        ],
+        "status": "pass"
       },
       "title": "天崩地裂 → 恩其拉·力量之语 / 鲜血尖塔 → 牦牛村"
     },
@@ -14013,9 +14130,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.2,
+        "range_minutes": [
+          5.1,
+          7.3
+        ],
+        "status": "pass"
       },
       "title": "过关斩将 → 牦牛村"
     },
@@ -14147,9 +14267,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 3.4,
+        "range_minutes": [
+          2.8,
+          4.1
+        ],
+        "status": "pass"
       },
       "title": "炉石战歌要塞 → 琥珀崖"
     },
@@ -14321,9 +14444,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.8,
+        "range_minutes": [
+          5.1,
+          8.4
+        ],
+        "status": "pass"
       },
       "title": "蓝玉营地 / 悬崖异常 → 琥珀崖"
     },
@@ -14495,9 +14621,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.1,
+        "range_minutes": [
+          5.8,
+          8.4
+        ],
+        "status": "pass"
       },
       "title": "峭壁断层 / 调查 → 琥珀崖"
     },
@@ -14769,9 +14898,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.2,
+        "range_minutes": [
+          6.7,
+          9.7
+        ],
+        "status": "pass"
       },
       "title": "法师塔二楼 → 与时间赛跑 → 苏雷斯塔兹"
     },
@@ -14989,9 +15121,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.7,
+        "range_minutes": [
+          6.3,
+          9.1
+        ],
+        "status": "pass"
       },
       "title": "营救艾瓦诺尔 → 苏雷斯塔兹 → 考达拉"
     },
@@ -15200,35 +15335,35 @@
           "task_id": 11733
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监测数据",
           "note": "四个点都是固定地质监测仪，必须主动点击读取数据；南(28.5,35.0)、西(22.5,23.8)、东北(31.5,20.4)、中央(28.3,28.5)。\n监测仪需要主动点击；本段依次处理东北(31.5,20.4)与中央(28.3,28.5)，不要只到坐标附近等待自动完成。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11900
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "古树的秘密",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11910
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冰冷的草莓",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11912
         },
@@ -15245,9 +15380,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 25.5,
+        "range_minutes": [
+          19.1,
+          31.9
+        ],
+        "status": "pass"
       },
       "title": "永生之盾 → 南部 / 西部监测点"
     },
@@ -15468,35 +15606,35 @@
       "summary": "完成北部、东北和中央监测点并补齐同区域任务；回永生之盾交付，接《保持隐蔽》和《蓝龙的卵》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "监测数据",
           "note": "四个点都是固定地质监测仪，必须主动点击读取数据；南(28.5,35.0)、西(22.5,23.8)、东北(31.5,20.4)、中央(28.3,28.5)。\n监测仪需要主动点击；本段依次处理东北(31.5,20.4)与中央(28.3,28.5)，不要只到坐标附近等待自动完成。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11900
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "古树的秘密",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11910
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冰冷的草莓",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11912
         },
@@ -15512,13 +15650,13 @@
           "task_id": 11918
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "保持隐蔽",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11914
         },
@@ -15535,9 +15673,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 25.4,
+        "range_minutes": [
+          19.0,
+          31.7
+        ],
+        "status": "pass"
       },
       "title": "北部 / 东北 / 中央监测点 → 永生之盾"
     },
@@ -15695,13 +15836,13 @@
       "summary": "在考达拉外圈完成《保持隐蔽》《蓝龙的卵》，并从考达拉缚法者取得闪光碎片触发《奇怪……》；回永生之盾交接《猎龙》《牢笼》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "保持隐蔽",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11914
         },
@@ -15723,7 +15864,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11941
         },
@@ -15739,7 +15880,7 @@
           "task_id": 11919
         },
         {
-          "badge": "shared",
+          "badge": "sequential_loot",
           "name": "牢笼",
           "note": null,
           "note_override_applied": true,
@@ -15751,9 +15892,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 11.1,
+        "range_minutes": [
+          8.3,
+          13.8
+        ],
+        "status": "pass"
       },
       "title": "考达拉外圈 → 奇怪…… → 永生之盾"
     },
@@ -15948,9 +16092,9 @@
       "summary": "完成《牢笼》和《猎龙》，把捕获的魔枢雏龙带回永生之盾；继续推进《克莉斯塔萨》并接《诱饵》。",
       "task_presentations": [
         {
-          "badge": "shared",
+          "badge": "sequential_loot",
           "name": "牢笼",
-          "note": "",
+          "note": "两件任务物改为五号依次拾取；主控完成击杀后按顺序逐号拾取，五号收齐后再离开。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -15970,43 +16114,46 @@
           "task_id": 11919
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "破译密码",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11931
         },
         {
           "badge": null,
           "name": "克莉斯塔萨",
-          "note": "",
+          "note": "交接前先使用任务物“强化奥术牢笼”寻找克莉斯塔萨，再与NPC对话。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11946
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "诱饵",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11951
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 8.6,
+        "range_minutes": [
+          6.5,
+          10.8
+        ],
+        "status": "pass"
       },
       "title": "戈德拉克 / 塞鲁利恩 → 猎龙 → 永生之盾"
     },
@@ -16209,35 +16356,35 @@
       "summary": "完成《诱饵》《破译密码》，回永生之盾接《莎拉苟萨的末日》；通过克莉斯塔萨脚本进入高处平台完成莎拉苟萨事件。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "诱饵",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11951
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "破译密码",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11931
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "莎拉苟萨的末日",
-          "note": "莎拉苟萨不在地面常驻。先使用任务给的强化奥术牢笼联系克莉斯塔萨并选择准备就绪，脚本会送到高处平台；到平台后使用奥术能量源召出莎拉苟萨。击杀后仍通过克莉斯塔萨脚本返回。",
+          "note": "莎拉苟萨不在地面常驻。先使用任务给的强化奥术牢笼联系克莉斯塔萨并选择准备就绪，脚本会送到高处平台；到平台后使用奥术能量源召出莎拉苟萨。击杀后仍通过克莉斯塔萨脚本返回。\n五号需依次交互并依次拾取任务物，一个角色完成当前交互后再切换下一个。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11957
         },
@@ -16248,15 +16395,18 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11967
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 19.2,
+        "range_minutes": [
+          14.4,
+          24.0
+        ],
+        "status": "pass"
       },
       "title": "考达拉目标区 → 莎拉苟萨平台"
     },
@@ -16366,26 +16516,29 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11967
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "触动陷阱",
-          "note": "到信号火焰约(25.4,21.8)，站在火焰旁使用任务物品莱洛拉斯的火花触发事件；到坐标不会自动完成。",
+          "note": "到信号火焰约(25.4,21.8)，站在火焰旁使用任务物品莱洛拉斯的火花触发事件；到坐标不会自动完成。由跟随号先触发，任务完成后主号带队先回永生之盾。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11969
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 7.2,
+        "range_minutes": [
+          5.9,
+          8.5
+        ],
+        "status": "pass"
       },
       "title": "永生之盾 → 信号火焰 → 莱洛拉斯"
     },
@@ -16393,10 +16546,7 @@
       "action_ids": [
         "a0606",
         "a0607",
-        "a0608",
-        "a0609",
-        "a0610",
-        "a0611"
+        "a0608"
       ],
       "lines": [
         {
@@ -16412,57 +16562,33 @@
           "action_ids": [
             "a0607"
           ],
-          "action_kind": "move",
+          "action_kind": "fixed_transport",
           "task_refs": [],
-          "text": "前往：飞行管理员",
+          "text": "固定交通：图书馆员提艾蕾 → 琥珀崖",
           "type": "route_action"
         },
         {
           "action_ids": [
             "a0608"
           ],
-          "location_ref": "borean-p186",
-          "task_refs": [],
-          "text": "永生之盾飞行点",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0609"
-          ],
-          "action_kind": "taxi",
-          "task_refs": [],
-          "text": "系统飞行：永生之盾 → 琥珀崖",
-          "type": "route_action"
-        },
-        {
-          "action_ids": [
-            "a0610"
-          ],
           "location_ref": "borean-p187",
           "task_refs": [],
           "text": "琥珀崖",
           "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0611"
-          ],
-          "action_kind": "move",
-          "task_refs": [],
-          "text": "前往：琥珀崖",
-          "type": "route_action"
         }
       ],
       "step_id": "step-58",
-      "summary": "考达拉任务结束后回永生之盾飞行管理员，乘系统鸟返回琥珀崖。",
+      "summary": "考达拉任务结束后到图书馆员提艾蕾处，直接传送到琥珀崖；不再支付或等待系统飞行。",
       "task_presentations": [],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 1.7,
+        "range_minutes": [
+          1.4,
+          2.0
+        ],
+        "status": "pass"
       },
-      "title": "永生之盾 → 系统鸟琥珀崖"
+      "title": "永生之盾 → 图书馆员提艾蕾传送琥珀崖"
     },
     {
       "action_ids": [
@@ -16694,7 +16820,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11592
         },
@@ -16710,13 +16836,13 @@
           "task_id": 11593
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "让他们安息",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11594
         },
@@ -16755,9 +16881,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 14.0,
+        "range_minutes": [
+          10.5,
+          17.5
+        ],
+        "status": "pass"
       },
       "title": "钢腭车队 → 博古洛克前哨站"
     },
@@ -16967,13 +17096,13 @@
           "task_id": 11624
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "沸点",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11627
         },
@@ -17000,21 +17129,24 @@
           "task_id": 11571
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冬鳞鱼人的贸易",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11559
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 6.5,
+        "range_minutes": [
+          4.9,
+          8.1
+        ],
+        "status": "pass"
       },
       "title": "因波莉安 → 火水元素 → 冬鳞避难所"
     },
@@ -17380,13 +17512,13 @@
       "summary": "完成冬鳞外圈和幽光海湾任务，连续推进避难所交接，直到接到《决不投降！》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "冬鳞鱼人的贸易",
-          "note": "。",
+          "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11559
         },
@@ -17424,24 +17556,24 @@
           "task_id": 11562
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "咕噜咕噜呜啦哇啦！",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11563
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "美味炖鲸肉",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11564
         },
@@ -17457,21 +17589,24 @@
           "task_id": 11565
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "决不投降！",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11566
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 28.6,
+        "range_minutes": [
+          21.5,
+          35.8
+        ],
+        "status": "pass"
       },
       "title": "冬鳞外圈 → 幽光海湾 → 冬鳞避难所"
     },
@@ -17686,13 +17821,13 @@
           "task_id": 12728
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "钥匙管理者呜啦咕噜",
-          "note": "",
+          "note": "交完任务后先跑出拐角，让NPC脱离视角，再返回可明显加快NPC刷新；不要原地等待，否则后续角色可能要等很久才能继续交任务。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11569
         },
@@ -17708,21 +17843,24 @@
           "task_id": 11570
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "决不投降！",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11566
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 13.9,
+        "range_minutes": [
+          11.4,
+          16.4
+        ],
+        "status": "pass"
       },
       "title": "冬鳞洞穴：裂谷 → 钥匙 → 护送"
     },
@@ -17930,24 +18068,24 @@
       "summary": "回因波莉安交《沸点》并完成《风暴微粒》；回博古洛克完成《空气的幻象》，接《先知格雷姆沃克之魂》《向犸格莫斯复仇》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "沸点",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11627
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "风暴微粒",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11649
         },
@@ -17963,23 +18101,25 @@
           "task_id": 11629
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "空气的幻象",
           "note": "就在斯纳尔芬旁的图腾使用因波莉安的原始精华完成，不需要去野外找幻象目标。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11631
         },
         {
           "badge": null,
           "name": "先知格雷姆沃克之魂",
-          "note": null,
+          "note": "犸格莫斯洞穴区域约(56.2,9.1)；需要进入洞内找先知格雷姆沃克的灵魂，不要只在地表附近找。",
           "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
+          "note_show_on": [
+            "accept"
+          ],
+          "note_visible": true,
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11635
@@ -17997,9 +18137,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 13.3,
+        "range_minutes": [
+          10.0,
+          16.6
+        ],
+        "status": "pass"
       },
       "title": "因波莉安 → 风暴微粒 → 博古洛克"
     },
@@ -18178,20 +18321,22 @@
           "name": "先知格雷姆沃克之魂",
           "note": null,
           "note_override_applied": true,
-          "note_show_on": [],
+          "note_show_on": [
+            "accept"
+          ],
           "note_visible": false,
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11635
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "卡加尼舒",
           "note": "拿到神像后还要对洞内先知格雷姆沃克的残骸使用，不能只击杀卡加尼舒。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11637
         },
@@ -18207,21 +18352,24 @@
           "task_id": 11639
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "落叶归根",
           "note": "接任务后立即拾取先知格雷姆沃克灵魂脚下的遗骸，再离开洞穴。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11638
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 12.3,
+        "range_minutes": [
+          9.2,
+          15.4
+        ],
+        "status": "pass"
       },
       "title": "犸格莫斯洞穴 → 博古洛克"
     },
@@ -18295,9 +18443,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 1.211,
+        "range_minutes": [
+          1.053,
+          1.368
+        ],
+        "status": "pass"
       },
       "title": "博古洛克 → 系统鸟琥珀崖"
     },
@@ -18397,7 +18548,7 @@
         {
           "badge": "shared",
           "name": "横贯冰原",
-          "note": "留到北风其余任务完成后再接。",
+          "note": "留到北风其余任务完成后再接；过第二个桥前放慢速度。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -18407,9 +18558,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 10.6,
+        "range_minutes": [
+          8.7,
+          12.5
+        ],
+        "status": "pass"
       },
       "title": "系统鸟琥珀崖 → 牦牛村 → 横贯冰原"
     }

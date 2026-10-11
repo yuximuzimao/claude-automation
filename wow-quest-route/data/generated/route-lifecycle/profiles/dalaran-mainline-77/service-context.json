@@ -1,0 +1,54 @@
+{
+  "background_layers": [],
+  "foreground_services": [
+    {
+      "location_ref": "dalaran-p003",
+      "service_action_id": "a0005",
+      "task_id": 12790,
+      "visit_id": "a0006",
+      "x": 56.3,
+      "y": 46.72,
+      "zone_id": 4395
+    }
+  ],
+  "input_fingerprint": "29b4a9f888c97596b7afd827c9f1079cc6478d52958054d8e531a661d8f32648",
+  "issues": [],
+  "profile_id": "dalaran-mainline-77",
+  "spatial_instances": [
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-a0005"
+      ],
+      "instance_id": "visit-a0006",
+      "location_ref": "dalaran-p003",
+      "visit_id": "a0006",
+      "x": 56.3,
+      "y": 46.72,
+      "zone_id": 4395
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "background_layer_count": 0,
+    "foreground_service_count": 1,
+    "shared_service_override_count": 0,
+    "spatial_instance_count": 1,
+    "target_cluster_count": 1
+  },
+  "target_clusters": [
+    {
+      "action_ids": [
+        "a0005"
+      ],
+      "cluster_id": "objective-a0005",
+      "source": "objective_action",
+      "task_ids": [
+        12790
+      ],
+      "visit_ids": [
+        "a0006"
+      ]
+    }
+  ]
+}

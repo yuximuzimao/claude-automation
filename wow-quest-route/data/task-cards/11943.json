@@ -57,10 +57,11 @@
   "guide": [
     "接取：莱洛拉斯。",
     "永生之盾的莱洛拉斯要你从塞鲁利恩将军手里夺取牢笼外壳，从战争使者戈德拉克手里夺取能量核心。",
-    "交付：莱洛拉斯。"
+    "交付：莱洛拉斯。",
+    "牢笼外壳和能量核心的任务物改为五号依次拾取；击杀完成后逐号拾取，五号收齐后再离开。"
   ],
   "fivebox": {
-    "status": "shared"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -109,14 +110,27 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-10",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.11943; run=2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑",
+      "observed_at": "2026-10-10",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "两件任务物改为五号依次拾取；主控完成击杀后按顺序逐号拾取，五号收齐后再离开。",
       "scope": "all",
-      "source_ref": "2026-09-26 Route Atlas note audit",
-      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
+      "source_ref": "user_live:2026-10-10",
+      "reason": "2026-10-09至2026-10-10北风第二组DK实跑反馈。"
     }
   }
 }

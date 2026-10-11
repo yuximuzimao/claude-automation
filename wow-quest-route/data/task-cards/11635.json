@@ -99,10 +99,13 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "犸格莫斯洞穴区域约(56.2,9.1)；需要进入洞内找先知格雷姆沃克的灵魂，不要只在地表附近找。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "show_on": [
+        "accept"
+      ],
+      "source_ref": "user_live:2026-10-11 + data/route-atlas/borean-tundra-target-clusters.json#npc:25425",
+      "reason": "第二组DK实跑要求在接任务后的下一步明确提示进洞与洞穴区域坐标；坐标以项目现有洞内目标实体位置作为区域定位。"
     }
   }
 }

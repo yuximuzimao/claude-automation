@@ -1,6 +1,6 @@
 {
-  "center_minutes": null,
-  "complete": false,
+  "center_minutes": 662.527,
+  "complete": true,
   "component_rows": [
     {
       "component": "move",
@@ -1078,13 +1078,7 @@
     },
     {
       "component": "move",
-      "edge_id": "a0606->a0608",
-      "seconds": 0.42995840192024276,
-      "step_id": "step-58"
-    },
-    {
-      "component": "move",
-      "edge_id": "a0610->a0612",
+      "edge_id": "a0608->a0612",
       "seconds": 33.075597342819506,
       "step_id": "step-59"
     },
@@ -1279,6 +1273,18 @@
       "edge_id": "a0711->a0714",
       "seconds": 1.0453092258661285,
       "step_id": "step-65"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0714->a0716",
+      "seconds": 23.0,
+      "step_id": "step-65"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0716->a0720",
+      "seconds": 49.0,
+      "step_id": "step-66"
     },
     {
       "component": "move",
@@ -2593,14 +2599,15 @@
       "visit_id": "a0720"
     }
   ],
-  "input_fingerprint": "11844c29f4b80971a6d11b773eec4587c470c0e027784736c840e42897373fe0",
+  "input_fingerprint": "2ddc77f69206327249fd44074abf7831b22876eb3b933a3c54c408ad341a9898",
   "issues": [
     {
       "action_id": "a0072",
       "edge_id": "a0070->a0073",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-08"
     },
     {
@@ -2608,7 +2615,8 @@
       "edge_id": "a0150->a0152",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16"
     },
     {
@@ -2616,7 +2624,8 @@
       "edge_id": "a0189->a0191",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21"
     },
     {
@@ -2624,7 +2633,8 @@
       "edge_id": "a0462->visit-p150-inner",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "fixed_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-46"
     },
     {
@@ -2632,7 +2642,8 @@
       "edge_id": "visit-p150-inner->visit-p150-upper",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "fixed_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-46"
     },
     {
@@ -2640,7 +2651,8 @@
       "edge_id": "a0468->a0472",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-47"
     },
     {
@@ -2648,7 +2660,8 @@
       "edge_id": "a0512->visit-p163-platform",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51"
     },
     {
@@ -2656,7 +2669,8 @@
       "edge_id": "visit-p163-platform->visit-p163-return",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51"
     },
     {
@@ -2664,7 +2678,8 @@
       "edge_id": "a0521->a0525",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52"
     },
     {
@@ -2672,7 +2687,8 @@
       "edge_id": "a0592->visit-p181-high",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "fixed_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-56"
     },
     {
@@ -2680,1258 +2696,1318 @@
       "edge_id": "visit-p181-high->visit-p181-return",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-56"
     },
     {
-      "edge_id": "a0608->a0610",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
+      "action_id": "a0607",
+      "edge_id": "a0606->a0608",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "fixed_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-58"
-    },
-    {
-      "edge_id": "a0714->a0716",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-65"
-    },
-    {
-      "edge_id": "a0716->a0720",
-      "kind": "flight_edge_binding_required",
-      "severity": "requirement",
-      "step_id": "step-66"
     },
     {
       "action_id": "a0159",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-16",
       "task_id": 11632
     },
     {
       "action_id": "a0193",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 11632
     },
     {
       "action_id": "a0447",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11654
     },
     {
       "action_id": "a0449",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11654
     },
     {
       "action_id": "a0564",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 11941
     },
     {
       "action_id": "a0569",
       "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 11941
     },
     {
       "action_id": "a0019",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11598
     },
     {
       "action_id": "a0020",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11606
     },
     {
       "action_id": "a0021",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11611
     },
     {
       "action_id": "a0023",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11598
     },
     {
       "action_id": "a0024",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11606
     },
     {
       "action_id": "a0025",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11611
     },
     {
       "action_id": "a0027",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11598
     },
     {
       "action_id": "a0028",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11606
     },
     {
       "action_id": "a0029",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-03",
       "task_id": 11611
     },
     {
       "action_id": "a0041",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11608
     },
     {
       "action_id": "a0042",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11602
     },
     {
       "action_id": "a0044",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11608
     },
     {
       "action_id": "a0045",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11602
     },
     {
       "action_id": "a0047",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11608
     },
     {
       "action_id": "a0048",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11602
     },
     {
       "action_id": "a0053",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11608
     },
     {
       "action_id": "a0054",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-05",
       "task_id": 11602
     },
     {
       "action_id": "a0071",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 11636
     },
     {
       "action_id": "a0084",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 11643
     },
     {
       "action_id": "a0086",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 11644
     },
     {
       "action_id": "a0087",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 11655
     },
     {
       "action_id": "a0088",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 11660
     },
     {
       "action_id": "a0091",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-09",
       "task_id": 11664
     },
     {
       "action_id": "a0107",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 11656
     },
     {
       "action_id": "a0109",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 11656
     },
     {
       "action_id": "a0111",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 11656
     },
     {
       "action_id": "a0113",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 11661
     },
     {
       "action_id": "a0115",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-11",
       "task_id": 11656
     },
     {
       "action_id": "a0121",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "task_id": 11652
     },
     {
       "action_id": "a0123",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-12",
       "task_id": 11652
     },
     {
       "action_id": "a0130",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-13",
       "task_id": 11613
     },
     {
       "action_id": "a0136",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "task_id": 11619
     },
     {
       "action_id": "a0144",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 11625
     },
     {
       "action_id": "a0149",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 11626
     },
     {
       "action_id": "a0167",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 11686
     },
     {
       "action_id": "a0169",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 11686
     },
     {
       "action_id": "a0171",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 11676
     },
     {
       "action_id": "a0172",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 11688
     },
     {
       "action_id": "a0174",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 11686
     },
     {
       "action_id": "a0183",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 11690
     },
     {
       "action_id": "a0190",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-20",
       "task_id": 11705
     },
     {
       "action_id": "a0199",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 11711
     },
     {
       "action_id": "a0206",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "task_id": 11714
     },
     {
       "action_id": "a0207",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "task_id": 11716
     },
     {
       "action_id": "a0214",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "task_id": 11717
     },
     {
       "action_id": "a0220",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-22",
       "task_id": 11719
     },
     {
       "action_id": "a0226",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-23",
       "task_id": 11721
     },
     {
       "action_id": "a0241",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "task_id": 11884
     },
     {
       "action_id": "a0243",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "task_id": 11869
     },
     {
       "action_id": "a0245",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-24",
       "task_id": 11865
     },
     {
       "action_id": "a0250",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-25",
       "task_id": 11876
     },
     {
       "action_id": "a0260",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-26",
       "task_id": 11878
     },
     {
       "action_id": "a0264",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-26",
       "task_id": 11879
     },
     {
       "action_id": "a0266",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "task_id": 11605
     },
     {
       "action_id": "a0267",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-27",
       "task_id": 11612
     },
     {
       "action_id": "a0274",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "task_id": 11607
     },
     {
       "action_id": "a0275",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-28",
       "task_id": 11617
     },
     {
       "action_id": "a0282",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "task_id": 11609
     },
     {
       "action_id": "a0283",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "task_id": 11623
     },
     {
       "action_id": "a0288",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-29",
       "task_id": 11610
     },
     {
       "action_id": "a0295",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-30",
       "task_id": 11868
     },
     {
       "action_id": "a0300",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-30",
       "task_id": 11871
     },
     {
       "action_id": "a0301",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-30",
       "task_id": 11866
     },
     {
       "action_id": "a0306",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "task_id": 11872
     },
     {
       "action_id": "a0313",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-31",
       "task_id": 11892
     },
     {
       "action_id": "a0319",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-32",
       "task_id": 11949
     },
     {
       "action_id": "a0327",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "task_id": 11961
     },
     {
       "action_id": "a0332",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-33",
       "task_id": 11968
     },
     {
       "action_id": "a0345",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 11684
     },
     {
       "action_id": "a0347",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 11684
     },
     {
       "action_id": "a0349",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 11684
     },
     {
       "action_id": "a0350",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-34",
       "task_id": 11890
     },
     {
       "action_id": "a0353",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "task_id": 11887
     },
     {
       "action_id": "a0355",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "task_id": 11881
     },
     {
       "action_id": "a0364",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-35",
       "task_id": 11895
     },
     {
       "action_id": "a0370",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "task_id": 11893
     },
     {
       "action_id": "a0372",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "task_id": 11896
     },
     {
       "action_id": "a0373",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "task_id": 11899
     },
     {
       "action_id": "a0374",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-36",
       "task_id": 11906
     },
     {
       "action_id": "a0379",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "task_id": 11675
     },
     {
       "action_id": "a0384",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-37",
       "task_id": 11677
     },
     {
       "action_id": "a0392",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "task_id": 11683
     },
     {
       "action_id": "a0393",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-38",
       "task_id": 11687
     },
     {
       "action_id": "a0408",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "task_id": 11894
     },
     {
       "action_id": "a0409",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "task_id": 11907
     },
     {
       "action_id": "a0410",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-40",
       "task_id": 11909
     },
     {
       "action_id": "a0417",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-41",
       "task_id": 11628
     },
     {
       "action_id": "a0422",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-42",
       "task_id": 11630
     },
     {
       "action_id": "a0424",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-42",
       "task_id": 11685
     },
     {
       "action_id": "a0431",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "task_id": 11695
     },
     {
       "action_id": "a0433",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-43",
       "task_id": 11695
     },
     {
       "action_id": "a0435",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-44",
       "task_id": 11633
     },
     {
       "action_id": "a0459",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11706
     },
     {
       "action_id": "a0444",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11640
     },
     {
       "action_id": "a0445",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11641
     },
     {
       "action_id": "a0446",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11647
     },
     {
       "action_id": "a0451",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-45",
       "task_id": 11659
     },
     {
       "action_id": "a0465",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-46",
       "task_id": 11898
     },
     {
       "action_id": "a0480",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-48",
       "task_id": 11587
     },
     {
       "action_id": "a0482",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-48",
       "task_id": 11576
     },
     {
       "action_id": "a0491",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49",
       "task_id": 11582
     },
     {
       "action_id": "a0489",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-49",
       "task_id": 11590
     },
     {
       "action_id": "a0500",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-50",
       "task_id": 11648
     },
     {
       "action_id": "a0506",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-50",
       "task_id": 11671
     },
     {
       "action_id": "a0516",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-51",
       "task_id": 11681
     },
     {
       "action_id": "a0533",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11900
     },
     {
       "action_id": "a0534",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11910
     },
     {
       "action_id": "a0535",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11912
     },
     {
       "action_id": "a0536",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11918
     },
     {
       "action_id": "a0538",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11900
     },
     {
       "action_id": "a0539",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11910
     },
     {
       "action_id": "a0540",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11912
     },
     {
       "action_id": "a0541",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-52",
       "task_id": 11918
     },
     {
       "action_id": "a0543",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11900
     },
     {
       "action_id": "a0544",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11910
     },
     {
       "action_id": "a0545",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11912
     },
     {
       "action_id": "a0546",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11918
     },
     {
       "action_id": "a0548",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11900
     },
     {
       "action_id": "a0550",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11900
     },
     {
       "action_id": "a0551",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11910
     },
     {
       "action_id": "a0552",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11912
     },
     {
       "action_id": "a0553",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-53",
       "task_id": 11918
     },
     {
       "action_id": "a0562",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 11914
     },
     {
       "action_id": "a0563",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-54",
       "task_id": 11936
     },
     {
       "action_id": "a0572",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-55",
       "task_id": 11943
     },
     {
       "action_id": "a0574",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-55",
       "task_id": 11943
     },
     {
       "action_id": "a0576",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-55",
       "task_id": 11919
     },
     {
       "action_id": "a0582",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-55",
       "task_id": 11946
     },
     {
       "action_id": "a0586",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-56",
       "task_id": 11951
     },
     {
       "action_id": "a0587",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-56",
       "task_id": 11931
     },
     {
       "action_id": "a0595",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-56",
       "task_id": 11957
     },
     {
       "action_id": "a0603",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-57",
       "task_id": 11969
     },
     {
       "action_id": "a0617",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-59",
       "task_id": 11592
     },
     {
       "action_id": "a0618",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-59",
       "task_id": 11593
     },
     {
       "action_id": "a0619",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-59",
       "task_id": 11594
     },
     {
       "action_id": "a0633",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-60",
       "task_id": 11627
     },
     {
       "action_id": "a0635",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-60",
       "task_id": 11627
     },
     {
       "action_id": "a0640",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-60",
       "task_id": 11571
     },
     {
       "action_id": "a0645",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-61",
       "task_id": 11559
     },
     {
       "action_id": "a0651",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-61",
       "task_id": 11560
     },
     {
       "action_id": "a0652",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-61",
       "task_id": 11561
     },
     {
       "action_id": "a0662",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-61",
       "task_id": 11563
     },
     {
       "action_id": "a0663",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-61",
       "task_id": 11564
     },
     {
       "action_id": "a0672",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-62",
       "task_id": 12728
     },
     {
       "action_id": "a0676",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-62",
       "task_id": 11569
     },
     {
       "action_id": "a0681",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-62",
       "task_id": 11566
     },
     {
       "action_id": "a0682",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-62",
       "task_id": 11570
     },
     {
       "action_id": "a0690",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-63",
       "task_id": 11649
     },
     {
       "action_id": "a0697",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-63",
       "task_id": 11631
     },
     {
       "action_id": "a0705",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-64",
       "task_id": 11637
     },
     {
       "action_id": "a0706",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-64",
       "task_id": 11639
     },
     {
       "action_id": "a0710",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-64",
       "task_id": 11638
     },
     {
       "action_id": "a0723",
       "kind": "timing_rule_ref_required",
-      "severity": "requirement",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-66",
       "task_id": 11930
     },
     {
       "end_policy": "fill_if_incomplete",
       "kind": "background_marginal_timing_input_required",
+      "resolved_by": "legacy_step_baseline",
       "service_id": "borean-11866-background",
-      "severity": "requirement",
+      "severity": "info",
       "step_id": "step-30",
       "task_id": 11866
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-01"
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-02"
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-04"
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-06"
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-10"
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-17"
-    },
-    {
-      "detail": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
-      },
-      "kind": "timing_range_model_required",
-      "scope": "step",
-      "severity": "requirement",
-      "step_id": "step-39"
     }
   ],
-  "known_seconds": 11608.786,
+  "known_seconds": 39751.617,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": false,
+  "point_estimate_complete": true,
   "profile_id": "borean-fivebox",
-  "range_basis": null,
-  "range_minutes": null,
-  "status": "requirements",
+  "range_basis": {
+    "basis": "sum_of_step_ranges",
+    "legacy_baseline_steps": 58
+  },
+  "range_minutes": [
+    512.274,
+    812.98
+  ],
+  "status": "pass",
   "steps": [
     {
       "center_minutes": 2.456,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 145.8,
         "move_seconds": 1.572,
@@ -3942,21 +4018,19 @@
       "known_seconds": 147.372,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        2.161,
+        2.752
+      ],
       "step_id": "step-01",
       "title": "战歌要塞",
       "unresolved_component_count": 0
     },
     {
       "center_minutes": 3.705,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 204.0,
         "move_seconds": 18.308,
@@ -3967,21 +4041,19 @@
       "known_seconds": 222.308,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        3.251,
+        4.159
+      ],
       "step_id": "step-02",
       "title": "战歌要塞 → 巨石采掘场",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 23.0,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 27.193,
@@ -3989,17 +4061,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 27.193,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1380.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1352.807,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        17.3,
+        28.8
+      ],
       "step_id": "step-03",
       "title": "巨石采掘场",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 3.785,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 213.6,
         "move_seconds": 13.476,
@@ -4010,21 +4089,19 @@
       "known_seconds": 227.076,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        3.324,
+        4.245
+      ],
       "step_id": "step-04",
       "title": "巨石采掘场 → 战歌要塞",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 36.773,
@@ -4032,17 +4109,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 94.973,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 258.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 163.027,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        3.6,
+        5.1
+      ],
       "step_id": "step-05",
       "title": "四虫孔与蛛卵一圈清",
-      "unresolved_component_count": 8
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 2.992,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 14.522,
@@ -4053,21 +4137,19 @@
       "known_seconds": 179.522,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        2.626,
+        3.358
+      ],
       "step_id": "step-06",
       "title": "战歌要塞",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 13.549,
@@ -4075,17 +4157,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 129.949,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 192.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 62.051,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        2.6,
+        3.8
+      ],
       "step_id": "step-07",
       "title": "开飞行点 → 通知地狱咆哮 → 魔法飞毯",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 184.2,
         "move_seconds": 1.878,
@@ -4093,17 +4182,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 186.078,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 288.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 101.922,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        4.0,
+        5.7
+      ],
       "step_id": "step-08",
       "title": "加尔鲁什码头 → 回音海岸",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 22.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 48.6,
         "move_seconds": 29.433,
@@ -4111,17 +4207,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 78.033,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1344.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1265.967,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        16.8,
+        28.0
+      ],
       "step_id": "step-09",
       "title": "固定零件 + 克瓦迪尔三任务 + 短护送",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 4.325,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 252.0,
         "move_seconds": 7.53,
@@ -4132,21 +4235,19 @@
       "known_seconds": 259.53,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        3.803,
+        4.848
+      ],
       "step_id": "step-10",
       "title": "回音海岸 → 加尔鲁什码头",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 64.662,
@@ -4154,17 +4255,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 64.662,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 312.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 247.338,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        3.9,
+        6.5
+      ],
       "step_id": "step-11",
       "title": "伯尔之锤 → 战歌码头 → 伯尔之砧",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 17.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 46.892,
@@ -4172,17 +4280,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 114.692,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1050.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 935.308,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        13.1,
+        21.9
+      ],
       "step_id": "step-12",
       "title": "海岸交付后直接上坦克做纳萨姆",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.6,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 69.488,
@@ -4190,17 +4305,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 244.088,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 456.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 211.912,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.2,
+        8.9
+      ],
       "step_id": "step-13",
       "title": "被俘虏的海象人 → 卡鲁克 → 斯卡迪尔营地 → 卡鲁克",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 30.234,
@@ -4208,17 +4330,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 146.634,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 270.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 123.366,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        3.7,
+        5.3
+      ],
       "step_id": "step-14",
       "title": "贾梅尔 → 父亲的话 → 维赫亚",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 8.0,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 140.47,
@@ -4226,17 +4355,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 247.27,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 480.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 232.73,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.5,
+        9.4
+      ],
       "step_id": "step-15",
       "title": "纳兹亚的三叉戟 → 使者 → 卡鲁克",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 11.562,
@@ -4244,17 +4380,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 79.362,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 210.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 130.638,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        2.9,
+        4.1
+      ],
       "step_id": "step-16",
       "title": "战歌要塞 → 伊斯里克斯事件",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 2.275,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 20.084,
@@ -4265,21 +4408,19 @@
       "known_seconds": 136.484,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        1.992,
+        2.558
+      ],
       "step_id": "step-17",
       "title": "战歌农场开局接任务",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.0,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 38.537,
@@ -4287,17 +4428,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 38.537,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 420.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 381.463,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.2,
+        8.7
+      ],
       "step_id": "step-18",
       "title": "农场三处侦察 + 囚犯/亡灵猪同圈",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.1,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 33.653,
@@ -4305,17 +4453,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 208.253,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 366.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 157.747,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.0,
+        7.1
+      ],
       "step_id": "step-19",
       "title": "战歌农场交付 → 科多救援",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 19.971,
@@ -4323,17 +4478,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 78.171,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 204.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 125.829,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        2.7,
+        4.0
+      ],
       "step_id": "step-20",
       "title": "暗影密探盖特莱 → 残忍的瓦雷杜斯",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.1,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 223.2,
         "move_seconds": 46.321,
@@ -4341,17 +4503,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 269.521,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 366.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 96.479,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.1,
+        7.2
+      ],
       "step_id": "step-21",
       "title": "炉石战歌 → 逃兵快递 → 图古克 / 劳莉丝",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 26.1,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 261.6,
         "move_seconds": 96.801,
@@ -4359,17 +4528,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 358.401,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1566.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1207.599,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        19.6,
+        32.7
+      ],
       "step_id": "step-22",
       "title": "血孢平原 → 巨蛾/蛾卵 → 迦莫斯链",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 96.969,
@@ -4377,17 +4553,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 213.369,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 348.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 134.631,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        4.8,
+        6.8
+      ],
       "step_id": "step-23",
       "title": "迦莫斯洞穴 → 血孢平原 → 战歌要塞",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 9.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 106.2,
         "move_seconds": 115.023,
@@ -4395,17 +4578,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 221.223,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 558.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 336.777,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        7.6,
+        11.0
+      ],
       "step_id": "step-24",
       "title": "仁德会·尼达尔 / 欢乐的蚌壳 / 死不足惜",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 36.112,
@@ -4413,17 +4603,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 94.312,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 252.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 157.688,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        3.4,
+        4.9
+      ],
       "step_id": "step-25",
       "title": "冷石采掘场 → 帮助弱小",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 80.628,
@@ -4431,17 +4628,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 245.028,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 468.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 222.972,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.4,
+        9.2
+      ],
       "step_id": "step-26",
       "title": "仁德会 → 库诺克 / 卡奥",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 5.7,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 31.537,
@@ -4449,17 +4653,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 108.937,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 342.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 233.063,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        4.3,
+        7.2
+      ],
       "step_id": "step-27",
       "title": "冷石采掘场·海象人的先祖 / 夺回采掘场",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 21.55,
@@ -4467,17 +4678,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 98.95,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 270.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 171.05,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        3.7,
+        5.3
+      ],
       "step_id": "step-28",
       "title": "冷石采掘场·失落的灵魂 / 别让他们逃了！",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 13.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 50.346,
@@ -4485,17 +4703,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 166.746,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 804.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 637.254,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        10.0,
+        16.7
+      ],
       "step_id": "step-29",
       "title": "冷石采掘场·寻找古器 / 先祖的回归",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 32.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 75.443,
@@ -4503,17 +4728,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 240.443,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1968.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1727.557,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        24.6,
+        41.0
+      ],
       "step_id": "step-30",
       "title": "仁德会南线：卡琳 → 遗弃海岸 / 不可容忍",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 8.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 126.0,
         "move_seconds": 133.319,
@@ -4521,17 +4753,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 259.319,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 492.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 232.681,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.7,
+        9.6
+      ],
       "step_id": "step-31",
       "title": "仁德会·蛤蜊主宰 / 刺杀哈罗德·兰恩",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 60.529,
@@ -4539,17 +4778,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 225.529,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 444.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 218.471,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.1,
+        8.7
+      ],
       "step_id": "step-32",
       "title": "卡斯卡拉·战斗到底 / 穆希特的智慧",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 15.151,
@@ -4557,17 +4803,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 131.551,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 372.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 240.449,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        4.7,
+        7.8
+      ],
       "step_id": "step-33",
       "title": "卡斯卡拉·神灵的眷顾 / 情势扭转",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 102.96,
@@ -4575,17 +4828,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 199.56,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 288.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 88.44,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        4.0,
+        5.7
+      ],
       "step_id": "step-34",
       "title": "牦牛村 → 三处虫孔",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 12.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 193.2,
         "move_seconds": 86.985,
@@ -4593,17 +4853,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 280.185,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 750.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 469.815,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        9.4,
+        15.6
+      ],
       "step_id": "step-35",
       "title": "应急的物资 / 运货行动 → 牦牛村",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 31.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 56.491,
@@ -4611,17 +4878,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 56.491,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1884.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1827.509,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        23.6,
+        39.3
+      ],
       "step_id": "step-36",
       "title": "元素的力量 / 菲兹兰克泵站",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 10.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 72.057,
@@ -4629,17 +4903,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 188.457,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 630.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 441.543,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        7.9,
+        13.2
+      ],
       "step_id": "step-37",
       "title": "赫米萨：死亡的解脱 → 阻止瘟疫",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 20.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 193.8,
         "move_seconds": 79.633,
@@ -4647,17 +4928,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 273.433,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1248.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 974.567,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        15.6,
+        25.9
+      ],
       "step_id": "step-38",
       "title": "阻止瘟疫交接 → 塔尔拉玛斯 → 报告坏消息",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 2.478,
-      "complete": false,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 115.8,
         "move_seconds": 32.879,
@@ -4668,21 +4956,19 @@
       "known_seconds": 148.679,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "unresolved",
-        "matching_observation_ids": [],
-        "missing_component_uncertainty": [
-          "accept_turnin_seconds",
-          "move_seconds"
-        ]
+        "basis": "component_relative_uncertainty"
       },
-      "range_minutes": null,
+      "range_minutes": [
+        2.164,
+        2.792
+      ],
       "step_id": "step-39",
       "title": "牦牛村·任务交接",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 13.0,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 54.659,
@@ -4690,17 +4976,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 54.659,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 780.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 725.341,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        9.7,
+        16.2
+      ],
       "step_id": "step-40",
       "title": "菲兹兰克泵站·修修补补 / 机械副官 / 击败机甲专家",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 10.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 113.322,
@@ -4708,17 +5001,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 248.922,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 624.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 375.078,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        7.8,
+        13.1
+      ],
       "step_id": "step-41",
       "title": "牦牛村 → 天灾的外衣",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 17.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 93.792,
@@ -4726,17 +5026,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 171.192,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1044.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 872.808,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        13.1,
+        21.8
+      ],
       "step_id": "step-42",
       "title": "腐化的土地 / 元素之心 → 牦牛村",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.9,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 70.548,
@@ -4744,17 +5051,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 70.548,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 234.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 163.452,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        2.9,
+        4.8
+      ],
       "step_id": "step-43",
       "title": "元素愤怒号角·上下半截",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 80.017,
@@ -4762,17 +5076,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 176.617,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 264.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 87.383,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        3.6,
+        5.2
+      ],
       "step_id": "step-44",
       "title": "恩其拉·乔装潜入 → 牦牛村",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 14.9,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 184.2,
         "move_seconds": 151.488,
@@ -4780,17 +5101,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 335.688,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 894.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 558.312,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        11.2,
+        18.7
+      ],
       "step_id": "step-45",
       "title": "天崩地裂 → 恩其拉·力量之语 / 鲜血尖塔 → 牦牛村",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 83.66,
@@ -4798,17 +5126,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 151.46,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 372.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 220.54,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.1,
+        7.3
+      ],
       "step_id": "step-46",
       "title": "过关斩将 → 牦牛村",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 3.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 49.916,
@@ -4816,17 +5151,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 117.716,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 204.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 86.284,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        2.8,
+        4.1
+      ],
       "step_id": "step-47",
       "title": "炉石战歌要塞 → 琥珀崖",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.8,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 86.868,
@@ -4834,17 +5176,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 164.268,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 408.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 243.732,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.1,
+        8.4
+      ],
       "step_id": "step-48",
       "title": "蓝玉营地 / 悬崖异常 → 琥珀崖",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.1,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 53.763,
@@ -4852,17 +5201,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 131.163,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 426.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 294.837,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.8,
+        8.4
+      ],
       "step_id": "step-49",
       "title": "峭壁断层 / 调查 → 琥珀崖",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 8.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.0,
         "move_seconds": 42.929,
@@ -4870,17 +5226,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 216.929,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 492.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 275.071,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.7,
+        9.7
+      ],
       "step_id": "step-50",
       "title": "法师塔二楼 → 与时间赛跑 → 苏雷斯塔兹",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.7,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 27.084,
@@ -4888,17 +5251,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 201.684,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 462.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 260.316,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.3,
+        9.1
+      ],
       "step_id": "step-51",
       "title": "营救艾瓦诺尔 → 苏雷斯塔兹 → 考达拉",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 25.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 87.0,
         "move_seconds": 48.168,
@@ -4906,17 +5276,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 135.168,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1530.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1394.832,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        19.1,
+        31.9
+      ],
       "step_id": "step-52",
       "title": "永生之盾 → 南部 / 西部监测点",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 25.4,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 75.672,
@@ -4924,17 +5301,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 172.272,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1524.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1351.728,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        19.0,
+        31.7
+      ],
       "step_id": "step-53",
       "title": "北部 / 东北 / 中央监测点 → 永生之盾",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 11.1,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 49.767,
@@ -4942,17 +5326,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 127.167,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 666.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 538.833,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        8.3,
+        13.8
+      ],
       "step_id": "step-54",
       "title": "考达拉外圈 → 奇怪…… → 永生之盾",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 8.6,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 115.993,
@@ -4960,17 +5351,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 212.593,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 516.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 303.407,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        6.5,
+        10.8
+      ],
       "step_id": "step-55",
       "title": "戈德拉克 / 塞鲁利恩 → 猎龙 → 永生之盾",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 19.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 126.0,
         "move_seconds": 75.741,
@@ -4978,17 +5376,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 201.741,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1152.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 950.259,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        14.4,
+        24.0
+      ],
       "step_id": "step-56",
       "title": "考达拉目标区 → 莎拉苟萨平台",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 7.2,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 127.47,
@@ -4996,35 +5401,49 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 234.27,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 432.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 197.73,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        5.9,
+        8.5
+      ],
       "step_id": "step-57",
       "title": "永生之盾 → 信号火焰 → 莱洛拉斯",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.7,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 0.0,
-        "move_seconds": 0.43,
+        "move_seconds": 0.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 0.43,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 102.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 102.0,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        1.4,
+        2.0
+      ],
       "step_id": "step-58",
-      "title": "永生之盾 → 系统鸟琥珀崖",
-      "unresolved_component_count": 1
+      "title": "永生之盾 → 图书馆员提艾蕾传送琥珀崖",
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 14.0,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 203.4,
         "move_seconds": 75.244,
@@ -5032,17 +5451,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 278.644,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 840.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 561.356,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        10.5,
+        17.5
+      ],
       "step_id": "step-59",
       "title": "钢腭车队 → 博古洛克前哨站",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.5,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 71.551,
@@ -5050,17 +5476,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 246.151,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 390.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 143.849,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        4.9,
+        8.1
+      ],
       "step_id": "step-60",
       "title": "因波莉安 → 火水元素 → 冬鳞避难所",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 28.6,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 329.4,
         "move_seconds": 104.207,
@@ -5068,17 +5501,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 433.607,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1716.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 1282.393,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        21.5,
+        35.8
+      ],
       "step_id": "step-61",
       "title": "冬鳞外圈 → 幽光海湾 → 冬鳞避难所",
-      "unresolved_component_count": 5
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 13.9,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 85.321,
@@ -5086,17 +5526,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 250.321,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 834.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 583.679,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        11.4,
+        16.4
+      ],
       "step_id": "step-62",
       "title": "冬鳞洞穴：裂谷 → 钥匙 → 护送",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 13.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 203.4,
         "move_seconds": 45.671,
@@ -5104,17 +5551,24 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 249.071,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 798.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 548.929,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        10.0,
+        16.6
+      ],
       "step_id": "step-63",
       "title": "因波莉安 → 风暴微粒 → 博古洛克",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 12.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 54.782,
@@ -5122,56 +5576,75 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 229.382,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 738.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 508.618,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        9.2,
+        15.4
+      ],
       "step_id": "step-64",
       "title": "犸格莫斯洞穴 → 博古洛克",
-      "unresolved_component_count": 3
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 1.211,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 48.6,
-        "move_seconds": 1.045,
+        "move_seconds": 24.045,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 49.645,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 72.645,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "component_relative_uncertainty"
+      },
+      "range_minutes": [
+        1.053,
+        1.368
+      ],
       "step_id": "step-65",
       "title": "博古洛克 → 系统鸟琥珀崖",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 10.6,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 48.6,
-        "move_seconds": 8.556,
+        "move_seconds": 57.556,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 57.156,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 636.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 529.844,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/borean-fivebox-timing.json"
+      },
+      "range_minutes": [
+        8.7,
+        12.5
+      ],
       "step_id": "step-66",
       "title": "系统鸟琥珀崖 → 牦牛村 → 横贯冰原",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     }
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 181,
-    "range_model_status": "requirements",
-    "requirement_count": 181,
+    "issue_count": 172,
+    "range_model_status": "resolved",
+    "requirement_count": 0,
     "step_count": 66
   }
 }
