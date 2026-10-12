@@ -91,10 +91,19 @@
     "从南侧进入红玉巨龙圣地；除击杀通灵师外，还必须摧毁圣地下面的腐化源，单纯击杀不会完成第二目标。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-13",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12450",
+      "observed_at": "2026-10-13",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",

@@ -2011,6 +2011,45 @@
         "xp_end": "约102万",
         "interpretation": "本轮用于回写fivebox事实和路线错误；因步骤16/17、红玉丁香顺序及吉加托尔支线均发生结构修正，不直接校准旧Timing。"
       }
+    },
+    {
+      "observation_id": "route-run-2026-10-12-13-dragonblight-dk-002",
+      "profile_id": "dragonblight-fivebox",
+      "profile_version": 2,
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 1,
+      "action_scope": {
+        "start": {"anchor": "步骤28附近继续龙眠阶段"},
+        "end": {"anchor": "01:45暂停，步骤38进行中"},
+        "closed_comparison_scope": "步骤28→37闭合"
+      },
+      "actual_minutes": 182.0,
+      "time_precision": "mixed_user_minute_plus_savedvariables_runtime_anchor",
+      "clean": false,
+      "calibration_eligible": false,
+      "ineligibility_reasons": [
+        "end_boundary_is_partial_step38",
+        "contains_route_transport_choice",
+        "mixed_precision_runtime_boundary"
+      ],
+      "source_route_key": "dragonblight_dk_second_run_steps28_38_partial",
+      "source_record_ref": "data/observations/route-timing-runs.json#run_id=2026-10-12-13-dragonblight-dk-second-run-2243-0145",
+      "source_record": {
+        "date": "2026-10-12/13",
+        "user_start_local": "2026-10-12T22:43:00+08:00",
+        "step37_closed_local": "2026-10-13T01:15:21+08:00",
+        "last_hard_runtime_active_local": "2026-10-13T01:43:03+08:00",
+        "user_stop_local_approx": "2026-10-13T01:45:00+08:00",
+        "closed_scope_actual_minutes": 152.35,
+        "closed_scope_predicted_minutes": 148.3,
+        "closed_scope_delta_minutes": 4.05,
+        "closed_scope_delta_percent": 2.73,
+        "first_group_same_scope_active_minutes_approx": 167.6,
+        "second_group_faster_than_first_minutes_approx": 15.25,
+        "second_group_faster_percent_approx": 9.1,
+        "level_end": 76,
+        "interpretation": "步骤28→37的当前预测与本次DK实跑高度贴合；完整182分钟还包含约30分钟步骤38未闭合工作，因此不拿整段182分钟直接校准已闭合步骤。"
+      }
     }
   ]
 }

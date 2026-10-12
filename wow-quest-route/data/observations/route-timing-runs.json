@@ -2171,6 +2171,56 @@
         "state": "按当前反馈从步骤26《莫亚基 → 鱼钩 → 炉石阿格玛》继续"
       },
       "status": "continuation_mechanics_runtime_route_recorded_not_calibration_eligible"
+    },
+    {
+      "run_id": "2026-10-12-13-dragonblight-dk-second-run-2243-0145",
+      "date": "2026-10-12",
+      "continuation_date": "2026-10-13",
+      "route_key": "dragonblight_dk_second_run_steps28_38_partial",
+      "profile_ids": ["dragonblight-fivebox"],
+      "profile_versions_at_run": {"dragonblight-fivebox": 2},
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 1,
+      "run_kind": "second_fivebox_run_dragonblight_continuation",
+      "time_precision": "user_minute_start_plus_savedvariables_runtime_boundary",
+      "source": "2026-10-13用户现场反馈 + SavedVariables.zip/Questie Journey + !Pig运行时事件。",
+      "journey_anchors": {
+        "user_start_local": "2026-10-12T22:43:00+08:00",
+        "first_journey_anchor_local": "2026-10-12T22:45:38+08:00",
+        "step37_closed_local": "2026-10-13T01:15:21+08:00",
+        "last_hard_runtime_active_local": "2026-10-13T01:43:03+08:00",
+        "user_stop_local_approx": "2026-10-13T01:45:00+08:00",
+        "business_start": "龙眠阶段继续推进（步骤28附近）",
+        "business_closed_boundary": "步骤37闭合并接《翡翠龙泪》",
+        "business_end": "步骤38进行中；手上任务已完成大半，下次继续当前任务"
+      },
+      "gross_minutes": 182.0,
+      "paused_minutes": 0.0,
+      "actual_minutes": 182.0,
+      "actual_display": "3小时02分钟",
+      "closed_scope_comparison": {
+        "scope": "步骤28→37闭合",
+        "actual_minutes": 152.35,
+        "predicted_minutes": 148.3,
+        "delta_minutes": 4.05,
+        "delta_percent": 2.73,
+        "first_group_active_minutes_approx": 167.6,
+        "second_group_faster_than_first_minutes_approx": 15.25,
+        "second_group_faster_percent_approx": 9.1,
+        "first_group_caveat": "第一组同阶段存在路线跳步、萨拉斯塔失败、额外炉石清理和跨时段暂停；168分钟为扣除长暂停后的近似活跃墙钟，不是干净职业对照。"
+      },
+      "route_deviations_and_lessons": [
+        "第二组血DK确认《萨拉斯塔，北地的灾祸》当前配置可正常击杀，继续保留自然路线；冰冻之心已补充确认同一尸体可供五号依次拾取。",
+        "本轮因从当前位置直接跑回龙眠较远，采用先去黑锋之门升级技能→炉石回交《北地的灾祸》→系统鸟飞龙眠；系统飞行约1分钟，作为本轮有效转场方案记录。",
+        "步骤37闭合后继续推进步骤38约30分钟，01:45暂停时手头任务已完成大半。"
+      ],
+      "savedvariables_boundary_evidence": {
+        "method_ref": "docs/rules/timing-and-benchmarking.md §11.4 用户忘记暂停时间时：用SavedVariables运行时事件夹定边界",
+        "hard_active_anchor": "!Pig.lua于01:43:03记录WeakAuras实时运行错误",
+        "excluded_false_anchor": "BiaoGe.lua 01:39:56为市场价格刷新，不作为角色活跃证据",
+        "interpretation": "用户记忆01:40—01:50暂停，与01:43:03硬活跃下界和后续时间戳断档一致，因此项目采用01:45近似暂停。"
+      },
+      "status": "continuation_mechanics_runtime_route_and_timing_recorded_partial_step38"
     }
   ]
 }

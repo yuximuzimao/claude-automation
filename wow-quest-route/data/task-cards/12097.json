@@ -55,7 +55,7 @@
     "交付：高尔特上尉。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -76,14 +76,23 @@
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "partial",
       "supports_fields": ["fivebox.status"]
+    },
+    {
+      "evidence_id": "evidence-fivebox-live-2026-10-13",
+      "source_type": "user_live",
+      "source_ref": "2026-10-13用户补充确认：萨拉斯塔的冰冻之心可五号依次拾取",
+      "observed_at": "2026-10-13",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status", "presentation.note_override"]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "先与洛坎对话召唤萨拉斯塔；冰冻之心的五开拾取方式仍待单独确认。",
+      "text": "先与洛坎对话召唤萨拉斯塔；击杀后同一尸体可供五号依次拾取冰冻之心。",
       "scope": "all",
-      "source_ref": "2026-10-12第二组DK路线恢复",
-      "reason": "任务重新纳入75级路线，但任务物拾取机制尚未单独完成fivebox确认。"
+      "source_ref": "2026-10-13第二组DK实跑补充确认",
+      "reason": "用户确认冰冻之心为同一尸体五号依次拾取。"
     }
   }
 }

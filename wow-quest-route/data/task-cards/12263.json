@@ -52,10 +52,19 @@
     "塞雷纳尔会把你伪装成教徒；保持伪装穿过奈萨里奥之喉洞穴深入教徒区域观察意图。伪装丢失后应返回重新施加。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-13",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12263",
+      "observed_at": "2026-10-13",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",

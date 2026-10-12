@@ -52,10 +52,19 @@
     "三只猛犸人分布在龙眠神殿周边不同位置；冰碎有危险引导技能，血宴会借附近蛆虫回血，应按三只独立命名目标处理。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-13",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12149",
+      "observed_at": "2026-10-13",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
