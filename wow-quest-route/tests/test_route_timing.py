@@ -65,8 +65,11 @@ def _profile(*, actions=None, steps=None, service_overrides=None):
     return profile
 
 
-def _task_card(task_id: int, rule_ref=None):
-    return {"identity": {"task_id": task_id}, "timing_rule_ref": rule_ref}
+def _task_card(task_id: int, rule_ref=None, *, fivebox_status=None):
+    card = {"identity": {"task_id": task_id}, "timing_rule_ref": rule_ref}
+    if fivebox_status is not None:
+        card["fivebox"] = {"status": fivebox_status}
+    return card
 
 
 def _inputs():
@@ -82,6 +85,16 @@ def _inputs():
                 "shared-kill-count": {
                     "kind": "kill_count",
                     "required_inputs": ["kill_count", "combat_seconds_per_mob"],
+                },
+                "personal-drop-count": {
+                    "kind": "personal_drop",
+                    "required_inputs": [
+                        "required_count",
+                        "drop_rate",
+                        "combat_seconds_per_mob",
+                        "personal_loot_seconds_per_corpse",
+                        "party_size",
+                    ],
                 },
                 "fixed-service-seconds": {
                     "kind": "fixed_seconds",
@@ -395,6 +408,59 @@ def test_effective_quest_source_supplies_baseline_rule_inputs_and_task_config_ov
     overridden["task_parameters"]["tasks"]["100"] = {"inputs": {"kill_count": 5}}
     result = _evaluate(profile, cards, overridden)
     assert result["steps"][0]["components"]["objective_service_seconds"] == 75.0
+
+
+def test_personal_drop_not_shared_scales_required_count_by_party_size() -> None:
+    profile = _profile()
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"required_count": 1, "drop_rate": 0.25}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    cards = {100: _task_card(100, "personal-drop-count", fivebox_status="not_shared")}
+
+    report = _evaluate(profile, cards, inputs)
+
+    expected_kills = 5 / 0.25 + 1.2 * ((5 * 0.75) ** 0.5 / 0.25)
+    assert report["steps"][0]["components"]["objective_service_seconds"] == pytest.approx(expected_kills * 24.0)
+
+
+def test_personal_drop_shared_uses_one_drop_stream() -> None:
+    profile = _profile()
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"required_count": 1, "drop_rate": 0.25}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    cards = {100: _task_card(100, "personal-drop-count", fivebox_status="shared")}
+
+    report = _evaluate(profile, cards, inputs)
+
+    expected_kills = 1 / 0.25 + 1.2 * ((1 * 0.75) ** 0.5 / 0.25)
+    assert report["steps"][0]["components"]["objective_service_seconds"] == pytest.approx(expected_kills * 24.0)
+
+
+def test_personal_drop_100_percent_is_deterministic_and_still_scales_not_shared() -> None:
+    profile = _profile()
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"required_count": 2, "drop_rate": 1.0}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    cards = {100: _task_card(100, "personal-drop-count", fivebox_status="not_shared")}
+
+    report = _evaluate(profile, cards, inputs)
+
+    assert report["steps"][0]["components"]["objective_service_seconds"] == 10 * 24.0
 
 
 def test_missing_rule_input_stays_requirement_instead_of_using_old_fallback() -> None:

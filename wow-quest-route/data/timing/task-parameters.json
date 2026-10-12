@@ -1,6 +1,15 @@
 {
   "schema_version": 1,
   "config_id": "route-timing-task-parameters-v1",
-  "tasks": {},
+  "tasks": {
+    "11999": {
+      "inputs": {
+        "drop_rate": 0.1
+      },
+      "source_refs": [
+        "user_live:2026-10-12 task 11999 寻找线索：单号通常约15个法师猎手尸体内能出，运气好约5个以内；按当前样本暂定10%有效掉率用于Timing校准"
+      ]
+    }
+  },
   "note": "Task-specific Timing inputs are added only after explicit evidence review. This file never derives parameters from Task Card guide text, player notes, generated HTML, or quest names."
 }

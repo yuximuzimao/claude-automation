@@ -402,14 +402,36 @@ def _task_rule_seconds(
                     _issue("error", "invalid_drop_rate", task_id=task_id, drop_rate=drop_rate)
                 )
             else:
-                mean = required / drop_rate
-                std = math.sqrt(required * (1.0 - drop_rate)) / drop_rate
-                tail = float(params["personal_drop_tail_sigma_multiplier"])
-                expected_kills = mean + tail * std
-                seconds = expected_kills * (
-                    float(params["combat_seconds_per_mob"])
-                    + float(params["personal_loot_seconds_per_corpse"])
-                )
+                fivebox_status = str(((card.get("fivebox") or {}).get("status") or "")).strip()
+                # Personal-drop work scales by the number of independent character requirements.
+                # not_shared follows the current free-loot workflow: finish one character's
+                # personal requirement, then switch to the next. shared/sequential_loot need one
+                # successful drop stream. Unknown/special semantics must be classified explicitly.
+                if fivebox_status == "not_shared":
+                    independent_streams = int(params["party_size"])
+                elif fivebox_status in {"shared", "sequential_loot"}:
+                    independent_streams = 1
+                else:
+                    issues.append(
+                        _issue(
+                            "requirement",
+                            "personal_drop_fivebox_status_required",
+                            task_id=task_id,
+                            fivebox_status=fivebox_status or None,
+                        )
+                    )
+                    independent_streams = None
+
+                if independent_streams is not None:
+                    total_required = required * independent_streams
+                    mean = total_required / drop_rate
+                    std = math.sqrt(total_required * (1.0 - drop_rate)) / drop_rate
+                    tail = float(params["personal_drop_tail_sigma_multiplier"])
+                    expected_kills = mean + tail * std
+                    seconds = expected_kills * (
+                        float(params["combat_seconds_per_mob"])
+                        + float(params["personal_loot_seconds_per_corpse"])
+                    )
     else:
         issues.append(
             _issue("error", "unsupported_timing_rule_kind", task_id=task_id, rule_ref=rule_ref, kind=kind)

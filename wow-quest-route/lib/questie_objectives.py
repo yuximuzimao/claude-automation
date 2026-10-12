@@ -13,6 +13,7 @@ Q_OBJECTIVES = 10
 Q_TRIGGER_END = 9
 ITEM_NPC_DROPS = 2
 ITEM_OBJECT_DROPS = 3
+ITEM_ITEM_DROPS = 4
 
 NUMBER_WORDS = {
     "one": 1,
@@ -156,9 +157,15 @@ def objective_atoms(data: QuestieData, quest_id: int, row: dict[Any, Any]) -> tu
                 row_out["source_object_ids"] = [
                     int(object_id) for object_id in seq(item.get(ITEM_OBJECT_DROPS)) if isinstance(object_id, int)
                 ]
+                row_out["source_item_ids"] = [
+                    int(source_item_id)
+                    for source_item_id in seq(item.get(ITEM_ITEM_DROPS))
+                    if isinstance(source_item_id, int)
+                ]
             else:
                 row_out["source_npc_ids"] = []
                 row_out["source_object_ids"] = []
+                row_out["source_item_ids"] = []
         atoms.append(row_out)
     return atoms, issues
 
@@ -184,6 +191,9 @@ def timing_inputs_from_atoms(
         item = item_atoms[0]
         inputs["required_count"] = int(item["required_count"])
         inputs["item_id"] = int(item["item_id"])
+        source_item_ids = list(item.get("source_item_ids") or [])
+        if source_item_ids:
+            inputs["source_item_ids"] = [int(source_item_id) for source_item_id in source_item_ids]
         npc_ids = list(item.get("source_npc_ids") or [])
         if drop_db is not None and len(npc_ids) == 1:
             rate = drop_db.get(int(item["item_id"]), int(npc_ids[0]))

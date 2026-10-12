@@ -77,6 +77,23 @@ def test_ambiguous_extra_numbers_remain_review_requirement_not_machine_count() -
     assert issues[0]["kind"] == "questie_objective_count_review_required"
 
 
+def test_item_source_chain_is_preserved_without_inventing_container_drop_rate() -> None:
+    data = _questie(items={222: {4: {1: 333}}})
+    row = {
+        8: {1: "Collect the plans"},
+        10: {3: {1: {1: 222}}},
+    }
+
+    atoms, issues = objective_atoms(data, 100, row)
+    inputs, resolution_issues = timing_inputs_from_atoms(atoms)
+
+    assert issues == []
+    assert resolution_issues == []
+    assert atoms[0]["source_item_ids"] == [333]
+    assert inputs["source_item_ids"] == [333]
+    assert "drop_rate" not in inputs
+
+
 def test_multiple_drop_sources_never_select_one_route_drop_rate_implicitly() -> None:
     data = _questie(items={222: {2: {1: 333, 2: 444}}})
     row = {

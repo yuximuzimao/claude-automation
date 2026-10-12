@@ -2331,9 +2331,33 @@
       "seconds": 48.6,
       "step_id": "step-51",
       "visit_id": "a0606"
+    },
+    {
+      "action_id": "a0189",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "drop_rate": 0.1,
+          "fixed_object_seconds_per_character": 7.0,
+          "item_id": 35783,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "personal_drop",
+        "rule_ref": "personal-drop-count",
+        "task_id": 11999
+      },
+      "seconds": 1810.940258945177,
+      "step_id": "step-16",
+      "task_id": 11999
     }
   ],
-  "input_fingerprint": "df065a852be820ec57b9873f0ef7848d64f061cb697fcd9c70bb633c8be97c3e",
+  "input_fingerprint": "f0586614fceaaf44393445c31affd4e0cafd736a5d6ccab79932aaa03b024e17",
   "issues": [
     {
       "action_id": "use-hearth-after-rotting-organs",
@@ -2804,14 +2828,6 @@
       "severity": "info",
       "step_id": "step-16",
       "task_id": 12006
-    },
-    {
-      "action_id": "a0189",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-16",
-      "task_id": 11999
     },
     {
       "action_id": "a0190",
@@ -3478,7 +3494,7 @@
       "task_id": 13242
     }
   ],
-  "known_seconds": 41703.171,
+  "known_seconds": 42572.318,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "dragonblight-fivebox",
@@ -3860,25 +3876,25 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 23.1,
+      "center_minutes": 37.586,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 213.6,
         "move_seconds": 230.607,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 1810.94,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1386.0,
+      "known_seconds": 2255.147,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 941.793,
+        "residual_seconds": 0.0,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
         17.4,
-        28.9
+        37.586
       ],
       "step_id": "step-16",
       "title": "眠月花园 → 阿格玛 → 眠月花园",
@@ -4776,7 +4792,7 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 141,
+    "issue_count": 140,
     "range_model_status": "requirements",
     "requirement_count": 0,
     "step_count": 52

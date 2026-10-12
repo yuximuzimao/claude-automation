@@ -102,7 +102,7 @@ Task Card不再把任务拆成fivebox stages或objective/mechanic类型供Timing
 规则：
 
 - `timing_rule_ref = null`表示这个任务尚未完成Timing分类；模型不得从guide、玩家备注或`fivebox.status`自由猜一个精确公式。
-- `fivebox.status`只负责玩家执行分类；`shared / not_shared / sequential_loot / special / pending`不是完整的时间模型。
+- `fivebox.status`只负责玩家执行分类；`shared / not_shared / sequential_loot / special / pending`本身不是完整的时间模型。但当Task Card已经显式选择某个Timing规则族时，该规则可以把`fivebox.status`作为已确认的执行倍率输入。例如`personal-drop-count`中，`not_shared`表示每个角色都需要独立完成同一掉落需求，因此需求量按队伍人数放大；`shared/sequential_loot`只计算一个掉落流。
 - 同一类真实任务反复出现后，可以在Timing owner中定义一个可复用规则，再让对应Task Card引用它。
 - mixed/条件型任务可以引用一个专门的组合规则；不需要把任务本身重新拆成stage。
 - 若现有规则无法表达真实任务，先扩Timing owner/模型配置，再写新的`timing_rule_ref`。
@@ -146,6 +146,14 @@ Task Card不再把任务拆成fivebox stages或objective/mechanic类型供Timing
 - 拾取/切号操作成本。
 
 这些参数来自Timing模型配置、Questie基础数据或Timing Observations；不得为了计算方便重新把Task Card guide拆成另一套objective/fivebox schema。
+
+### `personal-drop-count` 当前计算口径
+
+当Task Card已经明确引用`personal-drop-count`时，先由Effective Quest Source或更高优先级Timing Input解析单角色需求量`N`与掉率`p`，再由已确认的`fivebox.status`决定独立需求份数：`not_shared`取当前队伍人数，`shared/sequential_loot`取1；`pending/special/缺失`不得猜，保持Requirement。
+
+令`N_total = N × independent_streams`。当`p = 1`时，击杀/掉落尝试数直接为`N_total`，不增加随机尾部；当`0 < p < 1`时，当前中心模型按负二项近似使用`mean = N_total / p`、`std = sqrt(N_total × (1-p)) / p`，再以版本化`personal_drop_tail_sigma_multiplier`形成保守中心击杀数。这个口径对应当前自由拾取执行：不共享任务按角色依次完成个人需求，而不是把五号视为并行推进后只等最慢号。
+
+掉率只能来自当前有效插件/数据库中可机械绑定到该任务目标的概率，或经证据审查后的版本化task-id Timing Input。若Questie只提供物品来源链、却没有该容器/脚本产物的概率，则保留`drop_rate`未知，禁止把100%、历史印象或玩家备注当默认概率。
 
 ### 期望值不是唯一输出
 

@@ -14,7 +14,7 @@
     },
     "personal-drop-count": {
       "kind": "personal_drop",
-      "description": "五号个人掉落：按需求量、掉率、战斗与个人拾取成本估算最慢角色完成窗口。",
+      "description": "个人掉落：按Task Card共享状态决定独立需求份数；不共享按队伍人数放大需求量，再结合掉率、战斗与拾取成本计算串行自由拾取墙钟。100%掉率自然退化为确定性数量成本。",
       "required_inputs": ["required_count", "drop_rate", "combat_seconds_per_mob", "personal_loot_seconds_per_corpse", "party_size"]
     },
     "fixed-object-interaction": {
