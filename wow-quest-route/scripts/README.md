@@ -103,7 +103,7 @@
 | `rebuild_route_profile.py` | 显式完整诊断/对抗审计一个Profile的各owner产物；不是日常修改入口，也不负责正式写页。 |
 | `record_route_economy_observation.py` | 追加一条原始全路线 Economy Observation；只记录金币差/资产数量/污染事实，不修改 Task Card rewards，不自行生成市场估值 |
 | `refine_zangarmarsh_task_profiles.py` | 细化赞加任务画像，包装旧内部audit实现 |
-| `render_route_assets.py` | 只按profile_id读取generated store当前Publisher payload并渲染HTML/player-view；要求显式`--output-dir`，不会自动选择正式目录，也不运行任何业务计算。 |
+| `render_route_assets.py` | 只按profile_id读取generated store当前Publisher payload并渲染HTML/player-view；要求显式`--output-dir`，不会自动选择正式目录，也不运行任何业务计算。单Profile/子集写正式`data/routes`会直接拒绝；正式目录只接受完整正式Profile集合。 |
 | `report_icecrown_airship_starts.py` | 输出冰冠飞艇/入口候选报告 |
 | `report_sholazar_phase_tasks.py` | 输出索拉查阶段任务报告 |
 | `solve_zangarmarsh_exact_v0.py` | 赞加exact v0求解器实验 |

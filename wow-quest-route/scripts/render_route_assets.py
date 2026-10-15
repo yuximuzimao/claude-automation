@@ -10,6 +10,28 @@ sys.path.insert(0, str(ROOT))
 
 from lib.generated_artifacts import read_generated_artifact
 from lib.route_player_assets import write_player_assets
+from lib.route_profiles import load_all_route_profiles
+
+
+def _validate_output_scope(profile_ids: list[str], output_dir: Path) -> None:
+    formal_output_dir = (ROOT / "data/routes").resolve()
+    if output_dir.resolve() != formal_output_dir:
+        return
+
+    required_profile_ids = set(
+        load_all_route_profiles(validate=True, validate_task_cards=False)
+    )
+    supplied_profile_ids = set(profile_ids)
+    if supplied_profile_ids == required_profile_ids:
+        return
+
+    missing = sorted(required_profile_ids - supplied_profile_ids)
+    extra = sorted(supplied_profile_ids - required_profile_ids)
+    raise SystemExit(
+        "refusing partial Route Atlas render into formal data/routes; "
+        f"missing={missing}, extra={extra}. "
+        "Render a subset to a non-formal output directory, or pass the complete formal Profile set."
+    )
 
 
 def main() -> None:
@@ -22,6 +44,8 @@ def main() -> None:
     parser.add_argument("profile_ids", nargs="+")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
+
+    _validate_output_scope(args.profile_ids, args.output_dir)
 
     payloads = [
         read_generated_artifact(

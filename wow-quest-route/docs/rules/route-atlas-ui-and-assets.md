@@ -202,9 +202,9 @@ UI/资源修改至少验证对应项目：
 
 ## 13. 正式渲染操作
 
-- 当前Publisher payload已经fresh时，单Profile资源渲染：`python3 scripts/render_route_assets.py <profile_id> --output-dir <dir>`。
+- 当前Publisher payload已经fresh时，单Profile资源渲染：`python3 scripts/render_route_assets.py <profile_id> --output-dir <dir>`；**单Profile/子集渲染只能写非正式目录，禁止把其输出目录指向正式`data/routes`。**
 - `REPUBLISH_ONLY`只允许从当前fresh Publisher payload重渲染，不重算Task Card/Profile/Timing/XP/Economy。
-- 渲染脚本不会自行选择或覆盖正式目录；正式页面替换只有Final Audit/cutover通过后才能执行。
+- 渲染脚本不会自行选择正式目录；写正式`data/routes`时必须提供完整正式Profile集合，且正式页面替换只有Final Audit/cutover通过后才能执行。现役脚本对此做fail-closed检查，Profile集合缩水必须直接拒绝写入。
 - 地图资源需要单独刷新时使用本文件§8列出的资源生成器，不让Publisher承担地图下载/高清化。
 
 ## 14. 本文件明确不负责

@@ -25,6 +25,7 @@
 | 跨地图入口合同 | 026 | `route-atlas-optimization.md` |
 | 重复全量验收 / 未按影响窗口验证 | 027 | Route Lifecycle SOP + `tests/README.md` |
 | 架构迁移循环验证 / 为跑绿修改真源 | 028 | Route Lifecycle SOP §17 / §17.2 |
+| 正式统一工作台被局部渲染覆盖 / Profile集合缩水 | 029 | `route-atlas-ui-and-assets.md` + `route-lifecycle-final-audit.md` |
 
 读取某条错题时重点看`现象 / 根因 / 复发记录`。条目中的修复方式均代表**当时修复方式**，当前是否仍适用必须以上表owner为准。
 
@@ -301,6 +302,17 @@
 - 当时修复方式（历史）：停止继续按诊断修改正式路线；把正式Task Card / Route Profile恢复为当前stage的只读fixture角色。每个stage先闭合owner/input/output/UNKNOWN语义和通用契约测试，再拿真实Profile验证；真实样本出现差异先分类，只有stage本身已经成立且证据独立证明是业务错误时，才重新进入普通`TASK_FACT / PROFILE_*`流程修改真源。
 - 复发条件：架构迁移、validator重写、schema切换或新模型落地时，只要出现“为了让新检查变绿先改正式数据”，或者用被当前检查改过的数据反过来证明检查正确，就属于本错题复发。
 - 当前规则入口：`ROUTE-DESIGN-PROCESS.md` §17 / §17.2。若分类需要用户路线取舍、与高优先级证据冲突，或SOP/owner语义有疑义，必须停止该分支并先询问用户，不得自行扩schema、改正式路线或放宽规则。
+
+## 错题029：单Profile渲染直接覆盖正式统一工作台，导致其余路线从页面消失
+
+- 日期：2026-10-15。
+- 现象：龙骨荒野实跑收尾后，为刷新`dragonblight-fivebox`玩家产物，执行了`render_route_assets.py dragonblight-fivebox --output-dir data/routes`。该命令把正式`data/routes/route-atlas-workbench.html`从原本包含15个Profile的统一工作台直接重写成只含1个Profile的页面，导致其余14条路线在正式页面中全部消失；Task Card、Route Profile、Publisher等真源并未丢失。用户发现后才恢复全量15 Profile工作台。
+- 当时背景/当时规则：`route-atlas-ui-and-assets.md` §1已经明确正式运行时只有一份统一工作台，所有Route Profile必须在同一页面切换；§13虽然给出了“单Profile资源渲染”命令，但同节同时明确“渲染脚本不会自行选择或覆盖正式目录；正式页面替换只有Final Audit/cutover通过后才能执行”。`route-lifecycle-final-audit.md`又明确项目级正式切换必须显式核对完整`required_profile_ids`，不得拿单Profile通过代替完整项目集合。
+- 根因：不是SOP缺失，而是执行时**截断读取/应用了SOP**：只采用了“单Profile可调用`render_route_assets.py`”这一条，没有继续应用“正式目录不能由局部渲染直接替换”和“正式切换必须核对完整Profile集合”的同级约束。同时误把`--output-dir data/routes`理解为“在现有统一工作台里刷新龙骨”，但脚本实际语义是“用本次传入的payload列表重新生成整份工作台”；`write_player_assets()`会调用`render_workbench_html(payloads)`并直接`write_text()`覆盖正式HTML，不存在增量合并。
+- 失守信号：命令执行结果当场已经返回`profile_count: 1`、`publish_keys: [dragonblight]`，而项目当前正式Profile集合为15个；这是足以立即停止发布的明显冲突，但当时只关注了`status=pass / publishable=true`，没有把聚合集合缩水作为硬错误。随后运行的Player Assets/Publisher/Display测试也只证明“给定输入可合法生成页面”，没有证明“正式聚合页面仍保留完整Profile集合”。
+- 当时修复方式（历史）：重新读取15个现役Profile的fresh Publisher payload，一次性重建正式工作台；修复后报告`profile_count: 15`，统一HTML由错误版本约292KB恢复到约2.06MB，JS检查及相关Display/Publisher/Player Assets测试通过，并单独提交`c1c5312 fix(wow): restore full route atlas workbench`恢复正式页面。
+- 复发条件：任何人或自动化把单Profile/子集Profile传给`render_route_assets.py`，同时把`--output-dir`指向正式`data/routes`；或只检查`publishable=true`而不核对正式页面应有的完整Profile集合，都可能再次静默删除其它路线。尤其在“只改一张地图、最小范围重渲染”场景最容易复发。
+- 当前规则入口：正式页面唯一性与渲染边界只读`docs/rules/route-atlas-ui-and-assets.md`；正式聚合集合完整性与项目级发布门禁只读`docs/rules/route-lifecycle-final-audit.md`。本错题只记录事故与根因，不另建第二套发布规则。
 
 ## 使用规则
 

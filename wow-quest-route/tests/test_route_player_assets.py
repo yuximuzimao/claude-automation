@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
@@ -11,6 +12,8 @@ from lib.route_player_assets import (
     render_workbench_html,
     write_player_assets,
 )
+from lib.route_profiles import load_all_route_profiles
+from scripts.render_route_assets import _validate_output_scope
 
 
 def _payload(*, status: str = "pass", publishable: bool = True) -> dict:
@@ -258,3 +261,16 @@ def test_duplicate_publish_key_is_rejected_before_render() -> None:
     duplicate["input_fingerprint"] = "publisher-other"
     with pytest.raises(PlayerAssetsError, match="duplicate publish_key"):
         render_workbench_html([_payload(), duplicate])
+
+
+def test_render_route_assets_refuses_partial_formal_output() -> None:
+    with pytest.raises(SystemExit, match="refusing partial Route Atlas render"):
+        _validate_output_scope(["dragonblight-fivebox"], Path("data/routes"))
+
+
+def test_render_route_assets_allows_complete_formal_set_and_nonformal_subset(tmp_path) -> None:
+    formal_profile_ids = list(
+        load_all_route_profiles(validate=True, validate_task_cards=False)
+    )
+    _validate_output_scope(formal_profile_ids, Path("data/routes"))
+    _validate_output_scope(["dragonblight-fivebox"], tmp_path)
