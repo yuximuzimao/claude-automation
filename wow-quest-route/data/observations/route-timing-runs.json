@@ -2046,7 +2046,10 @@
       "same_scope_model_comparison": {
         "scope": "北风步骤60《沸点》开始段→步骤66完成，再到龙骨步骤1→9完成。用户22:01开始；Questie首个匹配事件22:02:20接《沸点》，因此总范围与当前模型步骤60→66 + 龙骨1→9高度一致。",
         "model_center_minutes": 185.329,
-        "model_range_minutes": [143.505, 227.352],
+        "model_range_minutes": [
+          143.505,
+          227.352
+        ],
         "actual_minutes": 251.0,
         "over_center_minutes": 65.671,
         "over_center_percent": 35.43,
@@ -2056,7 +2059,10 @@
           "borean_steps_60_66": {
             "actual_minutes": 132.717,
             "model_center_minutes": 86.411,
-            "model_range_minutes": [66.753, 106.168],
+            "model_range_minutes": [
+              66.753,
+              106.168
+            ],
             "over_center_minutes": 46.306,
             "over_center_percent": 53.59,
             "over_upper_bound_minutes": 26.549,
@@ -2068,7 +2074,10 @@
             "explicit_pause_minutes": 86.0,
             "actual_active_minutes": 117.733,
             "model_center_minutes": 98.918,
-            "model_range_minutes": [76.752, 121.184],
+            "model_range_minutes": [
+              76.752,
+              121.184
+            ],
             "over_center_minutes": 18.815,
             "over_center_percent": 19.02,
             "below_upper_bound_minutes": 3.451,
@@ -2131,8 +2140,12 @@
       "date": "2026-10-11",
       "continuation_date": "2026-10-12",
       "route_key": "dragonblight_dk_second_run_continuation",
-      "profile_ids": ["dragonblight-fivebox"],
-      "profile_versions_at_run": {"dragonblight-fivebox": 1},
+      "profile_ids": [
+        "dragonblight-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "dragonblight-fivebox": 1
+      },
       "program_id": "horde-fivebox-full-clear",
       "program_version": 1,
       "run_kind": "second_fivebox_run_dragonblight_continuation",
@@ -2177,8 +2190,12 @@
       "date": "2026-10-12",
       "continuation_date": "2026-10-13",
       "route_key": "dragonblight_dk_second_run_steps28_38_partial",
-      "profile_ids": ["dragonblight-fivebox"],
-      "profile_versions_at_run": {"dragonblight-fivebox": 2},
+      "profile_ids": [
+        "dragonblight-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "dragonblight-fivebox": 2
+      },
       "program_id": "horde-fivebox-full-clear",
       "program_version": 1,
       "run_kind": "second_fivebox_run_dragonblight_continuation",
@@ -2221,6 +2238,129 @@
         "interpretation": "用户记忆01:40—01:50暂停，与01:43:03硬活跃下界和后续时间戳断档一致，因此项目采用01:45近似暂停。"
       },
       "status": "continuation_mechanics_runtime_route_and_timing_recorded_partial_step38"
+    },
+    {
+      "run_id": "2026-10-14-15-dragonblight-dk-second-run-2253-0224",
+      "date": "2026-10-14",
+      "continuation_date": "2026-10-15",
+      "route_key": "dragonblight_dk_second_run_steps38_to_undercity_battle_start",
+      "profile_ids": [
+        "dragonblight-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "dragonblight-fivebox": 2
+      },
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 1,
+      "run_kind": "second_fivebox_run_dragonblight_continuation",
+      "time_precision": "user_minute_start_stop",
+      "source": "2026-10-15用户现场反馈：22:53开始，23:07完成《夺取装备》，02:24到《幽暗城之战》入口暂停；中间有少量浪费时间。",
+      "journey_anchors": {
+        "user_start_local": "2026-10-14T22:53:00+08:00",
+        "user_stop_local": "2026-10-15T02:24:00+08:00",
+        "early_anchor_local": "2026-10-14T23:07:00+08:00",
+        "early_anchor": "完成《夺取装备》",
+        "business_start": "承接上次步骤38中途进度",
+        "business_end": "完成《黑暗的骚动》后续纯交接链，已接《幽暗城之战》，到场因萨尔/部队不在而停在事件入口等待重置"
+      },
+      "gross_minutes": 211.0,
+      "paused_minutes": 0.0,
+      "actual_minutes": 211.0,
+      "actual_display": "3小时31分钟",
+      "actual_contains_learning_or_route_errors": true,
+      "calibration_eligible": false,
+      "calibration_note": "用户明确说明中间浪费了一点时间，未给可扣除的具体窗口；211分钟按真实墙钟保留，不伪装成clean baseline。",
+      "runtime_lessons": [
+        "《鞭笞者的种子》《翡翠龙泪》不共享；《强大的猛犸人》《毫不留情》《毁灭的力量》共享；《奥雷托斯的羽毛》《暴虐的酋长》《先发制人》《黑暗的骚动》依次拾取。",
+        "步骤40完成后应从龙眠神殿直接系统飞行怨毒镇。",
+        "《毫不留情》四名目标都在牢笼内，备注应直接给NPC坐标并提示先交互再击杀。",
+        "《黑暗的骚动》拾取后回库卡隆先锋营地，系统飞行至战歌要塞；炉石保留到《幽暗城之战》结束后再用。",
+        "《黑暗的骚动》→《战争的使者》→奥格瑞玛任务传送→《毫无遗憾的一生》→幽暗城任务传送→《幽暗城之战》应作为龙骨结尾同一步骤展示。",
+        "《幽暗城之战》到场若看不到萨尔和部队，说明上一轮事件进行中或重置中；不要进城，原地等待事件重置。"
+      ],
+      "cumulative_second_group_dragonblight_to_current": {
+        "segments_minutes": [
+          117.733,
+          305.0,
+          182.0,
+          211.0
+        ],
+        "actual_minutes": 815.733,
+        "actual_display": "约13小时35分44秒",
+        "endpoint": "已接《幽暗城之战》，事件尚未开始/完成",
+        "note": "四段均为已记录有效墙钟；最后211分钟含用户所说少量浪费时间但无法精确扣除。"
+      },
+      "same_scope_first_group_comparison": {
+        "scope": "可可靠对齐的龙骨步骤1–9、10–25、28–37",
+        "first_group_minutes_approx": 741.62,
+        "second_group_minutes": 575.083,
+        "second_group_faster_minutes_approx": 166.537,
+        "second_group_faster_percent_approx": 22.46,
+        "note": "第一组整张龙骨没有完整且可复核的主动墙钟总值，因此只对齐三段可靠大区间，不伪造整图第一组总时长。"
+      },
+      "prediction_comparison": {
+        "pre_tail_known_model_seconds": 42572.318,
+        "pre_tail_known_model_minutes": 709.539,
+        "pre_tail_display": "约11小时49分32秒",
+        "current_actual_to_battle_start_minutes": 815.733,
+        "nominal_over_minutes": 106.194,
+        "nominal_over_percent": 14.97,
+        "caveat": "旧预测只覆盖原龙骨结尾到《黑暗的骚动》拾取；当前实际已经额外包含战歌要塞→奥格瑞玛→幽暗城入口的新收尾，因此不能把全部+106分钟解释为模型低估。新步骤53因《幽暗城之战》事件时间尚未实测，当前Timing保持不完整。"
+      },
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-15T02:24:00+08:00",
+        "level": 76,
+        "location": "幽暗城外·沃金 / 奥格瑞玛传送门附近",
+        "active_task": "13267《幽暗城之战》",
+        "state": "等待萨尔/部队事件重置；出现后与萨尔对话开始。完成后炉石阿格玛，再找夺日者影像用12791传送达拉然。"
+      },
+      "status": "continuation_recorded_route_tail_corrected_battle_pending"
+    },
+    {
+      "run_id": "2026-10-15-dragonblight-undercity-battle-033445-0415",
+      "date": "2026-10-15",
+      "route_key": "dragonblight_dk_second_run_undercity_battle_event",
+      "profile_ids": [
+        "dragonblight-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "dragonblight-fivebox": 3
+      },
+      "program_id": "horde-fivebox-full-clear",
+      "program_version": 2,
+      "run_kind": "second_fivebox_run_dragonblight_script_event",
+      "time_precision": "system_message_second_start_user_minute_completion",
+      "source": "会话系统时间戳确认用户于2026-10-15 03:34:45(+08:00)发送“完整离区重进一次有用，萨尔出现了”，用户确认发送该消息时即点击“准备好了”；04:15完成《幽暗城之战》。",
+      "journey_anchors": {
+        "event_start_local": "2026-10-15T03:34:45+08:00",
+        "event_start": "点击萨尔“准备好了”启动《幽暗城之战》",
+        "completion_local": "2026-10-15T04:15:00+08:00",
+        "business_end": "13267《幽暗城之战》完成"
+      },
+      "actual_minutes": 40.25,
+      "actual_display": "约40分15秒",
+      "actual_contains_learning_or_route_errors": false,
+      "calibration_eligible": false,
+      "calibration_note": "高质量单任务脚本事件Observation：03:34:45点击“准备好了”→04:15完成，约40分15秒。此前等待萨尔、相位排查与离区重建已完全排除。当前run尚未绑定稳定action_id范围/现役Timing规则，因此不允许Stage 7自动校准；只作为task_id 13267脚本事件时长参考。",
+      "runtime_lessons": [
+        "《幽暗城之战》本体为脚本跟随事件，不需要额外fivebox机制实测。",
+        "启动后约4分04秒时萨尔仍未移动，说明开场存在数分钟脚本等待；本次完整事件总耗时约40分15秒。",
+        "萨尔缺失的恢复机制另存Task Card：正常时间线→离区→返回→战役相位可恢复，不属于正常事件耗时。"
+      ],
+      "cumulative_second_group_dragonblight_counted": {
+        "previous_to_battle_entrance_minutes": 815.733,
+        "battle_event_minutes": 40.25,
+        "counted_minutes": 855.983,
+        "counted_display": "约14小时15分59秒",
+        "endpoint": "13267《幽暗城之战》完成",
+        "note": "按用户确认，02:24到03:34:45之间的等待/故障排查完全退出统计口径，不计入累计。"
+      },
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-15T04:15:00+08:00",
+        "completed_task": "13267《幽暗城之战》",
+        "post_completion_progress": "已炉石回阿格玛之锤；下次从大法师艾萨斯·夺日者的影像→12791《魔法王国达拉然》传送达拉然继续。"
+      },
+      "status": "battle_completed_clean_event_timing_recorded"
     }
   ]
 }

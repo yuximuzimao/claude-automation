@@ -402,7 +402,15 @@
     "a0619": "executed",
     "a0620": "executed",
     "a0622": "executed",
-    "a0624": "executed"
+    "a0624": "executed",
+    "tail-accept-13257": "executed",
+    "tail-accept-13266": "executed",
+    "tail-accept-13267": "executed",
+    "tail-do-13267": "executed",
+    "tail-turnin-13242": "executed",
+    "tail-turnin-13257": "executed",
+    "tail-turnin-13266": "executed",
+    "tail-turnin-13267": "executed"
   },
   "availability": {
     "deferred_gates": [
@@ -2168,6 +2176,42 @@
         "action_id": "a0607",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 13242
+      },
+      {
+        "action_id": "tail-accept-13257",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 13257
+      },
+      {
+        "action_id": "tail-accept-13257",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13257
+      },
+      {
+        "action_id": "tail-accept-13266",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 13266
+      },
+      {
+        "action_id": "tail-accept-13266",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13266
+      },
+      {
+        "action_id": "tail-accept-13267",
+        "kind": "min_level",
+        "required_min_level": 71,
+        "resolver": "derived_xp",
+        "task_id": 13267
+      },
+      {
+        "action_id": "tail-accept-13267",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13267
       }
     ],
     "events": [
@@ -6349,6 +6393,108 @@
           }
         ],
         "task_id": 13242
+      },
+      {
+        "action_id": "tail-accept-13257",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              13242
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 13257
+      },
+      {
+        "action_id": "tail-accept-13266",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              13257
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 13266
+      },
+      {
+        "action_id": "tail-accept-13267",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 71,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              13266
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 13267
       }
     ],
     "external_state_requirements": [
@@ -6432,6 +6578,13 @@
         "kind": "open_flight_point"
       },
       {
+        "action_id": "transport-wyrmrest-venomspite",
+        "from": "龙眠神殿",
+        "kind": "taxi",
+        "missing_entry_flight_points": [],
+        "to": "怨毒镇"
+      },
+      {
         "action_id": "a0586",
         "flight_point": "库卡隆先锋营地",
         "kind": "open_flight_point"
@@ -6449,16 +6602,28 @@
         "kind": "taxi",
         "missing_entry_flight_points": [],
         "to": "库卡隆先锋营地"
+      },
+      {
+        "action_id": "tail-taxi-korkron-warsong",
+        "from": "库卡隆先锋营地",
+        "kind": "taxi",
+        "missing_entry_flight_points": [
+          "战歌要塞"
+        ],
+        "to": "战歌要塞"
       }
     ],
     "guaranteed_opened_by_exit": [
       "库卡隆先锋营地",
       "怨毒镇",
+      "战歌要塞",
       "莫亚基港口",
       "阿格玛之锤",
       "龙眠神殿"
     ],
-    "required_entry_flight_points": []
+    "required_entry_flight_points": [
+      "战歌要塞"
+    ]
   },
   "hearth": {
     "entry_state_known": false,
@@ -6510,13 +6675,19 @@
         "kind": "use_hearth",
         "status": "used",
         "target": "阿格玛之锤"
+      },
+      {
+        "action_id": "tail-hearth-agmar",
+        "kind": "use_hearth",
+        "status": "used",
+        "target": "阿格玛之锤"
       }
     ],
     "final_location": "阿格玛之锤",
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "da35c88ff914aec8434dea8427083c95efc9819d5f1239e5822ae5b2af14b167",
+  "input_fingerprint": "5e4b26f0fbec3ff1cdb644184d65bbca0685cbc30079d3cca248da854e18e486",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",
@@ -6545,8 +6716,7 @@
     "final_active_task_ids": [
       12487,
       12789,
-      12791,
-      13242
+      12791
     ],
     "final_maybe_active_task_ids": [],
     "peak_upper_bound": null
@@ -6557,10 +6727,11 @@
       "1064": 1560,
       "1067": 6120,
       "1073": 3220,
-      "1085": 7465,
+      "1085": 8725,
       "1090": 1950,
       "1091": 5945,
-      "1106": 275
+      "1106": 275,
+      "76": 760
     },
     "possible_task_reward_delta": {
       "1067": 75,
@@ -6577,8 +6748,7 @@
     "final_active_task_ids": [
       12487,
       12789,
-      12791,
-      13242
+      12791
     ],
     "final_maybe_active_task_ids": [],
     "known_completed_task_ids": [
@@ -6718,7 +6888,11 @@
       12542,
       12545,
       12767,
-      12769
+      12769,
+      13242,
+      13257,
+      13266,
+      13267
     ],
     "maybe_completed_task_ids": [
       12057,

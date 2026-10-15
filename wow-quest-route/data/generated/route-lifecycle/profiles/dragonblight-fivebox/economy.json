@@ -1,0 +1,43 @@
+{
+  "characters": [],
+  "cost_coverage": "partial",
+  "gross_copper": null,
+  "gross_gph": null,
+  "input_fingerprint": "03f5affc59f855c582d6fb00f3818df9ada234baf0c7f8af9d1dd8568108e0b1",
+  "issues": [
+    {
+      "kind": "upstream_stage8_requirements",
+      "profile_id": "dragonblight-fivebox",
+      "severity": "requirement"
+    },
+    {
+      "kind": "economy_character_state_required",
+      "profile_id": "dragonblight-fivebox",
+      "severity": "requirement"
+    },
+    {
+      "kind": "route_cost_coverage_incomplete",
+      "note": "No structured current-scope cost input was supplied; known cost remains zero with partial coverage.",
+      "severity": "requirement"
+    },
+    {
+      "kind": "fresh_complete_timing_required_for_gph",
+      "severity": "requirement",
+      "timing_input_fingerprint": "f61f509134c0852070fba7ff65203bb859f29d848706dccd7bf4f22095e22f11",
+      "timing_status": "pass"
+    }
+  ],
+  "kind": "profile",
+  "known_cost_copper": 0,
+  "known_gross_copper": 0,
+  "matched_observation_count": 0,
+  "model_id": "wotlk-route-economy-v1",
+  "net_copper": null,
+  "net_gph": null,
+  "observation_comparisons": [],
+  "profile_id": "dragonblight-fivebox",
+  "status": "requirements",
+  "timing_input_fingerprint": "f61f509134c0852070fba7ff65203bb859f29d848706dccd7bf4f22095e22f11",
+  "turnins": [],
+  "xp_input_fingerprint": "fa1df246201897f3dc6259f3d5cd01796808c9f8aa48eba5b0e9bfca6d04c21d"
+}

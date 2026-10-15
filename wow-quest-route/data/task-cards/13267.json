@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "task_id": 13267,
+  "identity": {
+    "name_zhcn": "幽暗城之战",
+    "name_en": "The Battle For The Undercity",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "horde",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "verified",
+    "rewards": "verified",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 74,
+    "min_level": 71,
+    "pre_any": [
+      13266
+    ],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_reputation": null,
+    "required_class": [],
+    "required_race": [
+      "orc",
+      "undead",
+      "tauren",
+      "troll",
+      "blood_elf"
+    ],
+    "required_skill": [],
+    "hidden_requirements": []
+  },
+  "rewards": {
+    "reward_money_copper": 224000,
+    "fixed_items": [
+      {
+        "item_id": 44579,
+        "quantity": 1,
+        "name_zhcn": "英雄勋章",
+        "name_en": "Medallion of Heroism",
+        "sell_price_each_copper": 0,
+        "sell_price_total_copper": 0
+      }
+    ],
+    "choice_items_desc_by_sell": [
+      {
+        "item_id": 44349,
+        "quantity": 1,
+        "name_zhcn": "酋长的杀戮腿铠",
+        "name_en": "Warchief's Legplates of Carnage",
+        "sell_price_each_copper": 80126,
+        "sell_price_total_copper": 80126
+      },
+      {
+        "item_id": 44348,
+        "quantity": 1,
+        "name_zhcn": "酋长的勇气护腿",
+        "name_en": "Warchief's Leggings of Valor",
+        "sell_price_each_copper": 68436,
+        "sell_price_total_copper": 68436
+      },
+      {
+        "item_id": 44590,
+        "quantity": 1,
+        "name_zhcn": "酋长的预见护腿",
+        "name_en": "Warchief's Leggings of Foresight",
+        "sell_price_each_copper": 62679,
+        "sell_price_total_copper": 62679
+      },
+      {
+        "item_id": 44347,
+        "quantity": 1,
+        "name_zhcn": "酋长的英雄护腿",
+        "name_en": "Warchief's Legguards of Heroism",
+        "sell_price_each_copper": 56827,
+        "sell_price_total_copper": 56827
+      },
+      {
+        "item_id": 44583,
+        "quantity": 1,
+        "name_zhcn": "酋长的野蛮护腿",
+        "name_en": "Warchief's Legguards of Brutality",
+        "sell_price_each_copper": 52233,
+        "sell_price_total_copper": 52233
+      },
+      {
+        "item_id": 44346,
+        "quantity": 1,
+        "name_zhcn": "酋长的智慧护腿",
+        "name_en": "Warchief's Leggings of Wisdom",
+        "sell_price_each_copper": 45304,
+        "sell_price_total_copper": 45304
+      }
+    ],
+    "fixed_items_sell_total_copper": 0,
+    "choice_item_max_sell_copper": 80126,
+    "gear_sale_max_copper": 80126,
+    "reputation_rewards": [
+      {
+        "faction_id": 76,
+        "amount": 500
+      },
+      {
+        "faction_id": 1085,
+        "amount": 500
+      }
+    ],
+    "no_money_from_xp": false,
+    "full_xp": 41500
+  },
+  "guide": [
+    "接取：幽暗城外的沃金。",
+    "准备好后必须找到萨尔并与其对话启动事件，再全程跟随萨尔和希尔瓦娜斯完成幽暗城夺回战。",
+    "如果入口只有沃金和希尔瓦娜斯、萨尔不在，不要自行进入幽暗城，也不要只在原地反复切时间线。恢复方式：切回正常时间线→真正离开幽暗城/提瑞斯法区域→返回幽暗城外→再切回战役相位；萨尔会重新出现。不要放弃任务。",
+    "完成后向萨尔复命。时光服当前2倍经验下客户端显示83000经验；Task Card保留基础经验41500。"
+  ],
+  "fivebox": {
+    "status": "not_applicable"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-15",
+      "source_type": "user_live",
+      "source_ref": "2026-10-15第二组DK实跑《幽暗城之战》：客户端显示83000经验；事件本身全程跟随，无需单独做fivebox实测。现场曾出现沃金和希尔瓦娜斯在入口、萨尔缺失；实跑验证‘切回正常时间线→真正离开幽暗城/提瑞斯法区域→返回→再切战役相位’后萨尔重新出现。用户确认发送‘重进一次有用’时即点击‘准备好了’，并于04:15完成任务。",
+      "observed_at": "2026-10-15",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "rewards.full_xp"
+      ]
+    },
+    {
+      "evidence_id": "evidence-questie-11.34.0",
+      "source_type": "questie",
+      "source_ref": "Questie 11.34.0 effective quest row task_id=13267 + AzerothCore rewards",
+      "observed_at": null,
+      "version_scope": "WotLK 3.3.5 base DB / Questie 11.34.0",
+      "confidence": "verified",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "rewards",
+        "guide"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "若入口只有沃金和希尔瓦娜斯、萨尔不在：不要进城，也不要原地反复切时间线。切回正常时间线→真正离开幽暗城/提瑞斯法区域→返回幽暗城外→再切战役相位；萨尔重新出现后与其对话启动，开场后全程跟随即可。不要放弃任务。",
+      "scope": "all",
+      "source_ref": "2026-10-15用户现场 + Wowhead历史事件机制核对",
+      "reason": "只保留会改变现场操作的相位恢复步骤与启动方式。"
+    }
+  }
+}

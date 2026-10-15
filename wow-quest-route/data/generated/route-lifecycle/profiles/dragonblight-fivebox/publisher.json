@@ -1,16 +1,16 @@
 {
   "display": {
     "display_name": "龙骨荒野",
-    "footer": "天谴之门拾取萨鲁法尔战甲后，本图龙骨荒野清理段结束；仍在日志中的跨图任务继续保留。",
+    "footer": "《幽暗城之战》完成后炉石回阿格玛之锤，找大法师艾萨斯·夺日者的影像使用12791《魔法王国达拉然》传送到达拉然紫罗兰之门；到达后本路线结束。",
     "order": 7,
     "publish_key": "dragonblight",
-    "subtitle": "从北风护送《横贯冰原》进入龙骨边界，在沃图克处交付后开始；按页面步骤完成龙骨当前可达世界任务；跨图任务继续保留到对应后续地图自然交付。",
+    "subtitle": "从北风护送《横贯冰原》进入龙骨边界，在沃图克处交付后开始；清完龙骨本图任务后继续完成《黑暗的骚动》跨图后续、《幽暗城之战》，再炉石回阿格玛并用12791传送进入达拉然。",
     "title": "龙骨荒野 · 北风出口衔接 73+ 尽量清图路线"
   },
   "hearth_chain": [
     "阿格玛之锤"
   ],
-  "input_fingerprint": "bd391c805907a7de91c319c154015789df4397a4b1f44399c9ec740ab32d0226",
+  "input_fingerprint": "a96f35a654b6391555adfad715452b82829034fa4373aacf174f8e034a1d0c35",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -1692,9 +1692,9 @@
           "edge_id": "a0467->a0469",
           "from_location_ref": "dragonblight-p149",
           "from_visit_id": "a0467",
-          "movement_action_id": null,
-          "movement_mode": "ride",
-          "operation_kind": "self_move",
+          "movement_action_id": "transport-wyrmrest-venomspite",
+          "movement_mode": null,
+          "operation_kind": "taxi",
           "source": "canonical_profile",
           "to_location_ref": "dragonblight-p150",
           "to_visit_id": "a0469"
@@ -2204,9 +2204,75 @@
           "source": "canonical_profile",
           "to_location_ref": "dragonblight-p194",
           "to_visit_id": "a0608"
+        },
+        {
+          "edge_id": "a0608->tail-return-korkron",
+          "from_location_ref": "dragonblight-p194",
+          "from_visit_id": "a0608",
+          "movement_action_id": null,
+          "movement_mode": "ride",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p200",
+          "to_visit_id": "tail-return-korkron"
+        },
+        {
+          "edge_id": "tail-return-korkron->tail-visit-warsong",
+          "from_location_ref": "dragonblight-p200",
+          "from_visit_id": "tail-return-korkron",
+          "movement_action_id": "tail-taxi-korkron-warsong",
+          "movement_mode": null,
+          "operation_kind": "taxi",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p201",
+          "to_visit_id": "tail-visit-warsong"
+        },
+        {
+          "edge_id": "tail-visit-warsong->tail-visit-orgrimmar",
+          "from_location_ref": "dragonblight-p201",
+          "from_visit_id": "tail-visit-warsong",
+          "movement_action_id": "tail-transport-warsong-orgrimmar",
+          "movement_mode": null,
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p202",
+          "to_visit_id": "tail-visit-orgrimmar"
+        },
+        {
+          "edge_id": "tail-visit-orgrimmar->tail-visit-undercity-staging",
+          "from_location_ref": "dragonblight-p202",
+          "from_visit_id": "tail-visit-orgrimmar",
+          "movement_action_id": "tail-transport-orgrimmar-undercity",
+          "movement_mode": null,
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p203",
+          "to_visit_id": "tail-visit-undercity-staging"
+        },
+        {
+          "edge_id": "tail-visit-undercity-staging->tail-visit-aethas",
+          "from_location_ref": "dragonblight-p203",
+          "from_visit_id": "tail-visit-undercity-staging",
+          "movement_action_id": "tail-hearth-agmar",
+          "movement_mode": null,
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p205",
+          "to_visit_id": "tail-visit-aethas"
+        },
+        {
+          "edge_id": "tail-visit-aethas->tail-visit-dalaran",
+          "from_location_ref": "dragonblight-p205",
+          "from_visit_id": "tail-visit-aethas",
+          "movement_action_id": "tail-transport-12791-dalaran",
+          "movement_mode": null,
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p206",
+          "to_visit_id": "tail-visit-dalaran"
         }
       ],
-      "input_fingerprint": "e2e6c3d417c678e22aac9f51ca01f7ff50ef9427df1ab5072bb39496f9677a7a",
+      "input_fingerprint": "af0910b242c69966cc3c3d6f2195b0b70665771b6976d8d75251afd199783f56",
       "status": "pass",
       "visits": [
         {
@@ -4208,6 +4274,66 @@
           "visit_id": "a0608",
           "x": 38.16,
           "y": 18.71
+        },
+        {
+          "display_name": "库卡隆先锋营地",
+          "location_ref": "dragonblight-p200",
+          "location_role": "map_anchor",
+          "ordinal": 201,
+          "step_id": "step-52",
+          "visit_id": "tail-return-korkron",
+          "x": 40.71,
+          "y": 18.06
+        },
+        {
+          "display_name": "战歌要塞·萨鲁法尔大王",
+          "location_ref": "dragonblight-p201",
+          "location_role": "map_anchor",
+          "ordinal": 202,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-warsong",
+          "x": 41.36,
+          "y": 53.69
+        },
+        {
+          "display_name": "奥格瑞玛·格罗玛什堡垒",
+          "location_ref": "dragonblight-p202",
+          "location_role": "map_anchor",
+          "ordinal": 203,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-orgrimmar",
+          "x": 31.82,
+          "y": 37.82
+        },
+        {
+          "display_name": "幽暗城外·沃金 / 幽暗城之战入口",
+          "location_ref": "dragonblight-p203",
+          "location_role": "map_anchor",
+          "ordinal": 204,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-undercity-staging",
+          "x": 61.71,
+          "y": 62.61
+        },
+        {
+          "display_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
+          "location_ref": "dragonblight-p205",
+          "location_role": "map_anchor",
+          "ordinal": 205,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-aethas",
+          "x": 38.05,
+          "y": 46.22
+        },
+        {
+          "display_name": "达拉然·紫罗兰之门",
+          "location_ref": "dragonblight-p206",
+          "location_role": "map_anchor",
+          "ordinal": 206,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-dalaran",
+          "x": 56.3,
+          "y": 46.72
         }
       ]
     },
@@ -4311,17 +4437,17 @@
     ]
   },
   "profile_id": "dragonblight-fivebox",
-  "profile_version": 2,
+  "profile_version": 3,
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
     "center_minutes": null,
-    "input_fingerprint": "d6d261d65a350b25cfc9912751173b21d3a94f44f328df032f09779eb5b6963f",
+    "input_fingerprint": "96cfb363550715a97a932384969d5c5276177ab117a2008d67c2adaf7c3c5b83",
     "range_minutes": null,
     "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "683922f82b448f4da6772c212296422416683426d6f8266cbfe50d295400c89f",
+  "stage11_input_fingerprint": "390b7330b8d443707bd4b42707bcd5c93b23fc524c0faafbec5e924060b081e6",
   "status": "pass",
   "steps": [
     {
@@ -8183,10 +8309,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 23.1,
+        "center_minutes": 37.586,
         "range_minutes": [
           17.4,
-          28.9
+          37.586
         ],
         "status": "pass"
       },
@@ -10466,13 +10592,13 @@
           "task_id": 12016
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "鱼钩上的肉",
           "note": "沿粗鱼线到鱼钩，使用诱饵召出图格瓦尔并击杀；目标不是常驻怪。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12017
         },
@@ -12810,13 +12936,13 @@
           "task_id": 12304
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "翡翠龙泪",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12200
         }
@@ -13080,24 +13206,24 @@
           "task_id": 12454
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "奥雷托斯的羽毛",
           "note": "在林地东南端放下天爪枭羽蜕召出奥雷托斯。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12456
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "翡翠龙泪",
           "note": "继续携带到翡翠巨龙圣地。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12200
         },
@@ -13446,13 +13572,13 @@
           "task_id": 12150
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "暴虐的酋长",
           "note": "到8支火炬围成的黑色地面，吹精美战斗号角召出戈洛塔尔。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12151
         }
@@ -13469,6 +13595,7 @@
     },
     {
       "action_ids": [
+        "transport-wyrmrest-venomspite",
         "a0469",
         "a0470",
         "a0471",
@@ -13481,6 +13608,15 @@
         "a0478"
       ],
       "lines": [
+        {
+          "action_ids": [
+            "transport-wyrmrest-venomspite"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：龙眠神殿 → 怨毒镇",
+          "type": "route_action"
+        },
         {
           "action_ids": [
             "a0469"
@@ -13633,16 +13769,16 @@
         }
       ],
       "step_id": "step-40",
-      "summary": "回怨毒镇分别向米德尔顿、乌洛斯、巴莱特、汉瑟和薇吉交付已完成任务，并接出新壁炉谷下一批。",
+      "summary": "步骤40完成后从龙眠神殿直接系统飞行到怨毒镇，再按NPC交付翡翠/血色任务并接出新壁炉谷下一批。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "翡翠龙泪",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12200
         },
@@ -13669,13 +13805,13 @@
           "task_id": 12205
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "毫不留情",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12245
         },
@@ -13725,10 +13861,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 3.655,
+        "center_minutes": 4.8,
         "range_minutes": [
-          3.184,
-          4.126
+          4.0,
+          5.7
         ],
         "status": "pass"
       },
@@ -13943,13 +14079,13 @@
       "summary": "完成四名命名目标和共享战马；回怨毒镇交接后进兵营地下完成共享审讯，从同一掉落来源让五号分别取得强制魔棒。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "毫不留情",
-          "note": "几名命名目标需先交互/对话触发暴露，再击杀；直接找普通可攻击目标容易漏步骤。",
+          "note": "四名目标都在牢笼里：斯克尼德约(71.4,72.2)、基尼迪乌斯约(69.4,74.0)、布尔克约(72.7,74.3)、亚麦约(72.6,72.6)；先对话/交互触发再击杀。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12245
         },
@@ -15248,13 +15384,13 @@
           "task_id": 12283
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "先发制人",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12285
         },
@@ -15635,13 +15771,13 @@
           "task_id": 12127
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "毁灭的力量",
           "note": "与库尔迪拉对话进入阴影界，在阴影位面击杀6名暗影折磨者；需要重进时再次对话。开始前需已完成《邪能之约》《邪恶之约》《冰霜之约》。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12132
         },
@@ -16151,13 +16287,13 @@
           "task_id": 12500
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "黑暗的骚动",
           "note": "拾取萨鲁法尔战甲；战甲约(38.2,18.7)，物件较小。任务继续携带，之后回战歌要塞交。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13242
         }
@@ -16171,6 +16307,292 @@
         "status": "pass"
       },
       "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门"
+    },
+    {
+      "action_ids": [
+        "tail-return-korkron",
+        "tail-taxi-korkron-warsong",
+        "tail-visit-warsong",
+        "tail-turnin-13242",
+        "tail-accept-13257",
+        "tail-transport-warsong-orgrimmar",
+        "tail-visit-orgrimmar",
+        "tail-turnin-13257",
+        "tail-accept-13266",
+        "tail-transport-orgrimmar-undercity",
+        "tail-visit-undercity-staging",
+        "tail-turnin-13266",
+        "tail-accept-13267",
+        "tail-start-undercity-battle",
+        "tail-do-13267",
+        "tail-turnin-13267",
+        "tail-hearth-agmar",
+        "tail-visit-aethas",
+        "tail-transport-12791-dalaran",
+        "tail-visit-dalaran"
+      ],
+      "lines": [
+        {
+          "action_ids": [
+            "tail-return-korkron"
+          ],
+          "location_ref": "dragonblight-p200",
+          "task_refs": [],
+          "text": "库卡隆先锋营地",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "tail-taxi-korkron-warsong"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：库卡隆先锋营地 → 战歌要塞",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "tail-visit-warsong",
+            "tail-turnin-13242",
+            "tail-accept-13257"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨鲁法尔大王"
+          },
+          "location_ref": "dragonblight-p201",
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "黑暗的骚动",
+              "task_id": 13242
+            },
+            {
+              "kind": "accept",
+              "name": "战争的使者",
+              "task_id": 13257
+            }
+          ],
+          "text": "战歌要塞·萨鲁法尔大王 → 交《黑暗的骚动》 → 接《战争的使者》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "tail-transport-warsong-orgrimmar"
+          ],
+          "action_kind": "quest_transport",
+          "task_refs": [],
+          "text": "任务传送：战歌要塞 → 奥格瑞玛·格罗玛什堡垒",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "tail-visit-orgrimmar"
+          ],
+          "location_ref": "dragonblight-p202",
+          "task_refs": [],
+          "text": "奥格瑞玛·格罗玛什堡垒",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "tail-turnin-13257",
+            "tail-accept-13266"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "战争的使者",
+              "task_id": 13257
+            },
+            {
+              "kind": "accept",
+              "name": "毫无遗憾的一生",
+              "task_id": 13266
+            }
+          ],
+          "text": "萨尔 → 交《战争的使者》 → 接《毫无遗憾的一生》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "tail-transport-orgrimmar-undercity"
+          ],
+          "action_kind": "quest_transport",
+          "task_refs": [],
+          "text": "任务传送：奥格瑞玛·格罗玛什堡垒 → 幽暗城外·沃金",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "tail-visit-undercity-staging"
+          ],
+          "location_ref": "dragonblight-p203",
+          "task_refs": [],
+          "text": "幽暗城外·沃金 / 幽暗城之战入口",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "tail-turnin-13266",
+            "tail-accept-13267"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "沃金"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "毫无遗憾的一生",
+              "task_id": 13266
+            },
+            {
+              "kind": "accept",
+              "name": "幽暗城之战",
+              "task_id": 13267
+            }
+          ],
+          "text": "沃金 → 交《毫无遗憾的一生》 → 接《幽暗城之战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "tail-start-undercity-battle"
+          ],
+          "action_kind": "interact",
+          "task_refs": [],
+          "text": "萨尔 → 准备好了，开始《幽暗城之战》",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "tail-do-13267"
+          ],
+          "actor": null,
+          "task_refs": [
+            {
+              "kind": "objective",
+              "name": "幽暗城之战",
+              "task_id": 13267
+            }
+          ],
+          "text": "↳ 做《幽暗城之战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "tail-turnin-13267"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "萨尔"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "幽暗城之战",
+              "task_id": 13267
+            }
+          ],
+          "text": "萨尔 → 交《幽暗城之战》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "tail-hearth-agmar"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：阿格玛之锤",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "tail-visit-aethas"
+          ],
+          "location_ref": "dragonblight-p205",
+          "task_refs": [],
+          "text": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "tail-transport-12791-dalaran"
+          ],
+          "action_kind": "quest_transport",
+          "task_refs": [],
+          "text": "任务传送：阿格玛之锤·大法师艾萨斯·夺日者的影像 → 达拉然·紫罗兰之门",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "tail-visit-dalaran"
+          ],
+          "location_ref": "dragonblight-p206",
+          "task_refs": [],
+          "text": "达拉然·紫罗兰之门",
+          "type": "location"
+        }
+      ],
+      "step_id": "step-52",
+      "summary": "拾取萨鲁法尔战甲后回库卡隆先锋营地，系统飞行到战歌要塞交《黑暗的骚动》；保留炉石不动，经任务传送门依次去奥格瑞玛、幽暗城完成《幽暗城之战》，完成后再炉石回阿格玛，最后用12791任务传送进入达拉然。",
+      "task_presentations": [
+        {
+          "badge": "sequential_loot",
+          "name": "黑暗的骚动",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13242
+        },
+        {
+          "badge": null,
+          "name": "战争的使者",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13257
+        },
+        {
+          "badge": null,
+          "name": "毫无遗憾的一生",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13266
+        },
+        {
+          "badge": null,
+          "name": "幽暗城之战",
+          "note": "若入口只有沃金和希尔瓦娜斯、萨尔不在：不要进城，也不要原地反复切时间线。切回正常时间线→真正离开幽暗城/提瑞斯法区域→返回幽暗城外→再切战役相位；萨尔重新出现后与其对话启动，开场后全程跟随即可。不要放弃任务。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13267
+        }
+      ],
+      "timing": {
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
+      },
+      "title": "黑暗的骚动 → 战歌要塞 → 奥格 → 幽暗城之战 → 炉石 → 达拉然"
     }
   ]
 }

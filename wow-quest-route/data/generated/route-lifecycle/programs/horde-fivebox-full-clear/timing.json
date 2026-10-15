@@ -54,7 +54,7 @@
       "complete": false,
       "edge_id": "dragonblight-fivebox->dalaran-mainline-77",
       "from_profile_id": "dragonblight-fivebox",
-      "operation_kind": "transition_chain",
+      "operation_kind": "unknown",
       "range_basis": null,
       "range_minutes": null,
       "seconds": null,
@@ -133,7 +133,7 @@
   ],
   "center_minutes": null,
   "complete": false,
-  "input_fingerprint": "87f9997c2cd7f9bee423f70bf491a4d4d6602ad2cef2220e87658d31bf0fa5b9",
+  "input_fingerprint": "f2415e5e91f8023b0cb12154793149aa39a083421b1c137e1f325fe9d7f76d6c",
   "issues": [
     {
       "kind": "upstream_stage4_requirements",
@@ -176,11 +176,13 @@
       "severity": "requirement",
       "upstream_issues": [
         {
-          "action_id": "dragonblight-end-to-aethas-image",
           "edge_id": "dragonblight-fivebox->dalaran-mainline-77",
+          "from_handoff_ref": null,
           "from_profile_id": "dragonblight-fivebox",
-          "kind": "move_action_mode_required",
+          "kind": "program_boundary_transition_unproven",
+          "reason": "Program order proves sequence only. Provide one explicit source Profile exit movement action, matching endpoint handoff_ref values, or a reviewed Program boundary_transitions operation chain.",
           "severity": "unknown",
+          "to_handoff_ref": null,
           "to_profile_id": "dalaran-mainline-77"
         }
       ]
@@ -234,7 +236,7 @@
     }
   ],
   "kind": "route_program",
-  "known_seconds": 271539.143,
+  "known_seconds": 272669.835,
   "member_reports": {
     "borean-fivebox": {
       "center_minutes": 662.527,
@@ -7019,12 +7021,6 @@
         },
         {
           "component": "move",
-          "edge_id": "a0467->a0469",
-          "seconds": 61.30139307888717,
-          "step_id": "step-40"
-        },
-        {
-          "component": "move",
           "edge_id": "a0469->a0472",
           "seconds": 3.1887922489309064,
           "step_id": "step-40"
@@ -7280,6 +7276,12 @@
           "edge_id": "a0606->a0608",
           "seconds": 1.4826239084071975,
           "step_id": "step-51"
+        },
+        {
+          "component": "move",
+          "edge_id": "a0608->tail-return-korkron",
+          "seconds": 8.634732204101683,
+          "step_id": "step-52"
         },
         {
           "action_ids": [
@@ -8500,9 +8502,64 @@
           "seconds": 48.6,
           "step_id": "step-51",
           "visit_id": "a0606"
+        },
+        {
+          "action_ids": [
+            "tail-turnin-13242",
+            "tail-accept-13257"
+          ],
+          "component": "accept_turnin",
+          "seconds": 58.2,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-warsong"
+        },
+        {
+          "action_ids": [
+            "tail-turnin-13257",
+            "tail-accept-13266"
+          ],
+          "component": "accept_turnin",
+          "seconds": 58.2,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-orgrimmar"
+        },
+        {
+          "action_ids": [
+            "tail-turnin-13266",
+            "tail-accept-13267",
+            "tail-turnin-13267"
+          ],
+          "component": "accept_turnin",
+          "seconds": 67.8,
+          "step_id": "step-52",
+          "visit_id": "tail-visit-undercity-staging"
+        },
+        {
+          "action_id": "a0189",
+          "component": "objective_service",
+          "resolution": {
+            "resolved_inputs": {
+              "accept_turnin_base_seconds_per_stop": 39.0,
+              "accept_turnin_per_task_seconds": 9.6,
+              "combat_seconds_per_mob": 15.0,
+              "drop_rate": 0.1,
+              "fixed_object_seconds_per_character": 7.0,
+              "item_id": 35783,
+              "party_size": 5,
+              "personal_drop_tail_sigma_multiplier": 1.2,
+              "personal_loot_seconds_per_corpse": 9.0,
+              "required_count": 1
+            },
+            "rule_kind": "personal_drop",
+            "rule_ref": "personal-drop-count",
+            "task_id": 11999
+          },
+          "seconds": 1810.940258945177,
+          "step_id": "step-16",
+          "task_id": 11999
         }
       ],
-      "input_fingerprint": "d6d261d65a350b25cfc9912751173b21d3a94f44f328df032f09779eb5b6963f",
+      "input_fingerprint": "96cfb363550715a97a932384969d5c5276177ab117a2008d67c2adaf7c3c5b83",
       "issues": [
         {
           "action_id": "use-hearth-after-rotting-organs",
@@ -8604,6 +8661,13 @@
           "step_id": "step-38"
         },
         {
+          "edge_id": "a0467->a0469",
+          "kind": "flight_edge_binding_required",
+          "resolved_by": "legacy_step_baseline",
+          "severity": "info",
+          "step_id": "step-40"
+        },
+        {
           "action_id": "a0570",
           "edge_id": "a0566->a0569",
           "kind": "movement_action_timing_input_required",
@@ -8629,6 +8693,49 @@
           "resolved_by": "legacy_step_baseline",
           "severity": "info",
           "step_id": "step-51"
+        },
+        {
+          "edge_id": "tail-return-korkron->tail-visit-warsong",
+          "kind": "flight_edge_binding_required",
+          "resolved_by": "legacy_step_baseline",
+          "severity": "info",
+          "step_id": "step-52"
+        },
+        {
+          "action_id": "tail-transport-warsong-orgrimmar",
+          "edge_id": "tail-visit-warsong->tail-visit-orgrimmar",
+          "kind": "movement_action_timing_input_required",
+          "operation_kind": "quest_transport",
+          "resolved_by": "legacy_step_baseline",
+          "severity": "info",
+          "step_id": "step-52"
+        },
+        {
+          "action_id": "tail-transport-orgrimmar-undercity",
+          "edge_id": "tail-visit-orgrimmar->tail-visit-undercity-staging",
+          "kind": "movement_action_timing_input_required",
+          "operation_kind": "quest_transport",
+          "resolved_by": "legacy_step_baseline",
+          "severity": "info",
+          "step_id": "step-52"
+        },
+        {
+          "action_id": "tail-hearth-agmar",
+          "edge_id": "tail-visit-undercity-staging->tail-visit-aethas",
+          "kind": "movement_action_timing_input_required",
+          "operation_kind": "hearth",
+          "resolved_by": "legacy_step_baseline",
+          "severity": "info",
+          "step_id": "step-52"
+        },
+        {
+          "action_id": "tail-transport-12791-dalaran",
+          "edge_id": "tail-visit-aethas->tail-visit-dalaran",
+          "kind": "movement_action_timing_input_required",
+          "operation_kind": "quest_transport",
+          "resolved_by": "legacy_step_baseline",
+          "severity": "info",
+          "step_id": "step-52"
         },
         {
           "action_id": "a0078",
@@ -8973,14 +9080,6 @@
           "severity": "info",
           "step_id": "step-16",
           "task_id": 12006
-        },
-        {
-          "action_id": "a0189",
-          "kind": "timing_rule_ref_required",
-          "resolved_by": "legacy_step_baseline",
-          "severity": "info",
-          "step_id": "step-16",
-          "task_id": 11999
         },
         {
           "action_id": "a0190",
@@ -9647,7 +9746,7 @@
           "task_id": 13242
         }
       ],
-      "known_seconds": 41703.171,
+      "known_seconds": 42833.863,
       "model_id": "component-wall-clock-v2",
       "point_estimate_complete": false,
       "profile_id": "dragonblight-fivebox",
@@ -10029,25 +10128,25 @@
           "unresolved_component_count": 0
         },
         {
-          "center_minutes": 23.1,
+          "center_minutes": 37.586,
           "complete": true,
           "components": {
             "accept_turnin_seconds": 213.6,
             "move_seconds": 230.607,
-            "objective_service_seconds": 0.0,
+            "objective_service_seconds": 1810.94,
             "special_seconds": 0.0,
             "wait_seconds": 0.0
           },
-          "known_seconds": 1386.0,
+          "known_seconds": 2255.147,
           "point_estimate_complete": true,
           "range_basis": {
             "basis": "legacy_step_baseline_residual",
-            "residual_seconds": 941.793,
+            "residual_seconds": 0.0,
             "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
           },
           "range_minutes": [
             17.4,
-            28.9
+            37.586
           ],
           "step_id": "step-16",
           "title": "眠月花园 → 阿格玛 → 眠月花园",
@@ -10645,23 +10744,25 @@
           "unresolved_component_count": 0
         },
         {
-          "center_minutes": 3.655,
+          "center_minutes": 4.8,
           "complete": true,
           "components": {
             "accept_turnin_seconds": 154.8,
-            "move_seconds": 64.49,
+            "move_seconds": 3.189,
             "objective_service_seconds": 0.0,
             "special_seconds": 0.0,
             "wait_seconds": 0.0
           },
-          "known_seconds": 219.29,
+          "known_seconds": 288.0,
           "point_estimate_complete": true,
           "range_basis": {
-            "basis": "component_relative_uncertainty"
+            "basis": "legacy_step_baseline_residual",
+            "residual_seconds": 130.011,
+            "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
           },
           "range_minutes": [
-            3.184,
-            4.126
+            4.0,
+            5.7
           ],
           "step_id": "step-40",
           "title": "怨毒镇：翡翠 / 血色交接",
@@ -10941,14 +11042,32 @@
           "step_id": "step-51",
           "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门",
           "unresolved_component_count": 0
+        },
+        {
+          "center_minutes": null,
+          "complete": false,
+          "components": {
+            "accept_turnin_seconds": 184.2,
+            "move_seconds": 8.635,
+            "objective_service_seconds": 0.0,
+            "special_seconds": 0.0,
+            "wait_seconds": 0.0
+          },
+          "known_seconds": 192.835,
+          "point_estimate_complete": false,
+          "range_basis": null,
+          "range_minutes": null,
+          "step_id": "step-52",
+          "title": "黑暗的骚动 → 战歌要塞 → 奥格 → 幽暗城之战 → 炉石 → 达拉然",
+          "unresolved_component_count": 5
         }
       ],
       "summary": {
         "error_count": 0,
-        "issue_count": 141,
+        "issue_count": 146,
         "range_model_status": "requirements",
         "requirement_count": 0,
-        "step_count": 52
+        "step_count": 53
       }
     },
     "grizzly-fivebox": {

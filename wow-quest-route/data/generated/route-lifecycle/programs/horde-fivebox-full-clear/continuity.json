@@ -10279,7 +10279,15 @@
         "a0619": "executed",
         "a0620": "executed",
         "a0622": "executed",
-        "a0624": "executed"
+        "a0624": "executed",
+        "tail-accept-13257": "executed",
+        "tail-accept-13266": "executed",
+        "tail-accept-13267": "executed",
+        "tail-do-13267": "executed",
+        "tail-turnin-13242": "executed",
+        "tail-turnin-13257": "executed",
+        "tail-turnin-13266": "executed",
+        "tail-turnin-13267": "executed"
       },
       "deferred_gates": [
         {
@@ -12044,6 +12052,42 @@
           "action_id": "a0607",
           "kind": "once_task_entry_completion_unknown",
           "task_id": 13242
+        },
+        {
+          "action_id": "tail-accept-13257",
+          "kind": "min_level",
+          "required_min_level": 71,
+          "resolver": "derived_xp",
+          "task_id": 13257
+        },
+        {
+          "action_id": "tail-accept-13257",
+          "kind": "once_task_entry_completion_unknown",
+          "task_id": 13257
+        },
+        {
+          "action_id": "tail-accept-13266",
+          "kind": "min_level",
+          "required_min_level": 71,
+          "resolver": "derived_xp",
+          "task_id": 13266
+        },
+        {
+          "action_id": "tail-accept-13266",
+          "kind": "once_task_entry_completion_unknown",
+          "task_id": 13266
+        },
+        {
+          "action_id": "tail-accept-13267",
+          "kind": "min_level",
+          "required_min_level": 71,
+          "resolver": "derived_xp",
+          "task_id": 13267
+        },
+        {
+          "action_id": "tail-accept-13267",
+          "kind": "once_task_entry_completion_unknown",
+          "task_id": 13267
         }
       ],
       "from": "borean-fivebox",
@@ -13733,6 +13777,39 @@
           "kind": "unresolved_entry_task_state",
           "severity": "unknown",
           "to": "dragonblight-fivebox"
+        },
+        {
+          "from": "borean-fivebox",
+          "gate": {
+            "action_id": "tail-accept-13257",
+            "kind": "once_task_entry_completion_unknown",
+            "task_id": 13257
+          },
+          "kind": "unresolved_entry_task_state",
+          "severity": "unknown",
+          "to": "dragonblight-fivebox"
+        },
+        {
+          "from": "borean-fivebox",
+          "gate": {
+            "action_id": "tail-accept-13266",
+            "kind": "once_task_entry_completion_unknown",
+            "task_id": 13266
+          },
+          "kind": "unresolved_entry_task_state",
+          "severity": "unknown",
+          "to": "dragonblight-fivebox"
+        },
+        {
+          "from": "borean-fivebox",
+          "gate": {
+            "action_id": "tail-accept-13267",
+            "kind": "once_task_entry_completion_unknown",
+            "task_id": 13267
+          },
+          "kind": "unresolved_entry_task_state",
+          "severity": "unknown",
+          "to": "dragonblight-fivebox"
         }
       ],
       "output_state": {
@@ -13740,8 +13817,7 @@
           9724,
           12487,
           12789,
-          12791,
-          13242
+          12791
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -14187,7 +14263,11 @@
           12545,
           12728,
           12767,
-          12769
+          12769,
+          13242,
+          13257,
+          13266,
+          13267
         ],
         "completed_tasks_known": false,
         "hearth_location": "阿格玛之锤",
@@ -14238,7 +14318,7 @@
         "opened_flight_points_known": false
       },
       "stage3_hard_error_count": 0,
-      "stage4_requirement_count": 150,
+      "stage4_requirement_count": 153,
       "status": "requirements",
       "to": "dragonblight-fivebox",
       "upstream_state": {
@@ -14761,8 +14841,7 @@
           12487,
           12521,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -15211,7 +15290,11 @@
           12769,
           12790,
           12791,
-          12853
+          12853,
+          13242,
+          13257,
+          13266,
+          13267
         ],
         "completed_tasks_known": false,
         "hearth_location": "阿格玛之锤",
@@ -15271,8 +15354,7 @@
           9724,
           12487,
           12789,
-          12791,
-          13242
+          12791
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -15718,7 +15800,11 @@
           12545,
           12728,
           12767,
-          12769
+          12769,
+          13242,
+          13257,
+          13266,
+          13267
         ],
         "completed_tasks_known": false,
         "hearth_location": "阿格玛之锤",
@@ -18647,8 +18733,7 @@
           12487,
           12521,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -19199,6 +19284,10 @@
           13062,
           13063,
           13064,
+          13242,
+          13257,
+          13266,
+          13267,
           13273,
           13274,
           13285,
@@ -19271,8 +19360,7 @@
           12487,
           12521,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -19721,7 +19809,11 @@
           12769,
           12790,
           12791,
-          12853
+          12853,
+          13242,
+          13257,
+          13266,
+          13267
         ],
         "completed_tasks_known": false,
         "hearth_location": "阿格玛之锤",
@@ -24067,8 +24159,7 @@
           12487,
           12521,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -24733,12 +24824,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -24866,8 +24961,7 @@
           12487,
           12521,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -25418,6 +25512,10 @@
           13062,
           13063,
           13064,
+          13242,
+          13257,
+          13266,
+          13267,
           13273,
           13274,
           13285,
@@ -27229,8 +27327,7 @@
           9724,
           12487,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -27961,12 +28058,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -28096,8 +28197,7 @@
           12487,
           12521,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -28762,12 +28862,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -31749,8 +31853,7 @@
       "output_state": {
         "active_task_ids": [
           9724,
-          12487,
-          13242
+          12487
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -32582,12 +32685,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -32725,8 +32832,7 @@
           9724,
           12487,
           12789,
-          12974,
-          13242
+          12974
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -33457,12 +33563,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -35779,8 +35889,7 @@
       ],
       "output_state": {
         "active_task_ids": [
-          9724,
-          13242
+          9724
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -36694,12 +36803,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -36838,8 +36951,7 @@
       "upstream_state": {
         "active_task_ids": [
           9724,
-          12487,
-          13242
+          12487
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -37671,12 +37783,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -40707,8 +40823,7 @@
       ],
       "output_state": {
         "active_task_ids": [
-          9724,
-          13242
+          9724
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -41727,12 +41842,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -41879,8 +41998,7 @@
       "to": "howling-fivebox",
       "upstream_state": {
         "active_task_ids": [
-          9724,
-          13242
+          9724
         ],
         "active_tasks_known": false,
         "completed_task_ids": [
@@ -42794,12 +42912,16 @@
           13237,
           13238,
           13239,
+          13242,
+          13257,
           13258,
           13259,
           13260,
           13262,
           13263,
           13264,
+          13266,
+          13267,
           13271,
           13273,
           13274,
@@ -42938,8 +43060,7 @@
   },
   "final_state": {
     "active_task_ids": [
-      9724,
-      13242
+      9724
     ],
     "active_tasks_known": false,
     "completed_task_ids": [
@@ -43958,12 +44079,16 @@
       13237,
       13238,
       13239,
+      13242,
+      13257,
       13258,
       13259,
       13260,
       13262,
       13263,
       13264,
+      13266,
+      13267,
       13271,
       13273,
       13274,
@@ -44104,7 +44229,7 @@
     ],
     "opened_flight_points_known": false
   },
-  "input_fingerprint": "e63e1753de5df0285a53b8bc33794454d08aa4897b0289ca2dc8803f6bc0d076",
+  "input_fingerprint": "4222bc780a1d3991e22f9460836b17b4d782c925ba071db4c68dbc087532af43",
   "issues": [
     {
       "from": "program:horde-fivebox-full-clear",
@@ -49503,6 +49628,39 @@
         "action_id": "a0607",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 13242
+      },
+      "kind": "unresolved_entry_task_state",
+      "severity": "unknown",
+      "to": "dragonblight-fivebox"
+    },
+    {
+      "from": "borean-fivebox",
+      "gate": {
+        "action_id": "tail-accept-13257",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13257
+      },
+      "kind": "unresolved_entry_task_state",
+      "severity": "unknown",
+      "to": "dragonblight-fivebox"
+    },
+    {
+      "from": "borean-fivebox",
+      "gate": {
+        "action_id": "tail-accept-13266",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13266
+      },
+      "kind": "unresolved_entry_task_state",
+      "severity": "unknown",
+      "to": "dragonblight-fivebox"
+    },
+    {
+      "from": "borean-fivebox",
+      "gate": {
+        "action_id": "tail-accept-13267",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13267
       },
       "kind": "unresolved_entry_task_state",
       "severity": "unknown",
@@ -56902,7 +57060,7 @@
   "member_input_fingerprints": {
     "borean-fivebox": "03806ae7a65eb6124a5a527ac51804437c5a25d7341a28905490b4802d2b4e6c",
     "dalaran-mainline-77": "8c065fa285b88ca206f724a7de337ae93e24c20a2f379c2d97ffe607d2e29176",
-    "dragonblight-fivebox": "7db1521d2e244bd49acfef9b5c1b34fec4cc8e43d5723e40ead0ff180afffd4f",
+    "dragonblight-fivebox": "afa670826606626fcceec950184f22de1518bde26243fff8917929de1d502ed4",
     "grizzly-fivebox": "ad494c1e41ee81e6ffe39f93d623f6857281ed10f59535787b30b419660234c2",
     "hellfire-fivebox": "8eeee8eba870e9241d05bce000b9a64affb470b0889eaee6f6abc3ba95f8987d",
     "howling-fivebox": "a64be071a1e9c8383e8b83652aa125e1ecd8515995fd3bcdad1d3a3dbe6d52a8",
@@ -56928,6 +57086,6 @@
     "howling-fivebox"
   ],
   "program_id": "horde-fivebox-full-clear",
-  "program_version": 1,
+  "program_version": 2,
   "status": "requirements"
 }

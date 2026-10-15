@@ -114,51 +114,67 @@
     },
     "profiles/dragonblight-fivebox/display.json": {
       "artifact_kind": "display",
-      "input_fingerprint": "683922f82b448f4da6772c212296422416683426d6f8266cbfe50d295400c89f",
+      "input_fingerprint": "390b7330b8d443707bd4b42707bcd5c93b23fc524c0faafbec5e924060b081e6",
       "owner": "route_display",
       "scope_id": "dragonblight-fivebox",
       "scope_kind": "profiles",
-      "sha256": "a2790da132c219345ed19feb2056cf20c7475f3ca1d1fd3a6a6eba284f3881fc"
+      "sha256": "9f6c1e01e88846063c902dc327d472964cfa68281733263ca87a908fbff8aa9c"
+    },
+    "profiles/dragonblight-fivebox/economy.json": {
+      "artifact_kind": "economy",
+      "input_fingerprint": "03f5affc59f855c582d6fb00f3818df9ada234baf0c7f8af9d1dd8568108e0b1",
+      "owner": "route_economy",
+      "scope_id": "dragonblight-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "c939accb46a455a58b2e87064f472b621ebc4f290918cd42ca8384ee79cdb190"
     },
     "profiles/dragonblight-fivebox/movement.json": {
       "artifact_kind": "movement",
-      "input_fingerprint": "96f3f765b129d39d06041a2b68c4633b2a88f6794fefbf741ae6233ae32ffa1e",
+      "input_fingerprint": "e34f41967473b6fe5bb132b4a0ca45186d1691f07caed93f9cf0cd48a9b09ace",
       "owner": "route_movement",
       "scope_id": "dragonblight-fivebox",
       "scope_kind": "profiles",
-      "sha256": "7a9b01305b591184a7befebd83bf93a121865724ba8f440aaf6c6eeda9ef0850"
+      "sha256": "cae04950e1d51cce9b0be6f3fb2b7e5687fb843f73a3fa0b124d9b1e747ad1f8"
     },
     "profiles/dragonblight-fivebox/publisher.json": {
       "artifact_kind": "publisher",
-      "input_fingerprint": "bd391c805907a7de91c319c154015789df4397a4b1f44399c9ec740ab32d0226",
+      "input_fingerprint": "a96f35a654b6391555adfad715452b82829034fa4373aacf174f8e034a1d0c35",
       "owner": "route_publisher_payload",
       "scope_id": "dragonblight-fivebox",
       "scope_kind": "profiles",
-      "sha256": "2553f6b0f988cd95bdaddc48c127dc947ccc7c132b4831e72473412c7d852142"
+      "sha256": "39a9837941f262f28ce79d4483d7c03c6d292f2ef1112b6a477187ea738246f6"
     },
     "profiles/dragonblight-fivebox/replay.json": {
       "artifact_kind": "replay",
-      "input_fingerprint": "da35c88ff914aec8434dea8427083c95efc9819d5f1239e5822ae5b2af14b167",
+      "input_fingerprint": "5e4b26f0fbec3ff1cdb644184d65bbca0685cbc30079d3cca248da854e18e486",
       "owner": "route_replay",
       "scope_id": "dragonblight-fivebox",
       "scope_kind": "profiles",
-      "sha256": "e58f646674678096093376e28cfcdf3cba4d69744d281c377b3e9b655305b492"
+      "sha256": "0a2f917e143b540359925da4e6d34ee19451c412d820cd48b3c5bab7bf999fad"
     },
     "profiles/dragonblight-fivebox/service-context.json": {
       "artifact_kind": "service-context",
-      "input_fingerprint": "28326179361c6a0759d030faecffa9645c319f2815fa33ffcfa1c1545e92851b",
+      "input_fingerprint": "b94dd7aa59bc2b1794733eadd9bb28e418518d39febfe3993025504b8e0e3b9a",
       "owner": "route_service_context",
       "scope_id": "dragonblight-fivebox",
       "scope_kind": "profiles",
-      "sha256": "004bcaf94633fbb9b41f86c5ce065b6186b8fdbd050b4f349168e32a6e55dc02"
+      "sha256": "d1fa35ca179ebaeb34c754fd61ef960396585141de4eeaa7bef9a2b53da5e00c"
     },
     "profiles/dragonblight-fivebox/timing.json": {
       "artifact_kind": "timing",
-      "input_fingerprint": "f0586614fceaaf44393445c31affd4e0cafd736a5d6ccab79932aaa03b024e17",
+      "input_fingerprint": "f61f509134c0852070fba7ff65203bb859f29d848706dccd7bf4f22095e22f11",
       "owner": "route_timing",
       "scope_id": "dragonblight-fivebox",
       "scope_kind": "profiles",
-      "sha256": "8a55fa088fef4f45ccb29b5d4007077a355b2e2440ffbe9f32e65530232505b2"
+      "sha256": "70846a2c49f189537e2480b26c381b084e0487b4c52b673a8eb77b397c2da837"
+    },
+    "profiles/dragonblight-fivebox/xp.json": {
+      "artifact_kind": "xp",
+      "input_fingerprint": "fa1df246201897f3dc6259f3d5cd01796808c9f8aa48eba5b0e9bfca6d04c21d",
+      "owner": "route_xp",
+      "scope_id": "dragonblight-fivebox",
+      "scope_kind": "profiles",
+      "sha256": "bbe06b8bbc169810b72b380576bcf0e0d11376b7892fd869ad877492de499bea"
     },
     "profiles/grizzly-fivebox/display.json": {
       "artifact_kind": "display",
@@ -834,11 +850,11 @@
     },
     "programs/horde-fivebox-full-clear/continuity.json": {
       "artifact_kind": "continuity",
-      "input_fingerprint": "e63e1753de5df0285a53b8bc33794454d08aa4897b0289ca2dc8803f6bc0d076",
+      "input_fingerprint": "4222bc780a1d3991e22f9460836b17b4d782c925ba071db4c68dbc087532af43",
       "owner": "route_continuity",
       "scope_id": "horde-fivebox-full-clear",
       "scope_kind": "programs",
-      "sha256": "28a249b448f6b0a163fecf53d67f90f8d75af256b9c9abc151ae8a7d631aa1f4"
+      "sha256": "f527d6bd4f7dc8795fd975e2ebc7d50f6cd78768ca857a23f0b69a9bebad52e1"
     },
     "programs/horde-fivebox-full-clear/economy.json": {
       "artifact_kind": "economy",
@@ -850,11 +866,11 @@
     },
     "programs/horde-fivebox-full-clear/movement.json": {
       "artifact_kind": "movement",
-      "input_fingerprint": "f6e0dfe5e018c25da427a8c964313f5e6a23e06b258c23966fea9db5cb20fbf9",
+      "input_fingerprint": "045a4a7479ce40aa32d5fb033275954225e65af76b5d836caa2b1f1408fbd515",
       "owner": "route_movement",
       "scope_id": "horde-fivebox-full-clear",
       "scope_kind": "programs",
-      "sha256": "6cc3d4f0f323061f5517227714aba0d4503bb90a1ea9f3c5485a6c5cb03b1d4a"
+      "sha256": "e7d9641fd3faf287e0c9bf5cb5d5216a2a40954ca36f51f2d414a4bebc1eb882"
     },
     "programs/horde-fivebox-full-clear/review-trigger.json": {
       "artifact_kind": "review-trigger",
@@ -874,11 +890,11 @@
     },
     "programs/horde-fivebox-full-clear/timing.json": {
       "artifact_kind": "timing",
-      "input_fingerprint": "87f9997c2cd7f9bee423f70bf491a4d4d6602ad2cef2220e87658d31bf0fa5b9",
+      "input_fingerprint": "f2415e5e91f8023b0cb12154793149aa39a083421b1c137e1f325fe9d7f76d6c",
       "owner": "route_timing",
       "scope_id": "horde-fivebox-full-clear",
       "scope_kind": "programs",
-      "sha256": "30fb16aa96af30699b8cd4330f53db3de2d95e9e6d2cfef208622a34fe344676"
+      "sha256": "9eb093feeb752daaa4d01184485d353390a7fae471f39abad23e689e41ee4e2d"
     },
     "programs/horde-fivebox-full-clear/xp.json": {
       "artifact_kind": "xp",

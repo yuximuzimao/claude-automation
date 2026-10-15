@@ -1035,9 +1035,18 @@
       "x": 38.16,
       "y": 18.71,
       "zone_id": 65
+    },
+    {
+      "location_ref": "dragonblight-p203",
+      "service_action_id": "tail-do-13267",
+      "task_id": 13267,
+      "visit_id": "tail-visit-undercity-staging",
+      "x": 61.71,
+      "y": 62.61,
+      "zone_id": 85
     }
   ],
-  "input_fingerprint": "28326179361c6a0759d030faecffa9645c319f2815fa33ffcfa1c1545e92851b",
+  "input_fingerprint": "b94dd7aa59bc2b1794733eadd9bb28e418518d39febfe3993025504b8e0e3b9a",
   "issues": [],
   "profile_id": "dragonblight-fivebox",
   "spatial_instances": [
@@ -2101,15 +2110,27 @@
       "x": 51.08,
       "y": 32.75,
       "zone_id": 65
+    },
+    {
+      "basis": "canonical_visit_occurrence",
+      "cluster_ids": [
+        "objective-tail-do-13267"
+      ],
+      "instance_id": "visit-tail-visit-undercity-staging",
+      "location_ref": "dragonblight-p203",
+      "visit_id": "tail-visit-undercity-staging",
+      "x": 61.71,
+      "y": 62.61,
+      "zone_id": 85
     }
   ],
   "status": "pass",
   "summary": {
     "background_layer_count": 0,
-    "foreground_service_count": 115,
+    "foreground_service_count": 116,
     "shared_service_override_count": 0,
-    "spatial_instance_count": 86,
-    "target_cluster_count": 115
+    "spatial_instance_count": 87,
+    "target_cluster_count": 116
   },
   "target_clusters": [
     {
@@ -3605,6 +3626,19 @@
       ],
       "visit_ids": [
         "a0621"
+      ]
+    },
+    {
+      "action_ids": [
+        "tail-do-13267"
+      ],
+      "cluster_id": "objective-tail-do-13267",
+      "source": "objective_action",
+      "task_ids": [
+        13267
+      ],
+      "visit_ids": [
+        "tail-visit-undercity-staging"
       ]
     }
   ]

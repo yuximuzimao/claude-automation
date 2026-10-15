@@ -89,43 +89,26 @@
       "to_zone_id": 65
     },
     {
-      "cross_zone": true,
+      "cross_zone": false,
       "edge_id": "dragonblight-fivebox->dalaran-mainline-77",
-      "from_location_ref": "dragonblight-p194",
+      "from_location_ref": "dragonblight-p206",
       "from_profile_id": "dragonblight-fivebox",
-      "from_visit_id": "a0608",
-      "from_zone_id": 65,
+      "from_visit_id": "tail-visit-dalaran",
+      "from_zone_id": 4395,
       "issues": [
         {
-          "action_id": "dragonblight-end-to-aethas-image",
           "edge_id": "dragonblight-fivebox->dalaran-mainline-77",
+          "from_handoff_ref": null,
           "from_profile_id": "dragonblight-fivebox",
-          "kind": "move_action_mode_required",
+          "kind": "program_boundary_transition_unproven",
+          "reason": "Program order proves sequence only. Provide one explicit source Profile exit movement action, matching endpoint handoff_ref values, or a reviewed Program boundary_transitions operation chain.",
           "severity": "unknown",
+          "to_handoff_ref": null,
           "to_profile_id": "dalaran-mainline-77"
         }
       ],
-      "operation_kind": "transition_chain",
-      "operations": [
-        {
-          "action_id": "dragonblight-end-to-aethas-image",
-          "action_kind": "move",
-          "from_name": "龙骨荒野·萨鲁法尔战甲",
-          "movement_mode": null,
-          "operation_id": "dragonblight-end-to-aethas-image",
-          "operation_kind": "move",
-          "to_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像"
-        },
-        {
-          "action_id": "quest-12791-teleport-dalaran",
-          "action_kind": "quest_transport",
-          "from_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
-          "operation_id": "quest-12791-teleport-dalaran",
-          "operation_kind": "quest_transport",
-          "to_name": "达拉然·紫罗兰之门"
-        }
-      ],
-      "source": "program_transition",
+      "operation_kind": "unknown",
+      "source": "unproven",
       "status": "requirements",
       "to_location_ref": "dalaran-p001",
       "to_profile_id": "dalaran-mainline-77",
@@ -272,7 +255,7 @@
       "to_zone_id": 394
     }
   ],
-  "input_fingerprint": "f6e0dfe5e018c25da427a8c964313f5e6a23e06b258c23966fea9db5cb20fbf9",
+  "input_fingerprint": "045a4a7479ce40aa32d5fb033275954225e65af76b5d836caa2b1f1408fbd515",
   "issues": [
     {
       "edge_id": "nagrand-fivebox-67-68->borean-fivebox",
@@ -285,11 +268,13 @@
       "to_profile_id": "borean-fivebox"
     },
     {
-      "action_id": "dragonblight-end-to-aethas-image",
       "edge_id": "dragonblight-fivebox->dalaran-mainline-77",
+      "from_handoff_ref": null,
       "from_profile_id": "dragonblight-fivebox",
-      "kind": "move_action_mode_required",
+      "kind": "program_boundary_transition_unproven",
+      "reason": "Program order proves sequence only. Provide one explicit source Profile exit movement action, matching endpoint handoff_ref values, or a reviewed Program boundary_transitions operation chain.",
       "severity": "unknown",
+      "to_handoff_ref": null,
       "to_profile_id": "dalaran-mainline-77"
     }
   ],
@@ -7846,7 +7831,7 @@
       ]
     },
     "dragonblight-fivebox": {
-      "canonical_edge_count": 196,
+      "canonical_edge_count": 202,
       "edges": [
         {
           "cross_zone": false,
@@ -10194,10 +10179,16 @@
           "from_location_ref": "dragonblight-p149",
           "from_visit_id": "a0467",
           "from_zone_id": 65,
-          "legacy_transport": "ride",
-          "movement_mode": "ride",
-          "movement_mode_source": "explicit",
-          "operation_kind": "self_move",
+          "legacy_transport": "taxi",
+          "movement_action": {
+            "action_id": "transport-wyrmrest-venomspite",
+            "action_kind": "taxi",
+            "from_name": "龙眠神殿",
+            "operation_kind": "taxi",
+            "to_name": "怨毒镇"
+          },
+          "movement_action_id": "transport-wyrmrest-venomspite",
+          "operation_kind": "taxi",
           "source": "canonical_profile",
           "to_location_ref": "dragonblight-p150",
           "to_visit_id": "a0469",
@@ -10921,10 +10912,129 @@
           "to_location_ref": "dragonblight-p194",
           "to_visit_id": "a0608",
           "to_zone_id": 65
+        },
+        {
+          "cross_zone": false,
+          "edge_id": "a0608->tail-return-korkron",
+          "from_location_ref": "dragonblight-p194",
+          "from_visit_id": "a0608",
+          "from_zone_id": 65,
+          "legacy_transport": "ride",
+          "movement_mode": "ride",
+          "movement_mode_source": "explicit",
+          "operation_kind": "self_move",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p200",
+          "to_visit_id": "tail-return-korkron",
+          "to_zone_id": 65
+        },
+        {
+          "cross_zone": true,
+          "edge_id": "tail-return-korkron->tail-visit-warsong",
+          "from_location_ref": "dragonblight-p200",
+          "from_visit_id": "tail-return-korkron",
+          "from_zone_id": 65,
+          "legacy_transport": "taxi",
+          "movement_action": {
+            "action_id": "tail-taxi-korkron-warsong",
+            "action_kind": "taxi",
+            "from_name": "库卡隆先锋营地",
+            "operation_kind": "taxi",
+            "to_name": "战歌要塞"
+          },
+          "movement_action_id": "tail-taxi-korkron-warsong",
+          "operation_kind": "taxi",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p201",
+          "to_visit_id": "tail-visit-warsong",
+          "to_zone_id": 3537
+        },
+        {
+          "cross_zone": true,
+          "edge_id": "tail-visit-warsong->tail-visit-orgrimmar",
+          "from_location_ref": "dragonblight-p201",
+          "from_visit_id": "tail-visit-warsong",
+          "from_zone_id": 3537,
+          "legacy_transport": "script",
+          "movement_action": {
+            "action_id": "tail-transport-warsong-orgrimmar",
+            "action_kind": "quest_transport",
+            "from_name": "战歌要塞",
+            "operation_kind": "quest_transport",
+            "to_name": "奥格瑞玛·格罗玛什堡垒"
+          },
+          "movement_action_id": "tail-transport-warsong-orgrimmar",
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p202",
+          "to_visit_id": "tail-visit-orgrimmar",
+          "to_zone_id": 1637
+        },
+        {
+          "cross_zone": true,
+          "edge_id": "tail-visit-orgrimmar->tail-visit-undercity-staging",
+          "from_location_ref": "dragonblight-p202",
+          "from_visit_id": "tail-visit-orgrimmar",
+          "from_zone_id": 1637,
+          "legacy_transport": "script",
+          "movement_action": {
+            "action_id": "tail-transport-orgrimmar-undercity",
+            "action_kind": "quest_transport",
+            "from_name": "奥格瑞玛·格罗玛什堡垒",
+            "operation_kind": "quest_transport",
+            "to_name": "幽暗城外·沃金"
+          },
+          "movement_action_id": "tail-transport-orgrimmar-undercity",
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p203",
+          "to_visit_id": "tail-visit-undercity-staging",
+          "to_zone_id": 85
+        },
+        {
+          "cross_zone": true,
+          "edge_id": "tail-visit-undercity-staging->tail-visit-aethas",
+          "from_location_ref": "dragonblight-p203",
+          "from_visit_id": "tail-visit-undercity-staging",
+          "from_zone_id": 85,
+          "legacy_transport": "hearth",
+          "movement_action": {
+            "action_id": "tail-hearth-agmar",
+            "action_kind": "use_hearth",
+            "operation_kind": "hearth",
+            "target_name": "阿格玛之锤"
+          },
+          "movement_action_id": "tail-hearth-agmar",
+          "operation_kind": "hearth",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p205",
+          "to_visit_id": "tail-visit-aethas",
+          "to_zone_id": 65
+        },
+        {
+          "cross_zone": true,
+          "edge_id": "tail-visit-aethas->tail-visit-dalaran",
+          "from_location_ref": "dragonblight-p205",
+          "from_visit_id": "tail-visit-aethas",
+          "from_zone_id": 65,
+          "legacy_transport": "script",
+          "movement_action": {
+            "action_id": "tail-transport-12791-dalaran",
+            "action_kind": "quest_transport",
+            "from_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
+            "operation_kind": "quest_transport",
+            "to_name": "达拉然·紫罗兰之门"
+          },
+          "movement_action_id": "tail-transport-12791-dalaran",
+          "operation_kind": "quest_transport",
+          "source": "canonical_profile",
+          "to_location_ref": "dragonblight-p206",
+          "to_visit_id": "tail-visit-dalaran",
+          "to_zone_id": 4395
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "96f3f765b129d39d06041a2b68c4633b2a88f6794fefbf741ae6233ae32ffa1e",
+      "input_fingerprint": "e34f41967473b6fe5bb132b4a0ca45186d1691f07caed93f9cf0cd48a9b09ace",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 65,
@@ -13375,10 +13485,10 @@
           "display_name": "怨毒镇",
           "handoff_ref": null,
           "incoming_movement": {
-            "kind": "self_move",
-            "mode": "ride"
+            "action_id": "transport-wyrmrest-venomspite",
+            "kind": "action"
           },
-          "legacy_transport": "ride",
+          "legacy_transport": "taxi",
           "location_ref": "dragonblight-p150",
           "location_role": "map_anchor",
           "ordinal": 154,
@@ -14119,6 +14229,102 @@
           "x": 38.16,
           "y": 18.71,
           "zone_id": 65
+        },
+        {
+          "display_name": "库卡隆先锋营地",
+          "handoff_ref": null,
+          "incoming_movement": {
+            "kind": "self_move",
+            "mode": "ride"
+          },
+          "legacy_transport": "ride",
+          "location_ref": "dragonblight-p200",
+          "location_role": "map_anchor",
+          "ordinal": 201,
+          "visit_id": "tail-return-korkron",
+          "x": 40.71,
+          "y": 18.06,
+          "zone_id": 65
+        },
+        {
+          "display_name": "战歌要塞·萨鲁法尔大王",
+          "handoff_ref": null,
+          "incoming_movement": {
+            "action_id": "tail-taxi-korkron-warsong",
+            "kind": "action"
+          },
+          "legacy_transport": "taxi",
+          "location_ref": "dragonblight-p201",
+          "location_role": "map_anchor",
+          "ordinal": 202,
+          "visit_id": "tail-visit-warsong",
+          "x": 41.36,
+          "y": 53.69,
+          "zone_id": 3537
+        },
+        {
+          "display_name": "奥格瑞玛·格罗玛什堡垒",
+          "handoff_ref": null,
+          "incoming_movement": {
+            "action_id": "tail-transport-warsong-orgrimmar",
+            "kind": "action"
+          },
+          "legacy_transport": "script",
+          "location_ref": "dragonblight-p202",
+          "location_role": "map_anchor",
+          "ordinal": 203,
+          "visit_id": "tail-visit-orgrimmar",
+          "x": 31.82,
+          "y": 37.82,
+          "zone_id": 1637
+        },
+        {
+          "display_name": "幽暗城外·沃金 / 幽暗城之战入口",
+          "handoff_ref": null,
+          "incoming_movement": {
+            "action_id": "tail-transport-orgrimmar-undercity",
+            "kind": "action"
+          },
+          "legacy_transport": "script",
+          "location_ref": "dragonblight-p203",
+          "location_role": "map_anchor",
+          "ordinal": 204,
+          "visit_id": "tail-visit-undercity-staging",
+          "x": 61.71,
+          "y": 62.61,
+          "zone_id": 85
+        },
+        {
+          "display_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
+          "handoff_ref": null,
+          "incoming_movement": {
+            "action_id": "tail-hearth-agmar",
+            "kind": "action"
+          },
+          "legacy_transport": "hearth",
+          "location_ref": "dragonblight-p205",
+          "location_role": "map_anchor",
+          "ordinal": 205,
+          "visit_id": "tail-visit-aethas",
+          "x": 38.05,
+          "y": 46.22,
+          "zone_id": 65
+        },
+        {
+          "display_name": "达拉然·紫罗兰之门",
+          "handoff_ref": null,
+          "incoming_movement": {
+            "action_id": "tail-transport-12791-dalaran",
+            "kind": "action"
+          },
+          "legacy_transport": "script",
+          "location_ref": "dragonblight-p206",
+          "location_role": "map_anchor",
+          "ordinal": 206,
+          "visit_id": "tail-visit-dalaran",
+          "x": 56.3,
+          "y": 46.72,
+          "zone_id": 4395
         }
       ]
     },

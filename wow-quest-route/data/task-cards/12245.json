@@ -55,13 +55,24 @@
     "接取：间谍女王瑞贝娅。",
     "间谍女王瑞贝娅要求你去杀死亡灵卫兵斯克尼德、首席抄写员基尼迪乌斯、工程师布尔克和司法官亚麦。 /  / 完成任务后，向怨毒镇的高级执行官乌洛斯复命。",
     "交付：高级执行官乌洛斯。",
-    "几名血色命名目标并非普通击杀信用；按要求先交互/对话使其暴露或触发，再击杀对应NPC。"
+    "四名目标都关在牢笼里，需要先对话/交互触发后再击杀：亡灵卫兵斯克尼德约(71.4,72.2)、首席抄写员基尼迪乌斯约(69.4,74.0)、工程师布尔克约(72.7,74.3)、司法官亚麦约(72.6,72.6)。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-15",
+      "source_type": "user_live",
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12245",
+      "observed_at": "2026-10-15",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -100,10 +111,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "几名命名目标需先交互/对话触发暴露，再击杀；直接找普通可攻击目标容易漏步骤。",
+      "text": "四名目标都在牢笼里：斯克尼德约(71.4,72.2)、基尼迪乌斯约(69.4,74.0)、布尔克约(72.7,74.3)、亚麦约(72.6,72.6)；先对话/交互触发再击杀。",
       "scope": "all",
-      "source_ref": "Task Card guide/evidence; 2026-09-26 presentation enrichment audit",
-      "reason": "备注专项审计：仅保留正常插件与路线动作不足以避免找错、漏触发或返工的最短执行提示。"
+      "source_ref": "2026-10-15用户第二组DK实跑 + Task Card/Questie坐标证据",
+      "reason": "实跑确认最有价值的是牢笼位置和四名NPC坐标；删除泛化且无执行价值的尾句。"
     }
   }
 }

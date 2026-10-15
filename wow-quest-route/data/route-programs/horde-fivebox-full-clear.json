@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "program_id": "horde-fivebox-full-clear",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "program_scope": "Horde fivebox Outland-to-Northrend full-clear sequence",
@@ -53,6 +53,11 @@
       "date": "2026-09-19",
       "kind": "migration_fidelity",
       "summary": "Migrate the reviewed Storm Peaks -> Icecrown physical handoff into the Program: Storm Peaks closes at Camp Tunka'lo; the retained K3 loaner wind rider is valid in both Storm Peaks and Icecrown, and the formal Icecrown entry audit fixes the first geographic region at the Argent Tournament Grounds. The boundary is therefore a self-flight to the Argent Tournament Grounds."
+    },
+    {
+      "date": "2026-10-15",
+      "kind": "route_boundary_absorbed_by_profile",
+      "summary": "Dragonblight v3 now owns the full post-Wrathgate chain through Warsong Hold, Orgrimmar, Battle for the Undercity, hearth to Agmar and Task 12791 teleport to Dalaran; remove the old duplicate Dragonblight→Dalaran Program boundary transition."
     }
   ],
   "boundary_transitions": [
@@ -66,24 +71,6 @@
           "from_name": "赞加沼泽·莉萨奥营地",
           "to_name": "纳格兰·加拉达尔",
           "movement_mode": "ride"
-        }
-      ]
-    },
-    {
-      "from_profile_id": "dragonblight-fivebox",
-      "to_profile_id": "dalaran-mainline-77",
-      "operations": [
-        {
-          "operation_id": "dragonblight-end-to-aethas-image",
-          "kind": "move",
-          "from_name": "龙骨荒野·萨鲁法尔战甲",
-          "to_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像"
-        },
-        {
-          "operation_id": "quest-12791-teleport-dalaran",
-          "kind": "quest_transport",
-          "from_name": "阿格玛之锤·大法师艾萨斯·夺日者的影像",
-          "to_name": "达拉然·紫罗兰之门"
         }
       ]
     },

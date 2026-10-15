@@ -850,12 +850,6 @@
     },
     {
       "component": "move",
-      "edge_id": "a0467->a0469",
-      "seconds": 61.30139307888717,
-      "step_id": "step-40"
-    },
-    {
-      "component": "move",
       "edge_id": "a0469->a0472",
       "seconds": 3.1887922489309064,
       "step_id": "step-40"
@@ -1111,6 +1105,12 @@
       "edge_id": "a0606->a0608",
       "seconds": 1.4826239084071975,
       "step_id": "step-51"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0608->tail-return-korkron",
+      "seconds": 8.634732204101683,
+      "step_id": "step-52"
     },
     {
       "action_ids": [
@@ -2333,6 +2333,37 @@
       "visit_id": "a0606"
     },
     {
+      "action_ids": [
+        "tail-turnin-13242",
+        "tail-accept-13257"
+      ],
+      "component": "accept_turnin",
+      "seconds": 58.2,
+      "step_id": "step-52",
+      "visit_id": "tail-visit-warsong"
+    },
+    {
+      "action_ids": [
+        "tail-turnin-13257",
+        "tail-accept-13266"
+      ],
+      "component": "accept_turnin",
+      "seconds": 58.2,
+      "step_id": "step-52",
+      "visit_id": "tail-visit-orgrimmar"
+    },
+    {
+      "action_ids": [
+        "tail-turnin-13266",
+        "tail-accept-13267",
+        "tail-turnin-13267"
+      ],
+      "component": "accept_turnin",
+      "seconds": 67.8,
+      "step_id": "step-52",
+      "visit_id": "tail-visit-undercity-staging"
+    },
+    {
       "action_id": "a0189",
       "component": "objective_service",
       "resolution": {
@@ -2357,7 +2388,7 @@
       "task_id": 11999
     }
   ],
-  "input_fingerprint": "f0586614fceaaf44393445c31affd4e0cafd736a5d6ccab79932aaa03b024e17",
+  "input_fingerprint": "f61f509134c0852070fba7ff65203bb859f29d848706dccd7bf4f22095e22f11",
   "issues": [
     {
       "action_id": "use-hearth-after-rotting-organs",
@@ -2459,6 +2490,13 @@
       "step_id": "step-38"
     },
     {
+      "edge_id": "a0467->a0469",
+      "kind": "flight_edge_binding_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-40"
+    },
+    {
       "action_id": "a0570",
       "edge_id": "a0566->a0569",
       "kind": "movement_action_timing_input_required",
@@ -2484,6 +2522,49 @@
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
       "step_id": "step-51"
+    },
+    {
+      "edge_id": "tail-return-korkron->tail-visit-warsong",
+      "kind": "flight_edge_binding_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-52"
+    },
+    {
+      "action_id": "tail-transport-warsong-orgrimmar",
+      "edge_id": "tail-visit-warsong->tail-visit-orgrimmar",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "quest_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-52"
+    },
+    {
+      "action_id": "tail-transport-orgrimmar-undercity",
+      "edge_id": "tail-visit-orgrimmar->tail-visit-undercity-staging",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "quest_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-52"
+    },
+    {
+      "action_id": "tail-hearth-agmar",
+      "edge_id": "tail-visit-undercity-staging->tail-visit-aethas",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "hearth",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-52"
+    },
+    {
+      "action_id": "tail-transport-12791-dalaran",
+      "edge_id": "tail-visit-aethas->tail-visit-dalaran",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "quest_transport",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-52"
     },
     {
       "action_id": "a0078",
@@ -3492,9 +3573,17 @@
       "severity": "info",
       "step_id": "step-51",
       "task_id": 13242
+    },
+    {
+      "action_id": "tail-do-13267",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-52",
+      "task_id": 13267
     }
   ],
-  "known_seconds": 42572.318,
+  "known_seconds": 42833.863,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "dragonblight-fivebox",
@@ -4492,23 +4581,25 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 3.655,
+      "center_minutes": 4.8,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 154.8,
-        "move_seconds": 64.49,
+        "move_seconds": 3.189,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 219.29,
+      "known_seconds": 288.0,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "component_relative_uncertainty"
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 130.011,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
-        3.184,
-        4.126
+        4.0,
+        5.7
       ],
       "step_id": "step-40",
       "title": "怨毒镇：翡翠 / 血色交接",
@@ -4788,13 +4879,31 @@
       "step_id": "step-51",
       "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门",
       "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 184.2,
+        "move_seconds": 8.635,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 192.835,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-52",
+      "title": "黑暗的骚动 → 战歌要塞 → 奥格 → 幽暗城之战 → 炉石 → 达拉然",
+      "unresolved_component_count": 6
     }
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 140,
+    "issue_count": 147,
     "range_model_status": "requirements",
     "requirement_count": 0,
-    "step_count": 52
+    "step_count": 53
   }
 }
