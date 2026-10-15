@@ -1,6 +1,6 @@
 {
-  "center_minutes": 365.0,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -18,7 +18,7 @@
       "component": "move",
       "edge_id": "a0246->a0249",
       "seconds": 0.0,
-      "step_id": "step-12"
+      "step_id": "step-12b"
     },
     {
       "action_ids": [
@@ -474,7 +474,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 67.8,
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "visit_id": "a0241"
     },
     {
@@ -483,7 +483,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "visit_id": "a0246"
     },
     {
@@ -492,11 +492,11 @@
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "visit_id": "a0249"
     }
   ],
-  "input_fingerprint": "7160edff2bd348d86c26672f4cf64b1d8925a2774a90f27febfadb6f3c795719",
+  "input_fingerprint": "b798ed4ec19641726d98ef75f81c5d61a85b92ad313306ecb6be742a43ddee10",
   "issues": [
     {
       "edge_id": "a0001->a0005",
@@ -1089,7 +1089,7 @@
       "profile_id": "hellfire-fivebox",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "zone_id": 3483
     },
     {
@@ -1098,7 +1098,7 @@
       "profile_id": "hellfire-fivebox",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "zone_id": 3483
     },
     {
@@ -1450,7 +1450,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "task_id": 10351
     },
     {
@@ -1458,22 +1458,16 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-12",
+      "step_id": "step-12b",
       "task_id": 10255
     }
   ],
-  "known_seconds": 21900.0,
+  "known_seconds": 22065.0,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "hellfire-fivebox",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 12
-  },
-  "range_minutes": [
-    266.0,
-    480.0
-  ],
+  "range_basis": null,
+  "range_minutes": null,
   "status": "pass",
   "steps": [
     {
@@ -1755,7 +1749,7 @@
       "center_minutes": 30.0,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 339.0,
+        "accept_turnin_seconds": 174.0,
         "move_seconds": 0.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
@@ -1765,7 +1759,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1461.0,
+        "residual_seconds": 1626.0,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/hellfire-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1773,15 +1767,33 @@
         40.0
       ],
       "step_id": "step-12",
-      "title": "塞纳里奥哨站 → 赞加沼泽",
+      "title": "塞纳里奥哨站：巨人 / 棘牙岭 → 回交",
       "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 165.0,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 165.0,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-12b",
+      "title": "缚地者 / 解毒剂 → 赞加沼泽",
+      "unresolved_component_count": 4
     }
   ],
   "summary": {
     "error_count": 0,
     "issue_count": 112,
-    "range_model_status": "resolved",
+    "range_model_status": "requirements",
     "requirement_count": 0,
-    "step_count": 12
+    "step_count": 13
   }
 }

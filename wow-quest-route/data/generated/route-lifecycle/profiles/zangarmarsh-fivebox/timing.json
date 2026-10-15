@@ -1,6 +1,6 @@
 {
-  "center_minutes": 343.0,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -24,19 +24,19 @@
       "component": "move",
       "edge_id": "a0019->a0021",
       "seconds": 38.7851118381001,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
       "edge_id": "a0021->a0023",
       "seconds": 39.293312299858094,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
       "edge_id": "a0023->a0027",
       "seconds": 49.23827428844274,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
@@ -337,7 +337,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "visit_id": "a0023"
     },
     {
@@ -354,7 +354,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 125.39999999999999,
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "visit_id": "a0027"
     },
     {
@@ -627,7 +627,7 @@
       "visit_id": "a0225"
     }
   ],
-  "input_fingerprint": "9c5060111b54d20e2e2a4b84283844f96a4f63e2a141fcccbe69696d3d8f5101",
+  "input_fingerprint": "8c9d0366c791e2d264ca04c0348726bc0b28323b941701b38451f4cf16e518fc",
   "issues": [
     {
       "edge_id": "a0070->a0079",
@@ -802,7 +802,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9716
     },
     {
@@ -810,7 +810,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9747
     },
     {
@@ -818,7 +818,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9752
     },
     {
@@ -826,7 +826,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9718
     },
     {
@@ -1177,26 +1177,20 @@
       "task_id": 9806
     }
   ],
-  "known_seconds": 20580.0,
+  "known_seconds": 20881.317,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "zangarmarsh-fivebox",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 14
-  },
-  "range_minutes": [
-    270.9,
-    416.1
-  ],
+  "range_basis": null,
+  "range_minutes": null,
   "status": "pass",
   "steps": [
     {
       "center_minutes": 10.0,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 376.8,
-        "move_seconds": 150.102,
+        "accept_turnin_seconds": 202.8,
+        "move_seconds": 22.786,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
@@ -1205,7 +1199,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 73.098,
+        "residual_seconds": 374.414,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1213,8 +1207,26 @@
         12.0
       ],
       "step_id": "step-01",
-      "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所",
+      "title": "塞纳里奥庇护所：开场 → 古树祝福",
       "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 174.0,
+        "move_seconds": 127.317,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 301.317,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-01b",
+      "title": "暗泽湖 → 暗泽村 → 回庇护所",
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": 5.0,
@@ -1545,8 +1557,8 @@
   "summary": {
     "error_count": 0,
     "issue_count": 67,
-    "range_model_status": "resolved",
+    "range_model_status": "requirements",
     "requirement_count": 0,
-    "step_count": 14
+    "step_count": 15
   }
 }

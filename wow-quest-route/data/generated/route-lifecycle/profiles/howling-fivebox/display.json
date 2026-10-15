@@ -12,7 +12,7 @@
     "征服堡",
     "新阿加曼德"
   ],
-  "input_fingerprint": "2597ed8b4be35762a23f08a869012f3f915e07d65f45bfebbebf6873b0db80ef",
+  "input_fingerprint": "9902682c073995c1db436954c0c2e4e46269734c1946c9c5bcacdcdc5f21e0b2",
   "issues": [
     {
       "display_name": "老冰鳞",
@@ -1623,7 +1623,7 @@
         "location_ref": "howling-p006",
         "location_role": "map_anchor",
         "ordinal": 8,
-        "step_id": "step-01",
+        "step_id": "step-01b",
         "visit_id": "a0017",
         "x": 26.2,
         "y": 24.6
@@ -1633,7 +1633,7 @@
         "location_ref": "howling-p007",
         "location_role": "map_anchor",
         "ordinal": 9,
-        "step_id": "step-01",
+        "step_id": "step-01b",
         "visit_id": "a0021",
         "x": 22.2,
         "y": 23.5
@@ -1643,7 +1643,7 @@
         "location_ref": "howling-p008",
         "location_role": "map_anchor",
         "ordinal": 10,
-        "step_id": "step-01",
+        "step_id": "step-01b",
         "visit_id": "a0023",
         "x": 26.2,
         "y": 24.6
@@ -2861,7 +2861,7 @@
     ]
   },
   "profile_id": "howling-fivebox",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
     "center_minutes": 451.278,
@@ -2893,15 +2893,7 @@
         "a0013",
         "a0014",
         "a0015",
-        "a0016",
-        "a0017",
-        "a0018",
-        "a0019",
-        "a0020",
-        "a0021",
-        "a0022",
-        "a0023",
-        "a0024"
+        "a0016"
       ],
       "lines": [
         {
@@ -3131,7 +3123,89 @@
           ],
           "text": "老冰鳞 → 交《腐鳃的三叉戟》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-01",
+      "summary": "炉石征服堡后转药剂师营地接任务，清冷原海岸与腐鳃短链，再返回药剂师营地。",
+      "task_presentations": [
+        {
+          "badge": "not_shared",
+          "name": "疯狂的研究",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11301
         },
+        {
+          "badge": "not_shared",
+          "name": "酒里有什么？",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11298
+        },
+        {
+          "badge": "shared",
+          "name": "比鱼人更恶臭……",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11397
+        },
+        {
+          "badge": "not_shared",
+          "name": "天灾装置",
+          "note": "任务起始物由冷原海岸亡灵鱼人掉落；五号按掉落分别取得并接任务，离开前确认都已接到。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11398
+        },
+        {
+          "badge": "shared",
+          "name": "腐鳃的三叉戟",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 11422
+        }
+      ],
+      "timing": {
+        "center_minutes": 25.679,
+        "range_minutes": [
+          19.661,
+          31.702
+        ],
+        "status": "pass"
+      },
+      "title": "征服堡 → 药剂师营地 → 冷原海岸 / 腐鳃"
+    },
+    {
+      "action_ids": [
+        "a0017",
+        "a0018",
+        "a0019",
+        "a0020",
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024"
+      ],
+      "lines": [
         {
           "action_ids": [
             "a0017"
@@ -3247,38 +3321,16 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-01",
-      "summary": "",
+      "step_id": "step-01b",
+      "summary": "回药剂师营地交海岸任务，接《关闭护盾》，完成水晶目标后再次回营地交付。",
       "task_presentations": [
-        {
-          "badge": "not_shared",
-          "name": "疯狂的研究",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 11301
-        },
-        {
-          "badge": "not_shared",
-          "name": "酒里有什么？",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 11298
-        },
         {
           "badge": "shared",
           "name": "比鱼人更恶臭……",
-          "note": "",
+          "note": null,
           "note_override_applied": true,
           "note_show_on": [],
-          "note_visible": true,
+          "note_visible": false,
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11397
@@ -3286,24 +3338,13 @@
         {
           "badge": "not_shared",
           "name": "天灾装置",
-          "note": "任务起始物由冷原海岸亡灵鱼人掉落；五号按掉落分别取得并接任务，离开前确认都已接到。",
+          "note": null,
           "note_override_applied": true,
           "note_show_on": [],
-          "note_visible": true,
+          "note_visible": false,
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 11398
-        },
-        {
-          "badge": "shared",
-          "name": "腐鳃的三叉戟",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 11422
         },
         {
           "badge": "shared",
@@ -3318,14 +3359,11 @@
         }
       ],
       "timing": {
-        "center_minutes": 25.679,
-        "range_minutes": [
-          19.661,
-          31.702
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
       },
-      "title": "征服堡 → 冷原海岸 / 腐鳃 / 护盾"
+      "title": "药剂师营地回交 → 关闭护盾"
     },
     {
       "action_ids": [

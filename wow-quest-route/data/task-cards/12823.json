@@ -43,6 +43,7 @@
   "guide": [
     "接取：吉诺。",
     "加姆高地的吉诺要你把重磅炸药包偷偷放到霜胆的祭坛附近，炸死塔尔玛·霜胆，然后在洞穴坍塌前逃出来。",
+    "放置炸药后不要立即离开；等霜胆进入事件并确认祭坛爆炸、任务完成后再离开。2026-10-15/16一次异常实跑中事件未自行触发，手动将霜胆引到炸药附近后爆炸；仅作异常恢复候选，不视为固定必做。",
     "交付：吉诺。"
   ],
   "fivebox": {
@@ -50,6 +51,15 @@
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-16-event-fallback",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-15/16",
+      "observed_at": "2026-10-16",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["guide", "presentation.note_override"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",
@@ -99,10 +109,10 @@
   ],
   "presentation": {
     "note_override": {
-      "text": "霜胆祭坛在洞穴最上层；主控放置炸药并撤出即可同步五号。",
+      "text": "霜胆祭坛在洞穴最上层；放置炸药后不要立即离开，确认祭坛爆炸且任务完成后再出去。若霜胆出现后事件迟迟不触发，可尝试将霜胆引到炸药附近。",
       "scope": "all",
-      "source_ref": "2026-09-26 Route Atlas note ownership audit",
-      "reason": "逐任务备注归属审计：只保留当前任务自身执行所需信息；移除其它任务的状态、同区编排和迁移过程包装。"
+      "source_ref": "user live-run report 2026-10-15/16 + existing quest objective",
+      "reason": "本轮实跑确认离开前必须先看到事件完成；手动引霜胆到炸药附近只作为一次异常恢复候选，不升级为固定必做。"
     }
   }
 }

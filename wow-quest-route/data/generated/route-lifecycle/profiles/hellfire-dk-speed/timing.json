@@ -1,6 +1,6 @@
 {
-  "center_minutes": 310.0,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -308,7 +308,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 106.2,
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "visit_id": "a0159"
     },
     {
@@ -317,7 +317,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "visit_id": "a0161"
     },
     {
@@ -436,7 +436,7 @@
       "visit_id": "a0228"
     }
   ],
-  "input_fingerprint": "23cca62be9d5b1b78ebcf08bd43de376b012231e1688d9d650236a24d268142f",
+  "input_fingerprint": "4ee8eafc49d1e14ab06e473030c29c74dbcc866c7b97ae327b1d362172810329",
   "issues": [
     {
       "action_id": "a0002",
@@ -840,7 +840,7 @@
       "profile_id": "hellfire-dk-speed",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "zone_id": 3483
     },
     {
@@ -849,7 +849,7 @@
       "profile_id": "hellfire-dk-speed",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "zone_id": 3483
     },
     {
@@ -858,7 +858,7 @@
       "profile_id": "hellfire-dk-speed",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "zone_id": 3483
     },
     {
@@ -1231,7 +1231,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "task_id": 9387
     },
     {
@@ -1239,7 +1239,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-08",
+      "step_id": "step-08b",
       "task_id": 10367
     },
     {
@@ -1307,18 +1307,12 @@
       "task_id": 10351
     }
   ],
-  "known_seconds": 18600.0,
+  "known_seconds": 18754.8,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "hellfire-dk-speed",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 11
-  },
-  "range_minutes": [
-    227.0,
-    415.0
-  ],
+  "range_basis": null,
+  "range_minutes": null,
   "status": "pass",
   "steps": [
     {
@@ -1500,7 +1494,7 @@
       "center_minutes": 35.0,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 270.6,
+        "accept_turnin_seconds": 115.8,
         "move_seconds": 0.0,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
@@ -1510,7 +1504,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1829.4,
+        "residual_seconds": 1984.2,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/hellfire-dk-speed-timing.json"
       },
       "range_minutes": [
@@ -1518,8 +1512,26 @@
         44.0
       ],
       "step_id": "step-08",
-      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 猎鹰回交 → 沙纳尔",
+      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙",
       "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 154.8,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 154.8,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-08b",
+      "title": "猎鹰回交 → 沙纳尔",
+      "unresolved_component_count": 5
     },
     {
       "center_minutes": 27.0,
@@ -1600,8 +1612,8 @@
   "summary": {
     "error_count": 0,
     "issue_count": 101,
-    "range_model_status": "resolved",
+    "range_model_status": "requirements",
     "requirement_count": 0,
-    "step_count": 11
+    "step_count": 12
   }
 }

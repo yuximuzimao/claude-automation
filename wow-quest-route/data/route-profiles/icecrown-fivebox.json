@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "icecrown-fivebox",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "冰冠冰川",
@@ -5318,8 +5318,8 @@
     },
     {
       "step_id": "step-25",
-      "title": "第一次东行联合包：伊米海姆 / 矿洞 → 玛雷卡里斯 → 破碎前线",
-      "summary": null,
+      "title": "伊米海姆：地面 / 空中突袭 → 占山为王",
+      "summary": "先完成第一军团的地面与空中突袭，再到布拉斯·炸雷完成《占山为王》。",
       "action_ids": [
         "a0378",
         "a0379",
@@ -5336,7 +5336,14 @@
         "a0390",
         "a0391",
         "a0392",
-        "a0393",
+        "a0393"
+      ]
+    },
+    {
+      "step_id": "step-25b",
+      "title": "伊米海姆 / 矿洞 → 玛雷卡里斯 → 破碎前线",
+      "summary": "完成伊米亚之血、矿洞奴隶与《思维诡计》，再向东清玛雷卡里斯两项并转破碎前线。",
+      "action_ids": [
         "a0394",
         "a0395",
         "a0396",
@@ -5928,8 +5935,8 @@
     },
     {
       "step_id": "step-54",
-      "title": "高难可选：瓦哈拉斯后续 + 邪恶骑士",
-      "summary": null,
+      "title": "高难可选：瓦哈拉斯后续",
+      "summary": "炉石暗影拱顶后前往瓦哈拉斯，连续完成黑暗主宰、西格莉德、卡纳基、死亡一击领主与终极挑战。",
       "action_ids": [
         "a0729",
         "a0728",
@@ -5951,7 +5958,14 @@
         "a0745",
         "a0746",
         "a0747",
-        "a0748",
+        "a0748"
+      ]
+    },
+    {
+      "step_id": "step-54b",
+      "title": "高难可选：邪恶骑士 → 血毒的命运",
+      "summary": "离开瓦哈拉斯后完成《邪恶骑士》，再推进《血毒的命运》到冰冠堡垒地下深渊并回交。",
+      "action_ids": [
         "a0749",
         "a0750",
         "a0751",
@@ -8915,6 +8929,11 @@
       "date": "2026-09-19",
       "kind": "architecture_migration",
       "summary": "Reclassified the Dalaran intermediate state in Task 13082 as transition_context: it preserves the confirmed Shattrath -> Dalaran quest transport ordering but is not a required map navigation point. Exact landing coordinates are therefore not required. The post-Dalaran return-to-Icecrown operation remains separately tracked in the final human decision ledger instead of being upgraded to user-verified fact."
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "display_step_split",
+      "summary": "按HUD可读性把第一次东行联合包和高难可选末段各拆成两段；不改变任务/交通动作顺序。"
     }
   ]
 }

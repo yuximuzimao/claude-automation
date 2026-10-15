@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "hellfire-fivebox",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "地狱火半岛",
@@ -1976,8 +1976,8 @@
     },
     {
       "step_id": "step-12",
-      "title": "塞纳里奥哨站 → 赞加沼泽",
-      "summary": "完成塞纳里奥本地高密度短链，接《塞纳里奥远征队》后直接越境进入赞加。",
+      "title": "塞纳里奥哨站：巨人 / 棘牙岭 → 回交",
+      "summary": "接齐塞纳里奥哨站任务，完成北侧巨人、火红水晶和棘牙岭三项后回哨站集中交接。",
       "action_ids": [
         "a0222",
         "a0223",
@@ -1997,7 +1997,14 @@
         "a0237",
         "a0238",
         "a0239",
-        "a0240",
+        "a0240"
+      ]
+    },
+    {
+      "step_id": "step-12b",
+      "title": "缚地者 / 解毒剂 → 赞加沼泽",
+      "summary": "完成缚地者与自然治愈短链，再做测试解毒剂，随后直接越境进入赞加并交《塞纳里奥远征队》。",
+      "action_ids": [
         "a0241",
         "a0242",
         "a0243",
@@ -2803,6 +2810,11 @@
       "date": "2026-09-19",
       "kind": "architecture_migration",
       "summary": "Closed Hellfire -> Zangarmarsh endpoint semantics. The final Hellfire visit is Ysiel Windsinger at Cenarion Refuge, verified by Questie at Zangarmarsh 3521/(78.4,62.02). Added an explicit neutral move from Cenarion Post to Cenarion Refuge; movement mode remains unknown. Matching handoff_ref proves the Program boundary without relying on names."
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "display_step_split",
+      "summary": "按HUD可读性把原末段塞纳里奥哨站→赞加沼泽拆成两段；不改变动作顺序、任务事实或跨图终点。"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "input_fingerprint": "fd34335d8ee85eeab34f963f011fcc378278058201c47469fb4b470902ae2390",
+  "input_fingerprint": "7eb03a37fb7a9b5fc5e43f7a552f08bc8287d6e48f9a65ef918b7e6394f0bdda",
   "issues": [],
   "kind": "route_program",
   "member_reports": {
@@ -1419,7 +1419,7 @@
           "zone_id": 3537
         }
       ],
-      "input_fingerprint": "f0d7db47a2a2ae4131ca87e0fac0c0f01b41d36ba89a7235db4756cd62d1d706",
+      "input_fingerprint": "3194169eca33e8353137d91080dbef7120d4d6499a435189cd43fdee963d8c47",
       "issues": [],
       "profile_id": "borean-fivebox",
       "spatial_instances": [
@@ -4767,7 +4767,7 @@
           "zone_id": 4395
         }
       ],
-      "input_fingerprint": "58beb1f02feeafc6f4d7e074720f07dc13ba61010d93a43fa713ed0e2e4ae3e7",
+      "input_fingerprint": "43713791f0d1029b50f6a002c8e9bb522fff5e48b0951e346b94750608b0c8bf",
       "issues": [],
       "profile_id": "dalaran-mainline-77",
       "spatial_instances": [
@@ -5845,9 +5845,18 @@
           "x": 38.16,
           "y": 18.71,
           "zone_id": 65
+        },
+        {
+          "location_ref": "dragonblight-p203",
+          "service_action_id": "tail-do-13267",
+          "task_id": 13267,
+          "visit_id": "tail-visit-undercity-staging",
+          "x": 61.71,
+          "y": 62.61,
+          "zone_id": 85
         }
       ],
-      "input_fingerprint": "9dfc86451a7729efc767347940ae807448778436c7008577bc7ff4107a237346",
+      "input_fingerprint": "82ffb65fce4f5b3a23b0d10a38fbb1e9cf103c0530bdfd653ef405f0664e648d",
       "issues": [],
       "profile_id": "dragonblight-fivebox",
       "spatial_instances": [
@@ -6911,15 +6920,27 @@
           "x": 51.08,
           "y": 32.75,
           "zone_id": 65
+        },
+        {
+          "basis": "canonical_visit_occurrence",
+          "cluster_ids": [
+            "objective-tail-do-13267"
+          ],
+          "instance_id": "visit-tail-visit-undercity-staging",
+          "location_ref": "dragonblight-p203",
+          "visit_id": "tail-visit-undercity-staging",
+          "x": 61.71,
+          "y": 62.61,
+          "zone_id": 85
         }
       ],
       "status": "pass",
       "summary": {
         "background_layer_count": 0,
-        "foreground_service_count": 115,
+        "foreground_service_count": 116,
         "shared_service_override_count": 0,
-        "spatial_instance_count": 86,
-        "target_cluster_count": 115
+        "spatial_instance_count": 87,
+        "target_cluster_count": 116
       },
       "target_clusters": [
         {
@@ -8416,6 +8437,19 @@
           "visit_ids": [
             "a0621"
           ]
+        },
+        {
+          "action_ids": [
+            "tail-do-13267"
+          ],
+          "cluster_id": "objective-tail-do-13267",
+          "source": "objective_action",
+          "task_ids": [
+            13267
+          ],
+          "visit_ids": [
+            "tail-visit-undercity-staging"
+          ]
         }
       ]
     },
@@ -9079,7 +9113,7 @@
           "zone_id": 394
         }
       ],
-      "input_fingerprint": "65cbd6f773f6dc028c70f8fd9cb2ab78d4c1658785318d1cf002ae67207fda3f",
+      "input_fingerprint": "ceeb0892bf736787928354b3979123e3f447ff0650016c3c53e0ceea001503bc",
       "issues": [],
       "profile_id": "grizzly-fivebox",
       "spatial_instances": [
@@ -10813,7 +10847,7 @@
           "zone_id": 3483
         }
       ],
-      "input_fingerprint": "3e52003de0c1ca259eb2b0148d59c7381f9b9ba6155d5bd374ff66f0c277686d",
+      "input_fingerprint": "330749f59037beb7c6d1ed505f6efbb2a53de10395e2915f86a66d155f132f91",
       "issues": [],
       "profile_id": "hellfire-fivebox",
       "spatial_instances": [
@@ -12555,7 +12589,7 @@
           "zone_id": 495
         }
       ],
-      "input_fingerprint": "7a2e67004bc666451b19e7825729a3a202f7dd1435d08305e35bf6bc1389e221",
+      "input_fingerprint": "c150b7c76067a38d83a5aa5b5eeba059b273974d208f469517cecb5f2755bb33",
       "issues": [],
       "profile_id": "howling-fivebox",
       "spatial_instances": [
@@ -15622,7 +15656,7 @@
           "zone_id": 210
         }
       ],
-      "input_fingerprint": "b3a53bc0506b89f97efbb7ae713460f129b584b745eb3152027610265f5008c8",
+      "input_fingerprint": "c6f56c2de652fbf711d77f6f5e750eb3a8adb647fd4bfe4dcdc3a5a8ec80d9f2",
       "issues": [],
       "profile_id": "icecrown-fivebox",
       "spatial_instances": [
@@ -18884,7 +18918,7 @@
           "zone_id": 3518
         }
       ],
-      "input_fingerprint": "44cbd73cb098067e5081a130b08453eaf6a2a37744bc72453853faa60a320ef9",
+      "input_fingerprint": "0537d611d174a19b78d2cee5f4918565e9fa895f9f552c22c7eba913b015ae44",
       "issues": [],
       "profile_id": "nagrand-fivebox-67-68",
       "spatial_instances": [
@@ -20103,7 +20137,7 @@
           "zone_id": 3711
         }
       ],
-      "input_fingerprint": "6b6ed989225c8ce586dfda7ee90bfb69d3ef7a8dee1e9fea5e3228cd920fa540",
+      "input_fingerprint": "b6d050bdd62a7247abae72aa6f4002802cd74158bc8b43977cc790f2f0cf0f5d",
       "issues": [],
       "profile_id": "sholazar-fivebox",
       "spatial_instances": [
@@ -21322,14 +21356,14 @@
       "background_layers": [
         {
           "end_action_id": "a0352",
-          "end_ordinal": 350,
+          "end_ordinal": 352,
           "end_policy": "fill_if_incomplete",
           "foreground_objective_action_ids": [
             "a0352"
           ],
           "service_id": "storm-12882-background",
           "start_action_id": "a0190",
-          "start_ordinal": 188,
+          "start_ordinal": 190,
           "task_id": 12882,
           "visit_ids": [
             "a0196",
@@ -22222,7 +22256,7 @@
           "zone_id": 67
         }
       ],
-      "input_fingerprint": "fb9fe90b30c7d51d6771b6aa8e951ca91f98aae848fc2d2953adff8737dfa234",
+      "input_fingerprint": "80a5ad88c4553d0daa793662ad3ccb148df8a42de6c0d2110cbd7e33de740f17",
       "issues": [],
       "profile_id": "storm-peaks-fivebox",
       "spatial_instances": [
@@ -24867,7 +24901,7 @@
           "zone_id": 3521
         }
       ],
-      "input_fingerprint": "03a67598a75602214c032787a6a7090fe72dc33c79cac71be3a368cd6c5fb350",
+      "input_fingerprint": "72da915640f91eff95711640eaae0d144e525ba6572d3da44e73b758e5b30c9e",
       "issues": [],
       "profile_id": "zangarmarsh-fivebox",
       "spatial_instances": [
@@ -26642,7 +26676,7 @@
           "zone_id": 66
         }
       ],
-      "input_fingerprint": "3879d4b8574ccafd84e8ae319fbf39f1610f74d4295c50bd1e85feb924a7bdee",
+      "input_fingerprint": "fff1ca4438cb9040d79bef6825c1543b4a22142b42de77520208eb17e900d609",
       "issues": [],
       "profile_id": "zuldrak-fivebox",
       "spatial_instances": [

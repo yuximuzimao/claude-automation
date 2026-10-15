@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "dalaran-mainline-77",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "达拉然",
@@ -156,6 +156,12 @@
       "action_id": "a0015"
     },
     {
+      "kind": "interact",
+      "location_ref": "dalaran-p007",
+      "target_name": "使用69级系统邮件中的传送卷轴，传送后接泰坦能量任务并自动返回达拉然",
+      "action_id": "dalaran-titan-mail-scroll"
+    },
+    {
       "kind": "location",
       "location_ref": "dalaran-p008",
       "action_id": "a0016"
@@ -243,9 +249,10 @@
     },
     {
       "step_id": "step-04",
-      "title": "紫罗兰之门 → K3",
-      "summary": "用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
+      "title": "泰坦能量旁路 → 紫罗兰之门 → K3",
+      "summary": "先用69级系统邮件中的传送卷轴去接泰坦能量任务并自动返回达拉然，再用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
       "action_ids": [
+        "dalaran-titan-mail-scroll",
         "a0016",
         "a0017",
         "a0018",
@@ -391,6 +398,11 @@
       "date": "2026-09-18",
       "kind": "architecture_migration",
       "summary": "Semantic-parity correction for Task 12790: replace incorrect migrated self-move return with the verified two-crystal round trip (Dalaran Violet Gate -> Violet Stand -> Dalaran Violet Gate), preserving the old player note that each character must click both crystals. Violet Stand uses WotLK Wowhead approx (15,42), Crystalsong map 2817."
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "live_run_route_correction",
+      "summary": "第二组DK实跑确认步骤3结束后可直接使用69级系统邮件中的传送卷轴，传送去接泰坦能量任务并自动返回达拉然，再继续步骤4离城前往K3。"
     }
   ]
 }

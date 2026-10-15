@@ -176,7 +176,14 @@ def test_workbench_embeds_stage12_payload_and_has_required_offline_controls() ->
     assert "pendingTag" in html
     assert "return'待实测'" in html
     assert "五开待实测" not in html
+    assert ".mapCard{position:relative;background:#080a0d;border:1px solid #343942;border-radius:10px;overflow:visible;min-height:0}" in html
+    assert ".mapWrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:10px}" in html
+    assert "max-height:calc(100vh - 32px)" in html
+    assert "z-index:20" in html
+    assert "body{margin:0;background:#1b2027;color:#eee}" in html
     assert ".hudBody{padding:10px 12px;overflow:auto;font-size:14px}" in html
+    assert ".noteTaskName{" in html
+    assert "row.appendChild(el('span','noteTaskName',`《${p.name||p.task_id}》`))" in html
     assert ".routeAction.open_flight_point{color:#ff9f68}" in html
     assert ".routeAction.bind_hearth{color:#cf9cff}" in html
     assert "row.classList.add('routeAction',String(line.action_kind))" in html

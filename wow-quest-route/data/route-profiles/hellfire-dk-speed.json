@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "hellfire-dk-speed",
-  "version": 2,
+  "version": 3,
   "status": "draft",
   "scope": {
     "route_scope": "Hellfire Peninsula",
@@ -1685,8 +1685,8 @@
     },
     {
       "step_id": "step-08",
-      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 猎鹰回交 → 沙纳尔",
-      "summary": null,
+      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙",
+      "summary": "猎鹰岗哨接齐南线任务，清阿苟纳之池后转大裂隙完成主目标并接到《遗失的信件》。",
       "action_ids": [
         "a0139",
         "a0140",
@@ -1706,7 +1706,14 @@
         "a0155",
         "a0156",
         "a0157",
-        "a0158",
+        "a0158"
+      ]
+    },
+    {
+      "step_id": "step-08b",
+      "title": "猎鹰回交 → 沙纳尔",
+      "summary": "回猎鹰岗哨集中交接，再进入沙纳尔完成《堕落之源》并接做《叛徒》。",
+      "action_ids": [
         "a0159",
         "a0177",
         "a0178",
@@ -2547,6 +2554,11 @@
       "date": "2026-09-18",
       "kind": "architecture_migration",
       "summary": "Semantic-parity cleanup: removed ambiguous legacy point transport styles from reviewed locations where old player text shows the special action as outgoing (or provides no incoming action). Existing explicit hearth/quest-transport actions and player text remain unchanged; arrival movement stays unresolved instead of fabricating special incoming transport."
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "display_step_split",
+      "summary": "按HUD可读性把猎鹰岗哨→阿苟纳→大裂隙→沙纳尔长段拆成两段；动作顺序和路线语义不变。"
     }
   ]
 }

@@ -10,7 +10,7 @@
   "hearth_chain": [
     "暗影拱顶"
   ],
-  "input_fingerprint": "c0e66cadacca096b4d7ccfe312452725d7240d689bd7c3ff3ce1bd755f848ec2",
+  "input_fingerprint": "11554fdcbec805aa422a3cbff3c3be6e95c821ccda920c21ea581da641d173a2",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -2921,7 +2921,7 @@
           "to_visit_id": "a0680"
         }
       ],
-      "input_fingerprint": "380abcd6c052b69c663c445c34373e50e10bbe49bd976de34c4e028804be3c63",
+      "input_fingerprint": "1e19943deba3930b625afe34e511697bd4e6f4980d31f73b20ea4778e43c00d0",
       "status": "pass",
       "visits": [
         {
@@ -4229,7 +4229,7 @@
           "location_ref": "icecrown-p144",
           "location_role": "map_anchor",
           "ordinal": 131,
-          "step_id": "step-25",
+          "step_id": "step-25b",
           "visit_id": "a0394",
           "x": 52.0,
           "y": 58.0
@@ -4239,7 +4239,7 @@
           "location_ref": "icecrown-p145",
           "location_role": "map_anchor",
           "ordinal": 132,
-          "step_id": "step-25",
+          "step_id": "step-25b",
           "visit_id": "a0396",
           "x": 55.0,
           "y": 59.0
@@ -4249,7 +4249,7 @@
           "location_ref": "icecrown-p146",
           "location_role": "map_anchor",
           "ordinal": 133,
-          "step_id": "step-25",
+          "step_id": "step-25b",
           "visit_id": "a0398",
           "x": 54.5,
           "y": 59.3
@@ -4259,7 +4259,7 @@
           "location_ref": "icecrown-p085",
           "location_role": "map_anchor",
           "ordinal": 134,
-          "step_id": "step-25",
+          "step_id": "step-25b",
           "visit_id": "a0241",
           "x": 58.0,
           "y": 72.0
@@ -4269,7 +4269,7 @@
           "location_ref": "icecrown-p147",
           "location_role": "map_anchor",
           "ordinal": 135,
-          "step_id": "step-25",
+          "step_id": "step-25b",
           "visit_id": "a0402",
           "x": 68.0,
           "y": 68.0
@@ -5529,7 +5529,7 @@
           "location_ref": "icecrown-p267",
           "location_role": "map_anchor",
           "ordinal": 261,
-          "step_id": "step-54",
+          "step_id": "step-54b",
           "visit_id": "a0749",
           "x": 56.2,
           "y": 80.2
@@ -5539,7 +5539,7 @@
           "location_ref": "icecrown-p268",
           "location_role": "map_anchor",
           "ordinal": 262,
-          "step_id": "step-54",
+          "step_id": "step-54b",
           "visit_id": "a0751",
           "x": 53.9,
           "y": 71.5
@@ -5549,7 +5549,7 @@
           "location_ref": "icecrown-p269",
           "location_role": "map_anchor",
           "ordinal": 263,
-          "step_id": "step-54",
+          "step_id": "step-54b",
           "visit_id": "a0754",
           "x": 54.0,
           "y": 86.0
@@ -5559,7 +5559,7 @@
           "location_ref": "icecrown-p270",
           "location_role": "map_anchor",
           "ordinal": 264,
-          "step_id": "step-54",
+          "step_id": "step-54b",
           "visit_id": "a0756",
           "x": 53.9,
           "y": 71.5
@@ -5796,12 +5796,12 @@
     ]
   },
   "profile_id": "icecrown-fivebox",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
     "center_minutes": 290.351,
-    "input_fingerprint": "b189d96c279a88bfe82388b7403ed1f6b83b2a7f08c337e37df1073e5171ce42",
+    "input_fingerprint": "4f8b9fa97445ffaa4408407a9c60285af5f9b79a99301bc148699e631a9e6f48",
     "range_minutes": [
       215.996,
       398.0
@@ -5809,7 +5809,7 @@
     "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "ef9d3069aa05d3b26dcb95ad6405eed19e304ae8dd0ee92f4fd784331ee83896",
+  "stage11_input_fingerprint": "96425cc4326829b3b3a2c621db1ab17b22ffb108ec17682d76e09aa51918a955",
   "status": "pass",
   "steps": [
     {
@@ -11904,22 +11904,7 @@
         "a0390",
         "a0391",
         "a0392",
-        "a0393",
-        "a0394",
-        "a0395",
-        "a0396",
-        "a0397",
-        "a0398",
-        "a0399",
-        "a0400",
-        "a0401",
-        "a0241",
-        "a0242",
-        "a0243",
-        "a0402",
-        "a0403",
-        "a0404",
-        "a0405"
+        "a0393"
       ],
       "lines": [
         {
@@ -12117,7 +12102,96 @@
           ],
           "text": "布拉斯·炸雷 → 交《占山为王》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-25",
+      "summary": "先完成第一军团的地面与空中突袭，再到布拉斯·炸雷完成《占山为王》。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "协助突袭",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13340
         },
+        {
+          "badge": "shared",
+          "name": "地面突袭",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13301
+        },
+        {
+          "badge": "shared",
+          "name": "空中突袭",
+          "note": "使用库卡隆压制炮台保护运兵机，等其安全降落并卸完部队才算完成。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13310
+        },
+        {
+          "badge": null,
+          "name": "前往伊米海姆！",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13293
+        },
+        {
+          "badge": "not_shared",
+          "name": "占山为王",
+          "note": "五个角色必须分别使用跳跃机器人完成一次。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13283
+        }
+      ],
+      "timing": {
+        "center_minutes": 11.882,
+        "range_minutes": [
+          8.881,
+          16.363
+        ],
+        "status": "pass"
+      },
+      "title": "伊米海姆：地面 / 空中突袭 → 占山为王"
+    },
+    {
+      "action_ids": [
+        "a0394",
+        "a0395",
+        "a0396",
+        "a0397",
+        "a0398",
+        "a0399",
+        "a0400",
+        "a0401",
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0402",
+        "a0403",
+        "a0404",
+        "a0405"
+      ],
+      "lines": [
         {
           "action_ids": [
             "a0394"
@@ -12314,64 +12388,9 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-25",
-      "summary": "",
+      "step_id": "step-25b",
+      "summary": "完成伊米亚之血、矿洞奴隶与《思维诡计》，再向东清玛雷卡里斯两项并转破碎前线。",
       "task_presentations": [
-        {
-          "badge": null,
-          "name": "协助突袭",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13340
-        },
-        {
-          "badge": "shared",
-          "name": "地面突袭",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13301
-        },
-        {
-          "badge": "shared",
-          "name": "空中突袭",
-          "note": "使用库卡隆压制炮台保护运兵机，等其安全降落并卸完部队才算完成。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13310
-        },
-        {
-          "badge": null,
-          "name": "前往伊米海姆！",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13293
-        },
-        {
-          "badge": "not_shared",
-          "name": "占山为王",
-          "note": "五个角色必须分别使用跳跃机器人完成一次。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13283
-        },
         {
           "badge": "shared",
           "name": "伊米亚之血",
@@ -12451,14 +12470,11 @@
         }
       ],
       "timing": {
-        "center_minutes": 11.882,
-        "range_minutes": [
-          8.881,
-          16.363
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
       },
-      "title": "第一次东行联合包：伊米海姆 / 矿洞 → 玛雷卡里斯 → 破碎前线"
+      "title": "伊米海姆 / 矿洞 → 玛雷卡里斯 → 破碎前线"
     },
     {
       "action_ids": [
@@ -18729,16 +18745,7 @@
         "a0745",
         "a0746",
         "a0747",
-        "a0748",
-        "a0749",
-        "a0750",
-        "a0751",
-        "a0752",
-        "a0753",
-        "a0754",
-        "a0755",
-        "a0756",
-        "a0757"
+        "a0748"
       ],
       "lines": [
         {
@@ -19040,7 +19047,90 @@
           ],
           "text": "残忍的亚纳尔 → 交《瓦哈拉斯之战：终极挑战》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-54",
+      "summary": "炉石暗影拱顶后前往瓦哈拉斯，连续完成黑暗主宰、西格莉德、卡纳基、死亡一击领主与终极挑战。",
+      "task_presentations": [
+        {
+          "badge": "shared",
+          "name": "瓦哈拉斯之战：黑暗主宰西塔利克斯",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13215
         },
+        {
+          "badge": "shared",
+          "name": "瓦哈拉斯之战：齐格莉德归来",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13216
+        },
+        {
+          "badge": "shared",
+          "name": "瓦哈拉斯之战：血肉巨人卡纳基！",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13217
+        },
+        {
+          "badge": "shared",
+          "name": "瓦哈拉斯之战：“死亡一击”领主",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13218
+        },
+        {
+          "badge": "shared",
+          "name": "瓦哈拉斯之战：终极挑战",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 13219
+        }
+      ],
+      "timing": {
+        "center_minutes": 11.499,
+        "range_minutes": [
+          8.594,
+          15.836
+        ],
+        "status": "pass"
+      },
+      "title": "高难可选：瓦哈拉斯后续"
+    },
+    {
+      "action_ids": [
+        "a0749",
+        "a0750",
+        "a0751",
+        "a0752",
+        "a0753",
+        "a0754",
+        "a0755",
+        "a0756",
+        "a0757"
+      ],
+      "lines": [
         {
           "action_ids": [
             "a0749"
@@ -19143,64 +19233,9 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-54",
-      "summary": "",
+      "step_id": "step-54b",
+      "summary": "离开瓦哈拉斯后完成《邪恶骑士》，再推进《血毒的命运》到冰冠堡垒地下深渊并回交。",
       "task_presentations": [
-        {
-          "badge": "shared",
-          "name": "瓦哈拉斯之战：黑暗主宰西塔利克斯",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13215
-        },
-        {
-          "badge": "shared",
-          "name": "瓦哈拉斯之战：齐格莉德归来",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13216
-        },
-        {
-          "badge": "shared",
-          "name": "瓦哈拉斯之战：血肉巨人卡纳基！",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13217
-        },
-        {
-          "badge": "shared",
-          "name": "瓦哈拉斯之战：“死亡一击”领主",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13218
-        },
-        {
-          "badge": "shared",
-          "name": "瓦哈拉斯之战：终极挑战",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13219
-        },
         {
           "badge": "shared",
           "name": "邪恶骑士",
@@ -19225,14 +19260,11 @@
         }
       ],
       "timing": {
-        "center_minutes": 11.499,
-        "range_minutes": [
-          8.594,
-          15.836
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
       },
-      "title": "高难可选：瓦哈拉斯后续 + 邪恶骑士"
+      "title": "高难可选：邪恶骑士 → 血毒的命运"
     },
     {
       "action_ids": [

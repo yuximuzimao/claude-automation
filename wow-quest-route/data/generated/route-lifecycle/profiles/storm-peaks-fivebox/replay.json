@@ -4520,6 +4520,18 @@
     "entry_state_known": true,
     "events": [
       {
+        "action_id": "a9001",
+        "kind": "bind_hearth",
+        "status": "bound",
+        "target": "K3"
+      },
+      {
+        "action_id": "a9002",
+        "kind": "use_hearth",
+        "status": "used",
+        "target": "K3"
+      },
+      {
         "action_id": "a0195",
         "kind": "bind_hearth",
         "status": "bound",
@@ -4566,7 +4578,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "285e3d3b1cb70cac6ae414510dbfb57dd83abdd326d68722b2a6da87baad8f0e",
+  "input_fingerprint": "a6c3bf877122c8c27b6424f1cc36ab1cf431d88201db95f3393f79fd5740fdce",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",

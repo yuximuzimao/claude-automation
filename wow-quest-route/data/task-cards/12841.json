@@ -43,13 +43,23 @@
   "guide": [
     "接取：女巫洛莉拉。",
     "荒弃矿洞的女巫洛莉拉要求你从监督者希尔拉手中夺回伊克芬符文。",
-    "交付：女巫洛莉拉。"
+    "交付：女巫洛莉拉。",
+    "2026-10-15/16五开实测：伊克芬符文需要五号依次拾取。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-16",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-15/16",
+      "observed_at": "2026-10-16",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status", "guide"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "howling-fivebox",
-  "version": 1,
+  "version": 2,
   "status": "draft",
   "scope": {
     "route_scope": "嚎风峡湾",
@@ -3040,8 +3040,8 @@
   "step_groups": [
     {
       "step_id": "step-01",
-      "title": "征服堡 → 冷原海岸 / 腐鳃 / 护盾",
-      "summary": null,
+      "title": "征服堡 → 药剂师营地 → 冷原海岸 / 腐鳃",
+      "summary": "炉石征服堡后转药剂师营地接任务，清冷原海岸与腐鳃短链，再返回药剂师营地。",
       "action_ids": [
         "a0001",
         "a0002",
@@ -3060,7 +3060,14 @@
         "a0013",
         "a0014",
         "a0015",
-        "a0016",
+        "a0016"
+      ]
+    },
+    {
+      "step_id": "step-01b",
+      "title": "药剂师营地回交 → 关闭护盾",
+      "summary": "回药剂师营地交海岸任务，接《关闭护盾》，完成水晶目标后再次回营地交付。",
+      "action_ids": [
         "a0017",
         "a0018",
         "a0019",
@@ -5167,6 +5174,11 @@
       "date": "2026-09-19",
       "kind": "architecture_migration",
       "summary": "Semantic-parity migration for Sister Mercy: replace three ambiguous legacy script edges with explicit player behavior from the old route/Task Presentation. Go to the ~38,75 boarding anchor (mode unknown), wait for the ship and board, use the bow cannon and recover Sorlof booty per Task 11529 presentation, return to ~38,75 (mode unknown), then reboard and turn in. Removed the artificial separate ship-bow visit so internal task movement remains Task Presentation/service semantics instead of a fake route edge."
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "display_step_split",
+      "summary": "按HUD可读性把嚎风开场“征服堡→冷原海岸/腐鳃/护盾”拆成两段；动作顺序和任务语义不变。"
     }
   ]
 }

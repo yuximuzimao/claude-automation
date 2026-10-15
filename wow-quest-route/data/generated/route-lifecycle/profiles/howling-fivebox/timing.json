@@ -1,6 +1,6 @@
 {
-  "center_minutes": 451.278,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -36,19 +36,19 @@
       "component": "move",
       "edge_id": "a0015->a0017",
       "seconds": 23.740819771501897,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
       "edge_id": "a0017->a0021",
       "seconds": 14.634836499712934,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
       "edge_id": "a0021->a0023",
       "seconds": 14.634836499712934,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
@@ -782,7 +782,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 58.2,
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "visit_id": "a0017"
     },
     {
@@ -791,7 +791,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "visit_id": "a0023"
     },
     {
@@ -1549,7 +1549,7 @@
       "visit_id": "a0457"
     }
   ],
-  "input_fingerprint": "87c6cdf170cc8f43d5c14acf72244bc2e0c119236db57e99b93c2f86d669f583",
+  "input_fingerprint": "5ed9cdaae9b8ae61a1adecc89cc52965d4827e2be240d9a3b845ae2aec5c2523",
   "issues": [
     {
       "action_id": "a0002",
@@ -1610,7 +1610,7 @@
       "kind": "conditional_hub_action_execution_maybe",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 11398
     },
     {
@@ -1682,7 +1682,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 11399
     },
     {
@@ -2350,26 +2350,20 @@
       "task_id": 11324
     }
   ],
-  "known_seconds": 27076.658,
+  "known_seconds": 27236.469,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "howling-fivebox",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 29
-  },
-  "range_minutes": [
-    346.017,
-    556.636
-  ],
+  "range_basis": null,
+  "range_minutes": null,
   "status": "pass",
   "steps": [
     {
       "center_minutes": 25.679,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 271.8,
-        "move_seconds": 141.806,
+        "accept_turnin_seconds": 165.0,
+        "move_seconds": 88.795,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
@@ -2378,7 +2372,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1127.106,
+        "residual_seconds": 1286.916,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
       },
       "range_minutes": [
@@ -2386,8 +2380,26 @@
         31.702
       ],
       "step_id": "step-01",
-      "title": "征服堡 → 冷原海岸 / 腐鳃 / 护盾",
+      "title": "征服堡 → 药剂师营地 → 冷原海岸 / 腐鳃",
       "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 106.8,
+        "move_seconds": 53.01,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 159.81,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-01b",
+      "title": "药剂师营地回交 → 关闭护盾",
+      "unresolved_component_count": 2
     },
     {
       "center_minutes": 17.777,
@@ -3116,8 +3128,8 @@
   "summary": {
     "error_count": 0,
     "issue_count": 100,
-    "range_model_status": "resolved",
+    "range_model_status": "requirements",
     "requirement_count": 0,
-    "step_count": 30
+    "step_count": 31
   }
 }

@@ -255,7 +255,7 @@
       "to_zone_id": 394
     }
   ],
-  "input_fingerprint": "045a4a7479ce40aa32d5fb033275954225e65af76b5d836caa2b1f1408fbd515",
+  "input_fingerprint": "e4238d59a4ab908f86c2e1d199d676f9171a1cb3905f91d98c1412b920ca38cd",
   "issues": [
     {
       "edge_id": "nagrand-fivebox-67-68->borean-fivebox",
@@ -7647,7 +7647,7 @@
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "3ef1f26bd77e90f4acf1401c7abda1cd0d6f47abf90bf3a1d29d97c910b1573b",
+      "input_fingerprint": "852e11205e0cb5e3a56c1e97f2640ccdec1725056b4bea2944b9c003c10a51cc",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 4395,
@@ -17916,7 +17916,7 @@
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "7e8d1f42e41081ad1d53e3c5b6da3a6fe5c80ef46821ee8a4a85eea35ba7279c",
+      "input_fingerprint": "f20a12679bc24ea2926cafa850f8d3281a904058190e9b022239d0a83c922727",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 3483,
@@ -21131,7 +21131,7 @@
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "e3d0d94d01beac5d2d9a129dfd7b165dff24dd63eb8da93e930046d12e9cdee2",
+      "input_fingerprint": "d915c359c6d8cf9db22070f3bfecdd2a3b989b436e8650ddb3508e1d4c110382",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 495,
@@ -27299,7 +27299,7 @@
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "04936a9ce70e1ccd72a4a51a888623ed31a37303320423e558c052e0bed8a5fb",
+      "input_fingerprint": "7dd2dcc72681df5d890f5b6abef9f0ced12d3dc8763c108d5e4125e0042eea8d",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 210,
@@ -35599,10 +35599,15 @@
           "from_location_ref": "storm-p015",
           "from_visit_id": "a0049",
           "from_zone_id": 67,
-          "legacy_transport": "fly",
-          "movement_mode": "fly",
-          "movement_mode_source": "explicit",
-          "operation_kind": "self_move",
+          "legacy_transport": "hearth",
+          "movement_action": {
+            "action_id": "a9002",
+            "action_kind": "use_hearth",
+            "operation_kind": "hearth",
+            "target_name": "K3"
+          },
+          "movement_action_id": "a9002",
+          "operation_kind": "hearth",
           "source": "canonical_profile",
           "to_location_ref": "storm-p016",
           "to_visit_id": "a0052",
@@ -37565,7 +37570,7 @@
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "1a8982096bfd7029d4212859e883c69c43f400405c3569a391dffe30ac8e83e1",
+      "input_fingerprint": "6135d1cd35d139acd213cc6ad9104cf97d7d22e6f4fa644a68d537c6d307399f",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 67,
@@ -37814,10 +37819,10 @@
           "display_name": "K3",
           "handoff_ref": null,
           "incoming_movement": {
-            "kind": "self_move",
-            "mode": "fly"
+            "action_id": "a9002",
+            "kind": "action"
           },
-          "legacy_transport": "fly",
+          "legacy_transport": "hearth",
           "location_ref": "storm-p016",
           "location_role": "map_anchor",
           "ordinal": 16,
@@ -40711,7 +40716,7 @@
         }
       ],
       "exit_movement_actions": [],
-      "input_fingerprint": "7874a2c5f0d09fc30593092de3f01a8b4136a51d44997e37f0d0570481c1a1d5",
+      "input_fingerprint": "e5924ecdc42eb94fdb2c3b99a0429e24aea61335955ada09990e878f742a8dd3",
       "issues": [],
       "migration_candidate_count": 0,
       "primary_zone_id": 3521,

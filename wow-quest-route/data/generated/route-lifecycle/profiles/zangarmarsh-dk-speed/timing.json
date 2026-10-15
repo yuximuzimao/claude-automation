@@ -1,6 +1,6 @@
 {
-  "center_minutes": 152.408,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -24,19 +24,19 @@
       "component": "move",
       "edge_id": "a0018->a0020",
       "seconds": 46.542134205720124,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
       "edge_id": "a0020->a0022",
       "seconds": 47.15197475982971,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
       "edge_id": "a0022->a0148",
       "seconds": 34.2049729471148,
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "component": "move",
@@ -220,7 +220,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "visit_id": "a0022"
     },
     {
@@ -237,7 +237,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 125.39999999999999,
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "visit_id": "a0026"
     },
     {
@@ -368,7 +368,7 @@
       "visit_id": "a0141"
     }
   ],
-  "input_fingerprint": "2e7032a3575b935fe86043bc1610cc0a6c1239f413ffd323b8dcd1cf935bef60",
+  "input_fingerprint": "baa09a0a552aa91c36fe0c1797014b7f14cd38a148211ec91074f26dee05cb45",
   "issues": [
     {
       "action_id": "a0150",
@@ -377,7 +377,7 @@
       "operation_kind": "hearth",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01"
+      "step_id": "step-01b"
     },
     {
       "edge_id": "a0069->a0071",
@@ -500,7 +500,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9716
     },
     {
@@ -508,7 +508,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9747
     },
     {
@@ -516,7 +516,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9752
     },
     {
@@ -524,7 +524,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9895
     },
     {
@@ -532,7 +532,7 @@
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
-      "step_id": "step-01",
+      "step_id": "step-01b",
       "task_id": 9718
     },
     {
@@ -728,35 +728,29 @@
       "task_id": 9823
     }
   ],
-  "known_seconds": 9144.489,
+  "known_seconds": 9423.147,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "zangarmarsh-dk-speed",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 9
-  },
-  "range_minutes": [
-    116.0,
-    204.0
-  ],
+  "range_basis": null,
+  "range_minutes": null,
   "status": "pass",
   "steps": [
     {
-      "center_minutes": 8.387,
+      "center_minutes": 8.0,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 348.0,
-        "move_seconds": 155.242,
+        "accept_turnin_seconds": 174.0,
+        "move_seconds": 27.343,
         "objective_service_seconds": 0.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 503.242,
+      "known_seconds": 480.0,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 0.0,
+        "residual_seconds": 278.657,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json"
       },
       "range_minutes": [
@@ -764,8 +758,26 @@
         11.0
       ],
       "step_id": "step-01",
-      "title": "塞纳里奥庇护所 → 暗泽村 → 沼泽之鞭 → 炉石回庇护所",
+      "title": "塞纳里奥庇护所：开场 → 古树祝福 / 绑炉石",
       "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": null,
+      "complete": false,
+      "components": {
+        "accept_turnin_seconds": 174.0,
+        "move_seconds": 127.899,
+        "objective_service_seconds": 0.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 301.899,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
+      "step_id": "step-01b",
+      "title": "暗泽湖 / 暗泽村 → 沼泽之鞭 → 炉石回庇护所",
+      "unresolved_component_count": 6
     },
     {
       "center_minutes": 4.021,
@@ -971,8 +983,8 @@
   "summary": {
     "error_count": 0,
     "issue_count": 44,
-    "range_model_status": "resolved",
+    "range_model_status": "requirements",
     "requirement_count": 0,
-    "step_count": 9
+    "step_count": 10
   }
 }

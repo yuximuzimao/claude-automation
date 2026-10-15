@@ -2361,6 +2361,45 @@
         "post_completion_progress": "已炉石回阿格玛之锤；下次从大法师艾萨斯·夺日者的影像→12791《魔法王国达拉然》传送达拉然继续。"
       },
       "status": "battle_completed_clean_event_timing_recorded"
+    },
+    {
+      "run_id": "2026-10-15-16-dalaran-storm-second-dk-2223-0058",
+      "date": "2026-10-15/16",
+      "route_key": "dalaran_to_storm_dk_second_run_partial",
+      "profile_ids": [
+        "dalaran-mainline-77",
+        "storm-peaks-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "dalaran-mainline-77": 1,
+        "storm-peaks-fivebox": 1
+      },
+      "run_kind": "second_fivebox_live_partial",
+      "time_precision": "exact_minute_user_reported",
+      "effective_start_local": "2026-10-15T22:23:00+08:00",
+      "effective_end_local": "2026-10-16T00:58:00+08:00",
+      "wall_clock_minutes": 155,
+      "actual_minutes": 155,
+      "route_window": "达拉然路线开始→风暴峭壁步骤6中《伊尔达的愚行》完成；后续任务尚未继续。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "《痛苦的离别》护送NPC两次出现异常行为：一次无视怪直接前跑导致掉队，一次战斗后长时间停住；该等待不代表正常任务成本。",
+        "《完美的计划》未确认爆炸触发即离开导致三次折返；最后手动将霜胆引到炸药附近后爆炸完成。该恢复动作仅作异常候选。"
+      ],
+      "route_corrections_confirmed_by_run": [
+        "进入K3后应绑定炉石；完成希弗列尔达《夺回设备》后直接炉石回K3交任务。",
+        "达拉然步骤3后可使用69级系统邮件中的传送卷轴，传送去接泰坦能量任务并自动返回达拉然，再继续离城去K3。"
+      ],
+      "calibration_eligible": false,
+      "calibration_note": "本段总墙钟包含明确脚本异常与重复折返，只保留为真实实跑记录和路线纠错证据，不直接校准Timing。",
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-16T00:58:00+08:00",
+        "level": 78,
+        "experience": "19.8万",
+        "completed_task": "12968《伊尔达的愚行》",
+        "state": "风暴峭壁步骤6执行中；《伊尔达的愚行》已完成，后续任务尚未继续。"
+      },
+      "status": "partial_live_run_recorded_contaminated_not_for_calibration"
     }
   ]
 }

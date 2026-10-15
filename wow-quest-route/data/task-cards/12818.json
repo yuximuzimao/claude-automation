@@ -41,13 +41,26 @@
   "guide": [
     "接取：基尔·斯巴索克。",
     "K3的基尔·斯巴索克需要10份烧焦的零件。",
-    "交付：基尔·斯巴索克。"
+    "交付：基尔·斯巴索克。",
+    "2026-10-15/16五开实测：烧焦的零件不共享，五号分别收集。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-16",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-15/16",
+      "observed_at": "2026-10-16",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
+      ]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",

@@ -10,7 +10,7 @@
   "hearth_chain": [
     "萨尔玛"
   ],
-  "input_fingerprint": "2db3590c457caccce0574ee9196a09d8585c78215b918fe0b7457de29efe0166",
+  "input_fingerprint": "71bdbffabe4909ae4e13146764d0bc698c266286227e951ac3a059f0d10d42fa",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -710,7 +710,7 @@
           "to_visit_id": "a0228"
         }
       ],
-      "input_fingerprint": "a4e354250d49f5ec807d4e90e325c48d7aec9f23330bbf878d7ae326194ba925",
+      "input_fingerprint": "69e296ac13dccc8e0aea39cc43fda21683ee1d6bbeaa616e312c3d8a8d31b513",
       "status": "pass",
       "visits": [
         {
@@ -1168,7 +1168,7 @@
           "location_ref": "hellfire-dk-p045",
           "location_role": "map_anchor",
           "ordinal": 46,
-          "step_id": "step-08",
+          "step_id": "step-08b",
           "visit_id": "a0159",
           "x": 27.05,
           "y": 60.24
@@ -1178,7 +1178,7 @@
           "location_ref": "hellfire-dk-p046",
           "location_role": "map_anchor",
           "ordinal": 47,
-          "step_id": "step-08",
+          "step_id": "step-08b",
           "visit_id": "a0161",
           "x": 16.27,
           "y": 65.09
@@ -1188,7 +1188,7 @@
           "location_ref": "hellfire-dk-p047",
           "location_role": "map_anchor",
           "ordinal": 48,
-          "step_id": "step-08",
+          "step_id": "step-08b",
           "visit_id": "a0164",
           "x": 14.34,
           "y": 63.5
@@ -1415,20 +1415,17 @@
     ]
   },
   "profile_id": "hellfire-dk-speed",
-  "profile_version": 2,
+  "profile_version": 3,
   "program_id": null,
   "publishable": true,
   "route_timing": {
-    "center_minutes": 310.0,
-    "input_fingerprint": "d328bb55a36e231793c16657e75d7a2671ea5b34768adab0a430818c801f86bc",
-    "range_minutes": [
-      227.0,
-      415.0
-    ],
+    "center_minutes": null,
+    "input_fingerprint": "4ee8eafc49d1e14ab06e473030c29c74dbcc866c7b97ae327b1d362172810329",
+    "range_minutes": null,
     "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "fb91ef18c986250faf5734ea1b52533ed6a12a0573f54e0c376090fab433ba53",
+  "stage11_input_fingerprint": "3172b30be1255f00678fb6f106b07dd0293c7d47d2b2a97210eb7e7898b1fea4",
   "status": "pass",
   "steps": [
     {
@@ -3747,20 +3744,7 @@
         "a0155",
         "a0156",
         "a0157",
-        "a0158",
-        "a0159",
-        "a0177",
-        "a0178",
-        "a0179",
-        "a0181",
-        "a0182",
-        "a0183",
-        "a0184",
-        "a0161",
-        "a0162",
-        "a0163",
-        "a0164",
-        "a0165"
+        "a0158"
       ],
       "lines": [
         {
@@ -3987,7 +3971,160 @@
           ],
           "text": "接《遗失的信件》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-08",
+      "summary": "猎鹰岗哨接齐南线任务，清阿苟纳之池后转大裂隙完成主目标并接到《遗失的信件》。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "猎鹰岗哨",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9498
         },
+        {
+          "badge": "shared",
+          "name": "大裂隙",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9340
+        },
+        {
+          "badge": null,
+          "name": "向祖莱报到",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10103
+        },
+        {
+          "badge": null,
+          "name": "通缉：黑色利爪",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9466
+        },
+        {
+          "badge": "not_shared",
+          "name": "邪恶之血",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9366
+        },
+        {
+          "badge": "not_shared",
+          "name": "埃雷利恩的日记",
+          "note": "固定任务物需要五号依次交互取得；拿到后各自在背包中使用。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9374
+        },
+        {
+          "badge": "not_shared",
+          "name": "堕落之源",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9387
+        },
+        {
+          "badge": null,
+          "name": "帮助塞纳里奥哨站",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10442
+        },
+        {
+          "badge": "shared",
+          "name": "阿拉修斯的意图",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10136
+        },
+        {
+          "badge": "shared",
+          "name": "痛苦与黑暗",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10389
+        },
+        {
+          "badge": null,
+          "name": "遗失的信件",
+          "note": "被腐蚀的皮箱自然掉落后可接本任务。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9373
+        }
+      ],
+      "timing": {
+        "center_minutes": 35.0,
+        "range_minutes": [
+          26.0,
+          44.0
+        ],
+        "status": "pass"
+      },
+      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙"
+    },
+    {
+      "action_ids": [
+        "a0159",
+        "a0177",
+        "a0178",
+        "a0179",
+        "a0181",
+        "a0182",
+        "a0183",
+        "a0184",
+        "a0161",
+        "a0162",
+        "a0163",
+        "a0164",
+        "a0165"
+      ],
+      "lines": [
         {
           "action_ids": [
             "a0159"
@@ -4142,129 +4279,30 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-08",
-      "summary": "",
+      "step_id": "step-08b",
+      "summary": "回猎鹰岗哨集中交接，再进入沙纳尔完成《堕落之源》并接做《叛徒》。",
       "task_presentations": [
         {
-          "badge": null,
-          "name": "猎鹰岗哨",
+          "badge": "shared",
+          "name": "大裂隙",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9498
-        },
-        {
-          "badge": "shared",
-          "name": "大裂隙",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9340
         },
         {
           "badge": null,
-          "name": "向祖莱报到",
+          "name": "通缉：黑色利爪",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10103
-        },
-        {
-          "badge": null,
-          "name": "通缉：黑色利爪",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
           "pending": true,
           "suppress_action_kinds": [],
           "task_id": 9466
-        },
-        {
-          "badge": "not_shared",
-          "name": "邪恶之血",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9366
-        },
-        {
-          "badge": "not_shared",
-          "name": "埃雷利恩的日记",
-          "note": "固定任务物需要五号依次交互取得；拿到后各自在背包中使用。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9374
-        },
-        {
-          "badge": "not_shared",
-          "name": "堕落之源",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9387
-        },
-        {
-          "badge": null,
-          "name": "帮助塞纳里奥哨站",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10442
-        },
-        {
-          "badge": "shared",
-          "name": "阿拉修斯的意图",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10136
-        },
-        {
-          "badge": "shared",
-          "name": "痛苦与黑暗",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10389
-        },
-        {
-          "badge": null,
-          "name": "遗失的信件",
-          "note": "被腐蚀的皮箱自然掉落后可接本任务。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": true,
-          "suppress_action_kinds": [],
-          "task_id": 9373
         },
         {
           "badge": "shared",
@@ -4278,6 +4316,17 @@
           "task_id": 9391
         },
         {
+          "badge": "not_shared",
+          "name": "邪恶之血",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9366
+        },
+        {
           "badge": "shared",
           "name": "阻止净化",
           "note": null,
@@ -4287,6 +4336,17 @@
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9370
+        },
+        {
+          "badge": "not_shared",
+          "name": "埃雷利恩的日记",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9374
         },
         {
           "badge": null,
@@ -4301,6 +4361,17 @@
         },
         {
           "badge": "not_shared",
+          "name": "堕落之源",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9387
+        },
+        {
+          "badge": "not_shared",
           "name": "叛徒",
           "note": "固定金属箱取得沙纳尔钥匙。",
           "note_override_applied": true,
@@ -4312,14 +4383,11 @@
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          26.0,
-          44.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
-      "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 猎鹰回交 → 沙纳尔"
+      "title": "猎鹰回交 → 沙纳尔"
     },
     {
       "action_ids": [

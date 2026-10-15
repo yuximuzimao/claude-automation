@@ -217,10 +217,15 @@
       "from_location_ref": "storm-p015",
       "from_visit_id": "a0049",
       "from_zone_id": 67,
-      "legacy_transport": "fly",
-      "movement_mode": "fly",
-      "movement_mode_source": "explicit",
-      "operation_kind": "self_move",
+      "legacy_transport": "hearth",
+      "movement_action": {
+        "action_id": "a9002",
+        "action_kind": "use_hearth",
+        "operation_kind": "hearth",
+        "target_name": "K3"
+      },
+      "movement_action_id": "a9002",
+      "operation_kind": "hearth",
       "source": "canonical_profile",
       "to_location_ref": "storm-p016",
       "to_visit_id": "a0052",
@@ -2183,7 +2188,7 @@
     }
   ],
   "exit_movement_actions": [],
-  "input_fingerprint": "1a8982096bfd7029d4212859e883c69c43f400405c3569a391dffe30ac8e83e1",
+  "input_fingerprint": "6135d1cd35d139acd213cc6ad9104cf97d7d22e6f4fa644a68d537c6d307399f",
   "issues": [],
   "migration_candidate_count": 0,
   "primary_zone_id": 67,
@@ -2432,10 +2437,10 @@
       "display_name": "K3",
       "handoff_ref": null,
       "incoming_movement": {
-        "kind": "self_move",
-        "mode": "fly"
+        "action_id": "a9002",
+        "kind": "action"
       },
-      "legacy_transport": "fly",
+      "legacy_transport": "hearth",
       "location_ref": "storm-p016",
       "location_role": "map_anchor",
       "ordinal": 16,

@@ -11,7 +11,7 @@
   "hearth_chain": [
     "萨布拉金"
   ],
-  "input_fingerprint": "894a73e46877d3362dae2c9d0f5488be018c7aeff30ae4c488ab4a45a1ba687f",
+  "input_fingerprint": "ba0823351a8bff1d09581a8bd2509b9a049ee1b38e83a313b257b96278c5d3d5",
   "issues": [
     {
       "display_name": "观察者杰哈恩",
@@ -652,7 +652,7 @@
         "to_visit_id": "a0225"
       }
     ],
-    "input_fingerprint": "3ee344136d4bb6932e6eb89c2b4cae88653ac86a9414c190acda018be9b4bacc",
+    "input_fingerprint": "ae5cb3fed7e9165564e3a711f7f2e7f76b072ab3d0dad53e923520bafa8c449f",
     "status": "pass",
     "visits": [
       {
@@ -700,7 +700,7 @@
         "location_ref": "zang-p005",
         "location_role": "map_anchor",
         "ordinal": 5,
-        "step_id": "step-01",
+        "step_id": "step-01b",
         "visit_id": "a0021",
         "x": 70.75,
         "y": 80.15
@@ -710,7 +710,7 @@
         "location_ref": "zang-p006",
         "location_role": "map_anchor",
         "ordinal": 6,
-        "step_id": "step-01",
+        "step_id": "step-01b",
         "visit_id": "a0023",
         "x": 83.38,
         "y": 85.54
@@ -720,7 +720,7 @@
         "location_ref": "zang-p007",
         "location_role": "map_anchor",
         "ordinal": 7,
-        "step_id": "step-01",
+        "step_id": "step-01b",
         "visit_id": "a0027",
         "x": 78.4,
         "y": 62.02
@@ -1228,11 +1228,11 @@
     ]
   },
   "profile_id": "zangarmarsh-fivebox",
-  "profile_version": 2,
+  "profile_version": 3,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
     "center_minutes": 343.0,
-    "input_fingerprint": "bb81c9515f1f1e51d0855bd20e5a88188a281a9959e3525b80d280db67fb7260",
+    "input_fingerprint": "a68dac031e1848bbf0a6397414487be7c12271e5a5e43ffbb4af1ded6d87eb01",
     "range_minutes": [
       270.9,
       416.1
@@ -1261,24 +1261,7 @@
         "a0017",
         "a0018",
         "a0019",
-        "a0020",
-        "a0021",
-        "a0022",
-        "a0023",
-        "a0024",
-        "a0025",
-        "a0026",
-        "a0027",
-        "a0028",
-        "a0029",
-        "a0030",
-        "a0031",
-        "a0032",
-        "a0033",
-        "a0034",
-        "a0035",
-        "a0036",
-        "a0037"
+        "a0020"
       ],
       "lines": [
         {
@@ -1532,7 +1515,164 @@
           ],
           "text": "唤风者塔鲁·黑蹄 → 交《古树的祝福》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-01",
+      "summary": "接齐塞纳里奥开场任务，完成两棵古树的祝福并回庇护所交付。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "暗泽湖的异常",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9716
         },
+        {
+          "badge": null,
+          "name": "失踪的先遣队",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9876
+        },
+        {
+          "badge": null,
+          "name": "监护者哈穆特",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9778
+        },
+        {
+          "badge": null,
+          "name": "观察者莉萨奥",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9697
+        },
+        {
+          "badge": "shared",
+          "name": "崩溃的平衡",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9895
+        },
+        {
+          "badge": "shared",
+          "name": "暗潮纳迦的首领",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9730
+        },
+        {
+          "badge": "shared",
+          "name": "血鳞纳迦的领袖",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9817
+        },
+        {
+          "badge": "shared",
+          "name": "古树的祝福",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9785
+        },
+        {
+          "badge": "shared",
+          "name": "暗泽部族",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9747
+        },
+        {
+          "badge": "not_shared",
+          "name": "赞加沼泽的植物",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9802
+        },
+        {
+          "badge": null,
+          "name": "热情的欢迎",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 9728
+        }
+      ],
+      "timing": {
+        "center_minutes": 10.0,
+        "range_minutes": [
+          8.5,
+          12.0
+        ],
+        "status": "pass"
+      },
+      "title": "塞纳里奥庇护所：开场 → 古树祝福"
+    },
+    {
+      "action_ids": [
+        "a0021",
+        "a0022",
+        "a0023",
+        "a0024",
+        "a0025",
+        "a0026",
+        "a0027",
+        "a0028",
+        "a0029",
+        "a0030",
+        "a0031",
+        "a0032",
+        "a0033",
+        "a0034",
+        "a0035",
+        "a0036",
+        "a0037"
+      ],
+      "lines": [
         {
           "action_ids": [
             "a0021"
@@ -1753,8 +1893,8 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-01",
-      "summary": "完成塞纳里奥开场、古树祝福、暗泽湖调查与暗泽村护送；回庇护所接出乌鸦飞行和恢复平衡。",
+      "step_id": "step-01b",
+      "summary": "调查暗泽湖，进入暗泽村完成部族目标和护送，再回庇护所交接乌鸦飞行、恢复平衡等后续。",
       "task_presentations": [
         {
           "badge": null,
@@ -1768,83 +1908,6 @@
           "task_id": 9716
         },
         {
-          "badge": null,
-          "name": "失踪的先遣队",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9876
-        },
-        {
-          "badge": null,
-          "name": "监护者哈穆特",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9778
-        },
-        {
-          "badge": null,
-          "name": "观察者莉萨奥",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9697
-        },
-        {
-          "badge": "shared",
-          "name": "崩溃的平衡",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9895
-        },
-        {
-          "badge": "shared",
-          "name": "暗潮纳迦的首领",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9730
-        },
-        {
-          "badge": "shared",
-          "name": "血鳞纳迦的领袖",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9817
-        },
-        {
-          "badge": "shared",
-          "name": "古树的祝福",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9785
-        },
-        {
           "badge": "shared",
           "name": "暗泽部族",
           "note": "",
@@ -1854,28 +1917,6 @@
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9747
-        },
-        {
-          "badge": "not_shared",
-          "name": "赞加沼泽的植物",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9802
-        },
-        {
-          "badge": null,
-          "name": "热情的欢迎",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": true,
-          "suppress_action_kinds": [],
-          "task_id": 9728
         },
         {
           "badge": "shared",
@@ -1945,14 +1986,11 @@
         }
       ],
       "timing": {
-        "center_minutes": 10.0,
-        "range_minutes": [
-          8.5,
-          12.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
       },
-      "title": "塞纳里奥庇护所 → 暗泽村 → 回庇护所"
+      "title": "暗泽湖 → 暗泽村 → 回庇护所"
     },
     {
       "action_ids": [

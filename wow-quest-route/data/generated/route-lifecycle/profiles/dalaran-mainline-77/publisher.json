@@ -10,7 +10,7 @@
   "hearth_chain": [
     "阿格玛之锤"
   ],
-  "input_fingerprint": "3bbabce02c993873f91b4ea8c1911ad0ffe20d7aa36b58310f48113aa3885ba7",
+  "input_fingerprint": "c7087affd605d17e924affa4e6f1c803fdab9c66354cbbbc8e9f756ef768a6b5",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -127,7 +127,7 @@
           "to_visit_id": "visit-k3-handoff"
         }
       ],
-      "input_fingerprint": "b316c477be79c2fef665d9dfb27927166966b5cac0a8b685c4d9d9c7918bca44",
+      "input_fingerprint": "92cf8e041c7716f50164e498dfcf2bc4a4a8df57018e93b3ff4f90631b5321e9",
       "status": "pass",
       "visits": [
         {
@@ -282,12 +282,12 @@
     ]
   },
   "profile_id": "dalaran-mainline-77",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
     "center_minutes": 23.0,
-    "input_fingerprint": "573182cff3fc46e2b0737cd0e4be0a59f9ca97c5376028de72073942a6850d68",
+    "input_fingerprint": "846714ab82dfce844f176fe771b45093d0bdc029ebf4152684ef3b81172c84a2",
     "range_minutes": [
       15.0,
       34.0
@@ -295,7 +295,7 @@
     "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "e8080453970386ab8db21fe51200194bce9347fae7ca1468c1da83bc3f3908b2",
+  "stage11_input_fingerprint": "9f0d28b177cdcd735f5bf9f7fbd40a6f6365dd420e75716a3c661fc557f3c7b6",
   "status": "pass",
   "steps": [
     {
@@ -632,6 +632,7 @@
     },
     {
       "action_ids": [
+        "dalaran-titan-mail-scroll",
         "a0016",
         "a0017",
         "a0018",
@@ -641,6 +642,15 @@
         "a0019"
       ],
       "lines": [
+        {
+          "action_ids": [
+            "dalaran-titan-mail-scroll"
+          ],
+          "action_kind": "interact",
+          "task_refs": [],
+          "text": "使用69级系统邮件中的传送卷轴，传送后接泰坦能量任务并自动返回达拉然",
+          "type": "route_action"
+        },
         {
           "action_ids": [
             "a0016"
@@ -708,7 +718,7 @@
         }
       ],
       "step_id": "step-04",
-      "summary": "用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
+      "summary": "先用69级系统邮件中的传送卷轴去接泰坦能量任务并自动返回达拉然，再用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
       "task_presentations": [
         {
           "badge": null,
@@ -730,7 +740,7 @@
         ],
         "status": "pass"
       },
-      "title": "紫罗兰之门 → K3"
+      "title": "泰坦能量旁路 → 紫罗兰之门 → K3"
     }
   ]
 }

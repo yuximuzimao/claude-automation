@@ -9,7 +9,7 @@
 - 当前Route Atlas派生数据：`../../data/generated/route-lifecycle/`（由现役owner生成，不是业务真源）。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`；纯文本玩家页：`../../data/routes/player-view/`。
 - 旧聚合`workbench-routes.json`只在`../archive/generated/route-atlas/`保留为历史证据，不参与当前生成链。
-- 最新阶段NEAT：[`../archive/neat/2026-10-15-dragonblight-dk-battle-completion-neat.md`](../archive/neat/2026-10-15-dragonblight-dk-battle-completion-neat.md)，记录第二组DK龙骨荒野尾段、《幽暗城之战》相位恢复、40分15秒脚本实测、fivebox清零与当前阿格玛→达拉然恢复点。
+- 最新阶段NEAT：[`../archive/neat/2026-10-16-storm-live-hud-step-length-neat.md`](../archive/neat/2026-10-16-storm-live-hud-step-length-neat.md)，记录达拉然→风暴最新实跑修正、HUD独立浮层、全地图首轮长步骤拆分与备注样式调整；页面整体底色仍为试用版，尚未最终确认。
 - Route Lifecycle迁移历史统一从[`../archive/analysis/2026-09-21-route-lifecycle-migration-history.md`](../archive/analysis/2026-09-21-route-lifecycle-migration-history.md)考古；更早NEAT和旧路线从[`../archive/README.md`](../archive/README.md)按日期/主题定向查找，不在当前入口维护长链索引。
 
 ## 仍有效的路线与支撑文档

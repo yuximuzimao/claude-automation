@@ -43,13 +43,23 @@
   "guide": [
     "接取：女巫洛莉拉。",
     "向安格妮塔·泰斯多达尔发起挑战，救出西弗·菲兹巴克。成功之后，向布伦希尔达村的女巫洛莉拉复命。",
-    "交付：女巫洛莉拉。"
+    "交付：女巫洛莉拉。",
+    "2026-10-15/16五开实测：《这是你的地精吗？》共享，主控完成即可同步推进五号。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
+    {
+      "evidence_id": "evidence-user-live-2026-10-16",
+      "source_type": "user_live",
+      "source_ref": "user live-run report 2026-10-15/16",
+      "observed_at": "2026-10-16",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": ["fivebox.status", "guide"]
+    },
     {
       "evidence_id": "evidence-questie-11.34.0",
       "source_type": "questie",

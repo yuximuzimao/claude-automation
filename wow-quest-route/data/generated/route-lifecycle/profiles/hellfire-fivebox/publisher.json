@@ -10,7 +10,7 @@
   "hearth_chain": [
     "萨尔玛"
   ],
-  "input_fingerprint": "3d2c3208aa0a024ceb6b7be57a4958e2fd5a224c0a18c23b2a0a9c7454e0928c",
+  "input_fingerprint": "15337b985ee6dbcc52a85623e1bdf94e8ee9333b61f3d0dc5813773ef1c98651",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -787,7 +787,7 @@
           "to_visit_id": "a0249"
         }
       ],
-      "input_fingerprint": "5d6044dc3355e5d91948a3d7703f62e32dd8714b4260579940193ad87d8126d1",
+      "input_fingerprint": "9344d5d45ce174bf5b9ff5421fdf1b3cb1b317e812914850ed4e550e6d23d95a",
       "status": "pass",
       "visits": [
         {
@@ -1475,7 +1475,7 @@
           "location_ref": "hellfire-p069",
           "location_role": "map_anchor",
           "ordinal": 69,
-          "step_id": "step-12",
+          "step_id": "step-12b",
           "visit_id": "a0241",
           "x": 15.83,
           "y": 51.83
@@ -1485,7 +1485,7 @@
           "location_ref": "hellfire-p070",
           "location_role": "map_anchor",
           "ordinal": 70,
-          "step_id": "step-12",
+          "step_id": "step-12b",
           "visit_id": "a0246",
           "x": 15.7,
           "y": 52.09
@@ -1495,7 +1495,7 @@
           "location_ref": "hellfire-p071",
           "location_role": "map_anchor",
           "ordinal": 71,
-          "step_id": "step-12",
+          "step_id": "step-12b",
           "visit_id": "a0249",
           "x": 78.4,
           "y": 62.02
@@ -1562,12 +1562,12 @@
     ]
   },
   "profile_id": "hellfire-fivebox",
-  "profile_version": 1,
+  "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
     "center_minutes": 365.0,
-    "input_fingerprint": "08d4f8c1d2bd67197be3958816bc16cfa9999263accf90f15796478826225585",
+    "input_fingerprint": "1648b99f1185a5ec9d8376b35cbb4f8de8fa806291782b4f4900558d1ba70937",
     "range_minutes": [
       266.0,
       480.0
@@ -1575,7 +1575,7 @@
     "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "31a6dfc97bc5b71a39fbfea0cebbdb19f44b4ba97aeb2a5c35d02bb11843baca",
+  "stage11_input_fingerprint": "dfacd49c356cff202d000720d85865c26cd0143e5804c607f27a2f92bcc2cbc8",
   "status": "pass",
   "steps": [
     {
@@ -5600,18 +5600,7 @@
         "a0237",
         "a0238",
         "a0239",
-        "a0240",
-        "a0241",
-        "a0242",
-        "a0243",
-        "a0244",
-        "a0245",
-        "a0246",
-        "a0247",
-        "a0248",
-        "move-hellfire-zang-cenarion-refuge",
-        "a0249",
-        "a0250"
+        "a0240"
       ],
       "lines": [
         {
@@ -5877,7 +5866,125 @@
           ],
           "text": "塞安·红鬃 → 交《恶魔的玷污》 → 接《测试解毒剂》",
           "type": "task_action"
+        }
+      ],
+      "step_id": "step-12",
+      "summary": "接齐塞纳里奥哨站任务，完成北侧巨人、火红水晶和棘牙岭三项后回哨站集中交接。",
+      "task_presentations": [
+        {
+          "badge": null,
+          "name": "帮助塞纳里奥哨站",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10442
         },
+        {
+          "badge": "not_shared",
+          "name": "恶魔的玷污",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9372
+        },
+        {
+          "badge": "shared",
+          "name": "巨人的威胁",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10132
+        },
+        {
+          "badge": "shared",
+          "name": "扫清棘牙岭！",
+          "note": "",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10159
+        },
+        {
+          "badge": null,
+          "name": "塞纳里奥远征队",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 9912
+        },
+        {
+          "badge": null,
+          "name": "火红水晶中的线索",
+          "note": "巨人若掉落火红水晶碎片，拾取后接本任务。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": true,
+          "suppress_action_kinds": [],
+          "task_id": 10134
+        },
+        {
+          "badge": null,
+          "name": "缚地者",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10349
+        },
+        {
+          "badge": "shared",
+          "name": "测试解毒剂",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10255
+        }
+      ],
+      "timing": {
+        "center_minutes": 30.0,
+        "range_minutes": [
+          22.0,
+          40.0
+        ],
+        "status": "pass"
+      },
+      "title": "塞纳里奥哨站：巨人 / 棘牙岭 → 回交"
+    },
+    {
+      "action_ids": [
+        "a0241",
+        "a0242",
+        "a0243",
+        "a0244",
+        "a0245",
+        "a0246",
+        "a0247",
+        "a0248",
+        "move-hellfire-zang-cenarion-refuge",
+        "a0249",
+        "a0250"
+      ],
+      "lines": [
         {
           "action_ids": [
             "a0241"
@@ -6016,75 +6123,9 @@
           "type": "task_action"
         }
       ],
-      "step_id": "step-12",
-      "summary": "完成塞纳里奥本地高密度短链，接《塞纳里奥远征队》后直接越境进入赞加。",
+      "step_id": "step-12b",
+      "summary": "完成缚地者与自然治愈短链，再做测试解毒剂，随后直接越境进入赞加并交《塞纳里奥远征队》。",
       "task_presentations": [
-        {
-          "badge": null,
-          "name": "帮助塞纳里奥哨站",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10442
-        },
-        {
-          "badge": "not_shared",
-          "name": "恶魔的玷污",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9372
-        },
-        {
-          "badge": "shared",
-          "name": "巨人的威胁",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10132
-        },
-        {
-          "badge": "shared",
-          "name": "扫清棘牙岭！",
-          "note": "",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 10159
-        },
-        {
-          "badge": null,
-          "name": "塞纳里奥远征队",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 9912
-        },
-        {
-          "badge": null,
-          "name": "火红水晶中的线索",
-          "note": "巨人若掉落火红水晶碎片，拾取后接本任务。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": true,
-          "suppress_action_kinds": [],
-          "task_id": 10134
-        },
         {
           "badge": null,
           "name": "缚地者",
@@ -6098,6 +6139,17 @@
         },
         {
           "badge": "shared",
+          "name": "自然的治愈",
+          "note": "在缚地者法阵使用新生之种。",
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": true,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 10351
+        },
+        {
+          "badge": "shared",
           "name": "测试解毒剂",
           "note": "对一只笨拙的地狱野猪使用塞纳里奥解毒剂并观察结果。",
           "note_override_applied": true,
@@ -6108,26 +6160,23 @@
           "task_id": 10255
         },
         {
-          "badge": "shared",
-          "name": "自然的治愈",
-          "note": "在缚地者法阵使用新生之种。",
+          "badge": null,
+          "name": "塞纳里奥远征队",
+          "note": null,
           "note_override_applied": true,
           "note_show_on": [],
-          "note_visible": true,
+          "note_visible": false,
           "pending": false,
           "suppress_action_kinds": [],
-          "task_id": 10351
+          "task_id": 9912
         }
       ],
       "timing": {
-        "center_minutes": 30.0,
-        "range_minutes": [
-          22.0,
-          40.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "unavailable"
       },
-      "title": "塞纳里奥哨站 → 赞加沼泽"
+      "title": "缚地者 / 解毒剂 → 赞加沼泽"
     }
   ]
 }

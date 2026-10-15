@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "zangarmarsh-dk-speed",
-  "version": 2,
+  "version": 3,
   "status": "draft",
   "scope": {
     "route_scope": "赞加沼泽",
@@ -997,8 +997,8 @@
   "step_groups": [
     {
       "step_id": "step-01",
-      "title": "塞纳里奥庇护所 → 暗泽村 → 沼泽之鞭 → 炉石回庇护所",
-      "summary": null,
+      "title": "塞纳里奥庇护所：开场 → 古树祝福 / 绑炉石",
+      "summary": "接齐DK速度版开场任务，完成古树祝福并回庇护所绑定炉石。",
       "action_ids": [
         "a0001",
         "a0002",
@@ -1016,7 +1016,14 @@
         "a0017",
         "a0018",
         "a0019",
-        "a0147",
+        "a0147"
+      ]
+    },
+    {
+      "step_id": "step-01b",
+      "title": "暗泽湖 / 暗泽村 → 沼泽之鞭 → 炉石回庇护所",
+      "summary": "完成暗泽湖调查、暗泽村护送和沼泽之鞭，炉石回庇护所集中交接并接出后续。",
+      "action_ids": [
         "a0020",
         "a0021",
         "a0022",
@@ -1636,6 +1643,11 @@
       "date": "2026-09-25",
       "kind": "live_run_transport_correction",
       "summary": "用户纠正：塞纳里奥庇护所没有飞行点；删除误加的开飞行点动作与旧“塞纳里奥庇护所→沼泽鼠岗哨”系统飞行，改为普通骑行。"
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "display_step_split",
+      "summary": "按HUD可读性把DK赞加开场长段拆为“庇护所/古树祝福/绑炉石”和“暗泽湖/暗泽村/沼泽之鞭/炉石回交”两段；动作顺序不变。"
     }
   ]
 }
