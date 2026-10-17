@@ -22,6 +22,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认只保留最新 1 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`，新备份成功后替换上一份。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。
+- **Codex 供应商切换**：CC Switch 的账号订阅/自定义 API 职责、切换步骤和连接排查统一见 `docs/codex-provider-switching.md`。当前自定义网关的 8080 端口只接受 HTTP；不要在未验证 TLS 的情况下把地址改成 HTTPS。DeepSeek Harness 已于 2026-10-10 卸载，历史配置只保留在 `docs/archive/2026-10-09-codex-ccswitch-deepseek-harness/`。
 - **审单工具**：当前能力、验证范围和未提交工作区边界只见 `order-review/docs/CURRENT.md`，不在此重复旧测试数字或已过期的内存验收状态。
 - **生图授权门禁**：所有图片生成和编辑默认只讨论，只接受用户当前消息中的一次性明确执行授权；每次调用后立即恢复讨论模式。禁止继承上一轮意图，也禁止切换到本机脚本或 CLI/API 备用生图路径。完整规则和事件归档见 `product-ad-studio/docs/INDEX.md` 与 `product-ad-studio/docs/archive/2026-07-31-image-generation-authorization.md`。
 - **claude-mem**：已完全卸载（2026-07-15）。hooks 清空、插件禁用、数据已删除。Codex 无需关心 claude-mem 相关状态。
