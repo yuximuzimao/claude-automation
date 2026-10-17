@@ -62,6 +62,22 @@ struct QQWindowPreparer {
     }
 
     @MainActor
+    static func isQQForeground() -> Bool {
+        NSWorkspace.shared.frontmostApplication?.bundleIdentifier == qqBundleID
+    }
+
+    @MainActor
+    static func focusHistoryWindow(expectedTitle: String) async throws {
+        let pid = try await activateQQ()
+        guard AXIsProcessTrusted() else {
+            throw WindowPreparationError.accessibilityNotTrusted
+        }
+        let window = try exactWindow(pid: pid, title: expectedTitle)
+        _ = AXUIElementPerformAction(window, kAXRaiseAction as CFString)
+        try await Task.sleep(nanoseconds: 150_000_000)
+    }
+
+    @MainActor
     static func prepare(
         expectedTitle: String,
         geometry: WindowTargetGeometry,
@@ -73,6 +89,10 @@ struct QQWindowPreparer {
         }
 
         let window = try exactWindow(pid: pid, title: expectedTitle)
+        // QQ has a main window and a separate history window. Activating the
+        // app alone may leave the main window above the history window; raise
+        // the exact target window before geometry and SCK checks.
+        _ = AXUIElementPerformAction(window, kAXRaiseAction as CFString)
         try requireSettable(window, attribute: kAXPositionAttribute as CFString)
         try requireSettable(window, attribute: kAXSizeAttribute as CFString)
 

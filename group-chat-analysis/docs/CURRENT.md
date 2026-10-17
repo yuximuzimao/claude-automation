@@ -1,58 +1,92 @@
 # CURRENT — 群聊分析
 
-这是项目当前开发状态的唯一真值。
+这是项目当前现场状态的唯一真值。历史过程不在这里展开；未完成事项只看 `tasks/todo.md`。
 
 ## 当前阶段
 
-**阶段 0/1/2/3 已完成。真实首次全量和第一次真实增量都已完成并通过审计；阶段 4 的页面 v2 设计方向已经确认，下一步是定义分析结果结构并制作真实批次原型。**
+“魔兽世界无限+时光服玩家群”（`wow-infinite-time`）从用户入群日 **2026-09-13** 到 **2026-10-12 23:59** 的单群文字历史基线与第一轮完整历史语义分析均已完成。
 
-正式入口仍唯一是 `python3 -m src.app.run_capture`。固定页数诊断继续使用原参数；首次全量使用 `--full --batch-id <id>`；每日增量使用 `--incremental --batch-id <id>`，两种双群模式都从本机 `config/local.json` 读取目标群与窗口参数。Python runner 独占 batch state 推进；Swift `capture-step` 只执行单次 current/scroll 副作用，`open-history` 只作为内部安全切群执行器。
+当前正式阶段是：**Silver 语义清洗批量化 → 首次阅读队列 / 资料库 / 无限服动态专题稳定化 → 唯一分析结果结构定型**。第一轮 topic cards 继续只作为候选索引层；现阶段主任务不是继续逐卡筛选，而是把事实切片跨日去重、实体对齐并转换成规范化知识单元。页面目标仍是“尽量不漏掉第一次值得看一眼的游戏特异信息，同时把用户需要亲自做的去重、合并和结构化工作降到最低”。用户最终只做“没用 / 存资料库”两类判断。
 
-## 当前已验证事实
+第二群暂不补历史；多群搜索/自动切群与无人值守调度继续后移。
 
-1. 官方 QQ 的“聊天记录”独立窗口是正式采集对象；Accessibility 正文树不足以作为正文读取通道。
-2. `src/capture/` 使用 ScreenCaptureKit + Apple Vision。窗口准备采用唯一同标题 `AXWindow` → 设置/读回 `AXPosition/AXSize` → 等待唯一同标题 SCK frame 稳定；不使用鼠标拖窗口 fallback。
-3. SCK 偶发 1–3px 捕获尺寸漂移已实测。MAD 只容忍 `<=3px` 并把两帧渲染到共同尺寸比较；更大漂移硬停。最终帧若回到 baseline，也不得判为新页。
-4. `capture-page.schema.json` 已升级为 v2：除原始 OCR 外保存私密 `dhash512` 视口指纹。该指纹**只**用于滚动前验证当前视口仍是上一份 durable raw 对应页面，不参与昵称/消息身份或去重。
-5. 512-bit dHash 当前门槛为 Hamming distance `<=20`。同一未滚动视口连续 6 次实测为 `18,0,0,0,0`；三个不同真实页距离为 `46/49/31`。超过 20 时在发滚轮前停止。
-6. `batch-state.schema.json` 已升级为 v4：保留 `pending_capture` / 每群 `capture_complete`，新增 `batch_kind=capture|incremental` 与不可变 `start_anchor`。旧 v2/v3 只确定性迁移为 `capture`；incremental 开始时从上一 completed 的尾部 anchor 复制 `start_anchor`。唯一页提交顺序仍是 **pending intent → Swift 单步副作用 → raw durable → record_page**。
-7. `pending current + raw 缺失` 可安全重试；`pending + raw 已落盘` 直接晋升 durable raw，不重复捕获；`pending scroll + 目标 raw 缺失` 视口位置不确定，必须硬停，禁止再次滚动；没有 pending 却凭空出现 next raw 也硬停。
-8. 当前 QQ 单页视觉从上到下是**新→旧**；`reconstruct_page()` 完成视觉判断后把完整候选反转为**旧→新**。页边缘 fragment 不静默丢弃，证据不足宁可保留重复。
-9. 嵌入图片 OCR 命中窄几何门禁时降级为 `unknown / 非文字内容（图片/表情等，未解析）`；图片内文字不进入 GPT 输入。无 OCR 的纯图片/表情、语音、文件继续不阻塞 v1。
-10. 相邻页去重仍以“漏真实消息 > 多保留重复消息”为错误成本：相似昵称不归并，一侧 sender 缺失不破坏性去重，`message_type`/双方已识别时间必须兼容，canonical 先保正文完整度。
-11. `messages.jsonl` 继续使用 Schema 校验、`fsync` + 原子 replace、同 batch 幂等恢复；完成顺序固定为 **messages durable → state completed → current.md**。
-12. 新唯一 runner 已真实跑通 3 页：state 最终 `completed`，`pending_capture=null`，并生成 canonical messages/current.md；completed 后删除 current.md 再重跑可纯本地重建，约 0.1 秒且不触碰 QQ。
-13. 文件级故障注入已实际验证：`pending current + raw 已存在` 可无捕获恢复；`pending scroll + raw 缺失` 会保留 pending/next_page_index 并停止，不会再发滚轮。
-14. 正式 `open-history` 已实机验证两个目标群往返：会话列表先用 OCR 找唯一目标行并限制在左侧安全区；选中后重新核对聊天头部；只有 hover 后局部 OCR 精确得到 `聊天记录` 才点击历史按钮；最后要求历史窗口标题精确匹配目标群。任何一步不满足都停止。
-15. 两个历史窗口精确标题已确认：`魔兽世界无限+时光服玩家群`、`魔兽世界2无限国服备战总群`。实测切换时成员数 1815/1777 只作为额外证据，不写成长期身份条件。
-16. 重新打开历史窗口时暴露了正文区潜伏 bug：聊天正文 `坐下）表情` 曾被误当过滤工具栏，导致 content_region 高度从正常约 `0.852` 截成 `0.192`。现已改为“同一水平带至少两个过滤控件共同出现”才可定义工具栏，并完成真实页回归。
-17. 两群同 batch 编排已完成：`page_index` 继续按整个 batch 全局递增；第一群结束后 batch 仍保持 incomplete，只有第二群也 `capture_complete` 后才统一 normalize / messages durable / state completed / current.md。
-18. 首次全量历史边界采用连续两次独立 `NO_CHANGE`：每次滚动前都先用上一 durable 页的 dHash 验证视口、重新定位正文锚点、QQ 必须前台且历史窗口标题唯一；任一次出现变化都会清零 no-change 连续计数。
-19. 首次全量默认每次最多新增 20 页。达到分片预算只在 raw 已 durable、`pending_capture=null` 的安全点返回 incomplete，不切下一个群、不标记 capture_complete；恢复已有 durable 页时禁止重新打开历史窗口，避免把视口重置到最新。
-20. 真实首次全量 `first-full-20261008` 已完成：第一群 `page 0–890` 共 **891 页 / 5700 条 canonical messages**；第二群 `page 891–1146` 共 **256 页 / 1593 条 canonical messages**；合计 **1147 页 / 7293 条**。
-21. 低运动滚屏模糊区门禁已继续用真实增量校准：`MAD 2.00–2.50` 只有最终相邻帧稳定，且新旧正文 OCR 各至少 8 条、Jaccard `<=0.85` 时才保守保存为新/部分推进页；真实增量 page 33 观测到 Jaccard `0.706` 的部分推进。高重叠页宁可多保留，由后续相邻页去重处理，避免再次滚动跳过消息。
-22. 1147 页中唯一异常页 `wow-infinite-2/page-001038.json` 是“日期 + 3 个消息头、无正文 OCR”；现已改为 header-only fragment fallback，不生成伪正文。修复后真实 **1147/1147 页逐页 reconstruct bad=0**。
-23. 程序性完整性审计通过：全局 `page_index 0–1146` 连续无缺页/重复；两个群 canonical sequence 各自从 0 连续；无未知 group、无重复 `record_id`；state 中两个连续消息 anchor 均准确对应各群 canonical 尾部。
-24. 每日增量已实现：新的 incremental batch 每群首次进入时必须重新打开“聊天记录”刷新快照；同一未完成 batch 已有 durable raw 时恢复不重开。每抓完 durable 页就检查上一 completed 的连续 `start_anchor`；命中后只提交 anchor 之后的新消息。0/1 条新消息、分片恢复、completed 本地重建、历史边界先于 anchor 的硬失败均有回归。
-25. 真实 baseline 离线验证通过：第一次全量的两组 anchor 都只在各自 canonical 最尾部命中（5700/5700、1593/1593），裁剪后均为 0；真实 v3 state 副本可确定性升级 v4，并把两组真实尾部 anchor 精确复制到新 incremental `start_anchor`。
-26. `python3 -m unittest discover -s tests -p 'test_*.py'` 当前 **96/96 通过**。
+## 当前稳定采集能力
 
-27. 第一次真实增量 `incremental-20261009-001` 已完成：共 95 个 raw pages，最终裁剪得到 **611 条新增 canonical messages**（第一群 609 / 第二群 2）。两群旧 `start_anchor` 均未重复入库，sequence 连续、record_id 无重复，新 completed anchor 正确前滚。
-28. 真实增量期间继续校准两类边界：低运动“部分推进页”允许在 `MAD 2.00–2.50 + 最终帧稳定 + OCR Jaccard <=0.85` 时保守保存；消息头高度门槛从 `0.95×body` 调整为 `1.05×body`，真实 page 93 的 `00:49/00:47` 头部因此恢复正确重建。全套测试当前 **96/96 通过**。
-29. 第一版报告已按当前魔兽项目重排为 v2，并生成简洁页面 v1；首轮评审已结束。已确认：重点发现只放真实有效信息，“没有发现/不触发修改”仅作状态总结；删除“全部信息”一级页；“当前项目”暂保留；黑话继续保留“解释 + 原文”，但必须按语境持续演化，同一词允许多义。页面 v1 仅作为评审样本，不是最终格式。
-30. AIHOT 参考研究和页面 v2 方向已完成：不采用多信源等级、热度榜和新闻精选门槛；先完整归组全部有意义话题，再按个人价值分为必看/应该看/可以看/留档。价值、可信度和讨论情况分别表达，单次短消息也可成为高价值待核验线索。每条实质信息固定先显示事实与原文，再显示明确标注的 AI 攻略/经验/趋势/机会/项目影响分析；纯黑话只进入独立词典。群聊项目与 `wow-quest-route` 分开保存，只有用户确认后才把候选交给目标项目独立核验。
-31. 已参考 `wow-quest-route` 的“SKILL 一级分流 → 唯一 SOP 分类 → owner 执行”结构，新增 `docs/OPERATING-SOP.md`。它现在是本项目唯一任务分类与完整运行入口，明确日常增量、首次全量、恢复、批次分析、页面设计、跨项目候选和自动化分别进入哪个 owner。现有 `docs/rules/` 继续各自维护细节；分析只是完整项目流程中的一个阶段。当前采集/规范化/持久化已有正式 CLI，GPT 分析仍由 Codex/模型人工触发，尚无正式分析 runner 或 `analyzed` 用户入口。
+- 正式采集入口唯一为 `python3 -m src.app.run_capture`；单日历史使用 `--history-date YYYY-MM-DD --group-key wow-infinite-time`。
+- 正式状态机唯一为 `pending intent → capture side effect → raw durable → record_page`；batch-state 现役只接受 schema v4。
+- 正文只走 ScreenCaptureKit 精确 QQ 历史窗口；无全屏裁剪 fallback。
+- 首次全量/单日历史以连续两次独立 `NO_CHANGE` 确认可取边界；incremental 使用连续 `start_anchor`。
+- 滚轮前会再次同步确认 QQ 前台；外部窗口抢焦点时自动恢复 QQ 并从上一 durable 视口重试一次，该次不计 `NO_CHANGE`。滚轮可能已生效而状态不确定时仍硬停。
+- 新 `history-date` 日包会先安全关闭同名旧聊天记录窗口，验证当前目标群并重新点击右上角“聊天记录”图标刷新历史快照，再选择日期；已有 durable 页的 incomplete 恢复不重开窗口、不重选日期。
+- `pending scroll + raw 缺失` 的 history-date 恢复仍使用自动重锚定；找不到唯一连续锚点或回放不一致就保持 incomplete，不猜。
+- Normalize 已恢复 `message_date` 和可确认的绝对 timestamp；单日 finalization 拒绝跨目标日 canonical。
+- 相邻页保守去重，错误成本保持 **漏真实消息 > 多保留重复消息**。
+- 2026-10-16 已补充一个真实边界：旧页 `top fragment` 被下一页完整消息吸收时，只在“长文本明确包含 + 前序连续多消息 overlap 仍成立”条件下允许该 fragment 不阻断重叠；`fragment_kind` 只作为 normalize 瞬态元数据，不进入 message-record schema。
+- runtime 全部为私密本地数据并被 `.gitignore` 排除。
+- 当前确定性回归以本阶段相关测试为准；2026-10-16 `tests.test_normalize_overlap + tests.test_assemble` 共 **26 项通过**。
 
-## 尚未验证 / 尚未实现
+## 已验证历史基线
 
-- 页面 v2 尚未实现：需要先确定运行时分析结果结构，再用真实增量批次制作“本期总览 / 话题总览 / 长期追踪 / 攻略知识 / 项目相关 / 黑话”六视图原型并评审；评审稳定后再补正式分析 runner 与 `analyzed` 状态入口。
-- 历史覆盖策略尚未决定：是直接分块分析现有 7293 条首次全量 canonical，还是尽可能重新从“入群至今”补采后再建立更完整历史基线；方案未定前不重复大规模采集。
-- 更大单日上下文的分块分析策略尚未实测；不能用关键词预筛替代完整读取。
-- 手动增量还需要多跑几次稳定后，才考虑每天一次的自动调度。
-- 语音和文件继续延期；无 OCR 的纯图片/表情按 v1 文字优先目标忽略。
+- 覆盖：**2026-09-13 → 2026-10-12，共 30/30 个自然日**。
+- 合计：**10761 raw pages / 70973 canonical**。
+- 每日均已检查 `completed / pending_capture=null`、raw page 连续、canonical sequence 连续、`record_id` 唯一、已恢复日期/时间不跨目标日。
+- 2026-09-25 → 2026-10-04 的 legacy 日包此前已使用当前 normalizer 从 raw 独立重建并 exact match；其它日包由当前 runner/normalizer 直接生成。
+- 阶段明细与逐日统计见 `docs/archive/neat/2026-10-13-complete-single-group-history-baseline.md`。
 
-## 下一恢复点
+旧的 `first-full-20261008` 与 `incremental-20261009-001` 继续只作为原运行链/anchor 的历史事实，不充当统一历史分析日包真值。
 
-直接执行 `tasks/todo.md` 顶部唯一下一步：**阶段 4：先定义页面 v2 的运行时分析结果结构，再用现有真实增量批次制作首个评审原型。历史覆盖策略仍需单独决定；不要直接重跑大规模历史采集。**
+## 已完成历史语义分析基线
 
-这里的 `dhash512` 是临时视口连续性证据，不是头像指纹。头像/昵称视觉身份辅助仍不属于 v1 去重门禁。
+- 已完整按时间顺序阅读 30 天历史，未使用关键词预筛代替全文阅读。
+- 第一轮细粒度语义层原为 **3123 张 topic cards**；2026-10-16 因把一张混合卡拆成“德鲁伊树皮机制 + ZAM 炸弹实战技巧”两条，当前 runtime 候选索引为 **3124 张**。
+- 旧跨日归一层保留 **20 个合集**，但当前只视为历史/实验结构，不再默认视作最终页面方案。
+- 黑话基础规则已写入 `docs/rules/analysis.md`；当前 runtime 页面黑话页已能展示 **29 个词条**。
+- 完整历史第一轮语义基线归档见 `docs/archive/neat/2026-10-15-complete-history-semantic-analysis.md`。
+
+## 当前阅读 / 资料库原型状态
+
+当前私密原型仍输出到：`runtime/reports/page-v2-prototype-light.html`；文件名暂未迁移，页面内容已经切换到新信息模型。
+
+当前已验证结构：
+
+- 第一轮 topic card = 候选索引，不是最终展示清单；
+- 页面顶层只保留 **新信息 / 资料库 / 无限服 / 黑话** 四个入口；旧“主信息 / 待核验 / 合集 / 本期总览 / 长期追踪 / 攻略知识 / 项目相关”不再作为默认 UI；
+- “职业”与“副本攻略 / 任务与练级 / 装备机制 / 专业技能 / 经济打金 / 插件故障 / 防诈骗”等是同级专题，不做职业 × 专题交叉筛选；本次无内容的专题自动不显示；
+- 新信息是首次阅读队列：只要具有明确、游戏特异的信息增量且系统不能确认用户已经掌握，就优先让用户第一次看到；封测/待版本核验不等于无价值；
+- 用户终审只有 **没用 / 存资料库**。两者都视为已阅，相同语义以后不重复占队列；只有可信度升降或更多人重复同一结论时只在后台静默更新；
+- 用户明确判定有用的知识进入资料库；资料库以部分关键词搜索为第一使用方式，并保留专题层级；
+- 展示前需要做基础身份补齐。当前已用 `T-20260925-020` 验证：把“弗约恩任务”补成“风暴峭壁 · 《弥补关系》#12915”，并带任务目标，再显示群聊新增的宠物式控制栏/先护盾控制技巧；
+- 2026-10-18 已确认仅按“同一天 + 同话题”收容器仍不够：正式分析窗口必须先跨日做 Silver 层语义清洗，再生成阅读单元；自然日只保留为证据时间，不能成为话题边界；
+- 当前已建立 `runtime/analysis-work/normalized-knowledge-pilot-v1.json` 验证类型化知识结构：NAXX追赶、区服组团差异、坦克学习阶梯、双持冰DK武器链四个样例共吸收20张来源卡；实例改为证据、路线改为阶段表、比较改为 variants，不再保留同义碎卡；
+- 分析窗口与阅读批次已经分离：历史半月数据可以整体去重/合并，页面再按每批最多40个阅读单元分页；分页不参与语义切分；
+- “可补全”只标记那些需要额外联网/资料比对才能补足关键事实的候选；用户可在看完本批后统一要求补全；
+- 原文右侧抽屉继续保留，回链仍以卡片自身时间范围/来源范围为主锚点，不用全日关键词搜索冒充证据；
+- 黑话继续独立维护语境化词典。
+
+无限服当前单独启用动态专题档案：`runtime/analysis-work/infinite-dossier-v1.json`。2026-10-18 已从长段自然语言摘要升级到 schema v2：仍按练级与玩家发展、经济与打金、专业与资源、规则与风险、职业玩法变化、服务器生态六个维度，但每个维度保存 `观察字段 / 当前状态 / 适用范围 / 依据 / 证据ID`，页面以结构表展示；重复观察只静默增加支持度，AI综合判断不得覆盖来源状态。
+
+当前 runtime 原型统计：
+
+- raw topic cards：**3124**；
+- longitudinal aggregate：**1**；
+- supplemental card：**1**；
+- blackwords：**29**；
+- source links：high **1434** / medium **69** / none **1622**；
+- Silver 清洗前的首次阅读候选：**1967 条事实切片**；它们不是最终阅读单元；
+- 当前4个 Silver 样例共吸收 **20 张来源卡**，页面实际待看降为 **1955 个单元/旧候选混合项**；完整历史尚未批量完成 Silver 清洗，所以这个数字仍然偏大；
+- 无限服首次阅读候选：**141 条**，后续应先吸收到结构化动态信号后再决定哪些需要单独打扰用户；
+- 当前由历史用户确认结果种出的资料库知识：**9 条**，其中双持冰DK路线已用标准化阶段表替换旧长段摘要。
+
+这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
+
+当前从首次阅读模型转向 Silver 规范化知识单元的阶段归档见 `docs/archive/neat/2026-10-18-first-read-to-silver-normalized-knowledge.md`；旧 v2 价值收敛阶段仍见 `docs/archive/neat/2026-10-16-analysis-v2-value-convergence-and-source-fidelity.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
+
+## 当前下一步
+
+1. 把完整历史候选从“事实切片”批量转成 Silver 规范化知识单元：先做实体对齐和跨日语义聚类，再按 `mechanism / ordered_route / comparison / strategy / sample / dynamic_signal` 固定结构清洗；旧 `review_*` 只能作为线索，不能当新模型真值。
+2. 在批量清洗过程中同步做“对象身份 / 基础上下文补齐”，优先覆盖任务、Boss、职业阈值和装备四类；同义实例只挂证据，不重复生成知识。
+3. 继续验证每批最多40个阅读单元的历史补课体验；阅读分页只控制负载，不得影响跨日语义合并。
+4. 确定正式的已阅语义指纹、资料库条目与无限服动态信号的数据结构；当前浏览器 localStorage 只承担原型交互，不视作长期真值。
+5. Silver层稳定后，再实现唯一正式分析结果、runner 和每日“采集 → 分析 → 首次阅读队列”流程。
+
+下一步严格以 `tasks/todo.md` 为准。

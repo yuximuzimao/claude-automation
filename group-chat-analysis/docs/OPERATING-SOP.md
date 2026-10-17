@@ -1,105 +1,99 @@
-# 群聊分析项目 SOP：任务分类与完整运行
+# 群聊分析项目 SOP：任务分类与运行
 
-用途：这是本项目唯一的运行与任务分类 SOP。它回答三件事：当前工作属于哪一类、下一份唯一应该读取的 owner 是什么、一个正常批次怎样从 QQ 走到分析结果。
-
-本文件不复制 OCR 算法、状态机细节、页面规则或隐私条款。分类完成后，具体操作、失败边界和数据契约只以对应 owner 为准。
-
-## 0. 先拆任务，再分类
-
-一条输入可能同时包含多类工作，必须拆开处理。例如：
-
-- “抓今天新增消息” → `ROUTINE_INCREMENTAL`
-- “这条 DK 经验应该排在前面” → `ANALYSIS_DESIGN`
-- “把确认后的任务机制写到魔兽项目” → `PROMOTION`
-- “滚动后状态不确定” → `CAPTURE_RECOVERY`
-
-每一项只进入一个主分类。先处理上游采集/数据完整性，再处理依赖它的分析与跨项目候选；不能用修改分析文案掩盖采集或规范化问题。
+用途：这是本项目唯一的任务分类与运行 SOP。先判断当前工作属于哪一类，再进入对应 owner；这里不复制 OCR、去重、存储或分析细节。
 
 ## 1. 分类表
 
-| 分类 | 只用于区分的定义 | 唯一下一步 |
+| 分类 | 定义 | 唯一下一步 |
 | --- | --- | --- |
-| `ROUTINE_INCREMENTAL` | 从上一 completed anchor 之后采集新增消息，生成本批 `current.md`。 | `rules/capture.md` 的“每日增量”与 `rules/storage.md`；正式入口只用 `src/app/run_capture.py --incremental`。 |
-| `FIRST_FULL_CAPTURE` | 首次建立历史基线，或用户明确批准重新补采大段历史。 | `rules/capture.md` 的“首次全量”与 `rules/storage.md`；正式入口只用 `src/app/run_capture.py --full`。 |
-| `BOUNDED_DIAGNOSTIC` | 固定群、固定少量页验证 QQ UI、OCR、滚动或几何，不建立正式全量/增量语义。 | `rules/capture.md` 与 `tests/README.md` 的本地适配器/端到端层。 |
-| `CAPTURE_RECOVERY` | 现有 batch incomplete、pending/raw 冲突、视口不确定、completed 后 `current.md` 缺失。 | `rules/storage.md` 的恢复语义；涉及 QQ 视口再读 `rules/capture.md`。 |
-| `NORMALIZATION_CONTRACT` | 修改 OCR block 如何组成消息、顺序、fragment、媒体占位、跨页去重或 anchor 匹配。 | `rules/normalization.md`。 |
-| `STORAGE_CONTRACT` | 修改 runtime 生命周期、batch state、canonical messages、current.md、原子提交或隐私数据落点。 | `rules/storage.md`；权限或敏感数据边界再读 `rules/privacy-and-safety.md`。 |
-| `ANALYSIS_BATCH` | 对一个 completed `current.md` 做话题归组、事实/原文展示、价值排序和报告生成。 | `rules/analysis.md` 的“批次分析 SOP”。 |
-| `ANALYSIS_DESIGN` | 修改分类、价值等级、可信度、长期跟踪、攻略知识、黑话或页面 v2 展示契约。 | `rules/analysis.md`。 |
-| `PROMOTION` | 把群聊候选交给 `wow-quest-route` 或其它项目核验/保存。 | 先读 `rules/analysis.md` 的跨项目边界；用户确认后退出本项目，进入目标项目自己的 SKILL/SOP。 |
-| `AUTOMATION` | 定时运行、失败告警或无人值守编排。 | 先读 `rules/capture.md`、`rules/storage.md` 和 `tests/README.md`；手动增量未稳定前不得启用。 |
-| `PRIVACY_OR_SAFETY` | 权限、QQ 操作范围、模型数据暴露、Git 私密数据或禁止技术路线。 | `rules/privacy-and-safety.md`。 |
-| `ARCHITECTURE_MIGRATION` | capture/normalize/store/inbox/analyze 边界、Schema owner 或唯一入口需要改变。 | `ARCHITECTURE.md`，并为当次迁移单独制定计划；历史只从 `archive/` 定向考古。 |
+| `ROUTINE_INCREMENTAL` | 从上一 completed anchor 之后采集新增消息。 | `rules/capture.md` + `rules/storage.md`；正式入口 `python3 -m src.app.run_capture --incremental --batch-id <id>`。 |
+| `FIRST_FULL_CAPTURE` | 建立普通全量基线，按配置串行采集全部目标群到 QQ 历史边界。 | `rules/capture.md` + `rules/storage.md`；正式入口 `python3 -m src.app.run_capture --full --batch-id <id>`。 |
+| `HISTORY_DAY_BACKFILL` | 对一个目标群补采某个自然日的完整可见历史。 | `rules/capture.md` + `rules/storage.md`；只用 `run_capture --history-date`，见下文。 |
+| `BOUNDED_DIAGNOSTIC` | 固定少量页验证窗口、OCR、滚动或几何，不建立正式全量/增量语义。 | `rules/capture.md` + `tests/README.md`。 |
+| `CAPTURE_RECOVERY` | incomplete、pending/raw 冲突、视口不确定、completed 后派生物缺失。 | `rules/storage.md`；涉及 QQ 视口再读 `rules/capture.md`。 |
+| `NORMALIZATION_CONTRACT` | OCR block 如何重建消息、日期、顺序、fragment、媒体占位或跨页去重。 | `rules/normalization.md`。 |
+| `STORAGE_CONTRACT` | batch state、canonical messages、current.md、原子提交或私密数据生命周期。 | `rules/storage.md`。 |
+| `ANALYSIS_BATCH` | 对 completed `current.md` 做一次正式分析。 | `rules/analysis.md`。 |
+| `ANALYSIS_DESIGN` | 修改分类、价值、可信度、页面、长期追踪、黑话等分析契约。 | `rules/analysis.md`。 |
+| `PROMOTION` | 把群聊候选交给魔兽或其它项目核验/保存。 | `rules/analysis.md`；用户确认后进入目标项目自己的 SKILL/SOP。 |
+| `AUTOMATION` | 定时采集、定时分析、失败告警或无人值守编排。 | `rules/capture.md` + `rules/storage.md` + `tests/README.md`。 |
+| `PRIVACY_OR_SAFETY` | 权限、QQ 操作范围、模型暴露、Git 私密数据或禁止技术路线。 | `rules/privacy-and-safety.md`。 |
+| `ARCHITECTURE_MIGRATION` | 模块边界、Schema owner 或唯一入口需要改变。 | `ARCHITECTURE.md`，单独制定迁移计划。 |
 
-分类完成后，不继续从本 SOP 猜具体实现；进入对应 owner 执行。
+一条请求包含多类工作时先拆开；采集/数据完整性优先于依赖它的分析。分类后不要继续从本 SOP 猜实现细节。
 
-## 2. 日常完整流程
+## 2. 唯一正式采集入口
 
-当前稳定的日常主流程是：
+所有正式采集都从：
 
-`增量采集 → 自动规范化/持久化 → current.md → 人工触发 GPT 分析 → 本地报告/页面 → 用户确认后的跨项目候选`
+```bash
+python3 -m src.app.run_capture ...
+```
 
-### 2.1 增量采集
+进入。`capture-step.swift`、`open-history.swift`、`select-history-date.swift` 都只是该入口内部调用的适配器，不维护第二套 batch/state 流程。
 
-为本轮选择新的 batch id，运行唯一正式入口：
+普通 `--full` / `--incremental` 默认每轮最多新增 20 页；达到预算只在 raw 已 durable、`pending_capture=null` 的安全点返回 incomplete。继续时使用同一 batch id。
+
+## 3. 单日历史补采
+
+当前从入群日期向前补历史时，每个自然日只运行：
+
+```bash
+python3 -m src.app.run_capture \
+  --history-date YYYY-MM-DD \
+  --group-key wow-infinite-time
+```
+
+需要像长跑 check 一样启动后立即返回时，加 `--background`。它只负责 detached 启动同一个正式 runner，不建立第二套采集逻辑；全局 PID 锁保证任意时刻只能有一个历史后台任务，避免多个日期同时操作 QQ。
+
+`--history-date` 自带以下约束：
+
+1. 自动进入单群 full-capture 语义，不需要另外写 `--full`；
+2. 默认 batch id 为 `history-YYYYMMDD-full`；
+3. 默认 runtime 为 `runtime/history-days/YYYY-MM-DD/`，和日常增量/首次全量分开；
+4. 默认允许单次新增最多 1000 页，适合受监督的整日长跑；每一页仍严格执行 pending → capture side effect → raw durable → record_page，任何安全门禁失败立即停；
+5. 第一页前由内部日期适配器安全打开/抬起目标历史窗口，选择目标日期，并同时 OCR 验证筛选字段和聊天区日期；
+6. 已有 durable page 的 incomplete batch 恢复时不重新选日期、不重开窗口，避免把已向历史推进的视口重置；
+7. 仍以连续两次独立 `NO_CHANGE` 确认 QQ 当天当前可取的历史边界；
+8. finalization 前必须确认 canonical 中已恢复出的 `message_date` / 绝对时间没有落到目标日期之外，否则拒绝 completed。
+
+一天是否完整不要求第一条必须恰好 `00:00`、最后一条必须恰好 `23:59`；当天凌晨或午夜附近本来可能没有发言。完整的机器证据是：目标日期选择已验证、页状态连续、连续两次 `NO_CHANGE`、finalization 日期审计通过、state 为 completed 且 `pending_capture=null`。
+
+补历史时按日期一天一天向入群日推进；每一天都只由日期定位、durable raw、双 `NO_CHANGE` 和 finalization 日期审计共同确定完成状态。
+
+## 4. 日常增量
+
+新批次运行：
 
 ```bash
 python3 -m src.app.run_capture --incremental --batch-id <batch_id>
 ```
 
-- 命令输出 `status=incomplete`：使用**同一个 batch id、同一条命令**继续；不得新建 batch 绕过恢复状态。
-- 命令输出 `status=completed`：canonical messages、completed state 和 `runtime/inbox/current.md` 已按正式顺序生成，可以进入分析。
-- 命令输出 `ERROR`：停止，不自动重复 UI 动作；按 `CAPTURE_RECOVERY` 分类检查 owner。
+每个新 incremental batch 必须重新安全打开目标群历史窗口刷新 QQ 快照；已有 durable 页的同一未完成 batch 恢复时不重开。命中上一 completed 的连续 `start_anchor` 后停止并只提交 anchor 之后的新消息。
 
-默认每次最多新增 20 页，所以一个真实增量可能需要多次运行同一命令。这里的重复调用是继续同一持久化 batch，不是对失败 UI 动作做盲目重试。
+输出 `status=incomplete` 时继续同一命令；输出 `status=completed` 后 canonical messages、state 和 `runtime/inbox/current.md` 才可进入分析。
 
-### 2.2 批次分析
+## 5. 批次分析与跨项目
 
-采集 completed 后按 `ANALYSIS_BATCH` 进入 `rules/analysis.md`：
+completed 后进入 `rules/analysis.md`。日常分析只读 `runtime/inbox/current.md`，不从 raw OCR 重猜消息；报告/页面保存到 `runtime/reports/`。群聊内容只生成跨项目候选，用户确认后再进入目标项目独立核验。
 
-1. 只读取 `runtime/inbox/current.md`，不从 raw OCR 重新猜消息；
-2. 先完整归组有意义话题，再生成事实、原文和 AI 扩展分析；
-3. 价值与可信度分别判断，生成本期总览和各长期视图所需结果；
-4. 报告和页面只保存到 `runtime/reports/`，不提交 Git；
-5. 需要进入其它项目的信息只标为候选，等待用户确认。
+当前正式分析 CLI 尚未建立，现阶段仍由 GPT/Codex 按 analysis owner 人工触发。
 
-当前分析阶段尚无正式 CLI，也没有自动调用模型的 worker。现阶段由 Codex/模型按 owner 规则读取 `current.md` 并生成报告；在正式分析 runner 建立前，不手改 batch state 假装完成自动化。
+## 6. 恢复原则
 
-### 2.3 跨项目候选
+- incomplete：继续原 batch，不删除 runtime、不另起 batch 猜测恢复。
+- `pending current + raw 缺失`：可重试当前页，因为没有滚动副作用。
+- pending 对应 raw 已 durable：校验后晋升，不重复捕获。
+- 明确的 pre-scroll rejection：允许清 pending 后重试。
+- `pending scroll + raw 缺失`：普通 full/incremental 仍停止且不再次滚动。history-date 由同一 runner 进入自动 `CAPTURE_RECOVERY`，不把故障现场屏直接当目标页。
+- history-date `CAPTURE_RECOVERY`：先截当前屏作 probe，再向较新方向最多回退 6 次；只有连续两张 probe **唯一**匹配连续两个已 durable 页时才认为重新进入已知区域。随后按 durable 页号逐页向历史方向回放，每一步都必须重新匹配对应 durable raw；最终再次确认回到最后 durable 页后，才允许清原 pending，让普通 runner 从最后 durable 页重新滚动并重新读取失败目标页。
+- 任一 probe 无法形成唯一连续锚点、回放页不匹配、窗口/滚动门禁失败或 OCR 无法形成足够证据时，保持 incomplete 并停止；不得用“当前看起来像下一屏”、单条 OCR、单次 dHash 或时间文本猜测晋升。
+- completed 但 `current.md` 缺失：原模式重跑，必须纯本地重建，不触碰 QQ。
+- 分析失败：只重跑分析，不修改 completed canonical，不重新采集。
 
-群聊项目内完成的只是候选整理：
+## 7. 当前仍未自动化
 
-`群聊原文与分析 → 候选信息 → 用户确认 → 目标项目独立核验 → 目标项目保存`
+- 正式 GPT 分析 runner 与唯一分析结果结构；当前 runtime 已有“新信息 / 资料库 / 无限服 / 黑话”低摩擦原型，但已阅语义指纹、资料库持久结构、基础身份自动补齐和动态专题更新仍需继续验证后才能冻结为正式契约；
+- 每日无人值守调度。
 
-用户未确认时流程停在本项目。确认后，新的工作从目标项目 `SKILL.md` 开始，不把本项目规则带过去代替目标项目 owner。
-
-## 3. 首次全量流程
-
-只有建立初始基线，或用户明确批准重新补采历史时才运行：
-
-```bash
-python3 -m src.app.run_capture --full --batch-id <batch_id>
-```
-
-`status=incomplete` 时继续使用同一个 batch id，直到 completed 或明确失败。完成后必须做页连续性、消息 sequence、record_id、unknown group、逐页重建和尾部 anchor 审计，再决定是否进入大规模历史分析。
-
-普通日常更新不得使用 `--full`。历史覆盖策略未决定前，不因为页面设计需要而重新抓取历史。
-
-## 4. 恢复与停止
-
-- incomplete batch：继续原 batch，不删除 runtime、不另起 batch 猜测恢复。
-- completed 但 `current.md` 缺失：使用原 batch id 和对应原模式重新运行，正式 runner 应从本地 durable 数据重建，不触碰 QQ。
-- `pending scroll + raw 缺失`：视口副作用不确定，必须停止，不能再次滚动。
-- 目标群、窗口标题、正文区域或配置集合不一致：在任何进一步 QQ 动作前停止。
-- 分析失败：completed messages 保持不变，可以重新分析；不得反向修改 canonical messages。
-- 跨项目核验失败：候选留在本项目并标明状态，不把它提升为目标项目事实。
-
-## 5. 当前未自动化的环节
-
-- GPT 批次分析仍是人工触发，没有正式分析 runner；
-- 页面 v2 结果结构和生成流程尚待实现；
-- 报告完成后的 `analyzed` 状态没有正式用户入口，不手工拼状态文件；
-- 手动增量还需多批稳定验证，定时化尚未批准。
-
-这些属于 `tasks/todo.md` 中的未完成工作，不能在 SOP 中写成已经存在的能力。
+这些只以 `tasks/todo.md` 作为未完成事项真源。

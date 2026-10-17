@@ -6,8 +6,9 @@
 
 可用合成/脱敏 fixture，覆盖：
 
-- Swift `capture-step` / `open-history` typecheck、正文区/MAD/dhash/Schema 纯函数回归；
+- Swift `capture-step` / `open-history` / `select-history-date` typecheck、正文区/MAD/dhash/Schema 纯函数回归；
 - 安全切群纯门禁：左侧会话唯一候选、目标头部复核、`聊天记录` tooltip 精确确认；
+- 日期筛选纯逻辑：目标日期合法性、Sunday-first 日历行列、跨月偏移；Swift 日期选择器必须 typecheck；
 - bbox 视觉行/消息/fragment 重建与媒体 OCR unknown 降级；
 - 时间文本解析；
 - 相邻屏最长连续重叠；
@@ -16,8 +17,8 @@
 - 保守发送者匹配：相似昵称不归并、一侧昵称缺失不破坏性去重；
 - `message_type` / `timestamp_text` 兼容性与两条最小重叠强锚点；
 - capture 页“新→旧”到最终消息“旧→新”的方向转换；
-- batch-state v4：`pending_capture`、每群 `capture_complete`、`batch_kind/start_anchor`、v2/v3 迁移、页恢复点、状态转换和连续锚点门禁；
-- 唯一 runner 的 pending/raw reconcile、stray raw 拒绝、pending scroll 硬停等故障注入；
+- batch-state v4：`pending_capture`、每群 `capture_complete`、`batch_kind/start_anchor`、旧 schema 拒绝、页恢复点、状态转换和连续锚点门禁；
+- 唯一 runner 的 pending/raw reconcile、stray raw 拒绝、普通 full/incremental 的 pending scroll 硬停，以及 history-date 自动 rewind→双 durable 连续重锚定→逐页 replay→清 pending→重读失败页的故障注入；history-date CLI 的稳定默认 batch/runtime/页预算、目标日期 finalization 审计，以及 background 仍复用正式 runner/全局互斥锁；
 - incremental：连续 anchor 停止/裁剪、重复 anchor 取最早匹配、双群新 batch 重开历史窗口、分片续跑不重开、0/1 新消息、历史边界先于 anchor 硬停、completed 本地重建；
 - canonical messages 原子/幂等提交与 messages→completed→current 崩溃恢复；
 - current.md 构建顺序；
@@ -37,7 +38,8 @@
 - 滚轮只影响消息区；
 - 图像变化检测、“变化后回到 baseline”拒绝及 `<=3px` SCK 尺寸漂移；
 - Vision OCR；
-- 不发生任何聊天写操作。
+- 不发生任何聊天写操作；
+- 日期筛选连续跨日期/跨月切换后，筛选字段和聊天区日期都能由 OCR 精确复核，任一次失败即停。
 
 这不是 CI 真值；QQ UI 更新后要按实时环境重新验证。
 

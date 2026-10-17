@@ -54,6 +54,11 @@
       "type": ["string", "null"],
       "description": "界面原始可见时间文本，如“16:33”“昨天08:47”。"
     },
+    "message_date": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "由 QQ 日期分隔线恢复的消息日历日期；没有日期证据时为 null。"
+    },
     "message_type": {
       "enum": [
         "text",

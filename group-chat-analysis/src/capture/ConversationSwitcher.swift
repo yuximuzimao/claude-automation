@@ -2,7 +2,6 @@ import AppKit
 import ApplicationServices
 import Foundation
 import ScreenCaptureKit
-import Vision
 
 struct QQConversationTarget {
     let groupKey: String
@@ -20,6 +19,7 @@ enum ConversationSwitchError: Error, CustomStringConvertible {
     case unsafeConversationCandidate
     case targetVerificationFailed
     case historyTooltipNotVerified([String])
+    case historyWindowCloseFailed(String)
     case historyWindowNotReady(String)
 
     var description: String {
@@ -40,6 +40,8 @@ enum ConversationSwitchError: Error, CustomStringConvertible {
             return "QQ main view did not verify the selected target group after switching."
         case let .historyTooltipNotVerified(texts):
             return "Chat-history tooltip verification failed: \(texts)"
+        case let .historyWindowCloseFailed(title):
+            return "Existing QQ history window could not be closed cleanly before refresh: \(title)"
         case let .historyWindowNotReady(title):
             return "QQ history window did not become uniquely available with exact title: \(title)"
         }
@@ -64,6 +66,10 @@ struct QQConversationSwitcher {
             throw ConversationSwitchError.accessibilityNotTrusted
         }
 
+        try await closeExistingHistoryWindow(
+            pid: qq.processIdentifier,
+            exactTitle: target.expectedHistoryTitle
+        )
         let axWindow = try exactMainAXWindow(pid: qq.processIdentifier)
         _ = AXUIElementPerformAction(axWindow, kAXRaiseAction as CFString)
         qq.activate(options: [])
@@ -72,13 +78,18 @@ struct QQConversationSwitcher {
         let mainWindow = try await exactMainSCKWindow()
         let before = try await capture(mainWindow)
         let blocks = try recognizeText(before)
-        let candidate = try conversationCandidate(
-            from: blocks,
-            prefix: target.conversationPrefix
-        )
-        let candidatePoint = screenPoint(for: candidate.bbox, in: mainWindow.frame)
-        postClick(candidatePoint)
-        try await Task.sleep(nanoseconds: 500_000_000)
+        // Reuse a user-selected target group when QQ is already showing it.
+        // We still require the same stable header verification before touching
+        // the history control; this avoids an unnecessary left-list click.
+        if !verifiesTarget(blocks, target: target) {
+            let candidate = try conversationCandidate(
+                from: blocks,
+                prefix: target.conversationPrefix
+            )
+            let candidatePoint = screenPoint(for: candidate.bbox, in: mainWindow.frame)
+            postClick(candidatePoint)
+            try await Task.sleep(nanoseconds: 500_000_000)
+        }
 
         let selectedWindow = try await exactMainSCKWindow()
         let selectedBlocks = try recognizeText(try await capture(selectedWindow))
@@ -134,12 +145,86 @@ struct QQConversationSwitcher {
         _ blocks: [CaptureOCRBlock],
         target: QQConversationTarget
     ) -> Bool {
-        let texts = blocks.map { compact($0.text) }
-        return texts.contains { $0.contains(compact(target.headerContains)) }
+        let expected = compact(target.headerContains)
+        return blocks.contains { block in
+            let centerX = block.bbox.x + block.bbox.width / 2.0
+            let centerY = block.bbox.y + block.bbox.height / 2.0
+            let inHeaderBand = centerX > 0.25 && centerX < 0.80 && centerY > 0.85
+            return inHeaderBand && compact(block.text).contains(expected)
+        }
     }
 
     static func isVerifiedHistoryTooltip(_ texts: [String]) -> Bool {
         texts.contains { compact($0) == "聊天记录" }
+    }
+
+    @MainActor
+    private static func closeExistingHistoryWindow(
+        pid: pid_t,
+        exactTitle: String
+    ) async throws {
+        let app = AXUIElementCreateApplication(pid)
+        var raw: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(
+            app,
+            kAXWindowsAttribute as CFString,
+            &raw
+        ) == .success,
+        let windows = raw as? [AXUIElement] else {
+            throw ConversationSwitchError.historyWindowCloseFailed(exactTitle)
+        }
+
+        var matches: [AXUIElement] = []
+        for window in windows {
+            var titleRaw: CFTypeRef?
+            guard AXUIElementCopyAttributeValue(
+                window,
+                kAXTitleAttribute as CFString,
+                &titleRaw
+            ) == .success,
+            let title = titleRaw as? String,
+            title == exactTitle else {
+                continue
+            }
+            matches.append(window)
+        }
+
+        guard matches.count <= 1 else {
+            throw ConversationSwitchError.historyWindowCloseFailed(exactTitle)
+        }
+        guard let existing = matches.first else { return }
+        var closeButtonRaw: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(
+            existing,
+            kAXCloseButtonAttribute as CFString,
+            &closeButtonRaw
+        ) == .success,
+        let closeButtonRaw else {
+            throw ConversationSwitchError.historyWindowCloseFailed(exactTitle)
+        }
+        let closeButton = unsafeBitCast(closeButtonRaw, to: AXUIElement.self)
+        guard AXUIElementPerformAction(closeButton, kAXPressAction as CFString) == .success else {
+            throw ConversationSwitchError.historyWindowCloseFailed(exactTitle)
+        }
+
+        let checkpoints = [120, 300, 650, 1000]
+        var previous = 0
+        for checkpoint in checkpoints {
+            let delta = checkpoint - previous
+            try await Task.sleep(nanoseconds: UInt64(delta) * 1_000_000)
+            previous = checkpoint
+            let content = try await SCShareableContent.excludingDesktopWindows(
+                false,
+                onScreenWindowsOnly: true
+            )
+            let stillVisible = content.windows.contains { window in
+                window.owningApplication?.bundleIdentifier == qqBundleID &&
+                    window.isOnScreen &&
+                    window.title == exactTitle
+            }
+            if !stillVisible { return }
+        }
+        throw ConversationSwitchError.historyWindowCloseFailed(exactTitle)
     }
 
     @MainActor
@@ -210,39 +295,21 @@ struct QQConversationSwitcher {
     }
 
     private static func recognizeText(_ image: CGImage) throws -> [CaptureOCRBlock] {
-        let request = VNRecognizeTextRequest()
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["zh-Hans", "en-US"]
-        request.usesLanguageCorrection = true
-        try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
-
-        return (request.results ?? []).enumerated().compactMap { index, observation in
-            guard let candidate = observation.topCandidates(1).first else { return nil }
-            return CaptureOCRBlock(
-                blockIndex: index,
-                text: candidate.string,
-                bbox: CaptureBBox(
-                    x: observation.boundingBox.origin.x,
-                    y: observation.boundingBox.origin.y,
-                    width: observation.boundingBox.width,
-                    height: observation.boundingBox.height
-                ),
-                confidence: Double(candidate.confidence)
-            )
-        }
+        try VisionTextRecognizer.recognizeBlocks(
+            image,
+            orientation: .up,
+            usesLanguageCorrection: true
+        )
     }
 
     private static func recognizeTooltip(_ image: CGImage) throws -> [String] {
-        let request = VNRecognizeTextRequest()
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["zh-Hans", "en-US"]
-        request.usesLanguageCorrection = false
-        request.regionOfInterest = historyTooltipROI
-        request.minimumTextHeight = 0.01
-        try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
-        return (request.results ?? []).compactMap {
-            $0.topCandidates(1).first?.string
-        }
+        try VisionTextRecognizer.recognizeStrings(
+            image,
+            orientation: .up,
+            usesLanguageCorrection: false,
+            regionOfInterest: historyTooltipROI,
+            minimumTextHeight: 0.01
+        )
     }
 
     @MainActor

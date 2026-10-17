@@ -67,6 +67,16 @@ class AdjacentOverlapTests(unittest.TestCase):
         right = Message("相同内容", sender_display="甲", timestamp_text=None)
         self.assertTrue(messages_match(left, right))
 
+    def test_normalized_dates_must_match_exactly(self) -> None:
+        left = Message("相同内容", sender_display="甲", timestamp_text="12:30", message_date="2026-10-02")
+        right = Message("相同内容", sender_display="甲", timestamp_text="12:30", message_date="2026-10-03")
+        self.assertFalse(messages_match(left, right))
+
+    def test_absolute_timestamps_must_match_exactly(self) -> None:
+        left = Message("相同内容", sender_display="甲", timestamp_text="12:30", timestamp="2026-10-02T12:30+08:00")
+        right = Message("相同内容", sender_display="甲", timestamp_text="12:30", timestamp="2026-10-03T12:30+08:00")
+        self.assertFalse(messages_match(left, right))
+
     def test_controlled_body_ocr_difference_can_match_with_exact_sender(self) -> None:
         left = [
             Message("玩家正在测试连续消息重叠", sender_display="甲"),
@@ -164,6 +174,48 @@ class AdjacentOverlapTests(unittest.TestCase):
 
         self.assertEqual(matches, [OverlapMatch(left_start=1, right_start=0, count=2)])
         self.assertEqual([item.content_text for item in merged], ["X", "A", "B", "C"])
+
+    def test_covered_top_fragment_does_not_block_confirmed_overlap(self) -> None:
+        older = [
+            Message("前文"),
+            Message("这个也不行吗", sender_display="时光三部落", timestamp_text="00:50"),
+            Message("好像zam那个炸弹乌德开树皮可以硬吃一颗", sender_display="，", timestamp_text="00:51"),
+            Message("之前躲不掉了开树皮没被炸死", sender_display="，", timestamp_text="00:51"),
+            Message("你说是咕咕？问题是人性形态能用。咕咕形态没有这个", sender_display="时光三部落", timestamp_text="00:51"),
+            Message("@时光三部落 咕咕能给自己开树皮啊", fragment_kind="top"),
+        ]
+        newer = [
+            Message("这个也不行吗", sender_display="时光三部落", timestamp_text="00:50"),
+            Message("好像zam那个炸弹鸟德开树皮可以硬吃一颗", sender_display="，", timestamp_text="00:51"),
+            Message("之前躲不掉了开树皮没被炸死", sender_display="，", timestamp_text="00:51"),
+            Message("你说是咕咕？问题是人性形态能用。咕咕形态没有这个", sender_display="时光三部落", timestamp_text="00:51"),
+            Message("时光三部落\n你说是咕咕？问题是人性形态能用。咕咕形态没有这个\n@时光三部落 咕咕能给自己开树皮啊", sender_display="，", timestamp_text="00:52"),
+        ]
+
+        merged, match = merge_adjacent_pages(older, newer)
+
+        self.assertEqual(match, OverlapMatch(left_start=1, right_start=0, count=4))
+        self.assertEqual(
+            sum("好像zam那个炸弹" in item.content_text for item in merged),
+            1,
+        )
+        self.assertTrue(any("咕咕能给自己开树皮啊" in item.content_text for item in merged))
+
+    def test_uncovered_top_fragment_is_preserved(self) -> None:
+        older = [
+            Message("older-1", sender_display="甲"),
+            Message("older-2", sender_display="甲"),
+            Message("独有的页顶残片内容", fragment_kind="top"),
+        ]
+        newer = [
+            Message("newer-1", sender_display="乙"),
+            Message("newer-2", sender_display="乙"),
+        ]
+
+        merged, match = merge_adjacent_pages(older, newer)
+
+        self.assertIsNone(match)
+        self.assertIn("独有的页顶残片内容", [item.content_text for item in merged])
 
     def test_no_match_keeps_both_pages(self) -> None:
         older = [Message("one"), Message("two")]

@@ -1,4 +1,4 @@
-"""Two-group first-full-capture orchestration over the single CaptureRunner state machine."""
+"""Full-capture orchestration for configured groups and single-day history backfill."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from typing import Callable
 
 from src.store import BatchStateStore
 
+from .swift_sources import OPEN_HISTORY_SOURCES, SELECT_HISTORY_DATE_SOURCES
 from .run_capture import (
     CaptureRunConfig,
     CaptureRunResult,
@@ -41,9 +42,11 @@ class FullCaptureConfig:
     runtime_root: Path = Path("runtime")
     boundary_confirmations: int = 2
     max_new_pages_per_run: int = 20
+    history_date: str | None = None
 
 
 HistoryOpener = Callable[[GroupTarget], None]
+HistoryDateSelector = Callable[[GroupTarget, str], None]
 
 
 def load_local_full_capture_config(
@@ -52,6 +55,8 @@ def load_local_full_capture_config(
     batch_id: str,
     runtime_root: Path = Path("runtime"),
     max_new_pages_per_run: int = 20,
+    group_key: str | None = None,
+    history_date: str | None = None,
 ) -> FullCaptureConfig:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -72,6 +77,7 @@ def load_local_full_capture_config(
                 history_title=str(item["history_title"]),
             )
             for item in groups
+            if group_key is None or item.get("group_key") == group_key
         )
         config = FullCaptureConfig(
             batch_id=batch_id,
@@ -83,13 +89,15 @@ def load_local_full_capture_config(
             scroll_pixels=int(data.get("scroll_pixels", 630)),
             runtime_root=runtime_root,
             max_new_pages_per_run=max_new_pages_per_run,
+            history_date=history_date,
         )
     except (KeyError, TypeError, ValueError) as exc:
         raise ValueError("local capture config fields are invalid") from exc
 
     keys = [target.group_key for target in config.groups]
     if (
-        not config.batch_id
+        not keys
+        or not config.batch_id
         or any(not key for key in keys)
         or len(set(keys)) != len(keys)
         or config.window_width <= 100
@@ -97,6 +105,7 @@ def load_local_full_capture_config(
         or config.scroll_pixels <= 0
         or config.boundary_confirmations < 2
         or config.max_new_pages_per_run < 1
+        or (config.history_date is not None and len(config.groups) != 1)
     ):
         raise ValueError("local capture config values are invalid")
     return config
@@ -111,6 +120,7 @@ class FullCaptureRunner:
         config: FullCaptureConfig,
         *,
         history_opener: HistoryOpener | None = None,
+        history_date_selector: HistoryDateSelector | None = None,
         step_executor: StepExecutor | None = None,
         now: Now = utc_now,
     ) -> None:
@@ -123,13 +133,19 @@ class FullCaptureRunner:
         )
         self.state_store = BatchStateStore(self.runtime_root / "state" / "batch-state.json")
         self.history_opener = history_opener or self._execute_open_history
+        self.history_date_selector = history_date_selector or self._execute_select_history_date
         self.step_executor = step_executor
         self.now = now
         self._open_history_binary: Path | None = None
+        self._select_history_date_binary: Path | None = None
 
     def run(self) -> CaptureRunResult:
         state = self.state_store.load()
         expected_groups = {target.group_key for target in self.config.groups}
+        if self.config.history_date is not None and len(expected_groups) != 1:
+            raise RecoveryRequired(
+                "history-date capture requires exactly one configured group"
+            )
         if state is not None:
             if state["status"] == "incomplete" and state["batch_id"] != self.config.batch_id:
                 raise RecoveryRequired(
@@ -142,6 +158,20 @@ class FullCaptureRunner:
                     )
                 if state["status"] in {"completed", "analyzed"}:
                     return self._runner_for(self.config.groups[0]).run()
+                pending = state["pending_capture"]
+                if (
+                    self.config.history_date is not None
+                    and pending is not None
+                    and pending["mode"] == "scroll"
+                    and not self._pending_raw_path(pending).exists()
+                ):
+                    target = next(
+                        item for item in self.config.groups if item.group_key == pending["group_key"]
+                    )
+                    self._runner_for(target).recover_pending_scroll_by_reanchor()
+                    state = self.state_store.load()
+                    if state is None:
+                        raise RecoveryRequired("pending-scroll recovery lost batch state")
                 self._preflight_pending_without_ui(state)
 
         for target in self.config.groups:
@@ -160,7 +190,11 @@ class FullCaptureRunner:
                 should_open = True
 
             if should_open:
-                self.history_opener(target)
+                if self.config.history_date is not None:
+                    self.history_opener(target)
+                    self.history_date_selector(target, self.config.history_date)
+                else:
+                    self.history_opener(target)
 
             result = self._runner_for(target).run()
             if result.status == "completed":
@@ -185,7 +219,7 @@ class FullCaptureRunner:
         raw_path = self._pending_raw_path(pending)
         if pending["mode"] == "scroll" and not raw_path.exists():
             raise RecoveryRequired(
-                "pending scroll has no durable target raw page; refusing to switch/open any QQ history window before manual recovery"
+                "pending scroll has no durable target raw page; refusing to switch/open QQ until recovery has succeeded"
             )
 
     def _pending_raw_path(self, pending: dict) -> Path:
@@ -214,10 +248,39 @@ class FullCaptureRunner:
                 batch_group_keys=tuple(item.group_key for item in self.config.groups),
                 boundary_confirmations=self.config.boundary_confirmations,
                 max_new_pages=self.config.max_new_pages_per_run,
+                expected_message_date=self.config.history_date,
             ),
             step_executor=self.step_executor,
             now=self.now,
         )
+
+    def _execute_select_history_date(self, target: GroupTarget, target_date: str) -> None:
+        if self._select_history_date_binary is None:
+            self._select_history_date_binary = self._build_select_history_date()
+        command = [
+            str(self._select_history_date_binary),
+            "--date", target_date,
+            "--group-key", target.group_key,
+            "--conversation-prefix", target.conversation_prefix,
+            "--header-contains", target.header_contains,
+            "--expected-title", target.history_title,
+            "--window-x", str(self.config.window_x),
+            "--window-y", str(self.config.window_y),
+            "--window-width", str(self.config.window_width),
+            "--window-height", str(self.config.window_height),
+        ]
+        subprocess.run(command, cwd=self.project_root, check=True)
+
+    def _build_select_history_date(self) -> Path:
+        build_dir = self.project_root / "build"
+        build_dir.mkdir(parents=True, exist_ok=True)
+        binary = build_dir / "select-history-date"
+        subprocess.run(
+            ["swiftc", "-parse-as-library", *SELECT_HISTORY_DATE_SOURCES, "-o", str(binary)],
+            cwd=self.project_root,
+            check=True,
+        )
+        return binary
 
     def _execute_open_history(self, target: GroupTarget) -> None:
         if self._open_history_binary is None:
@@ -236,15 +299,7 @@ class FullCaptureRunner:
         build_dir.mkdir(parents=True, exist_ok=True)
         binary = build_dir / "open-history"
         subprocess.run(
-            [
-                "swiftc",
-                "-parse-as-library",
-                "src/capture/CaptureModels.swift",
-                "src/capture/ConversationSwitcher.swift",
-                "src/app/open-history.swift",
-                "-o",
-                str(binary),
-            ],
+            ["swiftc", "-parse-as-library", *OPEN_HISTORY_SOURCES, "-o", str(binary)],
             cwd=self.project_root,
             check=True,
         )

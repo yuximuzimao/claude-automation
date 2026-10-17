@@ -19,7 +19,7 @@
 | `tasks/todo.md` | 唯一当前待办 | 每次进入项目 |
 | `docs/INDEX.md` | 文档/数据导航 | 每次进入项目 |
 | `docs/CURRENT.md` | 当前开发阶段与已验证事实 | 继续当前工作时 |
-| `docs/HANDOFF.md` | Codex/Claude 当前交接与验证结果 | 跨 agent 接续工作时 |
+| `docs/HANDOFF.md` | 跨 agent 接续注意事项；不复制当前状态清单 | 跨 agent 接续工作时 |
 | `docs/OPERATING-SOP.md` | 唯一任务分类与完整运行 SOP | 采集、恢复、分析、跨项目候选或自动化时 |
 | `docs/ARCHITECTURE.md` | 稳定模块边界与数据流 | 设计/实现跨模块功能时 |
 | `docs/rules/README.md` | 长期规则 owner 目录 | SOP 已完成分类、需要查看 owner 清单时 |
@@ -27,12 +27,14 @@
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
-| `src/app/run_capture.py` | 唯一正式运行入口；固定页数诊断、`--full`、`--incremental` | 改运行/恢复 CLI 时 |
-| `src/app/full_capture.py` | 两群安全串行基础编排、首次全量历史边界与安全分片 | 改双群/首次全量编排时 |
+| `src/app/run_capture.py` | 唯一正式运行入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动 | 改运行/恢复 CLI 时 |
+| `src/app/full_capture.py` | 两群首次全量与单群按日期历史补采编排 | 改首次全量/单日历史编排时 |
 | `src/app/incremental_capture.py` | 两群每日增量、强制刷新历史快照与 anchor 停止 | 改增量编排时 |
 | `src/app/capture-step.swift` | 内部单步 current/scroll capture | 改 Swift 单步执行边界时 |
-| `src/app/open-history.swift` | 安全打开目标群聊天记录窗口 | 改两群切换入口时 |
+| `src/app/open-history.swift` | 内部安全打开目标群聊天记录窗口 | 改两群切换入口时 |
+| `src/app/select-history-date.swift` | history-date 模式内部日期定位 CLI 适配器 | 改单日历史定位入口时 |
 | `src/capture/ConversationSwitcher.swift` | 会话 OCR 定位、目标复核、聊天记录 tooltip/窗口门禁 | 改 QQ 群切换安全逻辑时 |
+| `src/capture/HistoryDateSelector.swift` | 日期筛选、月份导航、日期格计算与双重 OCR 复核 | 改 QQ 日期筛选逻辑时 |
 | `src/capture/` | AX/SCK/Vision/变化检测/dhash/raw 写入 | 改 QQ 捕获与滚动时 |
 | `src/normalize/page_reconstruct.py` | 单页 bbox→消息/fragment/media unknown | 改几何重建时 |
 | `src/normalize/assemble.py` | 同群多页组装与 Schema records | 改跨页组装时 |
@@ -75,7 +77,7 @@
 | `docs/rules/` | 跨批次长期规则 |
 | `docs/OPERATING-SOP.md` | 项目唯一任务分类与运行 SOP |
 | `docs/archive/` | 历史方案/阶段归档，默认不加载 |
-| `tasks/` | 当前待办与临时教训 |
+| `tasks/` | 当前待办（只保留 `todo.md`；临时教训不建空壳文件） |
 | `tests/` | 确定性逻辑、采集适配器与回归验证 |
 | `runtime/` | 私密运行数据；整个目录不进 Git |
 | `runtime/inbox/current.md` | GPT 默认读取的当前分析输入 |

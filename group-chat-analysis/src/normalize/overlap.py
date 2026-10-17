@@ -28,8 +28,13 @@ class Message:
     content_text: str
     sender_display: str | None = None
     timestamp_text: str | None = None
+    timestamp: str | None = None
+    message_date: str | None = None
     message_type: str = "text"
     ocr_confidence: float | None = None
+    # Transient reconstruction metadata. This is intentionally not persisted in
+    # message-record.json; it only helps adjacent-page overlap handling.
+    fragment_kind: str | None = None
 
 
 def persisted_message_fields(message: Message) -> dict[str, object]:
@@ -39,6 +44,8 @@ def persisted_message_fields(message: Message) -> dict[str, object]:
         "content_text": message.content_text,
         "sender_display": message.sender_display,
         "timestamp_text": message.timestamp_text,
+        "timestamp": message.timestamp,
+        "message_date": message.message_date,
         "message_type": message.message_type,
         "ocr_confidence": message.ocr_confidence,
     }
@@ -78,11 +85,17 @@ def _compatible_sender(left: Message, right: Message) -> bool:
 
 
 def _compatible_optional(left: str | None, right: str | None) -> bool:
-    """A missing non-identity field is unknown; two observed values must agree."""
+    """A missing OCR-derived field is unknown; two observed values may differ slightly."""
 
     if left is None or right is None:
         return True
     return _similar_text(left, right)
+
+
+def _compatible_exact_optional(left: str | None, right: str | None) -> bool:
+    """Deterministic normalized metadata must match exactly when both sides are known."""
+
+    return left is None or right is None or left == right
 
 
 def messages_match(left: Message, right: Message) -> bool:
@@ -94,6 +107,8 @@ def messages_match(left: Message, right: Message) -> bool:
         _similar_text(left.content_text, right.content_text)
         and _compatible_sender(left, right)
         and _compatible_optional(left.timestamp_text, right.timestamp_text)
+        and _compatible_exact_optional(left.timestamp, right.timestamp)
+        and _compatible_exact_optional(left.message_date, right.message_date)
     )
 
 
@@ -199,6 +214,27 @@ def _canonical_message(left: Message, right: Message) -> Message:
     return left
 
 
+def _covered_top_fragment(fragment: Message, newer_page: list[Message]) -> bool:
+    """Return whether a clipped older-page top fragment is already visible in the next page.
+
+    QQ scroll overlap can reconstruct the same boundary text differently: the older
+    screenshot may expose only a headerless top fragment while the newer screenshot
+    contains that text inside one complete message. Such a fragment must not block an
+    otherwise strong multi-message overlap, but we only suppress it when the text is
+    long and exactly contained (after normalization) in the nearby newer page.
+    """
+
+    if fragment.fragment_kind != "top" or fragment.sender_display or fragment.timestamp_text:
+        return False
+    fragment_key = _text_key(fragment.content_text)
+    if len(fragment_key) < TWO_MESSAGE_EXACT_TEXT_ANCHOR_LENGTH:
+        return False
+    return any(
+        fragment_key in _text_key(message.content_text)
+        for message in newer_page[:8]
+    )
+
+
 def merge_adjacent_pages(
     older_page: list[Message],
     newer_page: list[Message],
@@ -207,19 +243,23 @@ def merge_adjacent_pages(
 ) -> tuple[list[Message], OverlapMatch | None]:
     """Merge two old-to-new adjacent pages, deleting only confirmed overlap."""
 
-    match = find_overlap(older_page, newer_page, min_count=min_count)
+    overlap_older = list(older_page)
+    while overlap_older and _covered_top_fragment(overlap_older[-1], newer_page):
+        overlap_older.pop()
+
+    match = find_overlap(overlap_older, newer_page, min_count=min_count)
     if match is None:
         return list(older_page) + list(newer_page), None
 
     canonical = [
         _canonical_message(
-            older_page[match.left_start + offset],
+            overlap_older[match.left_start + offset],
             newer_page[match.right_start + offset],
         )
         for offset in range(match.count)
     ]
     merged = (
-        list(older_page[: match.left_start])
+        list(overlap_older[: match.left_start])
         + list(newer_page[: match.right_start])
         + canonical
         + list(newer_page[match.right_end :])

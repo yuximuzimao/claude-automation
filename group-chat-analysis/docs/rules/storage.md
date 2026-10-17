@@ -27,24 +27,25 @@
 
 ```text
 runtime/
-  raw/          # OCR批次原始结构化结果，可按策略清理
-  messages/     # 规范化消息库
-  inbox/        # GPT待分析输入
-    current.md  # 唯一默认入口
+  raw/          # 普通 full / incremental 的 OCR 原始结构化结果
+  messages/     # 普通 full / incremental 的规范化消息库
+  inbox/        # 普通批次 GPT 待分析输入
+    current.md  # 日常分析唯一默认入口
+  history-days/ # 单日历史补采；每个 YYYY-MM-DD 子目录都是独立 runtime root
   reports/      # GPT分析结果
-  state/        # 恢复点与完成状态
-  diagnostics/  # 临时诊断截图；常规运行不得使用
+  state/        # 普通 full / incremental 的恢复点与完成状态
+  diagnostics/  # 临时诊断；常规运行不得长期保留
 ```
 
 目录可在程序首次运行时创建，不需要通过占位文件进入 Git。
 
 ## canonical source
 
-规范化群聊原文的本地 canonical source 是：
+日常 full / incremental 的本地 canonical source 是 `runtime/messages/messages.jsonl`。
 
-`runtime/messages/messages.jsonl`
+单日历史补采为了避免把旧历史追加到日常增量库尾部，每个自然日使用独立 runtime root；其 canonical 为 `runtime/history-days/YYYY-MM-DD/messages/messages.jsonl`。一个日期只有一个现役 history-day bundle，后续总历史分析从这些 completed 日包构建输入，不把它们反向拼进日常 `runtime/messages/messages.jsonl`。
 
-`runtime/inbox/current.md` 是派生分析包，不反向修改 messages。
+`runtime/inbox/current.md` 和各 history-day 下的 `inbox/current.md` 都是 completed canonical 的派生物，不反向修改 messages。
 
 ## current.md
 
@@ -71,13 +72,15 @@ runtime/
 - `completed`：达到本轮停止条件且规范化/去重完成，可以生成 current.md；
 - `analyzed`：GPT 已处理 current.md，但不改变已完成消息，也不能用另一组记录改写现有 current.md。
 
-batch-state v4 保留 `pending_capture` / 每群 `capture_complete`，并新增 `batch_kind = capture | incremental` 与每群不可变 `start_anchor`。v2/v3 状态只确定性迁移为 `capture`，不得猜成 incremental。唯一页提交顺序仍为 **pending intent → capture side effect → raw durable → record_page**；`record_page()` 只能消费与 group/page 完全匹配的 pending，随后清空 pending 并推进全 batch 的 `next_page_index`。只有所有群都 `capture_complete=true`，才允许整个 batch completed。
+batch-state 当前唯一支持 schema v4：保留 `pending_capture` / 每群 `capture_complete`，并包含 `batch_kind = capture | incremental` 与每群不可变 `start_anchor`。现存 runtime state 已全部升级为 v4，因此运行时不再保留 v2/v3 自动迁移兼容层；遇到旧 schema 直接拒绝，由人工确认数据来源后处理。唯一页提交顺序仍为 **pending intent → capture side effect → raw durable → record_page**；`record_page()` 只能消费与 group/page 完全匹配的 pending，随后清空 pending 并推进全 batch 的 `next_page_index`。只有所有群都 `capture_complete=true`，才允许整个 batch completed。
 
 恢复语义：
 - `pending current` 且 raw 缺失：当前页捕获没有滚动副作用，可以重试同一页；
 - pending 对应 raw 已完整落盘：直接校验并晋升该 raw，不重复 capture；
 - Swift 明确以 pre-scroll 专用退出码证明失败发生在发滚轮之前：允许只撤销该 pending，不推进 page_index、不计 NO_CHANGE；
-- `pending scroll` 且目标 raw 缺失，但没有 pre-scroll 证据：无法证明滚轮是否已经发生，必须保留 incomplete 并停止，禁止再次滚动；
+- `pending scroll` 且目标 raw 缺失，但没有 pre-scroll 证据：普通 full/incremental 必须保留 incomplete 并停止；history-date 进入同一 runner 内的自动重锚定，不直接消费该 pending；
+- history-date 重锚定期间的 probe/replay 只写 `runtime/.../diagnostics/pending-scroll-recovery/` 临时 raw，不调用 `record_page()`、不推进 `next_page_index`、不改变 canonical。只有连续两张 probe 唯一匹配连续 durable 页，并逐页回放/最终 current probe 全部重新匹配至最后 durable 页后，才允许 `abort_pending_capture()` 撤销原 pending；
+- 撤销 pending 后 state 仍停在原 `next_page_index`，普通 runner 必须从最后 durable 页重新执行一次真实 scroll/capture，失败目标页重新生成正式 raw 后才能 `record_page()`；任何重锚定证据不足都保持原 pending/incomplete；
 - 没有 pending 却出现 `next_page_index` 对应 raw：来源无法证明，必须停止，不得猜测晋升。
 
 批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级保存该群最近页、不可变 `start_anchor` 与最新 completed anchor。incremental batch 开始时 `start_anchor` 从上一 completed 尾部复制，整个 batch 生命周期内不得变化；只有本轮 completed 时才允许更新 `last_completed_anchor`。

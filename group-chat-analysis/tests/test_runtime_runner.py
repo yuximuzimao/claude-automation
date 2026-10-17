@@ -6,13 +6,19 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from src.app.run_capture import (
     CaptureNoChange,
     CapturePreScrollRejected,
     CaptureRunConfig,
+    CaptureRunError,
     CaptureRunner,
     RecoveryRequired,
+    history_background_command,
+    history_background_paths,
+    parse_args,
+    start_history_background,
 )
 from src.store import BatchStateStore
 
@@ -109,6 +115,95 @@ class RuntimeRunnerTests(unittest.TestCase):
             now=self.now,
         )
 
+    def test_history_date_cli_derives_stable_batch_runtime_and_long_page_budget(self) -> None:
+        with patch(
+            "sys.argv",
+            [
+                "run_capture",
+                "--history-date",
+                "2026-09-24",
+                "--group-key",
+                "wow-infinite-time",
+            ],
+        ):
+            args = parse_args()
+        self.assertTrue(args.full)
+        self.assertFalse(args.incremental)
+        self.assertEqual(args.batch_id, "history-20260924-full")
+        self.assertEqual(args.runtime_root, Path("runtime/history-days/2026-09-24"))
+        self.assertEqual(args.max_new_pages, 1000)
+
+    def test_background_is_rejected_outside_history_date_mode(self) -> None:
+        with patch("sys.argv", ["run_capture", "--batch-id", "batch-1", "--full", "--background"]):
+            with self.assertRaises(SystemExit):
+                parse_args()
+
+    def test_history_date_background_reuses_same_formal_runner(self) -> None:
+        with patch(
+            "sys.argv",
+            [
+                "run_capture",
+                "--history-date",
+                "2026-09-24",
+                "--group-key",
+                "wow-infinite-time",
+                "--background",
+            ],
+        ):
+            args = parse_args()
+        self.assertTrue(args.background)
+        command = history_background_command(args)
+        self.assertIn("src.app.run_capture", command)
+        self.assertIn("--history-date", command)
+        self.assertNotIn("--background", command)
+        log_path, pid_path = history_background_paths(self.root, "2026-09-24")
+        self.assertEqual(log_path, self.root / "runtime/diagnostics/history-20260924-background.log")
+        self.assertEqual(pid_path, self.root / "runtime/diagnostics/history-background.pid")
+
+    def test_history_background_launcher_writes_pid_and_uses_detached_same_runner(self) -> None:
+        with patch(
+            "sys.argv",
+            [
+                "run_capture",
+                "--history-date",
+                "2026-09-24",
+                "--group-key",
+                "wow-infinite-time",
+                "--background",
+            ],
+        ):
+            args = parse_args()
+        with patch("src.app.run_capture.subprocess.Popen") as popen:
+            popen.return_value.pid = 9876
+            pid, log_path = start_history_background(self.root, args)
+        self.assertEqual(pid, 9876)
+        self.assertTrue(log_path.exists())
+        _log, pid_path = history_background_paths(self.root, "2026-09-24")
+        self.assertEqual(pid_path.read_text(encoding="utf-8"), "9876")
+        call = popen.call_args
+        self.assertTrue(call.kwargs["start_new_session"])
+        self.assertNotIn("--background", call.args[0])
+
+    def test_history_background_global_lock_refuses_second_capture(self) -> None:
+        with patch(
+            "sys.argv",
+            [
+                "run_capture",
+                "--history-date",
+                "2026-09-24",
+                "--group-key",
+                "wow-infinite-time",
+                "--background",
+            ],
+        ):
+            args = parse_args()
+        _log_path, pid_path = history_background_paths(self.root, "2026-09-24")
+        pid_path.parent.mkdir(parents=True, exist_ok=True)
+        pid_path.write_text("43210", encoding="utf-8")
+        with patch("src.app.run_capture.os.kill", return_value=None):
+            with self.assertRaises(CaptureRunError):
+                start_history_background(self.root, args)
+
     def test_single_entry_completes_and_builds_current(self) -> None:
         result = self.runner().run()
 
@@ -118,7 +213,6 @@ class RuntimeRunnerTests(unittest.TestCase):
         self.assertTrue(result.current_path.exists())
         state = BatchStateStore(self.runtime / "state" / "batch-state.json").load()
         self.assertEqual(state["status"], "completed")
-        self.assertIsNone(state["pending_capture"])
 
     def test_raw_written_before_state_record_is_reconciled_without_recapture(self) -> None:
         def crash_after_write(config, mode, page_index, output, previous) -> None:
@@ -225,6 +319,104 @@ class RuntimeRunnerTests(unittest.TestCase):
         self.assertEqual(state["pending_capture"]["page_index"], 1)
         self.assertFalse(
             (self.runtime / "raw/batch-1/group-a/page-000001.json").exists()
+        )
+
+    def test_pending_scroll_recovery_rewinds_reanchors_and_clears_pending(self) -> None:
+        state_store = BatchStateStore(self.runtime / "state" / "batch-state.json")
+        state_store.start_batch(
+            "batch-1", started_at=self.now(), group_keys=["group-a"]
+        )
+        for page_index in range(3):
+            state_store.begin_capture(
+                "batch-1",
+                "group-a",
+                page_index,
+                mode="current" if page_index == 0 else "scroll",
+                started_at=self.now(),
+            )
+            path = self.runtime / f"raw/batch-1/group-a/page-{page_index:06d}.json"
+            self.write_page(self.config, "current", page_index, path, None)
+            state_store.record_page(
+                "batch-1",
+                "group-a",
+                page_index,
+                updated_at=f"2026-01-01T00:00:0{page_index}Z",
+            )
+        state_store.begin_capture(
+            "batch-1", "group-a", 3, mode="scroll", started_at=self.now()
+        )
+
+        calls = []
+
+        def recovery_step(config, mode, page_index, output, previous) -> None:
+            calls.append((mode, page_index, previous.name if previous else None))
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(
+                json.dumps(raw_page("batch-1", "group-a", page_index), ensure_ascii=False),
+                encoding="utf-8",
+            )
+
+        state = self.runner(recovery_step, page_count=4).recover_pending_scroll_by_reanchor()
+
+        self.assertIsNone(state["pending_capture"])
+        self.assertEqual(state["next_page_index"], 3)
+        self.assertEqual(state["groups"]["group-a"]["last_page_index"], 2)
+        self.assertEqual(
+            calls,
+            [
+                ("current", 3, None),
+                ("rewind", 2, "probe-current-000003.json"),
+                ("rewind", 1, "probe-rewind-01-000002.json"),
+                ("scroll", 2, "page-000001.json"),
+                ("current", 2, None),
+            ],
+        )
+        self.assertFalse(
+            (self.runtime / "diagnostics/pending-scroll-recovery").exists()
+        )
+
+    def test_pending_scroll_recovery_failure_preserves_original_pending(self) -> None:
+        state_store = BatchStateStore(self.runtime / "state" / "batch-state.json")
+        state_store.start_batch(
+            "batch-1", started_at=self.now(), group_keys=["group-a"]
+        )
+        for page_index in range(3):
+            state_store.begin_capture(
+                "batch-1",
+                "group-a",
+                page_index,
+                mode="current" if page_index == 0 else "scroll",
+                started_at=self.now(),
+            )
+            path = self.runtime / f"raw/batch-1/group-a/page-{page_index:06d}.json"
+            self.write_page(self.config, "current", page_index, path, None)
+            state_store.record_page(
+                "batch-1",
+                "group-a",
+                page_index,
+                updated_at=f"2026-01-01T00:00:0{page_index}Z",
+            )
+        state_store.begin_capture(
+            "batch-1", "group-a", 3, mode="scroll", started_at=self.now()
+        )
+
+        def unmatchable_probe(_config, _mode, page_index, output, _previous) -> None:
+            value = raw_page("batch-1", "group-a", page_index)
+            for block in value["blocks"]:
+                block["text"] = f"unknown-{page_index}-{block['block_index']}"
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(json.dumps(value), encoding="utf-8")
+
+        with self.assertRaises(RecoveryRequired):
+            self.runner(unmatchable_probe, page_count=4).recover_pending_scroll_by_reanchor()
+
+        state = state_store.load()
+        self.assertEqual(state["pending_capture"]["page_index"], 3)
+        self.assertEqual(state["pending_capture"]["mode"], "scroll")
+        self.assertEqual(state["next_page_index"], 3)
+        self.assertEqual(state["groups"]["group-a"]["last_page_index"], 2)
+        self.assertFalse(
+            (self.runtime / "raw/batch-1/group-a/page-000003.json").exists()
         )
 
     def test_pre_scroll_rejection_clears_pending_without_advancing_page(self) -> None:

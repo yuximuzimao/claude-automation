@@ -1,4 +1,4 @@
-"""Single formal runtime entry for one-group capture with conservative recovery."""
+"""Single formal runtime entry for resumable QQ capture and history backfill."""
 
 from __future__ import annotations
 
@@ -6,10 +6,15 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import argparse
 import json
+import os
 from pathlib import Path
+import shutil
 import subprocess
+import sys
 from typing import Callable
 
+from src.app.pending_scroll_recovery import raw_pages_same_view, unique_rewind_anchor
+from src.app.swift_sources import CAPTURE_STEP_SOURCES
 from src.normalize.assemble import assemble_capture_pages
 from src.normalize.incremental import find_anchor_end, reindex_new_records_after_anchor
 from src.normalize.page_reconstruct import validate_capture_page
@@ -49,6 +54,7 @@ class CaptureRunConfig:
     boundary_confirmations: int = 2
     max_new_pages: int | None = None
     batch_kind: str = "capture"
+    expected_message_date: str | None = None
 
 
 @dataclass(frozen=True)
@@ -229,6 +235,151 @@ class CaptureRunner:
 
         return self._finish_or_report_incomplete(state)
 
+    def recover_pending_scroll_by_reanchor(self) -> dict:
+        """Re-anchor an unknown post-scroll viewport without trusting its position.
+
+        Recovery never promotes the failed target page.  It captures the current
+        viewport as a probe, rewinds toward newer messages until two consecutive
+        probes uniquely match two consecutive already-durable pages, then replays
+        forward while verifying every durable page until the last known page is
+        reached.  Only then is the original pending scroll cleared so the normal
+        runner can re-read the missing target page from a known-safe viewport.
+        """
+
+        self._validate_config()
+        state = self.state_store.load()
+        if state is None:
+            raise RecoveryRequired("no batch state exists for pending-scroll recovery")
+        if state["batch_id"] != self.config.batch_id or state["status"] != "incomplete":
+            raise RecoveryRequired("pending-scroll recovery requires the active incomplete batch")
+        if set(state["groups"]) != set(self.batch_group_keys):
+            raise RecoveryRequired("pending-scroll recovery group set does not match the active batch")
+
+        pending = state["pending_capture"]
+        if pending is None or pending["mode"] != "scroll":
+            raise RecoveryRequired("there is no pending scroll capture to recover")
+        if pending["group_key"] != self.config.group_key:
+            raise RecoveryRequired("pending capture belongs to another group")
+
+        pending_index = int(pending["page_index"])
+        progress = state["groups"][self.config.group_key]
+        last_page_index = progress["last_page_index"]
+        if last_page_index is None or pending_index != int(last_page_index) + 1:
+            raise RecoveryRequired("pending scroll is not immediately after the last durable page")
+        last_page_index = int(last_page_index)
+        if last_page_index < 1:
+            raise RecoveryRequired("pending-scroll re-anchor needs at least two durable pages")
+        if self._page_path(pending_index).exists():
+            raise RecoveryRequired("pending target raw already exists; use normal pending reconciliation")
+
+        lookback_start = max(0, last_page_index - 12)
+        durable_pages = {
+            index: self._load_expected_raw(self._page_path(index), index)
+            for index in range(lookback_start, last_page_index + 1)
+        }
+        probe_dir = (
+            self.runtime_root
+            / "diagnostics"
+            / "pending-scroll-recovery"
+            / self.config.batch_id
+            / self.config.group_key
+        )
+        shutil.rmtree(probe_dir, ignore_errors=True)
+        probe_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            probes: list[tuple[int, dict, Path]] = []
+            current_path = probe_dir / f"probe-current-{pending_index:06d}.json"
+            self.step_executor(self.config, "current", pending_index, current_path, None)
+            current_probe = self._load_expected_raw(current_path, pending_index)
+            probes.append((pending_index, current_probe, current_path))
+
+            anchor_index: int | None = None
+            for rewind_number in range(1, 7):
+                probe_index = pending_index - rewind_number
+                if probe_index < 0:
+                    break
+                previous_probe_path = probes[-1][2]
+                output = probe_dir / f"probe-rewind-{rewind_number:02d}-{probe_index:06d}.json"
+                try:
+                    self.step_executor(
+                        self.config,
+                        "rewind",
+                        probe_index,
+                        output,
+                        previous_probe_path,
+                    )
+                except CaptureNoChange:
+                    break
+                probe = self._load_expected_raw(output, probe_index)
+                probes.append((probe_index, probe, output))
+                if len(probes) >= 2:
+                    anchor_index = unique_rewind_anchor(
+                        probes[-2][1],
+                        probes[-1][1],
+                        durable_pages,
+                    )
+                    if anchor_index is not None:
+                        break
+
+            if anchor_index is None:
+                raise RecoveryRequired(
+                    "could not re-anchor on two consecutive durable pages after rewinding; pending scroll preserved"
+                )
+
+            current_probe = probes[-1][1]
+            if not raw_pages_same_view(current_probe, durable_pages[anchor_index]):
+                raise RecoveryRequired("re-anchor sequence did not end on the claimed durable page")
+
+            for target_index in range(anchor_index + 1, last_page_index + 1):
+                previous_durable = self._page_path(target_index - 1)
+                output = probe_dir / f"replay-{target_index:06d}.json"
+                try:
+                    self.step_executor(
+                        self.config,
+                        "scroll",
+                        target_index,
+                        output,
+                        previous_durable,
+                    )
+                except CaptureNoChange as exc:
+                    raise RecoveryRequired(
+                        f"re-anchor replay stopped before durable page {target_index}"
+                    ) from exc
+                replay = self._load_expected_raw(output, target_index)
+                if not raw_pages_same_view(replay, durable_pages[target_index]):
+                    raise RecoveryRequired(
+                        f"re-anchor replay did not match durable page {target_index}; pending scroll preserved"
+                    )
+
+            final_probe_path = probe_dir / f"final-{last_page_index:06d}.json"
+            self.step_executor(
+                self.config,
+                "current",
+                last_page_index,
+                final_probe_path,
+                None,
+            )
+            final_probe = self._load_expected_raw(final_probe_path, last_page_index)
+            if not raw_pages_same_view(final_probe, durable_pages[last_page_index]):
+                raise RecoveryRequired(
+                    "final recovery viewport does not match the last durable page; pending scroll preserved"
+                )
+
+            return self.state_store.abort_pending_capture(
+                self.config.batch_id,
+                self.config.group_key,
+                pending_index,
+                updated_at=self.now(),
+            )
+        finally:
+            shutil.rmtree(probe_dir, ignore_errors=True)
+            for parent in (probe_dir.parent, probe_dir.parent.parent):
+                try:
+                    parent.rmdir()
+                except OSError:
+                    pass
+
     def _mark_incremental_anchor_if_found(self, state: dict) -> tuple[dict, bool]:
         if self.config.batch_kind != "incremental":
             return state, False
@@ -262,6 +413,7 @@ class CaptureRunner:
             )
 
         records, page_count = self._assemble_all_groups(state)
+        self._validate_expected_message_date(records)
         finalizer = (
             finalize_incremental_batch
             if self.config.batch_kind == "incremental"
@@ -289,6 +441,7 @@ class CaptureRunner:
         if set(state["groups"]) != set(self.batch_group_keys):
             raise CaptureRunError("completed state groups do not match runner groups")
         records, page_count = self._assemble_all_groups(state)
+        self._validate_expected_message_date(records)
         finalizer = (
             finalize_incremental_batch
             if self.config.batch_kind == "incremental"
@@ -309,6 +462,31 @@ class CaptureRunner:
             messages=len(records),
             current_path=self.current_path,
         )
+
+    def _validate_expected_message_date(self, records: list[dict[str, object]]) -> None:
+        expected = self.config.expected_message_date
+        if expected is None:
+            return
+        if not records:
+            raise RecoveryRequired("history-date capture produced no canonical messages")
+        observed = {str(record["message_date"]) for record in records if record.get("message_date") is not None}
+        if expected not in observed:
+            raise RecoveryRequired(
+                f"history-date capture did not contain the selected date: expected={expected} observed={sorted(observed)}"
+            )
+        unexpected = sorted(value for value in observed if value != expected)
+        if unexpected:
+            raise RecoveryRequired(
+                f"history-date capture contains messages from other dates: expected={expected} unexpected={unexpected}"
+            )
+        for record in records:
+            timestamp = record.get("timestamp")
+            if timestamp is None:
+                continue
+            if str(timestamp)[:10] != expected:
+                raise RecoveryRequired(
+                    f"history-date capture contains an out-of-day timestamp: expected={expected} timestamp={timestamp}"
+                )
 
     def _assemble_all_groups(self, state: dict) -> tuple[list[dict[str, object]], int]:
         records: list[dict[str, object]] = []
@@ -518,18 +696,8 @@ class CaptureRunner:
         build_dir = self.project_root / "build"
         build_dir.mkdir(parents=True, exist_ok=True)
         binary = build_dir / "capture-step"
-        sources = [
-            "src/capture/CaptureModels.swift",
-            "src/capture/VisualFingerprint.swift",
-            "src/capture/ContentRegion.swift",
-            "src/capture/WindowPreparation.swift",
-            "src/capture/ChangeDetector.swift",
-            "src/capture/QQHistoryCapture.swift",
-            "src/capture/RawPageWriter.swift",
-            "src/app/capture-step.swift",
-        ]
         subprocess.run(
-            ["swiftc", *sources, "-o", str(binary)],
+            ["swiftc", *CAPTURE_STEP_SOURCES, "-o", str(binary)],
             cwd=self.project_root,
             check=True,
         )
@@ -538,12 +706,12 @@ class CaptureRunner:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run resumable QQ group capture")
-    parser.add_argument("--batch-id", required=True)
+    parser.add_argument("--batch-id")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--full", action="store_true", help="capture all groups from config/local.json to history boundary")
     mode.add_argument("--incremental", action="store_true", help="capture only messages newer than the previous completed anchors")
     parser.add_argument("--config", type=Path, default=Path("config/local.json"))
-    parser.add_argument("--max-new-pages", type=int, default=20)
+    parser.add_argument("--max-new-pages", type=int)
     parser.add_argument("--group-key")
     parser.add_argument("--expected-title")
     parser.add_argument("--pages", type=int)
@@ -553,7 +721,33 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--window-height", type=float)
     parser.add_argument("--scroll-pixels", type=int, default=630)
     parser.add_argument("--runtime-root", type=Path, default=Path("runtime"))
+    parser.add_argument("--history-date", help="single-group full capture for one QQ history date (YYYY-MM-DD)")
+    parser.add_argument("--background", action="store_true", help="run history-date capture detached and return immediately")
     args = parser.parse_args()
+    if args.background and args.history_date is None:
+        parser.error("--background is only valid with --history-date")
+    if args.history_date is not None:
+        if args.incremental:
+            parser.error("--history-date cannot be combined with --incremental")
+        if not args.group_key:
+            parser.error("--history-date requires --group-key")
+        try:
+            datetime.strptime(args.history_date, "%Y-%m-%d")
+        except ValueError:
+            parser.error("--history-date must be YYYY-MM-DD")
+        args.full = True
+        if args.batch_id is None:
+            args.batch_id = f"history-{args.history_date.replace('-', '')}-full"
+        if args.runtime_root == Path("runtime"):
+            args.runtime_root = Path("runtime/history-days") / args.history_date
+        if args.max_new_pages is None:
+            args.max_new_pages = 1000
+    else:
+        if args.batch_id is None:
+            parser.error("--batch-id is required unless --history-date is used")
+        if args.max_new_pages is None:
+            args.max_new_pages = 20
+
     if args.full or args.incremental:
         return args
 
@@ -571,10 +765,61 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
+def history_background_paths(project_root: Path, target_date: str) -> tuple[Path, Path]:
+    diagnostics = project_root / "runtime" / "diagnostics"
+    log_name = f"history-{target_date.replace('-', '')}-background.log"
+    return diagnostics / log_name, diagnostics / "history-background.pid"
+
+
+def history_background_command(args: argparse.Namespace) -> list[str]:
+    return [
+        sys.executable,
+        "-m",
+        "src.app.run_capture",
+        "--history-date", str(args.history_date),
+        "--group-key", str(args.group_key),
+        "--batch-id", str(args.batch_id),
+        "--runtime-root", str(args.runtime_root),
+        "--max-new-pages", str(args.max_new_pages),
+        "--config", str(args.config),
+    ]
+
+
+def start_history_background(project_root: Path, args: argparse.Namespace) -> tuple[int, Path]:
+    if not args.background or args.history_date is None:
+        raise CaptureRunError("background launch requires --history-date --background")
+    log_path, pid_path = history_background_paths(project_root, args.history_date)
+    if pid_path.exists():
+        try:
+            existing_pid = int(pid_path.read_text(encoding="utf-8").strip())
+            os.kill(existing_pid, 0)
+        except (OSError, ValueError):
+            pass
+        else:
+            raise CaptureRunError(
+                f"history-date background capture is already running for {args.history_date} (pid={existing_pid})"
+            )
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with log_path.open("ab", buffering=0) as log_file:
+        process = subprocess.Popen(
+            history_background_command(args),
+            cwd=project_root,
+            stdout=log_file,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+    pid_path.write_text(str(process.pid), encoding="utf-8")
+    return process.pid, log_path
+
+
 def main() -> None:
     project_root = Path(__file__).resolve().parents[2]
     args = parse_args()
     try:
+        if args.background:
+            pid, log_path = start_history_background(project_root, args)
+            print(f"STARTED history_date={args.history_date} pid={pid} log={log_path}")
+            return
         if args.full or args.incremental:
             from .full_capture import FullCaptureRunner, load_local_full_capture_config
 
@@ -584,6 +829,8 @@ def main() -> None:
                 batch_id=args.batch_id,
                 runtime_root=args.runtime_root,
                 max_new_pages_per_run=args.max_new_pages,
+                group_key=args.group_key,
+                history_date=args.history_date,
             )
             if args.incremental:
                 from .incremental_capture import IncrementalCaptureRunner
@@ -610,6 +857,7 @@ def main() -> None:
         RecoveryRequired,
         StateError,
         ValueError,
+        OSError,
         subprocess.CalledProcessError,
     ) as exc:
         raise SystemExit(f"ERROR {exc}") from exc

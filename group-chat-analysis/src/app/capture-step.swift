@@ -24,7 +24,7 @@ struct CaptureStepArguments {
         }
 
         guard
-            let mode = values["--mode"], ["current", "scroll"].contains(mode),
+            let mode = values["--mode"], ["current", "scroll", "rewind"].contains(mode),
             let groupKey = values["--group-key"], !groupKey.isEmpty,
             let expectedTitle = values["--expected-title"], !expectedTitle.isEmpty,
             let batchID = values["--batch-id"], !batchID.isEmpty,
@@ -39,7 +39,7 @@ struct CaptureStepArguments {
         }
 
         let previousRawPath = values["--previous-raw"]
-        if mode == "scroll" && previousRawPath == nil {
+        if ["scroll", "rewind"].contains(mode) && previousRawPath == nil {
             throw CaptureStepCLIError.previousRawRequired
         }
         let scrollPixels = values["--scroll-pixels"].flatMap(Int.init) ?? 630
@@ -73,9 +73,9 @@ enum CaptureStepCLIError: Error, CustomStringConvertible {
         case .invalidArguments:
             return "Invalid capture-step arguments."
         case .previousRawRequired:
-            return "--previous-raw is required for scroll mode."
+            return "--previous-raw is required for scroll/rewind mode."
         case let .previousRawMismatch(reason):
-            return "Previous raw page is not the expected durable predecessor: \(reason)"
+            return "Previous raw page is not the expected predecessor for this capture mode: \(reason)"
         case let .scrollNoChange(mad):
             return "Scroll produced no confirmed change (max baseline MAD=\(String(format: "%.4f", mad)))."
         case let .scrollUncertain(baseline, adjacent):
@@ -99,7 +99,10 @@ private func loadPreviousPage(_ args: CaptureStepArguments) throws -> RawCapture
     guard page.groupKey == args.groupKey else {
         throw CaptureStepCLIError.previousRawMismatch("group_key")
     }
-    guard page.pageIndex == args.pageIndex - 1 else {
+    let expectedPreviousIndex = args.mode == "rewind"
+        ? args.pageIndex + 1
+        : args.pageIndex - 1
+    guard page.pageIndex == expectedPreviousIndex else {
         throw CaptureStepCLIError.previousRawMismatch("page_index")
     }
     return page
@@ -110,7 +113,7 @@ struct CaptureStepMain {
     static func main() async {
         do {
             let args = try CaptureStepArguments.parse(CommandLine.arguments)
-            if args.mode == "scroll" {
+            if args.mode == "scroll" || args.mode == "rewind" {
                 do {
                     try await QQWindowPreparer.prepare(
                         expectedTitle: args.expectedTitle,
@@ -144,13 +147,17 @@ struct CaptureStepMain {
                     record: previousRecord,
                     windowID: target.windowID
                 )
+                let direction: HistoryScrollDirection = args.mode == "rewind"
+                    ? .towardNewer
+                    : .towardHistory
                 let (next, result) = try await QQHistoryCapture.capturePageAfterStableScroll(
                     groupKey: args.groupKey,
                     expectedTitle: args.expectedTitle,
                     batchID: args.batchID,
                     pageIndex: args.pageIndex,
                     previousPage: previous,
-                    scrollPixels: args.scrollPixels
+                    scrollPixels: args.scrollPixels,
+                    direction: direction
                 )
                 switch result {
                 case .changedAndStable:

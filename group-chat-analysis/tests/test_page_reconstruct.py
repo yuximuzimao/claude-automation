@@ -56,6 +56,8 @@ class PageReconstructTests(unittest.TestCase):
 
         self.assertEqual([item.sender_display for item in result.messages], ["玩家乙", "玩家甲"])
         self.assertEqual([item.content_text for item in result.messages], ["第二条正文", "第一条正文"])
+        self.assertEqual([item.message_date for item in result.messages], ["2026-01-01", "2026-01-01"])
+        self.assertEqual([item.timestamp for item in result.messages], ["2026-01-01T09:09+08:00", "2026-01-01T09:10+08:00"])
         self.assertEqual([item.kind for item in result.fragments], ["top", "bottom"])
         self.assertEqual(result.fragments[0].text, "页顶残片")
         self.assertIn("页底正文", result.fragments[1].text)
@@ -151,6 +153,34 @@ class PageReconstructTests(unittest.TestCase):
 
         self.assertEqual(media.message_type, "unknown")
         self.assertEqual(media.content_text, "非文字内容（图片/表情等，未解析）")
+
+    def test_relative_date_word_inside_message_body_is_not_a_date_separator(self) -> None:
+        blocks = [
+            raw_block(0, "2026/01/01", 0.01, 0.82, 0.06, 0.014),
+            raw_block(1, "玩家甲 09:10", 0.04, 0.74, 0.09, 0.015),
+            raw_block(2, "昨天", 0.04, 0.70, 0.04, 0.022),
+            raw_block(3, "玩家乙 09:09", 0.04, 0.61, 0.09, 0.015),
+            raw_block(4, "后续正文", 0.04, 0.57, 0.08, 0.022),
+        ]
+
+        result = reconstruct_page(page(blocks))
+        by_sender = {item.sender_display: item for item in result.messages}
+
+        self.assertEqual(by_sender["玩家甲"].content_text, "昨天")
+        self.assertEqual(by_sender["玩家甲"].message_date, "2026-01-01")
+        self.assertEqual(by_sender["玩家乙"].message_date, "2026-01-01")
+
+    def test_relative_date_at_date_label_position_still_changes_context(self) -> None:
+        blocks = [
+            raw_block(0, "昨天", 0.01, 0.82, 0.04, 0.014),
+            raw_block(1, "玩家甲 09:10", 0.04, 0.74, 0.09, 0.015),
+            raw_block(2, "正文", 0.04, 0.70, 0.08, 0.022),
+        ]
+
+        result = reconstruct_page(page(blocks))
+
+        self.assertEqual(result.messages[0].message_date, "2025-12-31")
+        self.assertEqual(result.messages[0].timestamp, "2025-12-31T09:10+08:00")
 
     def test_rejects_unknown_capture_fields(self) -> None:
         raw = page([raw_block(0, "玩家甲 09:10", 0.04, 0.7, 0.09, 0.014)])

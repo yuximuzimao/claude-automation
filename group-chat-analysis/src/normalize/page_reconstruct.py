@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
 import json
 from pathlib import Path
 import re
@@ -17,7 +18,11 @@ CAPTURE_SCHEMA_VERSION = _SCHEMA["properties"]["schema_version"]["const"]
 CAPTURE_SOURCE = _SCHEMA["properties"]["source"]["const"]
 CAPTURE_FINGERPRINT_RE = re.compile(r"^dhash512:[0-9a-f]{128}$")
 
-DATE_RE = re.compile(r"^\s*(\d{4})[/-](\d{1,2})[/-](\d{1,2})\s*$")
+DATE_RE = re.compile(
+    r"^\s*(?:(\d{4})\s*[年/-]\s*(\d{1,2})\s*[月/-]\s*(\d{1,2})\s*日?|"
+    r"(\d{1,2})\s*[月/-]\s*(\d{1,2})\s*日?|"
+    r"(今天|昨天|前天))\s*$"
+)
 HEADER_RE = re.compile(r"^\s*(.*?)\s*[•.]?\s*(\d{1,2}:\d{2})\s*$")
 
 
@@ -80,12 +85,15 @@ class VisualLine:
 class PageMessageCandidate:
     sender_display: str | None
     timestamp_text: str | None
+    timestamp: str | None
     message_type: str
     content_text: str
     ocr_confidence: float | None
     observed_at: str
     page_index: int
     bbox: BBox
+    message_date: str | None = None
+    fragment_kind: str | None = None
 
 
 @dataclass(frozen=True)
@@ -97,6 +105,8 @@ class PageFragment:
     bbox: BBox
     sender_display: str | None = None
     timestamp_text: str | None = None
+    timestamp: str | None = None
+    message_date: str | None = None
 
 
 @dataclass(frozen=True)
@@ -104,6 +114,7 @@ class PageReconstruction:
     messages: tuple[PageMessageCandidate, ...]
     fragments: tuple[PageFragment, ...]
     body_height: float
+    ending_date: date | None = None
 
 
 def _bbox_from_dict(value: object) -> BBox:
@@ -228,13 +239,58 @@ def _header_parts(text: str) -> tuple[str | None, str] | None:
     return sender, match.group(2)
 
 
-def _estimate_body_height(lines: list[VisualLine]) -> float:
+def _date_context(text: str, captured_at: str) -> date | None:
+    match = DATE_RE.match(text)
+    if not match:
+        return None
+    captured = datetime.fromisoformat(captured_at.replace("Z", "+00:00"))
+    local_date = (captured.astimezone(timezone(timedelta(hours=8)))).date()
+    year, month, day, short_month, short_day, relative = match.groups()
+    if relative:
+        return local_date - {"今天": timedelta(0), "昨天": timedelta(days=1), "前天": timedelta(days=2)}[relative]
+    if year is None:
+        year = str(local_date.year)
+        month, day = short_month, short_day
+    try:
+        resolved = datetime(int(year), int(month), int(day)).date()
+    except ValueError:
+        return None
+    if not match.group(1) and resolved > local_date + timedelta(days=31):
+        resolved = resolved.replace(year=resolved.year - 1)
+    return resolved
+
+
+def _absolute_timestamp(date_value: date | None, time_text: str | None) -> str | None:
+    if date_value is None or not time_text:
+        return None
+    try:
+        hour, minute = (int(item) for item in time_text.split(":", 1))
+        return datetime(
+            date_value.year,
+            date_value.month,
+            date_value.day,
+            hour,
+            minute,
+            tzinfo=timezone(timedelta(hours=8)),
+        ).isoformat(timespec="minutes")
+    except (TypeError, ValueError):
+        return None
+
+
+def _looks_like_date_separator(line: VisualLine, region: BBox) -> bool:
+    if DATE_RE.match(line.text) is None or region.width <= 0:
+        return False
+    relative_left = (line.bbox.x - region.x) / region.width
+    return relative_left <= 0.03
+
+
+def _estimate_body_height(lines: list[VisualLine], region: BBox) -> float:
     samples: list[float] = []
     for index, line in enumerate(lines[:-1]):
         if _header_parts(line.text) is None:
             continue
         next_line = lines[index + 1]
-        if _header_parts(next_line.text) is not None or DATE_RE.match(next_line.text):
+        if _header_parts(next_line.text) is not None or _looks_like_date_separator(next_line, region):
             continue
         gap = max(0.0, line.bbox.y - next_line.bbox.max_y)
         if gap <= 2.0 * max(line.bbox.height, next_line.bbox.height):
@@ -245,7 +301,7 @@ def _estimate_body_height(lines: list[VisualLine]) -> float:
     fallback = [
         line.bbox.height
         for line in lines
-        if _header_parts(line.text) is None and DATE_RE.match(line.text) is None
+        if _header_parts(line.text) is None and not _looks_like_date_separator(line, region)
     ]
     if fallback:
         return median(fallback)
@@ -299,6 +355,8 @@ def _message_from_lines(
     body: list[VisualLine],
     sender: str | None,
     time_text: str,
+    timestamp: str | None,
+    message_date: str | None,
     observed_at: str,
     page_index: int,
     body_height: float,
@@ -309,6 +367,8 @@ def _message_from_lines(
     return PageMessageCandidate(
         sender_display=sender,
         timestamp_text=time_text,
+        timestamp=timestamp,
+        message_date=message_date,
         message_type="unknown" if media_like else "text",
         content_text=(
             "非文字内容（图片/表情等，未解析）"
@@ -322,14 +382,14 @@ def _message_from_lines(
     )
 
 
-def reconstruct_page(page: object) -> PageReconstruction:
+def reconstruct_page(page: object, *, inherited_date: date | None = None) -> PageReconstruction:
     page = validate_capture_page(page)
     region = _bbox_from_dict(page["content_region"])
     lines = build_visual_lines(_parse_blocks(page), region)
     if not lines:
         raise PageReconstructionError("capture page has no OCR lines inside content region")
 
-    body_height = _estimate_body_height(lines)
+    body_height = _estimate_body_height(lines, region)
     header_gap_limit = body_height * 1.5
     bottom_edge_limit = body_height * 1.5
     observed_at = page["captured_at"]
@@ -342,7 +402,9 @@ def reconstruct_page(page: object) -> PageReconstruction:
     current_header: VisualLine | None = None
     current_sender: str | None = None
     current_time: str | None = None
+    current_timestamp: str | None = None
     current_body: list[VisualLine] = []
+    current_date = inherited_date
     seen_valid_header = False
 
     def add_fragment(kind: str, items: list[VisualLine], sender: str | None = None, time_text: str | None = None) -> None:
@@ -357,11 +419,13 @@ def reconstruct_page(page: object) -> PageReconstruction:
                 bbox=BBox.union(item.bbox for item in items),
                 sender_display=sender,
                 timestamp_text=time_text,
+                timestamp=_absolute_timestamp(current_date, time_text),
+                message_date=current_date.isoformat() if current_date is not None else None,
             )
         )
 
     def finish_current(*, at_page_end: bool = False) -> None:
-        nonlocal current_header, current_sender, current_time, current_body
+        nonlocal current_header, current_sender, current_time, current_timestamp, current_body
         if current_header is None:
             return
         if not current_body:
@@ -382,6 +446,8 @@ def reconstruct_page(page: object) -> PageReconstruction:
                         current_body,
                         current_sender,
                         current_time or "",
+                        current_timestamp,
+                        current_date.isoformat() if current_date is not None else None,
                         observed_at,
                         page_index,
                         body_height,
@@ -390,11 +456,18 @@ def reconstruct_page(page: object) -> PageReconstruction:
         current_header = None
         current_sender = None
         current_time = None
+        current_timestamp = None
         current_body = []
 
     for line in lines:
-        if DATE_RE.match(line.text):
+        parsed_date = (
+            _date_context(line.text, observed_at)
+            if _looks_like_date_separator(line, region)
+            else None
+        )
+        if parsed_date is not None:
             finish_current()
+            current_date = parsed_date
             if not seen_valid_header:
                 add_fragment("top", leading_orphan)
                 leading_orphan = []
@@ -415,6 +488,7 @@ def reconstruct_page(page: object) -> PageReconstruction:
             finish_current()
             current_header = line
             current_sender, current_time = header
+            current_timestamp = _absolute_timestamp(current_date, current_time)
             continue
 
         if _is_system_line(line, region):
@@ -429,6 +503,8 @@ def reconstruct_page(page: object) -> PageReconstruction:
                 PageMessageCandidate(
                     sender_display=None,
                     timestamp_text=None,
+                    timestamp=None,
+                    message_date=current_date.isoformat() if current_date is not None else None,
                     message_type="system",
                     content_text=line.text,
                     ocr_confidence=line.confidence,
@@ -469,4 +545,5 @@ def reconstruct_page(page: object) -> PageReconstruction:
         messages=tuple(reversed(messages)),
         fragments=tuple(fragments),
         body_height=body_height,
+        ending_date=current_date,
     )

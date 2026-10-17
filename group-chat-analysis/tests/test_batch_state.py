@@ -98,39 +98,15 @@ class BatchStateTests(unittest.TestCase):
         self.assertEqual(resumed["next_page_index"], 1)
         self.assertFalse(self.store.can_build_inbox("batch-1"))
 
-    def test_v2_state_is_migrated_without_guessing_incomplete_group_completion(self) -> None:
+    def test_legacy_state_schema_is_rejected_instead_of_migrated(self) -> None:
         state = self.store.start_batch(
             "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
         )
-        legacy = json.loads(json.dumps(state))
-        legacy["schema_version"] = "2"
-        legacy["groups"]["group-a"].pop("capture_complete")
-        self.store.path.write_text(json.dumps(legacy), encoding="utf-8")
+        state["schema_version"] = "3"
+        self.store.path.write_text(json.dumps(state), encoding="utf-8")
 
-        migrated = self.store.load()
-
-        self.assertEqual(migrated["schema_version"], "4")
-        self.assertEqual(migrated["batch_kind"], "capture")
-        self.assertFalse(migrated["groups"]["group-a"]["capture_complete"])
-        self.assertEqual(migrated["groups"]["group-a"]["start_anchor"], [])
-        persisted = json.loads(self.store.path.read_text(encoding="utf-8"))
-        self.assertEqual(persisted["schema_version"], "4")
-
-    def test_v3_state_is_migrated_to_capture_with_empty_start_anchor(self) -> None:
-        state = self.store.start_batch(
-            "batch-1", started_at="2026-01-01T00:00:00Z", group_keys=["group-a"]
-        )
-        legacy = json.loads(json.dumps(state))
-        legacy["schema_version"] = "3"
-        legacy.pop("batch_kind")
-        legacy["groups"]["group-a"].pop("start_anchor")
-        self.store.path.write_text(json.dumps(legacy), encoding="utf-8")
-
-        migrated = self.store.load()
-
-        self.assertEqual(migrated["schema_version"], "4")
-        self.assertEqual(migrated["batch_kind"], "capture")
-        self.assertEqual(migrated["groups"]["group-a"]["start_anchor"], [])
+        with self.assertRaises(StateError):
+            self.store.load()
 
     def test_incremental_batch_copies_previous_completed_anchor_as_start_anchor(self) -> None:
         self.store.start_batch(

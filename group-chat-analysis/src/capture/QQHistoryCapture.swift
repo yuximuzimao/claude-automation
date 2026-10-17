@@ -2,7 +2,6 @@ import AppKit
 import CoreGraphics
 import Foundation
 import ScreenCaptureKit
-import Vision
 
 private let qqCaptureBundleID = "com.tencent.qq"
 
@@ -55,6 +54,11 @@ enum ScrollAdvanceResult {
     case uncertain(lastBaselineMAD: Double, lastAdjacentMAD: Double?)
 }
 
+enum HistoryScrollDirection {
+    case towardHistory
+    case towardNewer
+}
+
 struct QQHistoryCapture {
     @MainActor
     static func capturePage(
@@ -65,11 +69,9 @@ struct QQHistoryCapture {
     ) async throws -> CapturedPage {
         let target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
         let image = try await captureImage(target)
-        let capturedAt = ISO8601DateFormatter().string(from: Date())
-        return try makeCapturedPage(
-            image: image,
-            capturedAt: capturedAt,
-            target: target,
+        return try await makeCapturedPageWithToolbarRetry(
+            initialImage: image,
+            initialTarget: target,
             groupKey: groupKey,
             expectedTitle: expectedTitle,
             batchID: batchID,
@@ -84,110 +86,162 @@ struct QQHistoryCapture {
         batchID: String,
         pageIndex: Int,
         previousPage: CapturedPage,
-        scrollPixels: Int
+        scrollPixels: Int,
+        direction: HistoryScrollDirection = .towardHistory
     ) async throws -> (CapturedPage?, ScrollAdvanceResult) {
         guard scrollPixels > 0 else {
             throw QQHistoryCaptureError.invalidScrollPixels
         }
-        let target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
-        guard target.windowID == previousPage.windowID else {
-            throw QQHistoryCaptureError.historyWindowChanged
-        }
-        let currentImage = try await captureImage(target)
-        let currentFingerprint = try VisualFingerprint.make(currentImage)
-        let fingerprintDistance = try VisualFingerprint.distance(
-            currentFingerprint,
-            previousPage.record.visualFingerprint
-        )
-        guard fingerprintDistance <= VisualFingerprint.sameViewportMaximumDistance else {
-            throw QQHistoryCaptureError.viewportMismatch(fingerprintDistance)
-        }
 
-        let anchor = try safeScrollPoint(
-            target: target,
-            blocks: previousPage.record.blocks,
-            region: previousPage.record.contentRegion
-        )
-        postMouseMove(anchor)
-        try await Task.sleep(nanoseconds: 300_000_000)
+        let maxFocusRecoveries = 1
+        var focusRecoveries = 0
 
-        let baseline = try await captureImage(target)
-        let delta = min(scrollPixels, max(1, Int(target.frame.height * 0.75)))
-        postScrollTowardHistory(pixels: delta)
+        while true {
+            let target: SCWindow
+            do {
+                target = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+            } catch QQHistoryCaptureError.qqNotForeground {
+                guard focusRecoveries < maxFocusRecoveries else {
+                    throw QQHistoryCaptureError.qqNotForeground
+                }
+                try await QQWindowPreparer.focusHistoryWindow(expectedTitle: expectedTitle)
+                focusRecoveries += 1
+                print("FOCUS_RECOVERED stage=before-viewport-check")
+                continue
+            }
 
-        let stability = try await ScrollChangeDetector.waitForStableChange(
-            baseline: baseline,
-            region: previousPage.record.contentRegion
-        ) {
-            let current = try await validatedHistoryWindow(expectedTitle: expectedTitle)
-            guard current.windowID == target.windowID else {
+            guard target.windowID == previousPage.windowID else {
                 throw QQHistoryCaptureError.historyWindowChanged
             }
-            return try await captureImage(current)
-        }
-
-        switch stability {
-        case let .changedAndStable(image, baselineMAD, adjacentMAD):
-            let current = try await validatedHistoryWindow(expectedTitle: expectedTitle)
-            guard current.windowID == target.windowID else {
-                throw QQHistoryCaptureError.historyWindowChanged
+            let currentImage = try await captureImage(target)
+            let currentFingerprint = try VisualFingerprint.make(currentImage)
+            let fingerprintDistance = try VisualFingerprint.distance(
+                currentFingerprint,
+                previousPage.record.visualFingerprint
+            )
+            guard fingerprintDistance <= VisualFingerprint.sameViewportMaximumDistance else {
+                throw QQHistoryCaptureError.viewportMismatch(fingerprintDistance)
             }
-            let page = try makeCapturedPage(
-                image: image,
-                capturedAt: ISO8601DateFormatter().string(from: Date()),
-                target: current,
-                groupKey: groupKey,
-                expectedTitle: expectedTitle,
-                batchID: batchID,
-                pageIndex: pageIndex
+
+            let anchor = try safeScrollPoint(
+                target: target,
+                blocks: previousPage.record.blocks,
+                region: previousPage.record.contentRegion
             )
-            return (
-                page,
-                .changedAndStable(
-                    baselineMAD: baselineMAD,
-                    adjacentMAD: adjacentMAD
-                )
-            )
-        case let .noChange(maxBaselineMAD):
-            return (nil, .noChange(maxBaselineMAD: maxBaselineMAD))
-        case let .uncertain(image, lastBaselineMAD, lastAdjacentMAD):
-            if lastBaselineMAD > ScrollChangeDetector.dynamicNoiseThreshold,
-               lastBaselineMAD < ScrollChangeDetector.changedThreshold,
-               let lastAdjacentMAD,
-               lastAdjacentMAD <= ScrollChangeDetector.quietThreshold {
+            postMouseMove(anchor)
+            try await Task.sleep(nanoseconds: 300_000_000)
+
+            if !QQWindowPreparer.isQQForeground() {
+                guard focusRecoveries < maxFocusRecoveries else {
+                    throw QQHistoryCaptureError.qqNotForeground
+                }
+                try await QQWindowPreparer.focusHistoryWindow(expectedTitle: expectedTitle)
+                focusRecoveries += 1
+                print("FOCUS_RECOVERED stage=before-scroll")
+                continue
+            }
+
+            let baseline = try await captureImage(target)
+            // captureImage is async, so perform one final synchronous foreground
+            // check immediately before posting the wheel event.  This closes the
+            // focus-steal window between viewport validation and the actual scroll.
+            if !QQWindowPreparer.isQQForeground() {
+                guard focusRecoveries < maxFocusRecoveries else {
+                    throw QQHistoryCaptureError.qqNotForeground
+                }
+                try await QQWindowPreparer.focusHistoryWindow(expectedTitle: expectedTitle)
+                focusRecoveries += 1
+                print("FOCUS_RECOVERED stage=immediately-before-scroll")
+                continue
+            }
+
+            let delta = min(scrollPixels, max(1, Int(target.frame.height * 0.75)))
+            postScroll(pixels: delta, direction: direction)
+
+            let stability = try await ScrollChangeDetector.waitForStableChange(
+                baseline: baseline,
+                region: previousPage.record.contentRegion
+            ) {
                 let current = try await validatedHistoryWindow(expectedTitle: expectedTitle)
                 guard current.windowID == target.windowID else {
                     throw QQHistoryCaptureError.historyWindowChanged
                 }
-                let candidate = try makeCapturedPage(
-                    image: image,
-                    capturedAt: ISO8601DateFormatter().string(from: Date()),
-                    target: current,
+                return try await captureImage(current)
+            }
+
+            switch stability {
+            case let .changedAndStable(image, baselineMAD, adjacentMAD):
+                let current = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+                guard current.windowID == target.windowID else {
+                    throw QQHistoryCaptureError.historyWindowChanged
+                }
+                let page = try await makeCapturedPageWithToolbarRetry(
+                    initialImage: image,
+                    initialTarget: current,
                     groupKey: groupKey,
                     expectedTitle: expectedTitle,
                     batchID: batchID,
                     pageIndex: pageIndex
                 )
-                if isClearlyDifferentByOCR(
-                    previous: previousPage.record,
-                    current: candidate.record
-                ) {
-                    return (
-                        candidate,
-                        .changedAndStable(
-                            baselineMAD: lastBaselineMAD,
-                            adjacentMAD: lastAdjacentMAD
-                        )
+                return (
+                    page,
+                    .changedAndStable(
+                        baselineMAD: baselineMAD,
+                        adjacentMAD: adjacentMAD
                     )
-                }
-            }
-            return (
-                nil,
-                .uncertain(
-                    lastBaselineMAD: lastBaselineMAD,
-                    lastAdjacentMAD: lastAdjacentMAD
                 )
-            )
+            case let .noChange(maxBaselineMAD):
+                // A verified unchanged viewport is safe to retry if focus was
+                // stolen: no durable position changed, and this must not count as
+                // history-boundary evidence.
+                if !QQWindowPreparer.isQQForeground() {
+                    guard focusRecoveries < maxFocusRecoveries else {
+                        throw QQHistoryCaptureError.qqNotForeground
+                    }
+                    try await QQWindowPreparer.focusHistoryWindow(expectedTitle: expectedTitle)
+                    focusRecoveries += 1
+                    print("FOCUS_RECOVERED stage=after-no-change")
+                    continue
+                }
+                return (nil, .noChange(maxBaselineMAD: maxBaselineMAD))
+            case let .uncertain(image, lastBaselineMAD, lastAdjacentMAD):
+                if lastBaselineMAD > ScrollChangeDetector.dynamicNoiseThreshold,
+                   lastBaselineMAD < ScrollChangeDetector.changedThreshold,
+                   let lastAdjacentMAD,
+                   lastAdjacentMAD <= ScrollChangeDetector.quietThreshold {
+                    let current = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+                    guard current.windowID == target.windowID else {
+                        throw QQHistoryCaptureError.historyWindowChanged
+                    }
+                    let candidate = try await makeCapturedPageWithToolbarRetry(
+                        initialImage: image,
+                        initialTarget: current,
+                        groupKey: groupKey,
+                        expectedTitle: expectedTitle,
+                        batchID: batchID,
+                        pageIndex: pageIndex
+                    )
+                    if isClearlyDifferentByOCR(
+                        previous: previousPage.record,
+                        current: candidate.record
+                    ) {
+                        return (
+                            candidate,
+                            .changedAndStable(
+                                baselineMAD: lastBaselineMAD,
+                                adjacentMAD: lastAdjacentMAD
+                            )
+                        )
+                    }
+                }
+                return (
+                    nil,
+                    .uncertain(
+                        lastBaselineMAD: lastBaselineMAD,
+                        lastAdjacentMAD: lastAdjacentMAD
+                    )
+                )
+            }
         }
     }
 
@@ -284,6 +338,47 @@ struct QQHistoryCapture {
         }
     }
 
+    @MainActor
+    private static func makeCapturedPageWithToolbarRetry(
+        initialImage: CGImage,
+        initialTarget: SCWindow,
+        groupKey: String,
+        expectedTitle: String,
+        batchID: String,
+        pageIndex: Int
+    ) async throws -> CapturedPage {
+        var image = initialImage
+        var target = initialTarget
+        let maximumAttempts = 3
+
+        for attempt in 0..<maximumAttempts {
+            do {
+                return try makeCapturedPage(
+                    image: image,
+                    capturedAt: ISO8601DateFormatter().string(from: Date()),
+                    target: target,
+                    groupKey: groupKey,
+                    expectedTitle: expectedTitle,
+                    batchID: batchID,
+                    pageIndex: pageIndex
+                )
+            } catch ContentRegionError.toolbarNotFound {
+                guard attempt + 1 < maximumAttempts else {
+                    throw ContentRegionError.toolbarNotFound
+                }
+                try await Task.sleep(nanoseconds: 180_000_000)
+                let refreshed = try await validatedHistoryWindow(expectedTitle: expectedTitle)
+                guard refreshed.windowID == initialTarget.windowID else {
+                    throw QQHistoryCaptureError.historyWindowChanged
+                }
+                target = refreshed
+                image = try await captureImage(refreshed)
+            }
+        }
+
+        throw ContentRegionError.toolbarNotFound
+    }
+
     private static func makeCapturedPage(
         image: CGImage,
         capturedAt: String,
@@ -293,11 +388,42 @@ struct QQHistoryCapture {
         batchID: String,
         pageIndex: Int
     ) throws -> CapturedPage {
-        let blocks = try recognizeText(image)
-        guard !blocks.isEmpty else {
-            throw QQHistoryCaptureError.noOCRResults
+        let uprightBlocks = try VisionTextRecognizer.recognizeBlocks(
+            image,
+            orientation: .up,
+            usesLanguageCorrection: true
+        )
+
+        var blocks = uprightBlocks
+        let region: CaptureBBox
+        if uprightBlocks.isEmpty {
+            let rotatedBlocks = try VisionTextRecognizer.recognizeBlocks(
+                image,
+                orientation: .down,
+                usesLanguageCorrection: true
+            )
+            guard !rotatedBlocks.isEmpty else {
+                throw QQHistoryCaptureError.noOCRResults
+            }
+            blocks = rotatedBlocks
+            region = try ContentRegionLocator.locate(from: rotatedBlocks)
+        } else {
+            do {
+                region = try ContentRegionLocator.locate(from: uprightBlocks)
+            } catch ContentRegionError.toolbarNotFound {
+                let rotatedBlocks = try VisionTextRecognizer.recognizeBlocks(
+                    image,
+                    orientation: .down,
+                    usesLanguageCorrection: true
+                )
+                guard !rotatedBlocks.isEmpty else {
+                    throw QQHistoryCaptureError.noOCRResults
+                }
+                blocks = rotatedBlocks
+                region = try ContentRegionLocator.locate(from: rotatedBlocks)
+            }
         }
-        let region = try ContentRegionLocator.locate(from: blocks)
+
         let fingerprint = try VisualFingerprint.make(image)
         let title = target.title ?? expectedTitle
         let page = RawCapturePage(
@@ -326,38 +452,6 @@ struct QQHistoryCapture {
             blocks: blocks
         )
         return CapturedPage(record: page, windowID: target.windowID)
-    }
-
-    private static func recognizeText(_ image: CGImage) throws -> [CaptureOCRBlock] {
-        let request = VNRecognizeTextRequest()
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["zh-Hans", "en-US"]
-        request.usesLanguageCorrection = true
-
-        let handler = VNImageRequestHandler(cgImage: image, options: [:])
-        try handler.perform([request])
-
-        return (request.results ?? []).enumerated().compactMap { index, observation in
-            guard let candidate = observation.topCandidates(1).first else {
-                return nil
-            }
-            let text = candidate.string
-            guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                return nil
-            }
-            let box = observation.boundingBox
-            return CaptureOCRBlock(
-                blockIndex: index,
-                text: text,
-                bbox: CaptureBBox(
-                    x: box.origin.x,
-                    y: box.origin.y,
-                    width: box.size.width,
-                    height: box.size.height
-                ),
-                confidence: Double(candidate.confidence)
-            )
-        }
     }
 
     private static func safeScrollPoint(
@@ -405,12 +499,15 @@ struct QQHistoryCapture {
         )?.post(tap: .cghidEventTap)
     }
 
-    private static func postScrollTowardHistory(pixels: Int) {
+    private static func postScroll(pixels: Int, direction: HistoryScrollDirection) {
+        let signedPixels: Int32 = direction == .towardHistory
+            ? -Int32(pixels)
+            : Int32(pixels)
         CGEvent(
             scrollWheelEvent2Source: CGEventSource(stateID: .hidSystemState),
             units: .pixel,
             wheelCount: 1,
-            wheel1: -Int32(pixels),
+            wheel1: signedPixels,
             wheel2: 0,
             wheel3: 0
         )?.post(tap: .cghidEventTap)

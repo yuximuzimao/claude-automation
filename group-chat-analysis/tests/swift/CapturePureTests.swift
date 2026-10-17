@@ -1,5 +1,6 @@
 import CoreGraphics
 import Foundation
+import ImageIO
 
 private enum TestFailure: Error, CustomStringConvertible {
     case failed(String)
@@ -122,6 +123,13 @@ private func testConversationSwitcherPureGates() throws {
     try expect(
         !QQConversationSwitcher.verifiesTarget(blocks, target: wrongHeader),
         "wrong header text must reject target verification"
+    )
+    let bodyOnly = [
+        block(0, "刚才有人提到国服备战总群", x: 0.36, y: 0.45, width: 0.20, height: 0.02),
+    ]
+    try expect(
+        !QQConversationSwitcher.verifiesTarget(bodyOnly, target: target),
+        "matching text in chat body must not verify the selected target"
     )
     try expect(
         QQConversationSwitcher.isVerifiedHistoryTooltip(["聊天记录"]),
@@ -354,6 +362,17 @@ private func testAmbiguousScrollOCRFallback() throws {
     )
 }
 
+private func testDisplayBBoxRemapsUpsideDownVisionCoordinates() throws {
+    let original = CGRect(x: 0.9680, y: 0.0974, width: 0.0174, height: 0.0139)
+    let remapped = VisionTextRecognizer.displayBBox(for: original, orientation: .down)
+    try expect(abs(remapped.x - 0.0146) < 0.0002, "180-degree bbox x should map back to the displayed toolbar position")
+    try expect(abs(remapped.y - 0.8887) < 0.0002, "180-degree bbox y should map back to the displayed toolbar position")
+    try expect(remapped.width == original.width && remapped.height == original.height, "180-degree bbox remap must preserve size")
+
+    let upright = VisionTextRecognizer.displayBBox(for: original, orientation: .up)
+    try expect(upright.x == original.origin.x && upright.y == original.origin.y, "upright bbox must remain unchanged")
+}
+
 private func testCaptureSchemaShape() throws {
     let page = samplePage()
 
@@ -407,6 +426,7 @@ struct CapturePureTestsMain {
             try await testChangeDetectorAllowsFingerprintStableDynamicNoise()
             try testVisualFingerprintDistance()
             try testAmbiguousScrollOCRFallback()
+            try testDisplayBBoxRemapsUpsideDownVisionCoordinates()
             try testCaptureSchemaShape()
             try testRawWriterPersistsAndRefusesOverwrite()
             print("CapturePureTests OK")

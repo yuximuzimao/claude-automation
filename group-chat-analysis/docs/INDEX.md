@@ -7,7 +7,7 @@
 | 需求 | 入口 |
 | --- | --- |
 | 当前做到哪里、已验证什么、下一步是什么 | `CURRENT.md` |
-| Codex/Claude 当前交接与已完成验证 | `HANDOFF.md` |
+| 跨 agent 接续注意事项（不复制当前状态） | `HANDOFF.md` |
 | 项目任务分类与完整运行 SOP | `OPERATING-SOP.md` |
 | 理解整体模块/data flow | `ARCHITECTURE.md` |
 | 当前待办 | `../tasks/todo.md` |
@@ -33,11 +33,13 @@
 ## 代码与测试
 
 - `../src/README.md`：正式代码模块边界、依赖方向与当前门禁。
-- `../src/app/run_capture.py`：唯一正式运行入口；固定页数诊断、`--full` 首次全量与 `--incremental` 每日增量。
-- `../src/app/full_capture.py`：两群安全串行基础编排、首次全量双 no-change 历史边界与安全分片。
+- `../src/app/run_capture.py`：唯一正式运行入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动；history-date pending-scroll 恢复也由同一 runner 内部完成。
+- `../src/app/swift_sources.py`：正式 Swift target / Swift 纯测试唯一 source manifest。
+- `../src/app/full_capture.py`：两群首次全量与单群按日期历史补采编排；单日 pending-scroll 会先自动重锚定，不重选日期/重开窗口。
 - `../src/app/incremental_capture.py`：两群每日增量、历史窗口刷新与上一 completed anchor 停止。
-- `../src/app/capture-step.swift`：内部单步 current/scroll capture。
-- `../src/app/open-history.swift`：安全打开目标群聊天记录窗口。
+- `../src/app/capture-step.swift`：内部单步 current/scroll/rewind capture。
+- `../src/app/open-history.swift`：内部安全打开目标群聊天记录窗口。
+- `../src/app/select-history-date.swift`：history-date 模式内部日期定位适配器。
 - `../src/capture/ConversationSwitcher.swift`：会话 OCR 定位、目标复核、`聊天记录` tooltip 与历史窗口标题门禁。
 - `../src/capture/`：AX/SCK/Vision、正文区、滚动/MAD、dhash 视口门禁与 raw 原子写入。
 - `../src/normalize/page_reconstruct.py`：单页 bbox→视觉行→消息/fragment/media unknown。
@@ -58,12 +60,13 @@
 
 规划路径：
 
-- `runtime/raw/`：原始 OCR/屏幕批次的结构化中间记录；用于纠错。
-- `runtime/messages/`：规范化、去重后的本地消息库。
-- `runtime/inbox/current.md`：GPT/CodexPro 唯一默认分析入口；保存“本批待分析的全部文字消息”。
+- `runtime/raw/`：普通 full / incremental 的原始 OCR 批次。
+- `runtime/messages/`：普通 full / incremental 的规范化消息库。
+- `runtime/inbox/current.md`：日常 GPT/CodexPro 唯一默认分析入口。
+- `runtime/history-days/YYYY-MM-DD/`：单日历史补采独立 runtime root；各日自带 raw/messages/inbox/state。
 - `runtime/reports/`：GPT分析结果。
-- `runtime/state/`：采集锚点、上次完成位置、批次状态。
-- `runtime/diagnostics/`：只有显式诊断时才允许临时落盘截图；完成后清理。
+- `runtime/state/`：普通 full / incremental 的采集恢复状态。
+- `runtime/diagnostics/`：显式诊断临时产物与当前历史长跑日志；不作为正式数据源。
 
 ## 历史
 

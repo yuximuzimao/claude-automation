@@ -87,6 +87,14 @@ def validate_message_record(record: Mapping[str, object]) -> None:
     _require_optional_string(record, "group_display")
     _require_optional_string(record, "sender_display")
     _require_optional_string(record, "timestamp_text")
+    message_date = record.get("message_date")
+    if message_date is not None:
+        if not isinstance(message_date, str):
+            raise MessageRecordError("message_date must be a string or null")
+        try:
+            datetime.strptime(message_date, "%Y-%m-%d")
+        except ValueError as exc:
+            raise MessageRecordError("message_date must be YYYY-MM-DD") from exc
     _require_optional_string(record, "timestamp")
 
     sequence = record.get("sequence")

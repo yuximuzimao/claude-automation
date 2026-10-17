@@ -57,36 +57,8 @@ class BatchStateStore:
             state = json.loads(self.path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise StateError("batch state is not valid JSON") from exc
-        if isinstance(state, dict) and state.get("schema_version") in {"2", "3"}:
-            state = self._upgrade_legacy_state(state)
-            self._write(state)
         self._validate_state(state)
         return state
-
-    @staticmethod
-    def _upgrade_legacy_state(state: dict) -> dict:
-        upgraded = json.loads(json.dumps(state))
-        legacy_version = upgraded.get("schema_version")
-        groups = upgraded.get("groups")
-        if not isinstance(groups, dict):
-            raise StateError("legacy batch state groups are invalid")
-        if legacy_version == "2":
-            capture_complete = upgraded.get("status") in {"completed", "analyzed"}
-            for progress in groups.values():
-                if not isinstance(progress, dict):
-                    raise StateError("legacy group progress is invalid")
-                progress["capture_complete"] = capture_complete
-                progress["start_anchor"] = []
-        elif legacy_version == "3":
-            for progress in groups.values():
-                if not isinstance(progress, dict):
-                    raise StateError("legacy group progress is invalid")
-                progress["start_anchor"] = []
-        else:
-            raise StateError("unsupported legacy batch state schema version")
-        upgraded["batch_kind"] = "capture"
-        upgraded["schema_version"] = STATE_SCHEMA_VERSION
-        return upgraded
 
     @staticmethod
     def _valid_datetime(value: object) -> bool:

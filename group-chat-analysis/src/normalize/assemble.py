@@ -52,12 +52,15 @@ def _fragment_candidate(fragment: PageFragment) -> PageMessageCandidate | None:
     return PageMessageCandidate(
         sender_display=fragment.sender_display,
         timestamp_text=fragment.timestamp_text,
+        timestamp=fragment.timestamp,
+        message_date=fragment.message_date,
         message_type="text",
         content_text=content,
         ocr_confidence=None,
         observed_at=fragment.observed_at,
         page_index=fragment.page_index,
         bbox=fragment.bbox,
+        fragment_kind=fragment.kind,
     )
 
 
@@ -79,8 +82,11 @@ def _message_from_candidate(candidate: PageMessageCandidate) -> Message:
         content_text=candidate.content_text,
         sender_display=candidate.sender_display,
         timestamp_text=candidate.timestamp_text,
+        timestamp=candidate.timestamp,
+        message_date=candidate.message_date,
         message_type=candidate.message_type,
         ocr_confidence=candidate.ocr_confidence,
+        fragment_kind=candidate.fragment_kind,
     )
 
 
@@ -121,7 +127,13 @@ def assemble_capture_pages(pages: Iterable[object]) -> AssembledBatch:
     if group_display is not None and not isinstance(group_display, str):
         raise BatchAssemblyError("group_display must be a string or null")
 
-    reconstructions = tuple(reconstruct_page(page) for page in validated)
+    reconstructions_list: list[PageReconstruction] = []
+    inherited_date = None
+    for page in validated:
+        reconstruction = reconstruct_page(page, inherited_date=inherited_date)
+        reconstructions_list.append(reconstruction)
+        inherited_date = reconstruction.ending_date
+    reconstructions = tuple(reconstructions_list)
     message_pages: list[list[Message]] = []
     candidate_by_message_id: dict[int, PageMessageCandidate] = {}
     for reconstruction in reconstructions:
@@ -144,7 +156,8 @@ def assemble_capture_pages(pages: Iterable[object]) -> AssembledBatch:
             "group_display": group_display,
             "sequence": sequence,
             "sender_display": candidate.sender_display,
-            "timestamp": None,
+            "timestamp": candidate.timestamp,
+            "message_date": candidate.message_date,
             "timestamp_text": candidate.timestamp_text,
             "message_type": candidate.message_type,
             "content_text": candidate.content_text,
