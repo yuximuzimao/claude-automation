@@ -34,6 +34,8 @@ const { judgeLoginState, matchShopName, shopKeyword, READ_LOGIN_STATE_JS, JL_DOM
 const SESSIONS_DIR = path.join(__dirname, '../../../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
 const DEFAULT_WAIT_MS = 8000;
+const TRANSITIONAL_RETRY_MS = 1000;
+const TRANSITIONAL_MAX_RETRIES = 8;
 const AFTER_SALE_LIST_URL = 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list';
 
 /** 读账号 note（供店铺名匹配验证用） */
@@ -121,14 +123,22 @@ async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
   await new Promise(r => setTimeout(r, waitMs));
 
   let info;
-  try {
-    const raw = await cdp.eval(targetId, READ_LOGIN_STATE_JS);
-    info = typeof raw === 'string' ? JSON.parse(raw) : raw;
-  } catch (e) {
-    return { success: false, error: `读取登录态失败: ${e.message}` };
-  }
+  let judged;
+  for (let attempt = 0; attempt <= TRANSITIONAL_MAX_RETRIES; attempt++) {
+    try {
+      const raw = await cdp.eval(targetId, READ_LOGIN_STATE_JS);
+      info = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    } catch (e) {
+      return { success: false, error: `读取登录态失败: ${e.message}` };
+    }
 
-  const judged = judgeLoginState(info);
+    judged = judgeLoginState(info);
+    if (!(judged.success && judged.state === 'transitional')) break;
+    if (attempt === TRANSITIONAL_MAX_RETRIES) {
+      return { success: false, error: `注入后页面长时间停留在切号过渡态：页面="${judged.shopName}"` };
+    }
+    await new Promise(r => setTimeout(r, TRANSITIONAL_RETRY_MS));
+  }
   if (judged.success && judged.state === 'logged-in') {
     // 已登录 → 再验店铺名是否匹配目标账号（关键字包含匹配，防注入到错号）
     const note = getAccountNote(accountNum);

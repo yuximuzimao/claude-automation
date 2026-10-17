@@ -41,7 +41,14 @@ test('未知状态：无店铺名 但 只有"自动注册"缺"商家登录" → 
   assert.match(r.error, /未知页面状态/);
 });
 
-test('已登录优先：店铺名有值时即使两句文案缺也判已登录', () => {
+test('切号过渡态：店铺名=新用户时不判已登录', () => {
+  const r = judgeLoginState({ url: JL_HOME, title: 't', shopName: '新用户', 'has商家登录': false, 'has自动注册': false });
+  assert.equal(r.success, true);
+  assert.equal(r.state, 'transitional');
+  assert.equal(r.loggedIn, false);
+});
+
+test('已登录优先：真实店铺名有值时即使两句文案缺也判已登录', () => {
   const r = judgeLoginState({ url: JL_HOME, title: 't', shopName: '百浩创展', 'has商家登录': false, 'has自动注册': false });
   assert.equal(r.state, 'logged-in');
   assert.equal(r.shopName, '百浩创展');

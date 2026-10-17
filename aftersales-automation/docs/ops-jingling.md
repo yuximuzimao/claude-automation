@@ -158,6 +158,7 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 2. 未登录或错号时，只清 jlsupp 子域 Cookie/storage；删除后再次读取，`JSESSIONID/_us` 任一残留都返回失败。
 3. 只有 `success === true && verified === true` 才调用 04 注入，并把同一个 `targetId` 传入；禁止重新选择“第一个鲸灵 tab”。
 4. 注入后固定导航 `https://scrm.jlsupp.com/micro-customer/business/after-sale-list`，再校验店铺名；禁止 `Page.reload` 继承旧工单详情 URL。
+5. 切号过程中页面可能短暂把店铺区显示为「新用户」。该值属于已确认的 `transitional` 过渡态，不得视为真实店铺名或错号；Step 04 只读等待真实店铺名出现后再执行原有关键字匹配。当前每 1 秒重读一次，最多额外 8 秒；持续停留过渡态则明确报错并停止，禁止仅靠延长固定 sleep 掩盖状态判断问题。
 
 **新增与重新登录的待确认生命周期**：
 1. 新增店铺调用 `POST /api/accounts/add` 创建账号并返回账号编号；重新登录调用 `POST /api/accounts/:num/relogin`。后端统一启动 `../sessions/jl.js --auto-save`，等待写入 `../sessions/.relogin-port-<num>`，前端随后显示同一组「确认保存/取消」按钮。

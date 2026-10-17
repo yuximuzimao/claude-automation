@@ -18,6 +18,7 @@
 const JL_DOMAIN = 'scrm.jlsupp.com';
 const LOGIN_MARK_1 = '商家登录';
 const LOGIN_MARK_2 = '未注册的手机号登录成功后将自动注册';
+const TRANSITIONAL_SHOP_NAMES = new Set(['新用户']);
 
 /**
  * @param {{url:string, title?:string, shopName:string, has商家登录:boolean, has自动注册:boolean}} info
@@ -29,7 +30,12 @@ function judgeLoginState(info) {
     return { success: false, error: `当前 tab 不在鲸灵域名: ${info && info.url}` };
   }
 
-  // 已登录：店铺名有值
+  // 切号过渡态：页面会短暂显示“新用户”，不能当作真实店铺名。
+  if (TRANSITIONAL_SHOP_NAMES.has(info.shopName)) {
+    return { success: true, state: 'transitional', loggedIn: false, shopName: info.shopName, url: info.url, title: info.title };
+  }
+
+  // 已登录：真实店铺名有值
   if (info.shopName) {
     return { success: true, state: 'logged-in', loggedIn: true, shopName: info.shopName, url: info.url, title: info.title };
   }
