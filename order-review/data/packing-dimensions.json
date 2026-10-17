@@ -120,9 +120,25 @@
       "brandId": "yuexi",
       "dimensionsMm": [200, 117, 122],
       "dimensionType": "outer",
+      "inventoryStatus": "retired",
+      "evidenceSource": "user_provided",
+      "usagePolicy": "confirmed_scope_only",
+      "retiredAt": "2026-10-09",
+      "replacedByCartonId": "carton-18",
+      "note": "用户明确原单品四盒装纸箱弃用，改用按新品尺寸加大的新四瓶箱；旧尺寸只保留追溯。"
+    },
+    {
+      "cartonId": "carton-18",
+      "displayName": "悦希新四瓶箱",
+      "brandId": "yuexi",
+      "dimensionsMm": [215, 123, 123],
+      "dimensionType": "outer",
       "inventoryStatus": "active",
       "evidenceSource": "user_provided",
-      "usagePolicy": "confirmed_scope_only"
+      "usagePolicy": "manual_only",
+      "replacesCartonId": "carton-13",
+      "confirmedAt": "2026-10-09",
+      "note": "在原四瓶装箱子基础上按新品尺寸加大。9月22日活动SKU 133776685、133776684使用此箱，原文见packing-campaign-split-notes-09-22.md第4批；未核对SKU明细及每包份数，不从箱名推断通用容量，不继承旧箱容量。"
     },
     {
       "cartonId": "carton-14",
@@ -153,6 +169,66 @@
       "inventoryStatus": "active",
       "evidenceSource": "user_provided",
       "usagePolicy": "fixed_plan_only"
+    },
+    {
+      "cartonId": "carton-19",
+      "displayName": "春堂御品一盒装通用箱",
+      "brandId": "chuntangyupin",
+      "dimensionsMm": [175, 88, 186],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "supplier",
+      "usagePolicy": "confirmed_scope_only",
+      "confirmedAt": "2026-10-16",
+      "confirmedUse": "苹果饮/黄精饮一盒装通用",
+      "procurementQuotes": [
+        {
+          "quantity": 6000,
+          "unitPriceCny": 0.95,
+          "confirmedAt": "2026-10-16",
+          "evidenceSource": "user_provided"
+        }
+      ]
+    },
+    {
+      "cartonId": "carton-20",
+      "displayName": "春堂御品三盒装通用箱",
+      "brandId": "chuntangyupin",
+      "dimensionsMm": [239, 178, 186],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "supplier",
+      "usagePolicy": "confirmed_scope_only",
+      "confirmedAt": "2026-10-16",
+      "confirmedUse": "苹果饮/黄精饮三盒装通用",
+      "procurementQuotes": [
+        {
+          "quantity": 8000,
+          "unitPriceCny": 1.75,
+          "confirmedAt": "2026-10-16",
+          "evidenceSource": "user_provided"
+        }
+      ]
+    },
+    {
+      "cartonId": "carton-21",
+      "displayName": "春堂御品六盒装通用箱",
+      "brandId": "chuntangyupin",
+      "dimensionsMm": [239, 178, 352],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "supplier",
+      "usagePolicy": "confirmed_scope_only",
+      "confirmedAt": "2026-10-16",
+      "confirmedUse": "苹果饮/黄精饮六盒及三盒+三盒合并装通用",
+      "procurementQuotes": [
+        {
+          "quantity": 3000,
+          "unitPriceCny": 2.3,
+          "confirmedAt": "2026-10-16",
+          "evidenceSource": "user_provided"
+        }
+      ]
     }
   ],
   "dedicatedOriginalCartons": [
@@ -432,15 +508,7 @@
     {"cartonId": "carton-05", "capacity": 24, "productSpecId": "coffee-regular-package", "isMaximum": true},
     {"cartonId": "carton-01", "capacity": 3, "productSpecId": "black-tea-regular-package", "isMaximum": true},
     {"cartonId": "carton-07", "capacity": 7, "productSpecId": "black-tea-regular-package", "isMaximum": true},
-    {"cartonId": "carton-06", "capacity": 18, "productSpecId": "black-tea-regular-package", "isMaximum": true},
-    {
-      "cartonId": "carton-13",
-      "capacity": 4,
-      "allowedMerchantCodes": ["6940079053009", "6940079096228", "6940079096211", "6940079050947"],
-      "isMaximum": false,
-      "scopeComplete": false,
-      "mixingPolicy": "not_confirmed"
-    }
+    {"cartonId": "carton-06", "capacity": 18, "productSpecId": "black-tea-regular-package", "isMaximum": true}
   ],
   "confirmedParcelQuantityRules": [
     {
@@ -545,7 +613,19 @@
       ],
       "dimensionType": "outer",
       "evidenceSource": "user_provided",
-      "confirmedAt": "2026-09-08"
+      "confirmedAt": "2026-09-08",
+      "status": "retired_by_user",
+      "retiredAt": "2026-10-09",
+      "supersededByCartonId": "carton-18",
+      "historicalCapacityEvidence": {
+        "cartonId": "carton-13",
+        "capacity": 4,
+        "allowedMerchantCodes": ["6940079053009", "6940079096228", "6940079096211", "6940079050947"],
+        "isMaximum": false,
+        "scopeComplete": false,
+        "mixingPolicy": "not_confirmed"
+      },
+      "note": "旧箱及其容量证据只作追溯，不参与当前推荐，也不转移给新四瓶箱。"
     },
     {
       "cartonId": "carton-15",
@@ -1072,33 +1152,6 @@
         "confirmedAt": "2026-10-12",
         "preserveExactText": true
       }
-    },
-    {
-      "label": "春堂御品 苹果饮（临时称呼）",
-      "recordType": "product_dimension_pending_identity",
-      "brandId": "chuntangyupin",
-      "evidenceSource": "user_provided",
-      "confirmedAt": "2026-10-12",
-      "status": "dimensions_confirmed_pending_product_identity_and_merchant_code",
-      "missingFields": ["erpFullName", "currentMerchantCode", "combinationStructure"],
-      "dimensionsMm": [117, 57, 153],
-      "reportedDimensionsText": "117.5*57.5*153mm",
-      "dimensionNormalization": "装箱算法当前仅接受整数毫米；用户确认0.5mm级差异对实际装箱无实质影响，可向下取整用于几何模拟，原始测量值完整保留。",
-      "temporaryShortName": "苹果饮",
-      "note": "春堂御品首次活动产品。当前只确认单包外包装尺寸；ERP完整名称、条码/商家编码、规格及组合关系均未知，不提前猜测或转入active商品尺寸表。"
-    },
-    {
-      "label": "春堂御品 黄精原浆（临时称呼）",
-      "recordType": "product_dimension_pending_identity",
-      "brandId": "chuntangyupin",
-      "evidenceSource": "user_provided",
-      "confirmedAt": "2026-10-12",
-      "status": "dimensions_confirmed_pending_product_identity_and_merchant_code",
-      "missingFields": ["erpFullName", "currentMerchantCode", "combinationStructure"],
-      "dimensionsMm": [158, 73, 166],
-      "reportedDimensionsText": "158*73*166mm",
-      "temporaryShortName": "黄精原浆",
-      "note": "春堂御品首次活动产品。当前只确认单包外包装尺寸；ERP完整名称、条码/商家编码、规格及组合关系均未知，不提前猜测或转入active商品尺寸表。"
     },
     {
       "label": "氨基酸洁面产品原箱",
@@ -1691,10 +1744,10 @@
       ]
     },
     {
-      "label": "悦希新四盒装纸箱",
-      "recordType": "carton_pending_integration",
+      "label": "悦希新四瓶箱",
+      "recordType": "resolved_carton_measurement",
       "brandId": "yuexi",
-      "cartonId": "carton-18",
+      "supersededByCartonId": "carton-18",
       "dimensionsMm": [
         215,
         123,
@@ -1706,8 +1759,9 @@
       "unitInterpretationEvidence": "与同批四个既有箱尺寸逐一对应，按厘米换算毫米，不先取整。",
       "evidenceSource": "user_provided",
       "confirmedAt": "2026-09-08",
-      "status": "dimensions_confirmed_pending_experimental_catalog_integration",
-      "note": "与旧四盒纸箱carton-13独立保留，不覆盖旧尺寸；名称含四盒不代表任意商品或组合最多/恰好四件。用户活动笔记只保存原文，不据此建立自动规则。"
+      "status": "resolved_into_cartons",
+      "resolvedAt": "2026-10-09",
+      "note": "新四瓶箱尺寸已登记到carton-18；用户明确旧单品四盒箱carton-13弃用。9月22日活动SKU 133776685、133776684使用新箱，原文见packing-campaign-split-notes-09-22.md第4批；不从名称推断通用容量，不继承旧箱容量。"
     },
     {
       "label": "印花礼盒",

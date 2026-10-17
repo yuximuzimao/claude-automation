@@ -1,4 +1,5 @@
 from dataclasses import replace
+import json
 
 import pytest
 
@@ -16,6 +17,7 @@ from order_review.carton_packing import (
     units_from_catalog,
 )
 from order_review.dimension_catalog import (
+    DEFAULT_DIMENSION_CATALOG_PATH,
     DimensionCatalog,
     DimensionsMm,
     DimensionType,
@@ -41,6 +43,8 @@ YUEXI_REJUVENATING_CREAM_3_CODE = "6950328225903"
 YUEXI_PLEASANT_CREAM_CODE = "6950328260188"
 YUEXI_MOUSSE_OIL_CODE = "6970240607946"
 YUEXI_MOUSSE_OIL_TRIAL_CODE = "6970240607953"
+CHUNTANG_APPLE_DRINK_CODE = "6978430740077"
+CHUNTANG_HUANGJING_DRINK_CODE = "6973061293404"
 
 
 @pytest.fixture(scope="module")
@@ -50,7 +54,7 @@ def catalog() -> DimensionCatalog:
 
 def test_catalog_preserves_dimension_evidence_and_inventory_state(catalog):
     assert catalog.schema_version == 2
-    assert len(catalog.cartons) == 17
+    assert len(catalog.cartons) == 20
     assert catalog.carton_name_semantics == "label_only"
     assert all(item.dimension_type == DimensionType.OUTER for item in catalog.cartons)
     assert [item.inventory_status for item in catalog.cartons[9:12]] == [
@@ -61,7 +65,60 @@ def test_catalog_preserves_dimension_evidence_and_inventory_state(catalog):
     assert len(catalog.candidate_cartons()) == 12
     assert catalog.outer_to_inner_reduction == DimensionsMm(5, 5, 5)
     assert {item.brand_id for item in catalog.cartons[:12]} == {"kgos"}
-    assert {item.brand_id for item in catalog.cartons[12:]} == {"yuexi"}
+    assert {item.brand_id for item in catalog.cartons[12:17]} == {"yuexi"}
+    assert {item.brand_id for item in catalog.cartons[17:]} == {"chuntangyupin"}
+    assert catalog.carton("carton-19").dimensions == DimensionsMm(175, 88, 186)
+    assert catalog.carton("carton-20").dimensions == DimensionsMm(239, 178, 186)
+    assert catalog.carton("carton-21").dimensions == DimensionsMm(239, 178, 352)
+
+
+def test_chuntang_products_and_confirmed_cartons_are_active(catalog):
+    apple = catalog.product(CHUNTANG_APPLE_DRINK_CODE)
+    huangjing = catalog.product(CHUNTANG_HUANGJING_DRINK_CODE)
+
+    assert apple is not None
+    assert apple.brand_id == "chuntangyupin"
+    assert apple.dimensions == DimensionsMm(117, 57, 153)
+    assert huangjing is not None
+    assert huangjing.brand_id == "chuntangyupin"
+    assert huangjing.dimensions == DimensionsMm(158, 73, 166)
+
+    cases = (
+        ("carton-19", [PackingLine(CHUNTANG_APPLE_DRINK_CODE, 1)]),
+        ("carton-19", [PackingLine(CHUNTANG_HUANGJING_DRINK_CODE, 1)]),
+        ("carton-20", [PackingLine(CHUNTANG_APPLE_DRINK_CODE, 3)]),
+        ("carton-20", [PackingLine(CHUNTANG_HUANGJING_DRINK_CODE, 3)]),
+        ("carton-21", [PackingLine(CHUNTANG_APPLE_DRINK_CODE, 6)]),
+        ("carton-21", [PackingLine(CHUNTANG_HUANGJING_DRINK_CODE, 6)]),
+        (
+            "carton-21",
+            [
+                PackingLine(CHUNTANG_APPLE_DRINK_CODE, 3),
+                PackingLine(CHUNTANG_HUANGJING_DRINK_CODE, 3),
+            ],
+        ),
+    )
+    for carton_id, lines in cases:
+        assessment = assess_catalog_carton(catalog, carton_id, lines)
+        assert assessment.status == CartonAssessmentStatus.FITS_INNER_GEOMETRY
+
+
+def test_chuntang_carton_procurement_quotes_preserve_quantity_price_pairs():
+    payload = json.loads(DEFAULT_DIMENSION_CATALOG_PATH.read_text(encoding="utf-8"))
+    cartons = {item["cartonId"]: item for item in payload["cartons"]}
+
+    assert cartons["carton-19"]["procurementQuotes"] == [
+        {
+            "quantity": 6000,
+            "unitPriceCny": 0.95,
+            "confirmedAt": "2026-10-16",
+            "evidenceSource": "user_provided",
+        }
+    ]
+    assert cartons["carton-20"]["procurementQuotes"][0]["quantity"] == 8000
+    assert cartons["carton-20"]["procurementQuotes"][0]["unitPriceCny"] == 1.75
+    assert cartons["carton-21"]["procurementQuotes"][0]["quantity"] == 3000
+    assert cartons["carton-21"]["procurementQuotes"][0]["unitPriceCny"] == 2.3
 
 
 def test_general_carton_candidates_must_match_product_brand(catalog):

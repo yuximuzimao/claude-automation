@@ -3,7 +3,7 @@
   "unit": "mm",
   "identityContract": "装箱商品只按 ERP 标准全名与商家编码关联；不使用 product-mapping 的识图标签、颜色、特征或别名作为装箱键。",
   "note": "本文件只保存审单装箱范围、商品尺寸、零体积配件和仓库装箱排除项。ERP 标准全名用于资料展示和身份核对，实际订单几何计算仍以商家编码命中尺寸。",
-  "activePackingBrands": ["kgos", "yuexi"],
+  "activePackingBrands": ["kgos", "yuexi", "chuntangyupin"],
   "deprecatedBrandKeywords": ["RITEKOKO", "KOKO", "希凝", "钥黑"],
   "excludedFromWarehousePackingProducts": [
     {
@@ -270,6 +270,28 @@
       "brandId": "yuexi",
       "merchantCodes": ["6970240607946"],
       "dimensionsMm": [48, 48, 197],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "chuntangyupin-apple-drink-package",
+      "erpNames": ["黄芪苹果饮 30ml*7袋"],
+      "displayName": "苹果饮",
+      "brandId": "chuntangyupin",
+      "merchantCodes": ["6978430740077"],
+      "dimensionsMm": [117, 57, 153],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "chuntangyupin-huangjing-drink-package",
+      "erpNames": ["有机九华黄精原浆 30g*10袋"],
+      "displayName": "黄精饮",
+      "brandId": "chuntangyupin",
+      "merchantCodes": ["6973061293404"],
+      "dimensionsMm": [158, 73, 166],
       "dimensionSource": "user_provided",
       "orientationPolicy": "all_axis_aligned",
       "stackable": true
