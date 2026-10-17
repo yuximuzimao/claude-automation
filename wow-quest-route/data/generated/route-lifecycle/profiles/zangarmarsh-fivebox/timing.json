@@ -625,9 +625,141 @@
       "seconds": 48.6,
       "step_id": "step-14",
       "visit_id": "a0225"
+    },
+    {
+      "action_id": "a0047",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 9770
+      },
+      "seconds": 150.0,
+      "step_id": "step-02",
+      "task_id": 9770
+    },
+    {
+      "action_id": "a0055",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 20,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 10096
+      },
+      "seconds": 300.0,
+      "step_id": "step-02",
+      "task_id": 10096
+    },
+    {
+      "action_id": "a0080",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 9845
+      },
+      "seconds": 150.0,
+      "step_id": "step-04",
+      "task_id": 9845
+    },
+    {
+      "action_id": "a0131",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 8,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 9841
+      },
+      "seconds": 120.0,
+      "step_id": "step-07",
+      "task_id": 9841
+    },
+    {
+      "action_id": "a0175",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 18,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 9726
+      },
+      "seconds": 270.0,
+      "step_id": "step-10",
+      "task_id": 9726
+    },
+    {
+      "action_id": "a0214",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 18,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 10118
+      },
+      "seconds": 270.0,
+      "step_id": "step-13",
+      "task_id": 10118
     }
   ],
-  "input_fingerprint": "8c9d0366c791e2d264ca04c0348726bc0b28323b941701b38451f4cf16e518fc",
+  "input_fingerprint": "fe5b7c3458bd969c99bd768274b916b77feef27255194e512d2813aaa4a7a579",
   "issues": [
     {
       "edge_id": "a0070->a0079",
@@ -784,58 +916,44 @@
     {
       "action_id": "a0016",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 9785
     },
     {
       "action_id": "a0018",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 9785
     },
     {
       "action_id": "a0022",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01b",
       "task_id": 9716
     },
     {
       "action_id": "a0024",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01b",
       "task_id": 9747
     },
     {
       "action_id": "a0026",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01b",
       "task_id": 9752
     },
     {
       "action_id": "a0031",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01b",
       "task_id": 9718
-    },
-    {
-      "action_id": "a0047",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 9770
     },
     {
       "action_id": "a0048",
@@ -847,33 +965,29 @@
     },
     {
       "action_id": "a0049",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 9773
     },
     {
       "action_id": "a0050",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 9769
     },
     {
       "action_id": "a0051",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 9774
     },
     {
       "action_id": "a0052",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 9728
     },
@@ -884,14 +998,6 @@
       "severity": "info",
       "step_id": "step-02",
       "task_id": 9788
-    },
-    {
-      "action_id": "a0055",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 10096
     },
     {
       "action_id": "a0056",
@@ -927,9 +1033,8 @@
     },
     {
       "action_id": "a0062",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-03",
       "task_id": 9728
     },
@@ -951,19 +1056,10 @@
     },
     {
       "action_id": "a0067",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-03",
       "task_id": 9728
-    },
-    {
-      "action_id": "a0080",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-04",
-      "task_id": 9845
     },
     {
       "action_id": "a0081",
@@ -1014,18 +1110,9 @@
       "task_id": 9814
     },
     {
-      "action_id": "a0131",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-07",
-      "task_id": 9841
-    },
-    {
       "action_id": "a0138",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-07",
       "task_id": 9846
     },
@@ -1039,9 +1126,8 @@
     },
     {
       "action_id": "a0155",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 9739
     },
@@ -1055,27 +1141,17 @@
     },
     {
       "action_id": "a0157",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 9743
     },
     {
       "action_id": "a0167",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-09",
       "task_id": 9702
-    },
-    {
-      "action_id": "a0175",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-10",
-      "task_id": 9726
     },
     {
       "action_id": "a0177",
@@ -1111,33 +1187,22 @@
     },
     {
       "action_id": "a0204",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 9847
     },
     {
       "action_id": "a0212",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 9842
     },
     {
-      "action_id": "a0214",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-13",
-      "task_id": 10118
-    },
-    {
       "action_id": "a0216",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 9709
     },
@@ -1175,19 +1240,24 @@
       "severity": "info",
       "step_id": "step-11",
       "task_id": 9806
+    },
+    {
+      "kind": "timing_point_estimate_incomplete",
+      "scope": "profile",
+      "severity": "requirement"
     }
   ],
-  "known_seconds": 20881.317,
+  "known_seconds": 12617.96,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "zangarmarsh-fivebox",
   "range_basis": null,
   "range_minutes": null,
-  "status": "pass",
+  "status": "requirements",
   "steps": [
     {
-      "center_minutes": 10.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 202.8,
         "move_seconds": 22.786,
@@ -1195,20 +1265,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 600.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 374.414,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        8.5,
-        12.0
-      ],
+      "known_seconds": 225.586,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-01",
       "title": "塞纳里奥庇护所：开场 → 古树祝福",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
       "center_minutes": null,
@@ -1229,33 +1292,26 @@
       "unresolved_component_count": 4
     },
     {
-      "center_minutes": 5.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 144.54,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 450.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 300.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 58.86,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        4.0,
-        6.5
-      ],
+      "known_seconds": 691.14,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-02",
       "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 8
     },
     {
-      "center_minutes": 30.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 48.6,
         "move_seconds": 131.411,
@@ -1263,20 +1319,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1800.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1619.989,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        23.4,
-        36.6
-      ],
+      "known_seconds": 180.011,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-03",
       "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 8
     },
     {
       "center_minutes": 25.0,
@@ -1284,7 +1333,7 @@
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 148.085,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 150.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -1292,7 +1341,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1187.515,
+        "residual_seconds": 1037.515,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1354,33 +1403,26 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 30.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 145.2,
         "move_seconds": 124.368,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 120.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1800.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1530.432,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        23.4,
-        36.6
-      ],
+      "known_seconds": 389.568,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-07",
       "title": "萨布拉金 → 蛮沼区 → 恐爪刷新点",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 35.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 349.2,
         "move_seconds": 138.33,
@@ -1388,24 +1430,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2100.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1612.47,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        27.3,
-        42.7
-      ],
+      "known_seconds": 487.53,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-08",
       "title": "孢子村 → 莉萨奥 → 法恩森 → 孢殖林 → 孢子村",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 22.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 85.382,
@@ -1413,20 +1448,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1320.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1176.418,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        18.0,
-        26.0
-      ],
+      "known_seconds": 143.582,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-09",
       "title": "丢弃的食物 → 昂古拉 → 莉萨奥",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
       "center_minutes": 42.0,
@@ -1434,7 +1462,7 @@
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 152.662,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 270.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -1442,7 +1470,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 2367.338,
+        "residual_seconds": 2097.338,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1479,8 +1507,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 15.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 62.96,
@@ -1488,45 +1516,31 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 900.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 759.64,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        12.3,
-        17.7
-      ],
+      "known_seconds": 140.36,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-12",
       "title": "博哈姆 → 炉石萨布拉金",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 35.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 128.867,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 270.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2100.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1971.133,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json"
-      },
-      "range_minutes": [
-        27.3,
-        42.7
-      ],
+      "known_seconds": 398.867,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-13",
       "title": "昂古拉走廊 → 匕潭失落者 → 安葛洛什",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
       "center_minutes": 12.0,
@@ -1556,9 +1570,9 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 67,
+    "issue_count": 62,
     "range_model_status": "requirements",
-    "requirement_count": 0,
+    "requirement_count": 20,
     "step_count": 15
   }
 }

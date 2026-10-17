@@ -17,7 +17,9 @@
   "availability": {
     "quest_level": 75,
     "min_level": 71,
-    "pre_any": [12095],
+    "pre_any": [
+      12095
+    ],
     "pre_all": [],
     "parent_active": [],
     "exclusive_with": [],
@@ -37,10 +39,38 @@
     "reward_money_copper": 0,
     "fixed_items": [],
     "choice_items_desc_by_sell": [
-      {"item_id": 38530, "quantity": 1, "name_zhcn": null, "name_en": "Wrap of Vigorous Destruction", "sell_price_each_copper": 0, "sell_price_total_copper": 0},
-      {"item_id": 38531, "quantity": 1, "name_zhcn": null, "name_en": "Links of Righteous Persecution", "sell_price_each_copper": 0, "sell_price_total_copper": 0},
-      {"item_id": 38532, "quantity": 1, "name_zhcn": null, "name_en": "Belt of Vengeful Purification", "sell_price_each_copper": 0, "sell_price_total_copper": 0},
-      {"item_id": 38533, "quantity": 1, "name_zhcn": null, "name_en": "Girdle of Forceful Annihilation", "sell_price_each_copper": 0, "sell_price_total_copper": 0}
+      {
+        "item_id": 38530,
+        "quantity": 1,
+        "name_zhcn": null,
+        "name_en": "Wrap of Vigorous Destruction",
+        "sell_price_each_copper": 0,
+        "sell_price_total_copper": 0
+      },
+      {
+        "item_id": 38531,
+        "quantity": 1,
+        "name_zhcn": null,
+        "name_en": "Links of Righteous Persecution",
+        "sell_price_each_copper": 0,
+        "sell_price_total_copper": 0
+      },
+      {
+        "item_id": 38532,
+        "quantity": 1,
+        "name_zhcn": null,
+        "name_en": "Belt of Vengeful Purification",
+        "sell_price_each_copper": 0,
+        "sell_price_total_copper": 0
+      },
+      {
+        "item_id": 38533,
+        "quantity": 1,
+        "name_zhcn": null,
+        "name_en": "Girdle of Forceful Annihilation",
+        "sell_price_each_copper": 0,
+        "sell_price_total_copper": 0
+      }
     ],
     "fixed_items_sell_total_copper": 0,
     "choice_item_max_sell_copper": 0,
@@ -66,7 +96,11 @@
       "observed_at": null,
       "version_scope": "Questie WotLK 11.34.0",
       "confidence": "verified",
-      "supports_fields": ["identity", "availability", "guide"]
+      "supports_fields": [
+        "identity",
+        "availability",
+        "guide"
+      ]
     },
     {
       "evidence_id": "evidence-fivebox-live-2026-10-12",
@@ -75,7 +109,9 @@
       "observed_at": "2026-10-12",
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "partial",
-      "supports_fields": ["fivebox.status"]
+      "supports_fields": [
+        "fivebox.status"
+      ]
     },
     {
       "evidence_id": "evidence-fivebox-live-2026-10-13",
@@ -84,7 +120,10 @@
       "observed_at": "2026-10-13",
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
-      "supports_fields": ["fivebox.status", "presentation.note_override"]
+      "supports_fields": [
+        "fivebox.status",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {

@@ -1547,17 +1547,194 @@
       "seconds": 48.6,
       "step_id": "step-30",
       "visit_id": "a0457"
+    },
+    {
+      "action_id": "a0039",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 5,
+          "item_id": 33541,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 5
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 11298
+      },
+      "seconds": 175.0,
+      "step_id": "step-02",
+      "task_id": 11298
+    },
+    {
+      "action_id": "a0088",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 8,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11458
+      },
+      "seconds": 120.0,
+      "step_id": "step-05",
+      "task_id": 11458
+    },
+    {
+      "action_id": "a0226",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11230
+      },
+      "seconds": 225.0,
+      "step_id": "step-14",
+      "task_id": 11230
+    },
+    {
+      "action_id": "a0268",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 13,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12482
+      },
+      "seconds": 195.0,
+      "step_id": "step-16",
+      "task_id": 12482
+    },
+    {
+      "action_id": "a0333",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 8,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11315
+      },
+      "seconds": 120.0,
+      "step_id": "step-21",
+      "task_id": 11315
+    },
+    {
+      "action_id": "a0340",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11316
+      },
+      "seconds": 150.0,
+      "step_id": "step-21",
+      "task_id": 11316
+    },
+    {
+      "action_id": "a0404",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 31,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11263
+      },
+      "seconds": 465.0,
+      "step_id": "step-26",
+      "task_id": 11263
+    },
+    {
+      "action_id": "a0417",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 16,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11268
+      },
+      "seconds": 240.0,
+      "step_id": "step-27",
+      "task_id": 11268
     }
   ],
-  "input_fingerprint": "5ed9cdaae9b8ae61a1adecc89cc52965d4827e2be240d9a3b845ae2aec5c2523",
+  "input_fingerprint": "ca0dda37046ae7badc7a5f0ad4cd5ace72df35006603c1ebab4f434c20dd1d81",
   "issues": [
     {
       "action_id": "a0002",
       "edge_id": "a0001->visit-entry-conquest",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01"
     },
     {
@@ -1600,16 +1777,14 @@
     {
       "action_id": "a0010",
       "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 11398
     },
     {
       "action_id": "a0019",
       "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01b",
       "task_id": 11398
     },
@@ -1664,24 +1839,21 @@
     {
       "action_id": "a0009",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 11397
     },
     {
       "action_id": "a0014",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 11422
     },
     {
       "action_id": "a0022",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-01b",
       "task_id": 11399
     },
@@ -1708,14 +1880,6 @@
       "severity": "info",
       "step_id": "step-02",
       "task_id": 11301
-    },
-    {
-      "action_id": "a0039",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 11298
     },
     {
       "action_id": "a0045",
@@ -1774,14 +1938,6 @@
       "task_id": 11457
     },
     {
-      "action_id": "a0088",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 11458
-    },
-    {
       "action_id": "a0099",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -1807,9 +1963,8 @@
     },
     {
       "action_id": "a0116",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-07",
       "task_id": 11466
     },
@@ -1847,153 +2002,127 @@
     },
     {
       "action_id": "a0135",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 11476
     },
     {
       "action_id": "a0138",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 11479
     },
     {
       "action_id": "a0145",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 11471
     },
     {
       "action_id": "a0146",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 11512
     },
     {
       "action_id": "a0148",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-09",
       "task_id": 11467
     },
     {
       "action_id": "a0150",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-09",
       "task_id": 11511
     },
     {
       "action_id": "a0157",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-10",
       "task_id": 11527
     },
     {
       "action_id": "a0161",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-10",
       "task_id": 11529
     },
     {
       "action_id": "a0167",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-11",
       "task_id": 11567
     },
     {
       "action_id": "a0179",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-11",
       "task_id": 11568
     },
     {
       "action_id": "a0194",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 11167
     },
     {
       "action_id": "a0195",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 11227
     },
     {
       "action_id": "a0196",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 11270
     },
     {
       "action_id": "a0205",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 11221
     },
     {
       "action_id": "a0207",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 11168
     },
     {
       "action_id": "a0209",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 11253
     },
     {
       "action_id": "a0216",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 11170
     },
     {
-      "action_id": "a0226",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-14",
-      "task_id": 11230
-    },
-    {
       "action_id": "a0230",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-14",
       "task_id": 11232
     },
@@ -2007,9 +2136,8 @@
     },
     {
       "action_id": "a0247",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-15",
       "task_id": 11282
     },
@@ -2023,89 +2151,71 @@
     },
     {
       "action_id": "a0253",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-15",
       "task_id": 11285
     },
     {
       "action_id": "a0261",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-16",
       "task_id": 12481
     },
     {
       "action_id": "a0267",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-16",
       "task_id": 11423
     },
     {
-      "action_id": "a0268",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-16",
-      "task_id": 12482
-    },
-    {
       "action_id": "a0276",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 11305
     },
     {
       "action_id": "a0280",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 11306
     },
     {
       "action_id": "a0284",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 11307
     },
     {
       "action_id": "a0291",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-18",
       "task_id": 11309
     },
     {
       "action_id": "a0296",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-18",
       "task_id": 11310
     },
     {
       "action_id": "a0307",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-19",
       "task_id": 11271
     },
     {
       "action_id": "a0308",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-19",
       "task_id": 11275
     },
@@ -2119,49 +2229,29 @@
     },
     {
       "action_id": "a0320",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 11281
     },
     {
       "action_id": "a0327",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-21",
       "task_id": 11313
     },
     {
       "action_id": "a0332",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-21",
       "task_id": 11314
     },
     {
-      "action_id": "a0333",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 11315
-    },
-    {
-      "action_id": "a0340",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 11316
-    },
-    {
       "action_id": "a0341",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-21",
       "task_id": 11319
     },
@@ -2175,41 +2265,36 @@
     },
     {
       "action_id": "a0351",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-23",
       "task_id": 11350
     },
     {
       "action_id": "a0352",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-23",
       "task_id": 11365
     },
     {
       "action_id": "a0364",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-23",
       "task_id": 11351
     },
     {
       "action_id": "a0365",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-23",
       "task_id": 11366
     },
     {
       "action_id": "a0377",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-24",
       "task_id": 11352
     },
@@ -2223,49 +2308,36 @@
     },
     {
       "action_id": "a0388",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-25",
       "task_id": 11257
     },
     {
       "action_id": "a0389",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-25",
       "task_id": 11258
     },
     {
       "action_id": "a0390",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-25",
       "task_id": 11259
     },
     {
       "action_id": "a0392",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-25",
       "task_id": 11260
     },
     {
-      "action_id": "a0404",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-26",
-      "task_id": 11263
-    },
-    {
       "action_id": "a0405",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-26",
       "task_id": 11265
     },
@@ -2278,42 +2350,30 @@
       "task_id": 11264
     },
     {
-      "action_id": "a0417",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-27",
-      "task_id": 11268
-    },
-    {
       "action_id": "a0418",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-27",
       "task_id": 11433
     },
     {
       "action_id": "a0419",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-27",
       "task_id": 11267
     },
     {
       "action_id": "a0422",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-27",
       "task_id": 11453
     },
     {
       "action_id": "a0430",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-28",
       "task_id": 11317
     },
@@ -2335,32 +2395,35 @@
     },
     {
       "action_id": "a0451",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-29",
       "task_id": 11417
     },
     {
       "action_id": "a0456",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-30",
       "task_id": 11324
+    },
+    {
+      "kind": "timing_point_estimate_incomplete",
+      "scope": "profile",
+      "severity": "requirement"
     }
   ],
-  "known_seconds": 27236.469,
+  "known_seconds": 12829.174,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "howling-fivebox",
   "range_basis": null,
   "range_minutes": null,
-  "status": "pass",
+  "status": "requirements",
   "steps": [
     {
-      "center_minutes": 25.679,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 88.795,
@@ -2368,20 +2431,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1540.711,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1286.916,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        19.661,
-        31.702
-      ],
+      "known_seconds": 253.795,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-01",
       "title": "征服堡 → 药剂师营地 → 冷原海岸 / 腐鳃",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": null,
@@ -2407,7 +2463,7 @@
       "components": {
         "accept_turnin_seconds": 223.2,
         "move_seconds": 145.655,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 175.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -2415,7 +2471,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 697.792,
+        "residual_seconds": 522.792,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
       },
       "range_minutes": [
@@ -2482,7 +2538,7 @@
       "components": {
         "accept_turnin_seconds": 184.2,
         "move_seconds": 149.954,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 120.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -2490,7 +2546,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 673.235,
+        "residual_seconds": 553.235,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
       },
       "range_minutes": [
@@ -2525,8 +2581,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 20.74,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 202.8,
         "move_seconds": 39.735,
@@ -2534,24 +2590,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1244.421,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1001.886,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        15.88,
-        25.605
-      ],
+      "known_seconds": 242.535,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-07",
       "title": "斯库德 / 被遗忘的宝藏 → 赌债 / 嗜酒的杰克",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
-      "center_minutes": 27.654,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 319.8,
         "move_seconds": 47.392,
@@ -2559,24 +2608,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1659.228,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1292.036,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        21.173,
-        34.141
-      ],
+      "known_seconds": 367.192,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-08",
       "title": "无赖港西侧 → 权力链 → 洞穴双任务",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 8
     },
     {
-      "center_minutes": 6.913,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 98.769,
@@ -2584,24 +2626,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 414.807,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 257.838,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        5.293,
-        8.535
-      ],
+      "known_seconds": 156.969,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-09",
       "title": "死人的债务 / 风暴愤怒法杖 → 无赖港",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 13.827,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 16.176,
@@ -2609,24 +2644,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 829.614,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 677.838,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        10.587,
-        17.07
-      ],
+      "known_seconds": 151.776,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-10",
       "title": "慈悲修女号",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 18.765,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 193.8,
         "move_seconds": 496.453,
@@ -2634,24 +2662,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1125.905,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 435.652,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.367,
-        23.167
-      ],
+      "known_seconds": 690.253,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-11",
       "title": "四遗物 → 炉石新阿加曼德 → 盾牌岭",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 18.765,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 201.391,
@@ -2659,24 +2680,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1125.905,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 760.113,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.367,
-        23.167
-      ],
+      "known_seconds": 365.791,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-12",
       "title": "新阿加曼德 → 复仇港开场",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 18.765,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 174.0,
         "move_seconds": 81.753,
@@ -2684,49 +2698,35 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1125.905,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 870.151,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.367,
-        23.167
-      ],
+      "known_seconds": 255.753,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-13",
       "title": "复仇港前线 → 北岸 → 回港",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
-      "center_minutes": 18.765,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 300.6,
         "move_seconds": 87.091,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 225.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1125.905,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 738.214,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.367,
-        23.167
-      ],
+      "known_seconds": 612.691,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-14",
       "title": "风行者舰队 → 联盟前线",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 15.802,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 203.4,
         "move_seconds": 77.402,
@@ -2734,49 +2734,35 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 948.13,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 667.328,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        12.099,
-        19.509
-      ],
+      "known_seconds": 280.802,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-15",
       "title": "戈斯中士 → 拜尔海姆",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 13.827,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 184.2,
         "move_seconds": 107.119,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 195.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 829.614,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 538.295,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        10.587,
-        17.07
-      ],
+      "known_seconds": 486.319,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-16",
       "title": "林德尔 → 尼弗莱瓦",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 17.777,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 213.0,
         "move_seconds": 163.456,
@@ -2784,24 +2770,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1066.646,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 690.19,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        13.611,
-        21.948
-      ],
+      "known_seconds": 376.456,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-17",
       "title": "新阿加曼德：量身订制 → 药剂喷雾",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 8.889,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 93.706,
@@ -2809,24 +2788,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 533.323,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 332.817,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        6.806,
-        10.974
-      ],
+      "known_seconds": 200.506,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-18",
       "title": "重要零件 → 集中处理",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 10.864,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 161.167,
@@ -2834,24 +2806,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 651.839,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 413.273,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        8.318,
-        13.412
-      ],
+      "known_seconds": 238.567,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-19",
       "title": "冬蹄营地 → 东北自然区",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 13.827,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 174.0,
         "move_seconds": 77.351,
@@ -2859,45 +2824,31 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 829.614,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 578.263,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        10.587,
-        17.07
-      ],
+      "known_seconds": 251.351,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-20",
       "title": "冬蹄交接 → 冰瀑",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 1
     },
     {
-      "center_minutes": 17.777,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 142.9,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 270.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1066.646,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 759.347,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        13.611,
-        21.948
-      ],
+      "known_seconds": 577.3,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-21",
       "title": "鲁莉尔蕾 → 裂木 / 凋零林地",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
       "center_minutes": 7.901,
@@ -2925,8 +2876,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 18.765,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 127.103,
@@ -2934,24 +2885,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1125.905,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 921.402,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.367,
-        23.167
-      ],
+      "known_seconds": 204.503,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-23",
       "title": "巨人平原：符文 / 巨人前两段",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 6
     },
     {
-      "center_minutes": 15.802,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 135.143,
@@ -2959,24 +2903,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 948.13,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 677.387,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        12.099,
-        19.509
-      ],
+      "known_seconds": 270.743,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-24",
       "title": "巨人平原：命令符文 / 麦加利斯",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
-      "center_minutes": 19.753,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 193.2,
         "move_seconds": 98.24,
@@ -2984,74 +2921,53 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1185.163,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 893.723,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        15.124,
-        24.386
-      ],
+      "known_seconds": 291.44,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-25",
       "title": "斯克恩",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 6
     },
     {
-      "center_minutes": 11.852,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 87.533,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 465.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 711.098,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 526.965,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        9.074,
-        14.632
-      ],
+      "known_seconds": 649.133,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-26",
       "title": "亚勒伯龙·前段",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 13.827,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 84.834,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 240.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 829.614,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 667.38,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        10.587,
-        17.07
-      ],
+      "known_seconds": 402.234,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-27",
       "title": "亚勒伯龙·后段",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 6
     },
     {
-      "center_minutes": 10.864,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 237.03,
@@ -3059,24 +2975,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 651.839,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 298.409,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        8.318,
-        13.412
-      ],
+      "known_seconds": 353.43,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-28",
       "title": "霜刃神殿 → 先知拉瑞恩",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 1
     },
     {
-      "center_minutes": 11.852,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 254.24,
@@ -3084,24 +2993,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 711.098,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 340.458,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        9.074,
-        14.632
-      ],
+      "known_seconds": 370.64,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-29",
       "title": "乌尔芬 → 兄弟 → 巨鹰",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 6.913,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 131.592,
@@ -3109,27 +3011,20 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 414.807,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 176.415,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json"
-      },
-      "range_minutes": [
-        5.293,
-        8.535
-      ],
+      "known_seconds": 238.392,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-30",
       "title": "乌尔芬 → 头狼 → 拉瑞恩",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 1
     }
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 100,
+    "issue_count": 93,
     "range_model_status": "requirements",
-    "requirement_count": 0,
+    "requirement_count": 57,
     "step_count": 31
   }
 }

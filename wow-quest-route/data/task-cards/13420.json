@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "task_id": 13420,
+  "identity": {
+    "name_zhcn": "永冻之冰",
+    "name_en": "Everfrost",
+    "game_variant_id": "timewalking-wotlk-cn",
+    "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+    "faction": "both",
+    "repeatability": "once"
+  },
+  "coverage": {
+    "availability": "partial",
+    "rewards": "partial",
+    "guide": "verified"
+  },
+  "availability": {
+    "quest_level": 77,
+    "min_level": 77,
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "exclusive_with": [],
+    "required_class": [],
+    "required_race": [],
+    "required_skill": [],
+    "hidden_requirements": [
+      {
+        "kind": "reputation_and_world_object_trigger",
+        "summary": "霍迪尔之子达到友善后，可由风暴峭壁随机刷新的永冻薄片触发；正式路线仍按机会拾取，不专门等待。",
+        "confidence": "verified",
+        "source_refs": [
+          "public-reference-13420",
+          "legacy-storm-override-13420"
+        ]
+      }
+    ]
+  },
+  "rewards": {
+    "full_xp": 21400
+  },
+  "guide": [
+    "在风暴峭壁发现并拾取永冻薄片后触发《永冻之冰》。",
+    "返回丹尼芬雷向卡尔德询问永冻之冰。",
+    "当前不纳入正式练级路线：沿自然路线看到就拾取，没看到直接继续。"
+  ],
+  "fivebox": {
+    "status": "not_shared"
+  },
+  "timing_rule_ref": null,
+  "evidence": [
+    {
+      "evidence_id": "public-reference-13420",
+      "source_type": "public_reference",
+      "source_ref": "WotLK public quest reference: quest 13420《永冻之冰》；永冻薄片触发，风暴峭壁，77级，任务不可共享。",
+      "observed_at": "2026-10-17",
+      "version_scope": "WotLK reference",
+      "confidence": "partial",
+      "supports_fields": [
+        "identity",
+        "availability",
+        "rewards",
+        "guide",
+        "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "legacy-storm-override-13420",
+      "source_type": "legacy_migration",
+      "source_ref": "data/route-atlas/storm-peaks-task-overrides.json#13420",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "user-live-2026-10-17-everfrost-points",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17 second DK fivebox Storm Peaks live run: observed Everfrost Chip points (54.4,67.5) and (72,48); XP spread attributed to this task.",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
+    }
+  ],
+  "presentation": {
+    "note_override": {
+      "text": "永冻薄片已实测采集点：(54.4,67.5)、(72,48)。任务当前不放进正式路线；自然路过看到就拿，不专门绕路或等待刷新。",
+      "scope": "all",
+      "source_ref": "2026-10-17 user live run",
+      "reason": "用户要求暂时只把两个实测采集点记录在该任务卡片，尚未决定页面展示位置。"
+    }
+  }
+}

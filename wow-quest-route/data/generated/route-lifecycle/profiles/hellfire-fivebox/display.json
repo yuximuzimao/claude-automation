@@ -11,7 +11,7 @@
   "hearth_chain": [
     "萨尔玛"
   ],
-  "input_fingerprint": "dfacd49c356cff202d000720d85865c26cd0143e5804c607f27a2f92bcc2cbc8",
+  "input_fingerprint": "c2dbe0f3f77e579b5d3bf6774b465732803abfacab74afebd36eff116d376d28",
   "issues": [
     {
       "display_name": "纳拉杜",
@@ -812,7 +812,7 @@
         "to_visit_id": "a0249"
       }
     ],
-    "input_fingerprint": "9344d5d45ce174bf5b9ff5421fdf1b3cb1b317e812914850ed4e550e6d23d95a",
+    "input_fingerprint": "67b6bb5bf401fd938b8e387d5aeaa34da4c0f0b804449814303eaf41abb728b2",
     "status": "pass",
     "visits": [
       {
@@ -1531,13 +1531,10 @@
   "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
-    "center_minutes": 365.0,
-    "input_fingerprint": "1648b99f1185a5ec9d8376b35cbb4f8de8fa806291782b4f4900558d1ba70937",
-    "range_minutes": [
-      266.0,
-      480.0
-    ],
-    "status": "pass"
+    "center_minutes": null,
+    "input_fingerprint": "27835f4d17be691580220ac43d83f8714ead78d26aad9d27bb49ec17bf4c07dc",
+    "range_minutes": null,
+    "status": "requirements"
   },
   "status": "pass",
   "steps": [
@@ -2572,12 +2569,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          25.0,
-          48.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "萨尔玛装备包 → 断背岗哨"
     },
@@ -2968,13 +2962,13 @@
           "task_id": 10792
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "格里洛克之眼",
           "note": "使用塞萨克的碎片捕获眼睛，再带到塞萨克的熔锅使其分离。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10813
         },
@@ -2990,24 +2984,21 @@
           "task_id": 10250
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "\"暗眼\"格里洛克",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10834
         }
       ],
       "timing": {
-        "center_minutes": 25.0,
-        "range_minutes": [
-          18.0,
-          34.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "断背岗哨 → 军械库 → 塞斯高"
     },
@@ -3191,24 +3182,21 @@
           "task_id": 10258
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "\"暗眼\"格里洛克",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10834
         }
       ],
       "timing": {
-        "center_minutes": 25.0,
-        "range_minutes": [
-          18.0,
-          34.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "血之复仇 → 暗眼格里洛克 → 炉石萨尔玛"
     },
@@ -4235,13 +4223,13 @@
           "task_id": 9405
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "灵魂的指引",
           "note": "在尸体处使用先祖狼魂图腾，跟随狼魂前往玛格汉岗哨。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9410
         },
@@ -4258,12 +4246,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          25.0,
-          48.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "刺客 → 玛格汉岗哨"
     },
@@ -4653,13 +4638,13 @@
           "task_id": 10103
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：黑色利爪",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9466
         },
@@ -4753,12 +4738,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          26.0,
-          44.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "猎鹰岗哨 → 阿苟纳 → 大裂隙 → 沙纳尔"
     },
@@ -5116,13 +5098,13 @@
           "task_id": 10367
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "残冠长者",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10368
         },
@@ -5149,13 +5131,13 @@
           "task_id": 9340
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：黑色利爪",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9466
         },
@@ -5260,12 +5242,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 30.0,
-        "range_minutes": [
-          22.0,
-          38.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "沙纳尔后半 → 猎鹰岗哨回交"
     },
@@ -5924,12 +5903,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 30.0,
-        "range_minutes": [
-          22.0,
-          40.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "塞纳里奥哨站：巨人 / 棘牙岭 → 回交"
     },
@@ -6137,7 +6113,7 @@
       "timing": {
         "center_minutes": null,
         "range_minutes": null,
-        "status": "unavailable"
+        "status": "requirements"
       },
       "title": "缚地者 / 解毒剂 → 赞加沼泽"
     }

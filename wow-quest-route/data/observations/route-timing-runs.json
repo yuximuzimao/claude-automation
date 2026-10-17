@@ -2400,6 +2400,59 @@
         "state": "风暴峭壁步骤6执行中；《伊尔达的愚行》已完成，后续任务尚未继续。"
       },
       "status": "partial_live_run_recorded_contaminated_not_for_calibration"
+    },
+    {
+      "run_id": "2026-10-16-17-storm-second-dk-2302-0406",
+      "date": "2026-10-16/17",
+      "route_key": "storm_peaks_second_dk_live_continuation",
+      "profile_ids": [
+        "storm-peaks-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "storm-peaks-fivebox": 3
+      },
+      "run_kind": "second_fivebox_live_partial",
+      "time_precision": "exact_minute_user_reported",
+      "effective_start_local": "2026-10-16T23:02:00+08:00",
+      "effective_end_local": "2026-10-17T04:06:00+08:00",
+      "wall_clock_minutes": 304,
+      "actual_minutes": 281,
+      "pause_windows": [
+        {
+          "start_local": "2026-10-17T01:30:00+08:00",
+          "end_local": "2026-10-17T01:53:00+08:00",
+          "minutes": 23
+        }
+      ],
+      "route_window": "风暴峭壁第二组DK续跑；23:02开始，04:06停止。",
+      "actual_contains_learning_or_route_errors": false,
+      "known_error_or_learning_sources": [],
+      "route_corrections_confirmed_by_run": [
+        "《燃烧吧，瓦基里安》共享；完成后炉石再去交任务。",
+        "《制造挽具》不共享；《最后的母熊》依次交互；《驭龙赛》共享且距离近。",
+        "《骨肉相残》依次交互；《弥补关系》共享，实跑完成很快。",
+        "《远古的圣物》不共享；《失踪的布莱恩·铜须》依次拾取；《紧急措施》《洞穴中的药品》不共享；《失踪的猎人》不需要五开标记。",
+        "《热与冷》《猎杀间谍》《粘滞清洁》《喂饱安格里姆》本轮均跳过；独立日常从正式练级路线删除。",
+        "02:36完成《雷铸徽记》；《回首往事》本轮提前到此处完成，先记录为本次实跑变化，不固化顺序。",
+        "《科洛米尔，风暴之锤》依次交互；《见证者与英雄》《雷蹄的记忆》共享。",
+        "《土灵的誓言》召唤后可操控土灵宝宝。",
+        "接共享《清算之战》后先炉石，再去布德克拉格庇护所。",
+        "13420《永冻之冰》本轮记录永冻薄片实测点(54.4,67.5)、(72,48)，仍只做机会拾取，不加入正式路线。"
+      ],
+      "timing_observations": [
+        "《精炼之火》因目标怪本身较少，本轮耗时偏长。",
+        "《弥补关系》本轮完成很快。"
+      ],
+      "calibration_eligible": false,
+      "calibration_note": "本段跨多个步骤且主动跳过独立日常，并包含一次《回首往事》提前完成的路线变体；保留真实总时长和局部效率观察，不直接作为稳定动作区间Timing校准样本。",
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-17T04:06:00+08:00",
+        "level": 79,
+        "experience_range": "33.4万-39.8万",
+        "experience_spread_reason": "永冻薄片触发的13420《永冻之冰》完成差异。",
+        "state": "风暴峭壁第二组DK续跑于04:06停止；本次最新反馈已处理到《清算之战》路线顺序调整。"
+      },
+      "status": "partial_live_run_recorded_route_corrections_applied"
     }
   ]
 }

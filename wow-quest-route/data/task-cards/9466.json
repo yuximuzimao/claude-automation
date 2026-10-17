@@ -77,12 +77,13 @@
   "guide": [
     "接取：通缉布告。",
     "将黑色利爪的爪子交给地狱火半岛猎鹰岗哨的游侠队长维恩雷。",
+    "五开实测：击杀一次后，五号依次拾取任务物。",
     "交付：游侠队长维恩雷。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "sequential-corpse-loot",
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",

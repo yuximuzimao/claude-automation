@@ -2364,6 +2364,185 @@
       "visit_id": "tail-visit-undercity-staging"
     },
     {
+      "action_id": "a0010",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 11980
+      },
+      "seconds": 225.0,
+      "step_id": "step-01",
+      "task_id": 11980
+    },
+    {
+      "action_id": "a0045",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "zero_service",
+        "rule_ref": "zero-independent-service",
+        "task_id": 12036
+      },
+      "seconds": 0.0,
+      "step_id": "step-05",
+      "task_id": 12036
+    },
+    {
+      "action_id": "a0049",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 10,
+          "item_id": 36725,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 10
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12039
+      },
+      "seconds": 350.0,
+      "step_id": "step-05",
+      "task_id": 12039
+    },
+    {
+      "action_id": "a0052",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 6,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12040
+      },
+      "seconds": 90.0,
+      "step_id": "step-05",
+      "task_id": 12040
+    },
+    {
+      "action_id": "a0080",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "personal-kill-count",
+        "task_id": 12053
+      },
+      "seconds": 75.0,
+      "step_id": "step-07",
+      "task_id": 12053
+    },
+    {
+      "action_id": "a0122",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 13,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12043
+      },
+      "seconds": 195.0,
+      "step_id": "step-10",
+      "task_id": 12043
+    },
+    {
+      "action_id": "a0139",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 12,
+          "item_id": 36730,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 12
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12047
+      },
+      "seconds": 420.0,
+      "step_id": "step-12",
+      "task_id": 12047
+    },
+    {
+      "action_id": "a0176",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 8,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12079
+      },
+      "seconds": 120.0,
+      "step_id": "step-15",
+      "task_id": 12079
+    },
+    {
       "action_id": "a0189",
       "component": "objective_service",
       "resolution": {
@@ -2377,7 +2556,10 @@
           "party_size": 5,
           "personal_drop_tail_sigma_multiplier": 1.2,
           "personal_loot_seconds_per_corpse": 9.0,
-          "required_count": 1
+          "required_count": 1,
+          "source_item_ids": [
+            35792
+          ]
         },
         "rule_kind": "personal_drop",
         "rule_ref": "personal-drop-count",
@@ -2386,9 +2568,342 @@
       "seconds": 1810.940258945177,
       "step_id": "step-16",
       "task_id": 11999
+    },
+    {
+      "action_id": "a0241",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12111
+      },
+      "seconds": 150.0,
+      "step_id": "step-21",
+      "task_id": 12111
+    },
+    {
+      "action_id": "a0263",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12028
+      },
+      "seconds": 35.0,
+      "step_id": "step-23",
+      "task_id": 12028
+    },
+    {
+      "action_id": "a0292",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "personal-kill-count",
+        "task_id": 12032
+      },
+      "seconds": 75.0,
+      "step_id": "step-25",
+      "task_id": 12032
+    },
+    {
+      "action_id": "a0336",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 21,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12448
+      },
+      "seconds": 315.0,
+      "step_id": "step-29",
+      "task_id": 12448
+    },
+    {
+      "action_id": "a0383",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "zero_service",
+        "rule_ref": "zero-independent-service",
+        "task_id": 12263
+      },
+      "seconds": 0.0,
+      "step_id": "step-33",
+      "task_id": 12263
+    },
+    {
+      "action_id": "a0388",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12264
+      },
+      "seconds": 225.0,
+      "step_id": "step-33",
+      "task_id": 12264
+    },
+    {
+      "action_id": "a0389",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 8,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12265
+      },
+      "seconds": 56.0,
+      "step_id": "step-33",
+      "task_id": 12265
+    },
+    {
+      "action_id": "a0410",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "personal-kill-count",
+        "task_id": 12470
+      },
+      "seconds": 75.0,
+      "step_id": "step-35",
+      "task_id": 12470
+    },
+    {
+      "action_id": "a0442",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 5,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12454
+      },
+      "seconds": 75.0,
+      "step_id": "step-37",
+      "task_id": 12454
+    },
+    {
+      "action_id": "a0515",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 5,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12232
+      },
+      "seconds": 35.0,
+      "step_id": "step-43",
+      "task_id": 12232
+    },
+    {
+      "action_id": "a0520",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 5,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12232
+      },
+      "seconds": 35.0,
+      "step_id": "step-44",
+      "task_id": 12232
+    },
+    {
+      "action_id": "a0539",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12260
+      },
+      "seconds": 15.0,
+      "step_id": "step-45",
+      "task_id": 12260
+    },
+    {
+      "action_id": "a0549",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 1,
+          "item_id": 37540,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12283
+      },
+      "seconds": 35.0,
+      "step_id": "step-46",
+      "task_id": 12283
+    },
+    {
+      "action_id": "a0576",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 6,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12132
+      },
+      "seconds": 90.0,
+      "step_id": "step-49",
+      "task_id": 12132
+    },
+    {
+      "action_id": "a0609",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 1,
+          "item_id": 43615,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 13242
+      },
+      "seconds": 35.0,
+      "step_id": "step-51",
+      "task_id": 13242
     }
   ],
-  "input_fingerprint": "f61f509134c0852070fba7ff65203bb859f29d848706dccd7bf4f22095e22f11",
+  "input_fingerprint": "1d5087e14d2a016ab5da114b5e16a8dec7555d853fb495b872b8ed78383459e6",
   "issues": [
     {
       "action_id": "use-hearth-after-rotting-organs",
@@ -2526,8 +3041,7 @@
     {
       "edge_id": "tail-return-korkron->tail-visit-warsong",
       "kind": "flight_edge_binding_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-52"
     },
     {
@@ -2535,8 +3049,7 @@
       "edge_id": "tail-visit-warsong->tail-visit-orgrimmar",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-52"
     },
     {
@@ -2544,8 +3057,7 @@
       "edge_id": "tail-visit-orgrimmar->tail-visit-undercity-staging",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-52"
     },
     {
@@ -2553,8 +3065,7 @@
       "edge_id": "tail-visit-undercity-staging->tail-visit-aethas",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "hearth",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-52"
     },
     {
@@ -2562,8 +3073,7 @@
       "edge_id": "tail-visit-aethas->tail-visit-dalaran",
       "kind": "movement_action_timing_input_required",
       "operation_kind": "quest_transport",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-52"
     },
     {
@@ -2617,8 +3127,7 @@
     {
       "action_id": "a0611",
       "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 12419
     },
@@ -2671,14 +3180,6 @@
       "task_id": 11978
     },
     {
-      "action_id": "a0010",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-01",
-      "task_id": 11980
-    },
-    {
       "action_id": "a0016",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -2695,36 +3196,12 @@
       "task_id": 12033
     },
     {
-      "action_id": "a0045",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 12036
-    },
-    {
       "action_id": "a0047",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
       "step_id": "step-05",
       "task_id": 12056
-    },
-    {
-      "action_id": "a0049",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 12039
-    },
-    {
-      "action_id": "a0052",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 12040
     },
     {
       "action_id": "a0056",
@@ -2749,14 +3226,6 @@
       "severity": "info",
       "step_id": "step-07",
       "task_id": 12048
-    },
-    {
-      "action_id": "a0080",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-07",
-      "task_id": 12053
     },
     {
       "action_id": "a0085",
@@ -2791,14 +3260,6 @@
       "task_id": 12091
     },
     {
-      "action_id": "a0122",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-10",
-      "task_id": 12043
-    },
-    {
       "action_id": "a0123",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -2821,14 +3282,6 @@
       "severity": "info",
       "step_id": "step-11",
       "task_id": 12046
-    },
-    {
-      "action_id": "a0139",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-12",
-      "task_id": 12047
     },
     {
       "action_id": "a0141",
@@ -2885,14 +3338,6 @@
       "severity": "info",
       "step_id": "step-15",
       "task_id": 12078
-    },
-    {
-      "action_id": "a0176",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-15",
-      "task_id": 12079
     },
     {
       "action_id": "a0178",
@@ -2969,42 +3414,30 @@
     {
       "action_id": "a0230",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 12102
     },
     {
       "action_id": "a0232",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 12126
     },
     {
       "action_id": "a0614",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-20b",
       "task_id": 12090
     },
     {
       "action_id": "a0622",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-20b",
       "task_id": 12097
-    },
-    {
-      "action_id": "a0241",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 12111
     },
     {
       "action_id": "a0250",
@@ -3029,14 +3462,6 @@
       "severity": "info",
       "step_id": "step-23",
       "task_id": 11959
-    },
-    {
-      "action_id": "a0263",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-23",
-      "task_id": 12028
     },
     {
       "action_id": "a0269",
@@ -3087,14 +3512,6 @@
       "task_id": 12016
     },
     {
-      "action_id": "a0292",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-25",
-      "task_id": 12032
-    },
-    {
       "action_id": "a0298",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -3117,14 +3534,6 @@
       "severity": "info",
       "step_id": "step-28",
       "task_id": 12145
-    },
-    {
-      "action_id": "a0336",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-29",
-      "task_id": 12448
     },
     {
       "action_id": "a0341",
@@ -3175,30 +3584,6 @@
       "task_id": 12262
     },
     {
-      "action_id": "a0383",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-33",
-      "task_id": 12263
-    },
-    {
-      "action_id": "a0388",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-33",
-      "task_id": 12264
-    },
-    {
-      "action_id": "a0389",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-33",
-      "task_id": 12265
-    },
-    {
       "action_id": "a0395",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -3229,14 +3614,6 @@
       "severity": "info",
       "step_id": "step-35",
       "task_id": 12149
-    },
-    {
-      "action_id": "a0410",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-35",
-      "task_id": 12470
     },
     {
       "action_id": "a0420",
@@ -3293,14 +3670,6 @@
       "severity": "info",
       "step_id": "step-37",
       "task_id": 12211
-    },
-    {
-      "action_id": "a0442",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-37",
-      "task_id": 12454
     },
     {
       "action_id": "a0445",
@@ -3439,14 +3808,6 @@
       "task_id": 12273
     },
     {
-      "action_id": "a0515",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-43",
-      "task_id": 12232
-    },
-    {
       "action_id": "a0517",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -3461,14 +3822,6 @@
       "severity": "info",
       "step_id": "step-44",
       "task_id": 12273
-    },
-    {
-      "action_id": "a0520",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-44",
-      "task_id": 12232
     },
     {
       "action_id": "a0522",
@@ -3487,28 +3840,12 @@
       "task_id": 12254
     },
     {
-      "action_id": "a0539",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-45",
-      "task_id": 12260
-    },
-    {
       "action_id": "a0544",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
       "severity": "info",
       "step_id": "step-45",
       "task_id": 12274
-    },
-    {
-      "action_id": "a0549",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-46",
-      "task_id": 12283
     },
     {
       "action_id": "a0551",
@@ -3543,14 +3880,6 @@
       "task_id": 12459
     },
     {
-      "action_id": "a0576",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-49",
-      "task_id": 12132
-    },
-    {
       "action_id": "a0596",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -3567,29 +3896,25 @@
       "task_id": 12459
     },
     {
-      "action_id": "a0609",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-51",
-      "task_id": 13242
-    },
-    {
       "action_id": "tail-do-13267",
       "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "severity": "requirement",
       "step_id": "step-52",
       "task_id": 13267
+    },
+    {
+      "kind": "timing_point_estimate_incomplete",
+      "scope": "profile",
+      "severity": "requirement"
     }
   ],
-  "known_seconds": 42833.863,
+  "known_seconds": 42456.367,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "dragonblight-fivebox",
   "range_basis": null,
   "range_minutes": null,
-  "status": "pass",
+  "status": "requirements",
   "steps": [
     {
       "center_minutes": 16.8,
@@ -3597,7 +3922,7 @@
       "components": {
         "accept_turnin_seconds": 126.0,
         "move_seconds": 16.539,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 225.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -3605,7 +3930,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 865.461,
+        "residual_seconds": 640.461,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -3695,7 +4020,7 @@
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 51.271,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 440.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -3703,7 +4028,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1446.929,
+        "residual_seconds": 1006.929,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -3745,7 +4070,7 @@
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 59.355,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 75.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -3753,7 +4078,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 799.845,
+        "residual_seconds": 724.845,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -3820,7 +4145,7 @@
       "components": {
         "accept_turnin_seconds": 232.8,
         "move_seconds": 128.682,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 195.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -3828,7 +4153,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 838.518,
+        "residual_seconds": 643.518,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -3870,7 +4195,7 @@
       "components": {
         "accept_turnin_seconds": 77.4,
         "move_seconds": 45.336,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 420.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -3878,7 +4203,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 843.264,
+        "residual_seconds": 423.264,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -3945,7 +4270,7 @@
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 69.273,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 120.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -3953,7 +4278,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 390.927,
+        "residual_seconds": 270.927,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4065,8 +4390,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 7.7,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 126.0,
         "move_seconds": 80.875,
@@ -4074,20 +4399,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 462.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 255.125,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
-      },
-      "range_minutes": [
-        5.8,
-        9.6
-      ],
+      "known_seconds": 206.875,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-20",
       "title": "红玉丁香 → 邪恶之约 → 阿格玛疫苗链",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
       "center_minutes": null,
@@ -4108,25 +4426,23 @@
       "unresolved_component_count": 2
     },
     {
-      "center_minutes": 5.0,
+      "center_minutes": 4.355,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 48.6,
         "move_seconds": 62.7,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 150.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 300.0,
+      "known_seconds": 261.3,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 188.7,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
+        "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        4.1,
-        5.9
+        3.226,
+        5.484
       ],
       "step_id": "step-21",
       "title": "野生动物的疫苗 → 索艾",
@@ -4161,7 +4477,7 @@
       "components": {
         "accept_turnin_seconds": 193.8,
         "move_seconds": 128.263,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 35.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4169,7 +4485,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 823.937,
+        "residual_seconds": 788.937,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4211,7 +4527,7 @@
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 95.855,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 75.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4219,7 +4535,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1821.745,
+        "residual_seconds": 1746.745,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4311,7 +4627,7 @@
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 94.947,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 315.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4319,7 +4635,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 484.653,
+        "residual_seconds": 169.653,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4406,25 +4722,23 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 8.0,
+      "center_minutes": 7.417,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 28.441,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 281.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 480.0,
+      "known_seconds": 445.041,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 315.959,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
+        "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        6.6,
-        9.4
+        5.436,
+        9.399
       ],
       "step_id": "step-33",
       "title": "敌人的意图 → 扫荡诅咒教派 / 污染的能量",
@@ -4461,7 +4775,7 @@
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 53.884,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 75.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4469,7 +4783,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 804.116,
+        "residual_seconds": 729.116,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4511,7 +4825,7 @@
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 104.593,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 75.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4519,7 +4833,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 4453.007,
+        "residual_seconds": 4378.007,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4661,7 +4975,7 @@
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 52.92,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 35.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4669,7 +4983,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 343.08,
+        "residual_seconds": 308.08,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4686,7 +5000,7 @@
       "components": {
         "accept_turnin_seconds": 0.0,
         "move_seconds": 27.96,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 35.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4694,7 +5008,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 248.04,
+        "residual_seconds": 213.04,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4711,7 +5025,7 @@
       "components": {
         "accept_turnin_seconds": 271.2,
         "move_seconds": 112.961,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 15.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4719,7 +5033,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 275.839,
+        "residual_seconds": 260.839,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4736,7 +5050,7 @@
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 40.892,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 35.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4744,7 +5058,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 194.908,
+        "residual_seconds": 159.908,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4806,25 +5120,23 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 4.5,
+      "center_minutes": 3.688,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 126.0,
         "move_seconds": 5.288,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 90.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 270.0,
+      "known_seconds": 221.288,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 138.712,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
+        "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        3.7,
-        5.4
+        2.898,
+        4.478
       ],
       "step_id": "step-49",
       "title": "冰霜之约 → 毁灭的力量 → 翻译过的魔典",
@@ -4861,7 +5173,7 @@
       "components": {
         "accept_turnin_seconds": 165.0,
         "move_seconds": 145.773,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 35.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -4869,7 +5181,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 283.227,
+        "residual_seconds": 248.227,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json"
       },
       "range_minutes": [
@@ -4901,9 +5213,9 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 147,
+    "issue_count": 125,
     "range_model_status": "requirements",
-    "requirement_count": 0,
+    "requirement_count": 12,
     "step_count": 53
   }
 }

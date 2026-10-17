@@ -1,7 +1,88 @@
 {
   "schema_version": 1,
   "config_id": "route-timing-profile-action-parameters-v1",
-  "profiles": {},
+  "profiles": {
+    "hellfire-dk-speed": {
+      "actions": {
+        "a0002": {
+          "seconds": 15.0,
+          "source_refs": ["WotLK Through the Dark Portal route evidence: Orgrimmar Valley of Spirits portal is a fixed portal transition to Blasted Lands; provisional 15s interaction/loading calibration until a clean current-server observation exists."]
+        },
+        "a0004": {
+          "seconds": 10.0,
+          "source_refs": ["data/sources/video-extraction/episode-26-events.json: equivalent Dark Portal crossing occurs inside the 00:35-00:45 handoff window; provisional 10s fixed-transition ceiling, Hub interaction remains separately charged."]
+        },
+        "a0010": {
+          "seconds": 60.0,
+          "source_refs": ["WotLK spell 34924 / Task 10289: Stair of Destiny -> Thrallmar is the exact forced flight path; provisional 60s route-action calibration until a clean current-server observation exists."]
+        },
+        "a0085": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0125": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        }
+      }
+    },
+    "zangarmarsh-dk-speed": {
+      "actions": {
+        "a0150": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0075": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0123": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0133": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0142": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        }
+      }
+    },
+    "storm-peaks-fivebox": {
+      "actions": {
+        "a9002": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a9003": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0219": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0275": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0329": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0397": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        },
+        "a0443": {
+          "seconds": 21.0,
+          "source_refs": ["component-wall-clock-v1 hearth structural extra: 0.35min"]
+        }
+      }
+    }
+  },
   "programs": {},
   "note": "Route/action-specific timing parameters live here only when the route action is already fixed and only its duration needs a versioned calibration. profiles owns Profile action/service calibration; programs owns Route Program boundary-transition operation calibration. This file never changes route order or movement choice."
 }

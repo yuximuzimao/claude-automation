@@ -95,13 +95,13 @@
   "guide": [
     "接取：塔迦祖母。",
     "研究机甲专家的手册，并将机甲专家麦卡佐德的徽记带回北风苔原的牦牛村，向塔迦祖母汇报你获胜的消息。",
-    "机甲专家麦卡佐德的徽记可由五号从同一具尸体依次拾取。",
+    "五开执行：手册只需交互一次，召出并击杀一次机甲专家；场上已有Boss时不会重复召唤新的Boss。击杀后五号从同一具尸体依次拾取徽记。",
     "交付：塔迦祖母。"
   ],
   "fivebox": {
     "status": "sequential_loot"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",

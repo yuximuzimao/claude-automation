@@ -240,7 +240,7 @@ def test_fivebox_pending_checklist_matches_formal_route_pending_tasks() -> None:
     formal_task_ids: set[int] = set()
     for path in sorted((ROOT / "data/route-profiles").glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
-        if not data.get("profile_id"):
+        if not data.get("profile_id") or data.get("status") == "retired":
             continue
         for action in data.get("actions", []):
             task_id = action.get("task_id")

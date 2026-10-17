@@ -55,9 +55,9 @@
     "交付：夏拉托尔。"
   ],
   "fivebox": {
-    "status": "not_shared"
+    "status": "shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-object-interaction",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -104,11 +104,23 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "user-live-2026-10-17-fivebox",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17 Storm Peaks second DK fivebox live run: 《见证者与英雄》共享；覆盖此前不共享记录。",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "唐卡洛营地内3份历史卷轴五号分别交互；同一卷轴可连续切号点击。",
+      "text": "",
       "scope": "all",
       "source_ref": "2026-09-26 Route Atlas note audit",
       "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"

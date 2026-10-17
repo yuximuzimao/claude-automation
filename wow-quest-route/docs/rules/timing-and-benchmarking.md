@@ -55,6 +55,8 @@
 
 同一NPC/同一Hub批量动作共享基础成本，禁止给每个任务重复计完整Hub开销。
 
+由`accept + when.has_item`定义的自然掉落机会任务不属于主路线保证成本：Replay给出`maybe`时，Timing基线排除该任务的可选Hub成本并保留info；其同task后续条件交付沿用同一机会任务身份。其它条件Hub动作的`maybe`仍是Requirement，不能借此规则普遍忽略分支成本。
+
 ### `T_wait`
 
 无法通过主动执行消除的等待：
@@ -147,13 +149,21 @@ Task Card不再把任务拆成fivebox stages或objective/mechanic类型供Timing
 
 这些参数来自Timing模型配置、Questie基础数据或Timing Observations；不得为了计算方便重新把Task Card guide拆成另一套objective/fivebox schema。
 
+### `personal-kill-count` 当前计算口径
+
+当Task Card已经明确引用`personal-kill-count`时，任务本身仍只记录单角色目标数；Timing按`kill_count × party_size × combat_seconds_per_mob`计算当前五开个人进度的墙钟服务成本。它用于已经确认“每个角色都必须各自完成”的击杀/载具进度；不能只因为Task Card是`not_shared`就自动套用，仍需显式`timing_rule_ref`。
+
 ### `personal-drop-count` 当前计算口径
 
 当Task Card已经明确引用`personal-drop-count`时，先由Effective Quest Source或更高优先级Timing Input解析单角色需求量`N`与掉率`p`，再由已确认的`fivebox.status`决定独立需求份数：`not_shared`取当前队伍人数，`shared/sequential_loot`取1；`pending/special/缺失`不得猜，保持Requirement。
 
 令`N_total = N × independent_streams`。当`p = 1`时，击杀/掉落尝试数直接为`N_total`，不增加随机尾部；当`0 < p < 1`时，当前中心模型按负二项近似使用`mean = N_total / p`、`std = sqrt(N_total × (1-p)) / p`，再以版本化`personal_drop_tail_sigma_multiplier`形成保守中心击杀数。这个口径对应当前自由拾取执行：不共享任务按角色依次完成个人需求，而不是把五号视为并行推进后只等最慢号。
 
-掉率只能来自当前有效插件/数据库中可机械绑定到该任务目标的概率，或经证据审查后的版本化task-id Timing Input。若Questie只提供物品来源链、却没有该容器/脚本产物的概率，则保留`drop_rate`未知，禁止把100%、历史印象或玩家备注当默认概率。
+掉率只能来自当前有效插件/数据库中可机械绑定到该任务目标的概率，或经证据审查后的版本化task-id Timing Input。Timing内部统一使用`0–1`概率；若上游Questie/Wowhead数据以百分数表示，必须在Effective Quest Source adapter归一化后再进入模型。多个可能NPC来源若当前版本化掉率完全相同，可直接保留同一概率并记录全部候选来源；若不同，继续保留路线来源选择Requirement。若Questie只提供物品来源链、却没有该容器/脚本产物的概率，则保留`drop_rate`未知，禁止把100%、历史印象或玩家备注当默认概率。**机械取得掉率本身也不是自动选择`personal-drop-count`的充分条件**：必须先有当前任务的显式`timing_rule_ref`与已确认fivebox执行机制，批量迁移时优先复用经审查的单任务intrinsic service；不得仅因数据库存在概率就把历史地图全部改成随机掉落模型。
+
+### `sequential-corpse-loot` 当前计算口径
+
+用于已经确认“同一目标只杀一次、同一具尸体由五个角色依次拾取同一任务物”的任务。Task Card必须显式为`fivebox.status=sequential_loot`并引用该规则；单角色需求量为`N`时，当前墙钟服务成本为`N × combat_seconds_per_mob + N × party_size × personal_loot_seconds_per_corpse`。击杀成本只计一次，拾取成本按角色数放大；不得再为每个这类Boss任务手填一份重复的60秒固定值。
 
 ### 期望值不是唯一输出
 
@@ -238,7 +248,9 @@ Timing只负责把这些动作换算成墙钟。
 
 Route Lifecycle切换期间，旧版组件模型的中心值与区间保存在当前`model-config`的`legacy_step_baselines`中，作为**迁移残差**使用。它不是第二套玩家输入，也不是实跑观察：Timing先计算当前Profile已经具备的Movement、Hub和任务服务成本，再用基线补齐尚未完成结构化迁移的部分。
 
-当某个步骤的当前输入全部闭合时，该步骤自动停止使用基线；后续实跑只通过本文件规定的Observation校准当前模型。页面、HTML和人工备注不得直接读取或修改基线数字。
+迁移残差只允许用于**步骤合同仍与旧基线兼容**的同一step。若发生拆step/合step、任务集合增删、关键动作重排、fivebox机制修正导致任务服务口径改变，受影响旧step必须写入`invalidated_step_ids`或完成等价的显式失效处理；不能仅凭`step_id`相同继续补旧中心值。新拆出的step没有自己的旧基线时必须保持Requirement，整张Profile存在其它legacy baseline不能把它降成info。`fivebox.status=pending`属于事实机制尚未闭合，**永远不得**由legacy baseline/residual解决或降级；历史整步时间只能补迁移中的模型参数，不能替代缺失的实测事实。
+
+当一个Profile已完成Movement、Hub、objective service和特殊动作参数的显式迁移后，必须把该Profile的`compatible_step_residual_floor`关闭；此后旧step中心/区间只保留作历史比较，不再参与当前中心值或区间。尚未闭合的兼容旧step才允许继续使用迁移残差。`point_estimate_complete=false`时Profile状态不得为`pass`。页面、HTML和人工备注不得直接读取或修改基线数字。
 
 ### clean baseline
 
@@ -414,6 +426,7 @@ Timing结果是否形成Selection Review条件只读Review Trigger / Selection o
 - 任务时间规则只读`timing_rule_ref`，不解析guide/玩家备注，也不把fivebox状态当完整时间公式；
 - `timing_rule_ref=null`时保留不确定边界，不擅自猜规则；
 - Route Profile每个需要发布的stepGroup都有Timing结果/或明确`includeInTotal=false`；
+- `point_estimate_complete=false`时Profile状态不得为`pass`；新拆/变更step不得被其它step的legacy baseline掩盖；
 - 实跑样本scope与当前Route Profile/version匹配；
 - 模型公式/参数有版本，不存在地图Builder各自复制一套公式。
 

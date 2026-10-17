@@ -11,7 +11,7 @@
     "塞纳里奥庇护所",
     "萨布拉金"
   ],
-  "input_fingerprint": "8605c92cb64834ed22bc039e8e9171a6246833cdcb9017520604f0efd12dc7cb",
+  "input_fingerprint": "d27b181778790d1e3cd2059285d7ca45937233e44c809bd9a375641c7c77e601",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -425,7 +425,7 @@
           "to_visit_id": "a0141"
         }
       ],
-      "input_fingerprint": "a49926a382c7ab45d3638a42542a8d6a0b19afc98359043a4130eef78732444f",
+      "input_fingerprint": "d956919a30394d3f9ae143a76199f6b27a914c956f0c8b0a897039c8f379ed8a",
       "status": "pass",
       "visits": [
         {
@@ -944,13 +944,16 @@
   "program_id": null,
   "publishable": true,
   "route_timing": {
-    "center_minutes": null,
-    "input_fingerprint": "baa09a0a552aa91c36fe0c1797014b7f14cd38a148211ec91074f26dee05cb45",
-    "range_minutes": null,
+    "center_minutes": 97.553,
+    "input_fingerprint": "e2b8005f80831cf79d7e6141aa539d9b4a00eab31e8a4a6c619fab20211c2ea0",
+    "range_minutes": [
+      74.913,
+      120.192
+    ],
     "status": "pass"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "6eeb427c03b00f796c08974c54fd7e1a3789d18e32c5affd633ee09948fc8e41",
+  "stage11_input_fingerprint": "9f1ae553aa5e093900ed25e875b10164490917740580d5bf08356015fe4f9fcd",
   "status": "pass",
   "steps": [
     {
@@ -1239,7 +1242,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9716
         },
@@ -1322,10 +1325,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 8.0,
+        "center_minutes": 3.589,
         "range_minutes": [
-          6.0,
-          11.0
+          3.091,
+          4.087
         ],
         "status": "pass"
       },
@@ -1618,7 +1621,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9716
         },
@@ -1656,35 +1659,35 @@
           "task_id": 9895
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "乌鸦的飞翔",
           "note": "在伊谢尔·风歌处使用风暴乌鸦护符，任务脚本会自动飞行完成；不要自己跑去调查点。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9718
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阴冷之地",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9788
         },
@@ -1712,9 +1715,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "requirements"
+        "center_minutes": 16.882,
+        "range_minutes": [
+          12.136,
+          21.627
+        ],
+        "status": "pass"
       },
       "title": "暗泽湖 / 暗泽村 → 沼泽之鞭 → 炉石回庇护所"
     },
@@ -1929,13 +1935,13 @@
           "task_id": 9775
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阴冷之地",
           "note": "目标物在暗泽村以南的洞穴内，不要只在地表坐标附近找。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9788
         },
@@ -1962,22 +1968,22 @@
           "task_id": 9894
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": "第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         }
       ],
       "timing": {
-        "center_minutes": 4.021,
+        "center_minutes": 12.471,
         "range_minutes": [
-          3.0,
-          6.0
+          8.944,
+          15.998
         ],
         "status": "pass"
       },
@@ -2077,13 +2083,13 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": "第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
@@ -2105,7 +2111,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9731
         },
@@ -2122,10 +2128,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 28.0,
+        "center_minutes": 2.41,
         "range_minutes": [
-          22.0,
-          35.0
+          1.902,
+          2.918
         ],
         "status": "pass"
       },
@@ -2407,13 +2413,13 @@
           "task_id": 9775
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "爆顶蘑菇",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9814
         },
@@ -2429,24 +2435,24 @@
           "task_id": 9845
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：穆玛基酋长",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10117
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：格罗阿克",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9820
         },
@@ -2462,13 +2468,13 @@
           "task_id": 9841
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": "第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
@@ -2479,7 +2485,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9731
         },
@@ -2507,10 +2513,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 22.0,
+        "center_minutes": 12.702,
         "range_minutes": [
-          17.0,
-          29.0
+          10.355,
+          15.048
         ],
         "status": "pass"
       },
@@ -2677,7 +2683,8 @@
         },
         {
           "action_ids": [
-            "a0089"
+            "a0089",
+            "a0090"
           ],
           "actor": {
             "kind": "npc",
@@ -2688,27 +2695,14 @@
               "kind": "turnin",
               "name": "拯救孢子人",
               "task_id": 10096
-            }
-          ],
-          "text": "劳兰娜·萨维尔 → 交《拯救孢子人》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0090"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "劳兰娜·萨维尔"
-          },
-          "task_refs": [
+            },
             {
               "kind": "turnin",
               "name": "赞加沼泽的植物",
               "task_id": 9802
             }
           ],
-          "text": "若已完成：劳兰娜·萨维尔 → 交《赞加沼泽的植物》",
+          "text": "劳兰娜·萨维尔 → 交《拯救孢子人》、《赞加沼泽的植物》",
           "type": "task_action"
         },
         {
@@ -2749,13 +2743,13 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
@@ -2766,7 +2760,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9731
         },
@@ -2826,13 +2820,13 @@
           "task_id": 9895
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阴冷之地",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9788
         },
@@ -2870,22 +2864,22 @@
           "task_id": 9770
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "对方的尊重",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9898
         }
       ],
       "timing": {
-        "center_minutes": 12.0,
+        "center_minutes": 6.347,
         "range_minutes": [
-          10.0,
-          16.0
+          5.487,
+          7.207
         ],
         "status": "pass"
       },
@@ -3106,13 +3100,13 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "对方的尊重",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9898
         },
@@ -3145,16 +3139,16 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9701
         }
       ],
       "timing": {
-        "center_minutes": 12.0,
+        "center_minutes": 12.2,
         "range_minutes": [
-          9.0,
-          17.0
+          10.248,
+          14.153
         ],
         "status": "pass"
       },
@@ -3397,7 +3391,8 @@
         },
         {
           "action_ids": [
-            "a0128"
+            "a0128",
+            "a0129"
           ],
           "actor": {
             "kind": "npc",
@@ -3408,27 +3403,14 @@
               "kind": "turnin",
               "name": "多头蛇之王",
               "task_id": 9903
-            }
-          ],
-          "text": "若已完成：苏尔加亚 → 交《多头蛇之王》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0129"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "苏尔加亚"
-          },
-          "task_refs": [
+            },
             {
               "kind": "turnin",
               "name": "猎杀恐爪",
               "task_id": 9904
             }
           ],
-          "text": "若已完成：苏尔加亚 → 交《猎杀恐爪》",
+          "text": "苏尔加亚 → 交《多头蛇之王》、《猎杀恐爪》",
           "type": "task_action"
         },
         {
@@ -3454,13 +3436,13 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "爆顶蘑菇",
           "note": "围绕萨布拉金本地专门转一圈拾取，不要只沿主路等顺手收齐。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9814
         },
@@ -3487,24 +3469,24 @@
           "task_id": 9904
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：穆玛基酋长",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10117
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：格罗阿克",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9820
         },
@@ -3520,33 +3502,33 @@
           "task_id": 9903
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "你见过鱼人吗？",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9816
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "战斗迫近",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9822
         }
       ],
       "timing": {
-        "center_minutes": 20.0,
+        "center_minutes": 13.732,
         "range_minutes": [
-          15.0,
-          28.0
+          10.13,
+          17.334
         ],
         "status": "pass"
       },
@@ -3685,24 +3667,24 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "你见过鱼人吗？",
           "note": "到匕潭村约(26.8,22.6)的任务点使用任务提供的鱼人笼完成目标。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9816
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "战斗迫近",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9822
         },
@@ -3730,10 +3712,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 28.0,
+        "center_minutes": 4.01,
         "range_minutes": [
-          21.0,
-          37.0
+          3.307,
+          4.713
         ],
         "status": "pass"
       },
@@ -3899,10 +3881,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 18.0,
+        "center_minutes": 13.211,
         "range_minutes": [
-          13.0,
-          25.0
+          9.313,
+          17.108
         ],
         "status": "pass"
       },

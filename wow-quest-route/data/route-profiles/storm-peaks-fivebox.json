@@ -85,13 +85,9 @@
     13011,
     13001,
     12967,
-    12981,
     13009,
     12985,
     12987,
-    13006,
-    12994,
-    13046,
     12976,
     13050,
     13051,
@@ -946,6 +942,17 @@
       "action_id": "a0130"
     },
     {
+      "kind": "use_hearth",
+      "location_ref": "storm-p143",
+      "target_name": "K3",
+      "action_id": "a9003"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p143",
+      "action_id": "a9004"
+    },
+    {
       "kind": "location",
       "location_ref": "storm-p039",
       "action_id": "a0131"
@@ -1607,13 +1614,6 @@
       "action_id": "a0236"
     },
     {
-      "kind": "accept",
-      "task_id": 12981,
-      "location_ref": "storm-p069",
-      "target_name": "弗约恩之砧",
-      "action_id": "a0237"
-    },
-    {
       "kind": "turnin",
       "task_id": 12924,
       "location_ref": "storm-p069",
@@ -1648,12 +1648,6 @@
     },
     {
       "kind": "objective",
-      "task_id": 12981,
-      "location_ref": "storm-p070",
-      "action_id": "a0242"
-    },
-    {
-      "kind": "objective",
       "task_id": 12985,
       "location_ref": "storm-p070",
       "action_id": "a0243"
@@ -1662,13 +1656,6 @@
       "kind": "location",
       "location_ref": "storm-p071",
       "action_id": "a0244"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 12981,
-      "location_ref": "storm-p071",
-      "target_name": "弗约恩之砧",
-      "action_id": "a0245"
     },
     {
       "kind": "turnin",
@@ -1683,13 +1670,6 @@
       "location_ref": "storm-p071",
       "npc_name": "亚米尔德",
       "action_id": "a0247"
-    },
-    {
-      "kind": "accept",
-      "task_id": 12994,
-      "location_ref": "storm-p071",
-      "npc_name": "冰霜座狼母兽",
-      "action_id": "a0249"
     },
     {
       "kind": "location",
@@ -1715,20 +1695,6 @@
       "action_id": "a0253"
     },
     {
-      "kind": "accept",
-      "task_id": 13006,
-      "location_ref": "storm-p071",
-      "target_name": "霍迪尔之盔",
-      "action_id": "a0248"
-    },
-    {
-      "kind": "accept",
-      "task_id": 13046,
-      "location_ref": "storm-p073",
-      "target_name": "贪婪的安格里姆",
-      "action_id": "a0254"
-    },
-    {
       "kind": "location",
       "location_ref": "storm-p074",
       "action_id": "a0255"
@@ -1741,32 +1707,9 @@
     },
     {
       "kind": "objective",
-      "task_id": 13006,
-      "location_ref": "storm-p074",
-      "action_id": "a0257"
-    },
-    {
-      "kind": "objective",
       "task_id": 13011,
       "location_ref": "storm-p074",
       "action_id": "a0258"
-    },
-    {
-      "kind": "location",
-      "location_ref": "storm-p075",
-      "action_id": "a0259"
-    },
-    {
-      "kind": "objective",
-      "task_id": 12994,
-      "location_ref": "storm-p075",
-      "action_id": "a0260"
-    },
-    {
-      "kind": "objective",
-      "task_id": 13046,
-      "location_ref": "storm-p075",
-      "action_id": "a0261"
     },
     {
       "kind": "location",
@@ -1786,27 +1729,6 @@
       "location_ref": "storm-p076",
       "npc_name": "约库姆国王",
       "action_id": "a0264"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 13006,
-      "location_ref": "storm-p076",
-      "target_name": "霍迪尔之盔",
-      "action_id": "a0265"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 12994,
-      "location_ref": "storm-p076",
-      "npc_name": "冰霜座狼母兽",
-      "action_id": "a0266"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 13046,
-      "location_ref": "storm-p076",
-      "target_name": "贪婪的安格里姆",
-      "action_id": "a0267"
     },
     {
       "kind": "location",
@@ -2111,6 +2033,17 @@
       "action_id": "a0317"
     },
     {
+      "kind": "use_hearth",
+      "location_ref": "storm-p099",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0329"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p099",
+      "action_id": "a0328"
+    },
+    {
       "kind": "location",
       "location_ref": "storm-p095",
       "action_id": "a0318"
@@ -2168,17 +2101,6 @@
       "location_ref": "storm-p098",
       "npc_name": "约库姆国王",
       "action_id": "a0327"
-    },
-    {
-      "kind": "use_hearth",
-      "location_ref": "storm-p099",
-      "target_name": "格罗玛什坠毁点",
-      "action_id": "a0329"
-    },
-    {
-      "kind": "location",
-      "location_ref": "storm-p099",
-      "action_id": "a0328"
     },
     {
       "kind": "turnin",
@@ -3251,8 +3173,8 @@
     },
     {
       "step_id": "step-06b",
-      "title": "瓦基里安：伊尔达 → 鱼叉炮 → 回布伦希尔达",
-      "summary": "进入最大建筑完成伊尔达并从旁边大箱子接《燃烧吧，瓦基里安》，清室外三项后回布伦希尔达集中交付。",
+      "title": "瓦基里安：伊尔达 → 鱼叉炮 → 炉石 → 回布伦希尔达",
+      "summary": "进入最大建筑完成伊尔达并从旁边大箱子接《燃烧吧，瓦基里安》，清室外三项；做完《燃烧吧，瓦基里安》后炉石回K3，再去布伦希尔达集中交付。",
       "action_ids": [
         "a0123",
         "a0124",
@@ -3262,6 +3184,8 @@
         "a0128",
         "a0129",
         "a0130",
+        "a9003",
+        "a9004",
         "a0131",
         "a0132",
         "a0133",
@@ -3403,7 +3327,7 @@
     {
       "step_id": "step-11",
       "title": "丹尼芬雷 → 弗约恩之砧：元素之战",
-      "summary": "丹尼芬雷接齐霍迪尔任务，去弗约恩之砧完成《元素之战》，回城接出《热与冷》《新的开始》《雷铸徽记》《回首往事》。",
+      "summary": "丹尼芬雷接齐霍迪尔任务，去弗约恩之砧完成《元素之战》，回城接出《新的开始》《雷铸徽记》《回首往事》。",
       "action_ids": [
         "a0225",
         "a0226",
@@ -3416,7 +3340,6 @@
         "a0234",
         "a0235",
         "a0236",
-        "a0237",
         "a0238",
         "a0239",
         "a0240",
@@ -3426,29 +3349,20 @@
     {
       "step_id": "step-11b",
       "title": "霜原湖 → 霍迪尔之盔 → 上古寒冬山谷",
-      "summary": "完成《热与冷》《雷铸徽记》和放置霍迪尔之盔，再去冬眠洞穴/上古寒冬山谷清长矛、粘滞、尤卡塔尔、间谍和安格里姆。",
+      "summary": "完成《雷铸徽记》和放置霍迪尔之盔，再去冬眠洞穴/上古寒冬山谷完成长矛与尤卡塔尔。",
       "action_ids": [
         "a0241",
-        "a0242",
         "a0243",
         "a0244",
-        "a0245",
         "a0246",
         "a0247",
-        "a0249",
         "a0250",
         "a0251",
         "a0252",
         "a0253",
-        "a0248",
-        "a0254",
         "a0255",
         "a0256",
-        "a0257",
-        "a0258",
-        "a0259",
-        "a0260",
-        "a0261"
+        "a0258"
       ]
     },
     {
@@ -3459,9 +3373,6 @@
         "a0262",
         "a0263",
         "a0264",
-        "a0265",
-        "a0266",
-        "a0267",
         "a0268",
         "a0269",
         "a0270",
@@ -3507,8 +3418,8 @@
     },
     {
       "step_id": "step-13",
-      "title": "造物者圣台 → 布德克拉格开点 → 清算 → 奥杜尔",
-      "summary": "完成造物者圣台任务后先去布德克拉格开飞行点并直接接《稀有的土壤》，再做《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。",
+      "title": "造物者圣台 → 接清算 → 炉石 → 布德克拉格 → 奥杜尔",
+      "summary": "完成造物者圣台任务并接《清算之战》后先炉石回格罗玛什坠毁点，再前往布德克拉格开飞行点并接《稀有的土壤》，完成《清算之战》后开奥杜尔飞行点并系统飞行到丹尼芬雷。",
       "action_ids": [
         "a0302",
         "a0303",
@@ -3526,6 +3437,8 @@
         "a0315",
         "a0316",
         "a0317",
+        "a0329",
+        "a0328",
         "a0318",
         "a0319",
         "a0320",
@@ -3540,11 +3453,9 @@
     },
     {
       "step_id": "step-14",
-      "title": "炉石格罗玛什 → 兽人语 → 寒风",
-      "summary": "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。",
+      "title": "格罗玛什 → 兽人语 → 寒风",
+      "summary": "交布莱恩便笺后继续霜齿追踪与兽人语任务。",
       "action_ids": [
-        "a0329",
-        "a0328",
         "a0330",
         "a0331",
         "a0332",
@@ -4557,17 +4468,6 @@
           "mode": "fly"
         }
       },
-      "storm-p075": {
-        "display_name": "上古寒冬山谷",
-        "x": 57.2,
-        "y": 64.0,
-        "phase": "dun_niffelem",
-        "transport": "ride",
-        "incoming_movement": {
-          "kind": "self_move",
-          "mode": "ride"
-        }
-      },
       "storm-p076": {
         "display_name": "丹尼芬雷",
         "x": 65.0,
@@ -5302,6 +5202,17 @@
         "incoming_movement": {
           "kind": "self_move",
           "mode": "fly"
+        }
+      },
+      "storm-p143": {
+        "display_name": "K3",
+        "x": 41.0,
+        "y": 85.7,
+        "phase": "k3",
+        "transport": "hearth",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a9003"
         }
       }
     }

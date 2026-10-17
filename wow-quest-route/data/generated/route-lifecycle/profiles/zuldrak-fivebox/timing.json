@@ -1,6 +1,6 @@
 {
-  "center_minutes": 498.2,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -1329,9 +1329,281 @@
       "seconds": 48.6,
       "step_id": "step-23",
       "visit_id": "a0424"
+    },
+    {
+      "action_id": "a0052",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12630
+      },
+      "seconds": 150.0,
+      "step_id": "step-03",
+      "task_id": 12630
+    },
+    {
+      "action_id": "a0070",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12652
+      },
+      "seconds": 150.0,
+      "step_id": "step-04",
+      "task_id": 12652
+    },
+    {
+      "action_id": "a0081",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12916
+      },
+      "seconds": 7.0,
+      "step_id": "step-04",
+      "task_id": 12916
+    },
+    {
+      "action_id": "a0103",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 7,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12673
+      },
+      "seconds": 49.0,
+      "step_id": "step-05",
+      "task_id": 12673
+    },
+    {
+      "action_id": "a0194",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 5,
+          "item_id": 38552,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 5
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12597
+      },
+      "seconds": 175.0,
+      "step_id": "step-11",
+      "task_id": 12597
+    },
+    {
+      "action_id": "a0195",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 10,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12562
+      },
+      "seconds": 150.0,
+      "step_id": "step-11",
+      "task_id": 12562
+    },
+    {
+      "action_id": "a0213",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 8,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12552
+      },
+      "seconds": 120.0,
+      "step_id": "step-12",
+      "task_id": 12552
+    },
+    {
+      "action_id": "a0225",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 1,
+          "item_id": 38560,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12583
+      },
+      "seconds": 35.0,
+      "step_id": "step-12",
+      "task_id": 12583
+    },
+    {
+      "action_id": "a0226",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 10,
+          "item_id": 38562,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 10
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12584
+      },
+      "seconds": 350.0,
+      "step_id": "step-12",
+      "task_id": 12584
+    },
+    {
+      "action_id": "a0317",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 7,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12640
+      },
+      "seconds": 105.0,
+      "step_id": "step-17",
+      "task_id": 12640
+    },
+    {
+      "action_id": "a0356",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "interaction_count": 10,
+          "item_id": 39156,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 10
+        },
+        "rule_kind": "fixed_object",
+        "rule_ref": "fixed-object-interaction",
+        "task_id": 12672
+      },
+      "seconds": 350.0,
+      "step_id": "step-19",
+      "task_id": 12672
+    },
+    {
+      "action_id": "a0389",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "kill_count": 12,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "kill_count",
+        "rule_ref": "shared-kill-count",
+        "task_id": 12708
+      },
+      "seconds": 180.0,
+      "step_id": "step-20",
+      "task_id": 12708
     }
   ],
-  "input_fingerprint": "22872ce932d32d9560a2349ac85b9f61315b5070f127266a8d04640e537307c6",
+  "input_fingerprint": "a6d27bc7ca2568119ef4daf1dc6d7bd833b2f9dbf83fc0c7e5e502c68b6114e6",
   "issues": [
     {
       "action_id": "a0090",
@@ -1520,49 +1792,43 @@
     },
     {
       "action_id": "a0010",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 12859
     },
     {
       "action_id": "a0011",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 12861
     },
     {
       "action_id": "a0012",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 12857
     },
     {
       "action_id": "a0027",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 12903
     },
     {
       "action_id": "a0028",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 12901
     },
     {
       "action_id": "a0030",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 12903
     },
@@ -1576,9 +1842,8 @@
     },
     {
       "action_id": "a0035",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 12903
     },
@@ -1599,26 +1864,16 @@
       "task_id": 12914
     },
     {
-      "action_id": "a0052",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-03",
-      "task_id": 12630
-    },
-    {
       "action_id": "a0058",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-03",
       "task_id": 12637
     },
     {
       "action_id": "a0063",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-03",
       "task_id": 12629
     },
@@ -1631,22 +1886,6 @@
       "task_id": 12648
     },
     {
-      "action_id": "a0070",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-04",
-      "task_id": 12652
-    },
-    {
-      "action_id": "a0081",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-04",
-      "task_id": 12916
-    },
-    {
       "action_id": "a0085",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -1656,27 +1895,17 @@
     },
     {
       "action_id": "a0093",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-05",
       "task_id": 12664
     },
     {
       "action_id": "a0095",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-05",
       "task_id": 12661
-    },
-    {
-      "action_id": "a0103",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 12673
     },
     {
       "action_id": "a0105",
@@ -1688,9 +1917,8 @@
     },
     {
       "action_id": "a0112",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-06",
       "task_id": 12686
     },
@@ -1704,9 +1932,8 @@
     },
     {
       "action_id": "a0121",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-06",
       "task_id": 12690
     },
@@ -1720,9 +1947,8 @@
     },
     {
       "action_id": "a0128",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-06",
       "task_id": 12676
     },
@@ -1744,9 +1970,8 @@
     },
     {
       "action_id": "a0149",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-08",
       "task_id": 12740
     },
@@ -1784,17 +2009,15 @@
     },
     {
       "action_id": "a0178",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-10",
       "task_id": 12506
     },
     {
       "action_id": "a0179",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-10",
       "task_id": 12504
     },
@@ -1807,22 +2030,6 @@
       "task_id": 12508
     },
     {
-      "action_id": "a0194",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-11",
-      "task_id": 12597
-    },
-    {
-      "action_id": "a0195",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-11",
-      "task_id": 12562
-    },
-    {
       "action_id": "a0196",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -1832,9 +2039,8 @@
     },
     {
       "action_id": "a0203",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-11",
       "task_id": 12598
     },
@@ -1848,57 +2054,29 @@
     },
     {
       "action_id": "a0211",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 12606
     },
     {
-      "action_id": "a0213",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-12",
-      "task_id": 12552
-    },
-    {
       "action_id": "a0214",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 12553
     },
     {
       "action_id": "a0224",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 12554
     },
     {
-      "action_id": "a0225",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-12",
-      "task_id": 12583
-    },
-    {
-      "action_id": "a0226",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-12",
-      "task_id": 12584
-    },
-    {
       "action_id": "a0232",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-12",
       "task_id": 12555
     },
@@ -1968,9 +2146,8 @@
     },
     {
       "action_id": "a0279",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-15",
       "task_id": 12948
     },
@@ -2015,34 +2192,23 @@
       "task_id": 12639
     },
     {
-      "action_id": "a0317",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-17",
-      "task_id": 12640
-    },
-    {
       "action_id": "a0320",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 12646
     },
     {
       "action_id": "a0323",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 12647
     },
     {
       "action_id": "a0326",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 12650
     },
@@ -2079,14 +2245,6 @@
       "task_id": 12666
     },
     {
-      "action_id": "a0356",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-19",
-      "task_id": 12672
-    },
-    {
       "action_id": "a0360",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -2120,9 +2278,8 @@
     },
     {
       "action_id": "a0377",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-19",
       "task_id": 12685
     },
@@ -2133,14 +2290,6 @@
       "severity": "info",
       "step_id": "step-20",
       "task_id": 12707
-    },
-    {
-      "action_id": "a0389",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-20",
-      "task_id": 12708
     },
     {
       "action_id": "a0390",
@@ -2197,25 +2346,24 @@
       "severity": "info",
       "step_id": "step-23",
       "task_id": 13556
+    },
+    {
+      "kind": "timing_point_estimate_incomplete",
+      "scope": "profile",
+      "severity": "requirement"
     }
   ],
-  "known_seconds": 29892.0,
+  "known_seconds": 16698.033,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "zuldrak-fivebox",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 23
-  },
-  "range_minutes": [
-    377.0,
-    619.8
-  ],
-  "status": "pass",
+  "range_basis": null,
+  "range_minutes": null,
+  "status": "requirements",
   "steps": [
     {
-      "center_minutes": 15.8,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 280.8,
         "move_seconds": 36.023,
@@ -2223,24 +2371,17 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 948.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 631.177,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        12.9,
-        18.5
-      ],
+      "known_seconds": 316.823,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-01",
       "title": "圣光据点 → 怒爪巢穴 → 圣光据点",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 3
     },
     {
-      "center_minutes": 42.5,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 252.0,
         "move_seconds": 130.882,
@@ -2248,45 +2389,31 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2550.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 2167.118,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        31.9,
-        53.2
-      ],
+      "known_seconds": 382.882,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-02",
       "title": "北伐军前线 → 三名失踪者 → 盖米尔",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 6
     },
     {
-      "center_minutes": 35.6,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 223.2,
         "move_seconds": 121.574,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 150.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2136.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1791.226,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        26.7,
-        44.5
-      ],
+      "known_seconds": 494.774,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-03",
       "title": "黑锋哨站 → 纳斯 → 无处可藏",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
       "center_minutes": 26.5,
@@ -2294,7 +2421,7 @@
       "components": {
         "accept_turnin_seconds": 300.6,
         "move_seconds": 168.259,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 157.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -2302,7 +2429,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1121.141,
+        "residual_seconds": 964.141,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
       },
       "range_minutes": [
@@ -2314,33 +2441,26 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 12.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 232.8,
         "move_seconds": 0.0,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 49.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 720.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 487.2,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        9.8,
-        14.1
-      ],
+      "known_seconds": 281.8,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-05",
       "title": "黑暗的地平线 → 官大一级压死人",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 7
     },
     {
-      "center_minutes": 33.4,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 232.8,
         "move_seconds": 0.0,
@@ -2348,20 +2468,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2004.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1771.2,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        25.1,
-        41.8
-      ],
+      "known_seconds": 232.8,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-06",
       "title": "危险的材料 → 真相大白 / 爆破",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 10
     },
     {
       "center_minutes": 3.9,
@@ -2389,8 +2502,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 19.6,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 67.84,
@@ -2398,20 +2511,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1176.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 943.76,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.7,
-        24.5
-      ],
+      "known_seconds": 232.24,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-08",
       "title": "银色前沿：接任务 / 庭院 / 接后续",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
       "center_minutes": 28.2,
@@ -2439,8 +2545,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 15.2,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 213.0,
         "move_seconds": 82.944,
@@ -2448,70 +2554,49 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 912.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 616.056,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        11.4,
-        19.0
-      ],
+      "known_seconds": 295.944,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-10",
       "title": "赫布瓦罗交付 → 西莱图斯 → 银色前沿",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
-      "center_minutes": 20.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 281.4,
         "move_seconds": 147.161,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 325.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1200.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 771.439,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        15.0,
-        25.1
-      ],
+      "known_seconds": 753.561,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-11",
       "title": "达克迦尔 → 布兰顿 → 鲁伯特 / 蛛魔弹坑",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 2
     },
     {
-      "center_minutes": 33.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 271.2,
         "move_seconds": 152.944,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 505.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1980.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1555.856,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        24.8,
-        41.3
-      ],
+      "known_seconds": 929.144,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-12",
       "title": "蛛魔救援区 → 达克索塔北侧 → 希姆埃巴",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
       "center_minutes": 26.4,
@@ -2564,8 +2649,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 17.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 87.0,
         "move_seconds": 45.561,
@@ -2573,20 +2658,13 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1020.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 887.439,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        12.8,
-        21.3
-      ],
+      "known_seconds": 132.561,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-15",
       "title": "痛苦斗兽场：科尔拉克 / 冠军 → 希姆托加",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": 3.1,
@@ -2614,29 +2692,22 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 37.7,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 300.0,
         "move_seconds": 94.031,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 105.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2262.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1867.969,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        28.3,
-        47.1
-      ],
+      "known_seconds": 499.031,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-17",
       "title": "哈克娅 → 伦诺克完整链",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 7
     },
     {
       "center_minutes": 23.0,
@@ -2664,29 +2735,22 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 29.7,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 349.2,
         "move_seconds": 245.274,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 350.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1782.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1187.526,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
-      },
-      "range_minutes": [
-        22.3,
-        37.1
-      ],
+      "known_seconds": 944.474,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-19",
       "title": "奎丝鲁恩 → 哈克娅 → 炉石希姆托加",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
       "center_minutes": 24.0,
@@ -2694,7 +2758,7 @@
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 78.258,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 180.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -2702,7 +2766,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1265.142,
+        "residual_seconds": 1085.142,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json"
       },
       "range_minutes": [
@@ -2791,9 +2855,9 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 106,
-    "range_model_status": "resolved",
-    "requirement_count": 0,
+    "issue_count": 95,
+    "range_model_status": "requirements",
+    "requirement_count": 28,
     "step_count": 23
   }
 }

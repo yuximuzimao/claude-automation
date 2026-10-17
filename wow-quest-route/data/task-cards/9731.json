@@ -79,12 +79,13 @@
   "guide": [
     "接取：抽水泵结构图。",
     "前往毒蛇湖搜寻抽水泵的踪迹，然后向塞纳里奥庇护所的伊谢尔·风歌汇报你的发现。",
+    "该物品用于触发/接取任务，不作为依次拾取或不共享目标标记。",
     "交付：伊谢尔·风歌。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_applicable"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "zero-independent-service",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -108,6 +109,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-clarification-2026-10-17",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17用户澄清：9731《抽水泵结构图》是用于接任务的起始物，不按依次拾取/不共享任务目标标记；此前‘五号图纸齐’描述只表示五号都要进入该任务链。",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "fivebox.status"
       ]
     }
   ],

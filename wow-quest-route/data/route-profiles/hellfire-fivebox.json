@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile_id": "hellfire-fivebox",
   "version": 2,
-  "status": "draft",
+  "status": "retired",
   "scope": {
     "route_scope": "地狱火半岛",
     "character_profile": "horde-fivebox-current",
@@ -2815,6 +2815,11 @@
       "date": "2026-10-16",
       "kind": "display_step_split",
       "summary": "按HUD可读性把原末段塞纳里奥哨站→赞加沼泽拆成两段；不改变动作顺序、任务事实或跨图终点。"
+    },
+    {
+      "date": "2026-10-18",
+      "kind": "lifecycle_retirement",
+      "summary": "普通五开地狱火路线退出当前练级工作台：后续打金练号固定使用DK专用路线。Profile、Task Card、几何、历史产物全部保留为可恢复资产；未来需要非DK路线时恢复status并重新发布即可，不需要重做路线。"
     }
   ]
 }

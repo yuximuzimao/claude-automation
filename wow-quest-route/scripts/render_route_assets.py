@@ -18,9 +18,12 @@ def _validate_output_scope(profile_ids: list[str], output_dir: Path) -> None:
     if output_dir.resolve() != formal_output_dir:
         return
 
-    required_profile_ids = set(
-        load_all_route_profiles(validate=True, validate_task_cards=False)
-    )
+    profiles = load_all_route_profiles(validate=True, validate_task_cards=False)
+    required_profile_ids = {
+        profile_id
+        for profile_id, profile in profiles.items()
+        if profile.get("status") != "retired"
+    }
     supplied_profile_ids = set(profile_ids)
     if supplied_profile_ids == required_profile_ids:
         return

@@ -60,7 +60,7 @@
     "a0087": "executed",
     "a0088": "executed",
     "a0089": "executed",
-    "a0090": "maybe",
+    "a0090": "executed",
     "a0093": "executed",
     "a0094": "executed",
     "a0096": "executed",
@@ -82,8 +82,8 @@
     "a0125": "executed",
     "a0126": "executed",
     "a0127": "executed",
-    "a0128": "maybe",
-    "a0129": "maybe",
+    "a0128": "executed",
+    "a0129": "executed",
     "a0131": "executed",
     "a0134": "executed",
     "a0135": "executed",
@@ -1348,7 +1348,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "7165c9181286d97d5594a8386dc65e18316e1e35df55cac953579fedcb37e71d",
+  "input_fingerprint": "b73749c4376af2e2e55133bd1b46b8d9894b0b538c4a8ca8729dea14025a3587",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",
@@ -1357,16 +1357,9 @@
     },
     {
       "kind": "conditional_task_exit_state_branch",
-      "maybe_active_task_ids": [
-        9802,
-        9903,
-        9904
-      ],
+      "maybe_active_task_ids": [],
       "maybe_completed_task_ids": [
         9731,
-        9802,
-        9903,
-        9904,
         9911
       ],
       "reason": "Conditional route actions leave more than one legitimate exit state. Preserve the branch for downstream Program/Timing/Review instead of inventing one outcome.",
@@ -1381,21 +1374,16 @@
       9724,
       9797
     ],
-    "final_maybe_active_task_ids": [
-      9802,
-      9903,
-      9904
-    ],
+    "final_maybe_active_task_ids": [],
     "peak_upper_bound": null
   },
   "reputation": {
     "definite_task_reward_delta": {
-      "530": 2500,
-      "942": 3350
+      "530": 3000,
+      "942": 3600
     },
     "possible_task_reward_delta": {
-      "530": 500,
-      "942": 750
+      "942": 500
     }
   },
   "status": "requirements",
@@ -1407,11 +1395,7 @@
       9724,
       9797
     ],
-    "final_maybe_active_task_ids": [
-      9802,
-      9903,
-      9904
-    ],
+    "final_maybe_active_task_ids": [],
     "known_completed_task_ids": [
       9697,
       9701,
@@ -1425,6 +1409,7 @@
       9775,
       9785,
       9788,
+      9802,
       9814,
       9816,
       9817,
@@ -1436,6 +1421,8 @@
       9894,
       9895,
       9898,
+      9903,
+      9904,
       9912,
       10096,
       10103,
@@ -1444,9 +1431,6 @@
     ],
     "maybe_completed_task_ids": [
       9731,
-      9802,
-      9903,
-      9904,
       9911
     ]
   }

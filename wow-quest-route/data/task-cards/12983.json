@@ -46,9 +46,9 @@
     "交付：艾丝崔·约利塔尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-object-interaction",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -72,6 +72,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "user-live-2026-10-17-fivebox",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17 Storm Peaks second DK fivebox live run: 《最后的母熊》五号依次交互，按not_shared归类。",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

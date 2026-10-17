@@ -255,10 +255,15 @@ def test_write_gate_refuses_blocked_and_writes_single_workbench_plus_player_view
     with pytest.raises(PlayerAssetsError, match="non-publishable"):
         write_player_assets([_payload(status="blocked", publishable=False)], output_dir=tmp_path)
 
+    stale_player_view = tmp_path / "player-view" / "retired-route.md"
+    stale_player_view.parent.mkdir(parents=True, exist_ok=True)
+    stale_player_view.write_text("stale", encoding="utf-8")
+
     report = write_player_assets([_payload()], output_dir=tmp_path)
     assert report["publishable"] is True
     assert (tmp_path / "route-atlas-workbench.html").exists()
     assert (tmp_path / "player-view" / "assets_fixture.md").exists()
+    assert not stale_player_view.exists()
     assert not list(tmp_path.glob("*candidate*.html"))
 
 
@@ -276,8 +281,24 @@ def test_render_route_assets_refuses_partial_formal_output() -> None:
 
 
 def test_render_route_assets_allows_complete_formal_set_and_nonformal_subset(tmp_path) -> None:
-    formal_profile_ids = list(
-        load_all_route_profiles(validate=True, validate_task_cards=False)
-    )
+    profiles = load_all_route_profiles(validate=True, validate_task_cards=False)
+    formal_profile_ids = [
+        profile_id for profile_id, profile in profiles.items() if profile.get("status") != "retired"
+    ]
     _validate_output_scope(formal_profile_ids, Path("data/routes"))
     _validate_output_scope(["dragonblight-fivebox"], tmp_path)
+
+
+def test_render_route_assets_excludes_retired_profiles_from_formal_set() -> None:
+    profiles = load_all_route_profiles(validate=True, validate_task_cards=False)
+    formal_profile_ids = [
+        profile_id for profile_id, profile in profiles.items() if profile.get("status") != "retired"
+    ]
+    retired_profile_ids = [
+        profile_id for profile_id, profile in profiles.items() if profile.get("status") == "retired"
+    ]
+
+    assert "hellfire-fivebox" in retired_profile_ids
+    assert "zangarmarsh-fivebox" in retired_profile_ids
+    with pytest.raises(SystemExit, match="refusing partial Route Atlas render"):
+        _validate_output_scope(formal_profile_ids + retired_profile_ids, Path("data/routes"))

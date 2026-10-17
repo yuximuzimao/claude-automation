@@ -11,7 +11,7 @@
   "hearth_chain": [
     "加拉达尔"
   ],
-  "input_fingerprint": "003fe00601ae426ebc69740ce63c666f54712a01b65925c8d3248848ca1347f9",
+  "input_fingerprint": "37fbf247e1fe69b62798c5295533281ce2109082e934d1ec56b53d6ba23d593c",
   "issues": [
     {
       "display_name": "星界财团招募员",
@@ -526,7 +526,7 @@
         "to_visit_id": "a0154"
       }
     ],
-    "input_fingerprint": "b6b5a316604898a8f66f4269dc2c6ea9c2735313efe63b52ce0ffcd26d4bfc53",
+    "input_fingerprint": "6da13ff60b25f9e6ccad4e57fb08757d2f00a32f59bee555960dedabe2deb0c3",
     "status": "pass",
     "visits": [
       {
@@ -985,13 +985,10 @@
   "profile_version": 2,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
-    "center_minutes": 61.205,
-    "input_fingerprint": "b062eca3958900f4cc5a3ab686b137ee8772ba8ceb67bd190a2b2203d9862f90",
-    "range_minutes": [
-      36.037,
-      63.549
-    ],
-    "status": "pass"
+    "center_minutes": null,
+    "input_fingerprint": "5dbda4bdd0eac2b026baa977ece611467c415762c32fd6a1b0329e9bc08d91a0",
+    "range_minutes": null,
+    "status": "requirements"
   },
   "status": "pass",
   "steps": [
@@ -1352,13 +1349,13 @@
           "task_id": 9939
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪恶的信仰",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9863
         },
@@ -1374,13 +1371,13 @@
           "task_id": 9864
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "暗血领袖",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9867
         },
@@ -1613,10 +1610,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 2.445,
+        "center_minutes": 11.445,
         "range_minutes": [
           1.59,
-          2.445
+          11.445
         ],
         "status": "pass"
       },
@@ -2160,10 +2157,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 6.123,
+        "center_minutes": 15.123,
         "range_minutes": [
-          2.782,
-          6.123
+          11.127,
+          19.119
         ],
         "status": "pass"
       },
@@ -2491,13 +2488,13 @@
           "task_id": 9864
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "寻找幸存者",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9948
         },
@@ -2559,24 +2556,24 @@
           "task_id": 9999
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪恶的信仰",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9863
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "暗血领袖",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9867
         },
@@ -2604,12 +2601,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 7.667,
-        "range_minutes": [
-          4.372,
-          7.667
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "车队 → 侦查大地 → 暗血三任务 → 护送"
     },
@@ -2750,24 +2744,21 @@
           "task_id": 9999
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "主规划师",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10001
         }
       ],
       "timing": {
-        "center_minutes": 3.5,
-        "range_minutes": [
-          1.789,
-          3.5
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "争取时间 → 主规划师：第一次来就做完"
     },
@@ -3059,13 +3050,13 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "寻找幸存者",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9948
         },
@@ -3081,13 +3072,13 @@
           "task_id": 9945
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "掠夺者考瓦尔",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9946
         },
@@ -3126,12 +3117,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 7.145,
-        "range_minutes": [
-          4.174,
-          7.145
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "战槌山 → 考瓦尔 → 顺路断蹄/佐尔布 → 嘲颅刷满念珠 → 炉石"
     },
@@ -3346,24 +3334,24 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "邪恶的信仰",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9863
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "暗血领袖",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9867
         },
@@ -3701,13 +3689,13 @@
           "task_id": 9913
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "象牙生意",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9914
         },
@@ -3746,10 +3734,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 5.873,
+        "center_minutes": 8.373,
         "range_minutes": [
           2.385,
-          5.873
+          8.373
         ],
         "status": "pass"
       },
@@ -3999,13 +3987,13 @@
           "task_id": 9900
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "象牙生意",
           "note": "象牙沿路顺手收集，尽量自然补齐，避免专程刷。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9914
         },
@@ -4055,12 +4043,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 4.566,
-        "range_minutes": [
-          3.18,
-          4.87
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "沃舒古 → 象牙 → 高级羊/暗血/风鹏 → 炉石交吉塞尔达"
     },
@@ -4262,13 +4247,13 @@
           "task_id": 9859
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "终极挑战",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9852
         }
@@ -4421,24 +4406,24 @@
       "summary": "",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "终极挑战",
           "note": "击杀塔丝克后，确认每个仍需要任务物的角色都取得塔丝克之心再离开。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9852
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "象牙生意",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9914
         },
@@ -4477,12 +4462,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 7.87,
-        "range_minutes": [
-          1.789,
-          7.87
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "终极挑战 → 奈辛瓦里 → 埃瑞斯码头收尾"
     }

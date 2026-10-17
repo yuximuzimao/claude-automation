@@ -52,12 +52,13 @@
     "full_xp": 5000
   },
   "guide": [
-    "向塞萨克取得碎片捕获格里洛克之眼，再带到塞萨克的熔锅使其分离。"
+    "向塞萨克取得碎片捕获格里洛克之眼，再带到塞萨克的熔锅使其分离。",
+    "当前按不共享执行：五号分别捕获眼睛，并分别在塞萨克的熔锅完成分离。已知眼睛刷新约45秒。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",

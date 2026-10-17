@@ -121,7 +121,7 @@
 - `test_route_publisher_payload.py`：A类，验证Stage 12永久Publisher Payload合同：只接受Stage 11 `route_display` + profile-bound Route UI；原样透传steps/Task Presentation/Timing语义，保留Profile/version/Program上下文与fingerprint；地图只允许离线`maps/`路径；Stage 11 requirements/blocked只可生成`publishable=false`诊断payload；禁止旧points/actionHtml/noteHtml与其它业务fallback。
 - `test_route_player_assets.py`：A类，验证Stage 13永久HTML/player-view/offline合同：两类输出只读Stage 12 Publisher payload；HTML内嵌payload且运行时无网络/项目JSON依赖，具备Profile切换、上一/下一段、当前/剩余播放、跟随和HUD收起；player-view不经HTML round-trip；本地map缺失或Publisher非publishable时正式写入门fail closed。
 - `test_route_final_audit.py`：A类，验证Stage 14永久最终审计合同：严格核对Stage 1–13顺序/implementation/evaluation、Stage 1 root fingerprint、Stage 11→12→13 fingerprint链、新链旧消费者清零、player-view内部token/过程话术/过长步骤冷读，以及显式完整Profile集合的项目级`cutover_ready`门禁。
-- `test_rule_routing.py`：A类，验证项目结构契约：SOP只保留14类信息分类、关键边界与停止条件；正式操作只在对应唯一owner出现且不得跨owner重复；项目CLAUDE服从工作区根CLAUDE；`docs/rules/README.md`只做目录；Todo是唯一未完成事项真源；已经退出的治理/中央执行/decision/state中间层不得复活；迁移历史不得回流永久SOP。
+- `test_rule_routing.py`：A类，验证项目结构契约：SOP只保留14类信息分类、关键边界与停止条件；正式操作只在对应唯一owner出现且不得跨owner重复；项目CLAUDE服从工作区根CLAUDE；`docs/rules/README.md`只做目录；Todo是唯一未完成事项真源；`tasks/fivebox-pending.md`必须与全部**非retired现役Profile**实际引用的`fivebox.status=pending` Task Card精确一致，retired资产不得重新污染当前待办；已经退出的治理/中央执行/decision/state中间层不得复活；迁移历史不得回流永久SOP。
 
 其它地图测试默认属于对应Profile开发验证或快照，除非逐条确认它保护的是公共永久契约。
 

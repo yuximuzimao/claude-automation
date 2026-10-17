@@ -81,7 +81,7 @@
   "fivebox": {
     "status": "shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "shared-kill-count",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -128,14 +128,25 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "user-live-2026-10-17-pet-control",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17 Storm Peaks second DK fivebox live run: 《土灵的誓言》召唤后可以直接操控土灵宝宝。",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "先用峭壁号角召土灵援军，再由主控完成击杀目标即可同步五号。",
+      "text": "先用峭壁号角召土灵援军；召唤后可以直接操控土灵宝宝，再由主控完成击杀目标即可同步五号。",
       "scope": "all",
-      "source_ref": "2026-09-26 Route Atlas note ownership audit",
-      "reason": "逐任务备注/标签一致性审计：按已有用户实跑证据纠正fivebox状态，并只保留当前任务自身执行信息。"
+      "source_ref": "2026-10-17 user live run",
+      "reason": "在原有fivebox执行备注基础上补入本次实跑确认：召唤后可直接操控土灵宝宝。"
     }
   }
 }

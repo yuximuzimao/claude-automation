@@ -72,6 +72,11 @@
 | `build_task_evidence_index.py` | 解析Questie有效任务库、奖励库、当前Task Card和现役结构化资料，生成可删除重建的Task Evidence查询缓存。 |
 | `build_task_presentation.py` | 只把一个Task Card在指定Profile下的Task Presentation打印到stdout，用于检查；正式写入Display走`update_route_display_task.py`，不产生可手改中间文件。 |
 | `build_timing_quest_source_inputs.py` | Stage 7 Effective Quest Source输入构建器；只从当前Questie包机械派生objective数量/来源关系，可写`data/timing/quest-source-inputs.json`缓存；不得读取Task Card guide/路线文案，也不得独立成为Derived Timing真源。 |
+| `audit_timing_requirements.py` | Timing缺口诊断器；按step列出未闭合任务、fivebox状态、Quest Source输入、legacy类型与可选foundation intrinsic service，只读不改数据。 |
+| `compare_route_timing_to_legacy.py` | 把当前拆分后的Timing按逻辑root step重新聚合，与版本化legacy baseline对比中心值/区间/累计delta，用于定位“哪一段预测发生变化”。 |
+| `migrate_route_timing_from_foundation.py` | Timing迁移辅助；dry-run默认，可读foundation与可选task timing screen，把已审查的单任务intrinsic service或安全的结构化规则迁到Task Card `timing_rule_ref` + versioned task parameters；pending机制不猜，原始数据库掉率本身不会触发批量个人掉落模型。 |
+| `apply_task_intrinsic_timing.py` | 把已存在的逐任务intrinsic-service数据集批量接入一个Profile的`fixed-service-seconds`；适合北风task timing screen、冰冠/索拉查完整foundation等已审查来源，pending任务自动跳过/清除旧规则。 |
+| `invalidate_split_legacy_timing.py` | 扫描全部Profile的`step-X + step-Xb/...`拆分，自动把对应legacy root step加入`invalidated_step_ids`，防止旧整步中心值在新step结构下继续补残差。 |
 | `build_uprez_zone_map.py` | 对地图底图进行高清化/uprez处理 |
 | `build_video_map_reference.py` | 构建视频拆解地图参考 |
 | `build_video_route_reference.py` | 构建视频任务相对顺序/路线参考 |
@@ -103,7 +108,7 @@
 | `rebuild_route_profile.py` | 显式完整诊断/对抗审计一个Profile的各owner产物；不是日常修改入口，也不负责正式写页。 |
 | `record_route_economy_observation.py` | 追加一条原始全路线 Economy Observation；只记录金币差/资产数量/污染事实，不修改 Task Card rewards，不自行生成市场估值 |
 | `refine_zangarmarsh_task_profiles.py` | 细化赞加任务画像，包装旧内部audit实现 |
-| `render_route_assets.py` | 只按profile_id读取generated store当前Publisher payload并渲染HTML/player-view；要求显式`--output-dir`，不会自动选择正式目录，也不运行任何业务计算。单Profile/子集写正式`data/routes`会直接拒绝；正式目录只接受完整正式Profile集合。 |
+| `render_route_assets.py` | 只按profile_id读取generated store当前Publisher payload并渲染HTML/player-view；要求显式`--output-dir`，不会自动选择正式目录，也不运行任何业务计算。单Profile/子集写正式`data/routes`会直接拒绝；正式目录只接受完整**非retired**正式Profile集合，`retired`资产保留但不进入当前工作台。 |
 | `report_icecrown_airship_starts.py` | 输出冰冠飞艇/入口候选报告 |
 | `report_sholazar_phase_tasks.py` | 输出索拉查阶段任务报告 |
 | `solve_zangarmarsh_exact_v0.py` | 赞加exact v0求解器实验 |

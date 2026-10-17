@@ -19,7 +19,7 @@
     "self_move_speed_yards_per_second": {
       "ride": 14.0,
       "fly": 21.0,
-      "swim": null
+      "swim": 4.7222
     },
     "ride_speed_multiplier_by_class": {
       "paladin": 1.2
@@ -27,9 +27,13 @@
     "path_factor_by_mode": {
       "ride": 1.0,
       "fly": 1.05,
-      "swim": null
+      "swim": 1.0
     },
     "map_dimensions_yards_by_profile": {
+      "hellfire-dk-speed": {
+        "width": 5164.583,
+        "height": 3443.7499
+      },
       "zangarmarsh-fivebox": {
         "width": 5027.0835,
         "height": 3352.0833
@@ -673,7 +677,10 @@
     "dragonblight-fivebox": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/dragonblight-fivebox-timing.json",
       "source_model": "component-wall-clock-v1",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
+      "invalidated_step_ids": [
+        "step-20"
+      ],
       "route_center_minutes": 692.1,
       "route_range_minutes": [
         531.0,
@@ -1257,7 +1264,11 @@
     "hellfire-dk-speed": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/hellfire-dk-speed-timing.json",
       "source_model": "pre_live_budget",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
+      "compatible_step_residual_floor": false,
+      "invalidated_step_ids": [
+        "step-08"
+      ],
       "route_center_minutes": 330.0,
       "route_range_minutes": [
         243.0,
@@ -1357,7 +1368,7 @@
     "hellfire-fivebox": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/hellfire-fivebox-timing.json",
       "source_model": "legacy_current_budget",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
       "route_center_minutes": 360.0,
       "route_range_minutes": [
         270.0,
@@ -1460,12 +1471,15 @@
           ],
           "include_in_total": true
         }
-      }
+      },
+      "invalidated_step_ids": [
+        "step-12"
+      ]
     },
     "howling-fivebox": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/howling-fivebox-timing.json",
       "source_model": "pre_live_reference_not_recalculated_after_2026_09_11_local_reorder",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
       "route_center_minutes": 455.3,
       "route_range_minutes": [
         348.6,
@@ -1712,12 +1726,15 @@
           ],
           "include_in_total": true
         }
-      }
+      },
+      "invalidated_step_ids": [
+        "step-01"
+      ]
     },
     "icecrown-fivebox": {
       "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json",
       "source_model": "pre_live_reachable_step_marginal_timing_v2",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
       "route_center_minutes": 289.0,
       "route_range_minutes": [
         216.0,
@@ -2172,7 +2189,11 @@
           ],
           "include_in_total": true
         }
-      }
+      },
+      "invalidated_step_ids": [
+        "step-25",
+        "step-54"
+      ]
     },
     "nagrand-fivebox-67-68": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/nagrand-fivebox-67-68-timing.json",
@@ -2481,7 +2502,16 @@
     "storm-peaks-fivebox": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/storm-peaks-fivebox-timing.json",
       "source_model": "component-wall-clock-v1",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
+      "invalidated_step_ids": [
+        "step-03",
+        "step-06",
+        "step-08",
+        "step-09",
+        "step-11",
+        "step-13",
+        "step-18"
+      ],
       "route_center_minutes": 497.6,
       "route_range_minutes": [
         379.3,
@@ -2697,7 +2727,8 @@
     "zangarmarsh-dk-speed": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-dk-speed-timing.json",
       "source_model": "legacy_current_budget",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
+      "compatible_step_residual_floor": false,
       "route_center_minutes": 174.0,
       "route_range_minutes": [
         133.0,
@@ -2776,12 +2807,15 @@
           ],
           "include_in_total": true
         }
-      }
+      },
+      "invalidated_step_ids": [
+        "step-01"
+      ]
     },
     "zangarmarsh-fivebox": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zangarmarsh-fivebox-timing.json",
       "source_model": "component-wall-clock-v1",
-      "migration_policy": "legacy_center_and_range_residual_until_current_components_close",
+      "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
       "route_center_minutes": 343.0,
       "route_range_minutes": [
         271.7,
@@ -2900,7 +2934,10 @@
           ],
           "include_in_total": true
         }
-      }
+      },
+      "invalidated_step_ids": [
+        "step-01"
+      ]
     },
     "zuldrak-fivebox": {
       "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/zuldrak-fivebox-timing.json",

@@ -48,13 +48,13 @@
   "guide": [
     "接取：莱洛拉斯。",
     "永生之盾的莱洛拉斯要你从审讯者卡勒拉斯那里取得碧蓝书典，并从他手下的考达拉缚法者那里收集3枚闪烁的符文。",
-    "交付：莱洛拉斯。",
-    "《破译密码》不共享，五号需要分别完成任务物收集。"
+    "五开实测为混合机制：碧蓝书典由同一尸体五号依次拾取；闪烁的符文不共享，五号分别收集3枚。Questie/Wowhead当前WotLK数据：碧蓝书典约71.53%，闪烁的符文约29.30%。",
+    "交付：莱洛拉斯。"
   ],
   "fivebox": {
-    "status": "not_shared"
+    "status": "special"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",

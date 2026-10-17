@@ -48,7 +48,7 @@
   "fivebox": {
     "status": "sequential_loot"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -81,7 +81,10 @@
       "observed_at": "2026-10-11",
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
-      "supports_fields": ["fivebox.status", "presentation.note_override"]
+      "supports_fields": [
+        "fivebox.status",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {

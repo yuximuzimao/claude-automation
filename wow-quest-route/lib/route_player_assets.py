@@ -322,6 +322,10 @@ def write_player_assets(
     workbench.write_text(html, encoding="utf-8")
     player_dir = output_dir / PLAYER_VIEW_DIRNAME
     player_dir.mkdir(parents=True, exist_ok=True)
+    expected_player_view_names = {f"{publish_key}.md" for publish_key in report["player_views"]}
+    for existing in player_dir.glob("*.md"):
+        if existing.name not in expected_player_view_names:
+            existing.unlink()
     for publish_key, text in report["player_views"].items():
         (player_dir / f"{publish_key}.md").write_text(text, encoding="utf-8")
     return {

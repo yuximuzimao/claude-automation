@@ -154,30 +154,18 @@
     "a0233": "executed",
     "a0234": "executed",
     "a0235": "executed",
-    "a0237": "executed",
     "a0238": "executed",
     "a0239": "executed",
     "a0240": "executed",
-    "a0242": "executed",
     "a0243": "executed",
-    "a0245": "executed",
     "a0246": "executed",
     "a0247": "executed",
-    "a0248": "executed",
-    "a0249": "executed",
     "a0251": "executed",
     "a0253": "executed",
-    "a0254": "executed",
     "a0256": "executed",
-    "a0257": "executed",
     "a0258": "executed",
-    "a0260": "executed",
-    "a0261": "executed",
     "a0263": "executed",
     "a0264": "executed",
-    "a0265": "executed",
-    "a0266": "executed",
-    "a0267": "executed",
     "a0269": "executed",
     "a0271": "executed",
     "a0272": "executed",
@@ -1054,13 +1042,6 @@
         "task_id": 12967
       },
       {
-        "action_id": "a0237",
-        "kind": "min_level",
-        "required_min_level": 77,
-        "resolver": "derived_xp",
-        "task_id": 12981
-      },
-      {
         "action_id": "a0239",
         "kind": "min_level",
         "required_min_level": 77,
@@ -1133,66 +1114,6 @@
         "action_id": "a0247",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 12987
-      },
-      {
-        "action_id": "a0249",
-        "kind": "min_level",
-        "required_min_level": 77,
-        "resolver": "derived_xp",
-        "task_id": 12994
-      },
-      {
-        "action_id": "a0249",
-        "kind": "reputation",
-        "required_reputation": {
-          "max": null,
-          "min": {
-            "1": 1119,
-            "2": 9000
-          }
-        },
-        "resolver": "reputation_calibration",
-        "task_id": 12994
-      },
-      {
-        "action_id": "a0248",
-        "kind": "min_level",
-        "required_min_level": 77,
-        "resolver": "derived_xp",
-        "task_id": 13006
-      },
-      {
-        "action_id": "a0248",
-        "kind": "reputation",
-        "required_reputation": {
-          "max": null,
-          "min": {
-            "1": 1119,
-            "2": 3000
-          }
-        },
-        "resolver": "reputation_calibration",
-        "task_id": 13006
-      },
-      {
-        "action_id": "a0254",
-        "kind": "min_level",
-        "required_min_level": 77,
-        "resolver": "derived_xp",
-        "task_id": 13046
-      },
-      {
-        "action_id": "a0254",
-        "kind": "reputation",
-        "required_reputation": {
-          "max": null,
-          "min": {
-            "1": 1119,
-            "2": 21000
-          }
-        },
-        "resolver": "reputation_calibration",
-        "task_id": 13046
       },
       {
         "action_id": "a0272",
@@ -3098,25 +3019,6 @@
         "task_id": 12967
       },
       {
-        "action_id": "a0237",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 77,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              12967
-            ]
-          }
-        ],
-        "task_id": 12981
-      },
-      {
         "action_id": "a0239",
         "checks": [
           {
@@ -3228,85 +3130,6 @@
           }
         ],
         "task_id": 12987
-      },
-      {
-        "action_id": "a0249",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 77,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "reputation",
-            "required": {
-              "max": null,
-              "min": {
-                "1": 1119,
-                "2": 9000
-              }
-            },
-            "resolver": "reputation_calibration",
-            "status": "deferred"
-          }
-        ],
-        "task_id": 12994
-      },
-      {
-        "action_id": "a0248",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 77,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "reputation",
-            "required": {
-              "max": null,
-              "min": {
-                "1": 1119,
-                "2": 3000
-              }
-            },
-            "resolver": "reputation_calibration",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              12987
-            ]
-          }
-        ],
-        "task_id": 13006
-      },
-      {
-        "action_id": "a0254",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 77,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "reputation",
-            "required": {
-              "max": null,
-              "min": {
-                "1": 1119,
-                "2": 21000
-              }
-            },
-            "resolver": "reputation_calibration",
-            "status": "deferred"
-          }
-        ],
-        "task_id": 13046
       },
       {
         "action_id": "a0272",
@@ -4532,6 +4355,12 @@
         "target": "K3"
       },
       {
+        "action_id": "a9003",
+        "kind": "use_hearth",
+        "status": "used",
+        "target": "K3"
+      },
+      {
         "action_id": "a0195",
         "kind": "bind_hearth",
         "status": "bound",
@@ -4578,7 +4407,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "a6c3bf877122c8c27b6424f1cc36ab1cf431d88201db95f3393f79fd5740fdce",
+  "input_fingerprint": "328946b64f5cf6895a179ae38d0a5f09bb80bb232cc2c054b52bdfa4d084d0a5",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",
@@ -4607,7 +4436,7 @@
   "reputation": {
     "definite_task_reward_delta": {
       "1085": 3045,
-      "1119": 47375
+      "1119": 45975
     },
     "possible_task_reward_delta": {}
   },
@@ -4680,7 +4509,6 @@
       12976,
       12978,
       12980,
-      12981,
       12983,
       12984,
       12985,
@@ -4689,14 +4517,12 @@
       12989,
       12991,
       12993,
-      12994,
       12996,
       12997,
       12998,
       13000,
       13001,
       13005,
-      13006,
       13007,
       13009,
       13010,
@@ -4705,7 +4531,6 @@
       13035,
       13037,
       13038,
-      13046,
       13047,
       13048,
       13049,

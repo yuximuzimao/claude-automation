@@ -54,12 +54,13 @@
   "guide": [
     "接取：先知格雷姆沃克的灵魂。",
     "夺得卡加尼舒的神像，对先知格雷姆沃克的残骸使用它。 /  / 然后将物像还给滞留在犸格莫斯内的先知格雷姆沃克的灵魂。",
+    "五开实测为混合机制：击杀一次卡加尼舒后五号依次拾取神像；随后五号还需要分别对先知格雷姆沃克的残骸依次交互使用神像。",
     "交付：先知格雷姆沃克的灵魂。"
   ],
   "fivebox": {
-    "status": "sequential_loot"
+    "status": "special"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",

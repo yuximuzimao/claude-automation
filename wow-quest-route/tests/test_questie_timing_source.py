@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from lib.questie_drop_rates import DropRate
 from lib.questie_objectives import (
     build_effective_timing_source_inputs,
     objective_atoms,
@@ -9,6 +10,15 @@ from lib.questie_objectives import (
     timing_inputs_from_atoms,
 )
 from lib.questie_source import QuestieData
+
+
+class _DropDB:
+    def __init__(self, rates: dict[tuple[int, int], float]):
+        self.rates = rates
+
+    def get(self, item_id: int, npc_id: int):
+        rate = self.rates.get((item_id, npc_id))
+        return DropRate(item_id, npc_id, rate, "synthetic") if rate is not None else None
 
 
 def _questie(*, quest_names=None, items=None) -> QuestieData:
@@ -108,6 +118,94 @@ def test_multiple_drop_sources_never_select_one_route_drop_rate_implicitly() -> 
     assert inputs["required_count"] == 5
     assert atoms[0]["source_npc_ids"] == [333, 444]
     assert "drop_rate" not in inputs
+
+
+def test_drop_rate_percent_is_normalized_to_probability_for_timing() -> None:
+    atoms = [
+        {
+            "objective_type": "item",
+            "entity_id": 222,
+            "item_id": 222,
+            "required_count": 1,
+            "source_npc_ids": [333],
+            "source_object_ids": [],
+            "source_item_ids": [],
+        }
+    ]
+    inputs, issues = timing_inputs_from_atoms(atoms, drop_db=_DropDB({(222, 333): 39.0}))
+
+    assert issues == []
+    assert inputs["drop_rate"] == 0.39
+
+
+def test_equal_multi_npc_drop_rates_resolve_without_route_source_selection() -> None:
+    atoms = [
+        {
+            "objective_type": "item",
+            "entity_id": 222,
+            "item_id": 222,
+            "required_count": 6,
+            "source_npc_ids": [333, 444],
+            "source_object_ids": [],
+            "source_item_ids": [],
+        }
+    ]
+    inputs, issues = timing_inputs_from_atoms(
+        atoms,
+        drop_db=_DropDB({(222, 333): 20.0, (222, 444): 20.0}),
+    )
+
+    assert issues == []
+    assert inputs["drop_rate"] == 0.2
+    assert inputs["drop_rate_npc_ids"] == [333, 444]
+    assert inputs["drop_rate_candidates"] == [
+        {"npc_id": 333, "rate": 0.2, "source": "synthetic"},
+        {"npc_id": 444, "rate": 0.2, "source": "synthetic"},
+    ]
+
+
+def test_different_multi_npc_drop_rates_still_require_route_source_selection() -> None:
+    atoms = [
+        {
+            "objective_type": "item",
+            "entity_id": 222,
+            "item_id": 222,
+            "required_count": 5,
+            "source_npc_ids": [333, 444],
+            "source_object_ids": [],
+            "source_item_ids": [],
+        }
+    ]
+    inputs, issues = timing_inputs_from_atoms(
+        atoms,
+        drop_db=_DropDB({(222, 333): 20.0, (222, 444): 30.0}),
+    )
+
+    assert "drop_rate" not in inputs
+    assert inputs["drop_rate_candidates"] == [
+        {"npc_id": 333, "rate": 0.2, "source": "synthetic"},
+        {"npc_id": 444, "rate": 0.3, "source": "synthetic"},
+    ]
+    assert issues[0]["kind"] == "drop_rate_route_source_selection_required"
+
+
+def test_world_object_item_collection_exposes_interaction_count() -> None:
+    atoms = [
+        {
+            "objective_type": "item",
+            "entity_id": 222,
+            "item_id": 222,
+            "required_count": 8,
+            "source_npc_ids": [],
+            "source_object_ids": [555],
+            "source_item_ids": [],
+        }
+    ]
+    inputs, issues = timing_inputs_from_atoms(atoms)
+
+    assert issues == []
+    assert inputs["required_count"] == 8
+    assert inputs["interaction_count"] == 8
 
 
 def test_missing_questie_source_is_explicit_requirement_not_foundation_fallback(tmp_path: Path) -> None:

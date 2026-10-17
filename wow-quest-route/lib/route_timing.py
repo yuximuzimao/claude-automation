@@ -43,7 +43,14 @@ def validate_timing_inputs(inputs: dict[str, Any]) -> None:
     if registry.get("schema_version") != 1:
         errors.append("rule_registry.schema_version must be 1")
     rules = mapping("rule_registry.rules", registry.get("rules"))
-    allowed_rule_kinds = {"zero_service", "kill_count", "personal_drop", "fixed_object", "fixed_seconds"}
+    allowed_rule_kinds = {
+        "zero_service",
+        "kill_count",
+        "personal_drop",
+        "sequential_corpse_loot",
+        "fixed_object",
+        "fixed_seconds",
+    }
     for rule_id, rule_raw in rules.items():
         rule = mapping(f"rule_registry.rules.{rule_id}", rule_raw)
         if rule.get("kind") not in allowed_rule_kinds:
@@ -323,6 +330,14 @@ def _task_rule_seconds(
     if card is None:
         return None, [_issue("error", "timing_task_card_missing", task_id=task_id)], {}
 
+    fivebox_status = str(((card.get("fivebox") or {}).get("status") or "")).strip()
+    if fivebox_status == "pending":
+        return (
+            None,
+            [_issue("requirement", "timing_fivebox_mechanism_pending", task_id=task_id)],
+            {"task_id": task_id, "rule_ref": card.get("timing_rule_ref"), "fivebox_status": fivebox_status},
+        )
+
     rule_ref = card.get("timing_rule_ref")
     if not rule_ref:
         return (
@@ -376,14 +391,47 @@ def _task_rule_seconds(
     elif kind == "fixed_seconds":
         seconds = float(params["fixed_service_seconds"])
     elif kind == "kill_count":
-        seconds = float(params["kill_count"]) * float(params["combat_seconds_per_mob"])
+        execution_scope = str(rule.get("execution_scope") or "shared")
+        multiplier = int(params["party_size"]) if execution_scope == "per_character" else 1
+        seconds = float(params["kill_count"]) * multiplier * float(params["combat_seconds_per_mob"])
+    elif kind == "sequential_corpse_loot":
+        fivebox_status = str(((card.get("fivebox") or {}).get("status") or "")).strip()
+        if fivebox_status != "sequential_loot":
+            issues.append(
+                _issue(
+                    "requirement",
+                    "sequential_corpse_loot_fivebox_status_required",
+                    task_id=task_id,
+                    fivebox_status=fivebox_status or None,
+                )
+            )
+        else:
+            required = float(params["required_count"])
+            seconds = required * float(params["combat_seconds_per_mob"]) + required * int(
+                params["party_size"]
+            ) * float(params["personal_loot_seconds_per_corpse"])
     elif kind == "fixed_object":
-        multiplier = 1 if params["interaction_scope"] == "shared" else int(params["party_size"])
-        seconds = (
-            float(params["interaction_count"])
-            * multiplier
-            * float(params["fixed_object_seconds_per_character"])
-        )
+        fivebox_status = str(((card.get("fivebox") or {}).get("status") or "")).strip()
+        if fivebox_status == "shared":
+            multiplier = 1
+        elif fivebox_status in {"not_shared", "sequential_loot"}:
+            multiplier = int(params["party_size"])
+        else:
+            issues.append(
+                _issue(
+                    "requirement",
+                    "fixed_object_fivebox_status_required",
+                    task_id=task_id,
+                    fivebox_status=fivebox_status or None,
+                )
+            )
+            multiplier = None
+        if multiplier is not None:
+            seconds = (
+                float(params["interaction_count"])
+                * multiplier
+                * float(params["fixed_object_seconds_per_character"])
+            )
     elif kind == "personal_drop":
         if int(params["party_size"]) != 5:
             issues.append(
@@ -476,6 +524,9 @@ def _legacy_step_baseline(
     baselines = (inputs.get("model_config") or {}).get("legacy_step_baselines") or {}
     profile = baselines.get(str(profile_id))
     if not isinstance(profile, dict):
+        return None
+    invalidated = {str(value) for value in profile.get("invalidated_step_ids") or []}
+    if str(step_id) in invalidated:
         return None
     steps = profile.get("steps") or {}
     row = steps.get(str(step_id))
@@ -690,24 +741,12 @@ def evaluate_profile_timing(
         (baseline_profile.get("steps") or {})
     )
     if movement_report["status"] == "blocked":
-        issues.append(
-            _issue(
-                "info" if has_legacy_baseline else "error",
-                "upstream_stage5_blocked",
-                resolved_by="legacy_step_baseline" if has_legacy_baseline else None,
-            )
-        )
-    elif movement_report["status"] == "requirements" and not has_legacy_baseline:
+        issues.append(_issue("error", "upstream_stage5_blocked"))
+    elif movement_report["status"] == "requirements":
         issues.append(_issue("requirement", "upstream_stage5_requirements"))
     if service_report["status"] == "blocked":
-        issues.append(
-            _issue(
-                "info" if has_legacy_baseline else "error",
-                "upstream_stage6_blocked",
-                resolved_by="legacy_step_baseline" if has_legacy_baseline else None,
-            )
-        )
-    elif service_report["status"] == "requirements" and not has_legacy_baseline:
+        issues.append(_issue("error", "upstream_stage6_blocked"))
+    elif service_report["status"] == "requirements":
         issues.append(_issue("requirement", "upstream_stage6_requirements"))
 
     party_size = int(character_profile.get("party_size") or 1)
@@ -791,6 +830,13 @@ def evaluate_profile_timing(
     # Hub handling: one base charge per physical visit. Conditional task actions consume the single
     # Stage-3 Replay execution result; Timing never re-evaluates task_active/task_complete/has_item.
     hub_by_visit: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    opportunity_task_ids = {
+        int(action["task_id"])
+        for action in profile["actions"]
+        if action.get("kind") == "accept"
+        and action.get("task_id") is not None
+        and (action.get("when") or {}).get("kind") == "has_item"
+    }
     for action in profile["actions"]:
         if action["kind"] not in {"accept", "turnin"}:
             continue
@@ -804,12 +850,25 @@ def evaluate_profile_timing(
             if execution == "skipped":
                 continue
             if execution == "maybe":
+                task_id = int(action["task_id"])
+                if task_id in opportunity_task_ids:
+                    issues.append(
+                        _issue(
+                            "info",
+                            "conditional_opportunity_hub_action_maybe",
+                            action_id=action_id,
+                            task_id=task_id,
+                            step_id=step_by_action.get(action_id),
+                            baseline_policy="exclude_optional_hub_cost",
+                        )
+                    )
+                    continue
                 issues.append(
                     _issue(
                         "requirement",
                         "conditional_hub_action_execution_maybe",
                         action_id=action_id,
-                        task_id=int(action["task_id"]),
+                        task_id=task_id,
                         step_id=step_by_action.get(action_id),
                     )
                 )
@@ -975,9 +1034,17 @@ def evaluate_profile_timing(
     # keeps the historical estimate visible during migration while resolved
     # current components replace the corresponding residual.
     cost_issues = [dict(issue) for issue in issues]
+    legacy_non_resolvable_kinds = {"timing_fivebox_mechanism_pending"}
     if has_legacy_baseline:
         for issue in issues:
             if issue.get("severity") not in {"requirement", "unknown"}:
+                continue
+            if issue.get("kind") in legacy_non_resolvable_kinds:
+                continue
+            step_id = issue.get("step_id")
+            if step_id is None:
+                continue
+            if _legacy_step_baseline(str(profile["profile_id"]), str(step_id), inputs) is None:
                 continue
             issue["severity"] = "info"
             issue["resolved_by"] = "legacy_step_baseline"
@@ -986,6 +1053,7 @@ def evaluate_profile_timing(
     # while uncertainty is still missing; in that case keep the center and mark the artifact as a
     # requirement rather than erasing known work or inventing a generic +/- percentage.
     unresolved_by_step: dict[str, int] = defaultdict(int)
+    legacy_blocked_steps: set[str] = set()
     global_unresolved = 0
     for issue in cost_issues:
         if issue.get("severity") not in {"requirement", "unknown", "error"}:
@@ -994,7 +1062,10 @@ def evaluate_profile_timing(
         if step_id is None:
             global_unresolved += 1
         else:
-            unresolved_by_step[str(step_id)] += 1
+            step_id = str(step_id)
+            unresolved_by_step[step_id] += 1
+            if issue.get("kind") in legacy_non_resolvable_kinds:
+                legacy_blocked_steps.add(step_id)
 
     steps: list[dict[str, Any]] = []
     total_known_seconds = 0.0
@@ -1012,7 +1083,15 @@ def evaluate_profile_timing(
         range_minutes: list[float] | None = None
         range_basis: dict[str, Any] | None = None
         legacy_row = _legacy_step_baseline(str(profile["profile_id"]), step_id, inputs)
-        if legacy_row is not None and unresolved:
+        preserve_compatible_residual_floor = bool(
+            (baseline_profile or {}).get("compatible_step_residual_floor")
+        )
+        use_legacy_residual = (
+            legacy_row is not None
+            and step_id not in legacy_blocked_steps
+            and (bool(unresolved) or preserve_compatible_residual_floor)
+        )
+        if use_legacy_residual:
             legacy_center_seconds = float(legacy_row["center_minutes"]) * 60.0
             residual_seconds = max(0.0, legacy_center_seconds - current_known_seconds)
             known_seconds = current_known_seconds + residual_seconds
@@ -1107,6 +1186,11 @@ def evaluate_profile_timing(
                     detail=route_range_basis,
                 )
             )
+
+    if not route_point_estimate_complete and not any(
+        row.get("severity") == "error" for row in issues
+    ):
+        issues.append(_issue("requirement", "timing_point_estimate_incomplete", scope="profile"))
 
     status = _status(issues)
     complete = route_point_estimate_complete and route_range is not None and status == "pass"

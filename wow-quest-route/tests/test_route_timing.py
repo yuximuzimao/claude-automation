@@ -84,7 +84,13 @@ def _inputs():
                 },
                 "shared-kill-count": {
                     "kind": "kill_count",
+                    "execution_scope": "shared",
                     "required_inputs": ["kill_count", "combat_seconds_per_mob"],
+                },
+                "personal-kill-count": {
+                    "kind": "kill_count",
+                    "execution_scope": "per_character",
+                    "required_inputs": ["kill_count", "combat_seconds_per_mob", "party_size"],
                 },
                 "personal-drop-count": {
                     "kind": "personal_drop",
@@ -93,6 +99,23 @@ def _inputs():
                         "drop_rate",
                         "combat_seconds_per_mob",
                         "personal_loot_seconds_per_corpse",
+                        "party_size",
+                    ],
+                },
+                "sequential-corpse-loot": {
+                    "kind": "sequential_corpse_loot",
+                    "required_inputs": [
+                        "required_count",
+                        "combat_seconds_per_mob",
+                        "personal_loot_seconds_per_corpse",
+                        "party_size",
+                    ],
+                },
+                "fixed-object-interaction": {
+                    "kind": "fixed_object",
+                    "required_inputs": [
+                        "interaction_count",
+                        "fixed_object_seconds_per_character",
                         "party_size",
                     ],
                 },
@@ -177,6 +200,60 @@ def test_unknown_task_rule_never_falls_back_to_default_minutes() -> None:
     assert not any(row.get("basis") == "historical_default" for row in report["component_rows"])
 
 
+def test_has_item_opportunity_hub_maybe_does_not_block_baseline_timing() -> None:
+    actions = [
+        {"action_id": "v1", "kind": "location", "location_ref": "p1"},
+        {
+            "action_id": "a1",
+            "kind": "accept",
+            "task_id": 100,
+            "location_ref": "p1",
+            "when": {"kind": "has_item", "item_name": "Opportunity Item"},
+        },
+        {
+            "action_id": "t1",
+            "kind": "turnin",
+            "task_id": 100,
+            "location_ref": "p1",
+            "when": {"kind": "task_active", "task_id": 100},
+        },
+    ]
+    report = _evaluate(
+        _profile(actions=actions),
+        {100: _task_card(100, "zero-independent-service")},
+        action_execution={"a1": "maybe", "t1": "maybe"},
+    )
+
+    opportunity_issues = [
+        issue for issue in report["issues"] if issue["kind"] == "conditional_opportunity_hub_action_maybe"
+    ]
+    assert len(opportunity_issues) == 2
+    assert all(issue["severity"] == "info" for issue in opportunity_issues)
+    assert not any(issue["kind"] == "conditional_hub_action_execution_maybe" for issue in report["issues"])
+
+
+def test_non_opportunity_conditional_hub_maybe_stays_requirement() -> None:
+    actions = [
+        {"action_id": "v1", "kind": "location", "location_ref": "p1"},
+        {
+            "action_id": "a1",
+            "kind": "accept",
+            "task_id": 100,
+            "location_ref": "p1",
+            "when": {"kind": "task_active", "task_id": 100},
+        },
+    ]
+    report = _evaluate(
+        _profile(actions=actions),
+        {100: _task_card(100, "zero-independent-service")},
+        action_execution={"a1": "maybe"},
+    )
+
+    issue = next(issue for issue in report["issues"] if issue["kind"] == "conditional_hub_action_execution_maybe")
+    assert issue["severity"] == "requirement"
+    assert not any(row.get("basis") == "historical_default" for row in report["component_rows"])
+
+
 def test_legacy_step_baseline_fills_only_unresolved_residual() -> None:
     inputs = deepcopy(_inputs())
     inputs["model_config"]["legacy_step_baselines"] = {
@@ -197,6 +274,147 @@ def test_legacy_step_baseline_fills_only_unresolved_residual() -> None:
     assert report["range_minutes"] == [9.0, 15.0]
     assert report["steps"][0]["range_basis"]["basis"] == "legacy_step_baseline_residual"
     assert report["steps"][0]["unresolved_component_count"] == 0
+
+
+def test_compatible_step_residual_floor_preserves_unmodeled_local_service() -> None:
+    inputs = deepcopy(_inputs())
+    inputs["model_config"]["legacy_step_baselines"] = {
+        "synthetic-timing": {
+            "source_ref": "legacy-test",
+            "migration_policy": "legacy_center_and_range_residual_only_for_unchanged_step_contracts",
+            "compatible_step_residual_floor": True,
+            "steps": {"step-01": {"center_minutes": 12.0, "range_minutes": [9.0, 15.0]}},
+        }
+    }
+    report = _evaluate(
+        _profile(),
+        {100: _task_card(100, "zero-independent-service")},
+        inputs,
+    )
+
+    assert report["status"] == "pass"
+    assert report["center_minutes"] == 12.0
+    assert report["steps"][0]["range_basis"]["basis"] == "legacy_step_baseline_residual"
+    assert report["steps"][0]["range_basis"]["residual_seconds"] > 0
+
+
+def test_pending_fivebox_mechanism_is_never_resolved_by_legacy_baseline() -> None:
+    inputs = deepcopy(_inputs())
+    inputs["model_config"]["legacy_step_baselines"] = {
+        "synthetic-timing": {
+            "source_ref": "legacy-test",
+            "steps": {"step-01": {"center_minutes": 12.0, "range_minutes": [9.0, 15.0]}},
+        }
+    }
+    report = _evaluate(
+        _profile(),
+        {100: _task_card(100, fivebox_status="pending")},
+        inputs,
+    )
+
+    assert report["status"] == "requirements"
+    assert report["center_minutes"] is None
+    assert report["steps"][0]["center_minutes"] is None
+    assert report["steps"][0]["unresolved_component_count"] > 0
+    issue = next(row for row in report["issues"] if row["kind"] == "timing_fivebox_mechanism_pending")
+    assert issue["severity"] == "requirement"
+    assert issue.get("resolved_by") is None
+
+
+def test_new_step_without_legacy_row_stays_requirement_even_when_profile_has_baseline() -> None:
+    actions = [
+        {"action_id": "v1", "kind": "location", "location_ref": "p1"},
+        {"action_id": "o1", "kind": "objective", "task_id": 100, "location_ref": "p1"},
+        {"action_id": "v2", "kind": "location", "location_ref": "p2"},
+        {"action_id": "o2", "kind": "objective", "task_id": 200, "location_ref": "p2"},
+    ]
+    steps = [
+        {"step_id": "step-01", "title": "old", "action_ids": ["v1", "o1"]},
+        {"step_id": "step-01b", "title": "new split", "action_ids": ["v2", "o2"]},
+    ]
+    profile = _profile(actions=actions, steps=steps)
+    inputs = deepcopy(_inputs())
+    inputs["model_config"]["legacy_step_baselines"] = {
+        "synthetic-timing": {
+            "source_ref": "legacy-test",
+            "steps": {"step-01": {"center_minutes": 12.0, "range_minutes": [9.0, 15.0]}},
+        }
+    }
+    report = _evaluate(profile, {100: _task_card(100), 200: _task_card(200)}, inputs)
+
+    assert report["status"] == "requirements"
+    assert report["center_minutes"] is None
+    split = next(row for row in report["steps"] if row["step_id"] == "step-01b")
+    assert split["center_minutes"] is None
+    issue = next(
+        row
+        for row in report["issues"]
+        if row.get("step_id") == "step-01b" and row["kind"] == "timing_rule_ref_required"
+    )
+    assert issue["severity"] == "requirement"
+    assert issue.get("resolved_by") is None
+
+
+def test_invalidated_legacy_step_does_not_pin_changed_route_center() -> None:
+    inputs = deepcopy(_inputs())
+    inputs["model_config"]["legacy_step_baselines"] = {
+        "synthetic-timing": {
+            "source_ref": "legacy-test",
+            "invalidated_step_ids": ["step-01"],
+            "steps": {"step-01": {"center_minutes": 12.0, "range_minutes": [9.0, 15.0]}},
+        }
+    }
+    report = _evaluate(_profile(), {100: _task_card(100)}, inputs)
+
+    assert report["status"] == "requirements"
+    assert report["center_minutes"] is None
+    assert report["steps"][0]["center_minutes"] is None
+    assert any(row["kind"] == "timing_point_estimate_incomplete" for row in report["issues"])
+
+
+def test_fixed_object_uses_task_card_fivebox_status_for_multiplier() -> None:
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"interaction_count": 3}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+
+    shared = _evaluate(
+        _profile(),
+        {100: _task_card(100, "fixed-object-interaction", fivebox_status="shared")},
+        inputs,
+    )
+    personal = _evaluate(
+        _profile(),
+        {100: _task_card(100, "fixed-object-interaction", fivebox_status="not_shared")},
+        inputs,
+    )
+
+    assert shared["steps"][0]["components"]["objective_service_seconds"] == 3 * 7.0
+    assert personal["steps"][0]["components"]["objective_service_seconds"] == 3 * 5 * 7.0
+
+
+def test_fixed_object_unknown_fivebox_status_stays_requirement() -> None:
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"interaction_count": 1}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    report = _evaluate(
+        _profile(),
+        {100: _task_card(100, "fixed-object-interaction", fivebox_status="pending")},
+        inputs,
+    )
+
+    assert report["status"] == "requirements"
+    assert report["center_minutes"] is None
+    assert any(row["kind"] == "timing_fivebox_mechanism_pending" for row in report["issues"])
 
 
 def test_self_move_with_unknown_coordinates_stays_requirement() -> None:
@@ -410,6 +628,21 @@ def test_effective_quest_source_supplies_baseline_rule_inputs_and_task_config_ov
     assert result["steps"][0]["components"]["objective_service_seconds"] == 75.0
 
 
+def test_personal_kill_count_scales_by_party_size() -> None:
+    profile = _profile()
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"kill_count": 10}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    report = _evaluate(profile, {100: _task_card(100, "personal-kill-count")}, inputs)
+
+    assert report["steps"][0]["components"]["objective_service_seconds"] == 10 * 5 * 15.0
+
+
 def test_personal_drop_not_shared_scales_required_count_by_party_size() -> None:
     profile = _profile()
     inputs = _inputs()
@@ -461,6 +694,41 @@ def test_personal_drop_100_percent_is_deterministic_and_still_scales_not_shared(
     report = _evaluate(profile, cards, inputs)
 
     assert report["steps"][0]["components"]["objective_service_seconds"] == 10 * 24.0
+
+
+def test_sequential_corpse_loot_counts_one_kill_and_party_loots() -> None:
+    profile = _profile()
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"required_count": 1}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    cards = {100: _task_card(100, "sequential-corpse-loot", fivebox_status="sequential_loot")}
+
+    report = _evaluate(profile, cards, inputs)
+
+    assert report["steps"][0]["components"]["objective_service_seconds"] == 15.0 + 5 * 9.0
+
+
+def test_sequential_corpse_loot_requires_confirmed_sequential_status() -> None:
+    profile = _profile()
+    inputs = _inputs()
+    inputs["quest_source_inputs"] = {
+        "schema_version": 1,
+        "status": "pass",
+        "source": {"questie_version": "synthetic", "source_sha256": "a" * 64},
+        "tasks": {"100": {"inputs": {"required_count": 1}, "objectives": [], "issues": []}},
+        "issues": [],
+    }
+    cards = {100: _task_card(100, "sequential-corpse-loot", fivebox_status="shared")}
+
+    report = _evaluate(profile, cards, inputs)
+
+    assert report["status"] == "requirements"
+    assert any(issue["kind"] == "sequential_corpse_loot_fivebox_status_required" for issue in report["issues"])
 
 
 def test_missing_rule_input_stays_requirement_instead_of_using_old_fallback() -> None:

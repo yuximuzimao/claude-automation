@@ -43,12 +43,13 @@
   "guide": [
     "接取：纳拉杜。",
     "搭救被囚禁在沙纳尔废墟的抚风者莫洛德、召火者阿库鲁和唤水者埃伊兰。完成任务后向纳拉杜复命。",
+    "五开实测：三名NPC的解救进度共享。",
     "交付：纳拉杜。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-object-interaction",
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",

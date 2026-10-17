@@ -2,14 +2,14 @@
   "background_layers": [
     {
       "end_action_id": "a0352",
-      "end_ordinal": 352,
+      "end_ordinal": 341,
       "end_policy": "fill_if_incomplete",
       "foreground_objective_action_ids": [
         "a0352"
       ],
       "service_id": "storm-12882-background",
       "start_action_id": "a0190",
-      "start_ordinal": 190,
+      "start_ordinal": 192,
       "task_id": 12882,
       "visit_ids": [
         "a0196",
@@ -29,7 +29,6 @@
         "a0250",
         "a0252",
         "a0255",
-        "a0259",
         "a0262",
         "a0268",
         "a0270",
@@ -49,11 +48,11 @@
         "a0310",
         "a0312",
         "a0314",
+        "a0328",
         "a0318",
         "a0321",
         "a0323",
         "a0326",
-        "a0328",
         "a0332",
         "a0335",
         "a0339",
@@ -444,15 +443,6 @@
     },
     {
       "location_ref": "storm-p070",
-      "service_action_id": "a0242",
-      "task_id": 12981,
-      "visit_id": "a0241",
-      "x": 69.4,
-      "y": 59.6,
-      "zone_id": 67
-    },
-    {
-      "location_ref": "storm-p070",
       "service_action_id": "a0243",
       "task_id": 12985,
       "visit_id": "a0241",
@@ -480,38 +470,11 @@
     },
     {
       "location_ref": "storm-p074",
-      "service_action_id": "a0257",
-      "task_id": 13006,
-      "visit_id": "a0255",
-      "x": 54.9,
-      "y": 61.0,
-      "zone_id": 67
-    },
-    {
-      "location_ref": "storm-p074",
       "service_action_id": "a0258",
       "task_id": 13011,
       "visit_id": "a0255",
       "x": 54.9,
       "y": 61.0,
-      "zone_id": 67
-    },
-    {
-      "location_ref": "storm-p075",
-      "service_action_id": "a0260",
-      "task_id": 12994,
-      "visit_id": "a0259",
-      "x": 57.2,
-      "y": 64.0,
-      "zone_id": 67
-    },
-    {
-      "location_ref": "storm-p075",
-      "service_action_id": "a0261",
-      "task_id": 13046,
-      "visit_id": "a0259",
-      "x": 57.2,
-      "y": 64.0,
       "zone_id": 67
     },
     {
@@ -902,7 +865,7 @@
       "zone_id": 67
     }
   ],
-  "input_fingerprint": "26de4d6bc0dd62f9e359b16865535b272a15cd0e7a3f8dea7ea1ac2c252d3acf",
+  "input_fingerprint": "fdaf733693dc8bbabb901906e7f1c14179f3c42d4b42582d33aeefe3e53a7c4a",
   "issues": [],
   "profile_id": "storm-peaks-fivebox",
   "spatial_instances": [
@@ -1314,7 +1277,6 @@
     {
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
-        "objective-a0242",
         "objective-a0243"
       ],
       "instance_id": "visit-a0241",
@@ -1340,7 +1302,6 @@
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
         "objective-a0256",
-        "objective-a0257",
         "objective-a0258"
       ],
       "instance_id": "visit-a0255",
@@ -1348,19 +1309,6 @@
       "visit_id": "a0255",
       "x": 54.9,
       "y": 61.0,
-      "zone_id": 67
-    },
-    {
-      "basis": "canonical_visit_occurrence",
-      "cluster_ids": [
-        "objective-a0260",
-        "objective-a0261"
-      ],
-      "instance_id": "visit-a0259",
-      "location_ref": "storm-p075",
-      "visit_id": "a0259",
-      "x": 57.2,
-      "y": 64.0,
       "zone_id": 67
     },
     {
@@ -1806,10 +1754,10 @@
   "status": "pass",
   "summary": {
     "background_layer_count": 1,
-    "foreground_service_count": 93,
+    "foreground_service_count": 89,
     "shared_service_override_count": 0,
-    "spatial_instance_count": 73,
-    "target_cluster_count": 93
+    "spatial_instance_count": 72,
+    "target_cluster_count": 89
   },
   "target_clusters": [
     {
@@ -2360,19 +2308,6 @@
     },
     {
       "action_ids": [
-        "a0242"
-      ],
-      "cluster_id": "objective-a0242",
-      "source": "objective_action",
-      "task_ids": [
-        12981
-      ],
-      "visit_ids": [
-        "a0241"
-      ]
-    },
-    {
-      "action_ids": [
         "a0243"
       ],
       "cluster_id": "objective-a0243",
@@ -2412,19 +2347,6 @@
     },
     {
       "action_ids": [
-        "a0257"
-      ],
-      "cluster_id": "objective-a0257",
-      "source": "objective_action",
-      "task_ids": [
-        13006
-      ],
-      "visit_ids": [
-        "a0255"
-      ]
-    },
-    {
-      "action_ids": [
         "a0258"
       ],
       "cluster_id": "objective-a0258",
@@ -2434,32 +2356,6 @@
       ],
       "visit_ids": [
         "a0255"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0260"
-      ],
-      "cluster_id": "objective-a0260",
-      "source": "objective_action",
-      "task_ids": [
-        12994
-      ],
-      "visit_ids": [
-        "a0259"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0261"
-      ],
-      "cluster_id": "objective-a0261",
-      "source": "objective_action",
-      "task_ids": [
-        13046
-      ],
-      "visit_ids": [
-        "a0259"
       ]
     },
     {

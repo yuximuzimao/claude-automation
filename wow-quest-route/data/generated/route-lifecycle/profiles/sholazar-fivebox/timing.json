@@ -1,6 +1,6 @@
 {
-  "center_minutes": 267.567,
-  "complete": true,
+  "center_minutes": null,
+  "complete": false,
   "component_rows": [
     {
       "component": "move",
@@ -920,6 +920,1233 @@
       "visit_id": "a0267"
     },
     {
+      "action_id": "a0018",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 244.99999999999997,
+          "interaction_count": 7,
+          "item_id": 38349,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 7
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12523
+      },
+      "seconds": 244.99999999999997,
+      "step_id": "step-02",
+      "task_id": 12523
+    },
+    {
+      "action_id": "a0019",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 576.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12524
+      },
+      "seconds": 576.0,
+      "step_id": "step-02",
+      "task_id": 12524
+    },
+    {
+      "action_id": "a0020",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "drop_rate_candidates": [
+            {
+              "npc_id": 28001,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28002,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28003,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28004,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28009,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28010,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28011,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28024,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28025,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28027,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28069,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28076,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28077,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28078,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28079,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28080,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28081,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28082,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28083,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28085,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28086,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28087,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28095,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28096,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28097,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28098,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28101,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28105,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28108,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28109,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28110,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28111,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28112,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28113,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28114,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28123,
+              "rate": 0.04,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28124,
+              "rate": 0.03,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28129,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28138,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28170,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28186,
+              "rate": 0.03,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28188,
+              "rate": 0.03,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28213,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28271,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28288,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28297,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28325,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28358,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28373,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28378,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28379,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28380,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28381,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28443,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28467,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28538,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28641,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28659,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28840,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28847,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28858,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28862,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 28877,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 29013,
+              "rate": 0.1,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 29036,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 29044,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 29123,
+              "rate": 0.01,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 29124,
+              "rate": 0.01,
+              "source": "pserver"
+            }
+          ],
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "item_id": 38642,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12624
+      },
+      "seconds": 90.0,
+      "step_id": "step-02",
+      "task_id": 12624
+    },
+    {
+      "action_id": "a0022",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 0.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12688
+      },
+      "seconds": 0.0,
+      "step_id": "step-02",
+      "task_id": 12688
+    },
+    {
+      "action_id": "a0032",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 30.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12525
+      },
+      "seconds": 30.0,
+      "step_id": "step-04",
+      "task_id": 12525
+    },
+    {
+      "action_id": "a0039",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12589
+      },
+      "seconds": 90.0,
+      "step_id": "step-04",
+      "task_id": 12589
+    },
+    {
+      "action_id": "a0044",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 225.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12549
+      },
+      "seconds": 225.0,
+      "step_id": "step-05",
+      "task_id": 12549
+    },
+    {
+      "action_id": "a0046",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 225.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12520
+      },
+      "seconds": 225.0,
+      "step_id": "step-05",
+      "task_id": 12520
+    },
+    {
+      "action_id": "a0059",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "drop_rate": 0.41,
+          "drop_rate_npc_id": 28129,
+          "drop_rate_source": "pserver",
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 331.0735966128493,
+          "item_id": 40394,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 5
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12804
+      },
+      "seconds": 331.0735966128493,
+      "step_id": "step-06",
+      "task_id": 12804
+    },
+    {
+      "action_id": "a0060",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 0.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12592
+      },
+      "seconds": 0.0,
+      "step_id": "step-06",
+      "task_id": 12592
+    },
+    {
+      "action_id": "a0063",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 225.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12551
+      },
+      "seconds": 225.0,
+      "step_id": "step-06",
+      "task_id": 12551
+    },
+    {
+      "action_id": "a0064",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 243.60000000000002,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12634
+      },
+      "seconds": 243.60000000000002,
+      "step_id": "step-06",
+      "task_id": 12634
+    },
+    {
+      "action_id": "a0073",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 35.0,
+          "interaction_count": 1,
+          "item_id": 38688,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12644
+      },
+      "seconds": 35.0,
+      "step_id": "step-07",
+      "task_id": 12644
+    },
+    {
+      "action_id": "a0076",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 45.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12645
+      },
+      "seconds": 45.0,
+      "step_id": "step-07",
+      "task_id": 12645
+    },
+    {
+      "action_id": "a0077",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 45.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12645
+      },
+      "seconds": 45.0,
+      "step_id": "step-07",
+      "task_id": 12645
+    },
+    {
+      "action_id": "a0081",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12544
+      },
+      "seconds": 90.0,
+      "step_id": "step-08",
+      "task_id": 12544
+    },
+    {
+      "action_id": "a0086",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 105.0,
+          "interaction_count": 3,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12550
+      },
+      "seconds": 105.0,
+      "step_id": "step-08",
+      "task_id": 12550
+    },
+    {
+      "action_id": "a0090",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 175.0,
+          "interaction_count": 5,
+          "item_id": 38553,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 5
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12560
+      },
+      "seconds": 175.0,
+      "step_id": "step-09",
+      "task_id": 12560
+    },
+    {
+      "action_id": "a0093",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 45.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12645
+      },
+      "seconds": 45.0,
+      "step_id": "step-09",
+      "task_id": 12645
+    },
+    {
+      "action_id": "a0098",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 35.0,
+          "interaction_count": 1,
+          "item_id": 39264,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12699
+      },
+      "seconds": 35.0,
+      "step_id": "step-10",
+      "task_id": 12699
+    },
+    {
+      "action_id": "a0102",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 0.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12671
+      },
+      "seconds": 0.0,
+      "step_id": "step-10",
+      "task_id": 12671
+    },
+    {
+      "action_id": "a0116",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "drop_rate": 1.0,
+          "drop_rate_npc_id": 28317,
+          "drop_rate_source": "pserver",
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "item_id": 38559,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12569
+      },
+      "seconds": 90.0,
+      "step_id": "step-11",
+      "task_id": 12569
+    },
+    {
+      "action_id": "a0125",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 210.0,
+          "kill_count": 14,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12529
+      },
+      "seconds": 210.0,
+      "step_id": "step-13",
+      "task_id": 12529
+    },
+    {
+      "action_id": "a0133",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 225.0,
+          "kill_count": 15,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12533
+      },
+      "seconds": 225.0,
+      "step_id": "step-13",
+      "task_id": 12533
+    },
+    {
+      "action_id": "a0139",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 360.0,
+          "item_id": 38483,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 12
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12532
+      },
+      "seconds": 360.0,
+      "step_id": "step-14",
+      "task_id": 12532
+    },
+    {
+      "action_id": "a0157",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 35.0,
+          "interaction_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12537
+      },
+      "seconds": 35.0,
+      "step_id": "step-15",
+      "task_id": 12537
+    },
+    {
+      "action_id": "a0158",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 468.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12538
+      },
+      "seconds": 468.0,
+      "step_id": "step-15",
+      "task_id": 12538
+    },
+    {
+      "action_id": "a0177",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 0.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12570
+      },
+      "seconds": 0.0,
+      "step_id": "step-17",
+      "task_id": 12570
+    },
+    {
+      "action_id": "a0183",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 165.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12571
+      },
+      "seconds": 165.0,
+      "step_id": "step-17",
+      "task_id": 12571
+    },
+    {
+      "action_id": "a0190",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12573
+      },
+      "seconds": 90.0,
+      "step_id": "step-17",
+      "task_id": 12573
+    },
+    {
+      "action_id": "a0207",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 6,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12603
+      },
+      "seconds": 90.0,
+      "step_id": "step-19",
+      "task_id": 12603
+    },
+    {
+      "action_id": "a0210",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 240.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12575
+      },
+      "seconds": 240.0,
+      "step_id": "step-19",
+      "task_id": 12575
+    },
+    {
+      "action_id": "a0211",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 210.0,
+          "kill_count": 14,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12576
+      },
+      "seconds": 210.0,
+      "step_id": "step-19",
+      "task_id": 12576
+    },
+    {
+      "action_id": "a0219",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12607
+      },
+      "seconds": 90.0,
+      "step_id": "step-20",
+      "task_id": 12607
+    },
+    {
+      "action_id": "a0224",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12614
+      },
+      "seconds": 90.0,
+      "step_id": "step-20",
+      "task_id": 12614
+    },
+    {
+      "action_id": "a0247",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "kill_count": 6,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12580
+      },
+      "seconds": 90.0,
+      "step_id": "step-21",
+      "task_id": 12580
+    },
+    {
+      "action_id": "a0251",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 350.0,
+          "interaction_count": 10,
+          "item_id": 39063,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 10
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12579
+      },
+      "seconds": 350.0,
+      "step_id": "step-21",
+      "task_id": 12579
+    },
+    {
+      "action_id": "a0264",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "drop_rate": 0.1,
+          "drop_rate_npc_id": 28069,
+          "drop_rate_source": "pserver",
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 90.0,
+          "item_id": 39227,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 1
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12691
+      },
+      "seconds": 90.0,
+      "step_id": "step-22",
+      "task_id": 12691
+    },
+    {
       "basis": "background_covered_complete",
       "component": "objective_service",
       "seconds": 0.0,
@@ -928,8 +2155,16 @@
       "task_id": 12592
     }
   ],
-  "input_fingerprint": "58b7cb69f73566bdb8430e29d0fc28d3ab654ea25e57daff6b590d832cc7b0d8",
+  "input_fingerprint": "c8373f3392f63f36191bfc5f6464390332b0df29b934ee61960f37e4aa180251",
   "issues": [
+    {
+      "kind": "upstream_stage5_requirements",
+      "severity": "requirement"
+    },
+    {
+      "kind": "upstream_stage6_requirements",
+      "severity": "requirement"
+    },
     {
       "action_id": "transport-12521-sholazar",
       "edge_id": "visit-entry-dalaran->visit-entry-wildgrowth",
@@ -980,467 +2215,144 @@
         "a0271"
       ],
       "kind": "profile_exit_movement_timing_requires_program_context",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info"
+      "severity": "requirement"
     },
     {
       "action_id": "a0003",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-01",
       "task_id": 12521
     },
     {
       "action_id": "a0013",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-02",
       "task_id": 12522
     },
     {
-      "action_id": "a0018",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 12523
-    },
-    {
-      "action_id": "a0019",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 12524
-    },
-    {
-      "action_id": "a0020",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 12624
-    },
-    {
-      "action_id": "a0022",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-02",
-      "task_id": 12688
-    },
-    {
-      "action_id": "a0032",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-04",
-      "task_id": 12525
-    },
-    {
-      "action_id": "a0039",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-04",
-      "task_id": 12589
-    },
-    {
-      "action_id": "a0044",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 12549
-    },
-    {
-      "action_id": "a0046",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-05",
-      "task_id": 12520
-    },
-    {
-      "action_id": "a0059",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-06",
-      "task_id": 12804
-    },
-    {
-      "action_id": "a0060",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-06",
-      "task_id": 12592
-    },
-    {
       "action_id": "a0062",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-06",
       "task_id": 12543
     },
     {
-      "action_id": "a0063",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-06",
-      "task_id": 12551
-    },
-    {
-      "action_id": "a0064",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-06",
-      "task_id": 12634
-    },
-    {
-      "action_id": "a0073",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-07",
-      "task_id": 12644
-    },
-    {
-      "action_id": "a0076",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-07",
-      "task_id": 12645
-    },
-    {
-      "action_id": "a0077",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-07",
-      "task_id": 12645
-    },
-    {
-      "action_id": "a0081",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-08",
-      "task_id": 12544
-    },
-    {
-      "action_id": "a0086",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-08",
-      "task_id": 12550
-    },
-    {
       "action_id": "a0088",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-09",
       "task_id": 12556
     },
     {
-      "action_id": "a0090",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-09",
-      "task_id": 12560
-    },
-    {
-      "action_id": "a0093",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-09",
-      "task_id": 12645
-    },
-    {
-      "action_id": "a0098",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-10",
-      "task_id": 12699
-    },
-    {
-      "action_id": "a0102",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-10",
-      "task_id": 12671
-    },
-    {
       "action_id": "a0105",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-10",
       "task_id": 12654
     },
     {
-      "action_id": "a0116",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-11",
-      "task_id": 12569
-    },
-    {
-      "action_id": "a0125",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-13",
-      "task_id": 12529
-    },
-    {
       "action_id": "a0126",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 12530
     },
     {
-      "action_id": "a0133",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-13",
-      "task_id": 12533
-    },
-    {
       "action_id": "a0134",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-13",
       "task_id": 12534
     },
     {
-      "action_id": "a0139",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-14",
-      "task_id": 12532
-    },
-    {
       "action_id": "a0144",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-14",
       "task_id": 12531
     },
     {
       "action_id": "a0145",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-14",
       "task_id": 12535
     },
     {
       "action_id": "a0151",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-15",
       "task_id": 12536
     },
     {
-      "action_id": "a0157",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-15",
-      "task_id": 12537
-    },
-    {
-      "action_id": "a0158",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-15",
-      "task_id": 12538
-    },
-    {
       "action_id": "a0164",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-15",
       "task_id": 12558
     },
     {
-      "action_id": "a0177",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-17",
-      "task_id": 12570
-    },
-    {
-      "action_id": "a0183",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-17",
-      "task_id": 12571
-    },
-    {
       "action_id": "a0184",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-17",
       "task_id": 12572
     },
     {
-      "action_id": "a0190",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-17",
-      "task_id": 12573
-    },
-    {
-      "action_id": "a0207",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-19",
-      "task_id": 12603
-    },
-    {
       "action_id": "a0208",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-19",
       "task_id": 12605
     },
     {
-      "action_id": "a0210",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-19",
-      "task_id": 12575
-    },
-    {
-      "action_id": "a0211",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-19",
-      "task_id": 12576
-    },
-    {
-      "action_id": "a0219",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-20",
-      "task_id": 12607
-    },
-    {
-      "action_id": "a0224",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-20",
-      "task_id": 12614
-    },
-    {
       "action_id": "a0226",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 12658
     },
     {
       "action_id": "a0227",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 12681
     },
     {
       "action_id": "a0233",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-20",
       "task_id": 12683
     },
     {
-      "action_id": "a0247",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 12580
-    },
-    {
-      "action_id": "a0251",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 12579
-    },
-    {
       "action_id": "a0256",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
+      "kind": "timing_fivebox_mechanism_pending",
+      "severity": "requirement",
       "step_id": "step-21",
       "task_id": 12581
     },
     {
-      "action_id": "a0264",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-22",
-      "task_id": 12691
+      "kind": "timing_point_estimate_incomplete",
+      "scope": "profile",
+      "severity": "requirement"
     }
   ],
-  "known_seconds": 16054.001,
+  "known_seconds": 11320.583,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": true,
+  "point_estimate_complete": false,
   "profile_id": "sholazar-fivebox",
-  "range_basis": {
-    "basis": "sum_of_step_ranges",
-    "legacy_baseline_steps": 23
-  },
-  "range_minutes": [
-    213.0,
-    320.467
-  ],
-  "status": "pass",
+  "range_basis": null,
+  "range_minutes": null,
+  "status": "requirements",
   "steps": [
     {
-      "center_minutes": 4.767,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 150.401,
@@ -1449,44 +2361,30 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 286.001,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 0.0,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        3.0,
-        4.767
-      ],
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-01",
       "title": "入图 → 奈辛瓦里初始化",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
-      "center_minutes": 19.4,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 106.8,
         "move_seconds": 81.775,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 911.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1164.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 975.425,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        14.6,
-        24.3
-      ],
+      "known_seconds": 1099.575,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-02",
       "title": "飞行器引擎 → 挖掘场第一圈",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": 3.0,
@@ -1519,7 +2417,7 @@
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 47.06,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 120.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -1527,7 +2425,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 147.34,
+        "residual_seconds": 27.34,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1544,7 +2442,7 @@
       "components": {
         "accept_turnin_seconds": 106.2,
         "move_seconds": 27.614,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 450.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -1552,7 +2450,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 478.186,
+        "residual_seconds": 28.186,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1564,45 +2462,38 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 21.4,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 58.2,
         "move_seconds": 64.375,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 799.674,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1284.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1161.425,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        16.0,
-        26.7
-      ],
+      "known_seconds": 922.249,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-06",
       "title": "索乌拉姆 → 肉排 / 祭品 / 鳄鱼 / 酿酒",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
-      "center_minutes": 3.6,
+      "center_minutes": 4.013,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 115.8,
         "move_seconds": 0.0,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 125.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 216.0,
+      "known_seconds": 240.8,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 100.2,
+        "residual_seconds": 0.0,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1614,20 +2505,20 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 5.2,
+      "center_minutes": 6.113,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 55.405,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 195.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 312.0,
+      "known_seconds": 366.805,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 140.195,
+        "residual_seconds": 0.0,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1639,54 +2530,40 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 8.1,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 76.207,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 220.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 486.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 341.993,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        6.6,
-        9.5
-      ],
+      "known_seconds": 364.007,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-09",
       "title": "终极犀牛 / 鳄鱼计划 → 河流之心",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
-      "center_minutes": 5.1,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 32.84,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 35.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 306.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 156.76,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        4.2,
-        6.0
-      ],
+      "known_seconds": 184.24,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-10",
       "title": "尴尬的处境 → 侦察飞行 → 匹奇",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": 4.7,
@@ -1694,7 +2571,7 @@
       "components": {
         "accept_turnin_seconds": 96.6,
         "move_seconds": 42.397,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 90.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -1702,7 +2579,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 143.003,
+        "residual_seconds": 53.003,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
       },
       "range_minutes": [
@@ -1739,79 +2616,58 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 14.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 59.317,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 435.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 840.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 645.083,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        11.5,
-        16.5
-      ],
+      "known_seconds": 629.917,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-13",
       "title": "狂心岭第一圈：猩猩 → 蓝玉虫巢",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
-      "center_minutes": 16.5,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 67.877,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 360.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 990.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 757.723,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        12.4,
-        20.7
-      ],
+      "known_seconds": 592.277,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-14",
       "title": "狂心岭第二圈：抓鸡 → 南部任务",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
-      "center_minutes": 15.7,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 135.6,
         "move_seconds": 90.466,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 503.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 942.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 715.934,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        11.7,
-        19.6
-      ],
+      "known_seconds": 729.066,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-15",
       "title": "颠簸航行 → 雾语村 → 杉苟",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 5
     },
     {
       "center_minutes": 4.7,
@@ -1839,29 +2695,22 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 12.2,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 193.8,
         "move_seconds": 45.371,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 255.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 732.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 492.829,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        10.0,
-        14.4
-      ],
+      "known_seconds": 494.171,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-17",
       "title": "受伤神谕者 → 雨声树屋 → 议和",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": 4.8,
@@ -1889,79 +2738,58 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 21.1,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 164.4,
         "move_seconds": 54.142,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 540.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1266.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1047.458,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        15.9,
-        26.4
-      ],
+      "known_seconds": 758.542,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-19",
       "title": "多里安 → 燃烧林地 / 矛生营地",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
-      "center_minutes": 35.0,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 203.4,
         "move_seconds": 140.677,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 180.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 2100.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1755.923,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        29.8,
-        40.2
-      ],
+      "known_seconds": 524.077,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-20",
       "title": "猛犸 → 母龙 / 大鹏 → 燃烧的唾液",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 6
     },
     {
-      "center_minutes": 31.4,
-      "complete": true,
+      "center_minutes": null,
+      "complete": false,
       "components": {
         "accept_turnin_seconds": 310.2,
         "move_seconds": 132.658,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 440.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1884.0,
-      "point_estimate_complete": true,
-      "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 1441.142,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
-      },
-      "range_minutes": [
-        25.7,
-        37.0
-      ],
+      "known_seconds": 882.858,
+      "point_estimate_complete": false,
+      "range_basis": null,
+      "range_minutes": null,
       "step_id": "step-21",
       "title": "回家喽 → 苔行村 → 英雄的负担",
-      "unresolved_component_count": 0
+      "unresolved_component_count": 4
     },
     {
       "center_minutes": 14.3,
@@ -1969,7 +2797,7 @@
       "components": {
         "accept_turnin_seconds": 145.8,
         "move_seconds": 81.003,
-        "objective_service_seconds": 0.0,
+        "objective_service_seconds": 90.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
@@ -1977,7 +2805,7 @@
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 631.197,
+        "residual_seconds": 541.197,
         "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/sholazar-fivebox-timing.json"
       },
       "range_minutes": [
@@ -2016,9 +2844,9 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 61,
-    "range_model_status": "resolved",
-    "requirement_count": 0,
+    "issue_count": 26,
+    "range_model_status": "requirements",
+    "requirement_count": 21,
     "step_count": 23
   }
 }

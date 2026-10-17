@@ -2,12 +2,2957 @@
   "schema_version": 1,
   "config_id": "route-timing-task-parameters-v1",
   "tasks": {
+    "10813": {
+      "inputs": {
+        "fixed_service_seconds": 250.0
+      },
+      "source_refs": [
+        "user_live:2026-09-15 task 10813 格里洛克之眼：第二组按五号分别执行；用户查得眼睛刷新约45秒。2026-10-17决定按not_shared纳入Timing：4次额外刷新等待×45秒 + 5次捕获交互×7秒 + 5次熔锅交互×7秒 = 250秒；不含路线移动。"
+      ],
+      "provisional_range_minutes": [
+        3.5,
+        6.0
+      ]
+    },
+    "9374": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "user_live:2026-09-17 task 9374 埃雷利恩的日记：阿苟纳之池固定任务物由五号依次交互取得；每个objective action只含一个固定来源。"
+      ]
+    },
+    "9785": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "user_live:2026-09-17/18 task 9785 古树的祝福共享；Profile分别用两个objective action表示埃西恩与克勒斯，因此每个action按1次共享交互计价。"
+      ]
+    },
+    "9747": {
+      "inputs": {
+        "kill_count": 21
+      },
+      "source_refs": [
+        "Task Card task 9747 暗泽部族：卡塔鲁1 + 暗泽先知8 + 暗泽巫医6 + 暗泽神谕者6；五开实测共享，总击杀目标21。"
+      ]
+    },
+    "9752": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/sources/video-extraction/episode-29-extraction.md：约34分钟开始《逃离暗泽村》护送，约37:50—38:00护送目标完成；2026-09-17/18五开实测确认共享、五号只跑一次护送。取4分钟任务脚本服务，不含接交Hub成本。"
+      ],
+      "provisional_range_minutes": [
+        3.5,
+        4.5
+      ]
+    },
+    "9718": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/sources/video-extraction/episode-30-extraction.md：约07:48接《乌鸦的飞翔》、约10:08交；2026-10-17五开实测确认不共享、五号分别使用护符。扣除Hub/切号余量后先以120秒脚本服务作为provisional中心。"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        3.0
+      ]
+    },
+    "10208": {
+      "inputs": {
+        "fixed_service_seconds": 420.0
+      },
+      "source_refs": [
+        "user_live:task 10208 阻断援军为混合机制：五号分别收集8枚恶魔符文石，两座传送门炸毁进度共享。Questie WotLK恶魔符文石28513不同怪源掉率约30.312%—79.3103%，不能选单一掉率套个人掉落公式。",
+        "data/sources/video-extraction/episode-26-events.json：同机制联盟任务10144单号目标窗口约23:30—28:40=310秒；五开增加逐号拾取/核对后，provisional中心取420秒。"
+      ],
+      "provisional_range_minutes": [
+        5.0,
+        9.0
+      ]
+    },
+    "10129": {
+      "inputs": {
+        "fixed_service_seconds": 85.0
+      },
+      "source_refs": [
+        "user_live:task 10129 穆尔凯斯和沙德拉兹之门在队伍距离足够近时轰炸进度共享，只需一轮任务飞行。",
+        "data/sources/video-extraction/episode-26-events.json：同机制联盟任务10146目标窗口29:10—30:35=85秒。"
+      ],
+      "provisional_range_minutes": [
+        1.2,
+        1.8
+      ]
+    },
+    "10809": {
+      "inputs": {
+        "kill_count": 1
+      },
+      "source_refs": [
+        "Task Card task 10809 通缉：座狼主宰卡鲁什已确认共享；任务目标为单一命名Boss，按一次共享击杀计。"
+      ]
+    },
+    "10792": {
+      "inputs": {
+        "fixed_service_seconds": 60.0
+      },
+      "source_refs": [
+        "Task Card task 10792 燃烧吧，塞斯高！：共享完成，四处建筑投掷点火；用60秒作为任务内取火/点燃/四次投掷的provisional服务，不含路线移动。"
+      ],
+      "provisional_range_minutes": [0.8, 1.8]
+    },
+    "10238": {
+      "inputs": {
+        "interaction_count": 3
+      },
+      "source_refs": [
+        "Task Card task 10238 如何为地精效力：救出曼尼、莫恩、雅克三名目标；fivebox共享，按3次共享固定交互计。"
+      ]
+    },
+    "10390": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "user_live:task 10390 铸魔营地：暴虐：10个甘尔葛仆从共享击杀 + 剃刀电锯击杀一次 + 五号依次拾取徽记；按10×15 + 15 + 5×9 = 210秒，不含路线移动。"
+      ],
+      "provisional_range_minutes": [2.5, 4.5]
+    },
+    "10392": {
+      "inputs": {
+        "fixed_service_seconds": 67.0
+      },
+      "source_refs": [
+        "user_live:task 10392 深渊之门：阿利萨玛尔击杀一次，五号依次拾取钥匙，再共享完成怨恨符文；按15 + 5×9 + 7 = 67秒。"
+      ],
+      "provisional_range_minutes": [0.9, 1.5]
+    },
+    "9410": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 9410 灵魂的指引：不共享，五号分别召唤各自狼魂后可一起跟随；provisional中心取120秒任务脚本服务，不含普通路线移动。"
+      ],
+      "provisional_range_minutes": [1.5, 3.0]
+    },
+    "10368": {
+      "inputs": {
+        "interaction_count": 3
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 10368 残冠长者：抚风者莫洛德、召火者阿库鲁、唤水者埃伊兰三名NPC解救进度共享，按3次共享交互计。"
+      ]
+    },
+    "9472": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "user_live:task 9472 埃雷利恩的恋人共享；前置塞纳里奥烈酒已作为路线前置准备，任务内仅诱离薇拉并使用卷轴，provisional服务取30秒。"
+      ],
+      "provisional_range_minutes": [0.3, 0.8]
+    },
+    "9370": {
+      "inputs": {
+        "fixed_service_seconds": 22.0
+      },
+      "source_refs": [
+        "Task Card task 9370 阻止净化：共享，一次信号宝石交互 + 一次召唤怪击杀；按7秒交互 + 15秒击杀 = 22秒。"
+      ],
+      "provisional_range_minutes": [0.25, 0.6]
+    },
+    "9391": {
+      "inputs": {
+        "interaction_count": 3
+      },
+      "source_refs": [
+        "Task Card task 9391 点燃灯塔：南部/西部/中部三处灯塔，fivebox共享，按3次共享固定交互计。"
+      ]
+    },
+    "10351": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "Task Card task 10351 自然的治愈：fivebox共享，在缚地者法阵一次使用新生之种，按1次共享固定交互计。"
+      ]
+    },
+    "9720": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 9720 恢复平衡共享；Profile用4个objective action分别表示四座蒸汽泵，因此每个action按1次共享交互计。"
+      ]
+    },
+    "9816": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 9816 你见过鱼人吗？共享；在平坦岩石放置鱼人笼，按1次共享固定交互计。"
+      ]
+    },
+    "9823": {
+      "inputs": {
+        "kill_count": 21
+      },
+      "source_refs": [
+        "Task Card task 9823 你死我活：戈尔费斯大王1 + 安葛洛什殴斗者10 + 安葛洛什食魂者10；fivebox共享，总击杀目标21。"
+      ]
+    },
+    "11637": {
+      "inputs": {
+        "fixed_service_seconds": 95.0
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 11637 卡加尼舒：击杀一次 + 五号依次拾取神像 + 五号依次对先知残骸使用；15秒击杀 + 5×9秒拾取 + 5×7秒交互 = 95秒，不含路线移动。"
+      ],
+      "provisional_range_minutes": [
+        1.2,
+        2.2
+      ]
+    },
+    "11640": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 11640 力量之语：三名高阶祭司各击杀一次，每具尸体五号依次拾取对应卷轴；3×15秒击杀 + 3×5×9秒拾取 = 180秒，不含路线移动。"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        4.0
+      ]
+    },
+    "11909": {
+      "inputs": {
+        "fixed_service_seconds": 67.0
+      },
+      "source_refs": [
+        "user_live:2026-10-17 task 11909 击败机甲专家：手册交互一次，Boss场上存在时不会重复召唤；击杀一次后五号依次拾取。按7秒交互 + 15秒击杀 + 5×9秒拾取 = 67秒，不含路线移动。"
+      ],
+      "provisional_range_minutes": [
+        0.9,
+        1.6
+      ]
+    },
+    "11931": {
+      "inputs": {
+        "fixed_service_seconds": 336.0
+      },
+      "source_refs": [
+        "docs/archive/analysis/2026-08-18-borean-p2a-formal-removal-impact.md：历史路线影响估计约5.63分钟，其中约0.03分钟为几何移动；Timing intrinsic service暂取5.60分钟=336秒。",
+        "Questie 11.34.0 WotLK drop table：Azure Codex 35628 from 25720 = 71.5252%；Shimmering Rune 35629 from 25719 = 29.2977%。2026-10-17用户确认碧蓝书典依次拾取、闪烁符文不共享。"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        8.0
+      ]
+    },
     "11999": {
       "inputs": {
         "drop_rate": 0.1
       },
       "source_refs": [
         "user_live:2026-10-12 task 11999 寻找线索：单号通常约15个法师猎手尸体内能出，运气好约5个以内；按当前样本暂定10%有效掉率用于Timing校准"
+      ]
+    },
+    "12820": {
+      "inputs": {
+        "fixed_service_seconds": 270.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12820; basis=manual_pre_route:user_live_shared_progress_twelve_kills_once_for_group"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        7.0
+      ]
+    },
+    "12828": {
+      "inputs": {
+        "fixed_service_seconds": 270.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12828; basis=manual_pre_route:user_live_one_mammoth_drops_many_ground_loot_progress_not_shared_pickup_not_character_bound"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        8.0
+      ]
+    },
+    "12829": {
+      "inputs": {
+        "fixed_service_seconds": 504.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12829; basis=mixed_objective_model"
+      ]
+    },
+    "12843": {
+      "inputs": {
+        "fixed_service_seconds": 330.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12843; basis=manual_pre_route:user_live_shared_rescue_progress_five_keys_total"
+      ],
+      "provisional_range_minutes": [
+        3.5,
+        9.0
+      ]
+    },
+    "12844": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12844; basis=manual_pre_route:user_live_not_shared_two_fast_respawn_equipment_points_ground_and_basement"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        8.0
+      ]
+    },
+    "12969": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12969; basis=single_target_model"
+      ]
+    },
+    "12968": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12968; basis=single_target_model"
+      ]
+    },
+    "12989": {
+      "inputs": {
+        "fixed_service_seconds": 323.99999999999994
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12989; basis=mixed_objective_model"
+      ]
+    },
+    "12996": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12996; basis=single_target_model"
+      ]
+    },
+    "13055": {
+      "inputs": {
+        "fixed_service_seconds": 544.2
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13055; basis=mixed_personal_item_model"
+      ]
+    },
+    "13056": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13056; basis=single_target_model"
+      ]
+    },
+    "12985": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12985; basis=manual_pre_route:diamond_pick_dead_iron_giants_eight_eyes_fivebox_phased"
+      ],
+      "provisional_range_minutes": [
+        9.0,
+        24.0
+      ]
+    },
+    "12987": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "data/observations/fivebox-task-types.json#tasks.12987; legacy_type=quest_item_use_personal_confirmed"
+      ]
+    },
+    "13001": {
+      "inputs": {
+        "fixed_service_seconds": 429.09060918431106
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13001; basis=mixed_personal_item_model"
+      ]
+    },
+    "13011": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13011; basis=single_target_model"
+      ]
+    },
+    "13035": {
+      "inputs": {
+        "kill_count": 3
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13035; three named lieutenant kill objectives"
+      ]
+    },
+    "13047": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13047; basis=single_target_model"
+      ]
+    },
+    "12965": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12965; basis=manual_pre_route:three_fixed_loken_artifacts_click_destroy_fivebox"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        6.0
+      ]
+    },
+    "12978": {
+      "inputs": {
+        "fixed_service_seconds": 431.99999999999994
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12978; basis=mixed_objective_model"
+      ]
+    },
+    "12979": {
+      "inputs": {
+        "fixed_service_seconds": 273.4587011926903
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12979; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "12980": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "data/observations/fivebox-task-types.json#tasks.12980; legacy_type=npc_interaction_group_shared_confirmed"
+      ]
+    },
+    "12819": {
+      "inputs": {
+        "fixed_service_seconds": 270.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12819; basis=manual_pre_route:user_live_safe_ground_route_continuous_pickups_single_pass"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        7.0
+      ]
+    },
+    "12836": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12836; basis=single_target_model"
+      ]
+    },
+    "12827": {
+      "inputs": {
+        "fixed_service_seconds": 420.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12827; basis=manual_pre_route:user_live_three_camps_crates_plus_mob_gap_fill_refresh_not_fast"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        12.0
+      ]
+    },
+    "12821": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12821; basis=manual_pre_route:power_cell_then_garm_teleporter_auto_return_fivebox"
+      ],
+      "provisional_range_minutes": [
+        5.0,
+        13.0
+      ]
+    },
+    "12822": {
+      "inputs": {
+        "fixed_service_seconds": 576.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12822; basis=mixed_objective_model"
+      ]
+    },
+    "12823": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12823; basis=manual_pre_route:place_explosives_at_frostgut_altar_then_escape_collapse"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        7.0
+      ]
+    },
+    "12841": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12841; basis=single_target_model"
+      ]
+    },
+    "12907": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12907; basis=single_target_model"
+      ]
+    },
+    "12856": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12856; basis=shared_kill_model"
+      ]
+    },
+    "12915": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12915; basis=manual_pre_route:earth_charm_granite_helpers_plus_fjorn_and_five_giants"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        10.0
+      ]
+    },
+    "13051": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13051; basis=single_target_model"
+      ]
+    },
+    "13034": {
+      "inputs": {
+        "interaction_count": 3
+      },
+      "source_refs": [
+        "2026-10-17 user live: 13034《见证者与英雄》共享；三个历史卷轴只由主控交互一次"
+      ]
+    },
+    "12910": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12910; basis=manual_pre_route:mount_frostbite_scent_track_then_recover_use_communicator"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        7.0
+      ]
+    },
+    "12926": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12926; basis=manual_pre_route:six_inventor_disk_fragments_per_character_then_combine_and_brann_communicator"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        20.0
+      ]
+    },
+    "12882": {
+      "inputs": {
+        "fixed_service_seconds": 608.7975155039879
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12882; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "12928": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12928; basis=single_target_model"
+      ]
+    },
+    "13273": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13273; basis=manual_pre_route:two_fixed_brann_camp_documents_fivebox"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        5.0
+      ]
+    },
+    "13274": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13274; basis=single_target_model"
+      ]
+    },
+    "13285": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13285; basis=single_target_model"
+      ]
+    },
+    "12930": {
+      "inputs": {
+        "fixed_service_seconds": 1080.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12930; basis=manual_pre_route:user_live_fivebox_35_enchanted_earth_pickups_vertical_cliff_repeated_altitude_search_frostweave_preowned"
+      ],
+      "provisional_range_minutes": [
+        12.0,
+        25.0
+      ]
+    },
+    "12931": {
+      "inputs": {
+        "fixed_service_seconds": 396.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12931; basis=mixed_objective_model"
+      ]
+    },
+    "12988": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12988; basis=manual_pre_route:bomb_three_fixed_lightning_forges"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        5.0
+      ]
+    },
+    "12993": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=12993; basis=manual_pre_route:two_fixed_colossus_spec_documents_fivebox"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        4.5
+      ]
+    },
+    "13037": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13037; basis=single_target_model"
+      ]
+    },
+    "13049": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/storm-peaks-task-foundation.json#task_id=13049; basis=manual_pre_route:two_random_scion_of_storm_drops_per_character_cave"
+      ],
+      "provisional_range_minutes": [
+        8.0,
+        25.0
+      ]
+    },
+    "12983": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "2026-10-17 user live: 12983《最后的母熊》五号依次交互解救母熊"
+      ]
+    },
+    "13064": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "2026-10-17 user live: 13064《骨肉相残》五号依次与托里姆交互/听故事"
+      ]
+    },
+    "13010": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "2026-10-17 user live: 13010《科洛米尔，风暴之锤》五号依次完成约库姆对话/脚本交互"
+      ]
+    },
+    "11598": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11598; basis=mixed_objective_model"
+      ]
+    },
+    "11608": {
+      "inputs": {
+        "fixed_service_seconds": 60.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11608; basis=shared_kill_model"
+      ]
+    },
+    "11655": {
+      "inputs": {
+        "fixed_service_seconds": 499.20000000000005
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11655; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11661": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11661; basis=single_target_model"
+      ]
+    },
+    "11652": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11652; basis=special_service_override"
+      ]
+    },
+    "11619": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11619; basis=single_target_model"
+      ]
+    },
+    "11626": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11626; basis=single_target_model"
+      ]
+    },
+    "11705": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11705; basis=single_target_model"
+      ]
+    },
+    "11717": {
+      "inputs": {
+        "fixed_service_seconds": 331.2
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11717; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11884": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11884; basis=shared_kill_model"
+      ]
+    },
+    "11878": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11878; basis=single_target_model"
+      ]
+    },
+    "11605": {
+      "inputs": {
+        "fixed_service_seconds": 21.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11605; basis=special_service_override"
+      ]
+    },
+    "11617": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11617; basis=shared_kill_model"
+      ]
+    },
+    "11623": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11623; basis=single_target_model"
+      ]
+    },
+    "11868": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11868; basis=single_target_model"
+      ]
+    },
+    "11871": {
+      "inputs": {
+        "fixed_service_seconds": 717.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11871; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11866": {
+      "inputs": {
+        "fixed_service_seconds": 877.8000000000001
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11866; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11872": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11872; basis=single_target_model"
+      ]
+    },
+    "11892": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11892; basis=single_target_model"
+      ]
+    },
+    "11968": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11968; basis=single_target_model"
+      ]
+    },
+    "11684": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11684; basis=shared_kill_model"
+      ]
+    },
+    "11887": {
+      "inputs": {
+        "fixed_service_seconds": 244.8
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11887; basis=special_service_override"
+      ]
+    },
+    "11881": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11881; basis=single_target_model"
+      ]
+    },
+    "11895": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11895; basis=single_target_model"
+      ]
+    },
+    "11896": {
+      "inputs": {
+        "fixed_service_seconds": 612.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11896; basis=mixed_objective_model"
+      ]
+    },
+    "11675": {
+      "inputs": {
+        "fixed_service_seconds": 396.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11675; basis=mixed_objective_model"
+      ]
+    },
+    "11683": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11683; basis=mixed_objective_model"
+      ]
+    },
+    "11687": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11687; basis=shared_kill_model"
+      ]
+    },
+    "11894": {
+      "inputs": {
+        "fixed_service_seconds": 505.79999999999995
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11894; basis=special_service_override"
+      ]
+    },
+    "11907": {
+      "inputs": {
+        "fixed_service_seconds": 60.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11907; basis=shared_kill_model"
+      ]
+    },
+    "11633": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11633; basis=shared_kill_model"
+      ]
+    },
+    "11706": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11706; basis=shared_kill_model"
+      ]
+    },
+    "11647": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11647; basis=shared_kill_model"
+      ]
+    },
+    "11898": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11898; basis=shared_kill_model"
+      ]
+    },
+    "11587": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11587; basis=special_service_override"
+      ]
+    },
+    "11576": {
+      "inputs": {
+        "fixed_service_seconds": 48.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11576; basis=special_service_override"
+      ]
+    },
+    "11582": {
+      "inputs": {
+        "fixed_service_seconds": 48.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11582; basis=special_service_override"
+      ]
+    },
+    "11648": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11648; basis=special_service_override"
+      ]
+    },
+    "11671": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11671; basis=special_service_override"
+      ]
+    },
+    "11910": {
+      "inputs": {
+        "fixed_service_seconds": 429.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11910; basis=mixed_personal_item_model"
+      ]
+    },
+    "11943": {
+      "inputs": {
+        "fixed_service_seconds": 48.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11943; basis=special_service_override"
+      ]
+    },
+    "11969": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11969; basis=special_service_override"
+      ]
+    },
+    "11593": {
+      "inputs": {
+        "fixed_service_seconds": 70.19999999999999
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11593; basis=task_specific_corpse_use_observation_aware"
+      ]
+    },
+    "11594": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11594; basis=task_specific_mixed_override"
+      ]
+    },
+    "11627": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11627; basis=shared_kill_model"
+      ]
+    },
+    "11571": {
+      "inputs": {
+        "fixed_service_seconds": 72.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11571; basis=special_service_override"
+      ]
+    },
+    "11559": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11559; basis=special_service_override"
+      ]
+    },
+    "11561": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11561; basis=task_specific_mixed_override"
+      ]
+    },
+    "11564": {
+      "inputs": {
+        "fixed_service_seconds": 444.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11564; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "12728": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=12728; basis=single_target_model"
+      ]
+    },
+    "11631": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11631; basis=special_service_override"
+      ]
+    },
+    "13040": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13040; basis=manual_pre_route:public_wotlk_five_account_benchmark_fifty_venom_sacs_near_guaranteed_drop"
+      ],
+      "provisional_range_minutes": [
+        12.0,
+        20.0
+      ]
+    },
+    "13008": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13008; basis=manual_pre_route:release_eight_webbed_crusaders_along_existing_venom_kill_path_fivebox_interaction_unresolved"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        12.0
+      ]
+    },
+    "13039": {
+      "inputs": {
+        "fixed_service_seconds": 684.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13039; basis=mixed_objective_model"
+      ]
+    },
+    "13045": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13045; basis=manual_pre_route:three_skytalon_rescue_roundtrips_per_character_one_crusader_per_trip"
+      ],
+      "provisional_range_minutes": [
+        10.0,
+        20.0
+      ]
+    },
+    "13086": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13086; basis=manual_pre_route:argent_cannon_one_hundred_attackers_three_destroyers_public_single_character_under_five_minutes_fivebox_credit_unresolved"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        30.0
+      ]
+    },
+    "13110": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13110; basis=manual_pre_route:holy_water_on_ten_resurrected_crusader_corpses_same_corpse_fivebox_reuse_unresolved"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        18.0
+      ]
+    },
+    "13125": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13125; basis=shared_kill_model"
+      ]
+    },
+    "13130": {
+      "inputs": {
+        "fixed_service_seconds": 1217.5950310079759
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13130; basis=mixed_personal_item_model"
+      ]
+    },
+    "13135": {
+      "inputs": {
+        "fixed_service_seconds": 499.20000000000005
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13135; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "13141": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13141; basis=manual_pre_route:crusaders_pinnacle_flag_defense_event_public_nearby_credit_evidence_fivebox_consistency_unresolved"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        20.0
+      ]
+    },
+    "12892": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12892; basis=manual_pre_route:single_eye_destruction_event_public_hotfix_range_credit_likely_shared_live_consistency_check"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        10.0
+      ]
+    },
+    "12891": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12891; basis=manual_pre_route:three_named_components_plus_five_scourge_essences_near_shadow_vault_public_comments_most_components_high_drop_fivebox_loot_unresolved"
+      ],
+      "provisional_range_minutes": [
+        5.0,
+        15.0
+      ]
+    },
+    "12893": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12893; basis=manual_pre_route:three_named_kills_shared_plus_domination_wand_corpse_interactions_fivebox_reuse_unresolved"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        9.0
+      ]
+    },
+    "12897": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12897; basis=single_target_model"
+      ]
+    },
+    "12939": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12939; basis=manual_pre_route:six_banner_challenge_events_credit_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        15.0
+      ]
+    },
+    "12955": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12955; basis=manual_pre_route:four_named_competitor_dialogue_duels_kill_credit_likely_shared_trigger_unresolved"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        12.0
+      ]
+    },
+    "12943": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12943; basis=manual_pre_route:pronounce_judgment_event_then_single_ufrang_kill_trigger_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        10.0
+      ]
+    },
+    "12949": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12949; basis=manual_pre_route:single_named_kill_key_acquisition_fivebox_loot_credit_unresolved"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        8.0
+      ]
+    },
+    "13042": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13042; basis=shared_kill_model"
+      ]
+    },
+    "13043": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13043; basis=manual_pre_route:control_nergeld_vehicle_script_defend_and_defeat_doctor_fivebox_event_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        20.0
+      ]
+    },
+    "12992": {
+      "inputs": {
+        "fixed_service_seconds": 972.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12992; basis=mixed_objective_model"
+      ]
+    },
+    "12982": {
+      "inputs": {
+        "fixed_service_seconds": 396.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12982; basis=mixed_objective_model"
+      ]
+    },
+    "13091": {
+      "inputs": {
+        "fixed_service_seconds": 420.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13091; basis=manual_pre_route:control_water_terror_vehicle_kill_ten_vrykul_fivebox_credit_unresolved"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        15.0
+      ]
+    },
+    "13059": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13059; basis=manual_pre_route:use_bethod_sword_issue_challenge_then_single_thane_illskar_boss_event_fivebox_event_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        15.0
+      ]
+    },
+    "13121": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13121; basis=manual_pre_route:fixed_lich_king_eye_interaction_event_fivebox_personal_expected"
+      ],
+      "provisional_range_minutes": [
+        1.0,
+        6.0
+      ]
+    },
+    "13133": {
+      "inputs": {
+        "fixed_service_seconds": 600.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13133; basis=manual_pre_route:wake_control_iskalder_and_ground_follow_back_to_bone_witch_fivebox_control_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        22.0
+      ]
+    },
+    "13137": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13137; basis=manual_pre_route:signal_flare_summon_possessed_iskalder_single_kill_trigger_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        8.0
+      ]
+    },
+    "13142": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13142; basis=single_target_model"
+      ]
+    },
+    "12810": {
+      "inputs": {
+        "fixed_service_seconds": 420.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12810; basis=manual_pre_route:ten_shark_blood_pool_uses_per_character_kills_shared_interactions_personal"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        12.0
+      ]
+    },
+    "12814": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12814; basis=mixed_objective_model"
+      ]
+    },
+    "12847": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12847; basis=manual_pre_route:archbishop_landgren_kill_single_gate_per_kill_interrogation_script_fivebox_gate_credit_unresolved"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        20.0
+      ]
+    },
+    "12852": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12852; basis=single_target_model"
+      ]
+    },
+    "13119": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13119; basis=manual_pre_route:kill_summoning_master_then_staff_destroy_four_altars_personal_interactions"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        9.0
+      ]
+    },
+    "13120": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13120; basis=manual_pre_route:three_fixed_deaths_gaze_orb_stands_each_five_second_use_short_fleshwerks_local_move_fivebox_interaction_unresolved"
+      ],
+      "provisional_range_minutes": [
+        1.5,
+        4.5
+      ]
+    },
+    "13134": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13134; basis=mixed_objective_model"
+      ]
+    },
+    "13136": {
+      "inputs": {
+        "fixed_service_seconds": 608.7975155039879
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13136; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "13138": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13138; basis=manual_pre_route:use_bag_of_jagged_shards_at_bottom_malykriss_furnace_single_fixed_interaction_per_required_character"
+      ],
+      "provisional_range_minutes": [
+        0.8,
+        3.0
+      ]
+    },
+    "13239": {
+      "inputs": {
+        "fixed_service_seconds": 144.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13239; basis=mixed_objective_model"
+      ]
+    },
+    "13262": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13262; basis=manual_pre_route:ignite_fixed_saronite_bomb_fuse_event_fivebox_trigger_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        0.8,
+        4.0
+      ]
+    },
+    "13264": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13264; basis=manual_pre_route:revived_abomination_three_target_types_fifteen_each_credit_requires_nearby_tagging_fivebox_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        5.0,
+        30.0
+      ]
+    },
+    "13278": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13278; basis=single_target_model"
+      ]
+    },
+    "13305": {
+      "inputs": {
+        "fixed_service_seconds": 1200.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13305; basis=manual_pre_route:siege_vehicle_150_ghouls_20_mages_2_bone_giants_personal_expected_fivebox_credit_unresolved"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        40.0
+      ]
+    },
+    "13236": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13236; basis=manual_pre_route:scripted_one_hundred_ghoul_vision_at_first_legion_camp_not_literal_combat_service"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        8.0
+      ]
+    },
+    "13361": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13361; basis=manual_pre_route:personal_arthas_vs_illidan_scenario_five_characters"
+      ],
+      "provisional_range_minutes": [
+        8.0,
+        18.0
+      ]
+    },
+    "13152": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13152; basis=shared_kill_model"
+      ]
+    },
+    "13211": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13211; basis=manual_pre_route:burn_seven_dense_corpses_personal_torch_interactions_fast_respawn"
+      ],
+      "provisional_range_minutes": [
+        3.0,
+        10.0
+      ]
+    },
+    "13144": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13144; basis=manual_pre_route:carry_three_burning_skeletons_to_chained_abominations_event_credit_sharing_unresolved"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        12.0
+      ]
+    },
+    "13212": {
+      "inputs": {
+        "fixed_service_seconds": 840.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13212; basis=manual_pre_route:four_unique_olakin_body_parts_from_corpulent_horrors_random_drop_tail_fivebox_loot_unresolved"
+      ],
+      "provisional_range_minutes": [
+        8.0,
+        28.0
+      ]
+    },
+    "13220": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13220; basis=manual_pre_route:two_fixed_reassembly_items_then_resurrection_table_use_personal_interactions"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        7.0
+      ]
+    },
+    "13235": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13235; basis=single_target_model"
+      ]
+    },
+    "13364": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13364; basis=manual_pre_route:tirion_gambit_all_five_hooded_then_single_interaction_group_shared_confirmed"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        35.0
+      ]
+    },
+    "13074": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13074; basis=manual_pre_route:three_emerald_acorns_per_character_personal_dream_phase_fixed_pickups"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        7.0
+      ]
+    },
+    "13078": {
+      "inputs": {
+        "fixed_service_seconds": 420.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13078; basis=manual_pre_route:ruby_sanctum_guardian_fire_then_dahlia_tear_spawn_personal_pickup_fivebox_confirmed"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        15.0
+      ]
+    },
+    "13373": {
+      "inputs": {
+        "fixed_service_seconds": 1080.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13373; basis=manual_pre_route:infra_green_bomber_40_infantry_8_captains_15_gargoyles_personal_vehicle_expected_exit_rescue_shortcut"
+      ],
+      "provisional_range_minutes": [
+        8.0,
+        40.0
+      ]
+    },
+    "13354": {
+      "inputs": {
+        "fixed_service_seconds": 60.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13354; basis=shared_kill_model"
+      ]
+    },
+    "13355": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13355; basis=manual_pre_route:three_fixed_cauldron_separation_vial_uses_per_required_character"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        5.0
+      ]
+    },
+    "13356": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13356; basis=manual_pre_route:ten_tainted_essences_combine_writhing_mass_then_cauldron_use_personal_fivebox"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        20.0
+      ]
+    },
+    "13358": {
+      "inputs": {
+        "fixed_service_seconds": 600.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13358; basis=manual_pre_route:five_dark_matter_siphons_per_character_then_crystal_summon_corpse_reuse_unresolved"
+      ],
+      "provisional_range_minutes": [
+        5.0,
+        20.0
+      ]
+    },
+    "13366": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13366; basis=manual_pre_route:three_distinct_cultist_research_pages_per_character_then_combine_thesis_random_page_drop_fivebox_loot_unresolved"
+      ],
+      "provisional_range_minutes": [
+        6.0,
+        22.0
+      ]
+    },
+    "13367": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13367; basis=single_target_model"
+      ]
+    },
+    "13171": {
+      "inputs": {
+        "fixed_service_seconds": 600.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13171; basis=manual_pre_route:observer_vehicle_banish_ten_scourge_crystals_per_character_if_not_shared_short_respawn_loop"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        20.0
+      ]
+    },
+    "13172": {
+      "inputs": {
+        "fixed_service_seconds": 2916.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13172; basis=mixed_objective_model"
+      ]
+    },
+    "13174": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13174; basis=manual_pre_route:four_fixed_weeping_quarry_documents_known_coordinates_directly_after_seeds_of_chaos_drop_down"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        7.0
+      ]
+    },
+    "13313": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13313; basis=manual_pre_route:sgm3_shoot_down_six_skybreaker_recon_fighters_fivebox_credit_unresolved"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        12.0
+      ]
+    },
+    "13312": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13312; basis=single_target_model"
+      ]
+    },
+    "13329": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13329; basis=manual_pre_route:six_skeletal_reaver_kills_plus_volatile_acid_corpse_uses_fivebox_corpse_reuse_unresolved"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        18.0
+      ]
+    },
+    "13328": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13328; basis=manual_pre_route:three_fixed_corp_rethar_shards_split_across_two_battlement_levels_personal_interaction_fivebox_confirmed"
+      ],
+      "provisional_range_minutes": [
+        2.5,
+        7.0
+      ]
+    },
+    "13143": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13143; basis=manual_pre_route:public_nonshareable_light_stalker_weaken_emblem_control_and_escort_five_characters"
+      ],
+      "provisional_range_minutes": [
+        5.0,
+        12.0
+      ]
+    },
+    "13145": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13145; basis=manual_pre_route:light_stalker_vehicle_four_malykriss_scout_points_personal_expected_five_characters"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        18.0
+      ]
+    },
+    "13146": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13146; basis=manual_pre_route:light_stalker_drag_scourge_bomb_to_four_abominations_personal_vehicle_event"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        20.0
+      ]
+    },
+    "13147": {
+      "inputs": {
+        "fixed_service_seconds": 720.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13147; basis=manual_pre_route:light_stalker_throw_stones_start_five_fights_personal_vehicle_event"
+      ],
+      "provisional_range_minutes": [
+        7.0,
+        20.0
+      ]
+    },
+    "13160": {
+      "inputs": {
+        "fixed_service_seconds": 900.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13160; basis=manual_pre_route:light_stalker_vehicle_kill_twelve_sleeping_scouts_personal_expected_five_characters"
+      ],
+      "provisional_range_minutes": [
+        8.0,
+        25.0
+      ]
+    },
+    "13163": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13163; basis=single_target_model"
+      ]
+    },
+    "13162": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13162; basis=single_target_model"
+      ]
+    },
+    "13215": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13215; basis=single_target_model"
+      ]
+    },
+    "13216": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13216; basis=single_target_model"
+      ]
+    },
+    "13217": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13217; basis=single_target_model"
+      ]
+    },
+    "13218": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13218; basis=single_target_model"
+      ]
+    },
+    "13219": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13219; basis=single_target_model"
+      ]
+    },
+    "13161": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13161; basis=single_target_model"
+      ]
+    },
+    "13164": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13164; basis=single_target_model"
+      ]
+    },
+    "12524": {
+      "inputs": {
+        "fixed_service_seconds": 576.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12524; basis=mixed_objective_model"
+      ]
+    },
+    "12624": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12624; basis=single_target_model"
+      ]
+    },
+    "12525": {
+      "inputs": {
+        "fixed_service_seconds": 30.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12525; basis=shared_kill_model"
+      ]
+    },
+    "12589": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12589; basis=single_target_model"
+      ]
+    },
+    "12592": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12592; basis=manual_pre_route:user_confirmed_full_route_overlap_no_independent_farming"
+      ],
+      "provisional_range_minutes": [
+        0.0,
+        0.0
+      ]
+    },
+    "12634": {
+      "inputs": {
+        "fixed_service_seconds": 243.60000000000002
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12634; basis=mixed_personal_item_model"
+      ]
+    },
+    "12645": {
+      "inputs": {
+        "fixed_service_seconds": 45.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12645; basis=shared_kill_model"
+      ]
+    },
+    "12544": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12544; basis=single_target_model"
+      ]
+    },
+    "12532": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12532; basis=manual_pre_route:public_wotlk_mechanic_short_single_character_but_fivebox_capture_sharing_unverified"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        15.0
+      ]
+    },
+    "12538": {
+      "inputs": {
+        "fixed_service_seconds": 468.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12538; basis=mixed_objective_model"
+      ]
+    },
+    "12571": {
+      "inputs": {
+        "fixed_service_seconds": 165.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12571; basis=shared_kill_model"
+      ]
+    },
+    "12605": {
+      "inputs": {
+        "fixed_service_seconds": 480.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12605; basis=manual_pre_route:six_hatchling_interactions_from_eggs_fivebox_pickup_sharing_unverified"
+      ],
+      "provisional_range_minutes": [
+        4.0,
+        18.0
+      ]
+    },
+    "12575": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12575; basis=manual_pre_route:single_named_spawn_plus_treasure_fast_respawn_public_wotlk_evidence"
+      ],
+      "provisional_range_minutes": [
+        2.0,
+        8.0
+      ]
+    },
+    "12607": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12607; basis=single_target_model"
+      ]
+    },
+    "12614": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12614; basis=single_target_model"
+      ]
+    },
+    "11606": {
+      "inputs": {
+        "fixed_service_seconds": 525.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11606; basis=special_service_override"
+      ]
+    },
+    "11611": {
+      "inputs": {
+        "fixed_service_seconds": 75.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11611; basis=shared_kill_model"
+      ]
+    },
+    "11602": {
+      "inputs": {
+        "fixed_service_seconds": 70.19999999999999
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11602; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "11636": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11636; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "11643": {
+      "inputs": {
+        "fixed_service_seconds": 34.8
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11643; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "11644": {
+      "inputs": {
+        "fixed_service_seconds": 609.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11644; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11660": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11660; basis=single_target_model"
+      ]
+    },
+    "11664": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11664; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "11613": {
+      "inputs": {
+        "fixed_service_seconds": 165.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11613; basis=shared_kill_model"
+      ]
+    },
+    "11625": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11625; basis=single_target_model"
+      ]
+    },
+    "11676": {
+      "inputs": {
+        "fixed_service_seconds": 75.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11676; basis=shared_kill_model"
+      ]
+    },
+    "11688": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11688; basis=shared_kill_model"
+      ]
+    },
+    "11690": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11690; basis=shared_kill_model"
+      ]
+    },
+    "11711": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11711; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "11714": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11714; basis=shared_kill_model"
+      ]
+    },
+    "11716": {
+      "inputs": {
+        "fixed_service_seconds": 609.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11716; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11719": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11719; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "11721": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11721; basis=single_target_model"
+      ]
+    },
+    "11869": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11869; basis=shared_kill_model"
+      ]
+    },
+    "11865": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11865; basis=shared_kill_model"
+      ]
+    },
+    "11876": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11876; basis=shared_kill_model"
+      ]
+    },
+    "11879": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11879; basis=single_target_model"
+      ]
+    },
+    "11612": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11612; basis=shared_kill_model"
+      ]
+    },
+    "11607": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11607; basis=shared_kill_model"
+      ]
+    },
+    "11609": {
+      "inputs": {
+        "fixed_service_seconds": 387.6
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11609; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11949": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11949; basis=shared_kill_model"
+      ]
+    },
+    "11890": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11890; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "11893": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11893; basis=shared_kill_model"
+      ]
+    },
+    "11899": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11899; basis=shared_kill_model"
+      ]
+    },
+    "11906": {
+      "inputs": {
+        "fixed_service_seconds": 877.8000000000001
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11906; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11677": {
+      "inputs": {
+        "fixed_service_seconds": 7.199999999999999
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11677; basis=single_fixed_object_model"
+      ]
+    },
+    "11628": {
+      "inputs": {
+        "fixed_service_seconds": 331.2
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11628; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11630": {
+      "inputs": {
+        "fixed_service_seconds": 499.20000000000005
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11630; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11685": {
+      "inputs": {
+        "fixed_service_seconds": 331.2
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11685; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11641": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11641; basis=shared_kill_model"
+      ]
+    },
+    "11659": {
+      "inputs": {
+        "fixed_service_seconds": 75.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11659; basis=shared_kill_model"
+      ]
+    },
+    "11590": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11590; basis=special_service_override"
+      ]
+    },
+    "11681": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11681; basis=special_service_override"
+      ]
+    },
+    "11912": {
+      "inputs": {
+        "fixed_service_seconds": 609.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11912; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11918": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11918; basis=shared_kill_model"
+      ]
+    },
+    "11914": {
+      "inputs": {
+        "fixed_service_seconds": 331.2
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11914; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11936": {
+      "inputs": {
+        "fixed_service_seconds": 109.80000000000001
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11936; basis=special_service_override"
+      ]
+    },
+    "11919": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11919; basis=special_service_override"
+      ]
+    },
+    "11946": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11946; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "11951": {
+      "inputs": {
+        "fixed_service_seconds": 609.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11951; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11957": {
+      "inputs": {
+        "fixed_service_seconds": 180.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11957; basis=special_service_override"
+      ]
+    },
+    "11592": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11592; basis=known_script_service"
+      ]
+    },
+    "11560": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11560; basis=special_service_override"
+      ]
+    },
+    "11563": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11563; basis=single_target_model"
+      ]
+    },
+    "11569": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11569; basis=single_target_model"
+      ]
+    },
+    "11566": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11566; basis=single_target_model"
+      ]
+    },
+    "11570": {
+      "inputs": {
+        "fixed_service_seconds": 270.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11570; basis=special_service_override"
+      ]
+    },
+    "11649": {
+      "inputs": {
+        "fixed_service_seconds": 331.2
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11649; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "11639": {
+      "inputs": {
+        "fixed_service_seconds": 315.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11639; basis=shared_kill_model"
+      ]
+    },
+    "11638": {
+      "inputs": {
+        "fixed_service_seconds": 34.8
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11638; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "11930": {
+      "inputs": {
+        "fixed_service_seconds": 360.0
+      },
+      "source_refs": [
+        "data/route-atlas/borean-tundra-task-timing-screen.json#task_id=11930; basis=special_service_override"
+      ]
+    },
+    "13118": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13118; basis=shared_kill_model"
+      ]
+    },
+    "13084": {
+      "inputs": {
+        "fixed_service_seconds": 350.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13084; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12807": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=12807; basis=single_target_model"
+      ]
+    },
+    "13117": {
+      "inputs": {
+        "fixed_service_seconds": 35.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13117; basis=single_fixed_object_model"
+      ]
+    },
+    "13229": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13229; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "13308": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13308; basis=single_target_model"
+      ]
+    },
+    "13140": {
+      "inputs": {
+        "fixed_service_seconds": 331.0735966128493
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13140; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "13228": {
+      "inputs": {
+        "fixed_service_seconds": 15.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13228; basis=shared_kill_model"
+      ]
+    },
+    "13230": {
+      "inputs": {
+        "fixed_service_seconds": 75.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13230; basis=shared_kill_model"
+      ]
+    },
+    "13237": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13237; basis=shared_kill_model"
+      ]
+    },
+    "13259": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13259; basis=shared_kill_model"
+      ]
+    },
+    "13275": {
+      "inputs": {
+        "fixed_service_seconds": 214.54530459215553
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13275; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "13277": {
+      "inputs": {
+        "fixed_service_seconds": 331.0735966128493
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13277; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "13349": {
+      "inputs": {
+        "fixed_service_seconds": 240.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13349; basis=shared_kill_model"
+      ]
+    },
+    "13082": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13082; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "13306": {
+      "inputs": {
+        "fixed_service_seconds": 120.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13306; basis=shared_kill_model"
+      ]
+    },
+    "13170": {
+      "inputs": {
+        "fixed_service_seconds": 300.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13170; basis=shared_kill_model"
+      ]
+    },
+    "13169": {
+      "inputs": {
+        "fixed_service_seconds": 270.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13169; basis=shared_kill_model"
+      ]
+    },
+    "13307": {
+      "inputs": {
+        "fixed_service_seconds": 450.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13307; basis=shared_kill_model"
+      ]
+    },
+    "13316": {
+      "inputs": {
+        "fixed_service_seconds": 150.0
+      },
+      "source_refs": [
+        "data/route-atlas/icecrown-task-foundation.json#task_id=13316; basis=shared_kill_model"
+      ]
+    },
+    "12523": {
+      "inputs": {
+        "fixed_service_seconds": 244.99999999999997
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12523; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12688": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12688; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "12549": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12549; basis=shared_kill_model"
+      ]
+    },
+    "12520": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12520; basis=shared_kill_model"
+      ]
+    },
+    "12804": {
+      "inputs": {
+        "fixed_service_seconds": 331.0735966128493
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12804; basis=fivebox_personal_drop_model"
+      ]
+    },
+    "12551": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12551; basis=shared_kill_model"
+      ]
+    },
+    "12644": {
+      "inputs": {
+        "fixed_service_seconds": 35.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12644; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12550": {
+      "inputs": {
+        "fixed_service_seconds": 105.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12550; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12560": {
+      "inputs": {
+        "fixed_service_seconds": 175.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12560; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12699": {
+      "inputs": {
+        "fixed_service_seconds": 35.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12699; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12671": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12671; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "12569": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12569; basis=single_target_model"
+      ]
+    },
+    "12529": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12529; basis=shared_kill_model"
+      ]
+    },
+    "12533": {
+      "inputs": {
+        "fixed_service_seconds": 225.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12533; basis=shared_kill_model"
+      ]
+    },
+    "12537": {
+      "inputs": {
+        "fixed_service_seconds": 35.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12537; basis=single_fixed_object_model"
+      ]
+    },
+    "12570": {
+      "inputs": {
+        "fixed_service_seconds": 0.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12570; basis=no_independent_objective_service_hub_time_separate"
+      ]
+    },
+    "12573": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12573; basis=single_target_model"
+      ]
+    },
+    "12603": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12603; basis=shared_kill_model"
+      ]
+    },
+    "12576": {
+      "inputs": {
+        "fixed_service_seconds": 210.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12576; basis=shared_kill_model"
+      ]
+    },
+    "12580": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12580; basis=shared_kill_model"
+      ]
+    },
+    "12579": {
+      "inputs": {
+        "fixed_service_seconds": 350.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12579; basis=fixed_object_fivebox_model"
+      ]
+    },
+    "12691": {
+      "inputs": {
+        "fixed_service_seconds": 90.0
+      },
+      "source_refs": [
+        "data/route-atlas/sholazar-task-foundation.json#task_id=12691; basis=single_target_model"
+      ]
+    },
+    "11656": {
+      "inputs": {
+        "interaction_count": 4
+      },
+      "source_refs": [
+        "2026-09-20/21 second DK: 烧毁船只共享；四个船只固定目标"
+      ]
+    },
+    "11686": {
+      "inputs": {
+        "interaction_count": 3
+      },
+      "source_refs": [
+        "2026-09-26 second DK: 战歌农场共享；三个固定目标"
+      ]
+    },
+    "11610": {
+      "inputs": {
+        "interaction_count": 3
+      },
+      "source_refs": [
+        "2026-09-27 second DK: 先祖的回归共享；三个固定目标"
+      ]
+    },
+    "11961": {
+      "inputs": {
+        "interaction_count": 1
+      },
+      "source_refs": [
+        "2026-10-08 second DK: 神灵的眷顾五号分别交互，各自取得任务物"
+      ]
+    },
+    "11900": {
+      "inputs": {
+        "interaction_count": 4
+      },
+      "source_refs": [
+        "2026-10-10 second DK: 监测数据共享；四个固定监测仪主动点击"
+      ]
+    },
+    "11695": {
+      "inputs": {
+        "interaction_count": 2
+      },
+      "source_refs": [
+        "2026-10-09 second DK: 元素愤怒号角两件固定物五号依次拾取"
       ]
     }
   },

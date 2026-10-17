@@ -2,7 +2,7 @@
   "schema_version": 1,
   "program_id": "horde-fivebox-full-clear",
   "version": 2,
-  "status": "draft",
+  "status": "retired",
   "scope": {
     "program_scope": "Horde fivebox Outland-to-Northrend full-clear sequence",
     "character_profile": "horde-fivebox-current",
@@ -58,6 +58,11 @@
       "date": "2026-10-15",
       "kind": "route_boundary_absorbed_by_profile",
       "summary": "Dragonblight v3 now owns the full post-Wrathgate chain through Warsong Hold, Orgrimmar, Battle for the Undercity, hearth to Agmar and Task 12791 teleport to Dalaran; remove the old duplicate Dragonblight→Dalaran Program boundary transition."
+    },
+    {
+      "date": "2026-10-18",
+      "kind": "lifecycle_retirement",
+      "summary": "Retire the ordinary-class full-clear Program together with the ordinary Hellfire/Zangarmarsh Profiles. The complete Program definition is retained unchanged as a recoverable historical chain; current gold-farming leveling uses the DK-specific Outland routes instead."
     }
   ],
   "boundary_transitions": [

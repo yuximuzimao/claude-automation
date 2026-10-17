@@ -37,6 +37,8 @@ Route Profile 只保存无法从 Task Card、公共规则或其它已保存路�
 - 最小 `entry_requirements`；Profile 不人工保存可由“Program/冷启动真实入口状态 + actions”唯一重放得到的 exit state；
 - Profile 自身的 scope、版本、状态、display元数据和变更记录。
 
+Profile生命周期状态中，`retired`表示**退出当前正式工作台/现役Program，但资产本身保留**：Route Profile、Task Card、几何、历史generated/Observation都不得因为退休而删除。正式`data/routes`渲染必须只包含非`retired` Profile；若未来重新启用，只需把Profile恢复为现役状态、恢复必要Program组合并按正常Lifecycle重建/发布，不允许从头重做已经保留的路线。`frozen_reusable`仍属于现役可发布集合，不能用它表达“隐藏但保留”。
+
 `Target Cluster / Spatial Instance / Background Layer`首先属于Route Optimization/Service Context的结构化结果：**能从Task Card + Profile原子机械重建的，不再作为第二真源写进Profile；只有真实路线决策无法重建、且会改变执行/Timing/Optimization的那部分，才允许以通用最小原子进入Profile。**
 
 同理，movement/transport只允许一个canonical业务真源。地图point的线型、旧`location.transport`等展示/兼容字段只能由canonical movement派生，不能与动作级交通两处独立人工维护。

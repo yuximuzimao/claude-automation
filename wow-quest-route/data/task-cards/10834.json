@@ -95,12 +95,13 @@
   "guide": [
     "接取：塞萨克。",
     "杀死\"暗眼\"格里洛克，将格里洛克的眼罩交给断背岗哨的塞萨克。",
+    "五开实测：击杀一次后，五号可从同一尸体依次拾取任务物。",
     "交付：塞萨克。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "sequential_loot"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "sequential-corpse-loot",
   "evidence": [
     {
       "evidence_id": "evidence-foundation-migration",

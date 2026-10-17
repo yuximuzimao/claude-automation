@@ -11,7 +11,7 @@
   "hearth_chain": [
     "萨布拉金"
   ],
-  "input_fingerprint": "ba0823351a8bff1d09581a8bd2509b9a049ee1b38e83a313b257b96278c5d3d5",
+  "input_fingerprint": "cd42f90edb73d36f2418b9016878e6c2dc22b2598fe132de19269145e686a637",
   "issues": [
     {
       "display_name": "观察者杰哈恩",
@@ -652,7 +652,7 @@
         "to_visit_id": "a0225"
       }
     ],
-    "input_fingerprint": "ae5cb3fed7e9165564e3a711f7f2e7f76b072ab3d0dad53e923520bafa8c449f",
+    "input_fingerprint": "895f967c966d2e1632ba6d87c83b24a6d9a62be2c7bfde53c69da7f272ebc623",
     "status": "pass",
     "visits": [
       {
@@ -1231,13 +1231,10 @@
   "profile_version": 3,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
-    "center_minutes": 343.0,
-    "input_fingerprint": "a68dac031e1848bbf0a6397414487be7c12271e5a5e43ffbb4af1ded6d87eb01",
-    "range_minutes": [
-      270.9,
-      416.1
-    ],
-    "status": "pass"
+    "center_minutes": null,
+    "input_fingerprint": "05e37366412f1cd379291e9d9b61f8216bfee48e4e6185a4182dd07815302f19",
+    "range_minutes": null,
+    "status": "requirements"
   },
   "status": "pass",
   "steps": [
@@ -1527,7 +1524,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9716
         },
@@ -1643,12 +1640,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 10.0,
-        "range_minutes": [
-          8.5,
-          12.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "塞纳里奥庇护所：开场 → 古树祝福"
     },
@@ -1903,7 +1897,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9716
         },
@@ -1930,35 +1924,35 @@
           "task_id": 9752
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "乌鸦的飞翔",
           "note": "在伊谢尔·风歌处使用风暴乌鸦护符，任务脚本会自动飞行完成；不要自己跑去调查点。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9718
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阴冷之地",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9788
         },
@@ -1988,7 +1982,7 @@
       "timing": {
         "center_minutes": null,
         "range_minutes": null,
-        "status": "unavailable"
+        "status": "requirements"
       },
       "title": "暗泽湖 → 暗泽村 → 回庇护所"
     },
@@ -2326,13 +2320,13 @@
           "task_id": 9728
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阴冷之地",
           "note": "目标物在暗泽村以南的洞穴内，不要只在地表坐标附近找。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9788
         },
@@ -2359,24 +2353,21 @@
           "task_id": 9894
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": "第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         }
       ],
       "timing": {
-        "center_minutes": 5.0,
-        "range_minutes": [
-          4.0,
-          6.5
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "沼泽鼠岗哨 → 东部湖区 → 暗泽湖第一泵"
     },
@@ -2517,13 +2508,13 @@
       "summary": "环礁湖完成第二处抽水泵与哈格哈兹；毒蛇湖完成第三泵、弗亚希并补齐纳迦爪子，离开前确保取得《抽水泵结构图》，最后去观察者杰哈恩交任务。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": "第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
@@ -2556,7 +2547,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9731
         },
@@ -2584,12 +2575,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 30.0,
-        "range_minutes": [
-          23.4,
-          36.6
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "环礁湖 → 毒蛇湖 → 观察者杰哈恩"
     },
@@ -2843,13 +2831,13 @@
           "task_id": 9775
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "爆顶蘑菇",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9814
         },
@@ -2865,24 +2853,24 @@
           "task_id": 9845
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：穆玛基酋长",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10117
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：格罗阿克",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9820
         },
@@ -2904,7 +2892,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9731
         },
@@ -2932,12 +2920,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 25.0,
-        "range_minutes": [
-          19.5,
-          30.5
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "萨布拉金 → 水域排水口 → 炉石萨布拉金"
     },
@@ -3266,13 +3251,13 @@
       "summary": "完成陆地第四泵后普通骑行回塞纳里奥集中交付，再继续骑行到沼泽鼠；《沼牙的威胁》在这次自然回访时交并接出《对方的尊重》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "恢复平衡",
           "note": "第一处抽水泵在暗泽湖；到抽水泵控制台旁使用任务给的铁藤种子。\n第三处抽水泵在毒蛇湖；到控制台旁使用铁藤种子。\n第二处抽水泵在环礁湖；到控制台旁使用铁藤种子。\n第四处抽水泵在陆地；到控制台旁使用铁藤种子。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9720
         },
@@ -3283,7 +3268,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9731
         },
@@ -3354,13 +3339,13 @@
           "task_id": 9895
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "阴冷之地",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9788
         },
@@ -3453,24 +3438,21 @@
           "task_id": 9770
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "对方的尊重",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9898
         }
       ],
       "timing": {
-        "center_minutes": 15.0,
-        "range_minutes": [
-          12.3,
-          17.7
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "沼光湖 → 骑行塞纳里奥庇护所 → 骑行沼泽鼠岗哨"
     },
@@ -3776,24 +3758,21 @@
           "task_id": 9899
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "对方的尊重",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9898
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          27.3,
-          42.7
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "死亡泥潭 → 孢子之翼 → 沼泽鼠岗哨 → 黑钉 → 炉石萨布拉金"
     },
@@ -3998,13 +3977,13 @@
       "summary": "先完成萨布拉金本地采集并接出后续，再往返蛮沼区完成《蛮沼之灵》；经过恐爪刷新点时只在目标现身的情况下顺手完成。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "爆顶蘑菇",
           "note": "围绕萨布拉金本地专门转一圈拾取，不要只沿主路等顺手收齐。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9814
         },
@@ -4020,13 +3999,13 @@
           "task_id": 9841
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "你见过鱼人吗？",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9816
         },
@@ -4076,12 +4055,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 30.0,
-        "range_minutes": [
-          23.4,
-          36.6
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "萨布拉金 → 蛮沼区 → 恐爪刷新点"
     },
@@ -4401,7 +4377,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9701
         },
@@ -4462,12 +4438,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          27.3,
-          42.7
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "孢子村 → 莉萨奥 → 法恩森 → 孢殖林 → 孢子村"
     },
@@ -4636,12 +4609,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 22.0,
-        "range_minutes": [
-          18.0,
-          26.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "丢弃的食物 → 昂古拉 → 莉萨奥"
     },
@@ -4802,35 +4772,35 @@
           "task_id": 9726
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：穆玛基酋长",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10117
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "你见过鱼人吗？",
           "note": "到匕潭村约(26.8,22.6)的任务点使用任务提供的鱼人笼完成目标。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9816
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：格罗阿克",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9820
         },
@@ -4858,12 +4828,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 42.0,
-        "range_minutes": [
-          32.8,
-          51.2
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "血鳞区 → 穆玛基 → 匕潭鱼人笼 → 格罗阿克"
     },
@@ -5122,46 +5089,46 @@
       "summary": "炉石回萨布拉金交北部任务并接《战斗迫近》；完成后自然回孢子村集中交付，再到莉萨奥接《偷回蘑菇》。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：穆玛基酋长",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 10117
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "通缉：格罗阿克",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9820
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "战斗迫近",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9822
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "你见过鱼人吗？",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9816
         },
@@ -5255,12 +5222,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 32.0,
-        "range_minutes": [
-          25.0,
-          39.0
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "炉石萨布拉金 → 战斗迫近 → 孢子村 → 莉萨奥"
     },
@@ -5382,13 +5346,13 @@
           "task_id": 9847
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "战斗迫近",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 9822
         },
@@ -5416,12 +5380,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 15.0,
-        "range_minutes": [
-          12.3,
-          17.7
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "博哈姆 → 炉石萨布拉金"
     },
@@ -5564,12 +5525,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 35.0,
-        "range_minutes": [
-          27.3,
-          42.7
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "昂古拉走廊 → 匕潭失落者 → 安葛洛什"
     },

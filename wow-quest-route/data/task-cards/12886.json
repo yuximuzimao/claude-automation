@@ -87,9 +87,9 @@
     "交付：托里姆。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "shared-kill-count",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -113,6 +113,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "user-live-2026-10-17-fivebox",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17 Storm Peaks second DK fivebox live run: 《驭龙赛》共享，目标距离近。",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

@@ -194,11 +194,14 @@ def timing_inputs_from_atoms(
         source_item_ids = list(item.get("source_item_ids") or [])
         if source_item_ids:
             inputs["source_item_ids"] = [int(source_item_id) for source_item_id in source_item_ids]
+        object_ids = list(item.get("source_object_ids") or [])
         npc_ids = list(item.get("source_npc_ids") or [])
+        if object_ids and not npc_ids and not source_item_ids:
+            inputs["interaction_count"] = int(item["required_count"])
         if drop_db is not None and len(npc_ids) == 1:
             rate = drop_db.get(int(item["item_id"]), int(npc_ids[0]))
             if rate is not None:
-                inputs["drop_rate"] = float(rate.rate)
+                inputs["drop_rate"] = float(rate.rate) / 100.0
                 inputs["drop_rate_source"] = rate.source
                 inputs["drop_rate_npc_id"] = int(npc_ids[0])
         elif drop_db is not None and len(npc_ids) > 1:
@@ -206,17 +209,25 @@ def timing_inputs_from_atoms(
             for npc_id in npc_ids:
                 rate = drop_db.get(int(item["item_id"]), int(npc_id))
                 if rate is not None:
-                    candidates.append({"npc_id": int(npc_id), "rate": float(rate.rate), "source": rate.source})
+                    candidates.append(
+                        {"npc_id": int(npc_id), "rate": float(rate.rate) / 100.0, "source": rate.source}
+                    )
             if candidates:
                 inputs["drop_rate_candidates"] = candidates
-                issues.append(
-                    {
-                        "severity": "requirement",
-                        "kind": "drop_rate_route_source_selection_required",
-                        "item_id": int(item["item_id"]),
-                        "candidate_npc_ids": [row["npc_id"] for row in candidates],
-                    }
-                )
+                unique_rates = {round(float(row["rate"]), 12) for row in candidates}
+                if len(unique_rates) == 1:
+                    inputs["drop_rate"] = float(candidates[0]["rate"])
+                    inputs["drop_rate_source"] = "equivalent_npc_sources"
+                    inputs["drop_rate_npc_ids"] = [row["npc_id"] for row in candidates]
+                else:
+                    issues.append(
+                        {
+                            "severity": "requirement",
+                            "kind": "drop_rate_route_source_selection_required",
+                            "item_id": int(item["item_id"]),
+                            "candidate_npc_ids": [row["npc_id"] for row in candidates],
+                        }
+                    )
     return inputs, issues
 
 

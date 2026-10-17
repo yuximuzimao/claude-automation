@@ -9,18 +9,30 @@
     },
     "shared-kill-count": {
       "kind": "kill_count",
+      "execution_scope": "shared",
       "description": "共享击杀任务：按结构化目标数量和当前Profile战斗校准计算一次队伍服务成本。",
       "required_inputs": ["kill_count", "combat_seconds_per_mob"]
+    },
+    "personal-kill-count": {
+      "kind": "kill_count",
+      "execution_scope": "per_character",
+      "description": "个人击杀/个人载具进度：每个角色都需要完成结构化目标数量时，按队伍人数放大击杀服务成本。",
+      "required_inputs": ["kill_count", "combat_seconds_per_mob", "party_size"]
     },
     "personal-drop-count": {
       "kind": "personal_drop",
       "description": "个人掉落：按Task Card共享状态决定独立需求份数；不共享按队伍人数放大需求量，再结合掉率、战斗与拾取成本计算串行自由拾取墙钟。100%掉率自然退化为确定性数量成本。",
       "required_inputs": ["required_count", "drop_rate", "combat_seconds_per_mob", "personal_loot_seconds_per_corpse", "party_size"]
     },
+    "sequential-corpse-loot": {
+      "kind": "sequential_corpse_loot",
+      "description": "同一目标只需击杀一次，但同一具尸体由五个角色依次拾取任务物：击杀成本只计一次，拾取成本按需求数量×队伍人数计。",
+      "required_inputs": ["required_count", "combat_seconds_per_mob", "personal_loot_seconds_per_corpse", "party_size"]
+    },
     "fixed-object-interaction": {
       "kind": "fixed_object",
-      "description": "固定物/场景交互：按交互次数、是否共享、当前队伍规模和单次操作校准计算。",
-      "required_inputs": ["interaction_count", "interaction_scope", "fixed_object_seconds_per_character", "party_size"]
+      "description": "固定物/场景交互：按交互次数、Task Card fivebox.status、当前队伍规模和单次操作校准计算；共享计一次，不共享/依次拾取按队伍人数计。",
+      "required_inputs": ["interaction_count", "fixed_object_seconds_per_character", "party_size"]
     },
     "fixed-service-seconds": {
       "kind": "fixed_seconds",

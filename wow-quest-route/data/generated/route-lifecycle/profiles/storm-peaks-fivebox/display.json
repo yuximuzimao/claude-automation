@@ -14,7 +14,7 @@
     "格罗玛什坠毁点",
     "布德克拉格庇护所"
   ],
-  "input_fingerprint": "2e52ca407cbba0cf10d20d84dbad5bfc1a77cfd58414b6934344f94bf0ab6012",
+  "input_fingerprint": "d6e64cca0a31276345f6a646addeb67b7d17faf77ea83c78bb9fa3c3948fab76",
   "issues": [
     {
       "display_name": "驭龙赛 → 风暴神殿",
@@ -184,9 +184,9 @@
         "edge_id": "a0049->a0052",
         "from_location_ref": "storm-p015",
         "from_visit_id": "a0049",
-        "movement_action_id": null,
-        "movement_mode": "fly",
-        "operation_kind": "self_move",
+        "movement_action_id": "a9002",
+        "movement_mode": null,
+        "operation_kind": "hearth",
         "source": "canonical_profile",
         "to_location_ref": "storm-p016",
         "to_visit_id": "a0052"
@@ -1578,7 +1578,7 @@
         "to_visit_id": "a0471"
       }
     ],
-    "input_fingerprint": "e560365345c4e1d709bdbaace3ef3d3cb91bb2c686f4482a9df3998068adf88e",
+    "input_fingerprint": "7ca5eb7cfdb1c1d366b72e1aaeea98a6688862430fe6260bf9fb7d5b38a51d45",
     "status": "pass",
     "visits": [
       {
@@ -2326,7 +2326,7 @@
         "location_ref": "storm-p075",
         "location_role": "map_anchor",
         "ordinal": 75,
-        "step_id": "step-11b",
+        "step_id": null,
         "visit_id": "a0259",
         "x": 57.2,
         "y": 64.0
@@ -2566,7 +2566,7 @@
         "location_ref": "storm-p099",
         "location_role": "map_anchor",
         "ordinal": 99,
-        "step_id": "step-14",
+        "step_id": "step-13",
         "visit_id": "a0328",
         "x": 37.3,
         "y": 49.6
@@ -3007,13 +3007,10 @@
   "profile_version": 3,
   "program_id": "horde-fivebox-full-clear",
   "route_timing": {
-    "center_minutes": 495.788,
-    "input_fingerprint": "f050ac9d7646e7ef373b35f9d612a2e4b6f6b103032a7ef1d8ed9b539cb2885c",
-    "range_minutes": [
-      377.908,
-      613.967
-    ],
-    "status": "pass"
+    "center_minutes": null,
+    "input_fingerprint": "5d73a14740cb336896dd43fa2f99cbd76e6a24ec200c386d64f9507d37231781",
+    "range_minutes": null,
+    "status": "requirements"
   },
   "status": "pass",
   "steps": [
@@ -3503,10 +3500,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 23.6,
+        "center_minutes": 23.103,
         "range_minutes": [
-          17.7,
-          29.5
+          15.953,
+          30.253
         ],
         "status": "pass"
       },
@@ -3687,10 +3684,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 43.6,
+        "center_minutes": 29.347,
         "range_minutes": [
-          32.7,
-          54.5
+          19.494,
+          39.199
         ],
         "status": "pass"
       },
@@ -3883,9 +3880,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 10.897,
+        "range_minutes": [
+          7.889,
+          13.904
+        ],
+        "status": "pass"
       },
       "title": "水晶蛛网洞穴：未被遗忘 → 痛苦的离别"
     },
@@ -4102,9 +4102,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 12.93,
+        "range_minutes": [
+          8.943,
+          16.916
+        ],
+        "status": "pass"
       },
       "title": "希弗列尔达 → 炉石K3回交"
     },
@@ -4784,10 +4787,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 12.3,
+        "center_minutes": 11.805,
         "range_minutes": [
-          10.1,
-          14.6
+          9.309,
+          14.302
         ],
         "status": "pass"
       },
@@ -5148,10 +5151,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 25.1,
+        "center_minutes": 9.645,
         "range_minutes": [
-          20.6,
-          29.7
+          7.479,
+          11.811
         ],
         "status": "pass"
       },
@@ -5167,6 +5170,8 @@
         "a0128",
         "a0129",
         "a0130",
+        "a9003",
+        "a9004",
         "a0131",
         "a0132",
         "a0133",
@@ -5272,6 +5277,24 @@
         },
         {
           "action_ids": [
+            "a9003"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：K3",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a9004"
+          ],
+          "location_ref": "storm-p143",
+          "task_refs": [],
+          "text": "K3",
+          "type": "location"
+        },
+        {
+          "action_ids": [
             "a0131"
           ],
           "location_ref": "storm-p039",
@@ -5329,7 +5352,7 @@
         }
       ],
       "step_id": "step-06b",
-      "summary": "进入最大建筑完成伊尔达并从旁边大箱子接《燃烧吧，瓦基里安》，清室外三项后回布伦希尔达集中交付。",
+      "summary": "进入最大建筑完成伊尔达并从旁边大箱子接《燃烧吧，瓦基里安》，清室外三项；做完《燃烧吧，瓦基里安》后炉石回K3，再去布伦希尔达集中交付。",
       "task_presentations": [
         {
           "badge": "shared",
@@ -5343,13 +5366,13 @@
           "task_id": 12968
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "燃烧吧，瓦基里安",
           "note": "伊尔达旁大箱子接任务；鱼叉炮在室外东侧约(26.6,59.9)，用炮台技能点燃6个干草垛。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12953
         },
@@ -5377,11 +5400,14 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 14.687,
+        "range_minutes": [
+          10.647,
+          18.727
+        ],
+        "status": "pass"
       },
-      "title": "瓦基里安：伊尔达 → 鱼叉炮 → 回布伦希尔达"
+      "title": "瓦基里安：伊尔达 → 鱼叉炮 → 炉石 → 回布伦希尔达"
     },
     {
       "action_ids": [
@@ -5597,10 +5623,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 14.8,
+        "center_minutes": 14.272,
         "range_minutes": [
-          12.2,
-          17.5
+          10.518,
+          18.025
         ],
         "status": "pass"
       },
@@ -5827,24 +5853,24 @@
           "task_id": 13063
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "制造挽具",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12900
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "最后的母熊",
           "note": "冰喉母熊在冬眠洞穴内，需要进入洞穴解救。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12983
         },
@@ -5872,10 +5898,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 23.5,
+        "center_minutes": 24.667,
         "range_minutes": [
-          17.6,
-          29.4
+          17.178,
+          32.156
         ],
         "status": "pass"
       },
@@ -6120,21 +6146,24 @@
           "task_id": 13062
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "驭龙赛",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12886
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 7.191,
+        "range_minutes": [
+          5.609,
+          8.773
+        ],
+        "status": "pass"
       },
       "title": "热身赛 → 利齿之坑 → 驭龙赛前置"
     },
@@ -6241,44 +6270,44 @@
       "summary": "完成驭龙赛和托里姆的《骨肉相残》，接到《弥补关系》后再转格罗玛什。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "驭龙赛",
           "note": "用海德尼尔鱼叉不断换龙并击杀10名龙骑士；结束时对柱饰使用鱼叉脱离。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12886
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "骨肉相残",
           "note": "与托里姆对话并听完整段故事；不要离开对话/事件范围。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13064
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "弥补关系",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12915
         }
       ],
       "timing": {
-        "center_minutes": 30.3,
+        "center_minutes": 5.499,
         "range_minutes": [
-          22.7,
-          37.9
+          4.096,
+          6.902
         ],
         "status": "pass"
       },
@@ -6583,35 +6612,35 @@
       "summary": "格罗玛什接任务、开飞行点并绑炉石，再进基莫拉克之巢完成《紧急措施》和猎人连续链。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "远古的圣物",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12882
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "失踪的布莱恩·铜须",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12895
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "紧急措施",
           "note": "基莫拉克之巢洞口约(46.7,55.2)；冰原狼主要在洞内，收齐6张狼皮。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13000
         },
@@ -6627,13 +6656,13 @@
           "task_id": 13054
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "洞穴中的药品",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13055
         },
@@ -6650,9 +6679,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 88.635,
+        "range_minutes": [
+          58.995,
+          118.274
+        ],
+        "status": "pass"
       },
       "title": "格罗玛什 → 基莫拉克之巢"
     },
@@ -6846,13 +6878,13 @@
       "summary": "完成《弥补关系》《精炼之火》，在弗约恩之砧接《希望的火花》；炉石回格罗玛什交《紧急措施》，再去风暴神殿找托里姆。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "弥补关系",
           "note": "弗约恩之砧旁用大地符咒召土灵，杀弗约恩和5个雷铸铁巨人；留意熔渣覆盖的金属。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12915
         },
@@ -6879,13 +6911,13 @@
           "task_id": 12956
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "紧急措施",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13000
         },
@@ -6902,10 +6934,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 22.0,
+        "center_minutes": 30.992,
         "range_minutes": [
           16.5,
-          27.4
+          30.992
         ],
         "status": "pass"
       },
@@ -6924,7 +6956,6 @@
         "a0234",
         "a0235",
         "a0236",
-        "a0237",
         "a0238",
         "a0239",
         "a0240",
@@ -7068,24 +7099,6 @@
         },
         {
           "action_ids": [
-            "a0237"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "弗约恩之砧"
-          },
-          "task_refs": [
-            {
-              "kind": "accept",
-              "name": "热与冷",
-              "task_id": 12981
-            }
-          ],
-          "text": "弗约恩之砧 → 接《热与冷》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
             "a0238",
             "a0239",
             "a0240"
@@ -7134,7 +7147,7 @@
         }
       ],
       "step_id": "step-11",
-      "summary": "丹尼芬雷接齐霍迪尔任务，去弗约恩之砧完成《元素之战》，回城接出《热与冷》《新的开始》《雷铸徽记》《回首往事》。",
+      "summary": "丹尼芬雷接齐霍迪尔任务，去弗约恩之砧完成《元素之战》，回城接出《新的开始》《雷铸徽记》《回首往事》。",
       "task_presentations": [
         {
           "badge": null,
@@ -7179,17 +7192,6 @@
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12967
-        },
-        {
-          "badge": "not_shared",
-          "name": "热与冷",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 12981
         },
         {
           "badge": null,
@@ -7237,10 +7239,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 59.4,
+        "center_minutes": 19.28,
         "range_minutes": [
-          44.5,
-          74.2
+          13.994,
+          24.565
         ],
         "status": "pass"
       },
@@ -7249,26 +7251,17 @@
     {
       "action_ids": [
         "a0241",
-        "a0242",
         "a0243",
         "a0244",
-        "a0245",
         "a0246",
         "a0247",
-        "a0249",
         "a0250",
         "a0251",
         "a0252",
         "a0253",
-        "a0248",
-        "a0254",
         "a0255",
         "a0256",
-        "a0257",
-        "a0258",
-        "a0259",
-        "a0260",
-        "a0261"
+        "a0258"
       ],
       "lines": [
         {
@@ -7282,23 +7275,17 @@
         },
         {
           "action_ids": [
-            "a0242",
             "a0243"
           ],
           "actor": null,
           "task_refs": [
             {
               "kind": "objective",
-              "name": "热与冷",
-              "task_id": 12981
-            },
-            {
-              "kind": "objective",
               "name": "雷铸徽记",
               "task_id": 12985
             }
           ],
-          "text": "↳ 做《热与冷》、《雷铸徽记》",
+          "text": "↳ 做《雷铸徽记》",
           "type": "task_action"
         },
         {
@@ -7309,24 +7296,6 @@
           "task_refs": [],
           "text": "丹尼芬雷",
           "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0245"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "弗约恩之砧"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "热与冷",
-              "task_id": 12981
-            }
-          ],
-          "text": "弗约恩之砧 → 交《热与冷》",
-          "type": "task_action"
         },
         {
           "action_ids": [
@@ -7350,24 +7319,6 @@
             }
           ],
           "text": "亚米尔德 → 交《雷铸徽记》 → 接《放置霍迪尔之盔》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0249"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "冰霜座狼母兽"
-          },
-          "task_refs": [
-            {
-              "kind": "accept",
-              "name": "猎杀间谍",
-              "task_id": 12994
-            }
-          ],
-          "text": "冰霜座狼母兽 → 接《猎杀间谍》",
           "type": "task_action"
         },
         {
@@ -7423,42 +7374,6 @@
         },
         {
           "action_ids": [
-            "a0248"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "霍迪尔之盔"
-          },
-          "task_refs": [
-            {
-              "kind": "accept",
-              "name": "粘滞清洁",
-              "task_id": 13006
-            }
-          ],
-          "text": "霍迪尔之盔 → 接《粘滞清洁》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0254"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "贪婪的安格里姆"
-          },
-          "task_refs": [
-            {
-              "kind": "accept",
-              "name": "喂饱安格里姆",
-              "task_id": 13046
-            }
-          ],
-          "text": "贪婪的安格里姆 → 接《喂饱安格里姆》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
             "a0255"
           ],
           "location_ref": "storm-p074",
@@ -7469,7 +7384,6 @@
         {
           "action_ids": [
             "a0256",
-            "a0257",
             "a0258"
           ],
           "actor": null,
@@ -7481,63 +7395,17 @@
             },
             {
               "kind": "objective",
-              "name": "粘滞清洁",
-              "task_id": 13006
-            },
-            {
-              "kind": "objective",
               "name": "斩除尤卡塔尔",
               "task_id": 13011
             }
           ],
-          "text": "↳ 做《打造霍迪尔之矛》、《粘滞清洁》、《斩除尤卡塔尔》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0259"
-          ],
-          "location_ref": "storm-p075",
-          "task_refs": [],
-          "text": "上古寒冬山谷",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0260",
-            "a0261"
-          ],
-          "actor": null,
-          "task_refs": [
-            {
-              "kind": "objective",
-              "name": "猎杀间谍",
-              "task_id": 12994
-            },
-            {
-              "kind": "objective",
-              "name": "喂饱安格里姆",
-              "task_id": 13046
-            }
-          ],
-          "text": "↳ 做《猎杀间谍》、《喂饱安格里姆》",
+          "text": "↳ 做《打造霍迪尔之矛》、《斩除尤卡塔尔》",
           "type": "task_action"
         }
       ],
       "step_id": "step-11b",
-      "summary": "完成《热与冷》《雷铸徽记》和放置霍迪尔之盔，再去冬眠洞穴/上古寒冬山谷清长矛、粘滞、尤卡塔尔、间谍和安格里姆。",
+      "summary": "完成《雷铸徽记》和放置霍迪尔之盔，再去冬眠洞穴/上古寒冬山谷完成长矛与尤卡塔尔。",
       "task_presentations": [
-        {
-          "badge": "not_shared",
-          "name": "热与冷",
-          "note": "每号先杀怪取得6份任务道具，再分别使用6次并拾取后续目标物。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 12981
-        },
         {
           "badge": "not_shared",
           "name": "雷铸徽记",
@@ -7559,39 +7427,6 @@
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12987
-        },
-        {
-          "badge": "shared",
-          "name": "猎杀间谍",
-          "note": "对座狼尸体使用灵体座狼之牙召唤灵体冰霜座狼，跟随找到并击杀雷铸间谍；每次击杀后回尸体重新召唤，共3次。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 12994
-        },
-        {
-          "badge": "not_shared",
-          "name": "粘滞清洁",
-          "note": "目标怪刷新很快；有人抢怪时原地等刷新即可，不必换点绕圈。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13006
-        },
-        {
-          "badge": "shared",
-          "name": "喂饱安格里姆",
-          "note": "对游荡的冰虫使用安格里姆之牙，再把灵体冰虫打到虚弱让安格里姆吞食；不要直接打死。",
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": true,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13046
         },
         {
           "badge": "not_shared",
@@ -7617,9 +7452,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 27.419,
+        "range_minutes": [
+          18.513,
+          36.326
+        ],
+        "status": "pass"
       },
       "title": "霜原湖 → 霍迪尔之盔 → 上古寒冬山谷"
     },
@@ -7628,9 +7466,6 @@
         "a0262",
         "a0263",
         "a0264",
-        "a0265",
-        "a0266",
-        "a0267",
         "a0268",
         "a0269",
         "a0270",
@@ -7684,60 +7519,6 @@
             }
           ],
           "text": "约库姆国王 → 交《斩除尤卡塔尔》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0265"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "霍迪尔之盔"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "粘滞清洁",
-              "task_id": 13006
-            }
-          ],
-          "text": "霍迪尔之盔 → 交《粘滞清洁》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0266"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "冰霜座狼母兽"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "猎杀间谍",
-              "task_id": 12994
-            }
-          ],
-          "text": "冰霜座狼母兽 → 交《猎杀间谍》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0267"
-          ],
-          "actor": {
-            "kind": "target",
-            "name": "贪婪的安格里姆"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "喂饱安格里姆",
-              "task_id": 13046
-            }
-          ],
-          "text": "贪婪的安格里姆 → 交《喂饱安格里姆》",
           "type": "task_action"
         },
         {
@@ -7861,39 +7642,6 @@
         },
         {
           "badge": "not_shared",
-          "name": "粘滞清洁",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13006
-        },
-        {
-          "badge": "shared",
-          "name": "猎杀间谍",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 12994
-        },
-        {
-          "badge": "shared",
-          "name": "喂饱安格里姆",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 13046
-        },
-        {
-          "badge": "not_shared",
           "name": "回首往事",
           "note": "",
           "note_override_applied": true,
@@ -7916,9 +7664,12 @@
         }
       ],
       "timing": {
-        "center_minutes": null,
-        "range_minutes": null,
-        "status": "unavailable"
+        "center_minutes": 8.756,
+        "range_minutes": [
+          6.572,
+          10.94
+        ],
+        "status": "pass"
       },
       "title": "丹尼芬雷回交 → 雷暴台地 → 炉石格罗玛什"
     },
@@ -8293,24 +8044,24 @@
           "task_id": 13051
         },
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "失踪的布莱恩·铜须",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12895
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "科洛米尔，风暴之锤",
           "note": "按约库姆对话/脚本完成科洛米尔事件。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13010
         },
@@ -8326,9 +8077,9 @@
           "task_id": 13057
         },
         {
-          "badge": "not_shared",
+          "badge": "shared",
           "name": "见证者与英雄",
-          "note": "唐卡洛营地内3份历史卷轴五号分别交互；同一卷轴可连续切号点击。",
+          "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -8337,22 +8088,22 @@
           "task_id": 13034
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "雷蹄的记忆",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13037
         }
       ],
       "timing": {
-        "center_minutes": 21.4,
+        "center_minutes": 16.606,
         "range_minutes": [
-          16.1,
-          26.8
+          13.078,
+          20.133
         ],
         "status": "pass"
       },
@@ -8376,6 +8127,8 @@
         "a0315",
         "a0316",
         "a0317",
+        "a0329",
+        "a0328",
         "a0318",
         "a0319",
         "a0320",
@@ -8564,6 +8317,24 @@
         },
         {
           "action_ids": [
+            "a0329"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：格罗玛什坠毁点",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0328"
+          ],
+          "location_ref": "storm-p099",
+          "task_refs": [],
+          "text": "格罗玛什坠毁点",
+          "type": "location"
+        },
+        {
+          "action_ids": [
             "a0318"
           ],
           "location_ref": "storm-p095",
@@ -8678,7 +8449,7 @@
         }
       ],
       "step_id": "step-13",
-      "summary": "完成造物者圣台任务后先去布德克拉格开飞行点并直接接《稀有的土壤》，再做《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。",
+      "summary": "完成造物者圣台任务并接《清算之战》后先炉石回格罗玛什坠毁点，再前往布德克拉格开飞行点并接《稀有的土壤》，完成《清算之战》后开奥杜尔飞行点并系统飞行到丹尼芬雷。",
       "task_presentations": [
         {
           "badge": null,
@@ -8694,7 +8465,7 @@
         {
           "badge": "shared",
           "name": "土灵的誓言",
-          "note": "先用峭壁号角召土灵援军，再由主控完成击杀目标即可同步五号。",
+          "note": "先用峭壁号角召土灵援军；召唤后可以直接操控土灵宝宝，再由主控完成击杀目标即可同步五号。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -8737,19 +8508,17 @@
         }
       ],
       "timing": {
-        "center_minutes": 19.7,
+        "center_minutes": 24.279,
         "range_minutes": [
-          16.2,
-          23.3
+          18.663,
+          29.895
         ],
         "status": "pass"
       },
-      "title": "造物者圣台 → 布德克拉格开点 → 清算 → 奥杜尔"
+      "title": "造物者圣台 → 接清算 → 炉石 → 布德克拉格 → 奥杜尔"
     },
     {
       "action_ids": [
-        "a0329",
-        "a0328",
         "a0330",
         "a0331",
         "a0332",
@@ -8764,24 +8533,6 @@
         "a0341"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0329"
-          ],
-          "action_kind": "use_hearth",
-          "task_refs": [],
-          "text": "使用炉石：格罗玛什坠毁点",
-          "type": "route_action"
-        },
-        {
-          "action_ids": [
-            "a0328"
-          ],
-          "location_ref": "storm-p099",
-          "task_refs": [],
-          "text": "格罗玛什坠毁点",
-          "type": "location"
-        },
         {
           "action_ids": [
             "a0330",
@@ -8922,16 +8673,16 @@
         }
       ],
       "step_id": "step-14",
-      "summary": "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。",
+      "summary": "交布莱恩便笺后继续霜齿追踪与兽人语任务。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "sequential_loot",
           "name": "失踪的布莱恩·铜须",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12895
         },
@@ -8981,14 +8732,14 @@
         }
       ],
       "timing": {
-        "center_minutes": 10.5,
+        "center_minutes": 8.681,
         "range_minutes": [
-          8.7,
-          12.4
+          6.666,
+          10.696
         ],
         "status": "pass"
       },
-      "title": "炉石格罗玛什 → 兽人语 → 寒风"
+      "title": "格罗玛什 → 兽人语 → 寒风"
     },
     {
       "action_ids": [
@@ -9339,13 +9090,13 @@
           "task_id": 12926
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "远古的圣物",
           "note": "雷铸敌人沿后续路线自然累计；发明家图书馆补齐10件。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12882
         },
@@ -9624,22 +9375,22 @@
           "task_id": 13285
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "远古的圣物",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12882
         }
       ],
       "timing": {
-        "center_minutes": 11.6,
+        "center_minutes": 11.059,
         "range_minutes": [
-          8.7,
-          14.4
+          8.387,
+          13.73
         ],
         "status": "pass"
       },
@@ -10009,10 +9760,10 @@
         }
       ],
       "timing": {
-        "center_minutes": 38.8,
+        "center_minutes": 38.264,
         "range_minutes": [
-          29.1,
-          48.5
+          26.282,
+          50.246
         ],
         "status": "pass"
       },
@@ -10297,12 +10048,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 26.1,
-        "range_minutes": [
-          19.6,
-          32.7
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "尼达维里尔：洛肯物件 → 黑暗护甲 → 回庇护所"
     },
@@ -10517,7 +10265,7 @@
       "timing": {
         "center_minutes": null,
         "range_minutes": null,
-        "status": "unavailable"
+        "status": "requirements"
       },
       "title": "护甲板秘密 → 风暴之子瓦杜兰"
     },
@@ -11153,13 +10901,13 @@
       "summary": "从布德克拉格庇护所系统飞行到已开的唐卡洛营地，继续已接的《雷蹄的记忆》，再完成裂隙、嚎风洞穴和北风事件。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "shared",
           "name": "雷蹄的记忆",
           "note": "",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13037
         },

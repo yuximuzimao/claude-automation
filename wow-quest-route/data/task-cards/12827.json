@@ -47,7 +47,7 @@
   "fivebox": {
     "status": "not_shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-user-live-2026-10-16",
@@ -56,7 +56,10 @@
       "observed_at": "2026-10-16",
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
-      "supports_fields": ["fivebox.status", "guide"]
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
+      ]
     },
     {
       "evidence_id": "evidence-questie-11.34.0",

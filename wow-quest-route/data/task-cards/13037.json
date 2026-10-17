@@ -57,9 +57,9 @@
     "交付：夏拉托尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -83,6 +83,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "user-live-2026-10-17-fivebox",
+      "source_type": "user_live",
+      "source_ref": "2026-10-17 Storm Peaks second DK fivebox live run: 《雷蹄的记忆》共享。",
+      "observed_at": "2026-10-17",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

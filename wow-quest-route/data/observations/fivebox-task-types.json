@@ -186,9 +186,11 @@
       "note": "《尤尔巴的报告》实跑确认：报告一旦从怪物掉出，同一具尸体五个角色都可分别拾取。掉落期望只计算获得一份报告所需的击杀次数，不得乘五。若提前顺路掉出，只更新完成状态；当前交付本来与最终沼泽鼠停靠合并。"
     },
     "9814": {
-      "type": "object_collect_manual_local_loop",
-      "status": "user_confirmed_geometry_unmeasured_time",
-      "note": "《爆顶蘑菇》不能因为刷新点数量看似覆盖主体路线就按0秒背景采集。首组实跑需要围绕萨布拉金专门转一圈拾取；该本地圈可以自然接入后续西部路线。当前只确认空间服务形态，真实圈耗时仍待后续实跑记录。"
+      "type": "personal_object_collect_manual_local_loop",
+      "status": "user_confirmed",
+      "note": "《爆顶蘑菇》不共享，五号分别收集；不能因为刷新点数量看似覆盖主体路线就按0秒背景采集。首组实跑需要围绕萨布拉金专门转一圈拾取，该本地圈可以自然接入后续西部路线；真实圈耗时仍待后续干净实跑校准。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认 + 既有首组路线几何观察"
     },
     "1149": {
       "type": "personal_trigger_jump_hidden_slope_entrance",
@@ -2275,10 +2277,11 @@
       "confirmed_at": "2026-09-15"
     },
     "10813": {
-      "type": "special_capture_mechanic_group_share_pending",
-      "status": "third_group_validation_pending",
-      "note": "《格里洛克之眼》第二组实跑时按不共享方式逐号完成，因此本轮不能判定真实共享性；实际可能共享。用户查到目标刷新约45秒，熟悉机制后等待成本可能明显低于本轮体感。正确NPC为塞萨克：使用塞萨克的碎片捕获格里洛克之眼，再带到塞萨克的熔锅使其分离。第三组专门验证共享性。",
-      "observed_at": "2026-09-15"
+      "type": "special_capture_mechanic_personal_confirmed_for_route_model",
+      "status": "user_confirmed_model_rule_applied",
+      "note": "《格里洛克之眼》第二组实跑按五号分别完成；2026-10-17用户决定当前路线直接按不共享处理和计算时间，不再等待第三组验证。眼睛刷新约45秒；正确NPC为塞萨克：使用塞萨克的碎片捕获格里洛克之眼，再带到塞萨克的熔锅使其分离。",
+      "observed_at": "2026-09-15",
+      "confirmed_at": "2026-10-17"
     },
     "12165": {
       "type": "personal_multi_part_drop_confirmed",
@@ -2335,11 +2338,11 @@
       "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
     },
     "11931": {
-      "type": "personal_drop_collection_confirmed",
+      "type": "mixed_sequential_loot_and_personal_drop_confirmed",
       "status": "user_confirmed",
-      "note": "《破译密码》不共享，五号分别取得碧蓝书典和闪烁的符文。",
-      "observed_at": "2026-10-10",
-      "source": "2026-10-09 22:56—2026-10-10 01:34 北风第二组DK实跑"
+      "note": "《破译密码》为混合机制：碧蓝书典由同一尸体五号依次拾取；闪烁的符文不共享，五号分别收集3枚。Questie 11.34.0 WotLK掉率：碧蓝书典71.5252%，闪烁的符文29.2977%。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认 + Questie 11.34.0 WotLK drop table"
     },
     "11941": {
       "type": "item_turnin_not_applicable_confirmed",
@@ -2445,6 +2448,202 @@
       "note": "《幽暗城之战》为全程跟随萨尔和希尔瓦娜斯的脚本事件，不再单列fivebox实测。现场若沃金和希尔瓦娜斯在、萨尔缺失，原地切时间线无效；本次实跑验证：切回正常时间线→真正离开幽暗城/提瑞斯法区域→返回→再切战役相位，可让萨尔重新出现。",
       "observed_at": "2026-10-15",
       "source": "2026-10-15用户现场验证"
+    },
+    "10834": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《\"暗眼\"格里洛克》击杀一次，五号从同一尸体依次拾取眼罩。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9410": {
+      "type": "personal_summon_follow_confirmed",
+      "status": "user_confirmed",
+      "note": "《灵魂的指引》不共享；五号分别召唤各自的狼魂，随后可一起跟随跑。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9466": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《通缉：黑色利爪》击杀一次后五号依次拾取任务物。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "10368": {
+      "type": "group_shared_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《残冠长者》三名NPC的解救进度共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9716": {
+      "type": "personal_proximity_trigger_not_applicable",
+      "status": "user_confirmed_not_applicable",
+      "note": "《暗泽湖的异常》本质是个人固定点位调查，但五号跟随一起到位置会自然完成，页面不需要fivebox标签。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9718": {
+      "type": "personal_vehicle_script_confirmed",
+      "status": "user_confirmed",
+      "note": "《乌鸦的飞翔》不共享，五号分别执行。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9788": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《阴冷之地》按五号依次拾取/依次交互同一任务来源执行。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9720": {
+      "type": "group_shared_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《恢复平衡》蒸汽泵控制台进度共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9731": {
+      "type": "quest_start_item_not_applicable",
+      "status": "user_confirmed_not_applicable",
+      "note": "《抽水泵结构图》是用于接任务的起始物，不按依次拾取或不共享任务目标标记。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户纠正"
+    },
+    "9898": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《对方的尊重》黑钉之刺五号依次拾取。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9701": {
+      "type": "personal_proximity_trigger_not_applicable",
+      "status": "user_confirmed_not_applicable",
+      "note": "《观察孢子人》本质为个人到点触发，但五号跟随一起到位会自然完成，页面不需要fivebox标签。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "10117": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《通缉：穆玛基酋长》击杀一次后五号依次拾取任务物。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9820": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《通缉：格罗阿克》击杀一次后五号依次拾取任务物。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9816": {
+      "type": "group_shared_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《你见过鱼人吗？》共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9822": {
+      "type": "personal_sequential_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《战斗迫近》不共享，五号依次交互完成任务目标。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9863": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《邪恶的信仰》不共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9867": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《暗血领袖》击杀后五号依次拾取任务物。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "10001": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《主规划师》五号依次拾取主规划师的蓝图。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9948": {
+      "type": "group_shared_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《寻找幸存者》释放俘虏进度共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9946": {
+      "type": "group_shared_objective_confirmed",
+      "status": "user_confirmed",
+      "note": "《掠夺者考瓦尔》共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9914": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《象牙生意》不共享，五号分别收集象牙。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "9852": {
+      "type": "same_source_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《终极挑战》击杀塔丝克后五号依次拾取塔丝克之心。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "10913": {
+      "type": "group_shared_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《不适当的葬礼》焚烧尸体进度共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "10877": {
+      "type": "personal_sequential_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《恐怖圣物》五号依次从同一大型宝箱取得任务物；按不共享+依次交互记录。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "10873": {
+      "type": "group_shared_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《夜间的绑架》解救沙塔尔战士进度共享。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "11909": {
+      "type": "single_interaction_single_boss_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《击败机甲专家》只交互手册一次、只击杀一个Boss；已有Boss存在时不会再召出新的，击杀后五号依次拾取。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "11640": {
+      "type": "multi_named_mob_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《力量之语》三名高阶祭司各击杀一次，对应卷轴五号依次拾取。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
+    },
+    "11637": {
+      "type": "mixed_sequential_loot_and_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《卡加尼舒》击杀一次后五号依次拾取神像，再五号依次对先知残骸使用；按special混合机制记录。",
+      "observed_at": "2026-10-17",
+      "source": "2026-10-17用户补充确认"
     }
   }
 }
