@@ -304,6 +304,48 @@ header {
 .btn-orange { background: var(--orange); color: #fff; border: none; border-radius: 7px; padding: 7px 14px; cursor: pointer; font-size: 13px; font-weight: 500; }
 .btn-orange:hover { background: #b45309; }
 
+/* ── SKU 计价确认（仅有待确认项时显示） ── */
+.sku-pricing-panel {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.sku-pricing-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.sku-pricing-title { font-size: 13px; font-weight: 600; color: var(--gray-800); flex: 1; }
+.sku-pricing-select-all { font-size: 12px; color: var(--gray-600); display: inline-flex; align-items: center; gap: 5px; }
+.sku-pricing-rows { display: flex; flex-direction: column; }
+.sku-pricing-row {
+  display: grid;
+  grid-template-columns: 22px minmax(260px, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.sku-pricing-row:last-child { border-bottom: none; }
+.sku-pricing-row-error { box-shadow: inset 3px 0 0 var(--red); }
+.sku-pricing-name { font-size: 13px; color: var(--gray-800); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sku-pricing-row label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-500); white-space: nowrap; }
+.sku-pricing-number {
+  width: 64px;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 5px 7px;
+  font-size: 13px;
+  text-align: center;
+  outline: none;
+}
+.sku-pricing-number:focus { border-color: var(--blue); }
+
 /* ── Ticket Cards ── */
 .ticket-list { display: flex; flex-direction: column; gap: 14px; }
 

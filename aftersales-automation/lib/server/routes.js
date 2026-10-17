@@ -30,6 +30,7 @@ const {
   selectReprocessQueueItems,
 } = require('./live-batch-scope');
 const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
+const { confirmSkuPricingAndReinfer } = require('./sku-pricing-confirmation');
 const wanwuState = require('../../wanwu/state');
 
 const router = express.Router();
@@ -148,6 +149,20 @@ router.get('/simulations/:id', (req, res) => {
   const sim = db.getSimulation(req.params.id);
   if (!sim) return res.status(404).json({ error: '未找到' });
   res.json(sim);
+});
+
+router.post('/sku-pricing/confirm', (req, res) => {
+  try {
+    const result = confirmSkuPricingAndReinfer(req.body && req.body.entries);
+    res.json({
+      ok: true,
+      savedCount: result.saved.length,
+      reinferredCount: result.reinferred.length,
+      reinferred: result.reinferred,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 // 重新采集+推理（含评价内容 hint）

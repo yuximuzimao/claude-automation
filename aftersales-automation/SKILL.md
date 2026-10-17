@@ -74,6 +74,8 @@ entry: cli.js
 | `lib/server/relogin-session.js` | 新增店铺与重新登录共用的临时登录进程启动、端口等待和首次手机号初始化参数判定 | 改店铺管理登录窗口启动流程时 |
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
+| `lib/sku-pricing.js` | 单商品部分退货的 SKU 计价关系：按规格商家编码保存“计价主品/随主品赠送/ERP实际组成”，解析买赠候选并在组成变化时强制重新确认 | 改部分退货金额辅助或买赠 SKU 确认时 |
+| `lib/server/sku-pricing-confirmation.js` | 待确认页 SKU 计价保存 + 只对挂有 `skuPricingPending` 的当前工单复用已保存 `collectedData` 做本地重推理；不操作鲸灵/ERP | 改 SKU 确认后的即时刷新链路时 |
 | `lib/server/routes.js` | Express API 路由 | 改 API 端点时 |
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化；统计累计处理量合并 live queue、归档 case 和现存 live simulation 并按工单号去重，评价正确率只按每单最新明确评价计算；反馈洞察用 `markFeedbackInsighted(ids)` 写 `insightedAt`，保留原文 | 改数据读写、统计口径或收口手动洞察时 |

@@ -15,6 +15,7 @@ const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, EXEMPT_ACCESSORY_K
 const { proveReturnItems } = require('./return-item-proof');
 const { DEFINITELY_UNSHIPPED_STATUSES, getGiftShipmentState } = require('./gift-shipment-status');
 const { mergeExternalLogisticsIntoErp } = require('./external-logistics-baidu');
+const { resolveSkuPricing } = require('./sku-pricing');
 
 // 解析 urgency 字符串（如 "1天3小时" / "3小时"）为总小时数
 function parseUrgencyHours(urgency) {
@@ -85,7 +86,10 @@ function observeGiftOutboundLogistics(cd) {
     const returnedSigned = logisticsTexts.some(text =>
       /已退回签收|退回签收|退回商家后.*签收/.test(text)
     );
-    const signed = !returned && logisticsTexts.some(text =>
+    const interceptSucceeded = logisticsTexts.some(text =>
+      /拦截成功|成功拦截|拒收成功|已拒收/.test(text)
+    );
+    const signed = !returned && !interceptSucceeded && logisticsTexts.some(text =>
       SIGNED_KEYWORDS.some(keyword => text.includes(keyword))
       || /已投递|已领取|已派送至本人/.test(text)
     );
@@ -96,6 +100,7 @@ function observeGiftOutboundLogistics(cd) {
       tracking,
       returned,
       returnedSigned,
+      interceptSucceeded,
       signed,
       yizhan,
       hasLogistics: logisticsTexts.length > 0,
@@ -107,12 +112,14 @@ function observeGiftOutboundLogistics(cd) {
     packages,
     returnedCount: packages.filter(pkg => pkg.returned).length,
     returnedSignedCount: packages.filter(pkg => pkg.returnedSigned).length,
+    interceptSucceededCount: packages.filter(pkg => pkg.interceptSucceeded).length,
     signedCount: packages.filter(pkg => pkg.signed).length,
     yizhanCount: packages.filter(pkg => pkg.yizhan).length,
     inTransitCount: packages.filter(pkg => pkg.hasLogistics && !pkg.returned && !pkg.signed && !pkg.yizhan).length,
     unknownCount: packages.filter(pkg => !pkg.hasLogistics).length,
     allReturned: packages.length > 0 && packages.every(pkg => pkg.returned),
     allReturnedSigned: packages.length > 0 && packages.every(pkg => pkg.returnedSigned),
+    allInterceptSucceeded: packages.length > 0 && packages.every(pkg => pkg.interceptSucceeded),
   };
 }
 
@@ -1835,9 +1842,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
           giftOutbound.packages.forEach(pkg => {
             const result = pkg.returnedSigned
               ? '已退回签收'
-              : pkg.returned
-                ? '识别到退回节点，但尚未确认退回签收'
-                : pkg.signed
+              : pkg.interceptSucceeded
+                ? '拦截成功，已进入退回'
+                : pkg.returned
+                  ? '识别到退回节点，但尚未确认退回签收'
+                  : pkg.signed
                   ? '已签收，未识别到明确退回证据'
                   : pkg.yizhan
                     ? '驿站待取，未识别到明确退回证据'
@@ -1857,6 +1866,116 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
             label: '赠品发货物流观察',
             value: `子订单${giftSubOrderId}未取得可核验运单号；当前仅供人工复核，不改变自动放行条件`,
           });
+        }
+      }
+
+      // 仅在“单子订单 + 单一主商品 + 主品少退”这个固定分支中提供退款金额辅助。
+      // 独立赠品必须已随退货入库，或物流明确显示已退回签收 / 拦截成功；其他情况继续走原人工分支。
+      const singleMainExpected = groupedMainExpected.length === 1 ? groupedMainExpected[0] : null;
+      const mainAfterSaleNum = singleMainExpected ? resolveMainAfterSaleNum(singleMainExpected) : null;
+      const physicalQtyPerSet = singleMainExpected && mainAfterSaleNum
+        ? singleMainExpected.expectedQty / mainAfterSaleNum
+        : null;
+      const mainProductMatch = subOrders.length === 1
+        ? productMatches.find(match => String(match.subOrderId || '') === String(subOrders[0].id || '')) || productMatches[0]
+        : null;
+      const separateGiftSafeForPricing = gifts.length === 0 || (
+        !giftDefinitelyUnshipped
+        && giftArchiveSubItems.length > 0
+        && (
+          !hasGiftShortage
+          || Boolean(giftOutbound && giftOutbound.allReturnedSigned)
+          || Boolean(giftOutbound && giftOutbound.allInterceptSucceeded)
+        )
+      );
+      const amountBase = Number(ticket.amount);
+      const pricingBranchEligible = issues.length === 0
+        && subOrders.length === 1
+        && groupedMainExpected.length === 1
+        && mainShortItems.length === 1
+        && unmatchedReceived.length === 0
+        && Number.isInteger(physicalQtyPerSet)
+        && physicalQtyPerSet > 0
+        && mainAfterSaleNum !== null
+        && mainProductMatch
+        && mainProductMatch.specCode
+        && Number.isFinite(amountBase)
+        && amountBase > 0
+        && separateGiftSafeForPricing;
+
+      if (pricingBranchEligible) {
+        const mainShort = mainShortItems[0];
+        const pricing = resolveSkuPricing({
+          specCode: mainProductMatch.specCode,
+          specName: subOrders[0].attr1 || '',
+          physicalQty: physicalQtyPerSet,
+        });
+
+        if (pricing.status === 'confirmation_required') {
+          const mismatchText = pricing.compositionMismatch
+            ? `；已保存的ERP实际组成是${pricing.savedPhysicalQty}件，本次读取为${pricing.physicalQty}件`
+            : '';
+          s({ type: 'branch', text: `等待SKU计价确认 → ${pricing.specName || pricing.specCode}${mismatchText}` });
+          return fin(escalate(`该规格疑似包含随主品赠送数量，需先确认计价主品/赠品数量${mismatchText}`, {
+            confidence: 'high',
+            rulesApplied: [{ doc: 'flow-5.1', section: 'Step4c', summary: '单商品部分退货遇到疑似买赠SKU→先确认SKU计价关系，仅本地重推理' }],
+            autoExecutionBlocked: true,
+            humanTriggeredExecutionAllowed: false,
+            skuPricingPending: {
+              specCode: pricing.specCode,
+              specName: pricing.specName,
+              physicalQty: pricing.physicalQty,
+              suggestedPricedQty: pricing.suggestedPricedQty,
+              suggestedBundledGiftQty: pricing.suggestedBundledGiftQty,
+              compositionMismatch: Boolean(pricing.compositionMismatch),
+            },
+          }));
+        }
+
+        if (pricing.status === 'resolved') {
+          const totalPricedQty = pricing.pricedQty * mainAfterSaleNum;
+          const totalBundledGiftQty = pricing.bundledGiftQty * mainAfterSaleNum;
+          const refundablePricedQty = Math.max(0, Math.min(
+            totalPricedQty,
+            Number(mainShort.receivedQty || 0) - totalBundledGiftQty,
+          ));
+          const recommendedAmount = Math.round((amountBase / totalPricedQty * refundablePricedQty + Number.EPSILON) * 100) / 100;
+          const compactAmount = Number(recommendedAmount.toFixed(2)).toString();
+          const compactBase = Number(amountBase.toFixed(2)).toString();
+          const formula = `${compactBase}/${totalPricedQty}*${refundablePricedQty}=${compactAmount}`;
+
+          s({
+            type: 'branch',
+            text: `推荐人工拒绝退款并修改金额 → ${formula}`,
+          });
+          const decision = reject(
+            `部分退货：实际退回${mainShort.receivedQty}件，应退${mainShort.expectedQty}件；建议退款金额¥${recommendedAmount.toFixed(2)}（${formula}）`,
+            ['⚠️ 仅提供人工退款金额辅助，禁止无人自动执行'],
+            [{ doc: 'flow-5.1', section: 'Step4c', summary: '单商品部分退货→按SKU计价主品数量计算建议退款金额，人工确认后拒绝并修改金额' }],
+          );
+          decision.reasonCode = 'PARTIAL_RETURN_AMOUNT_MANUAL';
+          decision.rejectReason = '其他';
+          const shortQty = Math.max(0, Number(mainShort.expectedQty || 0) - Number(mainShort.receivedQty || 0));
+          const shortProductName = String(mainShort.name || singleMainExpected.name || subOrders[0].attr1 || '商品').trim();
+          decision.rejectDetail = `退回少${shortQty}件${shortProductName}，修改金额${formula}`;
+          decision.requiresHumanReview = true;
+          decision.autoExecutionBlocked = true;
+          decision.humanTriggeredExecutionAllowed = true;
+          decision.recommendedActionLabel = `拒绝退款（修改金额¥${recommendedAmount.toFixed(2)}）`;
+          decision.refundAmountRecommendation = {
+            baseAmount: amountBase,
+            physicalQtyPerSet,
+            pricedQtyPerSet: pricing.pricedQty,
+            bundledGiftQtyPerSet: pricing.bundledGiftQty,
+            setCount: mainAfterSaleNum,
+            receivedQty: Number(mainShort.receivedQty || 0),
+            refundablePricedQty,
+            recommendedAmount,
+            formula,
+            pricingSource: pricing.source,
+            specCode: pricing.specCode,
+          };
+          return fin(decision);
         }
       }
 

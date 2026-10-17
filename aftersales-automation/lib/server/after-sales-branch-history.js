@@ -30,6 +30,14 @@ const BRANCHES = Object.freeze({
     label: '退货退款 / 已入库 / 少退或缺失 / 人工处理',
     automationStatus: 'manual_only',
   },
+  'refund_return.received.short.pricing_pending': {
+    label: '退货退款 / 单商品少退 / SKU计价关系待确认',
+    automationStatus: 'manual_only',
+  },
+  'refund_return.received.short.amount_manual_reject': {
+    label: '退货退款 / 单商品少退 / 推荐修改退款金额 / 人工拒绝',
+    automationStatus: 'manual_only',
+  },
   'refund_return.received.damaged.manual': {
     label: '退货退款 / 已入库 / 含次品 / 人工处理',
     automationStatus: 'manual_only',
@@ -269,6 +277,8 @@ const RULE_BRANCHES = Object.freeze({
   '超售后期无理由退货→拒绝': 'refund_return.no_tracking.overdue.reject',
   '主品完整且赠品全部包裹已明确进入退回链路→仅允许人工确认后同意退款': 'refund_return.gift_returned.manual_approve',
   '主品完整且整套赠品已签收未退回→仅允许人工确认后拒绝退款': 'refund_return.gift_not_returned.manual_reject',
+  '单商品部分退货遇到疑似买赠SKU→先确认SKU计价关系，仅本地重推理': 'refund_return.received.short.pricing_pending',
+  '单商品部分退货→按SKU计价主品数量计算建议退款金额，人工确认后拒绝并修改金额': 'refund_return.received.short.amount_manual_reject',
 });
 
 const REGISTERED_RULE_SUMMARIES = new Set([

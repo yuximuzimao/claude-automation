@@ -719,6 +719,119 @@ function loadAutoPage(page) {
   return loadAllLiveTabs();
 }
 
+function collectSkuPricingPendingRows(pendingItems, simsByQueueItem) {
+  const rows = new Map();
+  (pendingItems || []).forEach(item => {
+    const sims = simsByQueueItem[item.id] || [];
+    const latest = sims[sims.length - 1];
+    const pending = latest && latest.decision && latest.decision.skuPricingPending;
+    if (!pending || !pending.specCode) return;
+    const code = String(pending.specCode);
+    const existing = rows.get(code);
+    if (existing) {
+      if (Number(existing.physicalQty) !== Number(pending.physicalQty)) existing.compositionConflict = true;
+      return;
+    }
+    rows.set(code, {
+      specCode: code,
+      specName: pending.specName || code,
+      physicalQty: Number(pending.physicalQty),
+      pricedQty: Number(pending.suggestedPricedQty),
+      bundledGiftQty: Number(pending.suggestedBundledGiftQty),
+      compositionMismatch: Boolean(pending.compositionMismatch),
+      compositionConflict: false,
+    });
+  });
+  return [...rows.values()];
+}
+
+function renderSkuPricingPanel(pendingItems, simsByQueueItem) {
+  const panel = document.getElementById('sku-pricing-panel');
+  if (!panel) return;
+  const rows = collectSkuPricingPendingRows(pendingItems, simsByQueueItem);
+  if (!rows.length) {
+    panel.classList.add('hidden');
+    panel.innerHTML = '';
+    return;
+  }
+
+  panel.classList.remove('hidden');
+  panel.innerHTML = `
+    <div class="sku-pricing-head">
+      <label class="sku-pricing-select-all"><input type="checkbox" id="sku-pricing-select-all" onchange="toggleAllSkuPricing(this.checked)"> 全选</label>
+      <span class="sku-pricing-title">SKU计价确认</span>
+      <button class="btn-primary btn-sm" onclick="confirmSelectedSkuPricing(this)">确认已勾选</button>
+    </div>
+    <div class="sku-pricing-rows">
+      ${rows.map(row => {
+        const encodedCode = encodeURIComponent(row.specCode);
+        const encodedName = encodeURIComponent(row.specName);
+        const rowClass = row.compositionMismatch || row.compositionConflict ? ' sku-pricing-row-error' : '';
+        const title = row.compositionConflict
+          ? '同一商品编码在当前工单中读取到不同ERP组成，禁止直接保存'
+          : (row.compositionMismatch ? '该商品编码本次ERP组成与历史保存值不同，请重新确认数量' : '');
+        return `<div class="sku-pricing-row${rowClass}" data-spec-code="${encodedCode}" data-spec-name="${encodedName}" data-physical-qty="${row.physicalQty}" title="${title}">
+          <input type="checkbox" class="sku-pricing-check">
+          <div class="sku-pricing-name">${h(row.specName)}</div>
+          <label>主品 <input class="sku-pricing-number sku-pricing-paid" type="number" min="1" step="1" value="${Number.isFinite(row.pricedQty) ? row.pricedQty : row.physicalQty}"></label>
+          <label>赠品 <input class="sku-pricing-number sku-pricing-gift" type="number" min="0" step="1" value="${Number.isFinite(row.bundledGiftQty) ? row.bundledGiftQty : 0}"></label>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function toggleAllSkuPricing(checked) {
+  document.querySelectorAll('#sku-pricing-panel .sku-pricing-check').forEach(input => { input.checked = checked; });
+}
+
+async function confirmSelectedSkuPricing(btn) {
+  const selected = [...document.querySelectorAll('#sku-pricing-panel .sku-pricing-row')]
+    .filter(row => row.querySelector('.sku-pricing-check') && row.querySelector('.sku-pricing-check').checked);
+  if (!selected.length) {
+    showToast('请先勾选需要确认的SKU', 'error');
+    return;
+  }
+
+  const entries = [];
+  for (const row of selected) {
+    const specCode = decodeURIComponent(row.dataset.specCode || '');
+    const specName = decodeURIComponent(row.dataset.specName || '');
+    const physicalQty = Number(row.dataset.physicalQty);
+    const pricedQty = Number(row.querySelector('.sku-pricing-paid').value);
+    const bundledGiftQty = Number(row.querySelector('.sku-pricing-gift').value);
+    if (!Number.isInteger(pricedQty) || pricedQty <= 0 || !Number.isInteger(bundledGiftQty) || bundledGiftQty < 0) {
+      showToast(`${specName}：主品/赠品数量必须填写整数`, 'error');
+      return;
+    }
+    if (pricedQty + bundledGiftQty !== physicalQty) {
+      showToast(`${specName}：主品+赠品必须等于ERP实际组成 ${physicalQty}`, 'error');
+      return;
+    }
+    entries.push({ specCode, specName, physicalQty, pricedQty, bundledGiftQty });
+  }
+
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '确认中…';
+  try {
+    const result = await api('/sku-pricing/confirm', {
+      method: 'POST',
+      body: JSON.stringify({ entries }),
+    });
+    if (result.error) {
+      showToast('确认失败：' + result.error, 'error');
+      return;
+    }
+    showToast(`已保存 ${result.savedCount} 个SKU，并更新 ${result.reinferredCount} 张工单`);
+    await loadAllLiveTabs();
+  } catch (error) {
+    showToast('确认失败：' + error.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
 async function loadAllLiveTabs() {
   const [queue, sims] = await Promise.all([
     api('/queue?mode=live'),
@@ -757,6 +870,7 @@ async function loadAllLiveTabs() {
 
   // Tab 1: 待确认
   const pendingItems = items.filter(i => i.status !== 'waiting' && !AUTO_STATUSES.includes(i.status));
+  renderSkuPricingPanel(pendingItems, simsByQueueItem);
   updateLiveStoreFilter('pending', pendingItems);
   const visiblePendingItems = applyLiveStoreFilter('pending', pendingItems);
   const simCount = pendingItems.filter(i => i.status === 'simulated').length;
