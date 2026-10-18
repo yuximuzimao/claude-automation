@@ -110,6 +110,8 @@ function batchDependencies(overrides = {}) {
   ];
   const dependencies = {
     openAccountFlow: async accountNum => ({ success: true, accountNum, targetId: 'list-tab', matchedNote: '测试店铺' }),
+    saveSessionState: async accountNum => calls.push(['saveSession', accountNum]),
+    invalidateSessionState: async () => calls.push(['invalidateSession']),
     prepareAfterSaleList: async () => ({
       success: true,
       targetId: 'list-tab',
@@ -170,6 +172,202 @@ function batchDependencies(overrides = {}) {
   };
   return { dependencies, calls, urgent, getTargets: () => targets.slice() };
 }
+
+test('打开账号成功后先同步current-session，再开始批量页面处理', async () => {
+  const order = [];
+  const fixture = batchDependencies({
+    openAccountFlow: async accountNum => {
+      order.push('open');
+      return { success: true, accountNum, targetId: 'list-tab', matchedNote: '测试店铺' };
+    },
+    saveSessionState: async accountNum => {
+      order.push(`save:${accountNum}`);
+    },
+    prepareAfterSaleList: async () => {
+      order.push('prepare');
+      return { success: true, targetId: 'list-tab', list: { urgent: [], totalCount: 0, complete: true } };
+    },
+    cleanupCurrentAccountJlTargets: async () => ({ closedTargetIds: [] }),
+  });
+
+  const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
+
+  assert.equal(result.success, true);
+  assert.deepEqual(order.slice(0, 3), ['open', 'save:3', 'prepare']);
+});
+
+test('账号结束店铺校验失败时作废current-session并标记为不可信状态', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: { urgent: [], totalCount: 0, complete: true },
+    }),
+    cleanupCurrentAccountJlTargets: async () => ({ closedTargetIds: [] }),
+    readShopName: async () => ({ success: true, state: 'logged-in', shopName: '错误店铺' }),
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }),
+    error => {
+      assert.equal(error.accountStateUntrusted, true);
+      assert.equal(error.jlTargetId, 'list-tab');
+      assert.match(error.message, /账号结束店铺状态不可信/);
+      return true;
+    }
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => ['saveSession', 'invalidateSession'].includes(call[0])),
+    [['saveSession', '3'], ['invalidateSession']]
+  );
+});
+
+test('账号收尾清理阶段发现主tab状态不可信时同样作废session并进入隔离标记', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: { urgent: [], totalCount: 0, complete: true },
+    }),
+    cleanupCurrentAccountJlTargets: async () => {
+      const error = new Error('售后列表主 tab 不存在: list-tab');
+      error.accountMainStateUntrusted = true;
+      error.jlTargetId = 'list-tab';
+      throw error;
+    },
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }),
+    error => {
+      assert.equal(error.accountStateUntrusted, true);
+      assert.equal(error.jlTargetId, 'list-tab');
+      assert.match(error.message, /账号结束店铺状态不可信/);
+      return true;
+    }
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => ['saveSession', 'invalidateSession'].includes(call[0])),
+    [['saveSession', '3'], ['invalidateSession']]
+  );
+});
+
+test('账号收尾详情tab普通错误不进入账号隔离，也不作废current-session', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: { urgent: [], totalCount: 0, complete: true },
+    }),
+    cleanupCurrentAccountJlTargets: async () => {
+      throw new Error('详情标签页关闭验证失败: detail-1');
+    },
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }),
+    error => {
+      assert.equal(error.accountStateUntrusted, undefined);
+      assert.match(error.message, /详情标签页关闭验证失败/);
+      return true;
+    }
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => ['saveSession', 'invalidateSession'].includes(call[0])),
+    [['saveSession', '3']]
+  );
+});
+
+test('账号收尾清理阶段明确掉登录也只作废session，不进入隔离标记', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: { urgent: [], totalCount: 0, complete: true },
+    }),
+    cleanupCurrentAccountJlTargets: async () => {
+      const error = new Error('账号登录已失效');
+      error.accountSessionExpired = true;
+      throw error;
+    },
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }),
+    error => {
+      assert.equal(error.accountSessionExpired, true);
+      assert.equal(error.accountStateUntrusted, undefined);
+      assert.equal(error.jlTargetId, undefined);
+      assert.match(error.message, /登录已失效/);
+      return true;
+    }
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => ['saveSession', 'invalidateSession'].includes(call[0])),
+    [['saveSession', '3'], ['invalidateSession']]
+  );
+});
+
+test('账号结束时明确掉登录只作废current-session，不标记为账号状态不可信', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: { urgent: [], totalCount: 0, complete: true },
+    }),
+    cleanupCurrentAccountJlTargets: async () => ({ closedTargetIds: [] }),
+    readShopName: async () => ({ success: true, state: 'logged-out', loggedIn: false }),
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }),
+    error => {
+      assert.equal(error.accountSessionExpired, true);
+      assert.equal(error.accountStateUntrusted, undefined);
+      assert.equal(error.jlTargetId, undefined);
+      assert.match(error.message, /登录已失效/);
+      return true;
+    }
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => ['saveSession', 'invalidateSession'].includes(call[0])),
+    [['saveSession', '3'], ['invalidateSession']]
+  );
+});
+
+test('账号结束校验读取期间收到停止时传播AbortError，不作废current-session', async () => {
+  const controller = new AbortController();
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: { urgent: [], totalCount: 0, complete: true },
+    }),
+    cleanupCurrentAccountJlTargets: async () => ({ closedTargetIds: [] }),
+    readShopName: async () => {
+      controller.abort();
+      return { success: true, state: 'logged-in', shopName: '测试店铺' };
+    },
+  });
+
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', {
+      dependencies: fixture.dependencies,
+      abortSignal: controller.signal,
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.deepEqual(
+    fixture.calls.filter(call => ['saveSession', 'invalidateSession'].includes(call[0])),
+    [['saveSession', '3']]
+  );
+});
 
 test('冻结首次48小时清单，并严格按快照顺序逐单处理', async () => {
   const fixture = batchDependencies();

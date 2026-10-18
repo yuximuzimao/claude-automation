@@ -52,6 +52,85 @@ test('a1-fixed-batch登录异常仍归类为登录失效', () => {
   assert.equal(failure.patch.status, 'expired');
 });
 
+test('账号状态不可信隔离只关闭当前鲸灵tab，并在5秒静默后再次确认无鲸灵tab', async () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { isolateUntrustedJlTarget } = require('../../lib/server/op-queue');
+  const calls = [];
+  let targets = [
+    { id: 'jl-tab', type: 'page', url: 'https://scrm.jlsupp.com/micro-supplier/business/home' },
+    { id: 'erp-tab', type: 'page', url: 'https://viperp.superboss.cc/' },
+  ];
+  const cdp = {
+    getTargets: async () => targets.map(item => ({ ...item })),
+    closeTarget: async targetId => {
+      calls.push(['close', targetId]);
+    },
+  };
+
+  const result = await isolateUntrustedJlTarget('jl-tab', {}, {
+    cdp,
+    wait: async ms => {
+      calls.push(['wait', ms]);
+      if (ms === 300) targets = targets.filter(item => item.id !== 'jl-tab');
+    },
+  });
+
+  assert.deepEqual(result, { isolated: true, quietMs: 5000 });
+  assert.deepEqual(calls, [['close', 'jl-tab'], ['wait', 300], ['wait', 5000]]);
+  assert.deepEqual(targets.map(item => item.id), ['erp-tab']);
+});
+
+test('账号状态不可信隔离会关闭已知异常target，即使它暂时还是about:blank', async () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { isolateUntrustedJlTarget } = require('../../lib/server/op-queue');
+  const calls = [];
+  let targets = [
+    { id: 'jl-tab', type: 'page', url: 'about:blank' },
+    { id: 'erp-tab', type: 'page', url: 'https://viperp.superboss.cc/' },
+  ];
+  const cdp = {
+    getTargets: async () => targets.map(item => ({ ...item })),
+    closeTarget: async targetId => {
+      calls.push(['close', targetId]);
+      targets = targets.filter(item => item.id !== targetId);
+    },
+  };
+
+  await isolateUntrustedJlTarget('jl-tab', {}, {
+    cdp,
+    wait: async ms => calls.push(['wait', ms]),
+  });
+
+  assert.deepEqual(calls, [['close', 'jl-tab'], ['wait', 300], ['wait', 5000]]);
+  assert.deepEqual(targets.map(item => item.id), ['erp-tab']);
+});
+
+test('账号状态不可信隔离发现额外鲸灵tab时立即失败，不重复关闭或等待', async () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { isolateUntrustedJlTarget } = require('../../lib/server/op-queue');
+  const calls = [];
+  let targets = [
+    { id: 'jl-tab', type: 'page', url: 'https://scrm.jlsupp.com/micro-supplier/business/home' },
+    { id: 'unexpected-jl', type: 'page', url: 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list' },
+  ];
+  const cdp = {
+    getTargets: async () => targets.map(item => ({ ...item })),
+    closeTarget: async targetId => {
+      calls.push(['close', targetId]);
+      targets = targets.filter(item => item.id !== targetId);
+    },
+  };
+
+  await assert.rejects(
+    isolateUntrustedJlTarget('jl-tab', {}, {
+      cdp,
+      wait: async ms => calls.push(['wait', ms]),
+    }),
+    /关闭后仍有鲸灵 tab/
+  );
+  assert.deepEqual(calls, [['close', 'jl-tab'], ['wait', 300]]);
+});
+
 test('等待重查仅拦截件允许人工提前拒绝', () => {
   delete require.cache[require.resolve('../../lib/server/op-queue')];
   const { canManuallyExecuteWaitingIntercept } = require('../../lib/server/op-queue');

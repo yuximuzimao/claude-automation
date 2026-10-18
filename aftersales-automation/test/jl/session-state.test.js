@@ -7,6 +7,7 @@ const path = require('node:path');
 const {
   readSessionState,
   saveSessionState,
+  clearSessionState,
   isSameFreshSession,
 } = require('../../lib/jl-session-state');
 
@@ -19,4 +20,15 @@ test('saveSessionState records the account that actually owns the current JL tab
   assert.deepEqual(readSessionState(file), { accountNum: 13, at: 123456 });
   assert.equal(isSameFreshSession(file, 13, 1000, 123999), true);
   assert.equal(isSameFreshSession(file, 3, 1000, 123999), false);
+});
+
+test('clearSessionState removes stale ownership and tolerates an already-missing file', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'jl-session-state-clear-'));
+  const file = path.join(dir, 'current-session.json');
+
+  saveSessionState(file, 13, 123456);
+  clearSessionState(file);
+  assert.equal(readSessionState(file), null);
+
+  assert.doesNotThrow(() => clearSessionState(file));
 });

@@ -472,6 +472,47 @@ function waitForAbortableDelay(ms, op) {
   });
 }
 
+function isJlPageTarget(target) {
+  if (!target || target.type !== 'page' || !target.url) return false;
+  try {
+    return new URL(target.url).hostname.replace(/^\./, '').endsWith('jlsupp.com');
+  } catch {
+    return false;
+  }
+}
+
+function targetIdOf(target) {
+  return target && (target.id || target.targetId) || null;
+}
+
+async function isolateUntrustedJlTarget(targetId, op, dependencies = {}) {
+  const cdp = dependencies.cdp || require('../cdp');
+  const wait = dependencies.wait || (ms => waitForAbortableDelay(ms, op));
+  const before = await cdp.getTargets();
+  const target = (before || []).find(item => targetIdOf(item) === targetId);
+
+  if (target) {
+    await cdp.closeTarget(targetId);
+    await wait(300);
+  }
+
+  const afterClose = await cdp.getTargets();
+  const remaining = (afterClose || []).filter(isJlPageTarget);
+  if (remaining.length > 0) {
+    throw new Error(`异常账号隔离失败：关闭后仍有鲸灵 tab: ${remaining.map(targetIdOf).filter(Boolean).join(', ')}`);
+  }
+
+  await wait(5000);
+
+  const afterQuiet = await cdp.getTargets();
+  const reappeared = (afterQuiet || []).filter(isJlPageTarget);
+  if (reappeared.length > 0) {
+    throw new Error(`异常账号隔离失败：5秒观察期内鲸灵 tab 再次出现: ${reappeared.map(targetIdOf).filter(Boolean).join(', ')}`);
+  }
+
+  return { isolated: true, quietMs: 5000 };
+}
+
 // ── 执行分派 ──────────────────────────────────────────────────────
 
 async function executeOp(op) {
@@ -975,9 +1016,12 @@ async function execScan(op) {
         note,
       });
       sse.broadcast('scan-progress', { type: 'error', num, note, error: (e.message || '').slice(0, 100) });
+      const accountStateUntrusted = Boolean(e && e.accountStateUntrusted === true);
       updateScanHud(op, {
         status: `${note} 店铺处理异常`,
-        detail: i < total - 1 ? '已记录异常，10 秒后继续下一个店铺。' : '已记录异常，正在完成本轮扫描汇总。',
+        detail: accountStateUntrusted
+          ? '账号结束校验失败，正在隔离当前鲸灵页面并停止本轮扫描。'
+          : (i < total - 1 ? '已记录异常，10 秒后继续下一个店铺。' : '已记录异常，正在完成本轮扫描汇总。'),
         shopIndex: i + 1,
         shopTotal: total,
         remainingShops: total - i - 1,
@@ -987,6 +1031,18 @@ async function execScan(op) {
         error: String(e.message || '未知异常').slice(0, 160),
       });
       console.error(`[execScan] 账号${num} 失败:`, e.message);
+
+      if (accountStateUntrusted) {
+        try {
+          await isolateUntrustedJlTarget(e.jlTargetId, op);
+          log(`账号${num} 结束店铺状态不可信：鲸灵 tab 已关闭并完成 5 秒无 tab 隔离，本轮扫描停止`);
+        } catch (isolationError) {
+          if (isolationError && isolationError.name === 'AbortError') throw isolationError;
+          e.message = `${e.message}；${isolationError.message || isolationError}`;
+          log(`账号${num} 异常隔离失败：${isolationError.message || isolationError}`);
+        }
+        throw e;
+      }
     }
 
     // 风控红线：账号之间间隔 ≥10s
@@ -1582,5 +1638,6 @@ module.exports = {
   updateScanReminderState,
   sendScanSummaryReminders,
   buildDeadlineSummaryReminder,
+  isolateUntrustedJlTarget,
   processRecheckedOpenedDetail,
 };

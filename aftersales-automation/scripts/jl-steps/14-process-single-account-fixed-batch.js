@@ -75,6 +75,11 @@ async function assertCurrentAccountShop(targetId, context, dependencies) {
     throw new Error('缺少 readShopName 店铺校验依赖，拒绝操作当前账号鲸灵 tab');
   }
   const state = await dependencies.readShopName(targetId, 0);
+  if (state && state.success === true && state.state === 'logged-out') {
+    const error = new Error('账号登录已失效');
+    error.accountSessionExpired = true;
+    throw error;
+  }
   if (!state || state.success !== true || state.state !== 'logged-in') {
     throw new Error(`标签页店铺态不可信: ${targetId} ${(state && state.error) || state && state.state || 'unknown'}`);
   }
@@ -83,15 +88,44 @@ async function assertCurrentAccountShop(targetId, context, dependencies) {
   }
 }
 
+async function assertFinalAccountShop(targetId, context, dependencies) {
+  const accountNote = context && context.account && context.account.matchedNote;
+  if (!accountNote) throw new Error('账号结束校验缺少目标店铺名');
+  if (typeof dependencies.readShopName !== 'function') {
+    throw new Error('账号结束校验缺少 readShopName 依赖');
+  }
+  const state = await dependencies.readShopName(targetId, 0);
+  if (state && state.success === true && state.state === 'logged-out') {
+    const error = new Error('账号结束时登录已失效');
+    error.accountSessionExpired = true;
+    throw error;
+  }
+  if (!state || state.success !== true || state.state !== 'logged-in') {
+    throw new Error(`账号结束店铺态不可信: ${targetId} ${(state && state.error) || state && state.state || 'unknown'}`);
+  }
+  if (!matchShopName(state.shopName, accountNote)) {
+    throw new Error(`账号结束店铺不匹配: 页面店铺="${state.shopName || ''}"，目标店铺="${accountNote}"`);
+  }
+  return state;
+}
+
 async function assertCurrentAccountListTarget(listTargetId, context, dependencies) {
-  if (!listTargetId) throw new Error('缺少售后列表主 tab targetId');
-  const targets = await dependencies.getTargets();
-  const target = findTargetById(targets, listTargetId);
-  if (!target) throw new Error(`售后列表主 tab 不存在: ${listTargetId}`);
-  if (!isJlTarget(target)) throw new Error(`售后列表主 tab 不是鲸灵域: ${target.url || listTargetId}`);
-  if (!isAfterSaleListTarget(target)) throw new Error(`售后列表主 tab 不在售后列表页: ${target.url || listTargetId}`);
-  await assertCurrentAccountShop(listTargetId, context, dependencies);
-  return target;
+  try {
+    if (!listTargetId) throw new Error('缺少售后列表主 tab targetId');
+    const targets = await dependencies.getTargets();
+    const target = findTargetById(targets, listTargetId);
+    if (!target) throw new Error(`售后列表主 tab 不存在: ${listTargetId}`);
+    if (!isJlTarget(target)) throw new Error(`售后列表主 tab 不是鲸灵域: ${target.url || listTargetId}`);
+    if (!isAfterSaleListTarget(target)) throw new Error(`售后列表主 tab 不在售后列表页: ${target.url || listTargetId}`);
+    await assertCurrentAccountShop(listTargetId, context, dependencies);
+    return target;
+  } catch (error) {
+    if (error && error.accountSessionExpired !== true) {
+      error.accountMainStateUntrusted = true;
+      error.jlTargetId = listTargetId || null;
+    }
+    throw error;
+  }
 }
 
 async function assertClosableCurrentAccountDetailTarget(detailTargetId, context, dependencies) {
@@ -852,6 +886,10 @@ function loadDefaultDependencies() {
   const fs = require('node:fs');
   const path = require('node:path');
   const {
+    saveSessionState: writeSessionState,
+    clearSessionState,
+  } = require('../../lib/jl-session-state');
+  const {
     collectTicketTargetAware,
     resolveUniqueErpTargetId,
   } = require('../../lib/jl/target-aware-collector');
@@ -875,6 +913,7 @@ function loadDefaultDependencies() {
     sleepFn: sleep,
   });
   const circuitFile = path.join(__dirname, '../../data/circuit-breaker.json');
+  const sessionStateFile = path.join(__dirname, '../../data/current-session.json');
   const executionJournal = createAutoExecutionJournal();
   const readCircuit = createCircuitReader(fs.readFileSync, circuitFile);
   if (typeof globalThis.__tripCircuitBreaker !== 'function') {
@@ -890,6 +929,8 @@ function loadDefaultDependencies() {
   }
   return {
     openAccountFlow,
+    saveSessionState: accountNum => writeSessionState(sessionStateFile, accountNum),
+    invalidateSessionState: () => clearSessionState(sessionStateFile),
     prepareAfterSaleList,
     clickWorkOrderAction,
     locateWorkOrder: (targetId, workOrderNum) => {
@@ -1020,6 +1061,36 @@ function resolveSharedReturnGroupForBatch(
   );
 }
 
+async function throwAccountEndStateFailure(cause, context, dependencies) {
+  const { accountResult, snapshot, items, targetId } = context;
+  let invalidateError = null;
+  if (typeof dependencies.invalidateSessionState !== 'function') {
+    invalidateError = new Error('缺少 invalidateSessionState');
+  } else {
+    try {
+      await dependencies.invalidateSessionState();
+    } catch (error) {
+      invalidateError = error;
+    }
+  }
+  const suffix = invalidateError
+    ? `；current-session 作废失败: ${invalidateError.message || invalidateError}`
+    : '';
+
+  if (cause && cause.accountSessionExpired === true) {
+    const error = new Error(`${cause.message}${suffix}`);
+    error.accountSessionExpired = true;
+    error.batch = { success: false, account: accountResult, snapshot, items };
+    throw error;
+  }
+
+  const error = new Error(`账号结束店铺状态不可信: ${(cause && cause.message) || cause || 'unknown'}${suffix}`);
+  error.accountStateUntrusted = true;
+  error.jlTargetId = (cause && cause.jlTargetId) || targetId || null;
+  error.batch = { success: false, account: accountResult, snapshot, items };
+  throw error;
+}
+
 async function processSingleAccountFixedBatch(accountNum, options = {}) {
   const account = assertAccountNum(accountNum);
   if (options.thresholdHours != null && Number(options.thresholdHours) !== 48) {
@@ -1047,6 +1118,10 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   const accountResult = await dependencies.openAccountFlow(account);
   assertNotAborted(options.abortSignal);
   if (!accountResult || !accountResult.success) throw stepError('打开账号失败', accountResult);
+  if (typeof dependencies.saveSessionState !== 'function') {
+    throw new Error('缺少 saveSessionState，拒绝在账号状态缓存未同步时处理批量工单');
+  }
+  await dependencies.saveSessionState(account);
   const prepared = await dependencies.prepareAfterSaleList({
     targetId: accountResult.targetId,
     thresholdHours,
@@ -1275,16 +1350,29 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
 
   let cleanup = null;
   assertNotAborted(options.abortSignal);
-  if (typeof dependencies.cleanupCurrentAccountJlTargets === 'function') {
-    cleanup = await dependencies.cleanupCurrentAccountJlTargets({
-      account: accountResult,
-      listTargetId: prepared.targetId,
-    });
-  } else if (typeof dependencies.readShopName === 'function') {
-    cleanup = await cleanupCurrentAccountJlTargets({
-      account: accountResult,
-      listTargetId: prepared.targetId,
-    }, dependencies);
+  try {
+    if (typeof dependencies.cleanupCurrentAccountJlTargets === 'function') {
+      cleanup = await dependencies.cleanupCurrentAccountJlTargets({
+        account: accountResult,
+        listTargetId: prepared.targetId,
+      });
+    } else if (typeof dependencies.readShopName === 'function') {
+      cleanup = await cleanupCurrentAccountJlTargets({
+        account: accountResult,
+        listTargetId: prepared.targetId,
+      }, dependencies);
+    }
+  } catch (cause) {
+    if (isAbortError(cause)) throw cause;
+    if (cause && (cause.accountMainStateUntrusted === true || cause.accountSessionExpired === true)) {
+      await throwAccountEndStateFailure(cause, {
+        accountResult,
+        snapshot,
+        items,
+        targetId: prepared.targetId,
+      }, dependencies);
+    }
+    throw cause;
   }
 
   try {
@@ -1296,6 +1384,20 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     await dependencies.fetchAndCacheAlerts(accountNum, accountNote);
   } catch(e) {
     console.warn('[step14] fetchAndCacheAlerts 非致命错误:', e.message);
+  }
+
+  try {
+    assertNotAborted(options.abortSignal);
+    await assertFinalAccountShop(prepared.targetId, { account: accountResult }, dependencies);
+    assertNotAborted(options.abortSignal);
+  } catch (cause) {
+    if (isAbortError(cause)) throw cause;
+    await throwAccountEndStateFailure(cause, {
+      accountResult,
+      snapshot,
+      items,
+      targetId: prepared.targetId,
+    }, dependencies);
   }
 
   return {
