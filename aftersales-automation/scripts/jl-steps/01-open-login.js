@@ -36,12 +36,15 @@ const JL_DOMAIN = 'scrm.jlsupp.com';
  * @param {string} loginUrl
  * @returns {Promise<{success, targetId?, url?, title?, readyState?, error?}>}
  */
-async function openLogin(loginUrl = LOGIN_URL) {
+async function openLogin(loginUrl = LOGIN_URL, options = {}) {
+  const cdpClient = options.cdp || cdp;
+  const sleep = options.sleep || (ms => new Promise(r => setTimeout(r, ms)));
+
   // 新开一个标签直达 URL（= 地址栏输入网址回车）。Chrome 自己加载，
   // 已登录则平台自动跳后台，未登录停 login。我们不做任何额外导航。
   let targetId;
   try {
-    const created = await cdp.createTarget(loginUrl);
+    const created = await cdpClient.createTarget(loginUrl);
     targetId = created && created.id;
     if (!targetId) {
       return { success: false, error: '新建 tab 未返回 targetId' };
@@ -50,18 +53,19 @@ async function openLogin(loginUrl = LOGIN_URL) {
     return { success: false, error: `打开 login 页失败: ${e.message}` };
   }
 
-  // 等页面加载稳定：轮询 readyState=complete（最多 ~10s），不主动 reload/navigate。
-  // 仅被动读取，不构成对页面的操作。
+  // 等页面真正进入鲸灵域且加载完成（最多 ~10s），不主动 reload/navigate。
+  // 新建 target 初始 about:blank 自身也是 readyState=complete，不能据此提前结束等待。
+  // 全程只读，不构成对页面的操作。
   let info;
   for (let i = 0; i < 20; i++) {
-    await new Promise(r => setTimeout(r, 500));
+    await sleep(500);
     try {
-      const raw = await cdp.eval(
+      const raw = await cdpClient.eval(
         targetId,
         `JSON.stringify({ url: location.href, title: document.title, readyState: document.readyState })`
       );
       info = typeof raw === 'string' ? JSON.parse(raw) : raw;
-      if (info && info.readyState === 'complete') break;
+      if (info && (info.url || '').includes(JL_DOMAIN) && info.readyState === 'complete') break;
     } catch (e) {
       // 页面跳转中 eval 可能短暂失败，继续轮询（被动等待，非行为操作）
     }

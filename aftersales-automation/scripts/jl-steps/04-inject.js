@@ -29,13 +29,12 @@ const path = require('path');
 const fs = require('fs');
 const { spawnSync } = require('child_process');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
-const { judgeLoginState, matchShopName, shopKeyword, READ_LOGIN_STATE_JS, JL_DOMAIN } = require(path.join(__dirname, '../../lib/jl/login-state'));
+const { matchShopName, shopKeyword, JL_DOMAIN } = require(path.join(__dirname, '../../lib/jl/login-state'));
+const { readShopName } = require('./02-read-shop-name');
 
 const SESSIONS_DIR = path.join(__dirname, '../../../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
 const DEFAULT_WAIT_MS = 8000;
-const TRANSITIONAL_RETRY_MS = 1000;
-const TRANSITIONAL_MAX_RETRIES = 8;
 const AFTER_SALE_LIST_URL = 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list';
 
 /** 读账号 note（供店铺名匹配验证用） */
@@ -122,23 +121,7 @@ async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
   // 5. 再等登录态跳转稳定（规则：等 8s）
   await new Promise(r => setTimeout(r, waitMs));
 
-  let info;
-  let judged;
-  for (let attempt = 0; attempt <= TRANSITIONAL_MAX_RETRIES; attempt++) {
-    try {
-      const raw = await cdp.eval(targetId, READ_LOGIN_STATE_JS);
-      info = typeof raw === 'string' ? JSON.parse(raw) : raw;
-    } catch (e) {
-      return { success: false, error: `读取登录态失败: ${e.message}` };
-    }
-
-    judged = judgeLoginState(info);
-    if (!(judged.success && judged.state === 'transitional')) break;
-    if (attempt === TRANSITIONAL_MAX_RETRIES) {
-      return { success: false, error: `注入后页面长时间停留在切号过渡态：页面="${judged.shopName}"` };
-    }
-    await new Promise(r => setTimeout(r, TRANSITIONAL_RETRY_MS));
-  }
+  const judged = await readShopName(targetId, 0);
   if (judged.success && judged.state === 'logged-in') {
     // 已登录 → 再验店铺名是否匹配目标账号（关键字包含匹配，防注入到错号）
     const note = getAccountNote(accountNum);
@@ -153,7 +136,7 @@ async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
   if (judged.success && judged.state === 'logged-out') {
     return { success: false, error: `注入后仍未登录（session 可能失效）: ${judged.url}` };
   }
-  return { success: false, error: `注入后页面状态异常：${judged.error}` };
+  return { success: false, error: `注入后页面状态异常：${judged.error || judged.state || 'unknown'}` };
 }
 
 // CLI 入口

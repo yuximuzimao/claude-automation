@@ -23,7 +23,7 @@ const TRANSITIONAL_SHOP_NAMES = new Set(['新用户']);
 /**
  * @param {{url:string, title?:string, shopName:string, has商家登录:boolean, has自动注册:boolean}} info
  * @returns {{success, state?, loggedIn?, shopName?, url?, title?, error?}}
- *   state: 'logged-in' | 'logged-out'
+ *   state: 'logged-in' | 'logged-out' | 'transitional'
  */
 function judgeLoginState(info) {
   if (!info || !(info.url || '').includes(JL_DOMAIN)) {

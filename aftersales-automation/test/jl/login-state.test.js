@@ -4,6 +4,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const { judgeLoginState, matchShopName, shopKeyword } = require('../../lib/jl/login-state');
+const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
+const { openLogin } = require('../../scripts/jl-steps/01-open-login');
 
 const JL_HOME = 'https://scrm.jlsupp.com/micro-supplier/business/home';
 const JL_LOGIN = 'https://scrm.jlsupp.com/micro-businessPlatform/login';
@@ -46,6 +48,90 @@ test('切号过渡态：店铺名=新用户时不判已登录', () => {
   assert.equal(r.success, true);
   assert.equal(r.state, 'transitional');
   assert.equal(r.loggedIn, false);
+});
+
+test('稳定读取：新用户过渡态只在读取层等待，不暴露给业务层', async () => {
+  const states = [
+    { url: JL_HOME, title: 't', shopName: '新用户', 'has商家登录': false, 'has自动注册': false },
+    { url: JL_HOME, title: 't', shopName: '杭州共途贸易有限公司', 'has商家登录': false, 'has自动注册': false },
+  ];
+  const sleeps = [];
+  const result = await readShopName('tab-1', 0, {
+    cdp: {
+      eval: async () => JSON.stringify(states.shift()),
+    },
+    sleep: async ms => sleeps.push(ms),
+    settleRetryMs: 10,
+    settleMaxRetries: 3,
+  });
+
+  assert.equal(result.success, true);
+  assert.equal(result.state, 'logged-in');
+  assert.equal(result.shopName, '杭州共途贸易有限公司');
+  assert.deepEqual(sleeps, [0, 10]);
+  assert.equal(states.length, 0);
+});
+
+test('稳定读取：鲸灵微应用暂时空白时只读等待，随后真实店铺出现才判已登录', async () => {
+  const states = [
+    { url: JL_HOME, title: 't', shopName: '', 'has商家登录': false, 'has自动注册': false },
+    { url: JL_HOME, title: 't', shopName: '合肥百浩创展贸易有限公司', 'has商家登录': false, 'has自动注册': false },
+  ];
+  const result = await readShopName('tab-2', 0, {
+    cdp: {
+      eval: async () => JSON.stringify(states.shift()),
+    },
+    sleep: async () => {},
+    settleRetryMs: 10,
+    settleMaxRetries: 3,
+  });
+
+  assert.equal(result.success, true);
+  assert.equal(result.state, 'logged-in');
+  assert.equal(result.shopName, '合肥百浩创展贸易有限公司');
+});
+
+test('稳定读取：过渡态持续到上限时仍 fail-closed，不清理也不注入', async () => {
+  let reads = 0;
+  const result = await readShopName('tab-3', 0, {
+    cdp: {
+      eval: async () => {
+        reads += 1;
+        return JSON.stringify({ url: JL_HOME, title: 't', shopName: '新用户', 'has商家登录': false, 'has自动注册': false });
+      },
+    },
+    sleep: async () => {},
+    settleRetryMs: 10,
+    settleMaxRetries: 2,
+  });
+
+  assert.equal(result.success, false);
+  assert.match(result.error, /长时间停留在切号过渡态/);
+  assert.equal(reads, 3);
+});
+
+test('打开登录页：about:blank 即使 complete 也继续等待真正进入鲸灵域', async () => {
+  const pages = [
+    { url: 'about:blank', title: '', readyState: 'complete' },
+    { url: JL_LOGIN, title: '鲸灵商家后台', readyState: 'loading' },
+    { url: JL_LOGIN, title: '鲸灵商家后台', readyState: 'complete' },
+  ];
+  let reads = 0;
+  const result = await openLogin(JL_LOGIN, {
+    cdp: {
+      createTarget: async () => ({ id: 'new-tab' }),
+      eval: async () => {
+        reads += 1;
+        return JSON.stringify(pages.shift());
+      },
+    },
+    sleep: async () => {},
+  });
+
+  assert.equal(result.success, true);
+  assert.equal(result.targetId, 'new-tab');
+  assert.equal(result.url, JL_LOGIN);
+  assert.equal(reads, 3);
 });
 
 test('已登录优先：真实店铺名有值时即使两句文案缺也判已登录', () => {
