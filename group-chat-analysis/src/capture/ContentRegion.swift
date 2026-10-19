@@ -53,6 +53,15 @@ struct ContentRegionLocator {
         )
     }
 
+    static func toolbarEvidenceScore(from blocks: [CaptureOCRBlock]) -> Int {
+        let filterCandidates = blocks.filter { isFilterToolbarText($0.text) }
+        let toolbar = bestToolbarRow(from: filterCandidates)
+        let combined = compact(toolbar.map(\.text).joined(separator: " "))
+        return toolbarTokens.reduce(0) { score, token in
+            score + (combined.contains(token) ? 1 : 0)
+        }
+    }
+
     static func isToolbarText(_ text: String) -> Bool {
         let value = compact(text)
         if value.contains("搜索") || (value.contains("搜") && value.count <= 5) {

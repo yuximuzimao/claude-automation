@@ -12,6 +12,7 @@
 
 ## 阶段归档
 
+- `neat/2026-10-19-engineered-history-silver-cleaning.md`：补齐 10/13→10/18 六日历史并纳入36日语义基线；采集侧补上正交方向 Vision OCR fallback；分析侧正式建立来源/Atomic Claim/Question Cluster/质量门禁，并把 Silver 批量清洗推进到105个知识单元/624张完整来源卡。
 - `neat/2026-10-18-first-read-to-silver-normalized-knowledge.md`：首次阅读模型恢复宽召回后，进一步定位“未洗数据”根问题；引入 Silver 规范化知识单元、跨日合并、类型化结构、4个 pilot 样例、无限服动态信号 v2 与历史阅读分页。
 - `neat/2026-10-16-analysis-v2-value-convergence-and-source-fidelity.md`：页面 v2 真实数据审阅、主信息价值收敛、连续实测聚合、职业/黑话分层、合集方案暂缓，以及相邻页 top fragment 导致原文重复的去重修复阶段。
 - `neat/2026-10-15-complete-history-semantic-analysis.md`：30天/70973条完整历史的全文语义分析、3123张话题卡、20个跨日合集、分类/六视图审查与跨午夜验证收口。

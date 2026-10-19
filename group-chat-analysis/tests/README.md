@@ -62,3 +62,13 @@
 - runtime 文件确实不被 Git 跟踪。
 
 GPT分析属于后续独立验收，不用“摘要看起来不错”代替采集完整性验证。
+
+## 4. 分析质量门禁（只读；不触碰 QQ）
+
+- `python3 -m unittest tests.test_analysis_quality tests.test_analysis_cluster_proposals tests.test_source_anchor_apply tests.test_atomic_claim_queue -v`：coverage 状态、孤儿引用、外部证据、缺失原文锚点、重复 ID、来源审核后精确多段引用、语义错误 quarantine、原子命题 work-lane 路由、聚类提案不吞旧知识和非链式合并等合成回归。
+- `python3 -m src.analysis.quality --report runtime/analysis-work/data-quality-baseline-v1.json`：全量结构/来源校验和输入 hash；只含 `PASS_WITH_WARNINGS` 不能当作已具备正式发布资格。
+- `python3 -m src.analysis.source_anchor_backfill`：只为历史缺锚点卡生成 canonical 原文候选；必须经过语义复核后才能写 verified overlay。
+- `python3 -m src.analysis.atomic_claim_queue`：把全部未完成候选按 high-anchor / medium-review / direct-retrieval / semantic-rebuild 分流；旧 Topic Card 仅作 hint。
+- `python3 -m src.analysis.cluster_proposals`：对未 full 且未被 semantic quarantine 的候选做相似度召回和保守聚类提案，同时用历史人工 Silver 做非独立校准；**不更新 Silver/Gold/已阅**。
+- 正式自动合并必须另外通过独立留出集的语义 precision/recall、错误合并、混合卡 full 误判、动态信息失真等验收；见 `docs/ANALYSIS-DATA-QUALITY-SOP.md`。
+

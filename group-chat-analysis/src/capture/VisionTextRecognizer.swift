@@ -66,19 +66,35 @@ enum VisionTextRecognizer {
         for box: CGRect,
         orientation: CGImagePropertyOrientation
     ) -> CaptureBBox {
-        if orientation == .down {
+        switch orientation {
+        case .down:
             return CaptureBBox(
                 x: 1.0 - box.origin.x - box.size.width,
                 y: 1.0 - box.origin.y - box.size.height,
                 width: box.size.width,
                 height: box.size.height
             )
+        case .right:
+            return CaptureBBox(
+                x: 1.0 - box.origin.y - box.size.height,
+                y: box.origin.x,
+                width: box.size.height,
+                height: box.size.width
+            )
+        case .left:
+            return CaptureBBox(
+                x: box.origin.y,
+                y: 1.0 - box.origin.x - box.size.width,
+                width: box.size.height,
+                height: box.size.width
+            )
+        default:
+            return CaptureBBox(
+                x: box.origin.x,
+                y: box.origin.y,
+                width: box.size.width,
+                height: box.size.height
+            )
         }
-        return CaptureBBox(
-            x: box.origin.x,
-            y: box.origin.y,
-            width: box.size.width,
-            height: box.size.height
-        )
     }
 }

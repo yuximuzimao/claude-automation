@@ -362,15 +362,36 @@ private func testAmbiguousScrollOCRFallback() throws {
     )
 }
 
-private func testDisplayBBoxRemapsUpsideDownVisionCoordinates() throws {
+private func testDisplayBBoxRemapsVisionCoordinates() throws {
     let original = CGRect(x: 0.9680, y: 0.0974, width: 0.0174, height: 0.0139)
     let remapped = VisionTextRecognizer.displayBBox(for: original, orientation: .down)
     try expect(abs(remapped.x - 0.0146) < 0.0002, "180-degree bbox x should map back to the displayed toolbar position")
     try expect(abs(remapped.y - 0.8887) < 0.0002, "180-degree bbox y should map back to the displayed toolbar position")
     try expect(remapped.width == original.width && remapped.height == original.height, "180-degree bbox remap must preserve size")
 
+    let quarterTurn = CGRect(x: 0.10, y: 0.20, width: 0.30, height: 0.40)
+    let right = VisionTextRecognizer.displayBBox(for: quarterTurn, orientation: .right)
+    try expect(abs(right.x - 0.40) < 0.0001, "90-degree right bbox x remap is wrong")
+    try expect(abs(right.y - 0.10) < 0.0001, "90-degree right bbox y remap is wrong")
+    try expect(abs(right.width - 0.40) < 0.0001 && abs(right.height - 0.30) < 0.0001, "90-degree right bbox size should swap axes")
+
+    let left = VisionTextRecognizer.displayBBox(for: quarterTurn, orientation: .left)
+    try expect(abs(left.x - 0.20) < 0.0001, "90-degree left bbox x remap is wrong")
+    try expect(abs(left.y - 0.60) < 0.0001, "90-degree left bbox y remap is wrong")
+    try expect(abs(left.width - 0.40) < 0.0001 && abs(left.height - 0.30) < 0.0001, "90-degree left bbox size should swap axes")
+
     let upright = VisionTextRecognizer.displayBBox(for: original, orientation: .up)
     try expect(upright.x == original.origin.x && upright.y == original.origin.y, "upright bbox must remain unchanged")
+}
+
+private func testToolbarEvidenceScoreUsesOnlyCoLinearControls() throws {
+    let blocks = [
+        block(0, "全部", x: 0.02, y: 0.887),
+        block(1, "图片/视频", x: 0.07, y: 0.887),
+        block(2, "表情 文件 链接", x: 0.14, y: 0.887),
+        block(3, "正文里提到筛选和文件", x: 0.08, y: 0.55),
+    ]
+    try expect(ContentRegionLocator.toolbarEvidenceScore(from: blocks) == 5, "toolbar evidence should count distinct tokens only on the best toolbar row")
 }
 
 private func testCaptureSchemaShape() throws {
@@ -426,7 +447,8 @@ struct CapturePureTestsMain {
             try await testChangeDetectorAllowsFingerprintStableDynamicNoise()
             try testVisualFingerprintDistance()
             try testAmbiguousScrollOCRFallback()
-            try testDisplayBBoxRemapsUpsideDownVisionCoordinates()
+            try testDisplayBBoxRemapsVisionCoordinates()
+            try testToolbarEvidenceScoreUsesOnlyCoLinearControls()
             try testCaptureSchemaShape()
             try testRawWriterPersistsAndRefusesOverwrite()
             print("CapturePureTests OK")

@@ -77,7 +77,7 @@ python3 -m src.app.run_capture --incremental --batch-id <batch_id>
 
 completed 后进入 `rules/analysis.md`。日常分析只读 `runtime/inbox/current.md`，不从 raw OCR 重猜消息；报告/页面保存到 `runtime/reports/`。群聊内容只生成跨项目候选，用户确认后再进入目标项目独立核验。
 
-当前正式分析 CLI 尚未建立，现阶段仍由 GPT/Codex 按 analysis owner 人工触发。
+当前正式分析 CLI 尚未建立，现阶段仍由 GPT/Codex 按 analysis owner 人工触发；已有只读质量检查与全量相似候选提案入口，执行细节见 `ANALYSIS-DATA-QUALITY-SOP.md`，其产物不能自动晋升为正式 Silver。
 
 ## 6. 恢复原则
 

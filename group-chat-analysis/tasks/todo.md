@@ -4,7 +4,12 @@
 
 ## 1. Silver 语义清洗与首次阅读队列
 
-- [ ] 把完整历史 1967 条首次阅读事实切片批量转换为规范化知识单元：先做对象/实体对齐与跨日语义聚类，再按 `mechanism / ordered_route / comparison / strategy / sample / dynamic_signal` 固定结构去重、合并和字段化。`normalized-knowledge-pilot-v1.json` 的4个样例只用于验证数据形状，不是正式全量结果。
+- [ ] 继续完成来源与历史格式债：当前候选层 **698/2278** 仍无可靠原文定位（其中已 full 160）；已建立196条 verified source anchor。45条旧 Silver 引用仍省略 coverage，1条外部核验仍无正式 locator。关键词/相似度只能生成 proposal，不能冒充证据。
+- [ ] **下一批前先刷新 `atomic-claim-work-queue-v1.json`**：Silver 已在上一版 work queue 后继续推进到105个单元/624张完整来源卡，旧的 `1131 ready / 24 review / 525 direct，active 1680` 只保留为历史快照，不能继续当现役数量。当前 reviewed registry 仍为 **167张来源卡 / 206 claims**；15张已确认失真的旧 Topic Card 继续 quarantine，旧标题/摘要永久只作 retrieval hint。
+- [ ] 继续扩展现役 Question Cluster Registry（当前 **206 claims / 127 questions / 104 boundary negatives**）：新 claim 固定走 existing-cluster assignment；未命中才进入 bootstrap。多路召回 `lexical_topk + same_source_card + same_entity` 只生成待审 pair，禁止自动合并。继续扩大独立 holdout / 困难负例后，再把 reviewed question clusters 转成 Silver 草稿。
+- [ ] 增加分析运行工单血缘、按阶段输入输出 hash、异常隔离、幂等重跑及正式发布/回滚；相关工程步骤以 `docs/ANALYSIS-DATA-QUALITY-SOP.md` 为执行依据。
+
+- [ ] 把完整历史 **2278 条**首次阅读事实切片批量转换为规范化知识单元：先做对象/实体对齐与跨日语义聚类，再按 `mechanism / ordered_route / comparison / strategy / sample / dynamic_signal` 固定结构去重、合并和字段化。`normalized-knowledge-pilot-v1.json` 的4个样例只用于验证数据形状，不是正式全量结果。
 - [ ] 批量转换时把实例降为证据角色：同一个结论的直接实例、支持、例外、冲突挂到同一知识单元，不再重复占阅读队列。NAXX 199→228、坦克学习路线、区服组团差异已作为首批验证案例。
 - [ ] 把“对象身份 / 基础上下文补齐”做成 Silver 清洗的一部分，优先覆盖任务（地图/任务名/ID/目标）、Boss（副本/等级或阶段/Boss名/顺序）、职业阈值（专精/版本/具体数值/条件）、装备（正式名/ID/部位/来源/限制）。
 - [ ] 历史回看继续使用“全窗口分析 + 小批量阅读”：跨日语义先整体合并，页面每批最多40个阅读单元；验证批次大小是否合适，但不得按分页重新切语义。
@@ -14,7 +19,7 @@
 
 - [ ] 定义正式“已阅语义指纹”：用户判定没用或存资料库后，相同语义结论不再重新展示；单纯可信度升降只静默更新证据变量。
 - [ ] 定义正式资料库条目结构和专题层级，关键词搜索为第一使用路径；只保存用户明确判定有用的知识，不把系统过滤或“没用”内容伪装成知识。
-- [ ] 继续校准 `runtime/analysis-work/infinite-dossier-v1.json` schema v2：把 141 条无限服候选逐步洗成 `观察字段 / 当前状态 / 适用范围 / 依据 / 证据ID` 动态信号并吸收到六个维度；重复观察只加强后台支持度，只有状态/边界发生变化才产生新的可见更新。
+- [ ] 继续校准 `runtime/analysis-work/infinite-dossier-v1.json` schema v2：把当前页面约 **125 条**无限服候选逐步洗成 `观察字段 / 当前状态 / 适用范围 / 依据 / 证据ID` 动态信号并吸收到六个维度；重复观察只加强后台支持度，只有状态/边界发生变化才产生新的可见更新。
 - [ ] 明确“可补全候选”的持久状态；每批分析后用户可统一要求联网/资料比对补全，不把基础身份补齐也算成额外研究任务。
 
 ## 3. 唯一分析结果结构与正式分析流程

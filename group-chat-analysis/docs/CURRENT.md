@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-“魔兽世界无限+时光服玩家群”（`wow-infinite-time`）从用户入群日 **2026-09-13** 到 **2026-10-12 23:59** 的单群文字历史基线与第一轮完整历史语义分析均已完成。
+“魔兽世界无限+时光服玩家群”（`wow-infinite-time`）从用户入群日 **2026-09-13** 到 **2026-10-18 23:59** 的单群文字历史基线与第一轮完整历史语义分析均已完成。
 
 当前正式阶段是：**Silver 语义清洗批量化 → 首次阅读队列 / 资料库 / 无限服动态专题稳定化 → 唯一分析结果结构定型**。第一轮 topic cards 继续只作为候选索引层；现阶段主任务不是继续逐卡筛选，而是把事实切片跨日去重、实体对齐并转换成规范化知识单元。页面目标仍是“尽量不漏掉第一次值得看一眼的游戏特异信息，同时把用户需要亲自做的去重、合并和结构化工作降到最低”。用户最终只做“没用 / 存资料库”两类判断。
 
@@ -22,23 +22,25 @@
 - Normalize 已恢复 `message_date` 和可确认的绝对 timestamp；单日 finalization 拒绝跨目标日 canonical。
 - 相邻页保守去重，错误成本保持 **漏真实消息 > 多保留重复消息**。
 - 2026-10-16 已补充一个真实边界：旧页 `top fragment` 被下一页完整消息吸收时，只在“长文本明确包含 + 前序连续多消息 overlap 仍成立”条件下允许该 fragment 不阻断重叠；`fragment_kind` 只作为 normalize 瞬态元数据，不进入 message-record schema。
+- 2026-10-19 补采 10/13 时发现 ScreenCaptureKit 偶发把同一窗口帧以 90° 方向交给 Vision，导致现役 `.up/.down` OCR 无法定位工具栏。生产实现现为 `.up` 正常路径失败后才在**同一帧**尝试 `.down/.right/.left`，bbox 映射回显示坐标，并继续要求同一工具栏水平带至少两个已知控件；没有降低安全门槛。Swift 采集回归 5/5 通过，真实故障窗口 current-only 复测恢复正常。
 - runtime 全部为私密本地数据并被 `.gitignore` 排除。
-- 当前确定性回归以本阶段相关测试为准；2026-10-16 `tests.test_normalize_overlap + tests.test_assemble` 共 **26 项通过**。
+- 归档前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，当前确定性回归 **171 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及分析质量/来源/Atomic Claim/Question Cluster 回归。
 
 ## 已验证历史基线
 
-- 覆盖：**2026-09-13 → 2026-10-12，共 30/30 个自然日**。
-- 合计：**10761 raw pages / 70973 canonical**。
+- 覆盖：**2026-09-13 → 2026-10-18，共 36/36 个自然日**。
+- 合计：**12973 raw pages / 85655 canonical**。
 - 每日均已检查 `completed / pending_capture=null`、raw page 连续、canonical sequence 连续、`record_id` 唯一、已恢复日期/时间不跨目标日。
 - 2026-09-25 → 2026-10-04 的 legacy 日包此前已使用当前 normalizer 从 raw 独立重建并 exact match；其它日包由当前 runner/normalizer 直接生成。
-- 阶段明细与逐日统计见 `docs/archive/neat/2026-10-13-complete-single-group-history-baseline.md`。
+- 前 30 日阶段明细与逐日统计见 `docs/archive/neat/2026-10-13-complete-single-group-history-baseline.md`。
+- 2026-10-19 已完成 **2026-10-13 → 2026-10-18** 补采并纳入当前语义基线。六天均逐日确认 `completed / pending_capture=null / capture_complete=true`：10/13 page 0–296、10/14 0–335、10/15 0–296、10/16 0–646、10/17 0–237、10/18 0–396；串行 supervisor 最终于 2026-10-19 04:15:13 输出 `ALL DONE`，当前无残留采集进程。
 
 旧的 `first-full-20261008` 与 `incremental-20261009-001` 继续只作为原运行链/anchor 的历史事实，不充当统一历史分析日包真值。
 
 ## 已完成历史语义分析基线
 
-- 已完整按时间顺序阅读 30 天历史，未使用关键词预筛代替全文阅读。
-- 第一轮细粒度语义层原为 **3123 张 topic cards**；2026-10-16 因把一张混合卡拆成“德鲁伊树皮机制 + ZAM 炸弹实战技巧”两条，当前 runtime 候选索引为 **3124 张**。
+- 已完整按时间顺序阅读 **36 天历史**，未使用关键词预筛代替全文阅读。
+- 当前第一轮细粒度语义候选索引为 **3442 张 topic cards**；其中 10/13 → 10/18 新增 **318 张**（70 / 54 / 49 / 55 / 50 / 40），均完成整日全文复核、来源范围门禁并 promotion。
 - 旧跨日归一层保留 **20 个合集**，但当前只视为历史/实验结构，不再默认视作最终页面方案。
 - 黑话基础规则已写入 `docs/rules/analysis.md`；当前 runtime 页面黑话页已能展示 **29 个词条**。
 - 完整历史第一轮语义基线归档见 `docs/archive/neat/2026-10-15-complete-history-semantic-analysis.md`。
@@ -57,33 +59,35 @@
 - 用户明确判定有用的知识进入资料库；资料库以部分关键词搜索为第一使用方式，并保留专题层级；
 - 展示前需要做基础身份补齐。当前已用 `T-20260925-020` 验证：把“弗约恩任务”补成“风暴峭壁 · 《弥补关系》#12915”，并带任务目标，再显示群聊新增的宠物式控制栏/先护盾控制技巧；
 - 2026-10-18 已确认仅按“同一天 + 同话题”收容器仍不够：正式分析窗口必须先跨日做 Silver 层语义清洗，再生成阅读单元；自然日只保留为证据时间，不能成为话题边界；
-- 当前已建立 `runtime/analysis-work/normalized-knowledge-pilot-v1.json` 验证类型化知识结构：NAXX追赶、区服组团差异、坦克学习阶梯、双持冰DK武器链四个样例共吸收20张来源卡；实例改为证据、路线改为阶段表、比较改为 variants，不再保留同义碎卡；
+- Silver 已从4条 pilot 样例进入正式工作集 `runtime/analysis-work/silver-knowledge-v1.json`：当前共 **105 个知识单元 / 624 张完整吸收来源卡**。除原有 NAXX追赶、区服组团差异、坦克学习阶梯、双持冰DK武器链外，已完成惩戒骑首批清洗；冰DK的构筑分流、70→80保留冰天赋顶T升级路线、副本难度边界、命中/精准阈值、饰品预算层级、够用型配装和入门循环；DKT 的起手仇恨/异常诊断/岗位压力；BDK 的属性阈值、饰品取舍、强度与就业分离；NAXX 稳定工资与时间成本、新号 P4→NAXX→P5 低成本成型路线；猎人专业目标分层、敏捷/攻强条件树和近战猎传闻动态信号；冰法低操作下限/成长上限、急速饱和与爆发错峰、旧套2+2与4件套取舍；整合插件省事/性能权衡、BIS工具可信边界、团本提示链失效、插件安装更新诊断与下载来源安全；首号自练/后续小号直升、任务+随机本混合升级、快飞ROI、G团工资资格和老板位→工资位的资本转换策略；以及双采顺路收益/专门搬砖分流、直升角色知识债、公会团/野团组织取舍、包团/拍团价格风险结构；此后继续完成直升礼包权益/直升装工资位边界、80后任务启动资金、账号控制权风险、专业冲满ROI、奥杜尔时长与观星职责/削弱、美酒节追赶与限时窗口、G团团规透明度/岗位补贴/收入方差/排骨ROI、随机本混合升级与AA固定本路线，以及ZG低成本追赶件与跳Boss路线经济；随后继续收敛插件整合包性能、团本视觉降噪、一键输出辅助边界，以及坦克学习/岗位压力、坦克稀缺与信任门槛、不同坦克专精职责比较。实例与重复说法均降为 evidence，不再重复占阅读队列；
 - 分析窗口与阅读批次已经分离：历史半月数据可以整体去重/合并，页面再按每批最多40个阅读单元分页；分页不参与语义切分；
+- 2026-10-18 第二批清洗进一步校准 Silver 方法：`evidence_refs` 区分 `coverage=full|partial`，避免混合卡只吸收一半却整卡消失；实体只负责召回，最终按 `question` 决定合并边界；已阅核心与新增条件/例外分离，不能用新 queue 覆盖旧 knowledge；新的 queue 单元默认必须至少含一条当前首次阅读候选，禁止因为“与当前项目相关”而擅自复活旧 hidden/collection-only 内容。页面构建同时生成私密 `runtime/analysis-work/silver-candidates-v1.json`，作为后续批量清洗的明确候选工作集；
 - “可补全”只标记那些需要额外联网/资料比对才能补足关键事实的候选；用户可在看完本批后统一要求补全；
 - 原文右侧抽屉继续保留，回链仍以卡片自身时间范围/来源范围为主锚点，不用全日关键词搜索冒充证据；
 - 黑话继续独立维护语境化词典。
+- 2026-10-18 开始工程化分析质量改造：已新增 `docs/ANALYSIS-DATA-QUALITY-SOP.md`、`src/analysis/quality.py`、来源回填/审核/应用、`atomic_claim_queue.py`、`cluster_proposals.py` 及回归测试。当前 **2278 张首次阅读候选**均纳入数据质量快照；当前 105 条 Silver、原文、已阅和 9 条资料库知识均继续沿用同一工程化质量门禁；本轮新增清洗未改动已阅结果或资料库知识。来源债仍为 **698 张**；当前候选锚点为 **1552 high / 28 medium / 698 none**，其中已 full 但仍缺直达锚点 **160 张**。人工语义复核已形成 **196 条 verified source anchor**，并反向发现 **15 张旧 Topic Card 语义抽取错误**；这些卡进入 quarantine，不能参与自动聚类或评测真值。45 条旧引用仍依赖隐式 full，1 条外部引用缺正式 locator。词面召回的 known-positive recall@5 仍为 75.6%、@10 为 85.6%，top5 已标注一致率 65.9%，只作为召回基线。Atomic claim 已进入稳定生产批次：15 张纠错卡→22 claims、12 张 pilot→18 claims、独立 20 张 holdout→31 claims，另已完成生产 B1–B6 共 120 张来源卡。全部 claim 自带 canonical `source_refs`。reviewed atomic registry 现为 **167 张来源卡 / 206 条 reviewed claims / 9 个数据批次**。召回器采用 `lexical_topk + same_source_card + same_entity` 多路 union，所有路线只负责召回；calibration、frozen holdout 与 B1–B6 的人工 gold 正关系均能进入候选池。高分线仍不是合并概率：独立 holdout 固定 0.075 线 precision 65.2% / recall 88.2%，B3/B5 等批次也再次出现高分误报。经过人工 existing-cluster assignment / new-question bootstrap，Question Cluster Registry v14 已有 **206 reviewed claims / 127 reviewed questions / 48 个多命题问题 / 104 条 boundary negative links**。上一版全量 work queue 快照为 **1131 ready-from-high-anchor / 24 needs-anchor-review / 525 direct-source-retrieval，active 1680**；Silver 此后已继续推进到105个单元/624张完整来源卡，因此下一批前必须刷新 work queue。15张旧语义错误 Topic Card 继续 quarantine，其正确原子命题已进入 reviewed registry。
 
 无限服当前单独启用动态专题档案：`runtime/analysis-work/infinite-dossier-v1.json`。2026-10-18 已从长段自然语言摘要升级到 schema v2：仍按练级与玩家发展、经济与打金、专业与资源、规则与风险、职业玩法变化、服务器生态六个维度，但每个维度保存 `观察字段 / 当前状态 / 适用范围 / 依据 / 证据ID`，页面以结构表展示；重复观察只静默增加支持度，AI综合判断不得覆盖来源状态。
 
 当前 runtime 原型统计：
 
-- raw topic cards：**3124**；
+- raw topic cards：**3442**；
 - longitudinal aggregate：**1**；
 - supplemental card：**1**；
 - blackwords：**29**；
-- source links：high **1434** / medium **69** / none **1622**；
-- Silver 清洗前的首次阅读候选：**1967 条事实切片**；它们不是最终阅读单元；
-- 当前4个 Silver 样例共吸收 **20 张来源卡**，页面实际待看降为 **1955 个单元/旧候选混合项**；完整历史尚未批量完成 Silver 清洗，所以这个数字仍然偏大；
-- 无限服首次阅读候选：**141 条**，后续应先吸收到结构化动态信号后再决定哪些需要单独打扰用户；
+- source links：high **1973** / medium **44** / none **1426**；
+- Silver 清洗前的首次阅读候选：**2278 条事实切片**；它们不是最终阅读单元；
+- 当前正式 Silver 工作集共 **105 个知识单元 / 624 张完整吸收来源卡**；页面按 Silver 组件去重后的有效待看为 **1724**，原始 `v3_queue` 为 **2278**。当前候选索引为 **613 张 full / 1644 张 unabsorbed / 21 张 partial**；叠加无限服 dossier 等已规范化组件后，normalized 状态为 **657 full / 1600 unabsorbed / 21 partial**。`partial` 混合卡仅部分语义已归属 Silver，仍保留在首次阅读候选中；
+- 无限服最近构建时有效首次阅读候选：**125 条**，后续应先吸收到结构化动态信号后再决定哪些需要单独打扰用户；
 - 当前由历史用户确认结果种出的资料库知识：**9 条**，其中双持冰DK路线已用标准化阶段表替换旧长段摘要。
 
 这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
 
-当前从首次阅读模型转向 Silver 规范化知识单元的阶段归档见 `docs/archive/neat/2026-10-18-first-read-to-silver-normalized-knowledge.md`；旧 v2 价值收敛阶段仍见 `docs/archive/neat/2026-10-16-analysis-v2-value-convergence-and-source-fidelity.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
+当前 36 日历史补齐、分析质量工程化与 Silver 批量清洗阶段归档见 `docs/archive/neat/2026-10-19-engineered-history-silver-cleaning.md`；此前首次阅读→Silver 模型定型见 `docs/archive/neat/2026-10-18-first-read-to-silver-normalized-knowledge.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
 
 ## 当前下一步
 
-1. 把完整历史候选从“事实切片”批量转成 Silver 规范化知识单元：先做实体对齐和跨日语义聚类，再按 `mechanism / ordered_route / comparison / strategy / sample / dynamic_signal` 固定结构清洗；旧 `review_*` 只能作为线索，不能当新模型真值。
+1. 继续按已建立的 Question Cluster Registry 增量流水线处理 `atomic-claim-work-queue-v1.json`；当前 Silver 已从该队列生成时继续前进，下一批前应先刷新 work queue。上一版快照为 **1131 ready-from-high-anchor / 24 needs-anchor-review / 525 direct-source-retrieval，active 1680**。每批固定走 canonical→claim quality→existing-cluster assignment→new-question bootstrap→多路 recall audit→reviewed registry；旧 Topic Card 永远只作检索提示，similarity 不自动合并。
 2. 在批量清洗过程中同步做“对象身份 / 基础上下文补齐”，优先覆盖任务、Boss、职业阈值和装备四类；同义实例只挂证据，不重复生成知识。
 3. 继续验证每批最多40个阅读单元的历史补课体验；阅读分页只控制负载，不得影响跨日语义合并。
 4. 确定正式的已阅语义指纹、资料库条目与无限服动态信号的数据结构；当前浏览器 localStorage 只承担原型交互，不视作长期真值。

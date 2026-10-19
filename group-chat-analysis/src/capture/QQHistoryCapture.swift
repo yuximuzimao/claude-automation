@@ -396,32 +396,43 @@ struct QQHistoryCapture {
 
         var blocks = uprightBlocks
         let region: CaptureBBox
-        if uprightBlocks.isEmpty {
-            let rotatedBlocks = try VisionTextRecognizer.recognizeBlocks(
-                image,
-                orientation: .down,
-                usesLanguageCorrection: true
-            )
-            guard !rotatedBlocks.isEmpty else {
-                throw QQHistoryCaptureError.noOCRResults
+        do {
+            guard !uprightBlocks.isEmpty else {
+                throw ContentRegionError.toolbarNotFound
             }
-            blocks = rotatedBlocks
-            region = try ContentRegionLocator.locate(from: rotatedBlocks)
-        } else {
-            do {
-                region = try ContentRegionLocator.locate(from: uprightBlocks)
-            } catch ContentRegionError.toolbarNotFound {
-                let rotatedBlocks = try VisionTextRecognizer.recognizeBlocks(
+            region = try ContentRegionLocator.locate(from: uprightBlocks)
+        } catch ContentRegionError.toolbarNotFound {
+            var sawOCR = !uprightBlocks.isEmpty
+            var bestFallback: (blocks: [CaptureOCRBlock], region: CaptureBBox, score: Int)?
+            for orientation: CGImagePropertyOrientation in [.down, .right, .left] {
+                let candidateBlocks = try VisionTextRecognizer.recognizeBlocks(
                     image,
-                    orientation: .down,
+                    orientation: orientation,
                     usesLanguageCorrection: true
                 )
-                guard !rotatedBlocks.isEmpty else {
-                    throw QQHistoryCaptureError.noOCRResults
+                guard !candidateBlocks.isEmpty else {
+                    continue
                 }
-                blocks = rotatedBlocks
-                region = try ContentRegionLocator.locate(from: rotatedBlocks)
+                sawOCR = true
+                do {
+                    let candidateRegion = try ContentRegionLocator.locate(from: candidateBlocks)
+                    let candidateScore = ContentRegionLocator.toolbarEvidenceScore(from: candidateBlocks)
+                    if bestFallback == nil || candidateScore > bestFallback!.score {
+                        bestFallback = (candidateBlocks, candidateRegion, candidateScore)
+                    }
+                } catch is ContentRegionError {
+                    continue
+                }
             }
+
+            guard let bestFallback else {
+                if sawOCR {
+                    throw ContentRegionError.toolbarNotFound
+                }
+                throw QQHistoryCaptureError.noOCRResults
+            }
+            blocks = bestFallback.blocks
+            region = bestFallback.region
         }
 
         let fingerprint = try VisualFingerprint.make(image)
