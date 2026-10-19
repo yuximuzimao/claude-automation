@@ -204,6 +204,9 @@ def test_workbench_embeds_stage12_payload_and_has_required_offline_controls() ->
     assert "candidates.find(token=>token.ref.kind===inferred)" in html
     assert "used.add(best.index)" in html
     assert "步骤 ${stepIndex+1}/${r.steps.length}" in html
+    assert ".stepSummary.empty{visibility:hidden}" in html
+    assert "s.summary||'\u00a0'" in html
+    assert "summary.setAttribute('aria-hidden','true')" in html
     assert "presentationByTask" in html
     lowered = html.lower()
     assert 'src="http://' not in lowered

@@ -13,7 +13,7 @@
     "格罗玛什坠毁点",
     "布德克拉格庇护所"
   ],
-  "input_fingerprint": "5454234a1209e4411e87a7144553edf2eca02e9ebd50d1d049f55a98dc028383",
+  "input_fingerprint": "dbde0425871e3f167649f594f2f1eb6c12438c654a8e5ca894b71e589589c9ad",
   "issues": [],
   "kind": "publisher_payload",
   "map": {
@@ -2569,7 +2569,7 @@
           "location_ref": "storm-p100",
           "location_role": "map_anchor",
           "ordinal": 100,
-          "step_id": "step-14",
+          "step_id": "step-13",
           "visit_id": "a0332",
           "x": 40.8,
           "y": 51.2
@@ -3076,17 +3076,17 @@
     ]
   },
   "profile_id": "storm-peaks-fivebox",
-  "profile_version": 3,
+  "profile_version": 4,
   "program_id": "horde-fivebox-full-clear",
   "publishable": true,
   "route_timing": {
     "center_minutes": null,
-    "input_fingerprint": "5d73a14740cb336896dd43fa2f99cbd76e6a24ec200c386d64f9507d37231781",
+    "input_fingerprint": "ccd05373f690974f8cd92c49bc05ff3d32f5d30e2e5fd0d80b5e9f0a3f643004",
     "range_minutes": null,
     "status": "requirements"
   },
   "schema_version": 1,
-  "stage11_input_fingerprint": "d6e64cca0a31276345f6a646addeb67b7d17faf77ea83c78bb9fa3c3948fab76",
+  "stage11_input_fingerprint": "bb24a0f9b2d693520ca54089f473df5f4f047fc34af5775d91cf23149fea641e",
   "status": "pass",
   "steps": [
     {
@@ -7765,6 +7765,9 @@
         "a0288",
         "a0289",
         "a0290",
+        "a0290a",
+        "a0330",
+        "a0331",
         "a0291",
         "a0292",
         "a0293",
@@ -7947,6 +7950,39 @@
             }
           ],
           "text": "托里姆 → 交《侵犯领土》 → 接《科洛米尔，风暴之锤》",
+          "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0290a"
+          ],
+          "location_ref": "storm-p085a",
+          "task_refs": [],
+          "text": "格罗玛什坠毁点",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0330",
+            "a0331"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "伯克塔·血怒"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "失踪的布莱恩·铜须",
+              "task_id": 12895
+            },
+            {
+              "kind": "accept",
+              "name": "敏锐的嗅觉",
+              "task_id": 12909
+            }
+          ],
+          "text": "伯克塔·血怒 → 交《失踪的布莱恩·铜须》 → 接《敏锐的嗅觉》",
           "type": "task_action"
         },
         {
@@ -8142,6 +8178,17 @@
         },
         {
           "badge": null,
+          "name": "敏锐的嗅觉",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12909
+        },
+        {
+          "badge": null,
           "name": "造物者圣台",
           "note": null,
           "note_override_applied": true,
@@ -8211,9 +8258,11 @@
         "a0322",
         "a0323",
         "a0324",
-        "a0325",
         "a0326",
-        "a0327"
+        "a0327",
+        "a0332",
+        "a0333",
+        "a0334"
       ],
       "lines": [
         {
@@ -8472,27 +8521,18 @@
           "action_ids": [
             "a0323"
           ],
-          "location_ref": "storm-p097",
+          "location_ref": "storm-p096a",
           "task_refs": [],
-          "text": "奥杜尔",
+          "text": "布德克拉格庇护所",
           "type": "location"
         },
         {
           "action_ids": [
             "a0324"
           ],
-          "action_kind": "open_flight_point",
-          "task_refs": [],
-          "text": "开飞行点：奥杜尔",
-          "type": "route_action"
-        },
-        {
-          "action_ids": [
-            "a0325"
-          ],
           "action_kind": "taxi",
           "task_refs": [],
-          "text": "系统飞行：奥杜尔 → 丹尼芬雷",
+          "text": "系统飞行：布德克拉格庇护所 → 丹尼芬雷",
           "type": "route_action"
         },
         {
@@ -8521,10 +8561,43 @@
           ],
           "text": "约库姆国王 → 交《清算之战》",
           "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0332"
+          ],
+          "location_ref": "storm-p100",
+          "task_refs": [],
+          "text": "格罗玛什东侧",
+          "type": "location"
+        },
+        {
+          "action_ids": [
+            "a0333",
+            "a0334"
+          ],
+          "actor": {
+            "kind": "npc",
+            "name": "凯尔莉丝"
+          },
+          "task_refs": [
+            {
+              "kind": "turnin",
+              "name": "敏锐的嗅觉",
+              "task_id": 12909
+            },
+            {
+              "kind": "accept",
+              "name": "追踪罪犯",
+              "task_id": 12910
+            }
+          ],
+          "text": "凯尔莉丝 → 交《敏锐的嗅觉》 → 接《追踪罪犯》",
+          "type": "task_action"
         }
       ],
       "step_id": "step-13",
-      "summary": "完成造物者圣台任务并接《清算之战》后先炉石回格罗玛什坠毁点，再前往布德克拉格开飞行点并接《稀有的土壤》，完成《清算之战》后开奥杜尔飞行点并系统飞行到丹尼芬雷。",
+      "summary": "完成造物者圣台并接《清算之战》后先炉石回格罗玛什坠毁点，再前往布德克拉格开点并接《稀有的土壤》；完成《清算之战》后回布德克拉格系统飞丹尼芬雷交任务，再用借用双足飞龙直飞格罗玛什东侧交《敏锐的嗅觉》。",
       "task_presentations": [
         {
           "badge": null,
@@ -8580,6 +8653,28 @@
           "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12930
+        },
+        {
+          "badge": null,
+          "name": "敏锐的嗅觉",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12909
+        },
+        {
+          "badge": "special",
+          "name": "追踪罪犯",
+          "note": null,
+          "note_override_applied": true,
+          "note_show_on": [],
+          "note_visible": false,
+          "pending": false,
+          "suppress_action_kinds": [],
+          "task_id": 12910
         }
       ],
       "timing": {
@@ -8590,15 +8685,10 @@
         ],
         "status": "pass"
       },
-      "title": "造物者圣台 → 接清算 → 炉石 → 布德克拉格 → 奥杜尔"
+      "title": "接清算 → 炉石 → 布德克拉格 → 丹尼芬雷 → 敏锐嗅觉"
     },
     {
       "action_ids": [
-        "a0330",
-        "a0331",
-        "a0332",
-        "a0333",
-        "a0334",
         "a0335",
         "a0336",
         "a0337",
@@ -8608,63 +8698,6 @@
         "a0341"
       ],
       "lines": [
-        {
-          "action_ids": [
-            "a0330",
-            "a0331"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "伯克塔·血怒"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "失踪的布莱恩·铜须",
-              "task_id": 12895
-            },
-            {
-              "kind": "accept",
-              "name": "敏锐的嗅觉",
-              "task_id": 12909
-            }
-          ],
-          "text": "伯克塔·血怒 → 交《失踪的布莱恩·铜须》 → 接《敏锐的嗅觉》",
-          "type": "task_action"
-        },
-        {
-          "action_ids": [
-            "a0332"
-          ],
-          "location_ref": "storm-p100",
-          "task_refs": [],
-          "text": "格罗玛什东侧",
-          "type": "location"
-        },
-        {
-          "action_ids": [
-            "a0333",
-            "a0334"
-          ],
-          "actor": {
-            "kind": "npc",
-            "name": "凯尔莉丝"
-          },
-          "task_refs": [
-            {
-              "kind": "turnin",
-              "name": "敏锐的嗅觉",
-              "task_id": 12909
-            },
-            {
-              "kind": "accept",
-              "name": "追踪罪犯",
-              "task_id": 12910
-            }
-          ],
-          "text": "凯尔莉丝 → 交《敏锐的嗅觉》 → 接《追踪罪犯》",
-          "type": "task_action"
-        },
         {
           "action_ids": [
             "a0335"
@@ -8748,30 +8781,8 @@
         }
       ],
       "step_id": "step-14",
-      "summary": "交布莱恩便笺后继续霜齿追踪与兽人语任务。",
+      "summary": "从《追踪罪犯》继续推进兽人语任务并接《寒风的声音》。",
       "task_presentations": [
-        {
-          "badge": "sequential_loot",
-          "name": "失踪的布莱恩·铜须",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 12895
-        },
-        {
-          "badge": null,
-          "name": "敏锐的嗅觉",
-          "note": null,
-          "note_override_applied": true,
-          "note_show_on": [],
-          "note_visible": false,
-          "pending": false,
-          "suppress_action_kinds": [],
-          "task_id": 12909
-        },
         {
           "badge": "special",
           "name": "追踪罪犯",
@@ -8795,13 +8806,13 @@
           "task_id": 12913
         },
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "寒风的声音",
           "note": null,
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12917
         }
@@ -8814,12 +8825,13 @@
         ],
         "status": "pass"
       },
-      "title": "格罗玛什 → 兽人语 → 寒风"
+      "title": "追踪罪犯 → 兽人语 → 寒风"
     },
     {
       "action_ids": [
         "a0342",
         "a0343",
+        "a0343a",
         "a0344",
         "a0345",
         "a0346",
@@ -8865,6 +8877,15 @@
           ],
           "text": "↳ 做《寒风的声音》",
           "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0343a"
+          ],
+          "action_kind": "use_hearth",
+          "task_refs": [],
+          "text": "使用炉石：格罗玛什坠毁点",
+          "type": "route_action"
         },
         {
           "action_ids": [
@@ -9132,13 +9153,13 @@
       "summary": "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿。",
       "task_presentations": [
         {
-          "badge": null,
+          "badge": "not_shared",
           "name": "寒风的声音",
           "note": "寒风峡谷目标刷新范围比当前单一找怪区更大；有人抢怪时直接换其它刷新点，不原地干等。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12917
         },
@@ -9193,7 +9214,7 @@
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": false,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13416
         },
@@ -9221,12 +9242,9 @@
         }
       ],
       "timing": {
-        "center_minutes": 38.7,
-        "range_minutes": [
-          29.0,
-          48.3
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "寒风峡谷 → 发明家图书馆"
     },
@@ -9430,7 +9448,7 @@
         {
           "badge": "not_shared",
           "name": "诺甘农之核的守护者",
-          "note": "从洛肯的宝库圆形入口进入内层；诺甘农之核五号分别拾取。",
+          "note": "从洛肯的宝库圆形入口约(56.4,52.1)进入内层；任务不共享。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -9792,7 +9810,7 @@
         {
           "badge": "shared",
           "name": "雷铸铁矮人的奴隶",
-          "note": "",
+          "note": "尼达维里尔矿洞入口约(26.5,50.9)。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -10295,7 +10313,7 @@
         {
           "badge": "shared",
           "name": "护甲板的秘密",
-          "note": "",
+          "note": "米米尔车间约(32.0,40.7)。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
@@ -10304,13 +10322,13 @@
           "task_id": 12980
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "风暴之子瓦杜兰",
           "note": "找到风暴之子瓦杜兰后先使用布德克拉格的作战号角，再击败它。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 12984
         },
@@ -10674,24 +10692,21 @@
           "task_id": 12998
         },
         {
-          "badge": null,
+          "badge": "shared",
           "name": "钢铁巨像",
-          "note": "五号一起骑被驯服的冰虫打钢铁巨像更稳；单号容易翻车。不要下坐骑直接硬打。",
+          "note": "可以五号一起打；也可以主号负责攻击，其他四号负责治疗。",
           "note_override_applied": true,
           "note_show_on": [],
           "note_visible": true,
-          "pending": true,
+          "pending": false,
           "suppress_action_kinds": [],
           "task_id": 13007
         }
       ],
       "timing": {
-        "center_minutes": 17.3,
-        "range_minutes": [
-          12.9,
-          21.6
-        ],
-        "status": "pass"
+        "center_minutes": null,
+        "range_minutes": null,
+        "status": "requirements"
       },
       "title": "尼达维里尔熔炉 → 风暴之心 → 炉石 → 钢铁巨像"
     },
@@ -10719,7 +10734,9 @@
         "a0469",
         "a0470",
         "a0471",
-        "a0472"
+        "a0472",
+        "a0473",
+        "a0474"
       ],
       "lines": [
         {
@@ -10970,10 +10987,28 @@
           ],
           "text": "夏拉托尔 → 交《改变风向》",
           "type": "task_action"
+        },
+        {
+          "action_ids": [
+            "a0473"
+          ],
+          "action_kind": "taxi",
+          "task_refs": [],
+          "text": "系统飞行：唐卡洛营地 → 布德克拉格庇护所",
+          "type": "route_action"
+        },
+        {
+          "action_ids": [
+            "a0474"
+          ],
+          "location_ref": "storm-p144",
+          "task_refs": [],
+          "text": "布德克拉格庇护所",
+          "type": "location"
         }
       ],
       "step_id": "step-20",
-      "summary": "从布德克拉格庇护所系统飞行到已开的唐卡洛营地，继续已接的《雷蹄的记忆》，再完成裂隙、嚎风洞穴和北风事件。",
+      "summary": "从布德克拉格庇护所系统飞行到唐卡洛营地，完成《雷蹄的记忆》、裂隙、嚎风洞穴和北风事件；风暴结束后系统飞回布德克拉格庇护所，再从这里进入冰冠。",
       "task_presentations": [
         {
           "badge": "shared",
@@ -11039,7 +11074,7 @@
         ],
         "status": "pass"
       },
-      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风"
+      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风 → 回布德克拉格"
     }
   ]
 }

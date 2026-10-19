@@ -3776,7 +3776,7 @@
       "task_id": 13164
     }
   ],
-  "input_fingerprint": "fb0a6151033b9608e3c6e9e31c6e55c42b71787013a28ad6c0d06a2845810fca",
+  "input_fingerprint": "8b829f5e020b162acc5a9925303012955fb561e9cb8ad030dab33505f9c4badc",
   "issues": [
     {
       "edge_id": "a0001->a0003",
@@ -5959,32 +5959,32 @@
     },
     {
       "action_id": "a0093",
-      "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
       "severity": "info",
       "step_id": "step-06",
       "task_id": 13043
     },
     {
       "action_id": "a0101",
-      "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
       "severity": "info",
       "step_id": "step-06",
       "task_id": 13043
     },
     {
       "action_id": "a0231",
-      "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
       "severity": "info",
       "step_id": "step-15",
       "task_id": 13136
     },
     {
       "action_id": "a0238",
-      "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
       "severity": "info",
       "step_id": "step-15",
       "task_id": 13136
@@ -6015,36 +6015,41 @@
     },
     {
       "action_id": "a0288",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 13040
     },
     {
       "action_id": "a0289",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 13008
     },
     {
       "action_id": "a0329",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 13122
     },
     {
       "action_id": "a0330",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-21",
       "task_id": 13110
     },
     {
       "action_id": "a0029",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-02",
       "task_id": 12892
     },
@@ -6214,8 +6219,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 16.9,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 330.0,
         "move_seconds": 0.0,
@@ -6224,12 +6229,19 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 1014.0,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        5.729,
+        16.9
+      ],
       "step_id": "step-19",
       "title": "银色前线基地：天灾战术 + 致命剧毒 + 保卫前线",
-      "unresolved_component_count": 9
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 31.53,
@@ -6257,8 +6269,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 9.91,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 339.6,
         "move_seconds": 0.0,
@@ -6267,12 +6279,19 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 594.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        7.162,
+        13.196
+      ],
       "step_id": "step-21",
       "title": "回音谷 / 天灾城：三任务同杀 → 三首领",
-      "unresolved_component_count": 11
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 29.743,
@@ -6350,8 +6369,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 15.91,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 174.6,
         "move_seconds": 0.0,
@@ -6360,12 +6379,19 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 954.6,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 0.0,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        4.297,
+        15.91
+      ],
       "step_id": "step-02",
       "title": "暗影拱顶入口：乐趣十足 → 解放你的思想",
-      "unresolved_component_count": 7
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 3.833,
@@ -7496,7 +7522,7 @@
     "error_count": 0,
     "issue_count": 275,
     "range_model_status": "requirements",
-    "requirement_count": 39,
+    "requirement_count": 34,
     "step_count": 58
   }
 }

@@ -1,6 +1,6 @@
 {
-  "center_minutes": null,
-  "complete": false,
+  "center_minutes": 583.157,
+  "complete": true,
   "component_rows": [
     {
       "component": "move",
@@ -496,8 +496,14 @@
     },
     {
       "component": "move",
-      "edge_id": "a0288->a0291",
-      "seconds": 113.9305678827387,
+      "edge_id": "a0288->a0290a",
+      "seconds": 24.07446655711783,
+      "step_id": "step-12"
+    },
+    {
+      "component": "move",
+      "edge_id": "a0290a->a0291",
+      "seconds": 103.04216880734123,
       "step_id": "step-12"
     },
     {
@@ -569,7 +575,7 @@
     {
       "component": "move",
       "edge_id": "a0321->a0323",
-      "seconds": 33.468450418186755,
+      "seconds": 22.216681455862958,
       "step_id": "step-13"
     },
     {
@@ -581,8 +587,8 @@
     {
       "component": "move",
       "edge_id": "a0326->a0332",
-      "seconds": 107.20035089896086,
-      "step_id": "step-14"
+      "seconds": 90.04829475512713,
+      "step_id": "step-13"
     },
     {
       "component": "move",
@@ -599,12 +605,6 @@
     {
       "component": "move",
       "edge_id": "a0339->a0342",
-      "seconds": 36.42297580099215,
-      "step_id": "step-15"
-    },
-    {
-      "component": "move",
-      "edge_id": "a0342->a0344",
       "seconds": 36.42297580099215,
       "step_id": "step-15"
     },
@@ -1359,6 +1359,16 @@
     },
     {
       "action_ids": [
+        "a0330",
+        "a0331"
+      ],
+      "component": "accept_turnin",
+      "seconds": 58.2,
+      "step_id": "step-12",
+      "visit_id": "a0290a"
+    },
+    {
+      "action_ids": [
         "a0294",
         "a0295"
       ],
@@ -1411,12 +1421,10 @@
     },
     {
       "action_ids": [
-        "a0327",
-        "a0330",
-        "a0331"
+        "a0327"
       ],
       "component": "accept_turnin",
-      "seconds": 67.8,
+      "seconds": 48.6,
       "step_id": "step-13",
       "visit_id": "a0326"
     },
@@ -1427,7 +1435,7 @@
       ],
       "component": "accept_turnin",
       "seconds": 58.2,
-      "step_id": "step-14",
+      "step_id": "step-13",
       "visit_id": "a0332"
     },
     {
@@ -3644,6 +3652,29 @@
       "task_id": 12980
     },
     {
+      "action_id": "a0423",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 151.0,
+          "kill_count": 1,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 12984
+      },
+      "seconds": 151.0,
+      "step_id": "step-18b",
+      "task_id": 12984
+    },
+    {
       "action_id": "a0429",
       "component": "objective_service",
       "resolution": {
@@ -3843,7 +3874,7 @@
       "task_id": 13058
     }
   ],
-  "input_fingerprint": "0dccd870d358d254d09c3da60e5c5fa87c842a5c86e21863afda5370a2125c8b",
+  "input_fingerprint": "70510f54156dd1de4f09e49541b916d177378ffc9758569798e9581f4b4edcbf",
   "issues": [
     {
       "action_id": "a0066",
@@ -3864,6 +3895,15 @@
       "step_id": "step-04"
     },
     {
+      "action_id": "a0343a",
+      "edge_id": "a0342->a0344",
+      "kind": "movement_action_timing_input_required",
+      "operation_kind": "hearth",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-15"
+    },
+    {
       "edge_id": "a0448->a0450",
       "kind": "flight_edge_binding_required",
       "resolved_by": "legacy_step_baseline",
@@ -3871,53 +3911,57 @@
       "step_id": "step-20"
     },
     {
-      "action_id": "a0214",
-      "kind": "conditional_hub_action_execution_maybe",
+      "edge_id": "a0471->a0474",
+      "kind": "flight_edge_binding_required",
       "resolved_by": "legacy_step_baseline",
+      "severity": "info",
+      "step_id": "step-20"
+    },
+    {
+      "action_id": "a0214",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
       "severity": "info",
       "step_id": "step-10",
       "task_id": 12922
     },
     {
       "action_id": "a0216",
-      "kind": "conditional_hub_action_execution_maybe",
-      "resolved_by": "legacy_step_baseline",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
       "severity": "info",
       "step_id": "step-10",
       "task_id": 12922
     },
     {
       "action_id": "a0410",
-      "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 12979
     },
     {
       "action_id": "a0415",
-      "kind": "conditional_hub_action_execution_maybe",
-      "severity": "requirement",
+      "baseline_policy": "exclude_optional_hub_cost",
+      "kind": "conditional_opportunity_hub_action_maybe",
+      "severity": "info",
       "step_id": "step-18",
       "task_id": 12979
     },
     {
       "action_id": "a0343",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-15",
       "task_id": 12917
     },
     {
-      "action_id": "a0423",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
-      "step_id": "step-18b",
-      "task_id": 12984
-    },
-    {
       "action_id": "a0447",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-19",
       "task_id": 13007
     },
@@ -3929,20 +3973,21 @@
       "severity": "info",
       "step_id": "step-15",
       "task_id": 12882
-    },
-    {
-      "kind": "timing_point_estimate_incomplete",
-      "scope": "profile",
-      "severity": "requirement"
     }
   ],
-  "known_seconds": 34313.089,
+  "known_seconds": 34989.408,
   "model_id": "component-wall-clock-v2",
-  "point_estimate_complete": false,
+  "point_estimate_complete": true,
   "profile_id": "storm-peaks-fivebox",
-  "range_basis": null,
-  "range_minutes": null,
-  "status": "requirements",
+  "range_basis": {
+    "basis": "sum_of_step_ranges",
+    "legacy_baseline_steps": 4
+  },
+  "range_minutes": [
+    416.785,
+    749.424
+  ],
+  "status": "pass",
   "steps": [
     {
       "center_minutes": 1.488,
@@ -4281,13 +4326,11 @@
       "known_seconds": 1859.503,
       "point_estimate_complete": true,
       "range_basis": {
-        "basis": "legacy_step_baseline_residual",
-        "residual_seconds": 0.0,
-        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/storm-peaks-fivebox-timing.json"
+        "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        16.5,
-        30.992
+        21.225,
+        40.758
       ],
       "step_id": "step-10",
       "title": "弗约恩之砧：弥补关系 + 精炼之火",
@@ -4363,91 +4406,98 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 16.606,
+      "center_minutes": 17.795,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 300.6,
-        "move_seconds": 339.742,
+        "accept_turnin_seconds": 358.8,
+        "move_seconds": 352.928,
         "objective_service_seconds": 356.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 996.342,
+      "known_seconds": 1067.728,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        13.078,
-        20.133
+        14.119,
+        21.472
       ],
       "step_id": "step-12",
       "title": "托里姆：维拉努斯 → 科洛米尔 → 唐卡洛开点",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 23.379,
+      "center_minutes": 25.342,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 252.0,
-        "move_seconds": 520.721,
+        "accept_turnin_seconds": 291.0,
+        "move_seconds": 599.517,
         "objective_service_seconds": 630.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1402.721,
+      "known_seconds": 1520.517,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        17.898,
-        28.859
+        19.586,
+        31.098
       ],
       "step_id": "step-13",
-      "title": "造物者圣台 → 接清算 → 炉石 → 布德克拉格 → 奥杜尔",
+      "title": "接清算 → 炉石 → 布德克拉格 → 丹尼芬雷 → 敏锐嗅觉",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 10.209,
+      "center_minutes": 7.453,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 174.6,
-        "move_seconds": 197.952,
+        "accept_turnin_seconds": 116.4,
+        "move_seconds": 90.751,
         "objective_service_seconds": 240.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 612.552,
+      "known_seconds": 447.151,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "component_relative_uncertainty"
       },
       "range_minutes": [
-        7.965,
-        12.453
+        5.593,
+        9.312
       ],
       "step_id": "step-14",
-      "title": "格罗玛什 → 兽人语 → 寒风",
+      "title": "追踪罪犯 → 兽人语 → 寒风",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 38.7,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 232.2,
-        "move_seconds": 112.394,
+        "move_seconds": 75.971,
         "objective_service_seconds": 1598.798,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1943.392,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 2322.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 415.031,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/storm-peaks-fivebox-timing.json"
+      },
+      "range_minutes": [
+        29.0,
+        48.3
+      ],
       "step_id": "step-15",
       "title": "寒风峡谷 → 发明家图书馆",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 11.059,
@@ -4496,8 +4546,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 24.92,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 67.8,
         "move_seconds": 91.937,
@@ -4506,34 +4556,44 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 1495.196,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "component_relative_uncertainty"
+      },
+      "range_minutes": [
+        16.764,
+        33.076
+      ],
       "step_id": "step-18",
       "title": "尼达维里尔：洛肯物件 → 黑暗护甲 → 回庇护所",
-      "unresolved_component_count": 2
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 6.346,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 126.0,
         "move_seconds": 96.737,
-        "objective_service_seconds": 7.0,
+        "objective_service_seconds": 158.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 229.737,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 380.737,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "component_relative_uncertainty"
+      },
+      "range_minutes": [
+        4.93,
+        7.761
+      ],
       "step_id": "step-18b",
       "title": "护甲板秘密 → 风暴之子瓦杜兰",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 17.3,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 232.8,
         "move_seconds": 195.271,
@@ -4541,13 +4601,20 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 915.071,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 1038.0,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 122.929,
+        "source_ref": "docs/archive/generated/2026-09-route-lifecycle-legacy-chain/route-models/storm-peaks-fivebox-timing.json"
+      },
+      "range_minutes": [
+        12.9,
+        21.6
+      ],
       "step_id": "step-19",
       "title": "尼达维里尔熔炉 → 风暴之心 → 炉石 → 钢铁巨像",
-      "unresolved_component_count": 1
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 27.7,
@@ -4571,15 +4638,15 @@
         34.7
       ],
       "step_id": "step-20",
-      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风",
+      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风 → 回布德克拉格",
       "unresolved_component_count": 0
     }
   ],
   "summary": {
     "error_count": 0,
     "issue_count": 12,
-    "range_model_status": "requirements",
-    "requirement_count": 6,
+    "range_model_status": "resolved",
+    "requirement_count": 0,
     "step_count": 28
   }
 }

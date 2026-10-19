@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "storm-peaks-fivebox",
-  "version": 3,
+  "version": 4,
   "status": "draft",
   "scope": {
     "route_scope": "风暴峭壁",
@@ -1870,6 +1870,25 @@
     },
     {
       "kind": "location",
+      "location_ref": "storm-p085a",
+      "action_id": "a0290a"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 12895,
+      "location_ref": "storm-p085a",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0330"
+    },
+    {
+      "kind": "accept",
+      "task_id": 12909,
+      "location_ref": "storm-p085a",
+      "npc_name": "伯克塔·血怒",
+      "action_id": "a0331"
+    },
+    {
+      "kind": "location",
       "location_ref": "storm-p086",
       "action_id": "a0291"
     },
@@ -2074,21 +2093,15 @@
     },
     {
       "kind": "location",
-      "location_ref": "storm-p097",
+      "location_ref": "storm-p096a",
       "action_id": "a0323"
     },
     {
-      "kind": "open_flight_point",
-      "location_ref": "storm-p097",
-      "target_name": "奥杜尔",
-      "action_id": "a0324"
-    },
-    {
       "kind": "taxi",
-      "location_ref": "storm-p097",
-      "from_name": "奥杜尔",
+      "location_ref": "storm-p096a",
+      "from_name": "布德克拉格庇护所",
       "to_name": "丹尼芬雷",
-      "action_id": "a0325"
+      "action_id": "a0324"
     },
     {
       "kind": "location",
@@ -2101,20 +2114,6 @@
       "location_ref": "storm-p098",
       "npc_name": "约库姆国王",
       "action_id": "a0327"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 12895,
-      "location_ref": "storm-p099",
-      "npc_name": "伯克塔·血怒",
-      "action_id": "a0330"
-    },
-    {
-      "kind": "accept",
-      "task_id": 12909,
-      "location_ref": "storm-p099",
-      "npc_name": "伯克塔·血怒",
-      "action_id": "a0331"
     },
     {
       "kind": "location",
@@ -2189,6 +2188,12 @@
       "task_id": 12917,
       "location_ref": "storm-p103",
       "action_id": "a0343"
+    },
+    {
+      "kind": "use_hearth",
+      "location_ref": "storm-p104",
+      "target_name": "格罗玛什坠毁点",
+      "action_id": "a0343a"
     },
     {
       "kind": "location",
@@ -2989,6 +2994,18 @@
       "location_ref": "storm-p142",
       "npc_name": "夏拉托尔",
       "action_id": "a0472"
+    },
+    {
+      "kind": "taxi",
+      "location_ref": "storm-p144",
+      "from_name": "唐卡洛营地",
+      "to_name": "布德克拉格庇护所",
+      "action_id": "a0473"
+    },
+    {
+      "kind": "location",
+      "location_ref": "storm-p144",
+      "action_id": "a0474"
     }
   ],
   "step_groups": [
@@ -3403,6 +3420,9 @@
         "a0288",
         "a0289",
         "a0290",
+        "a0290a",
+        "a0330",
+        "a0331",
         "a0291",
         "a0292",
         "a0293",
@@ -3418,8 +3438,8 @@
     },
     {
       "step_id": "step-13",
-      "title": "造物者圣台 → 接清算 → 炉石 → 布德克拉格 → 奥杜尔",
-      "summary": "完成造物者圣台任务并接《清算之战》后先炉石回格罗玛什坠毁点，再前往布德克拉格开飞行点并接《稀有的土壤》，完成《清算之战》后开奥杜尔飞行点并系统飞行到丹尼芬雷。",
+      "title": "接清算 → 炉石 → 布德克拉格 → 丹尼芬雷 → 敏锐嗅觉",
+      "summary": "完成造物者圣台并接《清算之战》后先炉石回格罗玛什坠毁点，再前往布德克拉格开点并接《稀有的土壤》；完成《清算之战》后回布德克拉格系统飞丹尼芬雷交任务，再用借用双足飞龙直飞格罗玛什东侧交《敏锐的嗅觉》。",
       "action_ids": [
         "a0302",
         "a0303",
@@ -3446,21 +3466,18 @@
         "a0322",
         "a0323",
         "a0324",
-        "a0325",
         "a0326",
-        "a0327"
+        "a0327",
+        "a0332",
+        "a0333",
+        "a0334"
       ]
     },
     {
       "step_id": "step-14",
-      "title": "格罗玛什 → 兽人语 → 寒风",
-      "summary": "交布莱恩便笺后继续霜齿追踪与兽人语任务。",
+      "title": "追踪罪犯 → 兽人语 → 寒风",
+      "summary": "从《追踪罪犯》继续推进兽人语任务并接《寒风的声音》。",
       "action_ids": [
-        "a0330",
-        "a0331",
-        "a0332",
-        "a0333",
-        "a0334",
         "a0335",
         "a0336",
         "a0337",
@@ -3477,6 +3494,7 @@
       "action_ids": [
         "a0342",
         "a0343",
+        "a0343a",
         "a0344",
         "a0345",
         "a0346",
@@ -3622,8 +3640,8 @@
     },
     {
       "step_id": "step-20",
-      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风",
-      "summary": "从布德克拉格庇护所系统飞行到已开的唐卡洛营地，继续已接的《雷蹄的记忆》，再完成裂隙、嚎风洞穴和北风事件。",
+      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风 → 回布德克拉格",
+      "summary": "从布德克拉格庇护所系统飞行到唐卡洛营地，完成《雷蹄的记忆》、裂隙、嚎风洞穴和北风事件；风暴结束后系统飞回布德克拉格庇护所，再从这里进入冰冠。",
       "action_ids": [
         "a0451",
         "a0450",
@@ -3647,7 +3665,9 @@
         "a0469",
         "a0470",
         "a0471",
-        "a0472"
+        "a0472",
+        "a0473",
+        "a0474"
       ]
     }
   ],
@@ -4578,6 +4598,17 @@
           "mode": "fly"
         }
       },
+      "storm-p085a": {
+        "display_name": "格罗玛什坠毁点",
+        "x": 37.3,
+        "y": 49.6,
+        "phase": "gromarsh",
+        "transport": "fly",
+        "incoming_movement": {
+          "kind": "self_move",
+          "mode": "fly"
+        }
+      },
       "storm-p086": {
         "display_name": "丹尼芬雷",
         "x": 65.4,
@@ -4698,11 +4729,11 @@
           "mode": "fly"
         }
       },
-      "storm-p097": {
-        "display_name": "奥杜尔",
-        "x": 45.0,
-        "y": 28.0,
-        "phase": "ulduar",
+      "storm-p096a": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
         "transport": "fly",
         "incoming_movement": {
           "kind": "self_move",
@@ -4717,7 +4748,7 @@
         "transport": "taxi",
         "incoming_movement": {
           "kind": "action",
-          "action_id": "a0325"
+          "action_id": "a0324"
         }
       },
       "storm-p099": {
@@ -4736,10 +4767,10 @@
         "x": 40.8,
         "y": 51.2,
         "phase": "brann",
-        "transport": "ride",
+        "transport": "fly",
         "incoming_movement": {
           "kind": "self_move",
-          "mode": "ride"
+          "mode": "fly"
         }
       },
       "storm-p101": {
@@ -4780,10 +4811,10 @@
         "x": 37.3,
         "y": 49.7,
         "phase": "gromarsh",
-        "transport": "fly",
+        "transport": "hearth",
         "incoming_movement": {
-          "kind": "self_move",
-          "mode": "fly"
+          "kind": "action",
+          "action_id": "a0343a"
         }
       },
       "storm-p105": {
@@ -5204,6 +5235,17 @@
           "mode": "fly"
         }
       },
+      "storm-p144": {
+        "display_name": "布德克拉格庇护所",
+        "x": 31.4,
+        "y": 38.1,
+        "phase": "bouldercrag",
+        "transport": "taxi",
+        "incoming_movement": {
+          "kind": "action",
+          "action_id": "a0473"
+        }
+      },
       "storm-p143": {
         "display_name": "K3",
         "x": 41.0,
@@ -5237,6 +5279,11 @@
       "date": "2026-10-16",
       "kind": "display_step_split",
       "summary": "按HUD可读性拆分原步骤3、6、8、9、11、18；只重划stepGroups边界与标题，不改变任何路线动作顺序、任务事实或交通。"
+    },
+    {
+      "date": "2026-10-19",
+      "kind": "live_run_route_correction",
+      "summary": "第二组DK实跑修正后半段：布莱恩便笺在科洛米尔前第一次回格罗玛什时提前交付并接《敏锐的嗅觉》；清算之战不再绕奥杜尔开点，改回布德克拉格系统飞丹尼芬雷，交清算后直飞格罗玛什东侧；《寒风的声音》完成后炉石；风暴结束由唐卡洛系统飞回布德克拉格再进入冰冠。"
     }
   ]
 }

@@ -65,10 +65,11 @@
   "guide": [
     "接取：古斯塔夫神父。",
     "冰冠冰川银色前线基地的古斯塔夫神父要求你交给他10个遗忘深渊毒囊。",
+    "遗忘深渊毒囊实测为100%掉落；任务不共享，五号分别收集。",
     "交付：古斯塔夫神父。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -94,6 +95,18 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-19",
+      "source_type": "user_live",
+      "source_ref": "2026-10-19 second DK fivebox live run: 《致命的剧毒》不共享，任务物实测100%掉落。",
+      "observed_at": "2026-10-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

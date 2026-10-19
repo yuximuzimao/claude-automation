@@ -84,7 +84,7 @@
     "交付：古斯塔夫神父。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -110,6 +110,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-19",
+      "source_type": "user_live",
+      "source_ref": "2026-10-19 second DK fivebox live run: 《永不安息的亡者》共享。",
+      "observed_at": "2026-10-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

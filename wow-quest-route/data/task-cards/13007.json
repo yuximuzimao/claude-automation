@@ -79,7 +79,7 @@
     "交付：塑石者布德克拉格。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -106,14 +106,25 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-19",
+      "source_type": "user_live",
+      "source_ref": "2026-10-19 second DK fivebox live run: 《钢铁巨像》共享；可五号一起打，也可主号攻击、其余四号治疗。",
+      "observed_at": "2026-10-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《钢铁巨像》：五号一起骑被驯服的冰虫打钢铁巨像更稳；单号容易翻车。不要下坐骑直接硬打。",
+      "text": "可以五号一起打；也可以主号负责攻击，其他四号负责治疗。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移：当前正式workbench中只有一条可明确归属该任务的备注，按原文无损保存。"
+      "source_ref": "2026-10-19 second DK fivebox live run",
+      "reason": "第二组DK实测确认钢铁巨像共享，并补充两种稳定五开打法。"
     }
   }
 }

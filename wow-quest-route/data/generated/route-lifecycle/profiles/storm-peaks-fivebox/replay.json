@@ -1164,6 +1164,18 @@
         "task_id": 13010
       },
       {
+        "action_id": "a0331",
+        "kind": "min_level",
+        "required_min_level": 77,
+        "resolver": "derived_xp",
+        "task_id": 12909
+      },
+      {
+        "action_id": "a0331",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 12909
+      },
+      {
         "action_id": "a0295",
         "kind": "min_level",
         "required_min_level": 77,
@@ -1246,18 +1258,6 @@
         "action_id": "a0320",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 12930
-      },
-      {
-        "action_id": "a0331",
-        "kind": "min_level",
-        "required_min_level": 77,
-        "resolver": "derived_xp",
-        "task_id": 12909
-      },
-      {
-        "action_id": "a0331",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 12909
       },
       {
         "action_id": "a0334",
@@ -3228,6 +3228,40 @@
         "task_id": 13010
       },
       {
+        "action_id": "a0331",
+        "checks": [
+          {
+            "kind": "faction",
+            "status": "pass",
+            "value": "horde"
+          },
+          {
+            "kind": "race",
+            "status": "pass",
+            "value": "blood_elf"
+          },
+          {
+            "kind": "min_level",
+            "required": 77,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "pre_any",
+            "status": "pass",
+            "task_ids": [
+              12895
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 12909
+      },
+      {
         "action_id": "a0295",
         "checks": [
           {
@@ -3401,40 +3435,6 @@
           }
         ],
         "task_id": 12930
-      },
-      {
-        "action_id": "a0331",
-        "checks": [
-          {
-            "kind": "faction",
-            "status": "pass",
-            "value": "horde"
-          },
-          {
-            "kind": "race",
-            "status": "pass",
-            "value": "blood_elf"
-          },
-          {
-            "kind": "min_level",
-            "required": 77,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              12895
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 12909
       },
       {
         "action_id": "a0334",
@@ -4311,12 +4311,7 @@
       },
       {
         "action_id": "a0324",
-        "flight_point": "奥杜尔",
-        "kind": "open_flight_point"
-      },
-      {
-        "action_id": "a0325",
-        "from": "奥杜尔",
+        "from": "布德克拉格庇护所",
         "kind": "taxi",
         "missing_entry_flight_points": [],
         "to": "丹尼芬雷"
@@ -4327,13 +4322,19 @@
         "kind": "taxi",
         "missing_entry_flight_points": [],
         "to": "唐卡洛营地"
+      },
+      {
+        "action_id": "a0473",
+        "from": "唐卡洛营地",
+        "kind": "taxi",
+        "missing_entry_flight_points": [],
+        "to": "布德克拉格庇护所"
       }
     ],
     "guaranteed_opened_by_exit": [
       "K3",
       "丹尼芬雷",
       "唐卡洛营地",
-      "奥杜尔",
       "布德克拉格庇护所",
       "格罗玛什坠毁点"
     ],
@@ -4385,6 +4386,12 @@
         "target": "格罗玛什坠毁点"
       },
       {
+        "action_id": "a0343a",
+        "kind": "use_hearth",
+        "status": "used",
+        "target": "格罗玛什坠毁点"
+      },
+      {
         "action_id": "a0378",
         "kind": "bind_hearth",
         "status": "bound",
@@ -4407,7 +4414,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "328946b64f5cf6895a179ae38d0a5f09bb80bb232cc2c054b52bdfa4d084d0a5",
+  "input_fingerprint": "b1fb8db4a87233359c8d7851a3f5861d6a9682e78e1dfb38507f895118b7d0b0",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",

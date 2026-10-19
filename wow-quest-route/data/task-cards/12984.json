@@ -79,9 +79,9 @@
     "交付：塑石者布德克拉格。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
-  "timing_rule_ref": null,
+  "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
     {
       "evidence_id": "evidence-questie-11.34.0",
@@ -105,6 +105,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-19",
+      "source_type": "user_live",
+      "source_ref": "2026-10-19 second DK fivebox live run: 《风暴之子瓦杜兰》共享。",
+      "observed_at": "2026-10-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

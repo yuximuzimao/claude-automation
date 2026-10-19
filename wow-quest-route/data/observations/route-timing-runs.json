@@ -2453,6 +2453,140 @@
         "state": "风暴峭壁第二组DK续跑于04:06停止；本次最新反馈已处理到《清算之战》路线顺序调整。"
       },
       "status": "partial_live_run_recorded_route_corrections_applied"
+    },
+    {
+      "run_id": "2026-10-19-storm-second-dk-0300-0614",
+      "date": "2026-10-19",
+      "route_key": "storm_peaks_second_dk_live_completion",
+      "profile_ids": [
+        "storm-peaks-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "storm-peaks-fivebox": 3
+      },
+      "run_kind": "second_fivebox_live_completion",
+      "time_precision": "exact_minute_user_reported_with_journey_end_anchor",
+      "effective_start_local": "2026-10-19T03:00:00+08:00",
+      "effective_end_local": "2026-10-19T06:14:00+08:00",
+      "wall_clock_minutes": 194,
+      "actual_minutes": 194,
+      "pause_windows": [],
+      "route_window": "风暴峭壁第二组DK续跑：《清算之战》objective开始→风暴正式路线完成。",
+      "excluded_before_start": [
+        "03:00前测试奥杜尔飞行限制时坐骑消失、坠崖、自杀复活并开飞行点；用户明确不计入本次正式实测。"
+      ],
+      "route_corrections_confirmed_by_run": [
+        "奥杜尔不作为正式开点/系统飞行中继；改为布德克拉格庇护所系统飞丹尼芬雷。",
+        "《失踪的布莱恩·铜须》在更早第一次回格罗玛什时交付并接《敏锐的嗅觉》，不拖到《清算之战》之后。",
+        "《寒风的声音》不共享，完成后直接炉石回格罗玛什坠毁点。",
+        "《图书馆的控制台》为纯交接，不显示fivebox标签。",
+        "《诺甘农之核的守护者》不共享；删除误导性的分别拾取描述。",
+        "《风暴之子瓦杜兰》《钢铁巨像》共享。",
+        "风暴结束后从唐卡洛系统飞回布德克拉格庇护所，再进入冰冠。"
+      ],
+      "timing_observations": [
+        "《寒风的声音》本轮无人抢怪仍超过30分钟，保留为任务级慢点证据；未给出精确起止，不伪造单任务精确分钟。",
+        "Questie Journey于06:13:36完成13058，与用户06:14风暴结束边界一致。"
+      ],
+      "journey_evidence": {
+        "source": ".ai-bridge/Questie.lua",
+        "source_sha256": "a4a7486f2105f895f5d05e036b70a162d4a75d483741389a99c56030f1d7ea6d",
+        "end_anchor": "2026-10-19T06:13:36+08:00 Complete 13058"
+      },
+      "calibration_eligible": false,
+      "calibration_note": "整段包含多项正式路线纠正且起点由用户墙钟锚定；保留真实194分钟与局部任务观察，不直接反标完整Storm模型。",
+      "runtime_end_state": {
+        "user_end_local": "2026-10-19T06:14:00+08:00",
+        "level": 80,
+        "state": "风暴峭壁完成，进入冰冠。"
+      },
+      "status": "live_run_recorded_route_corrections_applied"
+    },
+    {
+      "run_id": "2026-10-19-icecrown-second-dk-0614-0828",
+      "date": "2026-10-19",
+      "route_key": "icecrown_second_dk_live_partial_reordered",
+      "profile_ids": [
+        "icecrown-fivebox"
+      ],
+      "run_kind": "second_fivebox_live_partial",
+      "time_precision": "mixed_user_minute_boundary_and_exact_journey_events",
+      "effective_start_local": "2026-10-19T06:14:00+08:00",
+      "effective_end_local": "2026-10-19T08:28:00+08:00",
+      "wall_clock_minutes": 134,
+      "actual_minutes": 134,
+      "pause_windows": [],
+      "route_window": "冰冠第二组DK：风暴转场后进入冰冠→08:28停止；Journey末端08:27:38完成13125《凝固的空气》。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "06:37在奥格瑞姆之锤接13227《审判日降临！》与12892《乐趣十足》后，误把正式后段暗影拱顶链提前执行；到07:12:19接12899《暗影拱顶》时发现顺序错误，随后直接飞去交13227并从正式步骤2继续。",
+        "该误序没有无效墙钟：06:37:00→07:12:19正好完成正式路线后续本来就需要的一整圈12892→12891→12893→12897并回到飞船；07:12:19→07:15:08则是飞船→交13227的正常跨点移动。正式路线不复制这次提前顺序，但这些任务/移动样本可保留。"
+      ],
+      "task_time_slices": [
+        {
+          "task_id": 12892,
+          "task_name": "乐趣十足",
+          "start_local": "2026-10-19T06:37:00+08:00",
+          "end_local": "2026-10-19T06:41:12+08:00",
+          "seconds": 252,
+          "note": "接取→完成连续区间，4分12秒。"
+        },
+        {
+          "task_id": 12891,
+          "task_name": "我有一计……",
+          "start_local": "2026-10-19T06:41:13+08:00",
+          "end_local": "2026-10-19T07:00:07+08:00",
+          "seconds": 1134,
+          "note": "接取→完成连续区间，18分54秒。"
+        },
+        {
+          "task_id": 12893,
+          "task_name": "解放你的思想",
+          "start_local": "2026-10-19T07:00:08+08:00",
+          "end_local": "2026-10-19T07:06:05+08:00",
+          "seconds": 357,
+          "note": "接取→完成连续区间，5分57秒。"
+        },
+        {
+          "task_id": 12897,
+          "task_name": "顽固的敌人",
+          "start_local": "2026-10-19T07:06:06+08:00",
+          "end_local": "2026-10-19T07:12:19+08:00",
+          "seconds": 373,
+          "note": "接取→完成并接《暗影拱顶》的连续区间，6分13秒。"
+        }
+      ],
+      "transition_time_slices": [
+        {
+          "from": "奥格瑞姆之锤（接《暗影拱顶》）",
+          "to": "银色前线基地（交《审判日降临！》）",
+          "start_local": "2026-10-19T07:12:19+08:00",
+          "end_local": "2026-10-19T07:15:08+08:00",
+          "seconds": 169,
+          "note": "2分49秒；与正式路线在飞船接完任务后直接去步骤2的移动方向一致，可保留为正常移动样本。"
+        }
+      ],
+      "route_corrections_confirmed_by_run": [
+        "《乐趣十足》《天灾的战术》《永不安息的亡者》共享。",
+        "《致命的剧毒》《天灾石》不共享；《致命的剧毒》任务物实测100%掉落。",
+        "暗影拱顶链本次只是提前执行，正式路线仍保持飞船接任务后先去交《审判日降临！》、从步骤2继续。"
+      ],
+      "journey_evidence": {
+        "source": ".ai-bridge/Questie.lua",
+        "source_sha256": "a4a7486f2105f895f5d05e036b70a162d4a75d483741389a99c56030f1d7ea6d",
+        "first_icecrown_task_anchor": "2026-10-19T06:22:10+08:00 Accept 13668",
+        "formal_airship_anchor": "2026-10-19T06:36:52+08:00 Accept 13227; 06:37:00 Accept 12892",
+        "rejoin_anchor": "2026-10-19T07:15:08+08:00 Complete 13227",
+        "end_anchor": "2026-10-19T08:27:38+08:00 Complete 13125"
+      },
+      "calibration_eligible": false,
+      "calibration_note": "整段134分钟的任务时间有效，但执行顺序与正式Profile不同；只保留可被Journey隔离的连续任务/转场切片，不把整段直接用于步骤顺序校准。",
+      "runtime_end_state": {
+        "user_stop_local": "2026-10-19T08:28:00+08:00",
+        "level": 80,
+        "state": "13125《凝固的空气》已完成；冰冠继续点以此Journey末端为准。"
+      },
+      "status": "partial_live_run_recorded_reordered_slices_preserved"
     }
   ]
 }
