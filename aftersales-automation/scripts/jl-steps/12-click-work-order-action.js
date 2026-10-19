@@ -15,6 +15,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
+const { assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 
 const JL_DOMAIN = 'scrm.jlsupp.com';
 const ACTION_TEXTS = ['处理', '查看', '售后处理'];
@@ -263,9 +264,12 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
-async function scrollActionButtonIntoView(targetId, workOrderNum) {
+async function scrollActionButtonIntoView(targetId, workOrderNum, abortSignal = null) {
+  assertNotAborted(abortSignal);
   let found = await findActionButton(targetId, workOrderNum);
+  assertNotAborted(abortSignal);
   for (let step = 0; step <= MAX_WHEEL_STEPS; step++) {
+    assertNotAborted(abortSignal);
     if (isRectInViewport(found.rect, found.viewport)) {
       return { button: found, wheelSteps: step };
     }
@@ -281,20 +285,27 @@ async function scrollActionButtonIntoView(targetId, workOrderNum) {
       deltaY,
       button: 'none',
     });
-    await sleep(WHEEL_WAIT_MS);
+    assertNotAborted(abortSignal);
+    await waitAbortable(WHEEL_WAIT_MS, abortSignal);
     found = await findActionButton(targetId, workOrderNum);
+    assertNotAborted(abortSignal);
   }
   throw new Error(`处理按钮滚动后仍不在可视区: ${workOrderNum}`);
 }
 
-async function clickPointLikeHuman(targetId, x, y) {
+async function clickPointLikeHuman(targetId, x, y, abortSignal = null) {
+  assertNotAborted(abortSignal);
   await cdp.dispatchMouseEvent(targetId, {
     type: 'mouseMoved',
     x,
     y,
     button: 'none',
   });
-  await sleep(MOVE_DELAY_MS);
+  assertNotAborted(abortSignal);
+  await waitAbortable(MOVE_DELAY_MS, abortSignal);
+
+  // mousePressed 一旦发出就必须配对 mouseReleased；之后再响应停止。
+  assertNotAborted(abortSignal);
   await cdp.dispatchMouseEvent(targetId, {
     type: 'mousePressed',
     x,
@@ -310,6 +321,7 @@ async function clickPointLikeHuman(targetId, x, y) {
     button: 'left',
     clickCount: 1,
   });
+  assertNotAborted(abortSignal);
 }
 
 async function readTargetPageInfo(targetId, workOrderNum, targetUrl) {
@@ -347,11 +359,14 @@ async function readTargetPageInfo(targetId, workOrderNum, targetUrl) {
 
 async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options = {}) {
   const timeoutMs = options.timeoutMs || NEW_TARGET_TIMEOUT_MS;
+  const abortSignal = options.abortSignal || null;
   const startedAt = Date.now();
   let lastNewTargets = [];
 
   while (Date.now() - startedAt <= timeoutMs) {
+    assertNotAborted(abortSignal);
     const targets = await cdp.getTargets();
+    assertNotAborted(abortSignal);
     const newTargets = (targets || []).filter(t =>
       t &&
       t.type === 'page' &&
@@ -365,7 +380,9 @@ async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options 
     }));
 
     for (const target of newTargets) {
+      assertNotAborted(abortSignal);
       const page = await readTargetPageInfo(target.id, workOrderNum, target.url);
+      assertNotAborted(abortSignal);
       if (page.containsWorkOrderNum) {
         return {
           newTargetId: target.id,
@@ -378,7 +395,7 @@ async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options 
         };
       }
     }
-    await sleep(options.intervalMs || NEW_TARGET_INTERVAL_MS);
+    await waitAbortable(options.intervalMs || NEW_TARGET_INTERVAL_MS, abortSignal);
   }
 
   const error = new Error(`未识别到属于工单 ${workOrderNum} 的新标签页: ${JSON.stringify(lastNewTargets)}`);
@@ -388,21 +405,29 @@ async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options 
 
 async function clickWorkOrderAction(workOrderNum, options = {}) {
   const order = assertWorkOrderNum(workOrderNum);
+  const abortSignal = options.abortSignal || null;
+  assertNotAborted(abortSignal);
   const target = options.targetId
     ? { id: options.targetId }
     : await findJlPageTarget();
+  assertNotAborted(abortSignal);
 
   const beforeTargets = await cdp.getTargets();
+  assertNotAborted(abortSignal);
   const beforeTargetIds = new Set((beforeTargets || [])
     .filter(t => t && t.type === 'page' && t.id)
     .map(t => t.id));
 
-  const positioned = await scrollActionButtonIntoView(target.id, order);
+  const positioned = await scrollActionButtonIntoView(target.id, order, abortSignal);
+  assertNotAborted(abortSignal);
   const rect = positioned.button.rect;
-  await clickPointLikeHuman(target.id, rect.centerX, rect.centerY);
-  await sleep(AFTER_CLICK_WAIT_MS);
+  await clickPointLikeHuman(target.id, rect.centerX, rect.centerY, abortSignal);
+  await waitAbortable(AFTER_CLICK_WAIT_MS, abortSignal);
 
-  const newTab = await waitForNewWorkOrderTarget(beforeTargetIds, order, options);
+  const newTab = await waitForNewWorkOrderTarget(beforeTargetIds, order, {
+    ...options,
+    abortSignal,
+  });
   return {
     success: true,
     targetId: target.id,

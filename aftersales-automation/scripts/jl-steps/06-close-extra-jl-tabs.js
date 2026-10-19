@@ -8,6 +8,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
+const { assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 const { countJlTabs } = require('./05-count-jl-tabs');
 
 const DEFAULT_CLOSE_GAP_MS = 300;
@@ -18,7 +19,11 @@ function sleep(ms) {
 
 async function closeExtraJlTabs(options = {}) {
   const sleepMs = options.sleepMs == null ? DEFAULT_CLOSE_GAP_MS : options.sleepMs;
+  const abortSignal = options.abortSignal || null;
+  const sleepFn = options.sleep || sleep;
+  assertNotAborted(abortSignal);
   const counted = await countJlTabs();
+  assertNotAborted(abortSignal);
   if (!counted || !counted.success) {
     return { success: false, error: counted && counted.error ? counted.error : '统计鲲灵 tab 失败' };
   }
@@ -38,10 +43,13 @@ async function closeExtraJlTabs(options = {}) {
   const closed = [];
   for (const tab of tabs.slice(1)) {
     try {
+      assertNotAborted(abortSignal);
       await cdp.closeTarget(tab.id);
       closed.push(tab.id);
-      if (sleepMs > 0) await sleep(sleepMs);
+      assertNotAborted(abortSignal);
+      if (sleepMs > 0) await waitAbortable(sleepMs, abortSignal, sleepFn);
     } catch (e) {
+      if (e && e.name === 'AbortError') throw e;
       return {
         success: false,
         count: counted.count,

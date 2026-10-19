@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { matchShopName, shopKeyword } = require('./login-state');
+const { assertNotAborted } = require('../wait');
 
 const SESSIONS_DIR = path.join(__dirname, '../../../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
@@ -50,14 +51,18 @@ function decideOpenAccountAction(loginState, accountNote) {
   };
 }
 
-async function resolveJlTab(steps) {
+async function resolveJlTab(steps, abortSignal) {
+  assertNotAborted(abortSignal);
   const counted = await steps.countJlTabs();
+  assertNotAborted(abortSignal);
   if (!counted || !counted.success) {
     return { success: false, error: counted && counted.error ? counted.error : '统计鲲灵 tab 失败' };
   }
 
   if (counted.count === 0) {
-    const opened = await steps.openLogin();
+    assertNotAborted(abortSignal);
+    const opened = await steps.openLogin(undefined, { abortSignal });
+    assertNotAborted(abortSignal);
     if (!opened || !opened.success) {
       return { success: false, error: opened && opened.error ? opened.error : '打开 login 页失败' };
     }
@@ -70,7 +75,9 @@ async function resolveJlTab(steps) {
     return { success: true, targetId, opened: false };
   }
 
-  const closed = await steps.closeExtraJlTabs();
+  assertNotAborted(abortSignal);
+  const closed = await steps.closeExtraJlTabs({ abortSignal });
+  assertNotAborted(abortSignal);
   if (!closed || !closed.success) {
     return { success: false, error: closed && closed.error ? closed.error : '关闭多余鲲灵 tab 失败' };
   }
@@ -84,18 +91,23 @@ async function openAccountFlow(accountNum, options = {}) {
   if (!accountNum) return { success: false, error: '缺少 accountNum' };
 
   const steps = options.steps || loadDefaultSteps();
+  const abortSignal = options.abortSignal || null;
   const accountNote = options.note || getAccountNote(accountNum, options.accountsFile);
   if (!accountNote) {
     return { success: false, error: `账号 ${accountNum} 缺少 note/name，无法校验店铺名` };
   }
 
-  const resolved = await resolveJlTab(steps);
+  assertNotAborted(abortSignal);
+  const resolved = await resolveJlTab(steps, abortSignal);
+  assertNotAborted(abortSignal);
   if (!resolved || !resolved.success) {
     return { success: false, error: resolved && resolved.error ? resolved.error : '解析鲲灵 tab 失败' };
   }
 
   const targetId = resolved.targetId;
-  const loginState = await steps.readShopName(targetId);
+  assertNotAborted(abortSignal);
+  const loginState = await steps.readShopName(targetId, undefined, { abortSignal });
+  assertNotAborted(abortSignal);
   const decision = decideOpenAccountAction(loginState, accountNote);
 
   if (decision.action === 'error') {
@@ -113,7 +125,9 @@ async function openAccountFlow(accountNum, options = {}) {
   }
   // inject 分支（未登录 / 错号）：先清当前 tab 旧账号 cookie/storage，再注入目标账号。
   // 清场保证传给平台的只有新账号认证信息，不混旧账号（替代破坏性的退出登录）。
+  assertNotAborted(abortSignal);
   const cleared = await steps.clearJlData(targetId);
+  assertNotAborted(abortSignal);
   if (!cleared || cleared.success !== true || cleared.verified !== true) {
     return {
       success: false,
@@ -121,7 +135,9 @@ async function openAccountFlow(accountNum, options = {}) {
       targetId,
     };
   }
-  const injected = await steps.inject(accountNum, { targetId });
+  assertNotAborted(abortSignal);
+  const injected = await steps.inject(accountNum, { targetId, abortSignal });
+  assertNotAborted(abortSignal);
   if (!injected || !injected.success) {
     return { success: false, error: injected && injected.error ? injected.error : '注入目标账号失败', targetId };
   }

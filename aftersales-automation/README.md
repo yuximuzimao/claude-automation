@@ -61,7 +61,7 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 - **Pipeline**（`lib/server/pipeline.js`）：保留 collect → infer → execute 的历史兼容能力；当前生产入口以 op-queue + A1 安全链路为准
 - **Op-queue**（`lib/server/op-queue.js`）：全局操作队列，串行化浏览器操作
 - **CDP**（`lib/cdp.js`）：直连 Chrome port 9222，物理点击/JS eval/页面导航
-- **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
+- **JL session state**（`lib/jl-session-state.js`）：只记录最近一次已由真实页面确认成功的账号，作为辅助缓存；现役 A1 不允许用该缓存跳过页面身份校验
 - **安全账号编排**（`lib/jl/open-account-flow.js`）：匹配账号则复用；切换时清理并复查认证 Cookie，将同一 `targetId` 交给注入步骤
 - **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗；排序值正确但列表乱序时，只等待 2 秒并刷新当前列表一次，重新就绪后复核，不重复点击排序
 - **A1/A2 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：当前生产入口为 `POST /api/accounts/:num/a1-fixed-batch` → `op-queue` → `processSingleAccountFixedBatch`。入口固定单账号 + 48h 清单；前端“处理工单”按钮只在账号 session ok 时显示，点击后二次确认。Step14 严格串行逐单处理，写回原 queue/simulation；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，其余按分支进入待确认/等待重查。自动等待重查项若在下一次完整可信的同账号 48h 清单中消失，则按 `INDEX §3.1` 直接删除 queue 项，不再转待确认。

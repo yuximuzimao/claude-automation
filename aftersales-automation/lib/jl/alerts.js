@@ -9,6 +9,7 @@
 const path = require('path');
 const fs = require('fs');
 const cdp = require('../cdp');
+const { assertNotAborted, waitAbortable } = require('../wait');
 
 const CACHE_FILE = path.join(__dirname, '../../data/jl-alerts-cache.json');
 const ACCOUNTS_FILE = path.join(__dirname, '../../../sessions/accounts.json');
@@ -60,7 +61,9 @@ function validateAlertAccount(accountNum, accountNote, accountNotes) {
   return { ok: true, key, note: expectedNote };
 }
 
-async function fetchAndCacheAlerts(accountNum, accountNote) {
+async function fetchAndCacheAlerts(accountNum, accountNote, options = {}) {
+  const abortSignal = options.abortSignal || null;
+  assertNotAborted(abortSignal);
   const accountNotes = readAccountNotes();
   const accountGuard = validateAlertAccount(accountNum, accountNote, accountNotes);
   if (!accountGuard.ok) {
@@ -70,13 +73,17 @@ async function fetchAndCacheAlerts(accountNum, accountNote) {
   const { key } = accountGuard;
 
   const targets = await cdp.getTargets();
+  assertNotAborted(abortSignal);
   const jl = targets.find(t => t.url && t.url.includes('scrm.jlsupp.com'));
   if (!jl) return readCache();
 
   // 点左侧导航栏「后台首页」按钮（fixed 定位，不受页面滚动影响）
   // 用 URL 直跳可能绕过 Vue router 导致弹窗时序问题，点按钮和人工操作行为一致
+  assertNotAborted(abortSignal);
   const curUrl = await cdp.eval(jl.id, 'window.location.href').catch(() => '');
+  assertNotAborted(abortSignal);
   if (!curUrl.includes('/business/home')) {
+    assertNotAborted(abortSignal);
     const clicked = await cdp.eval(jl.id, `
       (() => {
         const btn = Array.from(document.querySelectorAll('.nav-item')).find(el =>
@@ -86,19 +93,22 @@ async function fetchAndCacheAlerts(accountNum, accountNote) {
         return !!btn;
       })()
     `).catch(() => false);
+    assertNotAborted(abortSignal);
     if (!clicked) {
       console.warn('[alerts] 未找到「后台首页」导航按钮，跳过');
       return readCache();
     }
-    await new Promise(r => setTimeout(r, 4000));
+    await waitAbortable(4000, abortSignal);
   }
 
+  assertNotAborted(abortSignal);
   const items = await cdp.eval(jl.id, `
     Array.from(document.querySelectorAll('.scroll-item')).map(el => ({
       title: (el.querySelector('.title')?.innerText || '').trim(),
       content: (el.querySelector('.content')?.innerText || '').trim(),
     })).filter(i => i.title || i.content)
   `).catch(() => []);
+  assertNotAborted(abortSignal);
 
   if (Array.isArray(items) && items.length > 0) {
     const cache = readCache() || { byAccount: {} };

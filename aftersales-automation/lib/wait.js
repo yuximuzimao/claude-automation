@@ -4,6 +4,51 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function createAbortError() {
+  const error = new Error('操作已被用户停止');
+  error.name = 'AbortError';
+  return error;
+}
+
+function assertNotAborted(signal) {
+  if (signal && signal.aborted) throw createAbortError();
+}
+
+function runAbortable(factory, signal) {
+  assertNotAborted(signal);
+  if (!signal) return Promise.resolve().then(factory);
+
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const cleanup = () => signal.removeEventListener('abort', onAbort);
+    const onAbort = () => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(createAbortError());
+    };
+    signal.addEventListener('abort', onAbort, { once: true });
+
+    Promise.resolve()
+      .then(factory)
+      .then(value => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        resolve(value);
+      }, error => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(error);
+      });
+  });
+}
+
+function waitAbortable(ms, signal, sleepFn = sleep) {
+  return runAbortable(() => sleepFn(ms), signal);
+}
+
 // ── 风控信号检测 ──────────────────────────────────────────────
 // 精确匹配已知风控/反爬信号。不用"非 2xx 全部风控"这种粗暴规则
 // ——登录过期 401、页面 302 跳转、iframe 加载失败 204 不是风控信号。
@@ -70,4 +115,12 @@ async function waitFor(fn, { timeoutMs = 10000, intervalMs = 500, label = '' } =
   throw new Error(`waitFor 超时: ${label}`);
 }
 
-module.exports = { sleep, retry, waitFor };
+module.exports = {
+  sleep,
+  retry,
+  waitFor,
+  createAbortError,
+  assertNotAborted,
+  runAbortable,
+  waitAbortable,
+};

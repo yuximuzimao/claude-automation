@@ -31,18 +31,10 @@ const BASE = path.join(__dirname, '../..');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
 const { assertAccountNum } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
 
-// ── 当前注入账号状态（跨子进程共享，10分钟TTL）─────────────────────
+// ── 当前账号缓存（仅记录最近一次已由真实页面确认的账号，不作为身份判断依据）──
 const SESSION_STATE_FILE = path.join(BASE, 'data/current-session.json');
-const SESSION_TTL_MS = 10 * 60 * 1000;
-function readSessionState() {
-  try { return JSON.parse(fs.readFileSync(SESSION_STATE_FILE, 'utf8')); } catch { return null; }
-}
 function saveSessionState(num) {
   try { fs.writeFileSync(SESSION_STATE_FILE, JSON.stringify({ accountNum: num, at: Date.now() })); } catch {}
-}
-function isSameSession(accountNum) {
-  const s = readSessionState();
-  return s && s.accountNum === accountNum && (Date.now() - s.at) < SESSION_TTL_MS;
 }
 const ACCOUNT_STATUS_FILE = path.join(BASE, 'data/account-status.json');
 
@@ -488,15 +480,26 @@ function targetIdOf(target) {
 async function isolateUntrustedJlTarget(targetId, op, dependencies = {}) {
   const cdp = dependencies.cdp || require('../cdp');
   const wait = dependencies.wait || (ms => waitForAbortableDelay(ms, op));
+  assertNotAborted(op);
   const before = await cdp.getTargets();
+  assertNotAborted(op);
   const target = (before || []).find(item => targetIdOf(item) === targetId);
 
   if (target) {
+    assertNotAborted(op);
     await cdp.closeTarget(targetId);
+    assertNotAborted(op);
     await wait(300);
   }
 
   const afterClose = await cdp.getTargets();
+  assertNotAborted(op);
+  const knownTargetStillPresent = targetId
+    ? (afterClose || []).some(item => targetIdOf(item) === targetId)
+    : false;
+  if (knownTargetStillPresent) {
+    throw new Error(`异常账号隔离失败：目标 tab 关闭后仍存在: ${targetId}`);
+  }
   const remaining = (afterClose || []).filter(isJlPageTarget);
   if (remaining.length > 0) {
     throw new Error(`异常账号隔离失败：关闭后仍有鲸灵 tab: ${remaining.map(targetIdOf).filter(Boolean).join(', ')}`);
@@ -505,6 +508,13 @@ async function isolateUntrustedJlTarget(targetId, op, dependencies = {}) {
   await wait(5000);
 
   const afterQuiet = await cdp.getTargets();
+  assertNotAborted(op);
+  const knownTargetReappeared = targetId
+    ? (afterQuiet || []).some(item => targetIdOf(item) === targetId)
+    : false;
+  if (knownTargetReappeared) {
+    throw new Error(`异常账号隔离失败：5秒观察期后目标 tab 仍存在: ${targetId}`);
+  }
   const reappeared = (afterQuiet || []).filter(isJlPageTarget);
   if (reappeared.length > 0) {
     throw new Error(`异常账号隔离失败：5秒观察期内鲸灵 tab 再次出现: ${reappeared.map(targetIdOf).filter(Boolean).join(', ')}`);
@@ -701,7 +711,7 @@ async function execOpenAccount(op) {
   // 直接调用 openAccountFlow，与 execExecute/execReprocessOne 共用同一安全链路（2026-07-01 模块化）
   const { openAccountFlow } = require('../jl/open-account-flow');
   const out = await Promise.race([
-    openAccountFlow(String(accountNum)),
+    openAccountFlow(String(accountNum), { abortSignal: op._abortSignal }),
     new Promise((_, reject) => setTimeout(() => reject(new Error('打开账号超时（90s）')), 90000)),
   ]);
   if (!out || !out.success) {
@@ -1161,7 +1171,7 @@ async function execReprocessOne(op) {
   const { sleep, waitFor } = require('../wait');
 
   // ── Step 1: 安全打开账号 ──────────────────────────────────────────
-  const accountResult = await openAccountFlow(accountNum);
+  const accountResult = await openAccountFlow(accountNum, { abortSignal: op._abortSignal });
   if (!accountResult || !accountResult.success) {
     throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
   }
@@ -1172,13 +1182,21 @@ async function execReprocessOne(op) {
   // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
   const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
 
+  assertNotAborted(op);
   await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
-  await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
-  await step11.assertAfterSaleListReady(listTargetId);
+  assertNotAborted(op);
+  await waitForAbortableDelay(step11.AFTER_NAVIGATION_WAIT_MS, op);
+  await step11.assertAfterSaleListReady(listTargetId, {
+    abortSignal: op._abortSignal,
+    sleep: ms => waitForAbortableDelay(ms, op),
+  });
   const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
-  await selectOverdueSort({ targetId: listTargetId });
-  await sleep(step11.AFTER_SORT_WAIT_MS);
-  await step11.verifySortWithRefreshRecovery(listTargetId);
+  await selectOverdueSort({ targetId: listTargetId, abortSignal: op._abortSignal });
+  await waitForAbortableDelay(step11.AFTER_SORT_WAIT_MS, op);
+  await step11.verifySortWithRefreshRecovery(listTargetId, {
+    abortSignal: op._abortSignal,
+    sleep: ms => waitForAbortableDelay(ms, op),
+  });
   assertNotAborted(op);
 
   // ── Step 3: 定位工单（与执行操作完全一致的寻址逻辑）───────────────
@@ -1187,18 +1205,21 @@ async function execReprocessOne(op) {
   const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
 
   const readCurrentPage = async (targetId) => {
+    assertNotAborted(op);
     const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+    assertNotAborted(op);
     return {
       tickets: (raw && raw.tickets) || [],
       loading: Boolean(raw && raw.loading),
       pagination: step10.normalizePaginationState(raw && raw.pagination),
     };
   };
-  const waitForPage = step14.createWaitForPage(waitFor);
+  const waitForPage = step14.createWaitForPage(waitFor, op._abortSignal);
+  const abortableSleep = ms => waitForAbortableDelay(ms, op);
 
   // prepareAfterSaleList 读完后分页可能停在最后一页，先回到第 1 页
   await step14.clickPageOneLikeHuman(listTargetId, {
-    readCurrentPage, sleep, waitForPage,
+    readCurrentPage, sleep: abortableSleep, waitForPage, abortSignal: op._abortSignal,
     dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
     eval: (id, js) => cdp.eval(id, js),
   });
@@ -1206,13 +1227,13 @@ async function execReprocessOne(op) {
   const located = await step14.locateWorkOrderOnFreshList(listTargetId, queueItem.workOrderNum, {
     readCurrentPage,
     clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
-      readCurrentPage, sleep, waitForPage,
+      readCurrentPage, sleep: abortableSleep, waitForPage, abortSignal: op._abortSignal,
       dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
       eval: (id, js) => cdp.eval(id, js),
     }),
-    clickNextPage: step10.clickNextPage,
+    clickNextPage: id => step10.clickNextPage(id, { abortSignal: op._abortSignal }),
     waitForPage,
-  });
+  }, { abortSignal: op._abortSignal });
   if (!located || !located.found) {
     throw new Error(`工单 ${queueItem.workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
   }
@@ -1253,14 +1274,17 @@ async function execReprocessOne(op) {
   }
 
   // Step 4: 点击处理按钮，打开详情 tab
-  const opened = await clickWorkOrderAction(queueItem.workOrderNum, { targetId: listTargetId });
+  const opened = await clickWorkOrderAction(queueItem.workOrderNum, {
+    targetId: listTargetId,
+    abortSignal: op._abortSignal,
+  });
   if (!opened || !opened.success || !opened.newTargetId) {
     throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
   }
   const detailTargetId = opened.newTargetId;
 
   // 等待详情页 Vue 组件完全渲染
-  await sleep(2000);
+  await waitForAbortableDelay(2000, op);
   assertNotAborted(op);
 
   // ── Step 5: 完整复用扫描工单的采集、推理、自动执行和写回链路 ──
@@ -1274,14 +1298,18 @@ async function execReprocessOne(op) {
       erpTargetId,
       ticket,
       queueItem: refreshedQueueItem,
+      abortSignal: op._abortSignal,
     }, { step14, dependencies: processingDependencies });
     log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.status === 'auto_executed' ? ' (已自动执行)' : processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
   } finally {
-    // Step 6: 关闭详情 tab（无论处理成功或失败）
-    await step14.closeAndVerifyDetailTarget(detailTargetId, processingDependencies, {
-      account: accountResult,
-      listTargetId,
-    });
+    // 紧急停止后不再为了收尾整洁关闭详情 tab；允许现场原样保留。
+    if (!(op._abortSignal && op._abortSignal.aborted)) {
+      await step14.closeAndVerifyDetailTarget(detailTargetId, processingDependencies, {
+        account: accountResult,
+        listTargetId,
+        abortSignal: op._abortSignal,
+      });
+    }
   }
 
   return { done: true };
@@ -1402,7 +1430,7 @@ async function execExecute(op) {
   const { sleep, waitFor } = require('../wait');
 
   // ── Step 1: 安全打开账号 ──────────────────────────────────────────
-  const accountResult = await openAccountFlow(accountNum);
+  const accountResult = await openAccountFlow(accountNum, { abortSignal: op._abortSignal });
   if (!accountResult || !accountResult.success) {
     throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
   }
@@ -1413,13 +1441,21 @@ async function execExecute(op) {
   // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
   const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
 
+  assertNotAborted(op);
   await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
-  await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
-  await step11.assertAfterSaleListReady(listTargetId);
+  assertNotAborted(op);
+  await waitForAbortableDelay(step11.AFTER_NAVIGATION_WAIT_MS, op);
+  await step11.assertAfterSaleListReady(listTargetId, {
+    abortSignal: op._abortSignal,
+    sleep: ms => waitForAbortableDelay(ms, op),
+  });
   const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
-  await selectOverdueSort({ targetId: listTargetId });
-  await sleep(step11.AFTER_SORT_WAIT_MS);
-  await step11.verifySortWithRefreshRecovery(listTargetId);
+  await selectOverdueSort({ targetId: listTargetId, abortSignal: op._abortSignal });
+  await waitForAbortableDelay(step11.AFTER_SORT_WAIT_MS, op);
+  await step11.verifySortWithRefreshRecovery(listTargetId, {
+    abortSignal: op._abortSignal,
+    sleep: ms => waitForAbortableDelay(ms, op),
+  });
   assertNotAborted(op);
 
   const { action } = sim.decision;
@@ -1437,18 +1473,21 @@ async function execExecute(op) {
 
     // Step 3: 定位工单（与扫描时寻找工单流程完全一致）
     const readCurrentPage = async (targetId) => {
+      assertNotAborted(op);
       const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+      assertNotAborted(op);
       return {
         tickets: (raw && raw.tickets) || [],
         loading: Boolean(raw && raw.loading),
         pagination: step10.normalizePaginationState(raw && raw.pagination),
       };
     };
-    const waitForPage = step14.createWaitForPage(waitFor);
+    const waitForPage = step14.createWaitForPage(waitFor, op._abortSignal);
+    const abortableSleep = ms => waitForAbortableDelay(ms, op);
 
     // prepareAfterSaleList 读完后分页可能停在最后一页，先回到第 1 页
     await step14.clickPageOneLikeHuman(listTargetId, {
-      readCurrentPage, sleep, waitForPage,
+      readCurrentPage, sleep: abortableSleep, waitForPage, abortSignal: op._abortSignal,
       dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
       eval: (id, js) => cdp.eval(id, js),
     });
@@ -1456,19 +1495,22 @@ async function execExecute(op) {
     const located = await step14.locateWorkOrderOnFreshList(listTargetId, sim.workOrderNum, {
       readCurrentPage,
       clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
-        readCurrentPage, sleep, waitForPage,
+        readCurrentPage, sleep: abortableSleep, waitForPage, abortSignal: op._abortSignal,
         dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
         eval: (id, js) => cdp.eval(id, js),
       }),
-      clickNextPage: step10.clickNextPage,
+      clickNextPage: id => step10.clickNextPage(id, { abortSignal: op._abortSignal }),
       waitForPage,
-    });
+    }, { abortSignal: op._abortSignal });
     if (!located || !located.found) {
       throw new Error(`工单 ${sim.workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
     }
 
     // Step 4: 点击处理按钮，打开详情 tab
-    const opened = await clickWorkOrderAction(sim.workOrderNum, { targetId: listTargetId });
+    const opened = await clickWorkOrderAction(sim.workOrderNum, {
+      targetId: listTargetId,
+      abortSignal: op._abortSignal,
+    });
     if (!opened || !opened.success || !opened.newTargetId) {
       throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
     }
@@ -1476,7 +1518,7 @@ async function execExecute(op) {
 
     // 等待详情页 Vue 组件完全渲染（waitForNewWorkOrderTarget 只校验了 URL 含工单号，
     // body 可能尚未渲染完成，approveTicket navigate 会再等 3s，但这里多等 2s 更稳妥）
-    await sleep(2000);
+    await waitForAbortableDelay(2000, op);
     assertNotAborted(op);
 
     let detailClosed = false;
@@ -1486,6 +1528,8 @@ async function execExecute(op) {
       // Step 5: 在详情 tab 上执行决策
       if (action === 'approve' || action === 'reject') {
         const { executeTicketDecision } = require('../jl/execute-decision');
+        // 平台写操作尚未发出时，停止优先；一旦发出则让本次动作完成并写完本地审计记录。
+        assertNotAborted(op);
         result = await executeTicketDecision({
           targetId: detailTargetId,
           workOrderNum: sim.workOrderNum,
@@ -1517,15 +1561,21 @@ async function execExecute(op) {
         log(`已记录拦截: ${tracking}`);
       });
     } finally {
-      // Step 6: 关闭详情 tab（无论成功失败）
-      try {
-        const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
-        await step14.closeAndVerifyDetailTarget(detailTargetId, {
-          getTargets: cdp.getTargets, closeTarget: cdp.closeTarget, sleep,
-          readShopName: (id, waitMs) => readShopName(id, waitMs),
-        }, { account: accountResult, listTargetId });
-        detailClosed = true;
-      } catch(e) { log(`[execute] 关闭详情 tab 失败（非致命）: ${e.message}`); }
+      // 紧急停止后不再关闭详情 tab；若平台写操作已经发出，只保留后续本地审计记账。
+      if (!(op._abortSignal && op._abortSignal.aborted)) {
+        try {
+          const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
+          await step14.closeAndVerifyDetailTarget(detailTargetId, {
+            getTargets: cdp.getTargets, closeTarget: cdp.closeTarget, sleep,
+            readShopName: (id, waitMs, options) => readShopName(id, waitMs, options),
+          }, {
+            account: accountResult,
+            listTargetId,
+            abortSignal: op._abortSignal,
+          });
+          detailClosed = true;
+        } catch(e) { log(`[execute] 关闭详情 tab 失败（非致命）: ${e.message}`); }
+      }
     }
   }
 
@@ -1539,6 +1589,8 @@ async function execExecute(op) {
   });
   db.updateSimulation(simId, { executedAt: new Date().toISOString() });
   db.updateQueueItem(sim.queueItemId, { status: 'done' });
+  // 平台写操作期间收到停止：审计/本地状态已完整落盘后，再把当前队列操作结束为“已停止”。
+  assertNotAborted(op);
   return { action, workOrderNum: sim.workOrderNum };
 }
 
@@ -1551,7 +1603,7 @@ async function execOpenTicket(op) {
   const { openAccountFlow } = require('../jl/open-account-flow');
   const { sleep, waitFor } = require('../wait');
 
-  const accountResult = await openAccountFlow(accountNum);
+  const accountResult = await openAccountFlow(accountNum, { abortSignal: op._abortSignal });
   if (!accountResult || !accountResult.success) {
     throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
   }
@@ -1561,13 +1613,21 @@ async function execOpenTicket(op) {
 
   // 导航到售后列表页并排序
   const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  assertNotAborted(op);
   await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
-  await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
-  await step11.assertAfterSaleListReady(listTargetId);
+  assertNotAborted(op);
+  await waitForAbortableDelay(step11.AFTER_NAVIGATION_WAIT_MS, op);
+  await step11.assertAfterSaleListReady(listTargetId, {
+    abortSignal: op._abortSignal,
+    sleep: ms => waitForAbortableDelay(ms, op),
+  });
   const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
-  await selectOverdueSort({ targetId: listTargetId });
-  await sleep(step11.AFTER_SORT_WAIT_MS);
-  await step11.verifySortWithRefreshRecovery(listTargetId);
+  await selectOverdueSort({ targetId: listTargetId, abortSignal: op._abortSignal });
+  await waitForAbortableDelay(step11.AFTER_SORT_WAIT_MS, op);
+  await step11.verifySortWithRefreshRecovery(listTargetId, {
+    abortSignal: op._abortSignal,
+    sleep: ms => waitForAbortableDelay(ms, op),
+  });
   assertNotAborted(op);
 
   // 定位工单
@@ -1576,17 +1636,20 @@ async function execOpenTicket(op) {
   const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
 
   const readCurrentPage = async (targetId) => {
+    assertNotAborted(op);
     const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+    assertNotAborted(op);
     return {
       tickets: (raw && raw.tickets) || [],
       loading: Boolean(raw && raw.loading),
       pagination: step10.normalizePaginationState(raw && raw.pagination),
     };
   };
-  const waitForPage = step14.createWaitForPage(waitFor);
+  const waitForPage = step14.createWaitForPage(waitFor, op._abortSignal);
+  const abortableSleep = ms => waitForAbortableDelay(ms, op);
 
   await step14.clickPageOneLikeHuman(listTargetId, {
-    readCurrentPage, sleep, waitForPage,
+    readCurrentPage, sleep: abortableSleep, waitForPage, abortSignal: op._abortSignal,
     dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
     eval: (id, js) => cdp.eval(id, js),
   });
@@ -1594,24 +1657,29 @@ async function execOpenTicket(op) {
   const located = await step14.locateWorkOrderOnFreshList(listTargetId, workOrderNum, {
     readCurrentPage,
     clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
-      readCurrentPage, sleep, waitForPage,
+      readCurrentPage, sleep: abortableSleep, waitForPage, abortSignal: op._abortSignal,
       dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
       eval: (id, js) => cdp.eval(id, js),
     }),
-    clickNextPage: step10.clickNextPage,
+    clickNextPage: id => step10.clickNextPage(id, { abortSignal: op._abortSignal }),
     waitForPage,
-  });
+  }, { abortSignal: op._abortSignal });
   if (!located || !located.found) {
     throw new Error(`工单 ${workOrderNum} 未在待处理列表中找到（可能已处理或已关闭）`);
   }
   assertNotAborted(op);
 
   // 点击处理按钮打开详情 tab
-  const opened = await clickWorkOrderAction(workOrderNum, { targetId: listTargetId });
+  assertNotAborted(op);
+  const opened = await clickWorkOrderAction(workOrderNum, {
+    targetId: listTargetId,
+    abortSignal: op._abortSignal,
+  });
   if (!opened || !opened.success || !opened.newTargetId) {
     throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
   }
-  await sleep(2000);
+  assertNotAborted(op);
+  await waitForAbortableDelay(2000, op);
 
   return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
 }

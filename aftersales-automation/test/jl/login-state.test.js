@@ -91,6 +91,47 @@ test('稳定读取：鲸灵微应用暂时空白时只读等待，随后真实�
   assert.equal(result.shopName, '合肥百浩创展贸易有限公司');
 });
 
+test('稳定读取：等待期间收到停止时立即抛出AbortError，不再读取页面', async () => {
+  const controller = new AbortController();
+  let reads = 0;
+
+  await assert.rejects(
+    readShopName('tab-abort-wait', 8000, {
+      abortSignal: controller.signal,
+      cdp: {
+        eval: async () => {
+          reads += 1;
+          return JSON.stringify({ url: JL_HOME, title: 't', shopName: '测试店铺', 'has商家登录': false, 'has自动注册': false });
+        },
+      },
+      sleep: async () => {
+        controller.abort();
+      },
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.equal(reads, 0);
+});
+
+test('稳定读取：页面读取返回前收到停止时丢弃迟到结果，不进入账号判断', async () => {
+  const controller = new AbortController();
+
+  await assert.rejects(
+    readShopName('tab-abort-read', 0, {
+      abortSignal: controller.signal,
+      cdp: {
+        eval: async () => {
+          controller.abort();
+          return JSON.stringify({ url: JL_HOME, title: 't', shopName: '测试店铺', 'has商家登录': false, 'has自动注册': false });
+        },
+      },
+      sleep: async () => {},
+    }),
+    error => error && error.name === 'AbortError'
+  );
+});
+
 test('稳定读取：过渡态持续到上限时仍 fail-closed，不清理也不注入', async () => {
   let reads = 0;
   const result = await readShopName('tab-3', 0, {
@@ -132,6 +173,28 @@ test('打开登录页：about:blank 即使 complete 也继续等待真正进入�
   assert.equal(result.targetId, 'new-tab');
   assert.equal(result.url, JL_LOGIN);
   assert.equal(reads, 3);
+});
+
+test('打开登录页：停止发生在被动等待期间时立即中断，保留已创建tab且不再读取', async () => {
+  const controller = new AbortController();
+  let reads = 0;
+
+  await assert.rejects(
+    openLogin(JL_LOGIN, {
+      abortSignal: controller.signal,
+      cdp: {
+        createTarget: async () => ({ id: 'new-tab-abort' }),
+        eval: async () => {
+          reads += 1;
+          return JSON.stringify({ url: JL_LOGIN, title: '鲸灵商家后台', readyState: 'complete' });
+        },
+      },
+      sleep: async () => { controller.abort(); },
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.equal(reads, 0);
 });
 
 test('已登录优先：真实店铺名有值时即使两句文案缺也判已登录', () => {

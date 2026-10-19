@@ -30,7 +30,7 @@
 - 赠品子订单号禁止推算，必须从 `giftSubBizOrderDetailDTO.subBizOrderId` 读取
 - 截图只用于上传凭证，禁止截图判断操作结果
 - 鲸灵行为操作报错即停（maxRetries=0，域名自动识别）；被动等待（导航）最多重试 1 次（共执行 2 次）。风控信号 → 全局熔断持久化到 `data/circuit-breaker.json`，需人工 `node cli.js reset-circuit`
-- 多账号扫描/采集/队列任一路径成功注入鲸灵账号后，必须同步 `data/current-session.json`；实际 tab 账号和缓存账号不一致会导致跳过注入、读空工单、误改 queue 状态。
+- `data/current-session.json` 只记录最近一次已由真实页面确认成功的鲸灵账号，不能作为当前店铺身份依据。现役 A1 的打开店铺、扫描、重新采集、执行、查看工单都必须通过 `openAccountFlow/readShopName` 读取真实页面确认；禁止因为缓存命中就跳过身份校验。真实页面确认成功后再同步该缓存。
 - 安全切换账号必须经过 `openAccountFlow`：清理后 `verified === true` 才能注入；注入必须绑定同一个 `targetId`，随后固定导航售后列表，禁止 `Page.reload` 继承旧工单详情 URL。
 - 平台拒绝原因是“工单类型 × 业务分支”的已确认枚举，禁止为了复用而跨分支统一成一个常量。推理说明与平台写入字段必须分层；安全关键分支由 `decision` 提供唯一写入值，执行层禁止被路由参数覆盖，字段缺失时 fail-closed。
 - 单元测试中的浏览器、平台读取、提醒和生产缓存写入必须依赖注入；禁止测试直接调用真实 CDP 或写 `data/`。测试前后应核对相关生产状态文件未变化。

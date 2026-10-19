@@ -69,7 +69,7 @@ entry: cli.js
 | `lib/jl/navigate.js` | 鲸灵页面导航 | 需要跳鲸灵页面时 |
 | `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
 | `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示。缓存读取会按 `accounts.json` 校验账号存在性和店铺显示名，名称不匹配的数据直接失效；Step14 必须通过 `dependencies.fetchAndCacheAlerts` 调用，单测不得落回真实 CDP/生产缓存。**新 A1 完整闭环目标**：仅在账号工单全部处理后调用，沿用 `.scroll-item` DOM 读取且不主动关弹窗。旧停用 `op-queue.js`/`scan-all.js` 仍会列表读完即调用，恢复前必须由第三步接管或删除 | 改平台提醒逻辑时 |
-| `lib/jl-session-state.js` | 鲸灵当前账号缓存读写（`data/current-session.json`） | 改多账号扫描、采集注入、op-queue 注入判断时 |
+| `lib/jl-session-state.js` | 鲸灵当前账号辅助缓存读写（`data/current-session.json`）；只记录最近一次已由真实页面确认成功的账号，现役 A1 禁止把缓存命中作为身份判断或跳过页面校验的依据 | 改多账号扫描、账号缓存同步或页面身份校验时 |
 | `lib/jl-account-config.js` | 保存登录态时合并账号配置；首次新增可从 `supplierInfo.supplierMobileList[0]` 初始化 phone，后续保存保留已有 phone/name/note/file | 改店铺管理新增/重登保存逻辑时 |
 | `lib/server/relogin-session.js` | 新增店铺与重新登录共用的临时登录进程启动、端口等待和首次手机号初始化参数判定 | 改店铺管理登录窗口启动流程时 |
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
@@ -205,7 +205,7 @@ await cdp.navigate(targetId, 'https://...');
 | 19 | 全项目重复代码 → 提取共享函数 | 快递单号提取和待办创建统一由 `lib/helpers.js` 提供。`createReminder()` 当前调用用户的「创建提醒」快捷指令并设置5分钟后提醒；快递行动由 `decision.courierActions` 统一驱动，取消拦截不属于当前行动模型。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
-| 22 | scan-all 切账号后不写 current-session | 多账号扫描会改变同一个 SCRM tab 的实际账号。成功 `jl.js inject` 后必须写 `data/current-session.json`；否则后续 collect/reprocess 可能误判「已经是目标账号」并跳过注入，读不到工单后错误推进 queue。 |
+| 22 | 旧 scan-all 切账号后不写 current-session（历史问题） | 这是 legacy `scan-all.js / collect.js / pipeline.js` 的历史故障：旧路径曾把 `current-session` 当成是否跳过注入的依据。现役 A1 已改为真实页面身份优先，禁止复用这种缓存授权模式；本条仅用于追溯旧问题。 |
 | 23 | 登录确认态过早退出、没有退出路径，或首次新增未保存手机号 | 新增与重登必须共用 `reloginConfirm`；点取消后先进入 `reloginCancelling` 并锁住按钮，等 `/relogin-cancel` 成功后再清理确认态，失败则保留。登录页关闭或 port 文件不存在时也要退出确认态。首次新增且 Session 文件不存在时才允许从认证数据初始化缺失的手机号；普通重登必须保留旧 `phone`、不得覆盖。`unknown + hasFile` 表示未扫描验证，不是失效。 |
 | 24 | pipeline 历史执行守卫把 skip 误判为"已执行" | `skip` action（工单暂时不可访问）也会写 `executedAt`（自动归档），但它不是真实审批操作。守卫条件 `!!s.executedAt` 会把 skip 误判为"已执行" → 工单恢复后 approve 永久被跳过。**修复**：守卫加 `&& s.decision?.action !== 'skip'`。**规则**：executedAt 语义是"曾被处理"，approve/reject 与 skip 必须分开对待。`pipeline.js:319` |
 | 25 | 多弹窗共存时用 `dialogs[length-1]` 取"最后一个可见弹窗" | 套装子品明细误报「未找到子品明细表头」根因：`archive.js` READ_SUB_ITEMS_JS 赌"最后一个可见弹窗就是子商品弹窗"。但 collect 全流程里 ERP tab 可能残留/并发其他可见弹窗（如 `erp-logistics` 的 `trade-detail-dialog` 订单详情弹窗未完全关闭），`dialogs[length-1]` 取到它 → 表头不匹配。**单独跑必成功、生产偶发失败**正是此特征（同工单一成一败）。**修复**：按标题 `子商品信息`（或"含组合比例表头"兜底）精确锁定弹窗，禁止赌最后一个。**规则**：多弹窗页面定位目标弹窗必须用标题/特征匹配，不能用 DOM 序位置。失败时务必 dump 所有可见弹窗标题+class（埋点），别只丢错误字符串。`archive.js:138` |

@@ -14,7 +14,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
-const { sleep, waitFor } = require(path.join(__dirname, '../../lib/wait'));
+const { sleep, assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 const { createPlatformStageObservation } = require(path.join(__dirname, '../../lib/after-sales-platform-stage'));
 
 const JL_DOMAIN = 'scrm.jlsupp.com';
@@ -23,6 +23,18 @@ const MAX_PAGES = 20;
 const MOVE_DELAY_MS = 150;
 const PRESS_DELAY_MS = 130;
 const SCROLL_TO_BOTTOM_DELTA_PX = 5000;
+
+async function waitForAbortable(fn, { timeoutMs = 10000, intervalMs = 500, label = '', abortSignal = null } = {}) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    assertNotAborted(abortSignal);
+    const result = await fn();
+    assertNotAborted(abortSignal);
+    if (result) return result;
+    await waitAbortable(intervalMs, abortSignal);
+  }
+  throw new Error(`waitFor 超时: ${label}`);
+}
 
 function parseRemainingHours(text) {
   if (!text) return null;
@@ -322,8 +334,11 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
 })()
 `;
 
-async function clickNextPage(targetId) {
+async function clickNextPage(targetId, options = {}) {
+  const abortSignal = options.abortSignal || null;
+  assertNotAborted(abortSignal);
   const raw = await cdp.eval(targetId, READ_CURRENT_PAGE_TICKETS_JS);
+  assertNotAborted(abortSignal);
   const state = normalizePaginationState(raw && raw.pagination);
 
   if (!state.hasNext) {
@@ -332,6 +347,7 @@ async function clickNextPage(targetId) {
 
   // 分页条在页面底部（top ≈ 2400px），CDP 物理点击只接受 viewport 坐标。
   // 先向下大幅滚动使分页条进入 viewport，重读坐标，再物理点击——与 step 12 同原则。
+  assertNotAborted(abortSignal);
   await cdp.dispatchMouseEvent(targetId, {
     type: 'mouseWheel',
     x: 640,
@@ -340,9 +356,11 @@ async function clickNextPage(targetId) {
     deltaY: SCROLL_TO_BOTTOM_DELTA_PX,
     button: 'none',
   });
-  await sleep(400);
+  assertNotAborted(abortSignal);
+  await waitAbortable(400, abortSignal);
 
   const raw2 = await cdp.eval(targetId, READ_CURRENT_PAGE_TICKETS_JS);
+  assertNotAborted(abortSignal);
   const state2 = normalizePaginationState(raw2 && raw2.pagination);
   const nextRect = state2 && state2.nextButton && state2.nextButton.rect;
 
@@ -350,10 +368,15 @@ async function clickNextPage(targetId) {
     return { clicked: false, reason: '滚动后未能获取下一页按钮坐标', pagination: state2 || state };
   }
 
+  assertNotAborted(abortSignal);
   await cdp.dispatchMouseEvent(targetId, {
     type: 'mouseMoved', x: nextRect.centerX, y: nextRect.centerY, button: 'none',
   });
-  await sleep(MOVE_DELAY_MS);
+  assertNotAborted(abortSignal);
+  await waitAbortable(MOVE_DELAY_MS, abortSignal);
+
+  // mousePressed 一旦发出就必须配对 mouseReleased，避免停止时把浏览器留在“鼠标仍按住”状态。
+  assertNotAborted(abortSignal);
   await cdp.dispatchMouseEvent(targetId, {
     type: 'mousePressed', x: nextRect.centerX, y: nextRect.centerY, button: 'left', clickCount: 1,
   });
@@ -361,6 +384,7 @@ async function clickNextPage(targetId) {
   await cdp.dispatchMouseEvent(targetId, {
     type: 'mouseReleased', x: nextRect.centerX, y: nextRect.centerY, button: 'left', clickCount: 1,
   });
+  assertNotAborted(abortSignal);
 
   return { clicked: true, reason: null, pagination: state };
 }
@@ -370,6 +394,8 @@ async function readUrgentAfterSaleList(options = {}) {
     ? DEFAULT_THRESHOLD_HOURS
     : Number(options.thresholdHours);
   const maxPages = options.maxPages || MAX_PAGES;
+  const abortSignal = options.abortSignal || null;
+  assertNotAborted(abortSignal);
   const target = options.targetId
     ? { id: options.targetId }
     : await findJlPageTarget();
@@ -382,7 +408,9 @@ async function readUrgentAfterSaleList(options = {}) {
   let prefetchedPageData = null;
 
   for (let pageIndex = 1; pageIndex <= maxPages; pageIndex++) {
+    assertNotAborted(abortSignal);
     const pageData = prefetchedPageData || await cdp.eval(target.id, READ_CURRENT_PAGE_TICKETS_JS);
+    assertNotAborted(abortSignal);
     prefetchedPageData = null;
     // 第一页"待商家处理"数为 0 → 此店铺没有待处理工单，直接返回空列表
     if (pageIndex === 1 && pageData && pageData.pendingCount === 0) {
@@ -454,7 +482,7 @@ async function readUrgentAfterSaleList(options = {}) {
     }
 
     const nextPage = (lastPagination.currentPage || pageIndex) + 1;
-    const clickResult = await clickNextPage(target.id);
+    const clickResult = await clickNextPage(target.id, { abortSignal });
     if (!clickResult.clicked) {
       return {
         success: true,
@@ -473,10 +501,15 @@ async function readUrgentAfterSaleList(options = {}) {
       };
     }
 
-    await sleep(1500);
-    prefetchedPageData = await waitFor(
+    await waitAbortable(1500, abortSignal);
+    prefetchedPageData = await waitForAbortable(
       makeStablePagePredicate(target.id, nextPage, tickets),
-      { timeoutMs: 8000, intervalMs: 500, label: `翻页到第${nextPage}页并等待列表刷新稳定` }
+      {
+        timeoutMs: 8000,
+        intervalMs: 500,
+        label: `翻页到第${nextPage}页并等待列表刷新稳定`,
+        abortSignal,
+      }
     );
   }
 

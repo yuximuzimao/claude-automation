@@ -27,6 +27,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
+const { assertNotAborted, runAbortable, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 
 const LOGIN_URL = 'https://scrm.jlsupp.com/micro-businessPlatform/login';
 const JL_DOMAIN = 'scrm.jlsupp.com';
@@ -39,17 +40,25 @@ const JL_DOMAIN = 'scrm.jlsupp.com';
 async function openLogin(loginUrl = LOGIN_URL, options = {}) {
   const cdpClient = options.cdp || cdp;
   const sleep = options.sleep || (ms => new Promise(r => setTimeout(r, ms)));
+  const abortSignal = options.abortSignal || null;
+
+  assertNotAborted(abortSignal);
 
   // 新开一个标签直达 URL（= 地址栏输入网址回车）。Chrome 自己加载，
   // 已登录则平台自动跳后台，未登录停 login。我们不做任何额外导航。
   let targetId;
   try {
-    const created = await cdpClient.createTarget(loginUrl);
+    const created = await runAbortable(
+      () => cdpClient.createTarget(loginUrl),
+      abortSignal
+    );
+    assertNotAborted(abortSignal);
     targetId = created && created.id;
     if (!targetId) {
       return { success: false, error: '新建 tab 未返回 targetId' };
     }
   } catch (e) {
+    if (e && e.name === 'AbortError') throw e;
     return { success: false, error: `打开 login 页失败: ${e.message}` };
   }
 
@@ -58,15 +67,20 @@ async function openLogin(loginUrl = LOGIN_URL, options = {}) {
   // 全程只读，不构成对页面的操作。
   let info;
   for (let i = 0; i < 20; i++) {
-    await sleep(500);
+    await waitAbortable(500, abortSignal, sleep);
     try {
-      const raw = await cdpClient.eval(
-        targetId,
-        `JSON.stringify({ url: location.href, title: document.title, readyState: document.readyState })`
+      const raw = await runAbortable(
+        () => cdpClient.eval(
+          targetId,
+          `JSON.stringify({ url: location.href, title: document.title, readyState: document.readyState })`
+        ),
+        abortSignal
       );
+      assertNotAborted(abortSignal);
       info = typeof raw === 'string' ? JSON.parse(raw) : raw;
       if (info && (info.url || '').includes(JL_DOMAIN) && info.readyState === 'complete') break;
     } catch (e) {
+      if (e && e.name === 'AbortError') throw e;
       // 页面跳转中 eval 可能短暂失败，继续轮询（被动等待，非行为操作）
     }
   }

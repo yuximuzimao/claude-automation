@@ -371,7 +371,7 @@ test('A1 单笔入口统一使用排序刷新恢复门禁', () => {
     path.join(PROJECT_ROOT, 'lib/server/op-queue.js'),
     'utf8'
   );
-  const recoveryCalls = source.match(/step11\.verifySortWithRefreshRecovery\(listTargetId\)/g) || [];
+  const recoveryCalls = source.match(/step11\.verifySortWithRefreshRecovery\(listTargetId,\s*\{/g) || [];
 
   assert.equal(recoveryCalls.length, 3);
   assert.doesNotMatch(source, /step11\.readCurrentPageSortCheck\(listTargetId\)/);

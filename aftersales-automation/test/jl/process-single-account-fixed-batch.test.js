@@ -1565,7 +1565,7 @@ test('详情处理异常仍关闭目标tab、写回人工复核simulation并停�
   assert.deepEqual(fixture.getTargets(), ['list-tab']);
 });
 
-test('详情采集中停止时立即关闭当前tab，不写失败结果也不打开下一单', async () => {
+test('详情采集中停止时保留当前tab原样，不写失败结果也不打开下一单', async () => {
   const controller = new AbortController();
   const fixture = batchDependencies({
     collectDetail: async () => {
@@ -1587,8 +1587,8 @@ test('详情采集中停止时立即关闭当前tab，不写失败结果也不�
     [ORDER_1]
   );
   assert.equal(fixture.calls.some(call => call[0] === 'persistOutcome'), false);
-  assert.equal(fixture.calls.some(call => call[0] === 'close' && call[1] === `detail-${ORDER_1}`), true);
-  assert.deepEqual(fixture.getTargets(), ['list-tab']);
+  assert.equal(fixture.calls.some(call => call[0] === 'close' && call[1] === `detail-${ORDER_1}`), false);
+  assert.deepEqual(fixture.getTargets(), ['list-tab', `detail-${ORDER_1}`]);
 });
 
 test('平台写操作已发出后收到停止，先完成核验记账再停止下一单', async () => {

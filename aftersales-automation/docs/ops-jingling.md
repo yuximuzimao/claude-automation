@@ -143,9 +143,9 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 ### 2.5 鲸灵账号 Session、新增与重新登录
 
 **多账号切换缓存**：
-- `data/current-session.json` 记录当前 Chrome 中实际注入的鲸灵账号。
-- `scan-all.js`、`lib/server/pipeline.js`、`lib/server/op-queue.js` 任一路径确认真实页面已经是目标店铺后，都必须同步写入该文件；A1 固定批次在 `openAccountFlow` 成功后、开始读取工单前立即同步，不能只在发生注入时更新。
-- 如果扫描脚本切换了账号但未更新 `current-session.json`，后续采集/重处理会误以为页面仍是旧账号，跳过必要注入，可能读不到当前账号工单并把 live queue 错误推进到完成态。
+- `data/current-session.json` 只记录“最近一次已由真实页面确认成功的账号”，是辅助缓存，不是真实登录态来源。
+- 现役 A1 的打开店铺、扫描、重新采集、执行、查看工单都必须通过 `openAccountFlow/readShopName` 读取真实页面确认店铺；禁止因为 `current-session.json` 命中就跳过页面身份校验。旧 `collect.js / pipeline.js / scan-all.js` 不属于现役 A1 入口，不得把它们的缓存跳过模式重新接回正式链路。
+- 任一路径确认真实页面已经是目标店铺后，都应同步写入该文件；A1 固定批次在 `openAccountFlow` 成功后、开始读取工单前立即同步。缓存缺失或陈旧可以导致额外页面核验，但绝不能反过来授权平台操作。
 
 **店铺管理状态显示**：
 - `hasFile=false`：没有保存 session，显示「添加登录」。
@@ -159,7 +159,8 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 3. 只有 `success === true && verified === true` 才调用 04 注入，并把同一个 `targetId` 传入；禁止重新选择“第一个鲸灵 tab”。
 4. 注入后固定导航 `https://scrm.jlsupp.com/micro-customer/business/after-sale-list`，再校验店铺名；禁止 `Page.reload` 继承旧工单详情 URL。
 5. 切号/微应用重挂载过程中可能短暂显示「新用户」，或出现“已在鲸灵域但店铺名与登录标志均尚未形成”的空白态。两者都属于瞬时状态，不得视为真实店铺名、错号或未登录。统一由 Step 02 的稳定读取层每 1 秒只读复核、最多额外 8 秒，业务编排只接收可信终态；Step 04 注入后复用同一稳定读取。持续不稳定则明确报错并停止，不清 Cookie、不注入、不靠无限延长固定 sleep 掩盖异常。Step 01 新建登录页同样必须等 URL 真正进入鲸灵域且页面完成加载，不能因为初始 `about:blank` 自身是 `readyState=complete` 就提前判失败。
-6. A1 多账号固定批次把账号边界作为安全门：账号工单处理、详情 tab 收尾和首页提醒读取完成后，再只读确认主页面仍是当前店铺。明确掉登录只作废 `current-session.json` 并沿用原 expired 流程；工单未找到、详情 tab 未找到/关闭失败等普通业务或详情错误不触发账号隔离。只有主 tab 缺失、离开可信鲸灵页面、店铺态长期未知或店铺名不匹配等“当前账号身份不可信”情况，才作废 current-session，关闭该次已知异常 target，等待 300ms 确认 Chrome 已移除，再要求连续 5 秒无任何鲸灵 tab 重新出现；无论隔离成功与否都停止整轮扫描，不自动进入下一账号。该 5 秒静默只证明浏览器侧现场已隔离，不视为服务端请求已完成的证明。
+6. A1 多账号固定批次把账号边界作为安全门：账号工单处理、详情 tab 收尾和首页提醒读取完成后，再只读确认主页面仍是当前店铺。明确掉登录只作废 `current-session.json` 并沿用原 expired 流程；工单未找到、详情 tab 未找到/关闭失败等普通业务或详情错误不触发账号隔离。只有主 tab 缺失、离开可信鲸灵页面、店铺态长期未知或店铺名不匹配等“当前账号身份不可信”情况，才作废 current-session，关闭该次已知异常 target；关闭后先等待 300ms，并同时确认该具体 `targetId` 已消失、没有其他鲸灵 tab，再要求连续 5 秒无任何鲸灵 tab 或原 target 重新出现。无论隔离成功与否都停止整轮扫描，不自动进入下一账号。该 5 秒静默只证明浏览器侧现场已隔离，不视为服务端请求已完成的证明。
+7. 紧急停止优先于读取、等待、导航、翻页、关闭 tab 和账号异常隔离：收到停止后不再发起新的浏览器动作，也不为了“收尾整洁”关闭详情页或主 tab，当前现场允许原样保留。鼠标 `mousePressed` 已发出时只补配对的 `mouseReleased`；注入前的本地 Cookie/storage 清理一旦开始则完成本次清理与验证后停止，禁止清到一半留下不确定认证态；单次账号注入子进程已经启动时同样不强杀到半途，返回后立即停止后续动作。唯一例外是退款同意/拒绝等不可逆平台写操作已经实际发出：必须完成该次结果确认和本地执行账本记录，随后立即停止，禁止进入下一业务动作。
 
 **新增与重新登录的待确认生命周期**：
 1. 新增店铺调用 `POST /api/accounts/add` 创建账号并返回账号编号；重新登录调用 `POST /api/accounts/:num/relogin`。后端统一启动 `../sessions/jl.js --auto-save`，等待写入 `../sessions/.relogin-port-<num>`，前端随后显示同一组「确认保存/取消」按钮。

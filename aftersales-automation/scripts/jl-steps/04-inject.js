@@ -30,6 +30,7 @@ const fs = require('fs');
 const { spawnSync } = require('child_process');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
 const { matchShopName, shopKeyword, JL_DOMAIN } = require(path.join(__dirname, '../../lib/jl/login-state'));
+const { assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 const { readShopName } = require('./02-read-shop-name');
 
 const SESSIONS_DIR = path.join(__dirname, '../../../sessions');
@@ -53,11 +54,13 @@ function normalizeInjectOptions(waitMsOrOptions) {
     return {
       waitMs: waitMsOrOptions.waitMs == null ? DEFAULT_WAIT_MS : Number(waitMsOrOptions.waitMs),
       targetId: waitMsOrOptions.targetId ? String(waitMsOrOptions.targetId) : null,
+      abortSignal: waitMsOrOptions.abortSignal || null,
     };
   }
   return {
     waitMs: waitMsOrOptions == null ? DEFAULT_WAIT_MS : Number(waitMsOrOptions),
     targetId: null,
+    abortSignal: null,
   };
 }
 
@@ -82,9 +85,16 @@ function resolveInjectionTargetId(explicitTargetId, targets = []) {
  */
 async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
   if (!accountNum) return { success: false, error: '缺少 accountNum' };
-  const { waitMs, targetId: requestedTargetId } = normalizeInjectOptions(waitMsOrOptions);
+  const {
+    waitMs,
+    targetId: requestedTargetId,
+    abortSignal,
+  } = normalizeInjectOptions(waitMsOrOptions);
 
-  // 1. 调 jl.js inject（复用现有注入逻辑）
+  assertNotAborted(abortSignal);
+
+  // 1. 调 jl.js inject（复用现有注入逻辑）。
+  // 已经发出的单次注入不在半途中强杀；返回后立即尊重停止信号，不再继续导航/读取。
   const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
     timeout: 30000, encoding: 'utf8',
   });
@@ -93,15 +103,20 @@ async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
     return { success: false, error: `jl.js inject 失败: ${msg}` };
   }
 
+  assertNotAborted(abortSignal);
+
   // 2. 等注入写入稳定（规则：等 8s）
-  await new Promise(r => setTimeout(r, waitMs));
+  await waitAbortable(waitMs, abortSignal);
 
   // 3. 编排调用只使用已解析/已清理 targetId；CLI 兼容路径只接受唯一鲸灵 tab。
   let targets = [];
   if (!requestedTargetId) {
     try {
+      assertNotAborted(abortSignal);
       targets = await cdp.getTargets();
+      assertNotAborted(abortSignal);
     } catch (e) {
+      if (e && e.name === 'AbortError') throw e;
       return { success: false, error: `列出 tab 失败: ${e.message}` };
     }
   }
@@ -114,14 +129,17 @@ async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
 
   // 4. 固定进入售后列表，让新认证态生效且不继承旧详情页上下文。
   try {
+    assertNotAborted(abortSignal);
     await cdp.navigate(targetId, AFTER_SALE_LIST_URL);
+    assertNotAborted(abortSignal);
   } catch (e) {
+    if (e && e.name === 'AbortError') throw e;
     return { success: false, error: `注入后导航售后列表失败: ${e.message}` };
   }
   // 5. 再等登录态跳转稳定（规则：等 8s）
-  await new Promise(r => setTimeout(r, waitMs));
+  await waitAbortable(waitMs, abortSignal);
 
-  const judged = await readShopName(targetId, 0);
+  const judged = await readShopName(targetId, 0, { abortSignal });
   if (judged.success && judged.state === 'logged-in') {
     // 已登录 → 再验店铺名是否匹配目标账号（关键字包含匹配，防注入到错号）
     const note = getAccountNote(accountNum);

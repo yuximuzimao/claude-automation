@@ -16,6 +16,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
+const { assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 const { selectOverdueSort, TARGET_SORT } = require('./09-select-overdue-sort');
 const {
   readUrgentAfterSaleList,
@@ -59,12 +60,15 @@ async function assertAfterSaleListReady(targetId, options = {}) {
     ? options.intervalMs
     : LIST_READY_INTERVAL_MS;
   const sleepFn = options.sleep || sleep;
+  const abortSignal = options.abortSignal || null;
   let status = null;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    assertNotAborted(abortSignal);
     status = await readAfterSaleListStatus(targetId);
+    assertNotAborted(abortSignal);
     if (status && status.success) return status;
-    if (attempt < maxAttempts) await sleepFn(intervalMs);
+    if (attempt < maxAttempts) await waitAbortable(intervalMs, abortSignal, sleepFn);
   }
 
   throw new Error(`未到售后列表页: ${JSON.stringify(status)}`);
@@ -137,22 +141,30 @@ async function verifySortWithRefreshRecovery(targetId, options = {}) {
   const reloadFn = options.reload || cdp.reload;
   const readyFn = options.assertReady || assertAfterSaleListReady;
   const checkFn = options.readSortCheck || readCurrentPageSortCheck;
+  const abortSignal = options.abortSignal || null;
   const recoveryWaitMs = Number.isFinite(options.recoveryWaitMs) && options.recoveryWaitMs >= 0
     ? options.recoveryWaitMs
     : SORT_RECOVERY_WAIT_MS;
 
   try {
+    assertNotAborted(abortSignal);
     const sortCheck = await checkFn(targetId);
+    assertNotAborted(abortSignal);
     return { ...sortCheck, recoveredByRefresh: false };
   } catch (error) {
+    if (error && error.name === 'AbortError') throw error;
     if (!error || error.code !== SORT_ORDER_UNSTABLE_CODE) throw error;
 
-    await sleepFn(recoveryWaitMs);
+    await waitAbortable(recoveryWaitMs, abortSignal, sleepFn);
+    assertNotAborted(abortSignal);
     await reloadFn(targetId);
-    await readyFn(targetId);
-    await sleepFn(recoveryWaitMs);
+    assertNotAborted(abortSignal);
+    await readyFn(targetId, { abortSignal, sleep: sleepFn });
+    await waitAbortable(recoveryWaitMs, abortSignal, sleepFn);
 
+    assertNotAborted(abortSignal);
     const sortCheck = await checkFn(targetId);
+    assertNotAborted(abortSignal);
     return { ...sortCheck, recoveredByRefresh: true };
   }
 }
@@ -160,18 +172,26 @@ async function verifySortWithRefreshRecovery(targetId, options = {}) {
 async function prepareAfterSaleList(options = {}) {
   const thresholdHours = options.thresholdHours == null ? 48 : Number(options.thresholdHours);
   const targetId = options.targetId;
+  const abortSignal = options.abortSignal || null;
   if (!targetId) throw new Error('缺少目标鲸灵 targetId');
 
+  assertNotAborted(abortSignal);
   await cdp.navigate(targetId, AFTER_SALE_LIST_URL);
-  const listReady = await assertAfterSaleListReady(targetId);
-  const sorted = await selectOverdueSort({ targetId });
-  await sleep(AFTER_SORT_WAIT_MS);
+  assertNotAborted(abortSignal);
+  const listReady = await assertAfterSaleListReady(targetId, { abortSignal });
+  assertNotAborted(abortSignal);
+  const abortOptions = abortSignal ? { abortSignal } : {};
+  const sorted = await selectOverdueSort({ targetId, ...abortOptions });
+  assertNotAborted(abortSignal);
+  await waitAbortable(AFTER_SORT_WAIT_MS, abortSignal, sleep);
 
-  const sortCheck = await verifySortWithRefreshRecovery(targetId);
+  const sortCheck = await verifySortWithRefreshRecovery(targetId, abortOptions);
   const list = await readUrgentAfterSaleList({
     targetId,
     thresholdHours,
+    ...abortOptions,
   });
+  assertNotAborted(abortSignal);
 
   return {
     success: true,

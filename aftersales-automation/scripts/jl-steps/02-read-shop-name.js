@@ -32,6 +32,7 @@
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
 const { judgeLoginState, READ_LOGIN_STATE_JS, JL_DOMAIN } = require(path.join(__dirname, '../../lib/jl/login-state'));
+const { assertNotAborted, runAbortable, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 
 const DEFAULT_WAIT_MS = 8000;          // 打开后固定等 8 秒再读（用户规定）
 const SETTLE_RETRY_MS = 1000;
@@ -51,11 +52,13 @@ async function readShopName(targetId, waitMs = DEFAULT_WAIT_MS, options = {}) {
 
   const cdpClient = options.cdp || cdp;
   const sleep = options.sleep || (ms => new Promise(r => setTimeout(r, ms)));
+  const abortSignal = options.abortSignal || null;
   const settleRetryMs = options.settleRetryMs == null ? SETTLE_RETRY_MS : Number(options.settleRetryMs);
   const settleMaxRetries = options.settleMaxRetries == null ? SETTLE_MAX_RETRIES : Number(options.settleMaxRetries);
 
-  // 1. 等待页面登录态跳转稳定（规则：默认固定等 8s）
-  await sleep(waitMs);
+  // 1. 等待页面登录态跳转稳定（规则：默认固定等 8s）。
+  // 紧急停止优先级最高：停止后不再等待本次只读检查，也不处理迟到的读取结果。
+  await waitAbortable(waitMs, abortSignal, sleep);
 
   // 2. 瞬时状态只在本层吸收：业务层不能看到 transitional，也不能把空白微应用当终态。
   // 只做有界纯读；若始终无法进入可信终态，则明确失败，不触发清理/注入。
@@ -63,9 +66,14 @@ async function readShopName(targetId, waitMs = DEFAULT_WAIT_MS, options = {}) {
   let lastJudged = null;
   for (let attempt = 0; attempt <= settleMaxRetries; attempt++) {
     try {
-      const raw = await cdpClient.eval(targetId, READ_LOGIN_STATE_JS);
+      const raw = await runAbortable(
+        () => cdpClient.eval(targetId, READ_LOGIN_STATE_JS),
+        abortSignal
+      );
+      assertNotAborted(abortSignal);
       lastInfo = typeof raw === 'string' ? JSON.parse(raw) : raw;
     } catch (e) {
+      if (e && e.name === 'AbortError') throw e;
       return { success: false, error: `读取页面失败: ${e.message}` };
     }
 
@@ -91,7 +99,7 @@ async function readShopName(targetId, waitMs = DEFAULT_WAIT_MS, options = {}) {
         error: `页面长时间未形成可信登录态：shopName=${JSON.stringify(lastInfo && lastInfo.shopName || '')}, url=${lastInfo && lastInfo.url || ''}`,
       };
     }
-    await sleep(settleRetryMs);
+    await waitAbortable(settleRetryMs, abortSignal, sleep);
   }
 
   return lastJudged || { success: false, error: '读取登录态失败' };

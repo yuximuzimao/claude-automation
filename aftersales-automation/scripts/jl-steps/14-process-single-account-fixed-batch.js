@@ -2,6 +2,7 @@
 'use strict';
 
 const { matchShopName } = require('../../lib/jl/login-state');
+const { assertNotAborted, waitAbortable } = require('../../lib/wait');
 const { getSkipCompletionStatus } = require('../../lib/server/pipeline-status');
 const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execution-journal');
 const { getHoursUntilNextScan } = require('../../lib/constants');
@@ -15,16 +16,6 @@ const {
 const MAX_PAGES = 20;
 const JL_HOST_SUFFIX = 'jlsupp.com';
 const AFTER_SALE_LIST_PATH = '/micro-customer/business/after-sale-list';
-
-function createAbortError() {
-  const error = new Error('操作已被用户停止');
-  error.name = 'AbortError';
-  return error;
-}
-
-function assertNotAborted(signal) {
-  if (signal && signal.aborted) throw createAbortError();
-}
 
 function isAbortError(error) {
   return Boolean(error && (error.name === 'AbortError' || String(error.message || '').includes('操作已被用户停止')));
@@ -70,11 +61,14 @@ function findTargetById(targets, targetId) {
 
 async function assertCurrentAccountShop(targetId, context, dependencies) {
   const accountNote = context && context.account && context.account.matchedNote;
+  const abortSignal = context && context.abortSignal;
+  assertNotAborted(abortSignal);
   if (!accountNote) return;
   if (typeof dependencies.readShopName !== 'function') {
     throw new Error('缺少 readShopName 店铺校验依赖，拒绝操作当前账号鲸灵 tab');
   }
-  const state = await dependencies.readShopName(targetId, 0);
+  const state = await dependencies.readShopName(targetId, 0, { abortSignal });
+  assertNotAborted(abortSignal);
   if (state && state.success === true && state.state === 'logged-out') {
     const error = new Error('账号登录已失效');
     error.accountSessionExpired = true;
@@ -90,11 +84,14 @@ async function assertCurrentAccountShop(targetId, context, dependencies) {
 
 async function assertFinalAccountShop(targetId, context, dependencies) {
   const accountNote = context && context.account && context.account.matchedNote;
+  const abortSignal = context && context.abortSignal;
+  assertNotAborted(abortSignal);
   if (!accountNote) throw new Error('账号结束校验缺少目标店铺名');
   if (typeof dependencies.readShopName !== 'function') {
     throw new Error('账号结束校验缺少 readShopName 依赖');
   }
-  const state = await dependencies.readShopName(targetId, 0);
+  const state = await dependencies.readShopName(targetId, 0, { abortSignal });
+  assertNotAborted(abortSignal);
   if (state && state.success === true && state.state === 'logged-out') {
     const error = new Error('账号结束时登录已失效');
     error.accountSessionExpired = true;
@@ -111,8 +108,11 @@ async function assertFinalAccountShop(targetId, context, dependencies) {
 
 async function assertCurrentAccountListTarget(listTargetId, context, dependencies) {
   try {
+    const abortSignal = context && context.abortSignal;
+    assertNotAborted(abortSignal);
     if (!listTargetId) throw new Error('缺少售后列表主 tab targetId');
     const targets = await dependencies.getTargets();
+    assertNotAborted(abortSignal);
     const target = findTargetById(targets, listTargetId);
     if (!target) throw new Error(`售后列表主 tab 不存在: ${listTargetId}`);
     if (!isJlTarget(target)) throw new Error(`售后列表主 tab 不是鲸灵域: ${target.url || listTargetId}`);
@@ -120,6 +120,7 @@ async function assertCurrentAccountListTarget(listTargetId, context, dependencie
     await assertCurrentAccountShop(listTargetId, context, dependencies);
     return target;
   } catch (error) {
+    if (isAbortError(error)) throw error;
     if (error && error.accountSessionExpired !== true) {
       error.accountMainStateUntrusted = true;
       error.jlTargetId = listTargetId || null;
@@ -129,11 +130,14 @@ async function assertCurrentAccountListTarget(listTargetId, context, dependencie
 }
 
 async function assertClosableCurrentAccountDetailTarget(detailTargetId, context, dependencies) {
+  const abortSignal = context && context.abortSignal;
+  assertNotAborted(abortSignal);
   if (!detailTargetId) throw new Error('缺少待关闭详情 tab targetId');
   if (context && context.listTargetId && detailTargetId === context.listTargetId) {
     throw new Error('拒绝关闭售后列表主 tab');
   }
   const targets = await dependencies.getTargets();
+  assertNotAborted(abortSignal);
   const target = findTargetById(targets, detailTargetId);
   if (!target) throw new Error(`待关闭详情 tab 不存在: ${detailTargetId}`);
   if (!isJlTarget(target)) throw new Error(`拒绝关闭非鲸灵标签页: ${target.url || detailTargetId}`);
@@ -199,13 +203,15 @@ function ticketFingerprint(pageData) {
     .map(ticket => ticket && ticket.workOrderNum).join('|');
 }
 
-function createWaitForPage(waitForFn) {
+function createWaitForPage(waitForFn, abortSignal = null) {
   return (targetId, expectedPage, readPage, beforeState) => {
     let previousFingerprint = null;
     let stableReads = 0;
     const beforeFingerprint = beforeState ? ticketFingerprint(beforeState) : null;
     return waitForFn(async () => {
+      assertNotAborted(abortSignal);
       const state = await readPage();
+      assertNotAborted(abortSignal);
       if (!state || state.loading || !state.pagination || state.pagination.currentPage !== expectedPage) return null;
       if (!Number.isSafeInteger(state.pagination.totalCount) || state.pagination.totalCount < 0) return null;
       const minimumOffset = (expectedPage - 1) * 10;
@@ -223,17 +229,23 @@ function createWaitForPage(waitForFn) {
   };
 }
 
-function createRefreshList({ reload, assertReady, readSortCheck, readCurrentPage, waitForFn, sleepFn }) {
+function createRefreshList({ reload, assertReady, readSortCheck, readCurrentPage, waitForFn, sleepFn, abortSignal = null }) {
   return async targetId => {
+    assertNotAborted(abortSignal);
     await reload(targetId);
-    await assertReady(targetId);
-    await sleepFn(2000);
+    assertNotAborted(abortSignal);
+    await assertReady(targetId, { abortSignal, sleep: sleepFn });
+    await waitAbortable(2000, abortSignal, sleepFn);
+    assertNotAborted(abortSignal);
     await readSortCheck(targetId);
+    assertNotAborted(abortSignal);
 
     let previousSignature = null;
     let stableReads = 0;
     return waitForFn(async () => {
+      assertNotAborted(abortSignal);
       const state = await readCurrentPage(targetId);
+      assertNotAborted(abortSignal);
       let trusted;
       try {
         trusted = assertTrustedPagination(state);
@@ -295,18 +307,24 @@ function createAutoExecutionGate({ readCircuit, executionJournal, readSimulation
 }
 
 async function clickPageOneLikeHuman(targetId, dependencies) {
+  const abortSignal = dependencies && dependencies.abortSignal;
+  assertNotAborted(abortSignal);
   const before = await dependencies.readCurrentPage(targetId);
+  assertNotAborted(abortSignal);
   const { pagination } = assertTrustedPagination(before);
   if (pagination.currentPage === 1) return pagination;
 
   // 分页条在页面底部（top ≈ 2400px），CDP 物理点击只接受 viewport 坐标。
   // 先向下大幅滚动使分页条进入 viewport，重读坐标，物理点击——与 step 12 / clickNextPage 同原则。
+  assertNotAborted(abortSignal);
   await dependencies.dispatchMouseEvent({
     type: 'mouseWheel', x: 640, y: 400, deltaX: 0, deltaY: 5000, button: 'none',
   });
-  await dependencies.sleep(400);
+  assertNotAborted(abortSignal);
+  await waitAbortable(400, abortSignal, dependencies.sleep);
 
   const afterScroll = await dependencies.readCurrentPage(targetId);
+  assertNotAborted(abortSignal);
   const { pages } = assertTrustedPagination(afterScroll);
   const pageOneLi = pages.find(p => p.number === 1 && !p.active);
   if (!pageOneLi || !pageOneLi.rect || !Number.isFinite(pageOneLi.rect.centerX)) {
@@ -314,17 +332,24 @@ async function clickPageOneLikeHuman(targetId, dependencies) {
   }
 
   const { centerX: x, centerY: y } = pageOneLi.rect;
+  assertNotAborted(abortSignal);
   await dependencies.dispatchMouseEvent({ type: 'mouseMoved', x, y, button: 'none' });
-  await dependencies.sleep(150);
+  assertNotAborted(abortSignal);
+  await waitAbortable(150, abortSignal, dependencies.sleep);
+
+  // mousePressed 已发出后只完成配对的 mouseReleased，再响应停止。
+  assertNotAborted(abortSignal);
   await dependencies.dispatchMouseEvent({ type: 'mousePressed', x, y, button: 'left', clickCount: 1 });
   await dependencies.sleep(130);
   await dependencies.dispatchMouseEvent({ type: 'mouseReleased', x, y, button: 'left', clickCount: 1 });
+  assertNotAborted(abortSignal);
 
-  await dependencies.sleep(1500);
+  await waitAbortable(1500, abortSignal, dependencies.sleep);
 
   const after = typeof dependencies.waitForPage === 'function'
     ? await dependencies.waitForPage(targetId, 1, () => dependencies.readCurrentPage(targetId), before)
     : await dependencies.readCurrentPage(targetId);
+  assertNotAborted(abortSignal);
   const trusted = assertTrustedPagination(after);
   if (trusted.pagination.currentPage !== 1) {
     throw new Error(`切回第一页失败: 当前仍为第${trusted.pagination.currentPage}页`);
@@ -335,7 +360,10 @@ async function clickPageOneLikeHuman(targetId, dependencies) {
 async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, options = {}) {
   const order = assertWorkOrderNum(workOrderNum);
   const maxPages = options.maxPages || MAX_PAGES;
+  const abortSignal = options.abortSignal || null;
+  assertNotAborted(abortSignal);
   let current = await dependencies.readCurrentPage(targetId);
+  assertNotAborted(abortSignal);
   let trusted = assertTrustedPagination(current);
 
   if (containsWorkOrder(current, order)) {
@@ -357,11 +385,14 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
   }
 
   if (trusted.pagination.currentPage !== 1) {
+    assertNotAborted(abortSignal);
     const pageOne = await dependencies.clickPageOne(targetId);
+    assertNotAborted(abortSignal);
     if (pageOne && pageOne.pagination && pageOne.pagination.currentPage === 1 && Array.isArray(pageOne.tickets)) {
       current = pageOne;
     } else {
       current = await dependencies.readCurrentPage(targetId);
+      assertNotAborted(abortSignal);
     }
     trusted = assertTrustedPagination(current);
     if (trusted.pagination.currentPage !== 1) throw new Error('回到第一页后页码验证失败');
@@ -370,6 +401,7 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
   const pagesChecked = [];
   let refreshedAfterPaginationDrift = false;
   for (let checked = 0; checked < maxPages; checked++) {
+    assertNotAborted(abortSignal);
     trusted = assertTrustedPagination(current);
     const pageNumber = trusted.pagination.currentPage;
     if (!pagesChecked.includes(pageNumber)) pagesChecked.push(pageNumber);
@@ -400,12 +432,15 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
     }
 
     if (checked === maxPages - 1) throw new Error(`达到最大页数 ${maxPages}，不能判定工单消失`);
+    assertNotAborted(abortSignal);
     const next = await dependencies.clickNextPage(targetId);
+    assertNotAborted(abortSignal);
     if (!next || next.clicked !== true) {
       if (!refreshedAfterPaginationDrift && typeof dependencies.refreshList === 'function') {
         current = await dependencies.refreshList(targetId, {
           reason: (next && next.reason) || '下一页点击未确认',
         });
+        assertNotAborted(abortSignal);
         const refreshed = assertTrustedPagination(current);
         if (refreshed.pagination.currentPage !== 1) {
           throw new Error(`分页兜底刷新后未回到第1页: 当前第${refreshed.pagination.currentPage}页`);
@@ -422,10 +457,13 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
       current = typeof dependencies.waitForPage === 'function'
         ? await dependencies.waitForPage(targetId, expectedPage, () => dependencies.readCurrentPage(targetId), current)
         : await dependencies.readCurrentPage(targetId);
+      assertNotAborted(abortSignal);
     } catch (error) {
+      if (isAbortError(error)) throw error;
       const expectedTimeout = error && error.message === `waitFor 超时: 等待售后列表第${expectedPage}页刷新`;
       if (!expectedTimeout || refreshedAfterPaginationDrift || typeof dependencies.refreshList !== 'function') throw error;
       current = await dependencies.refreshList(targetId, { reason: error.message });
+      assertNotAborted(abortSignal);
       const refreshed = assertTrustedPagination(current);
       if (refreshed.pagination.currentPage !== 1) {
         throw new Error(`分页兜底刷新后未回到第1页: 当前第${refreshed.pagination.currentPage}页`);
@@ -445,15 +483,24 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
 }
 
 async function closeAndVerifyDetailTarget(detailTargetId, dependencies, context = {}) {
+  const abortSignal = context && context.abortSignal;
+  assertNotAborted(abortSignal);
   await assertClosableCurrentAccountDetailTarget(detailTargetId, context, dependencies);
+  assertNotAborted(abortSignal);
   await dependencies.closeTarget(detailTargetId);
-  // Chrome closeTarget HTTP 返回成功后标签页可能尚未从 /json 列表移除，短等待 + 重试一次
-  await dependencies.sleep(300);
+  assertNotAborted(abortSignal);
+  // Chrome closeTarget HTTP 返回成功后标签页可能尚未从 /json 列表移除，短等待 + 重试一次。
+  // 用户停止时不再为了“收尾整洁”继续关闭/验证详情页。
+  await waitAbortable(300, abortSignal, dependencies.sleep);
   let targets = await dependencies.getTargets();
+  assertNotAborted(abortSignal);
   if ((targets || []).some(target => targetIdOf(target) === detailTargetId)) {
+    assertNotAborted(abortSignal);
     await dependencies.closeTarget(detailTargetId);
-    await dependencies.sleep(500);
+    assertNotAborted(abortSignal);
+    await waitAbortable(500, abortSignal, dependencies.sleep);
     targets = await dependencies.getTargets();
+    assertNotAborted(abortSignal);
     if ((targets || []).some(target => targetIdOf(target) === detailTargetId)) {
       throw new Error(`详情标签页关闭验证失败: ${detailTargetId}`);
     }
@@ -462,36 +509,49 @@ async function closeAndVerifyDetailTarget(detailTargetId, dependencies, context 
 
 async function cleanupCurrentAccountJlTargets(context, dependencies) {
   const listTargetId = context && context.listTargetId;
+  const abortSignal = context && context.abortSignal;
+  assertNotAborted(abortSignal);
   await assertCurrentAccountListTarget(listTargetId, context, dependencies);
+  assertNotAborted(abortSignal);
 
   const before = await dependencies.getTargets();
+  assertNotAborted(abortSignal);
   const closeIds = [];
   for (const target of before || []) {
+    assertNotAborted(abortSignal);
     const targetId = targetIdOf(target);
     if (!targetId || targetId === listTargetId || !isJlTarget(target)) continue;
     if (context && context.account && context.account.matchedNote && typeof dependencies.readShopName === 'function') {
-      const state = await dependencies.readShopName(targetId, 0);
+      const state = await dependencies.readShopName(targetId, 0, { abortSignal });
+      assertNotAborted(abortSignal);
       if (!state || state.success !== true || state.state !== 'logged-in') {
         throw new Error(`账号收尾清理遇到不可信鲸灵 tab: ${target.url || targetId}`);
       }
       if (!matchShopName(state.shopName, context.account.matchedNote)) continue;
     }
     await assertClosableCurrentAccountDetailTarget(targetId, context, dependencies);
+    assertNotAborted(abortSignal);
     closeIds.push(targetId);
   }
 
   for (const targetId of closeIds) {
+    assertNotAborted(abortSignal);
     await dependencies.closeTarget(targetId);
+    assertNotAborted(abortSignal);
   }
 
   await assertCurrentAccountListTarget(listTargetId, context, dependencies);
+  assertNotAborted(abortSignal);
   const after = await dependencies.getTargets();
+  assertNotAborted(abortSignal);
   const remainingCurrentAccountJlTargets = [];
   for (const target of after || []) {
+    assertNotAborted(abortSignal);
     const targetId = targetIdOf(target);
     if (!targetId || targetId === listTargetId || !isJlTarget(target)) continue;
     if (context && context.account && context.account.matchedNote && typeof dependencies.readShopName === 'function') {
-      const state = await dependencies.readShopName(targetId, 0);
+      const state = await dependencies.readShopName(targetId, 0, { abortSignal });
+      assertNotAborted(abortSignal);
       if (state && state.success === true && state.state === 'logged-in' && matchShopName(state.shopName, context.account.matchedNote)) {
         remainingCurrentAccountJlTargets.push(targetId);
       }
@@ -903,15 +963,6 @@ function loadDefaultDependencies() {
       pagination: step10.normalizePaginationState(raw && raw.pagination),
     };
   };
-  const waitForPage = createWaitForPage(waitFor);
-  const refreshList = createRefreshList({
-    reload: cdp.reload,
-    assertReady: assertAfterSaleListReady,
-    readSortCheck: readCurrentPageSortCheck,
-    readCurrentPage,
-    waitForFn: waitFor,
-    sleepFn: sleep,
-  });
   const circuitFile = path.join(__dirname, '../../data/circuit-breaker.json');
   const sessionStateFile = path.join(__dirname, '../../data/current-session.json');
   const executionJournal = createAutoExecutionJournal();
@@ -933,28 +984,47 @@ function loadDefaultDependencies() {
     invalidateSessionState: () => clearSessionState(sessionStateFile),
     prepareAfterSaleList,
     clickWorkOrderAction,
-    locateWorkOrder: (targetId, workOrderNum) => {
+    locateWorkOrder: (targetId, workOrderNum, options = {}) => {
+      const abortSignal = options.abortSignal || null;
+      const abortableReadCurrentPage = async id => {
+        assertNotAborted(abortSignal);
+        const page = await readCurrentPage(id);
+        assertNotAborted(abortSignal);
+        return page;
+      };
+      const waitForPageWithAbort = createWaitForPage(waitFor, abortSignal);
+      const sleepWithAbort = ms => waitAbortable(ms, abortSignal, sleep);
       const pageDependencies = {
-        readCurrentPage,
-        sleep,
-        waitForPage,
+        readCurrentPage: abortableReadCurrentPage,
+        sleep: sleepWithAbort,
+        waitForPage: waitForPageWithAbort,
+        abortSignal,
         dispatchMouseEvent: event => cdp.dispatchMouseEvent(targetId, event),
         eval: (id, js) => cdp.eval(id, js),
       };
-      return locateWorkOrderOnFreshList(targetId, workOrderNum, {
-        readCurrentPage,
-        clickPageOne: id => clickPageOneLikeHuman(id, pageDependencies),
-        clickNextPage: step10.clickNextPage,
-        waitForPage,
-        refreshList,
+      const refreshListWithAbort = createRefreshList({
+        reload: cdp.reload,
+        assertReady: assertAfterSaleListReady,
+        readSortCheck: readCurrentPageSortCheck,
+        readCurrentPage: abortableReadCurrentPage,
+        waitForFn: waitFor,
+        sleepFn: sleepWithAbort,
+        abortSignal,
       });
+      return locateWorkOrderOnFreshList(targetId, workOrderNum, {
+        readCurrentPage: abortableReadCurrentPage,
+        clickPageOne: id => clickPageOneLikeHuman(id, pageDependencies),
+        clickNextPage: id => step10.clickNextPage(id, { abortSignal }),
+        waitForPage: waitForPageWithAbort,
+        refreshList: refreshListWithAbort,
+      }, { abortSignal });
     },
     resolveErpTargetId: requestedTargetId => resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, requestedTargetId),
-    readShopName: (targetId, waitMs = 0) => readShopName(targetId, waitMs),
+    readShopName: (targetId, waitMs = 0, options = {}) => readShopName(targetId, waitMs, options),
     cleanupCurrentAccountJlTargets: context => cleanupCurrentAccountJlTargets(context, {
       getTargets: cdp.getTargets,
       closeTarget: cdp.closeTarget,
-      readShopName: (targetId, waitMs = 0) => readShopName(targetId, waitMs),
+      readShopName: (targetId, waitMs = 0, options = {}) => readShopName(targetId, waitMs, options),
     }),
     fetchAndCacheAlerts,
     collectDetail: context => collectTicketTargetAware({
@@ -1062,14 +1132,17 @@ function resolveSharedReturnGroupForBatch(
 }
 
 async function throwAccountEndStateFailure(cause, context, dependencies) {
-  const { accountResult, snapshot, items, targetId } = context;
+  const { accountResult, snapshot, items, targetId, abortSignal } = context;
+  assertNotAborted(abortSignal);
   let invalidateError = null;
   if (typeof dependencies.invalidateSessionState !== 'function') {
     invalidateError = new Error('缺少 invalidateSessionState');
   } else {
     try {
       await dependencies.invalidateSessionState();
+      assertNotAborted(abortSignal);
     } catch (error) {
+      if (isAbortError(error)) throw error;
       invalidateError = error;
     }
   }
@@ -1115,7 +1188,9 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   };
   await assertBatchAllowed();
 
-  const accountResult = await dependencies.openAccountFlow(account);
+  const accountResult = await dependencies.openAccountFlow(account, {
+    abortSignal: options.abortSignal,
+  });
   assertNotAborted(options.abortSignal);
   if (!accountResult || !accountResult.success) throw stepError('打开账号失败', accountResult);
   if (typeof dependencies.saveSessionState !== 'function') {
@@ -1125,6 +1200,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   const prepared = await dependencies.prepareAfterSaleList({
     targetId: accountResult.targetId,
     thresholdHours,
+    abortSignal: options.abortSignal,
   });
   assertNotAborted(options.abortSignal);
   if (!prepared || !prepared.success) throw stepError('准备售后列表失败', prepared);
@@ -1182,7 +1258,9 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     let processingError = null;
 
     try {
-      const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum);
+      const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum, {
+        abortSignal: options.abortSignal,
+      });
       assertNotAborted(options.abortSignal);
       item.location = located;
       if (!located || !located.found) {
@@ -1208,7 +1286,10 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         continue;
       }
 
-      const opened = await dependencies.clickWorkOrderAction(item.workOrderNum, { targetId: prepared.targetId });
+      const opened = await dependencies.clickWorkOrderAction(item.workOrderNum, {
+        targetId: prepared.targetId,
+        abortSignal: options.abortSignal,
+      });
       if (!opened || !opened.success || !opened.newTargetId) throw stepError('打开目标工单失败', opened);
       detailTargetId = opened.newTargetId;
       item.detailTargetId = detailTargetId;
@@ -1234,12 +1315,14 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       item.persistedSimulationId = persisted && persisted.id;
     } catch (error) {
       processingError = error;
-      if (!detailTargetId && Array.isArray(error.newTargetIds)) {
+      if (!isAbortError(error) && !detailTargetId && Array.isArray(error.newTargetIds)) {
         for (const unexpectedTargetId of error.newTargetIds) {
+          assertNotAborted(options.abortSignal);
           try {
             await closeAndVerifyDetailTarget(unexpectedTargetId, dependencies, {
               account: accountResult,
               listTargetId: prepared.targetId,
+              abortSignal: options.abortSignal,
             });
           } catch (cleanupError) {
             processingError = cleanupError;
@@ -1248,11 +1331,12 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         }
       }
     } finally {
-      if (detailTargetId) {
+      if (detailTargetId && !isAbortError(processingError) && !(options.abortSignal && options.abortSignal.aborted)) {
         try {
           await closeAndVerifyDetailTarget(detailTargetId, dependencies, {
             account: accountResult,
             listTargetId: prepared.targetId,
+            abortSignal: options.abortSignal,
           });
           item.detailClosed = true;
         } catch (closeError) {
@@ -1261,6 +1345,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       }
     }
 
+    assertNotAborted(options.abortSignal);
     if (processingError) {
       if (isAbortError(processingError)) throw processingError;
       const failureProcessed = buildFailureProcessed(item.ticket, processingError);
@@ -1355,11 +1440,13 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       cleanup = await dependencies.cleanupCurrentAccountJlTargets({
         account: accountResult,
         listTargetId: prepared.targetId,
+        abortSignal: options.abortSignal,
       });
     } else if (typeof dependencies.readShopName === 'function') {
       cleanup = await cleanupCurrentAccountJlTargets({
         account: accountResult,
         listTargetId: prepared.targetId,
+        abortSignal: options.abortSignal,
       }, dependencies);
     }
   } catch (cause) {
@@ -1370,6 +1457,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         snapshot,
         items,
         targetId: prepared.targetId,
+        abortSignal: options.abortSignal,
       }, dependencies);
     }
     throw cause;
@@ -1381,14 +1469,21 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     if (typeof dependencies.fetchAndCacheAlerts !== 'function') {
       throw new Error('首页提醒采集依赖未装配');
     }
-    await dependencies.fetchAndCacheAlerts(accountNum, accountNote);
+    await dependencies.fetchAndCacheAlerts(accountNum, accountNote, {
+      abortSignal: options.abortSignal,
+    });
+    assertNotAborted(options.abortSignal);
   } catch(e) {
+    if (isAbortError(e)) throw e;
     console.warn('[step14] fetchAndCacheAlerts 非致命错误:', e.message);
   }
 
   try {
     assertNotAborted(options.abortSignal);
-    await assertFinalAccountShop(prepared.targetId, { account: accountResult }, dependencies);
+    await assertFinalAccountShop(prepared.targetId, {
+      account: accountResult,
+      abortSignal: options.abortSignal,
+    }, dependencies);
     assertNotAborted(options.abortSignal);
   } catch (cause) {
     if (isAbortError(cause)) throw cause;
@@ -1397,6 +1492,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       snapshot,
       items,
       targetId: prepared.targetId,
+      abortSignal: options.abortSignal,
     }, dependencies);
   }
 

@@ -105,6 +105,55 @@ test('账号状态不可信隔离会关闭已知异常target，即使它暂时�
   assert.deepEqual(targets.map(item => item.id), ['erp-tab']);
 });
 
+test('about:blank异常target关闭请求返回后仍存在时必须判隔离失败', async () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { isolateUntrustedJlTarget } = require('../../lib/server/op-queue');
+  const calls = [];
+  const targets = [
+    { id: 'jl-tab', type: 'page', url: 'about:blank' },
+    { id: 'erp-tab', type: 'page', url: 'https://viperp.superboss.cc/' },
+  ];
+  const cdp = {
+    getTargets: async () => targets.map(item => ({ ...item })),
+    closeTarget: async targetId => calls.push(['close', targetId]),
+  };
+
+  await assert.rejects(
+    isolateUntrustedJlTarget('jl-tab', {}, {
+      cdp,
+      wait: async ms => calls.push(['wait', ms]),
+    }),
+    /目标 tab 关闭后仍存在/
+  );
+
+  assert.deepEqual(calls, [['close', 'jl-tab'], ['wait', 300]]);
+});
+
+test('隔离开始前已经收到停止时不读取也不关闭任何tab', async () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { isolateUntrustedJlTarget } = require('../../lib/server/op-queue');
+  const controller = new AbortController();
+  controller.abort();
+  const calls = [];
+  const cdp = {
+    getTargets: async () => {
+      calls.push(['getTargets']);
+      return [];
+    },
+    closeTarget: async targetId => calls.push(['close', targetId]),
+  };
+
+  await assert.rejects(
+    isolateUntrustedJlTarget('jl-tab', { _abortSignal: controller.signal }, {
+      cdp,
+      wait: async ms => calls.push(['wait', ms]),
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.deepEqual(calls, []);
+});
+
 test('账号状态不可信隔离发现额外鲸灵tab时立即失败，不重复关闭或等待', async () => {
   delete require.cache[require.resolve('../../lib/server/op-queue')];
   const { isolateUntrustedJlTarget } = require('../../lib/server/op-queue');

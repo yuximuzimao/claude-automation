@@ -118,6 +118,30 @@ test('openAccountFlow：清理返回 success:true 但 verified:false 时不得�
   assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1']);
 });
 
+test('openAccountFlow：读取店铺后收到停止时不清理、不注入，原样传播AbortError', async () => {
+  const calls = [];
+  const controller = new AbortController();
+  const steps = makeSteps({ success: true, state: 'logged-in', shopName: '杭州共途贸易有限公司' }, calls);
+  steps.readShopName = async targetId => {
+    calls.push(`readShopName:${targetId}`);
+    controller.abort();
+    return { success: true, state: 'logged-in', shopName: '杭州共途贸易有限公司' };
+  };
+
+  await assert.rejects(
+    openAccountFlow(3, {
+      note: '百浩-RITEKOKO',
+      steps,
+      abortSignal: controller.signal,
+    }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1']);
+  assert.equal(calls.some(call => call.startsWith('clearJlData:')), false);
+  assert.equal(calls.some(call => call.startsWith('inject:')), false);
+});
+
 test('openAccountFlow：未知登录态报错即停，不清理也不注入', async () => {
   const calls = [];
   const result = await openAccountFlow(3, {
@@ -192,6 +216,6 @@ test('op-queue 打开店铺后台入口使用安全编排脚本，不再盲目 j
   const body = source.slice(start, end);
 
   assert.match(body, /require\('\.\.\/jl\/open-account-flow'\)/);
-  assert.match(body, /openAccountFlow\(String\(accountNum\)\)/);
+  assert.match(body, /openAccountFlow\(String\(accountNum\), \{ abortSignal: op\._abortSignal \}\)/);
   assert.equal(body.includes("jl.js'), 'inject'"), false);
 });

@@ -80,3 +80,25 @@ test('closeExtraJlTabs stops on first closeTarget error without retrying remaini
   assert.deepEqual(closedAttempts, ['jl-2']);
   assert.match(result.error, /close failed/);
 });
+
+test('closeExtraJlTabs 收到停止后不继续关闭后续tab', async () => {
+  const controller = new AbortController();
+  const closedAttempts = [];
+  cdp.getTargets = async () => [
+    { id: 'jl-1', type: 'page', url: 'https://scrm.jlsupp.com/workbench', title: '后台' },
+    { id: 'jl-2', type: 'page', url: 'https://scrm.jlsupp.com/login', title: '登录' },
+    { id: 'jl-3', type: 'page', url: 'https://scrm.jlsupp.com/other', title: '其他' },
+  ];
+  cdp.closeTarget = async id => {
+    closedAttempts.push(id);
+    if (id === 'jl-2') controller.abort();
+    return { closed: true };
+  };
+
+  await assert.rejects(
+    closeExtraJlTabs({ sleepMs: 300, abortSignal: controller.signal }),
+    error => error && error.name === 'AbortError'
+  );
+
+  assert.deepEqual(closedAttempts, ['jl-2']);
+});

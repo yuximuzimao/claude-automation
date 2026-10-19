@@ -14,6 +14,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
+const { assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 
 const JL_DOMAIN = 'scrm.jlsupp.com';
 const SORT_PLACEHOLDER = '排序规则';
@@ -157,11 +158,15 @@ async function clickPoint(targetId, x, y, pressDelayMs) {
 }
 
 async function selectOverdueSort(options = {}) {
+  const abortSignal = options.abortSignal || null;
+  assertNotAborted(abortSignal);
   const target = options.targetId
     ? { id: options.targetId }
     : await findJlPageTarget();
+  assertNotAborted(abortSignal);
 
   const before = await findSortDropdownRect(target.id);
+  assertNotAborted(abortSignal);
   if (before.value === TARGET_SORT) {
     return {
       success: true,
@@ -176,6 +181,7 @@ async function selectOverdueSort(options = {}) {
   // JL SCRM el-select dropdown item 在 CDP 下 getBoundingClientRect().height = 0，
   // 物理点击 → 找 visible item → 点 item 的路径失败（item 坐标为 0,0）。
   // 改用 Vue emit 直接注入值（同 match.js 方案），绕过 DOM 渲染问题。
+  assertNotAborted(abortSignal);
   const targetSort = JSON.stringify(TARGET_SORT);
   const emitResult = await cdp.eval(target.id, `(function(){
     var targetText = ${targetSort};
@@ -195,10 +201,12 @@ async function selectOverdueSort(options = {}) {
     return JSON.stringify({error: '未找到排序规则 el-select 或目标选项「' + targetText + '」'});
   })()`);
 
+  assertNotAborted(abortSignal);
   if (emitResult && emitResult.error) throw new Error(emitResult.error);
-  await sleep(AFTER_SELECT_WAIT_MS);
+  await waitAbortable(AFTER_SELECT_WAIT_MS, abortSignal);
 
   const after = await findSortDropdownRect(target.id);
+  assertNotAborted(abortSignal);
   if (after.value !== TARGET_SORT) {
     throw new Error(`排序选择后校验失败: ${after.value || '(空)'}`);
   }
