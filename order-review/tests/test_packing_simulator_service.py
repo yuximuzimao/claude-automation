@@ -98,13 +98,13 @@ def test_catalog_view_keeps_full_brand_skeleton_and_pending_records(tmp_path):
         for keyword in ("RITEKOKO", "KOKO", "希凝", "钥黑")
     )
     assert directory["肉桂可可咖啡七条装"]["fullName"] == "KGOS甘油二酯咖啡固体饮料(肉桂可可味) 8g*7袋/盒"
-    assert directory["肉桂可可咖啡七条装"]["missingCode"] is True
+    assert directory["肉桂可可咖啡七条装"]["mainMerchantCode"] == "6980632720009"
+    assert directory["肉桂可可咖啡七条装"]["missingCode"] is False
     assert {
         short_name
         for short_name, item in directory.items()
         if item["missingCode"]
     } == {
-        "肉桂可可咖啡七条装",
         "HEE悦希冻龄提拉紧塑三相精华油 5ml （新品首发体验）",
     }
     assert not any("印花礼盒一盒装" in item["shortName"] for item in directory.values())
