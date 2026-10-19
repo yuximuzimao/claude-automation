@@ -135,7 +135,7 @@ def build_review_trigger(
         for program_id, program in load_all_route_programs(
             validate=True, validate_profiles=True
         ).items()
-        if target_id in program["profile_ids"]
+        if target_id in program["profile_ids"] and program.get("status") != "retired"
     ]
     if program_ids:
         raise ValueError(

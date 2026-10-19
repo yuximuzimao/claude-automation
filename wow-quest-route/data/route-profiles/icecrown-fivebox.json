@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "icecrown-fivebox",
-  "version": 2,
+  "version": 3,
   "status": "draft",
   "scope": {
     "route_scope": "冰冠冰川",
@@ -5622,6 +5622,28 @@
       ]
     }
   ],
+  "service_overrides": [
+    {
+      "service_id": "icecrown-step19-venom-dominant",
+      "kind": "shared_service",
+      "dominant_task_id": 13040,
+      "action_ids": [
+        "a0288",
+        "a0289",
+        "a0290"
+      ]
+    },
+    {
+      "service_id": "icecrown-step21-scourgestone-dominant",
+      "kind": "shared_service",
+      "dominant_task_id": 13122,
+      "action_ids": [
+        "a0328",
+        "a0329",
+        "a0330"
+      ]
+    }
+  ],
   "geometry": {
     "locations": {
       "icecrown-p001": {
@@ -8425,6 +8447,11 @@
       "date": "2026-10-16",
       "kind": "display_step_split",
       "summary": "按HUD可读性把第一次东行联合包和高难可选末段各拆成两段；不改变任务/交通动作顺序。"
+    },
+    {
+      "date": "2026-10-19",
+      "kind": "timing_service_overlap",
+      "summary": "按第二组DK实跑确认两组同批任务采用包含关系：步骤19以《致命的剧毒》为主体覆盖《天灾的战术》《保卫前线基地》；步骤21以《天灾石》为主体覆盖《净化天灾城》《永不安息的亡者》。"
     }
   ]
 }

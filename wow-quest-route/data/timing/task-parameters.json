@@ -1149,14 +1149,10 @@
     },
     "13040": {
       "inputs": {
-        "fixed_service_seconds": 900.0
+        "drop_rate": 1.0
       },
       "source_refs": [
-        "data/route-atlas/icecrown-task-foundation.json#task_id=13040; basis=manual_pre_route:public_wotlk_five_account_benchmark_fifty_venom_sacs_near_guaranteed_drop"
-      ],
-      "provisional_range_minutes": [
-        12.0,
-        20.0
+        "2026-10-19 second DK fivebox live run: 《致命的剧毒》不共享，五号各收10个毒囊，任务物实测100%掉落。"
       ]
     },
     "13008": {
@@ -1193,14 +1189,14 @@
     },
     "13086": {
       "inputs": {
-        "fixed_service_seconds": 720.0
+        "fixed_service_seconds": 210.0
       },
       "source_refs": [
-        "data/route-atlas/icecrown-task-foundation.json#task_id=13086; basis=manual_pre_route:argent_cannon_one_hundred_attackers_three_destroyers_public_single_character_under_five_minutes_fivebox_credit_unresolved"
+        "2026-10-19 second DK Journey: 《最后一道防线》07:51:00 Accept → 07:53:59 Complete = 179s；用户确认正常预测取3–4分钟，中心取210s。"
       ],
       "provisional_range_minutes": [
-        4.0,
-        30.0
+        3.0,
+        4.0
       ]
     },
     "13110": {
@@ -1217,10 +1213,14 @@
     },
     "13125": {
       "inputs": {
-        "fixed_service_seconds": 45.0
+        "fixed_service_seconds": 415.0
       },
       "source_refs": [
-        "data/route-atlas/icecrown-task-foundation.json#task_id=13125; basis=shared_kill_model"
+        "2026-10-19 second DK Journey: 《凝固的空气》08:20:43 Accept → 08:27:38 Complete = 415s；该单任务当前Profile把三Boss内部移动压在同一objective中，按用户规则仅因实测差距过大做task-specific固定服务修正。"
+      ],
+      "provisional_range_minutes": [
+        5.5,
+        8.5
       ]
     },
     "13130": {

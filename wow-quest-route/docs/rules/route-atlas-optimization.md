@@ -69,7 +69,7 @@ Stage 5输出按visit/edge携带来源、fingerprint、UNKNOWN/冲突诊断；St
 Stage 6回答“当前Route Profile中的任务服务发生在哪里、哪些服务真正共享、哪些任务只是被主体路线背景覆盖”，不重新决定任务集合或路线顺序。现役唯一解释器是`lib/route_service_context.py`；正式执行范围与入口见本文§23。完整诊断工具不是日常写入口。
 
 - 每个结构化`objective` action天然是一条foreground service event；它绑定Stage 5当前真实visit occurrence。`objective`只表示“这里发生任务服务”，不表示任务在此已经完成；任务完成/交付状态仍由Stage 3 Replay的turnin语义拥有。
-- 默认每条objective service独立形成一个Target Cluster。多个objective恰好在同一visit，只能证明共处，**不能自动证明同目标/零边际成本**；真正的共享服务必须由Profile最小`service_overrides.kind=shared_service`显式保存，且当前合同只允许同一visit内的objective actions组成一组。跨visit共享/持续累计应使用background window，不把多个地点伪装成同一个Target Cluster。
+- 默认每条objective service独立形成一个Target Cluster。多个objective恰好在同一visit，只能证明共处，**不能自动证明同目标/零边际成本**；真正的共享服务必须由Profile最小`service_overrides.kind=shared_service`显式保存，且当前合同只允许同一visit内的objective actions组成一组。若同一批怪会同时推进多个任务，并且其中一个任务的需求量天然覆盖其余任务，可在该`shared_service`上显式指定`dominant_task_id`；Stage 7只计算主体任务原有Timing规则一次，其余objective不重复收费。跨visit共享/持续累计应使用background window，不把多个地点伪装成同一个Target Cluster。
 - Spatial Instance默认只派生到canonical visit occurrence这一保守粒度：同一visit内的Target Clusters共享一个visit-level instance；不得用Questie平均坐标、旧`phase`字符串、地图距离或旧target-cluster文件自动声称洞穴/楼层/相位可互通。以后若新优化确实需要更强拓扑，必须先有独立可验证空间owner/原子，而不是在Stage 6偷偷猜。
 - `service_overrides.kind=background_window`只保存**无法从objective actions稳定重建、但会改变Timing/Optimization的route-only决策**：`task_id + start_action_id + end_action_id + end_policy`。窗口只引用稳定action身份，不引用旧step号/point index。
 - `end_policy=carry_if_incomplete`：窗口结束仍未完成时不建立专门补刷段，任务继续携带；例如《赞加沼泽的植物》在后续路线自然累计，不够就继续保留。

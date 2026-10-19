@@ -240,6 +240,13 @@ def validate_route_profile(
                 raise RouteProfileError(
                     f"service_override {row['service_id']} shared_service may reference only objective actions: {non_objective}"
                 )
+            dominant_task_id = row.get("dominant_task_id")
+            if dominant_task_id is not None:
+                shared_task_ids = {int(action_by_id[action_id]["task_id"]) for action_id in row["action_ids"]}
+                if int(dominant_task_id) not in shared_task_ids:
+                    raise RouteProfileError(
+                        f"service_override {row['service_id']} dominant_task_id must belong to its shared objective actions"
+                    )
 
     referenced_task_ids = {
         action["task_id"]

@@ -475,6 +475,43 @@ def test_shared_service_is_charged_once_not_once_per_objective() -> None:
     assert not any(issue["kind"] == "timing_rule_ref_required" for issue in report["issues"])
 
 
+def test_shared_service_can_use_dominant_task_formula_once() -> None:
+    actions = [
+        {"action_id": "v1", "kind": "location", "location_ref": "p1"},
+        {"action_id": "a1", "kind": "accept", "task_id": 100, "location_ref": "p1"},
+        {"action_id": "a2", "kind": "accept", "task_id": 200, "location_ref": "p1"},
+        {"action_id": "v2", "kind": "location", "location_ref": "p2"},
+        {"action_id": "o1", "kind": "objective", "task_id": 100, "location_ref": "p2"},
+        {"action_id": "o2", "kind": "objective", "task_id": 200, "location_ref": "p2"},
+    ]
+    profile = _profile(
+        actions=actions,
+        service_overrides=[
+            {
+                "service_id": "dominant-pack",
+                "kind": "shared_service",
+                "dominant_task_id": 100,
+                "action_ids": ["o1", "o2"],
+            }
+        ],
+    )
+    inputs = _inputs()
+    inputs["task_parameters"]["tasks"]["100"] = {"inputs": {"fixed_service_seconds": 120.0}}
+    inputs["task_parameters"]["tasks"]["200"] = {"inputs": {"fixed_service_seconds": 90.0}}
+    cards = {
+        100: _task_card(100, "fixed-service-seconds"),
+        200: _task_card(200, "fixed-service-seconds"),
+    }
+    report = _evaluate(profile, cards, inputs)
+
+    objective_rows = [row for row in report["component_rows"] if row["component"] == "objective_service"]
+    row = next(row for row in objective_rows if row.get("service_id") == "dominant-pack")
+    assert row["basis"] == "shared_service_dominant_task"
+    assert row["dominant_task_id"] == 100
+    assert row["seconds"] == 120.0
+    assert not any(item.get("action_id") in {"o1", "o2"} for item in objective_rows)
+
+
 def test_background_end_policies_remain_distinct() -> None:
     profile = _profile(
         service_overrides=[

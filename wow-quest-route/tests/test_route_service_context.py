@@ -68,6 +68,7 @@ def test_shared_service_requires_explicit_override_and_merges_same_visit_actions
             {
                 "service_id": "same-target",
                 "kind": "shared_service",
+                "dominant_task_id": 100,
                 "action_ids": ["o1", "o2"],
             }
         ]
@@ -79,6 +80,7 @@ def test_shared_service_requires_explicit_override_and_merges_same_visit_actions
     assert cluster["action_ids"] == ["o1", "o2"]
     assert cluster["task_ids"] == [100, 200]
     assert cluster["visit_ids"] == ["v2"]
+    assert cluster["dominant_task_id"] == 100
 
 
 def test_shared_service_cannot_claim_zero_cost_overlap_across_different_visits() -> None:

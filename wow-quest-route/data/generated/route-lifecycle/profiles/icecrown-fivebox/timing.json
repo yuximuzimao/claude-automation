@@ -1546,26 +1546,115 @@
       "visit_id": "a0680"
     },
     {
-      "action_id": "a0290",
+      "action_ids": [
+        "a0288",
+        "a0289",
+        "a0290"
+      ],
+      "basis": "shared_service_dominant_task",
       "component": "objective_service",
+      "dominant_task_id": 13040,
       "resolution": {
         "resolved_inputs": {
           "accept_turnin_base_seconds_per_stop": 39.0,
           "accept_turnin_per_task_seconds": 9.6,
           "combat_seconds_per_mob": 15.0,
+          "drop_rate": 1.0,
+          "drop_rate_candidates": [
+            {
+              "npc_id": 30204,
+              "rate": 0.67,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 30205,
+              "rate": 0.64,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 30206,
+              "rate": 0.6,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 30333,
+              "rate": 0.65,
+              "source": "pserver"
+            }
+          ],
           "fixed_object_seconds_per_character": 7.0,
-          "fixed_service_seconds": 684.0,
+          "item_id": 42770,
           "party_size": 5,
           "personal_drop_tail_sigma_multiplier": 1.2,
-          "personal_loot_seconds_per_corpse": 9.0
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 10
         },
-        "rule_kind": "fixed_seconds",
-        "rule_ref": "fixed-service-seconds",
-        "task_id": 13039
+        "rule_kind": "personal_drop",
+        "rule_ref": "personal-drop-count",
+        "task_id": 13040
       },
-      "seconds": 684.0,
-      "step_id": "step-19",
-      "task_id": 13039
+      "seconds": 1200.0,
+      "service_id": "icecrown-step19-venom-dominant",
+      "step_id": "step-19"
+    },
+    {
+      "action_ids": [
+        "a0328",
+        "a0329",
+        "a0330"
+      ],
+      "basis": "shared_service_dominant_task",
+      "component": "objective_service",
+      "dominant_task_id": 13122,
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "drop_rate": 1.0,
+          "drop_rate_candidates": [
+            {
+              "npc_id": 30202,
+              "rate": 1.0,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 30482,
+              "rate": 1.0,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 30541,
+              "rate": 1.0,
+              "source": "pserver"
+            },
+            {
+              "npc_id": 30543,
+              "rate": 1.0,
+              "source": "pserver"
+            }
+          ],
+          "drop_rate_npc_ids": [
+            30202,
+            30482,
+            30541,
+            30543
+          ],
+          "drop_rate_source": "equivalent_npc_sources",
+          "fixed_object_seconds_per_character": 7.0,
+          "item_id": 43169,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0,
+          "required_count": 15
+        },
+        "rule_kind": "personal_drop",
+        "rule_ref": "personal-drop-count",
+        "task_id": 13122
+      },
+      "seconds": 1800.0,
+      "service_id": "icecrown-step21-scourgestone-dominant",
+      "step_id": "step-21"
     },
     {
       "action_id": "a0303",
@@ -1599,7 +1688,7 @@
           "accept_turnin_per_task_seconds": 9.6,
           "combat_seconds_per_mob": 15.0,
           "fixed_object_seconds_per_character": 7.0,
-          "fixed_service_seconds": 720.0,
+          "fixed_service_seconds": 210.0,
           "kill_count": 100,
           "party_size": 5,
           "personal_drop_tail_sigma_multiplier": 1.2,
@@ -1609,32 +1698,9 @@
         "rule_ref": "fixed-service-seconds",
         "task_id": 13086
       },
-      "seconds": 720.0,
+      "seconds": 210.0,
       "step_id": "step-20",
       "task_id": 13086
-    },
-    {
-      "action_id": "a0328",
-      "component": "objective_service",
-      "resolution": {
-        "resolved_inputs": {
-          "accept_turnin_base_seconds_per_stop": 39.0,
-          "accept_turnin_per_task_seconds": 9.6,
-          "combat_seconds_per_mob": 15.0,
-          "fixed_object_seconds_per_character": 7.0,
-          "fixed_service_seconds": 210.0,
-          "kill_count": 14,
-          "party_size": 5,
-          "personal_drop_tail_sigma_multiplier": 1.2,
-          "personal_loot_seconds_per_corpse": 9.0
-        },
-        "rule_kind": "fixed_seconds",
-        "rule_ref": "fixed-service-seconds",
-        "task_id": 13118
-      },
-      "seconds": 210.0,
-      "step_id": "step-21",
-      "task_id": 13118
     },
     {
       "action_id": "a0337",
@@ -1645,7 +1711,7 @@
           "accept_turnin_per_task_seconds": 9.6,
           "combat_seconds_per_mob": 15.0,
           "fixed_object_seconds_per_character": 7.0,
-          "fixed_service_seconds": 45.0,
+          "fixed_service_seconds": 415.0,
           "party_size": 5,
           "personal_drop_tail_sigma_multiplier": 1.2,
           "personal_loot_seconds_per_corpse": 9.0
@@ -1654,7 +1720,7 @@
         "rule_ref": "fixed-service-seconds",
         "task_id": 13125
       },
-      "seconds": 45.0,
+      "seconds": 415.0,
       "step_id": "step-21",
       "task_id": 13125
     },
@@ -3776,7 +3842,7 @@
       "task_id": 13164
     }
   ],
-  "input_fingerprint": "8b829f5e020b162acc5a9925303012955fb561e9cb8ad030dab33505f9c4badc",
+  "input_fingerprint": "0e35ed1a63f911e0e66b1ad30433869ae24b0e6981d905e45df63540d03f4ed0",
   "issues": [
     {
       "edge_id": "a0001->a0003",
@@ -6014,38 +6080,6 @@
       "task_id": 13839
     },
     {
-      "action_id": "a0288",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-19",
-      "task_id": 13040
-    },
-    {
-      "action_id": "a0289",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-19",
-      "task_id": 13008
-    },
-    {
-      "action_id": "a0329",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 13122
-    },
-    {
-      "action_id": "a0330",
-      "kind": "timing_rule_ref_required",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-21",
-      "task_id": 13110
-    },
-    {
       "action_id": "a0029",
       "kind": "timing_rule_ref_required",
       "resolved_by": "legacy_step_baseline",
@@ -6185,7 +6219,7 @@
       "severity": "requirement"
     }
   ],
-  "known_seconds": 40604.868,
+  "known_seconds": 42570.868,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "icecrown-fivebox",
@@ -6219,16 +6253,16 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 16.9,
+      "center_minutes": 25.5,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 330.0,
         "move_seconds": 0.0,
-        "objective_service_seconds": 684.0,
+        "objective_service_seconds": 1200.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1014.0,
+      "known_seconds": 1530.0,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
@@ -6237,23 +6271,23 @@
       },
       "range_minutes": [
         5.729,
-        16.9
+        25.5
       ],
       "step_id": "step-19",
       "title": "银色前线基地：天灾战术 + 致命剧毒 + 保卫前线",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 31.53,
+      "center_minutes": 23.03,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 271.8,
         "move_seconds": 0.0,
-        "objective_service_seconds": 1620.0,
+        "objective_service_seconds": 1110.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 1891.8,
+      "known_seconds": 1381.8,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
@@ -6262,23 +6296,23 @@
       },
       "range_minutes": [
         5.729,
-        31.53
+        23.03
       ],
       "step_id": "step-20",
       "title": "银色前线基地：空中救兵 → 最后一道防线",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 9.91,
+      "center_minutes": 42.577,
       "complete": true,
       "components": {
         "accept_turnin_seconds": 339.6,
         "move_seconds": 0.0,
-        "objective_service_seconds": 255.0,
+        "objective_service_seconds": 2215.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 594.6,
+      "known_seconds": 2554.6,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
@@ -6287,7 +6321,7 @@
       },
       "range_minutes": [
         7.162,
-        13.196
+        42.577
       ],
       "step_id": "step-21",
       "title": "回音谷 / 天灾城：三任务同杀 → 三首领",
@@ -7520,7 +7554,7 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 275,
+    "issue_count": 271,
     "range_model_status": "requirements",
     "requirement_count": 34,
     "step_count": 58

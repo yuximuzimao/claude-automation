@@ -97,6 +97,10 @@
 
 多个任务共享一次战斗/移动时，背景任务只计真实新增边际成本。
 
+当同一批怪会同时推进多个任务，并且其中一个任务的需求量天然覆盖其余任务时，Route Profile可通过`shared_service + dominant_task_id`显式声明“包含关系”。Timing只按主体任务已经选定的`timing_rule_ref`计算一次；其它被覆盖任务不再重复收取击杀/掉落服务时间。这个关系必须由当前路线语义人工确认，不能因为objective位于同一visit就自动推断。AOE效率、有限并发、上下坐骑/跟随操作等不另建折扣或附加模型；当前`combat_seconds_per_mob`与`personal_loot_seconds_per_corpse`继续作为包含这些不可控因素后的保守平均参数，实际更高效的执行保留为实跑优化空间。
+
+`shared_service + dominant_task_id`不是历史路线的批量迁移触发器。已有路线若预测与实测基本一致，不为统一形式主动重算或清洗；只有实测出现有意义的偏差，或未来重构该路线时自然确认了明确包含关系，才对该Profile做局部修正。
+
 ## 4. Task Card如何选择时间规则
 
 Task Card不再把任务拆成fivebox stages或objective/mechanic类型供Timing消费。它只提供`timing_rule_ref`，指向本文或机器配置中已经定义的一个计算规则/规则族。

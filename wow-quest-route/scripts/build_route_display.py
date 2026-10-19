@@ -22,7 +22,7 @@ def _program_id_for_profile(profile_id: str) -> str | None:
         for program_id, program in load_all_route_programs(
             validate=True, validate_profiles=True
         ).items()
-        if profile_id in program["profile_ids"]
+        if profile_id in program["profile_ids"] and program.get("status") != "retired"
     ]
     if len(matches) > 1:
         raise ValueError(f"Profile {profile_id} belongs to multiple active Route Programs: {matches}")

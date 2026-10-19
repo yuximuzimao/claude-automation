@@ -239,6 +239,10 @@
           "type": "integer",
           "minimum": 1
         },
+        "dominant_task_id": {
+          "type": "integer",
+          "minimum": 1
+        },
         "start_action_id": {
           "type": "string",
           "minLength": 1
@@ -284,8 +288,17 @@
               "end_policy"
             ],
             "not": {
-              "required": [
-                "action_ids"
+              "anyOf": [
+                {
+                  "required": [
+                    "action_ids"
+                  ]
+                },
+                {
+                  "required": [
+                    "dominant_task_id"
+                  ]
+                }
               ]
             }
           }

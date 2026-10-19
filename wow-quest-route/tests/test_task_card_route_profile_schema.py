@@ -165,6 +165,47 @@ def test_route_profile_uses_structured_task_id_and_forbids_task_fact_copies() ->
         validate_route_profile(invalid, known_task_cards={1: card})
 
 
+def test_route_profile_shared_service_dominant_task_contract() -> None:
+    profile = _profile()
+    profile["task_ids"] = [1, 2]
+    profile["entry_requirements"]["active_task_ids"] = [2]
+    profile["actions"].insert(
+        3,
+        {"action_id": "a3b", "kind": "objective", "task_id": 2, "location_ref": "p1"},
+    )
+    profile["step_groups"][0]["action_ids"].insert(3, "a3b")
+    profile["service_overrides"] = [
+        {
+            "service_id": "same-pack",
+            "kind": "shared_service",
+            "dominant_task_id": 1,
+            "action_ids": ["a3", "a3b"],
+        }
+    ]
+    cards = {1: _card(1), 2: _card(2)}
+    validate_route_profile(profile, known_task_cards=cards)
+
+    invalid = copy.deepcopy(profile)
+    invalid["service_overrides"][0]["dominant_task_id"] = 3
+    with pytest.raises(RouteProfileError, match="dominant_task_id"):
+        validate_route_profile(invalid, known_task_cards=cards)
+
+    invalid = _profile()
+    invalid["service_overrides"] = [
+        {
+            "service_id": "background",
+            "kind": "background_window",
+            "task_id": 1,
+            "dominant_task_id": 1,
+            "start_action_id": "a2",
+            "end_action_id": "a3",
+            "end_policy": "covered_complete",
+        }
+    ]
+    with pytest.raises(RouteProfileError, match="JSON Schema"):
+        validate_route_profile(invalid, known_task_cards={1: _card()})
+
+
 def test_route_profile_requires_same_game_variant_as_task_card() -> None:
     card = _card()
     profile = _profile()

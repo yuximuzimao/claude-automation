@@ -293,6 +293,7 @@ def evaluate_profile_service_context(
                     "action_ids": [row["service_action_id"] for row in rows],
                     "task_ids": sorted({row["task_id"] for row in rows}),
                     "visit_ids": visit_ids,
+                    "dominant_task_id": override.get("dominant_task_id"),
                 }
             )
             continue

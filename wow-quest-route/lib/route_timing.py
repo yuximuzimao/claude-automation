@@ -932,7 +932,27 @@ def evaluate_profile_timing(
             )
             continue
         step_id = next(iter(step_ids)) if step_ids else None
-        if service_cfg.get("seconds") is None:
+        dominant_task_id = cluster.get("dominant_task_id")
+        resolution = None
+        if service_cfg.get("seconds") is not None:
+            seconds = float(service_cfg["seconds"])
+            basis = "shared_service_override"
+        elif dominant_task_id is not None:
+            seconds, task_issues, resolution = _task_rule_seconds(
+                task_id=int(dominant_task_id),
+                card=task_cards.get(int(dominant_task_id)),
+                party_size=party_size,
+                inputs=inputs,
+            )
+            for issue in task_issues:
+                issue.setdefault("service_id", cluster["cluster_id"])
+                issue.setdefault("action_ids", action_ids)
+                issue.setdefault("step_id", step_id)
+                issues.append(issue)
+            if seconds is None:
+                continue
+            basis = "shared_service_dominant_task"
+        else:
             issues.append(
                 _issue(
                     "requirement",
@@ -943,17 +963,18 @@ def evaluate_profile_timing(
                 )
             )
             continue
-        seconds = float(service_cfg["seconds"])
         if step_id is not None:
             step_components[step_id]["objective_service_seconds"] += seconds
         component_rows.append(
             {
                 "component": "objective_service",
-                "basis": "shared_service_override",
+                "basis": basis,
                 "service_id": cluster["cluster_id"],
+                "dominant_task_id": dominant_task_id,
                 "action_ids": action_ids,
                 "step_id": step_id,
                 "seconds": seconds,
+                "resolution": resolution,
             }
         )
 

@@ -127,11 +127,22 @@
       "supports_fields": [
         "fivebox"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-2026-10-19-route-order",
+      "source_type": "user_live",
+      "source_ref": "2026-10-19 second DK live run: 三个首领任意一个击杀后都会出现死亡之门；本轮按右下→左下→最远推进。",
+      "observed_at": "2026-10-19",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "《凝固的空气》：先击杀高阶祭司亚萨尔蒙，再击杀虫王塔洛诺克斯，最后击杀撕裂者萨兰纳克斯；三个首领都可以用阿彻鲁斯战斗号角召黑锋援军。每场结束都可能出现死亡之门，三个首领全部完成后再使用最后一个门返回回音谷交任务。",
+      "text": "《凝固的空气》：三个首领都可以用阿彻鲁斯战斗号角召黑锋援军，且任意一个首领击杀后都会出现死亡之门。当前实跑按右下→左下→最远推进；三个首领全部完成后直接使用最后击杀点的门返回回音谷交任务。",
       "scope": "all",
       "source_ref": "docs/archive/neat/2026-08-31-icecrown-closure-transport-sholazar-live-neat.md",
       "reason": "迁移语义对拍恢复旧玩家可见Boss执行技巧；归档与实测记录明确要求保留Boss顺序、战斗号角和最后死亡之门回交语义。"

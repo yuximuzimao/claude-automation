@@ -1055,7 +1055,7 @@
       "zone_id": 210
     }
   ],
-  "input_fingerprint": "07a6e5c5c4335133655f8f75456878a13a3ecba298daf7d9f1b3ce49bdde703e",
+  "input_fingerprint": "61ac8094308e1d98d54a0a384da66785a48c8d58fa45131c1cac6a974a211d52",
   "issues": [],
   "profile_id": "icecrown-fivebox",
   "spatial_instances": [
@@ -1481,9 +1481,7 @@
     {
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
-        "objective-a0288",
-        "objective-a0289",
-        "objective-a0290"
+        "icecrown-step19-venom-dominant"
       ],
       "instance_id": "visit-a0287",
       "location_ref": "icecrown-p102",
@@ -1519,9 +1517,7 @@
     {
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
-        "objective-a0328",
-        "objective-a0329",
-        "objective-a0330"
+        "icecrown-step21-scourgestone-dominant"
       ],
       "instance_id": "visit-a0327",
       "location_ref": "icecrown-p118",
@@ -2237,11 +2233,47 @@
   "summary": {
     "background_layer_count": 0,
     "foreground_service_count": 117,
-    "shared_service_override_count": 0,
+    "shared_service_override_count": 2,
     "spatial_instance_count": 96,
-    "target_cluster_count": 117
+    "target_cluster_count": 113
   },
   "target_clusters": [
+    {
+      "action_ids": [
+        "a0288",
+        "a0289",
+        "a0290"
+      ],
+      "cluster_id": "icecrown-step19-venom-dominant",
+      "dominant_task_id": 13040,
+      "source": "route_service_override",
+      "task_ids": [
+        13008,
+        13039,
+        13040
+      ],
+      "visit_ids": [
+        "a0287"
+      ]
+    },
+    {
+      "action_ids": [
+        "a0328",
+        "a0329",
+        "a0330"
+      ],
+      "cluster_id": "icecrown-step21-scourgestone-dominant",
+      "dominant_task_id": 13122,
+      "source": "route_service_override",
+      "task_ids": [
+        13110,
+        13118,
+        13122
+      ],
+      "visit_ids": [
+        "a0327"
+      ]
+    },
     {
       "action_ids": [
         "a0010"
@@ -2829,45 +2861,6 @@
     },
     {
       "action_ids": [
-        "a0288"
-      ],
-      "cluster_id": "objective-a0288",
-      "source": "objective_action",
-      "task_ids": [
-        13040
-      ],
-      "visit_ids": [
-        "a0287"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0289"
-      ],
-      "cluster_id": "objective-a0289",
-      "source": "objective_action",
-      "task_ids": [
-        13008
-      ],
-      "visit_ids": [
-        "a0287"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0290"
-      ],
-      "cluster_id": "objective-a0290",
-      "source": "objective_action",
-      "task_ids": [
-        13039
-      ],
-      "visit_ids": [
-        "a0287"
-      ]
-    },
-    {
-      "action_ids": [
         "a0303"
       ],
       "cluster_id": "objective-a0303",
@@ -2890,45 +2883,6 @@
       ],
       "visit_ids": [
         "a0311"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0328"
-      ],
-      "cluster_id": "objective-a0328",
-      "source": "objective_action",
-      "task_ids": [
-        13118
-      ],
-      "visit_ids": [
-        "a0327"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0329"
-      ],
-      "cluster_id": "objective-a0329",
-      "source": "objective_action",
-      "task_ids": [
-        13122
-      ],
-      "visit_ids": [
-        "a0327"
-      ]
-    },
-    {
-      "action_ids": [
-        "a0330"
-      ],
-      "cluster_id": "objective-a0330",
-      "source": "objective_action",
-      "task_ids": [
-        13110
-      ],
-      "visit_ids": [
-        "a0327"
       ]
     },
     {
