@@ -1,9 +1,11 @@
 # Handoff
 
-更新时间：2026-10-11
+更新时间：2026-10-21
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
+
+提醒事项迁移已完成并经用户确认收到。跨项目接入统一从 `docs/reminders.md` 进入；阶段证据归档于 `docs/archive/2026-10-21-mac-reminders/README.md`。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 

@@ -38,7 +38,7 @@
 # Step 1: 工单添加内部备注
 node cli.js add-note <工单号> "【待人工】原因：<触发原因> 关键信息：<核心数据>"
 
-# Step 2: 通过「创建提醒」快捷指令创建待办（5分钟后触发）
+# Step 2: 通过统一入口创建 Mac 提醒事项
 node cli.js remind <工单号> <账号名> "<具体问题描述>"
 
 # Step 3: 停止对该工单一切后续操作
@@ -107,6 +107,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 | 鲸灵/CDP 技术问题 | 页面异常、备注、账号切换 | `docs/ops-jingling.md` |
 | ERP 技术问题 | 导航、登录、物流弹窗、凭证上传 | `docs/ops-erp.md` |
 | 测试与验收 | CLI、采集或 ERP 逻辑修改后 | `docs/ops-testing.md` |
+| 提醒事项接入与排查 | 新增提醒、变更输入位置、维护发送或排查失败 | [工作区提醒说明](../../docs/reminders.md) |
 | 提醒事项回归 | 快捷指令发送、ERP 异常、扫描汇总或万物提醒修改后 | `docs/ops-testing.md §6` |
 | 队列停止/恢复/定时扫描状态窗 | 操作卡住、需立即中断或排查自动扫描进度提示 | `docs/ops-queue.md` |
 | 自动处理与统计口径 | 查当前授权分支、执行前门禁或指标来源 | `docs/automation-policy.md` |
@@ -244,7 +245,7 @@ node cli.js reject <工单号> <原因> <详情> [图片URL]
 # 添加内部备注
 node cli.js add-note <工单号> "备注内容"
 
-# 通过「创建提醒」快捷指令创建待办（5分钟后触发）
+# 通过统一入口创建 Mac 提醒事项
 node cli.js remind <工单号> <账号名> "原因"
 
 # 读物流信息

@@ -1,6 +1,6 @@
 # 待处理问题台账
 
-## 当前状态（2026-10-12）
+## 当前状态（2026-10-21）
 
 当前有 2 项已确认、待下次实施的售后自动化开发项。
 
@@ -27,11 +27,5 @@
 - 新问题先核验实时页面和当前代码，不从历史 simulation/case 快照反推事实。
 - 新自动分支必须来自统计复盘中的独立 `caseId`，由用户明确授权，并在执行前用本次采集重新证明关键事实。
 - 修改 `lib/` 后执行完整测试并按 `/aftersales-restart` 安全重启；不得自动重跑已有工单。
-
-## 已完成收尾（2026-10-11）
-
-- 快递行动统一由 `decision.courierActions` 驱动；`intercept` / `return_wait` 的展示、旧 simulation 兼容、明确退回过滤和自动处理工单标记已完成并通过回归。
-- 最近 30 天统计已合并 simulation、归档 case 和自动执行 journal；平台类型缺失回退决策步骤，`快递无物流记录` 固定归入商责人工分支。
-- 本阶段错误复盘和实际渲染验收规则见 `tasks/lessons.md` 与 `docs/ops-testing.md`。
 
 历史设计、实施计划和阶段交接统一见 `docs/superpowers/archive/`；当前自动化口径见 `docs/automation-policy.md`。

@@ -19,5 +19,6 @@
 - `2026-10-partial-refund-sku-pricing/`：单主子订单部分退货金额辅助、买赠 SKU 计价确认/复用、确认后基于已采集数据本地重推理，以及多主子订单金额采集后续边界的完成交接。
 - `2026-10-jl-new-user-transition/`：鲸灵切号过程中“新用户”过渡态误判修复，改为等待真实店铺名后再执行原有账号匹配。
 - `2026-10-jl-account-boundary-stop-safety/`：鲸灵多账号扫描账号边界、紧急停止最高优先级、异常 target 实际消失校验，以及 current-session 仅作辅助缓存的完成交接。
+- [2026-10-21 Mac 提醒事项统一迁移](../../../../docs/archive/2026-10-21-mac-reminders/README.md)：售后通知迁移、小爪共享输入修复、用户接收验证与跨项目提醒约定归档。
 
 当前生效口径：[自动处理授权与统计口径](../../automation-policy.md)。仍待实施的问题见[待处理问题台账](../../../tasks/todo.md)；退货入库专项待实测见 `../../../../return-inbound/tasks/todo.md`。

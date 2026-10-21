@@ -7,3 +7,4 @@
 - `2026-09-06-agents-skills-instruction-audit/` — 全局 AGENTS / Skills 自主性、批准与完成规则审计；包含最终验证摘要和历史审阅方案。
 - `2026-09-13-workbuddy-governance/` — WorkBuddy 记忆、项目入口、Skill 与工作区治理收尾；记录最终架构、清理结果与冷启动验证。
 - `2026-10-09-codex-ccswitch-deepseek-harness/` — DeepSeek Harness 与 CC Switch 升级、规则共享、Codex 官方账号/API 切换及 HTTP/HTTPS 连接根因归档；DeepSeek Harness 已于 2026-10-10 卸载，目录仅作历史证据。
+- [2026-10-21-mac-reminders/](2026-10-21-mac-reminders/README.md) — 售后系统通知迁移、输入文件对齐小爪工作区、真机接收验证，以及跨项目提醒约定与记忆同步。

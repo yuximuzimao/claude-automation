@@ -69,7 +69,7 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 - **已授权自动分支**：授权粒度与统计复盘中的最小 `caseId` 一致，不按单号或粗场景放开。当前开放三个分支：七天无理由（不喜欢/不合适）的退货退款严格精确退回；多拍/拍错/不想要的仅退款主品赠品全部无单号未发货；同原因仅退款中全部运单明确未揽收或已退回。三者执行前都按 [当前自动处理政策](docs/automation-policy.md) 重新证明事实。
 - **人工确认执行边界**：换货及商责分支始终设置 `requiresHumanReview + autoExecutionBlocked`，不会进入扫描中的无人自动执行。退回规格、数量、良次品严格一致并给出明确 approve/reject 动作时，人工核对后仍可点击单笔“执行操作”或主动发起批量执行；退货退款中“主品完整 + 赠品全部发货包裹已明确进入退回链路”同样只开放人工确认后的“同意退款”，不继承普通精确退回的无人自动权限。换货由 `execute-decision.js` 精确分派到“同意换货/拒绝换货”，找不到对应类型按钮即停止，不会借用退款按钮。
 - **自动执行恢复账本**（`lib/server/auto-execution-journal.js`、`lib/server/auto-execution-recovery.js`）：`executionJournal` 已作为自动执行安全门使用，记录 `auto_executing/auto_executed/failed/manually_resolved` 和 phase，防重复执行并 fail-closed。`auto-execution-recovery` 只是本地状态收口能力，尚无外部 CLI/API/UI recovery 入口；当前实际处理中断工单通常走两条路：重新采集推理覆盖旧状态，或用户手动处理后在页面归档。归档只表示系统不再处理该工单，不代表系统知道平台真实执行结果。
-- **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
+- **工具**（`lib/helpers.js`）：已发货快递单号提取和提醒事项发送；提醒接入见 [工作区提醒说明](../docs/reminders.md)
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
 “已自动执行”每页显示 10 条，归档后进入统计复盘内的历史记录。统计顶部以实际工单去重后的累计处理数、可见归档数、每单最新人工评价和评价正确率为准，不把会被裁剪的 simulation 行数当成累计量，也不把未评价工单默认为正确。
@@ -85,6 +85,7 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 | 文档 | 说明 |
 |------|------|
 | [SKILL.md](SKILL.md) | AI Agent 运行时上下文入口（必读） |
+| [提醒事项接入与排查](../docs/reminders.md) | 新增提醒、快捷指令输入、失败处理和真机验证 |
 | [docs/INDEX.md](docs/INDEX.md) | 处理规则、错误分级、已知坑位 |
 | [docs/automation-policy.md](docs/automation-policy.md) | 当前自动处理授权、执行前证明与统计口径 |
 | [docs/flow-5.1.md](docs/flow-5.1.md) | 退货退款流程 |

@@ -25,7 +25,8 @@ entry: cli.js
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
 | `lib/wait.js` | `sleep()`, `waitFor()`, `retry()` 工具；内置 `FORCE_NO_RETRY_DOMAINS` 自动禁止鲸灵重试 + `isRiskControlError()` 风控信号检测 + 熔断钩子 | 需要等待/重试/风控防护时 |
-| `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` + `createReminder()` | 提取快递单号或通过「创建提醒」快捷指令创建5分钟后待办时 |
+| `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` + `createReminder()` | 提取快递单号或发送提醒事项时；接入与失败处理先读 `../docs/reminders.md` |
+| `../docs/reminders.md` | 工作区共享的 Mac 提醒事项接入与排查 | 新增任何提醒、变更快捷指令/输入位置或排查发送失败时 |
 | `test/helpers-reminder.test.js` + `test/erp/notification.test.js` | 提醒事项发送与 ERP 异常提醒回归，隔离真实快捷指令 | 修改提醒发送或 ERP 告警时；运行方式见 `docs/ops-testing.md §6` |
 | `lib/result.js` | `ok()/fail()` JSON 封包 | 新增 CLI 命令时 |
 | `lib/constants.js` | 共享常量（扫描时间/关键词/红灯） | 查常量定义时 |
@@ -168,7 +169,7 @@ await cdp.navigate(targetId, 'https://...');
   - ⚠️ `cdp.clickAt(input)` 会清除输入框内容，禁止在登录页点击任何输入框
 - **Phase 2**：点登录按钮 → 等协议弹窗（`.rc-kmui-com-dlg`）→ 点同意（`input.rc-btn-ok`）→ checkLogin 确认
 - 熔断：连续 3 次认证失败 → `erp-circuit-breaker.json` state=open，15 分钟冷却后 half_open
-- 后台心跳自 2026-06-16 起停用，`startErpHeartbeat()` 仅保留函数定义。当前操作时检查登录状态，过期后按登录恢复流程处理；ERP 登录异常通过「创建提醒」快捷指令写入提醒事项。
+- 后台心跳自 2026-06-16 起停用，`startErpHeartbeat()` 仅保留函数定义。当前操作时检查登录状态，过期后按登录恢复流程处理。
 - 详见 `docs/ops-erp.md §2`
 
 ### 鲸灵账号新增与重新登录机制
@@ -203,7 +204,7 @@ await cdp.navigate(targetId, 'https://...');
 | 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
 | 15 | ~~刷新状态/check-session 全链路~~ **已删除（2026-06-16 停旧系统）** | 原批量检测会短时连续登录多个账号。账号状态只允许通过店铺管理“打开后台”的安全编排或 A1 单账号流程确认；不要重建批量刷新状态功能。 |
 | 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 `inferRefundOnly`（flow-5.3）的 safeToWait 3 条路径在 hoursUntilNextScan 为 null 时直接调用 `.toFixed(1)` → TypeError。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复。注意：flow-5.1 已改为简单阈值（`remaining > REMIND_HOURS`），不涉及 margin 计算。 |
-| 19 | 全项目重复代码 → 提取共享函数 | 快递单号提取和待办创建统一由 `lib/helpers.js` 提供。`createReminder()` 当前调用用户的「创建提醒」快捷指令并设置5分钟后提醒；快递行动由 `decision.courierActions` 统一驱动，取消拦截不属于当前行动模型。 |
+| 19 | 全项目重复代码 → 提取共享函数 | 快递单号提取和待办创建统一由 `lib/helpers.js` 提供；提醒接入见 `../docs/reminders.md`。快递行动由 `decision.courierActions` 统一驱动，取消拦截不属于当前行动模型。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
 | 22 | 旧 scan-all 切账号后不写 current-session（历史问题） | 这是 legacy `scan-all.js / collect.js / pipeline.js` 的历史故障：旧路径曾把 `current-session` 当成是否跳过注入的依据。现役 A1 已改为真实页面身份优先，禁止复用这种缓存授权模式；本条仅用于追溯旧问题。 |

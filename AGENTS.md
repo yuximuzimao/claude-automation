@@ -12,6 +12,8 @@
 4. 若旧项目缺`SKILL.md`，先读现有`CLAUDE.md/README/CURRENT`恢复最小上下文，同时明确标记“项目骨架不合规”；本次若涉及结构性维护，按`docs/new-project-template.md`补齐骨架。
 5. 禁止在有`SKILL.md`的项目里先用大范围 grep/glob 搜索业务逻辑再回来读SKILL。SKILL是一级导航；存在语义歧义时继续进入项目专项SOP，不在SKILL猜分支。
 
+提醒接入与排查属于工作区共享能力，先读 `docs/reminders.md`；跨项目提醒约定以 `/Users/chat/AGENTS.md`「提醒与通知」为准。
+
 ## 工作区红线
 
 - 真实业务系统写操作必须人工确认：退款、拒绝、入库、匹配写入、批量修改、提交确认、账号登录都属于高影响操作。
