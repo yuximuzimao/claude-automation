@@ -24,7 +24,7 @@
 - 2026-10-16 已补充一个真实边界：旧页 `top fragment` 被下一页完整消息吸收时，只在“长文本明确包含 + 前序连续多消息 overlap 仍成立”条件下允许该 fragment 不阻断重叠；`fragment_kind` 只作为 normalize 瞬态元数据，不进入 message-record schema。
 - 2026-10-19 补采 10/13 时发现 ScreenCaptureKit 偶发把同一窗口帧以 90° 方向交给 Vision，导致现役 `.up/.down` OCR 无法定位工具栏。生产实现现为 `.up` 正常路径失败后才在**同一帧**尝试 `.down/.right/.left`，bbox 映射回显示坐标，并继续要求同一工具栏水平带至少两个已知控件；没有降低安全门槛。Swift 采集回归 5/5 通过，真实故障窗口 current-only 复测恢复正常。
 - runtime 全部为私密本地数据并被 `.gitignore` 排除。
-- 归档前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，当前确定性回归 **171 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及分析质量/来源/Atomic Claim/Question Cluster 回归。
+- 归档前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，当前确定性回归 **172 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及分析质量/来源/Atomic Claim/Question Cluster 回归。
 
 ## 已验证历史基线
 
@@ -65,7 +65,7 @@
 - “可补全”只标记那些需要额外联网/资料比对才能补足关键事实的候选；用户可在看完本批后统一要求补全；
 - 原文右侧抽屉继续保留，回链仍以卡片自身时间范围/来源范围为主锚点，不用全日关键词搜索冒充证据；
 - 黑话继续独立维护语境化词典。
-- 2026-10-18 开始工程化分析质量改造：已新增 `docs/ANALYSIS-DATA-QUALITY-SOP.md`、`src/analysis/quality.py`、来源回填/审核/应用、`atomic_claim_queue.py`、`cluster_proposals.py` 及回归测试。当前 **2278 张首次阅读候选**均纳入数据质量快照；当前 105 条 Silver、原文、已阅和 9 条资料库知识均继续沿用同一工程化质量门禁；本轮新增清洗未改动已阅结果或资料库知识。来源债仍为 **698 张**；当前候选锚点为 **1552 high / 28 medium / 698 none**，其中已 full 但仍缺直达锚点 **160 张**。人工语义复核已形成 **196 条 verified source anchor**，并反向发现 **15 张旧 Topic Card 语义抽取错误**；这些卡进入 quarantine，不能参与自动聚类或评测真值。45 条旧引用仍依赖隐式 full，1 条外部引用缺正式 locator。词面召回的 known-positive recall@5 仍为 75.6%、@10 为 85.6%，top5 已标注一致率 65.9%，只作为召回基线。Atomic claim 已进入稳定生产批次：15 张纠错卡→22 claims、12 张 pilot→18 claims、独立 20 张 holdout→31 claims，另已完成生产 B1–B6 共 120 张来源卡。全部 claim 自带 canonical `source_refs`。reviewed atomic registry 现为 **167 张来源卡 / 206 条 reviewed claims / 9 个数据批次**。召回器采用 `lexical_topk + same_source_card + same_entity` 多路 union，所有路线只负责召回；calibration、frozen holdout 与 B1–B6 的人工 gold 正关系均能进入候选池。高分线仍不是合并概率：独立 holdout 固定 0.075 线 precision 65.2% / recall 88.2%，B3/B5 等批次也再次出现高分误报。经过人工 existing-cluster assignment / new-question bootstrap，Question Cluster Registry v14 已有 **206 reviewed claims / 127 reviewed questions / 48 个多命题问题 / 104 条 boundary negative links**。上一版全量 work queue 快照为 **1131 ready-from-high-anchor / 24 needs-anchor-review / 525 direct-source-retrieval，active 1680**；Silver 此后已继续推进到105个单元/624张完整来源卡，因此下一批前必须刷新 work queue。15张旧语义错误 Topic Card 继续 quarantine，其正确原子命题已进入 reviewed registry。
+- 2026-10-18 开始工程化分析质量改造：已新增 `docs/ANALYSIS-DATA-QUALITY-SOP.md`、`src/analysis/quality.py`、来源回填/审核/应用、`atomic_claim_queue.py`、`cluster_proposals.py` 及回归测试。当前 **2278 张首次阅读候选**均纳入数据质量快照；当前 105 条 Silver、原文、已阅和 9 条资料库知识均继续沿用同一工程化质量门禁；本轮新增清洗未改动已阅结果或资料库知识。来源债仍为 **698 张**；当前候选锚点为 **1575 high / 5 medium / 698 none**，其中已 full 但仍缺直达锚点 **160 张**。人工语义复核已形成 **909 条 verified source anchor**，并反向发现 **15 张旧 Topic Card 语义抽取错误**；这些卡进入 quarantine，不能参与自动聚类或评测真值。45 条旧引用仍依赖隐式 full，1 条外部引用缺正式 locator。词面召回的 known-positive recall@5 仍为 75.6%、@10 为 85.6%，top5 已标注一致率 65.9%，只作为召回基线。Atomic claim 已进入稳定生产批次：15 张纠错卡→22 claims、12 张 pilot→18 claims、独立 20 张 holdout→31 claims，生产批次已持续推进至 B37。全部 claim 自带 canonical `source_refs`。reviewed atomic registry 现为 **879 张来源卡 / 965 条 reviewed claims / 40 个数据批次**。召回器采用 `lexical_topk + same_source_card + same_entity` 多路 union，所有路线只负责召回；calibration、frozen holdout 与 B1–B6 的人工 gold 正关系均能进入候选池。高分线仍不是合并概率：独立 holdout 固定 0.075 线 precision 65.2% / recall 88.2%，B3/B5 等批次也再次出现高分误报。经过人工 existing-cluster assignment / new-question bootstrap，Question Cluster Registry v45 已有 **965 reviewed claims / 466 reviewed questions / 191 个多命题问题 / 416 条 boundary negative links**。2026-10-21 已按最新审核状态刷新 atomic-claim work queue：**227 ready-from-high-anchor / 0 needs-anchor-review / 522 direct-source-retrieval，active 749**；其余为613 already_full_silver、44 already_normalized、841 atomic_claim_reviewed、31 atomic_claim_no_claim_reviewed。该队列是待处理路由元数据，不代表语义审核完成。15张旧语义错误 Topic Card 继续 quarantine，其正确原子命题已进入 reviewed registry。
 
 无限服当前单独启用动态专题档案：`runtime/analysis-work/infinite-dossier-v1.json`。2026-10-18 已从长段自然语言摘要升级到 schema v2：仍按练级与玩家发展、经济与打金、专业与资源、规则与风险、职业玩法变化、服务器生态六个维度，但每个维度保存 `观察字段 / 当前状态 / 适用范围 / 依据 / 证据ID`，页面以结构表展示；重复观察只静默增加支持度，AI综合判断不得覆盖来源状态。
 
@@ -74,8 +74,8 @@
 - raw topic cards：**3442**；
 - longitudinal aggregate：**1**；
 - supplemental card：**1**；
-- blackwords：**29**；
-- source links：high **1973** / medium **44** / none **1426**；
+- blackwords：**30**；
+- source links：high **1996** / medium **21** / none **1426**；
 - Silver 清洗前的首次阅读候选：**2278 条事实切片**；它们不是最终阅读单元；
 - 当前正式 Silver 工作集共 **105 个知识单元 / 624 张完整吸收来源卡**；页面按 Silver 组件去重后的有效待看为 **1724**，原始 `v3_queue` 为 **2278**。当前候选索引为 **613 张 full / 1644 张 unabsorbed / 21 张 partial**；叠加无限服 dossier 等已规范化组件后，normalized 状态为 **657 full / 1600 unabsorbed / 21 partial**。`partial` 混合卡仅部分语义已归属 Silver，仍保留在首次阅读候选中；
 - 无限服最近构建时有效首次阅读候选：**125 条**，后续应先吸收到结构化动态信号后再决定哪些需要单独打扰用户；
@@ -83,11 +83,11 @@
 
 这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
 
-当前 36 日历史补齐、分析质量工程化与 Silver 批量清洗阶段归档见 `docs/archive/neat/2026-10-19-engineered-history-silver-cleaning.md`；此前首次阅读→Silver 模型定型见 `docs/archive/neat/2026-10-18-first-read-to-silver-normalized-knowledge.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
+当前 Atomic Claim 批量清洗、Question Cluster 收敛与 no-claim 退出机制阶段归档见 `docs/archive/neat/2026-10-21-atomic-claim-question-cluster-cleaning.md`；此前 36 日历史补齐与分析质量工程化阶段见 `docs/archive/neat/2026-10-19-engineered-history-silver-cleaning.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
 
 ## 当前下一步
 
-1. 继续按已建立的 Question Cluster Registry 增量流水线处理 `atomic-claim-work-queue-v1.json`；当前 Silver 已从该队列生成时继续前进，下一批前应先刷新 work queue。上一版快照为 **1131 ready-from-high-anchor / 24 needs-anchor-review / 525 direct-source-retrieval，active 1680**。每批固定走 canonical→claim quality→existing-cluster assignment→new-question bootstrap→多路 recall audit→reviewed registry；旧 Topic Card 永远只作检索提示，similarity 不自动合并。
+1. 从已刷新的 `atomic-claim-work-queue-v1.json` 继续按 Question Cluster Registry 增量流水线处理；现役待处理 **227 ready-from-high-anchor / 0 needs-anchor-review / 522 direct-source-retrieval，active 749**。每批固定走 canonical→claim quality→existing-cluster assignment→new-question bootstrap→多路 recall audit→reviewed registry；旧 Topic Card 永远只作检索提示，similarity 不自动合并。
 2. 在批量清洗过程中同步做“对象身份 / 基础上下文补齐”，优先覆盖任务、Boss、职业阈值和装备四类；同义实例只挂证据，不重复生成知识。
 3. 继续验证每批最多40个阅读单元的历史补课体验；阅读分页只控制负载，不得影响跨日语义合并。
 4. 确定正式的已阅语义指纹、资料库条目与无限服动态信号的数据结构；当前浏览器 localStorage 只承担原型交互，不视作长期真值。

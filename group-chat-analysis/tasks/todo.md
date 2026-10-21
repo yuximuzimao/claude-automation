@@ -4,9 +4,9 @@
 
 ## 1. Silver 语义清洗与首次阅读队列
 
-- [ ] 继续完成来源与历史格式债：当前候选层 **698/2278** 仍无可靠原文定位（其中已 full 160）；已建立196条 verified source anchor。45条旧 Silver 引用仍省略 coverage，1条外部核验仍无正式 locator。关键词/相似度只能生成 proposal，不能冒充证据。
-- [ ] **下一批前先刷新 `atomic-claim-work-queue-v1.json`**：Silver 已在上一版 work queue 后继续推进到105个单元/624张完整来源卡，旧的 `1131 ready / 24 review / 525 direct，active 1680` 只保留为历史快照，不能继续当现役数量。当前 reviewed registry 仍为 **167张来源卡 / 206 claims**；15张已确认失真的旧 Topic Card 继续 quarantine，旧标题/摘要永久只作 retrieval hint。
-- [ ] 继续扩展现役 Question Cluster Registry（当前 **206 claims / 127 questions / 104 boundary negatives**）：新 claim 固定走 existing-cluster assignment；未命中才进入 bootstrap。多路召回 `lexical_topk + same_source_card + same_entity` 只生成待审 pair，禁止自动合并。继续扩大独立 holdout / 困难负例后，再把 reviewed question clusters 转成 Silver 草稿。
+- [ ] 继续完成来源与历史格式债：当前候选层 **698/2278** 仍无可靠原文定位（其中已 full 160）；已建立909条 verified source anchor。45条旧 Silver 引用仍省略 coverage，1条外部核验仍无正式 locator。关键词/相似度只能生成 proposal，不能冒充证据。
+- [ ] 从已刷新（2026-10-21）的 `atomic-claim-work-queue-v1.json` 继续逐批清洗：现役 **227 ready / 0 anchor review / 522 direct source，active 749**；按 canonical 核验后拆分命题、归入问题簇，不以旧标题/摘要直接晋升 Silver；15张失真的旧 Topic Card 继续 quarantine。生产批次已推进至 **B37**，reviewed registry 当前为 **879 张来源卡 / 965 claims**，下一批从现役 ready queue 继续。
+- [ ] 继续扩展现役 Question Cluster Registry（当前 **965 claims / 466 questions / 416 boundary negatives**）：新 claim 固定走 existing-cluster assignment；未命中才进入 bootstrap。多路召回 `lexical_topk + same_source_card + same_entity` 只生成待审 pair，禁止自动合并。继续扩大独立 holdout / 困难负例后，再把 reviewed question clusters 转成 Silver 草稿。
 - [ ] 增加分析运行工单血缘、按阶段输入输出 hash、异常隔离、幂等重跑及正式发布/回滚；相关工程步骤以 `docs/ANALYSIS-DATA-QUALITY-SOP.md` 为执行依据。
 
 - [ ] 把完整历史 **2278 条**首次阅读事实切片批量转换为规范化知识单元：先做对象/实体对齐与跨日语义聚类，再按 `mechanism / ordered_route / comparison / strategy / sample / dynamic_signal` 固定结构去重、合并和字段化。`normalized-knowledge-pilot-v1.json` 的4个样例只用于验证数据形状，不是正式全量结果。

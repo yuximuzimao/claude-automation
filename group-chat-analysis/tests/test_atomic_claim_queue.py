@@ -32,6 +32,12 @@ class AtomicClaimQueueTests(unittest.TestCase):
     def test_reviewed_atomic_claim_does_not_reenter_work_queue(self):
         self.assertEqual(classify(row(cid="DONE", confidence="high"), {"DONE"}, {"DONE"}), "atomic_claim_reviewed")
 
+    def test_no_claim_reviewed_card_does_not_reenter_work_queue(self):
+        self.assertEqual(
+            classify(row(cid="NOCLAIM", confidence="high"), set(), set(), {"NOCLAIM"}),
+            "atomic_claim_no_claim_reviewed",
+        )
+
     def test_high_anchor_is_ready(self):
         self.assertEqual(classify(row(confidence="high"), set()), "ready_from_high_anchor")
 
