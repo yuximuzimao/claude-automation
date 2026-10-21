@@ -91,7 +91,7 @@ async function main() {
     const title = `【待人工】${accountName} 工单${workOrderNum}${reason ? ` / ${reason}` : ''}`;
 
     if (!createReminder(title)) {
-      console.log(JSON.stringify(fail('创建提醒快捷指令执行失败，已降级为系统通知')));
+      console.log(JSON.stringify(fail('创建提醒快捷指令执行失败，未创建提醒事项')));
       process.exit(1);
     }
     const result = ok({ reminded: true, title });

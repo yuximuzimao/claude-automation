@@ -68,7 +68,7 @@ function updateAccountStatus(num, patch) {
   if (patch.lastScan) {
     const title = buildAccountAbnormalReminder(num, prev, merged);
     if (title && !createReminder(title)) {
-      log(`[预警] 店铺异常待办快捷指令失败已降级通知: ${title}`);
+      log(`[预警] 店铺异常提醒事项创建失败: ${title}`);
     }
   }
 }
@@ -614,7 +614,7 @@ async function execWanwuScan(op) {
     });
     sse.broadcast('wanwu-status', current);
     if (total > 0 && !sendWanwuPendingReminder(result.counts)) {
-      log('[预警] 万物待办快捷指令失败，已降级为系统通知');
+      log('[预警] 万物待办提醒事项创建失败');
     }
     return { ok: true, total, summary, counts: result.counts, loggedInDuringScan: result.loggedInDuringScan };
   } catch (error) {
@@ -628,7 +628,7 @@ async function execWanwuScan(op) {
     });
     sse.broadcast('wanwu-status', current);
     if (!stopped && !sendWanwuFailureReminder(error)) {
-      log('[预警] 万物异常快捷指令失败，已降级为系统通知');
+      log('[预警] 万物异常提醒事项创建失败');
     }
     throw error;
   }
@@ -1078,7 +1078,7 @@ async function execScan(op) {
 
   const summaryReminderResults = sendScanSummaryReminders(scanReminderState);
   if (summaryReminderResults.some(result => !result)) {
-    log('[预警] 扫描汇总待办快捷指令执行失败，已降级系统通知');
+    log('[预警] 扫描汇总提醒事项创建失败');
   }
 
   // 到期预警：同一扫描批次只按最早截止工单创建一条汇总提醒
@@ -1087,7 +1087,7 @@ async function execScan(op) {
   );
   const deadlineReminder = buildDeadlineSummaryReminder(queueItems);
   if (deadlineReminder && !createReminder(deadlineReminder)) {
-    log(`[预警] 待办快捷指令失败已降级通知: ${deadlineReminder}`);
+    log(`[预警] 到期提醒事项创建失败: ${deadlineReminder}`);
   }
 
   sse.broadcast('accounts-update', readAccountStatus());

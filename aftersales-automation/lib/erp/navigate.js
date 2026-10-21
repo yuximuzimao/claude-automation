@@ -14,8 +14,8 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
 const cdp = require('../cdp');
+const { createReminder } = require('../helpers');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
@@ -62,13 +62,13 @@ function updateErpHealth(updates) {
   } catch {}
 }
 
-function alertErpDown(reason) {
-  try {
-    const msg = `ERP 登录异常: ${String(reason).slice(0, 80)}`;
-    spawnSync('osascript', ['-e',
-      `display notification ${JSON.stringify(msg)} with title "ERP 告警" sound name "Basso"`
-    ], { timeout: 5000 });
-  } catch {}
+function buildErpDownReminder(reason) {
+  const detail = String(reason || '登录状态异常').slice(0, 80);
+  return `【ERP异常】${detail}，请打开售后系统检查 ERP 登录状态`;
+}
+
+function alertErpDown(reason, sendReminder = createReminder) {
+  return Boolean(sendReminder(buildErpDownReminder(reason)));
 }
 
 // ============================================================
@@ -103,11 +103,6 @@ function onErpSuccess() {
   saveCircuitBreaker(cb);
   if (wasDown) {
     updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
-    try {
-      spawnSync('osascript', ['-e',
-        'display notification "ERP 已恢复登录" with title "ERP 恢复" sound name "Glass"'
-      ], { timeout: 5000 });
-    } catch {}
     console.log('[ERP 熔断] 已恢复，重置熔断器');
   }
 }
@@ -543,5 +538,5 @@ async function erpNav(targetId, pageName) {
 
 module.exports = {
   navigateErp, forceReloadErpPage, checkLogin, recoverLogin, erpNav, matchesErpRoute, CLOSE_ALL_DIALOGS_JS,
-  updateErpHealth, loadErpHealth, alertErpDown,
+  updateErpHealth, loadErpHealth, buildErpDownReminder, alertErpDown,
 };

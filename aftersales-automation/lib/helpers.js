@@ -3,9 +3,10 @@
 const path = require('node:path');
 
 const REMINDER_SHORTCUT = '创建提醒';
+// 与现有快捷指令的“文件”动作一致，读取小爪正在使用的共享输入文件。
 const SHORTCUT_INPUT_PATH = path.join(
   process.env.HOME || '/Users/chat',
-  '.qclaw/workspace-agent-a5b6f918/scripts/reminder/input.txt'
+  'WorkBuddy/小爪/data/input.txt'
 );
 
 // 从 collectedData 中提取所有已发货包裹的快递单号（去重）
@@ -59,23 +60,18 @@ function buildReminderPayload(reminder, now = new Date()) {
   return `${title}｜${time}`;
 }
 
-// 通过用户的「创建提醒」快捷指令创建待办，统一在5分钟后提醒
+// 通过用户的「创建提醒」快捷指令创建待办，统一在5分钟后提醒。
+// 快捷指令失败时只返回失败，不再弹出用户不会查看的系统通知。
 function createReminder(reminder, dependencies = {}) {
   const { spawnSync } = require('node:child_process');
   const fs = require('node:fs');
   const run = dependencies.spawnSync || spawnSync;
   const write = dependencies.writeFileSync || fs.writeFileSync;
   const now = dependencies.now || new Date();
-  const title = buildReminderTitle(reminder);
   try {
     write(SHORTCUT_INPUT_PATH, buildReminderPayload(reminder, now), 'utf8');
     const result = run('shortcuts', ['run', REMINDER_SHORTCUT], { timeout: 15000, encoding: 'utf8' });
     if (result.status === 0) return true;
-  } catch {}
-  try {
-    run('osascript', ['-e',
-      `display notification "${title.replace(/"/g, '\\"')}" with title "鲸灵售后预警" sound name "default"`
-    ], { timeout: 5000, encoding: 'utf8' });
   } catch {}
   return false;
 }

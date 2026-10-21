@@ -55,15 +55,17 @@ test('创建提醒写入快捷指令输入文件并运行“创建提醒”', ()
   assert.deepEqual(runs[0][1], ['run', '创建提醒']);
 });
 
-test('快捷指令失败且系统通知也异常时只返回失败，不中断扫描', () => {
+test('快捷指令失败时只返回失败，不再调用系统通知', () => {
+  const commands = [];
   const ok = createReminder('售后系统有待办', {
     now: new Date(2026, 6, 18, 9, 0, 0),
     writeFileSync: () => {},
     spawnSync: command => {
-      if (command === 'shortcuts') return { status: 1 };
-      throw new Error('系统通知不可用');
+      commands.push(command);
+      return { status: 1 };
     },
   });
 
   assert.equal(ok, false);
+  assert.deepEqual(commands, ['shortcuts']);
 });

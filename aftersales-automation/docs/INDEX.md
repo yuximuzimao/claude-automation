@@ -107,6 +107,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 | 鲸灵/CDP 技术问题 | 页面异常、备注、账号切换 | `docs/ops-jingling.md` |
 | ERP 技术问题 | 导航、登录、物流弹窗、凭证上传 | `docs/ops-erp.md` |
 | 测试与验收 | CLI、采集或 ERP 逻辑修改后 | `docs/ops-testing.md` |
+| 提醒事项回归 | 快捷指令发送、ERP 异常、扫描汇总或万物提醒修改后 | `docs/ops-testing.md §6` |
 | 队列停止/恢复/定时扫描状态窗 | 操作卡住、需立即中断或排查自动扫描进度提示 | `docs/ops-queue.md` |
 | 自动处理与统计口径 | 查当前授权分支、执行前门禁或指标来源 | `docs/automation-policy.md` |
 | 其他技术问题 | 先查总入口和常见故障 | `docs/ops-tech.md` |

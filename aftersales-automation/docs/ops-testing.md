@@ -75,4 +75,14 @@ shasum data/jl-alerts-cache.json
 
 两次校验值必须一致。
 
+## 6. 提醒事项回归
+
+```bash
+node --test test/helpers-reminder.test.js test/erp/notification.test.js test/server/scan-reminder-state.test.js test/wanwu/reminder.test.js
+```
+
+覆盖五分钟后提醒、ERP 异常转待办、快捷指令失败不再弹系统通知，以及扫描和万物提醒汇总。所有提醒发送使用模拟依赖，不创建真实待办。修改共享模块后仍须执行 `npm test`。
+
+真机核对时还须确认 `lib/helpers.js` 的 `SHORTCUT_INPUT_PATH` 与「创建提醒」快捷指令的「文件」动作一致，且输入文件可写；仅找到同名快捷指令不足以证明实际可发送。
+
 ---

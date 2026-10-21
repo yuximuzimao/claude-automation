@@ -26,6 +26,7 @@ entry: cli.js
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
 | `lib/wait.js` | `sleep()`, `waitFor()`, `retry()` 工具；内置 `FORCE_NO_RETRY_DOMAINS` 自动禁止鲸灵重试 + `isRiskControlError()` 风控信号检测 + 熔断钩子 | 需要等待/重试/风控防护时 |
 | `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` + `createReminder()` | 提取快递单号或通过「创建提醒」快捷指令创建5分钟后待办时 |
+| `test/helpers-reminder.test.js` + `test/erp/notification.test.js` | 提醒事项发送与 ERP 异常提醒回归，隔离真实快捷指令 | 修改提醒发送或 ERP 告警时；运行方式见 `docs/ops-testing.md §6` |
 | `lib/result.js` | `ok()/fail()` JSON 封包 | 新增 CLI 命令时 |
 | `lib/constants.js` | 共享常量（扫描时间/关键词/红灯） | 查常量定义时 |
 | `lib/gift-shipment-status.js` | 赠品 ERP 发货事实的保守判定：只有每个赠品子订单都查到 ERP，且全部为待审核/待打印快递单/待发货并无任何单号时，才证明赠品未发货 | 改退货退款是否要求退回赠品的边界时 |
@@ -167,7 +168,7 @@ await cdp.navigate(targetId, 'https://...');
   - ⚠️ `cdp.clickAt(input)` 会清除输入框内容，禁止在登录页点击任何输入框
 - **Phase 2**：点登录按钮 → 等协议弹窗（`.rc-kmui-com-dlg`）→ 点同意（`input.rc-btn-ok`）→ checkLogin 确认
 - 熔断：连续 3 次认证失败 → `erp-circuit-breaker.json` state=open，15 分钟冷却后 half_open
-- 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知。**（2026-06-16 停旧系统：startErpHeartbeat 函数保留但启动时不再调用，心跳已停。ERP session 超时改靠人工触发操作时的登录恢复兜底）**
+- 后台心跳自 2026-06-16 起停用，`startErpHeartbeat()` 仅保留函数定义。当前操作时检查登录状态，过期后按登录恢复流程处理；ERP 登录异常通过「创建提醒」快捷指令写入提醒事项。
 - 详见 `docs/ops-erp.md §2`
 
 ### 鲸灵账号新增与重新登录机制
