@@ -1,11 +1,13 @@
 # Handoff
 
-更新时间：2026-10-21
+更新时间：2026-10-22
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
 
 提醒事项迁移已完成并经用户确认收到。跨项目接入统一从 `docs/reminders.md` 进入；阶段证据归档于 `docs/archive/2026-10-21-mac-reminders/README.md`。
+
+QQ经典农场辅助（2026-10-22）：`qq-classic-farm/` 已完成首轮操作基线并按 neat 归档，收获/铲除、普通种植、务农、神秘商人、任务面板、每日分享、商城每日福利和程序坞恢复链路均已有现役规则；种子知识库为43个唯一图标（QQ 40条、微信20条平台观察）。当前现场与未完成项只见 `qq-classic-farm/docs/CURRENT.md` / `qq-classic-farm/tasks/todo.md`，阶段证据见 `qq-classic-farm/docs/archive/neat/2026-10-22-initial-operation-baseline.md`。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 

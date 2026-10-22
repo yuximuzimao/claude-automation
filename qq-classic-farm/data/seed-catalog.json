@@ -1,0 +1,1659 @@
+{
+  "schema_version": 1,
+  "captured_date": "2026-10-22",
+  "capture_notes": [
+    "Warehouse observations are account/platform-specific display values, not assumed global base stats.",
+    "Probability-drop fields intentionally omitted per user instruction.",
+    "quantity_initial_snapshot is the warehouse inventory snapshot captured on 2026-10-22 before subsequent verified inventory changes.",
+    "quantity_latest_known may differ where later verified planting, purchases, or other inventory changes occurred."
+  ],
+  "seed_count_unique": 43,
+  "platform_entry_counts": {
+    "qq": 40,
+    "wechat": 20
+  },
+  "seeds": [
+    {
+      "name": "似何莲种子",
+      "image": "assets/seeds/seed-001.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r3c3",
+          "name": "似何莲种子",
+          "quantity_latest_known": 2,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： ①） 8.2万/季"
+          },
+          "quantity_initial_snapshot": 2
+        }
+      }
+    },
+    {
+      "name": "凤仙花种子",
+      "image": "assets/seeds/seed-002.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r2c4",
+          "name": "凤仙花种子",
+          "quantity_latest_known": 1,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： ①） 8.2万/季"
+          },
+          "quantity_initial_snapshot": 1
+        }
+      }
+    },
+    {
+      "name": "勿忘我种子",
+      "image": "assets/seeds/seed-003.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r2c1",
+          "name": "勿忘我种子",
+          "quantity_latest_known": 28,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： ①） 9.6万/季"
+          },
+          "quantity_initial_snapshot": 28
+        }
+      }
+    },
+    {
+      "name": "卡特兰种子",
+      "image": "assets/seeds/seed-004.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r3c2",
+          "name": "卡特兰种子",
+          "quantity_latest_known": 22,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 22
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r3c2",
+          "name": "卡特兰种子",
+          "quantity_latest_known": 103,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_initial_snapshot": 103
+        }
+      }
+    },
+    {
+      "name": "发财红包种子",
+      "image": "assets/seeds/seed-005.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s2r4c5",
+          "name": "发财红包种子",
+          "quantity_latest_known": 0,
+          "mature_time": "8小时",
+          "harvests": "1季",
+          "yield_per_harvest": "1个/季",
+          "exp_per_harvest": "688/季",
+          "income_per_harvest": "10/季",
+          "seed_price_display": "400",
+          "fruit_value_display": null,
+          "raw_detail_rows": {
+            "price": "单价： 400",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 西10/",
+            "harvest": "可收：1季",
+            "yield": "季产：1个/季",
+            "exp": "经验：688/季",
+            "income": "收入： 國10/季"
+          },
+          "quantity_latest_known_basis": "3 seeds consumed by verified one-key planting test; option disappeared from page 8.",
+          "quantity_initial_snapshot": 3
+        }
+      }
+    },
+    {
+      "name": "哈哈南瓜种子",
+      "image": "assets/seeds/seed-006.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r1c2",
+          "name": "哈哈南瓜种子",
+          "quantity_latest_known": 4,
+          "mature_time": "24小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "36191/季",
+          "income_per_harvest": "20万/季",
+          "seed_price_display": "91.2万",
+          "fruit_value_display": "20000/个",
+          "raw_detail_rows": {
+            "price": "单价： 91.2万",
+            "mature": "成熟：24小时",
+            "fruit": "果实： 20000/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 10个/季",
+            "exp": "经验：36191/季",
+            "income": "收入： ①） 20万/季"
+          },
+          "quantity_initial_snapshot": 4
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r1c2",
+          "name": "哈哈南瓜种子",
+          "quantity_latest_known": 6,
+          "mature_time": "24小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "39916/季",
+          "income_per_harvest": "20万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "20000/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟： 24小时",
+            "fruit": "果实： 20000/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 10个/季",
+            "exp": "经验： 39916/季",
+            "income": "收入： 20万/季"
+          },
+          "quantity_initial_snapshot": 6
+        }
+      }
+    },
+    {
+      "name": "孔雀草种子",
+      "image": "assets/seeds/seed-007.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r2c4",
+          "name": "孔雀草种子",
+          "quantity_latest_known": 77,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： 9.6万/季"
+          },
+          "quantity_initial_snapshot": 77
+        }
+      }
+    },
+    {
+      "name": "寒兰种子",
+      "image": "assets/seeds/seed-008.png",
+      "observations": {
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r2c3",
+          "name": "寒兰种子",
+          "quantity_latest_known": 30,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "4365/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 4365/季",
+            "income": "收入： 11万/季"
+          },
+          "quantity_initial_snapshot": 30
+        }
+      }
+    },
+    {
+      "name": "小红花种子",
+      "image": "assets/seeds/seed-009.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s2r4c1",
+          "name": "小红花种子",
+          "quantity_latest_known": 30,
+          "mature_time": "8小时",
+          "harvests": "1季",
+          "yield_per_harvest": "230个/季",
+          "exp_per_harvest": "2261/季",
+          "income_per_harvest": "5.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 230个/季",
+            "exp": "经验：2261/季",
+            "income": "收入： 5.5万/季"
+          },
+          "quantity_initial_snapshot": 30
+        }
+      }
+    },
+    {
+      "name": "山丹丹种子",
+      "image": "assets/seeds/seed-010.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r3c2",
+          "name": "山丹丹种子",
+          "quantity_latest_known": 60,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： 9.6万/季"
+          },
+          "quantity_initial_snapshot": 60
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r2c2",
+          "name": "山丹丹种子",
+          "quantity_latest_known": 72,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "4365/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验：4365/季",
+            "income": "收入： 11万/季"
+          },
+          "quantity_initial_snapshot": 72
+        }
+      }
+    },
+    {
+      "name": "帝王血种子",
+      "image": "assets/seeds/seed-011.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r4c3",
+          "name": "帝王血种子",
+          "quantity_latest_known": 108,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 108
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r3c5",
+          "name": "帝王血种子",
+          "quantity_latest_known": 108,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： D） 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_initial_snapshot": 108
+        }
+      }
+    },
+    {
+      "name": "昙花种子",
+      "image": "assets/seeds/seed-012.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r2c2",
+          "name": "昙花种子",
+          "quantity_latest_known": 4,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1979/季",
+          "income_per_harvest": "4.8万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1979/季",
+            "income": "收入： 4.8万/季"
+          },
+          "quantity_initial_snapshot": 4
+        }
+      }
+    },
+    {
+      "name": "星语铃花种子",
+      "image": "assets/seeds/seed-013.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r1c3",
+          "name": "星语铃花种子",
+          "quantity_latest_known": 2,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "1380个/季",
+          "exp_per_harvest": "18095/季",
+          "income_per_harvest": "44万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "320/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 320/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 1380个/季",
+            "exp": "经验：18095/季",
+            "income": "收入： 44万/季"
+          },
+          "quantity_initial_snapshot": 2
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r1c3",
+          "name": "星语铃花种子",
+          "quantity_latest_known": 10,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "1596个/季",
+          "exp_per_harvest": "19958/季",
+          "income_per_harvest": "51万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "320/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 320/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 1596个/季",
+            "exp": "经验： 19958/季",
+            "income": "收入： 51万/季"
+          },
+          "quantity_initial_snapshot": 10
+        }
+      }
+    },
+    {
+      "name": "月下美人种子",
+      "image": "assets/seeds/seed-014.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r4c3",
+          "name": "月下美人种子",
+          "quantity_latest_known": 12,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： 9.6万/季"
+          },
+          "quantity_initial_snapshot": 12
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r2c5",
+          "name": "月下美人种子",
+          "quantity_latest_known": 72,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "4365/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 4365/季",
+            "income": "收入： 11万/季"
+          },
+          "quantity_initial_snapshot": 72
+        }
+      }
+    },
+    {
+      "name": "月光花种子",
+      "image": "assets/seeds/seed-015.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r4c2",
+          "name": "月光花种子",
+          "quantity_latest_known": 20,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： 9.6万/季"
+          },
+          "quantity_initial_snapshot": 20
+        }
+      }
+    },
+    {
+      "name": "月见草种子",
+      "image": "assets/seeds/seed-016.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s2r4c4",
+          "name": "月见草种子",
+          "quantity_latest_known": 75,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_latest_known_basis": "96 before test; 21 remaining empty plots were filled by verified one-key planting test.",
+          "quantity_initial_snapshot": 96
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r4c5",
+          "name": "月见草种子",
+          "quantity_latest_known": 43,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： D） 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_latest_known_basis": "67 observed in warehouse snapshot; 24 consumed by verified WeChat one-key planting on 2026-10-22.",
+          "quantity_initial_snapshot": 67
+        }
+      }
+    },
+    {
+      "name": "枸杞种子",
+      "image": "assets/seeds/seed-017.png",
+      "observations": {
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r2c4",
+          "name": "枸杞种子",
+          "quantity_latest_known": 30,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "4365/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： D） 280/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 4365/季",
+            "income": "收入： 11万/季"
+          },
+          "quantity_initial_snapshot": 30
+        }
+      }
+    },
+    {
+      "name": "梧桐种子",
+      "image": "assets/seeds/seed-018.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r4c1",
+          "name": "梧桐种子",
+          "quantity_latest_known": 76,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： ①） 9.6万/季"
+          },
+          "quantity_initial_snapshot": 76
+        }
+      }
+    },
+    {
+      "name": "森野甜莓种子",
+      "image": "assets/seeds/seed-019.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r4c5",
+          "name": "森野甜莓种子",
+          "quantity_latest_known": 68,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "5万/季",
+          "seed_price_display": null,
+          "fruit_value_display": "5000/个",
+          "raw_detail_rows": {
+            "price": "",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 5000/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 10个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： ◎5万/季"
+          },
+          "quantity_initial_snapshot": 68
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r4c2",
+          "name": "森野甜莓种子",
+          "quantity_latest_known": 16,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "5万/季",
+          "seed_price_display": null,
+          "fruit_value_display": "5000/个",
+          "raw_detail_rows": {
+            "price": "",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 5000/个",
+            "harvest": "可收：1季",
+            "yield": "季产：10个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： ◎5万/季"
+          },
+          "quantity_initial_snapshot": 16
+        }
+      }
+    },
+    {
+      "name": "森野黄金芽种子",
+      "image": "assets/seeds/seed-020.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r1c5",
+          "name": "森野黄金芽种子",
+          "quantity_latest_known": 1,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "18095/季",
+          "income_per_harvest": "50万/季",
+          "seed_price_display": null,
+          "fruit_value_display": "50000/个",
+          "raw_detail_rows": {
+            "price": "",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 50000/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 10个/季",
+            "exp": "经验：18095/季",
+            "income": "收入： 50万/季"
+          },
+          "quantity_initial_snapshot": 1
+        }
+      }
+    },
+    {
+      "name": "欢乐糖果种子",
+      "image": "assets/seeds/seed-021.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r2c5",
+          "name": "欢乐糖果种子",
+          "quantity_latest_known": 92,
+          "mature_time": "8小时",
+          "harvests": "1季",
+          "yield_per_harvest": "230个/季",
+          "exp_per_harvest": "2261/季",
+          "income_per_harvest": "5.5万/季",
+          "seed_price_display": "2898",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 2898.",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 230个/季",
+            "exp": "经验：2261/季",
+            "income": "收入： の 5.5万/季"
+          },
+          "quantity_initial_snapshot": 92
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r3c1",
+          "name": "欢乐糖果种子",
+          "quantity_latest_known": 116,
+          "mature_time": "8小时",
+          "harvests": "1季",
+          "yield_per_harvest": "266个/季",
+          "exp_per_harvest": "2494/季",
+          "income_per_harvest": "6.3万/季",
+          "seed_price_display": "2898",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 2898",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 266个/季",
+            "exp": "经验： 2494/季",
+            "income": "收入： 6.3万/季"
+          },
+          "quantity_initial_snapshot": 116
+        }
+      }
+    },
+    {
+      "name": "欧石楠种子",
+      "image": "assets/seeds/seed-022.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r2c5",
+          "name": "欧石楠种子",
+          "quantity_latest_known": 39,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： ①） 9.6万/季"
+          },
+          "quantity_initial_snapshot": 39
+        }
+      }
+    },
+    {
+      "name": "泡泡棉花糖种子",
+      "image": "assets/seeds/seed-023.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r1c4",
+          "name": "泡泡棉花糖种子",
+          "quantity_latest_known": 24,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "1380个/季",
+          "exp_per_harvest": "18095/季",
+          "income_per_harvest": "44万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "320/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 320/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 1380个/季",
+            "exp": "经验：18095/季",
+            "income": "收入： 44万/季"
+          },
+          "quantity_initial_snapshot": 24
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r1c4",
+          "name": "泡泡棉花糖种子",
+          "quantity_latest_known": 8,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "1596个/季",
+          "exp_per_harvest": "19958/季",
+          "income_per_harvest": "51万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "320/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： D） 320/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 1596个/季",
+            "exp": "经验： 19958/季",
+            "income": "收入： 51万/季"
+          },
+          "quantity_initial_snapshot": 8
+        }
+      }
+    },
+    {
+      "name": "爱心果种子",
+      "image": "assets/seeds/seed-024.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r1c1",
+          "name": "爱心果种子",
+          "quantity_latest_known": 4,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "690个/季",
+          "exp_per_harvest": "9048/季",
+          "income_per_harvest": "22万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "320/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟：8小时",
+            "fruit": "果实： 320/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 690个/季",
+            "exp": "经验：9048/季",
+            "income": "收入： ◎22万/季"
+          },
+          "quantity_initial_snapshot": 4
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r1c1",
+          "name": "爱心果种子",
+          "quantity_latest_known": 8,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "798个/季",
+          "exp_per_harvest": "9979/季",
+          "income_per_harvest": "25万/季",
+          "seed_price_display": "1.2万",
+          "fruit_value_display": "320/个",
+          "raw_detail_rows": {
+            "price": "单价： 1.2万",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 320/个",
+            "harvest": "可收：2季",
+            "yield": "李产： 798个/季",
+            "exp": "经验： 9979/季",
+            "income": "收入： ◎ 25万/季"
+          },
+          "quantity_initial_snapshot": 8
+        }
+      }
+    },
+    {
+      "name": "狗尾草种子",
+      "image": "assets/seeds/seed-025.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r4c4",
+          "name": "狗尾草种子",
+          "quantity_latest_known": 696,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 696
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r4c1",
+          "name": "狗尾草种子",
+          "quantity_latest_known": 664,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_initial_snapshot": 664
+        }
+      }
+    },
+    {
+      "name": "石竹花种子",
+      "image": "assets/seeds/seed-026.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r4c2",
+          "name": "石竹花种子",
+          "quantity_latest_known": 171,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： ①） 8.2万/季"
+          },
+          "quantity_initial_snapshot": 171
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r3c4",
+          "name": "石竹花种子",
+          "quantity_latest_known": 67,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： D） 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_initial_snapshot": 67
+        }
+      }
+    },
+    {
+      "name": "米兰种子",
+      "image": "assets/seeds/seed-027.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r3c4",
+          "name": "米兰种子",
+          "quantity_latest_known": 2,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 2
+        }
+      }
+    },
+    {
+      "name": "紫茉莉种子",
+      "image": "assets/seeds/seed-028.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s2r4c3",
+          "name": "紫茉莉种子",
+          "quantity_latest_known": 72,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 72
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r4c4",
+          "name": "紫茉莉种子",
+          "quantity_latest_known": 72,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_initial_snapshot": 72
+        }
+      }
+    },
+    {
+      "name": "紫薇种子",
+      "image": "assets/seeds/seed-029.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r3c5",
+          "name": "紫薇种子",
+          "quantity_latest_known": 76,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： 9.6万/季"
+          },
+          "quantity_initial_snapshot": 76
+        }
+      }
+    },
+    {
+      "name": "红云飞片种子",
+      "image": "assets/seeds/seed-030.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r3c5",
+          "name": "红云飞片种子",
+          "quantity_latest_known": 127,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 127
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r3c3",
+          "name": "红云飞片种子",
+          "quantity_latest_known": 105,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "3742/季",
+          "income_per_harvest": "9.5万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： D） 240/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 3742/季",
+            "income": "收入： 9.5万/季"
+          },
+          "quantity_initial_snapshot": 105
+        }
+      }
+    },
+    {
+      "name": "艾草种子",
+      "image": "assets/seeds/seed-031.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s2r4c2",
+          "name": "艾草种子",
+          "quantity_latest_known": 298,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1696/季",
+          "income_per_harvest": "4.1万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1696/季",
+            "income": "收入： ©. 4.1万/季"
+          },
+          "quantity_initial_snapshot": 298
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r4c3",
+          "name": "艾草种子",
+          "quantity_latest_known": 165,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "199个/季",
+          "exp_per_harvest": "1871/季",
+          "income_per_harvest": "4.7万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：2季",
+            "yield": "李产： 199个/季",
+            "exp": "经验： 1871/季",
+            "income": "收入： 4.7万/季"
+          },
+          "quantity_initial_snapshot": 165
+        }
+      }
+    },
+    {
+      "name": "茱萸种子",
+      "image": "assets/seeds/seed-032.png",
+      "observations": {
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r1c5",
+          "name": "茱萸种子",
+          "quantity_latest_known": 30,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "4365/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 4365/季",
+            "income": "收入： 11万/季"
+          },
+          "quantity_initial_snapshot": 30
+        }
+      }
+    },
+    {
+      "name": "荷包牡丹种子",
+      "image": "assets/seeds/seed-033.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r2c3",
+          "name": "荷包牡丹种子",
+          "quantity_latest_known": 23,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1979/季",
+          "income_per_harvest": "4.8万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：8小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1979/季",
+            "income": "收入： 4.8万/季"
+          },
+          "quantity_initial_snapshot": 23
+        }
+      }
+    },
+    {
+      "name": "萱草种子",
+      "image": "assets/seeds/seed-034.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r3c4",
+          "name": "萱草种子",
+          "quantity_latest_known": 44,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： ①） 9.6万/季"
+          },
+          "quantity_initial_snapshot": 44
+        }
+      }
+    },
+    {
+      "name": "蔷薇种子",
+      "image": "assets/seeds/seed-035.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r2c3",
+          "name": "蔷薇种子",
+          "quantity_latest_known": 17,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1696/季",
+          "income_per_harvest": "4.1万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1696/季",
+            "income": "收入： 4.1万/季"
+          },
+          "quantity_initial_snapshot": 17
+        }
+      }
+    },
+    {
+      "name": "蝴蝶兰种子",
+      "image": "assets/seeds/seed-036.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r2c1",
+          "name": "蝴蝶兰种子",
+          "quantity_latest_known": 30,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1696/季",
+          "income_per_harvest": "4.1万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1696/季",
+            "income": "收入： 4.1万/季"
+          },
+          "quantity_initial_snapshot": 30
+        }
+      }
+    },
+    {
+      "name": "金银花种子",
+      "image": "assets/seeds/seed-037.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r3c1",
+          "name": "金银花种子",
+          "quantity_latest_known": 1,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 1
+        }
+      }
+    },
+    {
+      "name": "铃兰种子",
+      "image": "assets/seeds/seed-038.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r4c5",
+          "name": "铃兰种子",
+          "quantity_latest_known": 84,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 84
+        }
+      }
+    },
+    {
+      "name": "银星海棠种子",
+      "image": "assets/seeds/seed-039.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r3c3",
+          "name": "银星海棠种子",
+          "quantity_latest_known": 40,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： 9.6万/季"
+          },
+          "quantity_initial_snapshot": 40
+        }
+      }
+    },
+    {
+      "name": "银杏树苗种子",
+      "image": "assets/seeds/seed-040.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r4c4",
+          "name": "银杏树苗种子",
+          "quantity_latest_known": 113,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1696/季",
+          "income_per_harvest": "4.1万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1696/季",
+            "income": "收入： ◎4.1万/季"
+          },
+          "quantity_latest_known_basis": "105 observed in warehouse snapshot; +8 acquired from verified hamster/mystery-merchant purchase on 2026-10-22.",
+          "quantity_initial_snapshot": 105
+        }
+      }
+    },
+    {
+      "name": "风信子种子",
+      "image": "assets/seeds/seed-041.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r2c2",
+          "name": "风信子种子",
+          "quantity_latest_known": 28,
+          "mature_time": "8小时",
+          "harvests": "2季",
+          "yield_per_harvest": "172个/季",
+          "exp_per_harvest": "1696/季",
+          "income_per_harvest": "4.1万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟：8小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：2季",
+            "yield": "季产： 172个/季",
+            "exp": "经验：1696/季",
+            "income": "收入： 4.1万/季"
+          },
+          "quantity_initial_snapshot": 28
+        }
+      }
+    },
+    {
+      "name": "鹭草种子",
+      "image": "assets/seeds/seed-042.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "s1r4c1",
+          "name": "鹭草种子",
+          "quantity_latest_known": 2,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3393/季",
+          "income_per_harvest": "8.2万/季",
+          "seed_price_display": "1000",
+          "fruit_value_display": "240/个",
+          "raw_detail_rows": {
+            "price": "单价： 1000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 240/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3393/季",
+            "income": "收入： 8.2万/季"
+          },
+          "quantity_initial_snapshot": 2
+        }
+      }
+    },
+    {
+      "name": "黄金果种子",
+      "image": "assets/seeds/seed-043.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "r3c1",
+          "name": "黄金果种子",
+          "quantity_latest_known": 63,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "345个/季",
+          "exp_per_harvest": "3958/季",
+          "income_per_harvest": "9.6万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "季产： 345个/季",
+            "exp": "经验：3958/季",
+            "income": "收入： ①） 9.6万/季"
+          },
+          "quantity_initial_snapshot": 63
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "r2c1",
+          "name": "黄金果种子",
+          "quantity_latest_known": 118,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "399个/季",
+          "exp_per_harvest": "4365/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价： 2000",
+            "mature": "成熟： 12小时",
+            "fruit": "果实： 280/个",
+            "harvest": "可收：1季",
+            "yield": "李产： 399个/季",
+            "exp": "经验： 4365/季",
+            "income": "收入： 11万/季"
+          },
+          "quantity_initial_snapshot": 118
+        }
+      }
+    }
+  ]
+}
