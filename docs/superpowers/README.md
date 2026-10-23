@@ -18,4 +18,6 @@ Home 与工作区卫生同样属于固定边界：所有 WorkBuddy 调用必须�
 
 ## 其他能力
 
+CodexPro 大文件分段读取由启动时的[本地补丁](../../scripts/lib/ensure-codexpro-paged-read.mjs)维护，验证入口为[读取回归测试](../../test/workspace/codexpro-paged-read.test.mjs)。
+
 `specs/` 和 `plans/` 中的 CodexPro 文档属于独立能力，本次未修改或归档。

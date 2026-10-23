@@ -11,6 +11,7 @@ required_skill="${CODEXPRO_REQUIRED_SKILL:-chinese-polish}"
 node "$SCRIPT_DIR/lib/ensure-codexpro-required-skill.mjs" \
   "$codexpro_package_root" \
   "$required_skill"
+node "$SCRIPT_DIR/lib/ensure-codexpro-paged-read.mjs" "$codexpro_package_root"
 
 codexpro_stop_stale_server 8787
 

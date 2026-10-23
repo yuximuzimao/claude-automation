@@ -40,6 +40,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 ## CodexPro 固定地址（2026-07-15）
 
+- 大文件读取（2026-10-23）：启动脚本已接入 `scripts/lib/ensure-codexpro-paged-read.mjs`，公开 `read` 工具将 `max_bytes` 用作返回正文预算，保留完整行并提示下一次读取位置；源文件安全上限为 2,000,000 字节，内部上下文读取与写入校验不变。7 项读取回归及语法检查已通过；当前服务仍运行旧代码，待用户选择重启时机。
 - `/Users/chat/claude` 已切换到 ngrok 账号固定 dev domain；GPT App Server URL 不再随 CodexPro 重启变化。
 - 日常恢复：网络可用后在终端输入一次 `codexpro`。
 - `codexpro` 当前以前台方式运行：运行它的终端需要保持开启；关闭终端会停止本地服务和 ngrok，但重新打开终端执行 `codexpro` 后仍复用同一个固定地址，GPT App 无需重建。
