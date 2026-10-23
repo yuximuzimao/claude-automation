@@ -8,3 +8,4 @@
 - `2026-09-13-workbuddy-governance/` — WorkBuddy 记忆、项目入口、Skill 与工作区治理收尾；记录最终架构、清理结果与冷启动验证。
 - `2026-10-09-codex-ccswitch-deepseek-harness/` — DeepSeek Harness 与 CC Switch 升级、规则共享、Codex 官方账号/API 切换及 HTTP/HTTPS 连接根因归档；DeepSeek Harness 已于 2026-10-10 卸载，目录仅作历史证据。
 - [2026-10-21-mac-reminders/](2026-10-21-mac-reminders/README.md) — 售后系统通知迁移、输入文件对齐小爪工作区、真机接收验证，以及跨项目提醒约定与记忆同步。
+- [2026-10-23-codexpro-paged-read/](2026-10-23-codexpro-paged-read/README.md) — 大文件读取参数根因、分段读取修复、7 项回归与用户重启后的实际服务验证；本阶段已结束。

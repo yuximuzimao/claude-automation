@@ -7,6 +7,8 @@
 
 提醒事项迁移已完成并经用户确认收到。跨项目接入统一从 `docs/reminders.md` 进入；阶段证据归档于 `docs/archive/2026-10-21-mac-reminders/README.md`。
 
+CodexPro 大文件读取修复已生效并结束本阶段；现役入口见 `docs/superpowers/README.md`，问题与验证证据归档于 `docs/archive/2026-10-23-codexpro-paged-read/README.md`，无待重启或继续实施事项。
+
 QQ经典农场辅助（2026-10-22）：`qq-classic-farm/` 已完成首轮操作基线并按 neat 归档，收获/铲除、普通种植、务农、神秘商人、任务面板、每日分享、商城每日福利和程序坞恢复链路均已有现役规则；种子知识库为43个唯一图标（QQ 40条、微信20条平台观察）。当前现场与未完成项只见 `qq-classic-farm/docs/CURRENT.md` / `qq-classic-farm/tasks/todo.md`，阶段证据见 `qq-classic-farm/docs/archive/neat/2026-10-22-initial-operation-baseline.md`。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
@@ -40,7 +42,6 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 ## CodexPro 固定地址（2026-07-15）
 
-- 大文件读取（2026-10-23）：启动脚本已接入 `scripts/lib/ensure-codexpro-paged-read.mjs`，公开 `read` 工具将 `max_bytes` 用作返回正文预算，保留完整行并提示下一次读取位置；源文件安全上限为 2,000,000 字节，内部上下文读取与写入校验不变。7 项读取回归及语法检查已通过；用户已重启，实际服务以 71,807 字节文件、1,000 字节预算连续两页验证通过，临时 MCP 会话已关闭。
 - `/Users/chat/claude` 已切换到 ngrok 账号固定 dev domain；GPT App Server URL 不再随 CodexPro 重启变化。
 - 日常恢复：网络可用后在终端输入一次 `codexpro`。
 - `codexpro` 当前以前台方式运行：运行它的终端需要保持开启；关闭终端会停止本地服务和 ngrok，但重新打开终端执行 `codexpro` 后仍复用同一个固定地址，GPT App 无需重建。
