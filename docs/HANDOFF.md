@@ -9,7 +9,7 @@
 
 CodexPro 大文件读取修复已生效并结束本阶段；现役入口见 `docs/superpowers/README.md`，问题与验证证据归档于 `docs/archive/2026-10-23-codexpro-paged-read/README.md`，无待重启或继续实施事项。
 
-QQ经典农场辅助（2026-10-22）：`qq-classic-farm/` 已完成首轮操作基线并按 neat 归档，收获/铲除、普通种植、务农、神秘商人、任务面板、每日分享、商城每日福利和程序坞恢复链路均已有现役规则；种子知识库为43个唯一图标（QQ 40条、微信20条平台观察）。当前现场与未完成项只见 `qq-classic-farm/docs/CURRENT.md` / `qq-classic-farm/tasks/todo.md`，阶段证据见 `qq-classic-farm/docs/archive/neat/2026-10-22-initial-operation-baseline.md`。
+QQ经典农场辅助（2026-10-24）：已跑通并固化化肥催熟（普通肥每阶段1次，高级肥可连续使用，一键施肥状态按平台独立）、4格特殊作物精确收获链（点“可摘”星标→黑色残株→点残株→铲子→裸地）和活动种子配地。当前 QQ 为 1 个金地 2×2 森野黄金芽 + 20 格森野甜莓，库存黄金芽5/甜莓24；微信为 2 个紫晶 2×2 森野黄金芽 + 16 格森野白桃，库存黄金芽1/甜莓0/白桃92。森野白桃已确认基础12小时、1季并新增图标 seed-044。若不再施肥，两边合并下次建议 10/25 05:55 后处理。微信本轮为避开置顶 ERP 窗口临时移到屏幕左侧；实际操作必须避开 ERP 覆盖区。当前现场、下一轮计划和待办只看 `qq-classic-farm/docs/CURRENT.md` / `qq-classic-farm/tasks/todo.md`。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 

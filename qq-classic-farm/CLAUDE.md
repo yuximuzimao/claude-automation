@@ -24,7 +24,7 @@
 
 | 文档 | 加载时机 |
 | --- | --- |
-| `docs/gameplay-rules.md` | 收获、种植、土地、成熟状态判断 |
+| `docs/gameplay-rules.md` | 收获、种植、化肥、土地、成熟状态判断与日常交互 |
 | `docs/seed-catalog.md` | 种子库存、图标、资料读取 |
 
 ## Git / 数据边界
