@@ -591,6 +591,24 @@ def annotate_topic_structure(cards: list[dict]) -> None:
         card["system_tags"] = assign_system_tags(card)
 
 
+def assign_silver_display_topics(unit: dict) -> list[str]:
+    """Keep first-read filters intentionally coarse: profession object or 其他."""
+    semantic_title = " ".join([
+        str(unit.get("subject") or ""),
+        str(unit.get("question") or ""),
+    ])
+    labels: list[str] = []
+    for _key, label, aliases in PROFESSIONS:
+        if any(_alias_matches(semantic_title, alias) for alias in aliases):
+            labels.append(label)
+    return list(dict.fromkeys(labels)) or ["其他"]
+
+
+def annotate_silver_display_topics(units: list[dict]) -> None:
+    for unit in units:
+        unit["display_topics"] = assign_silver_display_topics(unit)
+
+
 def annotate_v3_projection(cards: list[dict]) -> None:
     profession_label_map = {key: label for key, label, _aliases in PROFESSIONS}
     for card in cards:
@@ -599,15 +617,9 @@ def annotate_v3_projection(cards: list[dict]) -> None:
             if key == "noncareer":
                 continue
             topics.append({"key": f"class:{key}", "label": profession_label_map[key], "kind": "class"})
-        for key in card.get("system_tags", []):
-            label = V3_TOPIC_LABELS.get(key)
-            if label:
-                topics.append({"key": f"topic:{key}", "label": label, "kind": "topic"})
-        seen_topic_keys: set[str] = set()
-        card["v3_topics"] = [
-            topic for topic in topics
-            if not (topic["key"] in seen_topic_keys or seen_topic_keys.add(topic["key"]))
-        ]
+        if not topics:
+            topics.append({"key": "other", "label": "其他", "kind": "other"})
+        card["v3_topics"] = topics
 
         context = DISPLAY_CONTEXT_OVERRIDES.get(card.get("card_id", ""), {})
         card["display_eyebrow"] = context.get("eyebrow", "")
@@ -1592,6 +1604,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     for unit in normalized_knowledge:
         unit["semantic_fingerprint"] = semantic_fingerprint(unit)
+    annotate_silver_display_topics(normalized_knowledge)
 
     silver_component_ids = {
         ref.get("card_id")
@@ -1731,7 +1744,7 @@ def main(argv: list[str] | None = None) -> None:
     for unit in normalized_knowledge:
         if unit.get("initial_state") != "queue":
             continue
-        for label in unit.get("topics", []):
+        for label in unit.get("display_topics", []):
             if label:
                 v3_topic_counts[label] = v3_topic_counts.get(label, 0) + 1
     for card in display_cards:

@@ -148,7 +148,7 @@ h1{{font-size:21px;margin:0}}
 <section id="knowledge" class="view">
   <div class="intro"><h2>资料库</h2><p>主要用于以后只记得几个关键词时找回来，不要求平时浏览。</p></div>
   <input id="kbSearch" class="search" placeholder="搜任务名、Boss、职业、装备、插件、关键词……">
-  <div class="kb-tip">职业和副本、任务、防骗等都是同一级专题；一次只选一个，不做交叉筛选。</div>
+  <div class="kb-tip">标签只用于按职业快速分流；非职业内容统一进“其他”。副本、任务、装备、防骗等细分内容直接用上方搜索查找。</div>
   <div id="kbTopics" class="topicbar"></div>
   <div id="kbResult" class="result"></div>
   <div id="kbCards"></div>
@@ -255,7 +255,7 @@ function unitIsQueue(u){{return u.v3_first_read_queue&&!unitDecision(u.knowledge
 function unitIsKnowledge(u){{return u.initial_state==='knowledge'||u.v3_reviewed_decision==='knowledge'||unitDecision(u.knowledge_id)==='knowledge'}}
 function searchText(c){{return [c.card_id,c.title,c.semantic_summary,c.display_eyebrow,c.display_context,c.display_new_fact,...(c.tags||[]),...(c.collection_candidates||[]),...(c.v3_topics||[]).map(x=>x.label)].join(' ').toLowerCase()}}
 function unitSearchText(u){{return [u.knowledge_id,u.subject,u.question,...(u.canonical_facts||[]),...(u.search_terms||[]),...(u.topics||[])].join(' ').toLowerCase()}}
-function itemTopics(x){{return x.knowledge_id?(x.topics||[]):(x.v3_topics||[]).map(t=>t.label)}}
+function itemTopics(x){{return x.knowledge_id?(x.display_topics||['其他']):(x.v3_topics||[]).map(t=>t.label)}}
 function topicMatch(x,key){{return !key||itemTopics(x).includes(key)}}
 
 function buildTopicBar(el,itemsSource,active,onClick){{
@@ -311,7 +311,7 @@ function structuredHtml(u){{
   return ''
 }}
 function unitHtml(u,mode){{
-  const topics=(u.topics||[]).join(' · ');
+  const topics=(u.display_topics||['其他']).join(' · ');
   const lead=(u.canonical_facts||[])[0]||'';
   const evidence=(u.evidence_refs||[]).map(x=>x.card_id||x.external).filter(Boolean);
   const evidenceHtml=evidence.map(id=>{{
