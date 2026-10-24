@@ -251,10 +251,20 @@ def main() -> int:
         report["publication"]["blockers"].append("存在 Topic candidate 日期缺失对应 Bronze 来源")
 
     correction_count = 0
+    correction_total = 0
+    correction_resolved = 0
     if args.corrections.exists():
         correction_doc = json.loads(args.corrections.read_text(encoding="utf-8"))
-        correction_count = len(correction_doc.get("issues", []))
+        correction_issues = correction_doc.get("issues", [])
+        correction_total = len(correction_issues)
+        correction_resolved = sum(
+            bool((issue.get("resolution") or {}).get("resolved"))
+            for issue in correction_issues
+        )
+        correction_count = correction_total - correction_resolved
         report["counts"]["semantic_correction_queue"] = correction_count
+        report["counts"]["semantic_correction_total"] = correction_total
+        report["counts"]["semantic_correction_resolved"] = correction_resolved
         if correction_count:
             report["publication"]["blockers"].append("存在待纠正的语义抽取卡，不得作为自动聚类真值")
     report["inputs"] = {

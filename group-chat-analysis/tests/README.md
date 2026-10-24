@@ -70,5 +70,9 @@ GPT分析属于后续独立验收，不用“摘要看起来不错”代替采�
 - `python3 -m src.analysis.source_anchor_backfill`：只为历史缺锚点卡生成 canonical 原文候选；必须经过语义复核后才能写 verified overlay。
 - `python3 -m src.analysis.atomic_claim_queue`：把全部未完成候选按 high-anchor / medium-review / direct-retrieval / semantic-rebuild 分流；旧 Topic Card 仅作 hint。
 - `python3 -m src.analysis.cluster_proposals`：对未 full 且未被 semantic quarantine 的候选做相似度召回和保守聚类提案，同时用历史人工 Silver 做非独立校准；**不更新 Silver/Gold/已阅**。
-- 正式自动合并必须另外通过独立留出集的语义 precision/recall、错误合并、混合卡 full 误判、动态信息失真等验收；见 `docs/ANALYSIS-DATA-QUALITY-SOP.md`。
+- `tests/test_question_registry_store.py`：stable current registry 的 bootstrap/幂等、单调新增、旧 question/claim 不可丢失/换簇、canonical question revision history、stale previous hash 门禁。
+- `tests/test_analysis_runner.py`：work package 起点 hash、receipt 防篡改、质量/渲染失败隔离、immutable release、原子发布、重复执行、发布后状态写失败恢复及 rollback。
+- `tests/test_incremental_checkpoint.py` + `tests/test_incremental_capture.py`：独立 history runtime → 下一批逐群 checkpoint 的来源 hash/canonical tail/base-batch 门禁、一次性失效、两群不同 anchor 混合裁剪，以及 checkpoint 损坏时 **QQ UI 零触碰**。
+- `tests/test_review_decision_store.py` + `tests/test_analysis_review_server.py`：只允许正式 queue Silver 的用户裁决持久化、幂等/改判、历史 card-only 决策保留，以及 localhost/CSRF/Origin 门禁。
+- 正式自动合并仍必须另外通过独立留出集的语义 precision/recall、错误合并、混合卡 full 误判、动态信息失真等验收；见 `docs/ANALYSIS-DATA-QUALITY-SOP.md`。
 

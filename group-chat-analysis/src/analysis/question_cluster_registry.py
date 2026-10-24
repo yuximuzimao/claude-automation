@@ -103,7 +103,7 @@ def main() -> None:
     p.add_argument("--claims", type=Path, default=WORK / "atomic-claims-combined-holdout-v1.json")
     p.add_argument("--clusters", type=Path, default=WORK / "atomic-claim-question-clusters-holdout-complete-v1.json")
     p.add_argument("--decisions", type=Path, default=WORK / "atomic-claim-pair-decisions-combined-complete-v1.json")
-    p.add_argument("--out", type=Path, default=WORK / "question-cluster-registry-v1.json")
+    p.add_argument("--out", type=Path, default=WORK / "question-cluster-registry-candidate.json")
     args = p.parse_args()
 
     claims = json.loads(args.claims.read_text(encoding="utf-8"))

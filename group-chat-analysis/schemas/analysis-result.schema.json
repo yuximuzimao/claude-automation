@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis-result.schema.json",
+  "title": "Published Group Chat Analysis Result",
+  "description": "Immutable release metadata for one formally published analysis run.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "run_id",
+    "batch_id",
+    "runner_contract_version",
+    "source",
+    "review",
+    "code_hashes",
+    "quality",
+    "counts",
+    "render_summary",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "status": {"const": "published_analysis_result"},
+    "run_id": {"type": "string", "minLength": 1},
+    "batch_id": {"type": "string", "minLength": 1},
+    "runner_contract_version": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batch_id",
+        "current_sha256",
+        "message_count",
+        "canonical_batch_sha256"
+      ],
+      "properties": {
+        "batch_id": {"type": "string", "minLength": 1},
+        "current_sha256": {"$ref": "#/$defs/sha256"},
+        "message_count": {"type": "integer", "minimum": 0},
+        "canonical_batch_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_sha256",
+        "work_package",
+        "reviewed_at",
+        "reviewer",
+        "artifacts"
+      ],
+      "properties": {
+        "receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "work_package": {"$ref": "#/$defs/artifactRef"},
+        "reviewed_at": {"type": "string", "format": "date-time"},
+        "reviewer": {"type": "string", "minLength": 1},
+        "artifacts": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/$defs/artifactRef"}
+        }
+      }
+    },
+    "code_hashes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "errors", "warnings", "report_sha256"],
+      "properties": {
+        "result": {"type": "string"},
+        "errors": {"type": "integer", "minimum": 0},
+        "warnings": {"type": "integer", "minimum": 0},
+        "report_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "first_read_silver_units",
+        "knowledge_silver_units",
+        "dossier_absorbed_silver_units",
+        "reviewed_semantic_states"
+      ],
+      "properties": {
+        "first_read_silver_units": {"type": ["integer", "null"], "minimum": 0},
+        "knowledge_silver_units": {"type": ["integer", "null"], "minimum": 0},
+        "dossier_absorbed_silver_units": {"type": ["integer", "null"], "minimum": 0},
+        "reviewed_semantic_states": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "render_summary": {"type": "object"},
+    "artifacts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/artifactRef"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis-work-package.schema.json",
+  "title": "Analysis Work Package",
+  "description": "Freezes one completed batch and the knowledge baseline from which semantic review starts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "batch_id",
+    "source",
+    "baseline_artifacts",
+    "contract",
+    "prepared_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "status": {"const": "analysis_work_prepared"},
+    "batch_id": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batch_id",
+        "current_sha256",
+        "message_count",
+        "canonical_batch_sha256"
+      ],
+      "properties": {
+        "batch_id": {"type": "string", "minLength": 1},
+        "current_sha256": {"$ref": "#/$defs/sha256"},
+        "message_count": {"type": "integer", "minimum": 0},
+        "canonical_batch_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "baseline_artifacts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/artifactRef"}
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_review_required_before_receipt",
+        "baseline_hashes_are_analysis_start_state",
+        "output_artifacts_may_change_after_review",
+        "work_package_refresh_requires_explicit_flag"
+      ],
+      "properties": {
+        "semantic_review_required_before_receipt": {"const": true},
+        "baseline_hashes_are_analysis_start_state": {"const": true},
+        "output_artifacts_may_change_after_review": {"const": true},
+        "work_package_refresh_requires_explicit_flag": {"const": true}
+      }
+    },
+    "prepared_at": {"type": "string", "format": "date-time"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from src.store import IncrementalCheckpointError, IncrementalCheckpointStore
+
 from .full_capture import FullCaptureRunner, GroupTarget
 from .run_capture import CaptureRunConfig, CaptureRunner, RecoveryRequired
 
@@ -30,6 +32,25 @@ class IncrementalCaptureRunner(FullCaptureRunner):
                     raise RecoveryRequired(
                         f"previous completed group {group_key} has no continuous anchor; refusing any QQ UI action"
                     )
+            try:
+                overrides = IncrementalCheckpointStore(
+                    self.project_root,
+                    self.runtime_root,
+                ).resolve_for_next_batch(
+                    previous_state=state,
+                    group_keys=expected_groups,
+                )
+            except IncrementalCheckpointError as exc:
+                raise RecoveryRequired(
+                    f"incremental checkpoint validation failed before any QQ UI action: {exc}"
+                ) from exc
+            self.state_store.start_batch(
+                self.config.batch_id,
+                started_at=self.now(),
+                group_keys=[target.group_key for target in self.config.groups],
+                batch_kind="incremental",
+                start_anchor_overrides=overrides,
+            )
         elif state.get("batch_kind") != "incremental":
             raise RecoveryRequired(
                 "requested incremental batch_id already belongs to a non-incremental batch"

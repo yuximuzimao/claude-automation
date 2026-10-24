@@ -207,6 +207,7 @@ class BatchStateStore:
         started_at: str,
         group_keys: list[str],
         batch_kind: str = "capture",
+        start_anchor_overrides: dict[str, list[dict[str, object]]] | None = None,
     ) -> dict:
         if (
             not batch_id
@@ -218,6 +219,17 @@ class BatchStateStore:
         ):
             raise StateError("valid batch_id, started_at, and unique group_keys are required")
 
+        overrides = start_anchor_overrides or {}
+        if not isinstance(overrides, dict):
+            raise StateError("start_anchor_overrides must be a group-keyed object")
+        if overrides and batch_kind != "incremental":
+            raise StateError("start_anchor_overrides are only valid for incremental batches")
+        unknown_override_groups = sorted(set(overrides) - set(group_keys))
+        if unknown_override_groups:
+            raise StateError(
+                f"start_anchor_overrides contain groups outside the batch: {unknown_override_groups}"
+            )
+
         previous = self.load()
         if previous is not None and previous["status"] == "incomplete":
             if previous["batch_id"] != batch_id:
@@ -226,6 +238,11 @@ class BatchStateStore:
                 raise StateError("cannot resume an incomplete batch with different batch_kind")
             if set(previous["groups"]) != set(group_keys):
                 raise StateError("cannot resume an incomplete batch with different groups")
+            for group_key, anchors in overrides.items():
+                if previous["groups"][group_key]["start_anchor"] != anchors:
+                    raise StateError(
+                        "cannot change start_anchor while resuming an incomplete batch"
+                    )
             return previous
 
         previous_groups = previous["groups"] if previous is not None else {}
@@ -245,7 +262,9 @@ class BatchStateStore:
                     "capture_complete": False,
                     "last_page_index": None,
                     "start_anchor": (
-                        previous_groups.get(group_key, {}).get("last_completed_anchor", [])
+                        [dict(anchor) for anchor in overrides[group_key]]
+                        if batch_kind == "incremental" and group_key in overrides
+                        else previous_groups.get(group_key, {}).get("last_completed_anchor", [])
                         if batch_kind == "incremental"
                         else []
                     ),

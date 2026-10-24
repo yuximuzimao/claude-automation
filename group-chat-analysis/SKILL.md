@@ -26,8 +26,16 @@
 | `schemas/capture-page.schema.json` | 单页原始OCR捕获的数据契约 | 改capture输出/normalize输入时 |
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |
+| `schemas/incremental-checkpoint.schema.json` | 独立历史补采结果给“下一批 incremental”提供一次性逐群 anchor override 的契约 | 改历史→增量接棒时 |
+| `schemas/analysis-work-package.schema.json` | completed batch + 分析起始知识基线的冻结输入契约 | 改 daily 分析起点/恢复时 |
+| `schemas/analysis-review-receipt.schema.json` | completed batch、work package 与已审分析产物的发布收据契约 | 改分析发布门禁时 |
+| `schemas/analysis-result.schema.json` | immutable analysis release 的结果索引契约 | 改正式分析结果时 |
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
-| `src/app/run_capture.py` | 唯一正式运行入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动 | 改运行/恢复 CLI 时 |
+| `src/app/run_capture.py` | 唯一正式采集入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动 | 改采集/恢复 CLI 时 |
+| `src/app/manage_incremental_checkpoint.py` | 从已完成独立 runtime 为下一次 incremental 创建/查看一次性逐群 checkpoint；不操作 QQ | 历史补采比主 anchor 更新时 |
+| `src/app/run_analysis.py` | 已审语义产物的正式发布 runner；工单 hash、质量门禁、staging render、immutable release、原子发布、`analyzed` 推进与回滚 | 改分析发布/恢复时 |
+| `src/app/serve_analysis.py` | 仅监听 `127.0.0.1` 的阅读页面入口；把“没用 / 存资料库”写入正式 reviewed semantic state | 改页面裁决持久化时 |
+| `src/analysis/page_builder.py` / `page_renderer.py` | 正式 Gold/页面构建与渲染；运行数据仍来自 `runtime/` | 改页面投影时 |
 | `src/app/full_capture.py` | 两群首次全量与单群按日期历史补采编排 | 改首次全量/单日历史编排时 |
 | `src/app/incremental_capture.py` | 两群每日增量、强制刷新历史快照与 anchor 停止 | 改增量编排时 |
 | `src/app/capture-step.swift` | 内部单步 current/scroll capture | 改 Swift 单步执行边界时 |
@@ -40,7 +48,8 @@
 | `src/normalize/assemble.py` | 同群多页组装与 Schema records | 改跨页组装时 |
 | `src/normalize/overlap.py` | 相邻页保守去重与 capture→聊天顺序转换 | 改跨页去重/顺序时 |
 | `src/normalize/incremental.py` | 上一 completed anchor 匹配、裁剪与新增消息重编号 | 改增量停止/裁剪时 |
-| `src/store/batch_state.py` | 可恢复 batch/state | 改恢复点/状态机时 |
+| `src/store/batch_state.py` | 可恢复 batch/state；新 incremental 创建时可接收已验证的逐群 start-anchor override，创建后仍不可变 | 改恢复点/状态机时 |
+| `src/store/incremental_checkpoint.py` | checkpoint 来源 state/messages hash、canonical tail、base batch 与一次性生效门禁 | 改历史→日常增量接棒时 |
 | `src/store/message_record.py` | message-record 正式运行时校验 | 改消息持久化契约时 |
 | `src/store/message_store.py` | canonical messages.jsonl 原子/幂等持久化 | 改消息库时 |
 | `src/store/finalize.py` | messages→completed→current 提交/恢复 | 改完成顺序时 |

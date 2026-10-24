@@ -29,11 +29,19 @@
 - `../schemas/capture-page.schema.json`：单页窗口级捕获 + Apple Vision OCR 的原始输出；页级元数据与 OCR blocks 分离。
 - `../schemas/message-record.schema.json`：Normalize 后的单条规范化消息。
 - `../schemas/batch-state.schema.json`：可恢复批次的状态、页恢复位置和每群已完成连续锚点；不包含截图、头像指纹或昵称别名。
+- `../schemas/incremental-checkpoint.schema.json`：独立 history runtime 比主运行链更新时，给**下一批** incremental 提供一次性逐群 start-anchor override；绑定 base batch、来源 state/messages hash 与连续 anchor，不允许改写旧 completed batch。
+- `../schemas/analysis-work-package.schema.json`：冻结一个 completed batch 的 `current.md` / canonical batch 与分析开始时的 Question Registry、Silver、已阅、dossier 等基线 hash；换会话/中断后仍能明确分析起点。
+- `../schemas/analysis-review-receipt.schema.json`：把一个 completed batch、对应 work package 与已完成人工/模型语义审阅的正式分析产物 hash 绑定；draft receipt 不具备发布资格。
+- `../schemas/analysis-result.schema.json`：一次正式分析 release 的不可变结果索引、质量门禁、来源血缘与页面/派生产物 hash。
 
 ## 代码与测试
 
 - `../src/README.md`：正式代码模块边界、依赖方向与当前门禁。
-- `../src/app/run_capture.py`：唯一正式运行入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动；history-date pending-scroll 恢复也由同一 runner 内部完成。
+- `../src/app/run_capture.py`：唯一正式采集入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动；history-date pending-scroll 恢复也由同一 runner 内部完成。
+- `../src/app/manage_incremental_checkpoint.py`：只读已完成独立 runtime，创建/查看下一批 incremental 的一次性逐群 checkpoint；本身不操作 QQ。
+- `../src/app/run_analysis.py`：已审分析产物的正式发布入口；校验 batch/current/canonical/artifact hash，质量门禁通过后 staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`；支持幂等恢复和 release 回滚。
+- `../src/app/serve_analysis.py`：本机 `127.0.0.1` 阅读入口；CSRF/同源门禁下持久化用户“没用 / 存资料库”裁决，不修改 Silver 事实层。
+- `../src/analysis/page_builder.py` / `page_renderer.py`：正式页面构建/渲染 owner；旧 `runtime/analysis-work` 页面脚本不再作为正式代码入口。
 - `../src/app/swift_sources.py`：正式 Swift target / Swift 纯测试唯一 source manifest。
 - `../src/app/full_capture.py`：两群首次全量与单群按日期历史补采编排；单日 pending-scroll 会先自动重锚定，不重选日期/重开窗口。
 - `../src/app/incremental_capture.py`：两群每日增量、历史窗口刷新与上一 completed anchor 停止。
@@ -46,7 +54,8 @@
 - `../src/normalize/assemble.py`：同群连续 capture pages → Schema message records。
 - `../src/normalize/overlap.py`：相邻页保守去重与 capture 页方向转换。
 - `../src/normalize/incremental.py`：上一 completed anchor 匹配、裁剪与新增消息重编号。
-- `../src/store/batch_state.py`：可恢复 batch/state。
+- `../src/store/batch_state.py`：可恢复 batch/state；新 incremental 批次创建时支持已验证的逐群 start-anchor override，进入 incomplete 后 start_anchor 仍不可变。
+- `../src/store/incremental_checkpoint.py`：checkpoint 的来源 hash/canonical tail/base-batch 校验与一次性生效 owner。
 - `../src/store/message_record.py`：message-record 正式运行时校验。
 - `../src/store/message_store.py`：canonical messages.jsonl 原子/幂等持久化。
 - `../src/store/finalize.py`：messages→completed→current 提交与恢复。

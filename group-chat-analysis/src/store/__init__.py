@@ -7,6 +7,11 @@ from .batch_state import (
     BatchStateStore,
     StateError,
 )
+from .incremental_checkpoint import (
+    CHECKPOINT_SCHEMA_VERSION,
+    IncrementalCheckpointError,
+    IncrementalCheckpointStore,
+)
 from .message_record import (
     MESSAGE_RECORD_KEYS,
     MESSAGE_RECORD_REQUIRED,
@@ -24,6 +29,9 @@ __all__ = [
     "Anchor",
     "BatchStateStore",
     "StateError",
+    "CHECKPOINT_SCHEMA_VERSION",
+    "IncrementalCheckpointError",
+    "IncrementalCheckpointStore",
     "MESSAGE_RECORD_KEYS",
     "MESSAGE_RECORD_REQUIRED",
     "MESSAGE_SCHEMA_VERSION",

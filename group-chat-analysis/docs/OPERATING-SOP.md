@@ -71,13 +71,15 @@ python3 -m src.app.run_capture --incremental --batch-id <batch_id>
 
 每个新 incremental batch 必须重新安全打开目标群历史窗口刷新 QQ 快照；已有 durable 页的同一未完成 batch 恢复时不重开。命中上一 completed 的连续 `start_anchor` 后停止并只提交 anchor 之后的新消息。
 
+如果某一群经过**独立 history-date 补采**已经拥有比主运行链更新、且已 completed 的可靠尾部 anchor，禁止手改旧 main batch。先执行 `python3 -m src.app.manage_incremental_checkpoint --source-runtime <独立runtime> --group-key <group>` 创建一次性 checkpoint。它必须与当前上一 main completed batch id 精确绑定，并在下一批 incremental 开始前复核来源 state/messages hash、completed anchor 与 canonical tail；任一不一致都在打开 QQ 前硬停。checkpoint 只覆盖指定群的新 batch `start_anchor`，其他群仍沿用上一 main completed anchor；新批次一旦创建，start_anchor 继续按原规则不可变。上一 main batch 已变化时旧 checkpoint 自动失效。
+
 输出 `status=incomplete` 时继续同一命令；输出 `status=completed` 后 canonical messages、state 和 `runtime/inbox/current.md` 才可进入分析。
 
 ## 5. 批次分析与跨项目
 
 completed 后进入 `rules/analysis.md`。日常分析只读 `runtime/inbox/current.md`，不从 raw OCR 重猜消息；报告/页面保存到 `runtime/reports/`。群聊内容只生成跨项目候选，用户确认后再进入目标项目独立核验。
 
-当前正式分析 CLI 尚未建立，现阶段仍由 GPT/Codex 按 analysis owner 人工触发；已有只读质量检查与全量相似候选提案入口，执行细节见 `ANALYSIS-DATA-QUALITY-SOP.md`，其产物不能自动晋升为正式 Silver。
+分析已经拆成“语义生产”和“确定性发布”两层。语义判断仍由 GPT/Codex 按 analysis owner 完成，任何相似度/召回 proposal 都不能自动晋升；确定性状态机统一从 `python3 -m src.app.run_analysis` 进入。一个 completed batch 先用 `--prepare-work` 冻结 `current.md + canonical + 当前 Question Registry/Silver/已阅/dossier` 起点 hash，语义审阅完成后用 `--prepare-review` 生成 draft receipt 并由审阅者显式改成 `reviewed_analysis_ready`，最后才允许正式发布。发布顺序固定为质量门禁 → staging render → immutable release → 原子 current 指针 → `mark_analyzed()`；任一步失败都不得重新采集或提前推进 analyzed。
 
 ## 6. 恢复原则
 
@@ -93,7 +95,7 @@ completed 后进入 `rules/analysis.md`。日常分析只读 `runtime/inbox/curr
 
 ## 7. 当前仍未自动化
 
-- 正式 GPT 分析 runner 与唯一分析结果结构；当前 runtime 已有“新信息 / 资料库 / 无限服 / 黑话”低摩擦原型，但已阅语义指纹、资料库持久结构、基础身份自动补齐和动态专题更新仍需继续验证后才能冻结为正式契约；
+- 每日新增消息的语义生产编排仍需在真实 incremental batch 上继续验证：Atomic Claim → stable Question Registry assignment/bootstrap → Silver routing/authoring/publication → dossier `silent_support / visible_update` → reviewed receipt；确定性发布 runner、正式结果结构、页面裁决持久化已经建立；
 - 每日无人值守调度。
 
 这些只以 `tasks/todo.md` 作为未完成事项真源。

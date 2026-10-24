@@ -17,9 +17,9 @@
 
 - **Bronze**：QQ 屏幕采集的 durable raw、canonical messages。保留原始文本、时间、群、批次和采集上下文；任何后续清洗不回写原始语义。采集侧依旧由 `capture/normalize/store` 各自 owner 管理。
 - **Topic candidate**：全窗口宽松提取的候选语义索引。它可能包含多个原子命题，不等同一条知识；不允许凭分类/重复度直接删除。
-- **Atomic claim（工作队列已建立，抽取层待批量实现）**：每个独立事实或待检验说法有 claim_id、card_id、statement、entity、canonical_question、scope、evidence_type、time、uncertainty、source_ref、transform_version。一个 card 可拆多个 claim；旧 Topic Card 标题/摘要只允许作为检索提示，不能未经原文核对直接复制。
-- **Cluster proposal（待建立）**：全量生成的问句级聚合提案。输出源集合、聚类理由、模型/算法版本和风险分数；聚类结果**不是**已验证的 Silver。
-- **Silver**：人工/规则验证后的独立决策问题，附 full/partial 的证据覆盖、条件、反例、相互冲突的数值以及动态状态；历史的 48 个 Silver 是冻结对照集，不自动改写。
+- **Atomic claim**：每个独立事实或待检验说法有 claim_id、card_id、statement、entity、canonical_question、scope、evidence_type、time、uncertainty、source_ref、transform_version。一个 card 可拆多个 claim；旧 Topic Card 标题/摘要只允许作为检索提示，不能未经原文核对直接复制。历史基线现为 **1689 条 reviewed claims**。
+- **Question Cluster proposal / registry**：proposal 只负责高召回候选，不能自动晋升；经逐条语义审阅后的 Question Cluster 才进入稳定 registry。现役 `question-cluster-registry-current.json` 为 **623 个 reviewed questions / 1689 claims**，历史 v71 仅保留为 bootstrap 快照。
+- **Silver**：人工/规则验证后的独立决策问题，附 full/partial 的证据覆盖、条件、反例、相互冲突的数值以及动态状态；当前正式工作集为 **344 个知识单元 = 335 queue + 9 knowledge**，任何 daily delta 都只能通过 reviewed routing/authoring/publication 更新。
 - **Gold**：供用户首读/资料库/动态专题使用的视图。Gold 表示展示质量，不代表用户终审“有用”。只有用户明确“存资料库”才能进入长期 KB。
 
 ## 2. 全量分析流水线（按 DAG 顺序）
@@ -62,8 +62,8 @@
 
 ## 4. 标注评测集与持续改进
 
-1. 从已有 48 个 Silver 生成**正样本**：相同 question、相同条件下的多条 full 证据。另生成困难负样本：同实体/同职业但不同 question、不同适用版本、数字冲突不能直接归一。
-2. 对 1705 条剩余候选做**分层抽样**：高重复簇、长尾 singleton、混合卡、跨专题、价格/传闻、已阅交界。**测试集不用于调整规则**，避免虚高成绩。
+1. 从当前正式 Silver 与已审 Question Registry 中持续抽取**正样本**：相同 question、相同条件下的多条 full 证据；另维护困难负样本：同实体/同职业但不同 question、不同适用版本、数字冲突不能直接归一。
+2. 对新增 daily claims 与历史长尾做**分层抽样**：高重复簇、长尾 singleton、混合卡、跨专题、价格/传闻、已阅交界。**测试集不用于调整规则**，避免虚高成绩。
 3. 计算 pairwise precision/recall、错误合并（更高权重）、遗漏合并、孤立遗漏、full 误判、动态→静态误判；记录样例与修复版本。
 4. 聚类系统只能写 proposal；经评审的 Silver 才可让 full 卡离开首次阅读，partial 必须保留剩余语义；不可在数据质量不足时直接批量挤掉队列。
 5. Atomic claim 层必须做到**claim-level `source_refs`**；只在 Topic Card/item 级挂一段大范围来源不够。每个 statement 都要能独立回到 canonical 文件与行号。
@@ -73,10 +73,11 @@
 
 ## 5. 当前实施状态
 
-- 已有：Bronze、宽召回 Topic Card、候选索引、48 个手工校准 Silver、full/partial、展示构建。
+- 已有：Bronze、3442 张宽召回 Topic Card 候选索引、1689 条 reviewed Atomic Claims、623 个 reviewed Question Clusters、344 条正式 Silver、full/partial 证据覆盖、首次阅读/资料库/无限服/黑话展示构建。
 - 本次工程化已完成第一轮端到端验证：来源回填形成 `proposal → semantic review → verified overlay`；语义失真卡进入 quarantine；Atomic claim 已有 calibration/pilot/独立 holdout，并聚合成 reviewed registry。第二批 frozen holdout 中固定词面召回 Top-K 找回 17/17 positive pairs；pilot 固定高分线 precision 65.2% / recall 88.2%，经 semantic review + targeted recall completion 后 question cluster holdout pairwise precision/recall 均为 1.0。该 1.0 只证明当前人工审核流程在此 holdout 上闭环，不代表全量自动模型准确率。
-- 尚待开发验证：Question Cluster Registry 与增量 cluster assignment、继续批量生成 high-anchor 原子命题、独立扩大后的正反标注集、正式 publish/rollback。
-- 在上述步骤完成前，原有 Silver 和资料库继续作为唯一正式可见知识来源，不能把自动相似度簇当作已经清洗干净的数据。
+- Question Cluster Registry 已建立稳定现役入口 `question-cluster-registry-current.json`：历史 v71 仅作 bootstrap 快照，现役 assignment / Silver routing / 页面 / release 全部读取 current；`question_registry_store.py` 以内容 hash 保存不可变快照，并禁止已发布 question/claim 消失、换簇或无 revision history 改问句。
+- 正式发布/回滚已建立：`run_analysis --prepare-work` 固定分析起点，review receipt 固定审阅后的产物，质量门禁通过后 staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`；失败只重跑分析。页面“没用 / 存资料库”由本机 review server 持久化到 reviewed semantic state，不改写 Silver 事实层。
+- 尚待开发/实测：在**真实新 incremental batch** 上把模型语义生产阶段串成稳定 daily work package（新 claim 抽取、Question assignment/bootstrap、Silver/dossier delta），继续扩大独立正反评测集，并跑多次完整手动 E2E 后再讨论无人值守。
 
 ## 6. 运行入口（本项目）
 
@@ -88,7 +89,15 @@ python3 -m src.analysis.atomic_claim_queue
 python3 -m src.analysis.atomic_claim_pair_proposals
 python3 -m src.analysis.atomic_claim_cluster_apply
 python3 -m src.analysis.cluster_proposals
-python3 -m unittest tests.test_analysis_quality tests.test_analysis_cluster_proposals tests.test_source_anchor_apply tests.test_atomic_claim_queue -v
+python3 -m src.analysis.question_registry_store --candidate <reviewed-registry-candidate.json>
+python3 -m src.app.run_analysis --prepare-work --batch-id <completed-batch-id>
+# 完成语义审阅并更新正式分析产物后：
+python3 -m src.app.run_analysis --prepare-review --batch-id <completed-batch-id>
+# reviewed-analysis-v1.json 显式审阅为 reviewed_analysis_ready 后：
+python3 -m src.app.run_analysis --batch-id <completed-batch-id>
+# 本机终审页面：
+python3 -m src.app.serve_analysis
+python3 -m unittest discover -s tests -p 'test_*.py' -q
 ```
 
 质量报告为本地 runtime，不提交 Git；契约、程序和测试可以版本控制。必要的敏感内容不写入日志，只写 ID、状态、计数、文件 hash、问题种类。

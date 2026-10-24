@@ -113,7 +113,7 @@ def retrieve(new_claim_doc: dict, registry: dict, top_k: int = 5) -> dict:
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--claims", type=Path, required=True)
-    p.add_argument("--registry", type=Path, default=WORK / "question-cluster-registry-v14.json")
+    p.add_argument("--registry", type=Path, default=WORK / "question-cluster-registry-current.json")
     p.add_argument("--top-k", type=int, default=5)
     p.add_argument("--out", type=Path, default=WORK / "question-cluster-assignment-proposals-v1.json")
     args = p.parse_args()

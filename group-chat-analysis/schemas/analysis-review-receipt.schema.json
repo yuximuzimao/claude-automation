@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis-review-receipt.schema.json",
+  "title": "Reviewed Analysis Receipt",
+  "description": "Binds one completed capture batch and current.md snapshot to a semantically reviewed set of analysis artifacts. Draft receipts are not publishable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "batch_id",
+    "source",
+    "work_package",
+    "artifacts",
+    "reviewed_at",
+    "reviewer"
+  ],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "status": {"const": "reviewed_analysis_ready"},
+    "batch_id": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_sha256",
+        "message_count",
+        "canonical_batch_sha256"
+      ],
+      "properties": {
+        "current_sha256": {"$ref": "#/$defs/sha256"},
+        "message_count": {"type": "integer", "minimum": 0},
+        "canonical_batch_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "work_package": {"$ref": "#/$defs/artifactRef"},
+    "artifacts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/artifactRef"}
+    },
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "reviewer": {"type": "string", "minLength": 1},
+    "note": {"type": "string"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

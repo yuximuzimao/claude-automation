@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "incremental-checkpoint.schema.json",
+  "title": "Incremental Capture Checkpoint",
+  "description": "One-shot per-group anchor overrides for the next incremental batch. The checkpoint never mutates an existing completed batch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "base_batch_id",
+    "created_at",
+    "groups"
+  ],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "status": {"const": "ready"},
+    "base_batch_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "groups": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/groupCheckpoint"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "anchorMessage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "content_text",
+        "sender_display",
+        "timestamp_text"
+      ],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 0},
+        "content_text": {"type": "string", "minLength": 1},
+        "sender_display": {"type": ["string", "null"]},
+        "timestamp_text": {"type": ["string", "null"]}
+      }
+    },
+    "groupCheckpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_runtime",
+        "source_batch_id",
+        "source_state_sha256",
+        "source_messages_sha256",
+        "anchor"
+      ],
+      "properties": {
+        "source_runtime": {"type": "string", "minLength": 1},
+        "source_batch_id": {"type": "string", "minLength": 1},
+        "source_state_sha256": {"$ref": "#/$defs/sha256"},
+        "source_messages_sha256": {"$ref": "#/$defs/sha256"},
+        "anchor": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"$ref": "#/$defs/anchorMessage"}
+        }
+      }
+    }
+  }
+}

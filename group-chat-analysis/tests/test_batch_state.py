@@ -142,6 +142,105 @@ class BatchStateTests(unittest.TestCase):
             [item.as_dict() for item in anchors],
         )
 
+    def test_incremental_start_anchor_override_is_per_group_and_does_not_rewrite_previous_anchor(self) -> None:
+        self.store.start_batch(
+            "batch-1",
+            started_at="2026-01-01T00:00:00Z",
+            group_keys=["group-a", "group-b"],
+        )
+        for page_index, group_key in enumerate(("group-a", "group-b")):
+            self._record_page(
+                "batch-1",
+                group_key,
+                page_index,
+                updated_at=f"2026-01-01T00:01:0{page_index}Z",
+            )
+            self._complete_group(
+                "batch-1",
+                group_key,
+                completed_at=f"2026-01-01T00:01:1{page_index}Z",
+            )
+        old_a = [Anchor(4, "a-old-1"), Anchor(5, "a-old-2")]
+        old_b = [Anchor(6, "b-old-1"), Anchor(7, "b-old-2")]
+        self.store.complete_batch(
+            "batch-1",
+            anchors={"group-a": old_a, "group-b": old_b},
+            completed_at="2026-01-01T00:02:00Z",
+        )
+        override_a = [
+            Anchor(100, "a-newer-1", "Alice", "23:58").as_dict(),
+            Anchor(101, "a-newer-2", "Bob", "23:59").as_dict(),
+        ]
+
+        incremental = self.store.start_batch(
+            "batch-2",
+            started_at="2026-01-02T00:00:00Z",
+            group_keys=["group-a", "group-b"],
+            batch_kind="incremental",
+            start_anchor_overrides={"group-a": override_a},
+        )
+
+        self.assertEqual(
+            incremental["groups"]["group-a"]["start_anchor"],
+            override_a,
+        )
+        self.assertEqual(
+            incremental["groups"]["group-a"]["last_completed_anchor"],
+            [item.as_dict() for item in old_a],
+        )
+        self.assertEqual(
+            incremental["groups"]["group-b"]["start_anchor"],
+            [item.as_dict() for item in old_b],
+        )
+
+    def test_incomplete_incremental_cannot_change_start_anchor_override(self) -> None:
+        self.store.start_batch(
+            "batch-1",
+            started_at="2026-01-01T00:00:00Z",
+            group_keys=["group-a"],
+        )
+        self._record_page(
+            "batch-1",
+            "group-a",
+            0,
+            updated_at="2026-01-01T00:01:00Z",
+        )
+        self._complete_group(
+            "batch-1",
+            "group-a",
+            completed_at="2026-01-01T00:01:30Z",
+        )
+        self.store.complete_batch(
+            "batch-1",
+            anchors={"group-a": [Anchor(4, "old-1"), Anchor(5, "old-2")]},
+            completed_at="2026-01-01T00:02:00Z",
+        )
+        first_override = [
+            Anchor(10, "newer-1").as_dict(),
+            Anchor(11, "newer-2").as_dict(),
+        ]
+        self.store.start_batch(
+            "batch-2",
+            started_at="2026-01-02T00:00:00Z",
+            group_keys=["group-a"],
+            batch_kind="incremental",
+            start_anchor_overrides={"group-a": first_override},
+        )
+
+        with self.assertRaisesRegex(StateError, "cannot change start_anchor"):
+            self.store.start_batch(
+                "batch-2",
+                started_at="2026-01-02T00:01:00Z",
+                group_keys=["group-a"],
+                batch_kind="incremental",
+                start_anchor_overrides={
+                    "group-a": [
+                        Anchor(20, "different-1").as_dict(),
+                        Anchor(21, "different-2").as_dict(),
+                    ]
+                },
+            )
+
     def test_incremental_batch_without_previous_anchor_is_rejected(self) -> None:
         with self.assertRaises(StateError):
             self.store.start_batch(

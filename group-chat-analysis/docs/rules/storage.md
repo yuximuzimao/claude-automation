@@ -83,7 +83,9 @@ batch-state 当前唯一支持 schema v4：保留 `pending_capture` / 每群 `ca
 - 撤销 pending 后 state 仍停在原 `next_page_index`，普通 runner 必须从最后 durable 页重新执行一次真实 scroll/capture，失败目标页重新生成正式 raw 后才能 `record_page()`；任何重锚定证据不足都保持原 pending/incomplete；
 - 没有 pending 却出现 `next_page_index` 对应 raw：来源无法证明，必须停止，不得猜测晋升。
 
-批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级保存该群最近页、不可变 `start_anchor` 与最新 completed anchor。incremental batch 开始时 `start_anchor` 从上一 completed 尾部复制，整个 batch 生命周期内不得变化；只有本轮 completed 时才允许更新 `last_completed_anchor`。
+批次页恢复位置按 `capture-page.schema.json` 的全局 `page_index` 严格递进，不能跳页、重复记录或用新 batch 覆盖未完成 batch；群级保存该群最近页、不可变 `start_anchor` 与最新 completed anchor。incremental batch 开始时 `start_anchor` 默认从上一 completed 尾部复制，整个 batch 生命周期内不得变化；只有本轮 completed 时才允许更新 `last_completed_anchor`。
+
+唯一允许覆盖“下一批 start_anchor 来源”的路径是 `incremental-checkpoint-v1`：它用于独立 history runtime 已经推进到比主运行链更新边界的场景，**绝不修改旧 completed state**。checkpoint 必须绑定当前上一 main completed `batch_id`，逐群保存来源 runtime、来源 batch、来源 state/messages SHA-256 和连续 anchor；正式 incremental 在任何 QQ UI 动作前重新读取并验证来源仍 completed、anchor 等于来源 state 的 `last_completed_anchor` 且等于来源 canonical messages 尾部。只有新 incremental state 尚未创建时才能把通过验证的指定群 anchor 作为 `start_anchor` override；其他群仍从上一 main completed 尾部复制。若来源被改、群集合不匹配或同一 incomplete batch 尝试更换 override，立即停止；若 main batch 已前进，旧 checkpoint 视为已消费/过期并忽略。
 
 状态只保存 batch 标识、状态、时间、pending/页恢复位置和脱敏结构化锚点所需字段；不得保存截图、头像圆圈身份指纹或长期昵称别名。capture-page 的 `dhash512` 是 raw 层短期视口连续性证据，不是成员身份数据。分析失败不得让 completed 消息丢失。
 

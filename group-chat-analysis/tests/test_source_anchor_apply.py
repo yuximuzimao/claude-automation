@@ -58,6 +58,53 @@ class SourceAnchorApplyTests(unittest.TestCase):
         self.assertEqual(added, 0)
         self.assertEqual(out["anchors"], {})
 
+    def test_direct_canonical_review_without_proposal_is_allowed_when_explicit(self):
+        decisions = {
+            "review_batch": "R-direct",
+            "decisions": {
+                "T2": {
+                    "status": "verified",
+                    "reviewer": "AI",
+                    "date": "2026-09-21",
+                    "segments_override": [
+                        {"file": "part-01.md", "start_line": 2, "end_line": 3}
+                    ],
+                }
+            },
+        }
+        with patch.object(mod, "SOURCE_DIR", self.root):
+            out, added = mod.apply_reviews(
+                {"proposals": []},
+                decisions,
+                {"schema_version": 1, "anchors": {}},
+            )
+        self.assertEqual(added, 1)
+        self.assertEqual(out["anchors"]["T2"]["date"], "2026-09-21")
+        self.assertEqual(
+            out["anchors"]["T2"]["verification"]["source"],
+            "direct_canonical_review",
+        )
+        self.assertIsNone(out["anchors"]["T2"]["verification"]["retrieval_score"])
+
+    def test_direct_canonical_review_requires_date_and_segments(self):
+        decisions = {
+            "decisions": {
+                "T2": {
+                    "status": "verified",
+                    "segments_override": [
+                        {"file": "part-01.md", "start_line": 2, "end_line": 3}
+                    ],
+                }
+            }
+        }
+        with patch.object(mod, "SOURCE_DIR", self.root):
+            with self.assertRaisesRegex(ValueError, "explicit date"):
+                mod.apply_reviews(
+                    {"proposals": []},
+                    decisions,
+                    {"schema_version": 1, "anchors": {}},
+                )
+
     def test_refuses_conflicting_verified_anchor(self):
         decisions = {"decisions": {"T1": {"status": "verified"}}}
         existing = {"schema_version": 1, "anchors": {"T1": {

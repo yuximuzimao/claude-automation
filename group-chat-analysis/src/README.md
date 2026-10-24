@@ -11,6 +11,7 @@ src/
   normalize/    # 单页消息重建、fragment保留、跨页保守去重/顺序转换
   store/        # message-record、canonical messages、batch/state、finalize
   inbox/        # completed/analyzed batch → current.md
+  analysis/     # Silver/已阅/dossier/质量门禁/正式页面与 release 契约
 ```
 
 当前已有：
@@ -19,7 +20,8 @@ src/
 - `app/swift_sources.py`：所有正式 Swift target 与 Swift 纯测试共用的唯一 source manifest；生产编译和测试不得各自手写依赖列表。
 - `app/full_capture.py`：复用同一状态机编排双群首次全量和单群按日期历史补采；单日模式在首个 durable page 前调用日期定位，已有 durable 页恢复时不重新选日期；pending-scroll 自动重锚定也不重选日期/开窗。
 - `app/pending_scroll_recovery.py`：只提供纯匹配门禁：dHash + 正文 OCR 同位置匹配，以及连续两张 rewind probe 对连续 durable 页的唯一序列确认；不操作 QQ、不写 state。
-- `app/incremental_capture.py`：复用 full runner 的串行/恢复能力；新增量 batch 每群先重开历史窗口刷新快照，命中上一 completed `start_anchor` 后停止；已有 durable 页的同批次恢复不重开。
+- `app/incremental_capture.py`：复用 full runner 的串行/恢复能力；新增量 batch 每群先重开历史窗口刷新快照，命中上一 completed `start_anchor` 后停止；已有 durable 页的同批次恢复不重开。若存在与上一 completed batch 精确绑定的一次性 checkpoint，会在任何 QQ UI 动作前先校验来源 state/messages hash 与 canonical tail，并只对指定群覆盖**新 batch 创建时**的 start_anchor。
+- `app/manage_incremental_checkpoint.py`：独立 history runtime 已推进到比主运行链更新边界时，创建/查看下一批 incremental 的一次性逐群 checkpoint；只写本地 runtime，不触碰 QQ，也不改写旧 completed state。
 - `app/select-history-date.swift`：`run_capture --history-date` 的内部日期定位适配器；需要时先安全打开目标群历史窗口，再应用日期筛选并 OCR 双重复核，不维护第二套采集状态机。
 - `app/capture-step.swift`：内部单步 current/scroll/rewind capture；不维护恢复状态。rewind 复用正常滚动稳定门禁，只把滚轮方向改为较新方向，probe 结果只供 Python 重锚定验证。
 - `app/open-history.swift`：安全打开指定群的聊天记录窗口；只调用经过视觉/位置/标题多重门禁的切群适配器。
@@ -35,13 +37,20 @@ src/
 - `normalize/incremental.py`：保守匹配上一 completed 连续 anchor；命中后裁掉 anchor 及更旧记录，只重编号真正新增消息；重复 anchor 序列取最早匹配以偏向多保留。
 - `store/message_record.py`：从正式 Schema 读取字段/枚举/const 真值并校验。
 - `store/message_store.py`：canonical `messages.jsonl` 的 fsync + 原子 replace、同 batch 幂等重试与冲突拒绝。
-- `store/batch_state.py`：batch-state v4 唯一现役 schema；保留 `pending_capture` / 每群 `capture_complete`、`batch_kind` 与 immutable `start_anchor`，提供全 batch 页恢复位置、群级连续锚点和原子 state replace；旧 schema 直接拒绝，不保留运行时迁移层。
+- `store/batch_state.py`：batch-state v4 唯一现役 schema；保留 `pending_capture` / 每群 `capture_complete`、`batch_kind` 与 immutable `start_anchor`，提供全 batch 页恢复位置、群级连续锚点和原子 state replace；新 incremental **创建时**可接收已验证逐群 start-anchor override，但一旦进入 incomplete 就不可改；旧 schema 直接拒绝，不保留运行时迁移层。
+- `store/incremental_checkpoint.py`：一次性逐群 checkpoint owner；绑定上一主 completed batch id、独立来源 runtime/state/messages hash 和来源 canonical tail，来源变化即拒绝，上一主 batch 改变后旧 checkpoint 自动失效。
 - `store/finalize.py`：capture 继续使用 `messages durable → state completed → current.md`；incremental 额外支持 0/1 新消息、anchor 滚动和 completed 本地重建。
 - `inbox/builder.py`：只从 completed/analyzed 的 canonical records 生成 current.md，非法或不一致输入不得覆盖旧文件。
+- `app/run_analysis.py`：**正式分析发布 runner**。语义审阅仍由模型/人工完成，但发布状态机完全确定性：review receipt 精确绑定 completed batch、`current.md`、canonical batch 和分析产物 hash；随后质量门禁 → staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`。失败只留 run manifest，不碰 canonical；重复执行幂等；发布指针已切但状态写失败可向前恢复；历史 release 可显式回滚。
+- `analysis/analysis_release.py`：review receipt / release hash、原子 JSON、release current 指针与回滚完整性门禁。
+- `analysis/page_builder.py` / `page_renderer.py`：正式 Gold/阅读页面构建 owner；页面代码不再依赖 Git 忽略的 runtime 脚本。
+- `analysis/review_decision_store.py`：用户“没用 / 存资料库”唯一持久写入逻辑；只允许正式 queue Silver，写 reviewed semantic decisions/state，不修改 Silver 事实层。
+- `app/serve_analysis.py`：仅监听 `127.0.0.1` 的正式本机阅读入口；同源 + CSRF 门禁持久化用户裁决，并在写入后重建 review 页面。
 
 尚未完成：
 
-- 正式 GPT 分析 runner、Silver 规范化知识单元持久结构与最终页面生成流程；当前仍由 Codex/模型读取 `runtime/inbox/current.md` 人工执行分析，runtime 页面仅为可丢弃原型。
+- 每日新增消息的**语义生产判断**仍由 Codex/模型执行，但 daily work package 与发布血缘已正式化：`run_analysis --prepare-work` 冻结 completed batch 与当前 Question Registry/Silver/已阅/dossier 基线，完成 incremental Question assignment/bootstrap、Silver routing/authoring、dossier `silent_support / visible_update` 后再生成 reviewed receipt。历史 `question-cluster-registry-v71.json` 已只作为 bootstrap 快照；现役默认入口统一为 `question-cluster-registry-current.json`，由 `question_registry_store.py` 做单调发布和 hash 快照。仍待验证的是**真实新 incremental batch 上的语义 delta 编排**，不是 work package/发布状态机本身。
+- 真实新 incremental batch 上的完整“采集 → 语义分析 → reviewed receipt → 正式发布 → 页面终审”多次实测。
 - 手动增量多次稳定后的定时化决策。
 
 ## 依赖方向

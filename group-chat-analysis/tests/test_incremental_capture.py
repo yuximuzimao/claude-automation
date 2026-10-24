@@ -10,7 +10,15 @@ import unittest
 from src.app.full_capture import FullCaptureConfig, GroupTarget
 from src.app.incremental_capture import IncrementalCaptureRunner
 from src.app.run_capture import CaptureNoChange, RecoveryRequired
-from src.store import Anchor, BatchStateStore, MessageStore
+from src.store import (
+    Anchor,
+    BatchStateStore,
+    IncrementalCheckpointStore,
+    MESSAGE_SCHEMA_VERSION,
+    MESSAGE_SOURCE,
+    MessageStore,
+)
+from src.store.finalize import finalize_batch
 
 
 def raw_page(
@@ -114,6 +122,74 @@ class IncrementalCaptureTests(unittest.TestCase):
             anchors={group_key: self.anchors(group_key) for group_key in keys},
             completed_at="2026-01-01T00:02:00Z",
         )
+
+    def make_history_checkpoint_for_group_a(self) -> Path:
+        source_runtime = self.runtime / "history-days" / "2026-01-02"
+        state = BatchStateStore(source_runtime / "state" / "batch-state.json")
+        messages = MessageStore(source_runtime / "messages" / "messages.jsonl")
+        batch_id = "history-20260102-full"
+        state.start_batch(
+            batch_id,
+            started_at="2026-01-02T00:00:00Z",
+            group_keys=["group-a"],
+        )
+        state.begin_capture(
+            batch_id,
+            "group-a",
+            0,
+            mode="current",
+            started_at="2026-01-02T00:01:00Z",
+        )
+        state.record_page(
+            batch_id,
+            "group-a",
+            0,
+            updated_at="2026-01-02T00:01:10Z",
+        )
+        state.mark_group_capture_complete(
+            batch_id,
+            "group-a",
+            completed_at="2026-01-02T00:01:20Z",
+        )
+        rows = []
+        for sequence, (sender, time_text, text) in enumerate([
+            ("group-a-checkpoint-1", "23:58", "group-a-newer-anchor-1"),
+            ("group-a-checkpoint-2", "23:59", "group-a-newer-anchor-2"),
+        ]):
+            rows.append({
+                "schema_version": MESSAGE_SCHEMA_VERSION,
+                "record_id": f"{batch_id}:group-a:{sequence}",
+                "batch_id": batch_id,
+                "group_key": "group-a",
+                "group_display": "group-a",
+                "sequence": sequence,
+                "sender_display": sender,
+                "timestamp": None,
+                "timestamp_text": time_text,
+                "message_type": "text",
+                "content_text": text,
+                "ocr_confidence": 1.0,
+                "observed_at": "2026-01-02T00:00:00Z",
+                "source": MESSAGE_SOURCE,
+                "capture_refs": [],
+            })
+        finalize_batch(
+            state_store=state,
+            message_store=messages,
+            batch_id=batch_id,
+            records=rows,
+            completed_at="2026-01-02T00:02:00Z",
+            current_destination=source_runtime / "inbox" / "current.md",
+        )
+        IncrementalCheckpointStore(
+            self.root,
+            self.runtime,
+        ).create_from_completed_runtime(
+            source_runtime=source_runtime,
+            group_key="group-a",
+            created_at="2026-01-03T00:00:00Z",
+        )
+        return source_runtime
 
     def config(self, *, batch_id: str = "inc-1", max_pages: int = 20, groups=None) -> FullCaptureConfig:
         targets = tuple(groups or self.groups)
@@ -358,6 +434,95 @@ class IncrementalCaptureTests(unittest.TestCase):
         state = BatchStateStore(self.runtime / "state/batch-state.json").load()
         self.assertFalse(state["groups"]["group-a"]["capture_complete"])
         self.assertIsNone(state["pending_capture"])
+
+    def test_two_group_incremental_can_mix_checkpoint_and_previous_main_anchor(self) -> None:
+        self.make_baseline()
+        self.make_history_checkpoint_for_group_a()
+        opened: list[str] = []
+
+        def step(config, mode, page_index, output: Path, _previous) -> None:
+            self.assertEqual(mode, "current")
+            if config.group_key == "group-a":
+                messages = [
+                    ("group-a-checkpoint-1", "23:58", "group-a-newer-anchor-1"),
+                    ("group-a-checkpoint-2", "23:59", "group-a-newer-anchor-2"),
+                    ("group-a-new-1", "00:01", "group-a-after-checkpoint"),
+                ]
+            else:
+                messages = [
+                    ("group-b-old-1", "09:00", "group-b-anchor-1"),
+                    ("group-b-old-2", "09:01", "group-b-anchor-2"),
+                    ("group-b-new-1", "09:02", "group-b-after-main-anchor"),
+                ]
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(
+                json.dumps(
+                    raw_page("inc-1", config.group_key, page_index, messages),
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+        result = IncrementalCaptureRunner(
+            self.root,
+            self.config(),
+            history_opener=lambda target: opened.append(target.group_key),
+            step_executor=step,
+            now=self.now,
+        ).run()
+
+        self.assertEqual(result.status, "completed")
+        self.assertEqual(opened, ["group-a", "group-b"])
+        rows = MessageStore(
+            self.runtime / "messages" / "messages.jsonl"
+        ).records_for_batch("inc-1")
+        self.assertEqual(
+            [row["content_text"] for row in rows if row["group_key"] == "group-a"],
+            ["group-a-after-checkpoint"],
+        )
+        self.assertEqual(
+            [row["content_text"] for row in rows if row["group_key"] == "group-b"],
+            ["group-b-after-main-anchor"],
+        )
+        state = BatchStateStore(
+            self.runtime / "state" / "batch-state.json"
+        ).load()
+        self.assertEqual(
+            [row["content_text"] for row in state["groups"]["group-a"]["start_anchor"]],
+            ["group-a-newer-anchor-1", "group-a-newer-anchor-2"],
+        )
+        self.assertEqual(
+            [row["content_text"] for row in state["groups"]["group-b"]["start_anchor"]],
+            ["group-b-anchor-1", "group-b-anchor-2"],
+        )
+
+    def test_tampered_checkpoint_stops_before_opening_qq(self) -> None:
+        self.make_baseline()
+        source_runtime = self.make_history_checkpoint_for_group_a()
+        messages_path = source_runtime / "messages" / "messages.jsonl"
+        messages_path.write_text(
+            messages_path.read_text(encoding="utf-8") + "\n",
+            encoding="utf-8",
+        )
+        opened: list[str] = []
+
+        with self.assertRaisesRegex(
+            RecoveryRequired,
+            "checkpoint validation failed before any QQ UI action",
+        ):
+            IncrementalCaptureRunner(
+                self.root,
+                self.config(),
+                history_opener=lambda target: opened.append(target.group_key),
+                step_executor=self.write_anchor_and_new,
+                now=self.now,
+            ).run()
+        self.assertEqual(opened, [])
+        state = BatchStateStore(
+            self.runtime / "state" / "batch-state.json"
+        ).load()
+        self.assertEqual(state["batch_id"], "baseline-1")
+        self.assertEqual(state["status"], "completed")
 
     def test_missing_baseline_stops_before_opening_qq(self) -> None:
         opened: list[str] = []

@@ -34,15 +34,31 @@ def apply_reviews(proposals: dict, decisions: dict, verified: dict) -> tuple[dic
         if decision.get("status") != "verified":
             continue
         item = proposal_map.get(card_id)
-        if not item:
-            raise ValueError(f"reviewed card missing from current proposals: {card_id}")
-        if not item.get("candidates"):
-            raise ValueError(f"reviewed card has no candidate source: {card_id}")
-        top = item["candidates"][0]
-        date = item["date"]
-        # Semantic review may narrow/expand the retrieval window to exact supporting lines,
-        # or combine multiple same-day evidence segments. Retrieval is recall, not truth.
-        segments = decision.get("segments_override") or top["segments"]
+        if item:
+            if not item.get("candidates"):
+                raise ValueError(f"reviewed card has no candidate source: {card_id}")
+            top = item["candidates"][0]
+            date = item["date"]
+            # Semantic review may narrow/expand the retrieval window to exact supporting
+            # lines, or combine multiple same-day evidence segments. Retrieval is recall,
+            # not truth.
+            segments = decision.get("segments_override") or top["segments"]
+            retrieval_score = top.get("score")
+            retrieval_margin = top.get("margin_from_second")
+            verification_source = "proposal_review"
+        else:
+            # Direct canonical review is also valid, but it must be fully explicit.
+            # Without a proposal there is no safe date/window fallback to guess from.
+            date = str(decision.get("date") or "")
+            segments = decision.get("segments_override")
+            if not date or not segments:
+                raise ValueError(
+                    "direct reviewed anchor requires explicit date + segments_override: "
+                    f"{card_id}"
+                )
+            retrieval_score = None
+            retrieval_margin = None
+            verification_source = "direct_canonical_review"
         validate_segments(date, segments)
         proposed = {
             "date": date,
@@ -51,8 +67,9 @@ def apply_reviews(proposals: dict, decisions: dict, verified: dict) -> tuple[dic
                 "status": "verified",
                 "review_batch": decisions.get("review_batch", ""),
                 "reviewer": decision.get("reviewer", ""),
-                "retrieval_score": top.get("score"),
-                "retrieval_margin": top.get("margin_from_second"),
+                "source": verification_source,
+                "retrieval_score": retrieval_score,
+                "retrieval_margin": retrieval_margin,
             },
         }
         if card_id in anchors:

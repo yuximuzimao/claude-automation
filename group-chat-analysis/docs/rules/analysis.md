@@ -29,7 +29,7 @@ AI 自己在展示前过滤掉的内容不等于“用户已阅”。系统过�
 
 ## 批次分析 SOP
 
-前提：对应 capture batch 已 completed，`runtime/inbox/current.md` 已由正式 builder 生成。当前没有正式分析 CLI，现阶段由 Codex/模型人工触发执行。
+前提：对应 capture batch 已 completed，`runtime/inbox/current.md` 已由正式 builder 生成。语义判断仍由 Codex/模型执行，但分析运行边界已有正式 CLI：先用 `python3 -m src.app.run_analysis --prepare-work` 冻结本批输入与知识基线；完成本节 1–9 的语义审阅并更新正式分析产物后，`--prepare-review` 生成与 work package/最终 artifact hash 绑定的 draft receipt；只有显式审阅为 `reviewed_analysis_ready` 后才能运行发布。
 
 每个批次按以下顺序处理：
 
@@ -41,7 +41,7 @@ AI 自己在展示前过滤掉的内容不等于“用户已阅”。系统过�
 6. 对比已阅记录、知识库和目标项目已有事实。结论已经看过且没有新增信息时不展示；只有可信度升降、更多人重复同一结论时，后台静默更新证据状态，不重新占阅读队列；
 7. 对剩余信息建立“完整可读事实 → 必要原文回链 → 可选 AI 推断”。AI 推断只在多个事实组合后能产生具体、可验证、可能改变做法的新判断时出现，不为了填栏目强行生成；
 8. 核对覆盖情况，区分已归组消息、纯黑话、无语义闲聊、重复、广告/推广、泛常识、系统过滤、可补全候选和首次阅读候选；凡未进入展示层者记录原因，确保过滤逻辑可复核；
-9. 把报告和页面结果保存到 `runtime/reports/`，不得提交 Git；跨项目内容只标为候选。
+9. 完成语义更新后生成 reviewed receipt，交给正式 `run_analysis` 做质量门禁、staging 页面、immutable release 与 `analyzed` 状态推进；用户阅读页从正式 release / 本机 review server 展示，运行时内容均留在 `runtime/`，不得提交 Git；跨项目内容只标为候选。
 
 一条消息只出现一次、篇幅很短或没有引起讨论，都不能成为降权或删除理由。只要它包含明确、游戏特异的信息增量，就可以进入首次阅读候选；来源强弱只作为后台证据状态。讨论次数和参与人数只描述聊天现象，不代表真实性，也不作为用户可见的价值排序。
 

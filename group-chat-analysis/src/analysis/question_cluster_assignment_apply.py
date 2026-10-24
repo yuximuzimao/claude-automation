@@ -137,7 +137,7 @@ def apply_assignments(registry: dict, claim_doc: dict, decision_doc: dict) -> tu
 
 def main() -> None:
     p = argparse.ArgumentParser()
-    p.add_argument("--registry", type=Path, default=WORK / "question-cluster-registry-v2.json")
+    p.add_argument("--registry", type=Path, default=WORK / "question-cluster-registry-current.json")
     p.add_argument("--claims", type=Path, required=True)
     p.add_argument("--decisions", type=Path, required=True)
     p.add_argument("--out", type=Path, default=WORK / "question-cluster-registry-next.json")
