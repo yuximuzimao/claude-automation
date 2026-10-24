@@ -67,6 +67,8 @@ h1{{font-size:21px;margin:0}}
 .topicbar button{{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;color:#566277;font-size:12px;white-space:nowrap;cursor:pointer}}
 .topicbar button.active{{background:var(--ink);border-color:var(--ink);color:#fff}}
 .topicbar span{{margin-left:4px;opacity:.6;font-size:10px}}
+.subtopicbar{{padding-top:0;margin-top:-4px}}
+.subtopicbar:empty{{display:none}}
 .result{{font-size:12px;color:var(--muted);margin:0 0 10px}}
 .group{{background:#fff;border:1px solid var(--line);border-radius:11px;padding:0 16px;margin:10px 0 16px}}
 .group-head{{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #d8dee6;padding:11px 0 8px}}
@@ -141,6 +143,7 @@ h1{{font-size:21px;margin:0}}
   <div class="intro"><h2>新信息</h2><p>只看第一次值得你扫一眼的内容。旧结论重复出现、单纯可信度升级不会重新占这里。</p></div>
   <input id="newSearch" class="search" placeholder="搜索标题、事实、任务、副本、职业……">
   <div id="newTopics" class="topicbar"></div>
+  <div id="newSubtopics" class="topicbar subtopicbar"></div>
   <div id="newResult" class="result"></div>
   <div id="newCards"></div>
   <div class="pager"><button id="newPrev">上一批</button><span id="newPage"></span><button id="newNext">下一批</button></div>
@@ -148,8 +151,9 @@ h1{{font-size:21px;margin:0}}
 <section id="knowledge" class="view">
   <div class="intro"><h2>资料库</h2><p>主要用于以后只记得几个关键词时找回来，不要求平时浏览。</p></div>
   <input id="kbSearch" class="search" placeholder="搜任务名、Boss、职业、装备、插件、关键词……">
-  <div class="kb-tip">标签只用于按职业快速分流；非职业内容统一进“其他”。副本、任务、装备、防骗等细分内容直接用上方搜索查找。</div>
+  <div class="kb-tip">一级专题保持稳定；职业和副本进入后再按职业或具体副本细分，其他专题暂不增加下一级。</div>
   <div id="kbTopics" class="topicbar"></div>
+  <div id="kbSubtopics" class="topicbar subtopicbar"></div>
   <div id="kbResult" class="result"></div>
   <div id="kbCards"></div>
 </section>
@@ -179,7 +183,7 @@ const esc=s=>String(s??'').replace(/[&<>\"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'
 const byId=Object.fromEntries(ALL.map(c=>[c.card_id,c]));
 const DOSSIER_COMPONENT_IDS=(DOSSIER.sections||[]).flatMap(s=>(s.signals||[]).flatMap(x=>x.evidence_ids||[])).filter(Boolean);
 const COMPONENT_IDS=new Set([...UNITS.flatMap(u=>(u.evidence_refs||[]).filter(x=>x.coverage!=='partial').map(x=>x.card_id).filter(Boolean)),...DOSSIER_COMPONENT_IDS]);
-let newTopic='', kbTopic='', newPage=1; const NEW_PER=40;
+let newTopic='', newSubtopic='', kbTopic='', kbSubtopic='', newPage=1; const NEW_PER=40;
 
 function oldFeedback(id){{return localStorage.getItem('gca-feedback:'+id)||''}}
 function localDecision(id){{
@@ -255,14 +259,39 @@ function unitIsQueue(u){{return u.v3_first_read_queue&&!unitDecision(u.knowledge
 function unitIsKnowledge(u){{return u.initial_state==='knowledge'||u.v3_reviewed_decision==='knowledge'||unitDecision(u.knowledge_id)==='knowledge'}}
 function searchText(c){{return [c.card_id,c.title,c.semantic_summary,c.display_eyebrow,c.display_context,c.display_new_fact,...(c.tags||[]),...(c.collection_candidates||[]),...(c.v3_topics||[]).map(x=>x.label)].join(' ').toLowerCase()}}
 function unitSearchText(u){{return [u.knowledge_id,u.subject,u.question,...(u.canonical_facts||[]),...(u.search_terms||[]),...(u.topics||[])].join(' ').toLowerCase()}}
-function itemTopics(x){{return x.knowledge_id?(x.display_topics||['其他']):(x.v3_topics||[]).map(t=>t.label)}}
-function topicMatch(x,key){{return !key||itemTopics(x).includes(key)}}
+const PRIMARY_TOPIC_ORDER=['职业','副本攻略','任务与练级','装备机制','专业技能','经济 / 打金','插件 / 故障排查','防诈骗经验','PVP / 野外生态','其他'];
+function itemTopics(x){{return x.display_topics||['其他']}}
+function itemSubtopics(x,key){{return ((x.display_subtopics||{{}})[key]||[])}}
+function topicMatch(x,key,subkey=''){{
+  if(key&&!itemTopics(x).includes(key))return false;
+  return !subkey||itemSubtopics(x,key).includes(subkey)
+}}
+function displayTopicText(x){{
+  const primary=itemTopics(x);
+  const sub=x.display_subtopics||{{}};
+  return primary.map(label=>{{const children=sub[label]||[];return children.length?`${{label}}：${{children.join(' / ')}}`:label}}).join(' · ')
+}}
 
 function buildTopicBar(el,itemsSource,active,onClick){{
   const counts={{}};
   itemsSource.forEach(x=>itemTopics(x).forEach(label=>{{counts[label]=(counts[label]||0)+1}}));
-  const items=Object.entries(counts).filter(([,n])=>n>0).sort((a,b)=>a[0].localeCompare(b[0],'zh-CN'));
+  const items=Object.entries(counts).filter(([,n])=>n>0).sort((a,b)=>{{
+    const ai=PRIMARY_TOPIC_ORDER.indexOf(a[0]),bi=PRIMARY_TOPIC_ORDER.indexOf(b[0]);
+    if(ai!==-1||bi!==-1)return (ai===-1?999:ai)-(bi===-1?999:bi);
+    return a[0].localeCompare(b[0],'zh-CN')
+  }});
   el.innerHTML=`<button class="${{active===''?'active':''}}" data-key="">全部<span>${{itemsSource.length}}</span></button>`+items.map(([label,n])=>`<button class="${{active===label?'active':''}}" data-key="${{esc(label)}}">${{esc(label)}}<span>${{n}}</span></button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>onClick(b.dataset.key||''));
+}}
+function buildSubtopicBar(el,itemsSource,topic,active,onClick){{
+  if(!['职业','副本攻略'].includes(topic)){{el.innerHTML='';return}}
+  const counts={{}};
+  itemsSource.filter(x=>itemTopics(x).includes(topic)).forEach(x=>itemSubtopics(x,topic).forEach(label=>{{counts[label]=(counts[label]||0)+1}}));
+  const items=Object.entries(counts).filter(([,n])=>n>0).sort((a,b)=>a[0].localeCompare(b[0],'zh-CN'));
+  if(!items.length){{el.innerHTML='';return}}
+  const allCount=itemsSource.filter(x=>itemTopics(x).includes(topic)).length;
+  const allLabel=topic==='职业'?'全部职业':'全部副本';
+  el.innerHTML=`<button class="${{active===''?'active':''}}" data-key="">${{allLabel}}<span>${{allCount}}</span></button>`+items.map(([label,n])=>`<button class="${{active===label?'active':''}}" data-key="${{esc(label)}}">${{esc(label)}}<span>${{n}}</span></button>`).join('');
   el.querySelectorAll('button').forEach(b=>b.onclick=()=>onClick(b.dataset.key||''));
 }}
 
@@ -275,7 +304,7 @@ function cardHtml(c,mode){{
   const eyebrow=c.display_eyebrow||'';
   const context=c.display_context||'';
   const fact=c.display_new_fact||c.semantic_summary||'';
-  const topics=(c.v3_topics||[]).map(x=>x.label).slice(0,4).join(' · ');
+  const topics=displayTopicText(c);
   const actions=mode==='new'?`<div class="actions"><button onclick="setDecision('${{esc(c.card_id)}}','discard')">没用</button><button class="keep" onclick="setDecision('${{esc(c.card_id)}}','knowledge')">存资料库</button>${{sourceButton(c)}}</div>`:`<div class="actions">${{sourceButton(c)}}</div>`;
   return `<article class="card">
     <div class="meta"><span>${{esc(c.card_id||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}${{c.v3_completable?'<span class="badge">可补全</span>':''}}</div>
@@ -311,7 +340,7 @@ function structuredHtml(u){{
   return ''
 }}
 function unitHtml(u,mode){{
-  const topics=(u.display_topics||['其他']).join(' · ');
+  const topics=displayTopicText(u);
   const lead=(u.canonical_facts||[])[0]||'';
   const evidence=(u.evidence_refs||[]).map(x=>x.card_id||x.external).filter(Boolean);
   const evidenceHtml=evidence.map(id=>{{
@@ -339,9 +368,10 @@ function renderNew(){{
   const rawBase=ALL.filter(isQueue).filter(c=>!q||searchText(c).includes(q));
   const unitBase=UNITS.filter(unitIsQueue).filter(u=>!q||unitSearchText(u).includes(q));
   const allBase=[...unitBase,...rawBase];
-  buildTopicBar(document.getElementById('newTopics'),allBase,newTopic,key=>{{newTopic=key;newPage=1;renderNew()}});
-  const units=unitBase.filter(u=>topicMatch(u,newTopic));
-  const cards=rawBase.filter(c=>topicMatch(c,newTopic)).sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.card_id).localeCompare(String(b.card_id)));
+  buildTopicBar(document.getElementById('newTopics'),allBase,newTopic,key=>{{newTopic=key;newSubtopic='';newPage=1;renderNew()}});
+  buildSubtopicBar(document.getElementById('newSubtopics'),allBase,newTopic,newSubtopic,key=>{{newSubtopic=key;newPage=1;renderNew()}});
+  const units=unitBase.filter(u=>topicMatch(u,newTopic,newSubtopic));
+  const cards=rawBase.filter(c=>topicMatch(c,newTopic,newSubtopic)).sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.card_id).localeCompare(String(b.card_id)));
   const items=[...units.map(u=>({{type:'unit',value:u}})),...cards.map(c=>({{type:'card',value:c}}))];
   const pages=Math.max(1,Math.ceil(items.length/NEW_PER)); if(newPage>pages)newPage=pages;
   const slice=items.slice((newPage-1)*NEW_PER,newPage*NEW_PER);
@@ -355,9 +385,10 @@ function renderKnowledge(){{
   const rawBase=ALL.filter(isKnowledge).filter(c=>!q||searchText(c).includes(q));
   const unitBase=UNITS.filter(unitIsKnowledge).filter(u=>!q||unitSearchText(u).includes(q));
   const allBase=[...unitBase,...rawBase];
-  buildTopicBar(document.getElementById('kbTopics'),allBase,kbTopic,key=>{{kbTopic=key;renderKnowledge()}});
-  const units=unitBase.filter(u=>topicMatch(u,kbTopic));
-  const cards=rawBase.filter(c=>topicMatch(c,kbTopic)).sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.card_id).localeCompare(String(b.card_id)));
+  buildTopicBar(document.getElementById('kbTopics'),allBase,kbTopic,key=>{{kbTopic=key;kbSubtopic='';renderKnowledge()}});
+  buildSubtopicBar(document.getElementById('kbSubtopics'),allBase,kbTopic,kbSubtopic,key=>{{kbSubtopic=key;renderKnowledge()}});
+  const units=unitBase.filter(u=>topicMatch(u,kbTopic,kbSubtopic));
+  const cards=rawBase.filter(c=>topicMatch(c,kbTopic,kbSubtopic)).sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.card_id).localeCompare(String(b.card_id)));
   document.getElementById('kbResult').textContent=`找到 ${{units.length}} 个标准化知识单元 · ${{cards.length}} 条旧格式知识`;
   const unitPart=units.map(u=>unitHtml(u,'knowledge')).join('');
   const temp=document.createElement('div');renderGrouped(cards,temp,'knowledge');

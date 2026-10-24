@@ -13,7 +13,7 @@
 - 正式页面当前应从 `src/analysis/page_builder.py` / `page_renderer.py` 构建；正式用户裁决通过 `src/app/serve_analysis.py` 持久化。不要恢复旧 runtime 原型脚本为代码 owner。
 - 正式 Question Registry 入口是 `runtime/analysis-work/question-cluster-registry-current.json`；历史 v71 只作 bootstrap 快照。
 - 当前没有待消费 incremental checkpoint。checkpoint 能力保留，但用户已经明确当前不继续采集。
-- 2026-10-25 用户验收时明确把首次阅读/资料库页面标签收回到“职业标签 + 其他”；Silver 内部细粒度 `topics` 继续用于清洗和搜索，不再直接生成页面筛选按钮。现役契约见 `rules/analysis.md`。
+- 2026-10-25 用户进一步澄清页面分类：无限服继续独立；普通信息恢复“职业 / 副本攻略 / 任务与练级 / 装备机制 / 专业技能 / 经济与打金 / 插件与故障排查 / 防诈骗经验 / PVP与野外生态 / 其他”的稳定一级结构。当前仅职业按具体职业、副本按具体副本提供二级，其他专题暂不下钻；Silver 内部细粒度 `topics` 只做映射、清洗和搜索，不直接生成新的一级标签。现役契约见 `rules/analysis.md`。
 - 最新阶段证据归档：`docs/archive/neat/2026-10-25-formal-analysis-publication-and-review-baseline.md`。
 
 其余规则一律按 `SKILL.md → docs/OPERATING-SOP.md → 对应 rules owner` 进入，不从历史 archive 或旧聊天记录反推现役流程。

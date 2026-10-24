@@ -450,6 +450,48 @@ V3_TOPIC_LABELS = {
     "pvp": "PVP / 野外生态",
 }
 
+DISPLAY_PRIMARY_TOPICS = (
+    "职业",
+    "副本攻略",
+    "任务与练级",
+    "装备机制",
+    "专业技能",
+    "经济 / 打金",
+    "插件 / 故障排查",
+    "防诈骗经验",
+    "PVP / 野外生态",
+)
+
+SILVER_PRIMARY_TOPIC_ALIASES = {
+    "副本攻略": {"副本攻略", "团本", "副本", "五人本", "随机本", "副本任务", "团本运营", "副本导航", "副本机制", "开荒", "观星", "H模式", "NAXX", "奥杜尔", "TOC", "ICC", "ZAM", "ZG", "毒蛇神殿", "卡拉赞", "黑曜石圣殿", "永恒之眼", "红玉圣殿", "阿尔卡冯的宝库"},
+    "任务与练级": {"任务与练级", "练级", "任务", "日常", "声望", "路线", "升级", "追赶", "低等级", "诺森德", "外域", "骑术", "交通", "达拉然", "副本任务", "任务机制", "精英任务", "满级"},
+    "装备机制": {"装备机制", "装备", "配装", "装等", "掉落", "橙装", "传奇武器", "饰品", "套装", "BIS", "过渡装", "命中", "精准", "急速", "暴击", "破甲", "属性", "宝石", "唯一物品", "Roll"},
+    "专业技能": {"专业技能", "专业", "工程", "珠宝", "炼金", "裁缝", "锻造", "采集", "采药", "采矿", "双采", "钓鱼"},
+    "经济 / 打金": {"经济 / 打金", "经济", "打金", "金币", "G团", "GDKP", "工资", "收益", "价格", "装备价格", "AH", "消费", "预算", "竞价", "老板", "低起拍", "现金流", "回本", "投资", "交易", "金价", "材料价", "购买力", "通胀", "市场", "赚钱", "摸奖"},
+    "插件 / 故障排查": {"插件 / 故障排查", "插件", "WA", "宏", "UI", "RXP", "RXPGuides", "练级插件"},
+    "防诈骗经验": {"防诈骗经验", "诈骗", "账号安全", "找回", "代练", "RMT", "金币交易", "第三方平台", "预付款", "黑金", "代拍", "信誉", "账号与服务"},
+    "PVP / 野外生态": {"PVP / 野外生态", "PVP", "战场", "竞技场", "野外PVP"},
+}
+
+RAID_SUBTOPICS = (
+    ("NAXX", ("NAXX", "纳克萨玛斯")),
+    ("奥杜尔", ("奥杜尔", "ULDUAR", "观星者", "奥尔加隆", "尤格萨隆", "米米尔隆", "霍迪尔", "托里姆", "弗蕾亚", "维扎克斯", "钢铁议会", "XT-002", "烈焰巨兽", "掌炉者", "科隆加恩", "欧尔莉亚")),
+    ("TOC", ("TOC", "十字军的试炼", "双子女武神", "阵营冠军", "阿努巴拉克", "诺森德猛兽", "加拉克苏斯")),
+    ("ICC", ("ICC", "冰冠堡垒", "巫妖王", "玛洛加尔", "亡语者", "萨鲁法尔", "普崔塞德", "鲜血女王", "辛达苟萨")),
+    ("ZAM", ("ZAM", "祖阿曼")),
+    ("ZG", ("ZG", "祖尔格拉布")),
+    ("黑曜石圣殿", ("黑曜石圣殿", "萨塔里奥")),
+    ("永恒之眼", ("永恒之眼", "玛里苟斯")),
+    ("阿尔卡冯的宝库", ("阿尔卡冯的宝库", "宝库", "阿尔卡冯")),
+    ("红玉圣殿", ("红玉圣殿", "海里昂")),
+    ("毒蛇神殿", ("毒蛇神殿", "SSC")),
+    ("卡拉赞", ("卡拉赞", "KARAZHAN")),
+    ("黑石深渊", ("黑石深渊", "科林烈酒")),
+    ("魔枢", ("魔枢", "THE NEXUS")),
+    ("厄运之槌", ("厄运之槌", "厄运")),
+    ("玛拉顿", ("玛拉顿", "MARAUDON")),
+)
+
 DISPLAY_CONTEXT_OVERRIDES = {
     "T-20260925-020": {
         "eyebrow": "风暴峭壁 · 霍迪尔/托里姆前置 · 《弥补关系》 #12915",
@@ -591,35 +633,100 @@ def annotate_topic_structure(cards: list[dict]) -> None:
         card["system_tags"] = assign_system_tags(card)
 
 
+def assign_raid_subtopics(text: str) -> list[str]:
+    upper = text.upper()
+    labels: list[str] = []
+    for label, aliases in RAID_SUBTOPICS:
+        if any(alias.upper() in upper for alias in aliases):
+            labels.append(label)
+    return list(dict.fromkeys(labels))
+
+
 def assign_silver_display_topics(unit: dict) -> list[str]:
-    """Keep first-read filters intentionally coarse: profession object or 其他."""
+    """Project rich Silver metadata into a small, stable first-level navigation taxonomy."""
+    internal_topics = set(unit.get("topics") or [])
     semantic_title = " ".join([
         str(unit.get("subject") or ""),
         str(unit.get("question") or ""),
+        " ".join(internal_topics),
     ])
     labels: list[str] = []
-    for _key, label, aliases in PROFESSIONS:
-        if any(_alias_matches(semantic_title, alias) for alias in aliases):
-            labels.append(label)
+    if any(
+        any(_alias_matches(semantic_title, alias) for alias in aliases)
+        for _key, _label, aliases in PROFESSIONS
+    ):
+        labels.append("职业")
+    for topic in DISPLAY_PRIMARY_TOPICS:
+        if topic == "职业":
+            continue
+        if internal_topics & SILVER_PRIMARY_TOPIC_ALIASES[topic]:
+            labels.append(topic)
     return list(dict.fromkeys(labels)) or ["其他"]
+
+
+def assign_silver_display_subtopics(unit: dict) -> dict[str, list[str]]:
+    semantic_title = " ".join([
+        str(unit.get("subject") or ""),
+        str(unit.get("question") or ""),
+        " ".join(unit.get("topics") or []),
+    ])
+    result: dict[str, list[str]] = {}
+    profession_labels = [
+        label for _key, label, aliases in PROFESSIONS
+        if any(_alias_matches(semantic_title, alias) for alias in aliases)
+    ]
+    if profession_labels:
+        result["职业"] = list(dict.fromkeys(profession_labels))
+    if set(unit.get("topics") or []) & SILVER_PRIMARY_TOPIC_ALIASES["副本攻略"]:
+        raid_labels = assign_raid_subtopics(semantic_title)
+        if raid_labels:
+            result["副本攻略"] = raid_labels
+    return result
 
 
 def annotate_silver_display_topics(units: list[dict]) -> None:
     for unit in units:
         unit["display_topics"] = assign_silver_display_topics(unit)
+        unit["display_subtopics"] = assign_silver_display_subtopics(unit)
 
 
 def annotate_v3_projection(cards: list[dict]) -> None:
     profession_label_map = {key: label for key, label, _aliases in PROFESSIONS}
     for card in cards:
         topics: list[dict] = []
+        profession_labels: list[str] = []
         for key in card.get("profession_keys", []):
             if key == "noncareer":
                 continue
-            topics.append({"key": f"class:{key}", "label": profession_label_map[key], "kind": "class"})
-        if not topics:
-            topics.append({"key": "other", "label": "其他", "kind": "other"})
-        card["v3_topics"] = topics
+            label = profession_label_map[key]
+            profession_labels.append(label)
+            topics.append({"key": f"class:{key}", "label": label, "kind": "class"})
+        for key in card.get("system_tags", []):
+            label = V3_TOPIC_LABELS.get(key)
+            if label and key != "infinite":
+                topics.append({"key": f"topic:{key}", "label": label, "kind": "topic"})
+        seen_topic_keys: set[str] = set()
+        card["v3_topics"] = [
+            topic for topic in topics
+            if not (topic["key"] in seen_topic_keys or seen_topic_keys.add(topic["key"]))
+        ]
+        primary: list[str] = []
+        if profession_labels:
+            primary.append("职业")
+        primary.extend(
+            V3_TOPIC_LABELS[key]
+            for key in card.get("system_tags", [])
+            if key in V3_TOPIC_LABELS and key != "infinite"
+        )
+        card["display_topics"] = list(dict.fromkeys(primary)) or ["其他"]
+        subtopics: dict[str, list[str]] = {}
+        if profession_labels:
+            subtopics["职业"] = list(dict.fromkeys(profession_labels))
+        if "副本攻略" in card["display_topics"]:
+            raids = assign_raid_subtopics(card_text(card))
+            if raids:
+                subtopics["副本攻略"] = raids
+        card["display_subtopics"] = subtopics
 
         context = DISPLAY_CONTEXT_OVERRIDES.get(card.get("card_id", ""), {})
         card["display_eyebrow"] = context.get("eyebrow", "")
