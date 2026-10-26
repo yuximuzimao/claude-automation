@@ -57,7 +57,7 @@ entry: cli.js
 | `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
 | `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1/A2 固定清单逐单生产编排**：固定 48h 清单，逐单打开详情 tab，target-aware 采集，inferDecision，shouldAutoExecute + executionJournal 安全门；当前命中后只会自动 approve，否则写回待确认/等待重查 | 改 fixed-batch 生产链路、自动执行门禁或写回语义时 |
-| `lib/jl/target-aware-collector.js` | **当前 A1/A2 生产采集入口**：显式绑定 JL 详情 tab 和 ERP tab；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅 |
+| `lib/jl/target-aware-collector.js` | **当前 A1/A2 生产采集入口**：显式绑定 JL 详情 tab，按类型决定是否需要 ERP tab；分类边界见 `docs/flow-5.4.md`，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅 |
 | `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
 | `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
 | `docs/automation-policy.md` | 当前自动分支授权、执行前独立证明、统计来源与变更规则 | 查/改自动处理或统计口径时 |
@@ -69,7 +69,7 @@ entry: cli.js
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
 | `lib/jl/navigate.js` | 鲸灵页面导航 | 需要跳鲸灵页面时 |
-| `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
+| `lib/jl/logistics.js` | 鲸灵发货物流 `getLogistics()` 与限定退货区块/运单的 `getReturnLogistics()` | 查鲸灵侧物流时；数据字段见 `docs/collect-schema.md` |
 | `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示。缓存读取会按 `accounts.json` 校验账号存在性和店铺显示名，名称不匹配的数据直接失效；Step14 必须通过 `dependencies.fetchAndCacheAlerts` 调用，单测不得落回真实 CDP/生产缓存。**新 A1 完整闭环目标**：仅在账号工单全部处理后调用，沿用 `.scroll-item` DOM 读取且不主动关弹窗。旧停用 `op-queue.js`/`scan-all.js` 仍会列表读完即调用，恢复前必须由第三步接管或删除 | 改平台提醒逻辑时 |
 | `lib/jl-session-state.js` | 鲸灵当前账号辅助缓存读写（`data/current-session.json`）；只记录最近一次已由真实页面确认成功的账号，现役 A1 禁止把缓存命中作为身份判断或跳过页面校验的依据 | 改多账号扫描、账号缓存同步或页面身份校验时 |
 | `lib/jl-account-config.js` | 保存登录态时合并账号配置；首次新增可从 `supplierInfo.supplierMobileList[0]` 初始化 phone，后续保存保留已有 phone/name/note/file | 改店铺管理新增/重登保存逻辑时 |
@@ -104,7 +104,7 @@ entry: cli.js
 4. 步骤 14 是当前固定清单生产入口：首次读取 `<=48h` 清单作为不可变快照；逐单定位、打开详情 tab、采集、推理、自动执行判定、写回原 queue/simulation、关闭详情 tab。前端“处理工单”按钮已接入正式入口；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，未命中则写回 simulated/waiting。自动执行中断后的 recovery 仅有本地状态收口能力，无外部 CLI/API/UI；当前实际处理以重采覆盖或手动处理后归档为主。
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
    - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行平台决策（仅 approve/reject）或 `collectTicketTargetAware` + `inferDecision`。`escalate` 只表示人工处理结论，不是平台执行动作，禁止从“执行操作”入口写备注后伪装成执行成功。
-   - 换货/商责的“必须人工确认”只阻断扫描中的无人自动执行，不移除单笔或人工发起的批量执行入口。严格退回核验通过且有明确动作时设置 `humanTriggeredExecutionAllowed: true`；核验异常、缺少依据或没有确定动作时不得进入批量 approve/reject。
+   - 普通换货/商责的“必须人工确认”只阻断扫描中的无人自动执行，不移除单笔或人工发起的批量执行入口。严格退回核验通过且有明确动作时设置 `humanTriggeredExecutionAllowed: true`；核验异常、缺少依据或没有确定动作时不得进入批量 approve/reject。线下换货独立按 `docs/flow-5.4.md §线下换货` 处理。
    - `lib/jl/execute-decision.js` 按工单类型分派平台按钮：换货只认“同意换货/拒绝换货”，退款只认退款/退货按钮；精确按钮缺失时失败即停，禁止跨类型兜底。
    - `execReinfer` 直接转调 `execReprocessOne`。
    - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 初迁→2026-07-02 完成：统一账号校验+删除 CLI fallback+完整对齐 execExecute 步骤 1-5）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount`（扫描工单，2026-07-01 已删除——无调用方，新扫描走 execScan → processSingleAccountFixedBatch）。

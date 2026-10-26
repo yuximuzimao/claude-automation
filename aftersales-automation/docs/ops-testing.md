@@ -85,4 +85,12 @@ node --test test/helpers-reminder.test.js test/erp/notification.test.js test/ser
 
 真机接入、输入位置一致性和实际落地确认统一见 [工作区提醒说明](../../docs/reminders.md)。
 
+## 7. 线下换货回归
+
+```bash
+node --test test/jl/after-sale-type.test.js test/jl/read-urgent-after-sale-list.test.js test/jl/return-tracking-links.test.js test/jl/target-aware-collector.test.js test/jl/logistics-close-timeout.test.js test/jl/process-single-account-fixed-batch.test.js test/infer/exchange-return-manual.test.js test/server/after-sales-branch-history.test.js
+```
+
+覆盖类别优先识别、ERP 零采集、退货运单独立核验、三种签收状态固定人工、旧换货阶段不覆盖、结果保存后提醒、持久去重及发送失败记录。全部使用模拟页面和提醒依赖；真实样本观察只按 `tasks/todo.md` 在正常扫描自然发生时核对，不为验证主动重采工单或创建测试提醒。
+
 ---

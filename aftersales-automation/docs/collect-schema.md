@@ -18,7 +18,7 @@
   externalLogistics: Object | null,// 可选，仅退款物流异常时的百度真实页面补证结果
   logistics:      Object | null,   // 可选，鲸灵发货物流
   returnLogistics: Object | null,  // 可选，仅线下换货读取鲸灵退货单签收；见下方说明
-  erpAftersale:   Object | null,   // 退货退款/换货有 returnTracking 时必填
+  erpAftersale:   Object | null,   // 退货退款/普通换货有 returnTracking 时必填；线下换货不采集
   productMatch:   Object | null,   // 可选，商品对应表结果
   productArchive: Object | null,   // 可选，商品档案V2
   giftErpSearch:  Object | null,   // 第一个赠品子订单结果（旧字段兼容）
@@ -52,7 +52,7 @@
 | `workOrderStatus` | string | 是 | 工单状态，如"处理中"/"已退款"/"用户已取消" |
 | `afterSaleReason` | string | 是 | 售后原因，如"多拍/拍错/不想要"/"商品漏发" |
 | `buyerRemark` | string | 否 | 买家售后说明 |
-| `afterSaleType` | string | 否 | 详情页“售后类型/售后类别”原文，补充数值 subBizType；线下换货优先独立识别 |
+| `afterSaleType` | string | 否 | 详情页优先读取“售后类别”，缺失才读取“售后类型”；保留原文以补充数值 subBizType |
 | `type` | string | 否 | 采集器确认线下换货时保存的标准类型，避免沿用列表中的普通换货 |
 | `images` | array | 否 | 买家上传图片列表 |
 | `returnTracking` | string | 否 | 退货快递单号（退货退款或已进入退回验收阶段的换货可能有值） |
@@ -130,9 +130,26 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 
 ---
 
-## `logistics` 字段（鲸灵物流，logistics 采集）
+## `returnLogistics` 字段（鲸灵退货签收）
 
-线下换货不采集本节的原发货物流和任何 ERP 数据，只保留 `ticket` 与单独的 `returnLogistics`：`{ tracking, text, status, warnings }`。`tracking` 必须与当前工单 `returnTracking` 完全一致；`text` 仅来自退货物流区块或该区块打开的对应运单物流弹窗；`status` 为 `signed`（明确签收）、`not_signed`（明确仍未签收）或 `unknown`（无可确认状态）。未找到退货区块、状态缺失或无查看按钮时保留 `unknown`，不得读取原发货物流兜底。无退货单号时不采集该字段。线下换货不生成共用退货商品核验组。
+线下换货使用单独的 `{ tracking, text, status, warnings }`，不采集原发货物流或 ERP 数据，不生成共用退货商品核验组。
+
+`tracking` 必须与当前工单 `returnTracking` 完全一致；`text` 仅来自退货物流区块或该区块打开的对应运单物流弹窗；`status` 为 `signed`（明确签收）、`not_signed`（明确仍未签收）或 `unknown`（无可确认状态）。
+
+未找到退货区块、无法取得可确认状态时保留 `unknown`，不得读取原发货物流兜底。无查看按钮但区块已有明确状态时直接使用该状态；无退货单号时不采集该字段。页面操作报错则立即停止采集，不把错误伪装成 `unknown`。
+
+## 线下换货提醒状态（queue item）
+
+以下字段保存在 queue item，不属于 `collectedData`：
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `offlineExchangeReminderAt` | ISO string，缺省不存在 | 快捷指令成功返回后记录；同一 queue item 后续处理据此跳过重复提醒 |
+| `offlineExchangeReminderError` | string 或 null | 发送失败保存可执行的排查提示并记录日志；成功后清空，不在失败时写成功时间 |
+
+生产写回先保存 simulation 和队列结果，再发送提醒；发送状态写入后重新读取核验。提醒范围和业务结果以 [flow-5.4 §线下换货](flow-5.4.md#线下换货) 为准。
+
+## `logistics` 字段（鲸灵发货物流，logistics 采集）
 
 ```js
 {

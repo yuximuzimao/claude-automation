@@ -21,7 +21,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 审单交接（2026-10-11）：已完成项目总SOP分类入口与业务owner结构；总SOP见 `order-review/docs/OPERATING-SOP.md`，活动批量见 `order-review/docs/rules/activity-batch.md`，装箱辅助见 `order-review/docs/rules/packing-assistance.md`，包裹语义与ERP执行继续由原owner负责。下个对话按 `order-review/SKILL.md` → `tasks/todo.md` → `docs/CURRENT.md` 接手，从现有9月22日悦希资料与历史子订单核对开始，不自动开始完整清单提取、批量写操作或1～N箱开发。现役能力与权限只见CURRENT/AGENTS，阶段证据见 `order-review/docs/archive/2026-10-11-project-direction-and-step-scripts/`。
 
-售后线下换货（2026-10-26）：已接入独立人工分支，规则见 `aftersales-automation/docs/flow-5.4.md §线下换货`，采集合约见 `aftersales-automation/docs/collect-schema.md`。详情“售后类别”优先于普通售后类型；只保留详情及对应退货单签收结果，不采集 ERP、不开放系统执行，仅本分支新增 Mac 提醒事项并持久去重。48 小时范围和其他分支保持原行为。602 项全量测试、20 条决策回归及实际卡片渲染验证通过；服务已通过原 LaunchAgent 重启，端口/接口/统计正常，原工单队列逐项一致。本次未重采或执行旧工单，未发送测试提醒；尚未使用真实线下换货样本联调。
+售后线下换货（2026-10-26）：开发和 NEAT 文档收口已完成，阶段证据见 [归档交接](../aftersales-automation/docs/superpowers/archive/2026-10-offline-exchange/neat-handoff.md)。现役规则从 `aftersales-automation/docs/flow-5.4.md §线下换货` 进入；后续生产观察与未完成事项只见 `aftersales-automation/tasks/todo.md`。
 
 售后自动化统计修正（2026-10-10）：用户确认将平台售后类型“快递无物流记录”固定归入推理和统计的商责人工分支 `merchant_fault.logistics_no_record.manual`，不得继承仅退款物流候选或自动门禁；统计分支页的卡片继续以“分支条件 → 处理结果”为主，新增“平台工单类型”辅助辨认。最近30天分支统计已改为合并窗口内 `simulations.jsonl` 与 `cases.jsonl`，按工单号取最新观察记录，再用自动执行 journal 作为成功证据；旧记录缺少结构化类型时从决策步骤“工单类型”回退读取。相关代码、测试和口径见 `aftersales-automation/lib/constants.js`、`lib/infer.js`、`lib/server/after-sales-branch-history.js`、`public/app.js`、`docs/automation-policy.md`。
 

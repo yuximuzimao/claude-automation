@@ -16,10 +16,10 @@
 
 | 现象 | 原因 | 解决 |
 |------|------|------|
-| eval 返回 undefined 或空 | 忘加 `Content-Type: text/plain` | 确认 curl 命令加了 `-H "Content-Type: text/plain"` |
+| eval 入参格式错误或返回空 | 把旧 HTTP 代理请求体当作页面脚本，或脚本未返回结果 | 使用 `cdp.eval(targetId, jsCode)`，核对目标 tab 和脚本返回值；直连调用不使用 HTTP `Content-Type` |
 | ERP 导航后仍在原页面 | 登录已掉线 | 先执行登录检测，已掉线走 [ERP 登录恢复](ops-erp.md#2-erp-登录状态检测与恢复) |
 | 商品对应表搜索结果为空 | 店铺过滤器未切换 | 确认 getErpShop() 返回值正确，重新执行 product-match |
-| 商品档案V2 DOM 空白但不报错 | DOM 未渲染，但 Vue dataList 有数据 | 直接从 Vue sv.dataList 读（脚本已处理） |
+| 商品档案V2 DOM 行数不完整或旧 `dataList` 为空 | 新版使用可见表格的 Vue store，不再提供旧 `sv.dataList` | 按 [ERP 查询指南](erp-query.md#已知坑位商品查询) 从 `.el-table.__vue__.store.states.data` 读取完整当前页数据 |
 | 特殊悦希商品后再查普通商品时档案V2 `dataList 为空` | 上一轮「规格商家编码」残留，与本轮「主商家编码」叠加 | 查询前清空另一字段；固定例外和编码口径见 [erp-query.md](erp-query.md#查询字段选择与清场2026-09-10) |
 | 鲸灵备注弹窗关闭了但未保存 | 用了错误的按钮点击方式 | 必须用 MouseEvent dispatch（mousedown+mouseup+click），不能用 clickAt+button |
 | ERP 搜索后无结果 | 用了主订单号而非子订单号 | 永远用子订单号（纯数字） |
