@@ -690,6 +690,12 @@ def annotate_silver_display_topics(units: list[dict]) -> None:
         unit["display_subtopics"] = assign_silver_display_subtopics(unit)
 
 
+def annotate_silver_display_numbers(units: list[dict]) -> None:
+    """Give every Silver unit a stable baseline number independent of filtering/review state."""
+    for index, unit in enumerate(units, start=1):
+        unit["display_number"] = index
+
+
 def annotate_v3_projection(cards: list[dict]) -> None:
     profession_label_map = {key: label for key, label, _aliases in PROFESSIONS}
     for card in cards:
@@ -1712,6 +1718,7 @@ def main(argv: list[str] | None = None) -> None:
     for unit in normalized_knowledge:
         unit["semantic_fingerprint"] = semantic_fingerprint(unit)
     annotate_silver_display_topics(normalized_knowledge)
+    annotate_silver_display_numbers(normalized_knowledge)
 
     silver_component_ids = {
         ref.get("card_id")

@@ -350,7 +350,8 @@ function unitHtml(u,mode){{
     return esc(id)
   }}).join('<br>');
   const actions=mode==='new'?`<div class="actions"><button onclick="setUnitDecision('${{esc(u.knowledge_id)}}','discard')">没用</button><button class="keep" onclick="setUnitDecision('${{esc(u.knowledge_id)}}','knowledge')">存资料库</button></div>`:'';
-  return `<article class="unit"><div class="meta"><span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.question||'')}}</div><h3>${{esc(u.subject||'')}}</h3>${{lead?`<div class="fact">${{esc(lead)}}</div>`:''}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
+  const number=u.display_number?`#${{String(u.display_number).padStart(3,'0')}}`:'';
+  return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}<span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.question||'')}}</div><h3>${{esc(u.subject||'')}}</h3>${{lead?`<div class="fact">${{esc(lead)}}</div>`:''}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
 }}
 function renderGrouped(cards,el,mode){{
   if(!cards.length){{el.innerHTML='<div class="empty">没有符合当前条件的信息。</div>';return}}

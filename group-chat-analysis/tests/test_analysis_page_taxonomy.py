@@ -5,6 +5,7 @@ import unittest
 from src.analysis.page_builder import (
     assign_silver_display_subtopics,
     assign_silver_display_topics,
+    annotate_silver_display_numbers,
 )
 
 
@@ -41,6 +42,20 @@ class AnalysisPageTaxonomyTests(unittest.TestCase):
         }
         self.assertEqual(assign_silver_display_topics(unit), ["其他"])
         self.assertEqual(assign_silver_display_subtopics(unit), {})
+
+
+    def test_display_numbers_are_baseline_stable(self) -> None:
+        units = [
+            {"knowledge_id": "K-A"},
+            {"knowledge_id": "K-B"},
+            {"knowledge_id": "K-C"},
+        ]
+        annotate_silver_display_numbers(units)
+        self.assertEqual([u["display_number"] for u in units], [1, 2, 3])
+        # Review/filter flags must not renumber the baseline identifiers.
+        units[0]["v3_first_read_queue"] = False
+        units[1]["v3_first_read_queue"] = True
+        self.assertEqual([u["display_number"] for u in units], [1, 2, 3])
 
     def test_infinite_is_not_a_normal_first_level_topic(self) -> None:
         unit = {
