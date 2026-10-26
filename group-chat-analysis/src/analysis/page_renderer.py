@@ -258,7 +258,7 @@ function isKnowledge(c){{return !COMPONENT_IDS.has(c.card_id)&&(c.v3_knowledge||
 function unitIsQueue(u){{return u.v3_first_read_queue&&!unitDecision(u.knowledge_id)}}
 function unitIsKnowledge(u){{return u.initial_state==='knowledge'||u.v3_reviewed_decision==='knowledge'||unitDecision(u.knowledge_id)==='knowledge'}}
 function searchText(c){{return [c.card_id,c.title,c.semantic_summary,c.display_eyebrow,c.display_context,c.display_new_fact,...(c.tags||[]),...(c.collection_candidates||[]),...(c.v3_topics||[]).map(x=>x.label)].join(' ').toLowerCase()}}
-function unitSearchText(u){{return [u.knowledge_id,u.subject,u.question,...(u.canonical_facts||[]),...(u.search_terms||[]),...(u.topics||[])].join(' ').toLowerCase()}}
+function unitSearchText(u){{return [u.knowledge_id,u.display_subject,u.subject,u.display_question,u.question,...(u.canonical_facts||[]),...(u.search_terms||[]),...(u.topics||[])].join(' ').toLowerCase()}}
 const PRIMARY_TOPIC_ORDER=['职业','副本攻略','任务与练级','装备机制','专业技能','经济 / 打金','插件 / 故障排查','防诈骗经验','PVP / 野外生态','其他'];
 function itemTopics(x){{return x.display_topics||['其他']}}
 function itemSubtopics(x,key){{return ((x.display_subtopics||{{}})[key]||[])}}
@@ -351,7 +351,7 @@ function unitHtml(u,mode){{
   }}).join('<br>');
   const actions=mode==='new'?`<div class="actions"><button onclick="setUnitDecision('${{esc(u.knowledge_id)}}','discard')">没用</button><button class="keep" onclick="setUnitDecision('${{esc(u.knowledge_id)}}','knowledge')">存资料库</button></div>`:'';
   const number=u.display_number?`#${{String(u.display_number).padStart(3,'0')}}`:'';
-  return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}<span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.question||'')}}</div><h3>${{esc(u.subject||'')}}</h3>${{lead?`<div class="fact">${{esc(lead)}}</div>`:''}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
+  return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}<span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.display_question||u.question||'')}}</div><h3>${{esc(u.display_subject||u.subject||'')}}</h3>${{lead?`<div class="fact">${{esc(lead)}}</div>`:''}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
 }}
 function renderGrouped(cards,el,mode){{
   if(!cards.length){{el.innerHTML='<div class="empty">没有符合当前条件的信息。</div>';return}}

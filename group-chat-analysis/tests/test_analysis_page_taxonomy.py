@@ -6,6 +6,7 @@ from src.analysis.page_builder import (
     assign_silver_display_subtopics,
     assign_silver_display_topics,
     annotate_silver_display_numbers,
+    annotate_silver_display_copy,
 )
 
 
@@ -33,6 +34,20 @@ class AnalysisPageTaxonomyTests(unittest.TestCase):
             ["副本攻略", "经济 / 打金"],
         )
         self.assertEqual(assign_silver_display_subtopics(unit)["副本攻略"], ["NAXX"])
+
+    def test_thunder_upgrade_has_clear_display_copy(self) -> None:
+        unit = {"knowledge_id": "K-THUNDER-UPGRADE-MATERIAL-CLAIM-001"}
+        annotate_silver_display_copy([unit])
+        self.assertEqual(unit["display_subject"], "雷霆 → 惊雷（锻造武器升级）")
+        self.assertEqual(unit["display_question"], "雷霆升级成惊雷需要多少升级材料？")
+
+    def test_thunder_upgrade_maps_to_gear(self) -> None:
+        unit = {
+            "subject": "雷霆升级惊雷的材料数量口径",
+            "question": "雷霆升级惊雷需要多少材料？",
+            "topics": ["雷霆", "惊雷", "升级材料"],
+        }
+        self.assertEqual(assign_silver_display_topics(unit), ["装备机制"])
 
     def test_other_topics_do_not_create_new_first_level_labels(self) -> None:
         unit = {

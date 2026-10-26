@@ -24,7 +24,7 @@
 - 2026-10-16 已补充一个真实边界：旧页 `top fragment` 被下一页完整消息吸收时，只在“长文本明确包含 + 前序连续多消息 overlap 仍成立”条件下允许该 fragment 不阻断重叠；`fragment_kind` 只作为 normalize 瞬态元数据，不进入 message-record schema。
 - 2026-10-19 补采 10/13 时发现 ScreenCaptureKit 偶发把同一窗口帧以 90° 方向交给 Vision，导致现役 `.up/.down` OCR 无法定位工具栏。生产实现现为 `.up` 正常路径失败后才在**同一帧**尝试 `.down/.right/.left`，bbox 映射回显示坐标，并继续要求同一工具栏水平带至少两个已知控件；没有降低安全门槛。Swift 采集回归 5/5 通过，真实故障窗口 current-only 复测恢复正常。
 - runtime 全部为私密本地数据并被 `.gitignore` 排除。
-- 当前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，确定性回归 **298 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及来源、Atomic Claim、Question Cluster、Silver publication、首次阅读投影、语义指纹、已阅状态、资料库迁移与无限服 dossier 路由/幂等回归。
+- 当前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，确定性回归 **300 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及来源、Atomic Claim、Question Cluster、Silver publication、首次阅读投影、语义指纹、已阅状态、资料库迁移与无限服 dossier 路由/幂等回归。
 
 ## 已验证历史基线
 
@@ -95,7 +95,7 @@
 
 ## 当前下一步
 
-1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成并通过 **298 tests OK**；当前基线仍为 **344 Silver / 323 首次阅读 / 9 资料库 / 16 reviewed states / 38 dossier signals**。
+1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成并通过 **300 tests OK**；当前基线仍为 **344 Silver / 323 首次阅读 / 9 资料库 / 16 reviewed states / 38 dossier signals**。
 2. 下一主线只剩**真实新 incremental batch 的语义生产增量闭环**：从 work package 固定的起点出发，抽取本批新 claims，按 stable current registry 做 assignment / reviewed new-question bootstrap，再只对受影响 question 生成 Silver / dossier delta，完成审阅后生成 reviewed receipt 交给正式 runner。不能每次重跑全历史，也不能让历史 v71/v14 快照重新成为现役输入。
 3. 在上述 daily delta 中继续落实对象身份/基础上下文补齐和“可补全候选”持久状态；question 决定语义边界，重复支持静默加强，新增条件/例外/纠错才重新进入首次阅读。
 4. 继续验证每批最多40个阅读单元的历史补课体验，以及真实 daily 分析窗口/跨午夜报告边界；阅读分页只控制负载，不得影响 canonical 去重或跨日语义合并。

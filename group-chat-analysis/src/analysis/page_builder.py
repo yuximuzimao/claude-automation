@@ -465,7 +465,7 @@ DISPLAY_PRIMARY_TOPICS = (
 SILVER_PRIMARY_TOPIC_ALIASES = {
     "副本攻略": {"副本攻略", "团本", "副本", "五人本", "随机本", "副本任务", "团本运营", "副本导航", "副本机制", "开荒", "观星", "H模式", "NAXX", "奥杜尔", "TOC", "ICC", "ZAM", "ZG", "毒蛇神殿", "卡拉赞", "黑曜石圣殿", "永恒之眼", "红玉圣殿", "阿尔卡冯的宝库"},
     "任务与练级": {"任务与练级", "练级", "任务", "日常", "声望", "路线", "升级", "追赶", "低等级", "诺森德", "外域", "骑术", "交通", "达拉然", "副本任务", "任务机制", "精英任务", "满级"},
-    "装备机制": {"装备机制", "装备", "配装", "装等", "掉落", "橙装", "传奇武器", "饰品", "套装", "BIS", "过渡装", "命中", "精准", "急速", "暴击", "破甲", "属性", "宝石", "唯一物品", "Roll"},
+    "装备机制": {"装备机制", "装备", "配装", "装等", "掉落", "橙装", "传奇武器", "饰品", "套装", "BIS", "过渡装", "命中", "精准", "急速", "暴击", "破甲", "属性", "宝石", "唯一物品", "Roll", "雷霆", "惊雷"},
     "专业技能": {"专业技能", "专业", "工程", "珠宝", "炼金", "裁缝", "锻造", "采集", "采药", "采矿", "双采", "钓鱼"},
     "经济 / 打金": {"经济 / 打金", "经济", "打金", "金币", "G团", "GDKP", "工资", "收益", "价格", "装备价格", "AH", "消费", "预算", "竞价", "老板", "低起拍", "现金流", "回本", "投资", "交易", "金价", "材料价", "购买力", "通胀", "市场", "赚钱", "摸奖"},
     "插件 / 故障排查": {"插件 / 故障排查", "插件", "WA", "宏", "UI", "RXP", "RXPGuides", "练级插件"},
@@ -491,6 +491,14 @@ RAID_SUBTOPICS = (
     ("厄运之槌", ("厄运之槌", "厄运")),
     ("玛拉顿", ("玛拉顿", "MARAUDON")),
 )
+
+SILVER_DISPLAY_OVERRIDES = {
+    "K-THUNDER-UPGRADE-MATERIAL-CLAIM-001": {
+        "subject": "雷霆 → 惊雷（锻造武器升级）",
+        "question": "雷霆升级成惊雷需要多少升级材料？",
+    },
+}
+
 
 DISPLAY_CONTEXT_OVERRIDES = {
     "T-20260925-020": {
@@ -694,6 +702,16 @@ def annotate_silver_display_numbers(units: list[dict]) -> None:
     """Give every Silver unit a stable baseline number independent of filtering/review state."""
     for index, unit in enumerate(units, start=1):
         unit["display_number"] = index
+
+
+def annotate_silver_display_copy(units: list[dict]) -> None:
+    """Apply reviewed user-facing copy without mutating canonical Silver facts."""
+    for unit in units:
+        override = SILVER_DISPLAY_OVERRIDES.get(str(unit.get("knowledge_id") or ""), {})
+        if override.get("subject"):
+            unit["display_subject"] = override["subject"]
+        if override.get("question"):
+            unit["display_question"] = override["question"]
 
 
 def annotate_v3_projection(cards: list[dict]) -> None:
@@ -1719,6 +1737,7 @@ def main(argv: list[str] | None = None) -> None:
         unit["semantic_fingerprint"] = semantic_fingerprint(unit)
     annotate_silver_display_topics(normalized_knowledge)
     annotate_silver_display_numbers(normalized_knowledge)
+    annotate_silver_display_copy(normalized_knowledge)
 
     silver_component_ids = {
         ref.get("card_id")
