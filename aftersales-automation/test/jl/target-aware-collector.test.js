@@ -11,6 +11,68 @@ const {
 
 const WORK_ORDER = '100001781188621717210';
 
+for (const source of ['列表', '详情']) {
+  test(`线下换货从${source}识别，只保留详情并核验退货签收，无需ERP标签`, async () => {
+    const calls = [];
+    const ticket = {
+      subBizType: source === '列表' ? 999 : '线下换货',
+      afterSaleType: source === '详情' ? '线下换货' : undefined,
+      subOrders: [{ id: 'main-1', sku: 'SKU-1', afterSaleNum: 1 }],
+      gifts: [{ id: 'gift-1', sku: 'GIFT-1' }],
+      returnTracking: 'JT1234567890123', buyerRemark: '线下已沟通换货',
+    };
+    const dependencies = new Proxy({
+      readTicket: async () => { calls.push('详情'); return ok(ticket); },
+      getReturnLogistics: async (targetId, workOrderNum, tracking) => {
+        assert.equal(targetId, 'detail-tab');
+        assert.equal(workOrderNum, WORK_ORDER);
+        assert.equal(tracking, ticket.returnTracking);
+        calls.push('退货物流');
+        return ok({ tracking, text: `${tracking}\n已签收`, status: 'signed', warnings: [] });
+      },
+    }, { get: (target, key) => key in target ? target[key] : () => assert.fail(`不应调用 ${String(key)}`) });
+    const result = await collectTicketTargetAware({
+      detailTargetId: 'detail-tab', workOrderNum: WORK_ORDER,
+      type: source === '列表' ? '线下换货' : '换货',
+    }, dependencies);
+    assert.deepEqual(calls, ['详情', '退货物流']);
+    assert.equal(result.ticket.buyerRemark, ticket.buyerRemark);
+    assert.deepEqual(result.ticket.subOrders, ticket.subOrders);
+    assert.deepEqual(result.ticket.gifts, ticket.gifts);
+    assert.equal(result.ticket.type, '线下换货');
+    assert.equal(result.returnLogistics.status, 'signed');
+    assert.equal(result.erpSearch, null);
+    assert.equal(result.erpAftersale, null);
+    assert.equal(result.logistics, null);
+    assert.deepEqual(result.collectErrors, []);
+  });
+}
+
+test('线下换货缺退货单号不查询物流或ERP，仍保留详情转人工', async () => {
+  const result = await collectTicketTargetAware({
+    detailTargetId: 'detail-tab', workOrderNum: WORK_ORDER, type: '线下换货',
+  }, {
+    readTicket: async () => ok({ subOrders: [{ id: 'main-1' }], subBizType: '线下换货' }),
+    getReturnLogistics: async () => assert.fail('无退货单号不读取物流'),
+  });
+  const decision = inferDecision({ collectedData: result }, { type: '线下换货' });
+  assert.equal(decision.action, 'escalate');
+  assert.match(decision.reason, /未提供退货单号/);
+  assert.equal(result.returnLogistics, undefined);
+});
+
+test('线下换货退货物流读取失败只尝试一次并停止，不继续ERP', async () => {
+  let reads = 0;
+  await assert.rejects(collectTicketTargetAware({
+    detailTargetId: 'detail-tab', workOrderNum: WORK_ORDER, type: '线下换货',
+  }, {
+    readTicket: async () => ok({ subOrders: [], returnTracking: 'JT1234567890123' }),
+    getReturnLogistics: async () => { reads++; return { success: false, error: '物流弹窗未打开' }; },
+    erpSearch: async () => assert.fail('失败后不应继续ERP'),
+  }), /return-logistics: 物流弹窗未打开/);
+  assert.equal(reads, 1);
+});
+
 function ok(data) {
   return { success: true, data };
 }
@@ -297,13 +359,15 @@ test('当前工单内收到停止信号后，不再继续ERP物流和后续子�
   assert.deepEqual(calls, [['erpSearch', 'sub-1']]);
 });
 
-test('缺少显式详情或ERP targetId时拒绝采集', async () => {
+test('缺少显式详情targetId或普通工单缺少ERP targetId时拒绝采集', async () => {
   await assert.rejects(
     collectTicketTargetAware({ erpTargetId: 'erp-tab', workOrderNum: WORK_ORDER }, {}),
     /detailTargetId/
   );
   await assert.rejects(
-    collectTicketTargetAware({ detailTargetId: 'detail-tab', workOrderNum: WORK_ORDER }, {}),
+    collectTicketTargetAware({ detailTargetId: 'detail-tab', workOrderNum: WORK_ORDER, type: '仅退款' }, {
+      readTicket: async () => ok({ subBizType: '仅退款' }),
+    }),
     /erpTargetId/
   );
 });

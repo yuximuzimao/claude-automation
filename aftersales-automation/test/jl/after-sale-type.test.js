@@ -15,6 +15,8 @@ test('normalizeAfterSaleType 统一仅退款文案和数字类型', () => {
 test('normalizeAfterSaleType 保留其他已知售后类型，未知值返回 null', () => {
   assert.equal(normalizeAfterSaleType('退货退款'), '退货退款');
   assert.equal(normalizeAfterSaleType('换货'), '换货');
+  assert.equal(normalizeAfterSaleType('线下换货'), '线下换货');
+  assert.equal(normalizeAfterSaleType('售后类别：线下换货'), '线下换货');
   assert.equal(normalizeAfterSaleType('补寄'), '补寄');
   assert.equal(normalizeAfterSaleType(null), null);
   assert.equal(normalizeAfterSaleType('未知'), null);

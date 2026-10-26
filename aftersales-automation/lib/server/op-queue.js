@@ -1288,8 +1288,8 @@ async function execReprocessOne(op) {
   assertNotAborted(op);
 
   // ── Step 5: 完整复用扫描工单的采集、推理、自动执行和写回链路 ──
-  const erpTargetId = await processingDependencies.resolveErpTargetId(null);
   const ticket = freshState.ticket;
+  const erpTargetId = ticket.type === '线下换货' ? null : await processingDependencies.resolveErpTargetId(null);
   try {
     const { processed } = await processRecheckedOpenedDetail({
       account: accountResult,

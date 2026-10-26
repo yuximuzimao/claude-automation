@@ -125,6 +125,7 @@ entry: cli.js
 | 仅退款（未发货） | `docs/flow-5.2.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
 | 仅退款（已发货） | `docs/flow-5.3.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
 | 换货 | `docs/flow-5.4.md` | `inferManualReturnReview()` |
+| 线下换货 | `docs/flow-5.4.md §线下换货` | `inferDecision()` 独立人工分支 |
 
 ### ERP 操作流程
 

@@ -17,6 +17,7 @@
   erpLogistics:   Object | null,   // 可选，ERP 发货物流文本；用于仅退款已发货判断和退货退款赠品物流观察
   externalLogistics: Object | null,// 可选，仅退款物流异常时的百度真实页面补证结果
   logistics:      Object | null,   // 可选，鲸灵发货物流
+  returnLogistics: Object | null,  // 可选，仅线下换货读取鲸灵退货单签收；见下方说明
   erpAftersale:   Object | null,   // 退货退款/换货有 returnTracking 时必填
   productMatch:   Object | null,   // 可选，商品对应表结果
   productArchive: Object | null,   // 可选，商品档案V2
@@ -51,6 +52,8 @@
 | `workOrderStatus` | string | 是 | 工单状态，如"处理中"/"已退款"/"用户已取消" |
 | `afterSaleReason` | string | 是 | 售后原因，如"多拍/拍错/不想要"/"商品漏发" |
 | `buyerRemark` | string | 否 | 买家售后说明 |
+| `afterSaleType` | string | 否 | 详情页“售后类型/售后类别”原文，补充数值 subBizType；线下换货优先独立识别 |
+| `type` | string | 否 | 采集器确认线下换货时保存的标准类型，避免沿用列表中的普通换货 |
 | `images` | array | 否 | 买家上传图片列表 |
 | `returnTracking` | string | 否 | 退货快递单号（退货退款或已进入退回验收阶段的换货可能有值） |
 | `returnTrackingMultiUse` | boolean | 否 | 退货快递是否被多个工单共用 |
@@ -128,6 +131,8 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 ---
 
 ## `logistics` 字段（鲸灵物流，logistics 采集）
+
+线下换货不采集本节的原发货物流和任何 ERP 数据，只保留 `ticket` 与单独的 `returnLogistics`：`{ tracking, text, status, warnings }`。`tracking` 必须与当前工单 `returnTracking` 完全一致；`text` 仅来自退货物流区块或该区块打开的对应运单物流弹窗；`status` 为 `signed`（明确签收）、`not_signed`（明确仍未签收）或 `unknown`（无可确认状态）。未找到退货区块、状态缺失或无查看按钮时保留 `unknown`，不得读取原发货物流兜底。无退货单号时不采集该字段。线下换货不生成共用退货商品核验组。
 
 ```js
 {

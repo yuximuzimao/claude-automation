@@ -7,6 +7,7 @@ const { getSkipCompletionStatus } = require('../../lib/server/pipeline-status');
 const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execution-journal');
 const { getHoursUntilNextScan } = require('../../lib/constants');
 const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
+const { isOfflineExchange } = require('../../lib/jl/after-sale-type');
 const {
   getTicketPlatformStage,
   matchesConfirmedNoAction,
@@ -576,7 +577,14 @@ async function processOpenedDetail(context, dependencies) {
   }
   const platformStage = getTicketPlatformStage(context && context.ticket);
   collectedData.platformStage = platformStage;
-  if (collectedData.ticket && collectedData.ticket.returnTrackingMultiUse &&
+  const offlineExchange = isOfflineExchange(
+    context.ticket && context.ticket.type,
+    context.queueItem && context.queueItem.type,
+    collectedData.ticket && collectedData.ticket.type,
+    collectedData.ticket && collectedData.ticket.afterSaleType,
+    collectedData.ticket && collectedData.ticket.subBizType
+  );
+  if (!offlineExchange && collectedData.ticket && collectedData.ticket.returnTrackingMultiUse &&
       typeof dependencies.resolveSharedReturnGroup === 'function') {
     collectedData.sharedReturnGroup = await dependencies.resolveSharedReturnGroup(
       collectedData,
@@ -604,7 +612,7 @@ async function processOpenedDetail(context, dependencies) {
   const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
   let baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
   assertNotAborted(context && context.abortSignal);
-  if (typeof dependencies.supplementExternalLogistics === 'function') {
+  if (!offlineExchange && typeof dependencies.supplementExternalLogistics === 'function') {
     const supplement = await dependencies.supplementExternalLogistics(collectedData, baselineDecision, context);
     assertNotAborted(context && context.abortSignal);
     if (supplement && supplement.attempted) {
@@ -613,7 +621,7 @@ async function processOpenedDetail(context, dependencies) {
     }
   }
   const stageResult = applyPlatformStageObservation({
-    type: context && context.ticket && context.ticket.type,
+    type: offlineExchange ? '线下换货' : context && context.ticket && context.ticket.type,
     platformStage,
     baselineDecision,
   });
@@ -925,6 +933,32 @@ function buildSimulationPayload({ account, queueItem, ticket, processed, source 
   return sim;
 }
 
+function createOfflineExchangeReminder({ db, sendReminder, log = () => {}, now = () => new Date().toISOString() }) {
+  return ({ account, queueItem, ticket, processed }) => {
+    const decision = processed && processed.decision;
+    if (!decision || decision.action !== 'escalate' || decision.reasonCode !== 'OFFLINE_EXCHANGE_MANUAL') return null;
+    const current = (db.readQueue().items || []).find(item => item.id === queueItem.id);
+    if (!current) throw new Error('线下换货提醒缺少已保存的工单');
+    if (current.offlineExchangeReminderAt) return { sent: false, skipped: true };
+    const status = { signed: '退货已签收', not_signed: '退货尚未签收', unknown: '退货签收状态未确认' }[decision.returnLogisticsStatus] || '退货签收状态未确认';
+    const title = `【售后待人工】${account && account.matchedNote || current.accountNote || '未知店铺'} 工单${ticket.workOrderNum}：线下换货，${status}，请打开售后系统人工处理`;
+    let sent = false;
+    try { sent = sendReminder(title) === true; } catch (error) {
+      log(`[预警] 线下换货提醒事项创建失败: ${error.message}`);
+    }
+    const patch = sent
+      ? { offlineExchangeReminderAt: now(), offlineExchangeReminderError: null }
+      : { offlineExchangeReminderError: '线下换货提醒事项创建失败，请检查“创建提醒”快捷指令' };
+    db.updateQueueItem(queueItem.id, patch);
+    const saved = (db.readQueue().items || []).find(item => item.id === queueItem.id);
+    if (!saved || Object.entries(patch).some(([key, value]) => saved[key] !== value)) {
+      throw new Error('线下换货提醒状态写入后核验失败');
+    }
+    if (!sent) log(`[预警] ${patch.offlineExchangeReminderError}: ${title}`);
+    return { sent, skipped: false };
+  };
+}
+
 function loadDefaultDependencies() {
   const cdp = require('../../lib/cdp');
   const { openAccountFlow } = require('../../lib/jl/open-account-flow');
@@ -937,11 +971,15 @@ function loadDefaultDependencies() {
   const { readShopName } = require('./02-read-shop-name');
   const step10 = require('./10-read-urgent-after-sale-list');
   const { inferDecision } = require('../../lib/infer');
+  const { createReminder } = require('../../lib/helpers');
   const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
   const { fetchAndCacheAlerts } = require('../../lib/jl/alerts');
   const { supplementBaiduLogisticsIfNeeded } = require('../../lib/external-logistics-baidu');
   const { executeTicketDecision } = require('../../lib/jl/execute-decision');
   const db = require('../../lib/server/data');
+  const remindOfflineExchange = createOfflineExchangeReminder({
+    db, sendReminder: createReminder, log: message => process.stdout.write(`${message}\n`),
+  });
   const { createAutoExecutionJournal } = require('../../lib/server/auto-execution-journal');
   const fs = require('node:fs');
   const path = require('node:path');
@@ -1085,7 +1123,10 @@ function loadDefaultDependencies() {
       db.updateQueueItem(queueItem.id, {
         status: queueStatus,
         waitingRescan: !!(processed.decision && processed.decision.waitingRescan),
+        ...(processed.collectedData && processed.collectedData.ticket && processed.collectedData.ticket.type === '线下换货'
+          ? { type: '线下换货' } : {}),
       });
+      remindOfflineExchange({ account, queueItem, ticket, processed });
       return { ...sim, queueStatus };
     },
     closeTarget: cdp.closeTarget,
@@ -1239,7 +1280,8 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   }
   for (const item of items) await reportProgress(dependencies, item);
   const processableItems = items.filter(item => !item.suppressConfirmedNoAction);
-  const erpTargetId = processableItems.length && typeof dependencies.resolveErpTargetId === 'function'
+  const needsErp = processableItems.some(item => !isOfflineExchange(item.ticket.type));
+  const erpTargetId = needsErp && typeof dependencies.resolveErpTargetId === 'function'
     ? await dependencies.resolveErpTargetId(options.erpTargetId)
     : (options.erpTargetId || null);
   assertNotAborted(options.abortSignal);
@@ -1550,6 +1592,7 @@ module.exports = {
   statusForProcessed,
   buildSimulationPayload,
   createEnsureQueueItem,
+  createOfflineExchangeReminder,
   loadDefaultDependencies,
   resolveSharedReturnGroupForBatch,
   runCli,

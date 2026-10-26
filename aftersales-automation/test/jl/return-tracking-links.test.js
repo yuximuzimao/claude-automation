@@ -188,3 +188,23 @@ test('完整详情页读取脚本包含可解析的关联号读取函数', () =>
   assert.doesNotThrow(() => Function('return ' + READ_ORDER_INFO_JS));
   assert.match(READ_ORDER_INFO_JS, /readReturnTrackingLinksFromPage/);
 });
+
+for (const [label, prefix] of [['售后类别', ''], ['售后类型', ''], ['售后类别', '售后类型：换货\n']]) {
+  test(`详情页${label}${prefix ? '优先于普通售后类型，' : ''}保留线下换货原文及订单字段，不依赖数值类型推算`, () => {
+    const orderInfo = {
+      subBizType: 999, bizOrderId: 'main-1', buyerRemark: '线下换货已沟通',
+      subBizOrderDetailDTO: [{ subBizOrderId: 'sub-1', spuBarcode: 'SKU-1', attribute1: '规格A', afterSaleNum: 1 }],
+    };
+    const document = {
+      body: { innerText: `${prefix}${label}：\n线下换货\n退货物流单号：${TRACKING}` },
+      querySelector: () => ({ __vue__: { $data: { orderInfo } } }),
+      querySelectorAll: () => [],
+    };
+    const data = JSON.parse(Function('document', `return ${READ_ORDER_INFO_JS}`)(document));
+    assert.equal(data.afterSaleType, '线下换货');
+    assert.equal(data.subBizType, 999);
+    assert.equal(data.returnTracking, TRACKING);
+    assert.equal(data.buyerRemark, orderInfo.buyerRemark);
+    assert.equal(data.subOrders[0].id, 'sub-1');
+  });
+}

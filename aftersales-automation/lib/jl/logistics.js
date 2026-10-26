@@ -202,8 +202,82 @@ async function getLogistics(targetId, workOrderNum) {
   }
 }
 
+function classifyReturnLogistics(text) {
+  const lines = String(text || '').split(/\n/).map(line => line.trim()).filter(Boolean);
+  const signed = lines.some(line =>
+    !/未签收|尚未签收|待签收|等待签收|签收失败|拒签|拒绝签收/.test(line)
+    && (/已签收|签收成功|已妥投|本人签收|代签收/.test(line) || /^签收(?:\s|[：:]|$)/.test(line))
+  );
+  if (signed) return 'signed';
+  if (/未签收|待签收|签收失败|拒签|运输|在途|揽收|派送|配送|已发出/.test(String(text || ''))) return 'not_signed';
+  return 'unknown';
+}
+
+// 只定位退货模块，防止把原发货包裹“已签收”当作客户退货已签收。
+function readReturnLogisticsSectionFromPage(tracking, open) {
+  const visible = el => {
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0;
+  };
+  const sections = Array.from(document.querySelectorAll('.detail-module_mb10')).filter(visible);
+  const section = sections.find(el => {
+    const title = el.querySelector('.detail-module_title, [class*="detail-module_title"]');
+    return title && /退货物流/.test(title.innerText || title.textContent || '');
+  });
+  if (!section) return { text: '', warnings: ['未找到退货物流区块，签收状态未确认'] };
+  const text = section.innerText || section.textContent || '';
+  const trackings = text.match(/[A-Za-z0-9]+/g) || [];
+  if (!trackings.includes(String(tracking))) {
+    return { text: '', warnings: ['退货物流区块运单号与当前工单不一致，签收状态未确认'] };
+  }
+  const buttons = Array.from(section.querySelectorAll('button, a, [role="button"]'))
+    .filter(visible)
+    .filter(el => /^(查看物流|物流详情|查看物流详情)$/.test((el.innerText || el.textContent || '').trim()) && !el.disabled);
+  if (open && buttons.length === 1) buttons[0].click();
+  return { text, canOpen: buttons.length === 1, opened: Boolean(open && buttons.length === 1), warnings: [] };
+}
+
+async function getReturnLogistics(targetId, workOrderNum, tracking) {
+  try {
+    await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
+    const readSection = open => cdp.eval(targetId,
+      `(${readReturnLogisticsSectionFromPage.toString()})(${JSON.stringify(String(tracking))}, ${open})`
+    );
+    const section = await readSection(false);
+    let text = section.text || '';
+    let status = classifyReturnLogistics(text);
+    if (status !== 'unknown' || !section.canOpen) {
+      return ok({ tracking, text, status, warnings: section.warnings || [] });
+    }
+
+    const beforeOpen = await cdp.eval(targetId, VISIBLE_DIALOG_COUNT_JS);
+    try {
+      const opened = await readSection(true);
+      if (!opened.opened) throw new Error('退货物流查看入口已变化，停止读取');
+      const data = await waitFor(async () => {
+        if (await cdp.eval(targetId, VISIBLE_DIALOG_COUNT_JS) <= beforeOpen) return null;
+        const current = await cdp.eval(targetId, READ_LOGISTICS_TABS_JS);
+        if (current.error) return null;
+        const tokens = String(current.currentText || '').match(/[A-Za-z0-9]+/g) || [];
+        return tokens.includes(String(tracking)) ? current : null;
+      }, { timeoutMs: 5000, intervalMs: 300, label: '等待对应退货运单物流' });
+      text = data.currentText;
+      status = classifyReturnLogistics(text);
+    } finally {
+      const count = await cdp.eval(targetId, VISIBLE_DIALOG_COUNT_JS);
+      if (count > beforeOpen) await closeLogisticsDialog(targetId, count);
+    }
+    return ok({ tracking, text, status, warnings: [] });
+  } catch (error) {
+    return fail(error);
+  }
+}
+
 module.exports = {
   getLogistics,
+  getReturnLogistics,
+  classifyReturnLogistics,
+  readReturnLogisticsSectionFromPage,
   closeLogisticsDialog,
   VISIBLE_DIALOG_COUNT_JS,
 };

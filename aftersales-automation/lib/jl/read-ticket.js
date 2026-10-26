@@ -30,6 +30,7 @@ const READ_ORDER_INFO_JS = `(function(){
   if (!info) return JSON.stringify({error:'orderInfo not found'});
 
   var bodyText = document.body.innerText;
+  var typeMatch = bodyText.match(/售后类别[：:]\\s*([^\\n]+)/) || bodyText.match(/售后类型[：:]\\s*([^\\n]+)/);
 
   // 退货物流单号 + 多次使用检测。关联工单号优先读 Vue 结构，tooltip textContent 兜底。
   var rtMatch = bodyText.match(/退货物流单号[：:]\\s*([A-Za-z0-9]+)/);
@@ -140,6 +141,7 @@ const READ_ORDER_INFO_JS = `(function(){
     }),
     mainOrderId: info.bizOrderId,
     subBizType: info.subBizType,
+    afterSaleType: typeMatch ? typeMatch[1].trim() : undefined,
     workOrderType: info.workOrderType,
     workOrderStatus: workOrderStatus || undefined,
     returnTracking: returnTracking,

@@ -24,6 +24,7 @@ const {
   statusForProcessed,
   buildSimulationPayload,
   createEnsureQueueItem,
+  createOfflineExchangeReminder,
   runCli,
 } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
 const {
@@ -36,6 +37,101 @@ const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
 
 const ORDER_1 = '100001781188621717210';
 const ORDER_2 = '100001781188621717211';
+
+test('线下换货提醒成功持久化后，同工单重新处理和新发送器实例均不重复提醒', () => {
+  const item = { id: 'q-offline', accountNote: '测试店铺' };
+  const titles = [];
+  const db = {
+    readQueue: () => ({ items: [{ ...item }] }),
+    updateQueueItem: (_id, patch) => Object.assign(item, patch),
+  };
+  const dependencies = { db, sendReminder: title => { titles.push(title); return true; }, now: () => '2026-10-26T00:00:00.000Z' };
+  const context = {
+    account: { matchedNote: '测试店铺' }, queueItem: { id: item.id }, ticket: { workOrderNum: ORDER_1 },
+    processed: { decision: { action: 'escalate', reasonCode: 'OFFLINE_EXCHANGE_MANUAL', returnLogisticsStatus: 'signed' } },
+  };
+  assert.equal(createOfflineExchangeReminder(dependencies)(context).sent, true);
+  assert.deepEqual(createOfflineExchangeReminder(dependencies)(context), { sent: false, skipped: true });
+  assert.equal(titles.length, 1);
+  assert.match(titles[0], /线下换货.*退货已签收/);
+  assert.ok(titles[0].includes(ORDER_1));
+  assert.match(titles[0], /测试店铺/);
+  assert.equal(item.offlineExchangeReminderAt, '2026-10-26T00:00:00.000Z');
+});
+
+test('线下换货提醒失败写错误、保留再次发送机会，其他人工分支不新增提醒', () => {
+  const item = { id: 'q-offline' };
+  const logs = [];
+  let calls = 0;
+  const send = createOfflineExchangeReminder({
+    db: { readQueue: () => ({ items: [item] }), updateQueueItem: (_id, patch) => Object.assign(item, patch) },
+    sendReminder: () => ++calls > 1, log: message => logs.push(message),
+    now: () => '2026-10-26T00:00:00.000Z',
+  });
+  const context = {
+    account: {}, queueItem: item, ticket: { workOrderNum: ORDER_1 },
+    processed: { decision: { action: 'escalate', reasonCode: 'OFFLINE_EXCHANGE_MANUAL', returnLogisticsStatus: 'unknown' } },
+  };
+  assert.equal(send(context).sent, false);
+  assert.equal(item.offlineExchangeReminderAt, undefined);
+  assert.match(item.offlineExchangeReminderError, /创建失败/);
+  assert.equal(logs.length, 1);
+  assert.equal(send(context).sent, true);
+  assert.equal(item.offlineExchangeReminderError, null);
+  for (const decision of [{ action: 'escalate' }, { action: 'approve' }, { action: 'skip' }]) {
+    assert.equal(send({ ...context, processed: { decision } }), null);
+  }
+  assert.equal(calls, 2);
+});
+
+test('生产写回先保存人工结果，再创建线下换货提醒；重采沿用同一提醒标记', async t => {
+  const db = require('../../lib/server/data');
+  const helpers = require('../../lib/helpers');
+  const item = { id: 'q-offline', workOrderNum: ORDER_1, type: '换货' };
+  const saved = [];
+  let reminders = 0;
+  t.mock.method(db, 'readQueue', () => ({ items: [{ ...item }] }));
+  t.mock.method(db, 'updateQueueItem', (_id, patch) => Object.assign(item, patch));
+  t.mock.method(db, 'appendSimulation', sim => saved.push(sim));
+  t.mock.method(helpers, 'createReminder', () => {
+    assert.equal(saved.length, 1);
+    assert.equal(item.status, 'simulated');
+    reminders++;
+    return true;
+  });
+  const dependencies = loadDefaultDependencies();
+  const context = {
+    account: { accountNum: '3', matchedNote: '测试店铺' }, queueItem: item, ticket: { workOrderNum: ORDER_1 },
+    processed: {
+      status: 'simulated', collectedData: { ticket: { type: '线下换货' } },
+      decision: { action: 'escalate', reasonCode: 'OFFLINE_EXCHANGE_MANUAL', returnLogisticsStatus: 'not_signed' },
+    },
+  };
+  await dependencies.persistOutcome(context);
+  await dependencies.persistOutcome({ ...context, source: 'reprocess' });
+  assert.equal(reminders, 1);
+  assert.equal(item.type, '线下换货');
+  assert.equal(saved.length, 2);
+});
+
+test('详情识别线下换货时不套用普通换货二次发货观察、共用退货核验或外部补证', async () => {
+  const result = await processOpenedDetail({
+    ticket: { workOrderNum: ORDER_1, type: '换货', platformStage: { raw: '商家-待商家二次发货' } },
+    queueItem: { id: 'q-offline', type: '换货' },
+  }, {
+    collectDetail: async () => ({
+      ticket: { type: '线下换货', returnTrackingMultiUse: true, returnTracking: 'JT1234567890123' },
+      returnLogistics: { tracking: 'JT1234567890123', status: 'signed' }, collectErrors: [],
+    }),
+    inferDecision: (data, item) => require('../../lib/infer').inferDecision({ collectedData: data }, item),
+    shouldAutoExecute: () => false,
+    resolveSharedReturnGroup: () => assert.fail('线下换货不核对共用退货商品'),
+    supplementExternalLogistics: () => assert.fail('线下换货不触发其他物流源'),
+  });
+  assert.equal(result.decision.action, 'escalate');
+  assert.equal(result.decision.reasonCode, 'OFFLINE_EXCHANGE_MANUAL');
+  assert.equal(result.collectedData.sharedReturnGroup, undefined);
+});
 
 test('完整48小时清单缺失的自动等待重查项直接从queue删除', async () => {
   const missingOrder = '100001781188621717212';
@@ -172,6 +268,31 @@ function batchDependencies(overrides = {}) {
   };
   return { dependencies, calls, urgent, getTargets: () => targets.slice() };
 }
+
+test('整批仅有线下换货时不解析或创建ERP标签，只保存人工结果并关闭本次详情页', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true, targetId: 'list-tab', list: {
+        urgent: [{ workOrderNum: ORDER_1, type: '线下换货' }], totalCount: 1, complete: true,
+      },
+    }),
+    resolveErpTargetId: () => assert.fail('线下换货不需要ERP标签'),
+    collectDetail: async context => {
+      assert.equal(context.erpTargetId, null);
+      return {
+        ticket: { type: '线下换货', afterSaleReason: '其他', returnTracking: 'JT1234567890123' },
+        returnLogistics: { tracking: 'JT1234567890123', status: 'signed' }, collectErrors: [],
+      };
+    },
+    inferDecision: (data, item) => require('../../lib/infer').inferDecision({ collectedData: data }, item),
+    shouldAutoExecute: require('../../lib/server/after-sales-auto-gate').shouldAutoExecute,
+  });
+  const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
+  assert.equal(result.success, true);
+  assert.equal(result.items[0].decision.action, 'escalate');
+  assert.equal(fixture.calls.some(call => call[0] === 'execute'), false);
+  assert.deepEqual(fixture.getTargets(), ['list-tab']);
+});
 
 test('打开账号成功后先同步current-session，再开始批量页面处理', async () => {
   const order = [];

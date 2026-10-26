@@ -2,6 +2,7 @@
 
 const crypto = require('crypto');
 const { proveReturnItems } = require('../return-item-proof');
+const { isOfflineExchange } = require('../jl/after-sale-type');
 
 const ENABLED_AUTOMATION_CASES = new Set([
   'refund_return.received.exact.approve\u0000七天无理由退货（不喜欢/不合适）',
@@ -10,6 +11,10 @@ const ENABLED_AUTOMATION_CASES = new Set([
 ]);
 
 const BRANCHES = Object.freeze({
+  'offline_exchange.manual': {
+    label: '线下换货 / 核验退货签收 / 人工处理',
+    automationStatus: 'manual_only',
+  },
   'refund_return.received.exact.approve': {
     label: '退货退款 / 已入库 / 精确退回 / 同意退款',
     automationStatus: 'candidate',
@@ -234,6 +239,7 @@ const RULE_BRANCHES = Object.freeze({
   '工单不可访问→自动归档': 'global.gone.skip',
   '扫描工单详情页未确认→保留待复查': 'global.gone_scan.manual',
   '换货→上报人工': 'global.exchange.manual',
+  '线下换货→保留详情及退货签收结果，转人工': 'offline_exchange.manual',
   '换货退回核验通过→推荐人工同意换货': 'exchange.return.exact.manual_approve',
   '换货退回核验异常→人工确认': 'exchange.return.review.manual',
   '换货无退货单号→人工处理': 'exchange.no_tracking.manual',
@@ -305,6 +311,9 @@ function readDecisionStepValue(decision, label) {
 }
 
 function resolveOrderType(simulation, queueItem = {}) {
+  const ticket = simulation?.collectedData?.ticket || {};
+  if (isOfflineExchange(queueItem.type, ticket.type, ticket.afterSaleType, ticket.subBizType,
+    readDecisionStepValue(simulation?.decision, '工单类型'))) return '线下换货';
   const direct = [
     queueItem.type,
     simulation?.collectedData?.ticket?.type,
@@ -358,7 +367,7 @@ function classifySimulation(simulation, queueItem = {}) {
   const ticket = simulation?.collectedData?.ticket || {};
   const reason = ticket.afterSaleReason;
   const orderType = resolveOrderType(simulation, queueItem);
-  const logisticsNoRecord = String(reason || '').trim() === '快递无物流记录';
+  const logisticsNoRecord = orderType !== '线下换货' && String(reason || '').trim() === '快递无物流记录';
   const specialNoTracking = decision?.action === 'escalate'
     && orderType === '退货退款'
     && !String(ticket.returnTracking || '').trim()
@@ -372,6 +381,7 @@ function classifySimulation(simulation, queueItem = {}) {
     ? 'exchange.waiting_merchant_reship.confirm_no_action'
     : null;
   const manualReviewBranches = {
+    offline_exchange: 'offline_exchange.manual',
     exchange_return_exact: 'exchange.return.exact.manual_approve',
     exchange_return_review: 'exchange.return.review.manual',
     exchange_no_tracking: 'exchange.no_tracking.manual',

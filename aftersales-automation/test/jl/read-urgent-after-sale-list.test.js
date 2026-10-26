@@ -20,6 +20,31 @@ const {
 
 const SOURCE_PATH = path.join(__dirname, '../../scripts/jl-steps/10-read-urgent-after-sale-list.js');
 
+test('运行真实列表提取脚本独立识别线下换货，备注提及线下换货不改变普通类型', () => {
+  const element = text => ({
+    innerText: text, getBoundingClientRect: () => ({ width: 500, height: 100, left: 0, top: 0 }),
+  });
+  const texts = [
+    '售后工单号：100001700000000000001\n换货\n售后类别：线下换货\n商家-待处理',
+    '售后工单号：100001700000000000002\n换货\n备注：客户咨询线下换货\n商家-待处理',
+    '售后工单号：100001700000000000003\n仅退款\n商家-待处理',
+  ];
+  const cards = texts.map(text => ({
+    ...element(text),
+    querySelectorAll: selector => selector === '.el-timer' ? [element('0 天 15 小时 0 分 后流转至客服')] : [],
+  }));
+  const document = {
+    body: { innerText: '待商家处理 3' }, querySelector: () => null,
+    querySelectorAll: selector => selector === '#AfterSaleList .table_main' ? cards : [],
+  };
+  const raw = Function('document', 'getComputedStyle', `return (${READ_CURRENT_PAGE_TICKETS_JS})`)(
+    document, () => ({ display: 'block', visibility: 'visible' })
+  );
+  const result = typeof raw === 'string' ? JSON.parse(raw) : raw;
+  assert.deepEqual(result.tickets.map(ticket => ticket.type), ['线下换货', '换货', '仅退款']);
+  assert.deepEqual(result.tickets.map(ticket => ticket.totalHours), [15, 15, 15]);
+});
+
 test('parseRemainingHours parses days hours and minutes', () => {
   assert.equal(parseRemainingHours('1 天 5 小时 51 分 后自动退货退款'), 29 + 51 / 60);
   assert.equal(parseRemainingHours('47 小时 30 分 后自动退货退款'), 47.5);

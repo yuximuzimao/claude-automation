@@ -241,6 +241,7 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
     if (value == null) return null;
     const text = String(value).trim();
     if (!text) return null;
+    if (/^(?:售后(?:类型|类别)[：:\\s]*)?线下换货(?:[（(].*[）)])?$/.test(text)) return '线下换货';
     if (text === '323') return '仅退款';
     if (text.includes('仅退款')) return '仅退款';
     if (text.includes('退货退款')) return '退货退款';
@@ -259,7 +260,8 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
     const applyTime = (text.match(/申请时间[:：]\\s*(\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})/) || [])[1] || null;
     const remaining = extractRemainingTimerText(card, visible);
     const totalHours = parseRemainingHours(remaining);
-      const type = lines.map(normalizeType).find(Boolean) || null;
+    const type = lines.some(line => normalizeType(line) === '线下换货')
+      ? '线下换货' : lines.map(normalizeType).find(Boolean) || null;
     const status = lines.find(l => /^商家-/.test(l)) || null;
     const tracking = lines.find(l => /^[A-Z]{1,4}\\d{8,}$/.test(l) || /^\\d{10,}$/.test(l)) || null;
     const typeIndex = type ? lines.indexOf(type) : -1;

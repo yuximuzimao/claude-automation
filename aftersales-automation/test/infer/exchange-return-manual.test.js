@@ -41,6 +41,61 @@ function infer(type, collectedData) {
   );
 }
 
+for (const status of ['signed', 'not_signed', 'unknown']) {
+  test(`线下换货退货状态为${status}时固定人工，不依赖ERP，也不受同意评价覆盖`, () => {
+    const data = {
+      ticket: { afterSaleType: '线下换货', afterSaleReason: '其他', returnTracking: 'JT1234567890123', subOrders: [{ id: 'main-1' }] },
+      returnLogistics: { tracking: 'JT1234567890123', status, text: '退货物流' },
+      collectErrors: [],
+    };
+    const decision = inferDecision({ collectedData: data }, { type: '换货', hint: '同意换货' });
+    assert.equal(decision.action, 'escalate');
+    assert.equal(decision.reasonCode, 'OFFLINE_EXCHANGE_MANUAL');
+    assert.equal(decision.returnLogisticsStatus, status);
+    assert.equal(decision.requiresHumanReview, true);
+    assert.equal(decision.autoExecutionBlocked, true);
+    assert.equal(decision.humanTriggeredExecutionAllowed, false);
+    assert.equal(decision.waitingRescan, undefined);
+    assert.deepEqual(decision.courierActions, []);
+    assert.equal(shouldAutoExecute(decision, data, { type: '线下换货' }), false);
+    assert.equal(isBatchExecutable(decision, 'simulated'), false);
+    const classified = classifySimulation({ collectedData: data, decision }, { type: '线下换货' });
+    assert.equal(classified.branchId, 'offline_exchange.manual');
+    assert.equal(classified.automationStatus, 'manual_only');
+  });
+}
+
+test('线下换货不使用原发货签收或其他退货单的签收证明', () => {
+  for (const returnLogistics of [undefined, { tracking: 'OTHER', status: 'signed' }]) {
+    const decision = infer('线下换货', {
+      ticket: { returnTracking: 'JT1234567890123', subOrders: [] },
+      returnLogistics,
+      logistics: { packages: [{ text: '原发货运单已签收' }] },
+      collectErrors: [],
+    });
+    assert.equal(decision.action, 'escalate');
+    assert.equal(decision.returnLogisticsStatus, 'unknown');
+    assert.match(decision.reason, /签收状态未确认/);
+  }
+});
+
+test('线下换货的商责原因也留在独立人工分支，详情类型优先于旧列表普通换货', () => {
+  const data = {
+    ticket: { afterSaleType: '线下换货', afterSaleReason: '快递无物流记录', returnTracking: 'JT1234567890123' },
+    collectErrors: [],
+  };
+  const decision = infer('换货', data);
+  const result = classifySimulation({ collectedData: data, decision }, { type: '换货' });
+  assert.equal(result.branchId, 'offline_exchange.manual');
+  assert.equal(result.orderType, '线下换货');
+});
+
+test('线下换货已明确终结时沿用原终态处理，不产生人工提醒标记', () => {
+  const decision = infer('线下换货', { ticket: { workOrderStatus: '已关闭' }, collectErrors: [] });
+  assert.equal(decision.action, 'skip');
+  assert.equal(decision.reasonCode, undefined);
+});
+
 test('普通换货严格核对一致时禁止无人自动，但允许人工确认后单笔或批量同意换货', () => {
   const data = exactCollectedData();
   const decision = infer('换货', data);

@@ -69,6 +69,98 @@ afterEach(() => {
   }
 });
 
+it('退货签收分类只接受明确签收，否定、在途和空状态均不能判已签收', () => {
+  const { classifyReturnLogistics } = require('../../lib/jl/logistics');
+  for (const text of ['已签收', '签收\n2026-10-26 08:00', '已妥投', '快件由本人签收']) {
+    assert.equal(classifyReturnLogistics(text), 'signed', text);
+  }
+  for (const text of ['尚未签收', '待签收', '签收失败', '运输中', '拒签']) {
+    assert.equal(classifyReturnLogistics(text), 'not_signed', text);
+  }
+  assert.equal(classifyReturnLogistics('暂无信息'), 'unknown');
+});
+
+it('退货页面读取只定位可见退货模块，不点击原发货或隐藏模块', () => {
+  const { readReturnLogisticsSectionFromPage } = require('../../lib/jl/logistics');
+  const clicked = [];
+  const section = (title, text, id, hidden = false) => ({
+    innerText: text,
+    getBoundingClientRect: () => ({ width: hidden ? 0 : 500, height: hidden ? 0 : 100 }),
+    querySelector: () => ({ innerText: title }),
+    querySelectorAll: () => [{
+      innerText: '查看物流', getBoundingClientRect: () => ({ width: 80, height: 30 }),
+      click: () => clicked.push(id),
+    }],
+  });
+  const outbound = section('订单物流信息', 'JT1234567890123\n已签收', '原发货');
+  const inbound = section('退货物流信息', '退货物流单号：JT1234567890123', '退货');
+  const hidden = section('退货物流信息', 'JT1234567890123\n已签收', '隐藏', true);
+  const read = Function('document', 'tracking', 'open', `return (${readReturnLogisticsSectionFromPage.toString()})(tracking, open)`);
+  const result = read({ querySelectorAll: () => [outbound, hidden, inbound] }, 'JT1234567890123', true);
+  assert.equal(result.opened, true);
+  assert.equal(result.text, inbound.innerText);
+  assert.deepEqual(clicked, ['退货']);
+  const mismatch = read({ querySelectorAll: () => [inbound] }, 'JT9999999999999', true);
+  assert.equal(mismatch.text, '');
+  assert.match(mismatch.warnings.join(''), /不一致/);
+  assert.deepEqual(clicked, ['退货']);
+});
+
+it('退货区块已有明确签收时直接读取，不打开物流弹窗', async () => {
+  const loaded = loadLogisticsWithMocks({
+    evalResults: [{ text: 'JT1234567890123\n已签收', canOpen: true, warnings: [] }],
+    waitForImpl: async () => assert.fail('已有明确签收无需打开弹窗'),
+  });
+  const result = await loaded.getReturnLogistics('detail-tab', 'work-order', 'JT1234567890123');
+  assert.equal(result.success, true);
+  assert.equal(result.data.status, 'signed');
+  assert.equal(loaded.evalCalls.length, 1);
+});
+
+it('退货物流弹窗核对同一运单后读签收并关闭本次弹窗', async () => {
+  const evalResults = [
+    { text: 'JT1234567890123', canOpen: true, warnings: [] },
+    0, { opened: true }, 1,
+    { currentText: '物流单号：JT1234567890123\n已签收' },
+    1, { closed: true }, 0,
+  ];
+  const loaded = loadLogisticsWithMocks({
+    evalResults,
+    waitForImpl: async predicate => {
+      const value = await predicate();
+      if (!value) throw new Error('测试等待失败');
+      return value;
+    },
+  });
+  const result = await loaded.getReturnLogistics('detail-tab', 'work-order', 'JT1234567890123');
+  assert.equal(result.success, true);
+  assert.equal(result.data.status, 'signed');
+  assert.equal(evalResults.length, 0, '本次弹窗必须已关闭并读回确认');
+  assert.equal(loaded.clickPointCalls.length, 0);
+});
+
+it('弹窗是其他运单时不采信签收，停止读取并关闭弹窗，不重试点击', async () => {
+  const evalResults = [
+    { text: 'JT1234567890123', canOpen: true, warnings: [] },
+    0, { opened: true }, 1,
+    { currentText: '物流单号：OTHER1234567890\n已签收' },
+    1, { closed: true }, 0,
+  ];
+  const loaded = loadLogisticsWithMocks({
+    evalResults,
+    waitForImpl: async predicate => {
+      const value = await predicate();
+      if (!value) throw new Error('对应运单物流未确认');
+      return value;
+    },
+  });
+  const result = await loaded.getReturnLogistics('detail-tab', 'work-order', 'JT1234567890123');
+  assert.equal(result.success, false);
+  assert.match(result.error, /对应运单物流未确认/);
+  assert.equal(evalResults.length, 0);
+  assert.equal(loaded.evalCalls.filter(call => call.js.endsWith(', true)')).length, 1);
+});
+
 describe('JL logistics close timeout tolerance', () => {
   it('拒绝流程复用局部关闭能力，关闭失败会在打开拒绝表单前停止', () => {
     const source = fs.readFileSync(modulePath('lib/jl/reject.js'), 'utf8');

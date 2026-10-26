@@ -16,6 +16,7 @@ const { proveReturnItems } = require('./return-item-proof');
 const { DEFINITELY_UNSHIPPED_STATUSES, getGiftShipmentState } = require('./gift-shipment-status');
 const { mergeExternalLogisticsIntoErp } = require('./external-logistics-baidu');
 const { resolveSkuPricing } = require('./sku-pricing');
+const { isOfflineExchange } = require('./jl/after-sale-type');
 
 // 解析 urgency 字符串（如 "1天3小时" / "3小时"）为总小时数
 function parseUrgencyHours(urgency) {
@@ -2133,12 +2134,13 @@ function inferDecision(sim, queueItem) {
   }
 
   const cd = sim.collectedData || {};
-  const type = queueItem.type;
   const ticket = cd.ticket || {};
+  const offlineExchange = isOfflineExchange(queueItem.type, ticket.type, ticket.afterSaleType, ticket.subBizType);
+  const type = offlineExchange ? '线下换货' : queueItem.type;
 
   // ── hint 覆盖 ─────────────────────────────────────────────────
   const hint = queueItem.hint || '';
-  if (hint) {
+  if (hint && !offlineExchange) {
     s({ type: 'read', label: '用户评价指令', value: hint });
     const hintAction = parseHintAction(hint);
     s({ type: 'check', condition: '解析评价指令', result: hintAction ? `→ ${hintAction}` : '未识别' });
@@ -2255,6 +2257,32 @@ function inferDecision(sim, queueItem) {
   }
 
   s({ type: 'read', label: '工单类型', value: type || '未知' });
+
+  if (offlineExchange) {
+    const returnLogistics = cd.returnLogistics || {};
+    const trackingMatches = Boolean(ticket.returnTracking)
+      && returnLogistics.tracking === ticket.returnTracking;
+    const status = trackingMatches && ['signed', 'not_signed'].includes(returnLogistics.status)
+      ? returnLogistics.status : 'unknown';
+    const statusText = !ticket.returnTracking ? '未提供退货单号'
+      : status === 'signed' ? '退货已签收'
+      : status === 'not_signed' ? '退货尚未签收' : '退货签收状态未确认';
+    s({ type: 'read', label: '退货物流签收核验', value: `${ticket.returnTracking || '无单号'}：${statusText}` });
+    s({ type: 'branch', text: '线下换货固定转人工，跳过 ERP 和商品核验' });
+    return fin(escalate(`【线下换货｜需人工处理】${statusText}。请人工处理该工单。`, {
+      reasonCode: 'OFFLINE_EXCHANGE_MANUAL',
+      confidence: 'high',
+      requiresHumanReview: true,
+      autoExecutionBlocked: true,
+      humanTriggeredExecutionAllowed: false,
+      manualReviewKind: 'offline_exchange',
+      manualReviewReasons: ['线下换货'],
+      recommendedActionLabel: '人工处理',
+      returnLogisticsStatus: status,
+      rulesApplied: [{ doc: 'flow-5.4', section: '线下换货', summary: '线下换货→保留详情及退货签收结果，转人工' }],
+      warnings: status === 'signed' ? [] : ['退货签收尚未确认，请人工核实'],
+    }));
+  }
 
   // ── 关键采集失败 → 上报 ───────────────────────────────────────
   const needsErpAftersale = (type === '退货退款' || type === '换货') && Boolean(ticket.returnTracking);

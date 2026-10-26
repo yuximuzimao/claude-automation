@@ -5,19 +5,20 @@ const { readTicket } = require('./read-ticket');
 
 const ERP_URL = 'https://viperp.superboss.cc';
 const ERP_DOMAIN = 'superboss.cc';
-const { getLogistics } = require('./logistics');
+const { getLogistics, getReturnLogistics } = require('./logistics');
 const { erpSearch } = require('../erp/search');
 const { readAllErpLogistics } = require('../erp/read-logistics');
 const { erpAftersale } = require('../erp/aftersale');
 const { productMatch } = require('../product/match');
 const { productArchive } = require('../product/archive');
 const { getErpShop } = require('../erp/shop-map');
-const { normalizeAfterSaleType } = require('./after-sale-type');
+const { normalizeAfterSaleType, isOfflineExchange } = require('./after-sale-type');
 
 function loadDefaultDependencies() {
   return {
     readTicket,
     getLogistics,
+    getReturnLogistics,
     erpSearch,
     readAllErpLogistics,
     erpAftersale,
@@ -171,7 +172,6 @@ async function collectErpOrder(context, subOrderId, errorLabel, collected, depen
 
 async function collectTicketTargetAware(context, customDependencies) {
   if (!context || !context.detailTargetId) throw new Error('target-aware 采集缺少 detailTargetId');
-  if (!context.erpTargetId) throw new Error('target-aware 采集缺少 erpTargetId');
   if (!context.workOrderNum) throw new Error('target-aware 采集缺少 workOrderNum');
 
   const dependencies = customDependencies || loadDefaultDependencies();
@@ -185,6 +185,23 @@ async function collectTicketTargetAware(context, customDependencies) {
   const ticket = resultData(ticketResult, 'read-ticket', collected);
   if (!ticket) return collected;
   collected.ticket = ticket;
+
+  // 详情可能比列表更具体；线下换货只保留平台事实，不进入任何 ERP 采集。
+  if (isOfflineExchange(context.type, ticket.afterSaleType, ticket.subBizType)) {
+    ticket.type = '线下换货';
+    if (ticket.returnTracking) {
+      const result = await dependencies.getReturnLogistics(
+        context.detailTargetId, context.workOrderNum, ticket.returnTracking
+      );
+      assertNotAborted(context);
+      if (!result || !result.success) {
+        throw new Error(`return-logistics: ${(result && result.error) || '未知错误'}`);
+      }
+      collected.returnLogistics = result.data;
+    }
+    return collected;
+  }
+  if (!context.erpTargetId) throw new Error('target-aware 采集缺少 erpTargetId');
 
   const logisticsResults = [];
   for (const subOrder of ticket.subOrders || []) {
