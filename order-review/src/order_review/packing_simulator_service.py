@@ -1092,7 +1092,16 @@ class PackingSimulatorService:
                     if identity is None:
                         continue
                     full_name = str(identity.get("erpName") or "").strip()
-                    if full_name:
+                    has_current_identity = any(
+                        str(
+                            pending_by_name.get(
+                                (brand_id, str(name).strip()), {}
+                            ).get("currentMerchantCode") or ""
+                        ).strip() == str(code or "").strip()
+                        for name in erp_names
+                    )
+                    # 同一编码已有当前确认身份时，不从历史快照重新加入旧名。
+                    if full_name and not has_current_identity:
                         source_names.add((brand_id, full_name))
 
         for item in self._product_dimension_payload.get("ignoredZeroSpaceProducts", []):

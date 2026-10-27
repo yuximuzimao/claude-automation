@@ -75,7 +75,12 @@ def test_catalog_view_keeps_full_brand_skeleton_and_pending_records(tmp_path):
     assert directory["KGO糖果2.0"]["aliases"] == []
     assert "visualLabel" not in directory["KGO糖果2.0"]
     assert directory["KGOS三围尺"]["dimensionsMm"] == [90, 63, 23]
-    assert directory["焕颜乳2.0"]["mainMerchantCode"] == "6940079096228-1"
+    assert directory["焕颜乳3.0"]["mainMerchantCode"] == "6940079096228-1"
+    assert directory["焕颜乳3.0"]["fullName"] == "HEE悦希舒缓焕颜精华乳（3.0） 100g"
+    assert directory["焕颜水3.0"]["mainMerchantCode"] == "6931583616811"
+    assert directory["焕颜水3.0"]["fullName"] == "HEE悦希舒缓焕颜精萃水（3.0） 120ml"
+    assert "焕颜乳2.0" not in directory
+    assert "焕颜水2.0" not in directory
     assert directory["KGOS玉米片-香菜牛肉味"]["missingDimensions"] is True
     assert directory["KGOS玉米片-玉米浓汤味"]["missingDimensions"] is True
     assert directory["KGOS黑茶 茉莉味 体验装"]["simulationCode"] == "6979499760099"
