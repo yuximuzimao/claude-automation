@@ -36,7 +36,7 @@ entry: cli.js
 | `lib/erp/search.js` | ERP 订单搜索，`READ_ROWS_JS` 解析订单状态 | 查 ERP 订单数据时 |
 | `lib/erp/aftersale.js` | ERP 售后工单搜索（退货快递单号） | 退货核验时 |
 | `lib/erp/read-logistics.js` | ERP 订单物流读取 | 查 ERP 物流时 |
-| `lib/erp/shop-map.js` | 账号→ERP店铺名 + 供应商ID→店铺名映射（sku-calculator 共享） | 需要确定 ERP 店铺时 |
+| `lib/erp/shop-map.js` | 账号note→ERP店铺名 + 供应商ID→店铺名映射（sku-calculator 共享） | 需要确定 ERP 店铺时 |
 | `lib/jl/list.js` | 鲸灵工单列表扫描 | 改列表扫描逻辑时 |
 | `lib/jl/read-ticket.js` | 读单条工单详情 | 改工单数据提取时 |
 | `lib/jl/session-filter.js` | 最小注入白名单——`filterAuthCookies`/`filterIdentityLocalStorage`，只搬认证态+账号身份，丢弃设备/网络指纹（跨设备搬指纹触发风控） | 改注入字段白名单时 |

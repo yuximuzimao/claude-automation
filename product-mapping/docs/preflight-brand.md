@@ -23,9 +23,9 @@
 - [ ] **ERP 已登录**
   - 验证：navigateErp 不报登录错误
 
-- [ ] **aftersales server 是否正在运行？**
-  - 如果运行中：注意 ERP lock（product-mapping 操作 ERP 时会自动加锁）
-  - 如果已停止：无需额外操作
+- [ ] **正式商品匹配前已由用户手动停止售后**
+  - 脚本验证售后当前 `paused=true`，未停止时拒绝进入正式流程。
+  - 售后恢复条件只见 `docs/matching-stability.md §3.9`。
 
 ---
 

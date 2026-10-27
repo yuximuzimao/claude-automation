@@ -20,6 +20,7 @@
 | 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（以商品匹配当前待办为准，不在审单侧固定数量） |
 | ERP正式身份参考快照 | `../../product-mapping/data/products/erp-identities.json`（2026-09-11的200条只读快照，不定义在售目录） |
 | 历史阶段 | [档案索引](archive/README.md) |
+| 2026-10-28焕颜水乳3.0身份同步与文档收口 | [NEAT归档](archive/2026-10-28-yuexi-identity-neat/README.md)；[整理前CURRENT](archive/2026-10-28-yuexi-identity-neat/previous-current.md) |
 | 2026-10-16春堂御品产品/纸箱资料定稿 | [NEAT归档](archive/2026-10-16-chuntang-carton-finalization/neat-handoff.md) |
 | 2026-10-11方向修正与下次资料验证交接 | [NEAT归档](archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md) |
 | 2026-10-10悦希活动批量拆单与 SKU 清单调查 | [NEAT归档](archive/2026-10-10-yuexi-campaign-batch-automation-neat/neat-handoff.md) |
@@ -33,7 +34,7 @@
 ## 数据层次
 
 - 正式原单案例与执行日志在 `~/Library/Application Support/Order Review/`，不因本地实验改写。
-- 商品匹配的视觉标签不是装箱身份。模拟器只从 `features.json` 读取 ERP 标准全名，再用200条身份快照补正式简称/编码；商品尺寸和装箱规则由 `order-review` 自己维护并按 ERP 标准全名/商家编码关联。
+- 商品目录、当前确认身份、历史快照及尺寸的加载关系见[装箱辅助 owner](rules/packing-assistance.md#商品目录与身份来源)。
 - 包装资料按源尺寸、计算尺寸、来源与估计轴记录。完整名称和简称分开，空格和符号保留。
 - `pendingMappings`保存待确认、已转正式和已作废的资料收据，`giftPackingFitChecks`保存实验坐标；当前解析器不会仅凭这些记录自动提升有效商品/箱型，正式能力以现役数组与解析结果为准。
 - 活跃计划描述当前边界与后续方向，归档描述已经讨论/验证的历史事实；两者都不能取代当前源数据与业务规则。

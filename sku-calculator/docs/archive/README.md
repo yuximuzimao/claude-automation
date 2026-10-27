@@ -5,7 +5,7 @@
 ## 使用规则
 
 - 下一轮必须重新读取鲸灵页面或加购 Excel、ERP 组合明细和云仓库存。
-- 当前操作规则以 `../../CLAUDE.md`、`../../SKILL.md`、`../INDEX.md` 和 `../page-cart-scraping.md` 为准。
+- 当前规则由 [操作手册](../operations.md) 和 [页面加购读取](../page-cart-scraping.md) 维护；[INDEX](../INDEX.md)只导航。
 - `data/*.json` 是运行时快照，不纳入归档；Excel 报告保存在用户指定位置，归档记录路径和 SHA-256。
 
 ## 目录

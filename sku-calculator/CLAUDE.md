@@ -7,13 +7,14 @@
 ## Session 启动（必做，按顺序）
 
 1. 读 `tasks/todo.md` — 确认当前待办和进度
-2. 读 `docs/INDEX.md` — 操作规则权威入口
+2. 读 `docs/INDEX.md` — 按任务找到唯一规则入口
 
 ## 规则文档（渐进式，按需加载）
 
 | 文档 | 加载时机 |
 |------|---------|
-| `docs/INDEX.md` | 任何操作前 |
+| `docs/INDEX.md` | 文件与数据导航 |
+| `docs/operations.md` | 库存分配的流程、算法、参数、ERP与数据规则 |
 | `SKILL.md` | 首次操作时 |
 | `docs/page-cart-scraping.md` | 无 Excel、从鲸灵商品数据页读取加购时 |
 | `docs/archive/README.md` | 仅在追溯历史批次时 |
@@ -22,7 +23,7 @@
 ## 教训沉淀流程
 
 - `tasks/lessons.md` — Session 级新发现，先记这里
-- `docs/INDEX.md §6` — 稳定后迁入，不在两处重复维护
+- `docs/operations.md §6` 或共享ERP owner — 稳定后迁入，不在两处重复维护
 
 ## 相关项目
 

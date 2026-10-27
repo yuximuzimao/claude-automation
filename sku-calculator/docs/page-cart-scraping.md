@@ -13,11 +13,17 @@
 
 ### 用户要求保持页面不动时
 
-先检查可见 `.goods-detail-list` 的 Vue 数据及原查询方法。2026-10-27实测：`subModuleType=8` 为SKU明细，记录含独立 `specification` 和SKU ID；同一SPU可返回多条不同规格，不能因页面同时显示“SPU明细”文字而误判视图。
+先检查可见 `.goods-detail-list` 的 Vue 数据及原查询方法。已验证的SKU视图标识为`subModuleType=8`，记录含独立 `specification` 和SKU ID；同一SPU可返回多条不同规格，不能因页面同时显示“SPU明细”文字而误判视图。站点变化后仍须重新检查实际字段。
 
 当原 `toSearch` 方法仅把结果写入 `this.tableList` / `this.pagination.totalCount` 时，可在隔离对象上复用该方法：复制当前筛选、时间与排序，使用自己的分页和结果容器，不调用真实组件的翻页、搜索或视图切换方法。读取后必须验证返回行数等于总数、SKU ID唯一，并对比真实组件的页码、筛选、时间、排序和当前行ID，确认完全未变。查询失败即停，不重复尝试。
 
-2026-10-27同条件一次读取76条时，`pageSize=100`有效。该数值只是已验证的本次页面能力，不作为其他页面的固定上限。用户限定链接范围时，统计页缺失的链接或规格仍须从当次ERP对应表核实后补零；不能只处理出现过加购的规格。
+查询容量必须用当次返回总数验证，不得把历史成功的`pageSize`当成固定上限。单次验证的容量与条数只记录在对应批次归档。
+
+### 用户指定链接范围时
+
+- 在`_meta.scopeSpus`记录原始处理范围，先核实原始读取条数，再过滤范围外记录；原始总数保存在`_meta.sourceTotalRows`。
+- 范围内`paidItems > 0`的SKU按原规则剔除并留痕；范围外记录不加入本次剔除清单。
+- 统计页缺失的链接或规格须从当次目标ERP店铺的对应表核实后补零。`scopeSpus`只记录范围，现有CLI不会据此自动扩展规格；调用方须实际读取ERP、补齐输入，并更新`totalSkus`及补零数。
 
 ### 常规分页读取
 
@@ -25,7 +31,7 @@
 - 每页分别定位商品表（商品名称、货号）和 SKU 统计表（规格、加购人数、加购件数、支付件数、支付订单数）。
 - 两张并行表按当前页行序一一配对；每页必须验证行数相同。
 - 翻页后等待活动页码和表格内容都更新，再读取；不能只看到页码变化就立即取旧行。
-- 规格名去掉分号后的平台后缀，例如 `果冻*5盒;KGOS` 保存为 `果冻*5盒`。
+- 规格名去掉分号后的平台后缀、压缩连续空白并去掉首尾空白，例如 `果冻*5盒;KGOS` 保存为 `果冻*5盒`；与ERP匹配使用相同规范。
 - `cartAddCount` 使用「加购件数」，不是「加购人数」。
 - `paidItems > 0` 的 SKU 从本轮加购输入剔除，并写入 `_meta.excludedPaidItems` 留痕。
 - 完成后恢复用户原来的页码，不关闭或导航用户标签页。
@@ -39,6 +45,7 @@
     "sourceUrl": "https://scrm.jlsupp.com/.../goodsDetail",
     "parsedAt": "ISO时间",
     "dateRange": "近7天",
+    "sourceTotalRows": 50,
     "totalSkus": 50,
     "withCartData": 50,
     "supplierId": "43011",
@@ -65,12 +72,13 @@
 
 ## 写入后验证
 
-- 抓取总行数 = 页面显示总条数；
+- 范围过滤前的原始抓取总行数 = 页面显示总条数 = `_meta.sourceTotalRows`；
 - `skus.length = _meta.totalSkus`；
 - `key` 全部唯一；
 - 每条 `supplierId` 与 `_meta.supplierId` 一致；
 - `cartAddCount`、`cartAddPeople`、`paidItems` 都是非负数字；
-- `excludedPaidItems` 与原始页面中 `paidItems > 0` 的行完全对应；
-- 读回文件后再运行 `resolve-components`，匹配不足 100% 时停止，不手工忽略。
+- `excludedPaidItems` 与本次处理范围内 `paidItems > 0` 的行完全对应；
+- 指定链接范围的输入须覆盖ERP核实出的全部未剔除规格，补零后重新校验唯一key、总数和供应商；
+- 读回文件后再进入ERP组合解析；命令接口状态和完整性门禁见[操作手册§5](operations.md#5-erp-接入run-full-流程)，匹配或明细不足100%都必须停止。
 
 页面结构变化时先重新检查所有表头和首行单元格；不要沿用历史 tbody 下标硬读。

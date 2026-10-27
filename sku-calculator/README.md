@@ -18,6 +18,8 @@ node cli.js parse <加购表.xlsx> --supplier-id <商家ID>
 
 ## 标准流程
 
+执行前先查看 [当前待办](tasks/todo.md)。ERP两步命令的收尾接口尚有已登记问题；流程与完成校验以 [操作手册](docs/operations.md) 为准，本轮归档不会自动修复该代码问题。
+
 ```bash
 # 1. 准备加购数据（二选一：parse Excel，或按页面抓取文档生成 cart-adds.json）
 

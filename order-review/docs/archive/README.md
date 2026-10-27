@@ -4,6 +4,11 @@
 
 当前状态：`../CURRENT.md`；使用入口：`../../README.md`。长期业务约束：`../2026-07-23-package-rule-foundation.md`。
 
+## 2026-10-28 焕颜水乳3.0身份同步与文档收口
+
+- [NEAT归档](2026-10-28-yuexi-identity-neat/README.md)：当前ERP名称及简称统一为3.0、编码与尺寸沿用、此前332项非界面验证、身份加载契约及本次文档整理边界。
+- [整理前CURRENT](2026-10-28-yuexi-identity-neat/previous-current.md)：逐字保存迁出的阶段声明、旧验证流水账和worktree收口记录，只作历史追溯；当前状态仍以 `../CURRENT.md` 为准。
+
 ## 2026-10-16 春堂御品产品与纸箱资料定稿
 
 - [NEAT交接](2026-10-16-chuntang-carton-finalization/neat-handoff.md)：春堂御品苹果饮/黄精饮正式商品尺寸、1/3/6盒通用纸箱、采购数量与对应报价、混合六盒几何验证，以及待确认资料转正式的收口记录。

@@ -3,15 +3,16 @@
 ## DO FIRST
 
 1. 读 `tasks/todo.md` 确认当前进度
-2. 读 `docs/INDEX.md` 了解操作规范
-3. 核心算法在 `lib/allocate.js`，修改前必读
-4. 数据文件在 `data/`，结构见 `docs/INDEX.md §3`
+2. 读 `docs/INDEX.md` 按任务定位文件；实际库存计算进入 `docs/operations.md`
+3. 核心算法在 `lib/allocate.js`，修改前必读；ERP命令现有缺陷先看Todo
+4. 数据文件在 `data/`，结构见 `docs/operations.md §3`
 
 ## ENTRY MAP
 
 | 文件 | 用途 | 何时读 |
 |------|------|--------|
 | `README.md` | 人类使用入口、输入方式与安全边界 | 首次了解项目时 |
+| `docs/operations.md` | 库存分配操作与规则的唯一owner | 实际计算、接入ERP或核验结果时 |
 | `cli.js` | CLI 入口，所有命令的分发 | 执行命令时 |
 | `lib/product-catalog.js` | 运行时产品目录读取（含 clearCache()） | 涉及单品名称时 |
 | `lib/parse-cart-adds.js` | 读鲸灵加购 Excel → JSON | 解析输入数据时 |
@@ -56,9 +57,12 @@ sku-calculator/
     allocation-result.json    # calculate 生成
   docs/
     INDEX.md
+    operations.md
     page-cart-scraping.md
     archive/README.md
     archive/<date>-<topic>/README.md  # 已完成批次事实与报告指纹，按archive/README导航
+    archive/<date>-<topic>/neat-audit.md  # 阶段知识审查记录
+    archive/<date>-<topic>/knowledge-audit.json  # Markdown完整盘点与评估清单
   tasks/todo.md
   tasks/lessons.md
   test/allocate.test.js

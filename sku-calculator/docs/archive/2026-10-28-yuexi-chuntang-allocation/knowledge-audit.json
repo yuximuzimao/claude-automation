@@ -1,0 +1,1754 @@
+{
+  "auditedAt": "2026-10-28",
+  "scope": [
+    "sku-calculator",
+    "product-mapping",
+    "order-review",
+    "aftersales-automation"
+  ],
+  "method": "活跃全文审查；历史完整枚举并只读索引/本轮直接相关；缓存及旧运行报告分类登记",
+  "entries": [
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/.ai-bridge/README.md",
+      "lifecycle": "runtime_template",
+      "review": "full_text_reviewed",
+      "resolution": "空白协作模板，保留",
+      "lines": 12,
+      "bytes": 761,
+      "sha256": "cdf1d3255a68d679ded279962c46ac91559c8ef10f5f6dee5559ba4d916e982a"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/.ai-bridge/agent-status.md",
+      "lifecycle": "runtime_template",
+      "review": "full_text_reviewed",
+      "resolution": "空白协作模板，保留",
+      "lines": 3,
+      "bytes": 60,
+      "sha256": "28457fb4ac9f45313b5f277221a2caee6479bb80f0b3eed8a3c3124ea457f381"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/.ai-bridge/codex-status.md",
+      "lifecycle": "runtime_template",
+      "review": "full_text_reviewed",
+      "resolution": "空白协作模板，保留",
+      "lines": 3,
+      "bytes": 45,
+      "sha256": "2d782a9f189ec4ed87d383805425c48f2cf692bb08a4e9a9009e61dfd2d4c263"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/.ai-bridge/current-plan.md",
+      "lifecycle": "runtime_template",
+      "review": "full_text_reviewed",
+      "resolution": "空白协作模板，保留",
+      "lines": 3,
+      "bytes": 37,
+      "sha256": "d0862931403cdabd676e1838d58215c2f2ba557e6c12255e0d8d3ac4f9910a69"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/.ai-bridge/decisions.md",
+      "lifecycle": "runtime_template",
+      "review": "full_text_reviewed",
+      "resolution": "空白协作模板，保留",
+      "lines": 2,
+      "bytes": 13,
+      "sha256": "b9203ea09519d0709696890bae34fde1b9d7f2a33460e39d5f3bde19cbe87068"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/.ai-bridge/open-questions.md",
+      "lifecycle": "runtime_template",
+      "review": "full_text_reviewed",
+      "resolution": "空白协作模板，保留",
+      "lines": 2,
+      "bytes": 18,
+      "sha256": "7997d7655d1ee553e1006cc8205c6621e5226d29d4dd5493679db30cd8050ef8"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/AGENTS.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 3,
+      "bytes": 263,
+      "sha256": "065fc1c93cf982e3f630bacdb160ae13dfd27026b746e1bbd01d0d9efc73dcc0"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/CLAUDE.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 75,
+      "bytes": 5774,
+      "sha256": "1f955971767c072b687715f827c03b59ec3c6e88fd8612c0160a958616fe324c"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/README.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 102,
+      "bytes": 11235,
+      "sha256": "25ce01d52c778cb460eee54ccf96263168c6a8399acb4b6a70b093ecf24b3459"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/SKILL.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 226,
+      "bytes": 40557,
+      "sha256": "fefe8036239be932d1fed80e66d4782dbfb5609713ba9dd372c3960678881c59"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/data/insights/insight-2026-04-15T03-30-56.md",
+      "lifecycle": "runtime_history",
+      "review": "registered_only",
+      "resolution": "旧运行报告，不作当前规则",
+      "lines": 98,
+      "bytes": 3648,
+      "sha256": "ef83a4036a3f35e4a44aef8ed08cb37f0871a338c7754f836c0c125b7c492475"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/data/insights/insight-2026-04-18T06-09-47.md",
+      "lifecycle": "runtime_history",
+      "review": "registered_only",
+      "resolution": "旧运行报告，不作当前规则",
+      "lines": 69,
+      "bytes": 3099,
+      "sha256": "f2dec42e689d7750ada33580c11aedb7dffa8ff30324d9a06e261e62e1e1353f"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/data/insights/insight-2026-04-25T19-12-18.md",
+      "lifecycle": "runtime_history",
+      "review": "registered_only",
+      "resolution": "旧运行报告，不作当前规则",
+      "lines": 151,
+      "bytes": 9028,
+      "sha256": "cdb42da855be17faeda571c04e1563b9396efc69aa4d42cc33a2dd5d5fbe415d"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/data/insights/insight-2026-04-28T09-37-21.md",
+      "lifecycle": "runtime_history",
+      "review": "registered_only",
+      "resolution": "旧运行报告，不作当前规则",
+      "lines": 103,
+      "bytes": 5851,
+      "sha256": "d5ad4169b485fdad52adca69a37d7b34a5ad811d834e2bdf0216563115ad1714"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/data/insights/insight-2026-05-02T08-54-46.md",
+      "lifecycle": "runtime_history",
+      "review": "registered_only",
+      "resolution": "旧运行报告，不作当前规则",
+      "lines": 45,
+      "bytes": 2175,
+      "sha256": "337327ac947908fa77e184d6b7915c1404a5f05884a9ce49d89c92addf13aae1"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/data/insights/insight-2026-05-22T06-00-00.md",
+      "lifecycle": "runtime_history",
+      "review": "registered_only",
+      "resolution": "旧运行报告，不作当前规则",
+      "lines": 187,
+      "bytes": 6748,
+      "sha256": "4f3ddc83f4415e9352f939af9a8ea9e9373d5dece1b0ebbc694fe81983f648ba"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/INDEX.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 343,
+      "bytes": 32892,
+      "sha256": "6b3e5da340bc53d9843ba6a5427f7abd00ff7a408598abcbd7a0ffe048846e0e"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/automation-policy.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 75,
+      "bytes": 8635,
+      "sha256": "965d034d9ec0320998f2f93a5d5c019a3d8238374ff4e0dba370676549aa585c"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/collect-schema.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 300,
+      "bytes": 16087,
+      "sha256": "0ed65d23f9ff739e384cf61d01d9a813e8cf98da97e3368adfc0e7cd882f0c35"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/erp-query.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 151,
+      "bytes": 8085,
+      "sha256": "55084e204a07f97585301cf9e3102cc32e6f16ad19d3eef430f0805e4c6d60fa"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/flow-5.1.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 237,
+      "bytes": 20776,
+      "sha256": "8c2107cffb03285a8f5b9bab742e28db3fca2de387b62cd13596398080b6878c"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/flow-5.2.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 112,
+      "bytes": 4899,
+      "sha256": "6d786ce65e7db122644b1e446fb21d85168c723fc4987ab85778f36c8ed9fa35"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/flow-5.3.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 192,
+      "bytes": 10911,
+      "sha256": "36a3abb7d30996b893575ce08748c82ad254e0c946f2dd833600649335058f67"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/flow-5.4.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 166,
+      "bytes": 8007,
+      "sha256": "c0053fc7ec3d7f11f58262473ac4864ee14ac44db2f0eeb82aa0bb3cd80b4ffa"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/ops-erp.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 151,
+      "bytes": 7716,
+      "sha256": "054e890c8dd3d6bdbb65da8f72e2b786de1cd7f597569eada920621837aeb398"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/ops-jingling.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 184,
+      "bytes": 14144,
+      "sha256": "c4f7435f19fdcf299d2f98f0ced38d2addf338860ff858c16666650b3e74300a"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/ops-queue.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 127,
+      "bytes": 7699,
+      "sha256": "1efcdebe9778833c3538ba9363a69ea31823aa06c5b88230132e7cfa7ecbd64a"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/ops-tech.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 100,
+      "bytes": 11917,
+      "sha256": "1918a96037c04aa8adef60386aabc97eca24cc9a20e0bd0cddc550f15d700cdf"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/ops-testing.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 96,
+      "bytes": 5009,
+      "sha256": "21662f731c248e9f46d62c70e73c1acb4986380c840569ef4ae1634656c16180"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/handovers/2026-06-24-a1-fixed-batch-neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 78,
+      "bytes": 4090,
+      "sha256": "1731d8b168304f564e325c5ac3abbe5caf708262935a78c4d6de1e6bd8c133ea"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/handovers/2026-06-25-a1-erp-target-neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 41,
+      "bytes": 1702,
+      "sha256": "ccfdb40bfdda3765db0f6e0b92b6f9c5a1b9875d30de50778d9c92febf9260c9"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/handovers/2026-06-26-a1-single-order-collect-neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 80,
+      "bytes": 4352,
+      "sha256": "b1a62f1ca6fd43bb2b60a23c0b69318fecc45bd74d2c24d987063156188f1044"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 102,
+      "bytes": 6180,
+      "sha256": "995fd056d37e2b0b576694f9520c89a55c408aa4218847427afe19f39a4cf466"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 109,
+      "bytes": 5160,
+      "sha256": "d146bbf4a9658345fbcec5b8ea8209205a9032a7da5436da3230f872b48690ef"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/plans/2026-06-19-a1-fixed-batch-user-confirmation.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 98,
+      "bytes": 15101,
+      "sha256": "d3f5d16f17da3dac89c94aa0a1d10a749d662f7a95c1f5fdce1eea2ce3cbaeb9"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/plans/2026-06-27-a1-codexpro-parallel-tasks.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 419,
+      "bytes": 21637,
+      "sha256": "81c28f92daefd15cb8df21d6037a0bff1919419e916251fab9dac74873599ef2"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/plans/2026-06-27-auto-execution-journal-recovery-design.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 308,
+      "bytes": 14379,
+      "sha256": "16e6b95e997b43796e2730077387a40695a0121cef8b7e8b5d62946bf7749622"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/plans/2026-06-27-frontend-button-load-smoke-plan.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 239,
+      "bytes": 9770,
+      "sha256": "f5d76b8ec30abaa5350742ac27219bc525af9443835e47a196cff79f9e083b01"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 224,
+      "bytes": 12333,
+      "sha256": "59924163f1f1044ea60de8a42c6421412c2dcc6114f3623ab0c63350f4847029"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-06-a1/specs/2026-06-19-jl-direct-after-sale-navigation-design.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 66,
+      "bytes": 7118,
+      "sha256": "5d7b2716645841eb1d2d50fb97f2c67f545a8838a90f0509782b8c3d063c475f"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-add-store-confirm-phone/plans/2026-07-21-add-store-confirm-phone.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 149,
+      "bytes": 5588,
+      "sha256": "40be066e512bc6f3ea1647728e80e1acfcf4e847bf43923134af25479ed248d4"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-add-store-confirm-phone/specs/2026-07-21-add-store-confirm-phone-design.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 39,
+      "bytes": 2077,
+      "sha256": "2fd52fb0492fc46de7f9b6cb8d8173c2b476bf94856a1e64e9d774016fb1dcdb"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-branch-automation-ui/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 15,
+      "bytes": 846,
+      "sha256": "3de924dca28358a576fe89ff1f43fc41d3f535b3574111c0cb20196480563a98"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-branch-automation-ui/plans/2026-07-18-after-sales-branch-ui-implementation.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 271,
+      "bytes": 11031,
+      "sha256": "dc7b1f3a11786ebe7f49b67566be51fc9a4ef70da210ac7a5a3b501438d3bfc4"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-branch-automation-ui/plans/2026-07-19-after-sales-automation-priority-ui.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 379,
+      "bytes": 19342,
+      "sha256": "47e1121c26c0394e38342895c3ecca44d9a1c40e72e32523d8df96470dc257b7"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-branch-automation-ui/specs/2026-07-18-after-sales-branch-ui-design.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 135,
+      "bytes": 5549,
+      "sha256": "fbf6803f8b7ff078fef1282f1c4b7332723826065e0ec0cea24674437449a850"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-branch-automation/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 13,
+      "bytes": 605,
+      "sha256": "677f030d8014ffe2449f63d61d9601135a27a80e2ca684cb8e3277d23c084e72"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-branch-automation/specs/2026-07-16-after-sales-branch-automation-design.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 460,
+      "bytes": 27196,
+      "sha256": "b9a27b2ac31087874f6a884193bc6cafda691577a66add1953d1b280921fda65"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-existing-fixes/handovers/2026-07-17-refund-only-erp-logistics-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 33,
+      "bytes": 2267,
+      "sha256": "b8d52eb13a92ca81a7feef860c9bcc14016651f12cd58fdb6e52b5f19f96a97e"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-07-existing-fixes/handovers/2026-07-17-remaining-fixes-and-confidence-plan.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 78,
+      "bytes": 6106,
+      "sha256": "d9e4e7583afceccbd9de1a69eb668667429bd75b73002c00ae52fa23b287f21f"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-08-after-sales-corrections/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 39,
+      "bytes": 3190,
+      "sha256": "469687ac52b9460c17dfa471aad630eec9faf1a24a5c04844032e06c4ff6a795"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-08-scan-status-hud/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 42,
+      "bytes": 2764,
+      "sha256": "06eb779acb9a3770365ca51ddc0247bfa1a5a27d27150dca967dc0505596884e"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-09-aftersales-maintenance/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 117,
+      "bytes": 10443,
+      "sha256": "02a63930af6c665e92fb1d464d899e3a1825c69585ce22d06fe3e6d7769f6388"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-09-auto-execution-history/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 56,
+      "bytes": 3697,
+      "sha256": "3c6fd2280f340e7832aab7fd204cfe6ef4770b83fa609d7a5d3ad8533272e61f"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-09-courier-action-navigation/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 44,
+      "bytes": 2866,
+      "sha256": "0d9a7ef6522d97fb4bf081f27b356bc3765d72f199cb00e236964fdfe5563063"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-09-erp-next-compat/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 40,
+      "bytes": 1348,
+      "sha256": "9baca33cf3fec4696c5d9f469bb3d7c64bfb4f2e8c950d10b89530b365c5a208"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-09-return-inbound-stability/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 41,
+      "bytes": 3780,
+      "sha256": "94918ad9f0318f1190c1e8190b30756e73799387fe42b9710a186c9be1d3e41a"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-09-wanwu-scan/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 38,
+      "bytes": 2659,
+      "sha256": "14e479af60272fd5b12c5f97706d3475c2c7113482e03a430150ad3642592f34"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-10-jl-account-boundary-stop-safety/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 61,
+      "bytes": 5085,
+      "sha256": "b4a62f12334a3403d8efef184a2bc5322640b1f584b30ffa3566f7938e964df4"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-10-jl-new-user-transition/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 5,
+      "bytes": 336,
+      "sha256": "bb3e377633e8e00c660e7a874268439b2a6432990fb23f13cb5423ce52df2e32"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-10-jl-new-user-transition/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 39,
+      "bytes": 2080,
+      "sha256": "1356b9de61a46036bf8ca06a2e519a7c215d6c73568105e55e239217ccb6a9d0"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-10-offline-exchange/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 54,
+      "bytes": 4863,
+      "sha256": "30c4aecc7309704d4232fc0c81e11a8b6b1cd718fcd926dfb63826d843986892"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-10-partial-refund-sku-pricing/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 40,
+      "bytes": 3479,
+      "sha256": "2616a236ec93dd6b379181b136e3bd36df7dec0dca244fe7291d94620c71bc39"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/2026-10-return-refund-rule-sync/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 41,
+      "bytes": 2999,
+      "sha256": "ca3bac850ae4a4df94c98d6532432e5b7fc3971cdc17e1277ee50d5add3061e5"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/docs/superpowers/archive/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 25,
+      "bytes": 3683,
+      "sha256": "9d080cd64709de1bc610f64b766054b0ff76c5ffce02edef3b7847e8400aa2b6"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/tasks/lessons.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 48,
+      "bytes": 5294,
+      "sha256": "2058c5b572f7c77ad8c279e87fcf4411d1d6c09ab47f9ce3a97f565000458525"
+    },
+    {
+      "project": "aftersales-automation",
+      "path": "aftersales-automation/tasks/todo.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 35,
+      "bytes": 3998,
+      "sha256": "2362cafe36f731194a9c6b3ed337088d7b5903cb297d17385be5399036b94dff"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/.pytest_cache/README.md",
+      "lifecycle": "generated_cache",
+      "review": "generated_cache_reviewed",
+      "resolution": "保留工具生成说明",
+      "lines": 8,
+      "bytes": 302,
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/AGENTS.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 97,
+      "bytes": 12581,
+      "sha256": "70aaab409b229c394b24c66dcb0732ac2e89ccd31fef0e4639530ac4d3d97ba6"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/CLAUDE.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 28,
+      "bytes": 2079,
+      "sha256": "7ee4ce2ee9cda1696073e8cfd9bf9d1ed2a2b57bed178255e817b997e6989322"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/README.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 27,
+      "bytes": 1785,
+      "sha256": "f33cd8b5c9dbef3c404f699ba89d581c1a2dbb819017c4d241610ddef776d281"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/SKILL.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 65,
+      "bytes": 5146,
+      "sha256": "ec35cef30718cea17d39fb9fa7660746601953d289c2267f48cf86080c929239"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/data/packing-campaign-split-notes-09-22.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 337,
+      "bytes": 25950,
+      "sha256": "afde45516df31fb17ab7c2395cd7ae2bfe3fa43c3c11d6925cc36deb5efbe26d"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/2026-07-23-package-rule-foundation.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 600,
+      "bytes": 41777,
+      "sha256": "449fb7bd0a2e4e1baa4f0b64193185d117e63e81d9a523a564a48e61fcfdffe5"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/2026-09-08-packing-simulator-plan.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 235,
+      "bytes": 23633,
+      "sha256": "208a72b6ddaf792e40bee0b87573d4fdb5440c51496bf64ea1325bba73666648"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/2026-09-12-packing-algorithm-research.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 256,
+      "bytes": 14238,
+      "sha256": "21ee64e56d013166b6aa17e23b0d1520e62628c3d774c9bb4d6acefdaafca5ac"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/CURRENT.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 52,
+      "bytes": 7502,
+      "sha256": "ecbd10cbfa36ee3d84619fd4640ba8c62c174cced95db727722c0650240e5217"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/INDEX.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 40,
+      "bytes": 4091,
+      "sha256": "446ffa496ccdab53fbee716bab59178b8989fa3f56edfd5d0772f8faf4f011c1"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/OPERATING-SOP.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 63,
+      "bytes": 5011,
+      "sha256": "dd6a59428b4988dc67b4eaa644bec5de84613a7e257b7cec6e5d9fdf81bbefdd"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-10-initial-floating-window/implementation-plan.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 276,
+      "bytes": 7810,
+      "sha256": "41e9b3ccbf4fe47d6460172d365090e333416978f7324b098edbf6b1f5cfb7ae"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-22-package-plan/requirements.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 340,
+      "bytes": 10919,
+      "sha256": "ce4ec42023ba97490275a9e97b57089e3f6300d56709f7721c202a17b75024b8"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-22-read-only-order-view/design.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 348,
+      "bytes": 13098,
+      "sha256": "cc341c0f32a6df141301ed13cb4250a7cdb647af69db32e4d389a8ce3cd2747c"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-23-package-rule-foundation/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 162,
+      "bytes": 6162,
+      "sha256": "813bb89eb8a2591490afecc6e3cd5b3f3f6a642842fa71837b45eb7fb8bc7ba8"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-24-single-package-review-alignment/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 236,
+      "bytes": 7649,
+      "sha256": "66bb835502f37c2239178555a7c94e2aa9348af5a655b1d04488efa912692386"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-24-single-package-review-alignment/erp-page-evidence.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 276,
+      "bytes": 7195,
+      "sha256": "499fd08fd3917f3678be07c101ed4cdf84b4ddc879cfbefb6e440a4205d7761d"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-24-single-package-review-alignment/split-order-future-notes.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 300,
+      "bytes": 8868,
+      "sha256": "f5ed28ac7237f985c6b9fcaf264c3e34ac91a4740591c900c0b8aae2678198df"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-24-stage-a-safety-closure/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 244,
+      "bytes": 9080,
+      "sha256": "d8336213a596a9409e42f915920d2727f10b658cb81b9dba3e55320c861b2222"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-27-freight-and-single-item-default/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 116,
+      "bytes": 4489,
+      "sha256": "890c30f8a0a4f8ad266aa37c3bddcc318855705465a047dbd825ae417cbece5a"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-28-single-package-audit-v1/execution-plan.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 653,
+      "bytes": 26182,
+      "sha256": "2eb6552bc889a508784a2b4814e65a8731102422829e86d4ae4b4f31aac56306"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-28-single-package-audit-v1/feasibility-audit.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 260,
+      "bytes": 11543,
+      "sha256": "b7388ef3d53835578bf316b9b738acb094d9254133364cd0fbc88fc46150253f"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-28-single-package-audit-v1/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 103,
+      "bytes": 6003,
+      "sha256": "c80aeceb6c6911dba181b9e0224d06a5e91c38877f762ea9f55f1e9147b2eaad"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-28-single-package-audit-v1/post-v1-roadmap.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 303,
+      "bytes": 13177,
+      "sha256": "ae50a2c2385ed7987eda527420ed32214c691e657143dfbe66fb8dafafd87a13"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-29-mixed-split-v1/execution-plan.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 85,
+      "bytes": 6101,
+      "sha256": "30f316a41be7a995de4a5ca9ae04836939c01712417332c1343bba856f517a7d"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-29-mixed-split-v1/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 53,
+      "bytes": 3738,
+      "sha256": "01f4de968c0b100941598a965fd9752882d1057ca419f080bb13347ca8ee5ba7"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-30-memory-and-composition/historical-package-composition.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 110,
+      "bytes": 5515,
+      "sha256": "f501ad3da309ed8f4f81b7e528d3cfa064180b5974aff79c51eadb98d55a8806"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-30-memory-and-composition/memory-stability-direction.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 77,
+      "bytes": 4154,
+      "sha256": "4f08040ab78287ea7636426cd3cb81bc7b63b7dbae1492109b26d4bf2da1d9ed"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-30-memory-and-composition/memory-stability-worklog.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 189,
+      "bytes": 9825,
+      "sha256": "70c42e253fd2868851393676df45ee4bbe7ad64df1f53eba78a8424586e6b01b"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-07-30-mixed-split-and-audit/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 67,
+      "bytes": 3465,
+      "sha256": "4123b11af0260b355f4bb3f56574a3c062f43cdd486133b7ef371746164eef40"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-03-save-plan-and-case-correction/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 76,
+      "bytes": 3478,
+      "sha256": "51fc4d397eb4db695ef7da2e40701bc266dc992a9d742d6379b24e0cdde11e5b"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-05-split-scroll-and-direct-review/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 51,
+      "bytes": 2900,
+      "sha256": "0e2088d7f9a0815874e0f19ec8a24db46db3c51ee150724c0fd46bc6e4a1227a"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-06-split-result-stability/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 49,
+      "bytes": 2892,
+      "sha256": "1785239e20b474ceffde1adca436633ab4fc15e8d44c450dc57464c113a6fcec"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-12-reading-and-window-stability/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 75,
+      "bytes": 3769,
+      "sha256": "5f419cd7ae8d8379ddcbd9ee69ba90d0d3eb82ef78dd94a58c9dc9683b4bb056"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-14-carton-packing-foundation/approximate-recommendation-direction.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 130,
+      "bytes": 9487,
+      "sha256": "4edc55647c6ced399c24a60a4bdea3167a155f50d79ffe806b92dde8e02bf9ac"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-14-carton-packing-foundation/carton-data-collection.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 134,
+      "bytes": 7102,
+      "sha256": "a97faa1cceaba480423485f4d96ad33c0349a129265239b72e2967f35a529d76"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-14-carton-packing-foundation/carton-packing-foundation.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 246,
+      "bytes": 14577,
+      "sha256": "f8a90e11cbae211d3012f2465d95b3ecf2b58d9a66ea4101f79b432d585946ad"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-14-carton-packing-foundation/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 105,
+      "bytes": 5559,
+      "sha256": "e38d5a4305dfdd7f1db97915ab090e771c9060d04f2f77fd69907a55164b949b"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-27-split-transition-wait-timing/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 55,
+      "bytes": 2509,
+      "sha256": "4c33097b1e3b4851d867b554f757b6b223c2233a4c387b9db98956ae064cc77c"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-28-split-single-pass-verification/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 86,
+      "bytes": 4554,
+      "sha256": "33f5d6fb9774dbd23809c3e33d549e22995e7e06a6ec7378ef4c024170cc9dad"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-08-29-historical-composition-evidence-boundary/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 82,
+      "bytes": 4295,
+      "sha256": "df63dd140eea3a6d88abe7699bdb12edb881b7b0d6439f2e0a31c0609b75eaae"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-09-packing-simulator-planning/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 61,
+      "bytes": 5200,
+      "sha256": "3062c71cb741a54b1e7a4d814df05fe14637857445489a12af362869f8d54925"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-09-packing-simulator-planning/previous-implementation-state.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 47,
+      "bytes": 4108,
+      "sha256": "15b2198db7bc2a317071c0c0a8c176a6a5b8051b40ce895db4c144d692b32667"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-11-packing-simulator-p1/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 68,
+      "bytes": 7207,
+      "sha256": "072312b0a7e447c7ce8043ba749721565821b3b9400764e4dd3c1d1527d3baaf"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-13-packing-worktree-reconciliation/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 52,
+      "bytes": 4478,
+      "sha256": "49e0b2fe23c7c171ee8884e1e1588fda1f4beeac5fab14c2993da29e194f9169"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-17-packing-data-and-split-confirm-only/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 54,
+      "bytes": 4014,
+      "sha256": "a4ea4a09c343cc9f260a0ff9f37332dc3d81c34ac75d05df7cd666ed78b3f72a"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-25-package-history-identity-and-data-audit/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 50,
+      "bytes": 4519,
+      "sha256": "c48ebe503ba4a76e6f203b37cc1e51b96d277a904ff156c1ee6330526f2a80b0"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 37,
+      "bytes": 2726,
+      "sha256": "2ee096007846b1b68fb5e0bc69f6d2c69ed940089b8e49a7b55da76fc63f5767"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-10-10-yuexi-campaign-batch-automation-neat/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 47,
+      "bytes": 3188,
+      "sha256": "1392117dc9e6b88451305c3e1a2379e70437f3a57e19954b592d4d88ab02bf50"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 55,
+      "bytes": 5256,
+      "sha256": "c18008374b38dab872a8b3930ea9ea9587c8bf5b917a80b2c73ff9b769475a9e"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-10-16-chuntang-carton-finalization/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 44,
+      "bytes": 2903,
+      "sha256": "b2452cbbebf0bab8cefec054dc32c667c30c6279a5732273a7083a09f850c47e"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-10-28-yuexi-identity-neat/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 38,
+      "bytes": 4030,
+      "sha256": "819d53fa921f3e75ebb93a056eafd7f2ef071351581833b793ac57dee77b48dd"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/2026-10-28-yuexi-identity-neat/previous-current.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 93,
+      "bytes": 14934,
+      "sha256": "8e78a266f57d535cd113d24f38e0ff29a41ee49cec57ab8e0a900bc396b81005"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/archive/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 199,
+      "bytes": 16487,
+      "sha256": "eb89dca36ca09cedcb017a7fcd58807d8e408ddef1163704af0e2fc37751e76d"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/rules/README.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 13,
+      "bytes": 1159,
+      "sha256": "53b575c1f5022ba5e99bc48e43e42a1aedb07366d3b957b87c5d03af173fdfea"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/rules/activity-batch.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 61,
+      "bytes": 4720,
+      "sha256": "82c93c59ceb29610c3f9d9424e9fc7a158b1ec929160bbdebfb1a2297517c4a8"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/rules/erp-execution.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 22,
+      "bytes": 2632,
+      "sha256": "bfff22fedb72b03e3a788a758db83b536bdd73ee2464aea7fceb725cc389e3e3"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/rules/packing-assistance.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 38,
+      "bytes": 4455,
+      "sha256": "7a204cb216f9f797f618cf9cf857fa5a221fd18550bb1372609b59f2595a2a4c"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/docs/usage.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 190,
+      "bytes": 12495,
+      "sha256": "2c50ac0d2a89915a5dfa67e56caba990bb29df4696ae758559b8609f713a5279"
+    },
+    {
+      "project": "order-review",
+      "path": "order-review/tasks/todo.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 55,
+      "bytes": 6733,
+      "sha256": "c70b22245dac9e5fc142a86d45c41860cc32de5e0e0c7390f950fef658ea0923"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/.pytest_cache/README.md",
+      "lifecycle": "generated_cache",
+      "review": "generated_cache_reviewed",
+      "resolution": "保留工具生成说明",
+      "lines": 8,
+      "bytes": 302,
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/AGENTS.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 10,
+      "bytes": 569,
+      "sha256": "6526bcef2cb489ce0fded370cbcb961edaae8d138866fc9b7af62d6e61e171a4"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/CLAUDE.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 68,
+      "bytes": 4939,
+      "sha256": "71786688a177b2a275c35f62e9e951fe153c94e46d407ceaf69ca1d974e02b45"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/README.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 57,
+      "bytes": 2750,
+      "sha256": "1d4e4287d26e41216daf4fc9c72f1936c3206c05324ab62be4291e069e8addbc"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/SKILL.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 235,
+      "bytes": 14886,
+      "sha256": "b0dfa5601615a63cd460f843821fb964ecd2e89f7bcfb093a499193bfcf92562"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/INDEX.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 420,
+      "bytes": 43411,
+      "sha256": "2cd95d1376055014b2564c347015def06e81f7c84406674008b3030ada64c50f"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-04-21-lanze-check/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 380,
+      "bytes": 20042,
+      "sha256": "d133f96eb288ed7ab9dd3f51581912698755ffbe63d520a6ca583f6a00cd6986"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-07-25-lanze-match/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 63,
+      "bytes": 4417,
+      "sha256": "4b762d074750b8e76013fb42c60298fb4e6ac531ae74624a9efae35cff5cca8b"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-07-25-lanze-match/chatgpt-codexpro-session.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 77,
+      "bytes": 4566,
+      "sha256": "1da66a4c2126df660b095778e5da1c9b55b8794f22f69efb503f0cb59d5a806d"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-07-25-lanze-match/lessons-snapshot.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 278,
+      "bytes": 18125,
+      "sha256": "9e7fe9c8857dac2e642679e945d3a60ee4c77a438b3e03e271765148f112f2fd"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-07-28-baihao-hee-match/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 57,
+      "bytes": 2671,
+      "sha256": "8471c6cb8964a931afaea3b3a287aebaa9b0f80ce4cdb72528aa8c9cad1bf765"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-08-24-mingrui-kgos-match/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 83,
+      "bytes": 4093,
+      "sha256": "ddc0bdcc7f8bf7ffcc24fe00ffb873786da608cdcee048349ba1d53bbf2c332d"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-08-31-hee-new-products/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 21,
+      "bytes": 1763,
+      "sha256": "99ae54d901bdd37d3b9ab8e97459da41843044b71149150ae9d3672c726538d2"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-09-01-mingrui-kgos-refresh/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 56,
+      "bytes": 3486,
+      "sha256": "19301aeb98831cbd834753895b9c380c667d5272f8da20b0874516a3c09746ea"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-09-21-hengyuan-hee-922/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 41,
+      "bytes": 1787,
+      "sha256": "16cc5a2bc661cdeb4454825ddecb1f8fb2e391c36e296f18f5114a3c59b89406"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-09-22-erp-next-compat/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 88,
+      "bytes": 3299,
+      "sha256": "8a79cbd7617675ffb78eb215e524d0388b990c845a78beeefc45109d239ed499"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/2026-09-22-hee-922-maoye-handoff/neat-handoff.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 105,
+      "bytes": 4033,
+      "sha256": "ab0a565ed2f455b59220591aea4caa6c3c5a9b7a682a5db2936454b920049aa2"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/archive/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 24,
+      "bytes": 2158,
+      "sha256": "393b5d352d334b89e51dffd978ed9dbce39b1094d8d0e3ae8c11397b866ef2da"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/brand-onboarding.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 89,
+      "bytes": 4280,
+      "sha256": "b77bd0034d36038b3aaa5cbdb7135e9880319842accec69718450c03d78dfb96"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/chatgpt-codexpro-operations.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 102,
+      "bytes": 6323,
+      "sha256": "96ea1b92c50ec437f23ab794cde2b5969df1a49371263c93e1b888c37598eba8"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/matching-stability.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 250,
+      "bytes": 12939,
+      "sha256": "035a5d5f2cf70a658045392a4d557652f7774242fda58f71db5aad79876e9a0a"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/docs/preflight-brand.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 69,
+      "bytes": 2840,
+      "sha256": "509c691e119254e8ee00c7af30107d45b27800d8b98d0b1feeea742c96bc23e3"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/tasks/lessons.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "无需改动",
+      "lines": 9,
+      "bytes": 418,
+      "sha256": "c3d141a0e5e50d5275d7d76778c7d71ff32081bed82ad4fe01f8f4c609d9846f"
+    },
+    {
+      "project": "product-mapping",
+      "path": "product-mapping/tasks/todo.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 84,
+      "bytes": 6765,
+      "sha256": "1f7508e991867bea650dd9708e6991b3ffa6b87636f9e4e0c5347bac7fb44afc"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/CLAUDE.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 60,
+      "bytes": 2400,
+      "sha256": "783f8e4c8b95557369afa70f49571ca48b8995883205389cd73cd80b875fbd3c"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/README.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 54,
+      "bytes": 2389,
+      "sha256": "a7e92d88448adbe01bde5121d00e647e1e0ab25935173572e9a3ec7c37ea36c6"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/SKILL.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 69,
+      "bytes": 3924,
+      "sha256": "8565424ab331a06b76e9ddf88d00c7e187e5b35f30bc9cb9cd766874e6056d85"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/INDEX.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 33,
+      "bytes": 1612,
+      "sha256": "93b58c19fa3196dfd26c31364af0766531e15459dcb2e6d6bba03824ab96911f"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-06-04-baihao-inventory/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 187,
+      "bytes": 5936,
+      "sha256": "8ccf097e869911837010314686424b0a43eb394ddfe6045bbc7cff4a9a05a132"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-08-25-mingrui-kgos-allocation/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 43,
+      "bytes": 2130,
+      "sha256": "10f97b3755b12be362d95a30246e36d7893dd7311fcbcd54ce8e5d338ca02df7"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-08-26-mingrui-kgos-reallocation/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 41,
+      "bytes": 2624,
+      "sha256": "64723b7f6fc98b595b16d18c32fe37ad3f94d93738ba4c182ef61292efb9e16d"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-09-21-hengyuan-hee-922-allocation/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 48,
+      "bytes": 2157,
+      "sha256": "77f6f012f6d46953c49d40c1ce99ec42d973df14562d26eeed594c7374a6839b"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-09-22-erp-next-compat/README.md",
+      "lifecycle": "history",
+      "review": "registered_only",
+      "resolution": "未变化历史保留，不全文考古",
+      "lines": 28,
+      "bytes": 1265,
+      "sha256": "460f44bed153a180f5a4e7fd157d487723c3831eb1321391db87d63f5017d98a"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 57,
+      "bytes": 4302,
+      "sha256": "64ee6e750811fa3babd6bbf5ad57c88b87581236f4d72eded521ad89cf109b79"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/neat-audit.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 39,
+      "bytes": 4199,
+      "sha256": "3e2e47474cdce41db9f3f74f1f739290c9a7b484cfae6a1e3c3f954f70dc9779"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/archive/README.md",
+      "lifecycle": "history",
+      "review": "full_text_reviewed",
+      "resolution": "本轮归档已核对",
+      "lines": 20,
+      "bytes": 1624,
+      "sha256": "1c89f890b40bd5a46884bc2c8e94bf05c152cfddcf029b3ceb398765ad070e3f"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/operations.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 92,
+      "bytes": 10108,
+      "sha256": "f4aef569855f65aabc3563f97cb86012f3dae9f5e9db5113738c52a6bc5a0aed"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/docs/page-cart-scraping.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 84,
+      "bytes": 4850,
+      "sha256": "55ca35cf7ec69f2ecbaac180aee7f05625aa39bc344898a836478db8d19536c9"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/tasks/lessons.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 10,
+      "bytes": 457,
+      "sha256": "5fc6068331a34042f761063dbb970d7580f14c74702ec56c1ba08ccde74ab3a4"
+    },
+    {
+      "project": "sku-calculator",
+      "path": "sku-calculator/tasks/todo.md",
+      "lifecycle": "active",
+      "review": "full_text_reviewed",
+      "resolution": "已同步",
+      "lines": 13,
+      "bytes": 904,
+      "sha256": "3a5678095720ba47da4aa1dd142c192c1837398590a361cb5369eaefc74450d4"
+    }
+  ],
+  "validation": {
+    "localLinksChecked": 193,
+    "linkCheckedFiles": 63,
+    "brokenLinks": 0,
+    "reportHashes": "unchanged",
+    "featureData": "only lastUpdated corrected",
+    "applicationCodeChanges": 0,
+    "historicalCurrentText": "preserved exactly",
+    "gitIgnoreBoundary": "passed",
+    "neatSkillCrossPlatformCopies": "four files identical",
+    "scopeIsolation": "unrelated user edits excluded"
+  },
+  "sharedEntrypoints": [
+    {
+      "path": "/Users/chat/AGENTS.md",
+      "review": "full_text_reviewed",
+      "bytes": 12439,
+      "sha256": "8818db91c2542cd7600a4f0494adff1c0383e0ebf9cd460e14b324d5dbb07cdd"
+    },
+    {
+      "path": "/Users/chat/CLAUDE.md",
+      "review": "full_text_reviewed",
+      "bytes": 5634,
+      "sha256": "edb02b59a84dc8afbfee0e17811ef7c64c6b72736b9dc9b078a46a149a4ca70f"
+    },
+    {
+      "path": "/Users/chat/claude/AGENTS.md",
+      "review": "full_text_reviewed",
+      "bytes": 11899,
+      "sha256": "3f9784b4c350864056fac22a88655473ad82c6481d76f8f48114ff8307bd3f63"
+    },
+    {
+      "path": "/Users/chat/claude/CLAUDE.md",
+      "review": "full_text_reviewed",
+      "bytes": 16694,
+      "sha256": "31bc995597645f202c5768b01a69790b5aa8472adfc7eee047b06d513976747b"
+    },
+    {
+      "path": "/Users/chat/claude/docs/project-aliases.md",
+      "review": "full_text_reviewed",
+      "bytes": 3007,
+      "sha256": "7d493c0705fb560e0471afa1c2ffc1c389c8501cf9d8b6b0547fa5595895ce66"
+    },
+    {
+      "path": "/Users/chat/claude/docs/HANDOFF.md",
+      "review": "full_text_reviewed",
+      "bytes": 9129,
+      "sha256": "cb85e9115a117bc7d8626ee87f132e0fae08054d0c3f6c7dc3e969a980482c0b"
+    },
+    {
+      "path": "/Users/chat/claude/docs/codex-handoff/README.md",
+      "review": "full_text_reviewed",
+      "bytes": 2201,
+      "sha256": "027cd2c1cb79d084e88e68ba94106a8a57a00015a319f62bfa705413e4803214"
+    }
+  ],
+  "auditedAgainstCommit": "917f192",
+  "sharedSizeReview": {
+    "workspaceClaudeLines": 169,
+    "workspaceClaudeBytes": 16694,
+    "result": "略超字节软参考，属于用户共享硬边界与结构契约，本轮保留原规则并未追加叙事"
+  }
+}

@@ -4,6 +4,8 @@
 
 本批次已完成，只作追溯。下一轮必须重新读取加购、ERP组合和库存，不得复用本批次JSON。
 
+知识归档与逐文件审查结果见 [NEAT审查](neat-audit.md) 和 [完整盘点清单](knowledge-audit.json)。当前操作规则见 [操作手册](../../operations.md)。
+
 ## 范围与输入
 
 | 活动 | 账号 | 实时商家ID / ERP店铺 | SPU范围 | SKU数 | 今日加购件数 | 补零SKU |

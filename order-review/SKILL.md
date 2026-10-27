@@ -33,7 +33,7 @@ description: 审单项目导航：装箱辅助、日常浮窗、活动资料核�
 - 日常审单：读取原订单 → 恢复/编辑本地方案 → 用户逐单点击。单包按受保护审核链执行；多包当前只运行到拆分二次确认，随后由人工回ERP核对。
 - 装箱实验：只读快照/实验副本 → 标准ERP身份与装箱资料 → 指定箱型与约束 → 计算/独立校验 → 展示；历史人工方案只在求解完成后对照。
 - 活动批量：进入`docs/rules/activity-batch.md`，先区分历史资料核对、活动前置准备和活动中执行；不能混成一个数据流。
-- 商品身份：`features.json` 只贡献 `erpName`；正式简称/编码可由200条只读快照补全；视觉标签、特征、别名和活动 `sku-records` 不参与装箱身份。
+- 商品身份：进入 `docs/rules/packing-assistance.md` 的“商品目录与身份来源”，按现役加载契约区分当前确认身份、历史快照和尺寸关联。
 - 资料补充：保留完整名称、简称及原始尺寸 → 核实来源与估计轴 → 更新资料 → 读回；不自动扩大白名单。
 
 ## FAILURE PATTERNS
@@ -58,6 +58,7 @@ description: 审单项目导航：装箱辅助、日常浮窗、活动资料核�
 - `docs/2026-09-08-packing-simulator-plan.md`、`docs/2026-09-12-packing-algorithm-research.md`
 - `docs/archive/README.md`、`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/`、`docs/archive/2026-09-25-package-history-identity-and-data-audit/`
 - `docs/archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md`、`docs/archive/2026-10-11-project-direction-and-step-scripts/audit-inventory.json`
+- `docs/archive/2026-10-28-yuexi-identity-neat/README.md`、`docs/archive/2026-10-28-yuexi-identity-neat/previous-current.md`
 - `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
 - `data/packing-campaign-split-notes-09-22.md`（9月22日悦希活动分批原文及用户解释）

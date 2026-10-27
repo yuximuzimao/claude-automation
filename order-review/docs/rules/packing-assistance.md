@@ -20,6 +20,16 @@ KGOS大组合或固定拆法可直接沿用经验；小组合和零散合并订�
 - 结果必须保留商品、数量、箱型、尺寸来源、算法版本和逐件坐标（如有）的追溯关系。
 - 历史人工方案只在实验完成后作为对照，不能偷偷给求解器答案。
 
+## 商品目录与身份来源
+
+本节维护装箱目录的身份加载契约，对应 `src/order_review/packing_simulator_service.py` 的 `_product_directory_view()`；不改变商品匹配项目的 check/match/识图流程。
+
+- 候选全名来自 `product-mapping/data/products/*/features.json` 条目的 `erpName`、审单资料 `pendingMappings` 的 `erpFullName`、正式单品尺寸的 `erpNames` 和零体积配件的 `erpNames`。只保留现役装箱品牌，并应用停用品牌和仓库装箱排除项；视觉标签、特征、别名和活动 `sku-records` 不参与身份。
+- `product-mapping/data/products/erp-identities.json` 是2026-09-11的200条ERP档案只读快照，不是在售目录。正式尺寸中的商家编码可从该快照补充ERP全名及身份；当该尺寸记录的全名已在 `pendingMappings` 中关联同一 `currentMerchantCode` 时，不再从快照加入该编码的历史旧名。
+- 每个全名的正式简称、主商家编码优先取同全名快照；缺失时分别由对应 `pendingMappings.shortName/currentMerchantCode` 补齐，规格商家编码仍来自同全名快照。主/规格编码集合为空且尺寸记录有编码时，目录使用尺寸编码作为可用编码集合；不据此猜测ERP主商家编码。
+- 单品尺寸先按ERP标准全名关联，未命中时再按主/规格商家编码关联；简称缺失时可退回尺寸记录的 `displayName`，再退回全名。目录行的 `productKey` 仅是 `brandId::ERP标准全名` 形式的 opaque 标识，不是商品匹配的视觉键。
+- 单品尺寸、零体积配件和仓库排除项由 `data/packing-product-dimensions.json` 维护；纸箱、原箱、规则和资料收据由 `data/packing-dimensions.json` 维护。`pendingMappings` 可以提供目录身份字段，但其中一条记录的存在不代表该商品或箱型已获准进入求解；正式能力仍以现役数组和解析结果为准。
+
 ## 当前技术边界
 
 单箱内核已支持严格几何校验、物件顺序、候选点和稳定性分层；`pack_order()`多箱外层仍是可选研究，不能当作当前生产能力。

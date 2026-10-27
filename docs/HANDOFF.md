@@ -5,7 +5,7 @@
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
 
-库存计算（2026-10-28）：悦希账号17与春堂御品账号13的双活动已完成，两份Excel已放桌面，独立核验无超分配，售后LaunchAgent及3457健康检查均已恢复；本轮事实与报告指纹见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`。两店实时商家ID已补入共享shop-map。焕颜水、焕颜乳的3.0名称已同步当前识图和审单资料，历史身份快照保留原事实。
+库存计算（2026-10-28）：悦希账号17与春堂御品账号13的双活动及NEAT归档已完成；报表指纹、跨项目知识审查与完整清单见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`，现役库存规则见 `sku-calculator/docs/operations.md`。焕颜水乳3.0身份与历史资料边界见 `order-review/docs/archive/2026-10-28-yuexi-identity-neat/`；售后服务已恢复。未完成事项仅保留在各项目Todo。
 
 提醒事项迁移已完成并经用户确认收到。跨项目接入统一从 `docs/reminders.md` 进入；阶段证据归档于 `docs/archive/2026-10-21-mac-reminders/README.md`。
 
