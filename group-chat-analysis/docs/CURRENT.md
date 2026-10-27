@@ -47,7 +47,7 @@
 
 ## 当前阅读 / 资料库原型状态
 
-当前私密原型仍输出到：`runtime/reports/page-v2-prototype-light.html`；文件名暂未迁移，页面内容已经切换到新信息模型。
+静态预览仍可输出到 `runtime/reports/page-v2-prototype-light.html`；正式人工终审使用 `python3 -m src.app.serve_analysis` 提供的本机 review 页面，运行页为 `runtime/reports/review-live/page.html`。只有通过 review server 打开的页面才会把“没用 / 存资料库”写入正式 durable state。
 
 当前已验证结构：
 
@@ -68,11 +68,11 @@
 - 黑话继续独立维护语境化词典。
 - 2026-10-18 开始工程化分析质量改造：已新增 `docs/ANALYSIS-DATA-QUALITY-SOP.md`、`src/analysis/quality.py`、来源回填/审核/应用、`atomic_claim_queue.py`、`cluster_proposals.py` 及回归测试。当前 **2278 张首次阅读候选**均纳入数据质量快照；当时 105 条 Silver、原文、已阅和 9 条资料库知识均继续沿用同一工程化质量门禁；本轮新增清洗未改动已阅结果或资料库知识。旧候选层仍有 **698 张**未回填为正式 source anchor（其中已 full 160），45 条旧引用仍依赖隐式 full，1 条外部引用缺正式 locator；这部分现在属于来源/历史格式债，不再构成 Atomic Claim 历史队列阻塞。人工 source-anchor 阶段已形成 **909 条 verified source anchor**，并反向发现 **15 张旧 Topic Card 语义抽取错误**；这些卡继续 quarantine，不能参与自动聚类或评测真值。词面召回的 known-positive recall@5 仍为 75.6%、@10 为 85.6%，top5 已标注一致率 65.9%，只作为召回基线。Atomic Claim 生产批次已从 B1 持续推进至 **B63**；全部正式 claim 自带 canonical `source_refs`。截至 2026-10-22，reviewed atomic registry 为 **1592 张来源卡 / 1689 条 reviewed claims / 66 个数据批次**；历史 Question Cluster Registry **v71** 为 **1689 reviewed claims / 623 reviewed questions / 301 个多命题问题 / 564 条 boundary negative links**；2026-10-24 已以原内容一次性 bootstrap 为稳定现役 `question-cluster-registry-current.json`，现役 assignment / Silver routing / 页面 / release 均不再依赖 v71/v14 等历史文件名。召回器继续采用 `lexical_topk + same_source_card + same_entity` 多路 union，所有路线只负责召回；B62 再次出现高相似但不同题的“盗贼练级痛苦 vs 为缓解痛苦临时AH买装”，说明高分线仍不能当合并概率。历史 atomic-claim work queue 已完全清空：**active 0**；2278 张候选最终分区为 **613 already_full_silver + 44 already_normalized + 1554 atomic_claim_reviewed + 67 atomic_claim_no_claim_reviewed = 2278**，无残留 ready / anchor-review / direct-source work item。下一阶段不再继续逐卡清历史 Topic Card，而是从 reviewed Question Clusters 转换规范化 Silver 草稿/知识单元。15张旧语义错误 Topic Card 继续 quarantine，其正确原子命题已进入 reviewed registry。 Question Cluster→Silver 分流已工程化并 **623/623 清零**：在 publication 前正式 Silver 保持 **105 条且未被自动改写**；最终为 **140 reuse_existing / 483 new_draft / 0 needs_review / 188 existing-Silver links**，routing queue **active 0**。随后 Silver 草稿收敛也已完成：483个 new_draft 经 consolidation B01–B13 收敛为 **241 provisional groups / 31 exclusions / active 0 / 45 separation boundaries**（116 multi-question + 125 singleton）。这241组又已全部完成 materialization 与人工 authoring：**1183 Atomic Claims / 1135 evidence-card links（1094 full + 41 partial）→ 241/241 authored Silver drafts / authoring active 0**；每条均保留 claim-level canonical lineage，authoring 阶段正式 `silver-knowledge-v1.json` 仍为105条未改写。发布前完整性检查确认 materialized/authored 一一对应、无重复 knowledge_id、无与正式105条ID碰撞、必需 schema/evidence/lineage 均完整；authoring 阶段相关回归测试 **24/24 PASS**。
 - 2026-10-23 完成首轮全历史 Silver publication：241/241 authored drafts 的 publication gate 已人工清零，结果为 **232 append_new / 6 update_existing / 3 hold**；3 个 hold 均由更完整上位单元覆盖，不进入正式库。publication candidate 与发布前基线对比 **warning delta=0**，相关回归测试 **29/29 PASS**；正式 `silver-knowledge-v1.json` 先从 **105 → 337** 个知识单元，source window 扩展至 **2026-09-13..2026-10-18**。正式候选索引同步为 **1696 full / 33 partial / 549 unabsorbed**，normalized 为 **1740 full / 33 partial / 505 unabsorbed**。
-- 2026-10-23 随后完成首次阅读/资料库收敛：2278 张旧 Topic Card 候选均沿 `Atomic Claim → Question → routing → consolidation → publication` 获得终点，**raw card first-read queue=0**；正式 Silver 为 **337 → 344 = 335 queue + 9 knowledge**。其中 7 条旧 card 级用户确认知识已逐条回读原文并迁移为正式 Silver，资料库不再保留 legacy card 旁路。335 个 queue 是 Silver 层待决策基线，不等于最终页面可见数；无限服 dossier 动态吸收后当前真正首次阅读为 **323**。
+- 2026-10-23 随后完成首次阅读/资料库收敛：2278 张旧 Topic Card 候选均沿 `Atomic Claim → Question → routing → consolidation → publication` 获得终点，**raw card first-read queue=0**；正式 Silver 为 **337 → 344 = 335 queue + 9 knowledge**。其中 7 条旧 card 级用户确认知识已逐条回读原文并迁移为正式 Silver，资料库不再保留 legacy card 旁路。335 个 queue 是 Silver 层待决策基线，不等于最终页面可见数；无限服 dossier 动态吸收后，当时真正首次阅读为 **323**。
 - 已建立正式语义指纹与已阅状态：344 条 Silver 得到 **344 个唯一 semantic fingerprint / 0 exact collision**；`reviewed-semantic-state-v1.json` 当前含 **16 个用户语义状态 = 9 knowledge + 7 discard**。只有明确用户裁决才能进入该状态，系统过滤/错误隔离/合并项不得伪装成“用户已阅”；同语义只增加证据或可信度时不重新打扰，question 或稳定适用边界发生实质变化时才允许重新进入阅读队列。页面 localStorage 继续用 semantic fingerprint 作为即时交互缓存；正式本机 review server 已建立，只监听 `127.0.0.1`，在同源 + CSRF 门禁下把“没用 / 存资料库”写入 `reviewed-semantic-decisions-v1.json` 并重建 `reviewed-semantic-state-v1.json`。用户裁决只作用于正式 queue Silver，不改写 Silver 事实层；静态直接打开页面仍只使用 localStorage。
 - 来源与历史格式债已显著收敛：45 条旧 Silver 隐式 coverage 已全部显式化，唯一外部引用已补正式 locator；verified source anchors 当前 **1795**。335/335 个首次阅读 Silver 均至少有一份可靠可点原文。候选层当前 source anchor 为 **2164 high / 4 medium / 110 none**，质量门禁为 **0 error / 1 warning**；剩余 warning 是非阻塞的历史来源长尾。另有 73 个 Silver 仍存在部分辅助 evidence 未定位（446 张唯一辅助卡），但不影响任何首次阅读单元的最小可审计原文。
 - 2026-10-24 已建立正式分析发布链：`run_analysis --prepare-work` 冻结 completed batch、`current.md`、canonical batch 与 Question Registry/Silver/已阅/dossier 起始 hash；语义审阅完成后 reviewed receipt 再绑定 work-package hash 和最终分析产物 hash。确定性发布顺序为 **quality gate → staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`**；quality/render 失败不推进 batch，重复运行幂等，指针已切但状态写失败可向前恢复，历史 release 支持完整性校验后回滚。每个 immutable release 还会冻结 work package 与 reviewed receipt 本体，避免以后只剩 hash、原审阅输入丢失。正式页面 owner 已从 Git 忽略的 runtime 原型迁入 `src/analysis/page_builder.py` / `page_renderer.py`。当前真实主 batch-state 仍是旧的 `incremental-20261009-001 / completed`，而历史语义基线已覆盖到 10/18，因此**未**用该旧 batch 冒充历史基线发布或标记 analyzed；正式 runner 等下一次真实新 incremental batch 接管。
-- 2026-10-25 当前验证策略改为**冻结采集、先验收清洗成果**：第二群 `wow-infinite-2` 暂不采集，第一个群 `wow-infinite-time` 也不补 2026-10-19 之后消息；当前只使用已经完整验收的 **2026-09-13 → 2026-10-18 共 36/36 天** 历史，先判断 344 条正式 Silver / 当前 323 条首次阅读结果是否重复、是否过度合并、原文是否支撑、以及最终是否对用户有实际价值。此前为未来增量准备的一次性 checkpoint 已撤销，避免误触发采集。
+- 2026-10-25 当前验证策略改为**冻结采集、先验收清洗成果**：第二群 `wow-infinite-2` 暂不采集，第一个群 `wow-infinite-time` 也不补 2026-10-19 之后消息；当时只使用已经完整验收的 **2026-09-13 → 2026-10-18 共 36/36 天** 历史，以 344 条正式 Silver / 323 条首次阅读作为人工验收起点，判断是否重复、是否过度合并、原文是否支撑、以及最终是否对用户有实际价值。此前为未来增量准备的一次性 checkpoint 已撤销，避免误触发采集。
 
 无限服当前单独启用动态专题档案：`runtime/analysis-work/infinite-dossier-v1.json`。2026-10-18 已从长段自然语言摘要升级到 schema v2：仍按练级与玩家发展、经济与打金、专业与资源、规则与风险、职业玩法变化、服务器生态六个维度，但每个维度保存 `观察字段 / 当前状态 / 适用范围 / 依据 / 证据ID`，页面以结构表展示；重复观察只静默增加支持度，AI综合判断不得覆盖来源状态。
 
@@ -85,9 +85,9 @@
 - 页面全量 source links：high **2589** / medium **20** / none **834**；其中正式首次阅读候选层为 **2164 high / 4 medium / 110 none**；
 - Silver 清洗前的首次阅读候选：**2278 条事实切片**；它们只是历史候选索引，当前 **0 张 raw Topic Card** 直接进入首次阅读；
 - 当前正式 Silver 工作集共 **344 个知识单元 = 335 queue + 9 knowledge**；候选索引仍为 **1696 full / 549 unabsorbed / 33 partial**，叠加最新 dossier 等规范化组件后 normalized 为 **1743 full / 505 unabsorbed / 30 partial**。这些 card-level 状态只描述来源覆盖，不再决定用户可见队列；
-- 当前正式首次阅读队列：**323 个 Silver 阅读单元**；Silver 层 335 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示。335/335 个 Silver queue 均至少有一份 verified 原文；页面仍按每批最多40个阅读单元分页；
+- 当前正式首次阅读队列：**307 个 Silver 阅读单元**；Silver 层 335 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。335/335 个 Silver queue 均至少有一份 verified 原文；页面仍按每批最多40个阅读单元分页；
 - 无限服旧阶段“约125条候选”已作废。正式 Silver 重建后实际只有 **12 个无限服 queue 单元**需要进入动态档案；当前已全部按 `baseline_absorb` 吸收，dossier 为 **6 个维度 / 38 个动态 signal**（原27 + 新11），并建立 Silver→signal→原文血缘。重复执行 JSON 全等；未来只有 `visible_update`（state/scope/boundary 实质变化）才重新进入新信息。
-- 当前资料库知识：**9 条正式 Silver knowledge**；已阅语义状态共 **16 条（9 knowledge + 7 discard）**。
+- 当前资料库知识：**9 条正式 Silver knowledge**；已阅语义状态共 **34 条（9 knowledge + 25 discard）**。其中 25 个 discard 包含早期 7 个历史用户排除语义以及当前正式 Silver 的用户终审，不应把总数误读成“本轮新点掉25条”。正式 knowledge-id 裁决当前共 27 条，其中 9 knowledge + 18 discard。
 
 这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
 
@@ -95,10 +95,10 @@
 
 ## 当前下一步
 
-1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成并通过 **300 tests OK**；当前基线仍为 **344 Silver / 323 首次阅读 / 9 资料库 / 16 reviewed states / 38 dossier signals**。
-2. 下一主线只剩**真实新 incremental batch 的语义生产增量闭环**：从 work package 固定的起点出发，抽取本批新 claims，按 stable current registry 做 assignment / reviewed new-question bootstrap，再只对受影响 question 生成 Silver / dossier delta，完成审阅后生成 reviewed receipt 交给正式 runner。不能每次重跑全历史，也不能让历史 v71/v14 快照重新成为现役输入。
-3. 在上述 daily delta 中继续落实对象身份/基础上下文补齐和“可补全候选”持久状态；question 决定语义边界，重复支持静默加强，新增条件/例外/纠错才重新进入首次阅读。
-4. 继续验证每批最多40个阅读单元的历史补课体验，以及真实 daily 分析窗口/跨午夜报告边界；阅读分页只控制负载，不得影响 canonical 去重或跨日语义合并。
+1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成并通过 **300 tests OK**；当前人工验收基线为 **344 Silver / 307 首次阅读 / 9 资料库 / 34 reviewed states / 38 dossier signals**。
+2. **继续人工验收现有 307 条首次阅读 Silver，暂不恢复新采集。** 用户已经确认一类稳定低价值模式：把聊天抽象成“玩家心理 / 团队文化 / 产品适配 / 泛化方法论”，但没有具体对象、数值、机制、动作、门槛或可复用判断条件的内容，通常没有首次阅读价值。后续可先按该模式保守筛一批候选给用户确认，但不得未经确认直接大范围自动 discard。
+3. 继续观察其余条目是否存在新的稳定无用模式、误分类或展示理解成本；`#114 / #150 / #152 / #171` 当前因仅看描述仍无法判断，明确保留到用户实际阅读后再决定。`#304` 已确认是“雷霆 → 惊雷”的锻造武器升级信息，归入“装备机制”，展示文案已改成直接说明对象。
+4. 只有现有清洗成果的价值验收足够稳定后，才恢复真实新 incremental batch 的语义生产增量闭环，并在 daily delta 中继续落实对象身份/基础上下文补齐与“可补全候选”持久状态；不能每次重跑全历史。
 5. 剩余来源长尾 **110 none** 与部分辅助 evidence 缺口继续作为非阻塞后台债；在真实新 batch 多次手动 E2E 稳定前不进入无人值守调度。
 
 下一步严格以 `tasks/todo.md` 为准。
