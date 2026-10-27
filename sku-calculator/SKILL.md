@@ -58,6 +58,7 @@ sku-calculator/
     INDEX.md
     page-cart-scraping.md
     archive/README.md
+    archive/<date>-<topic>/README.md  # 已完成批次事实与报告指纹，按archive/README导航
   tasks/todo.md
   tasks/lessons.md
   test/allocate.test.js

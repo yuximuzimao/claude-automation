@@ -72,6 +72,9 @@ parse --supplier-id <商家ID> → resolve-components → resolve-stock → calc
 
 ## §6 已知坑位
 
+- **档案V2的`subItemNum`是子品用量合计**（2026-10-28双活动实测）：如4盒面膜只有1条子品行、组合比例为4，字段值也是4。校验组合完整性应核对比例合计，不能把它当成子品种类数与行数比较。
+- **后台ERP标签页的弹窗关闭动画可能停在离场状态**（2026-10-28实测）：Vue的`ElDialog.visible=false`且`closed=true`后，隐藏标签中的动画仍可能停在0ms，DOM保持可见尺寸。先激活已有ERP标签，再轮询确认弹窗隐藏；不要删除DOM或重复查询来掩盖。关闭按钮也必须逐一过滤可见性，避免点到嵌套隐藏弹窗的按钮。
+
 - **resolve-components 和 resolve-stock 必须顺序执行**：两者共用同一个 ERP tab，不能并行（ERP 浏览器操作互斥）
 - **product-columns.json 是临时产出**：每次 resolve-components 清空重建，不同店铺不相互污染
 - **店铺名不能设默认值**：2026-05-22 事故——resolve-components 默认 shop=澜泽，但数据是共途的，读了错误店铺对应表。修复：店铺名从 `supplierId → shop-map.js` 自动推导，推导失败时报错不静默
