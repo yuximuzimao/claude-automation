@@ -78,6 +78,8 @@ parse --supplier-id <商家ID> → resolve-components → resolve-stock → calc
 
 ## §6 已知坑位
 
+- **缓存库存页可能仍停在末页**：`query-stock.js`在开始读取前回到第1页，并按当前可见分页确认每页页码、预期条数及内容已更新。每页条数也只读取可见选择器；下一页不存在或禁用时立即停止。不能只把循环次数当作真实页码，也不能以最终条数相等代替逐页验证。
+
 - 共享ERP的子品字段与弹窗规则由商品匹配项目维护：子品数量语义见 [ERP技术读取规范](../../product-mapping/docs/INDEX.md#子品明细读取)，后台弹窗关闭诊断见 [档案回读稳定性](../../product-mapping/docs/matching-stability.md#311-档案回读必须精确命中查询编码)。本项目不再复制一套定义。
 
 - **resolve-components 和 resolve-stock 必须顺序执行**：两者共用同一个 ERP tab，不能并行（ERP 浏览器操作互斥）

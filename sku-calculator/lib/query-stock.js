@@ -132,7 +132,9 @@ async function queryStock(erpId) {
   try {
     const psVal = await cdp.eval(erpId, `
       (function(){
-        var sel = document.querySelector('.el-pagination .el-select .el-input__inner');
+        var sel = Array.from(document.querySelectorAll('.el-pagination .el-select .el-input__inner')).find(function(node){
+          var r = node.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+        });
         return sel ? parseInt(sel.value, 10) : 50;
       })()
     `);
@@ -140,6 +142,45 @@ async function queryStock(erpId) {
   } catch (_) {}
   const totalPages = Math.ceil(totalRecords / PAGE_SIZE);
   console.log(`  共 ${totalPages} 页，每页 ${PAGE_SIZE} 条`);
+
+  // 缓存页面可能停在末页；查询按钮不会保证页码归一。
+  await cdp.eval(erpId, `
+    (function(){
+      var visible = function(node){ var r=node.getBoundingClientRect();return r.width>0&&r.height>0; };
+      var pager = Array.from(document.querySelectorAll('.el-pagination')).find(visible);
+      if (!pager) throw new Error('找不到可见库存分页');
+      var active = pager.querySelector('.el-pager li.active');
+      if (active && active.textContent.trim() === '1') return true;
+      var first = Array.from(pager.querySelectorAll('.el-pager li.number')).find(function(node){
+        return visible(node) && node.textContent.trim() === '1';
+      });
+      if (!first) throw new Error('找不到库存第1页按钮');
+      first.click(); return true;
+    })()
+  `);
+
+  async function readExpectedPage(page, previousRows) {
+    const expectedCount = Math.min(PAGE_SIZE, totalRecords - (page - 1) * PAGE_SIZE);
+    const start = Date.now();
+    while (Date.now() - start < 15000) {
+      const state = await cdp.eval(erpId, `
+        (function(){
+          var visible = function(node){ var r=node.getBoundingClientRect();return r.width>0&&r.height>0; };
+          var pager = Array.from(document.querySelectorAll('.el-pagination')).find(visible);
+          var active = pager && pager.querySelector('.el-pager li.active');
+          return {
+            page: active ? parseInt(active.textContent.trim(),10) : 0,
+            loading: Array.from(document.querySelectorAll('.el-loading-mask')).some(visible)
+          };
+        })()
+      `);
+      const rows = await readCurrentPage(erpId);
+      if (state.page === page && !state.loading && rows.length === expectedCount &&
+          (!previousRows || JSON.stringify(rows) !== JSON.stringify(previousRows))) return rows;
+      await sleep(150);
+    }
+    throw new Error(`库存第${page}页未就绪：须页码正确、${expectedCount}条且内容已更新`);
+  }
 
   // 翻页读全量数据（从 Vue store 读，绕过虚拟滚动截断）
   const allRows = [];
@@ -151,13 +192,14 @@ async function queryStock(erpId) {
             var r = node.getBoundingClientRect();
             return r.width > 0 && r.height > 0;
           });
-          if (btn) btn.click();
+          if (!btn || btn.disabled) throw new Error('库存下一页按钮不可用');
+          btn.click();
         })()
       `);
       await sleep(2000);
       await waitForTableReady(erpId);
     }
-    const rows = await readCurrentPage(erpId);
+    const rows = await readExpectedPage(page, page > 1 ? allRows.slice(-PAGE_SIZE) : null);
     console.log(`  第 ${page}/${totalPages} 页读取 ${rows.length} 条`);
     allRows.push(...rows);
   }

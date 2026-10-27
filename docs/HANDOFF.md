@@ -7,7 +7,7 @@
 
 库存计算（2026-10-28）：悦希账号17与春堂御品账号13的双活动及NEAT归档已完成；报表指纹、跨项目知识审查与完整清单见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`，现役库存规则见 `sku-calculator/docs/operations.md`。焕颜水乳3.0身份与历史资料边界见 `order-review/docs/archive/2026-10-28-yuexi-identity-neat/`；售后服务已恢复。未完成事项仅保留在各项目Todo。
 
-KGOS账号4的新活动处于库存分配参数确认阶段，实时ERP资料已保存、售后已恢复；下一步及唯一当前状态见 `sku-calculator/tasks/todo.md`。本场尚未出最终报表，不复用前一批次的扣库存或满赠配置。
+KGOS账号4（2026-10-28）：库存计算已完成，37个销售SKU按本场用户决定等权分配，4档满赠因各500不足改为各300；报表已放桌面并独立核验无超分配。库存读取的末页残留问题已修复、真实201/201复验通过，售后已恢复；完整事实与指纹见 `sku-calculator/docs/archive/2026-10-28-kgos-account4-allocation/`。
 
 提醒事项迁移已完成并经用户确认收到。跨项目接入统一从 `docs/reminders.md` 进入；阶段证据归档于 `docs/archive/2026-10-21-mac-reminders/README.md`。
 
