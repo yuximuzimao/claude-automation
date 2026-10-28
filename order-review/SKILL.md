@@ -59,6 +59,7 @@ description: 审单项目导航：装箱辅助、日常浮窗、活动资料核�
 - `docs/archive/README.md`、`docs/archive/2026-09-27-yuexi-carton-capacities-and-service-stop/`、`docs/archive/2026-09-25-package-history-identity-and-data-audit/`
 - `docs/archive/2026-10-11-project-direction-and-step-scripts/neat-handoff.md`、`docs/archive/2026-10-11-project-direction-and-step-scripts/audit-inventory.json`
 - `docs/archive/2026-10-28-yuexi-identity-neat/README.md`、`docs/archive/2026-10-28-yuexi-identity-neat/previous-current.md`
+- `docs/archive/2026-10-29-split-menu-and-case-deletion/`
 - `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
 - `data/packing-campaign-split-notes-09-22.md`（9月22日悦希活动分批原文及用户解释）

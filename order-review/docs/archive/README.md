@@ -4,6 +4,11 @@
 
 当前状态：`../CURRENT.md`；使用入口：`../../README.md`。长期业务约束：`../2026-07-23-package-rule-foundation.md`。
 
+## 2026-10-29 拆分入口修复与单条方案删除
+
+- [阶段归档](2026-10-29-split-menu-and-case-deletion/neat-handoff.md)：ERP混合拆分菜单新标识、332项非界面回归与12项定位检查、装箱服务使用后关闭，以及订单772478993单条本地方案和索引的删除验证。
+- [文档盘点](2026-10-29-split-menu-and-case-deletion/audit-inventory.json)：活跃知识全文审查、历史目录登记、职责和本轮处置范围。
+
 ## 2026-10-28 焕颜水乳3.0身份同步与文档收口
 
 - [NEAT归档](2026-10-28-yuexi-identity-neat/README.md)：当前ERP名称及简称统一为3.0、编码与尺寸沿用、此前332项非界面验证、身份加载契约及本次文档整理边界。
