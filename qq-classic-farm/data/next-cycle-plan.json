@@ -1,0 +1,131 @@
+{
+  "plan_scope": "next 3 planting cycles (~one day with normal fertilizer use; ~28h48m with only 20% land acceleration and no fertilizer)",
+  "based_on_inventory": "data/inventory-live-2026-10-28.json",
+  "generated_at": "2026-10-28T17:25:30+08:00",
+  "goal": "leveling first; precompute all three rounds before touching the field; avoid any planned seed reaching zero",
+  "rules": [
+    "Warehouse row-major order is the picker order; each warehouse row of five is one picker page.",
+    "Read full warehouse inventory once at the start of the daily 3-cycle batch.",
+    "During the three cycles, subtract only Agent-planned consumption from the saved snapshot; do not rescan warehouse each cycle.",
+    "If the user manually uses/receives seeds, a reward inserts a new visible seed, or an expected picker slot no longer matches, mark inventory dirty and refresh before further planting.",
+    "Every 4-plot seed must complete: select -> 2x2 preview -> explicit confirm -> verify landed. Never click another plot while preview is unconfirmed.",
+    "After one-key ordinary planting, verify all expected remaining cells are occupied."
+  ],
+  "qq": {
+    "special_seed": {
+      "name": "泡泡棉花糖种子",
+      "picker_page": 1,
+      "picker_slot": 3,
+      "quantity_start": 24,
+      "quantity_per_cycle": 3,
+      "quantity_after_3_cycles": 15,
+      "base_mature_time": "12小时",
+      "exp_per_seed": 18095,
+      "placements_each_cycle": ["gold_a", "gold_b", "gold_c"]
+    },
+    "cycles": [
+      {
+        "cycle": 1,
+        "ordinary_seed": "天山红枫种子",
+        "picker_page": 4,
+        "picker_slot": 1,
+        "quantity_start": 30,
+        "quantity_use": 12,
+        "quantity_after": 18,
+        "ordinary_exp_each": 4005,
+        "expected_exp": 102345
+      },
+      {
+        "cycle": 2,
+        "ordinary_seed": "天山红枫种子",
+        "picker_page": 4,
+        "picker_slot": 1,
+        "quantity_start": 18,
+        "quantity_use": 12,
+        "quantity_after": 6,
+        "ordinary_exp_each": 4005,
+        "expected_exp": 102345
+      },
+      {
+        "cycle": 3,
+        "ordinary_seed": "紫薇种子",
+        "picker_page": 3,
+        "picker_slot": 3,
+        "quantity_start": 76,
+        "quantity_use": 12,
+        "quantity_after": 64,
+        "ordinary_exp_each": 3958,
+        "expected_exp": 101781
+      }
+    ],
+    "expected_3_cycle_exp": 306471,
+    "postconditions_each_cycle": [
+      "3 confirmed pure-gold 2x2 special crops",
+      "12 ordinary 1x1 crops",
+      "24 cells occupied",
+      "all planted seeds use 12-hour base maturity"
+    ]
+  },
+  "wechat": {
+    "special_seed": {
+      "name": "星语铃花种子",
+      "picker_page": 1,
+      "picker_slot": 3,
+      "quantity_start": 10,
+      "quantity_per_cycle": 2,
+      "quantity_after_3_cycles": 4,
+      "base_mature_time": "12小时",
+      "exp_per_seed": 19958,
+      "placements_each_cycle": ["purple_a", "purple_b"]
+    },
+    "cycles": [
+      {
+        "cycle": 1,
+        "ordinary_seed": "天山红枫种子",
+        "picker_page": 2,
+        "picker_slot": 5,
+        "quantity_start": 30,
+        "quantity_use": 16,
+        "quantity_after": 14,
+        "ordinary_exp_each": 4414,
+        "expected_exp": 110540
+      },
+      {
+        "cycle": 2,
+        "ordinary_seed": "黄金果种子",
+        "picker_page": 2,
+        "picker_slot": 1,
+        "quantity_start": 94,
+        "quantity_use": 16,
+        "quantity_after": 78,
+        "ordinary_exp_each": 4365,
+        "expected_exp": 109756
+      },
+      {
+        "cycle": 3,
+        "ordinary_seed": "黄金果种子",
+        "picker_page": 2,
+        "picker_slot": 1,
+        "quantity_start": 78,
+        "quantity_use": 16,
+        "quantity_after": 62,
+        "ordinary_exp_each": 4365,
+        "expected_exp": 109756
+      }
+    ],
+    "expected_3_cycle_exp": 330052,
+    "postconditions_each_cycle": [
+      "2 confirmed purple 2x2 special crops",
+      "16 ordinary 1x1 crops",
+      "24 cells occupied",
+      "all planted seeds use 12-hour base maturity"
+    ]
+  },
+  "inventory_dirty_conditions": [
+    "user manually plants or consumes any planned seed",
+    "daily/mission/activity reward adds a visible seed before a planned picker position",
+    "shop purchase changes planned seed quantity/order",
+    "picker page/slot does not match this plan",
+    "one-key planting result differs from the expected occupied-cell count"
+  ]
+}

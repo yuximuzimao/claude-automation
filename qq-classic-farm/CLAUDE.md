@@ -29,6 +29,6 @@
 
 ## Git / 数据边界
 
-- `data/seed-catalog.json` 与 `assets/seeds/` 是可版本化知识资产。
+- `data/seed-catalog.json`、`data/ui-layout.json`、`data/ui-anchors.json`、`assets/seeds/`、`assets/ui/` 与 `scripts/` 是可版本化知识/工具资产；原始整屏截图和一次性探针仍只放工作区 `_sandbox/`。
 - 仓库数量属于时间点观察值，必须带观察语义，不当作实时真值；再次实际操作时必要则刷新。
 - 原始全屏截图、OCR 中间产物、坐标探针和实验脚本放工作区根 `_sandbox/`，不提交。

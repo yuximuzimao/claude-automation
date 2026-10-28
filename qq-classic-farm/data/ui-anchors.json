@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "captured_at": "2026-10-25",
+  "matching": {
+    "default_threshold": 0.82,
+    "default_scales": [0.9, 0.95, 1.0, 1.05, 1.1]
+  },
+  "anchors": {
+    "onekey_harvest": {
+      "template": "assets/ui/onekey-harvest.png",
+      "threshold": 0.82,
+      "roi_normalized": [0.1, 0.5, 0.8, 0.45],
+      "click": "template_center",
+      "validation": {
+        "qq_positive_score": 0.914,
+        "wechat_positive_score": 1.0,
+        "clean_farm_false_score": 0.301
+      }
+    },
+    "onekey_farm": {
+      "template": "assets/ui/onekey-farm.png",
+      "threshold": 0.80,
+      "roi_normalized": [0.1, 0.5, 0.8, 0.45],
+      "click": "template_center",
+      "validation": {
+        "qq_positive_score": 0.819,
+        "clean_farm_false_score": 0.403
+      }
+    },
+    "fertilizer_normal": {
+      "template": "assets/ui/fertilizer-normal.png",
+      "threshold": 0.82,
+      "roi_normalized": [0.0, 0.45, 0.8, 0.5],
+      "click": "template_center",
+      "advanced_from_normal": {
+        "base_dx_pixels": 95,
+        "base_dy_pixels": 0,
+        "multiply_by_match_scale": true
+      },
+      "validation": {
+        "qq_positive_score": 1.0,
+        "wechat_positive_score": 0.941,
+        "clean_farm_false_score": 0.499
+      }
+    }
+  },
+  "safety": [
+    "Templates are semantic crops of the target control, not large scene-background crops.",
+    "A failed or below-threshold match must never fall back to guessed coordinates.",
+    "The fertilizer advanced-button offset is valid only after one-key farming has been cleared and the menu has the normal two-fertilizer layout."
+  ]
+}

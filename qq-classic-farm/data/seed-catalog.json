@@ -79,7 +79,9 @@
           "platform": "qq",
           "slot": "r2c1",
           "name": "勿忘我种子",
-          "quantity_latest_known": 28,
+          "quantity_latest_known": 16,
+          "quantity_confidence": "tracked",
+          "quantity_latest_known_basis": "2026-10-28 QQ picker observed 28 before one-key planting; 12 ordinary plots were planted with 勿忘我, leaving 16.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -463,7 +465,9 @@
           "platform": "qq",
           "slot": "r1c3",
           "name": "星语铃花种子",
-          "quantity_latest_known": 2,
+          "quantity_latest_known": 0,
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 QQ picker showed 2; both were planted into 2x2 special plots, leaving 0.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "1380个/季",
@@ -764,7 +768,9 @@
           "platform": "qq",
           "slot": "r1c5",
           "name": "森野黄金芽种子",
-          "quantity_latest_known": 5,
+          "quantity_latest_known": 0,
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 QQ picker showed 1 remaining before planting; that last 森野黄金芽 was planted, leaving 0.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "10个/季",
@@ -781,15 +787,15 @@
             "exp": "经验：18095/季",
             "income": "收入： 50万/季"
           },
-          "quantity_initial_snapshot": 1,
-          "quantity_confidence": "tracked",
-          "quantity_latest_known_basis": "2026-10-24 QQ seed picker observed 6; one 4-plot 森野黄金芽 was planted on a complete gold-land 2x2, leaving 5."
+          "quantity_initial_snapshot": 1
         },
         "wechat": {
           "platform": "wechat",
           "slot": "picker-p1c5-2026-10-24",
           "name": "森野黄金芽种子",
-          "quantity_latest_known": 1,
+          "quantity_latest_known": 0,
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 WeChat picker showed 1 remaining; that last 森野黄金芽 was planted into a complete purple 2x2, leaving 0.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": null,
@@ -1316,6 +1322,16 @@
       "name": "茱萸种子",
       "image": "assets/seeds/seed-032.png",
       "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "picker-p2c2-2026-10-24",
+          "name": "茱萸种子",
+          "quantity_latest_known": 30,
+          "quantity_first_observed": 30,
+          "quantity_first_observed_at": "2026-10-24T18:28:15+08:00",
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "QQ picker page 2 slot 2 screenshot; red-berry icon matches 茱萸. No later known consumption."
+        },
         "wechat": {
           "platform": "wechat",
           "slot": "r1c5",
@@ -1689,27 +1705,157 @@
       "name": "森野白桃种子",
       "image": "assets/seeds/seed-044.png",
       "observations": {
-        "wechat": {
-          "platform": "wechat",
-          "slot": "picker-p4c4-2026-10-24",
+        "qq": {
+          "platform": "qq",
+          "slot": "warehouse-p6c3-2026-10-28",
           "name": "森野白桃种子",
-          "quantity_latest_known": 92,
+          "quantity_latest_known": 64,
           "mature_time": "12小时",
           "harvests": "1季",
-          "yield_per_harvest": null,
-          "exp_per_harvest": null,
-          "income_per_harvest": null,
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3433/季",
+          "income_per_harvest": "5万/季",
           "seed_price_display": null,
-          "fruit_value_display": null,
+          "fruit_value_display": "5000/个",
           "raw_detail_rows": {
-            "picker_quantity": "108 before planting",
-            "mature_observation": "newly planted crop showed 09:35:35 remaining on 20% accelerated land, consistent with a 12-hour base mature time",
-            "harvest_observation": "crop status showed 1/1"
+            "mature": "成熟：12小时",
+            "fruit": "果实：5000/个",
+            "harvest": "可收：1季",
+            "yield": "季产：10个/季",
+            "exp": "经验：3433/季",
+            "income": "收入：5万/季"
           },
-          "quantity_confidence": "tracked",
-          "quantity_latest_known_basis": "2026-10-24 WeChat picker observed 108; 16 gold-land plots were planted in one-key mode, leaving 92.",
-          "quantity_first_observed": 108,
-          "quantity_first_observed_at": "2026-10-24"
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 live QQ warehouse."
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "warehouse-p4c3-2026-10-28",
+          "name": "森野白桃种子",
+          "quantity_latest_known": 12,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3784/季",
+          "income_per_harvest": "5万/季",
+          "seed_price_display": null,
+          "fruit_value_display": "5000/个",
+          "raw_detail_rows": {
+            "mature": "成熟：12小时",
+            "fruit": "果实：5000/个",
+            "harvest": "可收：1季",
+            "yield": "季产：10个/季",
+            "exp": "经验：3784/季",
+            "income": "收入：5万/季"
+          },
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 live WeChat warehouse."
+        }
+      }
+    },
+    {
+      "name": "天山红枫种子",
+      "image": "assets/seeds/seed-045.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "warehouse-p4c1-2026-10-28",
+          "name": "天山红枫种子",
+          "quantity_latest_known": 30,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "351个/季",
+          "exp_per_harvest": "4005/季",
+          "income_per_harvest": "9.8万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价：2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实：280/个",
+            "harvest": "可收：1季",
+            "yield": "季产：351个/季",
+            "exp": "经验：4005/季",
+            "income": "收入：9.8万/季"
+          },
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 live QQ warehouse."
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "warehouse-p2c5-2026-10-28",
+          "name": "天山红枫种子",
+          "quantity_latest_known": 30,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "405个/季",
+          "exp_per_harvest": "4414/季",
+          "income_per_harvest": "11万/季",
+          "seed_price_display": "2000",
+          "fruit_value_display": "280/个",
+          "raw_detail_rows": {
+            "price": "单价：2000",
+            "mature": "成熟：12小时",
+            "fruit": "果实：280/个",
+            "harvest": "可收：1季",
+            "yield": "季产：405个/季",
+            "exp": "经验：4414/季",
+            "income": "收入：11万/季"
+          },
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 live WeChat warehouse."
+        }
+      }
+    },
+    {
+      "name": "森野甜橙种子",
+      "image": "assets/seeds/seed-046.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "slot": "warehouse-p6c4-2026-10-28",
+          "name": "森野甜橙种子",
+          "quantity_latest_known": 108,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3433/季",
+          "income_per_harvest": "5万/季",
+          "seed_price_display": null,
+          "fruit_value_display": "5000/个",
+          "raw_detail_rows": {
+            "mature": "成熟：12小时",
+            "fruit": "果实：5000/个",
+            "harvest": "可收：1季",
+            "yield": "季产：10个/季",
+            "exp": "经验：3433/季",
+            "income": "收入：5万/季"
+          },
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 live QQ warehouse."
+        },
+        "wechat": {
+          "platform": "wechat",
+          "slot": "warehouse-p4c4-2026-10-28",
+          "name": "森野甜橙种子",
+          "quantity_latest_known": 108,
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3784/季",
+          "income_per_harvest": "5万/季",
+          "seed_price_display": null,
+          "fruit_value_display": "5000/个",
+          "raw_detail_rows": {
+            "mature": "成熟：12小时",
+            "fruit": "果实：5000/个",
+            "harvest": "可收：1季",
+            "yield": "季产：10个/季",
+            "exp": "经验：3784/季",
+            "income": "收入：5万/季"
+          },
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "2026-10-28 live WeChat warehouse."
         }
       }
     }

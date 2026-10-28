@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "captured_at": "2026-10-25",
+  "coordinate_system": "window-local logical pixels at the recorded baseline window size",
+  "grid_model": {
+    "formula": "center(u,v) = origin + u * u_step + v * v_step",
+    "u_range": [0, 5],
+    "v_range": [0, 3],
+    "cell_count": 24
+  },
+  "platforms": {
+    "qq": {
+      "baseline_window_size": [603, 1111],
+      "origin": [351.8319, 566.2033],
+      "u_step": [-40.9923, 20.9012],
+      "v_step": [41.007, 20.8822],
+      "normalized_origin": [0.5834691, 0.5096339],
+      "normalized_u_step": [-0.0679806, 0.018813],
+      "normalized_v_step": [0.068005, 0.0187958],
+      "fit_rms_pixels": 0.142,
+      "land_grades": {
+        "purple_cells": [[0,0],[0,1],[0,2],[0,3],[1,0]],
+        "gold_cells": [[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[3,0],[3,1],[3,2],[3,3],[4,0],[4,1],[4,2],[4,3],[5,0],[5,1],[5,2],[5,3]],
+        "verified_from": "2026-10-28 clean-land screenshot"
+      },
+      "main_window_entry": {
+        "baseline_window_size": [1239, 928],
+        "farm_icon_center": [31, 307],
+        "normalized_farm_icon_center": [0.02502, 0.33082],
+        "verified_at": "2026-10-28"
+      },
+      "safe_special_2x2": [
+        {"id": "gold_a", "grade": "gold", "anchor_cell": [2, 0], "cells": [[2, 0], [2, 1], [3, 0], [3, 1]]},
+        {"id": "gold_b", "grade": "gold", "anchor_cell": [4, 0], "cells": [[4, 0], [4, 1], [5, 0], [5, 1]]},
+        {"id": "gold_c", "grade": "gold", "anchor_cell": [4, 2], "cells": [[4, 2], [4, 3], [5, 2], [5, 3]]}
+      ]
+    },
+    "wechat": {
+      "baseline_window_size": [625, 1155],
+      "origin": [356.4956, 607.1813],
+      "u_step": [-42.5547, 21.6654],
+      "v_step": [42.5263, 21.7038],
+      "normalized_origin": [0.570393, 0.5256981],
+      "normalized_u_step": [-0.0680875, 0.0187579],
+      "normalized_v_step": [0.0680421, 0.0187912],
+      "fit_rms_pixels": 0.149,
+      "safe_special_2x2": [
+        {"id": "purple_a", "grade": "purple", "anchor_cell": [0, 0], "cells": [[0, 0], [0, 1], [1, 0], [1, 1]]},
+        {"id": "purple_b", "grade": "purple", "anchor_cell": [0, 2], "cells": [[0, 2], [0, 3], [1, 2], [1, 3]]}
+      ]
+    }
+  },
+  "usage": [
+    "When window size matches the baseline, generate all 24 plot centers directly from the formula instead of detecting each plot.",
+    "When window size differs, scale with normalized coordinates first and then verify or correct with a visual anchor before clicking.",
+    "These coordinates describe plot centers only. Dynamic buttons must still be located by state or image anchor."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "status": "provisional-order-table",
+  "model": "fixed_platform_order -> filter inventory<=0/unavailable -> paginate 5 items per page",
+  "inferred_sort_key": "game-configured hidden seed order/sort_id; not quantity, maturity time, experience, price, or name",
+  "evidence": [
+    "QQ picker pages 1/7..7/7 captured 2026-10-24 preserve a stable sequence.",
+    "When QQ 森野黄金芽 and 星语铃花 reached zero on 2026-10-28, later items shifted left without being re-sorted.",
+    "The relative order of seeds shared by QQ and WeChat is consistent across both platform captures.",
+    "New activity seeds may be inserted into the platform order; their insertion position must be calibrated once.",
+    "2026-10-28 live QQ page 1 was 4/4/24/5/16, disproving the completeness of the reconstructed QQ order table even though the fixed-order/filtering model still fits observed left-shift behavior."
+  ],
+  "page_size": 5,
+  "platforms": {
+    "qq": {
+      "observed_at": "2026-10-24T18:28:14+08:00",
+      "order": [
+        "爱心果种子",
+        "哈哈南瓜种子",
+        "星语铃花种子",
+        "泡泡棉花糖种子",
+        "森野黄金芽种子",
+        "勿忘我种子",
+        "茱萸种子",
+        "荷包牡丹种子",
+        "孔雀草种子",
+        "欧石楠种子",
+        "黄金果种子",
+        "山丹丹种子",
+        "银星海棠种子",
+        "萱草种子",
+        "紫薇种子",
+        "梧桐种子",
+        "月光花种子",
+        "月下美人种子",
+        "银杏树苗种子",
+        "铃兰种子",
+        "蝴蝶兰种子",
+        "风信子种子",
+        "蔷薇种子",
+        "欢乐糖果种子",
+        "卡特兰种子",
+        "红云飞片种子",
+        "石竹花种子",
+        "帝王血种子",
+        "狗尾草种子",
+        "森野甜莓种子",
+        "小红花种子",
+        "艾草种子",
+        "紫茉莉种子",
+        "月见草种子"
+      ],
+      "notes": [
+        "2026-10-24 page 2 slot 2 red-berry icon is 茱萸, quantity 30; QQ catalog originally lacked this platform observation.",
+        "The historical picker had 34 visible entries; low-stock warehouse items absent from the picker are treated as unavailable/zero at that time."
+      ]
+    },
+    "wechat": {
+      "observed_at": "2026-10-24",
+      "order": [
+        "爱心果种子",
+        "哈哈南瓜种子",
+        "星语铃花种子",
+        "泡泡棉花糖种子",
+        "森野黄金芽种子",
+        "茱萸种子",
+        "黄金果种子",
+        "山丹丹种子",
+        "寒兰种子",
+        "枸杞种子",
+        "月下美人种子",
+        "欢乐糖果种子",
+        "卡特兰种子",
+        "红云飞片种子",
+        "石竹花种子",
+        "帝王血种子",
+        "狗尾草种子",
+        "森野甜莓种子",
+        "艾草种子",
+        "森野白桃种子",
+        "紫茉莉种子",
+        "月见草种子"
+      ],
+      "notes": [
+        "森野黄金芽 was observed at picker page 1 slot 5 after being newly obtained, placing it after the four existing 2x2 special seeds.",
+        "森野白桃 was observed at picker page 4 slot 4 while 森野甜莓 was zero, placing 白桃 between 艾草 and 紫茉莉 in the fixed order."
+      ]
+    }
+  }
+}

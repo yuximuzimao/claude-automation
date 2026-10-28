@@ -4,6 +4,17 @@
 - `gameplay-rules.md`：稳定收获、种植、土地与交互规则。
 - `seed-catalog.md`：种子知识库字段、来源和刷新约定。
 - `../data/seed-catalog.json`：种子名称、图标路径与 QQ / 微信平台观察数据。
+- `../data/ui-layout.json`：QQ / 微信独立农场窗口基线、4×6 土地网格和固定合法 2×2 特殊种子锚点。
+- `../data/ui-anchors.json`：一键按钮、化肥菜单锚点阈值和已验证相对偏移。
+- `../data/inventory-live-2026-10-28.json`：当前 QQ / 微信仓库实时种子顺序与数量快照；仓库 row-major 顺序直接等于 picker 顺序，每 5 个一页。
+- `../data/next-cycle-plan.json`：基于当前实时库存预先计算的 **3 轮日批次**种植方案、页码/槽位、逐轮消耗量和预期经验。
+- `../data/picker-order.json`：旧的隐藏固定顺序研究表；仅作历史研究/异常分析，不作为正常选种依据。
 - `../assets/seeds/`：与种子名称映射的视觉图标资产。
+- `../assets/ui/`：手形全局按钮、一键务农、普通化肥及 QQ / 微信“可摘”的紧凑视觉模板。
+- `../scripts/ui_probe.py`：一次读取裁好的当前农场窗口状态、化肥候选点和 24 格坐标；只读，不点击，并拒绝整屏截图误输入。
+- `../scripts/pickable_locator.py`：一次识别全部 4 格植物“可摘”位置并去重；`ui_probe.py` 已直接复用。
+- `../scripts/picker_simulator.py`：旧隐藏排序模型的推演工具；只用于异常研究。
+- `../scripts/seed_picker_locator.py`：按种子名称在当前选择器中定位图标；保留为异常校准/兜底。
+- `../scripts/anchor_locator.py`：单模板 ROI 找图与逻辑坐标映射工具；只读，不点击。
 - `archive/README.md`：已完成阶段的历史索引；只用于追溯。
 - `../tasks/todo.md`：尚未验证或实现的工作。
