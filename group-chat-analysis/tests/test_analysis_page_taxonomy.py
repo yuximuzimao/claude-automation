@@ -91,6 +91,7 @@ class AnalysisPageTaxonomyTests(unittest.TestCase):
         self.assertIn("const facts=(u.canonical_facts||[]).filter(Boolean);", html)
         self.assertIn("facts.map", html)
         self.assertIn("if(!variants.length)return '';", html)
+        self.assertIn("filter(x=>x.display!==false)", html)
 
 
 if __name__ == "__main__":

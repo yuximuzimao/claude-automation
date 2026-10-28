@@ -91,14 +91,14 @@
 
 这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
 
-当前 Atomic Claim 批量清洗、Question Cluster 收敛与 no-claim 退出机制阶段归档见 `docs/archive/neat/2026-10-21-atomic-claim-question-cluster-cleaning.md`；此前 36 日历史补齐与分析质量工程化阶段见 `docs/archive/neat/2026-10-19-engineered-history-silver-cleaning.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
+当前 346 条 Silver 全量二次清洗阶段归档见 `docs/archive/neat/2026-10-28-full-silver-secondary-cleaning.md`；此前首次阅读价值校准见 `docs/archive/neat/2026-10-28-first-read-value-calibration-and-review-ux.md`，Atomic Claim / Question Cluster 阶段见 `docs/archive/neat/2026-10-21-atomic-claim-question-cluster-cleaning.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
 
 ## 当前下一步
 
-1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成；当前人工验收基线为 **346 Silver / 299 首次阅读 / 10 reviewed knowledge / 44 reviewed states / 38 dossier signals**。本轮相关回归测试 31/31 PASS，质量门禁 **0 errors / 1 个既有来源长尾 warning**。
-2. **继续人工验收现有首次阅读 Silver，暂不恢复新采集。** 用户已经确认三类稳定质量问题：其一，把聊天抽象成泛化方法论但缺少具体对象/数值/机制/动作/门槛；其二，Topic Card 已抓到事实但 Silver 合并或页面展示把事实压没；其三，canonical 原文里本身存在独立有效事实，但 Topic Card / Atomic Claim 在切片阶段就没有抽出来。2026-10-28 已先用 `#009 / #012 / #262 / #340 / #343` 校准第二类，又用 `#058 / #059 / #061 / #079` 确认第三类；现行规则要求具体事实优先、`coverage=full` 不得被误当成“原文无其它事实”的证明，发现 raw-source omission 时必须回 canonical 补回，并按真正决策问题更新或新建 Silver。已被用户 discard 的旧聚合不得复活成新事实容器。
-3. 继续观察其余条目是否存在新的稳定无用模式、误分类或展示理解成本；`#114 / #150 / #152 / #171` 当前因仅看描述仍无法判断，明确保留到用户实际阅读后再决定。`#304` 已确认是“雷霆 → 惊雷”的锻造武器升级信息，归入“装备机制”，展示文案已改成直接说明对象。
-4. 只有现有清洗成果的价值验收足够稳定后，才恢复真实新 incremental batch 的语义生产增量闭环，并在 daily delta 中继续落实对象身份/基础上下文补齐与“可补全候选”持久状态；不能每次重跑全历史。
-5. 剩余来源长尾 **110 none** 与部分辅助 evidence 缺口继续作为非阻塞后台债；在真实新 batch 多次手动 E2E 稳定前不进入无人值守调度。
+1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成；当前基线为 **346 Silver / 299 首次阅读 / 10 reviewed knowledge / 44 reviewed states / 38 dossier signals**。
+2. **2026-10-28 已完成现有 346 条 Silver 的全量二次处理。** 所有单元都重新检查了当前 `canonical_facts`、证据卡与可定位 canonical 原文；最终 **60 条重写 / 286 条保持 / 0 条因相邻无关聊天新增旁支知识**，知识 ID 与顺序完全不变。用户已有裁决重新绑定后仍为 **10 knowledge + 34 discard**，资料库条目允许重构但不会丢失用户“有用”裁决。本轮 31/31 回归测试 PASS，质量门禁 **0 errors / 1 个既有来源长尾 warning**。
+3. 本轮校准出的稳定规则包括：具体事实优先于泛化方法论；`coverage=full` 不代表原文没有其它事实；上层卡片无用不能连带删除同一讨论中的独立事实；窄用途事实保持窄表达；冲突玩家口径保留冲突；重复 evidence 只在前台去重；连续原文窗口允许夹相邻无关话题，但不得把这些相邻聊天当成新知识来源。`#009 / #012 / #058 / #059 / #061 / #079 / #110 / #262 / #340 / #343` 是主要人工校准样本。
+4. **下一步只做重建页面的用户抽查，不再要求为验证二次清洗而逐条重新人工清 299 条。** 用户仍可按正常使用方式继续点“没用 / 存资料库”，并重点观察是否还出现新的稳定错误类型；`#114 / #150 / #152 / #171` 继续等用户实际看到内容后再决定。
+5. 在这批历史结果完成抽查、用户确认质量足够稳定之前，继续冻结新采集；之后才恢复真实新 incremental batch，并把本轮规则固定到 daily Silver delta。剩余来源长尾 **110 none** 与部分辅助 evidence 缺口继续作为非阻塞后台债。
 
 下一步严格以 `tasks/todo.md` 为准。

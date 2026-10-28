@@ -12,6 +12,7 @@
 
 ## 阶段归档
 
+- `neat/2026-10-28-full-silver-secondary-cleaning.md`：对现有346条Silver做全量二次审计，60条重写/286条保持；资料库与discard均允许内容重构但保留用户裁决，固化具体事实优先、discard不下沉、窄事实保持窄、连续原文窗口不挖相邻闲聊等规则；当前346 Silver / 299首次阅读 / 10资料库 / 44 reviewed states。
 - `neat/2026-10-28-first-read-value-calibration-and-review-ux.md`：真实使用首次阅读页完成稳定编号、分类校准、review server 持久化验收与第一轮用户价值模式学习；当前 344 Silver / 307 首次阅读 / 9 资料库，继续暂停采集并按用户确认的低价值边界保守筛候选。
 - `neat/2026-10-25-formal-analysis-publication-and-review-baseline.md`：正式分析发布 runner、stable Question Registry、用户终审持久化、增量 checkpoint 能力与 293 项回归收口；当前暂停采集，转为用 36 天历史的 323 条首次阅读 Silver 验证真实使用价值。
 - `neat/2026-10-19-engineered-history-silver-cleaning.md`：补齐 10/13→10/18 六日历史并纳入36日语义基线；采集侧补上正交方向 Vision OCR fallback；分析侧正式建立来源/Atomic Claim/Question Cluster/质量门禁，并把 Silver 批量清洗推进到105个知识单元/624张完整来源卡。

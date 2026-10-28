@@ -346,7 +346,8 @@ function unitHtml(u,mode){{
   const topics=displayTopicText(u);
   const facts=(u.canonical_facts||[]).filter(Boolean);
   const factsHtml=facts.map(f=>`<div class="fact">${{esc(f)}}</div>`).join('');
-  const evidence=(u.evidence_refs||[]).map(x=>x.card_id||x.external).filter(Boolean);
+  const visibleEvidenceRefs=(u.evidence_refs||[]).filter(x=>x.display!==false);
+  const evidence=visibleEvidenceRefs.map(x=>x.card_id||x.external).filter(Boolean);
   const evidenceHtml=evidence.map(id=>{{
     const c=byId[id];
     const link=c&&c.source_link||{{}};
