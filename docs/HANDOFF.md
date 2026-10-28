@@ -5,7 +5,7 @@
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
 
-库存计算（2026-10-28）：悦希账号17与春堂御品账号13的双活动及NEAT归档已完成；报表指纹、跨项目知识审查与完整清单见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`，现役库存规则见 `sku-calculator/docs/operations.md`。焕颜水乳3.0身份与历史资料边界见 `order-review/docs/archive/2026-10-28-yuexi-identity-neat/`；售后服务已恢复。未完成事项仅保留在各项目Todo。
+库存计算（2026-10-28）：悦希账号17已按用户纠正的18+30共48SPU重算，81个现有SKU、近7天有效加购2902；rx-1已不存在的兰花油规格25件历史加购经鲸灵当前数字SKU ID核实后排除，ERP缺统计的1个规格补零。十品各扣200，33种实体商品无超分配，桌面新报表与独立XML验收指纹见 `sku-calculator/docs/archive/2026-10-28-yuexi-48-spu-recalculation/`；该结果替代旧悦希范围报告。春堂御品账号13原结果未改动，双活动历史与知识审查仍见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`。现役规则见 `sku-calculator/docs/operations.md`，焕颜水乳3.0身份边界见 `order-review/docs/archive/2026-10-28-yuexi-identity-neat/`；售后及原ERP路由/选中店铺已恢复，临时标签/代理均已清理。未完成事项仅保留在各项目Todo。
 
 KGOS账号4（2026-10-28）：库存计算已完成，37个销售SKU按本场用户决定等权分配，4档满赠因各500不足改为各300；报表已放桌面并独立核验无超分配。库存读取的末页残留问题已修复、真实201/201复验通过，售后已恢复；完整事实与指纹见 `sku-calculator/docs/archive/2026-10-28-kgos-account4-allocation/`。
 
