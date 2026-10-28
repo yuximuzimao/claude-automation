@@ -1,9 +1,11 @@
 # Handoff
 
-更新时间：2026-10-28
+更新时间：2026-10-29
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
+
+审单入口维护（2026-10-29）：混合拆分菜单定位已更新，浮窗已重启；验证范围和当前执行边界见 `order-review/docs/CURRENT.md`。本次没有提交真实订单拆分。
 
 库存计算（2026-10-28）：悦希账号17已按用户纠正的18+30共48SPU重算，81个现有SKU、近7天有效加购2902；rx-1已不存在的兰花油规格25件历史加购经鲸灵当前数字SKU ID核实后排除，ERP缺统计的1个规格补零。十品各扣200，33种实体商品无超分配，桌面新报表与独立XML验收指纹见 `sku-calculator/docs/archive/2026-10-28-yuexi-48-spu-recalculation/`；该结果替代旧悦希范围报告。春堂御品账号13原结果未改动，双活动历史与知识审查仍见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`。现役规则见 `sku-calculator/docs/operations.md`，焕颜水乳3.0身份边界见 `order-review/docs/archive/2026-10-28-yuexi-identity-neat/`；售后及原ERP路由/选中店铺已恢复，临时标签/代理均已清理。未完成事项仅保留在各项目Todo。
 

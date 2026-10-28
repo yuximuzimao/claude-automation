@@ -824,7 +824,7 @@ def build_prepare_split_menu_trigger_js(target_system_order_id: str) -> str:
     .filter(function(el){
       return visible(el) && clean(el.innerText || el.textContent).indexOf('订单拆分') >= 0 &&
         el.parentElement && el.parentElement.querySelector(
-          '.toolbar-sub_list [data-name="trade_split_by_mixed"]'
+          '.toolbar-sub_list [data-name="splitMixedOrders"]'
         );
     });
   if (triggers.length !== 1) return JSON.stringify({ok:false,error:'TRIGGER_NOT_UNIQUE'});
@@ -839,7 +839,7 @@ def build_prepare_mixed_split_item_js(target_system_order_id: str) -> str:
         r"""
   var items = Array.from(document.querySelectorAll(
     '.module-trade-taskbar-inner.J_Taskbar ' +
-    '.toolbar-sub_list [data-name="trade_split_by_mixed"]'
+    '.toolbar-sub_list [data-name="splitMixedOrders"]'
   )).filter(function(el){
     return visible(el) && clean(el.innerText || el.textContent) === '混合拆分';
   });
