@@ -8,6 +8,7 @@ from src.analysis.page_builder import (
     annotate_silver_display_numbers,
     annotate_silver_display_copy,
 )
+from src.analysis.page_renderer import build_page_v3
 
 
 class AnalysisPageTaxonomyTests(unittest.TestCase):
@@ -79,6 +80,17 @@ class AnalysisPageTaxonomyTests(unittest.TestCase):
             "topics": ["无限服", "经济 / 打金"],
         }
         self.assertEqual(assign_silver_display_topics(unit), ["经济 / 打金"])
+
+    def test_silver_renderer_keeps_all_facts_and_hides_empty_comparison_table(self) -> None:
+        html = build_page_v3([], [], {}, [{
+            "knowledge_id": "K-TEST",
+            "kind": "comparison",
+            "canonical_facts": ["事实一", "事实二"],
+            "structured": {"left": "A", "right": "B"},
+        }])
+        self.assertIn("const facts=(u.canonical_facts||[]).filter(Boolean);", html)
+        self.assertIn("facts.map", html)
+        self.assertIn("if(!variants.length)return '';", html)
 
 
 if __name__ == "__main__":

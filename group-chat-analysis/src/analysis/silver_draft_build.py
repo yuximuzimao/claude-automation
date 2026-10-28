@@ -51,6 +51,23 @@ def _role_for_card(group: dict, card_id: str) -> str:
     return "support"
 
 
+def _validate_structured_shape(kind: str, structured: dict, group_id: str) -> None:
+    if kind == "comparison":
+        variants = structured.get("variants")
+        if not isinstance(variants, list) or not variants:
+            raise ValueError(f"comparison draft requires non-empty structured.variants: {group_id}")
+    elif kind == "ordered_route":
+        stages = structured.get("stages")
+        if not isinstance(stages, list) or not stages:
+            raise ValueError(f"ordered_route draft requires non-empty structured.stages: {group_id}")
+    elif kind == "mechanism":
+        renderable = ("conditions", "mechanism", "action", "outcome", "concrete_samples")
+        if not any(structured.get(key) for key in renderable):
+            raise ValueError(
+                f"mechanism draft requires at least one renderable structured field: {group_id}"
+            )
+
+
 def build_drafts(materialized: dict, spec: dict) -> dict:
     groups = _materialized_map(materialized)
     rows = spec.get("items", [])
@@ -94,6 +111,7 @@ def build_drafts(materialized: dict, spec: dict) -> dict:
             raise ValueError(f"draft requires non-empty canonical_facts: {gid}")
         if not isinstance(structured, dict) or not structured:
             raise ValueError(f"draft requires structured fields: {gid}")
+        _validate_structured_shape(kind, structured, gid)
         if not isinstance(search_terms, list) or not search_terms:
             raise ValueError(f"draft requires search_terms: {gid}")
 

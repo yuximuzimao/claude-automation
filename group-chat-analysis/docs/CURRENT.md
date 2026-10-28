@@ -24,7 +24,7 @@
 - 2026-10-16 已补充一个真实边界：旧页 `top fragment` 被下一页完整消息吸收时，只在“长文本明确包含 + 前序连续多消息 overlap 仍成立”条件下允许该 fragment 不阻断重叠；`fragment_kind` 只作为 normalize 瞬态元数据，不进入 message-record schema。
 - 2026-10-19 补采 10/13 时发现 ScreenCaptureKit 偶发把同一窗口帧以 90° 方向交给 Vision，导致现役 `.up/.down` OCR 无法定位工具栏。生产实现现为 `.up` 正常路径失败后才在**同一帧**尝试 `.down/.right/.left`，bbox 映射回显示坐标，并继续要求同一工具栏水平带至少两个已知控件；没有降低安全门槛。Swift 采集回归 5/5 通过，真实故障窗口 current-only 复测恢复正常。
 - runtime 全部为私密本地数据并被 `.gitignore` 排除。
-- 当前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，确定性回归 **300 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及来源、Atomic Claim、Question Cluster、Silver publication、首次阅读投影、语义指纹、已阅状态、资料库迁移与无限服 dossier 路由/幂等回归。
+- 当前已运行 `python3 -m unittest discover -s tests -p 'test_*.py' -q`，确定性回归 **303 tests OK**；其中包含采集 Swift 纯测试、normalize/store/runner，以及来源、Atomic Claim、Question Cluster、Silver publication、首次阅读投影、语义指纹、已阅状态、资料库迁移与无限服 dossier 路由/幂等回归。
 
 ## 已验证历史基线
 
@@ -84,10 +84,10 @@
 - blackwords：**30**；
 - 页面全量 source links：high **2589** / medium **20** / none **834**；其中正式首次阅读候选层为 **2164 high / 4 medium / 110 none**；
 - Silver 清洗前的首次阅读候选：**2278 条事实切片**；它们只是历史候选索引，当前 **0 张 raw Topic Card** 直接进入首次阅读；
-- 当前正式 Silver 工作集共 **344 个知识单元 = 335 queue + 9 knowledge**；候选索引仍为 **1696 full / 549 unabsorbed / 33 partial**，叠加最新 dossier 等规范化组件后 normalized 为 **1743 full / 505 unabsorbed / 30 partial**。这些 card-level 状态只描述来源覆盖，不再决定用户可见队列；
-- 当前正式首次阅读队列：**307 个 Silver 阅读单元**；Silver 层 335 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。335/335 个 Silver queue 均至少有一份 verified 原文；页面仍按每批最多40个阅读单元分页；
+- 当前正式 Silver 工作集共 **346 个知识单元 = 337 queue + 9 knowledge**；候选索引现为 **1698 full / 546 unabsorbed / 34 partial**，叠加最新 dossier 等规范化组件后 normalized 为 **1745 full / 502 unabsorbed / 31 partial**。这些 card-level 状态只描述来源覆盖，不再决定用户可见队列；
+- 当前正式首次阅读队列：**299 个 Silver 阅读单元**；Silver 层 337 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。页面仍按每批最多40个阅读单元分页；
 - 无限服旧阶段“约125条候选”已作废。正式 Silver 重建后实际只有 **12 个无限服 queue 单元**需要进入动态档案；当前已全部按 `baseline_absorb` 吸收，dossier 为 **6 个维度 / 38 个动态 signal**（原27 + 新11），并建立 Silver→signal→原文血缘。重复执行 JSON 全等；未来只有 `visible_update`（state/scope/boundary 实质变化）才重新进入新信息。
-- 当前资料库知识：**9 条正式 Silver knowledge**；已阅语义状态共 **34 条（9 knowledge + 25 discard）**。其中 25 个 discard 包含早期 7 个历史用户排除语义以及当前正式 Silver 的用户终审，不应把总数误读成“本轮新点掉25条”。正式 knowledge-id 裁决当前共 27 条，其中 9 knowledge + 18 discard。
+- 当前资料库知识：**10 条 reviewed knowledge**；已阅语义状态共 **44 条（10 knowledge + 34 discard）**。这些状态包含历史已确认语义与当前人工终审，不应把总数直接当作本轮新增点击数。正式 Silver 本体仍为 9 条 initial knowledge，其余 knowledge 状态来自用户后续终审。
 
 这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
 
@@ -95,8 +95,8 @@
 
 ## 当前下一步
 
-1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成并通过 **300 tests OK**；当前人工验收基线为 **344 Silver / 307 首次阅读 / 9 资料库 / 34 reviewed states / 38 dossier signals**。
-2. **继续人工验收现有 307 条首次阅读 Silver，暂不恢复新采集。** 用户已经确认一类稳定低价值模式：把聊天抽象成“玩家心理 / 团队文化 / 产品适配 / 泛化方法论”，但没有具体对象、数值、机制、动作、门槛或可复用判断条件的内容，通常没有首次阅读价值。后续可先按该模式保守筛一批候选给用户确认，但不得未经确认直接大范围自动 discard。
+1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成；当前人工验收基线为 **346 Silver / 299 首次阅读 / 10 reviewed knowledge / 44 reviewed states / 38 dossier signals**。本轮相关回归测试 31/31 PASS，质量门禁 **0 errors / 1 个既有来源长尾 warning**。
+2. **继续人工验收现有首次阅读 Silver，暂不恢复新采集。** 用户已经确认三类稳定质量问题：其一，把聊天抽象成泛化方法论但缺少具体对象/数值/机制/动作/门槛；其二，Topic Card 已抓到事实但 Silver 合并或页面展示把事实压没；其三，canonical 原文里本身存在独立有效事实，但 Topic Card / Atomic Claim 在切片阶段就没有抽出来。2026-10-28 已先用 `#009 / #012 / #262 / #340 / #343` 校准第二类，又用 `#058 / #059 / #061 / #079` 确认第三类；现行规则要求具体事实优先、`coverage=full` 不得被误当成“原文无其它事实”的证明，发现 raw-source omission 时必须回 canonical 补回，并按真正决策问题更新或新建 Silver。已被用户 discard 的旧聚合不得复活成新事实容器。
 3. 继续观察其余条目是否存在新的稳定无用模式、误分类或展示理解成本；`#114 / #150 / #152 / #171` 当前因仅看描述仍无法判断，明确保留到用户实际阅读后再决定。`#304` 已确认是“雷霆 → 惊雷”的锻造武器升级信息，归入“装备机制”，展示文案已改成直接说明对象。
 4. 只有现有清洗成果的价值验收足够稳定后，才恢复真实新 incremental batch 的语义生产增量闭环，并在 daily delta 中继续落实对象身份/基础上下文补齐与“可补全候选”持久状态；不能每次重跑全历史。
 5. 剩余来源长尾 **110 none** 与部分辅助 evidence 缺口继续作为非阻塞后台债；在真实新 batch 多次手动 E2E 稳定前不进入无人值守调度。

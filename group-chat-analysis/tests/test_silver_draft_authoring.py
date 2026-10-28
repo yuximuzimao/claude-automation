@@ -79,6 +79,43 @@ class SilverDraftAuthoringTests(unittest.TestCase):
         self.assertEqual(row["lineage"]["group_id"], "G1")
         self.assertEqual(row["lineage"]["claim_ids"], ["C1"])
 
+    def test_build_drafts_rejects_comparison_without_variants(self):
+        spec = {"items": [{
+            "group_id": "G1",
+            "knowledge_id": "K-NEW-001",
+            "subject": "对比对象",
+            "question": "两种方案有什么区别？",
+            "kind": "comparison",
+            "scope": {"game_variant": "时光服"},
+            "canonical_facts": ["具体差异。"],
+            "evidence_state": "test_evidence",
+            "freshness": "structural",
+            "structured": {
+                "left": "方案A",
+                "right": "方案B",
+            },
+            "search_terms": ["对比"],
+        }]}
+        with self.assertRaisesRegex(ValueError, "structured.variants"):
+            build_drafts(self.materialized(), spec)
+
+    def test_build_drafts_rejects_unrenderable_mechanism_shape(self):
+        spec = {"items": [{
+            "group_id": "G1",
+            "knowledge_id": "K-NEW-001",
+            "subject": "机制对象",
+            "question": "机制是什么？",
+            "kind": "mechanism",
+            "scope": {"game_variant": "时光服"},
+            "canonical_facts": ["具体机制。"],
+            "evidence_state": "test_evidence",
+            "freshness": "structural",
+            "structured": {"requirement": "只有一个页面不会展示的字段"},
+            "search_terms": ["机制"],
+        }]}
+        with self.assertRaisesRegex(ValueError, "renderable structured field"):
+            build_drafts(self.materialized(), spec)
+
     def test_build_drafts_marks_uncertainty_conservatively(self):
         materialized = self.materialized()
         materialized["items"][0]["claims"][0]["certainty"] = "uncertain"

@@ -79,6 +79,7 @@ h1{{font-size:21px;margin:0}}
 .card-eyebrow{{font-size:12px;color:#52617a;font-weight:650;margin-bottom:4px}}
 .card h3{{font-size:17px;line-height:1.5;margin:0 0 7px}}
 .fact{{font-size:15px;color:#364257}}
+.fact+.fact{{margin-top:6px}}
 .unit{{background:#fff;border:1px solid #cfd8e5;border-radius:12px;padding:15px 17px;margin:10px 0 16px;box-shadow:0 1px 2px #17203308}}
 .unit .question{{font-size:12px;color:#66758c;margin-bottom:3px}}
 .unit h3{{font-size:18px;margin:0 0 8px}}
@@ -323,7 +324,9 @@ function structuredHtml(u){{
     return `<table class="struct-table"><thead><tr><th>条件</th><th>做什么</th><th>获得 / 练什么</th><th>用途</th><th>备注</th></tr></thead><tbody>${{rows}}</tbody></table>${{extras}}`
   }}
   if(u.kind==='comparison'){{
-    const rows=(s.variants||[]).map(x=>`<tr><td>${{esc(x.scope||'')}}</td><td>${{esc(x.behavior||'')}}</td><td>${{esc(x.consequence||'')}}</td></tr>`).join('');
+    const variants=s.variants||[];
+    if(!variants.length)return '';
+    const rows=variants.map(x=>`<tr><td>${{esc(x.scope||'')}}</td><td>${{esc(x.behavior||'')}}</td><td>${{esc(x.consequence||'')}}</td></tr>`).join('');
     const context=s.object_context?`<div class="context"><b>对象：</b>${{esc(s.object_context)}}</div>`:'';
     const use=(s.use_when||[]).length?`<div class="unit-note">有用场景：${{s.use_when.map(esc).join(' · ')}}</div>`:'';
     return `${{context}}<table class="struct-table"><thead><tr><th>范围</th><th>实际差异</th><th>影响</th></tr></thead><tbody>${{rows}}</tbody></table>${{use}}`
@@ -341,7 +344,8 @@ function structuredHtml(u){{
 }}
 function unitHtml(u,mode){{
   const topics=displayTopicText(u);
-  const lead=(u.canonical_facts||[])[0]||'';
+  const facts=(u.canonical_facts||[]).filter(Boolean);
+  const factsHtml=facts.map(f=>`<div class="fact">${{esc(f)}}</div>`).join('');
   const evidence=(u.evidence_refs||[]).map(x=>x.card_id||x.external).filter(Boolean);
   const evidenceHtml=evidence.map(id=>{{
     const c=byId[id];
@@ -351,7 +355,7 @@ function unitHtml(u,mode){{
   }}).join('<br>');
   const actions=mode==='new'?`<div class="actions"><button onclick="setUnitDecision('${{esc(u.knowledge_id)}}','discard')">没用</button><button class="keep" onclick="setUnitDecision('${{esc(u.knowledge_id)}}','knowledge')">存资料库</button></div>`:'';
   const number=u.display_number?`#${{String(u.display_number).padStart(3,'0')}}`:'';
-  return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}<span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.display_question||u.question||'')}}</div><h3>${{esc(u.display_subject||u.subject||'')}}</h3>${{lead?`<div class="fact">${{esc(lead)}}</div>`:''}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
+  return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}<span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.display_question||u.question||'')}}</div><h3>${{esc(u.display_subject||u.subject||'')}}</h3>${{factsHtml}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
 }}
 function renderGrouped(cards,el,mode){{
   if(!cards.length){{el.innerHTML='<div class="empty">没有符合当前条件的信息。</div>';return}}
