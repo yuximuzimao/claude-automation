@@ -29,11 +29,11 @@
 
 1. 选种时先按名称查 catalog，再使用 `image` 与种植选择器的图标比对。
 2. QQ / 微信库存独立，不能把同名种子数量相加。
-3. `quantity_latest_known` 是**工作库存估计**。2026-10-28 起采用“每日批次”口径：每天准备开始约 3 轮种植前完整读取 QQ / 微信仓库一次，形成 `data/inventory-live-*.json` 作为当天基线；三轮内只扣除 Agent 已知种植消耗，不重复全仓扫描。
-4. 库存采用三档可信度：`verified`（当天仓库直接看到）、`tracked`（从 verified 基线叠加已知增减）、`stale/uncertain`（用户手动操作、活动奖励/购买或异常导致无法量化变化）。`quantity_latest_known_basis` 说明来源。
-5. **仓库种子页当前 row-major 顺序就是土地 picker 当前顺序，每行 5 个正好对应 picker 一页。** 因此正常选种直接使用当天仓库快照计算 `page + slot`，不再维护/猜测隐藏排序。
-6. 三轮计划必须在第一轮开始前一次算完，并优先选择不会在当天计划内归零的种子，以避免 picker 项目消失导致后续位置左移。Agent 自己完成一轮后直接在工作库存中扣除计划消耗。
-7. 若用户手动种植/购买、活动或任务新增种子、picker 位置与计划不一致、或一键种植结果异常，则把当天库存标记为 dirty；继续种植前重新读仓库，而不是继续沿用旧页码。
+3. `quantity_latest_known` 是历史/知识库层面的最近观察值；Runner 正常执行时以未来 `data/farm-state.json` 的 mutable quantities 为事实状态。确认成功的种植/购买才扣增库存，点击未验收不改事实。
+4. 库存采用三档可信度：`verified`（仓库直接看到）、`tracked`（从 verified 基线叠加 Runner 已知增减）、`stale/uncertain`（用户手动操作、无法识别的奖励/购买或异常导致变化不明）。`quantity_latest_known_basis` 说明来源。
+5. **仓库种子页当前 row-major 顺序就是土地 picker 当前可见顺序，每行 5 个正好对应 picker 一页。** Runner 维护重新进入后校准的 stable_order，并按 quantities 过滤得到当前 visible_order；某种子确认消费到0后只需数量变0，后续左移是正常算法结果。
+6. 运行策略不再要求目标种子在计划末尾仍 >0。Planner 只需要保证本轮计划数量可满足；位置变化由 Runner 自动重算。当前优先验证“0/absent→positive 后，重新进入会恢复 stable_order”的假设；只有被实测否定才升级复杂顺序版本机制。
+7. 若用户手动种植/购买、无法识别的活动/任务奖励、expected slot 图标不一致或一键种植结果异常，则标记 state/inventory dirty；Runner 进入明确同步/停止分支，不继续沿用旧位置。
 8. 同名种子的成熟时间/季数通常可交叉核对，但产量、经验、收入以当前平台实测为准。
 9. 活动种子优先信任游戏内当前选择器/仓库；外部攻略只作为补充。
 

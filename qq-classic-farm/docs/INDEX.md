@@ -1,5 +1,6 @@
 # 文档索引
 
+- `../IMPLEMENTATION_PLAN.md`：**当前最高优先级交接文档**；本地 Runner 的架构、种子动态位置算法、状态机、里程碑、性能验收和对抗式审查。
 - `CURRENT.md`：当前 QQ / 微信农田、库存与日常状态快照。
 - `gameplay-rules.md`：稳定收获、种植、土地与交互规则。
 - `seed-catalog.md`：种子知识库字段、来源和刷新约定。
@@ -7,10 +8,11 @@
 - `../data/ui-layout.json`：QQ / 微信独立农场窗口基线、4×6 土地网格和固定合法 2×2 特殊种子锚点。
 - `../data/ui-anchors.json`：一键按钮、化肥菜单锚点阈值和已验证相对偏移。
 - `../data/inventory-live-2026-10-28.json`：当前 QQ / 微信仓库实时种子顺序与数量快照；仓库 row-major 顺序直接等于 picker 顺序，每 5 个一页。
-- `../data/next-cycle-plan.json`：基于当前实时库存预先计算的 **3 轮日批次**种植方案、页码/槽位、逐轮消耗量和预期经验。
-- `../data/picker-order.json`：旧的隐藏固定顺序研究表；仅作历史研究/异常分析，不作为正常选种依据。
+- `../data/next-cycle-plan.json`：2026-10-28 的旧 3 轮方案；保留作历史输入样本，**Runner 新架构不再把 page/slot 写死在运行策略里**。
+- `../data/picker-order.json`：固定顺序 + 过滤零库存模型的历史研究表；Runner M0 将把它作为历史对照，运行时建立带 revision 的当前 `visible_order`，不假设顺序永久不变。
 - `../assets/seeds/`：与种子名称映射的视觉图标资产。
 - `../assets/ui/`：手形全局按钮、一键务农、普通化肥及 QQ / 微信“可摘”的紧凑视觉模板。
+- `../scripts/open_qq_farm.swift`：QQ 农场固定入口脚本；定位 QQ / QQ经典农场窗口，按 `ui-layout.json` 已验证的主窗口相对坐标打开或恢复农场，不走“更多功能”。
 - `../scripts/ui_probe.py`：一次读取裁好的当前农场窗口状态、化肥候选点和 24 格坐标；只读，不点击，并拒绝整屏截图误输入。
 - `../scripts/pickable_locator.py`：一次识别全部 4 格植物“可摘”位置并去重；`ui_probe.py` 已直接复用。
 - `../scripts/picker_simulator.py`：旧隐藏排序模型的推演工具；只用于异常研究。
