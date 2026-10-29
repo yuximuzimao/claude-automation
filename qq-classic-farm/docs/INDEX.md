@@ -12,6 +12,8 @@
 - `../data/farm-state.json`：M0 库存事实状态（包含已记录 10-29 delta；当前双平台 inventory_dirty，实机前须同步）。
 - `runner-m0-verification.md`：M0 离线测试结果、位置样本、历史顺序差异与 M1 入口。
 - `../scripts/seed_order.py` / `../scripts/farm_runner.py`：纯位置计算与 M0 dry-run；run-next 在 M1/M2 完成前拒绝执行。
+- `../scripts/farm_geometry.py`：M1 唯一 window-local logical 坐标转换、Retina 像素映射与 fail-closed 校验。
+- `../scripts/window_registry.swift`：M1 只读 macOS 窗口枚举（需编译后调用），不聚焦、不点击；实机农场窗口联调未完成。
 - `../data/next-cycle-plan.json`：2026-10-28 的旧 3 轮方案；保留作历史输入样本，**Runner 新架构不再把 page/slot 写死在运行策略里**。
 - `../data/picker-order.json`：旧排序历史证据；当前 Runner 以 `data/seed-order.json` 的 fresh-entry `stable_order` + `data/farm-state.json` 数量计算临时 `visible_order`，未启用 order_revision。
 - `../assets/seeds/`：与种子名称映射的视觉图标资产。

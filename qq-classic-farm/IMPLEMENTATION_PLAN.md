@@ -856,8 +856,8 @@ Runner 遇异常必须返回结构化 error。
 
 任务：
 
-- [ ] window registry。
-- [ ] window-local → screen 唯一坐标。
+- [ ] window registry：已新增只读 `scripts/window_registry.swift`，Swift 编译通过，QQ/微信查询返回结构化窗口列表；当前两边独立农场窗口均未显示，仍需实机窗口联调与 Runner 接入。
+- [x] window-local → screen 唯一坐标：`scripts/farm_geometry.py` 纯逻辑转换、Retina screenshot pixel → local logical → screen、越界/尺寸/owner fail-closed；6 项离线单测通过，实际 CGEvent 联调仍待后续。
 - [ ] screenshot/crop。
 - [ ] in-process vision。
 - [ ] batch CGEvent。

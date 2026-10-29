@@ -6,7 +6,7 @@
 
 - **M0 离线验收已通过**：`scripts/seed_order.py`、`scripts/farm_runner.py dry-run`、`data/seed-order.json`、`data/farm-state.json`、RUN_PLAN schema/样例和 11 项单元测试均已落地；详情见 `runner-m0-verification.md`。
 - **当前安全状态**：QQ/微信 `inventory_dirty=true`（历史快照非实时），`run-next` 返回 `RUNNER_NOT_READY`，尚未触发游戏点击。历史零库存候选的稳定插入点未验证，不会猜测。
-- **下一次从 M1 开始**：本地窗口注册/坐标/截图/视觉/批量 CGEvent/收获；先 mock 与离线测试。种植 M2 尚未开始。不要重做 M0，不要用旧式 Agent 单击级遥控。
+- **M1 已启动但未验收**：新增只读 Swift 窗口注册工具（编译通过）和 window-local / Retina 坐标纯函数（6 项测试通过）；当前 QQ/微信独立农场窗口均未显示，因此没有进行真机点击。下一次继续 M1 的截图/crop、in-process vision、常驻 CGEvent 与收获状态机；当前总计 17 项离线测试通过。种植 M2 尚未开始。
 
 ## 当前现场
 

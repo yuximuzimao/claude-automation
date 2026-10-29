@@ -11,6 +11,6 @@
 - [ ] 排查一键种植遗漏紫晶地 bug：本轮 QQ 最终仍有 1 格紫晶空地；微信最终所有紫晶地为空。当前不推导为土地等级限制，先验证一键种植状态、库存、选择种子类型以及是否有残留特殊预览状态。
 - [x] 2026-10-28 17:25 实测确认：仓库种子页当前 row-major 顺序就是土地 picker 当前可见顺序，每5个一页；QQ/微信第一页数量与 picker 完全一致。新 Runner 不再把某次快照的页码/槽位长期写死，而以重进后校准的 stable_order + 当前 quantities 动态计算。
 - [ ] 旧“每日3轮后再脚本化”的前置条件已取消；当前直接实现 Runner。未来运行计划只保存策略（种子名/数量/成熟档/placement），库存扣减与 picker 动态位置由 Runner 的 farm-state/seed-order 算法维护。
-- [ ] **本地 Runner 重构（当前最高优先级）**：M0 已离线验收通过（11 项测试，dry-run 零点击/零 LLM），下一次从 M1 开始，再推进 M2。核心架构为“Planner 只给策略 → Runner 本地连续执行 → 异常才回 Agent”；正常 phase 内禁止 LLM/tool round-trip。M0 证据见 `docs/runner-m0-verification.md`。
+- [ ] **本地 Runner 重构（当前最高优先级）**：M0 已离线验收通过；M1 已有 window-local/Retina 纯坐标模块与只读窗口注册工具（总计 17 项测试通过），但尚未接入截图/视觉/CGEvent/收获，继续 M1 再推进 M2。核心架构为“Planner 只给策略 → Runner 本地连续执行 → 异常才回 Agent”；正常 phase 内禁止 LLM/tool round-trip。M0 证据见 `docs/runner-m0-verification.md`。
 - [ ] **种子位置动态算法**：优先实现 `stable_order + mutable quantities → visible_order → page/slot`。消费到0只改数量并自动左移；已知种子0→positive先假设重进后回到 stable_order。必须真机验证“刚获取时顺序 vs 重新进入后顺序”；若验证失败，再启用 order_revision 备选模型。不得再为了防止位置移动而强制保留库存 >0。
 - [ ] 定时执行继续后置：M2（完整收获+种植）连续稳定后，再定义成熟时间触发、自动打开/关闭和异常通知。
