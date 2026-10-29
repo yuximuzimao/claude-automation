@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "page_size": 5,
+  "hypothesis": "newly acquired seeds may be temporarily inserted; fresh entry restores stable order (UNVERIFIED)",
+  "platforms": {
+    "qq": {
+      "stable_order": [
+        "爱心果种子",
+        "哈哈南瓜种子",
+        "泡泡棉花糖种子",
+        "森野黄金芽种子",
+        "勿忘我种子",
+        "茱萸种子",
+        "孔雀草种子",
+        "欧石楠种子",
+        "黄金果种子",
+        "山丹丹种子",
+        "银星海棠种子",
+        "萱草种子",
+        "紫薇种子",
+        "梧桐种子",
+        "月光花种子",
+        "天山红枫种子",
+        "银杏树苗种子",
+        "铃兰种子",
+        "蝴蝶兰种子",
+        "风信子种子",
+        "蔷薇种子",
+        "欢乐糖果种子",
+        "卡特兰种子",
+        "红云飞片种子",
+        "石竹花种子",
+        "帝王血种子",
+        "狗尾草种子",
+        "森野白桃种子",
+        "森野甜橙种子",
+        "小红花种子",
+        "艾草种子",
+        "紫茉莉种子",
+        "月见草种子"
+      ],
+      "verified_at": "2026-10-28T17:25:30+08:00",
+      "evidence": [
+        "data/inventory-live-2026-10-28.json warehouse row-major",
+        "same-day picker first page matched warehouse first row",
+        "data/picker-order.json historical comparison only"
+      ],
+      "historical_zero_candidates_uncalibrated": [
+        "星语铃花种子",
+        "荷包牡丹种子",
+        "月下美人种子",
+        "森野甜莓种子"
+      ],
+      "fresh_entry_reacquisition_hypothesis_verified": false,
+      "notes": "Fresh 2026-10-28 sequence overrides older ordering; historical-only seeds need calibration if quantity becomes positive. WeChat 艾草/森野白桃 ordering conflict is not treated as permanent revision."
+    },
+    "wechat": {
+      "stable_order": [
+        "爱心果种子",
+        "哈哈南瓜种子",
+        "星语铃花种子",
+        "泡泡棉花糖种子",
+        "森野黄金芽种子",
+        "黄金果种子",
+        "山丹丹种子",
+        "寒兰种子",
+        "枸杞种子",
+        "天山红枫种子",
+        "月下美人种子",
+        "欢乐糖果种子",
+        "卡特兰种子",
+        "红云飞片种子",
+        "石竹花种子",
+        "帝王血种子",
+        "狗尾草种子",
+        "森野白桃种子",
+        "森野甜橙种子",
+        "艾草种子",
+        "紫茉莉种子",
+        "月见草种子"
+      ],
+      "verified_at": "2026-10-28T17:25:30+08:00",
+      "evidence": [
+        "data/inventory-live-2026-10-28.json warehouse row-major",
+        "same-day picker first page matched warehouse first row",
+        "data/picker-order.json historical comparison only"
+      ],
+      "historical_zero_candidates_uncalibrated": [
+        "茱萸种子",
+        "森野甜莓种子"
+      ],
+      "fresh_entry_reacquisition_hypothesis_verified": false,
+      "notes": "Fresh 2026-10-28 sequence overrides older ordering; historical-only seeds need calibration if quantity becomes positive. WeChat 艾草/森野白桃 ordering conflict is not treated as permanent revision."
+    }
+  }
+}

@@ -7,9 +7,13 @@
 - `../data/seed-catalog.json`：种子名称、图标路径与 QQ / 微信平台观察数据。
 - `../data/ui-layout.json`：QQ / 微信独立农场窗口基线、4×6 土地网格和固定合法 2×2 特殊种子锚点。
 - `../data/ui-anchors.json`：一键按钮、化肥菜单锚点阈值和已验证相对偏移。
-- `../data/inventory-live-2026-10-28.json`：当前 QQ / 微信仓库实时种子顺序与数量快照；仓库 row-major 顺序直接等于 picker 顺序，每 5 个一页。
+- `../data/inventory-live-2026-10-28.json`：**历史** QQ / 微信仓库种子顺序与数量快照；row-major 顺序等于当时 picker 顺序，每 5 个一页，不代表当前实时库存。
+- `../data/seed-order.json`：M0 fresh-entry 稳定顺序基线；历史仅有的零库存种子单独标为待校准。
+- `../data/farm-state.json`：M0 库存事实状态（包含已记录 10-29 delta；当前双平台 inventory_dirty，实机前须同步）。
+- `runner-m0-verification.md`：M0 离线测试结果、位置样本、历史顺序差异与 M1 入口。
+- `../scripts/seed_order.py` / `../scripts/farm_runner.py`：纯位置计算与 M0 dry-run；run-next 在 M1/M2 完成前拒绝执行。
 - `../data/next-cycle-plan.json`：2026-10-28 的旧 3 轮方案；保留作历史输入样本，**Runner 新架构不再把 page/slot 写死在运行策略里**。
-- `../data/picker-order.json`：固定顺序 + 过滤零库存模型的历史研究表；Runner M0 将把它作为历史对照，运行时建立带 revision 的当前 `visible_order`，不假设顺序永久不变。
+- `../data/picker-order.json`：旧排序历史证据；当前 Runner 以 `data/seed-order.json` 的 fresh-entry `stable_order` + `data/farm-state.json` 数量计算临时 `visible_order`，未启用 order_revision。
 - `../assets/seeds/`：与种子名称映射的视觉图标资产。
 - `../assets/ui/`：手形全局按钮、一键务农、普通化肥及 QQ / 微信“可摘”的紧凑视觉模板。
 - `../scripts/open_qq_farm.swift`：QQ 农场固定入口脚本；定位 QQ / QQ经典农场窗口，按 `ui-layout.json` 已验证的主窗口相对坐标打开或恢复农场，不走“更多功能”。

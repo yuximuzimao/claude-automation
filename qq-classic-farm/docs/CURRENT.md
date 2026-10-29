@@ -1,6 +1,12 @@
 # 当前状态
 
-更新时间：2026-10-30 01:57（已切换到本地 Runner 重构方案）
+更新时间：2026-10-30（M0 离线验收通过，下一步 M1）
+
+## Runner 当前开发检查点
+
+- **M0 离线验收已通过**：`scripts/seed_order.py`、`scripts/farm_runner.py dry-run`、`data/seed-order.json`、`data/farm-state.json`、RUN_PLAN schema/样例和 11 项单元测试均已落地；详情见 `runner-m0-verification.md`。
+- **当前安全状态**：QQ/微信 `inventory_dirty=true`（历史快照非实时），`run-next` 返回 `RUNNER_NOT_READY`，尚未触发游戏点击。历史零库存候选的稳定插入点未验证，不会猜测。
+- **下一次从 M1 开始**：本地窗口注册/坐标/截图/视觉/批量 CGEvent/收获；先 mock 与离线测试。种植 M2 尚未开始。不要重做 M0，不要用旧式 Agent 单击级遥控。
 
 ## 当前现场
 
@@ -72,7 +78,7 @@
 
 1. 按 SKILL.md 读取 Todo / INDEX / CURRENT / gameplay-rules。
 2. 当前真实现场：QQ 与微信都已完成 2026-10-29 那一轮种植；QQ 当日日常已完成，微信每日任务与商城福利由用户后续手动完成。接手重点是 Runner 开发，不是继续旧式实时遥控。
-3. 自恢复任务先按 `IMPLEMENTATION_PLAN.md` 完成 M0：stable_order、farm-state、动态 page/slot 算法、dry-run，并准备“刚获取→不退出→重进→再读顺序”的验证实验；默认使用 CodexPro，本地 Codex 仅为可选外援。
+3. M0 已完成离线验收。下一次直接从 `IMPLEMENTATION_PLAN.md` 的 M1 开始，默认使用 CodexPro；种子刚获取/重进顺序实验留待后续真机验证，尚未证实。
 4. M0 通过后做 M1/M2：本地连续收获与种植；四格仍保持 `预览→确认→落地` 事务，普通一键种植做 24 格阶段终验。
 5. 在 M2 实机跑通前，不继续用 ChatGPT/CodexPro 单击级遥控农场，也不做定时化。
 

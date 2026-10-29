@@ -831,16 +831,18 @@ Runner 遇异常必须返回结构化 error。
 
 任务：
 
-- [ ] 删除/禁用 Agent 单击级正常执行入口。
-- [ ] 建 `data/seed-order.json`，保存每个平台 `stable_order + verified_at + evidence`。默认假设重进后稳定；不要先实现复杂 revision。
-- [ ] 用 2026-10-28 fresh-entry warehouse sequence + 历史 `picker-order.json` 初始化 stable_order；微信 `森野白桃/艾草` 差异标记为“刚获取临时插入 vs 重进稳定顺序”的待验证假设，而不是永久 revision。
-- [ ] 建 `data/farm-state.json`。
-- [ ] 实现 `compute_visible_order(stable_order, quantities)` 和 `compute_picker_position(platform, seed, stable_order, quantities)`。
-- [ ] 单元测试库存从 >0 → 0：stable_order 不变，visible_order 自动过滤，所有后续 page/slot 正确左移。
-- [ ] 单元测试已知种子 0 → >0：stable_order 不变，visible_order 自动重新包含该种子并回到稳定位置。
-- [ ] 设计并记录“刚获取 → 不退出读取顺序 → 重新进入 → 再读顺序”的真机验证步骤；M0 不需要为了等实验结果阻塞其它纯算法开发。
-- [ ] 定义未来 RUN_PLAN schema（只 schema/sample，不做真实长期策略）。
-- [ ] Runner dry-run 框架。
+- [x] 禁用 Agent 单击级正常执行入口：新 Runner 只开放离线 dry-run，`run-next` 明确返回 `RUNNER_NOT_READY`；旧脚本仅作为诊断工具保留。
+- [x] 建 `data/seed-order.json`，保存每个平台 `stable_order + verified_at + evidence`；没有启用 revision。
+- [x] 用 2026-10-28 fresh-entry warehouse sequence + 历史 `picker-order.json` 初始化。历史仅有的零库存候选单独存为 `historical_zero_candidates_uncalibrated`，不猜插入位置；微信 `森野白桃/艾草` 差异仅作为待验证假设。
+- [x] 建 `data/farm-state.json`；应用 2026-10-29 已记录数量变化，但真实库存尚未重新验证，双平台 `inventory_dirty=true`。
+- [x] 实现 `compute_visible_order(stable_order, quantities)` 和 `compute_picker_position(platform, seed, stable_order, quantities)`。
+- [x] 单元测试库存从 >0 → 0：stable_order 不变，visible_order 自动过滤，所有后续 page/slot 正确左移。
+- [x] 单元测试已知种子 0 → >0：stable_order 不变，visible_order 自动重新包含该种子并回到稳定位置。
+- [x] 设计并记录“刚获取 → 不退出读取顺序 → 重新进入 → 再读顺序”的真机验证步骤；**实际真机实验仍待 M1/M2 后验证，不得把假设写成已证实。**
+- [x] 定义未来 RUN_PLAN schema 和 EXAMPLE-ONLY 样例（不做真实长期策略）。
+- [x] Runner dry-run 框架，11 项离线单测通过；完整验收见 `docs/runner-m0-verification.md`。
+
+**M0 离线验收：2026-10-30 已通过。** 仅代表数据模型与 dry-run 已完成；M1/M2 的真机执行、目标图标与数量校验尚未开始。下一次直接进入 M1，不要重复 M0。
 
 验收：
 
@@ -1073,14 +1075,14 @@ Runner 只允许：
    - `data/ui-layout.json`
    - `data/ui-anchors.json`
    - `data/seed-catalog.json`
-5. 先做 M0。
-6. **先 dry-run 和单元测试，不要直接操作游戏。**
-7. M0 通过后给用户展示：
+5. **M0 已于 2026-10-30 完成离线验收；下次从 M1 继续。** 详见 `docs/runner-m0-verification.md`，不要重复 M0。
+6. **M1/M2 仍先 mock/dry-run 和单元测试，再做真机操作。**
+7. M0 的验收证据已记录：
    - 新数据模型。
    - 当前任意 5 个可见种子的计算 page/slot。
    - 将一个种子 qty 置 0 并从 visible_order 删除后自动左移的测试。
    - 微信历史顺序与 2026-10-28 fresh-entry 顺序的差异说明，并明确列出“刚获取临时插入、重进恢复 stable_order”的真机验证步骤。
-8. 用户认可后继续 M1/M2。
+8. 用户已授权无人值守自恢复续跑，M0 后按验收条件继续 M1/M2；遇到需用户输入/授权的阻塞才暂停报告。
 9. M2 真机跑通前，不碰定时化。
 
 ---

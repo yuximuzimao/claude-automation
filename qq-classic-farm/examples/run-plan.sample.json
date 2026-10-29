@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "plan_id": "EXAMPLE-ONLY-NOT-ACTIVE",
+  "revision": 1,
+  "cycles": [{
+    "cycle_id": "example-1",
+    "status": "pending",
+    "maturity_target": "12h",
+    "platforms": {
+      "qq": {
+        "special": [{"seed": "泡泡棉花糖种子", "placements": ["gold_a", "gold_b", "gold_c"]}],
+        "ordinary": [{"seed": "天山红枫种子", "count": 12}]
+      },
+      "wechat": {
+        "special": [{"seed": "星语铃花种子", "placements": ["purple_a", "purple_b"]}],
+        "ordinary": [{"seed": "黄金果种子", "count": 16}]
+      }
+    }
+  }]
+}

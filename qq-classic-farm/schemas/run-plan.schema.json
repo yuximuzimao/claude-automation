@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Farm Runner strategy-only plan (M0)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "plan_id", "revision", "cycles"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "plan_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "cycles": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["cycle_id", "status", "maturity_target", "platforms"],
+        "properties": {
+          "cycle_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pending", "running", "complete", "error"]},
+          "maturity_target": {"type": "string"},
+          "platforms": {
+            "type": "object", "additionalProperties": false, "minProperties": 1,
+            "properties": {
+              "qq": {"$ref": "#/$defs/platform"},
+              "wechat": {"$ref": "#/$defs/platform"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "platform": {
+      "type": "object", "additionalProperties": false,
+      "required": ["special", "ordinary"],
+      "properties": {
+        "special": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["seed", "placements"],
+            "properties": {
+              "seed": {"type": "string", "minLength": 1},
+              "placements": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+            }
+          }
+        },
+        "ordinary": {
+          "type": "array", "minItems": 1, "maxItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["seed", "count"],
+            "properties": {
+              "seed": {"type": "string", "minLength": 1},
+              "count": {"type": "integer", "minimum": 1}
+            }
+          }
+        }
+      }
+    }
+  }
+}
