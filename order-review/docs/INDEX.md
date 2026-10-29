@@ -20,6 +20,7 @@
 | 悦希新品身份和视觉待补 | `../../product-mapping/tasks/todo.md`（以商品匹配当前待办为准，不在审单侧固定数量） |
 | ERP正式身份参考快照 | `../../product-mapping/data/products/erp-identities.json`（2026-09-11的200条只读快照，不定义在售目录） |
 | 历史阶段 | [档案索引](archive/README.md) |
+| 2026-10-30逐包复制组合公式、回归与浮窗重启 | [阶段归档](archive/2026-10-30-package-formula-copy/neat-handoff.md) |
 | 2026-10-29拆分入口修复、装箱服务关闭与单条方案删除 | [阶段归档](archive/2026-10-29-split-menu-and-case-deletion/neat-handoff.md) |
 | 2026-10-28焕颜水乳3.0身份同步与文档收口 | [NEAT归档](archive/2026-10-28-yuexi-identity-neat/README.md)；[整理前CURRENT](archive/2026-10-28-yuexi-identity-neat/previous-current.md) |
 | 2026-10-16春堂御品产品/纸箱资料定稿 | [NEAT归档](archive/2026-10-16-chuntang-carton-finalization/neat-handoff.md) |

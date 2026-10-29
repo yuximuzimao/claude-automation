@@ -50,5 +50,6 @@
 
 ## 阶段证据
 
+- 逐包复制组合公式、自动化回归及浮窗重启记录见[2026-10-30归档](archive/2026-10-30-package-formula-copy/neat-handoff.md)。
 - 拆分菜单定位修复、装箱服务使用后关闭，以及订单772478993单条本地方案删除的结果见[2026-10-29归档](archive/2026-10-29-split-menu-and-case-deletion/neat-handoff.md)。
 - 名称同步、此前验证结果和本次文档整理见[2026-10-28 NEAT归档](archive/2026-10-28-yuexi-identity-neat/README.md)；旧阶段声明、测试流水账和worktree收口经过保存在[整理前CURRENT历史快照](archive/2026-10-28-yuexi-identity-neat/previous-current.md)，不再作为当前验证状态。

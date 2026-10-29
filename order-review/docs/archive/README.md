@@ -4,6 +4,11 @@
 
 当前状态：`../CURRENT.md`；使用入口：`../../README.md`。长期业务约束：`../2026-07-23-package-rule-foundation.md`。
 
+## 2026-10-30 逐包复制商品组合公式
+
+- [阶段归档](2026-10-30-package-formula-copy/neat-handoff.md)：每个拆分包裹独立复制公式的最终需求、348项回归和浮窗单实例重启记录。
+- [文档盘点](2026-10-30-package-formula-copy/audit-inventory.json)：现役知识全文审查、历史目录登记与本轮处置范围。
+
 ## 2026-10-29 拆分入口修复与单条方案删除
 
 - [阶段归档](2026-10-29-split-menu-and-case-deletion/neat-handoff.md)：ERP混合拆分菜单新标识、332项非界面回归与12项定位检查、装箱服务使用后关闭，以及订单772478993单条本地方案和索引的删除验证。

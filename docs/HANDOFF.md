@@ -5,9 +5,7 @@
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
 
-审单浮窗（2026-10-30）：多包方案已新增逐包复制商品组合公式入口，当前行为与使用方式见 `order-review/docs/CURRENT.md` / `order-review/docs/usage.md`。
-
-审单收口（2026-10-29）：拆分入口修复、装箱服务使用后关闭及订单772478993单条本地方案删除已归档到 `order-review/docs/archive/2026-10-29-split-menu-and-case-deletion/neat-handoff.md`；现役能力和未完成事项只见项目 `docs/CURRENT.md` / `tasks/todo.md`。
+审单收口（2026-10-30）：逐包复制组合公式、自动化回归和浮窗重启记录已归档到 `order-review/docs/archive/2026-10-30-package-formula-copy/neat-handoff.md`；当前能力与使用方式只见项目 `docs/CURRENT.md` / `docs/usage.md`。
 
 库存计算（2026-10-28）：悦希账号17已按用户纠正的18+30共48SPU重算，81个现有SKU、近7天有效加购2902；rx-1已不存在的兰花油规格25件历史加购经鲸灵当前数字SKU ID核实后排除，ERP缺统计的1个规格补零。十品各扣200，33种实体商品无超分配，桌面新报表与独立XML验收指纹见 `sku-calculator/docs/archive/2026-10-28-yuexi-48-spu-recalculation/`；该结果替代旧悦希范围报告。春堂御品账号13原结果未改动，双活动历史与知识审查仍见 `sku-calculator/docs/archive/2026-10-28-yuexi-chuntang-allocation/`。现役规则见 `sku-calculator/docs/operations.md`，焕颜水乳3.0身份边界见 `order-review/docs/archive/2026-10-28-yuexi-identity-neat/`；售后及原ERP路由/选中店铺已恢复，临时标签/代理均已清理。未完成事项仅保留在各项目Todo。
 
