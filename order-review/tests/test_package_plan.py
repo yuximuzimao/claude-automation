@@ -1,13 +1,17 @@
-from dataclasses import FrozenInstanceError
+from dataclasses import FrozenInstanceError, replace
 
 import pytest
 
 from order_review.models import OrderSnapshot, Product
 from order_review.package_plan import (
     DraftSnapshotMismatchError,
+    Package,
     PackageDraft,
+    PackageItem,
+    PackagePlan,
     PackagePlanValidationError,
     SourceSnapshot,
+    build_package_formula,
 )
 
 
@@ -118,3 +122,110 @@ def test_draft_rejects_a_different_snapshot():
 
     with pytest.raises(DraftSnapshotMismatchError):
         draft.confirm(second)
+
+
+def test_package_formula_merges_duplicate_codes_and_keeps_letters_and_leading_zero():
+    product = make_order_snapshot().products[0]
+    source = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(
+            is_expanded=True,
+            products=[
+                replace(product, merchant_code="06931583616811", quantity=6),
+                replace(product, merchant_code="6940079096228-1", quantity=4),
+                replace(product, sku_id="OTHER-SKU", merchant_code="06931583616811", quantity=2),
+                replace(product, merchant_code="yxxyld", quantity=2),
+            ],
+        )
+    )
+    water, lotion, extra_water, bag = source.products
+
+    def item(product, quantity):
+        return PackageItem(product.source_product_id, product.display_name, quantity)
+
+    plan = PackagePlan(
+        packages=(
+            Package("1", (
+                item(water, 2), item(lotion, 2), item(extra_water, 2), item(bag, 1),
+            )),
+            Package("2", (item(bag, 1), item(lotion, 2), item(water, 4))),
+        )
+    )
+
+    assert [build_package_formula(source, package) for package in plan.packages] == [
+        "06931583616811*4+6940079096228-1*2+yxxyld*1",
+        "yxxyld*1+6940079096228-1*2+06931583616811*4",
+    ]
+
+
+@pytest.mark.parametrize("quantities", [(2, 2, 2), (2, 4), (1, 1, 4)])
+def test_package_formula_uses_selected_package_quantity(quantities):
+    source = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(is_expanded=True, products=[replace(
+            make_order_snapshot().products[0], quantity=sum(quantities),
+        )])
+    )
+    product = source.products[0]
+    plan = PackagePlan(
+        tuple(
+            Package(str(index), (PackageItem(product.source_product_id, "A", quantity),))
+            for index, quantity in enumerate(quantities)
+        )
+    )
+
+    assert [build_package_formula(source, package) for package in plan.packages] == [
+        f"CODE-A*{quantity}" for quantity in quantities
+    ]
+
+
+def test_package_formula_keeps_actual_code_for_same_name_with_different_codes():
+    product = make_order_snapshot().products[0]
+    source = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(
+            is_expanded=True,
+            products=[
+                replace(product, merchant_code="CODE-A", quantity=1),
+                replace(product, merchant_code="CODE-B", quantity=1),
+            ]
+        )
+    )
+    plan = PackagePlan(
+        tuple(
+            Package(str(index), (PackageItem(product.source_product_id, "相同名称", 1),))
+            for index, product in enumerate(source.products)
+        )
+    )
+
+    assert [build_package_formula(source, package) for package in plan.packages] == [
+        "CODE-A*1", "CODE-B*1",
+    ]
+
+
+@pytest.mark.parametrize("code", ["", " ", "A+B", "A*2", "A\nB"])
+def test_package_formula_requires_a_usable_merchant_code(code):
+    source = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(is_expanded=True, products=[replace(
+            make_order_snapshot().products[0],
+            merchant_code=code, main_merchant_code="MAIN", quantity=2,
+        )])
+    )
+    product = source.products[0]
+    plan = PackagePlan(
+        tuple(
+            Package(str(index), (PackageItem(product.source_product_id, "A", 1),))
+            for index in range(2)
+        )
+    )
+
+    assert all(build_package_formula(source, package) == "" for package in plan.packages)
+
+
+def test_package_formula_rejects_empty_unknown_or_invalid_quantity():
+    source = SourceSnapshot.from_order_snapshot(make_order_snapshot())
+    assert build_package_formula(source, Package("empty")) == ""
+    item = PackageItem(source.products[0].source_product_id, "A", 1)
+    for invalid in (
+        replace(item, source_product_id="unknown"),
+        replace(item, quantity=0),
+        replace(item, quantity=-1),
+    ):
+        assert build_package_formula(source, Package("invalid", (invalid,))) == ""

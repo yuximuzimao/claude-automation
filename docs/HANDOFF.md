@@ -1,9 +1,11 @@
 # Handoff
 
-更新时间：2026-10-29
+更新时间：2026-10-30
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
+
+审单浮窗（2026-10-30）：多包方案已新增逐包复制商品组合公式入口，当前行为与使用方式见 `order-review/docs/CURRENT.md` / `order-review/docs/usage.md`。
 
 审单收口（2026-10-29）：拆分入口修复、装箱服务使用后关闭及订单772478993单条本地方案删除已归档到 `order-review/docs/archive/2026-10-29-split-menu-and-case-deletion/neat-handoff.md`；现役能力和未完成事项只见项目 `docs/CURRENT.md` / `tasks/todo.md`。
 

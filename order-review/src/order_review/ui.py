@@ -33,7 +33,7 @@ from .macos_companion import (
     companion_should_be_visible,
     get_frontmost_application,
 )
-from .package_plan import PackagePlanValidationError
+from .package_plan import PackagePlanValidationError, build_package_formula
 from .package_workflow import PackagePlanWorkflow
 from .recommendations import (
     MATCH_EXACT_STRUCTURE,
@@ -1587,6 +1587,7 @@ class OrderReviewWindow:
 
     def _render_readonly_package_plan(self, plan) -> None:
         source = self.package_workflow.source_snapshot
+        show_formula_copy = source is not None and len(plan.packages) > 1
         names = (
             {item.source_product_id: item.display_name for item in source.products}
             if source is not None
@@ -1607,6 +1608,9 @@ class OrderReviewWindow:
                     kind_count=len(products),
                     total_quantity=sum(item.quantity for item in products),
                     products=products,
+                ),
+                copy_formula=(
+                    build_package_formula(source, package) if show_formula_copy else None
                 ),
             )
 
@@ -2959,7 +2963,13 @@ class OrderReviewWindow:
                 widget.bind("<Leave>", leave)
         return control
 
-    def _render_package(self, index: int, package: PackageView) -> None:
+    def _render_package(
+        self,
+        index: int,
+        package: PackageView,
+        *,
+        copy_formula: str | None = None,
+    ) -> None:
         outer = tk.Frame(
             self.content_frame,
             bg=MACOS_THEME["surface"],
@@ -2993,6 +3003,14 @@ class OrderReviewWindow:
             font=(FONT_FAMILY, 11, "bold"),
             anchor="w",
         ).pack(side="left", fill="x", expand=True)
+        if copy_formula is not None:
+            self._action_button(
+                header,
+                "复制组合公式",
+                lambda: self._copy_value(copy_formula),
+                compact=True,
+                enabled=bool(copy_formula) and not self._audit_running,
+            ).pack(side="right", padx=(3, 7), pady=5)
         tk.Label(
             header,
             text=f"{package.kind_count} 种 · {package.total_quantity} 件",

@@ -157,6 +157,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     rendered_window,
 ):
     root, window = rendered_window
+    assert not _buttons(window, "复制组合公式")
     assert window._auto_refresh_enabled is False
     assert window.auto_refresh_button.cget("text") == "自动刷新"
     window.auto_refresh_button.invoke()
@@ -186,6 +187,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
 
     _buttons(window, "单包方案")[0].invoke()
     root.update()
+    assert not _buttons(window, "复制组合公式")
     assert _buttons(window, "新增包裹")[0].cget("state") == "disabled"
     save_button = _buttons(window, "保存方案")[0]
     assert save_button.cget("fg") != "#ffffff"
@@ -269,6 +271,17 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
         for item in _walk(window.content_frame)
     )
     assert len(_buttons(window, "拆分当前订单")) == 1
+    copy_buttons = _buttons(window, "复制组合公式")
+    assert len(copy_buttons) == 2
+    for button, quantity in zip(copy_buttons, (37, 83)):
+        button.invoke()
+        root.update()
+        assert root.clipboard_get() == f"CODE-A*{quantity}"
+    assert not any(
+        isinstance(item, tk.Text) and "CODE-A*" in item.get("1.0", "end-1c")
+        or isinstance(item, tk.Label) and "CODE-A*" in item.cget("text")
+        for item in _walk(window.content_frame)
+    )
     text_widgets = [
         item
         for item in _walk(window.content_frame)

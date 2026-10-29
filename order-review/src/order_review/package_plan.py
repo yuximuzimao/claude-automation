@@ -336,6 +336,22 @@ class PackagePlan:
         )
 
 
+def build_package_formula(source: SourceSnapshot, package: Package) -> str:
+    """按当前包裹的实际商品编码汇总数量；明细不完整时不生成公式。"""
+    products = source.product_by_id
+    totals: dict[str, int] = {}
+    for item in package.items:
+        product = products.get(item.source_product_id)
+        if product is None or item.quantity <= 0:
+            return ""
+        code = product.merchant_code.strip()
+        if not code or any(char.isspace() or char in "*+" for char in code):
+            return ""
+        # 同一实物可能来自不同平台商品行，公式按实际编码汇总。
+        totals[code] = totals.get(code, 0) + item.quantity
+    return "+".join(f"{code}*{quantity}" for code, quantity in totals.items())
+
+
 @dataclass(frozen=True)
 class PackageDraft:
     snapshot_id: str
