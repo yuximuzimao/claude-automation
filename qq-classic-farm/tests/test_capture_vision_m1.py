@@ -51,8 +51,20 @@ class CaptureVisionTests(unittest.TestCase):
             return type("Process", (), {"returncode": 0, "stderr": ""})()
         with patch("farm_capture.subprocess.run", side_effect=fake_run) as run:
             cap = capture_window(frame, "qq", self.layout)
+            newer = capture_window(frame, "qq", self.layout)
         self.assertEqual(cap.gray.shape, (2222, 1206))
-        self.assertEqual(run.call_count, 1)
+        self.assertEqual(run.call_count, 2)
+        self.assertIsInstance(cap.capture_id, str)
+        self.assertTrue(cap.capture_id)
+        self.assertGreater(cap.captured_at_ns, 0)
+        self.assertNotEqual(newer.capture_id, cap.capture_id)
+        self.assertGreater(newer.captured_at_ns, cap.captured_at_ns)
+
+    def test_synthetic_capture_has_no_trusted_provenance(self):
+        frame = WindowFrame("QQ小程序", "QQ经典农场", 0, 0, 100, 100)
+        capture = FarmCapture(frame, np.zeros((100, 100), dtype=np.float32))
+        self.assertIsNone(capture.capture_id)
+        self.assertIsNone(capture.captured_at_ns)
 
     def test_capture_refuses_unvalidated_window_before_call(self):
         frame = WindowFrame("QQ", "QQ经典农场", 0, 0, 603, 1111)

@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from pathlib import Path
 import subprocess
 import tempfile
+from time import monotonic_ns
+from uuid import uuid4
 
 import numpy as np
 from PIL import Image
@@ -26,6 +28,9 @@ class CaptureStop(ValueError):
 class FarmCapture:
     frame: WindowFrame
     gray: np.ndarray
+    # Only capture_window() supplies provenance; synthetic/test captures default to untrusted.
+    capture_id: str | None = None
+    captured_at_ns: int | None = None
 
     def __post_init__(self):
         if self.gray.ndim != 2 or self.gray.size == 0:
@@ -74,4 +79,4 @@ def capture_window(
                 gray = np.asarray(im.convert("L"), dtype=np.float32)
         except (OSError, ValueError) as exc:
             raise CaptureStop("INVALID_SCREENSHOT", str(exc)) from exc
-    return FarmCapture(frame, gray)
+    return FarmCapture(frame, gray, capture_id=uuid4().hex, captured_at_ns=monotonic_ns())

@@ -875,6 +875,8 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 第9轮 M1 检查点：** CodexPro 连接正常。本轮新增 `scripts/farm_harvest.py` 与 `tests/test_harvest_phase_m1.py`，以注入式本地 adapter 模拟单次收获 phase；已覆盖已空田零点击、四格星标批量+全局手形、普通收获、未知/已知遮罩拒绝、未校准拒绝、占地与星标冲突、点击越界、批量部分成功不重试、缺失/不完整 24-cell 终验、clean-field 与占地矛盾等。**全量 61 项单元测试通过**；3 个 Swift helper typecheck 通过。新状态机仅离线 mock，不接真实点击，`run-next` 仍硬停止。下一步：取得真实/历史农田画面，验证星标偏移、特殊 2×2 占用和 24-cell 空地分类，再把本地 observation adapter/overlay 识别接入 FSM 并受控验收；不能用单纯“星标消失”宣称 clean field。对抗式审查：未增加策略决策，未恢复逐击模型调用，未知弹窗/部分点击均停止；**特别注意 postcondition 必须来自新截图及相同窗口身份**。
 
+**2026-10-30 第10轮 M1 检查点：** 对抗式审查确认上一轮状态机只检查窗口身份，**没有证明点击后的 clean-field 结论来自新截图**；若 adapter 意外复用旧截图，可能将旧观察误作终验。本轮在 `farm_capture.py` 给真实截屏附加唯一 `capture_id` 与 `monotonic_ns`，模拟截图默认不具备可信来源；`HarvestObservation` 明确携带这两项。`run_harvest()` 点击前验证来源，点击后要求新 ID 且时间严格递增，拒绝重复/倒序截图（`HARVEST_STALE_POSTCONDITION`），等待或复拍异常统一结构化 STOP（`HARVEST_POSTCONDITION_UNAVAILABLE`），均记录已发送点击数且禁止重试。新增回归覆盖无来源、重复/倒序、截图/等待异常与两次真实 capture mock 产生不同来源；**65 项单测通过，3 个 Swift helper typecheck 通过，`run-next` 仍返回 `RUNNER_NOT_READY`**。没有实机点击，也没有用假截图宣称 clean-field。下一步仍是取得真实或可信历史农田截图，完成星标偏移、实际 2×2 占用、遮罩及 24 格空地视觉分类校准；之后把真实 capture 的 ID/时间一路传入本地 observation adapter，再受控接线批量 CGEvent。对抗式审查：本轮只加强 I/O 安全，不涉及种植策略、定时化或逐击 LLM。
+
 ### M2 — 种植（最高价值）
 
 任务：

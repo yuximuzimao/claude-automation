@@ -29,6 +29,9 @@ class HarvestObservation:
     window_identity: tuple[int, int, str, str, float, float]
     window_width: float
     window_height: float
+    # From a fresh capture_window() invocation, not derived from screenshot contents.
+    capture_id: str
+    captured_at_ns: int
     hand: tuple[float, float] | None
     # (placement ID, local x, local y); these are validated special-star points.
     special: tuple[tuple[str, float, float], ...]
@@ -75,6 +78,9 @@ def prepare_harvest(obs: HarvestObservation) -> tuple[tuple[float, float], ...]:
     Geometry alone does not prove occupancy or star calibration.
     """
     _check_overlay(obs)
+    if (not isinstance(obs.capture_id, str) or not obs.capture_id
+        or type(obs.captured_at_ns) is not int or obs.captured_at_ns <= 0):
+        raise HarvestStop("HARVEST_CAPTURE_PROVENANCE_MISSING", "Observation lacks a trusted capture identifier/time")
     if not obs.calibration_verified:
         raise HarvestStop("HARVEST_CALIBRATION_REQUIRED", "Live star/occupancy calibration missing")
     if (not isfinite(obs.window_width) or not isfinite(obs.window_height)
@@ -132,8 +138,19 @@ def run_harvest(adapter: HarvestAdapter) -> dict:
         raise HarvestStop("HARVEST_PARTIAL_ACTION",
                           "Batch did not confirm the expected sent-click count",
                           clicks_sent=sent if type(sent) is int and sent >= 0 else 0)
-    adapter.wait(3.0)
-    after = adapter.observe()
+    try:
+        adapter.wait(3.0)
+        after = adapter.observe()
+    except Exception as exc:
+        raise HarvestStop("HARVEST_POSTCONDITION_UNAVAILABLE",
+                          "Cannot obtain fresh post-click observation; never replay actions",
+                          clicks_sent=sent) from exc
+    if (not isinstance(after.capture_id, str) or not after.capture_id
+        or type(after.captured_at_ns) is not int
+        or after.capture_id == obs.capture_id
+        or after.captured_at_ns <= obs.captured_at_ns):
+        raise HarvestStop("HARVEST_STALE_POSTCONDITION", "Postcondition must use a newer independent screenshot",
+                          clicks_sent=sent)
     if (after.window_identity != obs.window_identity or
         after.window_width != obs.window_width or
         after.window_height != obs.window_height):

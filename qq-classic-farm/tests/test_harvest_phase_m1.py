@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
+from itertools import count
 from pathlib import Path
 import sys
 import unittest
@@ -12,11 +13,16 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest, run_harvest
 
 
+_capture_serial = count(1)
+
+
 def observation(**changes) -> HarvestObservation:
+    serial = next(_capture_serial)
     baseline = HarvestObservation(
         overlay="none", calibration_verified=True,
         window_identity=(123, 456, "QQ小程序", "QQ经典农场", 500.0, 200.0),
         window_width=603, window_height=1111,
+        capture_id=f"mock-capture-{serial}", captured_at_ns=serial * 1_000_000,
         hand=(300.0, 900.0),
         special=(("gold_a", 250.0, 580.0), ("gold_b", 170.0, 620.0)),
         occupied_special=frozenset(("gold_a", "gold_b")),
@@ -49,8 +55,9 @@ class FakeAdapter:
 
 class HarvestPhaseTests(unittest.TestCase):
     def test_ordered_batch_and_verified_clean_field(self):
+        before = observation()
         after = observation(hand=None, special=(), occupied_special=frozenset(), empty_cells=(True,) * 24)
-        fake = FakeAdapter(observation(), after)
+        fake = FakeAdapter(before, after)
         result = run_harvest(fake)
         self.assertEqual(result["status"], "clean_field_verified")
         self.assertEqual(result["click_count"], 3)
@@ -128,9 +135,58 @@ class HarvestPhaseTests(unittest.TestCase):
                     prepare_harvest(observation(hand=point))
                 self.assertEqual(caught.exception.code, "CLICK_OUTSIDE_WINDOW")
 
+    def test_stale_or_out_of_order_postcondition_never_counts_as_clean(self):
+        before = observation()
+        clean = observation(hand=None, special=(), occupied_special=frozenset(),
+                            empty_cells=(True,) * 24)
+        for after in (replace(clean, capture_id=before.capture_id),
+                      replace(clean, captured_at_ns=before.captured_at_ns),
+                      replace(clean, captured_at_ns=before.captured_at_ns - 1),
+                      replace(clean, capture_id="")):
+            with self.subTest(after=after):
+                fake = FakeAdapter(before, after)
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake)
+                self.assertEqual(caught.exception.code, "HARVEST_STALE_POSTCONDITION")
+                self.assertEqual(caught.exception.clicks_sent, 3)
+                self.assertEqual(len(fake.batches), 1)
+
+    def test_precondition_requires_capture_provenance(self):
+        for changes in ({"capture_id": ""}, {"captured_at_ns": 0},
+                        {"captured_at_ns": True}):
+            with self.subTest(changes=changes):
+                with self.assertRaises(HarvestStop) as caught:
+                    prepare_harvest(observation(**changes))
+                self.assertEqual(caught.exception.code, "HARVEST_CAPTURE_PROVENANCE_MISSING")
+
+    def test_postclick_capture_or_wait_failure_is_structured_and_not_retried(self):
+        before = observation()
+        after = observation(hand=None, special=(), occupied_special=frozenset(),
+                            empty_cells=(True,) * 24)
+        for fail_stage in ("wait", "observe"):
+            with self.subTest(stage=fail_stage):
+                class BrokenPostAdapter(FakeAdapter):
+                    def wait(self, seconds):
+                        super().wait(seconds)
+                        if fail_stage == "wait":
+                            raise RuntimeError("Timer interrupted")
+
+                    def observe(self):
+                        if fail_stage == "observe" and len(self.observations) == 1:
+                            raise RuntimeError("Screenshot unavailable")
+                        return super().observe()
+
+                fake = BrokenPostAdapter(before, after)
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake)
+                self.assertEqual(caught.exception.code, "HARVEST_POSTCONDITION_UNAVAILABLE")
+                self.assertEqual(caught.exception.clicks_sent, 3)
+                self.assertEqual(len(fake.batches), 1)
+
     def test_postcondition_missing_stops_without_reclick(self):
+        before = observation()
         after = observation(hand=None, special=(), empty_cells=None)
-        fake = FakeAdapter(observation(), after)
+        fake = FakeAdapter(before, after)
         with self.assertRaises(HarvestStop) as caught:
             run_harvest(fake)
         self.assertEqual(caught.exception.code, "HARVEST_POSTCONDITION_UNKNOWN")
@@ -138,8 +194,9 @@ class HarvestPhaseTests(unittest.TestCase):
         self.assertEqual(len(fake.batches), 1)
 
     def test_postcondition_partial_field_stops_without_reclick(self):
+        before = observation()
         after = observation(hand=None, special=(), empty_cells=(True,) * 23 + (False,))
-        fake = FakeAdapter(observation(), after)
+        fake = FakeAdapter(before, after)
         with self.assertRaises(HarvestStop) as caught:
             run_harvest(fake)
         self.assertEqual(caught.exception.code, "HARVEST_FIELD_NOT_CLEAN")
@@ -170,8 +227,9 @@ class HarvestPhaseTests(unittest.TestCase):
         self.assertEqual(caught.exception.code, "HARVEST_STATE_CONFLICT")
 
     def test_postcondition_false_clean_report_rejected(self):
+        before = observation()
         after = observation(empty_cells=(True,) * 24)
-        fake = FakeAdapter(observation(), after)
+        fake = FakeAdapter(before, after)
         with self.assertRaises(HarvestStop) as caught:
             run_harvest(fake)
         self.assertEqual(caught.exception.code, "HARVEST_STATE_CONFLICT")
