@@ -10,7 +10,14 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest, run_harvest
+from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest, run_harvest as _run_harvest
+
+
+def run_harvest(adapter, *, clock_ns=None):
+    """Use a deterministic test clock; production uses the real monotonic clock."""
+    if clock_ns is None:
+        clock_ns = lambda: adapter.before_capture_ns + 1
+    return _run_harvest(adapter, clock_ns=clock_ns)
 
 
 _capture_serial = count(1)
@@ -35,6 +42,7 @@ class FakeAdapter:
     def __init__(self, before: HarvestObservation, after: HarvestObservation,
                  *, sent: int | None = None, fail_batch: bool = False):
         self.observations = [before, after]
+        self.before_capture_ns = before.captured_at_ns
         self.sent = sent
         self.fail_batch = fail_batch
         self.batches: list[tuple[tuple[float, float], ...]] = []
@@ -148,6 +156,36 @@ class HarvestPhaseTests(unittest.TestCase):
                 with self.assertRaises(HarvestStop) as caught:
                     prepare_harvest(observation(hand=point))
                 self.assertEqual(caught.exception.code, "CLICK_OUTSIDE_WINDOW")
+
+    def test_postcondition_must_be_captured_after_animation_wait(self):
+        # A distinct screenshot taken between the initial probe and completion
+        # of the required wait is stale, even with a newer ID and timestamp.
+        before = observation()
+        clean = observation(hand=None, special=(), occupied_special=frozenset(),
+                            empty_cells=(True,) * 24)
+        for wait_end in (clean.captured_at_ns, clean.captured_at_ns + 1):
+            with self.subTest(wait_end=wait_end):
+                fake = FakeAdapter(before, clean)
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake, clock_ns=lambda: wait_end)
+                self.assertEqual(caught.exception.code, "HARVEST_STALE_POSTCONDITION")
+                self.assertEqual(caught.exception.clicks_sent, 3)
+                self.assertEqual(len(fake.batches), 1)
+                self.assertEqual(fake.waits, [3.0])
+
+    def test_unavailable_post_wait_clock_stops_without_reclick(self):
+        before = observation()
+        clean = observation(hand=None, special=(), occupied_special=frozenset(),
+                            empty_cells=(True,) * 24)
+        for invalid in (None, 0, True):
+            with self.subTest(invalid=invalid):
+                fake = FakeAdapter(before, clean)
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake, clock_ns=lambda: invalid)
+                self.assertEqual(caught.exception.code, "HARVEST_POSTCONDITION_UNAVAILABLE")
+                self.assertEqual(caught.exception.clicks_sent, 3)
+                self.assertEqual(len(fake.batches), 1)
+                self.assertEqual(fake.waits, [3.0])
 
     def test_stale_or_out_of_order_postcondition_never_counts_as_clean(self):
         before = observation()

@@ -892,6 +892,9 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 M1 后续检查点（参考图 ROI 像素比例修复）：** 先新增 QQ/微信 × 1x/Retina 2x 的细纹理回归，构造两张**像素完全相同**、但窗口注册元数据宽高相差 1 logical point 的截图。原 `farm_clean_field.py` 复用当前图 `sx/sy` 裁参考图 ROI，导致 4 个子场景全部产生 **15.0 的虚假 RGB 均值差**；测试先红后修。现在每张图使用自己的 pixel/logical scale 裁局部 patch，patch 形状不一致仍 `FIELD_REFERENCE_MISMATCH` 结构化停止；4 个子场景修复后均为零差异。**全量 92 项单元测试通过，3 个 Swift helper typecheck 通过，`run-next` 仍 `RUNNER_NOT_READY`。** 本次仅修只读离线诊断精度，不增加空田分类、点击授权或策略；成熟田/四格星标/遮罩与同平台真实 clean/occupied 校准仍是 M1 阻塞，M2 未开始。对抗式审查：没有逐击 LLM、没有把策略决策塞入 Runner、没有定时/化肥功能。
 
+
+**2026-10-30 M1 后续检查点（收获终验时序安全修复）：** 对抗式审查发现 `run_harvest()` 只要求后验截图 ID 不同且时间晚于**初始观察**；如果 adapter 缓存了点击批次期间或等待动画期间拍摄的截图，仍可能把旧画面当成收获完成。现改为 CGEvent 批量发送成功、`wait(3.0)` 返回后读取本机 `monotonic_ns`，要求 `after.captured_at_ns` **严格晚于等待完成时刻**；时间戳无效/时钟异常结构化 `HARVEST_POSTCONDITION_UNAVAILABLE`，截图过早则 `HARVEST_STALE_POSTCONDITION`，两种情况都保留已发送点击数且禁止重试。测试使用注入式时钟覆盖截图新 ID 但拍摄过早、时钟无效与正常成功路径。**全量 94 项 Python 单测通过，3 个 Swift helper typecheck 通过；`run-next` 仍 `RUNNER_NOT_READY`。** 临时编译只读 window registry 后 QQ/微信均 `WINDOW_NOT_FOUND`，无真机点击。下一步仍是同平台真实 clean/occupied 样本、成熟田对齐、四格星标与遮罩校准，再接真实 I/O；M1 未验收、M2 未开始。对抗式审查：未引入策略决策、逐击模型调用、定时化或化肥功能。
+
 ### M2 — 种植（最高价值）
 
 任务：

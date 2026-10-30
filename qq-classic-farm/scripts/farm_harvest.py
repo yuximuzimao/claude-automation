@@ -9,8 +9,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from math import isfinite
-from time import perf_counter, sleep
-from typing import Protocol
+from time import monotonic_ns, perf_counter
+from typing import Callable, Protocol
 
 
 class HarvestStop(ValueError):
@@ -119,11 +119,14 @@ def prepare_harvest(obs: HarvestObservation) -> tuple[tuple[float, float], ...]:
     return tuple(actions)
 
 
-def run_harvest(adapter: HarvestAdapter) -> dict:
+def run_harvest(adapter: HarvestAdapter, *, clock_ns: Callable[[], int] = monotonic_ns) -> dict:
     """One local phase: precheck -> batch special stars + hand -> wait -> 24-cell verify.
 
     No automatic retry or speculative overlay click. A partial send must be
-    reported as uncertain; the caller must not replay the same batch.
+    reported as uncertain; the caller must not replay the same batch. The
+    postcondition capture must be taken AFTER the CGEvent batch and animation
+    wait, not merely later than the initial observation. The clock is injectable only
+    to keep offline contract tests deterministic.
     """
     started = perf_counter()
     obs = adapter.observe()
@@ -151,6 +154,11 @@ def run_harvest(adapter: HarvestAdapter) -> dict:
                           clicks_sent=sent if type(sent) is int and sent >= 0 else 0)
     try:
         adapter.wait(3.0)
+        # A newly identified screenshot can still have been cached *before*
+        # animation settled. Require a capture newer than the completed wait.
+        post_wait_ns = clock_ns()
+        if type(post_wait_ns) is not int or post_wait_ns <= 0:
+            raise ValueError("Invalid monotonic clock result")
         after = adapter.observe()
     except Exception as exc:
         raise HarvestStop("HARVEST_POSTCONDITION_UNAVAILABLE",
@@ -159,8 +167,9 @@ def run_harvest(adapter: HarvestAdapter) -> dict:
     if (not isinstance(after.capture_id, str) or not after.capture_id
         or type(after.captured_at_ns) is not int
         or after.capture_id == obs.capture_id
-        or after.captured_at_ns <= obs.captured_at_ns):
-        raise HarvestStop("HARVEST_STALE_POSTCONDITION", "Postcondition must use a newer independent screenshot",
+        or after.captured_at_ns <= obs.captured_at_ns
+        or after.captured_at_ns <= post_wait_ns):
+        raise HarvestStop("HARVEST_STALE_POSTCONDITION", "Postcondition screenshot must be newer than the completed animation wait",
                           clicks_sent=sent)
     if (after.window_identity != obs.window_identity or
         after.window_width != obs.window_width or
