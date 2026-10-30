@@ -29,6 +29,7 @@
 | `scripts/open_qq_farm.swift` | QQ 农场固定入口：定位窗口并按已验证相对坐标打开/恢复农场 | 每次需要恢复或打开 QQ 农场 |
 | `scripts/farm_harvest.py` | M1 本地收获状态机，当前仅 mock 验收、真实点击未接入 | Runner M1 开发 |
 | `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
+| `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |
 | `scripts/pickable_locator.py` | 一次返回全部 4 格植物“可摘”坐标；已被 `ui_probe.py` 集成 | 特殊植物收获 |
 | `scripts/picker_simulator.py` | 旧顺序模型推演工具 | 仅异常研究，不作为正常选种入口 |
@@ -58,6 +59,7 @@
 - UI 锚点模板：`assets/ui/`
 - QQ 农场固定入口：`scripts/open_qq_farm.swift`
 - M1 收获状态机（仅离线 mock）：`scripts/farm_harvest.py`
+- M1 遮挡田只读场景配准与空田对照：`scripts/farm_scene.py`、`scripts/farm_clean_field.py`、`scripts/farm_clean_replay.py`
 - 状态探测：`scripts/ui_probe.py`
 - 多目标可摘定位：`scripts/pickable_locator.py`
 - 当前库存快照：`data/inventory-live-2026-10-28.json`

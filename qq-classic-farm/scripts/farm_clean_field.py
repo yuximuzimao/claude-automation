@@ -1,9 +1,11 @@
 """Read-only M1 per-plot comparison against a separately labeled clean-field image.
 
 This is an *evidence collector*, not a classifier or click permission.
-The reference must be a known clean capture of the same platform/canvas; both
-images must independently align using exposed purple soil. No inferred crop
-states are returned until real replay calibrates thresholds and false positives.
+The reference must be a known clean capture of the same platform/canvas and
+must independently align on exposed purple soil. An occupied current field may
+use a read-only scene-background shift estimate; this is NOT independent field
+calibration. No crop states are inferred until real negative/positive replay
+calibrates false positives.
 """
 from __future__ import annotations
 
@@ -12,6 +14,7 @@ import numpy as np
 from farm_capture import FarmCapture
 from farm_field import FieldStop, probe_field_translation
 from farm_geometry import GeometryStop, plot_local_point, validate_farm_window
+from farm_scene import SceneStop, probe_scene_translation
 
 
 class CleanFieldStop(ValueError):
@@ -41,10 +44,31 @@ def compare_clean_reference(
             or not isinstance(half_height, int) or isinstance(half_height, bool)
             or not 3 <= half_width <= 15 or not 3 <= half_height <= 8):
             raise CleanFieldStop("INVALID_FIELD_PATCH", "Unsafe per-plot patch size")
-        # Independent full-purple-grid alignment: a cropped/obscured field is
-        # NOT allowed to borrow a previous offset or guess a replacement.
-        current_alignment = probe_field_translation(capture, platform, layout)
+        # The reference must independently align on exposed purple soil. An
+        # occupied current field may use only a read-only, three-landmark scene
+        # estimate; neither route is permitted to authorize clicks.
         reference_alignment = probe_field_translation(reference, platform, layout)
+        scene_alignment = None
+        alignment_method = "exposed_purple_soil"
+        try:
+            current_alignment = probe_field_translation(capture, platform, layout)
+        except FieldStop as field_exc:
+            # An occupied field can hide every purple soil tile. Estimate only
+            # a diagnostic scene-relative offset from independent background
+            # landmarks, never an actionable plot calibration.
+            try:
+                scene_alignment = probe_scene_translation(capture, reference, platform, layout)
+            except SceneStop as exc:
+                raise CleanFieldStop(field_exc.code, f"{field_exc}; scene fallback: {exc}") from exc
+            sx_local, sy_local = scene_alignment["scene_shift_local"]
+            rx_local, ry_local = reference_alignment["offset_local"]
+            current_alignment = {
+                "status": "diagnostic_only",
+                "offset_local": [round(rx_local + sx_local, 2),
+                                 round(ry_local + sy_local, 2)],
+                "can_authorize_clicks": False,
+            }
+            alignment_method = "background_reference_inferred"
         if (current_alignment["status"] != "diagnostic_only"
             or reference_alignment["status"] != "diagnostic_only"):
             raise CleanFieldStop("FIELD_ALIGNMENT_UNAVAILABLE", "Untrusted field alignment")
@@ -113,6 +137,8 @@ def compare_clean_reference(
         "global_rgb_offset": [round(float(x), 2) for x in global_offset],
         "reference_alignment": reference_alignment["offset_local"],
         "capture_alignment": current_alignment["offset_local"],
+        "capture_alignment_method": alignment_method,
+        "scene_alignment": scene_alignment,
         "empty_cells": None,
         "can_authorize_clicks": False,
         "requires_labeled_real_clean_and_occupied_replay": True,

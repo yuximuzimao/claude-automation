@@ -2,6 +2,7 @@
 
 Usage: python3 scripts/farm_clean_replay.py --platform qq
        --reference path/to/known-clean.png --current path/to/candidate.png
+An occupied current field can use read-only background-scene registration.
 No game window access, state updates, or click authorization.
 """
 from __future__ import annotations
