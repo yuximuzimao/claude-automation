@@ -122,11 +122,25 @@ class HarvestPhaseTests(unittest.TestCase):
         self.assertEqual(caught.exception.code, "HARVEST_HAND_MISSING")
 
     def test_malformed_occupancy_report_rejected(self):
-        for cells in ((True,) * 23, (True,) * 23 + (1,)):
+        for cells in ((True,) * 23, (True,) * 23 + (1,), "unknown", 24):
             with self.subTest(cells=cells):
                 with self.assertRaises(HarvestStop) as caught:
                     prepare_harvest(observation(empty_cells=cells))
                 self.assertEqual(caught.exception.code, "INVALID_FIELD_OBSERVATION")
+
+    def test_malformed_postclick_field_preserves_sent_clicks_and_never_retries(self):
+        before = observation()
+        for cells in ((True,) * 23, (True,) * 23 + (1,), "unknown", 24):
+            with self.subTest(cells=cells):
+                after = observation(hand=None, special=(), occupied_special=frozenset(),
+                                    empty_cells=cells)
+                fake = FakeAdapter(before, after)
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake)
+                self.assertEqual(caught.exception.code, "INVALID_FIELD_OBSERVATION")
+                self.assertEqual(caught.exception.clicks_sent, 3)
+                self.assertEqual(len(fake.batches), 1)
+                self.assertEqual(fake.waits, [3.0])
 
     def test_click_outside_window_rejected_before_batch(self):
         for point in ((-1, 200), (603, 200), (200, float("nan"))):

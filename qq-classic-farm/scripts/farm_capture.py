@@ -31,11 +31,17 @@ class FarmCapture:
     # Only capture_window() supplies provenance; synthetic/test captures default to untrusted.
     capture_id: str | None = None
     captured_at_ns: int | None = None
+    # Optional RGB evidence for conservative field-color alignment; grayscale
+    # remains the only input to existing anchor/star matchers.
+    rgb: np.ndarray | None = None
 
     def __post_init__(self):
         if self.gray.ndim != 2 or self.gray.size == 0:
             raise CaptureStop("INVALID_SCREENSHOT", "Expected a nonempty grayscale image")
         h, w = self.gray.shape
+        if (self.rgb is not None and
+            (self.rgb.shape != (h, w, 3) or self.rgb.dtype != np.uint8)):
+            raise CaptureStop("INVALID_SCREENSHOT", "RGB evidence must match grayscale capture")
         # Reject a clipped crop, full-screen image, or anisotropic scaling.
         sx, sy = w / self.frame.width, h / self.frame.height
         if not 0.95 <= sx <= 4.0 or abs(sx - sy) > 0.04 * max(sx, sy):
@@ -76,7 +82,9 @@ def capture_window(
             raise CaptureStop("SCREENSHOT_FAILED", proc.stderr.strip() or "No screenshot")
         try:
             with Image.open(output) as im:
+                rgb = np.asarray(im.convert("RGB"), dtype=np.uint8)
                 gray = np.asarray(im.convert("L"), dtype=np.float32)
         except (OSError, ValueError) as exc:
             raise CaptureStop("INVALID_SCREENSHOT", str(exc)) from exc
-    return FarmCapture(frame, gray, capture_id=uuid4().hex, captured_at_ns=monotonic_ns())
+    return FarmCapture(frame, gray, capture_id=uuid4().hex,
+                       captured_at_ns=monotonic_ns(), rgb=rgb)

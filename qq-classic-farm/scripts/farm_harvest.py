@@ -58,7 +58,9 @@ def _point(point: tuple[float, float], obs: HarvestObservation) -> None:
 def _clean(obs: HarvestObservation) -> bool:
     if obs.empty_cells is None:
         return False
-    if len(obs.empty_cells) != 24 or any(type(v) is not bool for v in obs.empty_cells):
+    if (not isinstance(obs.empty_cells, (tuple, list))
+        or len(obs.empty_cells) != 24
+        or any(type(v) is not bool for v in obs.empty_cells)):
         raise HarvestStop("INVALID_FIELD_OBSERVATION", "Expected 24 verified plot states")
     return all(obs.empty_cells)
 
@@ -166,7 +168,13 @@ def run_harvest(adapter: HarvestAdapter) -> dict:
     if after.empty_cells is None:
         raise HarvestStop("HARVEST_POSTCONDITION_UNKNOWN", "Missing 24-cell empty-state evidence",
                           clicks_sent=sent)
-    if not _clean(after):
+    try:
+        is_clean = _clean(after)
+    except HarvestStop as exc:
+        # Post-click validation errors must retain the action count for recovery.
+        # The batch may already have changed the farm; never blindly replay it.
+        raise HarvestStop(exc.code, str(exc), clicks_sent=sent) from exc
+    if not is_clean:
         raise HarvestStop("HARVEST_FIELD_NOT_CLEAN", "Not all 24 plots are confirmed empty",
                           clicks_sent=sent)
     if after.special or after.hand is not None or after.occupied_special:

@@ -192,6 +192,8 @@ class SpecialPickableTests(unittest.TestCase):
         self.assertEqual(grab.call_count, 1)
         vision.assert_called_once_with(capture, {}, "qq", self.layout)
         self.assertEqual(result["harvest"], probe)
+        self.assertEqual(result["field_alignment"]["code"], "FIELD_COLOR_REQUIRED")
+        self.assertFalse(result["field_alignment"]["can_authorize_clicks"])
         self.assertEqual(result["click_count"], 0)
         self.assertEqual(result["llm_round_trips"], 0)
 
