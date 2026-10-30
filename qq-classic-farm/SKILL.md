@@ -31,6 +31,7 @@
 | `scripts/farm_harvest_live.py` | M1 真实 registry/截图/视觉→FSM 只读预检及受门禁 CGEvent 接口；当前校准未知，禁止真实点击 | Runner M1 实机校准 |
 | `scripts/restore_wechat_main.swift` | 微信 Stage Manager 主窗口安全恢复，不盲点游戏入口 | 微信农场恢复 |
 | `scripts/farm_plant_picker.py` | M2 离线 picker 有界翻页与图标/数量验证接口，尚未接真实 UI | M2 开发 |
+| `scripts/farm_plant_cycle.py` | M2 单调用离线种植 phase：逐颗四格→普通一键、复用 M0 全局预检、成功事务检查点；真实 UI adapter 尚缺 | M2 集成/实机接线 |
 | `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |

@@ -907,6 +907,8 @@ Runner 遇异常必须返回结构化 error。
 
 ### M2 — 种植（最高价值）
 
+**2026-10-31 07:35–07:42 CST 集成检查点：** 新增 `scripts/farm_plant_cycle.py`，把已有 M2 picker、四格、普通事务接成**一个本地种植 phase**（全部离线 mock 验证）：M0 预校验整个24格规划及种子库存→每颗四格逐一预览/确认/落地→仅在每颗独立验收后推进内存库存/下一颗 picker 位置→最后普通一键种植并验收24格。测试证实特殊种子3→0后普通目标从第2页自动移到第1页；中途失败只返回已确认交易与数量、不重放任何已发送动作；注入式 checkpoint 每笔成功后被调用，持久化失败停止。严格校验返回结果与预期平台/种子/数量变更一致；旧状态 `inventory_dirty=true` 不允许进入真实种植。新增7项组合回归，**全量156项通过**、py_compile/M0 dry-run通过。当前尚无真实 M2 UI adapter，`run-next` 仍不解锁；真正本地执行需要当前24格占用、预览/一键模式、picker页码/图标/数量、窗口遮挡/前台等可信观察与批量CGEvent、持久化恢复日志，不能把离线贯通误称为真机种植成功。QQ 现场只读恢复/截图仍能工作，0.50阈值仅得3个低置信星标候选，未证实2×2占用，不能授权M1点击。
+
 **2026-10-31 03:41–03:47 CST 续跑检查点（M1 真实窗口恢复 + M2 四格事务离线闭环）：** 本机时钟确认允许操作；重新编译只读 registry 至 `/tmp/farm_window_registry`，证实上轮 `WINDOW_REGISTRY_FAILED` 是默认临时二进制缺失，不代表农场丢失。QQ 窗口一度在 Stage Manager 缩略态（46×128），导致只读 `probe-harvest` 返回 `WINDOW_SIZE_CHANGED`；使用既有 `swift scripts/open_qq_farm.swift` 安全恢复后，registry 确认完整 QQ 窗口 603×1111，`probe-harvest --registry /tmp/farm_window_registry` 成功返回手形 score 0.9139、星标列表为空、成熟遮挡田 `FIELD_ALIGNMENT_UNAVAILABLE`。离线目视旧实拍 `/tmp/farm-qq-live.png` 确认画面存在大量普通单格和大型作物的“可摘”星标，旧模板背景与现场粉色树冠差异明显；`pickables=[]` **不是无成熟四格的证据**。网格静态几何也不等于当前四格作物占用证明；未发送收获/种植/购买点击，现有成熟作物保留。
 
 为避免 M1 校准阻塞 M2，新增 `scripts/farm_plant_special.py` 和 `tests/test_plant_special_m2.py`：复用已有 M2 picker 的有界翻页与图标/数量验证；本地注入式事务执行 `确认目标2×2为空→打开目标锚点→核验 picker→选种→独立截图证明预览恰好覆盖目标四格→二次确认→新截图验证预览关闭且24格仅目标变为占用→返回更新后库存副本`。任意预览漂移、截图过早、窗口变化、库存不足、遮罩、占用变化或部分动作失败均结构化停止且不重试；尚未接真实 UI adapter，也不持久化库存。新增17项测试，**全量123项 Python 单测通过**，`py_compile` 通过，`run-next=RUNNER_NOT_READY`。这次 M2 真正具备四格种植事务的离线执行骨架，下一步接真实局部视觉/批量 CGEvent adapter；M1 仍需真实星标/占用与 clean-field 终验，**两者均未实机验收**。对抗式审查：没有种植策略内移、没有逐击 LLM、没有恢复旧截图遥控，也没有定时化/化肥扩展。
