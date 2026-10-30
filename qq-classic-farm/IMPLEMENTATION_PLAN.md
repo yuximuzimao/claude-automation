@@ -882,6 +882,8 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 第12轮 M1 检查点：** 对抗式审查发现 CGEvent 批量 helper 在第 N 次点击前若窗口移动、遮挡或焦点变化，旧错误 JSON **没有已发送点击数**，而 Python 收获状态机也会在 adapter 抛异常时丢弃已知部分计数，妨碍安全恢复。本轮修改 `scripts/farm_click_batch.swift`：所有运行中 STOP 均返回 `click_count`（仅表示已 post 的 CGEvent，不代表游戏落地），包括窗口枚举/身份/尺寸/焦点/遮挡/事件构造失败；新增 `scripts/farm_io.py::parse_click_batch_result` 严格区分 `validated_no_click` 与 `clicks_sent_unverified`，解析非零退出时保留可信范围内的部分计数，格式错误则按未知计数停止；`farm_harvest.py` 保留 adapter 报出的部分发送数，任何失败都禁止重放。新增批量协议与恢复回归，**全量 78 项单测通过、3 个 Swift helper typecheck 通过**；`run-next` 仍硬停止 `RUNNER_NOT_READY`。这是离线 I/O 可靠性改进，**尚未完成成熟田对齐、四格真实占用、遮罩及 24 格空地视觉分类，未执行真实点击**。下一步继续这些 M1 视觉证据与受控联调；不因 helper 改进提前解锁。对抗式审查：没有将种植策略塞入 Runner，没有逐击 LLM 往返，也没有引入定时/化肥扩展。
 
+**2026-10-30 第13轮 M1 检查点：** 新增 `scripts/farm_clean_field.py` 只读 24 格 RGB patch 差异诊断和 `scripts/farm_clean_replay.py` 历史截图回放入口；每张截图独立完成紫地格点对齐，禁止从参考图继承当前平移。6 项新单测覆盖 QQ/微信、Retina、平移、单格差异、遮挡/错图 fail-closed，**累计 84 项单测通过、3 个 Swift helper typecheck 通过**。真实历史 QQ 两张均标记为空田的 `../_sandbox/qq-final-clean.png` 与 `../_sandbox/qq-after-harvest-today.png` 回放：24 格的原始 RGB 平均差异仍为约 **20.7–33.5**，说明空田在不同画面之间也有显著全局/局部色彩变化，**不可用简单像素差阈值判定占用/干净**。微信空田自比为 0 只证明管线运行，不是独立正例。当前比较器严格输出 `diagnostic_only`、`empty_cells=null`、`can_authorize_clicks=false`，不接收获状态机、不放开点击。`python` 当前指向缺 scipy 的 Conda Python 3.13；验证须用具备 scipy 的 `python3 -m unittest discover -s tests -v`。`run-next` 仍 `RUNNER_NOT_READY`，未真机点击。**下一步**：找同平台多张真实已标注 clean/occupied 的历史样本，研究光照/动画归一与占用负例，校准 24 格判定且拒绝假阳性；并继续成熟田对齐、四格占用/星标偏移、遮罩识别。未有足够负例前不得把本诊断提升为 `empty_cells` 真值。对抗式审查：仅离线只读视觉工具，无策略、无定时、无逐击模型。
+
 ### M2 — 种植（最高价值）
 
 任务：

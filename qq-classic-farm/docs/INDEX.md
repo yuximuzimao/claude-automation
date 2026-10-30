@@ -15,6 +15,7 @@
 - `../scripts/farm_geometry.py`：M1 唯一 window-local logical 坐标转换、Retina 像素映射与 fail-closed 校验。
 - `../scripts/farm_harvest.py`：M1 本地收获 phase 状态机（离线 mock 验收；未接真实点击），终验必须有独立 24 格空地证据；异常保留已发送点击数。
 - `../scripts/farm_field.py`：M1 紫晶空地格点的**只读平移诊断**；历史回放已证明静态网格原点会偏移，诊断不可授权点击，成熟/遮挡时拒绝校准。
+- `../scripts/farm_clean_field.py` / `../scripts/farm_clean_replay.py`：M1 独立对齐后 24 格历史 RGB 对照，只读诊断；已知两张真实 QQ 空田仍有显著差异，不能凭原始差值宣布 clean，尚未接真实收获。
 - `../scripts/window_registry.swift`：M1 只读 macOS 窗口枚举（需编译后调用），不聚焦、不点击；实机农场窗口联调未完成。
 - `../data/next-cycle-plan.json`：2026-10-28 的旧 3 轮方案；保留作历史输入样本，**Runner 新架构不再把 page/slot 写死在运行策略里**。
 - `../data/picker-order.json`：旧排序历史证据；当前 Runner 以 `data/seed-order.json` 的 fresh-entry `stable_order` + `data/farm-state.json` 数量计算临时 `visible_order`，未启用 order_revision。

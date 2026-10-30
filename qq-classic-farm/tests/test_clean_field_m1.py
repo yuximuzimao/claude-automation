@@ -1,0 +1,95 @@
+"""Read-only M1 clean-field comparison tests; no game I/O or click permission."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+import sys
+import unittest
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from farm_capture import FarmCapture
+from farm_clean_field import CleanFieldStop, compare_clean_reference
+from farm_geometry import plot_local_point
+from test_field_alignment_m1 import synthetic
+
+LAYOUT = json.loads((ROOT / "data/ui-layout.json").read_text(encoding="utf-8"))
+
+
+def with_crop(capture: FarmCapture, platform: str, *, cell=(3, 3)) -> FarmCapture:
+    rgb = capture.rgb.copy()
+    x, y = plot_local_point(platform, *cell, capture.frame, LAYOUT)
+    # Synthetic test fixtures use (-9,+18) alignment.
+    x, y = round(x - 9), round(y + 18)
+    rgb[y-8:y+9, x-16:x+17] = (10, 20, 10)
+    return FarmCapture(capture.frame, np.mean(rgb, axis=2).astype(np.float32), rgb=rgb)
+
+
+class CleanFieldDiagnosticTests(unittest.TestCase):
+    def test_identical_reference_reports_24_numeric_diagnostics_not_empty_flags(self):
+        for platform in ("qq", "wechat"):
+            with self.subTest(platform=platform):
+                ref = synthetic(platform)
+                result = compare_clean_reference(ref, ref, platform, LAYOUT)
+                self.assertEqual(result["status"], "diagnostic_only")
+                self.assertEqual(result["cell_count"], 24)
+                self.assertEqual(len(result["cells"]), 24)
+                self.assertIsNone(result["empty_cells"])
+                self.assertFalse(result["can_authorize_clicks"])
+                self.assertTrue(all(c["mean_abs_rgb"] == 0 for c in result["cells"]))
+
+    def test_independent_alignment_handles_shift_and_retina(self):
+        for platform in ("qq", "wechat"):
+            for scale in (1, 2):
+                with self.subTest(platform=platform, scale=scale):
+                    reference = synthetic(platform, shift=(-9, 18), scale=scale)
+                    current = synthetic(platform, shift=(-12, 20), scale=scale)
+                    result = compare_clean_reference(current, reference, platform, LAYOUT)
+                    self.assertEqual(result["cell_count"], 24)
+                    self.assertLess(max(c["mean_abs_rgb"] for c in result["cells"]), 12)
+                    self.assertFalse(result["can_authorize_clicks"])
+
+    def test_changed_gold_plot_produces_difference_but_not_occupancy_claim(self):
+        reference = synthetic("qq")
+        current = with_crop(reference, "qq")
+        result = compare_clean_reference(current, reference, "qq", LAYOUT)
+        by_cell = {tuple(c["cell"]): c for c in result["cells"]}
+        self.assertGreater(by_cell[(3, 3)]["mean_abs_rgb"], 40)
+        self.assertIsNone(result["empty_cells"])
+
+    def test_clean_field_with_global_tint_must_not_be_called_occupied(self):
+        reference = synthetic("qq")
+        rgb = np.clip(reference.rgb.astype(np.int16) + 20, 0, 255).astype(np.uint8)
+        current = FarmCapture(reference.frame, np.mean(rgb, axis=2).astype(np.float32), rgb=rgb)
+        result = compare_clean_reference(current, reference, "qq", LAYOUT)
+        self.assertTrue(all(c["mean_abs_rgb"] > 10 for c in result["cells"]))
+        self.assertIsNone(result["empty_cells"])
+        self.assertFalse(result["can_authorize_clicks"])
+
+    def test_missing_purple_or_reference_color_fails_closed(self):
+        reference = synthetic("qq")
+        missing = synthetic("qq", missing=True)
+        with self.assertRaises(CleanFieldStop) as caught:
+            compare_clean_reference(missing, reference, "qq", LAYOUT)
+        self.assertEqual(caught.exception.code, "FIELD_ALIGNMENT_UNAVAILABLE")
+        no_rgb = FarmCapture(reference.frame, reference.gray)
+        with self.assertRaises(CleanFieldStop) as caught:
+            compare_clean_reference(reference, no_rgb, "qq", LAYOUT)
+        self.assertEqual(caught.exception.code, "FIELD_COLOR_REQUIRED")
+
+    def test_wrong_reference_and_unsafe_patch_rejected(self):
+        qq = synthetic("qq")
+        wechat = synthetic("wechat")
+        with self.assertRaises(CleanFieldStop) as caught:
+            compare_clean_reference(qq, wechat, "qq", LAYOUT)
+        self.assertIn(caught.exception.code, ("FIELD_REFERENCE_MISMATCH", "WRONG_FRONTMOST_APP"))
+        with self.assertRaises(CleanFieldStop) as caught:
+            compare_clean_reference(qq, qq, "qq", LAYOUT, half_width=99)
+        self.assertEqual(caught.exception.code, "INVALID_FIELD_PATCH")
+
+
+if __name__ == "__main__":
+    unittest.main()
