@@ -87,9 +87,13 @@ def compare_clean_reference(
     if abs(sx - rsx) > 0.02 or abs(sy - rsy) > 0.02:
         raise CleanFieldStop("FIELD_REFERENCE_MISMATCH", "Reference and live logical scales differ")
 
-    def patch(img: np.ndarray, x: float, y: float) -> np.ndarray:
-        px, py = round(x * sx), round(y * sy)
-        rx, ry = round(half_width * sx), round(half_height * sy)
+    def patch(img: np.ndarray, x: float, y: float,
+              pixel_scale_x: float, pixel_scale_y: float) -> np.ndarray:
+        # Current and reference can have the same screenshot pixel dimensions
+        # but slightly different reported logical window sizes. Never apply
+        # the current frame's pixel scale to the reference's local points.
+        px, py = round(x * pixel_scale_x), round(y * pixel_scale_y)
+        rx, ry = round(half_width * pixel_scale_x), round(half_height * pixel_scale_y)
         if px - rx < 0 or py - ry < 0 or px + rx >= width or py + ry >= height:
             raise CleanFieldStop("FIELD_PATCH_OUTSIDE_IMAGE", "Plot patch exceeds screenshot")
         return img[py-ry:py+ry+1, px-rx:px+rx+1].astype(np.int16)
@@ -101,8 +105,8 @@ def compare_clean_reference(
             rx, ry = plot_local_point(platform, u, v, reference.frame, layout)
             dx, dy = current_alignment["offset_local"]
             rdx, rdy = reference_alignment["offset_local"]
-            a = patch(capture.rgb, x + dx, y + dy)
-            b = patch(reference.rgb, rx + rdx, ry + rdy)
+            a = patch(capture.rgb, x + dx, y + dy, sx, sy)
+            b = patch(reference.rgb, rx + rdx, ry + rdy, rsx, rsy)
             if a.shape != b.shape:
                 raise CleanFieldStop("FIELD_REFERENCE_MISMATCH", "Plot patch dimensions differ")
             patches.append(([u, v], a, b))

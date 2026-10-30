@@ -890,6 +890,8 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 M1 后续检查点（逐格像素一致性诊断）：** `farm_clean_field.py` 在现有逐格 RGB 差异之外增加每格 `fraction_pixels_all_rgb_within_12/24`：每个像素三个通道经全局色偏校正后**同时**落在容差内才算一致，减少少数动画高差像素对均值的误导；不做空田布尔分类。真实历史回放：QQ 两张标注空田图对比，24格 within-12 比例 **0.4188–0.7806**；微信空田参考对满田占用图 **0–0.0513**；对部分四格占用图为 **0–1**（未改动空地可为1，受占用影响格接近0，边缘/过渡格约0.48–0.53）。**跨平台/局部状态仍有数值交叉**：QQ 真空田最低0.4188，微信部分占用某格约0.5328；不能据此选择全局阈值。新增局部动画带与整格作物负例回归，**91项单测通过、3个 Swift helper typecheck 通过**；`run-next` 仍 `RUNNER_NOT_READY`，没有真实点击。下一步仍需同平台独立 clean/occupied 配对、成熟田/四格星标/遮罩真机校准，才能评估保守的24格终验；所有比较结果继续 `diagnostic_only`、`empty_cells=null`、`can_authorize_clicks=false`。对抗式审查：没有把策略塞进 Runner，没有逐击 LLM，也没有定时/化肥扩展。
 
+**2026-10-30 M1 后续检查点（参考图 ROI 像素比例修复）：** 先新增 QQ/微信 × 1x/Retina 2x 的细纹理回归，构造两张**像素完全相同**、但窗口注册元数据宽高相差 1 logical point 的截图。原 `farm_clean_field.py` 复用当前图 `sx/sy` 裁参考图 ROI，导致 4 个子场景全部产生 **15.0 的虚假 RGB 均值差**；测试先红后修。现在每张图使用自己的 pixel/logical scale 裁局部 patch，patch 形状不一致仍 `FIELD_REFERENCE_MISMATCH` 结构化停止；4 个子场景修复后均为零差异。**全量 92 项单元测试通过，3 个 Swift helper typecheck 通过，`run-next` 仍 `RUNNER_NOT_READY`。** 本次仅修只读离线诊断精度，不增加空田分类、点击授权或策略；成熟田/四格星标/遮罩与同平台真实 clean/occupied 校准仍是 M1 阻塞，M2 未开始。对抗式审查：没有逐击 LLM、没有把策略决策塞入 Runner、没有定时/化肥功能。
+
 ### M2 — 种植（最高价值）
 
 任务：

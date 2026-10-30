@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_capture import FarmCapture
 from farm_clean_field import CleanFieldStop, compare_clean_reference
-from farm_geometry import plot_local_point
+from farm_geometry import WindowFrame, plot_local_point
 from test_field_alignment_m1 import synthetic
 
 LAYOUT = json.loads((ROOT / "data/ui-layout.json").read_text(encoding="utf-8"))
@@ -53,6 +53,37 @@ class CleanFieldDiagnosticTests(unittest.TestCase):
                     result = compare_clean_reference(current, reference, platform, LAYOUT)
                     self.assertEqual(result["cell_count"], 24)
                     self.assertLess(max(c["mean_abs_rgb"] for c in result["cells"]), 12)
+                    self.assertFalse(result["can_authorize_clicks"])
+
+    def test_same_pixels_with_slightly_different_logical_frames_stay_aligned(self):
+        # A window registry can report a 1-point size difference even when the
+        # screenshot has identical pixel dimensions. Each image needs its own
+        # pixel/logical scale; reusing the current scale shifts reference ROIs.
+        for platform in ("qq", "wechat"):
+            for scale in (1, 2):
+                with self.subTest(platform=platform, scale=scale):
+                    base = synthetic(platform, scale=scale)
+                    # Add fine-grained texture within each measured center ROI;
+                    # uniform synthetic soil would hide a one-pixel ROI shift.
+                    rgb = base.rgb.copy()
+                    for u in range(6):
+                        for v in range(4):
+                            x, y = plot_local_point(platform, u, v, base.frame, LAYOUT)
+                            cx, cy = round((x - 9) * scale), round((y + 18) * scale)
+                            for py in range(cy - 8 * scale, cy + 9 * scale):
+                                for px in range(cx - 16 * scale, cx + 17 * scale):
+                                    if tuple(rgb[py, px]) == (190, 125, 220):
+                                        rgb[py, px] = (190, 125, 220) if (px + py) % 2 else (200, 135, 230)
+                                    else:
+                                        rgb[py, px] = (70, 135, 75) if (px + py) % 2 else (85, 150, 90)
+                    current = FarmCapture(base.frame, np.mean(rgb, axis=2).astype(np.float32), rgb=rgb)
+                    frame = current.frame
+                    reference_frame = WindowFrame(frame.owner, frame.title, frame.x, frame.y,
+                                                  frame.width + 1, frame.height + 1)
+                    reference = FarmCapture(reference_frame, current.gray, rgb=current.rgb)
+                    result = compare_clean_reference(current, reference, platform, LAYOUT)
+                    self.assertEqual(result["cell_count"], 24)
+                    self.assertEqual(max(c["mean_abs_rgb"] for c in result["cells"]), 0)
                     self.assertFalse(result["can_authorize_clicks"])
 
     def test_changed_gold_plot_produces_difference_but_not_occupancy_claim(self):
