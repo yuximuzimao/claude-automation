@@ -53,7 +53,7 @@ def dedupe(items, radius=30.0):
     return kept
 
 
-def locate_pickables(image, roi_normalized=(0.12, 0.42, 0.76, 0.34), threshold=0.70, scales=None):
+def locate_pickables(image, roi_normalized=(0.12, 0.42, 0.76, 0.34), threshold=0.70, scales=None, dedupe_radius=30.0):
     if scales is None:
         scales = [0.9, 0.95, 1.0, 1.05, 1.1]
     h, w = image.shape
@@ -72,7 +72,7 @@ def locate_pickables(image, roi_normalized=(0.12, 0.42, 0.76, 0.34), threshold=0
         items.extend(candidates(
             image, load_gray(str(path)), roi, scales, threshold, name
         ))
-    result = dedupe(items)
+    result = dedupe(items, radius=dedupe_radius)
     return {"count": len(result), "items": result, "roi": roi}
 
 

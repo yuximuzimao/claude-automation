@@ -856,11 +856,11 @@ Runner 遇异常必须返回结构化 error。
 
 任务：
 
-- [ ] window registry：已新增只读 `scripts/window_registry.swift`，Swift 编译通过，QQ/微信查询返回结构化窗口列表；当前两边独立农场窗口均未显示，仍需实机窗口联调与 Runner 接入。
+- [ ] window registry：已新增只读 `scripts/window_registry.swift`（含 window_id/pid），Swift 编译通过；`scripts/farm_io.py` 已接入 Runner 的 `probe-harvest` 只读命令，按 owner/title/尺寸/ID 唯一验证。2026-10-29 本轮 QQ/微信均 `WINDOW_NOT_FOUND`，实机窗口联调仍待完成。
 - [x] window-local → screen 唯一坐标：`scripts/farm_geometry.py` 纯逻辑转换、Retina screenshot pixel → local logical → screen、越界/尺寸/owner fail-closed；6 项离线单测通过，实际 CGEvent 联调仍待后续。
-- [ ] screenshot/crop。
-- [ ] in-process vision。
-- [ ] batch CGEvent。
+- [x] screenshot/crop **离线实现**：`scripts/farm_capture.py` 按实时 window bounds 调用 `screencapture -x -R`，严格检查 crop/Retina 比例，统一转换 window-local；实机窗口截图待验证。
+- [x] in-process vision **离线实现及几何安全回归通过**：`scripts/farm_vision.py` 直接 import 现有 NCC/pickable 模块，返回 window-local logical 点；已修正 Retina 2x 模板尺度、pickable 去重半径，并按 `safe_special_2x2` 几何中心筛选候选，重复/无效候选结构化 STOP。43 项离线测试通过；实际农场星标偏移与四格占用仍待真机校准，probe 永不授权点击。
+- [ ] batch CGEvent：`scripts/farm_click_batch.swift` 已可编译并通过无点击 validation-mode 测试；每击检查 window ID/PID、前台、尺寸及遮挡。**尚未实机发送 CGEvent、尚未接 harvest phase**。
 - [ ] QQ / 微信窗口恢复。
 - [ ] harvest phase。
 - [ ] known overlay 处理。
@@ -870,6 +870,8 @@ Runner 遇异常必须返回结构化 error。
 - 一个命令完成“成熟农田 → clean field”。
 - 中途无模型参与。
 - phase duration 有日志。
+
+**2026-10-29 第7轮 M1 检查点：** 已核对前轮保存的 `farm_vision.py` / `farm_io.py` 四格候选过滤改动，并新增 `tests/test_special_pickables_m1.py`（QQ/微信、Retina 2x、普通单格星标、越界、重复、无效布局、只读 probe）。回归测试揭示关键几何误判：菱形 2×2 的某些单格中心距整体中心仅约 **21 logical px**，原临时 22px 门限会误收普通单格星标；已收紧为 **14px 临时门限**，但真实星标偏移可能仍造成误收/漏收，**不能当作已校准或可执行依据**。无效候选现在返回 `INVALID_PICKABLE_CANDIDATE`，重复归属返回 `AMBIGUOUS_PICKABLES`。累计 **43 项单元测试全部通过**，`farm_click_batch.swift` / `window_registry.swift` / `open_qq_farm.swift` 均 Swift typecheck 通过。只读实机 probe：QQ、微信均 `WINDOW_NOT_FOUND`（独立农场窗口当前未显示），没有截图或点击。`run-next` 仍硬停止 `RUNNER_NOT_READY`。**下一步**：先在可用农场窗口或已知历史画面回放中校准星标偏移与四格占用，完成遮罩检测、clean-field postcondition、收获状态机及批量动作受控联调；未经这些验证不得解锁执行。
 
 ### M2 — 种植（最高价值）
 

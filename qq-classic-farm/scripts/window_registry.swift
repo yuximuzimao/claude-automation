@@ -5,6 +5,8 @@ import CoreGraphics
 struct FarmWindow: Codable {
     let owner: String
     let title: String
+    let window_id: Int
+    let pid: Int
     let x: Double
     let y: Double
     let width: Double
@@ -39,13 +41,18 @@ let results: [FarmWindow] = raw.compactMap { item in
           width > 0, height > 0 else {
         return nil
     }
-    return FarmWindow(owner: owner, title: title, x: x, y: y, width: width, height: height)
+    let windowID = item[kCGWindowNumber as String] as? Int ?? -1
+    let pid = item[kCGWindowOwnerPID as String] as? Int ?? -1
+    guard windowID > 0, pid > 0 else { return nil }
+    return FarmWindow(owner: owner, title: title, window_id: windowID, pid: pid,
+                      x: x, y: y, width: width, height: height)
 }
 
 let payload: [String: Any] = [
     "platform": platform,
     "windows": results.map { [
         "owner": $0.owner, "title": $0.title,
+        "window_id": $0.window_id, "pid": $0.pid,
         "x": $0.x, "y": $0.y, "width": $0.width, "height": $0.height
     ] }
 ]
