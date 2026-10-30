@@ -133,6 +133,15 @@ def run_harvest(adapter: HarvestAdapter) -> dict:
                 "llm_round_trips": 0, "phase_duration_ms": round((perf_counter()-started)*1000, 2)}
     try:
         sent = adapter.click_batch(actions)
+    except HarvestStop as exc:
+        # A compiled CGEvent helper may fail on click N after posting 0..N-1.
+        # Preserve its confirmed count, but never retry any failed batch.
+        count = exc.clicks_sent
+        if type(count) is not int or not 0 <= count <= len(actions):
+            count = 0  # Unknown, not proof that no click was sent.
+        raise HarvestStop("HARVEST_PARTIAL_ACTION",
+                          f"Batch stopped ({exc.code}); never retry blindly",
+                          clicks_sent=count) from exc
     except Exception as exc:
         raise HarvestStop("HARVEST_PARTIAL_ACTION",
                           "Batch failed; actual click count is unknown, never retry blindly") from exc

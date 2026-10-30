@@ -13,6 +13,7 @@ import subprocess
 from farm_capture import capture_window
 from farm_field import FieldStop, probe_field_translation
 from farm_geometry import GeometryStop, WindowFrame, validate_farm_window
+from farm_harvest import HarvestStop
 from farm_vision import probe_harvest
 
 
@@ -27,6 +28,37 @@ class WindowHandle:
     window_id: int
     pid: int
     frame: WindowFrame
+
+
+def parse_click_batch_result(stdout: str, returncode: int, expected: int) -> int:
+    """Decode CGEvent helper protocol; validation-only is NEVER execution.
+
+    The helper's count means events posted, not game actions confirmed. On
+    failure preserve its known partial count for recovery; never replay.
+    """
+    if type(expected) is not int or not 1 <= expected <= 24:
+        raise HarvestStop("INVALID_BATCH", "Invalid expected action count")
+    try:
+        payload = json.loads(stdout)
+        if not isinstance(payload, dict):
+            raise ValueError("Expected helper JSON object")
+        count = payload["click_count"]
+        if type(count) is not int or not 0 <= count <= expected:
+            raise ValueError("Invalid helper click count")
+    except (ValueError, TypeError, KeyError) as exc:
+        raise HarvestStop("HARVEST_PARTIAL_ACTION",
+                          "Malformed helper response; posted count unknown") from exc
+    if returncode != 0:
+        code = payload.get("code")
+        if not isinstance(code, str) or not code:
+            code = "HARVEST_PARTIAL_ACTION"
+        raise HarvestStop(code, "Helper stopped; actions may be partially sent",
+                          clicks_sent=count)
+    if payload.get("status") != "clicks_sent_unverified" or count != expected:
+        raise HarvestStop("HARVEST_PARTIAL_ACTION",
+                          "Helper did not confirm the full execution batch",
+                          clicks_sent=count)
+    return count
 
 
 def find_farm_window(platform: str, layout: dict, registry_binary: Path) -> WindowHandle:

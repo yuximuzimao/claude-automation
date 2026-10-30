@@ -260,6 +260,29 @@ class HarvestPhaseTests(unittest.TestCase):
                 self.assertEqual(len(fake.batches), 1)
                 self.assertEqual(fake.waits, [])
 
+    def test_helper_partial_stop_preserves_confirmed_posts(self):
+        class StoppingAdapter(FakeAdapter):
+            def __init__(self, before, after, reported):
+                super().__init__(before, after)
+                self.reported = reported
+
+            def click_batch(self, points):
+                self.batches.append(points)
+                raise HarvestStop("WINDOW_OCCLUDED", "Occluded before next click",
+                                  clicks_sent=self.reported)
+
+        clean = observation(hand=None, special=(), occupied_special=frozenset(),
+                            empty_cells=(True,) * 24)
+        for reported, expected in ((2, 2), (0, 0), (99, 0)):
+            with self.subTest(reported=reported):
+                fake = StoppingAdapter(observation(), clean, reported)
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake)
+                self.assertEqual(caught.exception.code, "HARVEST_PARTIAL_ACTION")
+                self.assertEqual(caught.exception.clicks_sent, expected)
+                self.assertEqual(len(fake.batches), 1)
+                self.assertEqual(fake.waits, [])
+
 
 if __name__ == "__main__":
     unittest.main()

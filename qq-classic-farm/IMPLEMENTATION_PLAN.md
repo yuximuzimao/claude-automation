@@ -879,6 +879,9 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 第11轮 M1 检查点：** 已修复收获后 `_clean(after)` 对格式错误的 24 格数据抛出 `INVALID_FIELD_OBSERVATION` 时丢失 `clicks_sent` 的问题；同时拒绝非列表/元组的字段，保证部分执行后的结构化恢复记录不会被清零。发现父工作区 `_sandbox/` 中有历史真实截图，离线重放揭示 **同样接近基线尺寸的截图，固定网格原点仍可能明显平移**：QQ `qq-after-harvest-today.png` / `qq-final-clean.png` 相对现有 `ui-layout.json` 约 **(-9,+18) logical px**；微信 `wechat-cleared-final.png` 约 **(-60,+1) logical px**。这说明仅检查窗口尺寸不足以授权地块点击；不能把历史静态中心直接当作实时坐标。新增 `scripts/farm_field.py`：对露出的紫晶土壤进行颜色分割、组件筛选、完整格点一致性校验，输出 **只读诊断** `field_alignment.offset_local`，不返回点击许可；部分遮挡/成熟覆盖/颜色证据不足即 `FIELD_ALIGNMENT_UNAVAILABLE`。`farm_capture.py` 同时保留 RGB 供局部颜色校准，`probe-harvest` 输出该诊断。历史回放：QQ 两张完整空田与微信一张完整空田均获得一致平移；QQ 成熟/遮罩与微信成熟/残株样本拒绝校准；微信紫地露出而金地已种的样本也能估计平移，**这不代表 24 格空地已被验证**。新增 6 项离线测试，加上异常回归 1 项，**全量 72 项通过，3 个 Swift helper typecheck 通过**；`run-next` 仍返回 `RUNNER_NOT_READY`。QQ/微信只读窗口探测均 `WINDOW_NOT_FOUND`，未实机点击。下一步：用现场窗口校验画布平移及星标相对 2×2 的真实偏移；为成熟田设计不依赖露出紫地的可靠对齐/占用证据，再做遮罩与 24 格 clean-field 视觉分类；**未完成这些前不得把该诊断用于执行授权**。未增加策略、定时化或逐击 LLM。
 
+
+**2026-10-30 第12轮 M1 检查点：** 对抗式审查发现 CGEvent 批量 helper 在第 N 次点击前若窗口移动、遮挡或焦点变化，旧错误 JSON **没有已发送点击数**，而 Python 收获状态机也会在 adapter 抛异常时丢弃已知部分计数，妨碍安全恢复。本轮修改 `scripts/farm_click_batch.swift`：所有运行中 STOP 均返回 `click_count`（仅表示已 post 的 CGEvent，不代表游戏落地），包括窗口枚举/身份/尺寸/焦点/遮挡/事件构造失败；新增 `scripts/farm_io.py::parse_click_batch_result` 严格区分 `validated_no_click` 与 `clicks_sent_unverified`，解析非零退出时保留可信范围内的部分计数，格式错误则按未知计数停止；`farm_harvest.py` 保留 adapter 报出的部分发送数，任何失败都禁止重放。新增批量协议与恢复回归，**全量 78 项单测通过、3 个 Swift helper typecheck 通过**；`run-next` 仍硬停止 `RUNNER_NOT_READY`。这是离线 I/O 可靠性改进，**尚未完成成熟田对齐、四格真实占用、遮罩及 24 格空地视觉分类，未执行真实点击**。下一步继续这些 M1 视觉证据与受控联调；不因 helper 改进提前解锁。对抗式审查：没有将种植策略塞入 Runner，没有逐击 LLM 往返，也没有引入定时/化肥扩展。
+
 ### M2 — 种植（最高价值）
 
 任务：

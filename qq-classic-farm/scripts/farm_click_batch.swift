@@ -30,8 +30,13 @@ struct Result: Encodable {
     let click_count: Int
 }
 
-func stop(_ code: String, _ detail: String) -> Never {
-    let payload = ["status": "stopped", "code": code, "message": detail] as [String: String]
+func stop(_ code: String, _ detail: String, clicksSent: Int = 0) -> Never {
+    // A phase can have changed the farm before a later click fails. Report
+    // confirmed posts so recovery never treats the entire batch as untouched.
+    let payload: [String: Any] = [
+        "status": "stopped", "code": code, "message": detail,
+        "click_count": clicksSent,
+    ]
     if let data = try? JSONSerialization.data(withJSONObject: payload, options: [.sortedKeys]),
        let json = String(data: data, encoding: .utf8) { print(json) }
     exit(2)
@@ -39,11 +44,11 @@ func stop(_ code: String, _ detail: String) -> Never {
 func field(_ window: [String: Any], _ key: CFString) -> String {
     return window[key as String] as? String ?? ""
 }
-func windows() -> [[String: Any]] {
+func windows(clicksSent: Int) -> [[String: Any]] {
     guard let raw = CGWindowListCopyWindowInfo(
         [.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID
     ) as? [[String: Any]] else {
-        stop("WINDOW_NOT_FOUND", "Cannot enumerate on-screen windows")
+        stop("WINDOW_NOT_FOUND", "Cannot enumerate on-screen windows", clicksSent: clicksSent)
     }
     return raw
 }
@@ -54,24 +59,24 @@ func bounds(_ info: [String: Any]) -> CGRect? {
     else { return nil }
     return CGRect(x: x, y: y, width: w, height: h)
 }
-func liveWindow(_ batch: Batch, _ point: CGPoint) {
-    let list = windows()
+func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
+    let list = windows(clicksSent: clicksSent)
     guard let target = list.first(where: {
         ($0[kCGWindowNumber as String] as? Int) == batch.window_id
-    }) else { stop("WINDOW_NOT_FOUND", "Target window ID no longer visible") }
+    }) else { stop("WINDOW_NOT_FOUND", "Target window ID no longer visible", clicksSent: clicksSent) }
     guard field(target, kCGWindowOwnerName) == batch.owner,
           field(target, kCGWindowName) == batch.title,
           (target[kCGWindowOwnerPID as String] as? Int) == batch.pid,
           let current = bounds(target)
-    else { stop("WINDOW_NOT_FOUND", "Target window identity changed") }
+    else { stop("WINDOW_NOT_FOUND", "Target window identity changed", clicksSent: clicksSent) }
     if abs(current.origin.x - batch.frame.x) > 1 ||
        abs(current.origin.y - batch.frame.y) > 1 ||
        abs(current.width - batch.frame.width) > 1 ||
        abs(current.height - batch.frame.height) > 1 {
-        stop("WINDOW_SIZE_CHANGED", "Window moved/resized since batch preparation")
+        stop("WINDOW_SIZE_CHANGED", "Window moved/resized since batch preparation", clicksSent: clicksSent)
     }
     guard NSWorkspace.shared.frontmostApplication?.processIdentifier == pid_t(batch.pid) else {
-        stop("WRONG_FRONTMOST_APP", "Target app is not frontmost")
+        stop("WRONG_FRONTMOST_APP", "Target app is not frontmost", clicksSent: clicksSent)
     }
     // CGWindowList is front-to-back. Any visible overlapping window blocks input.
     for info in list {
@@ -80,9 +85,9 @@ func liveWindow(_ batch: Batch, _ point: CGPoint) {
         let id = info[kCGWindowNumber as String] as? Int ?? -1
         if id == batch.window_id { return }
         // Ignore desktop elements only (already excluded by enumeration).
-        stop("WINDOW_OCCLUDED", "Another visible window covers click target")
+        stop("WINDOW_OCCLUDED", "Another visible window covers click target", clicksSent: clicksSent)
     }
-    stop("WINDOW_OCCLUDED", "Target window is not topmost at click point")
+    stop("WINDOW_OCCLUDED", "Target window is not topmost at click point", clicksSent: clicksSent)
 }
 
 guard CommandLine.arguments.count == 1 ||
@@ -123,12 +128,12 @@ guard CGPreflightPostEventAccess() else {
 var clicked = 0
 for a in batch.actions {
     let p = CGPoint(x: batch.frame.x + a.x, y: batch.frame.y + a.y)
-    liveWindow(batch, p) // Recheck bounds, focus and occlusion before every click.
+    liveWindow(batch, p, clicksSent: clicked) // Recheck before every click.
     guard let down = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown,
                              mouseCursorPosition: p, mouseButton: .left),
           let up = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp,
                            mouseCursorPosition: p, mouseButton: .left)
-    else { stop("CGEVENT_FAILED", "Cannot construct mouse event") }
+    else { stop("CGEVENT_FAILED", "Cannot construct mouse event", clicksSent: clicked) }
     down.post(tap: .cghidEventTap)
     usleep(50_000)
     up.post(tap: .cghidEventTap)

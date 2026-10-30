@@ -52,11 +52,13 @@ class BatchHelperTests(unittest.TestCase):
         code, result = self.invoke({"x": 603, "y": 300, "delay_ms": 0})
         self.assertEqual(code, 2)
         self.assertEqual(result["code"], "CLICK_OUTSIDE_WINDOW")
+        self.assertEqual(result["click_count"], 0)
 
     def test_unbounded_delay_refused(self):
         code, result = self.invoke({"x": 200, "y": 300, "delay_ms": 5000})
         self.assertEqual(code, 2)
         self.assertEqual(result["code"], "CLICK_OUTSIDE_WINDOW")
+        self.assertEqual(result["click_count"], 0)
 
 
 if __name__ == "__main__":
