@@ -16,6 +16,8 @@ from time import perf_counter
 from farm_capture import CaptureStop
 from farm_geometry import GeometryStop
 from farm_io import IOStop, probe_window_harvest
+from farm_harvest import HarvestStop
+from farm_harvest_live import LiveHarvestAdapter, read_only_harvest_preflight
 from farm_vision import VisionStop
 
 from seed_order import (
@@ -237,7 +239,7 @@ def dry_run(plan: dict, order: dict, state: dict, layout: dict) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Farm Runner; dry-run or read-only M1 probe; never clicks")
-    parser.add_argument("command", choices=("dry-run", "probe-harvest", "run-next"))
+    parser.add_argument("command", choices=("dry-run", "probe-harvest", "preflight-harvest", "run-next"))
     parser.add_argument("--platform", choices=("qq", "wechat"))
     parser.add_argument("--registry", type=Path, default=ROOT / "_sandbox/farm_window_registry")
     parser.add_argument("--anchors", type=Path, default=ROOT / "data/ui-anchors.json")
@@ -249,6 +251,14 @@ def main() -> int:
     try:
         if args.command == "run-next":
             raise RunnerStop("RUNNER_NOT_READY", "M1/M2 not implemented; refusing real UI actions")
+        if args.command == "preflight-harvest":
+            if not args.platform:
+                raise RunnerStop("INVALID_ARGUMENT", "--platform required for preflight-harvest")
+            adapter = LiveHarvestAdapter(args.platform, load_json(args.layout),
+                                         load_json(args.anchors), args.registry)
+            result = read_only_harvest_preflight(adapter)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if result["status"] == "read_only_ready" else 2
         if args.command == "probe-harvest":
             if not args.platform:
                 raise RunnerStop("INVALID_ARGUMENT", "--platform required for probe-harvest")
@@ -260,7 +270,7 @@ def main() -> int:
                          load_json(args.state), load_json(args.layout))
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
-    except (RunnerStop, PickerStateError, IOStop, CaptureStop, GeometryStop, VisionStop) as exc:
+    except (RunnerStop, PickerStateError, IOStop, CaptureStop, GeometryStop, VisionStop, HarvestStop) as exc:
         result = {"status": "stopped", "code": exc.code, "message": str(exc)}
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 2
