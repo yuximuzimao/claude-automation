@@ -862,7 +862,7 @@ Runner 遇异常必须返回结构化 error。
 - [x] in-process vision **离线实现及几何安全回归通过**：`scripts/farm_vision.py` 直接 import 现有 NCC/pickable 模块，返回 window-local logical 点；已修正 Retina 2x 模板尺度、pickable 去重半径，并按 `safe_special_2x2` 几何中心筛选候选，重复/无效候选结构化 STOP。43 项离线测试通过；实际农场星标偏移与四格占用仍待真机校准，probe 永不授权点击。
 - [ ] batch CGEvent：`scripts/farm_click_batch.swift` 已可编译并通过无点击 validation-mode 测试；每击检查 window ID/PID、前台、尺寸及遮挡。**尚未实机发送 CGEvent、尚未接 harvest phase**。
 - [ ] QQ / 微信窗口恢复。
-- [ ] harvest phase。
+- [ ] harvest phase：已新增 `scripts/farm_harvest.py` 纯本地可注入 I/O 的确定性阶段状态机（单批 special stars → hand → 3s → 24-cell clean-field 验收），18 项 mock 回归通过；**尚未接真实视觉/CGEvent**，占地/星标/遮罩与 24 格空地识别均待真机校准，不能视为可执行。
 - [ ] known overlay 处理。
 
 验收：
@@ -872,6 +872,8 @@ Runner 遇异常必须返回结构化 error。
 - phase duration 有日志。
 
 **2026-10-29 第7轮 M1 检查点：** 已核对前轮保存的 `farm_vision.py` / `farm_io.py` 四格候选过滤改动，并新增 `tests/test_special_pickables_m1.py`（QQ/微信、Retina 2x、普通单格星标、越界、重复、无效布局、只读 probe）。回归测试揭示关键几何误判：菱形 2×2 的某些单格中心距整体中心仅约 **21 logical px**，原临时 22px 门限会误收普通单格星标；已收紧为 **14px 临时门限**，但真实星标偏移可能仍造成误收/漏收，**不能当作已校准或可执行依据**。无效候选现在返回 `INVALID_PICKABLE_CANDIDATE`，重复归属返回 `AMBIGUOUS_PICKABLES`。累计 **43 项单元测试全部通过**，`farm_click_batch.swift` / `window_registry.swift` / `open_qq_farm.swift` 均 Swift typecheck 通过。只读实机 probe：QQ、微信均 `WINDOW_NOT_FOUND`（独立农场窗口当前未显示），没有截图或点击。`run-next` 仍硬停止 `RUNNER_NOT_READY`。**下一步**：先在可用农场窗口或已知历史画面回放中校准星标偏移与四格占用，完成遮罩检测、clean-field postcondition、收获状态机及批量动作受控联调；未经这些验证不得解锁执行。
+
+**2026-10-30 第9轮 M1 检查点：** CodexPro 连接正常。本轮新增 `scripts/farm_harvest.py` 与 `tests/test_harvest_phase_m1.py`，以注入式本地 adapter 模拟单次收获 phase；已覆盖已空田零点击、四格星标批量+全局手形、普通收获、未知/已知遮罩拒绝、未校准拒绝、占地与星标冲突、点击越界、批量部分成功不重试、缺失/不完整 24-cell 终验、clean-field 与占地矛盾等。**全量 61 项单元测试通过**；3 个 Swift helper typecheck 通过。新状态机仅离线 mock，不接真实点击，`run-next` 仍硬停止。下一步：取得真实/历史农田画面，验证星标偏移、特殊 2×2 占用和 24-cell 空地分类，再把本地 observation adapter/overlay 识别接入 FSM 并受控验收；不能用单纯“星标消失”宣称 clean field。对抗式审查：未增加策略决策，未恢复逐击模型调用，未知弹窗/部分点击均停止；**特别注意 postcondition 必须来自新截图及相同窗口身份**。
 
 ### M2 — 种植（最高价值）
 

@@ -1,12 +1,12 @@
 # 当前状态
 
-更新时间：2026-10-30（M0 离线通过；M1 几何候选过滤 43 项测试通过，仍待真机）
+更新时间：2026-10-30（M0 离线通过；M1 收获状态机 mock 已完成，全量 61 项测试通过，仍待真机）
 
 ## Runner 当前开发检查点
 
 - **M0 离线验收已通过**：`scripts/seed_order.py`、`scripts/farm_runner.py dry-run`、`data/seed-order.json`、`data/farm-state.json`、RUN_PLAN schema/样例和 11 项单元测试均已落地；详情见 `runner-m0-verification.md`。
 - **当前安全状态**：QQ/微信 `inventory_dirty=true`（历史快照非实时），`run-next` 返回 `RUNNER_NOT_READY`，尚未触发游戏点击。历史零库存候选的稳定插入点未验证，不会猜测。
-- **M1 已推进但未验收**：只读 Swift 窗口注册、截图裁剪、window-local/Retina 坐标、进程内视觉和预编译批量 CGEvent helper 均已离线实现；四格可摘候选按已知 2×2 中心过滤并拒绝重复/无效候选。第7轮回归发现菱形布局单格中心距四格中心仅约21px，原22px门限误收单格星标，已收紧为**临时14px**并补充测试；真实星标偏移与四格占用未校准，绝不可据此点击。**43项单测全部通过，3个Swift程序typecheck通过**。QQ/微信只读探测均 `WINDOW_NOT_FOUND`，没有真机截图或点击。`run-next` 继续返回 `RUNNER_NOT_READY`。下一步 M1：真实/历史截图校准 → 收获状态机 → 遮罩与 clean-field 终验 → 受控联调；M2尚未开始。
+- **M1 已推进但未验收**：只读 Swift 窗口注册、截图裁剪、window-local/Retina 坐标、进程内视觉和预编译批量 CGEvent helper 均已离线实现；四格可摘候选按已知 2×2 中心过滤并拒绝重复/无效候选。第7轮回归发现菱形布局单格中心距四格中心仅约21px，原22px门限误收单格星标，已收紧为**临时14px**并补充测试；真实星标偏移与四格占用未校准，绝不可据此点击。**全量61项单测通过，3个Swift程序typecheck通过**。新增 `scripts/farm_harvest.py`：离线 mock 的本地单批收获状态机（星标批量→手形一次→等待3秒→24格空地终验），严格拒绝未知/未处理遮罩、未校准占地、部分批量结果与终验缺证据；**尚未接真实视觉或点击**。QQ/微信只读探测均 `WINDOW_NOT_FOUND`，没有真机截图或点击。`run-next` 继续返回 `RUNNER_NOT_READY`。下一步 M1：真实/历史截图校准 → 把本地收获状态机接入已校准的遮罩/占地/24格终验 observation → 受控联调；M2尚未开始。
 
 ## 当前现场
 
