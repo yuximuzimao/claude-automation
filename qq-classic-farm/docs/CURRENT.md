@@ -4,6 +4,8 @@
 
 ## Runner 当前开发检查点
 
+- **2026-10-31 07:46 CST 微信主窗口恢复实机闭环（非农场）**：在 QQ 农场前台时，原 `restore_wechat_main.swift` 因 Stage Manager 微信缩略窗被遮挡返回 `WECHAT_TILE_OCCLUDED`。先只读确认唯一微信窗口身份及 owner PID；已修改 helper：缩略窗被遮挡时不点击其坐标，而通过 `NSRunningApplication(processIdentifier: tile.pid).activate(options: [])` 仅激活已确认的微信进程，再检查唯一完整微信主窗口。Swift typecheck 通过，真实从 QQ 前台触发返回 `WECHAT_MAIN_RESTORED_BY_PID`；此前 AppleScript 激活也已单次验证。**微信目前仅回到聊天主窗口，尚未按“发现→游戏→最近玩过”进入独立农场；没有农场点击、收获、种植。** 该恢复路径保留本地禁区门禁、唯一窗口身份和失败 STOP，不能把主窗口恢复算作 M1 验收。
+
 - **2026-10-31 07:35–07:42 CST 本轮检查点（M2 首次单调用完整种植阶段离线贯通）**：Mac 本地时间允许操作，先从 Stage Manager 恢复 QQ 农场，`preflight-harvest --registry /tmp/farm_window_registry` 真实取得 603×1111 窗口、手形 score 0.913922，仍因 `UNKNOWN_OVERLAY` 安全返回0点击。新鲜现场截图仅保存于 Mac `/tmp/farm-qq-current.png`（未提交）。对同一张成熟田截图使用**只读**旧星标定位器阈值0.50，可见三个低置信候选 (262,566; 0.660)、(344,606; 0.614)、(342,525.5; 0.539)，原0.70阈值仍为0；候选与配置中2×2中心的14px门限不能建立可靠对应，**绝不把降阈值当点击授权**。没有任何游戏点击、收获、购买、种植。
 - **M2 离线集成实质推进**：新增 `scripts/farm_plant_cycle.py`，一次调用按 Planner 原计划连续执行所有四格事务→普通一键事务，复用 M0 `preflight_cycle` 做整轮24格布局与总库存验证；每颗四格确认后更新**内存**库存，使特殊种子用尽后的普通种子 page/slot 自动左移；每笔已独立验收事务可调用注入式 `checkpoint` 保存恢复事实，失败返回已确认交易及数量，不盲重试、不擅自落盘；未验证库存直接 `INVENTORY_DIRTY`。独立验证结果还必须匹配指定平台、种子、状态和精确库存扣减，避免虚假成功污染后续事务。新增7项组合测试，**全量156项通过**，py_compile 和 M0 dry-run 通过。**尚未接 M2 真实 UI adapter，未获得任何 M1/M2 实机闭环验收，run-next 仍禁止执行。** 下一步应优先真实星标/2×2占用/遮罩/24格终验校准；M2 需要真实 picker/field/preview observer 与 CGEvent 接线、可信库存同步及可持久化恢复日志。正常 phase 仍零逐击模型往返.
 

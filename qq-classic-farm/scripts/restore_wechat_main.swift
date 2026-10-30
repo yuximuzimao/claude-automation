@@ -2,9 +2,11 @@
 // This helper never purchases, harvests, plants, or clicks inside WeChat content.
 import Foundation
 import CoreGraphics
+import AppKit
 
 struct Window {
     let id: Int
+    let pid: Int
     let owner: String
     let title: String
     let x: Double
@@ -25,8 +27,9 @@ func windows() -> [Window] {
               let x = b["X"] as? Double, let y = b["Y"] as? Double,
               let width = b["Width"] as? Double, let height = b["Height"] as? Double,
               let id = w[kCGWindowNumber as String] as? Int,
-              id > 0, width > 0, height > 0 else { return nil }
-        return Window(id: id, owner: owner, title: title,
+              let pid = w[kCGWindowOwnerPID as String] as? Int,
+              id > 0, pid > 0, width > 0, height > 0 else { return nil }
+        return Window(id: id, pid: pid, owner: owner, title: title,
                       x: x, y: y, width: width, height: height)
     }
 }
@@ -81,8 +84,24 @@ let topAtPoint = (CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDeskt
     else { return false }
     return CGRect(x: x, y: y, width: width, height: height).contains(clickPoint)
 }
-guard (topAtPoint?[kCGWindowNumber as String] as? Int) == tile.id else {
-    fail("WECHAT_TILE_OCCLUDED")
+if (topAtPoint?[kCGWindowNumber as String] as? Int) != tile.id {
+    // Stage Manager thumbnail can be covered by another app. Activating the
+    // *verified tile owner PID* avoids guessing a Dock position or clicking
+    // through the occluding business window. Never launch another instance.
+    guard allowedNow() else { fail("FARM_OPERATION_TIME_BLOCKED") }
+    guard let app = NSRunningApplication(processIdentifier: pid_t(tile.pid)),
+          app.activate(options: []) else {
+        fail("WECHAT_TILE_OCCLUDED")
+    }
+    for _ in 0..<12 {
+        usleep(250_000)
+        guard allowedNow() else { fail("FARM_OPERATION_TIME_BLOCKED") }
+        if mainWindows().count == 1 {
+            print("WECHAT_MAIN_RESTORED_BY_PID")
+            exit(0)
+        }
+    }
+    fail("WECHAT_MAIN_NOT_RESTORED")
 }
 guard CGPreflightPostEventAccess() else { fail("ACCESSIBILITY_PERMISSION_MISSING") }
 let point = CGPoint(x: tile.x + tile.width / 2, y: tile.y + tile.height / 2)
