@@ -119,6 +119,11 @@ def compare_clean_reference(
     for cell, a, b in patches:
         delta = np.abs(a - b)
         residual = np.abs(a.astype(np.float64) - b - global_offset)
+        # Per-pixel *joint RGB* agreement, not a channel-wise average.  A few
+        # animated soil highlights can inflate mean/P90 even when most of a
+        # clean cell matches; conversely a crop may cover only part of a cell.
+        # These fractions are evidence only, never an occupancy decision.
+        pixel_max_residual = np.max(residual, axis=2)
         result.append({
             "cell": cell,
             "mean_abs_rgb": round(float(delta.mean()), 2),
@@ -127,6 +132,8 @@ def compare_clean_reference(
             "median_abs_rgb_after_global_offset": round(float(np.median(residual)), 2),
             "p90_abs_rgb_after_global_offset": round(float(np.percentile(residual, 90)), 2),
             "fraction_residual_channels_gt_40": round(float(np.mean(residual > 40)), 4),
+            "fraction_pixels_all_rgb_within_12": round(float(np.mean(pixel_max_residual <= 12)), 4),
+            "fraction_pixels_all_rgb_within_24": round(float(np.mean(pixel_max_residual <= 24)), 4),
         })
     return {
         "status": "diagnostic_only",

@@ -40,6 +40,9 @@ class CleanFieldDiagnosticTests(unittest.TestCase):
                 self.assertIsNone(result["empty_cells"])
                 self.assertFalse(result["can_authorize_clicks"])
                 self.assertTrue(all(c["mean_abs_rgb"] == 0 for c in result["cells"]))
+                self.assertTrue(all(c["fraction_pixels_all_rgb_within_12"] == 1
+                                    and c["fraction_pixels_all_rgb_within_24"] == 1
+                                    for c in result["cells"]))
 
     def test_independent_alignment_handles_shift_and_retina(self):
         for platform in ("qq", "wechat"):
@@ -98,6 +101,26 @@ class CleanFieldDiagnosticTests(unittest.TestCase):
                                 by_cell[(3, 3)]["median_abs_rgb_after_global_offset"])
         self.assertLess(max(c["mean_abs_rgb_after_global_offset"] for c in result["cells"]
                             if c["cell"] != [3, 3]), 1)
+        self.assertLess(by_cell[(3, 3)]["fraction_pixels_all_rgb_within_12"], 0.1)
+        self.assertTrue(all(c["fraction_pixels_all_rgb_within_12"] == 1
+                            for c in result["cells"] if c["cell"] != [3, 3]))
+        self.assertIsNone(result["empty_cells"])
+        self.assertFalse(result["can_authorize_clicks"])
+
+    def test_local_animated_highlights_leave_partial_pixel_agreement(self):
+        reference = synthetic("qq")
+        rgb = reference.rgb.copy()
+        x, y = plot_local_point("qq", 3, 3, reference.frame, LAYOUT)
+        x, y = round(x - 9), round(y + 18)
+        # Change a band within the measured center patch; the other rows stay
+        # unchanged. Mean/P90 can rise without the entire cell changing.
+        rgb[y-6:y-2, x-13:x+14] = (5, 15, 5)
+        current = FarmCapture(reference.frame, np.mean(rgb, axis=2).astype(np.float32), rgb=rgb)
+        result = compare_clean_reference(current, reference, "qq", LAYOUT)
+        by_cell = {tuple(c["cell"]): c for c in result["cells"]}
+        self.assertGreater(by_cell[(3, 3)]["mean_abs_rgb_after_global_offset"], 10)
+        self.assertGreater(by_cell[(3, 3)]["fraction_pixels_all_rgb_within_12"], 0.6)
+        self.assertLess(by_cell[(3, 3)]["fraction_pixels_all_rgb_within_12"], 0.8)
         self.assertIsNone(result["empty_cells"])
         self.assertFalse(result["can_authorize_clicks"])
 
