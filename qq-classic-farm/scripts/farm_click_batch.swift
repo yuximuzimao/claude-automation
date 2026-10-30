@@ -30,6 +30,13 @@ struct Result: Encodable {
     let click_count: Int
 }
 
+func allowedNow() -> Bool {
+    let c = Calendar.current.dateComponents([.hour, .minute], from: Date())
+    guard let h = c.hour, let m = c.minute else { return false }
+    let t = h * 60 + m
+    return ![(0,60),(480,540),(720,780),(840,845),(960,1020),(1200,1260)].contains { t >= $0.0 && t < $0.1 }
+}
+
 func stop(_ code: String, _ detail: String, clicksSent: Int = 0) -> Never {
     // A phase can have changed the farm before a later click fails. Report
     // confirmed posts so recovery never treats the entire batch as untouched.
@@ -127,6 +134,9 @@ guard CGPreflightPostEventAccess() else {
 }
 var clicked = 0
 for a in batch.actions {
+    guard allowedNow() else {
+        stop("FARM_OPERATION_TIME_BLOCKED", "Mac local clock is in a prohibited automation window", clicksSent: clicked)
+    }
     let p = CGPoint(x: batch.frame.x + a.x, y: batch.frame.y + a.y)
     liveWindow(batch, p, clicksSent: clicked) // Recheck before every click.
     guard let down = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown,

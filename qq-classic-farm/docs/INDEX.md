@@ -22,6 +22,8 @@
 - `../assets/seeds/`：与种子名称映射的视觉图标资产。
 - `../assets/ui/`：手形全局按钮、一键务农、普通化肥及 QQ / 微信“可摘”的紧凑视觉模板。
 - `../scripts/open_qq_farm.swift`：QQ 农场固定入口脚本；定位 QQ / QQ经典农场窗口，按 `ui-layout.json` 已验证的主窗口相对坐标打开或恢复农场，不走“更多功能”。
+- `../scripts/restore_wechat_main.swift`：微信 Stage Manager 主窗口恢复，2026-10-31 实机成功；农场入口仍需状态式校准。
+- `../scripts/farm_plant_picker.py`：M2 离线 picker 有界翻页/目标 icon 与数量徽标校验，尚未接真实 UI。
 - `../scripts/ui_probe.py`：一次读取裁好的当前农场窗口状态、化肥候选点和 24 格坐标；只读，不点击，并拒绝整屏截图误输入。
 - `../scripts/pickable_locator.py`：一次识别全部 4 格植物“可摘”位置并去重；`ui_probe.py` 已直接复用。
 - `../scripts/picker_simulator.py`：旧隐藏排序模型的推演工具；只用于异常研究。

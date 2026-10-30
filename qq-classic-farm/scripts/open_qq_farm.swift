@@ -29,7 +29,18 @@ func windows(owner targetOwner: String) -> [(name: String, bounds: Bounds)] {
     }
 }
 
+func allowedNow() -> Bool {
+    let c = Calendar.current.dateComponents([.hour, .minute], from: Date())
+    guard let h = c.hour, let m = c.minute else { return false }
+    let t = h * 60 + m
+    return ![(0,60),(480,540),(720,780),(840,845),(960,1020),(1200,1260)].contains { t >= $0.0 && t < $0.1 }
+}
+
 func click(_ p: CGPoint) {
+    guard allowedNow() else {
+        fputs("FARM_OPERATION_TIME_BLOCKED\n", stderr)
+        exit(5)
+    }
     guard let move = CGEvent(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: p, mouseButton: .left),
           let down = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: p, mouseButton: .left),
           let up = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: p, mouseButton: .left) else {
@@ -38,6 +49,10 @@ func click(_ p: CGPoint) {
     }
     move.post(tap: .cghidEventTap)
     usleep(180_000)
+    guard allowedNow() else {
+        fputs("FARM_OPERATION_TIME_BLOCKED\n", stderr)
+        exit(5)
+    }
     down.post(tap: .cghidEventTap)
     usleep(90_000)
     up.post(tap: .cghidEventTap)

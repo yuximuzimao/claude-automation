@@ -854,6 +854,8 @@ Runner 遇异常必须返回结构化 error。
 
 ### M1 — 本地 I/O + 收获
 
+**2026-10-31 用户新增真机测试授权与优先级纠偏（适用于 M1/M2 测试）：** 用户确认 QQ/微信农场仍有未收获作物，可主动通过已有平台入口/恢复脚本安全进入，优先真实截图、现场校准与最小受控闭环，不再长期停留在离线 RGB 指标优化。需要短周期可重复收获样本时，到**游戏内普通种子商店把种子列表向上翻到最顶部，选择最低等级的「萝卜」**；现场核对实际价格、货币、成熟时间及数量，少量购买/种植，不触碰充值、付费或高级资源，不清除现有未成熟作物。QQ 等待成熟时改用微信实测；微信等待成熟时改用 QQ，或转入 M2 离线种植模块。每次记录 QQ/微信各自种植时间、状态、后续成熟回访条件；测试阶段的受控点击不等于 M1/M2 实机验收。实机操作必须避让**该 Mac 本地时间**：**08:00–09:00、12:00–13:00、14:00–14:05、16:00–17:00、20:00–21:00、00:00–01:00**。这些时段售后工单/万物扫描运行，绝不切农场窗口、触发鼠标/键盘/购买或改变焦点；可以离线开发测试。每个动作批次前检查本机时钟、窗口身份/前台与剩余允许时间，不确定时 STOP；禁止跨入禁区。若因场景缺失无法继续 M1 联调，转 M2 离线开发，不再无上限累积局部诊断。仍坚持 dry-run→单测→小范围可控真机验证→里程碑验收，未知/遮挡/坐标歧义结构化停止；正常完整周期最终必须零逐击 LLM 往返。
+
 任务：
 
 - [ ] window registry：已新增只读 `scripts/window_registry.swift`（含 window_id/pid），Swift 编译通过；`scripts/farm_io.py` 已接入 Runner 的 `probe-harvest` 只读命令，按 owner/title/尺寸/ID 唯一验证。2026-10-29 本轮 QQ/微信均 `WINDOW_NOT_FOUND`，实机窗口联调仍待完成。
@@ -895,12 +897,14 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 M1 后续检查点（收获终验时序安全修复）：** 对抗式审查发现 `run_harvest()` 只要求后验截图 ID 不同且时间晚于**初始观察**；如果 adapter 缓存了点击批次期间或等待动画期间拍摄的截图，仍可能把旧画面当成收获完成。现改为 CGEvent 批量发送成功、`wait(3.0)` 返回后读取本机 `monotonic_ns`，要求 `after.captured_at_ns` **严格晚于等待完成时刻**；时间戳无效/时钟异常结构化 `HARVEST_POSTCONDITION_UNAVAILABLE`，截图过早则 `HARVEST_STALE_POSTCONDITION`，两种情况都保留已发送点击数且禁止重试。测试使用注入式时钟覆盖截图新 ID 但拍摄过早、时钟无效与正常成功路径。**全量 94 项 Python 单测通过，3 个 Swift helper typecheck 通过；`run-next` 仍 `RUNNER_NOT_READY`。** 临时编译只读 window registry 后 QQ/微信均 `WINDOW_NOT_FOUND`，无真机点击。下一步仍是同平台真实 clean/occupied 样本、成熟田对齐、四格星标与遮罩校准，再接真实 I/O；M1 未验收、M2 未开始。对抗式审查：未引入策略决策、逐击模型调用、定时化或化肥功能。
 
+**2026-10-31 M1/M2 纠偏检查点：** Mac 本地时间 01:37 CST（允许操作）。已运行 `swift scripts/open_qq_farm.swift`，真实打开 QQ 独立农场；只读 registry 确认 603×1111、window_id=6951、pid=53086、bounds=(979,101)。`probe-harvest` 真实截图成功，手形 NCC=0.9139；画面有大量成熟“可摘”，但旧模板 `pickables=[]`，成熟田遮挡导致 `FIELD_ALIGNMENT_UNAVAILABLE`，**不得当成无四格成熟或授权收获**。QQ 真实截图仅暂存 Mac `/tmp/farm-qq-live.png`，不提交。新增 `scripts/restore_wechat_main.swift`，在本机时间门禁、唯一 Stage Manager 缩略窗身份校验下恢复微信主窗口，实机返回 `WECHAT_MAIN_RESTORED`，registry 确认微信主窗口 995×974、bounds=(250,33)；**尚未进入微信农场**。没有收获、购买萝卜、种植或改变库存。离线 M2 已开始：`scripts/farm_plant_picker.py` 复用 M0 stable_order/quantities 计算 page/slot，先观测当前页，允许一次有界批量翻页，再独立验证页码/目标 icon/数量徽标；不确定或漂移结构化 STOP，不点种子、不扣库存。新增12项测试，**全量106项 Python 单测通过，4个 Swift helper typecheck 通过**。QQ 入口和 CGEvent 批量 helper 已加入 Mac 本地禁区的逐批/逐击门禁，微信主窗口恢复 helper 也有时间及缩略窗遮挡检查；尚未进行禁区内真实操作测试。下一步 QQ 以真实成熟田校准特殊星标和占用后再接收获，微信状态式恢复“发现→游戏→最近玩过→农场”；阻塞时继续 M2 本地 picker UI adapter/四格事务。M1/M2 均未完成实机验收；对抗式审查：无策略内移、无逐击 LLM 正常路径、无定时化/化肥扩展。
+
 ### M2 — 种植（最高价值）
 
 任务：
 
-- [ ] picker page navigation（不盲假设起始页）。
-- [ ] expected position algorithm。
+- [ ] picker page navigation（不盲假设起始页）：M2 离线有界翻页 contract 已实现，真实页码识别和 CGEvent 尚未接线。
+- [x] expected position algorithm：复用 M0 `compute_picker_position`，M2 离线 picker 已接入；真实 UI 待验收。
 - [ ] target icon slot verification。
 - [ ] target quantity badge local verification，至少防止 ordinary 库存不足造成半填充。
 - [ ] local fallback target search。
