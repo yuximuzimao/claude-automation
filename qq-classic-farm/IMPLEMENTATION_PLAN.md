@@ -884,6 +884,8 @@ Runner 遇异常必须返回结构化 error。
 
 **2026-10-30 第13轮 M1 检查点：** 新增 `scripts/farm_clean_field.py` 只读 24 格 RGB patch 差异诊断和 `scripts/farm_clean_replay.py` 历史截图回放入口；每张截图独立完成紫地格点对齐，禁止从参考图继承当前平移。6 项新单测覆盖 QQ/微信、Retina、平移、单格差异、遮挡/错图 fail-closed，**累计 84 项单测通过、3 个 Swift helper typecheck 通过**。真实历史 QQ 两张均标记为空田的 `../_sandbox/qq-final-clean.png` 与 `../_sandbox/qq-after-harvest-today.png` 回放：24 格的原始 RGB 平均差异仍为约 **20.7–33.5**，说明空田在不同画面之间也有显著全局/局部色彩变化，**不可用简单像素差阈值判定占用/干净**。微信空田自比为 0 只证明管线运行，不是独立正例。当前比较器严格输出 `diagnostic_only`、`empty_cells=null`、`can_authorize_clicks=false`，不接收获状态机、不放开点击。`python` 当前指向缺 scipy 的 Conda Python 3.13；验证须用具备 scipy 的 `python3 -m unittest discover -s tests -v`。`run-next` 仍 `RUNNER_NOT_READY`，未真机点击。**下一步**：找同平台多张真实已标注 clean/occupied 的历史样本，研究光照/动画归一与占用负例，校准 24 格判定且拒绝假阳性；并继续成熟田对齐、四格占用/星标偏移、遮罩识别。未有足够负例前不得把本诊断提升为 `empty_cells` 真值。对抗式审查：仅离线只读视觉工具，无策略、无定时、无逐击模型。
 
+**2026-10-30 M1 后续检查点（色彩诊断）：** 在 `farm_clean_field.py` 增加跨24格逐通道中位数的全局 RGB 偏移估计，输出每格校正后均值/中位数/P90/超过40的通道比例，保留原始 RGB 指标与严格只读返回；增加 QQ/微信、Retina 2x 的全局色偏合成测试，以及全局色偏+单格占用负例（不能被校正抹平）。**86项单测通过，3个 Swift helper typecheck 通过**。历史真实 QQ 双空田回放：全局 RGB 偏移 `[0,0,0]`，24格原始与校正后平均差均为约 **23.39**；各格中位差 **0–9**、P90 **102.8–129**、残差>40通道比例 **15.5%–27.4%**。结论：当前真实差异不是简单一致的全局色偏；不能通过调一个全局阈值判定 clean。继续收集真实独立的 clean/occupied 配对及成熟田、遮罩、四格占用样本，再决定是否需要局部稳健特征。`empty_cells=null`、`can_authorize_clicks=false`、`run-next=RUNNER_NOT_READY` 继续保持；未接真实点击、未引入策略或逐击 LLM。
+
 ### M2 — 种植（最高价值）
 
 任务：

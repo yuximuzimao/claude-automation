@@ -70,7 +70,7 @@ def compare_clean_reference(
             raise CleanFieldStop("FIELD_PATCH_OUTSIDE_IMAGE", "Plot patch exceeds screenshot")
         return img[py-ry:py+ry+1, px-rx:px+rx+1].astype(np.int16)
 
-    result = []
+    patches = []
     for u in range(6):
         for v in range(4):
             x, y = plot_local_point(platform, u, v, capture.frame, layout)
@@ -81,17 +81,36 @@ def compare_clean_reference(
             b = patch(reference.rgb, rx + rdx, ry + rdy)
             if a.shape != b.shape:
                 raise CleanFieldStop("FIELD_REFERENCE_MISMATCH", "Plot patch dimensions differ")
-            delta = np.abs(a - b)
-            result.append({
-                "cell": [u, v],
-                "mean_abs_rgb": round(float(delta.mean()), 2),
-                "fraction_channels_delta_gt_40": round(float(np.mean(delta > 40)), 4),
-            })
+            patches.append(([u, v], a, b))
+
+    # Robust *diagnostic* additive color correction: estimate a per-channel
+    # offset from the median difference within each cell, then take the median
+    # across 24 cells. One changed/occupied cell cannot determine the offset.
+    # This does NOT compensate for spatially varying animation, color clipping,
+    # or prove that any individual cell is empty.
+    per_cell_offsets = np.array([np.median(a - b, axis=(0, 1))
+                                 for _, a, b in patches], dtype=np.float64)
+    global_offset = np.median(per_cell_offsets, axis=0)
+    result = []
+    for cell, a, b in patches:
+        delta = np.abs(a - b)
+        residual = np.abs(a.astype(np.float64) - b - global_offset)
+        result.append({
+            "cell": cell,
+            "mean_abs_rgb": round(float(delta.mean()), 2),
+            "fraction_channels_delta_gt_40": round(float(np.mean(delta > 40)), 4),
+            "mean_abs_rgb_after_global_offset": round(float(residual.mean()), 2),
+            "median_abs_rgb_after_global_offset": round(float(np.median(residual)), 2),
+            "p90_abs_rgb_after_global_offset": round(float(np.percentile(residual, 90)), 2),
+            "fraction_residual_channels_gt_40": round(float(np.mean(residual > 40)), 4),
+        })
     return {
         "status": "diagnostic_only",
         "platform": platform,
         "cells": result,
         "cell_count": len(result),
+        "color_normalization": "per_channel_median_additive_diagnostic_only",
+        "global_rgb_offset": [round(float(x), 2) for x in global_offset],
         "reference_alignment": reference_alignment["offset_local"],
         "capture_alignment": current_alignment["offset_local"],
         "empty_cells": None,

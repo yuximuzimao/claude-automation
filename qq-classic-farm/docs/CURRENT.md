@@ -1,12 +1,12 @@
 # 当前状态
 
-更新时间：2026-10-30（M0 离线通过；M1 新增历史截图 24 格只读对照诊断，84 项测试通过，仍待真机校准）
+更新时间：2026-10-30（M0 离线通过；M1 增加24格色彩偏移/局部差异只读诊断，86项测试通过，仍待真机校准）
 
 ## Runner 当前开发检查点
 
 - **M0 离线验收已通过**：`scripts/seed_order.py`、`scripts/farm_runner.py dry-run`、`data/seed-order.json`、`data/farm-state.json`、RUN_PLAN schema/样例和 11 项单元测试均已落地；详情见 `runner-m0-verification.md`。
 - **当前安全状态**：QQ/微信 `inventory_dirty=true`（历史快照非实时），`run-next` 返回 `RUNNER_NOT_READY`，尚未触发游戏点击。历史零库存候选的稳定插入点未验证，不会猜测。
-- **M1 已推进但未验收**：只读 Swift 窗口注册、截图裁剪、window-local/Retina 坐标、进程内视觉和预编译批量 CGEvent helper 均已离线实现；四格可摘候选按已知 2×2 中心过滤并拒绝重复/无效候选。第7轮回归发现菱形布局单格中心距四格中心仅约21px，原22px门限误收单格星标，已收紧为**临时14px**并补充测试；真实星标偏移与四格占用未校准，绝不可据此点击。**全量83项单测通过，3个Swift程序typecheck通过**。`farm_capture.py` 已为真实新截图生成唯一 capture_id 和单调时间戳，`farm_harvest.py` 在点击后要求不同且更晚的截图来源，否则结构化 STOP；等待或复拍失败也停止，不重试。新增 `scripts/farm_harvest.py`：离线 mock 的本地单批收获状态机（星标批量→手形一次→等待3秒→24格空地终验），严格拒绝未知/未处理遮罩、未校准占地、部分批量结果与终验缺证据；**尚未接真实视觉或点击**。历史截图离线回放发现网格与静态基线存在平移（QQ约 -9/+18、微信约 -60/+1 logical px），新增 `farm_field.py` 紫地颜色分割与完整格点匹配，只返回只读 `field_alignment`，遮挡/成熟时拒绝推断；不能将平移诊断当作点击授权，成熟田对齐、星标/占地及 24 格空地分类仍待校准。此前 QQ/微信只读探测均 `WINDOW_NOT_FOUND`，没有真机截图或点击。新增加的 CGEvent helper 结构化 STOP 保留已发送点击数（非游戏成功数），`farm_io.parse_click_batch_result` 拒绝把验证模式当作执行，`farm_harvest` 不再丢弃已知部分计数；仅离线验收，尚未接真实 I/O。`run-next` 继续返回 `RUNNER_NOT_READY`。新增 `farm_clean_field.py` + `farm_clean_replay.py`，只读比较独立对齐后的24格 RGB patch：两张真实 QQ 空田图各格原始 RGB 平均差异仍约20.7–33.5，简单差值阈值会误判，故仅返回 `diagnostic_only`、`empty_cells=null`，不得接入点击许可。下一步 M1：增加真实 clean/occupied 标注负例并校准光照/动画差异 → 把本地收获状态机接入已校准的遮罩/占地/24格终验 observation → 受控联调；M2尚未开始。当前 `python` 缺 scipy，测试请用 `python3`。
+- **M1 已推进但未验收**：只读 Swift 窗口注册、截图裁剪、window-local/Retina 坐标、进程内视觉和预编译批量 CGEvent helper 均已离线实现；四格可摘候选按已知 2×2 中心过滤并拒绝重复/无效候选。第7轮回归发现菱形布局单格中心距四格中心仅约21px，原22px门限误收单格星标，已收紧为**临时14px**并补充测试；真实星标偏移与四格占用未校准，绝不可据此点击。**全量86项单测通过，3个Swift程序typecheck通过**。`farm_capture.py` 已为真实新截图生成唯一 capture_id 和单调时间戳，`farm_harvest.py` 在点击后要求不同且更晚的截图来源，否则结构化 STOP；等待或复拍失败也停止，不重试。新增 `scripts/farm_harvest.py`：离线 mock 的本地单批收获状态机（星标批量→手形一次→等待3秒→24格空地终验），严格拒绝未知/未处理遮罩、未校准占地、部分批量结果与终验缺证据；**尚未接真实视觉或点击**。历史截图离线回放发现网格与静态基线存在平移（QQ约 -9/+18、微信约 -60/+1 logical px），新增 `farm_field.py` 紫地颜色分割与完整格点匹配，只返回只读 `field_alignment`，遮挡/成熟时拒绝推断；不能将平移诊断当作点击授权，成熟田对齐、星标/占地及 24 格空地分类仍待校准。此前 QQ/微信只读探测均 `WINDOW_NOT_FOUND`，没有真机截图或点击。新增加的 CGEvent helper 结构化 STOP 保留已发送点击数（非游戏成功数），`farm_io.parse_click_batch_result` 拒绝把验证模式当作执行，`farm_harvest` 不再丢弃已知部分计数；仅离线验收，尚未接真实 I/O。`run-next` 继续返回 `RUNNER_NOT_READY`。`farm_clean_field.py` + `farm_clean_replay.py` 只读比较独立对齐后的24格 RGB patch：两张真实 QQ 空田图各格原始 RGB 平均差异仍约20.7–33.5。本轮新增跨24格的每通道中位数全局色偏校正、校正后均值/中位数/P90及异常通道比例。真实 QQ 两张空田对比得出全局偏移 [0,0,0]，校正后均值不变，24格中位差0–9、P90约102.8–129、超过40的通道约15.5%–27.4%，提示差异并非简单全局色偏；**不能由此推断作物占用或空田**。仍只返回 `diagnostic_only`、`empty_cells=null`、`can_authorize_clicks=false`，不得接入点击许可。下一步 M1：增加真实 clean/occupied 标注负例并校准光照/动画差异 → 把本地收获状态机接入已校准的遮罩/占地/24格终验 observation → 受控联调；M2尚未开始。当前 `python` 缺 scipy，测试请用 `python3`。
 
 ## 当前现场
 

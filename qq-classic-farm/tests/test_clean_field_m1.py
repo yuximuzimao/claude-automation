@@ -69,6 +69,38 @@ class CleanFieldDiagnosticTests(unittest.TestCase):
         self.assertIsNone(result["empty_cells"])
         self.assertFalse(result["can_authorize_clicks"])
 
+    def test_global_rgb_tint_is_removed_as_diagnostic_not_empty_proof(self):
+        for platform in ("qq", "wechat"):
+            for scale in (1, 2):
+                with self.subTest(platform=platform, scale=scale):
+                    reference = synthetic(platform, scale=scale)
+                    tint = np.array([12, -8, 20], dtype=np.int16)
+                    rgb = np.clip(reference.rgb.astype(np.int16) + tint, 0, 255).astype(np.uint8)
+                    current = FarmCapture(reference.frame, np.mean(rgb, axis=2).astype(np.float32), rgb=rgb)
+                    result = compare_clean_reference(current, reference, platform, LAYOUT)
+                    self.assertEqual(result["global_rgb_offset"], [12.0, -8.0, 20.0])
+                    self.assertTrue(all(c["mean_abs_rgb_after_global_offset"] == 0
+                                        for c in result["cells"]))
+                    self.assertIsNone(result["empty_cells"])
+                    self.assertFalse(result["can_authorize_clicks"])
+
+    def test_local_crop_remains_distinct_after_global_tint_correction(self):
+        reference = synthetic("qq")
+        tinted = np.clip(reference.rgb.astype(np.int16) + 15, 0, 255).astype(np.uint8)
+        current = FarmCapture(reference.frame, np.mean(tinted, axis=2).astype(np.float32), rgb=tinted)
+        current = with_crop(current, "qq", cell=(3, 3))
+        result = compare_clean_reference(current, reference, "qq", LAYOUT)
+        by_cell = {tuple(c["cell"]): c for c in result["cells"]}
+        self.assertEqual(result["global_rgb_offset"], [15.0, 15.0, 15.0])
+        self.assertGreater(by_cell[(3, 3)]["mean_abs_rgb_after_global_offset"], 30)
+        self.assertGreater(by_cell[(3, 3)]["median_abs_rgb_after_global_offset"], 30)
+        self.assertGreaterEqual(by_cell[(3, 3)]["p90_abs_rgb_after_global_offset"],
+                                by_cell[(3, 3)]["median_abs_rgb_after_global_offset"])
+        self.assertLess(max(c["mean_abs_rgb_after_global_offset"] for c in result["cells"]
+                            if c["cell"] != [3, 3]), 1)
+        self.assertIsNone(result["empty_cells"])
+        self.assertFalse(result["can_authorize_clicks"])
+
     def test_missing_purple_or_reference_color_fails_closed(self):
         reference = synthetic("qq")
         missing = synthetic("qq", missing=True)
