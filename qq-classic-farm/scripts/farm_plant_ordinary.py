@@ -63,8 +63,6 @@ def plant_ordinary_one_key(
         raise OrdinaryPlantStop("PLANT_OBSERVATION_UNAVAILABLE", "One-key mode not observed")
     if before.preview_cells != frozenset():
         raise OrdinaryPlantStop("PLANT_PREVIEW_UNVERIFIED", "Active/unknown special preview")
-    if before.one_key_planting is not True:
-        raise OrdinaryPlantStop("ONE_KEY_NOT_VERIFIED", "One-key planting must be enabled")
     empty = frozenset(cell for cell in ALL_CELLS if not before.field_cells[cell])
     if len(empty) != count:
         raise OrdinaryPlantStop("PLANT_COUNT_MISMATCH",
@@ -79,6 +77,13 @@ def plant_ordinary_one_key(
         )
     except (PickerStop, PickerStateError) as exc:
         raise OrdinaryPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
+    # Live QQ only displays this toggle after opening the picker. Verify it
+    # there, after bounded navigation but BEFORE selecting a seed (which can
+    # otherwise plant all empty plots immediately). Never infer it from field UI.
+    if picker.get("one_key_planting") is not True:
+        raise OrdinaryPlantStop("ONE_KEY_NOT_VERIFIED",
+                                "One-key planting must be visibly enabled in the picker",
+                                action_may_have_been_sent=True)
     _act(adapter.select_seed, picker["position"]["slot"])
     _act(adapter.wait, 2.0)
     completed_at = _after_action_clock(clock_ns)

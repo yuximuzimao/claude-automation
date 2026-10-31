@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_capture import FarmCapture
 from farm_geometry import WindowFrame
-from farm_picker_vision import observe_picker, right_arrow_verified
+from farm_picker_vision import observe_picker, observe_one_key_mode, right_arrow_verified
 
 
 class PickerVisionTests(unittest.TestCase):
@@ -54,6 +54,31 @@ class PickerVisionTests(unittest.TestCase):
                                         "天山红枫种子", None)["page"])
         self.assertIsNone(observe_picker(self.capture(), "wechat", 1,
                                         "天山红枫种子", None)["page"])
+
+    def test_real_qq_unchecked_toggle_template_is_fail_closed(self):
+        capture = self.capture(maple_slot=None)
+        reference = np.asarray(Image.open(ROOT / "assets/ui/picker/qq-one-key-off.png").convert("RGB"))
+        capture.rgb[779:810, 370:400] = reference
+        self.assertIs(observe_one_key_mode(capture, "qq"), False)
+        self.assertIsNone(observe_one_key_mode(capture, "wechat"))
+        # A checkmark/overlay changes the interior; it is NOT proof of ON.
+        capture.rgb[785:801, 378:392] = [255, 245, 255]
+        self.assertIsNone(observe_one_key_mode(capture, "qq"))
+
+    @patch("farm_picker_vision._read_text", side_effect=["1/7", "18"])
+    def test_shifted_live_picker_uses_one_offset_for_page_icon_badge(self, ocr):
+        capture = self.capture(maple_slot=None)
+        checkbox = np.asarray(Image.open(ROOT / "assets/ui/picker/qq-one-key-off.png").convert("RGB"))
+        icon = np.asarray(Image.open(ROOT / "assets/ui/picker/qq-red-maple.png").convert("RGB"))
+        capture.rgb[779:810, 370:400] = checkbox
+        capture.rgb[712:775, 61:129] = icon
+        result = observe_picker(capture, "qq", 1, "天山红枫种子", Path("/tmp/ocr"))
+        self.assertTrue(-44 <= result["picker_y_shift"] <= -38)
+        self.assertEqual(result["page"], 1)
+        self.assertTrue(result["target_icon_verified"])
+        self.assertEqual(result["target_quantity"], 18)
+        self.assertIs(result["one_key_planting"], False)
+        self.assertEqual(ocr.call_count, 2)
 
     def test_arrow_is_independent_of_page_counter(self):
         capture = self.capture(maple_slot=None)

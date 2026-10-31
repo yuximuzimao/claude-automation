@@ -34,8 +34,8 @@
 | `scripts/farm_plant_picker.py` | M2 picker 有界翻页/目标图标与数量验证 contract；QQ 已接真实局部观察及受门禁批量翻页（仅两个目标已校准），完整种植未验收 | M2 开发 |
 | `scripts/farm_plant_cycle.py` | M2 单调用离线种植 phase：逐颗四格→普通一键、复用 M0 全局预检、成功事务检查点；真实 UI adapter 尚缺 | M2 集成/实机接线 |
 | `scripts/farm_plant_recovery.py` | M2 真机前置的 durable 事务恢复 journal：每笔先写 in_flight，再记录已验证库存；旧日志禁止自动重播，phase 完成不等于 farm-state 已提交 | M2 实机接线/崩溃恢复 |
-| `scripts/farm_plant_live.py` | M2 真实窗口注册/截图/只读 preflight；QQ picker 页码/两个目标图标与数量已实机读取，左右有界 CGEvent 翻页已联调；field/preview/one-key 仍未知，禁止选择种子或种植 | M2 现场局部视觉校准 |
-| `scripts/farm_picker_vision.py` / `scripts/farm_text_ocr.swift` | QQ 真实 picker 页码、局部图标/数量、左右箭头；Swift 需预编译（例如 `swiftc scripts/farm_text_ocr.swift -o /tmp/farm_text_ocr`），只对已校准目标授权局部观察，不授权播种 | M2 picker 实机联调 |
+| `scripts/farm_plant_live.py` | M2 真实窗口注册/截图/只读 preflight；QQ picker 页码/两个目标图标与数量及不同田格的 y 偏移已实机读取，左右有界 CGEvent 翻页已联调；picker 内 one-key OFF 可识别，ON/field/preview 仍未知，禁止选择种子或种植 | M2 现场局部视觉校准 |
+| `scripts/farm_picker_vision.py` / `scripts/farm_text_ocr.swift` | QQ 真实 picker 页码、局部图标/数量、左右箭头；不同田格会使 picker 纵向移动，现可用已验证 OFF 控件局部模板定位并统一平移 ROI/箭头。Swift OCR 需预编译（例如 `swiftc scripts/farm_text_ocr.swift -o /tmp/farm_text_ocr`）；ON 模式尚未知，只有已校准目标可局部观察，**不授权播种** | M2 picker 实机联调 |
 | `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |

@@ -1,8 +1,10 @@
 # 当前状态
 
-更新时间：2026-10-31 19:20 CST（M0 已通过；M1 QQ 遮罩已安全清除并完成1颗普通白萝卜的本地一键收获受控实测，仍缺24格独立终验/单命令正式验收；M2 QQ picker 已真实跑通页码 OCR→有界左右翻页→两种目标图标/数量终验，完整种植阶段及微信未验收；180项离线测试通过；run-next 仍 STOP）
+更新时间：2026-10-31 19:48 CST（M0 已通过；M1 QQ 已完成受控收获但仍缺24格独立终验/单命令正式验收；M2 QQ picker 已实机验证不同空金格触发的垂直偏移与动态箭头，且现场确认一键种植开关关闭；184项离线测试通过；完整种植与微信仍未验收，run-next STOP）
 
 ## Runner 当前开发检查点
+
+- **2026-10-31 19:33–19:48 CST M2 QQ picker 第二个真实落点验收（未播种）**：Mac 本地许可时段，真实 QQ 独立农场 window_id=6951、603×1111，起始24格目视为空（非独立算法终验）。经现场截图、金地落点核对、Swift `--preflight` 与新鲜度门禁，受控点击金格 `(u=2,v=0)` 打开 picker；发现该落点的 picker 比上轮 `(u=3,v=2)` **整体上移约42 logical px**，旧固定页码 ROI 因此返回 unknown。这是直接阻断“同一 Runner 适配不同田格”的真实 UI 差异。现用已实拍的 QQ picker「一键种植未勾选」局部模板定位**唯一纵向偏移**，将相同偏移同时用于页码、目标图标、数量徽标、左右箭头及 CGEvent 坐标；本地真实新截图重新读出 `1/7`、泡泡棉花糖第3槽**21颗**、`one_key_planting=false`、`picker_y_shift=-42`。经单独 `--preflight` 后直接调用已有 `LivePlantAdapter.turn_pages(1,1)`，**真实第1→2页**，新截图 OCR 确认2/7，阶段内0逐击模型往返；之后在已验证空白天空点击关闭 picker，独立新截图确认回到无 picker 的空田。**没有选择任何种子、购买、播种、收获、消耗库存或开启一键模式**。同步修正 M2 普通事务的真实顺序：一键种植开关仅在**打开 picker 后**出现，故在 `open_plot→picker导航/图标数量校验→一键模式校验→select_seed` 之间校验，禁止从裸田画面假设模式；OFF 可验证，ON 尚无模板保持 unknown/STOP。新增局部模板 `assets/ui/picker/qq-one-key-off.png`，全量 **184项测试通过**、py_compile/dry-run通过，关闭 picker 时只读预检正确返回 unknown，`run-next=RUNNER_NOT_READY`。**缩短的验收距离**：M2 picker 不再只适配单一金格落点，第二个真实落点的页码、数量、模式及箭头操作已验证；下一步仍需可信24格占用、ON 模式安全校准、四格预览/落地及库存同步。M1/微信状态不变。
 
 - **2026-10-31 19:05–19:20 CST 最新 M2 QQ picker 实机阶段（优先）**：Mac 本地允许时段，QQ 独立农场 window_id=6951、603×1111。此前受控收获/萝卜测试后田地仍为空，先实时截图与空田参考 ROI 对照，再以 Swift CGEvent preflight 通过的单击打开安全金格 `(u=3,v=2)` picker；仅打开选种，没有选择种子或改变库存。现场完整7页，页码小 ROI 经预编译 macOS Vision OCR **1/7–7/7 全部正确**；两个本次目视核实的 QQ 目标模板：泡泡棉花糖种子第1页第3槽**21颗**、天山红枫种子第4页第1槽**18颗**。`farm_picker_vision.py` 已接 `farm_plant_live.py`，QQ 左右箭头逐页本地预检及有界批量 CGEvent 真实验证：第7→4页一次本地3击并重新识别红枫；第4→1页直接调用已有 `prepare_picker_target` 一次本地3击，独立新截图证明棉花糖位置/数量正确，`llm_round_trips=0`、`selection_sent=false`。一次校准脚本在第5→6页因数字差异阈值过高结构化 STOP，重新只读确认第6页后才继续，无盲重试。最后在安全空白处点击一次，实时 OCR 确认 picker 关闭。QQ **一键种植开关仍关闭**，库存仍 dirty，未播种/购买/扣减种子；其他 QQ 种子图标与微信 picker 仍 unknown。新增 `farm_text_ocr.swift`、两种 QQ 目标局部模板及最小观察/导航接线，Python **180项测试通过**，Swift typecheck通过。**M2 picker 这两个目标的真实局部阶段通过，但 M2 完整种植与 M1 正式验收均未通过**；`run-next` 仍 `RUNNER_NOT_READY`。下一步优先24格真实占用、一键模式安全观察、四格预览/落地和库存同步，避免继续做纯离线恢复/RGB统计。
   

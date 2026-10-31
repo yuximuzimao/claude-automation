@@ -275,6 +275,8 @@ def main() -> int:
                 "page": view.page,
                 "target_icon_verified": view.target_icon_verified,
                 "target_quantity": view.target_quantity,
+                "one_key_planting": view.one_key_planting,
+                "picker_y_shift": adapter.last_picker_y_shift,
                 "diagnostics": adapter.last_diagnostics,
                 "click_count": 0, "llm_round_trips": 0,
             }

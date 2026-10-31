@@ -26,6 +26,9 @@ class PickerView:
     target_icon_verified: bool | None = None
     # Badge count from the same verified target slot; None = unreadable.
     target_quantity: int | None = None
+    # The one-key checkbox exists INSIDE the open picker, not on the bare field.
+    # True/False require a separately verified live control; None is unknown.
+    one_key_planting: bool | None = None
 
 
 class PickerAdapter(Protocol):
@@ -88,6 +91,7 @@ def prepare_picker_target(
         "position": position.as_dict(),
         "needed": needed,
         "visible_quantity": after.target_quantity,
+        "one_key_planting": after.one_key_planting,
         "pages_turned": turns,
         "observations": 1 if turns == 0 else 2,
         "llm_round_trips": 0,

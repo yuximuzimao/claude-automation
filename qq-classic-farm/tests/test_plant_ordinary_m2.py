@@ -26,7 +26,7 @@ def view(cid, ns, *, empty=EMPTY, identity=IDENTITY, one_key=True,
 class Adapter:
     def __init__(self, views=None, picker_views=None, fail=None):
         self.views = list(views or [view("before", 50), view("after", 201, empty=())])
-        self.picker_views = list(picker_views or [PickerView(1), PickerView(2, True, 8)])
+        self.picker_views = list(picker_views or [PickerView(1), PickerView(2, True, 8, True)])
         self.calls = []
         self.fail = fail
 
@@ -92,12 +92,23 @@ class OrdinaryPlantTests(unittest.TestCase):
         self.stop("PLANT_COUNT_MISMATCH", a)
         self.assertFalse(any(isinstance(x, tuple) and x[0] == "open" for x in a.calls))
 
-    def test_one_key_unverified_stops_before_action(self):
+    def test_one_key_is_checked_in_picker_before_seed_selection(self):
         for state in (None, False):
             with self.subTest(state=state):
-                a = Adapter(views=[view("before", 50, one_key=state)])
-                self.stop("ONE_KEY_NOT_VERIFIED", a)
-                self.assertEqual(a.calls, ["field"])
+                a = Adapter(picker_views=[PickerView(1), PickerView(2, True, 8, state)])
+                exc = self.stop("ONE_KEY_NOT_VERIFIED", a)
+                self.assertTrue(exc.action_may_have_been_sent)  # plot open/page turn only
+                self.assertIn(("open", (0, 0)), a.calls)
+                self.assertFalse(any(isinstance(x, tuple) and x[0] == "select" for x in a.calls))
+
+    def test_field_toggle_is_not_picker_authority(self):
+        a = Adapter(views=[view("before", 50, one_key=False),
+                           view("after", 201, empty=())])
+        self.assertEqual(self.run_one(a)["status"], "ordinary_plant_verified")
+        b = Adapter(views=[view("before", 50, one_key=True)],
+                    picker_views=[PickerView(1), PickerView(2, True, 8, False)])
+        self.stop("ONE_KEY_NOT_VERIFIED", b)
+        self.assertFalse(any(isinstance(x, tuple) and x[0] == "select" for x in b.calls))
 
     def test_inventory_shortage_stops_before_observe(self):
         a = Adapter()

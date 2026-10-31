@@ -23,10 +23,11 @@ class PickerNavigationTests(unittest.TestCase):
         return LivePlantAdapter("qq", {}, Path("/tmp/registry"),
                                 Path("/tmp/click"), execute=execute)
 
-    def prime(self, adapter, page=2):
+    def prime(self, adapter, page=2, y_shift=0):
         adapter.last_handle = HANDLE
         adapter.last_picker = SimpleNamespace(page=page)
         adapter.last_picker_total = 7
+        adapter.last_picker_y_shift = y_shift
         adapter.last_picker_capture = SimpleNamespace(captured_at_ns=1_000_000_000)
 
     @patch("farm_plant_live.require_live_window")
@@ -45,8 +46,25 @@ class PickerNavigationTests(unittest.TestCase):
         payload = json.loads(kwargs["input"])
         self.assertEqual(len(payload["actions"]), 2)
         self.assertEqual(payload["actions"][0]["x"], 569)
+        self.assertEqual(payload["actions"][0]["y"], 771)
         self.assertIsNone(adapter.last_picker)
         self.assertIsNone(adapter.last_handle)
+
+    @patch("farm_plant_live.require_live_window")
+    @patch("farm_plant_live.monotonic_ns", return_value=1_500_000_000)
+    @patch("farm_plant_live.picker_arrow_verified", return_value=True)
+    @patch("farm_plant_live.find_farm_window", return_value=HANDLE)
+    @patch("farm_plant_live.subprocess.run")
+    def test_shifted_picker_moves_arrow_with_verified_local_offset(self, run, registry, arrow, clock, time):
+        adapter = self.adapter()
+        self.prime(adapter, y_shift=-42)
+        initial_capture = adapter.last_picker_capture
+        run.return_value = SimpleNamespace(returncode=0,
+            stdout=json.dumps({"status": "clicks_sent_unverified", "click_count": 1}))
+        adapter.turn_pages(1, 1)
+        payload = json.loads(run.call_args.kwargs["input"])
+        self.assertEqual(payload["actions"][0]["y"], 729)
+        arrow.assert_called_once_with(initial_capture, 1, -42)
 
     @patch("farm_plant_live.require_live_window")
     @patch("farm_plant_live.monotonic_ns", return_value=1_500_000_000)

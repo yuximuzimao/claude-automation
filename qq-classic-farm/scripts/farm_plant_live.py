@@ -24,10 +24,10 @@ from farm_plant_special import Cell, SpecialPlantStop
 class LivePlantAdapter:
     """Real registry/capture + fail-closed M2 adapter, with gated CGEvent transport.
 
-    execute=True does NOT grant permission to click. The current real observer
-    deliberately cannot verify overlay, 24 cells, preview, picker page/icon/
-    quantity or one-key mode. Only future independent, live visual calibration
-    may produce an authorized observation; tests cannot be treated as that proof.
+    execute=True does NOT grant permission to plant. QQ picker page/icon/badge,
+    a bounded vertical offset and the unchecked one-key control have limited
+    real calibration; field occupancy, preview, overlay and enabled one-key
+    mode remain unknown. Tests never substitute for live authorization.
     """
 
     def __init__(self, platform: str, layout: dict, registry_binary: Path,
@@ -46,6 +46,7 @@ class LivePlantAdapter:
         self.last_picker: PickerView | None = None
         self.last_picker_capture = None
         self.last_picker_total: int | None = None
+        self.last_picker_y_shift: int | None = None
         self.last_diagnostics: dict = {}
         # Never set by the current uncalibrated observer.
         self.calibration_verified = False
@@ -57,6 +58,7 @@ class LivePlantAdapter:
         self.last_picker = None
         self.last_picker_capture = None
         self.last_picker_total = None
+        self.last_picker_y_shift = None
         self.calibration_verified = False
         self.last_diagnostics = {}
         require_live_window()
@@ -103,18 +105,22 @@ class LivePlantAdapter:
                                   target_seed, self.ocr_binary)
         view = PickerView(page=evidence["page"],
                           target_icon_verified=evidence["target_icon_verified"],
-                          target_quantity=evidence["target_quantity"])
+                          target_quantity=evidence["target_quantity"],
+                          one_key_planting=evidence["one_key_planting"])
         self.last_picker = view
         self.last_picker_capture = shot
         self.last_picker_total = evidence["total_pages"]
+        self.last_picker_y_shift = evidence["picker_y_shift"]
         self.last_diagnostics = {
             "platform": self.platform,
             "picker_page": view.page,
             "picker_total_pages": evidence["total_pages"],
+            "picker_y_shift": evidence["picker_y_shift"],
             "target_seed": target_seed,
             "expected_slot": expected_slot,
             "target_icon_verified": view.target_icon_verified,
             "target_quantity": view.target_quantity,
+            "one_key_planting": view.one_key_planting,
             "icon_score": evidence["icon_score"],
             "can_authorize_planting": False,
             "can_authorize_clicks": False,
@@ -190,12 +196,14 @@ class LivePlantAdapter:
                                    "Only QQ verified arrow navigation is available")
         if (view is None or shot is None or handle is None
             or type(view.page) is not int or type(self.last_picker_total) is not int
+            or type(self.last_picker_y_shift) is not int
+            or not -100 <= self.last_picker_y_shift <= 100
             or type(count) is not int or not 1 <= count <= 7
             or not 1 <= view.page + direction * count <= self.last_picker_total):
             raise SpecialPlantStop("PICKER_PAGE_UNKNOWN", "Cannot safely bound picker turns")
         if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
             raise SpecialPlantStop("PICKER_STALE_PRECONDITION", "Picker capture older than 2 seconds")
-        if not picker_arrow_verified(shot, direction):
+        if not picker_arrow_verified(shot, direction, self.last_picker_y_shift):
             raise SpecialPlantStop("PICKER_ARROW_UNVERIFIED", "Requested arrow not visually confirmed")
         current = find_farm_window(self.platform, self.layout, self.registry_binary)
         if not _same_handle(handle, current):
@@ -206,7 +214,7 @@ class LivePlantAdapter:
             "owner": f.owner, "title": f.title,
             "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
             "actions": [{"x": (569 if direction == 1 else 31) * f.width / 603,
-                         "y": 771 * f.height / 1111,
+                         "y": (771 + self.last_picker_y_shift) * f.height / 1111,
                          "delay_ms": 450} for _ in range(count)],
         }
         try:
@@ -225,6 +233,7 @@ class LivePlantAdapter:
             self.last_picker = None
             self.last_picker_capture = None
             self.last_picker_total = None
+            self.last_picker_y_shift = None
 
     def select_seed(self, slot: int) -> None:
         raise SpecialPlantStop("STATE_DRIFT",
