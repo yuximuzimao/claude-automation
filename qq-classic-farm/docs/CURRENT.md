@@ -1,8 +1,10 @@
 # 当前状态
 
-更新时间：2026-11-01 00:42 CST（M0 已通过；本轮只在禁区离线补 QQ 白萝卜实际落地格只读验收接口；M1/M2 完整阶段及微信仍未验收，run-next STOP）
+更新时间：2026-11-01 01:39 CST（M0 已通过；QQ Stage Manager 安全恢复实机修复；M1/M2 完整阶段及微信仍未验收，run-next STOP）
 
 ## Runner 当前开发检查点
+
+- **2026-11-01 01:34–01:39 CST QQ WINDOW_SIZE_CHANGED 直接阻塞解除（未试种）**：按五份文档从 `c0e8f374` 恢复；Mac 本地 `01:34 CST` 为允许时段。初次 `preflight-plant` 因 QQ 农场在 Stage Manager 缩略态（46×130）返回 `WINDOW_SIZE_CHANGED`；旧 `open_qq_farm.swift` 单次点击缩略窗后未恢复，明确 STOP。针对**已存在、唯一、owner=`QQ小程序`、title=`QQ经典农场` 的缩略窗**，修复入口为使用核实的 owner PID 调用 `NSRunningApplication.activate`，不再向可能被其它窗口遮挡的缩略坐标发送 CGEvent；真实返回「已通过已核实 QQ经典农场 PID 恢复完整窗口」。随后 QQ 真实只读 `preflight-plant` 得到 603×1111、window_id=6951、`field_cells_verified=24`、`clean_field_verified=true`、0点击。准备进入游戏商店做下一颗白萝卜落点测试时，**窗口又回到 Stage Manager 缩略态**；在任何农场点击之前，重新读取 registry 发现仅 46×130 缩略窗，测试脚本因 `WINDOW_SIZE_CHANGED` 在0事件处停止。原因（其他程序/用户/系统焦点切换）尚未确认；不反复抢焦点、不在未知前台点击。没有购买、种植、收获、库存变化，也没有获得新落地格证据。`open_qq_farm.swift` 新增本机禁区前2分钟门禁；Swift typecheck 与 Python 199项全量测试通过。**距离 M1/M2 缩短的一步**：已有农场窗口的安全恢复路径实机成功，不再依赖点击被遮挡的 Stage Manager 缩略窗；下一轮先确认前台能稳定保持，若可保持则同一短本地调用完成 `capture_landing_baseline → 1颗已核实白萝卜受控试种 → verify_landing_since`，否则记录焦点被抢占并推进 M2 离线真实接线。M1 单命令成熟→clean、M2 完整种植、微信实机均未验收；双平台库存 dirty，`run-next=RUNNER_NOT_READY`。
 
 - **2026-11-01 00:37 CST 本轮离线 M2 落地格检查点（非实机验收）**：Mac 实时钟 00:37 CST，处于00:00–01:00禁止触碰农场时段；本轮只读项目文档/代码，未操作 QQ/微信。上一轮已发现名义金格点击 `(3,2)` 实际苗出现在 `(2,2)`，本轮针对这个直接阻塞新增 `scripts/farm_qq_landing.py`，仅以同一窗口的可信前/后新截图和实拍 QQ 金/紫白萝卜苗局部 ROI 识别**唯一实际落地格**，要求前帧24格全空、后帧唯一已知苗、恢复该苗 ROI 后其余24格仍可信全空；窗口变化、旧帧、遮罩、额外变化、多株都返回 unknown。`LivePlantAdapter` 新增只读 `capture_landing_baseline()`/`verify_landing_since()`，供下一允许时段受控单颗萝卜试种后核实 `clicked_point → observed_cell`；不自动决定点击点、不授权正式种植、不扣库存。**199项全量离线测试通过**，py_compile/dry-run 通过；本轮没有新增真机样本，不能宣称映射已校准。QQ 目前按上轮记录为空田、一键种植 OFF；每次仍需现场复核。下一步在许可时段验证这一落点接口，再推进四格预览/确认/落地、ON模式、库存同步与微信农场恢复。M1 单命令成熟→clean 尚未验收，QQ/微信 `inventory_dirty=true`，`run-next=RUNNER_NOT_READY`。
 

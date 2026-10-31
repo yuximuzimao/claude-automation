@@ -1,5 +1,6 @@
 import Foundation
 import CoreGraphics
+import AppKit
 
 struct Bounds {
     let x: Double
@@ -33,7 +34,11 @@ func allowedNow() -> Bool {
     let c = Calendar.current.dateComponents([.hour, .minute], from: Date())
     guard let h = c.hour, let m = c.minute else { return false }
     let t = h * 60 + m
-    return ![(0,60),(480,540),(720,780),(840,845),(960,1020),(1200,1260)].contains { t >= $0.0 && t < $0.1 }
+    let blocked = [(0,60),(480,540),(720,780),(840,845),(960,1020),(1200,1260)]
+    return !(0...2).contains { offset in
+        let minute = (t + offset) % 1440
+        return blocked.contains { minute >= $0.0 && minute < $0.1 }
+    }
 }
 
 func click(_ p: CGPoint) {
@@ -64,10 +69,25 @@ func fullFarmWindow() -> Bounds? {
     }?.bounds
 }
 
-func smallFarmTile() -> Bounds? {
-    windows(owner: "QQ小程序").first {
-        $0.name == "QQ经典农场" && $0.bounds.width < 300 && $0.bounds.height < 300
-    }?.bounds
+func farmTilePIDs() -> [pid_t] {
+    // Only a uniquely identified existing QQ farm thumbnail may be activated.
+    // Stage Manager thumbnails can be covered; clicking their coordinates can
+    // focus an unrelated business window, so do not click thumbnails at all.
+    guard let list = CGWindowListCopyWindowInfo(
+        [.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID
+    ) as? [[String: Any]] else { return [] }
+    return list.compactMap { item in
+        guard (item[kCGWindowOwnerName as String] as? String) == "QQ小程序",
+              (item[kCGWindowName as String] as? String) == "QQ经典农场",
+              (item[kCGWindowLayer as String] as? Int) == 0,
+              let bounds = item[kCGWindowBounds as String] as? [String: Any],
+              let width = bounds["Width"] as? Double,
+              let height = bounds["Height"] as? Double,
+              width > 20, width < 300, height > 50, height < 300,
+              let pid = item[kCGWindowOwnerPID as String] as? Int, pid > 0
+        else { return nil }
+        return pid_t(pid)
+    }
 }
 
 func mainQQWindow() -> Bounds? {
@@ -96,16 +116,35 @@ if fullFarmWindow() != nil {
     exit(0)
 }
 
-if let tile = smallFarmTile() {
-    click(CGPoint(x: tile.x + tile.width / 2, y: tile.y + tile.height / 2))
-    for _ in 0..<8 {
+let farmPIDs = farmTilePIDs()
+if !farmPIDs.isEmpty {
+    guard farmPIDs.count == 1 else {
+        fputs("QQ经典农场缩略窗身份不唯一；停止\n", stderr)
+        exit(4)
+    }
+    guard allowedNow() else {
+        fputs("FARM_OPERATION_TIME_BLOCKED\n", stderr)
+        exit(5)
+    }
+    // Activate only the PID proved to own the existing farm thumbnail.
+    // Never send a click to a possibly occluded Stage Manager thumbnail.
+    guard let app = NSRunningApplication(processIdentifier: farmPIDs[0]),
+          app.activate(options: []) else {
+        fputs("QQ经典农场缩略窗对应进程无法安全激活；停止\n", stderr)
+        exit(4)
+    }
+    for _ in 0..<12 {
         usleep(250_000)
+        guard allowedNow() else {
+            fputs("FARM_OPERATION_TIME_BLOCKED\n", stderr)
+            exit(5)
+        }
         if fullFarmWindow() != nil {
-            print("已从现有 QQ经典农场 Stage Manager 缩略窗恢复农场")
+            print("已通过已核实 QQ经典农场 PID 恢复完整窗口")
             exit(0)
         }
     }
-    fputs("QQ经典农场缩略窗点击后未恢复；停止，不猜坐标\n", stderr)
+    fputs("已激活 QQ经典农场进程但未恢复完整窗口；停止，不猜坐标\n", stderr)
     exit(4)
 }
 

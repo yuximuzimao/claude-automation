@@ -26,7 +26,7 @@
 | `data/picker-order.json` | 固定顺序→过滤零库存→分页模型的历史证据 | M0 构建 stable_order、验证“刚获取临时插入/重进恢复”假设的历史对照 |
 | `assets/seeds/` | 种子图标资产 | 视觉匹配种植选择器 |
 | `assets/ui/` | 稳定 UI 锚点模板（手形按钮 / 务农 / 化肥 / 可摘） | 找图 |
-| `scripts/open_qq_farm.swift` | QQ 农场固定入口：定位窗口并按已验证相对坐标打开/恢复农场 | 每次需要恢复或打开 QQ 农场 |
+| `scripts/open_qq_farm.swift` | QQ 农场固定入口：唯一已验证的 Stage Manager QQ 农场缩略窗优先按 owner PID 激活（不点击可能被遮挡的缩略窗）；不存在农场才按已验证 QQ 主窗口相对坐标进入；本地禁区及前2分钟保护 | 每次需要恢复或打开 QQ 农场 |
 | `scripts/farm_harvest.py` | M1 本地收获状态机；真实批量收获尚未验收 | Runner M1 开发 |
 | `scripts/farm_harvest_live.py` | M1 真实 registry/截图/视觉→FSM 只读预检及受门禁 CGEvent 接口；当前校准未知，禁止 Runner 自动真实点击 | Runner M1 实机校准 |
 | `scripts/farm_click_batch.swift` | 已实机验证的批量 CGEvent helper；无参数仅 JSON 校验，`--preflight` 真机窗口/前台/遮挡/时钟0点击，`--execute` 才发送事件；Dock/通知中心全屏透传必须同时通过 AX 命中农场 PID，其他遮挡 STOP | 受控真机动作前先 preflight |
