@@ -18,6 +18,7 @@ from farm_capture import capture_window
 from farm_geometry import WindowFrame
 from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
+from farm_qq_clean import observe_qq_clean_cells
 from farm_vision import probe_harvest
 
 
@@ -59,8 +60,9 @@ class LiveHarvestAdapter:
     """One local phase I/O, with no LLM calls and no automatic window activation.
 
     execute=False is the default; execute=True alone is never sufficient:
-    independently verified overlay, star offset, special occupancy and 24-cell
-    empty states must be supplied by a future calibrated observer.
+    independently verified overlay, star offset and special occupancy must be
+    supplied. QQ clean-field postcondition is now observed read-only, but is
+    insufficient on its own to authorize harvesting.
     """
 
     def __init__(self, platform: str, layout: dict, anchors: dict,
@@ -91,6 +93,8 @@ class LiveHarvestAdapter:
         if not _same_handle(handle, again):
             raise HarvestStop("USER_INTERFERENCE", "Window changed during capture")
         probe = probe_harvest(capture, self.anchors, self.platform, self.layout)
+        clean = (observe_qq_clean_cells(capture, self.layout)
+                 if self.platform == "qq" else None)
         hand = probe.get("hand", {})
         point = tuple(hand["local_center"]) if hand.get("matched") else None
         # The current detector produces *candidate* stars, not independently
@@ -107,7 +111,8 @@ class LiveHarvestAdapter:
             "overlay": "unknown",
             "calibration_verified": False,
             "occupied_special": None,
-            "empty_cells": None,
+            "empty_cells": clean,
+            "clean_field_verified": clean == 24,
             "can_authorize_clicks": False,
         }
         obs = HarvestObservation(
@@ -116,7 +121,8 @@ class LiveHarvestAdapter:
             window_width=handle.frame.width, window_height=handle.frame.height,
             capture_id=capture.capture_id or "",
             captured_at_ns=capture.captured_at_ns or 0,
-            hand=point, special=(), occupied_special=None, empty_cells=None,
+            hand=point, special=(), occupied_special=None,
+            empty_cells=(tuple(True for _ in range(24)) if clean == 24 else None),
         )
         self.last_handle = handle
         self.last_observation = obs

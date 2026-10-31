@@ -18,6 +18,7 @@ from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
+from farm_qq_clean import ALL_CELLS, observe_qq_clean_cells
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -27,7 +28,8 @@ class LivePlantAdapter:
     execute=True does NOT grant permission to plant. QQ picker page/icon/badge,
     a bounded vertical offset and the unchecked one-key control have limited
     real calibration; field occupancy, preview, overlay and enabled one-key
-    mode remain unknown. Tests never substitute for live authorization.
+    mode remain unknown. A QQ all-empty postcondition is now observable, but
+    it cannot authorize clicks while overlay/preview/inventory are unknown.
     """
 
     def __init__(self, platform: str, layout: dict, registry_binary: Path,
@@ -72,12 +74,14 @@ class LivePlantAdapter:
 
     def observe_field(self) -> OrdinaryPlantView:
         handle, shot = self._capture()
+        clean = (observe_qq_clean_cells(shot, self.layout)
+                 if self.platform == "qq" else None)
         view = OrdinaryPlantView(
             capture_id=shot.capture_id or "",
             captured_at_ns=shot.captured_at_ns or 0,
             window_identity=_identity(handle),
             overlay="unknown",
-            field_cells=None,
+            field_cells=({cell: False for cell in ALL_CELLS} if clean == 24 else None),
             preview_cells=None,
             one_key_planting=None,
         )
@@ -90,7 +94,8 @@ class LivePlantAdapter:
                 "x": handle.frame.x, "y": handle.frame.y,
             },
             "overlay": "unknown",
-            "field_cells_verified": 0,
+            "field_cells_verified": (24 if clean == 24 else 0),
+            "clean_field_verified": clean == 24,
             "preview": "unknown",
             "one_key_planting": "unknown",
             "calibration_verified": False,
@@ -255,7 +260,8 @@ def read_only_plant_preflight(adapter: LivePlantAdapter) -> dict:
     view = adapter.observe_field()
     return {
         "status": "stopped", "code": "PLANT_OVERLAY",
-        "message": "Overlay, 24-cell occupancy, preview and picker require live calibration",
+        "message": ("QQ 24-cell clean evidence is read-only; overlay, preview and "
+                    "planting controls still require calibration"),
         "platform": adapter.platform, "window_id": view.window_identity[0],
         "capture_id": view.capture_id, "diagnostics": adapter.last_diagnostics,
         "click_count": 0, "llm_round_trips": 0,

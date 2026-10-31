@@ -38,6 +38,7 @@
 | `scripts/farm_picker_vision.py` / `scripts/farm_text_ocr.swift` | QQ 真实 picker 页码、局部图标/数量、左右箭头；不同田格会使 picker 纵向移动，现可用已验证 OFF 控件局部模板定位并统一平移 ROI/箭头。Swift OCR 需预编译（例如 `swiftc scripts/farm_text_ocr.swift -o /tmp/farm_text_ocr`）；ON 模式尚未知，只有已校准目标可局部观察，**不授权播种** | M2 picker 实机联调 |
 | `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
+| `scripts/farm_qq_clean.py` / `assets/ui/field/qq-empty-atlas.png` | QQ 五帧实拍空田24格局部模板；实机只读 `empty_cells=24` 正例，历史成熟田/遮罩与合成极小幼苗负例拒绝；动画可能返回 unknown，真实小苗负例及 overlay 仍待校准，**不授权点击** | M1 clean-field 终验 / M2 空田前检 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |
 | `scripts/pickable_locator.py` | 一次返回全部 4 格植物“可摘”坐标；已被 `ui_probe.py` 集成 | 特殊植物收获 |
 | `scripts/picker_simulator.py` | 旧顺序模型推演工具 | 仅异常研究，不作为正常选种入口 |
