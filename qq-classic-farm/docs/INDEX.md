@@ -26,6 +26,7 @@
 - `../scripts/farm_plant_picker.py`：M2 离线 picker 有界翻页/目标 icon 与数量徽标校验，尚未接真实 UI。
 - `../scripts/farm_plant_special.py`：M2 离线四格单颗事务（预览→确认→24格占用终验）；不接真实点击。
 - `../scripts/farm_plant_ordinary.py`：M2 离线普通一键种植事务（空格数=计划数量→picker→选种→24格全占用终验）；不接真实点击。
+- `../scripts/farm_plant_cycle.py` / `../scripts/farm_plant_recovery.py`：M2 本地组合种植 phase 与 durable preaction journal；已确认交易才更新恢复数量，异常/崩溃后不自动重放，尚未接真实 UI。
 - `../scripts/ui_probe.py`：一次读取裁好的当前农场窗口状态、化肥候选点和 24 格坐标；只读，不点击，并拒绝整屏截图误输入。
 - `../scripts/pickable_locator.py`：一次识别全部 4 格植物“可摘”位置并去重；`ui_probe.py` 已直接复用。
 - `../scripts/picker_simulator.py`：旧隐藏排序模型的推演工具；只用于异常研究。

@@ -1,8 +1,10 @@
 # 当前状态
 
-更新时间：2026-10-31（M0 已通过；M1 QQ 实机截图可用但真实收获未验收；M2 picker/四格/普通一键种植事务均已离线实现，139项测试通过，未接真实执行）
+更新时间：2026-10-31（M0 已通过；M1 QQ 实机只读预检可用、真实收获未验收；M2 已完成离线种植组合及受控恢复日志接线，163项测试通过，未接真实种植 UI）
 
 ## Runner 当前开发检查点
+
+- **2026-10-31 08:33 CST 离线 M2 持久化恢复检查点（实机禁区）**：本机时钟确认 08:33 CST，处于 08:00–09:00 禁止触碰 QQ/微信农场/前台的时段；本轮没有打开/切换农场窗口或发送鼠标键盘事件。为补齐真实种植前必须具备的崩溃恢复事实，新增 `scripts/farm_plant_recovery.py`：每个 plan/cycle/platform 独占创建 journal；每笔四格/普通事务在任何 UI 调用前以 fsync+原子写入 `in_flight`，独立终验成功后写 `checkpointed` 及已确认库存，全部成功后只标记 `phase_verified_uncommitted`，**不冒充 farm-state 已落盘**。任何旧 journal（包括崩溃、已完成但未与 farm-state 对账）均阻止自动重跑，须人工/可信现场 reconcile。`farm_plant_cycle.py` 新增 preaction callback，预写失败在零新动作前 STOP，部分动作保留已确认历史而不重放；包装入口 `run_plant_phase_with_recovery` 仍要求 `inventory_verified=True`，当前真实双平台 dirty，因此不能运行真实种植。新增7项持久化/崩溃/漂移/部分事务回归，**全量163项测试通过**，py_compile、dry-run 通过，`run-next` 继续 `RUNNER_NOT_READY`。这消除了 M2 真机接线前的一个必要安全阻塞，但**真实 picker/preview/24格 observer 与 CGEvent 仍未接入**；M1 真实星标/占用/遮罩/clean-field 校准也仍未完成。下一轮允许时段优先实机校准并接真实 UI，而非再扩展离线恢复功能。
 
 - **2026-10-31 07:46 CST 微信主窗口恢复实机闭环（非农场）**：在 QQ 农场前台时，原 `restore_wechat_main.swift` 因 Stage Manager 微信缩略窗被遮挡返回 `WECHAT_TILE_OCCLUDED`。先只读确认唯一微信窗口身份及 owner PID；已修改 helper：缩略窗被遮挡时不点击其坐标，而通过 `NSRunningApplication(processIdentifier: tile.pid).activate(options: [])` 仅激活已确认的微信进程，再检查唯一完整微信主窗口。Swift typecheck 通过，真实从 QQ 前台触发返回 `WECHAT_MAIN_RESTORED_BY_PID`；此前 AppleScript 激活也已单次验证。**微信目前仅回到聊天主窗口，尚未按“发现→游戏→最近玩过”进入独立农场；没有农场点击、收获、种植。** 该恢复路径保留本地禁区门禁、唯一窗口身份和失败 STOP，不能把主窗口恢复算作 M1 验收。
 

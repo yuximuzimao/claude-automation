@@ -1,5 +1,7 @@
 # Todo
 
+- [ ] **M2 真机接线下一步（2026-10-31 08:33 CST）**：已新增 durable preaction `in_flight` / confirmed-only `checkpointed` / `phase_verified_uncommitted` 恢复 journal，163项全量离线测试通过；旧 journal 绝不自动重播，当前 inventory_dirty 仍禁止真机种植。下一轮在 Mac 非禁区先补真实 field/preview/one-key/picker observer + CGEvent 最小接线，联动 M1 星标归属/遮罩/24格 clean-field 真实校准；不要继续扩展恢复机制。**本轮 08:33 CST 禁区仅离线开发，没有任何 QQ/微信焦点或点击操作。**
+
 - [ ] **微信农场下一步**：2026-10-31 07:46 CST 已在 QQ 前台复现 `WECHAT_TILE_OCCLUDED` 并修复：`restore_wechat_main.swift` 使用唯一微信缩略窗的 PID 安全激活已有进程，实机返回 `WECHAT_MAIN_RESTORED_BY_PID`，不点击被遮挡缩略窗；当前只到微信聊天主窗口，后续仍需状态式识别“发现→游戏→最近玩过→QQ经典农场”，进入独立农场后才可只读 M1 preflight。禁区时间/前台安全不变。
 
 - [ ] **2026-10-31 07:42 CST 最新直接阻塞**：QQ 可从 Stage Manager 恢复、实机只读 preflight 成功（603×1111，hand 0.9139，UNKNOWN_OVERLAY，0点击）；当前成熟田截图以0.50**仅诊断**阈值出现3个低置信星标 (262,566)、(344,606)、(342,525.5)，均低于原0.70门限，且尚未与真实2×2作物占用独立关联。**不要直接降阈值点击或凭旧14px中心过滤判断无特殊作物**；优先完成现场2×2占用/星标偏移/遮罩及24格空田可靠识别后做受控收获。截图在 Mac `/tmp/farm-qq-current.png`，临时文件不保证跨重启。

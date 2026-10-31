@@ -42,6 +42,7 @@ def run_plant_phase(
     inventory_verified: bool = False,
     clock_ns: Callable[[], int] = monotonic_ns,
     checkpoint: Callable[[list[dict], dict[str, int]], None] | None = None,
+    before_transaction: Callable[[dict, list[dict], dict[str, int]], None] | None = None,
 ) -> dict:
     """Execute a prevalidated local M2 phase; never touch real UI by itself.
 
@@ -105,8 +106,22 @@ def run_plant_phase(
                                      completed=completed, quantities=current,
                                      action_may_have_been_sent=True) from exc
 
+    def begin(transaction: dict) -> None:
+        if before_transaction is None:
+            return
+        try:
+            before_transaction(dict(transaction), list(completed), dict(current))
+        except Exception as exc:
+            raise PlantPhaseStop(
+                "RECOVERY_PREACTION_FAILED",
+                "Cannot durably mark transaction before game input; no new action sent",
+                completed=completed, quantities=current,
+                action_may_have_been_sent=False,
+            ) from exc
+
     for special in actions["special"]:
         for placement in special["placements"]:
+            begin({"kind": "special", "seed": special["seed"], "placement": placement})
             try:
                 result = plant_one_special(
                     adapter, platform=platform, seed=special["seed"],
@@ -122,6 +137,7 @@ def run_plant_phase(
                      status="special_plant_verified")
 
     ordinary = actions["ordinary"][0]
+    begin({"kind": "ordinary", "seed": ordinary["seed"], "count": ordinary["count"]})
     try:
         result = plant_ordinary_one_key(
             adapter, platform=platform, seed=ordinary["seed"],
