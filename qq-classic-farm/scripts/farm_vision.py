@@ -172,13 +172,24 @@ def probe_harvest(capture: FarmCapture, anchors_cfg: dict, platform: str, layout
     pixel_scale = capture.gray.shape[1] / capture.frame.width
     detected = locate_pickables(
         capture.gray,
+        # Diagnostic only: three real QQ 2x2 pickables scored 0.50-0.68,
+        # while the old 0.70 gate silently discarded all three.
+        threshold=0.50,
         scales=[s * pixel_scale for s in (0.9, 0.95, 1.0, 1.05, 1.1)],
         dedupe_radius=30.0 * pixel_scale,
     )
+    raw = [
+        {"local_center": list(capture.local_center(item["center_x"], item["center_y"])),
+         "score": item["score"], "template": item.get("template")}
+        for item in detected["items"]
+    ]
+    # Planting-safe 2x2 centroids are NOT authoritative harvest positions.
+    # Keep the legacy filter for comparison only; raw stars never authorize input.
     pickables, ignored = _filter_special_pickables(capture, platform, layout, detected)
     return {
         "hand": hand,
         "pickables": pickables,
+        "raw_pickable_candidates": raw,
         "ignored_outside_special_centers": ignored,
         "can_start_harvest": False,
         "requires_live_star_offset_and_occupancy_calibration": True,

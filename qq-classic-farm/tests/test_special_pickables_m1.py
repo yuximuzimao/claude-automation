@@ -176,9 +176,28 @@ class SpecialPickableTests(unittest.TestCase):
                 self.assertEqual(locator.call_count, 1)
                 self.assertEqual(locator.call_args.kwargs["dedupe_radius"], 60.0)
                 self.assertEqual(len(result["pickables"]), 1)
+                self.assertEqual(len(result["raw_pickable_candidates"]), 1)
+                self.assertEqual(locator.call_args.kwargs["threshold"], 0.50)
                 self.assertFalse(result["can_start_harvest"])
                 self.assertTrue(result["requires_live_star_offset_and_occupancy_calibration"])
                 self.assertTrue(result["needs_overlay_and_field_postcondition"])
+
+    def test_real_qq_offsets_survive_diagnostics_without_click_authority(self):
+        # 2026-10-31 controlled QQ harvest: three real stars at these
+        # window-local points; all were outside the planting-safe 2x2 gates.
+        capture = self.capture("qq")
+        stars = [(262, 566), (342, 608), (342, 525)]
+        detected = self.detected(*(self.item(capture, x, y, 0.6) for x, y in stars))
+        anchors = {"anchors": {"onekey_harvest": {"template": "unused"}},
+                   "matching": {"default_scales": [1.0]}}
+        with patch("farm_vision.match_anchor", return_value={"matched": True,
+                   "local_center": [297, 826], "score": 0.91}), \
+             patch("farm_vision.locate_pickables", return_value=detected):
+            result = probe_harvest(capture, anchors, "qq", self.layout)
+        self.assertEqual(len(result["raw_pickable_candidates"]), 3)
+        self.assertEqual(len(result["pickables"]), 0)
+        self.assertEqual(result["ignored_outside_special_centers"], 3)
+        self.assertFalse(result["can_start_harvest"])
 
     def test_io_composition_remains_read_only(self):
         capture = self.capture("qq")

@@ -2,6 +2,7 @@
 // Default mode is JSON validation only. --execute requires live target/focus/occlusion checks.
 // No AppleScript/System Events; only CoreGraphics CGEvent is used for clicks.
 import AppKit
+import ApplicationServices
 import CoreGraphics
 import Foundation
 
@@ -66,6 +67,35 @@ func bounds(_ info: [String: Any]) -> CGRect? {
     else { return nil }
     return CGRect(x: x, y: y, width: w, height: h)
 }
+// Dock and Notification Center expose transparent full-screen system surfaces
+// with alpha=1, despite passing pointer events to the farm. Do not disable
+// occlusion checks globally: only these exact main-display surfaces may be
+// ignored, and only when an independent Accessibility hit-test resolves to
+// the *target farm process*. Visible panels, other apps and unknown layers STOP.
+func isSystemPassThrough(_ info: [String: Any], _ rect: CGRect) -> Bool {
+    let owner = field(info, kCGWindowOwnerName)
+    let layer = info[kCGWindowLayer as String] as? Int ?? -1
+    let recognized = ((owner == "程序坞" || owner == "Dock") && layer == 20)
+        || ((owner == "通知中心" || owner == "Notification Center") && layer == 21)
+    guard recognized else { return false }
+    let screen = CGDisplayBounds(CGMainDisplayID())
+    return abs(rect.minX - screen.minX) <= 2
+        && abs(rect.minY - screen.minY) <= 2
+        && abs(rect.width - screen.width) <= 2
+        && abs(rect.height - screen.height) <= 2
+}
+
+func accessibilityHitIsTarget(_ point: CGPoint, _ targetPID: Int) -> Bool {
+    let system = AXUIElementCreateSystemWide()
+    var element: AXUIElement?
+    guard AXUIElementCopyElementAtPosition(system, Float(point.x),
+                                          Float(point.y), &element) == .success,
+          let hit = element else { return false }
+    var hitPID: pid_t = 0
+    return AXUIElementGetPid(hit, &hitPID) == .success
+        && hitPID == pid_t(targetPID)
+}
+
 func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
     let list = windows(clicksSent: clicksSent)
     guard let target = list.first(where: {
@@ -91,17 +121,22 @@ func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
         guard alpha > 0.01, let rect = bounds(info), rect.contains(point) else { continue }
         let id = info[kCGWindowNumber as String] as? Int ?? -1
         if id == batch.window_id { return }
-        // Ignore desktop elements only (already excluded by enumeration).
+        if isSystemPassThrough(info, rect)
+            && accessibilityHitIsTarget(point, batch.pid) {
+            continue
+        }
         stop("WINDOW_OCCLUDED", "Another visible window covers click target", clicksSent: clicksSent)
     }
     stop("WINDOW_OCCLUDED", "Target window is not topmost at click point", clicksSent: clicksSent)
 }
 
 guard CommandLine.arguments.count == 1 ||
-      (CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "--execute") else {
-    stop("INVALID_ARGUMENT", "Use no arguments for validation, or --execute for real clicks")
+      (CommandLine.arguments.count == 2 &&
+       ["--preflight", "--execute"].contains(CommandLine.arguments[1])) else {
+    stop("INVALID_ARGUMENT", "Use no arguments, --preflight, or --execute")
 }
-let execute = CommandLine.arguments.count == 2
+let execute = CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "--execute"
+let preflight = CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "--preflight"
 let input = FileHandle.standardInput.readDataToEndOfFile()
 guard let batch = try? JSONDecoder().decode(Batch.self, from: input) else {
     stop("INVALID_BATCH", "Expected JSON Batch on stdin")
@@ -123,14 +158,27 @@ for a in batch.actions {
 guard batch.actions.reduce(0, { $0 + $1.delay_ms }) <= 20000 else {
     stop("INVALID_BATCH", "Batch delay budget exceeded")
 }
-if !execute {
+if !execute && !preflight {
     let result = Result(status: "validated_no_click", code: nil, click_count: 0)
     let data = try JSONEncoder().encode(result)
     print(String(decoding: data, as: UTF8.self))
     exit(0)
 }
+guard allowedNow() else {
+    stop("FARM_OPERATION_TIME_BLOCKED", "Mac local clock is in a prohibited automation window")
+}
 guard CGPreflightPostEventAccess() else {
     stop("ACCESSIBILITY_PERMISSION_MISSING", "CGEvent posting not permitted")
+}
+if preflight {
+    for a in batch.actions {
+        let p = CGPoint(x: batch.frame.x + a.x, y: batch.frame.y + a.y)
+        liveWindow(batch, p, clicksSent: 0)
+    }
+    let result = Result(status: "preflight_ok_no_click", code: nil, click_count: 0)
+    let data = try JSONEncoder().encode(result)
+    print(String(decoding: data, as: UTF8.self))
+    exit(0)
 }
 var clicked = 0
 for a in batch.actions {

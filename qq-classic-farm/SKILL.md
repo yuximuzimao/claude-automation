@@ -28,7 +28,8 @@
 | `assets/ui/` | 稳定 UI 锚点模板（手形按钮 / 务农 / 化肥 / 可摘） | 找图 |
 | `scripts/open_qq_farm.swift` | QQ 农场固定入口：定位窗口并按已验证相对坐标打开/恢复农场 | 每次需要恢复或打开 QQ 农场 |
 | `scripts/farm_harvest.py` | M1 本地收获状态机；真实批量收获尚未验收 | Runner M1 开发 |
-| `scripts/farm_harvest_live.py` | M1 真实 registry/截图/视觉→FSM 只读预检及受门禁 CGEvent 接口；当前校准未知，禁止真实点击 | Runner M1 实机校准 |
+| `scripts/farm_harvest_live.py` | M1 真实 registry/截图/视觉→FSM 只读预检及受门禁 CGEvent 接口；当前校准未知，禁止 Runner 自动真实点击 | Runner M1 实机校准 |
+| `scripts/farm_click_batch.swift` | 已实机验证的批量 CGEvent helper；无参数仅 JSON 校验，`--preflight` 真机窗口/前台/遮挡/时钟0点击，`--execute` 才发送事件；Dock/通知中心全屏透传必须同时通过 AX 命中农场 PID，其他遮挡 STOP | 受控真机动作前先 preflight |
 | `scripts/restore_wechat_main.swift` | 微信 Stage Manager 主窗口安全恢复；缩略窗被遮挡时按已确认 owner PID 激活现有微信，不点被遮挡位置；不盲点游戏入口 | 微信农场恢复 |
 | `scripts/farm_plant_picker.py` | M2 离线 picker 有界翻页与图标/数量验证接口，尚未接真实 UI | M2 开发 |
 | `scripts/farm_plant_cycle.py` | M2 单调用离线种植 phase：逐颗四格→普通一键、复用 M0 全局预检、成功事务检查点；真实 UI adapter 尚缺 | M2 集成/实机接线 |

@@ -98,8 +98,11 @@ class LiveHarvestAdapter:
         self.last_diagnostics = {
             "hand_detected": point is not None,
             "hand_score": hand.get("score"),
-            "candidate_special_count": len(probe.get("pickables", [])),
-            "candidate_special": probe.get("pickables", []),
+            "candidate_special_count": len(probe.get("raw_pickable_candidates",
+                                                      probe.get("pickables", []))),
+            "candidate_special": probe.get("raw_pickable_candidates",
+                                           probe.get("pickables", [])),
+            "legacy_safe_placement_matches": probe.get("pickables", []),
             "ignored_outside_special_centers": probe.get("ignored_outside_special_centers"),
             "overlay": "unknown",
             "calibration_verified": False,

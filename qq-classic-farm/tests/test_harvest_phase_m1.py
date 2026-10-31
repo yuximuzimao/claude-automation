@@ -81,6 +81,21 @@ class HarvestPhaseTests(unittest.TestCase):
         self.assertEqual(run_harvest(fake)["click_count"], 1)
         self.assertEqual(fake.batches, [((300.0, 900.0),)])
 
+    def test_occupied_special_without_matching_star_never_clicks_hand(self):
+        # Real QQ showed three special stars outside the safe planting
+        # centroids; a zero-match detector must not silently click only hand.
+        for special, occupied in (
+            ((), frozenset({"gold_a"})),
+            ((("gold_a", 250.0, 580.0),), frozenset({"gold_a", "gold_b"})),
+        ):
+            with self.subTest(special=special):
+                before = observation(special=special, occupied_special=occupied)
+                fake = FakeAdapter(before, observation())
+                with self.assertRaises(HarvestStop) as caught:
+                    run_harvest(fake)
+                self.assertEqual(caught.exception.code, "SPECIAL_PICKABLE_MISMATCH")
+                self.assertEqual(fake.batches, [])
+
     def test_already_clean_is_zero_click_and_zero_wait(self):
         clean = observation(hand=None, special=(), occupied_special=frozenset(), empty_cells=(True,) * 24)
         fake = FakeAdapter(clean, clean)

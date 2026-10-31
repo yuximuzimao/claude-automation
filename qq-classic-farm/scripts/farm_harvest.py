@@ -115,6 +115,12 @@ def prepare_harvest(obs: HarvestObservation) -> tuple[tuple[float, float], ...]:
         used.add(placement)
         _point((x, y), obs)
         actions.append((x, y))
+    # Missing stars are not evidence of an empty 2x2 crop. The live QQ
+    # calibration found valid pickables far from the planting-safe centroids.
+    # Every independently occupied special must have exactly one verified star.
+    if used != obs.occupied_special:
+        raise HarvestStop("SPECIAL_PICKABLE_MISMATCH",
+                          "Occupied special plots and verified pickable stars disagree")
     actions.append(obs.hand)
     return tuple(actions)
 
