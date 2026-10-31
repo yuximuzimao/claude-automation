@@ -39,6 +39,7 @@
 | `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/farm_qq_clean.py` / `assets/ui/field/qq-empty-atlas.png` / 两张 `qq-*-seedling-negative.png` | QQ 五帧空田中心模板 + **金/紫地真实白萝卜小苗下方暗色簇负例**；2026-10-31 实机发现旧紫地小苗会被误判24格空田，已用真实小 ROI 先红后修；动画/未知仍返回 None。M1 live 仅允许 **全空+无手形/星标** 进入 `already_clean` 零动作终态，**绝不据此授权成熟收获或种植** | M1 clean-field 终验 / M2 空田前检 |
+| `scripts/farm_qq_landing.py` | QQ 白萝卜单颗受控试种的**只读落地格证据**：同窗口前帧24格全空→后帧唯一实拍已知幼苗→恢复该 ROI 后其余24格全空；接 `LivePlantAdapter.capture_landing_baseline/verify_landing_since`，199项全量离线通过，**尚未真机验收；不提供点击坐标、不授权正式种植或扣库存** | M2 下一允许时段实机校准点击格与真实落地格映射 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |
 | `scripts/pickable_locator.py` | 一次返回全部 4 格植物“可摘”坐标；已被 `ui_probe.py` 集成 | 特殊植物收获 |
 | `scripts/picker_simulator.py` | 旧顺序模型推演工具 | 仅异常研究，不作为正常选种入口 |

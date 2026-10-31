@@ -16,6 +16,7 @@
 - `../scripts/farm_harvest.py`：M1 本地收获 phase 状态机（离线 mock 验收；未接真实点击），终验必须有独立 24 格空地证据；异常保留已发送点击数。
 - `../scripts/farm_field.py`：M1 紫晶空地格点的**只读平移诊断**；历史回放已证明静态网格原点会偏移，诊断不可授权点击，成熟/遮挡时拒绝校准。
 - `../scripts/farm_qq_clean.py` / `../assets/ui/field/qq-empty-atlas.png`：QQ 24格独立空田只读正例（五帧实拍中心模板），已接 M1/M2 preflight；遮罩、幼苗/布局不确定即 STOP，尚不能授权点击或推断部分占用。
+- `../scripts/farm_qq_landing.py`：QQ 受控单颗白萝卜试种前后独立截图的实际落地格只读终验；离线通过，尚待真机验证，不授权点击/种植或库存扣减。
 - `../scripts/farm_scene.py` / `../scripts/farm_clean_field.py` / `../scripts/farm_clean_replay.py`：M1 空田参考图紫地校准 + 被作物遮挡的当前图三处静态背景锚点平移估计；24格 RGB 差异仅诊断，已回放真实微信占用负例，不能授权点击或宣布 clean。
 - `../scripts/window_registry.swift`：M1 只读 macOS 窗口枚举（需编译后调用），不聚焦、不点击；实机农场窗口联调未完成。
 - `../data/next-cycle-plan.json`：2026-10-28 的旧 3 轮方案；保留作历史输入样本，**Runner 新架构不再把 page/slot 写死在运行策略里**。

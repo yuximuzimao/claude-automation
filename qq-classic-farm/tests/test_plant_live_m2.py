@@ -93,7 +93,10 @@ class LivePlantTests(unittest.TestCase):
             self.adapter().observe_field()
         self.assertEqual(caught.exception.code, "USER_INTERFERENCE")
 
-    def test_uncalibrated_action_methods_stop(self):
+    @patch("farm_plant_live.require_live_window")
+    def test_uncalibrated_action_methods_stop(self, clock):
+        # The test targets uncalibrated action rejection, not the Mac clock;
+        # it must run identically inside/outside the real-operation blackout.
         adapter = self.adapter(execute=True)
         for method, args in ((adapter.open_plot, ((2, 0),)),
                              (adapter.turn_pages, (1, 1)),

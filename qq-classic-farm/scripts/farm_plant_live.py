@@ -19,6 +19,7 @@ from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
 from farm_qq_clean import ALL_CELLS, observe_qq_clean_cells
+from farm_qq_landing import LandingProof, verify_qq_single_radish_landing
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -71,6 +72,34 @@ class LivePlantAdapter:
             raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during capture")
         self.last_handle = before
         return before, shot
+
+    def capture_landing_baseline(self):
+        """Read-only clean QQ baseline for a separately authorized test seed."""
+        if self.platform != "qq":
+            raise SpecialPlantStop("PLANT_LANDING_UNVERIFIED", "QQ-only seedling evidence")
+        handle, shot = self._capture()
+        if observe_qq_clean_cells(shot, self.layout) != 24:
+            raise SpecialPlantStop("PLANT_FIELD_UNVERIFIED", "Baseline is not independently clean")
+        return handle, shot
+
+    def verify_landing_since(self, before_handle: WindowHandle, before_shot) -> LandingProof:
+        """Read-only post-test proof; does not plant, authorize, or debit stock."""
+        if self.platform != "qq":
+            raise SpecialPlantStop("PLANT_LANDING_UNVERIFIED", "QQ-only seedling evidence")
+        after_handle, after_shot = self._capture()
+        if not _same_handle(before_handle, after_handle):
+            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during test")
+        proof = verify_qq_single_radish_landing(before_shot, after_shot, self.layout)
+        if proof is None:
+            raise SpecialPlantStop("PLANT_LANDING_UNVERIFIED",
+                                   "Exactly one known QQ radish seedling was not proven")
+        self.last_diagnostics = {
+            "platform": "qq", "observed_landing_cell": list(proof.observed_cell),
+            "before_capture_id": proof.capture_before,
+            "after_capture_id": proof.capture_after,
+            "can_authorize_clicks": False, "inventory_updated": False,
+        }
+        return proof
 
     def observe_field(self) -> OrdinaryPlantView:
         handle, shot = self._capture()
