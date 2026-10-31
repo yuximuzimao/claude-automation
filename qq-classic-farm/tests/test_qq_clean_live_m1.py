@@ -66,6 +66,29 @@ class QQCleanFieldTests(unittest.TestCase):
                     rgb[y:y+2, x:x+2] = sprout_color
                     self.assertIsNone(observe_qq_clean_cells(self.shot(rgb), self.layout))
 
+    def test_real_qq_white_radish_seedling_below_center_is_not_clean(self):
+        # Captured from the 2026-10-31 22:45 CST live QQ single-seed test.
+        # The actual dark sprout lies ~16 px below the geometric cell center;
+        # the old 19x19 center-only check could accept it as empty soil.
+        rgb = self.image()
+        x, y = self.center((2, 2))
+        with Image.open(ROOT / "assets/ui/field/qq-white-radish-seedling-negative.png") as im:
+            sprout = np.asarray(im.convert("RGB"))
+        self.assertEqual(sprout.shape, (22, 47, 3))
+        rgb[y+5:y+27, x-23:x+24] = sprout
+        self.assertIsNone(observe_qq_clean_cells(self.shot(rgb), self.layout))
+
+    def test_real_qq_purple_seedling_below_center_is_not_clean(self):
+        # A second live test on purple soil returned a dangerous false
+        # clean=24 before the lower-diamond sentinel was added.
+        rgb = self.image()
+        x, y = self.center((0, 0))
+        with Image.open(ROOT / "assets/ui/field/qq-purple-white-radish-seedling-negative.png") as im:
+            sprout = np.asarray(im.convert("RGB"))
+        self.assertEqual(sprout.shape, (13, 16, 3))
+        rgb[y+11:y+24, x-19:x-3] = sprout
+        self.assertIsNone(observe_qq_clean_cells(self.shot(rgb), self.layout))
+
     def test_off_center_visible_crop_rejected(self):
         rgb = self.image()
         x, y = self.center((4, 2))
@@ -86,7 +109,7 @@ class QQCleanFieldTests(unittest.TestCase):
         altered["platforms"]["qq"]["land_grades"]["purple_cells"].remove([1, 1])
         self.assertIsNone(observe_qq_clean_cells(self.shot(rgb), altered))
 
-    def test_live_adapters_keep_overlay_and_clicks_blocked_after_clean_proof(self):
+    def test_live_plant_still_blocked_but_harvest_certifies_zero_action_only(self):
         handle = WindowHandle(6951, 53086, self.frame)
         shot = self.shot(self.image())
         with (patch("farm_plant_live.require_live_window"),
@@ -111,8 +134,12 @@ class QQCleanFieldTests(unittest.TestCase):
                                          Path("/tmp/registry"), execute=True)
             obs = harvest.observe()
             self.assertEqual(obs.empty_cells, (True,) * 24)
-            self.assertEqual(obs.overlay, "unknown")
-            self.assertFalse(obs.calibration_verified)
+            self.assertEqual(obs.overlay, "none")
+            self.assertTrue(obs.calibration_verified)
+            self.assertEqual(obs.occupied_special, frozenset())
+            self.assertFalse(harvest.last_diagnostics["can_authorize_clicks"])
+            from farm_harvest import prepare_harvest
+            self.assertEqual(prepare_harvest(obs), ())
 
 
 if __name__ == "__main__":

@@ -87,6 +87,33 @@ def observe_qq_clean_cells(capture: FarmCapture, layout: dict) -> int | None:
         if patch is None:
             return None
         is_purple = (u, v) in purple
+        if is_purple:
+            # A second *real* 1-minute radish test exposed the same dangerous
+            # false clean=24 on QQ purple soil. The small sprout is below/left
+            # of the geometric center, outside the old central atlas patch.
+            # The narrow lower-diamond ROI avoids unrelated dark decorations
+            # on the edge of the purple group; verified empty frames had zero
+            # near-black pixels here for all six purple cells.
+            lower = capture.rgb[y+11:y+24, x-19:x-3]
+            if lower.shape != (13, 16, 3):
+                return None
+            near_black = np.all(lower < 90, axis=2)
+            if int(np.count_nonzero(near_black)) >= 4:
+                return None
+        else:
+            # Real QQ white-radish seedlings appear *below* the geometric
+            # center: the 19x19 center patch can look perfectly empty.
+            # On verified gold soil the lower diamond is bright; a small
+            # cluster of very dark pixels is an occupied/unknown sentinel,
+            # NEVER positive proof of a particular crop. Two independent
+            # live gold clean fields had zero such pixels across 18 cells.
+            lower = capture.rgb[y+5:y+27, x-23:x+24]
+            if lower.shape != (22, 47, 3):
+                return None
+            dark = ((lower[:, :, 0] < 115) & (lower[:, :, 1] < 95)
+                    & (lower[:, :, 2] < 85))
+            if int(np.count_nonzero(dark)) >= 4:
+                return None
         # A 2x2 seedling covers four of the 7x7 central pixels. Requiring
         # <=3 changed pixels on purple and <=1 on gold rejects that sample.
         center_limit = 3 if is_purple else 1

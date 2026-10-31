@@ -100,6 +100,51 @@ class LiveAdapterTests(unittest.TestCase):
             click.assert_not_called()
 
     @patch("farm_harvest_live.require_live_window")
+    @patch("farm_harvest_live.observe_qq_clean_cells", return_value=24)
+    @patch("farm_harvest_live.probe_harvest")
+    @patch("farm_harvest_live.capture_window")
+    @patch("farm_harvest_live.find_farm_window")
+    def test_verified_qq_empty_field_reaches_fsm_without_click(
+        self, registry, capture, probe, _clean, _clock
+    ):
+        registry.return_value = HANDLE
+        capture.return_value = FakeCapture()
+        probe.return_value = {"hand": {"matched": False, "score": 0.2},
+                              "raw_pickable_candidates": [], "pickables": []}
+        adapter = self.adapter(execute=True)
+        with patch.object(adapter, "click_batch", side_effect=AssertionError("Never click")) as click:
+            result = run_harvest(adapter)
+            self.assertEqual(result["status"], "already_clean")
+            self.assertEqual(result["click_count"], 0)
+            self.assertEqual(result["llm_round_trips"], 0)
+            self.assertTrue(adapter.last_diagnostics["already_clean_verified"])
+            self.assertFalse(adapter.last_diagnostics["can_authorize_clicks"])
+            click.assert_not_called()
+
+    @patch("farm_harvest_live.require_live_window")
+    @patch("farm_harvest_live.observe_qq_clean_cells", return_value=24)
+    @patch("farm_harvest_live.probe_harvest")
+    @patch("farm_harvest_live.capture_window")
+    @patch("farm_harvest_live.find_farm_window")
+    def test_clean_patch_cannot_override_conflicting_crop_controls(
+        self, registry, capture, probe, _clean, _clock
+    ):
+        registry.return_value = HANDLE
+        capture.return_value = FakeCapture()
+        for hand, stars in (
+            ({"matched": True, "local_center": [297.0, 826.0]}, []),
+            ({"matched": False}, [{"local_center": [340.0, 600.0]}]),
+        ):
+            probe.return_value = {"hand": hand, "raw_pickable_candidates": stars}
+            adapter = self.adapter(execute=True)
+            with self.subTest(hand=hand, stars=stars):
+                with patch.object(adapter, "click_batch", side_effect=AssertionError("Never click")):
+                    with self.assertRaises(HarvestStop) as caught:
+                        run_harvest(adapter)
+                    self.assertEqual(caught.exception.code, "UNKNOWN_OVERLAY")
+                    self.assertFalse(adapter.last_diagnostics["already_clean_verified"])
+
+    @patch("farm_harvest_live.require_live_window")
     @patch("farm_harvest_live.probe_harvest")
     @patch("farm_harvest_live.capture_window")
     @patch("farm_harvest_live.find_farm_window")

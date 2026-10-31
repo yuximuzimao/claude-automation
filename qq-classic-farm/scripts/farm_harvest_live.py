@@ -97,6 +97,11 @@ class LiveHarvestAdapter:
                  if self.platform == "qq" else None)
         hand = probe.get("hand", {})
         point = tuple(hand["local_center"]) if hand.get("matched") else None
+        candidates = probe.get("raw_pickable_candidates", probe.get("pickables", []))
+        # The 24 independently empty QQ cells plus absence of actionable controls
+        # can certify only the zero-action terminal state. It does NOT calibrate
+        # occupied crops, star ownership, overlays on mature fields, or clicks.
+        already_clean = clean == 24 and point is None and len(candidates) == 0
         # The current detector produces *candidate* stars, not independently
         # verified 2x2 crop occupancy. Never promote them to click targets.
         self.last_diagnostics = {
@@ -108,20 +113,23 @@ class LiveHarvestAdapter:
                                            probe.get("pickables", [])),
             "legacy_safe_placement_matches": probe.get("pickables", []),
             "ignored_outside_special_centers": probe.get("ignored_outside_special_centers"),
-            "overlay": "unknown",
-            "calibration_verified": False,
-            "occupied_special": None,
+            "overlay": "none" if already_clean else "unknown",
+            "calibration_verified": already_clean,
+            "occupied_special": [] if already_clean else None,
             "empty_cells": clean,
             "clean_field_verified": clean == 24,
+            "already_clean_verified": already_clean,
             "can_authorize_clicks": False,
         }
         obs = HarvestObservation(
-            overlay="unknown", calibration_verified=False,
+            overlay="none" if already_clean else "unknown",
+            calibration_verified=already_clean,
             window_identity=_identity(handle),
             window_width=handle.frame.width, window_height=handle.frame.height,
             capture_id=capture.capture_id or "",
             captured_at_ns=capture.captured_at_ns or 0,
-            hand=point, special=(), occupied_special=None,
+            hand=point, special=(),
+            occupied_special=(frozenset() if already_clean else None),
             empty_cells=(tuple(True for _ in range(24)) if clean == 24 else None),
         )
         self.last_handle = handle
