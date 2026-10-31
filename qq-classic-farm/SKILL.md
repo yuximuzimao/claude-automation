@@ -33,6 +33,7 @@
 | `scripts/farm_plant_picker.py` | M2 离线 picker 有界翻页与图标/数量验证接口，尚未接真实 UI | M2 开发 |
 | `scripts/farm_plant_cycle.py` | M2 单调用离线种植 phase：逐颗四格→普通一键、复用 M0 全局预检、成功事务检查点；真实 UI adapter 尚缺 | M2 集成/实机接线 |
 | `scripts/farm_plant_recovery.py` | M2 真机前置的 durable 事务恢复 journal：每笔先写 in_flight，再记录已验证库存；旧日志禁止自动重播，phase 完成不等于 farm-state 已提交 | M2 实机接线/崩溃恢复 |
+| `scripts/farm_plant_live.py` | M2 真实窗口注册/截图/种植视图只读 preflight；当前 overlay/24格/preview/picker 均未知，真实点击严格禁用 | M2 现场局部视觉校准 |
 | `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |

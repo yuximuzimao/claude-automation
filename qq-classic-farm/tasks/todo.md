@@ -1,5 +1,8 @@
 # Todo
 
+- [ ] **2026-10-31 15:42 CST M2 最新可执行停点**：`farm_plant_live.py` 已实现并在真实 QQ 独立农场 603×1111 上验证 `preflight-plant`：先从 Stage Manager 缩略态恢复，真实截图/窗口身份→`OrdinaryPlantView`，返回 `PLANT_OVERLAY`、0点击；picker 观察接口也已接真实新截图，尚不能识别页码/图标/数量。`field_cells/preview/overlay/one_key` 均未知，CGEvent 仍不可授权，169项离线测试通过。**下一步优先对真实 picker/预览/24格占用做最小可验收的局部识别与校准**，之后才能受控种植；M1 特殊星标/clean-field 和微信独立农场恢复仍待处理。`run-next` 不解锁、库存 dirty，不得重做离线组合/恢复模块。
+
+
 - [ ] **M2 真机接线下一步（2026-10-31 08:33 CST）**：已新增 durable preaction `in_flight` / confirmed-only `checkpointed` / `phase_verified_uncommitted` 恢复 journal，163项全量离线测试通过；旧 journal 绝不自动重播，当前 inventory_dirty 仍禁止真机种植。下一轮在 Mac 非禁区先补真实 field/preview/one-key/picker observer + CGEvent 最小接线，联动 M1 星标归属/遮罩/24格 clean-field 真实校准；不要继续扩展恢复机制。**本轮 08:33 CST 禁区仅离线开发，没有任何 QQ/微信焦点或点击操作。**
 
 - [ ] **微信农场下一步**：2026-10-31 07:46 CST 已在 QQ 前台复现 `WECHAT_TILE_OCCLUDED` 并修复：`restore_wechat_main.swift` 使用唯一微信缩略窗的 PID 安全激活已有进程，实机返回 `WECHAT_MAIN_RESTORED_BY_PID`，不点击被遮挡缩略窗；当前只到微信聊天主窗口，后续仍需状态式识别“发现→游戏→最近玩过→QQ经典农场”，进入独立农场后才可只读 M1 preflight。禁区时间/前台安全不变。

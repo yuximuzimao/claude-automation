@@ -907,6 +907,9 @@ Runner 遇异常必须返回结构化 error。
 
 ### M2 — 种植（最高价值）
 
+**2026-10-31 15:42 CST 真实种植观察接线检查点（尚未实机种植）**：新增 `scripts/farm_plant_live.py` 与 `farm_runner.py preflight-plant`，本机真实 QQ 已跑通 registry→截图→身份复核→`OrdinaryPlantView` 只读预检；Stage Manager 缩略窗由既有 QQ 恢复入口恢复后，603×1111 的 QQ window_id=6951 预检结构化 `PLANT_OVERLAY`、0点击。picker 同样有新截图接口，但页码、图标、数量未识别；24格占用、遮罩、特殊预览及一键模式全部保留 unknown/None，动作方法仍 STOP。Swift CGEvent 批量传输接口保留多重门禁但不可被当前未校准观察授权。6项新增测试，**全量169项通过**，py_compile/dry-run通过，`run-next` 继续禁用，库存仍 dirty；QQ/微信均未完成真实种植。**下一步只做直接解锁实机种植的可信局部观察与校准、必要库存同步及受控点击验收；M1 仍需四格星标/占用、遮罩与 clean-field 校准，微信农场窗口需恢复。**
+
+
 **2026-10-31 08:33 CST M2 真机接线前恢复安全门槛（本轮仅离线）：** Mac 实时时钟为 08:33 CST，处于用户禁止操作农场的 08:00–09:00，未打开/切换 QQ/微信窗口、未点击。新增 `farm_plant_recovery.py` 和 `farm_plant_cycle.py` 的 preaction 回调：每笔 special/ordinary **先持久化 `in_flight`（fsync+原子替换）再进入 UI 事务**；独立 postcondition 验收后持久化 confirmed-only 数量及事务列表；完整种植 phase 只到 `phase_verified_uncommitted`，绝不宣称 farm-state 已提交。已有同路径 journal（即使看似完成）一律 STOP 等待现场 reconcile，绝不从不确定点击处盲目续播。包装调用 `run_plant_phase_with_recovery` 只接受已验证库存；当前 QQ/微信 `inventory_dirty=true` 仍禁止实机种植。7项新增测试，全量 **163 项通过**，py_compile/dry-run 通过；`run-next` 仍 `RUNNER_NOT_READY`。此举直接补上真实 M2 阶段必须的持久化恢复钩子，但没有解锁真实 UI。**下一步只优先做现场可执行的 picker/field/preview/one-key observer + CGEvent 接线与 M1 视觉实测，不再延长离线恢复模块。**
 
 **2026-10-31 07:46 CST 微信窗口恢复安全修复：** 已在真实 QQ 前台复现微信 Stage Manager 缩略窗被遮挡；`restore_wechat_main.swift` 改为从已确认的唯一微信缩略窗 owner PID 激活现有微信进程，避免向被遮挡坐标发送 CGEvent，实机返回 `WECHAT_MAIN_RESTORED_BY_PID`，Swift typecheck通过。当前仅恢复微信聊天主窗口，独立农场仍待状态式“发现→游戏→最近玩过”进入，M1/M2实机验收状态不变。
