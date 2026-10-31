@@ -118,7 +118,7 @@ def probe_field_translation(capture: FarmCapture, platform: str, layout: dict) -
         raise FieldStop("FIELD_ALIGNMENT_AMBIGUOUS", "Multiple full-grid translations fit")
     return {
         "status": "diagnostic_only",
-        "offset_local": [round(best[0] / sx, 2), round(best[1] / sy, 2)],
+        "offset_local": [round(best[0] / sx, 4), round(best[1] / sy, 4)],
         "matched_purple_cells": len(expected),
         "rms_logical": round(best[2] / max(sx, sy), 2),
         "can_authorize_clicks": False,

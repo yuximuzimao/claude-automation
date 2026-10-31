@@ -17,6 +17,7 @@ from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
+from farm_picker_vision import observe_picker, picker_arrow_verified
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -30,7 +31,8 @@ class LivePlantAdapter:
     """
 
     def __init__(self, platform: str, layout: dict, registry_binary: Path,
-                 click_binary: Path | None = None, *, execute: bool = False):
+                 click_binary: Path | None = None, *, execute: bool = False,
+                 ocr_binary: Path | None = None):
         if platform not in ("qq", "wechat"):
             raise SpecialPlantStop("UNKNOWN_PLATFORM", "Unsupported farm platform")
         self.platform = platform
@@ -38,9 +40,12 @@ class LivePlantAdapter:
         self.registry_binary = Path(registry_binary)
         self.click_binary = Path(click_binary) if click_binary is not None else None
         self.execute = execute
+        self.ocr_binary = Path(ocr_binary) if ocr_binary is not None else None
         self.last_handle: WindowHandle | None = None
         self.last_field: OrdinaryPlantView | None = None
         self.last_picker: PickerView | None = None
+        self.last_picker_capture = None
+        self.last_picker_total: int | None = None
         self.last_diagnostics: dict = {}
         # Never set by the current uncalibrated observer.
         self.calibration_verified = False
@@ -50,6 +55,8 @@ class LivePlantAdapter:
         self.last_handle = None
         self.last_field = None
         self.last_picker = None
+        self.last_picker_capture = None
+        self.last_picker_total = None
         self.calibration_verified = False
         self.last_diagnostics = {}
         require_live_window()
@@ -90,18 +97,26 @@ class LivePlantAdapter:
         return view
 
     def observe(self, expected_slot: int, target_seed: str) -> PickerView:
-        # The real picker page and badge cannot yet be read. Re-capture rather
-        # than return a cached observation after a potential UI transition.
-        self._capture()
-        view = PickerView(page=None, target_icon_verified=None, target_quantity=None)
+        # Fresh real screenshot; no historical page/slot or quantity is trusted.
+        _, shot = self._capture()
+        evidence = observe_picker(shot, self.platform, expected_slot,
+                                  target_seed, self.ocr_binary)
+        view = PickerView(page=evidence["page"],
+                          target_icon_verified=evidence["target_icon_verified"],
+                          target_quantity=evidence["target_quantity"])
         self.last_picker = view
+        self.last_picker_capture = shot
+        self.last_picker_total = evidence["total_pages"]
         self.last_diagnostics = {
             "platform": self.platform,
-            "picker_page": "unknown",
+            "picker_page": view.page,
+            "picker_total_pages": evidence["total_pages"],
             "target_seed": target_seed,
             "expected_slot": expected_slot,
-            "target_icon_verified": None,
-            "target_quantity": None,
+            "target_icon_verified": view.target_icon_verified,
+            "target_quantity": view.target_quantity,
+            "icon_score": evidence["icon_score"],
+            "can_authorize_planting": False,
             "can_authorize_clicks": False,
         }
         return view
@@ -165,8 +180,51 @@ class LivePlantAdapter:
                                "Live plot alignment and occupancy are not calibrated")
 
     def turn_pages(self, direction: int, count: int) -> None:
-        raise SpecialPlantStop("PICKER_PAGE_UNKNOWN",
-                               "Live page indicator and page-turn controls are not calibrated")
+        """Only QQ verified bounded arrow navigation; never selects a seed."""
+        require_live_window()
+        view, shot, handle = self.last_picker, self.last_picker_capture, self.last_handle
+        if not self.execute or self.click_binary is None:
+            raise SpecialPlantStop("PICKER_EXECUTION_DISABLED", "Real picker navigation not enabled")
+        if self.platform != "qq" or direction not in (-1, 1):
+            raise SpecialPlantStop("PICKER_DIRECTION_UNVERIFIED",
+                                   "Only QQ verified arrow navigation is available")
+        if (view is None or shot is None or handle is None
+            or type(view.page) is not int or type(self.last_picker_total) is not int
+            or type(count) is not int or not 1 <= count <= 7
+            or not 1 <= view.page + direction * count <= self.last_picker_total):
+            raise SpecialPlantStop("PICKER_PAGE_UNKNOWN", "Cannot safely bound picker turns")
+        if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
+            raise SpecialPlantStop("PICKER_STALE_PRECONDITION", "Picker capture older than 2 seconds")
+        if not picker_arrow_verified(shot, direction):
+            raise SpecialPlantStop("PICKER_ARROW_UNVERIFIED", "Requested arrow not visually confirmed")
+        current = find_farm_window(self.platform, self.layout, self.registry_binary)
+        if not _same_handle(handle, current):
+            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed before navigation")
+        f = handle.frame
+        batch = {
+            "window_id": handle.window_id, "pid": handle.pid,
+            "owner": f.owner, "title": f.title,
+            "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
+            "actions": [{"x": (569 if direction == 1 else 31) * f.width / 603,
+                         "y": 771 * f.height / 1111,
+                         "delay_ms": 450} for _ in range(count)],
+        }
+        try:
+            result = subprocess.run(
+                [str(self.click_binary), "--execute"], input=json.dumps(batch),
+                text=True, capture_output=True, timeout=30, check=False,
+            )
+            parse_click_batch_result(result.stdout, result.returncode, count)
+        except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
+            raise SpecialPlantStop("PICKER_NAVIGATION_UNCERTAIN",
+                                   "Page turns may be partial; do not retry",
+                                   action_may_have_been_sent=True) from exc
+        finally:
+            # A sent batch can never reuse the pre-navigation screenshot.
+            self.last_handle = None
+            self.last_picker = None
+            self.last_picker_capture = None
+            self.last_picker_total = None
 
     def select_seed(self, slot: int) -> None:
         raise SpecialPlantStop("STATE_DRIFT",

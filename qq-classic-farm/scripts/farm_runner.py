@@ -240,9 +240,12 @@ def dry_run(plan: dict, order: dict, state: dict, layout: dict) -> dict:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Farm Runner; dry-run or read-only M1 probe; never clicks")
-    parser.add_argument("command", choices=("dry-run", "probe-harvest", "preflight-harvest", "preflight-plant", "run-next"))
+    parser = argparse.ArgumentParser(description="Farm Runner; dry-run and read-only live preflights")
+    parser.add_argument("command", choices=("dry-run", "probe-harvest", "preflight-harvest", "preflight-plant", "preflight-picker", "run-next"))
     parser.add_argument("--platform", choices=("qq", "wechat"))
+    parser.add_argument("--target-seed", type=str)
+    parser.add_argument("--slot", type=int)
+    parser.add_argument("--ocr", type=Path, default=ROOT / "_sandbox/farm_text_ocr")
     parser.add_argument("--registry", type=Path, default=ROOT / "_sandbox/farm_window_registry")
     parser.add_argument("--anchors", type=Path, default=ROOT / "data/ui-anchors.json")
     parser.add_argument("--plan", type=Path, default=EXAMPLE_PLAN)
@@ -260,6 +263,23 @@ def main() -> int:
             result = read_only_plant_preflight(adapter)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 2
+        if args.command == "preflight-picker":
+            if not args.platform or not args.target_seed or type(args.slot) is not int:
+                raise RunnerStop("INVALID_ARGUMENT", "--platform, --target-seed, --slot required")
+            adapter = LivePlantAdapter(args.platform, load_json(args.layout),
+                                       args.registry, ocr_binary=args.ocr)
+            view = adapter.observe(args.slot, args.target_seed)
+            result = {
+                "status": "read_only_picker",
+                "platform": args.platform,
+                "page": view.page,
+                "target_icon_verified": view.target_icon_verified,
+                "target_quantity": view.target_quantity,
+                "diagnostics": adapter.last_diagnostics,
+                "click_count": 0, "llm_round_trips": 0,
+            }
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if view.page is not None else 2
         if args.command == "preflight-harvest":
             if not args.platform:
                 raise RunnerStop("INVALID_ARGUMENT", "--platform required for preflight-harvest")

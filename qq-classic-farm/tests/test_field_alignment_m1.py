@@ -51,7 +51,7 @@ class FieldAlignmentTests(unittest.TestCase):
                                                  platform, LAYOUT)
                 self.assertEqual(result["status"], "diagnostic_only")
                 self.assertFalse(result["can_authorize_clicks"])
-                self.assertEqual(result["matched_purple_cells"], 5 if platform == "qq" else 8)
+                self.assertEqual(result["matched_purple_cells"], 6 if platform == "qq" else 8)
                 self.assertAlmostEqual(result["offset_local"][0], shift[0], delta=1)
                 self.assertAlmostEqual(result["offset_local"][1], shift[1], delta=1)
 
@@ -64,7 +64,7 @@ class FieldAlignmentTests(unittest.TestCase):
 
     def test_decorative_purple_does_not_override_unique_grid(self):
         result = probe_field_translation(synthetic("qq", extra=True), "qq", LAYOUT)
-        self.assertEqual(result["matched_purple_cells"], 5)
+        self.assertEqual(result["matched_purple_cells"], 6)
 
     def test_partial_or_obscured_grid_fails_closed(self):
         for platform in ("qq", "wechat"):

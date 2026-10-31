@@ -1,7 +1,9 @@
 # Todo
 
+- [ ] **2026-10-31 19:20 CST 最新 M2 QQ picker 真机检查点**：已在真实 QQ 7页 picker 完成本地 OCR 页码、左右有界 CGEvent 批量翻页及目标图标/数量终验：第7→4页批次3击读红枫18颗，第4→1页通过现有 `prepare_picker_target` 批次3击读泡泡棉花糖21颗；全部阶段内0逐击 LLM、未选择种子/未改变库存，关闭 picker 已确认。`farm_picker_vision.py` 当前只对这两个 QQ 目标图标有现场模板，其他种子及微信严格 unknown；下一步优先 **QQ 24格占用/一键模式/四格预览落地的真实局部观察与库存同步**，再联调真实种植事务。QQ 一键种植仍关闭，`inventory_dirty=true`，`run-next` 继续 STOP；M1 QQ 单命令 clean-field 与微信 M1/M2 均未验收。Swift OCR 编译命令 `swiftc scripts/farm_text_ocr.swift -o /tmp/farm_text_ocr`，只读命令 `python3 scripts/farm_runner.py preflight-picker --platform qq --target-seed 天山红枫种子 --slot 1 --registry /tmp/farm_window_registry --ocr /tmp/farm_text_ocr`。全量180项测试通过。
+
 - [ ] **2026-10-31 17:45 CST 最新 M1 真机安全停点（优先）**：QQ 已受控逐次发送3个特殊「可摘」+1个手形，游戏画面显示三株特殊作物消失、普通田收获后似乎24格全空；但第三次星标触发图鉴获得/升级遮罩，手形触发「超变图鉴升级18」，一次有证据的空白关闭后遮罩仍在，**不能宣称 clean-field 终验，禁止盲重试或直接种植**。下一轮先读取 Mac 本地时间并只读复核现存遮罩，找到可验证的安全关闭方法，获得无遮挡现场 clean-field 正例，再做24格保守分类与本地单命令 M1 阶段；QQ 真实星标位置约(342,524)/(262,566)/(342,609)，**与安全种植2×2锚点不对应**，不可用旧14px门限筛掉。CGEvent 的 Dock/Notification Center 全屏透传误判已修复为「精确系统层+AX 命中农场 PID」双门禁，新增 `--preflight` 真机0点击通过，错误 PID 负例 STOP，171项全量离线测试通过。M1 未验收，M2 仍待真实 picker/占用/预览及库存同步；`run-next` 保持禁用。
-- [ ] **M2 直接阻塞**：在安全处理 QQ 现场遮罩/空田后优先进入真实 picker 局部页码/目标图标/数量、四格预览/落地与24格占用校准；复用已有 `farm_plant_live.py`、picker/ordinary/special/cycle 和 recovery，不再加纯离线恢复机制。微信独立农场仍待恢复并独立验证。
+- [ ] **M2 直接阻塞**：QQ picker 页码/左右有界翻页与两种已校准目标图标/数量已实机通过，**不要重做**；下一步优先真实24格占用、QQ 一键模式安全识别、四格预览/落地及当前库存同步，其他目标图标按实际需要小范围补样本。微信独立农场仍待恢复并独立验证。
 
 - [ ] **2026-10-31 15:42 CST M2 最新可执行停点**：`farm_plant_live.py` 已实现并在真实 QQ 独立农场 603×1111 上验证 `preflight-plant`：先从 Stage Manager 缩略态恢复，真实截图/窗口身份→`OrdinaryPlantView`，返回 `PLANT_OVERLAY`、0点击；picker 观察接口也已接真实新截图，尚不能识别页码/图标/数量。`field_cells/preview/overlay/one_key` 均未知，CGEvent 仍不可授权，169项离线测试通过。**下一步优先对真实 picker/预览/24格占用做最小可验收的局部识别与校准**，之后才能受控种植；M1 特殊星标/clean-field 和微信独立农场恢复仍待处理。`run-next` 不解锁、库存 dirty，不得重做离线组合/恢复模块。
 

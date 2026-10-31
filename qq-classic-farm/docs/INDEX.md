@@ -23,7 +23,8 @@
 - `../assets/ui/`：手形全局按钮、一键务农、普通化肥及 QQ / 微信“可摘”的紧凑视觉模板。
 - `../scripts/open_qq_farm.swift`：QQ 农场固定入口脚本；定位 QQ / QQ经典农场窗口，按 `ui-layout.json` 已验证的主窗口相对坐标打开或恢复农场，不走“更多功能”。
 - `../scripts/restore_wechat_main.swift`：微信 Stage Manager 主窗口恢复，2026-10-31 实机成功；农场入口仍需状态式校准。
-- `../scripts/farm_plant_picker.py`：M2 离线 picker 有界翻页/目标 icon 与数量徽标校验，尚未接真实 UI。
+- `../scripts/farm_plant_picker.py`：M2 picker 有界翻页/目标 icon 与数量徽标 contract；QQ 已有两个目标的真实局部联调，完整种植仍未验收。
+- `../scripts/farm_picker_vision.py` / `../scripts/farm_text_ocr.swift`：QQ picker 真实页码、已校准目标图标/数量及左右箭头；macOS Vision OCR Swift 需预编译，微信/其它目标保持 unknown，不授权种植。
 - `../scripts/farm_plant_special.py`：M2 离线四格单颗事务（预览→确认→24格占用终验）；不接真实点击。
 - `../scripts/farm_plant_ordinary.py`：M2 离线普通一键种植事务（空格数=计划数量→picker→选种→24格全占用终验）；不接真实点击。
 - `../scripts/farm_plant_cycle.py` / `../scripts/farm_plant_recovery.py`：M2 本地组合种植 phase 与 durable preaction journal；已确认交易才更新恢复数量，异常/崩溃后不自动重放，尚未接真实 UI。
