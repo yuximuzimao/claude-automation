@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 from typing import Mapping
 
-from farm_runner import save_state_atomic
+from farm_runner import load_json, save_state_atomic
 
 
 class RecoveryJournalStop(ValueError):
@@ -56,6 +56,7 @@ class PlantRecoveryJournal:
         record = {
             "schema_version": 1, **self.context, "status": "prepared",
             "pending_transaction": None, "completed_transactions": [],
+            "initial_quantities": self._quantities(quantities),
             "confirmed_quantities": self._quantities(quantities),
             "retry_allowed": False, "farm_state_committed": False,
         }
@@ -141,6 +142,63 @@ class PlantRecoveryJournal:
             raise RecoveryJournalStop("RECOVERY_RECONCILIATION_REQUIRED",
                                       "Cannot finalize an unverified/uncheckpointed phase")
         self._save({**old, "status": "phase_verified_uncommitted"})
+
+    def commit_verified_inventory(self, state_path: Path) -> dict:
+        """Explicit M2 post-phase commit, never a planting or recovery action.
+
+        Only a fully verified journal may debit stock. If the atomic state write
+        succeeded but the journal update failed, a second explicit call can
+        recognize its exact commit marker without debiting twice. A journal
+        left behind still blocks new game actions until reconciled.
+        """
+        record = self._record
+        if (record is None or record.get("status") != "phase_verified_uncommitted"
+            or record.get("farm_state_committed") is not False
+            or record.get("pending_transaction") is not None
+            or not record.get("completed_transactions")):
+            raise RecoveryJournalStop("RECOVERY_RECONCILIATION_REQUIRED",
+                                      "Only a fully verified uncommitted phase can debit stock")
+        if any(record.get(key) != value for key, value in self.context.items()):
+            raise RecoveryJournalStop("RECOVERY_STATE_DRIFT", "Journal context changed")
+        initial = self._quantities(record.get("initial_quantities"))
+        confirmed = self._quantities(record.get("confirmed_quantities"))
+        marker = {key: self.context[key] for key in
+                  ("plan_id", "plan_revision", "cycle_id", "platform", "inventory_revision")}
+        try:
+            state = load_json(Path(state_path))
+            platform_state = state["platforms"][self.context["platform"]]
+            revision = state["inventory_revision"]
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            raise RecoveryJournalStop("RECOVERY_STATE_DRIFT",
+                                      "Cannot verify current farm-state") from exc
+        if (state.get("schema_version") != 1 or type(revision) is not int
+            or not isinstance(platform_state, dict)
+            or platform_state.get("inventory_dirty") is not False):
+            raise RecoveryJournalStop("INVENTORY_DIRTY",
+                                      "State schema or verified inventory is not current")
+        # The journal may still be uncommitted after an interrupted _save.
+        # Accept ONLY our exact prior atomic state write, not an arbitrary
+        # revision advance or coincidentally matching quantities.
+        if (revision == self.context["inventory_revision"] + 1
+            and platform_state.get("last_plant_commit") == marker
+            and platform_state.get("quantities") == confirmed):
+            self._save({**record, "status": "committed", "farm_state_committed": True})
+            return state
+        if (revision != self.context["inventory_revision"]
+            or platform_state.get("quantities") != initial):
+            raise RecoveryJournalStop("RECOVERY_STATE_DRIFT",
+                                      "Inventory changed since verified phase started")
+        new_state = dict(state)
+        new_platforms = dict(state["platforms"])
+        new_platform = dict(platform_state)
+        new_platform["quantities"] = confirmed
+        new_platform["last_plant_commit"] = marker
+        new_platforms[self.context["platform"]] = new_platform
+        new_state["platforms"] = new_platforms
+        new_state["inventory_revision"] = revision + 1
+        save_state_atomic(Path(state_path), new_state)
+        self._save({**record, "status": "committed", "farm_state_committed": True})
+        return new_state
 
 
 def run_plant_phase_with_recovery(journal: PlantRecoveryJournal, adapter, *,

@@ -1,8 +1,10 @@
 # 当前状态
 
-更新时间：2026-11-01 01:39 CST（M0 已通过；QQ Stage Manager 安全恢复实机修复；M1/M2 完整阶段及微信仍未验收，run-next STOP）
+更新时间：2026-11-01 凌晨（M0 已通过；M2 confirmed-only 库存提交接口离线通过；M1/M2 实机及微信未验收，run-next STOP）
 
 ## Runner 当前开发检查点
+
+- **2026-11-01 凌晨仅离线 M2 库存提交接线**：从 a03fb733 检查点恢复并读取规定五份文档。用户在03:00 CST前占用电脑，本轮没有打开、恢复、切换或观察农场桌面窗口，没有发送任何游戏输入。复用既有 PlantRecoveryJournal 的 phase_verified_uncommitted，新增显式 commit_verified_inventory(state_path)：必须 journal 无 pending、已验证事务存在，farm-state 原始库存/版本匹配且 inventory_dirty=false，才对该平台确认数量执行原子提交并 inventory_revision+1；保存提交标识防止 state 成功、journal 标记失败时同对象重试重复扣减。临时 state 测试覆盖正常提交、dirty/库存漂移/版本漂移拒绝和标记失败后幂等；全量202项 Python测试及 M0 dry-run 通过。**真实 data/farm-state.json 未修改**，QQ/微信仍 inventory_dirty=true，run-next 继续 RUNNER_NOT_READY；跨进程 journal 恢复仍需人工核对。**缩短的距离**：补齐 M2 “独立验收后库存落盘”的接口；但未取得新的现场库存同步、播种/落点、四格预览/ON模式或微信实机证据。03:00后仍遵守六组常规禁区和每批前台安全检查。
 
 - **2026-11-01 01:34–01:39 CST QQ WINDOW_SIZE_CHANGED 直接阻塞解除（未试种）**：按五份文档从 `c0e8f374` 恢复；Mac 本地 `01:34 CST` 为允许时段。初次 `preflight-plant` 因 QQ 农场在 Stage Manager 缩略态（46×130）返回 `WINDOW_SIZE_CHANGED`；旧 `open_qq_farm.swift` 单次点击缩略窗后未恢复，明确 STOP。针对**已存在、唯一、owner=`QQ小程序`、title=`QQ经典农场` 的缩略窗**，修复入口为使用核实的 owner PID 调用 `NSRunningApplication.activate`，不再向可能被其它窗口遮挡的缩略坐标发送 CGEvent；真实返回「已通过已核实 QQ经典农场 PID 恢复完整窗口」。随后 QQ 真实只读 `preflight-plant` 得到 603×1111、window_id=6951、`field_cells_verified=24`、`clean_field_verified=true`、0点击。准备进入游戏商店做下一颗白萝卜落点测试时，**窗口又回到 Stage Manager 缩略态**；在任何农场点击之前，重新读取 registry 发现仅 46×130 缩略窗，测试脚本因 `WINDOW_SIZE_CHANGED` 在0事件处停止。原因（其他程序/用户/系统焦点切换）尚未确认；不反复抢焦点、不在未知前台点击。没有购买、种植、收获、库存变化，也没有获得新落地格证据。`open_qq_farm.swift` 新增本机禁区前2分钟门禁；Swift typecheck 与 Python 199项全量测试通过。**距离 M1/M2 缩短的一步**：已有农场窗口的安全恢复路径实机成功，不再依赖点击被遮挡的 Stage Manager 缩略窗；下一轮先确认前台能稳定保持，若可保持则同一短本地调用完成 `capture_landing_baseline → 1颗已核实白萝卜受控试种 → verify_landing_since`，否则记录焦点被抢占并推进 M2 离线真实接线。M1 单命令成熟→clean、M2 完整种植、微信实机均未验收；双平台库存 dirty，`run-next=RUNNER_NOT_READY`。
 

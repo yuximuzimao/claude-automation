@@ -184,6 +184,95 @@ class RecoveryTests(unittest.TestCase):
         with self.assertRaises(RecoveryJournalStop):
             self.journal().start(INITIAL)
 
+    def test_verified_phase_commits_only_confirmed_inventory(self):
+        state_path = Path(self.tmp.name) / "farm-state.json"
+        state = {"schema_version": 1, "inventory_revision": 3,
+                 "platforms": {
+                     "qq": {"quantities": dict(INITIAL), "inventory_dirty": False,
+                            "last_daily_date": "2026-10-31"},
+                     "wechat": {"quantities": {"w": 9}, "inventory_dirty": True}}}
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+        journal = self.journal()
+        journal.start(INITIAL)
+        tx = {"kind": "ordinary", "seed": "o", "count": 12}
+        journal.before_transaction(tx, [], INITIAL)
+        after = consume_confirmed(ORDER, INITIAL, "o", 12)
+        event = {"status": "ordinary_plant_verified", "platform": "qq",
+                 "seed": "o", "count": 12}
+        journal.checkpoint([event], after)
+        journal.finish({"status": "plant_phase_verified", "platform": "qq",
+                        "completed_transactions": [event],
+                        "quantities_after": after, "persisted": False})
+        committed = journal.commit_verified_inventory(state_path)
+        self.assertEqual(committed["inventory_revision"], 4)
+        self.assertEqual(committed["platforms"]["qq"]["quantities"], after)
+        self.assertEqual(committed["platforms"]["wechat"], state["platforms"]["wechat"])
+        self.assertEqual(committed["platforms"]["qq"]["last_daily_date"], "2026-10-31")
+        self.assertEqual(self.record()["status"], "committed")
+        self.assertTrue(self.record()["farm_state_committed"])
+        with self.assertRaises(RecoveryJournalStop):
+            journal.commit_verified_inventory(state_path)
+
+    def test_commit_refuses_dirty_or_drifted_inventory_without_writing(self):
+        for dirty, drift in ((True, False), (False, True), (False, False)):
+            with self.subTest(dirty=dirty, drift=drift):
+                journal = self.journal()
+                if self.path.exists():
+                    self.path.unlink()
+                journal.start(INITIAL)
+                tx = {"kind": "ordinary", "seed": "o", "count": 12}
+                journal.before_transaction(tx, [], INITIAL)
+                after = consume_confirmed(ORDER, INITIAL, "o", 12)
+                event = {"status": "ordinary_plant_verified", "platform": "qq",
+                         "seed": "o", "count": 12}
+                journal.checkpoint([event], after)
+                journal.finish({"status": "plant_phase_verified", "platform": "qq",
+                                "completed_transactions": [event],
+                                "quantities_after": after, "persisted": False})
+                quantities = dict(INITIAL)
+                if drift:
+                    quantities["o"] += 1
+                state = {"schema_version": 1,
+                         "inventory_revision": (4 if not dirty and not drift else 3),
+                         "platforms": {"qq": {"quantities": quantities,
+                                              "inventory_dirty": dirty}}}
+                state_path = Path(self.tmp.name) / "farm-state.json"
+                state_path.write_text(json.dumps(state), encoding="utf-8")
+                before = state_path.read_bytes()
+                with self.assertRaises(RecoveryJournalStop):
+                    journal.commit_verified_inventory(state_path)
+                self.assertEqual(state_path.read_bytes(), before)
+                self.assertEqual(self.record()["status"], "phase_verified_uncommitted")
+
+    def test_journal_write_failure_after_state_commit_is_idempotent_in_process(self):
+        state_path = Path(self.tmp.name) / "farm-state.json"
+        state = {"schema_version": 1, "inventory_revision": 3,
+                 "platforms": {"qq": {"quantities": dict(INITIAL),
+                                       "inventory_dirty": False}}}
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+        journal = self.journal()
+        journal.start(INITIAL)
+        tx = {"kind": "ordinary", "seed": "o", "count": 12}
+        journal.before_transaction(tx, [], INITIAL)
+        after = consume_confirmed(ORDER, INITIAL, "o", 12)
+        event = {"status": "ordinary_plant_verified", "platform": "qq",
+                 "seed": "o", "count": 12}
+        journal.checkpoint([event], after)
+        journal.finish({"status": "plant_phase_verified", "platform": "qq",
+                        "completed_transactions": [event],
+                        "quantities_after": after, "persisted": False})
+        original_save = journal._save
+        with patch.object(journal, "_save", side_effect=OSError("journal fsync failed")):
+            with self.assertRaises(OSError):
+                journal.commit_verified_inventory(state_path)
+        self.assertEqual(json.loads(state_path.read_text())["inventory_revision"], 4)
+        self.assertEqual(self.record()["status"], "phase_verified_uncommitted")
+        journal._save = original_save
+        journal.commit_verified_inventory(state_path)
+        self.assertEqual(json.loads(state_path.read_text())["inventory_revision"], 4)
+        self.assertEqual(self.record()["status"], "committed")
+
+
 
 if __name__ == "__main__":
     unittest.main()
