@@ -67,10 +67,12 @@ EMPTY → 四格 placement → 普通一键种植 → GROWING
 - [x] 普通剩余格数由 `24 - known_occupied` 直接计算。
 - [x] 普通事务要求 picker 明确验证 one-key ON 后，只选择一次已验证槽位。
 - [x] 异常统一 DIRTY/STOP；已删除 checkpoint / preaction / 崩溃自动续播职责。
-- [x] 纯事务层 23 项专项测试通过；当前全项目 155 项测试全部通过。
-- [ ] live adapter：固定格 open_plot 坐标接线。
+- [x] 纯事务层 23 项专项测试通过。
+- [x] QQ 固定格点击坐标已固化：实测 cell (3,2) ≈ local (301.52,689.09)。
+- [x] live adapter 已实现只读 `require_empty_field()` 与 `verify_cells_occupied(cells)`，均只截图/ROI 判断。
+- [x] 当前全项目 157 项测试全部通过。
+- [ ] live adapter：把固定格坐标真正接入 open_plot CGEvent（当前仍硬 STOP）。
 - [ ] live adapter：四格 preview / confirm ROI 校准。
-- [ ] live adapter：`verify_cells_occupied(cells)` 用 V2 固定 ROI 实现。
 - [ ] live adapter：one-key ON 正例校准。
 - [ ] 获得用户当前 Chat 明确授权后，做真实 EMPTY → 完整种植验收。
 

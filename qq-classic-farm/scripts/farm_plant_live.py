@@ -64,6 +64,55 @@ class LivePlantAdapter:
         # Never set by the current uncalibrated observer.
         self.calibration_verified = False
 
+    def require_empty_field(self) -> bool:
+        """Read-only V2 phase-start gate; never sends UI input."""
+        handle, shot = self._capture()
+        if self.platform != "qq":
+            raise SpecialPlantStop("EMPTY_CHECK_UNSUPPORTED",
+                                   "V2 live EMPTY check currently calibrated only for QQ")
+        check = check_qq_empty_field(shot, self.layout)
+        self.last_diagnostics = {
+            "platform": self.platform,
+            "window_id": handle.window_id,
+            "empty_check_status": check.status,
+            "empty_check_reason": check.reason,
+            "empty_cells": len(check.empty_cells),
+            "occupied_cells": len(check.occupied_cells),
+            "unknown_cells": len(check.unknown_cells),
+            "can_authorize_clicks": False,
+        }
+        if check.status == "UNKNOWN":
+            raise SpecialPlantStop("PLANT_FIELD_UNKNOWN",
+                                   "QQ field cannot be classified as EMPTY/NOT_EMPTY")
+        return check.status == "EMPTY"
+
+    def verify_cells_occupied(self, cells: frozenset[Cell]) -> bool | None:
+        """Read-only targeted ROI postcondition for Runner-planned cells."""
+        if (not isinstance(cells, frozenset) or not cells
+            or any(type(cell) is not tuple or len(cell) != 2
+                   or any(type(v) is not int for v in cell)
+                   or not (0 <= cell[0] < 6 and 0 <= cell[1] < 4)
+                   for cell in cells)):
+            raise SpecialPlantStop("INVALID_PLOT_SET", "Invalid planned cell set")
+        handle, shot = self._capture()
+        if self.platform != "qq":
+            return None
+        check = check_qq_empty_field(shot, self.layout)
+        occupied = frozenset(check.occupied_cells)
+        unknown = frozenset(check.unknown_cells)
+        self.last_diagnostics = {
+            "platform": self.platform,
+            "window_id": handle.window_id,
+            "empty_check_status": check.status,
+            "verify_cells": [list(cell) for cell in sorted(cells)],
+            "occupied_cells": [list(cell) for cell in sorted(occupied)],
+            "unknown_cells": [list(cell) for cell in sorted(unknown)],
+            "can_authorize_clicks": False,
+        }
+        if cells & unknown:
+            return None
+        return cells.issubset(occupied)
+
     def _capture(self):
         # Clear stale authority before touching the live registry.
         self.last_handle = None

@@ -36,8 +36,9 @@ Runner 已切换到 V2：
 2. V2-1 已离线完成：固定 4×6 网格 + 两个 5×5 ROI + `check-empty` 只读命令。
 3. V2-2 纯事务层已完成：Phase 只从 EMPTY 起步，之后由 Runner 维护 `known_occupied`；四格/普通事务不再依赖 24 格语义重建；checkpoint/崩溃自动续播已删除。
 4. Picker 保持“验证槽位 → 同槽点击”唯一入口，专门防止相邻种子槽误点。
-5. 当前全项目 155 项测试全绿；V2-2 live adapter 仍保持 open_plot/preview/confirm 未校准，不会因此发送真实种植输入。
-6. 当前不操作 QQ；00:00–01:00 也属于真机禁用时段。下一步继续纯离线接固定格坐标/ROI 接口。
+5. QQ 固定格点击偏移已由历史实测固化；live adapter 的 phase-start EMPTY 和指定 cells 占用验证已接成只读 ROI。
+6. 当前全项目 157 项测试全绿；open_plot 仍硬 STOP，preview/confirm 与 one-key ON 仍未完成校准，因此不会发送真实种植输入。
+7. 当前不操作 QQ；00:00–01:00 属于真机禁用时段。下一步优先用已保存的 one-key ON 截图做离线正例校准。
 
 ## 真机操作禁用时段
 

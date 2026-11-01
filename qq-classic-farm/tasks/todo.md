@@ -20,8 +20,10 @@
   - [x] 四格只验证 preview / confirm / 目标 2×2 ROI。
   - [x] 普通剩余格由计划直接计算；picker 验证 ON 后只点一次已验证槽位。
   - [x] 删除 checkpoint / 崩溃自动续播；异常 DIRTY/STOP。
-  - [x] 当前全项目 155 项测试全部通过。
-  - [ ] 接固定格 open_plot、四格 preview/confirm、目标 ROI 占用验证、one-key ON 正例。
+  - [x] QQ 固定格点击坐标已由历史实测固化。
+  - [x] live adapter 的 phase-start EMPTY 与指定 cells 占用验证已实现为只读 ROI。
+  - [x] 当前全项目 157 项测试全部通过。
+  - [ ] 接 open_plot CGEvent、四格 preview/confirm、one-key ON 正例。
   - [ ] 当前 Chat 明确授权后再做真实完整种植验收。
 
 - [ ] **V2-3 QQ 完整收获**

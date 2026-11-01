@@ -147,6 +147,31 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
         with self.assertRaises(HarvestStop):
             prepare_harvest(obs)
 
+    def test_live_adapter_phase_gate_and_target_roi_are_read_only(self):
+        handle = WindowHandle(6951, 53086, self.frame)
+        empty = self.shot(self.image())
+        planted = self.shot(self.image(occupied={(3, 2)}), capture_id="planted")
+
+        plant = LivePlantAdapter("qq", self.layout, Path("/tmp/registry"),
+                                 Path("/tmp/click"), execute=True)
+        with (patch.object(plant, "_capture", return_value=(handle, empty)),
+              patch("farm_plant_live.subprocess.run",
+                    side_effect=AssertionError("No CGEvent")) as cg):
+            self.assertTrue(plant.require_empty_field())
+            cg.assert_not_called()
+
+        target = frozenset({(3, 2)})
+        with (patch.object(plant, "_capture", return_value=(handle, planted)),
+              patch("farm_plant_live.subprocess.run",
+                    side_effect=AssertionError("No CGEvent")) as cg):
+            self.assertTrue(plant.verify_cells_occupied(target))
+            self.assertFalse(plant.verify_cells_occupied(frozenset({(0, 0)})))
+            cg.assert_not_called()
+
+        with self.assertRaises(SpecialPlantStop) as caught:
+            plant.verify_cells_occupied(frozenset())
+        self.assertEqual(caught.exception.code, "INVALID_PLOT_SET")
+
     def test_runner_check_empty_is_read_only(self):
         handle = WindowHandle(6951, 53086, self.frame)
         shot = self.shot(self.image())
