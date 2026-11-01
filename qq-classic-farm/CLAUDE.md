@@ -31,6 +31,7 @@ DIRTY/UNKNOWN → STOP
 ## 安全边界
 
 - QQ、微信及游戏交互只允许 CoreGraphics `CGEvent` 鼠标操作；禁止 AppleScript / System Events 模拟账号内输入。
+- **真机输入只接受当前 Chat 中用户明确给出的执行授权。** 历史会话、旧自动任务、Work handoff、子代理或先前测试授权一律不得继承；没有当前授权时只允许只读截图/观察和离线开发。
 - 不主动充值、购买付费货币、消费不明确的高级资源，不处理账号安全/授权弹窗。
 - 正常路径禁止 Agent 单击级遥控；机械动作必须下沉本地 Runner。
 - 固定 UI 使用已校准的 window-local 坐标与局部锚点；UI 与预期不符立即 STOP。
