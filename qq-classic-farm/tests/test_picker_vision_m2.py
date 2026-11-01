@@ -12,7 +12,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_capture import FarmCapture
 from farm_geometry import WindowFrame
-from farm_picker_vision import (observe_picker, observe_one_key_mode,
+from farm_picker_vision import (find_qq_picker_y_shift, observe_picker,
+                                observe_one_key_mode,
                                 observe_one_key_enable_confirmation, right_arrow_verified)
 
 
@@ -56,14 +57,25 @@ class PickerVisionTests(unittest.TestCase):
         self.assertIsNone(observe_picker(self.capture(), "wechat", 1,
                                         "天山红枫种子", None)["page"])
 
-    def test_real_qq_unchecked_toggle_template_is_fail_closed(self):
+    def test_real_qq_toggle_templates_prove_off_on_or_unknown(self):
         capture = self.capture(maple_slot=None)
-        reference = np.asarray(Image.open(ROOT / "assets/ui/picker/qq-one-key-off.png").convert("RGB"))
-        capture.rgb[779:810, 370:400] = reference
+        off = np.asarray(Image.open(
+            ROOT / "assets/ui/picker/qq-one-key-off.png").convert("RGB"))
+        capture.rgb[779:810, 370:400] = off
         self.assertIs(observe_one_key_mode(capture, "qq"), False)
         self.assertIsNone(observe_one_key_mode(capture, "wechat"))
-        # A checkmark/overlay changes the interior; it is NOT proof of ON.
-        capture.rgb[785:801, 378:392] = [255, 245, 255]
+
+        # Real 2026-11-01 ON control is shifted down by raw +63, which maps
+        # to picker_y_shift +21 under the shared QQ picker geometry.
+        capture = self.capture(maple_slot=None)
+        on = np.asarray(Image.open(
+            ROOT / "assets/ui/picker/qq-one-key-on.png").convert("RGB"))
+        capture.rgb[842:873, 370:400] = on
+        self.assertEqual(find_qq_picker_y_shift(capture, "qq"), 21)
+        self.assertIs(observe_one_key_mode(capture, "qq"), True)
+
+        # An arbitrary altered square is neither positive template.
+        capture.rgb[848:864, 378:392] = [255, 245, 255]
         self.assertIsNone(observe_one_key_mode(capture, "qq"))
 
     @patch("farm_picker_vision._read_text", side_effect=["1/7", "18"])

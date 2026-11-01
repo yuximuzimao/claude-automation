@@ -23,7 +23,8 @@
   - [x] QQ 固定格点击坐标已由历史实测固化。
   - [x] live adapter 的 phase-start EMPTY 与指定 cells 占用验证已实现为只读 ROI。
   - [x] 当前全项目 157 项测试全部通过。
-  - [ ] 接 open_plot CGEvent、四格 preview/confirm、one-key ON 正例。
+  - [x] one-key ON 正例已用实机截图校准，OFF / ON / UNKNOWN 三态可判。
+  - [ ] 接 open_plot CGEvent、四格 preview/confirm。
   - [ ] 当前 Chat 明确授权后再做真实完整种植验收。
 
 - [ ] **V2-3 QQ 完整收获**

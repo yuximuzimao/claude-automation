@@ -35,6 +35,7 @@ QQ_LEFT_ARROW_ROI = (15, 745, 55, 797)
 # An enabled toggle is NOT calibrated; do not infer True from not matching OFF.
 QQ_ONE_KEY_OFF_ROI = (370, 779, 400, 810)
 QQ_ONE_KEY_OFF = ROOT / "assets/ui/picker/qq-one-key-off.png"
+QQ_ONE_KEY_ON = ROOT / "assets/ui/picker/qq-one-key-on.png"
 # Real 2026-11-01 QQ: clicking OFF opens a confirmation dialog. It does
 # NOT establish ON; confirming may plant all empty plots immediately.
 QQ_ONE_KEY_ENABLE_CONFIRM_ROI = (56, 409, 548, 738)
@@ -108,55 +109,72 @@ def _off_template() -> np.ndarray | None:
         return None
 
 
-def _off_checkbox_score(capture: FarmCapture, offset: int) -> float:
-    """Local fixed-control template only; no inference about field occupancy."""
+@lru_cache(maxsize=1)
+def _on_template() -> np.ndarray | None:
+    try:
+        return np.asarray(Image.open(QQ_ONE_KEY_ON).convert("RGB"))
+    except (OSError, ValueError):
+        return None
+
+
+def _checkbox_score(capture: FarmCapture, offset: int,
+                    reference: np.ndarray | None) -> float:
+    """Match only the fixed checkbox interior, not animated surrounding grass."""
     patch = _crop(capture, _shift_y(QQ_ONE_KEY_OFF_ROI, offset))
-    reference = _off_template()
     if patch is None or reference is None:
         return -1.0
     if patch.shape != reference.shape:
         patch = np.asarray(Image.fromarray(patch).resize(
             (reference.shape[1], reference.shape[0])))
-    # Compare only the brown square, not the animated grass surrounding it.
     actual = patch[6:26, 6:24].astype(np.int16)
     expected = reference[6:26, 6:24].astype(np.int16)
     per_pixel = np.max(np.abs(actual - expected), axis=2)
     return float(np.mean(per_pixel <= 14))
 
 
-def _off_checkbox_distance(capture: FarmCapture, offset: int) -> float:
+def _checkbox_distance(capture: FarmCapture, offset: int,
+                       reference: np.ndarray | None) -> float:
     patch = _crop(capture, _shift_y(QQ_ONE_KEY_OFF_ROI, offset))
-    reference = _off_template()
     if patch is None or reference is None:
         return float("inf")
     if patch.shape != reference.shape:
         patch = np.asarray(Image.fromarray(patch).resize(
             (reference.shape[1], reference.shape[0])))
-    return float(np.mean(np.abs(patch.astype(np.int16) - reference.astype(np.int16))))
+    return float(np.mean(np.abs(
+        patch.astype(np.int16) - reference.astype(np.int16))))
+
+
+def _best_toggle_match(capture: FarmCapture, offset: int) -> tuple[float, float]:
+    """Return best score/distance across explicit OFF and ON templates."""
+    pairs = [
+        (_checkbox_score(capture, offset, _off_template()),
+         _checkbox_distance(capture, offset, _off_template())),
+        (_checkbox_score(capture, offset, _on_template()),
+         _checkbox_distance(capture, offset, _on_template())),
+    ]
+    return max(pairs, key=lambda item: (item[0], -item[1]))
 
 
 def find_qq_picker_y_shift(capture: FarmCapture, platform: str) -> int | None:
-    """Locate QQ picker vertical placement from its verified OFF checkbox.
-
-    The previous picker calibration was at checkbox y=821; clicking another
-    plot opens the SAME picker at y=779. Both positions must share one local
-    offset for page, badges, icons and arrows. Unknown/checked controls STOP.
-    """
+    """Locate QQ picker vertical placement from an explicit OFF or ON checkbox."""
     if platform != "qq":
         return None
-    candidates = [(offset, _off_checkbox_score(capture, offset))
-                  for offset in range(-65, 96)]
-    accepted = [(offset, score) for offset, score in candidates if score >= 0.98]
+    candidates = [
+        (offset, *_best_toggle_match(capture, offset))
+        for offset in range(-65, 96)
+    ]
+    accepted = [(offset, score, distance)
+                for offset, score, distance in candidates if score >= 0.98]
     if not accepted:
         return None
-    # The checkbox interior is a solid square (several adjacent y values
-    # score 1.0). Use the full control border to disambiguate exact y.
-    best_offset = min((offset for offset, _ in accepted),
-                      key=lambda offset: _off_checkbox_distance(capture, offset))
-    if (_off_checkbox_distance(capture, best_offset) > 12
-        or any(abs(offset - best_offset) > 5 for offset, _ in accepted)):
-        return None  # Ambiguous or visually changed control.
-    return best_offset - 42  # current OFF reference y=779; old base y=821.
+    # Several adjacent y values can share the same interior score; the full
+    # 30x31 template distance chooses the aligned border position.
+    best_offset, _score, best_distance = min(
+        accepted, key=lambda item: item[2])
+    if (best_distance > 12
+        or any(abs(offset - best_offset) > 5 for offset, _, _ in accepted)):
+        return None
+    return best_offset - 42
 
 
 @lru_cache(maxsize=1)
@@ -191,14 +209,21 @@ def observe_one_key_enable_confirmation(capture: FarmCapture, platform: str) -> 
 
 def observe_one_key_mode(capture: FarmCapture, platform: str,
                          picker_y_shift: int | None = None) -> bool | None:
-    """Only prove QQ picker toggle OFF; an enabled state stays unknown."""
+    """Return explicit QQ picker toggle state from OFF/ON positive templates."""
     if platform != "qq":
         return None
     shift = (find_qq_picker_y_shift(capture, platform)
              if picker_y_shift is None else picker_y_shift)
     if shift is None:
         return None
-    return False if _off_checkbox_score(capture, shift + 42) >= 0.98 else None
+    raw_offset = shift + 42
+    off_score = _checkbox_score(capture, raw_offset, _off_template())
+    on_score = _checkbox_score(capture, raw_offset, _on_template())
+    if off_score >= 0.98 and on_score < 0.90:
+        return False
+    if on_score >= 0.98 and off_score < 0.90:
+        return True
+    return None
 
 
 def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,

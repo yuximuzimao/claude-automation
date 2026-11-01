@@ -73,7 +73,7 @@ EMPTY → 四格 placement → 普通一键种植 → GROWING
 - [x] 当前全项目 157 项测试全部通过。
 - [ ] live adapter：把固定格坐标真正接入 open_plot CGEvent（当前仍硬 STOP）。
 - [ ] live adapter：四格 preview / confirm ROI 校准。
-- [ ] live adapter：one-key ON 正例校准。
+- [x] live adapter：one-key ON 正例已用 2026-11-01 实机截图校准；OFF / ON / UNKNOWN 三态均为正例/拒识逻辑，真实 ON 截图直接返回 `picker_y_shift=21`、`one_key_mode=True`。
 - [ ] 获得用户当前 Chat 明确授权后，做真实 EMPTY → 完整种植验收。
 
 验收不变：QQ 一个本地 phase 从 EMPTY 连续完成整轮种植；正常路径无逐点击模型往返。
