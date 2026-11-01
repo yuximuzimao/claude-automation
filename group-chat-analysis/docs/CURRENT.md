@@ -84,21 +84,21 @@
 - blackwords：**30**；
 - 页面全量 source links：high **2589** / medium **20** / none **834**；其中正式首次阅读候选层为 **2164 high / 4 medium / 110 none**；
 - Silver 清洗前的首次阅读候选：**2278 条事实切片**；它们只是历史候选索引，当前 **0 张 raw Topic Card** 直接进入首次阅读；
-- 当前正式 Silver 工作集共 **346 个知识单元 = 337 queue + 9 knowledge**；候选索引现为 **1698 full / 546 unabsorbed / 34 partial**，叠加最新 dossier 等规范化组件后 normalized 为 **1745 full / 502 unabsorbed / 31 partial**。这些 card-level 状态只描述来源覆盖，不再决定用户可见队列；
-- 当前正式首次阅读队列：**299 个 Silver 阅读单元**；Silver 层 337 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。页面仍按每批最多40个阅读单元分页；
+- 当前正式 Silver 工作集共 **348 个知识单元 = 339 queue + 9 knowledge**（原346条全量二审，另从同一讨论核实补回2条独立事实）；候选索引现为 **1698 full / 546 unabsorbed / 34 partial**，叠加最新 dossier 等规范化组件后 normalized 为 **1745 full / 502 unabsorbed / 31 partial**。这些 card-level 状态只描述来源覆盖，不再决定用户可见队列；
+- 当前正式首次阅读队列：**301 个 Silver 阅读单元**；Silver 层 339 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。页面仍按每批最多40个阅读单元分页；
 - 无限服旧阶段“约125条候选”已作废。正式 Silver 重建后实际只有 **12 个无限服 queue 单元**需要进入动态档案；当前已全部按 `baseline_absorb` 吸收，dossier 为 **6 个维度 / 38 个动态 signal**（原27 + 新11），并建立 Silver→signal→原文血缘。重复执行 JSON 全等；未来只有 `visible_update`（state/scope/boundary 实质变化）才重新进入新信息。
 - 当前资料库知识：**10 条 reviewed knowledge**；已阅语义状态共 **44 条（10 knowledge + 34 discard）**。这些状态包含历史已确认语义与当前人工终审，不应把总数直接当作本轮新增点击数。正式 Silver 本体仍为 9 条 initial knowledge，其余 knowledge 状态来自用户后续终审。
 
 这些数字只是当前完整历史回看原型，不是未来每日分析的正常批量，也不是永久业务常量。
 
-当前 346 条 Silver 全量二次清洗阶段归档见 `docs/archive/neat/2026-10-28-full-silver-secondary-cleaning.md`；此前首次阅读价值校准见 `docs/archive/neat/2026-10-28-first-read-value-calibration-and-review-ux.md`，Atomic Claim / Question Cluster 阶段见 `docs/archive/neat/2026-10-21-atomic-claim-question-cluster-cleaning.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
+当前 348 条 Silver 私密知识候选整理与跨批收口见 `docs/archive/neat/2026-11-01-complete-silver-knowledge-candidate-conversion.md`；上一轮正式 Silver 全量二次清洗见 `docs/archive/neat/2026-10-28-full-silver-secondary-cleaning.md`。此前首次阅读价值校准见 `docs/archive/neat/2026-10-28-first-read-value-calibration-and-review-ux.md`，Atomic Claim / Question Cluster 阶段见 `docs/archive/neat/2026-10-21-atomic-claim-question-cluster-cleaning.md`。现行信息模型只以 `docs/rules/analysis.md` 为准。
 
 ## 当前下一步
 
-1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成；当前基线为 **346 Silver / 299 首次阅读 / 10 reviewed knowledge / 44 reviewed states / 38 dossier signals**。
-2. **2026-10-28 已完成现有 346 条 Silver 的全量二次处理。** 所有单元都重新检查了当前 `canonical_facts`、证据卡与可定位 canonical 原文；最终 **60 条重写 / 286 条保持 / 0 条因相邻无关聊天新增旁支知识**，知识 ID 与顺序完全不变。用户已有裁决重新绑定后仍为 **10 knowledge + 34 discard**，资料库条目允许重构但不会丢失用户“有用”裁决。本轮 31/31 回归测试 PASS，质量门禁 **0 errors / 1 个既有来源长尾 warning**。
-3. 本轮校准出的稳定规则包括：具体事实优先于泛化方法论；`coverage=full` 不代表原文没有其它事实；上层卡片无用不能连带删除同一讨论中的独立事实；窄用途事实保持窄表达；冲突玩家口径保留冲突；重复 evidence 只在前台去重；连续原文窗口允许夹相邻无关话题，但不得把这些相邻聊天当成新知识来源。`#009 / #012 / #058 / #059 / #061 / #079 / #110 / #262 / #340 / #343` 是主要人工校准样本。
-4. **下一步只做重建页面的用户抽查，不再要求为验证二次清洗而逐条重新人工清 299 条。** 用户仍可按正常使用方式继续点“没用 / 存资料库”，并重点观察是否还出现新的稳定错误类型；`#114 / #150 / #152 / #171` 继续等用户实际看到内容后再决定。
-5. 在这批历史结果完成抽查、用户确认质量足够稳定之前，继续冻结新采集；之后才恢复真实新 incremental batch，并把本轮规则固定到 daily Silver delta。剩余来源长尾 **110 none** 与部分辅助 evidence 缺口继续作为非阻塞后台债。
+1. 历史清洗、正式 Silver/资料库、已阅语义、无限服 dossier、稳定 Question Registry、正式页面 owner、work package、发布/回滚 runner 与本机页面裁决持久化均已完成；当前基线为 **348 Silver / 301 首次阅读 / 10 reviewed knowledge / 44 reviewed states / 38 dossier signals**。
+2. **2026-10-29 完成独立的 346 条 Silver 二次审计验收与统一发布。** 从 `accepted-results` 复用全部 346 条结果，逐条校验结构、ID、覆盖、顺序及原用户裁决；**325 条重写 / 21 条保持**，另有 **2 条来自同一讨论、已与全局索引查重的独立 rescued unit**（术士循环提示、DK创建门槛分歧），正式 Silver 共 348 条。正式 Silver 只一次性写入；页面 `review-live/page.html` 和 `page-v2-details` 已重建；**303/303 tests OK**，质量 **0 errors / 1 个既有来源锚点 warning**。原 346 个 ID 顺序及 initial_state 不变，用户裁决文件字节未改，重建后 **10 knowledge + 34 discard**。完整发布校验及 SHA 记录见私密 `runtime/analysis-work/secondary-audit/staged-all-346-manifest.json`。
+3. 2026-10-28 的上一轮全量语义校准（60条重写/286条保持）仍是历史阶段事实，详见对应 NEAT 归档；现行正式 Silver 以 2026-10-29 的独立验收发布为准。稳定规则：具体事实优先、窄事实不泛化、用户 discard 不下沉到原文、冲突口径并列保留、连续 raw_context 不挖相邻无关聊天。
+4. **2026-11-01 已完成348条Silver的私密攻略/FAQ知识化与跨批收口。** `runtime/analysis-work/guide-knowledge-pilot-20261030/knowledge-resume-state.json` 当前为 `awaiting_user_review`；全量审计 **348/348 Silver、1833/1833 canonical facts、1809 evidence refs PASS**。同时生成跨批同题/遗漏审查 `history-crossbatch-review.md` 和348条主领域索引 `history-knowledge-index.md`。这些仍是私密候选，没有自动写回正式Silver、用户裁决或正式页面。
+5. **下一步由用户正常浏览正式 review 页面，并按需要从私密主领域索引抽查FAQ候选。** 不要求重新逐条清301条；发现稳定错误类型时先修私密候选。用户确认知识形态和页面方向后，再决定是否正式晋升资料库/改变展示层，或恢复真实 incremental batch。此前继续冻结新采集；来源长尾 **110 none** 与部分辅助 evidence 缺口仍是非阻塞后台债。
 
 下一步严格以 `tasks/todo.md` 为准。
