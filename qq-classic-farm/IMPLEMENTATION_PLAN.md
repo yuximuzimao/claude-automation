@@ -30,26 +30,27 @@ DIRTY/UNKNOWN → STOP
 验证：清理前 226 项测试；清理后 173 项现役测试全部通过。
 `farm_qq_clean.py` 暂留，V2-1 只复用“小 ROI 空地模板”思路并重写接口。
 
-## V2-1 QQ 空田检查器
-
-当前用户确认 QQ 为全空田。
+## V2-1 QQ 空田检查器 — 离线完成，live EMPTY 终验待授权
 
 目标：
 
 ```text
-check-empty qq → EMPTY | NOT_EMPTY | UNKNOWN
+check-empty --platform qq → EMPTY | NOT_EMPTY | UNKNOWN
 ```
 
-- [ ] 恢复/定位 QQ 固定农场窗口。
-- [ ] 用 baseline window 或稳定锚点定位农田。
-- [ ] 复用固定 4×6 网格推导 24 格。
-- [ ] 采当前 QQ 土地版本的 purple-empty / gold-empty 小 ROI。
-- [ ] 每格只检查对应土地等级的局部 ROI。
-- [ ] 24 格全匹配 → EMPTY。
-- [ ] 明确非空 → NOT_EMPTY。
-- [ ] 定位/模板/状态不确定 → UNKNOWN。
+- [x] 固定 603×1111 QQ 农场窗口模型。
+- [x] 复用固定 4×6 网格，不逐格找土地。
+- [x] 在 `ui-layout.json -> qq.empty_check` 固化两个 5×5 ROI：
+  - 土地颜色点：相对既有 origin `(-34,-11)`；
+  - 占用点：相对既有 origin `(-16,+16)`。
+- [x] 空地只按当前颜色就近匹配紫/金原型，不再依赖历史 `land_grades` 判定土地等级。
+- [x] 占用点亮度 <130 为明确非空，>160 才可成为空地候选，130–160 为 UNKNOWN。
+- [x] 实现 `EMPTY / NOT_EMPTY / UNKNOWN`。
+- [x] Runner 新增只读 `check-empty`：两次窗口身份确认 + 一次截图，0 点击。
+- [x] 真实截图离线回放：真空田=EMPTY（24/24）；当前24格月见草=NOT_EMPTY（24/24）；全屏遮罩=UNKNOWN（24/24）；残留大型作物=NOT_EMPTY。
+- [ ] 等用户在当前 Chat 明确允许且获得新的 QQ 空田现场后，执行 live EMPTY 终验。
 
-验收：当前 QQ 空田连续返回 EMPTY；真实幼苗/成熟样本不得返回 EMPTY；收获后空地样本返回 EMPTY。
+旧 19×19 atlas 与两张 sentinel negative 资产已删除；受控白萝卜 empty/seedling/mature/harvested 四态样本保留作历史实测证据。
 
 ## V2-2 QQ 完整种植
 

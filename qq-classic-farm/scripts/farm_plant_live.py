@@ -18,7 +18,7 @@ from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
-from farm_qq_clean import observe_qq_clean_cells
+from farm_qq_clean import check_qq_empty_field
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -91,8 +91,8 @@ class LivePlantAdapter:
         self.pending_empty_count = None
         self.pending_ordinary_seed = None
         handle, shot = self._capture()
-        clean = (observe_qq_clean_cells(shot, self.layout)
-                 if self.platform == "qq" else None)
+        empty_check = (check_qq_empty_field(shot, self.layout)
+                       if self.platform == "qq" else None)
         view = OrdinaryPlantView(
             capture_id=shot.capture_id or "",
             captured_at_ns=shot.captured_at_ns or 0,
@@ -113,8 +113,12 @@ class LivePlantAdapter:
             },
             "overlay": "unknown",
             "field_cells_verified": 0,
-            "empty_cells_candidate": clean,
-            "clean_field_verified": False,
+            "empty_check_status": empty_check.status if empty_check is not None else "UNKNOWN",
+            "empty_check_reason": empty_check.reason if empty_check is not None else "UNSUPPORTED_PLATFORM",
+            "empty_cells": len(empty_check.empty_cells) if empty_check is not None else 0,
+            "occupied_cells": len(empty_check.occupied_cells) if empty_check is not None else 0,
+            "unknown_cells": len(empty_check.unknown_cells) if empty_check is not None else 24,
+            "clean_field_verified": empty_check is not None and empty_check.status == "EMPTY",
             "preview": "unknown",
             "one_key_planting": "unknown",
             "calibration_verified": False,

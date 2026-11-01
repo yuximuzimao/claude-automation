@@ -9,11 +9,11 @@
   - 旧模块现役引用为 0。
   - 173 项保留测试全部通过。
 
-- [ ] **V2-1 QQ 空田检查器**
-  - 先用 2026-11-01 22:33 事故前已保存 QQ 全空截图采 purple-empty / gold-empty 小 ROI。
-  - 固定锚点/基线 + 4×6 网格推导 24 格。
-  - 实现 EMPTY / NOT_EMPTY / UNKNOWN。
-  - 当前 24 格月见草现场只允许只读验证 NOT_EMPTY；新的真机 EMPTY 正例等待用户当前 Chat 明确授权后再采。
+- [ ] **V2-1 QQ 空田检查器：离线完成，live EMPTY 终验待授权**
+  - [x] 固定 4×6 网格 + 两个 5×5 ROI 已实现。
+  - [x] `check-empty --platform qq` 只读命令已实现。
+  - [x] 真实历史空田 / 当前24格月见草 / 遮罩 / 残留作物离线回放符合事实。
+  - [ ] 新的 QQ 真空田出现后，由用户在当前 Chat 明确授权再做 live EMPTY 终验。
 
 - [ ] **V2-2 QQ 完整种植**
   - 四格 placement：固定位置 → picker → 图标/数量 → preview/confirm → 记录 placement。

@@ -16,8 +16,10 @@ from farm_harvest import HarvestStop, prepare_harvest, run_harvest
 from farm_harvest_live import (LiveHarvestAdapter, read_only_harvest_preflight,
                                require_live_window)
 from farm_io import WindowHandle
+from farm_qq_clean import ALL_CELLS, EmptyFieldCheck
 
 
+EMPTY_CHECK = EmptyFieldCheck("EMPTY", ALL_CELLS, (), (), "ALL_24_EMPTY")
 CST = timezone(timedelta(hours=8))
 FRAME = WindowFrame("QQ小程序", "QQ经典农场", 979, 101, 603, 1111)
 HANDLE = WindowHandle(6951, 53086, FRAME)
@@ -100,12 +102,12 @@ class LiveAdapterTests(unittest.TestCase):
             click.assert_not_called()
 
     @patch("farm_harvest_live.require_live_window")
-    @patch("farm_harvest_live.observe_qq_clean_cells", return_value=24)
+    @patch("farm_harvest_live.check_qq_empty_field", return_value=EMPTY_CHECK)
     @patch("farm_harvest_live.probe_harvest")
     @patch("farm_harvest_live.capture_window")
     @patch("farm_harvest_live.find_farm_window")
-    def test_local_qq_empty_patches_do_not_certify_clean_field(
-        self, registry, capture, probe, _clean, _clock
+    def test_v2_empty_check_does_not_authorize_harvest_by_itself(
+        self, registry, capture, probe, _check, _clock
     ):
         registry.return_value = HANDLE
         capture.return_value = FakeCapture()
@@ -116,18 +118,19 @@ class LiveAdapterTests(unittest.TestCase):
             with self.assertRaises(HarvestStop) as caught:
                 run_harvest(adapter)
             self.assertEqual(caught.exception.code, "UNKNOWN_OVERLAY")
-            self.assertTrue(adapter.last_diagnostics["candidate_clean_local_templates"])
+            self.assertTrue(adapter.last_diagnostics["empty_field_candidate"])
+            self.assertTrue(adapter.last_diagnostics["clean_field_verified"])
             self.assertFalse(adapter.last_diagnostics["already_clean_verified"])
             self.assertFalse(adapter.last_diagnostics["can_authorize_clicks"])
             click.assert_not_called()
 
     @patch("farm_harvest_live.require_live_window")
-    @patch("farm_harvest_live.observe_qq_clean_cells", return_value=24)
+    @patch("farm_harvest_live.check_qq_empty_field", return_value=EMPTY_CHECK)
     @patch("farm_harvest_live.probe_harvest")
     @patch("farm_harvest_live.capture_window")
     @patch("farm_harvest_live.find_farm_window")
-    def test_clean_patch_cannot_override_conflicting_crop_controls(
-        self, registry, capture, probe, _clean, _clock
+    def test_empty_check_cannot_override_conflicting_crop_controls(
+        self, registry, capture, probe, _check, _clock
     ):
         registry.return_value = HANDLE
         capture.return_value = FakeCapture()
