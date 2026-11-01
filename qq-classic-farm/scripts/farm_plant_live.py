@@ -28,6 +28,9 @@ from farm_qq_clean import ALL_CELLS, observe_qq_clean_cells
 from farm_plant_special import Cell, SpecialPlantStop
 
 
+QQ_CONFIRMED_ORDINARY_SEEDS = frozenset({"天山红枫种子"})
+
+
 class LivePlantAdapter:
     """Real registry/capture + fail-closed M2 adapter, with gated CGEvent transport.
 
@@ -53,10 +56,17 @@ class LivePlantAdapter:
         self.last_field: OrdinaryPlantView | None = None
         self.last_field_capture = None
         self.last_picker: PickerView | None = None
+        self.last_picker_expected_slot: int | None = None
+        self.last_picker_target_seed: str | None = None
         self.last_picker_capture = None
         self.last_picker_total: int | None = None
         self.last_picker_y_shift: int | None = None
         self.last_diagnostics: dict = {}
+        # Only a verified open_plot may arm a later picker seed selection.
+        # This survives picker captures/page turns but not a new field probe.
+        self.pending_picker_origin: tuple | None = None
+        self.pending_empty_count: int | None = None
+        self.pending_ordinary_seed: str | None = None
         # Never set by the current uncalibrated observer.
         self.calibration_verified = False
 
@@ -66,6 +76,8 @@ class LivePlantAdapter:
         self.last_field = None
         self.last_field_capture = None
         self.last_picker = None
+        self.last_picker_expected_slot = None
+        self.last_picker_target_seed = None
         self.last_picker_capture = None
         self.last_picker_total = None
         self.last_picker_y_shift = None
@@ -167,6 +179,9 @@ class LivePlantAdapter:
                                "Legacy landing ROI cannot independently verify crop ownership")
 
     def observe_field(self) -> OrdinaryPlantView:
+        self.pending_picker_origin = None
+        self.pending_empty_count = None
+        self.pending_ordinary_seed = None
         handle, shot = self._capture()
         clean = (observe_qq_clean_cells(shot, self.layout)
                  if self.platform == "qq" else None)
@@ -201,7 +216,12 @@ class LivePlantAdapter:
 
     def observe(self, expected_slot: int, target_seed: str) -> PickerView:
         # Fresh real screenshot; no historical page/slot or quantity is trusted.
-        _, shot = self._capture()
+        handle, shot = self._capture()
+        if (self.pending_picker_origin is not None
+            and _identity(handle) != self.pending_picker_origin):
+            self.pending_picker_origin = None
+            self.pending_empty_count = None
+            self.pending_ordinary_seed = None
         evidence = observe_picker(shot, self.platform, expected_slot,
                                   target_seed, self.ocr_binary)
         if evidence.get("one_key_confirmation_pending") is True:
@@ -214,6 +234,8 @@ class LivePlantAdapter:
                           target_quantity=evidence["target_quantity"],
                           one_key_planting=evidence["one_key_planting"])
         self.last_picker = view
+        self.last_picker_expected_slot = expected_slot
+        self.last_picker_target_seed = target_seed
         self.last_picker_capture = shot
         self.last_picker_total = evidence["total_pages"]
         self.last_picker_y_shift = evidence["picker_y_shift"]
@@ -285,6 +307,8 @@ class LivePlantAdapter:
             self.last_field = None
             self.last_field_capture = None
             self.last_picker = None
+            self.last_picker_expected_slot = None
+            self.last_picker_target_seed = None
             self.calibration_verified = False
 
     def open_plot(self, anchor_cell: Cell) -> None:
@@ -325,7 +349,14 @@ class LivePlantAdapter:
         except (FieldStop, GeometryStop, ValueError, KeyError, TypeError) as exc:
             raise SpecialPlantStop("PLANT_ALIGNMENT_UNVERIFIED",
                                    "Cannot register safe plot coordinate") from exc
+        self.pending_picker_origin = None
+        self.pending_empty_count = None
+        self.pending_ordinary_seed = None
         self._send_points(((x, y),))
+        # _send_points invalidates the pre-click field authority. Only the
+        # verified picker from this very click can later select a seed.
+        self.pending_picker_origin = _identity(handle)
+        self.pending_empty_count = sum(not value for value in field.field_cells.values())
 
     def turn_pages(self, direction: int, count: int) -> None:
         """Only QQ verified bounded arrow navigation; never selects a seed."""
@@ -373,13 +404,89 @@ class LivePlantAdapter:
             # A sent batch can never reuse the pre-navigation screenshot.
             self.last_handle = None
             self.last_picker = None
+            self.last_picker_expected_slot = None
+            self.last_picker_target_seed = None
             self.last_picker_capture = None
             self.last_picker_total = None
             self.last_picker_y_shift = None
 
+    def arm_ordinary_selection(self, count: int, seed: str) -> None:
+        """Bind verified ordinary transaction intent to this exact picker target."""
+        self.pending_ordinary_seed = None
+        if (type(count) is not int or count != self.pending_empty_count
+            or self.platform != "qq" or not isinstance(seed, str) or not seed
+            or seed not in QQ_CONFIRMED_ORDINARY_SEEDS
+            or seed != self.last_picker_target_seed
+            or self.last_picker is None or self.last_picker.one_key_planting is not True
+            or self.last_picker.target_icon_verified is not True
+            or type(self.last_picker.target_quantity) is not int
+            or self.last_picker.target_quantity < count
+            or self.last_handle is None
+            or self.pending_picker_origin != _identity(self.last_handle)):
+            raise SpecialPlantStop("PLANT_SELECTION_UNVERIFIED",
+                                   "Ordinary plan must match verified picker and all empty plots")
+        self.pending_ordinary_seed = seed
+
     def select_seed(self, slot: int) -> None:
-        raise SpecialPlantStop("STATE_DRIFT",
-                               "Live seed icon and quantity are not verified")
+        """Select an ordinary seed only from a verified ON-mode picker session.
+
+        Selecting in ON mode immediately plants every empty plot. An OFF-mode
+        picker is deliberately not supported here: special preview and
+        single-plot semantics have not been independently calibrated.
+        """
+        require_live_window()
+        view, shot, handle = self.last_picker, self.last_picker_capture, self.last_handle
+        empty_count = self.pending_empty_count
+        if (not self.execute or self.click_binary is None or self.platform != "qq"
+            or view is None or shot is None or handle is None
+            or self.pending_picker_origin != _identity(handle)
+            or type(empty_count) is not int or not 1 <= empty_count <= 24
+            or type(slot) is not int or not 1 <= slot <= 5
+            or slot != self.last_picker_expected_slot
+            or not self.pending_ordinary_seed
+            or self.pending_ordinary_seed != self.last_picker_target_seed
+            or type(self.last_picker_y_shift) is not int
+            or not -100 <= self.last_picker_y_shift <= 100
+            or type(view.page) is not int or view.target_icon_verified is not True
+            or type(view.target_quantity) is not int
+            or view.target_quantity < empty_count
+            or view.one_key_planting is not True):
+            raise SpecialPlantStop("PLANT_SELECTION_UNVERIFIED",
+                                   "Verified ON picker, seed, stock and originating empty plots required")
+        if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
+            raise SpecialPlantStop("PICKER_STALE_PRECONDITION", "Picker screenshot older than 2 seconds")
+        current = find_farm_window(self.platform, self.layout, self.registry_binary)
+        if not _same_handle(handle, current):
+            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed before seed selection")
+        from farm_picker_vision import QQ_SLOT_X
+        f = handle.frame
+        batch = {
+            "window_id": handle.window_id, "pid": handle.pid,
+            "owner": f.owner, "title": f.title,
+            "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
+            "actions": [{"x": QQ_SLOT_X[slot - 1] * f.width / 603,
+                         "y": (785 + self.last_picker_y_shift) * f.height / 1111,
+                         "delay_ms": 100}],
+        }
+        # Consume authority before the irreversible action, even on timeout.
+        self.pending_picker_origin = None
+        self.pending_empty_count = None
+        self.pending_ordinary_seed = None
+        self.last_picker = None
+        self.last_picker_expected_slot = None
+        self.last_picker_target_seed = None
+        self.last_picker_capture = None
+        self.last_handle = None
+        try:
+            result = subprocess.run(
+                [str(self.click_binary), "--execute"], input=json.dumps(batch),
+                text=True, capture_output=True, timeout=30, check=False,
+            )
+            parse_click_batch_result(result.stdout, result.returncode, 1)
+        except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
+            raise SpecialPlantStop("PLANT_ACTION_UNCERTAIN",
+                                   "Seed selection may have planted; never retry",
+                                   action_may_have_been_sent=True) from exc
 
     def confirm_special(self) -> None:
         raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED",

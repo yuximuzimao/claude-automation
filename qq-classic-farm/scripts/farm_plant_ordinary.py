@@ -84,6 +84,11 @@ def plant_ordinary_one_key(
         raise OrdinaryPlantStop("ONE_KEY_NOT_VERIFIED",
                                 "One-key planting must be visibly enabled in the picker",
                                 action_may_have_been_sent=True)
+    # The real adapter requires explicit ordinary intent: selecting a 4-grid
+    # special seed must never inherit ordinary ON-mode click authority.
+    arm = getattr(adapter, "arm_ordinary_selection", None)
+    if arm is not None:
+        _act(arm, count, seed)
     _act(adapter.select_seed, picker["position"]["slot"])
     _act(adapter.wait, 2.0)
     completed_at = _after_action_clock(clock_ns)

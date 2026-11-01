@@ -1,8 +1,10 @@
 # 当前状态
 
-更新时间：2026-11-01 16:45 CST（M2 已配准 open_plot 接线离线通过；紫晶6格仍unknown，M1/M2及微信未验收，run-next STOP）
+更新时间：2026-11-01 19:49 CST（M2 picker→普通选种 I/O 仅离线接通；紫晶6格及一键ON仍unknown，M1/M2和微信未验收，run-next STOP）
 
 ## Runner 当前开发检查点
+
+- **2026-11-01 19:43 CST M2 picker→普通一键选种接口离线接通，未进行实机操作**：已补 `LivePlantAdapter.select_seed`，复用已有 QQ picker 实测图标/数量和 CGEvent helper；只有经独立24格占用语义成功 `open_plot` 的同窗会话、目标槽位一致、数量覆盖全部空格、一键模式独立确认为 ON、新鲜截图及窗口身份仍一致才允许一次本地选种点击。令牌在执行前消耗，失败/部分发送不盲重试。OFF/unknown、缺 token、数量不足、错槽位均 STOP；四格预览和确认仍不开放。226项离线测试通过，普通分支仅允许已确认的QQ天山红枫，四格泡泡棉花糖不能误入；**没有真机播种或 ON 正例**，当前 QQ/微信 inventory_dirty，QQ 紫晶6格unknown，M1/M2及微信未验收，`run-next=RUNNER_NOT_READY`。距离 M2 验收缩短的是最后一段已验证 picker→种子点击的真实 I/O 接口；实际放行仍需独立24格占用和 ON 模式现场正例。
 
 - **2026-11-01 18:35–18:39 CST QQ M2 一键种植开关现场受控验证（非完整种植验收）**：Mac本地许可时段，QQ农场既有缩略窗经已验证入口安全恢复603×1111、window_id=8596。真实空田目视、紫晶田配准5/6 `[-9.3459,+18.4146]`；受控打开金格(3,2) picker 后独立读取1/7页、泡泡棉花糖21、一键OFF、shift=21。点击 OFF 开关**实际弹出二次确认框**，明确警告“开启一键种植后，将自动为所有空置地块种植当前选中的作物”；未确认，保存仅弹窗局部真实证据 `assets/ui/picker/qq-one-key-enable-confirm.png`，经确认取消按钮身份及Swift preflight后单击取消，独立读回OFF/21，安全空白关闭 picker，再读到 picker page=None、紫晶配准6/6。未选种、未购买、未播种/收获、未用钻石/化肥、未修改真实库存；未声称绝对24格已验证。新增 `observe_one_key_enable_confirmation()` 检出该模态并在 live adapter 结构化 `ONE_KEY_CONFIRMATION_PENDING` 停止；ON本身仍**未实测验收**，不能自动点击确认。下一轮优先处理这条已知二次确认的安全事务与四格预览/落地的独立证据，不重复普通picker翻页或RGB调参；M1/M2/微信未验收、库存dirty、run-next STOP。
 

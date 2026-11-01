@@ -1,5 +1,6 @@
 # Todo
 
+- [ ] **2026-11-01 19:43 CST M2 普通种子选择已接本地单击但仍禁止真机**：`LivePlantAdapter.select_seed` 仅在已验证 `open_plot` 会话、同窗新鲜 picker、目标slot一致/图标唯一/数量≥全部空格、独立确认一键ON时执行一次受禁区/焦点/遮挡保护的 CGEvent；OFF/unknown/缺来源/错槽位/库存不足 STOP，发送前消费授权防重播。226项离线测试通过；仅QQ天山红枫已确认普通分支，四格泡泡棉花糖不能误选；未操作QQ/微信，**当前24格占用及 ON 仍无正例**，所以不允许运行真实选种。下一直接阻塞：紫晶6格独立占用证据→ON真机正例→受控一键选种后24格占用终验，四格preview与微信随后；M1/M2未验收，run-next STOP。
 - [ ] **2026-11-01 18:39 CST M2 一键模式确认弹窗已真实发现、ON仍未验收**：QQ允许时段在空田金格安全打开picker（1/7、棉花糖21、one-key OFF、shift=21），点击OFF后出现“开启一键种植后，将自动为所有空置地块种植当前选中的作物”二次确认；保存真实局部图并取消，独立复核OFF/21、关闭picker，0播种/库存变化。新增弹窗识别→`ONE_KEY_CONFIRMATION_PENDING` STOP，不能把已点击复选框当作ON，也不能在24格占用未知/库存dirty时确认。下一最短实机前置：独立24格语义和真实库存同步后，设计可撤销/可验收的确认事务，再做ON/四格实际落地；QQ/微信单命令闭环未验收，run-next禁用。
 
 - [ ] **2026-11-01 16:45 CST M2 真实 open_plot I/O 接线离线完成、实机未验收**：本轮处于 Mac 16:00–17:00禁区，0游戏I/O；将旧 `LivePlantAdapter.open_plot` 无条件STOP改为有条件的注册地块路由，严格要求独立24格占用/无overlay/无preview/同窗可信截图/显式 calibration_verified；从真实紫晶土壤注册偏移计算点击位置并交给现有每批禁区/焦点/遮挡 CGEvent 门禁。测试在模拟已验证田格时得到QQ金格(3,2)约(301.52,689.09)，未校准/已占/配准不明均STOP。220项全量Python测试通过。**当前实际 live observe_field 仍返回 unknown、calibration_verified=false，不可真实播种**。下一步若紫晶6格无法独立判占用，继续推进 M2 ON/preview 的最小现场语义证据，不再补局部RGB阈值；随后串QQ单命令再验证微信。M1/M2、库存、微信均未验收；run-next STOP。

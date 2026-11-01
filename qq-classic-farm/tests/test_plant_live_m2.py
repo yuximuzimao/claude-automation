@@ -216,6 +216,117 @@ class LivePlantTests(unittest.TestCase):
                 with self.assertRaises(SpecialPlantStop):
                     method(*args)
 
+    def test_verified_ordinary_on_picker_selection_is_single_gated_cgevent(self):
+        import json
+        from types import SimpleNamespace
+        from farm_plant_picker import PickerView
+        from farm_harvest_live import _identity
+
+        adapter = self.adapter(execute=True)
+        adapter.pending_picker_origin = _identity(HANDLE)
+        adapter.pending_empty_count = 2
+        adapter.last_handle = HANDLE
+        adapter.last_picker_capture = FakeCapture()
+        adapter.last_picker_expected_slot = 3
+        adapter.last_picker_target_seed = "天山红枫种子"
+        adapter.last_picker = PickerView(page=1, target_icon_verified=True,
+                                         target_quantity=21, one_key_planting=True)
+        adapter.arm_ordinary_selection(2, "天山红枫种子")
+        adapter.last_picker_y_shift = 21
+        response = SimpleNamespace(returncode=0, stdout=json.dumps({
+            "status": "clicks_sent_unverified", "click_count": 1,
+        }))
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns", return_value=FakeCapture.captured_at_ns + 10),
+              patch("farm_plant_live.find_farm_window", return_value=HANDLE),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg):
+            adapter.select_seed(3)
+            payload = json.loads(cg.call_args.kwargs["input"])
+            self.assertEqual(payload["window_id"], HANDLE.window_id)
+            self.assertEqual(len(payload["actions"]), 1)
+            self.assertAlmostEqual(payload["actions"][0]["x"], 287)
+            self.assertAlmostEqual(payload["actions"][0]["y"], 806)
+            self.assertIsNone(adapter.pending_picker_origin)
+            self.assertIsNone(adapter.last_picker)
+            with self.assertRaises(SpecialPlantStop):
+                adapter.select_seed(3)
+            self.assertEqual(cg.call_count, 1)
+
+    def test_picker_selection_never_sends_without_verified_on_origin_and_stock(self):
+        from farm_plant_picker import PickerView
+        from farm_harvest_live import _identity
+        adapter = self.adapter(execute=True)
+        adapter.pending_picker_origin = _identity(HANDLE)
+        adapter.pending_empty_count = 4
+        adapter.last_handle = HANDLE
+        adapter.last_picker_capture = FakeCapture()
+        adapter.last_picker_expected_slot = 3
+        adapter.last_picker_target_seed = "天山红枫种子"
+        adapter.pending_ordinary_seed = "天山红枫种子"
+        adapter.last_picker_y_shift = 21
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.subprocess.run") as cg):
+            for mode, qty, slot in [(False, 21, 3), (None, 21, 3),
+                                    (True, 3, 3), (True, 21, 0), (True, 21, 4)]:
+                adapter.last_picker = PickerView(page=1, target_icon_verified=True,
+                                                 target_quantity=qty, one_key_planting=mode)
+                with self.assertRaises(SpecialPlantStop) as caught:
+                    adapter.select_seed(slot)
+                self.assertEqual(caught.exception.code, "PLANT_SELECTION_UNVERIFIED")
+            adapter.pending_picker_origin = None
+            adapter.last_picker = PickerView(page=1, target_icon_verified=True,
+                                             target_quantity=21, one_key_planting=True)
+            with self.assertRaises(SpecialPlantStop):
+                adapter.select_seed(3)
+            cg.assert_not_called()
+
+    def test_ordinary_intent_cannot_be_armed_for_special_or_wrong_count(self):
+        from farm_plant_picker import PickerView
+        from farm_harvest_live import _identity
+        adapter = self.adapter(execute=True)
+        adapter.pending_picker_origin = _identity(HANDLE)
+        adapter.pending_empty_count = 4
+        adapter.last_handle = HANDLE
+        adapter.last_picker_target_seed = "泡泡棉花糖种子"
+        adapter.last_picker = PickerView(page=1, target_icon_verified=True,
+                                         target_quantity=21, one_key_planting=True)
+        with patch("farm_plant_live.subprocess.run") as cg:
+            for count, seed in ((4, "天山红枫种子"), (3, "泡泡棉花糖种子"),
+                                (4, "泡泡棉花糖种子")):
+                with self.assertRaises(SpecialPlantStop):
+                    adapter.arm_ordinary_selection(count, seed)
+            self.assertIsNone(adapter.pending_ordinary_seed)
+            cg.assert_not_called()
+
+    def test_picker_selection_partial_result_is_uncertain_and_not_replayed(self):
+        from types import SimpleNamespace
+        from farm_plant_picker import PickerView
+        from farm_harvest_live import _identity
+        adapter = self.adapter(execute=True)
+        adapter.pending_picker_origin = _identity(HANDLE)
+        adapter.pending_empty_count = 2
+        adapter.last_handle = HANDLE
+        adapter.last_picker_capture = FakeCapture()
+        adapter.last_picker_expected_slot = 3
+        adapter.last_picker_target_seed = "天山红枫种子"
+        adapter.last_picker = PickerView(page=1, target_icon_verified=True,
+                                         target_quantity=21, one_key_planting=True)
+        adapter.arm_ordinary_selection(2, "天山红枫种子")
+        adapter.last_picker_y_shift = 21
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns", return_value=FakeCapture.captured_at_ns + 10),
+              patch("farm_plant_live.find_farm_window", return_value=HANDLE),
+              patch("farm_plant_live.subprocess.run", return_value=SimpleNamespace(
+                  returncode=2, stdout='{"status":"stopped","click_count":0}')) as cg):
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.select_seed(3)
+            self.assertEqual(caught.exception.code, "PLANT_ACTION_UNCERTAIN")
+            self.assertTrue(caught.exception.action_may_have_been_sent)
+            self.assertIsNone(adapter.pending_picker_origin)
+            with self.assertRaises(SpecialPlantStop):
+                adapter.select_seed(3)
+            self.assertEqual(cg.call_count, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
