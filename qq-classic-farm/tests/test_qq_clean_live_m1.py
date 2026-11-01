@@ -118,8 +118,9 @@ class QQCleanFieldTests(unittest.TestCase):
             plant = LivePlantAdapter("qq", self.layout, Path("/tmp/registry"),
                                      Path("/tmp/click"), execute=True)
             view = plant.observe_field()
-            self.assertEqual(len(view.field_cells), 24)
-            self.assertFalse(any(view.field_cells.values()))
+            self.assertIsNone(view.field_cells)
+            self.assertEqual(plant.last_diagnostics["empty_cells_candidate"], 24)
+            self.assertFalse(plant.last_diagnostics["clean_field_verified"])
             self.assertEqual(view.overlay, "unknown")
             self.assertFalse(plant.calibration_verified)
             with self.assertRaises(SpecialPlantStop):
@@ -133,13 +134,16 @@ class QQCleanFieldTests(unittest.TestCase):
             harvest = LiveHarvestAdapter("qq", self.layout, {},
                                          Path("/tmp/registry"), execute=True)
             obs = harvest.observe()
-            self.assertEqual(obs.empty_cells, (True,) * 24)
-            self.assertEqual(obs.overlay, "none")
-            self.assertTrue(obs.calibration_verified)
-            self.assertEqual(obs.occupied_special, frozenset())
+            self.assertIsNone(obs.empty_cells)
+            self.assertEqual(obs.overlay, "unknown")
+            self.assertFalse(obs.calibration_verified)
+            self.assertIsNone(obs.occupied_special)
+            self.assertTrue(harvest.last_diagnostics["candidate_clean_local_templates"])
+            self.assertFalse(harvest.last_diagnostics["clean_field_verified"])
             self.assertFalse(harvest.last_diagnostics["can_authorize_clicks"])
-            from farm_harvest import prepare_harvest
-            self.assertEqual(prepare_harvest(obs), ())
+            from farm_harvest import HarvestStop, prepare_harvest
+            with self.assertRaises(HarvestStop):
+                prepare_harvest(obs)
 
 
 if __name__ == "__main__":

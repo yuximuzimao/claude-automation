@@ -1,5 +1,7 @@
 # Todo
 
+- [ ] **2026-11-01 12:38–12:43 CST 本轮直接阻塞（离线已修，实机待验收）**：局部19×19模板/下方暗色哨兵不能证明24格全空；已在M1/M2真实adapter撤销候选clean=24→已验收空田的错误升级，历史already_clean零动作结论不再视为可靠终验。旧两帧落点proof因复用同一检测器已结构化停用；新 farm_field_delta.py + LivePlantAdapter 三帧（before/idle/after）只读整田仿射变化诊断已接线，记录候选变化格而不推断唯一真实落地格。209项全量测试和M0 dry-run通过；本轮12:00–13:00禁区无任何QQ/微信实机操作。**下一最短真实步骤**：许可时段安全恢复已存在QQ窗口，先验证田埂配准、遮挡与无输入动画对照，再用少量已核实金币白萝卜获得一组真实前后帧，独立区分名义点击格、作物渲染外溢与实际占用；无可靠语义证据则STOP。M1/M2和微信未验收，库存dirty，run-next保持禁用；不要再用RGB微调当进度。
+
 - [ ] **2026-11-01 10:40 CST M2 组合接线（仅离线）**：QQ 只读预检 `WINDOW_SIZE_CHANGED`，未操作桌面。`run_plant_phase_with_recovery` 现在可显式传入 `state_path`，完整事务及 phase verified 后调用已有 `commit_verified_inventory`；成功才报告 `persisted=true`/新 revision，漂移时 journal 留待人工 reconcile。205项全量 Python 测试通过；真实库存未动。**下一直接阻塞**仍是 QQ 窗口稳定恢复后白萝卜点击→实际落地格实测、四格预览/确认、ON模式24格终验、真实库存同步、微信农场。M1/M2 未验收，run-next STOP。
 
 - [ ] **2026-11-01 凌晨 M2 离线 confirmed-only 库存提交接口（非实机验收）**：新增 PlantRecoveryJournal.commit_verified_inventory(state_path)，仅在已完成 verified journal、原库存/版本一致且 inventory_dirty=false 时，原子提交确认消耗并版本+1，journal 随后标记 committed；同对象幂等防止提交后标记失败导致重复扣减，旧 journal 不自动重播。202项 Python全量测试和 dry-run通过；真实 farm-state 未改，QQ/微信窗口未碰。**下一直接阻塞**：真实库存同步、QQ点击→实际落点、四格预览/确认/落地、ON模式普通一键24格终验、微信实机。03:00 CST前用户占用，禁止任何桌面实机操作；之后仍严格避开六组禁区。M1/M2完整验收未完成，run-next STOP。

@@ -104,7 +104,7 @@ class LiveAdapterTests(unittest.TestCase):
     @patch("farm_harvest_live.probe_harvest")
     @patch("farm_harvest_live.capture_window")
     @patch("farm_harvest_live.find_farm_window")
-    def test_verified_qq_empty_field_reaches_fsm_without_click(
+    def test_local_qq_empty_patches_do_not_certify_clean_field(
         self, registry, capture, probe, _clean, _clock
     ):
         registry.return_value = HANDLE
@@ -113,11 +113,11 @@ class LiveAdapterTests(unittest.TestCase):
                               "raw_pickable_candidates": [], "pickables": []}
         adapter = self.adapter(execute=True)
         with patch.object(adapter, "click_batch", side_effect=AssertionError("Never click")) as click:
-            result = run_harvest(adapter)
-            self.assertEqual(result["status"], "already_clean")
-            self.assertEqual(result["click_count"], 0)
-            self.assertEqual(result["llm_round_trips"], 0)
-            self.assertTrue(adapter.last_diagnostics["already_clean_verified"])
+            with self.assertRaises(HarvestStop) as caught:
+                run_harvest(adapter)
+            self.assertEqual(caught.exception.code, "UNKNOWN_OVERLAY")
+            self.assertTrue(adapter.last_diagnostics["candidate_clean_local_templates"])
+            self.assertFalse(adapter.last_diagnostics["already_clean_verified"])
             self.assertFalse(adapter.last_diagnostics["can_authorize_clicks"])
             click.assert_not_called()
 

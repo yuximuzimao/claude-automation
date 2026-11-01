@@ -13,13 +13,13 @@ import subprocess
 from time import monotonic_ns, sleep
 
 from farm_capture import capture_window
+from farm_field_delta import FieldDelta, FieldDeltaStop, analyze_field_delta
 from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
 from farm_qq_clean import ALL_CELLS, observe_qq_clean_cells
-from farm_qq_landing import LandingProof, verify_qq_single_radish_landing
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -73,33 +73,46 @@ class LivePlantAdapter:
         self.last_handle = before
         return before, shot
 
-    def capture_landing_baseline(self):
-        """Read-only clean QQ baseline for a separately authorized test seed."""
-        if self.platform != "qq":
-            raise SpecialPlantStop("PLANT_LANDING_UNVERIFIED", "QQ-only seedling evidence")
-        handle, shot = self._capture()
-        if observe_qq_clean_cells(shot, self.layout) != 24:
-            raise SpecialPlantStop("PLANT_FIELD_UNVERIFIED", "Baseline is not independently clean")
-        return handle, shot
+    def capture_field_delta_control(self):
+        """Two fresh no-input captures, for full-field calibration only.
 
-    def verify_landing_since(self, before_handle: WindowHandle, before_shot) -> LandingProof:
-        """Read-only post-test proof; does not plant, authorize, or debit stock."""
-        if self.platform != "qq":
-            raise SpecialPlantStop("PLANT_LANDING_UNVERIFIED", "QQ-only seedling evidence")
-        after_handle, after_shot = self._capture()
+        Caller must independently confirm a known, safe test scene. This
+        method never classifies empty land or authorizes a subsequent click.
+        """
+        before_handle, before = self._capture()
+        sleep(0.4)
+        idle_handle, idle = self._capture()
+        if not _same_handle(before_handle, idle_handle):
+            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during idle control")
+        return before_handle, before, idle
+
+    def verify_field_delta_since(self, before_handle: WindowHandle, before, idle) -> FieldDelta:
+        """Read-only after frame; evidence remains diagnostic, not landing proof."""
+        after_handle, after = self._capture()
         if not _same_handle(before_handle, after_handle):
             raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during test")
-        proof = verify_qq_single_radish_landing(before_shot, after_shot, self.layout)
-        if proof is None:
-            raise SpecialPlantStop("PLANT_LANDING_UNVERIFIED",
-                                   "Exactly one known QQ radish seedling was not proven")
+        try:
+            evidence = analyze_field_delta(before, idle, after, self.platform, self.layout)
+        except FieldDeltaStop as exc:
+            raise SpecialPlantStop(exc.code, str(exc)) from exc
         self.last_diagnostics = {
-            "platform": "qq", "observed_landing_cell": list(proof.observed_cell),
-            "before_capture_id": proof.capture_before,
-            "after_capture_id": proof.capture_after,
+            "platform": self.platform, "field_delta_status": evidence.status,
+            "changed_pixels": evidence.changed_pixels,
+            "candidate_cells": [list(p) for p in evidence.candidate_cells],
+            "capture_ids": list(evidence.capture_ids),
             "can_authorize_clicks": False, "inventory_updated": False,
         }
-        return proof
+        return evidence
+
+    def capture_landing_baseline(self):
+        """Retired: the center-only empty-field detector is not an absolute proof."""
+        raise SpecialPlantStop("PLANT_LANDING_METHOD_UNSAFE",
+                               "Use three-frame whole-field calibration; legacy baseline has blind spots")
+
+    def verify_landing_since(self, before_handle: WindowHandle, before_shot):
+        """Retired: the legacy landing check reuses the same incomplete detector."""
+        raise SpecialPlantStop("PLANT_LANDING_METHOD_UNSAFE",
+                               "Legacy landing ROI cannot independently verify crop ownership")
 
     def observe_field(self) -> OrdinaryPlantView:
         handle, shot = self._capture()
@@ -110,7 +123,7 @@ class LivePlantAdapter:
             captured_at_ns=shot.captured_at_ns or 0,
             window_identity=_identity(handle),
             overlay="unknown",
-            field_cells=({cell: False for cell in ALL_CELLS} if clean == 24 else None),
+            field_cells=None,  # Partial soil templates do not prove empty plots.
             preview_cells=None,
             one_key_planting=None,
         )
@@ -123,8 +136,9 @@ class LivePlantAdapter:
                 "x": handle.frame.x, "y": handle.frame.y,
             },
             "overlay": "unknown",
-            "field_cells_verified": (24 if clean == 24 else 0),
-            "clean_field_verified": clean == 24,
+            "field_cells_verified": 0,
+            "empty_cells_candidate": clean,
+            "clean_field_verified": False,
             "preview": "unknown",
             "one_key_planting": "unknown",
             "calibration_verified": False,

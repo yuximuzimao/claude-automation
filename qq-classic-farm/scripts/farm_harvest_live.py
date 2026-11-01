@@ -98,10 +98,11 @@ class LiveHarvestAdapter:
         hand = probe.get("hand", {})
         point = tuple(hand["local_center"]) if hand.get("matched") else None
         candidates = probe.get("raw_pickable_candidates", probe.get("pickables", []))
-        # The 24 independently empty QQ cells plus absence of actionable controls
-        # can certify only the zero-action terminal state. It does NOT calibrate
-        # occupied crops, star ownership, overlays on mature fields, or clicks.
-        already_clean = clean == 24 and point is None and len(candidates) == 0
+        # Center patches and lower sentinels cover only part of each tile.
+        # A verified real seedling outside those ROIs can still look clean.
+        # Therefore clean==24 is only a local-template *candidate*, never a
+        # terminal state or independent occupancy proof.
+        candidate_clean = clean == 24 and point is None and len(candidates) == 0
         # The current detector produces *candidate* stars, not independently
         # verified 2x2 crop occupancy. Never promote them to click targets.
         self.last_diagnostics = {
@@ -113,24 +114,25 @@ class LiveHarvestAdapter:
                                            probe.get("pickables", [])),
             "legacy_safe_placement_matches": probe.get("pickables", []),
             "ignored_outside_special_centers": probe.get("ignored_outside_special_centers"),
-            "overlay": "none" if already_clean else "unknown",
-            "calibration_verified": already_clean,
-            "occupied_special": [] if already_clean else None,
-            "empty_cells": clean,
-            "clean_field_verified": clean == 24,
-            "already_clean_verified": already_clean,
+            "overlay": "unknown",
+            "calibration_verified": False,
+            "occupied_special": None,
+            "empty_cells_candidate": clean,
+            "candidate_clean_local_templates": candidate_clean,
+            "clean_field_verified": False,
+            "already_clean_verified": False,
             "can_authorize_clicks": False,
         }
         obs = HarvestObservation(
-            overlay="none" if already_clean else "unknown",
-            calibration_verified=already_clean,
+            overlay="unknown",
+            calibration_verified=False,
             window_identity=_identity(handle),
             window_width=handle.frame.width, window_height=handle.frame.height,
             capture_id=capture.capture_id or "",
             captured_at_ns=capture.captured_at_ns or 0,
             hand=point, special=(),
-            occupied_special=(frozenset() if already_clean else None),
-            empty_cells=(tuple(True for _ in range(24)) if clean == 24 else None),
+            occupied_special=None,
+            empty_cells=None,
         )
         self.last_handle = handle
         self.last_observation = obs

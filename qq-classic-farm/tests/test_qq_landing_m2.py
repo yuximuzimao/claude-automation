@@ -97,38 +97,41 @@ class LandingProofTests(unittest.TestCase):
             self.shot(before, "a", 100), self.shot(after, "b", 200, moved),
             self.layout))
 
-    def test_live_adapter_returns_only_observed_landing_and_never_clicks(self):
+    def test_legacy_live_landing_route_is_retired_without_input(self):
+        adapter = LivePlantAdapter("qq", self.layout, Path("/tmp/registry"),
+                                   Path("/tmp/click"), execute=True)
+        with patch("farm_plant_live.subprocess.run", side_effect=AssertionError("No click")):
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.capture_landing_baseline()
+            self.assertEqual(caught.exception.code, "PLANT_LANDING_METHOD_UNSAFE")
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.verify_landing_since(None, None)
+            self.assertEqual(caught.exception.code, "PLANT_LANDING_METHOD_UNSAFE")
+
+    def test_live_three_frame_diagnostic_never_authorizes_clicks(self):
         before = self.empty()
+        idle = before.copy()
         after = before.copy()
-        self.add_seedling(after, (2, 2))
+        x, y = self.center((0, 0))
+        after[y-21:y-15, x+13:x+21] = (25, 85, 15)
         handle = WindowHandle(6951, 53086, self.frame)
         adapter = LivePlantAdapter("qq", self.layout, Path("/tmp/registry"),
                                    Path("/tmp/click"), execute=True)
         with (patch("farm_plant_live.require_live_window"),
               patch("farm_plant_live.find_farm_window", return_value=handle),
               patch("farm_plant_live.capture_window", side_effect=[
-                  self.shot(before, "before", 100), self.shot(after, "after", 200)]),
+                  self.shot(before, "before", 100),
+                  self.shot(idle, "idle", 200),
+                  self.shot(after, "after", 300)]),
+              patch("farm_plant_live.sleep", return_value=None),
               patch("farm_plant_live.subprocess.run", side_effect=AssertionError("No click"))):
-            baseline_handle, baseline_shot = adapter.capture_landing_baseline()
-            proof = adapter.verify_landing_since(baseline_handle, baseline_shot)
-        self.assertEqual(proof.observed_cell, (2, 2))
-        self.assertFalse(adapter.last_diagnostics["can_authorize_clicks"])
-        self.assertFalse(adapter.last_diagnostics["inventory_updated"])
+            h, b, i = adapter.capture_field_delta_control()
+            evidence = adapter.verify_field_delta_since(h, b, i)
+        self.assertEqual(evidence.status, "diagnostic_only")
+        self.assertGreaterEqual(evidence.changed_pixels, 6)
+        self.assertFalse(evidence.can_authorize_clicks)
         self.assertFalse(adapter.calibration_verified)
-
-    def test_live_adapter_unknown_result_stops_without_action(self):
-        before = self.empty()
-        handle = WindowHandle(6951, 53086, self.frame)
-        adapter = LivePlantAdapter("qq", self.layout, Path("/tmp/registry"),
-                                   execute=True)
-        with (patch("farm_plant_live.require_live_window"),
-              patch("farm_plant_live.find_farm_window", return_value=handle),
-              patch("farm_plant_live.capture_window", side_effect=[
-                  self.shot(before, "before", 100), self.shot(before, "after", 200)])):
-            baseline_handle, baseline_shot = adapter.capture_landing_baseline()
-            with self.assertRaises(SpecialPlantStop) as caught:
-                adapter.verify_landing_since(baseline_handle, baseline_shot)
-        self.assertEqual(caught.exception.code, "PLANT_LANDING_UNVERIFIED")
+        self.assertFalse(adapter.last_diagnostics["can_authorize_clicks"])
 
 
 if __name__ == "__main__":
