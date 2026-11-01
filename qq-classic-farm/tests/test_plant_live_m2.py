@@ -61,6 +61,18 @@ class LivePlantTests(unittest.TestCase):
         self.assertIsNone(view.target_quantity)
         self.assertFalse(adapter.last_diagnostics["can_authorize_clicks"])
 
+    def test_picker_confirmation_modal_is_structured_stop_not_enabled_mode(self):
+        adapter = self.adapter(execute=True)
+        evidence = {"one_key_confirmation_pending": True}
+        with (patch.object(adapter, "_capture", return_value=(HANDLE, FakeCapture())),
+              patch("farm_plant_live.observe_picker", return_value=evidence),
+              patch("farm_plant_live.subprocess.run",
+                    side_effect=AssertionError("No CGEvent")) as cg):
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.observe(3, "泡泡棉花糖种子")
+            self.assertEqual(caught.exception.code, "ONE_KEY_CONFIRMATION_PENDING")
+            cg.assert_not_called()
+
     @patch("farm_plant_live.require_live_window")
     @patch("farm_plant_live.subprocess.run", side_effect=AssertionError("No CGEvent"))
     def test_execute_flag_cannot_bypass_calibration(self, cg, clock):

@@ -35,6 +35,10 @@ QQ_LEFT_ARROW_ROI = (15, 745, 55, 797)
 # An enabled toggle is NOT calibrated; do not infer True from not matching OFF.
 QQ_ONE_KEY_OFF_ROI = (370, 779, 400, 810)
 QQ_ONE_KEY_OFF = ROOT / "assets/ui/picker/qq-one-key-off.png"
+# Real 2026-11-01 QQ: clicking OFF opens a confirmation dialog. It does
+# NOT establish ON; confirming may plant all empty plots immediately.
+QQ_ONE_KEY_ENABLE_CONFIRM_ROI = (56, 409, 548, 738)
+QQ_ONE_KEY_ENABLE_CONFIRM = ROOT / "assets/ui/picker/qq-one-key-enable-confirm.png"
 
 
 def _crop(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | None:
@@ -155,6 +159,36 @@ def find_qq_picker_y_shift(capture: FarmCapture, platform: str) -> int | None:
     return best_offset - 42  # current OFF reference y=779; old base y=821.
 
 
+@lru_cache(maxsize=1)
+def _enable_confirm_template() -> np.ndarray | None:
+    try:
+        return np.asarray(Image.open(QQ_ONE_KEY_ENABLE_CONFIRM).convert("RGB"))
+    except (OSError, ValueError):
+        return None
+
+
+def observe_one_key_enable_confirmation(capture: FarmCapture, platform: str) -> bool:
+    """Identify the real modal before reading picker controls beneath it.
+
+    Positive means STOP; a modal screenshot cannot prove one-key ON. A
+    negative result is not proof of no other overlay or a safe click target.
+    """
+    if platform != "qq":
+        return False
+    patch = _crop(capture, QQ_ONE_KEY_ENABLE_CONFIRM_ROI)
+    template = _enable_confirm_template()
+    if patch is None or template is None:
+        return False
+    if patch.shape != template.shape:
+        patch = np.asarray(Image.fromarray(patch).resize(
+            (template.shape[1], template.shape[0])))
+    # Compare the fixed text/buttons *inside* the modal, not animated scenery.
+    current = patch[40:290, 50:430].astype(np.int16)
+    reference = template[40:290, 50:430].astype(np.int16)
+    per_pixel = np.max(np.abs(current - reference), axis=2)
+    return float(np.mean(per_pixel <= 18)) >= 0.95
+
+
 def observe_one_key_mode(capture: FarmCapture, platform: str,
                          picker_y_shift: int | None = None) -> bool | None:
     """Only prove QQ picker toggle OFF; an enabled state stays unknown."""
@@ -173,9 +207,11 @@ def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
     unknown = {"page": None, "total_pages": None,
                "target_icon_verified": None, "target_quantity": None,
                "icon_score": None, "one_key_planting": None,
-               "picker_y_shift": None}
+               "picker_y_shift": None, "one_key_confirmation_pending": None}
     if platform != "qq" or type(expected_slot) is not int or not 1 <= expected_slot <= 5:
         return unknown
+    if observe_one_key_enable_confirmation(capture, platform):
+        return {**unknown, "one_key_confirmation_pending": True}
     # The picker moves vertically with the plot clicked. Prefer an exact
     # bounded OFF-checkbox anchor; fall back to the previously calibrated
     # fixed page ROI only when its page counter independently verifies.

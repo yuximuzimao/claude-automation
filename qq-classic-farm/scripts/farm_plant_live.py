@@ -204,6 +204,11 @@ class LivePlantAdapter:
         _, shot = self._capture()
         evidence = observe_picker(shot, self.platform, expected_slot,
                                   target_seed, self.ocr_binary)
+        if evidence.get("one_key_confirmation_pending") is True:
+            raise SpecialPlantStop(
+                "ONE_KEY_CONFIRMATION_PENDING",
+                "QQ one-key enable requires confirmation; do not infer ON or select a seed",
+            )
         view = PickerView(page=evidence["page"],
                           target_icon_verified=evidence["target_icon_verified"],
                           target_quantity=evidence["target_quantity"],

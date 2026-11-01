@@ -12,7 +12,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_capture import FarmCapture
 from farm_geometry import WindowFrame
-from farm_picker_vision import observe_picker, observe_one_key_mode, right_arrow_verified
+from farm_picker_vision import (observe_picker, observe_one_key_mode,
+                                observe_one_key_enable_confirmation, right_arrow_verified)
 
 
 class PickerVisionTests(unittest.TestCase):
@@ -79,6 +80,25 @@ class PickerVisionTests(unittest.TestCase):
         self.assertEqual(result["target_quantity"], 18)
         self.assertIs(result["one_key_planting"], False)
         self.assertEqual(ocr.call_count, 2)
+
+    def test_real_qq_one_key_enable_requires_confirmation_not_on(self):
+        capture = self.capture(maple_slot=None)
+        modal = np.asarray(Image.open(
+            ROOT / "assets/ui/picker/qq-one-key-enable-confirm.png").convert("RGB"))
+        self.assertEqual(modal.shape, (329, 492, 3))
+        self.assertFalse(observe_one_key_enable_confirmation(capture, "qq"))
+        capture.rgb[409:738, 56:548] = modal
+        self.assertTrue(observe_one_key_enable_confirmation(capture, "qq"))
+        self.assertFalse(observe_one_key_enable_confirmation(capture, "wechat"))
+        with patch("farm_picker_vision._read_text",
+                   side_effect=AssertionError("Modal must stop before OCR")) as ocr:
+            result = observe_picker(capture, "qq", 3, "泡泡棉花糖种子", None)
+            self.assertTrue(result["one_key_confirmation_pending"])
+            self.assertIsNone(result["one_key_planting"])
+            self.assertIsNone(result["page"])
+            ocr.assert_not_called()
+        capture.rgb[490:560, 120:480] = [0, 0, 0]
+        self.assertFalse(observe_one_key_enable_confirmation(capture, "qq"))
 
     def test_arrow_is_independent_of_page_counter(self):
         capture = self.capture(maple_slot=None)
