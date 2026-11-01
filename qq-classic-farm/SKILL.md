@@ -40,7 +40,8 @@
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/farm_qq_clean.py` / `assets/ui/field/qq-empty-atlas.png` / 两张 `qq-*-seedling-negative.png` | QQ 五帧中心模板 + 金/紫真实萝卜苗局部负例；**2026-11-01确认空间盲区：clean=24只是局部候选，M1/M2 live均不得升级为已验证空田或already_clean终态**；未知STOP | 仅候选诊断，不授权收获/种植/终验 |
 | `scripts/farm_qq_landing.py` | 旧两帧ROI回填落点方法共用有盲区的clean detector，保留作历史回放；live capture_landing_baseline/verify_landing_since已结构化停用，**不能当作独立落点证明** | 不用于实机验收或点击授权 |
-| `scripts/farm_field_delta.py` | 三帧整田差分 before→无输入idle→after；M2 live 接线先在 before/idle 分别做真实紫晶田配准，offset漂移>2px STOP，再用注册后的24格仿射区域归属变化候选，避免名义格心误归邻格。只读 diagnostic_only，不推断作物归属、绝对空田或授权点击 | 下一许可时段已购1颗白萝卜的安全受控试种/落点/成熟收获 |
+| `scripts/farm_field_delta.py` | 三帧整田差分 before→无输入idle→after；M2 live 接线先在 before/idle 分别做真实紫晶田配准，offset漂移>2px STOP，再用注册后的24格仿射区域归属变化候选，避免名义格心误归邻格。只读 diagnostic_only，不推断作物归属、绝对空田或授权点击 | 已完成白萝卜实拍回放，后续只作候选诊断 |
+| `scripts/farm_field_postcondition.py` | 新增已注册24格完整仿射足迹的空田参考/无输入动画/操作后帧比较；M1/M2 live均有单次只读入口。参考必须独立语义确认，任何动画或单像素异常unknown，**当前真实收获后18 clean/6紫晶unknown，不是24格终验** | 下一轮优先独立确认紫晶装饰/占用，不重复试种或调19×19阈值 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |
 | `scripts/pickable_locator.py` | 一次返回全部 4 格植物“可摘”坐标；已被 `ui_probe.py` 集成 | 特殊植物收获 |
 | `scripts/picker_simulator.py` | 旧顺序模型推演工具 | 仅异常研究，不作为正常选种入口 |

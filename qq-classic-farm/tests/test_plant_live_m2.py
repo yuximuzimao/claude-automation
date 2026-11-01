@@ -93,6 +93,29 @@ class LivePlantTests(unittest.TestCase):
             self.adapter().observe_field()
         self.assertEqual(caught.exception.code, "USER_INTERFERENCE")
 
+    def test_registered_postcondition_is_read_only_and_keeps_unknown(self):
+        from farm_field_postcondition import FieldPostcondition
+        adapter = self.adapter(execute=True)
+        result = FieldPostcondition(
+            clean_cells=tuple((u, v) for u in range(6) for v in range(4)
+                              if (u, v) not in ((0, 0), (0, 1))),
+            changed_cells=(), unknown_cells=((0, 0), (0, 1)),
+            clean_field_verified=False, capture_ids=("empty", "idle", "post"),
+        )
+        with (patch.object(adapter, "_capture", return_value=(HANDLE, FakeCapture())),
+              patch("farm_plant_live.compare_empty_field_postcondition",
+                    return_value=result) as compare,
+              patch("farm_plant_live.subprocess.run",
+                    side_effect=AssertionError("No CGEvent")) as cg):
+            observed = adapter.verify_clean_field_against_reference(
+                HANDLE, FakeCapture(), FakeCapture(), empty_reference_verified=True)
+            self.assertIs(observed, result)
+            self.assertEqual(adapter.last_diagnostics["unknown_cells"], [[0, 0], [0, 1]])
+            self.assertFalse(adapter.last_diagnostics["clean_field_verified"])
+            self.assertFalse(adapter.calibration_verified)
+            self.assertTrue(compare.call_args.kwargs["empty_reference_verified"])
+            cg.assert_not_called()
+
     @patch("farm_plant_live.require_live_window")
     def test_uncalibrated_action_methods_stop(self, clock):
         # The test targets uncalibrated action rejection, not the Mac clock;

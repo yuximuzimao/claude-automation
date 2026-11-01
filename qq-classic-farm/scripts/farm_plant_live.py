@@ -14,6 +14,9 @@ from time import monotonic_ns, sleep
 
 from farm_capture import capture_window
 from farm_field_delta import FieldDelta, FieldDeltaStop, analyze_field_delta
+from farm_field_postcondition import (
+    FieldPostcondition, FieldPostconditionStop, compare_empty_field_postcondition,
+)
 from farm_field import FieldStop, probe_field_translation
 from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
@@ -117,6 +120,38 @@ class LivePlantAdapter:
             "can_authorize_clicks": False, "inventory_updated": False,
         }
         return evidence
+
+    def verify_clean_field_against_reference(
+        self, reference_handle: WindowHandle, empty, idle,
+        *, empty_reference_verified: bool = False,
+    ) -> FieldPostcondition:
+        """One local postcondition capture; no game input or click permission.
+
+        An independently approved empty baseline is required. A dynamic
+        decoration makes its cells unknown rather than silently clean.
+        """
+        current_handle, current = self._capture()
+        if not _same_handle(reference_handle, current_handle):
+            raise SpecialPlantStop("USER_INTERFERENCE",
+                                   "Farm window changed since empty reference")
+        try:
+            result = compare_empty_field_postcondition(
+                empty, idle, current, self.platform, self.layout,
+                empty_reference_verified=empty_reference_verified,
+            )
+        except FieldPostconditionStop as exc:
+            raise SpecialPlantStop(exc.code, str(exc)) from exc
+        self.last_diagnostics = {
+            "platform": self.platform,
+            "postcondition": result.status,
+            "clean_cells": [list(p) for p in result.clean_cells],
+            "changed_cells": [list(p) for p in result.changed_cells],
+            "unknown_cells": [list(p) for p in result.unknown_cells],
+            "clean_field_verified": result.clean_field_verified,
+            "can_authorize_clicks": False,
+            "capture_ids": list(result.capture_ids),
+        }
+        return result
 
     def capture_landing_baseline(self):
         """Retired: the center-only empty-field detector is not an absolute proof."""
