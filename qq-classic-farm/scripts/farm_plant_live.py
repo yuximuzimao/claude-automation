@@ -13,18 +13,12 @@ import subprocess
 from time import monotonic_ns, sleep
 
 from farm_capture import capture_window
-from farm_field_delta import FieldDelta, FieldDeltaStop, analyze_field_delta
-from farm_field_postcondition import (
-    FieldPostcondition, FieldPostconditionStop, compare_empty_field_postcondition,
-)
-from farm_field import FieldStop, probe_field_translation
-from farm_geometry import GeometryStop, plot_local_point
 from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
-from farm_qq_clean import ALL_CELLS, observe_qq_clean_cells
+from farm_qq_clean import observe_qq_clean_cells
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -91,92 +85,6 @@ class LivePlantAdapter:
             raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during capture")
         self.last_handle = before
         return before, shot
-
-    def capture_field_delta_control(self):
-        """Two fresh no-input captures, for full-field calibration only.
-
-        Caller must independently confirm a known, safe test scene. This
-        method never classifies empty land or authorizes a subsequent click.
-        """
-        before_handle, before = self._capture()
-        sleep(0.4)
-        idle_handle, idle = self._capture()
-        if not _same_handle(before_handle, idle_handle):
-            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during idle control")
-        return before_handle, before, idle
-
-    def verify_field_delta_since(self, before_handle: WindowHandle, before, idle) -> FieldDelta:
-        """Read-only after frame; evidence remains diagnostic, not landing proof."""
-        after_handle, after = self._capture()
-        if not _same_handle(before_handle, after_handle):
-            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during test")
-        try:
-            # Register the no-input field twice. The nominal grid may land
-            # inside a neighboring tile; never fit geometry to new crop sprites.
-            first = probe_field_translation(before, self.platform, self.layout)
-            control = probe_field_translation(idle, self.platform, self.layout)
-            a, b = first["offset_local"], control["offset_local"]
-            if max(abs(a[i] - b[i]) for i in range(2)) > 2:
-                raise SpecialPlantStop("FIELD_ALIGNMENT_DRIFT",
-                                       "No-input field registration changed")
-            offset = tuple((a[i] + b[i]) / 2 for i in range(2))
-            evidence = analyze_field_delta(
-                before, idle, after, self.platform, self.layout,
-                registration_offset_local=offset,
-            )
-        except (FieldDeltaStop, FieldStop) as exc:
-            raise SpecialPlantStop(exc.code, str(exc)) from exc
-        self.last_diagnostics = {
-            "platform": self.platform, "field_delta_status": evidence.status,
-            "changed_pixels": evidence.changed_pixels,
-            "candidate_cells": [list(p) for p in evidence.candidate_cells],
-            "registration_offset_local": list(evidence.registration_offset_local),
-            "capture_ids": list(evidence.capture_ids),
-            "can_authorize_clicks": False, "inventory_updated": False,
-        }
-        return evidence
-
-    def verify_clean_field_against_reference(
-        self, reference_handle: WindowHandle, empty, idle,
-        *, empty_reference_verified: bool = False,
-    ) -> FieldPostcondition:
-        """One local postcondition capture; no game input or click permission.
-
-        An independently approved empty baseline is required. A dynamic
-        decoration makes its cells unknown rather than silently clean.
-        """
-        current_handle, current = self._capture()
-        if not _same_handle(reference_handle, current_handle):
-            raise SpecialPlantStop("USER_INTERFERENCE",
-                                   "Farm window changed since empty reference")
-        try:
-            result = compare_empty_field_postcondition(
-                empty, idle, current, self.platform, self.layout,
-                empty_reference_verified=empty_reference_verified,
-            )
-        except FieldPostconditionStop as exc:
-            raise SpecialPlantStop(exc.code, str(exc)) from exc
-        self.last_diagnostics = {
-            "platform": self.platform,
-            "postcondition": result.status,
-            "clean_cells": [list(p) for p in result.clean_cells],
-            "changed_cells": [list(p) for p in result.changed_cells],
-            "unknown_cells": [list(p) for p in result.unknown_cells],
-            "clean_field_verified": result.clean_field_verified,
-            "can_authorize_clicks": False,
-            "capture_ids": list(result.capture_ids),
-        }
-        return result
-
-    def capture_landing_baseline(self):
-        """Retired: the center-only empty-field detector is not an absolute proof."""
-        raise SpecialPlantStop("PLANT_LANDING_METHOD_UNSAFE",
-                               "Use three-frame whole-field calibration; legacy baseline has blind spots")
-
-    def verify_landing_since(self, before_handle: WindowHandle, before_shot):
-        """Retired: the legacy landing check reuses the same incomplete detector."""
-        raise SpecialPlantStop("PLANT_LANDING_METHOD_UNSAFE",
-                               "Legacy landing ROI cannot independently verify crop ownership")
 
     def observe_field(self) -> OrdinaryPlantView:
         self.pending_picker_origin = None
@@ -255,108 +163,21 @@ class LivePlantAdapter:
         }
         return view
 
-    def _send_points(self, points: tuple[tuple[float, float], ...]) -> None:
-        """Transport for a future calibrated observer; never authorizes itself."""
-        require_live_window()
-        field, handle = self.last_field, self.last_handle
-        if (not self.execute or not self.calibration_verified
-            or field is None or handle is None or field.overlay != "none"
-            or field.field_cells is None or len(field.field_cells) != 24
-            or field.preview_cells is None):
-            raise SpecialPlantStop("PLANT_CALIBRATION_REQUIRED",
-                                   "Live field, overlay and preview are not independently verified")
-        if not field.capture_id or type(field.captured_at_ns) is not int:
-            raise SpecialPlantStop("PLANT_CAPTURE_UNVERIFIED", "No live screenshot provenance")
-        age = monotonic_ns() - field.captured_at_ns
-        if not 0 <= age <= 2_000_000_000:
-            raise SpecialPlantStop("PLANT_STALE_PRECONDITION", "Live capture is older than 2 seconds")
-        if self.click_binary is None:
-            raise SpecialPlantStop("CGEVENT_HELPER_MISSING", "Compiled click helper not configured")
-        if not 1 <= len(points) <= 24:
-            raise SpecialPlantStop("INVALID_BATCH", "Expected 1-24 verified local click points")
-        frame = handle.frame
-        if any(not 0 <= x < frame.width or not 0 <= y < frame.height for x, y in points):
-            raise SpecialPlantStop("CLICK_OUTSIDE_WINDOW", "Invalid window-local click coordinate")
-        current = find_farm_window(self.platform, self.layout, self.registry_binary)
-        if not _same_handle(handle, current):
-            raise SpecialPlantStop("USER_INTERFERENCE", "Farm window moved before input")
-        payload = {
-            "window_id": handle.window_id, "pid": handle.pid,
-            "owner": frame.owner, "title": frame.title,
-            "frame": {"x": frame.x, "y": frame.y,
-                      "width": frame.width, "height": frame.height},
-            "actions": [{"x": x, "y": y, "delay_ms": 100} for x, y in points],
-        }
-        # Swift independently rechecks local clock, frontmost app, window
-        # identity, and occlusion before *each* CGEvent. A partial send is STOP.
-        try:
-            proc = subprocess.run(
-                [str(self.click_binary), "--execute"], input=json.dumps(payload),
-                text=True, capture_output=True, timeout=30, check=False,
-            )
-        except (OSError, subprocess.TimeoutExpired) as exc:
-            raise SpecialPlantStop("PLANT_ACTION_UNCERTAIN",
-                                   "CGEvent outcome unknown; never retry") from exc
-        try:
-            parse_click_batch_result(proc.stdout, proc.returncode, len(points))
-        except Exception as exc:
-            raise SpecialPlantStop(getattr(exc, "code", "PLANT_ACTION_UNCERTAIN"),
-                                   "CGEvent outcome uncertain; never retry") from exc
-        finally:
-            self.last_handle = None
-            self.last_field = None
-            self.last_field_capture = None
-            self.last_picker = None
-            self.last_picker_expected_slot = None
-            self.last_picker_target_seed = None
-            self.calibration_verified = False
-
     def open_plot(self, anchor_cell: Cell) -> None:
-        """Open a verified empty plot at the *live-registered* coordinate.
+        """V2 placeholder until the fixed-grid empty checker authorizes a plot.
 
-        The soil alignment is only geometry: it cannot itself authorize input.
-        A separate trusted 24-cell/overlay/preview observation must already
-        have set calibration_verified, and _send_points rechecks the Mac gate.
+        V1 used full-field semantic proof plus runtime soil registration here.
+        That path is retired. V2-1 will provide a platform-specific EMPTY check
+        and calibrated fixed grid before this method sends any input.
         """
-        field, shot, handle = self.last_field, self.last_field_capture, self.last_handle
         if (type(anchor_cell) is not tuple or len(anchor_cell) != 2
             or any(type(v) is not int for v in anchor_cell)
-            or anchor_cell not in ALL_CELLS):
+            or not (0 <= anchor_cell[0] < 6 and 0 <= anchor_cell[1] < 4)):
             raise SpecialPlantStop("INVALID_PLOT", "Invalid plot cell")
-        if (field is None or shot is None or handle is None
-            or not self.calibration_verified or field.overlay != "none"
-            or field.preview_cells != frozenset()
-            or field.field_cells is None or set(field.field_cells) != ALL_CELLS
-            or any(type(v) is not bool for v in field.field_cells.values())):
-            raise SpecialPlantStop("PLANT_CALIBRATION_REQUIRED",
-                                   "Independently verified field/preview/overlay required")
-        if (shot.capture_id != field.capture_id or shot.frame != handle.frame
-            or field.window_identity != _identity(handle)):
-            raise SpecialPlantStop("PLANT_CAPTURE_UNVERIFIED",
-                                   "Field evidence does not belong to the current window")
-        if field.field_cells[anchor_cell]:
-            raise SpecialPlantStop("PLANT_TARGET_OCCUPIED", "Cannot open occupied plot")
-        try:
-            registration = probe_field_translation(shot, self.platform, self.layout)
-            dx, dy = registration["offset_local"]
-            if (registration.get("status") != "diagnostic_only"
-                or registration.get("matched_purple_cells", 0) < 5
-                or not all(type(v) in (int, float) for v in (dx, dy))):
-                raise ValueError("Unverified field registration")
-            x, y = plot_local_point(self.platform, *anchor_cell, handle.frame, self.layout)
-            x, y = x + dx, y + dy
-            handle.frame.screen_point(x, y)
-        except (FieldStop, GeometryStop, ValueError, KeyError, TypeError) as exc:
-            raise SpecialPlantStop("PLANT_ALIGNMENT_UNVERIFIED",
-                                   "Cannot register safe plot coordinate") from exc
-        self.pending_picker_origin = None
-        self.pending_empty_count = None
-        self.pending_ordinary_seed = None
-        self._send_points(((x, y),))
-        # _send_points invalidates the pre-click field authority. Only the
-        # verified picker from this very click can later select a seed.
-        self.pending_picker_origin = _identity(handle)
-        self.pending_empty_count = sum(not value for value in field.field_cells.values())
+        raise SpecialPlantStop(
+            "PLANT_V2_EMPTY_CHECK_REQUIRED",
+            "Fixed-grid V2 empty-field calibration is required before opening a plot",
+        )
 
     def turn_pages(self, direction: int, count: int) -> None:
         """Only QQ verified bounded arrow navigation; never selects a seed."""

@@ -15,9 +15,6 @@ from time import monotonic_ns, sleep
 from typing import Callable
 
 from farm_capture import capture_window
-from farm_field_postcondition import (
-    FieldPostcondition, FieldPostconditionStop, compare_empty_field_postcondition,
-)
 from farm_geometry import WindowFrame
 from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
@@ -140,40 +137,6 @@ class LiveHarvestAdapter:
         self.last_handle = handle
         self.last_observation = obs
         return obs
-
-    def verify_clean_field_against_reference(
-        self, reference_handle: WindowHandle, empty, idle,
-        *, empty_reference_verified: bool = False,
-    ) -> FieldPostcondition:
-        """Local post-harvest check, never a replacement for crop/overlay preflight."""
-        self.last_observation = None
-        self.last_handle = None
-        self.last_diagnostics = {}
-        require_live_window()
-        before = find_farm_window(self.platform, self.layout, self.registry_binary)
-        if not _same_handle(reference_handle, before):
-            raise HarvestStop("USER_INTERFERENCE", "Window changed since empty reference")
-        current = capture_window(before.frame, self.platform, self.layout)
-        after = find_farm_window(self.platform, self.layout, self.registry_binary)
-        if not _same_handle(before, after):
-            raise HarvestStop("USER_INTERFERENCE", "Window changed during postcondition")
-        try:
-            result = compare_empty_field_postcondition(
-                empty, idle, current, self.platform, self.layout,
-                empty_reference_verified=empty_reference_verified,
-            )
-        except FieldPostconditionStop as exc:
-            raise HarvestStop(exc.code, str(exc)) from exc
-        self.last_diagnostics = {
-            "postcondition": result.status,
-            "clean_cells": [list(p) for p in result.clean_cells],
-            "changed_cells": [list(p) for p in result.changed_cells],
-            "unknown_cells": [list(p) for p in result.unknown_cells],
-            "clean_field_verified": result.clean_field_verified,
-            "can_authorize_clicks": False,
-            "capture_ids": list(result.capture_ids),
-        }
-        return result
 
     def click_batch(self, points: tuple[tuple[float, float], ...]) -> int:
         require_live_window()

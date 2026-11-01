@@ -123,8 +123,9 @@ class QQCleanFieldTests(unittest.TestCase):
             self.assertFalse(plant.last_diagnostics["clean_field_verified"])
             self.assertEqual(view.overlay, "unknown")
             self.assertFalse(plant.calibration_verified)
-            with self.assertRaises(SpecialPlantStop):
-                plant._send_points(((300, 600),))
+            with self.assertRaises(SpecialPlantStop) as caught:
+                plant.open_plot((3, 2))
+            self.assertEqual(caught.exception.code, "PLANT_V2_EMPTY_CHECK_REQUIRED")
         with (patch("farm_harvest_live.require_live_window"),
               patch("farm_harvest_live.find_farm_window", return_value=handle),
               patch("farm_harvest_live.capture_window", return_value=shot),

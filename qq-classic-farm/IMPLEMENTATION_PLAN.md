@@ -14,18 +14,21 @@ DIRTY/UNKNOWN → STOP
 
 正常路径依靠固定窗口、固定网格、固定 ROI 找图/找色和确定性状态转换，不构建通用农田视觉理解。
 
-## V2-0 清理旧路线
+## V2-0 清理旧路线 — 已完成
 
-- [ ] 移除正常 Runner 对整田视觉研究模块的依赖。
-- [ ] 旧 diagnostic-only 脚本退出现役执行链。
-- [ ] 删除/简化复杂 planting recovery；异常统一 DIRTY/STOP。
-- [ ] 删除只保护旧路线的测试。
-- [ ] 验证旧视觉研究模块不再影响收获、种植或 run-next。
+- [x] 正常 Runner 已断开整田视觉研究依赖。
+- [x] V1 diagnostic-only 脚本已物理删除。
+- [x] 复杂 planting recovery 已删除；异常统一 DIRTY/STOP。
+- [x] 只保护旧路线的测试已删除。
+- [x] 反向搜索确认现役脚本/测试对旧模块引用为 0。
 
-退役研究模块：
+已删除：
 `farm_scene.py`、`farm_clean_field.py`、`farm_clean_replay.py`、
-`farm_field_delta.py`、`farm_field_postcondition.py`、`farm_qq_landing.py`。
-`farm_qq_clean.py` 只保留“小 ROI 空地模板”思路，重写为平台化检查器。
+`farm_field.py`、`farm_field_delta.py`、`farm_field_postcondition.py`、
+`farm_qq_landing.py`、`farm_plant_recovery.py`。
+
+验证：清理前 226 项测试；清理后 173 项现役测试全部通过。
+`farm_qq_clean.py` 暂留，V2-1 只复用“小 ROI 空地模板”思路并重写接口。
 
 ## V2-1 QQ 空田检查器
 
