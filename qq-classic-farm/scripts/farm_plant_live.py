@@ -18,6 +18,7 @@ from farm_field_postcondition import (
     FieldPostcondition, FieldPostconditionStop, compare_empty_field_postcondition,
 )
 from farm_field import FieldStop, probe_field_translation
+from farm_geometry import GeometryStop, plot_local_point
 from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
@@ -50,6 +51,7 @@ class LivePlantAdapter:
         self.ocr_binary = Path(ocr_binary) if ocr_binary is not None else None
         self.last_handle: WindowHandle | None = None
         self.last_field: OrdinaryPlantView | None = None
+        self.last_field_capture = None
         self.last_picker: PickerView | None = None
         self.last_picker_capture = None
         self.last_picker_total: int | None = None
@@ -62,6 +64,7 @@ class LivePlantAdapter:
         # Clear stale authority before touching the live registry.
         self.last_handle = None
         self.last_field = None
+        self.last_field_capture = None
         self.last_picker = None
         self.last_picker_capture = None
         self.last_picker_total = None
@@ -177,6 +180,7 @@ class LivePlantAdapter:
             one_key_planting=None,
         )
         self.last_field = view
+        self.last_field_capture = shot
         self.last_diagnostics = {
             "platform": self.platform,
             "window_id": handle.window_id,
@@ -274,13 +278,49 @@ class LivePlantAdapter:
         finally:
             self.last_handle = None
             self.last_field = None
+            self.last_field_capture = None
             self.last_picker = None
             self.calibration_verified = False
 
     def open_plot(self, anchor_cell: Cell) -> None:
-        # Existing M0 grid is not a substitute for a live alignment check.
-        raise SpecialPlantStop("PLANT_ALIGNMENT_UNVERIFIED",
-                               "Live plot alignment and occupancy are not calibrated")
+        """Open a verified empty plot at the *live-registered* coordinate.
+
+        The soil alignment is only geometry: it cannot itself authorize input.
+        A separate trusted 24-cell/overlay/preview observation must already
+        have set calibration_verified, and _send_points rechecks the Mac gate.
+        """
+        field, shot, handle = self.last_field, self.last_field_capture, self.last_handle
+        if (type(anchor_cell) is not tuple or len(anchor_cell) != 2
+            or any(type(v) is not int for v in anchor_cell)
+            or anchor_cell not in ALL_CELLS):
+            raise SpecialPlantStop("INVALID_PLOT", "Invalid plot cell")
+        if (field is None or shot is None or handle is None
+            or not self.calibration_verified or field.overlay != "none"
+            or field.preview_cells != frozenset()
+            or field.field_cells is None or set(field.field_cells) != ALL_CELLS
+            or any(type(v) is not bool for v in field.field_cells.values())):
+            raise SpecialPlantStop("PLANT_CALIBRATION_REQUIRED",
+                                   "Independently verified field/preview/overlay required")
+        if (shot.capture_id != field.capture_id or shot.frame != handle.frame
+            or field.window_identity != _identity(handle)):
+            raise SpecialPlantStop("PLANT_CAPTURE_UNVERIFIED",
+                                   "Field evidence does not belong to the current window")
+        if field.field_cells[anchor_cell]:
+            raise SpecialPlantStop("PLANT_TARGET_OCCUPIED", "Cannot open occupied plot")
+        try:
+            registration = probe_field_translation(shot, self.platform, self.layout)
+            dx, dy = registration["offset_local"]
+            if (registration.get("status") != "diagnostic_only"
+                or registration.get("matched_purple_cells", 0) < 5
+                or not all(type(v) in (int, float) for v in (dx, dy))):
+                raise ValueError("Unverified field registration")
+            x, y = plot_local_point(self.platform, *anchor_cell, handle.frame, self.layout)
+            x, y = x + dx, y + dy
+            handle.frame.screen_point(x, y)
+        except (FieldStop, GeometryStop, ValueError, KeyError, TypeError) as exc:
+            raise SpecialPlantStop("PLANT_ALIGNMENT_UNVERIFIED",
+                                   "Cannot register safe plot coordinate") from exc
+        self._send_points(((x, y),))
 
     def turn_pages(self, direction: int, count: int) -> None:
         """Only QQ verified bounded arrow navigation; never selects a seed."""

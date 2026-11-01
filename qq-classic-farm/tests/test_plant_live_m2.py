@@ -22,6 +22,7 @@ HANDLE = WindowHandle(6951, 53086, FRAME)
 class FakeCapture:
     capture_id = "live-plant-001"
     captured_at_ns = 123456789
+    frame = FRAME
 
 
 class LivePlantTests(unittest.TestCase):
@@ -115,6 +116,80 @@ class LivePlantTests(unittest.TestCase):
             self.assertFalse(adapter.calibration_verified)
             self.assertTrue(compare.call_args.kwargs["empty_reference_verified"])
             cg.assert_not_called()
+
+    def test_open_plot_uses_registered_cell_only_after_independent_field_verification(self):
+        import json
+        from farm_plant_ordinary import OrdinaryPlantView
+        from farm_plant_special import ALL_CELLS
+
+        layout = json.loads((ROOT / "data/ui-layout.json").read_text())
+        adapter = LivePlantAdapter("qq", layout, Path("/tmp/registry"),
+                                   Path("/tmp/click"), execute=True)
+        field = {cell: False for cell in ALL_CELLS}
+        adapter.last_handle = HANDLE
+        adapter.last_field_capture = FakeCapture()
+        adapter.last_field = OrdinaryPlantView(
+            capture_id="live-plant-001", captured_at_ns=123456789,
+            window_identity=(HANDLE.window_id, HANDLE.pid, FRAME.owner,
+                             FRAME.title, FRAME.x, FRAME.y),
+            overlay="none", field_cells=field, preview_cells=frozenset(),
+            one_key_planting=None,
+        )
+        with patch.object(adapter, "_send_points") as send, patch(
+            "farm_plant_live.probe_field_translation",
+            return_value={"status": "diagnostic_only", "matched_purple_cells": 5,
+                          "offset_local": [-9.3497, 18.4735]},
+        ) as register:
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.open_plot((3, 2))
+            self.assertEqual(caught.exception.code, "PLANT_CALIBRATION_REQUIRED")
+            send.assert_not_called()
+            register.assert_not_called()
+
+            adapter.calibration_verified = True  # mock independent semantic verifier
+            field[(3, 2)] = True
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.open_plot((3, 2))
+            self.assertEqual(caught.exception.code, "PLANT_TARGET_OCCUPIED")
+            send.assert_not_called()
+
+            field[(3, 2)] = False
+            adapter.open_plot((3, 2))
+            ((x, y),), = send.call_args.args
+            self.assertAlmostEqual(x, 301.52, delta=0.1)
+            self.assertAlmostEqual(y, 689.09, delta=0.1)
+            self.assertEqual(register.call_count, 1)
+
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.open_plot((6, 0))
+            self.assertEqual(caught.exception.code, "INVALID_PLOT")
+            self.assertEqual(send.call_count, 1)
+
+    def test_open_plot_rejects_missing_registration_without_cgevent(self):
+        import json
+        from farm_plant_ordinary import OrdinaryPlantView
+        from farm_plant_special import ALL_CELLS
+        layout = json.loads((ROOT / "data/ui-layout.json").read_text())
+        adapter = LivePlantAdapter("qq", layout, Path("/tmp/registry"),
+                                   Path("/tmp/click"), execute=True)
+        adapter.last_handle = HANDLE
+        adapter.last_field_capture = FakeCapture()
+        adapter.last_field = OrdinaryPlantView(
+            capture_id="live-plant-001", captured_at_ns=123456789,
+            window_identity=(HANDLE.window_id, HANDLE.pid, FRAME.owner,
+                             FRAME.title, FRAME.x, FRAME.y),
+            overlay="none", field_cells={cell: False for cell in ALL_CELLS},
+            preview_cells=frozenset(),
+        )
+        adapter.calibration_verified = True
+        with patch("farm_plant_live.probe_field_translation",
+                   side_effect=ValueError("ambiguous")), patch.object(
+            adapter, "_send_points", side_effect=AssertionError("no CGEvent")
+        ) as send:
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.open_plot((3, 2))
+            self.assertEqual(caught.exception.code, "PLANT_ALIGNMENT_UNVERIFIED")
+            send.assert_not_called()
 
     @patch("farm_plant_live.require_live_window")
     def test_uncalibrated_action_methods_stop(self, clock):
