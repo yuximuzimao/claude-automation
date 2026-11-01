@@ -16,8 +16,10 @@ Home 与工作区卫生同样属于固定边界：所有 WorkBuddy 调用必须�
 
 `archive/2026-07-13-workbuddy-safety/` 保存已经完成的 TDD 实施计划及 RED/GREEN 压力测试。它们用于追溯决策，**不得**当作当前操作手册；尤其不能复用其中旧的看门狗阈值、环境变量测试注入或自动终止设想。
 
-## 其他能力
+## CodexPro 本地快捷启动与分段读取
 
-CodexPro 大文件分段读取由启动时的[本地补丁](../../scripts/lib/ensure-codexpro-paged-read.mjs)维护，验证入口为[读取回归测试](../../test/workspace/codexpro-paged-read.test.mjs)，阶段证据见[修复归档](../archive/2026-10-23-codexpro-paged-read/README.md)。
+- [快捷启动脚本](../../scripts/start-codexpro-full.sh)：`codexpro` 无参数快捷入口，复用原 profile 和固定 ngrok 地址，默认附带 `--log-requests`。
+- [启动保护](../../scripts/lib/codexpro-startup-guard.sh)与[必需技能恢复](../../scripts/lib/ensure-codexpro-required-skill.mjs)：处理已确认的残留服务，并保留 `chinese-polish` 恢复逻辑。
+- [分页补丁](../../scripts/lib/ensure-codexpro-paged-read.mjs)与[读取回归](../../test/workspace/codexpro-paged-read.test.mjs)：维护 0.30.2 公开 `read` 的大文件分页。
 
-`specs/` 和 `plans/` 中的 CodexPro 文档属于独立能力，本次未修改或归档。
+本轮修复与验证见[0.30.2 阶段档案](../archive/2026-11-01-codexpro-0302/README.md)；原 0.28.5 证据保留在[10-23 档案](../archive/2026-10-23-codexpro-paged-read/README.md)。历史档案不作为当前运行配置来源。
