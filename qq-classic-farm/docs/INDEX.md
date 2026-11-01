@@ -1,39 +1,27 @@
 # 文档索引
 
-- `../IMPLEMENTATION_PLAN.md`：**当前最高优先级交接文档**；本地 Runner 的架构、种子动态位置算法、状态机、里程碑、性能验收和对抗式审查。
-- `CURRENT.md`：当前 QQ / 微信农田、库存与日常状态快照。
-- `gameplay-rules.md`：稳定收获、种植、土地与交互规则。
-- `seed-catalog.md`：种子知识库字段、来源和刷新约定。
-- `../data/seed-catalog.json`：种子名称、图标路径与 QQ / 微信平台观察数据。
-- `../data/ui-layout.json`：QQ / 微信独立农场窗口基线、4×6 土地网格和固定合法 2×2 特殊种子锚点。
-- `../data/ui-anchors.json`：一键按钮、化肥菜单锚点阈值和已验证相对偏移。
-- `../data/inventory-live-2026-10-28.json`：**历史** QQ / 微信仓库种子顺序与数量快照；row-major 顺序等于当时 picker 顺序，每 5 个一页，不代表当前实时库存。
-- `../data/seed-order.json`：M0 fresh-entry 稳定顺序基线；历史仅有的零库存种子单独标为待校准。
-- `../data/farm-state.json`：M0 库存事实状态（包含已记录 10-29 delta；当前双平台 inventory_dirty，实机前须同步）。
-- `runner-m0-verification.md`：M0 离线测试结果、位置样本、历史顺序差异与 M1 入口。
-- `../scripts/seed_order.py` / `../scripts/farm_runner.py`：纯位置计算与 M0 dry-run；run-next 在 M1/M2 完成前拒绝执行。
-- `../scripts/farm_geometry.py`：M1 唯一 window-local logical 坐标转换、Retina 像素映射与 fail-closed 校验。
-- `../scripts/farm_harvest.py`：M1 本地收获 phase 状态机（离线 mock 验收；未接真实点击），终验必须有独立 24 格空地证据；异常保留已发送点击数。
-- `../scripts/farm_field.py`：M1 紫晶空地格点的**只读平移诊断**；历史回放已证明静态网格原点会偏移，诊断不可授权点击，成熟/遮挡时拒绝校准。
-- `../scripts/farm_qq_clean.py` / `../assets/ui/field/qq-empty-atlas.png`：QQ 24格独立空田只读正例（五帧实拍中心模板），已接 M1/M2 preflight；遮罩、幼苗/布局不确定即 STOP，尚不能授权点击或推断部分占用。
-- `../scripts/farm_qq_landing.py`：QQ 受控单颗白萝卜试种前后独立截图的实际落地格只读终验；离线通过，尚待真机验证，不授权点击/种植或库存扣减。
-- `../scripts/farm_scene.py` / `../scripts/farm_clean_field.py` / `../scripts/farm_clean_replay.py`：M1 空田参考图紫地校准 + 被作物遮挡的当前图三处静态背景锚点平移估计；24格 RGB 差异仅诊断，已回放真实微信占用负例，不能授权点击或宣布 clean。
-- `../scripts/window_registry.swift`：M1 只读 macOS 窗口枚举（需编译后调用），不聚焦、不点击；实机农场窗口联调未完成。
-- `../data/next-cycle-plan.json`：2026-10-28 的旧 3 轮方案；保留作历史输入样本，**Runner 新架构不再把 page/slot 写死在运行策略里**。
-- `../data/picker-order.json`：旧排序历史证据；当前 Runner 以 `data/seed-order.json` 的 fresh-entry `stable_order` + `data/farm-state.json` 数量计算临时 `visible_order`，未启用 order_revision。
-- `../assets/seeds/`：与种子名称映射的视觉图标资产。
-- `../assets/ui/`：手形全局按钮、一键务农、普通化肥及 QQ / 微信“可摘”的紧凑视觉模板。
-- `../scripts/open_qq_farm.swift`：QQ 农场固定入口脚本；定位 QQ / QQ经典农场窗口，按 `ui-layout.json` 已验证的主窗口相对坐标打开或恢复农场，不走“更多功能”。
-- `../scripts/restore_wechat_main.swift`：微信 Stage Manager 主窗口恢复，2026-10-31 实机成功；农场入口仍需状态式校准。
-- `../scripts/farm_plant_picker.py`：M2 picker 有界翻页/目标 icon 与数量徽标 contract；QQ 已有两个目标的真实局部联调，完整种植仍未验收。
-- `../scripts/farm_picker_vision.py` / `../scripts/farm_text_ocr.swift`：QQ picker 真实页码、已校准目标图标/数量及左右箭头；macOS Vision OCR Swift 需预编译，微信/其它目标保持 unknown，不授权种植。
-- `../scripts/farm_plant_special.py`：M2 离线四格单颗事务（预览→确认→24格占用终验）；不接真实点击。
-- `../scripts/farm_plant_ordinary.py`：M2 离线普通一键种植事务（空格数=计划数量→picker→选种→24格全占用终验）；不接真实点击。
-- `../scripts/farm_plant_cycle.py` / `../scripts/farm_plant_recovery.py`：M2 本地组合种植 phase 与 durable preaction journal；已确认交易才更新恢复数量，异常/崩溃后不自动重放，尚未接真实 UI。
-- `../scripts/ui_probe.py`：一次读取裁好的当前农场窗口状态、化肥候选点和 24 格坐标；只读，不点击，并拒绝整屏截图误输入。
-- `../scripts/pickable_locator.py`：一次识别全部 4 格植物“可摘”位置并去重；`ui_probe.py` 已直接复用。
-- `../scripts/picker_simulator.py`：旧隐藏排序模型的推演工具；只用于异常研究。
-- `../scripts/seed_picker_locator.py`：按种子名称在当前选择器中定位图标；保留为异常校准/兜底。
-- `../scripts/anchor_locator.py`：单模板 ROI 找图与逻辑坐标映射工具；只读，不点击。
-- `archive/README.md`：已完成阶段的历史索引；只用于追溯。
-- `../tasks/todo.md`：尚未验证或实现的工作。
+这里只做文件导航，不维护业务判断。
+
+## 当前入口
+
+- `../SKILL.md`：项目一级入口。
+- `../CLAUDE.md`：稳定目标与安全边界。
+- `../IMPLEMENTATION_PLAN.md`：Runner V2 当前实施计划。
+- `../tasks/todo.md`：全部未完成事项唯一台账。
+- `CURRENT.md`：当前 QQ / 微信现场。
+- `superpowers/specs/2026-11-01-deterministic-farm-runner-v2-design.md`：Runner V2 设计定义。
+
+## 稳定规则 / 数据
+
+- `gameplay-rules.md`：游戏稳定规则。
+- `seed-catalog.md`：种子资料说明。
+- `../data/seed-catalog.json`：种子精确数据。
+- `../data/ui-layout.json`：窗口基线、4×6 网格、四格 placement。
+- `../data/ui-anchors.json`：UI 局部锚点。
+- `../data/seed-order.json`：stable_order。
+- `../data/farm-state.json`：Runner 状态/库存事实文件。
+
+## 历史
+
+- `runner-m0-verification.md`：M0 历史离线验收。
+- `archive/`：退出当前工作流的历史阶段。
