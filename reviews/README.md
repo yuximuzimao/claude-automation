@@ -44,6 +44,7 @@
 - `weekly/2026-W41.md`
 - `weekly/2026-W42.md`
 - `weekly/2026-W43.md`
+- `weekly/2026-W44.md`
 
 ## 已有月回顾
 
@@ -54,6 +55,7 @@
 - `monthly/2026-07.md`
 - `monthly/2026-08.md`
 - `monthly/2026-09.md`
+- `monthly/2026-10.md`
 
 ## 已有洞察
 
