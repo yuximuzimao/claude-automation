@@ -39,7 +39,9 @@ Runner 已切换到 V2：
 5. QQ 固定格点击偏移已由历史实测固化；live adapter 的 phase-start EMPTY 和指定 cells 占用验证已接成只读 ROI。
 6. 当前全项目 157 项测试全绿；open_plot 仍硬 STOP，preview/confirm 与 one-key ON 仍未完成校准，因此不会发送真实种植输入。
 7. one-key ON 已用事故现场保存的真实截图离线校准：picker y-shift=21，ON=True；OFF/ON/UNKNOWN 三态测试通过。
-8. 当前不操作 QQ；00:00–01:00 属于真机禁用时段。下一步继续查历史四格 preview/confirm 样本。
+8. 四格 preview/confirm 已用历史 QQ 实机样本离线校准：绿色高亮 2×2 可精确恢复目标 cells；确认按钮相对 preview 中心固定偏移，真实 preview 可验证，preview2/planted 均拒绝。
+9. 旧版 special-after1 截图与当前土地色彩条件不同，不用于放宽 V2 空地阈值。确认后的 occupied ROI 仍等新的同版本现场终验。
+10. 当前不操作 QQ；00:00–01:00 属于真机禁用时段。
 
 ## 真机操作禁用时段
 

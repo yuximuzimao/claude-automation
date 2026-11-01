@@ -18,7 +18,7 @@ from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
-from farm_qq_clean import check_qq_empty_field
+from farm_qq_clean import check_qq_empty_field, observe_qq_preview_cells
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -142,12 +142,14 @@ class LivePlantAdapter:
         handle, shot = self._capture()
         empty_check = (check_qq_empty_field(shot, self.layout)
                        if self.platform == "qq" else None)
+        preview_cells = (observe_qq_preview_cells(shot, self.layout)
+                         if self.platform == "qq" else None)
         view = OrdinaryPlantView(
             capture_id=shot.capture_id or "",
             captured_at_ns=shot.captured_at_ns or 0,
             window_identity=_identity(handle),
             overlay="unknown",
-            preview_cells=None,
+            preview_cells=preview_cells,
             one_key_planting=None,
         )
         self.last_field = view
@@ -166,7 +168,11 @@ class LivePlantAdapter:
             "occupied_cells": len(empty_check.occupied_cells) if empty_check is not None else 0,
             "unknown_cells": len(empty_check.unknown_cells) if empty_check is not None else 24,
             "clean_field_verified": empty_check is not None and empty_check.status == "EMPTY",
-            "preview": "unknown",
+            "preview_cells": ([list(cell) for cell in sorted(preview_cells)]
+                              if isinstance(preview_cells, frozenset) else None),
+            "preview": ("none" if preview_cells == frozenset()
+                        else "verified" if isinstance(preview_cells, frozenset)
+                        else "unknown"),
             "one_key_planting": "unknown",
             "calibration_verified": False,
             "can_authorize_clicks": False,

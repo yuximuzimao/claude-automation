@@ -72,7 +72,7 @@ EMPTY → 四格 placement → 普通一键种植 → GROWING
 - [x] live adapter 已实现只读 `require_empty_field()` 与 `verify_cells_occupied(cells)`，均只截图/ROI 判断。
 - [x] 当前全项目 157 项测试全部通过。
 - [ ] live adapter：把固定格坐标真正接入 open_plot CGEvent（当前仍硬 STOP）。
-- [ ] live adapter：四格 preview / confirm ROI 校准。
+- [x] live adapter：四格 preview / confirm ROI 已离线校准。24 个固定土地 ROI 中绿色高亮精确返回 2×2 preview；确认按钮由 preview 中心 + 固定偏移推算，并要求局部 ROI 同时满足绿色圆按钮与白色勾阈值。两份真实 preview 回放均通过，preview 消失/已落地状态均拒绝确认。
 - [x] live adapter：one-key ON 正例已用 2026-11-01 实机截图校准；OFF / ON / UNKNOWN 三态均为正例/拒识逻辑，真实 ON 截图直接返回 `picker_y_shift=21`、`one_key_mode=True`。
 - [ ] 获得用户当前 Chat 明确授权后，做真实 EMPTY → 完整种植验收。
 

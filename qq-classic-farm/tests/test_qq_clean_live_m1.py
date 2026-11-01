@@ -20,7 +20,8 @@ from farm_harvest_live import LiveHarvestAdapter
 from farm_io import WindowHandle
 from farm_plant_live import LivePlantAdapter
 from farm_plant_special import SpecialPlantStop
-from farm_qq_clean import ALL_CELLS, check_qq_empty_field
+from farm_qq_clean import (ALL_CELLS, check_qq_empty_field,
+                           observe_qq_preview_cells, qq_special_confirm_point)
 from farm_runner import RunnerStop, read_only_empty_check
 
 
@@ -42,17 +43,19 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
         r = self.cfg["patch_radius"]
         rgb[y-r:y+r+1, x-r:x+r+1] = value
 
-    def image(self, *, occupied=(), ambiguous=(), dim=False):
+    def image(self, *, occupied=(), ambiguous=(), preview=(), dim=False):
         rgb = np.zeros((1111, 603, 3), dtype=np.uint8)
         purple = np.asarray(self.cfg["soil_prototypes"]["purple"], dtype=np.uint8)
         gold = np.asarray(self.cfg["soil_prototypes"]["gold"], dtype=np.uint8)
         occupied = set(occupied)
         ambiguous = set(ambiguous)
+        preview = set(preview)
         for index, cell in enumerate(ALL_CELLS):
             sx, sy = self._point(cell, self.cfg["soil_offset"])
             ox, oy = self._point(cell, self.cfg["occupancy_offset"])
-            # The checker deliberately infers grade from color, not legacy land_grades.
-            self._paint(rgb, sx, sy, purple if index < 5 else gold)
+            soil = np.asarray((160, 215, 77), dtype=np.uint8) if cell in preview else (
+                purple if index < 5 else gold)
+            self._paint(rgb, sx, sy, soil)
             if cell in occupied:
                 marker = (120, 90, 45)
             elif cell in ambiguous:
@@ -83,6 +86,58 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
                 self.assertEqual(result.status, "NOT_EMPTY")
                 self.assertTrue(set(result.occupied_cells) & occupied)
                 self.assertEqual(result.reason, "OCCUPIED_CELL_DETECTED")
+
+    def test_preview_cells_are_exact_2x2_or_unknown(self):
+        target = frozenset({(4, 2), (4, 3), (5, 2), (5, 3)})
+        self.assertEqual(
+            observe_qq_preview_cells(
+                self.shot(self.image(preview=target)), self.layout),
+            target,
+        )
+        self.assertEqual(
+            observe_qq_preview_cells(self.shot(self.image()), self.layout),
+            frozenset(),
+        )
+        malformed = {(0, 0), (1, 1), (2, 2), (3, 3)}
+        self.assertIsNone(
+            observe_qq_preview_cells(
+                self.shot(self.image(preview=malformed)), self.layout)
+        )
+
+    def test_special_confirm_requires_exact_preview_and_green_check_roi(self):
+        target = frozenset({(4, 2), (4, 3), (5, 2), (5, 3)})
+        rgb = self.image(preview=target)
+        self.assertIsNone(
+            qq_special_confirm_point(self.shot(rgb.copy()), target, self.layout)
+        )
+
+        qq = self.layout["platforms"]["qq"]
+        origin = np.asarray(qq["origin"], dtype=float)
+        u_step = np.asarray(qq["u_step"], dtype=float)
+        v_step = np.asarray(qq["v_step"], dtype=float)
+        dx, dy = qq["planting"]["special_confirm_offset_normalized"]
+        center = np.mean(
+            [origin + u*u_step + v*v_step for u, v in target], axis=0)
+        x = round(center[0] + dx * self.frame.width)
+        y = round(center[1] + dy * self.frame.height)
+        original = rgb.copy()
+        rgb[y-38:y+39, x-38:x+39] = (130, 190, 40)
+        rgb[y-10:y+10, x-10:x+10] = (245, 245, 220)
+        # The synthetic square is larger than the real round button. Restore
+        # the 24 tiny soil sampling ROIs so the test isolates confirm-button
+        # verification instead of manufacturing extra preview cells.
+        for cell in ALL_CELLS:
+            sx, sy = self._point(cell, self.cfg["soil_offset"])
+            r = self.cfg["patch_radius"]
+            rgb[sy-r:sy+r+1, sx-r:sx+r+1] = original[
+                sy-r:sy+r+1, sx-r:sx+r+1]
+
+        point = qq_special_confirm_point(self.shot(rgb), target, self.layout)
+        self.assertIsNotNone(point)
+        self.assertAlmostEqual(point[0], x, delta=1)
+        self.assertAlmostEqual(point[1], y, delta=1)
+        wrong = frozenset({(0, 0), (0, 1), (1, 0), (1, 1)})
+        self.assertIsNone(qq_special_confirm_point(self.shot(rgb), wrong, self.layout))
 
     def test_dimmed_overlay_is_unknown_not_occupied(self):
         result = check_qq_empty_field(

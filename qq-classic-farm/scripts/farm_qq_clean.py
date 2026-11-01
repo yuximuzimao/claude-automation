@@ -55,6 +55,118 @@ def _distance(a: np.ndarray, b: np.ndarray) -> float:
     return sqrt(float(np.dot(delta, delta)))
 
 
+def observe_qq_preview_cells(
+    capture: FarmCapture, layout: dict
+) -> frozenset[Cell] | None:
+    """Return the exact 2x2 green preview, empty set, or None if ambiguous.
+
+    The game paints preview tiles green. V2 samples the same tiny soil ROI used
+    by the empty checker and only asks whether G exceeds both R/B by a
+    calibrated margin. It never identifies a crop species.
+    """
+    rgb = getattr(capture, "rgb", None)
+    if (rgb is None or rgb.dtype != np.uint8
+        or not getattr(capture, "capture_id", None)
+        or type(capture.captured_at_ns) is not int or capture.captured_at_ns <= 0):
+        return None
+    try:
+        qq = layout["platforms"]["qq"]
+        empty_cfg = qq["empty_check"]
+        plant_cfg = qq["planting"]
+        width, height = empty_cfg["verified_window_size"]
+        if ((capture.frame.width, capture.frame.height) != (width, height)
+            or rgb.shape != (height, width, 3)):
+            return None
+        origin = np.asarray(qq["origin"], dtype=np.float64)
+        u_step = np.asarray(qq["u_step"], dtype=np.float64)
+        v_step = np.asarray(qq["v_step"], dtype=np.float64)
+        soil_offset = np.asarray(empty_cfg["soil_offset"], dtype=np.float64)
+        radius = int(empty_cfg["patch_radius"])
+        margin_min = float(plant_cfg["preview_green_margin_min"])
+        if (soil_offset.shape != (2,) or not 1 <= radius <= 8 or margin_min <= 0):
+            return None
+    except (KeyError, TypeError, ValueError):
+        return None
+
+    preview: set[Cell] = set()
+    for cell in ALL_CELLS:
+        u, v = cell
+        base = origin + u * u_step + v * v_step
+        x, y = np.rint(base + soil_offset).astype(int)
+        patch = _patch(rgb, int(x), int(y), radius)
+        if patch is None:
+            return None
+        med = np.median(patch.reshape(-1, 3), axis=0)
+        if float(med[1] - max(med[0], med[2])) >= margin_min:
+            preview.add(cell)
+
+    if not preview:
+        return frozenset()
+    if len(preview) != 4:
+        return None
+    us = {u for u, _ in preview}
+    vs = {v for _, v in preview}
+    if (len(us) != 2 or len(vs) != 2
+        or max(us) - min(us) != 1 or max(vs) - min(vs) != 1):
+        return None
+    expected = {(u, v) for u in us for v in vs}
+    return frozenset(preview) if preview == expected else None
+
+
+def qq_special_confirm_point(
+    capture: FarmCapture, target: frozenset[Cell], layout: dict
+) -> tuple[float, float] | None:
+    """Return verified local confirm-button point for one exact 2x2 preview."""
+    if (not isinstance(target, frozenset) or len(target) != 4
+        or not target.issubset(ALL_CELLS)):
+        return None
+    if observe_qq_preview_cells(capture, layout) != target:
+        return None
+    us = {u for u, _ in target}
+    vs = {v for _, v in target}
+    if (len(us) != 2 or len(vs) != 2
+        or max(us) - min(us) != 1 or max(vs) - min(vs) != 1):
+        return None
+
+    try:
+        qq = layout["platforms"]["qq"]
+        cfg = qq["planting"]
+        origin = np.asarray(qq["origin"], dtype=np.float64)
+        u_step = np.asarray(qq["u_step"], dtype=np.float64)
+        v_step = np.asarray(qq["v_step"], dtype=np.float64)
+        dx, dy = map(float, cfg["special_confirm_offset_normalized"])
+        radius = int(cfg["special_confirm_radius"])
+        lime_min = int(cfg["special_confirm_lime_min"])
+        white_min = int(cfg["special_confirm_white_min"])
+        if not 20 <= radius <= 60 or lime_min <= 0 or white_min <= 0:
+            return None
+    except (KeyError, TypeError, ValueError):
+        return None
+
+    points = np.asarray(
+        [origin + u*u_step + v*v_step for u, v in target],
+        dtype=np.float64,
+    )
+    center = points.mean(axis=0)
+    x = float(center[0] + dx * capture.frame.width)
+    y = float(center[1] + dy * capture.frame.height)
+    xi, yi = map(int, np.rint((x, y)))
+    patch = _patch(capture.rgb, xi, yi, radius)
+    if patch is None or patch.shape != (2*radius+1, 2*radius+1, 3):
+        return None
+
+    rgb = patch.astype(np.int16)
+    r, g, b = (rgb[:, :, i] for i in range(3))
+    lime = ((g > 145) & (r > 80) & (r < 210) & (b < 90)
+            & (g > r * 1.15) & (g > b * 2.0))
+    white = (r > 210) & (g > 210) & (b > 185)
+    if int(np.count_nonzero(lime)) < lime_min:
+        return None
+    if int(np.count_nonzero(white)) < white_min:
+        return None
+    return x, y
+
+
 def check_qq_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCheck:
     """Return EMPTY, NOT_EMPTY, or UNKNOWN for the calibrated QQ 4x6 field."""
     rgb = getattr(capture, "rgb", None)
