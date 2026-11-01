@@ -157,7 +157,7 @@ class CleanFieldDiagnosticTests(unittest.TestCase):
 
     def test_missing_purple_or_reference_color_fails_closed(self):
         reference = synthetic("qq")
-        missing = synthetic("qq", missing=True)
+        missing = synthetic("qq", missing_count=2)
         with self.assertRaises(CleanFieldStop) as caught:
             compare_clean_reference(missing, reference, "qq", LAYOUT)
         self.assertEqual(caught.exception.code, "FIELD_ALIGNMENT_UNAVAILABLE")

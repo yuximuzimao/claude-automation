@@ -113,7 +113,8 @@ class LandingProofTests(unittest.TestCase):
         idle = before.copy()
         after = before.copy()
         x, y = self.center((0, 0))
-        after[y-21:y-15, x+13:x+21] = (25, 85, 15)
+        # Simulate a sprite inside the independently registered field.
+        after[y+14:y+22, x-13:x-5] = (25, 85, 15)
         handle = WindowHandle(6951, 53086, self.frame)
         adapter = LivePlantAdapter("qq", self.layout, Path("/tmp/registry"),
                                    Path("/tmp/click"), execute=True)
@@ -124,6 +125,8 @@ class LandingProofTests(unittest.TestCase):
                   self.shot(idle, "idle", 200),
                   self.shot(after, "after", 300)]),
               patch("farm_plant_live.sleep", return_value=None),
+              patch("farm_plant_live.probe_field_translation",
+                    return_value={"offset_local": [-9, 18]}),
               patch("farm_plant_live.subprocess.run", side_effect=AssertionError("No click"))):
             h, b, i = adapter.capture_field_delta_control()
             evidence = adapter.verify_field_delta_since(h, b, i)

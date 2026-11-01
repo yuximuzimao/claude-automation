@@ -24,6 +24,7 @@ class FieldDelta:
     capture_ids: tuple[str, str, str]
     status: str = "diagnostic_only"
     can_authorize_clicks: bool = False
+    registration_offset_local: tuple[float, float] | None = None
 
 
 class FieldDeltaStop(ValueError):
@@ -35,6 +36,7 @@ class FieldDeltaStop(ValueError):
 def analyze_field_delta(
     before: FarmCapture, idle: FarmCapture, after: FarmCapture,
     platform: str, layout: dict,
+    *, registration_offset_local: tuple[float, float] | None = None,
 ) -> FieldDelta:
     """Find scene changes over all 24 diamond areas, with an idle control.
 
@@ -56,6 +58,11 @@ def analyze_field_delta(
         validate_farm_window(before.frame, platform, layout)
         cfg = layout["platforms"][platform]
         origin = np.asarray(cfg["origin"], dtype=float)
+        if registration_offset_local is not None:
+            offset = np.asarray(registration_offset_local, dtype=float)
+            if offset.shape != (2,) or not np.all(np.isfinite(offset)):
+                raise ValueError("Invalid live field registration offset")
+            origin = origin + offset
         steps = np.asarray((cfg["u_step"], cfg["v_step"]), dtype=float).T
         if abs(np.linalg.det(steps)) < 1:
             raise ValueError("Degenerate grid")
@@ -103,4 +110,8 @@ def analyze_field_delta(
         assigned_cells=tuple(assigned),
         candidate_cells=tuple((i, j) for i, j, _ in assigned),
         capture_ids=tuple(s.capture_id for s in shots),
+        registration_offset_local=(
+            tuple(float(v) for v in registration_offset_local)
+            if registration_offset_local is not None else None
+        ),
     )

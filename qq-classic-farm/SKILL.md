@@ -36,11 +36,11 @@
 | `scripts/farm_plant_recovery.py` | M2 durable 事务 journal：每笔先写 in_flight，再记录已验证库存；`run_plant_phase_with_recovery(state_path=...)` 可在完整 phase verified 后显式调用 commit_verified_inventory，成功才报告 persisted=true；旧日志禁止自动重播。组合接口205项全量离线通过，未接 run-next、未实机验收 | M2 实机接线/崩溃恢复 |
 | `scripts/farm_plant_live.py` | M2 真实窗口注册/截图/只读 preflight；QQ picker 页码/两个目标图标与数量及不同田格的 y 偏移已实机读取，左右有界 CGEvent 翻页已联调；picker 内 one-key OFF 可识别，ON/field/preview 仍未知，禁止选择种子或种植 | M2 现场局部视觉校准 |
 | `scripts/farm_picker_vision.py` / `scripts/farm_text_ocr.swift` | QQ 真实 picker 页码、局部图标/数量、左右箭头；不同田格会使 picker 纵向移动，现可用已验证 OFF 控件局部模板定位并统一平移 ROI/箭头。Swift OCR 需预编译（例如 `swiftc scripts/farm_text_ocr.swift -o /tmp/farm_text_ocr`）；ON 模式尚未知，只有已校准目标可局部观察，**不授权播种** | M2 picker 实机联调 |
-| `scripts/farm_field.py` | 紫晶空地格点平移只读诊断；不能作为点击授权 | M1 历史截图回放/现场校准 |
+| `scripts/farm_field.py` | QQ真实无输入双帧配准：6块紫晶中1块被白色装饰遮挡，现要求至少5/6唯一匹配，采用紫晶连通块边界框中心，真实 offset≈(-9.35,+18.4)；2块及以上缺失/歧义STOP。**只读，不是点击或空田语义授权** | M1/M2 现场网格注册；不得继续用未注册的名义格心点地 |
 | `scripts/farm_scene.py` / `scripts/farm_clean_field.py` | 三处静态背景锚点估计遮挡农田相对空田的平移、24格差异回放；均只读不可授权点击 | M1 真实 clean/occupied 样本对照 |
 | `scripts/farm_qq_clean.py` / `assets/ui/field/qq-empty-atlas.png` / 两张 `qq-*-seedling-negative.png` | QQ 五帧中心模板 + 金/紫真实萝卜苗局部负例；**2026-11-01确认空间盲区：clean=24只是局部候选，M1/M2 live均不得升级为已验证空田或already_clean终态**；未知STOP | 仅候选诊断，不授权收获/种植/终验 |
 | `scripts/farm_qq_landing.py` | 旧两帧ROI回填落点方法共用有盲区的clean detector，保留作历史回放；live capture_landing_baseline/verify_landing_since已结构化停用，**不能当作独立落点证明** | 不用于实机验收或点击授权 |
-| `scripts/farm_field_delta.py` | 新的三帧整田仿射区域差分：before→无输入idle→after，拒绝旧帧/窗口漂移，返回变化像素与候选格；LivePlantAdapter.capture_field_delta_control/verify_field_delta_since只读接线；不推断唯一作物归属，不证明绝对空田，不能授权点击 | 下一允许时段真实白萝卜校准与动画对照 |
+| `scripts/farm_field_delta.py` | 三帧整田差分 before→无输入idle→after；M2 live 接线先在 before/idle 分别做真实紫晶田配准，offset漂移>2px STOP，再用注册后的24格仿射区域归属变化候选，避免名义格心误归邻格。只读 diagnostic_only，不推断作物归属、绝对空田或授权点击 | 下一许可时段已购1颗白萝卜的安全受控试种/落点/成熟收获 |
 | `scripts/ui_probe.py` | 裁好后的农场窗口只读状态探测 + 24 格坐标生成 | 实际操作每个状态入口 |
 | `scripts/pickable_locator.py` | 一次返回全部 4 格植物“可摘”坐标；已被 `ui_probe.py` 集成 | 特殊植物收获 |
 | `scripts/picker_simulator.py` | 旧顺序模型推演工具 | 仅异常研究，不作为正常选种入口 |

@@ -1,9 +1,10 @@
 """Read-only M1 farm-grid translation probe using exposed purple soil tiles.
 
 The historical grid formula can shift within a correctly sized farm window.
-This diagnostic estimates translation ONLY when every expected purple soil
-tile is visible and uniquely associated. It is not an action authorization:
-mature crops obscure tiles, and live star/occupancy calibration is pending.
+This diagnostic estimates translation only when all but at most one expected
+purple soil tile is uniquely associated; a static decoration may obscure one.
+It is not an action authorization: mature crops obscure tiles, and live
+star/occupancy calibration is pending.
 """
 from __future__ import annotations
 
@@ -77,11 +78,17 @@ def probe_field_translation(capture: FarmCapture, platform: str, layout: dict) -
             or not 19 * sy <= height <= 55 * sy
             or not 400 * sx * sy <= area <= 3300 * sx * sy):
             continue
-        yy, xx = np.nonzero(labels[slices] == index)
-        found.append((float(x0 + rx.start + xx.mean()),
-                      float(y0 + ry.start + yy.mean())))
+        # The purple sprite can be partly covered by a white decoration.
+        # Pixel centroids then drift toward the exposed half; the connected
+        # component's bounding-box midpoint preserves the tile geometry.
+        found.append((float(x0 + (rx.start + rx.stop) / 2),
+                      float(y0 + (ry.start + ry.stop) / 2)))
 
     tolerance = 3.5 * max(sx, sy)
+    # One soil tile can be covered by a decoration even in an otherwise empty
+    # field. Require all but at most one of the *known* purple tiles; do not
+    # accept arbitrary partial matches or infer that the field is empty.
+    minimum = max(4, len(expected) - 1)
     solutions = []
     for px, py in expected:
         for ox, oy in found:
@@ -96,30 +103,32 @@ def probe_field_translation(capture: FarmCapture, platform: str, layout: dict) -
                     for i, (fx, fy) in enumerate(found)
                     if i not in used
                 )
-                if not options or options[0][0] > tolerance:
-                    break
-                distance, i = options[0]
-                used.add(i)
-                matched.append((found[i][0] - ex, found[i][1] - ey, distance))
-            if len(matched) != len(expected):
+                if options and options[0][0] <= tolerance:
+                    distance, i = options[0]
+                    used.add(i)
+                    matched.append((found[i][0] - ex, found[i][1] - ey, distance))
+            if len(matched) < minimum:
                 continue
             shift_x = float(np.median([m[0] for m in matched]))
             shift_y = float(np.median([m[1] for m in matched]))
-            rms = float(np.sqrt(np.mean([m[2] ** 2 for m in matched])))
+            residuals = [
+                hypot(mx - shift_x, my - shift_y) for mx, my, _ in matched
+            ]
+            rms = float(np.sqrt(np.mean(np.square(residuals))))
             if rms <= 2.5 * max(sx, sy):
-                solutions.append((shift_x, shift_y, rms))
+                solutions.append((len(matched), shift_x, shift_y, rms))
     if not solutions:
         raise FieldStop("FIELD_ALIGNMENT_UNAVAILABLE",
-                        "Cannot uniquely align all exposed purple soil tiles")
-    solutions.sort(key=lambda s: s[2])
+                        "Fewer than all-but-one known purple tiles align")
+    solutions.sort(key=lambda s: (-s[0], s[3]))
     best = solutions[0]
-    if any(hypot(s[0] - best[0], s[1] - best[1]) > 5 * max(sx, sy)
-           for s in solutions[1:]):
-        raise FieldStop("FIELD_ALIGNMENT_AMBIGUOUS", "Multiple full-grid translations fit")
+    if any(hypot(s[1] - best[1], s[2] - best[2]) > 5 * max(sx, sy)
+           for s in solutions[1:] if s[0] == best[0]):
+        raise FieldStop("FIELD_ALIGNMENT_AMBIGUOUS", "Multiple grid translations fit")
     return {
         "status": "diagnostic_only",
-        "offset_local": [round(best[0] / sx, 4), round(best[1] / sy, 4)],
-        "matched_purple_cells": len(expected),
-        "rms_logical": round(best[2] / max(sx, sy), 2),
+        "offset_local": [round(best[1] / sx, 4), round(best[2] / sy, 4)],
+        "matched_purple_cells": best[0],
+        "rms_logical": round(best[3] / max(sx, sy), 2),
         "can_authorize_clicks": False,
     }

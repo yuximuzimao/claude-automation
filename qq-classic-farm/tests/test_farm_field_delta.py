@@ -59,6 +59,26 @@ class FieldDeltaTests(unittest.TestCase):
         self.assertIn((2, 2), evidence.candidate_cells)
         self.assertFalse(evidence.can_authorize_clicks)
 
+    def test_live_registered_grid_prevents_neighbor_attribution(self):
+        base = np.full((1111, 603, 3), 180, dtype=np.uint8)
+        after = base.copy()
+        cfg = self.cfg
+        x = round(cfg["origin"][0] + 3*cfg["u_step"][0] + 2*cfg["v_step"][0] - 9)
+        y = round(cfg["origin"][1] + 3*cfg["u_step"][1] + 2*cfg["v_step"][1] + 18)
+        after[y-4:y+4, x-4:x+4] = (25, 85, 15)
+        before = self.shot(base, "before", 10)
+        idle = self.shot(base.copy(), "idle", 20)
+        final = self.shot(after, "after", 30)
+        registered = analyze_field_delta(
+            before, idle, final, "qq", self.layout,
+            registration_offset_local=(-9, 18),
+        )
+        nominal = analyze_field_delta(before, idle, final, "qq", self.layout)
+        self.assertEqual(registered.candidate_cells, ((3, 2),))
+        self.assertNotEqual(nominal.candidate_cells, registered.candidate_cells)
+        self.assertEqual(registered.registration_offset_local, (-9, 18))
+        self.assertFalse(registered.can_authorize_clicks)
+
     def test_idle_animation_is_not_landing_evidence(self):
         base = np.full((1111, 603, 3), 180, dtype=np.uint8)
         idle = base.copy()

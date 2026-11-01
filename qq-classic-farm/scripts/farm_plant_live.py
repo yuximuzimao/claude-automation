@@ -14,6 +14,7 @@ from time import monotonic_ns, sleep
 
 from farm_capture import capture_window
 from farm_field_delta import FieldDelta, FieldDeltaStop, analyze_field_delta
+from farm_field import FieldStop, probe_field_translation
 from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
@@ -92,13 +93,26 @@ class LivePlantAdapter:
         if not _same_handle(before_handle, after_handle):
             raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed during test")
         try:
-            evidence = analyze_field_delta(before, idle, after, self.platform, self.layout)
-        except FieldDeltaStop as exc:
+            # Register the no-input field twice. The nominal grid may land
+            # inside a neighboring tile; never fit geometry to new crop sprites.
+            first = probe_field_translation(before, self.platform, self.layout)
+            control = probe_field_translation(idle, self.platform, self.layout)
+            a, b = first["offset_local"], control["offset_local"]
+            if max(abs(a[i] - b[i]) for i in range(2)) > 2:
+                raise SpecialPlantStop("FIELD_ALIGNMENT_DRIFT",
+                                       "No-input field registration changed")
+            offset = tuple((a[i] + b[i]) / 2 for i in range(2))
+            evidence = analyze_field_delta(
+                before, idle, after, self.platform, self.layout,
+                registration_offset_local=offset,
+            )
+        except (FieldDeltaStop, FieldStop) as exc:
             raise SpecialPlantStop(exc.code, str(exc)) from exc
         self.last_diagnostics = {
             "platform": self.platform, "field_delta_status": evidence.status,
             "changed_pixels": evidence.changed_pixels,
             "candidate_cells": [list(p) for p in evidence.candidate_cells],
+            "registration_offset_local": list(evidence.registration_offset_local),
             "capture_ids": list(evidence.capture_ids),
             "can_authorize_clicks": False, "inventory_updated": False,
         }
