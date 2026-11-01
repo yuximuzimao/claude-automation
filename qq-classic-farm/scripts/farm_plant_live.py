@@ -98,7 +98,6 @@ class LivePlantAdapter:
             captured_at_ns=shot.captured_at_ns or 0,
             window_identity=_identity(handle),
             overlay="unknown",
-            field_cells=None,  # Partial soil templates do not prove empty plots.
             preview_cells=None,
             one_key_planting=None,
         )
@@ -112,7 +111,6 @@ class LivePlantAdapter:
                 "x": handle.frame.x, "y": handle.frame.y,
             },
             "overlay": "unknown",
-            "field_cells_verified": 0,
             "empty_check_status": empty_check.status if empty_check is not None else "UNKNOWN",
             "empty_check_reason": empty_check.reason if empty_check is not None else "UNSUPPORTED_PLATFORM",
             "empty_cells": len(empty_check.empty_cells) if empty_check is not None else 0,

@@ -1,4 +1,4 @@
-"""M2 local phase composition, tested without real windows or mouse input."""
+"""V2 phase composition: one initial EMPTY check, then Runner-owned occupancy."""
 import json
 from pathlib import Path
 import sys
@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_plant_cycle import PlantPhaseStop, run_plant_phase
-from farm_plant_special import SpecialPlantStop
-from seed_order import compute_picker_position, consume_confirmed
+from farm_plant_special import ALL_CELLS, SpecialPlantStop
+from seed_order import consume_confirmed
 
 LAYOUT = json.loads((ROOT / "data/ui-layout.json").read_text())
 ORDER = ["a", "b", "c", "d", "s", "o"]
@@ -21,144 +21,167 @@ ACTIONS = {
 }
 
 
-class PhaseTests(unittest.TestCase):
-    def run_phase(self, **kw):
+class PhaseAdapter:
+    def __init__(self, empty=True):
+        self.empty = empty
+        self.calls = []
+
+    def require_empty_field(self):
+        self.calls.append("empty")
+        return self.empty
+
+
+def placement_cells(name):
+    row = next(x for x in LAYOUT["platforms"]["qq"]["safe_special_2x2"]
+               if x["id"] == name)
+    return frozenset(tuple(c) for c in row["cells"])
+
+
+class PlantPhaseV2Tests(unittest.TestCase):
+    def run_phase(self, adapter=None, **kw):
         return run_plant_phase(
-            object(), platform="qq", actions=kw.pop("actions", ACTIONS),
-            stable_order=ORDER, quantities=kw.pop("quantities", QUANTITIES),
-            layout=LAYOUT, inventory_verified=kw.pop("inventory_verified", True),
+            adapter or PhaseAdapter(),
+            platform="qq",
+            actions=kw.pop("actions", ACTIONS),
+            stable_order=ORDER,
+            quantities=kw.pop("quantities", QUANTITIES),
+            layout=LAYOUT,
+            inventory_verified=kw.pop("inventory_verified", True),
             **kw,
         )
 
-    def test_three_special_then_ordinary_uses_shifted_picker_and_checkpoints(self):
-        calls, snapshots = [], []
+    def test_phase_checks_empty_once_then_tracks_confirmed_placements(self):
+        adapter = PhaseAdapter()
+        seen = []
+        occupied = frozenset()
+        current = dict(QUANTITIES)
 
-        def special(_adapter, *, seed, placement, stable_order, quantities, **_):
-            pos = compute_picker_position("qq", seed, stable_order, quantities).as_dict()
-            calls.append(("special", placement, pos))
+        def special(_adapter, *, seed, placement, known_occupied, stable_order,
+                    quantities, **_):
+            nonlocal occupied, current
+            self.assertEqual(known_occupied, occupied)
+            cells = placement_cells(placement)
+            occupied = frozenset(occupied | cells)
+            current = consume_confirmed(stable_order, quantities, seed, 1)
+            seen.append(("special", placement, occupied))
             return {
-                "status": "special_plant_verified", "platform": "qq", "seed": seed, "placement": placement,
-                "picker": pos, "quantities_after": consume_confirmed(
-                    stable_order, quantities, seed, 1),
-                "persisted": False, "llm_round_trips": 0,
+                "status": "special_plant_verified",
+                "platform": "qq",
+                "seed": seed,
+                "placement": placement,
+                "picker": {"page": 1, "slot": 1, "visible_index": 0},
+                "occupied_after": [list(c) for c in sorted(occupied)],
+                "quantities_after": current,
+                "persisted": False,
+                "llm_round_trips": 0,
             }
 
-        def ordinary(_adapter, *, seed, count, stable_order, quantities, **_):
-            pos = compute_picker_position("qq", seed, stable_order, quantities).as_dict()
-            calls.append(("ordinary", count, pos))
+        def ordinary(_adapter, *, seed, count, known_occupied, stable_order,
+                     quantities, **_):
+            self.assertEqual(known_occupied, occupied)
+            self.assertEqual(len(ALL_CELLS - known_occupied), count)
+            updated = consume_confirmed(stable_order, quantities, seed, count)
+            seen.append(("ordinary", count, ALL_CELLS))
             return {
-                "status": "ordinary_plant_verified", "platform": "qq", "seed": seed,
-                "count": count, "picker": pos,
-                "quantities_after": consume_confirmed(stable_order, quantities, seed, count),
-                "persisted": False, "llm_round_trips": 0,
+                "status": "ordinary_plant_verified",
+                "platform": "qq",
+                "seed": seed,
+                "count": count,
+                "picker": {"page": 1, "slot": 1, "visible_index": 0},
+                "occupied_after": [list(c) for c in sorted(ALL_CELLS)],
+                "quantities_after": updated,
+                "persisted": False,
+                "llm_round_trips": 0,
             }
 
-        with patch("farm_plant_cycle.plant_one_special", side_effect=special), \
-             patch("farm_plant_cycle.plant_ordinary_one_key", side_effect=ordinary):
-            result = self.run_phase(checkpoint=lambda e, q: snapshots.append((len(e), dict(q))))
+        with patch("farm_plant_cycle.plant_one_special", side_effect=special),              patch("farm_plant_cycle.plant_ordinary_one_key", side_effect=ordinary):
+            result = self.run_phase(adapter)
 
-        self.assertEqual([c[0] for c in calls], ["special"] * 3 + ["ordinary"])
-        self.assertEqual(calls[0][2]["page"], 1)
-        self.assertEqual(calls[-1][2], {"page": 1, "slot": 5, "visible_index": 4})
+        self.assertEqual(adapter.calls, ["empty"])
+        self.assertEqual([x[0] for x in seen], ["special", "special", "special", "ordinary"])
+        self.assertEqual(frozenset(map(tuple, result["occupied_after"])), ALL_CELLS)
         self.assertEqual(result["quantities_after"]["s"], 0)
         self.assertEqual(result["quantities_after"]["o"], 0)
-        self.assertEqual(QUANTITIES["s"], 3)
-        self.assertEqual([x[0] for x in snapshots], [1, 2, 3, 4])
-        self.assertEqual(snapshots[2][1]["s"], 0)
         self.assertFalse(result["persisted"])
         self.assertEqual(result["llm_round_trips"], 0)
 
-    def test_partial_second_special_reports_first_confirmed_only_and_never_ordinary(self):
-        events = []
-        def special(_adapter, *, placement, stable_order, quantities, **_):
-            events.append(placement)
-            if placement == "gold_b":
-                raise SpecialPlantStop("PLANT_PREVIEW_MISMATCH", "Unsafe preview",
-                                       action_may_have_been_sent=True)
-            return {
-                "status": "special_plant_verified", "platform": "qq", "seed": "s", "placement": placement,
-                "quantities_after": consume_confirmed(stable_order, quantities, "s", 1),
-                "persisted": False, "llm_round_trips": 0,
-            }
-
-        with patch("farm_plant_cycle.plant_one_special", side_effect=special), \
-             patch("farm_plant_cycle.plant_ordinary_one_key") as ordinary:
-            with self.assertRaises(PlantPhaseStop) as caught:
-                self.run_phase()
-            ordinary.assert_not_called()
-        error = caught.exception
-        self.assertEqual(error.code, "PLANT_PREVIEW_MISMATCH")
-        self.assertEqual(events, ["gold_a", "gold_b"])
-        self.assertEqual(len(error.completed), 1)
-        self.assertEqual(error.confirmed_quantities["s"], 2)
-        self.assertTrue(error.action_may_have_been_sent)
-        self.assertFalse(error.recovery()["retry_allowed"])
-        self.assertEqual(QUANTITIES["s"], 3)
-
-    def test_unverified_inventory_stops_before_any_adapter_call(self):
+    def test_not_empty_stops_before_any_transaction(self):
+        adapter = PhaseAdapter(empty=False)
         with patch("farm_plant_cycle.plant_one_special") as special:
             with self.assertRaises(PlantPhaseStop) as caught:
-                self.run_phase(inventory_verified=False)
+                self.run_phase(adapter)
             special.assert_not_called()
+        self.assertEqual(caught.exception.code, "PLANT_FIELD_NOT_EMPTY")
+        self.assertEqual(adapter.calls, ["empty"])
+        self.assertFalse(caught.exception.facts()["retry_allowed"])
+
+    def test_inventory_and_plan_validation_happen_before_empty_check(self):
+        adapter = PhaseAdapter()
+        with self.assertRaises(PlantPhaseStop) as caught:
+            self.run_phase(adapter, inventory_verified=False)
         self.assertEqual(caught.exception.code, "INVENTORY_DIRTY")
+        self.assertEqual(adapter.calls, [])
 
-    def test_invalid_total_and_insufficient_stock_stop_before_any_ui(self):
-        for actions, quantities, code in (
-            ({**ACTIONS, "ordinary": [{"seed": "o", "count": 11}]},
-             QUANTITIES, "INVALID_PLACEMENT"),
-            (ACTIONS, {**QUANTITIES, "s": 2}, "INSUFFICIENT_INVENTORY"),
-        ):
-            with self.subTest(code=code):
-                with patch("farm_plant_cycle.plant_one_special") as special:
-                    with self.assertRaises(PlantPhaseStop) as caught:
-                        self.run_phase(actions=actions, quantities=quantities)
-                    special.assert_not_called()
-                self.assertEqual(caught.exception.code, code)
-                self.assertEqual(caught.exception.completed, [])
+        bad = {**ACTIONS, "ordinary": [{"seed": "o", "count": 11}]}
+        with self.assertRaises(PlantPhaseStop) as caught:
+            self.run_phase(adapter, actions=bad)
+        self.assertEqual(caught.exception.code, "INVALID_PLACEMENT")
+        self.assertEqual(adapter.calls, [])
 
-    def test_checkpoint_failure_stops_after_verified_first_action(self):
-        def special(_adapter, *, stable_order, quantities, **_):
+    def test_partial_special_stop_preserves_only_confirmed_runner_state(self):
+        adapter = PhaseAdapter()
+        first_cells = placement_cells("gold_a")
+        calls = []
+
+        def special(_adapter, *, placement, stable_order, quantities,
+                    known_occupied, **_):
+            calls.append(placement)
+            if placement == "gold_b":
+                raise SpecialPlantStop("PLANT_PREVIEW_MISMATCH", "bad",
+                                       action_may_have_been_sent=True)
+            updated = consume_confirmed(stable_order, quantities, "s", 1)
             return {
-                "status": "special_plant_verified", "platform": "qq", "seed": "s",
-                "quantities_after": consume_confirmed(stable_order, quantities, "s", 1),
+                "status": "special_plant_verified",
+                "platform": "qq", "seed": "s", "placement": placement,
+                "occupied_after": [list(c) for c in sorted(first_cells)],
+                "quantities_after": updated,
                 "persisted": False, "llm_round_trips": 0,
             }
-        with patch("farm_plant_cycle.plant_one_special", side_effect=special) as spec, \
-             patch("farm_plant_cycle.plant_ordinary_one_key") as ordinary:
+
+        with patch("farm_plant_cycle.plant_one_special", side_effect=special),              patch("farm_plant_cycle.plant_ordinary_one_key") as ordinary:
             with self.assertRaises(PlantPhaseStop) as caught:
-                self.run_phase(checkpoint=lambda *_: (_ for _ in ()).throw(OSError("disk full")))
+                self.run_phase(adapter)
             ordinary.assert_not_called()
-        self.assertEqual(spec.call_count, 1)
-        self.assertEqual(caught.exception.code, "RECOVERY_CHECKPOINT_FAILED")
+
+        self.assertEqual(calls, ["gold_a", "gold_b"])
+        self.assertEqual(caught.exception.confirmed_occupied, first_cells)
         self.assertEqual(caught.exception.confirmed_quantities["s"], 2)
-        self.assertEqual(len(caught.exception.completed), 1)
+        self.assertTrue(caught.exception.action_may_have_been_sent)
+        self.assertFalse(caught.exception.facts()["retry_allowed"])
 
-    def test_incorrect_confirmed_quantity_never_reaches_next_transaction(self):
-        def wrong(_adapter, **_):
-            return {
-                "status": "special_plant_verified", "platform": "qq", "seed": "s",
-                "quantities_after": dict(QUANTITIES),  # no decrement despite claimed success
-                "persisted": False, "llm_round_trips": 0,
-            }
-        with patch("farm_plant_cycle.plant_one_special", side_effect=wrong) as special, \
-             patch("farm_plant_cycle.plant_ordinary_one_key") as ordinary:
-            with self.assertRaises(PlantPhaseStop) as caught:
-                self.run_phase()
-            ordinary.assert_not_called()
-        self.assertEqual(special.call_count, 1)
-        self.assertEqual(caught.exception.code, "INVALID_TRANSACTION_RESULT")
-        self.assertEqual(caught.exception.confirmed_quantities["s"], 3)
-
-    def test_untrusted_transaction_result_stops_without_running_next_action(self):
+    def test_transaction_result_cannot_lie_about_occupancy_or_inventory(self):
+        adapter = PhaseAdapter()
         with patch("farm_plant_cycle.plant_one_special", return_value={
-            "status": "special_plant_verified", "quantities_after": dict(QUANTITIES),
-            "persisted": True, "llm_round_trips": 0,
-        }) as special, patch("farm_plant_cycle.plant_ordinary_one_key") as ordinary:
+            "status": "special_plant_verified",
+            "platform": "qq", "seed": "s", "placement": "gold_a",
+            "occupied_after": [],
+            "quantities_after": dict(QUANTITIES),
+            "persisted": False, "llm_round_trips": 0,
+        }), patch("farm_plant_cycle.plant_ordinary_one_key") as ordinary:
             with self.assertRaises(PlantPhaseStop) as caught:
-                self.run_phase()
+                self.run_phase(adapter)
             ordinary.assert_not_called()
-        self.assertEqual(special.call_count, 1)
         self.assertEqual(caught.exception.code, "INVALID_TRANSACTION_RESULT")
+
+    def test_empty_check_failure_is_structured_and_not_retried(self):
+        class Broken:
+            def require_empty_field(self):
+                raise OSError("capture failed")
+
+        with self.assertRaises(PlantPhaseStop) as caught:
+            self.run_phase(Broken())
+        self.assertEqual(caught.exception.code, "PLANT_EMPTY_CHECK_UNAVAILABLE")
+        self.assertFalse(caught.exception.action_may_have_been_sent)
 
 
 if __name__ == "__main__":

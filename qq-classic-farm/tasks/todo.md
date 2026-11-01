@@ -15,11 +15,14 @@
   - [x] 真实历史空田 / 当前24格月见草 / 遮罩 / 残留作物离线回放符合事实。
   - [ ] 新的 QQ 真空田出现后，由用户在当前 Chat 明确授权再做 live EMPTY 终验。
 
-- [ ] **V2-2 QQ 完整种植**
-  - 四格 placement：固定位置 → picker → 图标/数量 → preview/confirm → 记录 placement。
-  - 普通：剩余格数由计划直接计算 → one-key ON → 选种一次。
-  - 异常不补洞，DIRTY/STOP。
-  - 一个本地 phase 连续完成。
+- [ ] **V2-2 QQ 完整种植：纯事务层完成，live 接线待校准**
+  - [x] Phase 只从 EMPTY 起步，之后 Runner 维护 `known_occupied`。
+  - [x] 四格只验证 preview / confirm / 目标 2×2 ROI。
+  - [x] 普通剩余格由计划直接计算；picker 验证 ON 后只点一次已验证槽位。
+  - [x] 删除 checkpoint / 崩溃自动续播；异常 DIRTY/STOP。
+  - [x] 当前全项目 155 项测试全部通过。
+  - [ ] 接固定格 open_plot、四格 preview/confirm、目标 ROI 占用验证、one-key ON 正例。
+  - [ ] 当前 Chat 明确授权后再做真实完整种植验收。
 
 - [ ] **V2-3 QQ 完整收获**
   - 已知四格 placement 附近检查“可摘”。

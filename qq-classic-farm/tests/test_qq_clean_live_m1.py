@@ -127,7 +127,6 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
             view = plant.observe_field()
         self.assertEqual(plant.last_diagnostics["empty_check_status"], "EMPTY")
         self.assertTrue(plant.last_diagnostics["clean_field_verified"])
-        self.assertIsNone(view.field_cells)
         self.assertFalse(plant.calibration_verified)
         with self.assertRaises(SpecialPlantStop) as caught:
             plant.open_plot((3, 2))

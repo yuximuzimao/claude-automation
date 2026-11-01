@@ -1,9 +1,9 @@
-"""M2 ordinary one-key planting transaction; injectable local I/O, no live entry point.
+"""V2 ordinary one-key planting transaction.
 
-Planner chooses seed/count. The runner verifies one-key mode, exactly that
-many independently empty cells, the picker target, and the complete 24-cell
-postcondition before returning a *non-persisted* inventory copy. It never
-chooses substitute seeds or tries to fill missed plots.
+The Runner already knows which cells are occupied by confirmed special
+placements. One-key planting is allowed only when the planned ordinary count
+equals the remaining cells. Postcondition checks only those planned remaining
+cell ROIs; no 24-cell semantic reconstruction is performed.
 """
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ class OrdinaryPlantStop(SpecialPlantStop):
 
 @dataclass(frozen=True)
 class OrdinaryPlantView(SpecialPlantView):
-    # Verified from local UI. None is unknown, never interpreted as enabled.
+    # Kept only for diagnostic compatibility; picker state is authoritative.
     one_key_planting: bool | None = None
 
 
@@ -34,22 +34,30 @@ class OrdinaryPlantAdapter(PickerAdapter, Protocol):
     def open_plot(self, anchor_cell: Cell) -> None: ...
     def select_seed(self, slot: int) -> None: ...
     def wait(self, seconds: float) -> None: ...
+    def verify_cells_occupied(self, cells: frozenset[Cell]) -> bool | None: ...
 
 
 def plant_ordinary_one_key(
     adapter: OrdinaryPlantAdapter, *, platform: str, seed: str, count: int,
-    stable_order: Sequence[str], quantities: Mapping[str, int],
+    known_occupied: frozenset[Cell], stable_order: Sequence[str],
+    quantities: Mapping[str, int],
     clock_ns: Callable[[], int] = monotonic_ns,
 ) -> dict:
-    """One-key ordinary seed selection fills exactly the verified empty plots.
-
-    No live action is permitted until the adapter independently proves the
-    target window, current plot occupancy and enabled one-key mode. The
-    adapter itself must enforce Mac local blackout times, focus and occlusion.
-    """
+    """Fill exactly the remaining planned cells with one verified picker slot."""
     started = perf_counter()
     if type(count) is not int or count <= 0 or count > len(ALL_CELLS):
         raise OrdinaryPlantStop("INVALID_PLANT_COUNT", "Invalid ordinary plot count")
+    if (not isinstance(known_occupied, frozenset)
+        or not known_occupied.issubset(ALL_CELLS)):
+        raise OrdinaryPlantStop("PLANT_STATE_INVALID", "Invalid Runner occupied-cell state")
+
+    remaining = frozenset(ALL_CELLS - known_occupied)
+    if len(remaining) != count:
+        raise OrdinaryPlantStop(
+            "PLANT_COUNT_MISMATCH",
+            "One-key planting count must equal Runner-known remaining cells",
+        )
+
     try:
         compute_picker_position(platform, seed, stable_order, quantities)
         if type(quantities.get(seed, 0)) is not int or quantities[seed] < count:
@@ -58,17 +66,15 @@ def plant_ordinary_one_key(
         raise OrdinaryPlantStop(exc.code, str(exc)) from exc
 
     before = _observe(adapter, action_sent=False)
-    _check_view(before, field_required=True)
+    _check_view(before)
     if not isinstance(before, OrdinaryPlantView):
-        raise OrdinaryPlantStop("PLANT_OBSERVATION_UNAVAILABLE", "One-key mode not observed")
+        raise OrdinaryPlantStop("PLANT_OBSERVATION_UNAVAILABLE", "Invalid ordinary field view")
     if before.preview_cells != frozenset():
-        raise OrdinaryPlantStop("PLANT_PREVIEW_UNVERIFIED", "Active/unknown special preview")
-    empty = frozenset(cell for cell in ALL_CELLS if not before.field_cells[cell])
-    if len(empty) != count:
-        raise OrdinaryPlantStop("PLANT_COUNT_MISMATCH",
-                                "One-key fills all empty plots, not a subset")
-    # Deterministic plot selection is UI routing, not a planting strategy.
-    anchor = min(empty)
+        raise OrdinaryPlantStop("PLANT_PREVIEW_UNVERIFIED",
+                                "Active/unknown special preview before ordinary planting")
+
+    # Deterministic UI routing only. Strategy already determined the remaining set.
+    anchor = min(remaining)
     _act(adapter.open_plot, anchor)
     try:
         picker = prepare_picker_target(
@@ -77,40 +83,50 @@ def plant_ordinary_one_key(
         )
     except (PickerStop, PickerStateError) as exc:
         raise OrdinaryPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
-    # Live QQ only displays this toggle after opening the picker. Verify it
-    # there, after bounded navigation but BEFORE selecting a seed (which can
-    # otherwise plant all empty plots immediately). Never infer it from field UI.
+
     if picker.get("one_key_planting") is not True:
         raise OrdinaryPlantStop("ONE_KEY_NOT_VERIFIED",
-                                "One-key planting must be visibly enabled in the picker",
+                                "One-key planting must be visibly enabled in picker",
                                 action_may_have_been_sent=True)
-    # The real adapter requires explicit ordinary intent: selecting a 4-grid
-    # special seed must never inherit ordinary ON-mode click authority.
+
     arm = getattr(adapter, "arm_ordinary_selection", None)
     if arm is not None:
         _act(arm, count, seed)
+
+    # Critical invariant: click exactly the slot that prepare_picker_target verified.
     _act(adapter.select_seed, picker["position"]["slot"])
     _act(adapter.wait, 2.0)
     completed_at = _after_action_clock(clock_ns)
+
     after = _observe(adapter, action_sent=True)
     _fresh(before, after, completed_at)
-    try:
-        _check_view(after, field_required=True)
-    except SpecialPlantStop as exc:
-        raise OrdinaryPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
+    if not isinstance(after, OrdinaryPlantView):
+        raise OrdinaryPlantStop("PLANT_OBSERVATION_UNAVAILABLE",
+                                "Invalid ordinary postcondition view",
+                                action_may_have_been_sent=True)
     if after.preview_cells != frozenset():
         raise OrdinaryPlantStop("PLANT_PREVIEW_UNVERIFIED",
                                 "Unexpected preview after ordinary planting",
                                 action_may_have_been_sent=True)
-    if any(after.field_cells[cell] is not True for cell in ALL_CELLS):
+
+    try:
+        occupied_verified = adapter.verify_cells_occupied(remaining)
+    except Exception as exc:
+        raise OrdinaryPlantStop("PLANT_POSTCONDITION_UNAVAILABLE",
+                                "Cannot verify planned ordinary target ROIs",
+                                action_may_have_been_sent=True) from exc
+    if occupied_verified is not True:
         raise OrdinaryPlantStop("PLANT_POSTCONDITION_MISMATCH",
-                                "One-key did not fill all 24 plots",
+                                "Planned ordinary target ROIs are not all occupied",
                                 action_may_have_been_sent=True)
+
     updated = consume_confirmed(stable_order, quantities, seed, count)
     return {
         "status": "ordinary_plant_verified", "platform": platform,
         "seed": seed, "count": count, "anchor_cell": list(anchor),
-        "picker": picker["position"], "quantities_after": updated,
+        "picker": picker["position"],
+        "occupied_after": [list(cell) for cell in sorted(ALL_CELLS)],
+        "quantities_after": updated,
         "persisted": False, "llm_round_trips": 0,
         "phase_duration_ms": round((perf_counter() - started) * 1000, 2),
     }

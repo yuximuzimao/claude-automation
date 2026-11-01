@@ -43,7 +43,6 @@ class LivePlantTests(unittest.TestCase):
             self.assertEqual(result["llm_round_trips"], 0)
             self.assertEqual(view.window_identity[0], 6951)
             self.assertEqual(view.capture_id, "live-plant-001")
-            self.assertIsNone(view.field_cells)
             self.assertIsNone(view.preview_cells)
             self.assertIsNone(view.one_key_planting)
             self.assertFalse(adapter.calibration_verified)

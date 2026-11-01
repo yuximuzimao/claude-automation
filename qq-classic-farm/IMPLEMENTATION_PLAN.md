@@ -52,23 +52,29 @@ check-empty --platform qq → EMPTY | NOT_EMPTY | UNKNOWN
 
 旧 19×19 atlas 与两张 sentinel negative 资产已删除；受控白萝卜 empty/seedling/mature/harvested 四态样本保留作历史实测证据。
 
-## V2-2 QQ 完整种植
+## V2-2 QQ 完整种植 — 纯事务层完成，live 接线待校准
 
 ```text
 EMPTY → 四格 placement → 普通一键种植 → GROWING
 ```
 
-- [ ] Planner 只提供种子/数量/placement。
-- [ ] 四格使用固定 placement 坐标。
-- [ ] Picker 用 stable_order + quantities 计算 page/slot。
-- [ ] 局部验证页码、目标图标、数量。
-- [ ] 四格只验证 preview / confirm ROI。
-- [ ] 确认后直接记录该 placement 已落地。
-- [ ] 普通剩余格数由 24 - 已知四格占用直接计算。
-- [ ] 验证 one-key ON 后只选一次普通种子。
-- [ ] 结果不符合预期则 DIRTY/STOP，不补洞。
+- [x] Planner 只提供种子/数量/placement。
+- [x] Phase 开始只要求一次 `EMPTY`；之后 Runner 自己维护 `known_occupied`。
+- [x] Picker 继续用 stable_order + quantities 计算 page/slot。
+- [x] Picker 唯一选择入口保持“验证哪个目标槽位，就只能点击刚验证的同一槽位”。
+- [x] 四格事务只验证目标 preview、confirm 关闭和计划 2×2 ROI 已占用；不重建 24 格语义图。
+- [x] 四格确认后直接把该 placement 四格加入 Runner `known_occupied`。
+- [x] 普通剩余格数由 `24 - known_occupied` 直接计算。
+- [x] 普通事务要求 picker 明确验证 one-key ON 后，只选择一次已验证槽位。
+- [x] 异常统一 DIRTY/STOP；已删除 checkpoint / preaction / 崩溃自动续播职责。
+- [x] 纯事务层 23 项专项测试通过；当前全项目 155 项测试全部通过。
+- [ ] live adapter：固定格 open_plot 坐标接线。
+- [ ] live adapter：四格 preview / confirm ROI 校准。
+- [ ] live adapter：`verify_cells_occupied(cells)` 用 V2 固定 ROI 实现。
+- [ ] live adapter：one-key ON 正例校准。
+- [ ] 获得用户当前 Chat 明确授权后，做真实 EMPTY → 完整种植验收。
 
-验收：QQ 一个本地 phase 从 EMPTY 连续完成整轮种植；正常路径无逐点击模型往返。
+验收不变：QQ 一个本地 phase 从 EMPTY 连续完成整轮种植；正常路径无逐点击模型往返。
 
 ## V2-3 QQ 完整收获
 
