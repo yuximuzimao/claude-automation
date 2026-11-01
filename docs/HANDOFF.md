@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-10-30
+更新时间：2026-11-01
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
@@ -13,7 +13,7 @@ KGOS账号4（2026-10-28）：库存计算已完成，37个销售SKU按本场用
 
 提醒事项迁移已完成并经用户确认收到。跨项目接入统一从 `docs/reminders.md` 进入；阶段证据归档于 `docs/archive/2026-10-21-mac-reminders/README.md`。
 
-CodexPro 大文件读取修复已生效并结束本阶段；现役入口见 `docs/superpowers/README.md`，问题与验证证据归档于 `docs/archive/2026-10-23-codexpro-paged-read/README.md`，无待重启或继续实施事项。
+CodexPro 大文件读取（2026-11-01）：启动补丁已适配 0.30.2；新版仅原生支持按行范围读取，仍需公开 `read` 自动分页补丁，并为行号膨胀保留独立的内部区间预算，源文件仍限 2 MB。8 项回归、重新加载 shell 后实际启动、固定 ngrok 地址健康检查及实际 MCP 短行密集文件连续两页读取均通过；修复前后 `settings show` 输出和原配置文件逐字节一致，profile/token、workspace、allowed roots、ngrok、chinese-polish 恢复逻辑未变。验证进程已退出，8787/4040 无残留。现役入口见 `docs/superpowers/README.md`，0.28.5 的历史证据保留在 `docs/archive/2026-10-23-codexpro-paged-read/README.md`。
 
 QQ经典农场辅助（2026-10-24）：已跑通并固化化肥催熟（普通肥每阶段1次，高级肥可连续使用，一键施肥状态按平台独立）、4格特殊作物精确收获链（点“可摘”星标→黑色残株→点残株→铲子→裸地）和活动种子配地。当前 QQ 为 1 个金地 2×2 森野黄金芽 + 20 格森野甜莓，库存黄金芽5/甜莓24；微信为 2 个紫晶 2×2 森野黄金芽 + 16 格森野白桃，库存黄金芽1/甜莓0/白桃92。森野白桃已确认基础12小时、1季并新增图标 seed-044。若不再施肥，两边合并下次建议 10/25 05:55 后处理。微信本轮为避开置顶 ERP 窗口临时移到屏幕左侧；实际操作必须避开 ERP 覆盖区。当前现场、下一轮计划和待办只看 `qq-classic-farm/docs/CURRENT.md` / `qq-classic-farm/tasks/todo.md`。
 

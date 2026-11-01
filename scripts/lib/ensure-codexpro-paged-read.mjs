@@ -9,10 +9,13 @@ if (!packageRoot) throw new Error("CodexPro package root is required.");
 // 只给公开 read 工具分页，内部规则加载和写入校验继续使用原来的读取函数。
 const pagedRead = String.raw`export async function readTextFilePage(config, guard, workspace, filePath, options = {}) {
     const maxBytes = Math.min(options.maxBytes ?? config.maxReadBytes, config.maxReadBytes);
-    // 源文件沿用 CodexPro 支持的 2 MB 安全上限，返回正文单独受 maxBytes 限制。
-    const result = await readTextFile({ ...config, maxReadBytes: 2_000_000 }, guard, workspace, filePath, {
+    // 0.30.2 的范围读取仍以 2 MB 限制源文件；内部区间预算另需容纳行号前缀。
+    const maxSourceBytes = 2_000_000;
+    const maxNumberedBytes = maxSourceBytes + (maxSourceBytes + 1) * (String(maxSourceBytes + 1).length + 3);
+    const result = await readTextFile({ ...config, maxReadBytes: maxNumberedBytes }, guard, workspace, filePath, {
         ...options,
-        maxBytes: 2_000_000
+        startLine: options.startLine ?? 1,
+        maxBytes: maxNumberedBytes
     });
     const page = [];
     let returnedBytes = 0;
@@ -54,16 +57,16 @@ if (!fsOps.includes("export async function readTextFilePage(")) {
   fsOps = replaceOnce(fsOps, "export async function writeTextFile(", pagedRead + "export async function writeTextFile(");
 }
 if (!server.includes("const result = await readTextFilePage(")) {
-  server = replaceOnce(server, "repoTree, readTextFile, writeTextFile", "repoTree, readTextFile, readTextFilePage, writeTextFile");
+  server = replaceOnce(server, "repoTree, listFiles, readTextFile, writeTextFile", "repoTree, listFiles, readTextFile, readTextFilePage, writeTextFile");
   server = replaceOnce(server, "const result = await readTextFile(config, guard, workspace, args.path, {", "const result = await readTextFilePage(config, guard, workspace, args.path, {");
   server = replaceOnce(server, "Maximum file bytes. Capped by server config.", "Maximum returned text bytes, including line numbers. Large files are paged automatically; continue from nextStartLine. Capped by server config.");
   server = replaceOnce(server,
-    'Read a specific text file with line numbers. Avoid rereading files after write/edit unless exact final content is needed.',
-    'Read a text file with line numbers. Returns a bounded page for large files; max_bytes limits returned text, not source file size. Follow the returned continuation instruction when more lines are needed. Avoid rereading files after write/edit unless exact final content is needed.');
+    'Read a specific text file with line numbers. Avoid rereading files after write/edit/apply_patch unless exact final content is needed.',
+    'Read a text file with line numbers. Returns a bounded page for large files; max_bytes limits returned text, not source file size. Follow the returned continuation instruction when more lines are needed. Avoid rereading files after write/edit/apply_patch unless exact final content is needed.');
   server = replaceOnce(server,
-    'return textResult(text, { workspace_id: workspace.id, root: workspace.root, ...result });\n    });\n    registerCodexTool(config, server, "write",',
+    'return textResult(text, { workspace_id: workspace.id, root: workspace.root, ...result });\n    });\n    registerCodexTool(config, server, "view_image",',
     'const continuation = result.nextStartLine == null ? "" : `\\n\\n这里只返回了文件的一部分。若需继续，请调用 read，path 保持不变，start_line 设为 ${result.nextStartLine}，并省略 end_line 或将其设到该行之后。`;' +
-    '\n        return textResult(text + continuation, { workspace_id: workspace.id, root: workspace.root, ...result });\n    });\n    registerCodexTool(config, server, "write",');
+    '\n        return textResult(text + continuation, { workspace_id: workspace.id, root: workspace.root, ...result });\n    });\n    registerCodexTool(config, server, "view_image",');
 }
 
 const updates = [fsOps, server];

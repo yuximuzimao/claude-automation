@@ -28,7 +28,7 @@ test("71,807-byte file can be read with the previously failing 30KB budget", asy
   assert.equal(Buffer.byteLength(text), 71_807);
   await fs.writeFile(path.join(f.root, "registry.txt"), text);
   await assert.rejects(readTextFile(f.config, f.guard, f.workspace, "registry.txt", {
-    maxBytes: 30_000, startLine: 1, endLine: 160
+    maxBytes: 30_000
   }), /File is too large/);
   const result = await readTextFilePage(f.config, f.guard, f.workspace, "registry.txt", {
     maxBytes: 30_000, startLine: 1, endLine: 160
@@ -51,6 +51,25 @@ test("file larger than the old 180KB ceiling supports a narrow line range", asyn
   assert.equal(result.endLine, 1_010);
   assert.ok(result.text.includes("registry entry 1000"));
   assert.equal(result.sha256, createHash("sha256").update(text).digest("hex"));
+});
+
+test("dense short-line files support continuation and an explicit first line", async (t) => {
+  const f = await fixture(t);
+  const text = "x\n".repeat(250_000);
+  await fs.writeFile(path.join(f.root, "dense.txt"), text);
+  const first = await readTextFilePage(f.config, f.guard, f.workspace, "dense.txt", { maxBytes: 1_000 });
+  const second = await readTextFilePage(f.config, f.guard, f.workspace, "dense.txt", {
+    maxBytes: 1_000, startLine: first.nextStartLine
+  });
+  const explicit = await readTextFilePage(f.config, f.guard, f.workspace, "dense.txt", {
+    maxBytes: 1_000, startLine: 1
+  });
+  assert.deepEqual(explicit, first);
+  assert.equal(second.startLine, first.endLine + 1);
+  for (const page of [first, second]) assert.ok(page.returnedBytes <= 1_000);
+  const actual = [first.text, second.text].join("\n").split("\n")
+    .map((line) => line.replace(/^\s*\d+ \| /, ""));
+  assert.deepEqual(actual, text.split("\n").slice(0, second.endLine));
 });
 
 test("automatic pages preserve UTF-8, CRLF and every line without overlap", async (t) => {
@@ -105,6 +124,7 @@ test("path, binary and source-size safety checks still reject disallowed files",
   await fs.writeFile(path.join(f.root, "binary.txt"), Buffer.from([65, 0, 66]));
   await assert.rejects(readTextFilePage(f.config, f.guard, f.workspace, "binary.txt"), /binary/);
   await fs.writeFile(path.join(f.root, "oversize.txt"), "x".repeat(2_000_001));
+  await assert.rejects(readTextFilePage(f.config, f.guard, f.workspace, "oversize.txt"), /Limit: 2000000 bytes/);
   await assert.rejects(readTextFilePage(f.config, f.guard, f.workspace, "oversize.txt", {
     startLine: 1, endLine: 1
   }), /Limit: 2000000 bytes/);
