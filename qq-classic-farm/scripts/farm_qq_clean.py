@@ -1,14 +1,9 @@
-"""QQ V2 fixed-grid empty-field checker.
+"""V2 fixed-grid empty-field checks for QQ and WeChat.
 
-This is intentionally narrow. It assumes the verified QQ farm window size and
-fixed 4x6 grid, then samples two tiny ROIs per plot:
-
-- soil ROI: confirms the point still looks like QQ purple/gold land;
-- occupancy ROI: distinguishes bright empty soil from the dark planted marker.
-
-It does not identify crop species, infer partial transaction history, or align
-the whole field. Any ambiguous cell is UNKNOWN. One positively occupied cell
-is enough to prove the field is NOT_EMPTY.
+Both paths are intentionally narrow: fixed 4x6 geometry plus a few tiny
+platform-specific ROIs. They do not identify crop species or reconstruct a
+general scene. Any ambiguous cell is UNKNOWN; one positively occupied cell is
+enough to prove NOT_EMPTY.
 """
 from __future__ import annotations
 
@@ -165,6 +160,140 @@ def qq_special_confirm_point(
     if int(np.count_nonzero(white)) < white_min:
         return None
     return x, y
+
+
+def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCheck:
+    """Return EMPTY, NOT_EMPTY, or UNKNOWN for the calibrated WeChat field."""
+    rgb = getattr(capture, "rgb", None)
+    if (rgb is None or rgb.dtype != np.uint8
+        or not getattr(capture, "capture_id", None)
+        or type(capture.captured_at_ns) is not int or capture.captured_at_ns <= 0):
+        return _unknown("UNTRUSTED_CAPTURE")
+
+    try:
+        wechat = layout["platforms"]["wechat"]
+        cfg = wechat["empty_check"]
+        width = int(round(capture.frame.width))
+        height = int(round(capture.frame.height))
+        min_width, max_width = map(int, cfg["verified_window_width_range"])
+        expected_height = int(cfg["verified_window_height"])
+        if (not min_width <= width <= max_width or height != expected_height
+            or rgb.shape != (height, width, 3)):
+            return _unknown("WINDOW_SIZE_CHANGED")
+
+        origin = np.asarray(wechat["normalized_origin"], dtype=np.float64)
+        u_step = np.asarray(wechat["normalized_u_step"], dtype=np.float64)
+        v_step = np.asarray(wechat["normalized_v_step"], dtype=np.float64)
+        soil_offset = np.asarray(cfg["soil_offset_normalized"], dtype=np.float64)
+        occupancy_offset = np.asarray(
+            cfg["occupancy_offset_normalized"], dtype=np.float64)
+        residual_offset = np.asarray(
+            cfg["residual_offset_normalized"], dtype=np.float64)
+        if any(x.shape != (2,) for x in (
+            origin, u_step, v_step, soil_offset, occupancy_offset, residual_offset
+        )):
+            return _unknown("INVALID_CALIBRATION")
+
+        radius = cfg["patch_radius"]
+        soil_prototypes = {
+            name: np.asarray(value, dtype=np.float64)
+            for name, value in cfg["soil_prototypes"].items()
+        }
+        residual_prototypes = {
+            name: np.asarray(value, dtype=np.float64)
+            for name, value in cfg["residual_prototypes"].items()
+        }
+        if (type(radius) is not int or not 1 <= radius <= 8
+            or set(soil_prototypes) != {"purple", "gold"}
+            or set(residual_prototypes) != {"purple", "gold"}
+            or any(value.shape != (3,) for value in (
+                *soil_prototypes.values(), *residual_prototypes.values()
+            ))):
+            return _unknown("INVALID_CALIBRATION")
+
+        empty_soil_max = float(cfg["empty_soil_max_distance"])
+        occupied_soil_max = float(cfg["occupied_soil_max_distance"])
+        occupied_lum_max = float(cfg["occupied_luminance_max"])
+        empty_lum_min = float(cfg["empty_luminance_min"])
+        empty_residual_max = float(cfg["empty_residual_max_distance"])
+        if not (0 < empty_soil_max < occupied_soil_max
+                and occupied_lum_max < empty_lum_min
+                and empty_residual_max > 0):
+            return _unknown("INVALID_CALIBRATION")
+    except (KeyError, TypeError, ValueError):
+        return _unknown("INVALID_CALIBRATION")
+
+    scale = np.asarray([width, height], dtype=np.float64)
+    empty: list[Cell] = []
+    occupied: list[Cell] = []
+    unknown: list[Cell] = []
+
+    for cell in ALL_CELLS:
+        u, v = cell
+        base = (origin + u * u_step + v * v_step) * scale
+
+        points = [
+            np.rint(base + soil_offset * scale).astype(int),
+            np.rint(base + occupancy_offset * scale).astype(int),
+            np.rint(base + residual_offset * scale).astype(int),
+        ]
+        patches = [
+            _patch(rgb, int(point[0]), int(point[1]), radius)
+            for point in points
+        ]
+        if any(patch is None for patch in patches):
+            unknown.append(cell)
+            continue
+
+        soil_patch, occupancy_patch, residual_patch = patches
+        soil_rgb = np.median(soil_patch.reshape(-1, 3), axis=0)
+        distances = {
+            name: _distance(soil_rgb, prototype)
+            for name, prototype in soil_prototypes.items()
+        }
+        grade = min(distances, key=distances.get)
+        soil_distance = distances[grade]
+        occupancy_luminance = float(np.median(
+            occupancy_patch.astype(np.float64).mean(axis=2)))
+        residual_rgb = np.median(residual_patch.reshape(-1, 3), axis=0)
+        residual_distance = _distance(
+            residual_rgb, residual_prototypes[grade])
+
+        if (soil_distance <= occupied_soil_max
+            and occupancy_luminance < occupied_lum_max):
+            occupied.append(cell)
+        elif (soil_distance <= empty_soil_max
+              and occupancy_luminance > empty_lum_min
+              and residual_distance <= empty_residual_max):
+            empty.append(cell)
+        else:
+            unknown.append(cell)
+
+    if occupied:
+        return EmptyFieldCheck(
+            status="NOT_EMPTY",
+            empty_cells=tuple(empty),
+            occupied_cells=tuple(occupied),
+            unknown_cells=tuple(unknown),
+            reason="OCCUPIED_CELL_DETECTED",
+        )
+    if unknown:
+        return EmptyFieldCheck(
+            status="UNKNOWN",
+            empty_cells=tuple(empty),
+            occupied_cells=(),
+            unknown_cells=tuple(unknown),
+            reason="CELL_UNCERTAIN",
+        )
+    if len(empty) != len(ALL_CELLS):
+        return _unknown("INCOMPLETE_FIELD")
+    return EmptyFieldCheck(
+        status="EMPTY",
+        empty_cells=tuple(empty),
+        occupied_cells=(),
+        unknown_cells=(),
+        reason="ALL_24_EMPTY",
+    )
 
 
 def check_qq_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCheck:

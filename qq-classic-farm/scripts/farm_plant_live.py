@@ -19,8 +19,8 @@ from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
-from farm_qq_clean import (check_qq_empty_field, observe_qq_preview_cells,
-                           qq_special_confirm_point)
+from farm_qq_clean import (check_qq_empty_field, check_wechat_empty_field,
+                           observe_qq_preview_cells, qq_special_confirm_point)
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -71,15 +71,20 @@ class LivePlantAdapter:
         # Legacy compatibility flag remains false; V2 does not use it.
         self.calibration_verified = False
 
+    def _empty_check(self, shot):
+        if self.platform == "qq":
+            return check_qq_empty_field(shot, self.layout)
+        if self.platform == "wechat":
+            return check_wechat_empty_field(shot, self.layout)
+        raise SpecialPlantStop("EMPTY_CHECK_UNSUPPORTED",
+                               "V2 empty-field calibration is unavailable")
+
     def require_empty_field(self) -> bool:
         """Read-only V2 phase-start gate; never sends UI input."""
         # Starting/restarting a phase always discards any older authority.
         self.phase_origin = None
         handle, shot = self._capture()
-        if self.platform != "qq":
-            raise SpecialPlantStop("EMPTY_CHECK_UNSUPPORTED",
-                                   "V2 live EMPTY check currently calibrated only for QQ")
-        check = check_qq_empty_field(shot, self.layout)
+        check = self._empty_check(shot)
         self.last_diagnostics = {
             "platform": self.platform,
             "window_id": handle.window_id,
@@ -91,8 +96,10 @@ class LivePlantAdapter:
             "can_authorize_clicks": False,
         }
         if check.status == "UNKNOWN":
-            raise SpecialPlantStop("PLANT_FIELD_UNKNOWN",
-                                   "QQ field cannot be classified as EMPTY/NOT_EMPTY")
+            raise SpecialPlantStop(
+                "PLANT_FIELD_UNKNOWN",
+                f"{self.platform} field cannot be classified as EMPTY/NOT_EMPTY",
+            )
         if check.status == "EMPTY":
             self.phase_origin = _identity(handle)
             return True
@@ -110,9 +117,7 @@ class LivePlantAdapter:
             raise SpecialPlantStop("PLANT_PHASE_UNAUTHORIZED",
                                    "Target ROI check requires a verified EMPTY phase")
         handle, shot = self._capture()
-        if self.platform != "qq":
-            return None
-        check = check_qq_empty_field(shot, self.layout)
+        check = self._empty_check(shot)
         occupied = frozenset(check.occupied_cells)
         unknown = frozenset(check.unknown_cells)
         self.last_diagnostics = {
@@ -160,8 +165,7 @@ class LivePlantAdapter:
         self.pending_ordinary_seed = None
         self.pending_special_seed = None
         handle, shot = self._capture()
-        empty_check = (check_qq_empty_field(shot, self.layout)
-                       if self.platform == "qq" else None)
+        empty_check = self._empty_check(shot)
         preview_cells = (observe_qq_preview_cells(shot, self.layout)
                          if self.platform == "qq" else None)
         confirm_point = None

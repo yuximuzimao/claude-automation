@@ -22,7 +22,7 @@ from farm_plant_live import LivePlantAdapter
 from farm_plant_special import SpecialPlantStop
 from farm_qq_clean import (ALL_CELLS, check_qq_empty_field,
                            observe_qq_preview_cells, qq_special_confirm_point)
-from farm_runner import RunnerStop, read_only_empty_check
+from farm_runner import read_only_empty_check
 
 
 class QQEmptyFieldV2Tests(unittest.TestCase):
@@ -239,9 +239,6 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
         self.assertEqual(registry.call_count, 2)
         capture.assert_called_once()
 
-        with self.assertRaises(RunnerStop) as caught:
-            read_only_empty_check("wechat", self.layout, Path("/tmp/registry"))
-        self.assertEqual(caught.exception.code, "EMPTY_CHECK_UNSUPPORTED")
 
 
 if __name__ == "__main__":

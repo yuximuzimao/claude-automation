@@ -20,7 +20,7 @@ from farm_harvest import HarvestStop
 from farm_harvest_live import LiveHarvestAdapter, read_only_harvest_preflight
 from farm_plant_live import LivePlantAdapter, read_only_plant_preflight
 from farm_plant_special import SpecialPlantStop
-from farm_qq_clean import check_qq_empty_field
+from farm_qq_clean import check_qq_empty_field, check_wechat_empty_field
 from farm_vision import VisionStop
 
 from seed_order import (
@@ -242,15 +242,16 @@ def dry_run(plan: dict, order: dict, state: dict, layout: dict) -> dict:
 
 def read_only_empty_check(platform: str, layout: dict, registry_binary: Path) -> dict:
     """One verified farm-window capture; never sends input."""
-    if platform != "qq":
+    if platform not in ("qq", "wechat"):
         raise RunnerStop("EMPTY_CHECK_UNSUPPORTED",
-                         "V2 empty-field calibration currently exists only for QQ")
+                         "V2 empty-field calibration unavailable")
     before = find_farm_window(platform, layout, registry_binary)
     capture = capture_window(before.frame, platform, layout)
     after = find_farm_window(platform, layout, registry_binary)
     if before != after:
         raise RunnerStop("USER_INTERFERENCE", "Farm window changed during empty check")
-    check = check_qq_empty_field(capture, layout)
+    check = (check_qq_empty_field(capture, layout)
+             if platform == "qq" else check_wechat_empty_field(capture, layout))
     return {
         "status": check.status,
         "reason": check.reason,
