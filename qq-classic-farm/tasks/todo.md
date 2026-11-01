@@ -1,5 +1,7 @@
 # Todo
 
+- [ ] **2026-11-01 10:40 CST M2 组合接线（仅离线）**：QQ 只读预检 `WINDOW_SIZE_CHANGED`，未操作桌面。`run_plant_phase_with_recovery` 现在可显式传入 `state_path`，完整事务及 phase verified 后调用已有 `commit_verified_inventory`；成功才报告 `persisted=true`/新 revision，漂移时 journal 留待人工 reconcile。205项全量 Python 测试通过；真实库存未动。**下一直接阻塞**仍是 QQ 窗口稳定恢复后白萝卜点击→实际落地格实测、四格预览/确认、ON模式24格终验、真实库存同步、微信农场。M1/M2 未验收，run-next STOP。
+
 - [ ] **2026-11-01 凌晨 M2 离线 confirmed-only 库存提交接口（非实机验收）**：新增 PlantRecoveryJournal.commit_verified_inventory(state_path)，仅在已完成 verified journal、原库存/版本一致且 inventory_dirty=false 时，原子提交确认消耗并版本+1，journal 随后标记 committed；同对象幂等防止提交后标记失败导致重复扣减，旧 journal 不自动重播。202项 Python全量测试和 dry-run通过；真实 farm-state 未改，QQ/微信窗口未碰。**下一直接阻塞**：真实库存同步、QQ点击→实际落点、四格预览/确认/落地、ON模式普通一键24格终验、微信实机。03:00 CST前用户占用，禁止任何桌面实机操作；之后仍严格避开六组禁区。M1/M2完整验收未完成，run-next STOP。
 - [ ] **2026-11-01 01:34–01:39 CST QQ 窗口恢复修复（直接解锁真机前置）**：从 `c0e8f374` 恢复，Mac 本地允许时段。QQ Stage Manager 46×130 缩略窗导致 `preflight-plant=WINDOW_SIZE_CHANGED`，旧入口一次缩略点击失败；现 `open_qq_farm.swift` 仅对唯一 owner/title/PID 已核实的农场缩略窗调用进程激活，真实成功恢复完整603×1111 QQ 农场；后续 `preflight-plant` 真机证实24格空田、0点击。准备执行白萝卜受控试种时窗口再次退回缩略态，点击脚本在重新读窗口时直接 STOP，**没有购买/播种/收获/落点证据**，不得归因猜测或反复抢前台。Swift typecheck+199项 Python 单测通过。**下一轮优先**：确认无业务程序抢焦点且处于允许时段；恢复后在同一短本地阶段记录前帧空田→1颗金币白萝卜试种→后帧实际落地格，失败即停；若持续无法保持前台，继续 M2 四格 preview/ON/库存的离线最小接线。M1/M2 均未正式验收，run-next STOP。
 

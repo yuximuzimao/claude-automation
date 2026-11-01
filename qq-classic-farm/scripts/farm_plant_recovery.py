@@ -204,17 +204,37 @@ class PlantRecoveryJournal:
 def run_plant_phase_with_recovery(journal: PlantRecoveryJournal, adapter, *,
                                   platform: str, actions: dict, stable_order,
                                   quantities: Mapping[str, int], layout: dict,
-                                  inventory_verified: bool = False) -> dict:
-    """Compose existing phase with durable preaction and confirmed-only checkpoints.
+                                  inventory_verified: bool = False,
+                                  state_path: Path | None = None) -> dict:
+    """Compose M2 with durable checkpoints and an optional verified-only commit.
 
-    No UI adapter is constructed here. This helper does not authorize live clicks
-    or commit farm-state; callers must verify real inventory and field first.
+    No UI adapter is constructed here; this does not authorize live clicks.
+    When explicitly supplied, state_path is committed only after every game
+    transaction and the full phase have independently passed verification.
+    Without it, the existing uncommitted/reconciliation behavior is preserved.
     """
     from farm_plant_cycle import run_plant_phase
     if platform != journal.context["platform"]:
         raise RecoveryJournalStop("INVALID_RECOVERY_CONTEXT", "Journal platform mismatch")
     if not inventory_verified:
         raise RecoveryJournalStop("INVENTORY_DIRTY", "Refuse journaled run on stale inventory")
+    if state_path is not None:
+        # Validate the durable source BEFORE any journal or game action.
+        # The post-phase commit repeats these checks to detect later drift.
+        try:
+            state = load_json(Path(state_path))
+            platform_state = state["platforms"][platform]
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            raise RecoveryJournalStop("RECOVERY_STATE_DRIFT",
+                                      "Cannot verify initial farm-state") from exc
+        if (state.get("schema_version") != 1
+            or type(state.get("inventory_revision")) is not int
+            or state["inventory_revision"] != journal.context["inventory_revision"]
+            or not isinstance(platform_state, dict)
+            or platform_state.get("inventory_dirty") is not False
+            or platform_state.get("quantities") != dict(quantities)):
+            raise RecoveryJournalStop("RECOVERY_STATE_DRIFT",
+                                      "Farm-state inventory is not the verified starting inventory")
     journal.start(quantities)
     result = run_plant_phase(
         adapter, platform=platform, actions=actions, stable_order=stable_order,
@@ -223,4 +243,8 @@ def run_plant_phase_with_recovery(journal: PlantRecoveryJournal, adapter, *,
         checkpoint=journal.checkpoint,
     )
     journal.finish(result)
+    if state_path is not None:
+        committed = journal.commit_verified_inventory(Path(state_path))
+        return {**result, "persisted": True,
+                "inventory_revision": committed["inventory_revision"]}
     return result

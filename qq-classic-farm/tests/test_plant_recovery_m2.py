@@ -272,6 +272,91 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(json.loads(state_path.read_text())["inventory_revision"], 4)
         self.assertEqual(self.record()["status"], "committed")
 
+    def test_composed_phase_checks_durable_inventory_before_any_action(self):
+        state_path = Path(self.tmp.name) / "farm-state.json"
+        for dirty, revision in ((True, 3), (False, 4)):
+            with self.subTest(dirty=dirty, revision=revision):
+                state_path.write_text(json.dumps({
+                    "schema_version": 1, "inventory_revision": revision,
+                    "platforms": {"qq": {"quantities": dict(INITIAL),
+                                         "inventory_dirty": dirty}}
+                }), encoding="utf-8")
+                with patch("farm_plant_cycle.plant_one_special") as special:
+                    with self.assertRaises(RecoveryJournalStop) as caught:
+                        run_plant_phase_with_recovery(
+                            self.journal(), object(), platform="qq", actions=ACTIONS,
+                            stable_order=ORDER, quantities=INITIAL, layout=LAYOUT,
+                            inventory_verified=True, state_path=state_path)
+                    special.assert_not_called()
+                self.assertEqual(caught.exception.code, "RECOVERY_STATE_DRIFT")
+                self.assertFalse(self.path.exists())
+
+    def test_composed_phase_can_commit_verified_stock_without_live_ui(self):
+        state_path = Path(self.tmp.name) / "farm-state.json"
+        state = {"schema_version": 1, "inventory_revision": 3,
+                 "platforms": {"qq": {"quantities": dict(INITIAL), "inventory_dirty": False},
+                               "wechat": {"quantities": {"w": 7}, "inventory_dirty": True}}}
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+
+        def special(_adapter, *, seed, placement, stable_order, quantities, **_):
+            return {"status": "special_plant_verified", "platform": "qq",
+                    "seed": seed, "placement": placement,
+                    "quantities_after": consume_confirmed(stable_order, quantities, seed, 1),
+                    "persisted": False, "llm_round_trips": 0}
+
+        def ordinary(_adapter, *, seed, count, stable_order, quantities, **_):
+            return {"status": "ordinary_plant_verified", "platform": "qq",
+                    "seed": seed, "count": count,
+                    "quantities_after": consume_confirmed(stable_order, quantities, seed, count),
+                    "persisted": False, "llm_round_trips": 0}
+
+        with patch("farm_plant_cycle.plant_one_special", side_effect=special), \
+             patch("farm_plant_cycle.plant_ordinary_one_key", side_effect=ordinary):
+            result = run_plant_phase_with_recovery(
+                self.journal(), object(), platform="qq", actions=ACTIONS,
+                stable_order=ORDER, quantities=INITIAL, layout=LAYOUT,
+                inventory_verified=True, state_path=state_path)
+        saved = json.loads(state_path.read_text(encoding="utf-8"))
+        self.assertEqual(result["status"], "plant_phase_verified")
+        self.assertTrue(result["persisted"])
+        self.assertEqual(result["inventory_revision"], 4)
+        self.assertEqual(saved["platforms"]["qq"]["quantities"], result["quantities_after"])
+        self.assertEqual(saved["platforms"]["wechat"], state["platforms"]["wechat"])
+        self.assertEqual(self.record()["status"], "committed")
+
+    def test_composed_phase_commit_drift_stops_without_claiming_persisted(self):
+        state_path = Path(self.tmp.name) / "farm-state.json"
+        state = {"schema_version": 1, "inventory_revision": 3,
+                 "platforms": {"qq": {"quantities": dict(INITIAL), "inventory_dirty": False}}}
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+
+        def special(_adapter, *, seed, placement, stable_order, quantities, **_):
+            return {"status": "special_plant_verified", "platform": "qq",
+                    "seed": seed, "placement": placement,
+                    "quantities_after": consume_confirmed(stable_order, quantities, seed, 1),
+                    "persisted": False, "llm_round_trips": 0}
+
+        def ordinary(_adapter, *, seed, count, stable_order, quantities, **_):
+            # Simulate a concurrent inventory change after the game action
+            # but before the final verified-only farm-state commit.
+            changed = json.loads(state_path.read_text(encoding="utf-8"))
+            changed["inventory_revision"] = 4
+            state_path.write_text(json.dumps(changed), encoding="utf-8")
+            return {"status": "ordinary_plant_verified", "platform": "qq",
+                    "seed": seed, "count": count,
+                    "quantities_after": consume_confirmed(stable_order, quantities, seed, count),
+                    "persisted": False, "llm_round_trips": 0}
+
+        with patch("farm_plant_cycle.plant_one_special", side_effect=special), \
+             patch("farm_plant_cycle.plant_ordinary_one_key", side_effect=ordinary):
+            with self.assertRaises(RecoveryJournalStop) as caught:
+                run_plant_phase_with_recovery(
+                    self.journal(), object(), platform="qq", actions=ACTIONS,
+                    stable_order=ORDER, quantities=INITIAL, layout=LAYOUT,
+                    inventory_verified=True, state_path=state_path)
+        self.assertEqual(caught.exception.code, "RECOVERY_STATE_DRIFT")
+        self.assertEqual(self.record()["status"], "phase_verified_uncommitted")
+        self.assertEqual(json.loads(state_path.read_text())["platforms"]["qq"]["quantities"], INITIAL)
 
 
 if __name__ == "__main__":

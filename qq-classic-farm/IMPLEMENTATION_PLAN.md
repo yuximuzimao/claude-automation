@@ -915,6 +915,8 @@ Runner 遇异常必须返回结构化 error。
 
 ### M2 — 种植（最高价值）
 
+**2026-11-01 10:40 CST M2 组合 phase→库存落盘接线（离线，非实机验收）**：Mac 本地允许时段，QQ 只读 `preflight-plant` 返回 `WINDOW_SIZE_CHANGED`，没有发送农场操作。`run_plant_phase_with_recovery()` 新增显式可选 `state_path`：原有四格/普通事务逐笔 journal checkpoint、完整 phase verified 后才调用已实现的 `commit_verified_inventory()`；成功才返回 `persisted=true` 与新 `inventory_revision`，不传路径仍保持未提交、等待人工 reconcile。新增离线组合正例、执行前 dirty/revision 预检及阶段后 revision 漂移拒绝，Python 全量205项通过，真实 farm-state 未改。**本轮缩短 M2 的具体一步**：已实现的 confirmed-only 库存提交不再是孤立接口，现可由整个已验证种植 phase 直接调用；但真实库存同步、QQ 点击格→落地格、四格预览/确认/落地、ON模式24格终验及微信独立农场均未验收。双平台 inventory_dirty、`run-next=RUNNER_NOT_READY` 不变。
+
 **2026-11-01 凌晨用户占用保护期间：M2 confirmed-only 库存提交离线接线（非实机验收）**：复用已有 M2 事务与 durable recovery journal，不重做 picker/M0。此前 phase_verified_uncommitted 尚缺把已确认消耗写回 farm-state 的接口。本轮新增 PlantRecoveryJournal.commit_verified_inventory(state_path)：仅接受完整 verified、无 pending 的 journal，严格比对初始库存、inventory_dirty=false、inventory_revision，才对该平台确认数量执行原子写盘并 revision+1，之后标记 journal committed。若 state 已写而 journal 标记失败，同一 journal 对象可凭精确 plan/cycle/platform/revision marker 再次确认而不重复扣减；旧 journal 仍阻止任何自动重播，进程重启后的 reconcile 尚需人工。202项 Python 全量测试、M0 dry-run 通过；**没有任何 QQ/微信实机操作，也未修改真实库存**。此接口缩短 M2 的“已验收种植→库存事实落盘”缺口，但仍未接 run-next；下一步仍需现场库存同步、真实落点、四格预览/确认/落地、ON模式及微信实机验收。双平台 inventory_dirty=true，M1/M2 完整验收均未完成。
 
 

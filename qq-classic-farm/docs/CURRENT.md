@@ -1,8 +1,10 @@
 # 当前状态
 
-更新时间：2026-11-01 凌晨（M0 已通过；M2 confirmed-only 库存提交接口离线通过；M1/M2 实机及微信未验收，run-next STOP）
+更新时间：2026-11-01 10:40 CST（M0 已通过；M2 已验收阶段→库存提交的可选组合接线离线通过；M1/M2 实机及微信未验收，run-next STOP）
 
 ## Runner 当前开发检查点
+
+- **2026-11-01 10:38–10:42 CST M2 端到端库存提交离线接线（非实机验收）**：Mac 本地允许时段；QQ `preflight-plant` 只读返回 `WINDOW_SIZE_CHANGED`，未反复恢复或发送游戏点击。针对上轮已实现但尚未被 phase 调用的 `commit_verified_inventory()`，给 `run_plant_phase_with_recovery()` 增加显式可选 `state_path`：仅在全部四格/普通事务 checkpoint、journal.finish 完成后才执行原子库存提交；成功才返回 `persisted=true` 和新 revision，未提供路径仍保持 `phase_verified_uncommitted`。离线组合回归覆盖完整成功与阶段后 revision 漂移拒绝，**205项 Python 全量测试通过**；没有操作真实 farm-state 或农场作物。缩短 M2 的“phase 验收→事实库存落盘”接线缺口；真实库存同步、QQ 点击落地映射/四格预览、ON/24格终验及微信仍未验收。双平台库存 dirty，`run-next=RUNNER_NOT_READY`。
 
 - **2026-11-01 凌晨仅离线 M2 库存提交接线**：从 a03fb733 检查点恢复并读取规定五份文档。用户在03:00 CST前占用电脑，本轮没有打开、恢复、切换或观察农场桌面窗口，没有发送任何游戏输入。复用既有 PlantRecoveryJournal 的 phase_verified_uncommitted，新增显式 commit_verified_inventory(state_path)：必须 journal 无 pending、已验证事务存在，farm-state 原始库存/版本匹配且 inventory_dirty=false，才对该平台确认数量执行原子提交并 inventory_revision+1；保存提交标识防止 state 成功、journal 标记失败时同对象重试重复扣减。临时 state 测试覆盖正常提交、dirty/库存漂移/版本漂移拒绝和标记失败后幂等；全量202项 Python测试及 M0 dry-run 通过。**真实 data/farm-state.json 未修改**，QQ/微信仍 inventory_dirty=true，run-next 继续 RUNNER_NOT_READY；跨进程 journal 恢复仍需人工核对。**缩短的距离**：补齐 M2 “独立验收后库存落盘”的接口；但未取得新的现场库存同步、播种/落点、四格预览/ON模式或微信实机证据。03:00后仍遵守六组常规禁区和每批前台安全检查。
 
