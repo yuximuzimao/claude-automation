@@ -22,11 +22,13 @@
   - [x] 删除 checkpoint / 崩溃自动续播；异常 DIRTY/STOP。
   - [x] QQ 固定格点击坐标已由历史实测固化。
   - [x] live adapter 的 phase-start EMPTY 与指定 cells 占用验证已实现为只读 ROI。
-  - [x] 当前全项目 157 项测试全部通过。
   - [x] one-key ON 正例已用实机截图校准，OFF / ON / UNKNOWN 三态可判。
   - [x] 四格 preview/confirm 视觉已用历史实机样本离线校准。
-  - [ ] 接 open_plot / confirm CGEvent；确认后目标 occupied ROI 等新现场终验。
-  - [ ] 当前 Chat 明确授权后再做真实完整种植验收。
+  - [x] open_plot / confirm 已接单次 CGEvent，并绑定本轮 EMPTY phase。
+  - [x] 普通 ON / 四格 OFF 选种权限已分流；同 seed / slot / phase 才可点击。
+  - [x] 当前全项目 161 项测试全部通过。
+  - [ ] 确认后目标 occupied ROI 等新现场终验。
+  - [ ] 当前 Chat 已授权真机；等允许时段和合适现场做真实完整种植验收。
 
 - [ ] **V2-3 QQ 完整收获**
   - 已知四格 placement 附近检查“可摘”。
@@ -46,7 +48,7 @@
 
 ## 当前现场约束
 
-- QQ 当前 24 格误种月见草，保持现场，不自动收获/铲除/重种。
-- 微信不主动操作。
-- 真机输入必须由用户在当前 Chat 明确授权；历史自动任务、Work/handoff、子代理授权全部无效。
-- 当前阶段优先纯离线 V2-0 / V2-1。
+- QQ 当前已有作物，保持现场，不为测试自动铲除/重种。
+- 用户已在当前 Chat 明确授权 QQ / 微信农场真机操作；若需实测优先微信。
+- 真机仍必须遵守农场禁用时段和窗口冲突门禁；历史 Work/handoff、子代理授权仍无效。
+- 当前 00:00–01:00 禁用时段内只做离线工作。

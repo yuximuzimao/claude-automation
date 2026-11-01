@@ -185,7 +185,7 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
         self.assertFalse(plant.calibration_verified)
         with self.assertRaises(SpecialPlantStop) as caught:
             plant.open_plot((3, 2))
-        self.assertEqual(caught.exception.code, "PLANT_V2_EMPTY_CHECK_REQUIRED")
+        self.assertEqual(caught.exception.code, "PLANT_PHASE_UNAUTHORIZED")
 
         harvest = LiveHarvestAdapter("qq", self.layout, {}, Path("/tmp/registry"),
                                      execute=True)

@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_geometry import WindowFrame
+from farm_harvest_live import _identity
 from farm_io import WindowHandle
 from farm_plant_live import LivePlantAdapter
 from farm_plant_special import SpecialPlantStop
@@ -24,6 +25,8 @@ class PickerNavigationTests(unittest.TestCase):
                                 Path("/tmp/click"), execute=execute)
 
     def prime(self, adapter, page=2, y_shift=0):
+        adapter.phase_origin = _identity(HANDLE)
+        adapter.pending_picker_origin = _identity(HANDLE)
         adapter.last_handle = HANDLE
         adapter.last_picker = SimpleNamespace(page=page)
         adapter.last_picker_total = 7

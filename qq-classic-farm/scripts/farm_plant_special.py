@@ -183,6 +183,10 @@ def plant_one_special(
         raise SpecialPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
 
     # Critical invariant: only click the slot just verified for this exact seed.
+    # Live adapters additionally bind this picker session to special/OFF mode.
+    arm_special = getattr(adapter, "arm_special_selection", None)
+    if arm_special is not None:
+        _act(arm_special, seed)
     _act(adapter.select_seed, picker["position"]["slot"])
     selected_at = _after_action_clock(clock_ns)
     preview = _observe(adapter, action_sent=True)

@@ -94,18 +94,86 @@ class LivePlantTests(unittest.TestCase):
             self.adapter().observe_field()
         self.assertEqual(caught.exception.code, "USER_INTERFERENCE")
 
-    def test_open_plot_waits_for_v2_empty_checker(self):
+    def test_open_plot_requires_phase_and_then_uses_fixed_calibrated_point(self):
+        import json
+        from types import SimpleNamespace
+        from farm_harvest_live import _identity
+
         adapter = self.adapter(execute=True)
         with patch("farm_plant_live.subprocess.run",
                    side_effect=AssertionError("No CGEvent")) as cg:
             with self.assertRaises(SpecialPlantStop) as caught:
                 adapter.open_plot((3, 2))
-            self.assertEqual(caught.exception.code, "PLANT_V2_EMPTY_CHECK_REQUIRED")
+            self.assertEqual(caught.exception.code, "PLANT_PHASE_UNAUTHORIZED")
             cg.assert_not_called()
 
             with self.assertRaises(SpecialPlantStop) as caught:
                 adapter.open_plot((6, 0))
             self.assertEqual(caught.exception.code, "INVALID_PLOT")
+            cg.assert_not_called()
+
+        layout = json.loads((ROOT / "data/ui-layout.json").read_text())
+        adapter = LivePlantAdapter("qq", layout, Path("/tmp/registry"),
+                                   Path("/tmp/click"), execute=True)
+        adapter.phase_origin = _identity(HANDLE)
+        response = SimpleNamespace(returncode=0, stdout=json.dumps({
+            "status": "clicks_sent_unverified", "click_count": 1,
+        }))
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.find_farm_window", return_value=HANDLE),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg):
+            adapter.open_plot((3, 2))
+        payload = json.loads(cg.call_args.kwargs["input"])
+        self.assertEqual(len(payload["actions"]), 1)
+        self.assertAlmostEqual(payload["actions"][0]["x"], 301.52, delta=0.03)
+        self.assertAlmostEqual(payload["actions"][0]["y"], 689.09, delta=0.03)
+        self.assertEqual(adapter.pending_picker_origin, _identity(HANDLE))
+
+    def test_special_confirm_clicks_only_verified_preview_button(self):
+        import json
+        from types import SimpleNamespace
+        from farm_harvest_live import _identity
+
+        layout = json.loads((ROOT / "data/ui-layout.json").read_text())
+        target = frozenset({(4, 2), (4, 3), (5, 2), (5, 3)})
+        adapter = LivePlantAdapter("qq", layout, Path("/tmp/registry"),
+                                   Path("/tmp/click"), execute=True)
+        adapter.phase_origin = _identity(HANDLE)
+        adapter.last_handle = HANDLE
+        adapter.last_field_capture = FakeCapture()
+        adapter.last_field = SimpleNamespace(
+            overlay="none", preview_cells=target)
+        response = SimpleNamespace(returncode=0, stdout=json.dumps({
+            "status": "clicks_sent_unverified", "click_count": 1,
+        }))
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns",
+                    return_value=FakeCapture.captured_at_ns + 10),
+              patch("farm_plant_live.qq_special_confirm_point",
+                    return_value=(236.98, 568.96)),
+              patch("farm_plant_live.find_farm_window", return_value=HANDLE),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg):
+            adapter.confirm_special()
+        payload = json.loads(cg.call_args.kwargs["input"])
+        self.assertEqual(len(payload["actions"]), 1)
+        self.assertAlmostEqual(payload["actions"][0]["x"], 236.98)
+        self.assertAlmostEqual(payload["actions"][0]["y"], 568.96)
+        self.assertIsNone(adapter.last_field)
+
+        adapter.last_handle = HANDLE
+        adapter.last_field_capture = FakeCapture()
+        adapter.last_field = SimpleNamespace(
+            overlay="none", preview_cells=target)
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns",
+                    return_value=FakeCapture.captured_at_ns + 10),
+              patch("farm_plant_live.qq_special_confirm_point",
+                    return_value=None),
+              patch("farm_plant_live.subprocess.run",
+                    side_effect=AssertionError("No CGEvent")) as cg):
+            with self.assertRaises(SpecialPlantStop) as caught:
+                adapter.confirm_special()
+            self.assertEqual(caught.exception.code, "PLANT_CONFIRM_UNVERIFIED")
             cg.assert_not_called()
 
     @patch("farm_plant_live.require_live_window")
@@ -128,6 +196,7 @@ class LivePlantTests(unittest.TestCase):
         from farm_harvest_live import _identity
 
         adapter = self.adapter(execute=True)
+        adapter.phase_origin = _identity(HANDLE)
         adapter.pending_picker_origin = _identity(HANDLE)
         adapter.pending_empty_count = 2
         adapter.last_handle = HANDLE
@@ -157,10 +226,54 @@ class LivePlantTests(unittest.TestCase):
                 adapter.select_seed(3)
             self.assertEqual(cg.call_count, 1)
 
+    def test_verified_special_off_picker_selection_is_single_gated_cgevent(self):
+        import json
+        from types import SimpleNamespace
+        from farm_plant_picker import PickerView
+        from farm_harvest_live import _identity
+
+        adapter = self.adapter(execute=True)
+        adapter.phase_origin = _identity(HANDLE)
+        adapter.pending_picker_origin = _identity(HANDLE)
+        adapter.last_handle = HANDLE
+        adapter.last_picker_capture = FakeCapture()
+        adapter.last_picker_expected_slot = 3
+        adapter.last_picker_target_seed = "泡泡棉花糖种子"
+        adapter.last_picker = PickerView(page=1, target_icon_verified=True,
+                                         target_quantity=24, one_key_planting=False)
+        adapter.arm_special_selection("泡泡棉花糖种子")
+        adapter.last_picker_y_shift = 21
+        response = SimpleNamespace(returncode=0, stdout=json.dumps({
+            "status": "clicks_sent_unverified", "click_count": 1,
+        }))
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns",
+                    return_value=FakeCapture.captured_at_ns + 10),
+              patch("farm_plant_live.find_farm_window", return_value=HANDLE),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg):
+            adapter.select_seed(3)
+        payload = json.loads(cg.call_args.kwargs["input"])
+        self.assertEqual(len(payload["actions"]), 1)
+        self.assertAlmostEqual(payload["actions"][0]["x"], 287)
+        self.assertAlmostEqual(payload["actions"][0]["y"], 806)
+        self.assertIsNone(adapter.pending_special_seed)
+
+        blocked = self.adapter(execute=True)
+        blocked.phase_origin = _identity(HANDLE)
+        blocked.pending_picker_origin = _identity(HANDLE)
+        blocked.last_handle = HANDLE
+        blocked.last_picker_target_seed = "泡泡棉花糖种子"
+        blocked.last_picker = PickerView(page=1, target_icon_verified=True,
+                                         target_quantity=24, one_key_planting=True)
+        with self.assertRaises(SpecialPlantStop) as caught:
+            blocked.arm_special_selection("泡泡棉花糖种子")
+        self.assertEqual(caught.exception.code, "PLANT_SELECTION_UNVERIFIED")
+
     def test_picker_selection_never_sends_without_verified_on_origin_and_stock(self):
         from farm_plant_picker import PickerView
         from farm_harvest_live import _identity
         adapter = self.adapter(execute=True)
+        adapter.phase_origin = _identity(HANDLE)
         adapter.pending_picker_origin = _identity(HANDLE)
         adapter.pending_empty_count = 4
         adapter.last_handle = HANDLE
@@ -189,6 +302,7 @@ class LivePlantTests(unittest.TestCase):
         from farm_plant_picker import PickerView
         from farm_harvest_live import _identity
         adapter = self.adapter(execute=True)
+        adapter.phase_origin = _identity(HANDLE)
         adapter.pending_picker_origin = _identity(HANDLE)
         adapter.pending_empty_count = 4
         adapter.last_handle = HANDLE
@@ -208,6 +322,7 @@ class LivePlantTests(unittest.TestCase):
         from farm_plant_picker import PickerView
         from farm_harvest_live import _identity
         adapter = self.adapter(execute=True)
+        adapter.phase_origin = _identity(HANDLE)
         adapter.pending_picker_origin = _identity(HANDLE)
         adapter.pending_empty_count = 2
         adapter.last_handle = HANDLE

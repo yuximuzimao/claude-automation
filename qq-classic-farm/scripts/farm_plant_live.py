@@ -13,12 +13,14 @@ import subprocess
 from time import monotonic_ns, sleep
 
 from farm_capture import capture_window
+from farm_geometry import GeometryStop, plot_action_point
 from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import observe_picker, picker_arrow_verified
-from farm_qq_clean import check_qq_empty_field, observe_qq_preview_cells
+from farm_qq_clean import (check_qq_empty_field, observe_qq_preview_cells,
+                           qq_special_confirm_point)
 from farm_plant_special import Cell, SpecialPlantStop
 
 
@@ -61,11 +63,18 @@ class LivePlantAdapter:
         self.pending_picker_origin: tuple | None = None
         self.pending_empty_count: int | None = None
         self.pending_ordinary_seed: str | None = None
-        # Never set by the current uncalibrated observer.
+        self.pending_special_seed: str | None = None
+        # V2 phase authority exists only after a fresh EMPTY proof. It persists
+        # across the planned special/ordinary transactions but is invalidated
+        # by any window identity change.
+        self.phase_origin: tuple | None = None
+        # Legacy compatibility flag remains false; V2 does not use it.
         self.calibration_verified = False
 
     def require_empty_field(self) -> bool:
         """Read-only V2 phase-start gate; never sends UI input."""
+        # Starting/restarting a phase always discards any older authority.
+        self.phase_origin = None
         handle, shot = self._capture()
         if self.platform != "qq":
             raise SpecialPlantStop("EMPTY_CHECK_UNSUPPORTED",
@@ -84,7 +93,10 @@ class LivePlantAdapter:
         if check.status == "UNKNOWN":
             raise SpecialPlantStop("PLANT_FIELD_UNKNOWN",
                                    "QQ field cannot be classified as EMPTY/NOT_EMPTY")
-        return check.status == "EMPTY"
+        if check.status == "EMPTY":
+            self.phase_origin = _identity(handle)
+            return True
+        return False
 
     def verify_cells_occupied(self, cells: frozenset[Cell]) -> bool | None:
         """Read-only targeted ROI postcondition for Runner-planned cells."""
@@ -94,6 +106,9 @@ class LivePlantAdapter:
                    or not (0 <= cell[0] < 6 and 0 <= cell[1] < 4)
                    for cell in cells)):
             raise SpecialPlantStop("INVALID_PLOT_SET", "Invalid planned cell set")
+        if self.phase_origin is None:
+            raise SpecialPlantStop("PLANT_PHASE_UNAUTHORIZED",
+                                   "Target ROI check requires a verified EMPTY phase")
         handle, shot = self._capture()
         if self.platform != "qq":
             return None
@@ -128,6 +143,10 @@ class LivePlantAdapter:
         self.last_diagnostics = {}
         require_live_window()
         before = find_farm_window(self.platform, self.layout, self.registry_binary)
+        if self.phase_origin is not None and _identity(before) != self.phase_origin:
+            self.phase_origin = None
+            raise SpecialPlantStop("USER_INTERFERENCE",
+                                   "Farm window changed during planting phase")
         shot = capture_window(before.frame, self.platform, self.layout)
         after = find_farm_window(self.platform, self.layout, self.registry_binary)
         if not _same_handle(before, after):
@@ -139,16 +158,29 @@ class LivePlantAdapter:
         self.pending_picker_origin = None
         self.pending_empty_count = None
         self.pending_ordinary_seed = None
+        self.pending_special_seed = None
         handle, shot = self._capture()
         empty_check = (check_qq_empty_field(shot, self.layout)
                        if self.platform == "qq" else None)
         preview_cells = (observe_qq_preview_cells(shot, self.layout)
                          if self.platform == "qq" else None)
+        confirm_point = None
+        if isinstance(preview_cells, frozenset) and len(preview_cells) == 4:
+            confirm_point = qq_special_confirm_point(
+                shot, preview_cells, self.layout)
+        if (preview_cells == frozenset()
+            and empty_check is not None
+            and empty_check.status in ("EMPTY", "NOT_EMPTY")):
+            overlay = "none"
+        elif confirm_point is not None:
+            overlay = "none"
+        else:
+            overlay = "unknown"
         view = OrdinaryPlantView(
             capture_id=shot.capture_id or "",
             captured_at_ns=shot.captured_at_ns or 0,
             window_identity=_identity(handle),
-            overlay="unknown",
+            overlay=overlay,
             preview_cells=preview_cells,
             one_key_planting=None,
         )
@@ -161,7 +193,10 @@ class LivePlantAdapter:
                 "width": handle.frame.width, "height": handle.frame.height,
                 "x": handle.frame.x, "y": handle.frame.y,
             },
-            "overlay": "unknown",
+            "overlay": overlay,
+            "special_confirm_point": ([round(confirm_point[0], 2),
+                                       round(confirm_point[1], 2)]
+                                      if confirm_point is not None else None),
             "empty_check_status": empty_check.status if empty_check is not None else "UNKNOWN",
             "empty_check_reason": empty_check.reason if empty_check is not None else "UNSUPPORTED_PLATFORM",
             "empty_cells": len(empty_check.empty_cells) if empty_check is not None else 0,
@@ -221,20 +256,57 @@ class LivePlantAdapter:
         return view
 
     def open_plot(self, anchor_cell: Cell) -> None:
-        """V2 placeholder until the fixed-grid empty checker authorizes a plot.
-
-        V1 used full-field semantic proof plus runtime soil registration here.
-        That path is retired. V2-1 will provide a platform-specific EMPTY check
-        and calibrated fixed grid before this method sends any input.
-        """
+        """Open one fixed-grid plot only inside an authorized V2 planting phase."""
         if (type(anchor_cell) is not tuple or len(anchor_cell) != 2
             or any(type(v) is not int for v in anchor_cell)
             or not (0 <= anchor_cell[0] < 6 and 0 <= anchor_cell[1] < 4)):
             raise SpecialPlantStop("INVALID_PLOT", "Invalid plot cell")
-        raise SpecialPlantStop(
-            "PLANT_V2_EMPTY_CHECK_REQUIRED",
-            "Fixed-grid V2 empty-field calibration is required before opening a plot",
-        )
+        if (not self.execute or self.click_binary is None or self.platform != "qq"
+            or self.phase_origin is None):
+            raise SpecialPlantStop(
+                "PLANT_PHASE_UNAUTHORIZED",
+                "Fixed-grid click requires a current verified EMPTY phase",
+            )
+        require_live_window()
+        current = find_farm_window(self.platform, self.layout, self.registry_binary)
+        if _identity(current) != self.phase_origin:
+            self.phase_origin = None
+            raise SpecialPlantStop("USER_INTERFERENCE",
+                                   "Farm window changed before plot click")
+        try:
+            x, y = plot_action_point(
+                self.platform, anchor_cell[0], anchor_cell[1],
+                current.frame, self.layout,
+            )
+        except GeometryStop as exc:
+            raise SpecialPlantStop(exc.code, str(exc)) from exc
+
+        f = current.frame
+        batch = {
+            "window_id": current.window_id, "pid": current.pid,
+            "owner": f.owner, "title": f.title,
+            "frame": {"x": f.x, "y": f.y,
+                      "width": f.width, "height": f.height},
+            "actions": [{"x": x, "y": y, "delay_ms": 100}],
+        }
+        # A failed/uncertain click never leaves picker authority behind.
+        self.pending_picker_origin = None
+        self.pending_empty_count = None
+        self.pending_ordinary_seed = None
+        self.pending_special_seed = None
+        try:
+            result = subprocess.run(
+                [str(self.click_binary), "--execute"], input=json.dumps(batch),
+                text=True, capture_output=True, timeout=30, check=False,
+            )
+            parse_click_batch_result(result.stdout, result.returncode, 1)
+        except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
+            raise SpecialPlantStop(
+                "PLANT_ACTION_UNCERTAIN",
+                "Plot click outcome uncertain; never retry blindly",
+                action_may_have_been_sent=True,
+            ) from exc
+        self.pending_picker_origin = self.phase_origin
 
     def turn_pages(self, direction: int, count: int) -> None:
         """Only QQ verified bounded arrow navigation; never selects a seed."""
@@ -246,6 +318,9 @@ class LivePlantAdapter:
             raise SpecialPlantStop("PICKER_DIRECTION_UNVERIFIED",
                                    "Only QQ verified arrow navigation is available")
         if (view is None or shot is None or handle is None
+            or self.phase_origin is None
+            or self.pending_picker_origin != self.phase_origin
+            or self.pending_picker_origin != _identity(handle)
             or type(view.page) is not int or type(self.last_picker_total) is not int
             or type(self.last_picker_y_shift) is not int
             or not -100 <= self.last_picker_y_shift <= 100
@@ -289,9 +364,11 @@ class LivePlantAdapter:
             self.last_picker_y_shift = None
 
     def arm_ordinary_selection(self, count: int, seed: str) -> None:
-        """Bind verified ordinary transaction intent to this exact picker target."""
+        """Bind Runner-known remaining count to this exact verified picker target."""
+        self.pending_empty_count = None
         self.pending_ordinary_seed = None
-        if (type(count) is not int or count != self.pending_empty_count
+        self.pending_special_seed = None
+        if (type(count) is not int or not 1 <= count <= 24
             or self.platform != "qq" or not isinstance(seed, str) or not seed
             or seed not in QQ_CONFIRMED_ORDINARY_SEEDS
             or seed != self.last_picker_target_seed
@@ -300,37 +377,69 @@ class LivePlantAdapter:
             or type(self.last_picker.target_quantity) is not int
             or self.last_picker.target_quantity < count
             or self.last_handle is None
+            or self.phase_origin is None
+            or self.pending_picker_origin != self.phase_origin
             or self.pending_picker_origin != _identity(self.last_handle)):
             raise SpecialPlantStop("PLANT_SELECTION_UNVERIFIED",
-                                   "Ordinary plan must match verified picker and all empty plots")
+                                   "Ordinary plan must match verified picker and phase")
+        self.pending_empty_count = count
         self.pending_ordinary_seed = seed
 
-    def select_seed(self, slot: int) -> None:
-        """Select an ordinary seed only from a verified ON-mode picker session.
+    def arm_special_selection(self, seed: str) -> None:
+        """Bind this exact verified OFF-mode picker target to a 2x2 transaction."""
+        self.pending_empty_count = None
+        self.pending_ordinary_seed = None
+        self.pending_special_seed = None
+        if (self.platform != "qq" or not isinstance(seed, str) or not seed
+            or seed != self.last_picker_target_seed
+            or self.last_picker is None or self.last_picker.one_key_planting is not False
+            or self.last_picker.target_icon_verified is not True
+            or type(self.last_picker.target_quantity) is not int
+            or self.last_picker.target_quantity < 1
+            or self.last_handle is None
+            or self.phase_origin is None
+            or self.pending_picker_origin != self.phase_origin
+            or self.pending_picker_origin != _identity(self.last_handle)):
+            raise SpecialPlantStop("PLANT_SELECTION_UNVERIFIED",
+                                   "Special plan must match verified OFF picker and phase")
+        self.pending_special_seed = seed
 
-        Selecting in ON mode immediately plants every empty plot. An OFF-mode
-        picker is deliberately not supported here: special preview and
-        single-plot semantics have not been independently calibrated.
-        """
+    def select_seed(self, slot: int) -> None:
+        """Select exactly one armed ordinary-ON or special-OFF picker target."""
         require_live_window()
         view, shot, handle = self.last_picker, self.last_picker_capture, self.last_handle
         empty_count = self.pending_empty_count
+        ordinary = (
+            isinstance(self.pending_ordinary_seed, str)
+            and self.pending_ordinary_seed == self.last_picker_target_seed
+            and type(empty_count) is int and 1 <= empty_count <= 24
+            and view is not None and view.one_key_planting is True
+            and type(view.target_quantity) is int
+            and view.target_quantity >= empty_count
+        )
+        special = (
+            isinstance(self.pending_special_seed, str)
+            and self.pending_special_seed == self.last_picker_target_seed
+            and self.pending_ordinary_seed is None
+            and empty_count is None
+            and view is not None and view.one_key_planting is False
+            and type(view.target_quantity) is int
+            and view.target_quantity >= 1
+        )
         if (not self.execute or self.click_binary is None or self.platform != "qq"
             or view is None or shot is None or handle is None
+            or self.phase_origin is None
+            or self.pending_picker_origin != self.phase_origin
             or self.pending_picker_origin != _identity(handle)
-            or type(empty_count) is not int or not 1 <= empty_count <= 24
             or type(slot) is not int or not 1 <= slot <= 5
             or slot != self.last_picker_expected_slot
-            or not self.pending_ordinary_seed
-            or self.pending_ordinary_seed != self.last_picker_target_seed
+            or ordinary == special
             or type(self.last_picker_y_shift) is not int
             or not -100 <= self.last_picker_y_shift <= 100
             or type(view.page) is not int or view.target_icon_verified is not True
-            or type(view.target_quantity) is not int
-            or view.target_quantity < empty_count
-            or view.one_key_planting is not True):
+            or type(view.target_quantity) is not int):
             raise SpecialPlantStop("PLANT_SELECTION_UNVERIFIED",
-                                   "Verified ON picker, seed, stock and originating empty plots required")
+                                   "Exactly one verified ON-ordinary or OFF-special target is required")
         if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
             raise SpecialPlantStop("PICKER_STALE_PRECONDITION", "Picker screenshot older than 2 seconds")
         current = find_farm_window(self.platform, self.layout, self.registry_binary)
@@ -350,6 +459,7 @@ class LivePlantAdapter:
         self.pending_picker_origin = None
         self.pending_empty_count = None
         self.pending_ordinary_seed = None
+        self.pending_special_seed = None
         self.last_picker = None
         self.last_picker_expected_slot = None
         self.last_picker_target_seed = None
@@ -367,8 +477,60 @@ class LivePlantAdapter:
                                    action_may_have_been_sent=True) from exc
 
     def confirm_special(self) -> None:
-        raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED",
-                               "Live 2x2 preview and confirm control are not verified")
+        """Confirm only the exact live 2x2 preview with its verified green check."""
+        require_live_window()
+        view = self.last_field
+        shot = self.last_field_capture
+        handle = self.last_handle
+        if (not self.execute or self.click_binary is None or self.platform != "qq"
+            or self.phase_origin is None or view is None or shot is None
+            or handle is None or view.overlay != "none"
+            or not isinstance(view.preview_cells, frozenset)
+            or len(view.preview_cells) != 4):
+            raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED",
+                                   "Verified 2x2 preview and phase are required")
+        if _identity(handle) != self.phase_origin:
+            self.phase_origin = None
+            raise SpecialPlantStop("USER_INTERFERENCE",
+                                   "Farm window changed before special confirmation")
+        if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
+            raise SpecialPlantStop("PLANT_STALE_PRECONDITION",
+                                   "Special preview screenshot older than 2 seconds")
+        point = qq_special_confirm_point(
+            shot, view.preview_cells, self.layout)
+        if point is None:
+            raise SpecialPlantStop("PLANT_CONFIRM_UNVERIFIED",
+                                   "Green confirm control is not verified")
+        current = find_farm_window(self.platform, self.layout, self.registry_binary)
+        if _identity(current) != self.phase_origin:
+            self.phase_origin = None
+            raise SpecialPlantStop("USER_INTERFERENCE",
+                                   "Farm window changed before special confirmation")
+        x, y = point
+        f = current.frame
+        batch = {
+            "window_id": current.window_id, "pid": current.pid,
+            "owner": f.owner, "title": f.title,
+            "frame": {"x": f.x, "y": f.y,
+                      "width": f.width, "height": f.height},
+            "actions": [{"x": x, "y": y, "delay_ms": 100}],
+        }
+        # Consume the preview/confirm authority before the irreversible click.
+        self.last_handle = None
+        self.last_field = None
+        self.last_field_capture = None
+        try:
+            result = subprocess.run(
+                [str(self.click_binary), "--execute"], input=json.dumps(batch),
+                text=True, capture_output=True, timeout=30, check=False,
+            )
+            parse_click_batch_result(result.stdout, result.returncode, 1)
+        except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
+            raise SpecialPlantStop(
+                "PLANT_ACTION_UNCERTAIN",
+                "Special confirmation outcome uncertain; never retry",
+                action_may_have_been_sent=True,
+            ) from exc
 
     def wait(self, seconds: float) -> None:
         if not 0 <= seconds <= 5:

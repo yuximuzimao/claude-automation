@@ -70,11 +70,13 @@ EMPTY → 四格 placement → 普通一键种植 → GROWING
 - [x] 纯事务层 23 项专项测试通过。
 - [x] QQ 固定格点击坐标已固化：实测 cell (3,2) ≈ local (301.52,689.09)。
 - [x] live adapter 已实现只读 `require_empty_field()` 与 `verify_cells_occupied(cells)`，均只截图/ROI 判断。
-- [x] 当前全项目 157 项测试全部通过。
-- [ ] live adapter：把固定格坐标真正接入 open_plot CGEvent（当前仍硬 STOP）。
+- [x] live adapter：固定格坐标已接入 `open_plot` 单次 CGEvent；必须先有本轮 EMPTY 授权，窗口身份变化即失效。
 - [x] live adapter：四格 preview / confirm ROI 已离线校准。24 个固定土地 ROI 中绿色高亮精确返回 2×2 preview；确认按钮由 preview 中心 + 固定偏移推算，并要求局部 ROI 同时满足绿色圆按钮与白色勾阈值。两份真实 preview 回放均通过，preview 消失/已落地状态均拒绝确认。
+- [x] live adapter：confirm 已接入单次 CGEvent；只有“精确 2×2 preview + 绿色确认按钮”同时成立才允许点击。
 - [x] live adapter：one-key ON 正例已用 2026-11-01 实机截图校准；OFF / ON / UNKNOWN 三态均为正例/拒识逻辑，真实 ON 截图直接返回 `picker_y_shift=21`、`one_key_mode=True`。
-- [ ] 获得用户当前 Chat 明确授权后，做真实 EMPTY → 完整种植验收。
+- [x] picker 动作已按事务分流：普通种子必须 ON；四格种子必须 OFF；两者都绑定当前 phase、同一 seed、同一 slot。
+- [x] 当前全项目 161 项测试全部通过。
+- [ ] 当前 Chat 已授权真机；待允许时段并出现合适现场后做真实完整种植验收。
 
 验收不变：QQ 一个本地 phase 从 EMPTY 连续完成整轮种植；正常路径无逐点击模型往返。
 
