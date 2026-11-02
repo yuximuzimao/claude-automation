@@ -23,5 +23,5 @@
 
 ## 历史
 
-- `runner-m0-verification.md`：M0 历史离线验收。
+- `archive/runner-m0-verification.md`：M0 历史离线验收。
 - `archive/`：退出当前工作流的历史阶段。

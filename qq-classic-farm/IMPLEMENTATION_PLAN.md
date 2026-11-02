@@ -1,130 +1,112 @@
 # 农场 Runner V2 实施计划
 
-当前唯一现役计划。设计依据：
-`docs/superpowers/specs/2026-11-01-deterministic-farm-runner-v2-design.md`
+当前唯一现役实施计划。稳定架构定义见：
+`docs/superpowers/specs/2026-11-01-deterministic-farm-runner-v2-design.md`。
 
-## 目标
+## 已达到的基线
 
-把 QQ / 微信农场的重复操作做成固定流程 Runner：
+Runner 已完成 V2 方向切换：
 
 ```text
 EMPTY → PLANTING → GROWING/MATURE → HARVESTING → EMPTY
 DIRTY/UNKNOWN → STOP
 ```
 
-正常路径依靠固定窗口、固定网格、固定 ROI 找图/找色和确定性状态转换，不构建通用农田视觉理解。
+现役原则：
 
-## V2-0 清理旧路线 — 已完成
+- 固定窗口 + 固定 4×6 网格；
+- 平台独立的小 ROI 找图/找色；
+- Picker 只允许“验证哪个 seed/slot，就点击同一个 seed/slot”；
+- 普通种植要求 one-key 明确 ON；四格种植要求 OFF；
+- Phase 只从已验证 EMPTY 开始，Runner 自己维护 `known_occupied`；
+- 异常不补洞、不盲重试、不推断崩溃进度；
+- 正常 phase 不允许 Agent 单击级遥控。
 
-- [x] 正常 Runner 已断开整田视觉研究依赖。
-- [x] V1 diagnostic-only 脚本已物理删除。
-- [x] 复杂 planting recovery 已删除；异常统一 DIRTY/STOP。
-- [x] 只保护旧路线的测试已删除。
-- [x] 反向搜索确认现役脚本/测试对旧模块引用为 0。
+截至 2026-11-02：
 
-已删除：
-`farm_scene.py`、`farm_clean_field.py`、`farm_clean_replay.py`、
-`farm_field.py`、`farm_field_delta.py`、`farm_field_postcondition.py`、
-`farm_qq_landing.py`、`farm_plant_recovery.py`。
+- QQ / 微信 `check-empty` 均已通过当前 1.16.1.6 真机正负样本；
+- QQ 普通 one-key：EMPTY → 紫薇×24 → occupied 24/24 已真机通过；
+- 微信普通 one-key：EMPTY → 黄金果×24 → occupied 24/24 已真机通过；
+- 微信成熟普通整田：一键收获 → EMPTY 已真机通过；
+- QQ 四格 preview/confirm 已离线校准并接入动作层；
+- 全项目 170 项测试通过。
 
-验证：清理前 226 项测试；清理后 173 项现役测试全部通过。
-`farm_qq_clean.py` 暂留，V2-1 只复用“小 ROI 空地模板”思路并重写接口。
+详细阶段历史见 `docs/archive/README.md`。
 
-## V2-1 QQ 空田检查器 — 已完成
+## 剩余里程碑
+
+### 1. QQ 四格 + 普通混合种植
 
 目标：
 
 ```text
-check-empty --platform qq → EMPTY | NOT_EMPTY | UNKNOWN
+EMPTY
+→ 四格 placement（OFF picker → preview → confirm → 目标4格 occupied）
+→ 普通 one-key 填剩余格
+→ GROWING
 ```
 
-- [x] 固定 603×1111 QQ 农场窗口模型。
-- [x] 复用固定 4×6 网格，不逐格找土地。
-- [x] 在 `ui-layout.json -> qq.empty_check` 固化两个 5×5 ROI：
-  - 土地颜色点：相对既有 origin `(-34,-11)`；
-  - 占用点：相对既有 origin `(-16,+16)`。
-- [x] 空地只按当前颜色就近匹配紫/金原型，不再依赖历史 `land_grades` 判定土地等级。
-- [x] 占用点亮度 <130 为明确非空，>160 才可成为空地候选，130–160 为 UNKNOWN。
-- [x] 实现 `EMPTY / NOT_EMPTY / UNKNOWN`。
-- [x] Runner 新增只读 `check-empty`：两次窗口身份确认 + 一次截图，0 点击。
-- [x] 真实截图离线回放：真空田=EMPTY（24/24）；当前24格月见草=NOT_EMPTY（24/24）；全屏遮罩=UNKNOWN（24/24）；残留大型作物=NOT_EMPTY。
-- [x] 2026-11-02 真机一键收获后获得新空田；当前 1.16.1.6 土地配色重新校准，最终 ROI 在连续 5 次 live check 中均返回 EMPTY 24/24、0 unknown。
+验收：
 
-旧 19×19 atlas 与两张 sentinel negative 资产已删除；受控白萝卜 empty/seedling/mature/harvested 四态样本保留作历史实测证据。
+- 四格确认后的目标 2×2 ROI 真机通过；
+- 多个 placement 不互相覆盖；
+- 普通剩余格数只由本轮 `known_occupied` 推导；
+- 最终 24 格全部进入预期占用状态；
+- 任一 UNKNOWN / 窗口漂移 / slot 不一致立即 STOP。
 
-## V2-2 QQ 完整种植 — 纯事务层完成，live 接线待校准
+### 2. QQ 完整收获
+
+目标：
 
 ```text
-EMPTY → 四格 placement → 普通一键种植 → GROWING
+MATURE → 已知四格可摘 → 一键收获 → EMPTY
 ```
 
-- [x] Planner 只提供种子/数量/placement。
-- [x] Phase 开始只要求一次 `EMPTY`；之后 Runner 自己维护 `known_occupied`。
-- [x] Picker 继续用 stable_order + quantities 计算 page/slot。
-- [x] Picker 唯一选择入口保持“验证哪个目标槽位，就只能点击刚验证的同一槽位”。
-- [x] 四格事务只验证目标 preview、confirm 关闭和计划 2×2 ROI 已占用；不重建 24 格语义图。
-- [x] 四格确认后直接把该 placement 四格加入 Runner `known_occupied`。
-- [x] 普通剩余格数由 `24 - known_occupied` 直接计算。
-- [x] 普通事务要求 picker 明确验证 one-key ON 后，只选择一次已验证槽位。
-- [x] 异常统一 DIRTY/STOP；已删除 checkpoint / preaction / 崩溃自动续播职责。
-- [x] 纯事务层 23 项专项测试通过。
-- [x] QQ 固定格点击坐标已固化：实测 cell (3,2) ≈ local (301.52,689.09)。
-- [x] live adapter 已实现只读 `require_empty_field()` 与 `verify_cells_occupied(cells)`，均只截图/ROI 判断。
-- [x] live adapter：固定格坐标已接入 `open_plot` 单次 CGEvent；必须先有本轮 EMPTY 授权，窗口身份变化即失效。
-- [x] live adapter：四格 preview / confirm ROI 已离线校准。24 个固定土地 ROI 中绿色高亮精确返回 2×2 preview；确认按钮由 preview 中心 + 固定偏移推算，并要求局部 ROI 同时满足绿色圆按钮与白色勾阈值。两份真实 preview 回放均通过，preview 消失/已落地状态均拒绝确认。
-- [x] live adapter：confirm 已接入单次 CGEvent；只有“精确 2×2 preview + 绿色确认按钮”同时成立才允许点击。
-- [x] live adapter：one-key ON 正例已用 2026-11-01 实机截图校准；OFF / ON / UNKNOWN 三态均为正例/拒识逻辑，真实 ON 截图直接返回 `picker_y_shift=21`、`one_key_mode=True`。
-- [x] picker 动作已按事务分流：普通种子必须 ON；四格种子必须 OFF；两者都绑定当前 phase、同一 seed、同一 slot。
-- [x] 当前全项目 170 项测试全部通过。
-- [x] QQ 普通 one-key 子路径已真机跑通：EMPTY → 第3页第3槽紫薇图标/数量76/ON 全部验证 → 单击已验证槽位 → 24/24 occupied、0 unknown。
-- [ ] 四格特殊种子 + 剩余普通格的完整混合路径仍待真机验收。
+验收：
 
-验收不变：QQ 一个本地 phase 从 EMPTY 连续完成整轮种植；正常路径无逐点击模型往返。
+- 四格“可摘”只在本轮已知 placement 附近验证；
+- 四格逐个收获后，只点一次游戏手形一键按钮；
+- 等动画后 `check-empty --platform qq` 返回 EMPTY；
+- 非 EMPTY / UNKNOWN 不继续补点。
 
-## V2-3 QQ 完整收获
+### 3. 微信四格参数化
+
+QQ 的四格状态机不变，只补微信自己的：
+
+- preview ROI；
+- confirm 按钮/偏移；
+- 四格落地 occupied ROI；
+- 安全 placement 真机验收。
+
+### 4. 微信完整一轮
+
+当前黄金果成熟后执行：
 
 ```text
-MATURE → 四格可摘 → 一键收获 → EMPTY
+MATURE → 一键收获 → EMPTY
 ```
 
-- [ ] 只在已知 placement 附近检查“可摘”标志。
-- [ ] 收获已确认的四格。
-- [ ] 点击游戏一键收获。
-- [ ] 等动画。
-- [ ] 用 V2 空田检查器验证 EMPTY。
-- [ ] 非 EMPTY → DIRTY/STOP。
+该轮通过后，微信普通种植→成熟→收获→EMPTY 才算完整验收。
 
-## V2-4 微信参数化
-
-- [x] 微信固定 4×6 网格继续复用归一化几何；当前 1.16.1.6 独立空田 ROI 已用 live 正负样本重新校准。
-- [x] `check-empty --platform wechat` 已实现；真机空田=EMPTY 24/24，成熟整田=NOT_EMPTY 24/24。
-- [x] 微信普通成熟整田已真机执行一次手形一键收获，收获后完整空田终验通过。
-- [x] 625 / 627 两种已见窗口宽度均由归一化 ROI 支持。
-- [x] 当前土地事实更新为 6 紫 + 18 金；现役纯紫 `safe_special_2x2` 只保留 `purple_a`。
-- [x] 微信普通 picker 已参数化：第2/5页第1槽黄金果图标/数量94/one-key ON 实机截图由正式视觉函数验证，左右箭头均可验证。
-- [x] 微信固定格 open_plot、翻页、普通选种已接入正式 LivePlantAdapter；全部沿用 phase、窗口、时间、图标、数量、one-key 门禁。
-- [x] 微信普通 one-key 子路径已真机跑通：EMPTY → 黄金果×24 → 24/24 occupied；黄金果当前确认数量70。占用 ROI 已用该现场收敛为当前版本参数。
-- [x] 当前全项目 170 项测试全部通过。
-- [ ] 微信四格 preview / confirm 仍未校准。
-- [ ] 当前黄金果成熟后再跑一次收获，完成微信“种植→成熟→收获→EMPTY”整轮验收。
-
-## V2-5 Planner / 库存
+### 5. Planner / 库存
 
 双平台机械闭环稳定后再接：
 
-- [ ] 当前库存同步。
-- [ ] 连续 3 轮计划。
-- [ ] 成功种植后更新确认库存。
-- [ ] 活动优先、成熟时间对齐继续由 ChatGPT / Planner 决定。
+- 当前库存同步；
+- 连续 3 轮计划；
+- 已确认种植/购买后更新库存；
+- 活动优先、8h/12h 成熟窗口继续由 Planner 决定。
 
-## V2-6 定时化
+### 6. 定时化
 
-- [ ] 只在 Runner 稳定后重新评估。
-- [ ] 定时任务只调用 Runner / 报告 STOP。
-- [ ] 不恢复此前“每小时自主研发 Runner”的自动任务。
+只在 Runner 稳定后重新评估：
 
-## 第一里程碑
+- 定时任务只调用完成的 Runner；
+- STOP 时只报告异常，不自主研发/改代码；
+- 不恢复此前“每小时自主研发 Runner”的任务。
 
-不是测试数量，而是：
+## 成功标准
 
-> QQ 从 EMPTY 按计划连续种植；成熟后连续收获并再次验证 EMPTY。
+第一阶段不是“测试更多”，而是：
+
+> QQ 和微信都能在已知正常现场中，由本地 Runner 连续完成机械 phase；正常路径无需模型逐点击参与，异常则可靠 STOP。

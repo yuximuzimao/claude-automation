@@ -41,9 +41,9 @@ DIRTY/UNKNOWN → STOP
 | `scripts/seed_order.py` | stable_order / visible_order / page-slot |
 | `scripts/farm_plant_picker.py` | Picker 确定性翻页 contract |
 | `scripts/farm_picker_vision.py` / `farm_text_ocr.swift` | Picker 局部页码/图标/数量 |
-| `scripts/farm_runner.py` | Runner 总入口（V2 迁移中） |
-| `scripts/farm_harvest*.py` | 收获链（V2 迁移中） |
-| `scripts/farm_plant*.py` | 种植链（V2 迁移中） |
+| `scripts/farm_runner.py` | Runner V2 总入口 |
+| `scripts/farm_harvest*.py` | V2 收获链 |
+| `scripts/farm_plant*.py` | V2 种植链 |
 
 ## ROUTING
 

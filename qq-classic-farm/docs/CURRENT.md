@@ -4,58 +4,42 @@
 
 ## 当前方向
 
-Runner 已切换到 V2：
+Runner V2 是唯一现役架构：
 
-> 固定流程 + 固定网格/坐标 + 小 ROI 找图/找色 + 异常 STOP。
+> 固定流程 + 固定网格/坐标 + 平台独立小 ROI + 异常 STOP。
 
-设计：`docs/superpowers/specs/2026-11-01-deterministic-farm-runner-v2-design.md`
-
+设计：`superpowers/specs/2026-11-01-deterministic-farm-runner-v2-design.md`
 实施：`../IMPLEMENTATION_PLAN.md`
+历史：`archive/README.md`
 
 ## 当前现场
 
-- QQ：2026-11-02 18:35 左右确认误种的 24 格月见草已经全部成熟；真机只点一次手形一键收获，随后得到完整空田。
-- QQ V2-1 live：当前游戏版本 1.16.1.6 下重新校准 QQ 空田 ROI，连续 5 次 live check 均为 EMPTY 24/24、0 unknown。
-- QQ 当前现场：18:47 前后在 picker 第3/7页第3槽真机验证紫薇图标、数量76、one-key=ON 后，只点击该已验证槽位一次；结果 24/24 occupied、0 unknown。紫薇当前数量按确认消耗记为52。
-- 微信：2026-11-02 18:49 后按“发现→游戏→最近玩过 QQ经典农场”进入独立 625×1155 农场窗口；原现场为 24 格成熟普通作物。只读探测确认手形一键收获，四格过滤后无特殊作物；一键收获一次后得到完整空田。
-- 微信 V2 live：当前 1.16.1.6 已用“成熟整田 / 收获后空田 / 黄金果24格幼苗”三类同版本真机样本校准两个固定 ROI。空田=EMPTY 24/24，成熟整田=NOT_EMPTY 24/24，黄金果幼苗=NOT_EMPTY 24/24；土地为 6 紫 + 18 金，只剩一个纯紫 2×2 `purple_a`。
-- 微信普通 picker：第2/5页第1槽黄金果由正式视觉函数验证，图标分数1.0、数量94、one-key=ON，左右箭头均可验证；第1页/第2页局部库存也已现场读取，但后续页仍是历史数据，因此全局 `inventory_dirty=true` 保持。
-- 微信当前现场：19:10 左右已用受控真机动作完成黄金果一键种植24格；新占用 ROI 回放为 occupied 24/24、0 unknown，确认消耗24后黄金果当前数量70。正式 LivePlantAdapter 的 open_plot / 翻页 / 普通选种接口已按同一组实机坐标参数化并有 mock 回归；微信四格 preview/confirm 尚未校准。
-- 旧每小时“农场 Runner 重构”自动任务：**已暂停**。
-- 本次对话：只在 Chat 中通过 CodexPro 操作，不进入 Work 模式；任何历史 Work/handoff 授权均作废。
-- Codex CLI：当前不使用；后续仅在专项审查或明确适合的机械实现任务中考虑。
+- **QQ**：24 格紫薇生长中。2026-11-02 picker 真机验证为第3/7页第3槽、数量76、one-key=ON；确认种24后 Runner 记录紫薇52。
+- **微信**：24 格黄金果生长中。2026-11-02 picker 真机验证为第2/5页第1槽、数量94、one-key=ON；确认种24后 Runner 记录黄金果70。
+- 两个平台都不为测试主动铲除/重种；等待自然成熟可直接用于后续收获验收。
+- `data/farm-state.json` 全局库存仍保持 `inventory_dirty=true`；只把本轮明确验证的数量作为局部事实，不假装整仓已同步。
 
-## 已确认可复用
+## 当前已验证能力
 
-- QQ / 微信窗口恢复基础设施。
-- window-local / Retina 坐标转换。
-- CGEvent 批量点击及窗口/前台/禁用时段门禁。
-- QQ picker 页码、翻页、目标图标、数量徽标等局部识别。
-- stable_order + quantities → visible_order → page/slot。
-- 4×6 固定网格和四格 placement。
+- QQ / 微信窗口发现、恢复、window-local / Retina 坐标。
+- CGEvent 批量点击及前台/覆盖/禁用时段门禁。
+- QQ / 微信固定 4×6 网格与平台独立 EMPTY / NOT_EMPTY / UNKNOWN 小 ROI。
+- QQ / 微信普通 picker 页码/翻页/目标图标/数量/one-key ON 验证。
+- QQ / 微信普通 one-key 种植：EMPTY → 24格 occupied 真机通过。
+- 微信普通成熟整田：一键收获 → EMPTY 真机通过。
+- QQ 四格 preview / confirm 已离线校准并接入动作层，尚缺落地真机验收。
+- 当前全项目：170 项测试通过。
 
-## 当前下一步
+## 下一步
 
-1. V2-0 已完成：8 个 V1 整田视觉/复杂恢复模块删除。
-2. V2-1 已离线完成：固定 4×6 网格 + 两个 5×5 ROI + `check-empty` 只读命令。
-3. V2-2 纯事务层已完成：Phase 只从 EMPTY 起步，之后由 Runner 维护 `known_occupied`；四格/普通事务不再依赖 24 格语义重建；checkpoint/崩溃自动续播已删除。
-4. Picker 保持“验证槽位 → 同槽点击”唯一入口，专门防止相邻种子槽误点。
-5. QQ 固定格点击偏移已由历史实测固化；phase-start EMPTY、指定 cells 占用验证均使用小 ROI。
-6. `open_plot` 已接固定格单次 CGEvent；只有本轮 EMPTY phase 授权存在时才可点击，窗口身份变化立即失效。
-7. one-key ON 已用事故现场保存的真实截图离线校准：picker y-shift=21，ON=True；OFF/ON/UNKNOWN 三态测试通过。
-8. 四格 preview/confirm 已用历史 QQ 实机样本离线校准；confirm 已接单次 CGEvent，只允许精确 2×2 preview + 绿色确认按钮。
-9. picker 选种已分为普通 ON / 四格 OFF 两条互斥授权，并要求当前 phase、同 seed、同 slot；相邻槽误点路径不会被放行。
-10. 微信 V2 空田检查器已改为当前版本两个固定 ROI：土色 + 占用亮度；同版本真机空田、成熟整田、黄金果24格幼苗分别稳定给出 EMPTY 24/24、NOT_EMPTY 24/24、NOT_EMPTY 24/24。
-11. 微信普通成熟整田已真机跑通“一次手形一键收获 → 等待 → EMPTY 终验”。当前土地实测为 6 紫 + 18 金，旧第二个纯紫 `purple_b` 已退出现役。
-12. 微信普通 one-key 种植子路径也已真机跑通：黄金果第2/5页第1槽、数量94、ON 验证后种24格，结果 occupied 24/24；黄金果确认数量70。正式翻页/选种接口已按实机坐标接入，当前全项目170项测试全绿。
-13. QQ V2-1 已完成真机终验；QQ 普通 one-key 种植子路径也已真机跑通，当前 live 结果为紫薇 24/24 occupied。
-14. 紫薇 picker 模板已从当前 1.16.1.6 真机第3页第3槽采样，加入 QQ 已验证普通种子；实际数量76，确认种24后记为52。
-15. `farm_click_batch` 的系统透明层判断已收窄修正：只跳过全屏 Dock layer20 / Notification Center layer21；第一个其余真实窗口必须就是目标农场，WPS/Safari/Chat 覆盖仍会 STOP。
-16. 当前剩余关键验收：QQ 四格特殊+普通剩余格混合路径；微信四格 preview/confirm；微信当前黄金果成熟后的收获终验。用户已在当前 Chat 明确授权真机操作；每次输入仍先通过时间、窗口、遮挡门禁。
+1. 等现有作物成熟，优先完成微信黄金果收获，形成微信普通完整一轮。
+2. 选择合适空田现场，完成 QQ 四格 + 普通混合种植。
+3. 参数化微信四格 preview / confirm。
+4. 双平台机械闭环稳定后，再做 Planner / 库存和定时化。
 
-## 真机操作禁用时段
+## 真机操作门禁
 
-按农场 Mac 本地时间：
+按农场 Mac 本地时间，以下时段不切前台、不发输入：
 
 - 00:00–01:00
 - 08:00–09:00
@@ -64,4 +48,4 @@ Runner 已切换到 V2：
 - 16:00–17:00
 - 20:00–21:00
 
-真机阶段前重新读取当前时间和窗口状态。本文件是快照，不代替实时观察。
+真机输入只接受当前 Chat 的明确授权；历史会话、旧自动任务、Work handoff 或子代理授权不得继承。每次真机阶段前重新读取当前时间与窗口状态。

@@ -29,7 +29,7 @@
 
 1. 选种时先按名称查 catalog，再使用 `image` 与种植选择器的图标比对。
 2. QQ / 微信库存独立，不能把同名种子数量相加。
-3. `quantity_latest_known` 是历史/知识库层面的最近观察值；Runner 正常执行时以未来 `data/farm-state.json` 的 mutable quantities 为事实状态。确认成功的种植/购买才扣增库存，点击未验收不改事实。
+3. `quantity_latest_known` 是知识库层面的最新确认值；Runner 正常执行时以 `data/farm-state.json` 的 mutable quantities 为运行事实状态。确认成功的种植/购买才扣增库存，点击未验收不改事实。
 4. 库存采用三档可信度：`verified`（仓库直接看到）、`tracked`（从 verified 基线叠加 Runner 已知增减）、`stale/uncertain`（用户手动操作、无法识别的奖励/购买或异常导致变化不明）。`quantity_latest_known_basis` 说明来源。
 5. **仓库种子页当前 row-major 顺序就是土地 picker 当前可见顺序，每行 5 个正好对应 picker 一页。** Runner 维护重新进入后校准的 stable_order，并按 quantities 过滤得到当前 visible_order；某种子确认消费到0后只需数量变0，后续左移是正常算法结果。
 6. 运行策略不再要求目标种子在计划末尾仍 >0。Planner 只需要保证本轮计划数量可满足；位置变化由 Runner 自动重算。当前优先验证“0/absent→positive 后，重新进入会恢复 stable_order”的假设；只有被实测否定才升级复杂顺序版本机制。

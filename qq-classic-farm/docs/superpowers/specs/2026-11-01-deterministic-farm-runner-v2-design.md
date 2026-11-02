@@ -1,6 +1,6 @@
 # 农场 Deterministic Runner V2 设计
 
-更新时间：2026-11-01
+更新时间：2026-11-02
 
 ## 1. 项目定义
 
@@ -187,144 +187,52 @@ Picker 是固定 UI 流程，不升级为通用视觉搜索。
 - 不自动猜恢复点；
 - 重新同步比复杂恢复系统优先。
 
-## 9. 旧实现处置
+## 9. 当前代码边界
 
-### 保留并继续使用
+V2 已完成旧路线清理。现役正常路径只依赖固定窗口/坐标、局部 ROI、Picker 验证与确定性事务。
 
-- `window_registry.swift`
-- `open_qq_farm.swift`
-- `restore_wechat_main.swift`
-- `farm_capture.py`
-- `farm_geometry.py`
-- `farm_io.py`
-- `farm_click_batch.swift`
-- `farm_drag.swift`
-- `seed_order.py`
-- `farm_picker_vision.py`
-- `farm_text_ocr.swift`
-- `farm_plant_picker.py`
-- 已验证的 seed icons / UI anchors
-- `data/ui-layout.json` 的固定网格与 placement 数据
+现役核心包括：
 
-### 重写/简化后继续使用
+- `window_registry.swift` / `open_qq_farm.swift` / `restore_wechat_main.swift`；
+- `farm_capture.py` / `farm_geometry.py` / `farm_io.py`；
+- `farm_click_batch.swift` / `farm_drag.swift`；
+- `seed_order.py` / `farm_picker_vision.py` / `farm_text_ocr.swift` / `farm_plant_picker.py`；
+- `farm_runner.py` / `farm_harvest*.py` / `farm_plant*.py`；
+- `farm_qq_clean.py`：平台化的小 ROI `EMPTY / NOT_EMPTY / UNKNOWN` 检查器；
+- `data/ui-layout.json`：窗口、4×6 网格、平台参数与 placement。
 
-- `farm_runner.py`
-- `farm_harvest.py`
-- `farm_harvest_live.py`
-- `farm_plant_cycle.py`
-- `farm_plant_live.py`
-- `farm_plant_special.py`
-- `farm_plant_ordinary.py`
-- `farm_qq_clean.py`：改造成平台化“小 ROI 空地模板检查器”，不再承担完整语义证明
-
-### 降级为诊断/历史工具，退出正常 Runner
-
-- `farm_field.py`
-- `farm_scene.py`
-- `farm_clean_field.py`
-- `farm_clean_replay.py`
-- `farm_field_delta.py`
-- `farm_field_postcondition.py`
-- `farm_qq_landing.py`
-
-这些代码可暂时保留用于回放和校准，但不得成为 V2 正常流程的点击前置条件。实现稳定后再决定物理删除。
-
-### 计划移除复杂恢复职责
-
-- `farm_plant_recovery.py`
-
-V2 不做“崩溃后自动推断种到第几颗并继续”。异常统一进入 DIRTY/STOP。若该文件仍有 confirmed-only 原子写盘能力可复用，则只提取最小写盘函数，其余事务恢复逻辑删除。
+V1 的整田语义、三帧差分、场景重建与复杂 recovery 模块已经物理删除，不保留兼容壳。退役原因与删除清单见 `../../archive/2026-11-01-runner-v1-retired.md`；详细实验过程以 Git 历史为准。
 
 ## 10. 测试策略
 
-测试重点从“覆盖更多视觉边缘场景”改为“固定流程是否按预期运行”。
+测试重点是“固定 phase 能否按预期连续完成”，而不是增加通用视觉覆盖。
 
 优先级：
 
-1. 空地模板：QQ 当前土地 24/24 正例；
-2. 已种植样本必须让关键 ROI 退出 empty；
-3. 收获后再次恢复 empty；
-4. picker page/slot/icon/count；
-5. 四格 preview/confirm；
-6. 一键 ON；
-7. 一个完整 QQ 周期；
-8. 参数化到微信；
-9. QQ/微信各连续完整跑一轮。
+1. 平台空地正例必须稳定返回 EMPTY；
+2. 已种植/残留/遮罩负例不得误报 EMPTY；
+3. picker page/slot/icon/count/one-key；
+4. 四格 preview/confirm；
+5. 普通 one-key 种植后目标格 occupied；
+6. 收获后重新 EMPTY；
+7. QQ / 微信各自完整跑通机械 phase；
+8. 异常场景可靠 STOP。
 
-测试数量不是里程碑。真实完整流程可运行才是里程碑。
+测试数量不是里程碑。真实流程可连续执行并在异常时停止才是里程碑。
 
-## 11. 开发顺序
+## 11. 进度与动态状态
 
-### V2-0 清理
+本设计文件只维护稳定架构，不复制阶段进度。
 
-- 让本文件成为新方案定义；
-- 重写 IMPLEMENTATION_PLAN / CURRENT / todo 的现役部分；
-- 旧研究检查点移入历史，不再作为启动必读上下文；
-- 标记旧视觉研究模块为 diagnostic-only。
+- 当前实施顺序：`../../../IMPLEMENTATION_PLAN.md`
+- 未完成事项：`../../../tasks/todo.md`
+- 当前 QQ / 微信现场：`../../CURRENT.md`
+- 阶段历史：`../../archive/README.md`
 
-### V2-1 QQ 空田基准
+## 12. 成功标准
 
-当前用户确认 QQ 为全空田。
+V2 第一阶段成功标准：
 
-需要建立：
+> 在固定 QQ / 微信农场环境中，本地 Runner 能从已知阶段连续完成机械操作；正常路径没有模型逐点击往返，阶段结果由小 ROI 验收，未知状态可靠 STOP。
 
-- QQ 当前土地版本的稳定锚点；
-- purple-empty / gold-empty 小 ROI；
-- 24 格固定位置；
-- `check-empty qq` → EMPTY / NOT_EMPTY / UNKNOWN。
-
-### V2-2 QQ 种植
-
-复用现有 picker 和 CGEvent 能力，跑通：
-
-```text
-EMPTY → 四格种植 → 普通一键种植 → GROWING
-```
-
-### V2-3 QQ 收获
-
-成熟后跑通：
-
-```text
-MATURE → 四格可摘 → 一键收获 → EMPTY
-```
-
-形成 QQ 第一个真正完整闭环。
-
-### V2-4 微信参数化
-
-微信独立采：
-
-- 空地模板；
-- 网格起点/偏移；
-- 必要按钮模板。
-
-复用同一状态机。
-
-### V2-5 Planner / 库存
-
-双平台机械闭环稳定后，再接每天3轮种植规划和库存更新。
-
-### V2-6 定时化
-
-只有 Runner 已经稳定后，定时任务才负责“调用 Runner”，不再承担持续自主研发。
-
-## 12. 用户配合样本
-
-默认由自动化自行制造样本。只有无法低成本制造时才请求用户。
-
-近期可能需要的用户配合最多只有：
-
-1. 暂时保持 QQ 当前空田，直到 V2-1 空地模板完成；
-2. 如微信当前成熟，可保持现场供首次收获→空田基准；
-3. 若四格 preview 样本不足，按明确指令只制造一次指定四格种植状态。
-
-不会要求用户陪同反复截图或不断试错。
-
-## 13. 成功标准
-
-V2 第一阶段成功不是“更多测试通过”，而是：
-
-> 在固定 QQ 农场环境中，一个本地命令能从已知 EMPTY 状态按计划连续种植；成熟后另一个本地阶段能连续收获并重新验证 EMPTY，正常路径无逐点击模型往返。
-
-QQ 完成后再复制到微信。
+Planner 只决定种植策略与时间窗口；Runner 不接管策略，不发展成通用游戏视觉 Agent。

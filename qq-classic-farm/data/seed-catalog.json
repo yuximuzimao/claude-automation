@@ -7,10 +7,10 @@
     "quantity_initial_snapshot is the warehouse inventory snapshot captured on 2026-10-22 before subsequent verified inventory changes.",
     "quantity_latest_known may differ where later verified planting, purchases, or other inventory changes occurred."
   ],
-  "seed_count_unique": 43,
+  "seed_count_unique": 46,
   "platform_entry_counts": {
-    "qq": 40,
-    "wechat": 20
+    "qq": 44,
+    "wechat": 24
   },
   "seeds": [
     {
@@ -1192,7 +1192,8 @@
           "platform": "qq",
           "slot": "r3c5",
           "name": "紫薇种子",
-          "quantity_latest_known": 76,
+          "quantity_latest_known": 52,
+          "quantity_latest_known_basis": "76 verified in QQ picker on 2026-11-02; 24 consumed by verified one-key planting.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1679,7 +1680,7 @@
           "platform": "wechat",
           "slot": "r2c1",
           "name": "黄金果种子",
-          "quantity_latest_known": 94,
+          "quantity_latest_known": 70,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "399个/季",
@@ -1697,7 +1698,7 @@
             "income": "收入： 11万/季"
           },
           "quantity_initial_snapshot": 118,
-          "quantity_latest_known_basis": "118 shown in verified WeChat seed selector before planting; 24 consumed by one-key planting on 2026-10-23."
+          "quantity_latest_known_basis": "94 verified in WeChat picker on 2026-11-02; 24 consumed by verified one-key planting, leaving 70."
         }
       }
     },
