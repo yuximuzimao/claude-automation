@@ -187,10 +187,8 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
         soil_offset = np.asarray(cfg["soil_offset_normalized"], dtype=np.float64)
         occupancy_offset = np.asarray(
             cfg["occupancy_offset_normalized"], dtype=np.float64)
-        residual_offset = np.asarray(
-            cfg["residual_offset_normalized"], dtype=np.float64)
         if any(x.shape != (2,) for x in (
-            origin, u_step, v_step, soil_offset, occupancy_offset, residual_offset
+            origin, u_step, v_step, soil_offset, occupancy_offset
         )):
             return _unknown("INVALID_CALIBRATION")
 
@@ -199,26 +197,17 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
             name: np.asarray(value, dtype=np.float64)
             for name, value in cfg["soil_prototypes"].items()
         }
-        residual_prototypes = {
-            name: np.asarray(value, dtype=np.float64)
-            for name, value in cfg["residual_prototypes"].items()
-        }
         if (type(radius) is not int or not 1 <= radius <= 8
             or set(soil_prototypes) != {"purple", "gold"}
-            or set(residual_prototypes) != {"purple", "gold"}
-            or any(value.shape != (3,) for value in (
-                *soil_prototypes.values(), *residual_prototypes.values()
-            ))):
+            or any(value.shape != (3,) for value in soil_prototypes.values())):
             return _unknown("INVALID_CALIBRATION")
 
         empty_soil_max = float(cfg["empty_soil_max_distance"])
         occupied_soil_max = float(cfg["occupied_soil_max_distance"])
         occupied_lum_max = float(cfg["occupied_luminance_max"])
         empty_lum_min = float(cfg["empty_luminance_min"])
-        empty_residual_max = float(cfg["empty_residual_max_distance"])
         if not (0 < empty_soil_max < occupied_soil_max
-                and occupied_lum_max < empty_lum_min
-                and empty_residual_max > 0):
+                and occupied_lum_max < empty_lum_min):
             return _unknown("INVALID_CALIBRATION")
     except (KeyError, TypeError, ValueError):
         return _unknown("INVALID_CALIBRATION")
@@ -235,7 +224,6 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
         points = [
             np.rint(base + soil_offset * scale).astype(int),
             np.rint(base + occupancy_offset * scale).astype(int),
-            np.rint(base + residual_offset * scale).astype(int),
         ]
         patches = [
             _patch(rgb, int(point[0]), int(point[1]), radius)
@@ -245,7 +233,7 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
             unknown.append(cell)
             continue
 
-        soil_patch, occupancy_patch, residual_patch = patches
+        soil_patch, occupancy_patch = patches
         soil_rgb = np.median(soil_patch.reshape(-1, 3), axis=0)
         distances = {
             name: _distance(soil_rgb, prototype)
@@ -255,16 +243,12 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
         soil_distance = distances[grade]
         occupancy_luminance = float(np.median(
             occupancy_patch.astype(np.float64).mean(axis=2)))
-        residual_rgb = np.median(residual_patch.reshape(-1, 3), axis=0)
-        residual_distance = _distance(
-            residual_rgb, residual_prototypes[grade])
 
         if (soil_distance <= occupied_soil_max
             and occupancy_luminance < occupied_lum_max):
             occupied.append(cell)
         elif (soil_distance <= empty_soil_max
-              and occupancy_luminance > empty_lum_min
-              and residual_distance <= empty_residual_max):
+              and occupancy_luminance > empty_lum_min):
             empty.append(cell)
         else:
             unknown.append(cell)

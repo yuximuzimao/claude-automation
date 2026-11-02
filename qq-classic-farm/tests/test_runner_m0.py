@@ -104,7 +104,7 @@ class RunnerM0Tests(unittest.TestCase):
         self.assertEqual(self.state, before_state)
         self.assertEqual(self.plan, before_plan)
         self.assertEqual(
-            len([e for e in result["events"] if e["phase"] == "PLANT_SPECIAL"]), 5
+            len([e for e in result["events"] if e["phase"] == "PLANT_SPECIAL"]), 4
         )
         self.assertEqual(
             [e["expected_occupied_cells"] for e in result["events"]
@@ -112,8 +112,8 @@ class RunnerM0Tests(unittest.TestCase):
         )
         self.assertEqual(result["simulated_quantities"]["qq"]["泡泡棉花糖种子"], 18)
         self.assertEqual(result["simulated_quantities"]["qq"]["天山红枫种子"], 6)
-        self.assertEqual(result["simulated_quantities"]["wechat"]["星语铃花种子"], 6)
-        self.assertEqual(result["simulated_quantities"]["wechat"]["黄金果种子"], 78)
+        self.assertEqual(result["simulated_quantities"]["wechat"]["星语铃花种子"], 7)
+        self.assertEqual(result["simulated_quantities"]["wechat"]["黄金果种子"], 74)
         self.assertEqual(len(result["warnings"]), 2)
 
     def test_ordinary_shortage_blocks_before_any_real_click(self):

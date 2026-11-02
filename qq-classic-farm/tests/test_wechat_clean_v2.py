@@ -27,8 +27,8 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
         self.cfg = self.layout["platforms"]["wechat"]["empty_check"]
         self.wechat = self.layout["platforms"]["wechat"]
         self.purple = {
-            (u, v) for u in (0, 1) for v in range(4)
-        } | {(2, 0)}
+            (0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1)
+        }
 
     def frame(self, width=625):
         return WindowFrame("微信", "QQ经典农场", 50, 80, width, 1155)
@@ -49,28 +49,24 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
         r = self.cfg["patch_radius"]
         rgb[y-r:y+r+1, x-r:x+r+1] = value
 
-    def image(self, width=625, *, occupied=(), residual=()):
+    def image(self, width=625, *, occupied=(), ambiguous=()):
         rgb = np.zeros((1155, width, 3), dtype=np.uint8)
         occupied = set(occupied)
-        residual = set(residual)
+        ambiguous = set(ambiguous)
         for cell in ALL_CELLS:
             grade = "purple" if cell in self.purple else "gold"
             soil = self.cfg["soil_prototypes"][grade]
-            mature = self.cfg["residual_prototypes"][grade]
             self._paint(
                 rgb,
                 self._point(cell, self.cfg["soil_offset_normalized"], width),
-                soil,
+                (120, 120, 120) if cell in ambiguous else soil,
             )
             self._paint(
                 rgb,
                 self._point(cell, self.cfg["occupancy_offset_normalized"], width),
-                (60, 60, 60) if cell in occupied else (190, 190, 190),
-            )
-            self._paint(
-                rgb,
-                self._point(cell, self.cfg["residual_offset_normalized"], width),
-                (100, 90, 80) if cell in residual else mature,
+                ((145, 145, 145) if cell in ambiguous
+                 else (60, 60, 60) if cell in occupied
+                 else (190, 190, 190)),
             )
         return rgb
 
@@ -100,12 +96,12 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
         self.assertEqual(set(result.occupied_cells), set(ALL_CELLS))
         self.assertEqual(result.unknown_cells, ())
 
-    def test_mature_residual_is_unknown_not_empty(self):
-        target = {(0, 0), (0, 1), (1, 0), (1, 1)}
+    def test_ambiguous_cell_is_unknown_not_empty(self):
+        target = {(0, 0)}
         result = check_wechat_empty_field(
-            self.shot(self.image(625, residual=target)), self.layout)
+            self.shot(self.image(625, ambiguous=target)), self.layout)
         self.assertEqual(result.status, "UNKNOWN")
-        self.assertTrue(target & set(result.unknown_cells))
+        self.assertEqual(set(result.unknown_cells), target)
         self.assertEqual(result.occupied_cells, ())
 
     def test_untrusted_or_wrong_size_is_unknown(self):

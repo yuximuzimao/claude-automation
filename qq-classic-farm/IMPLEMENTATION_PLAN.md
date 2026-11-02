@@ -96,13 +96,13 @@ MATURE → 四格可摘 → 一键收获 → EMPTY
 
 ## V2-4 微信参数化
 
-- [x] 微信固定 4×6 网格继续复用归一化几何；独立空田 ROI 已校准。
-- [x] `check-empty --platform wechat` 已实现，只读且不解锁微信种植动作。
-- [x] 历史实机回放：真空田=EMPTY 24/24；全播种细芽=NOT_EMPTY 24/24；成熟四格残留=UNKNOWN；铲子/交互状态=UNKNOWN。
+- [x] 微信固定 4×6 网格继续复用归一化几何；当前 1.16.1.6 独立空田 ROI 已用 live 正负样本重新校准。
+- [x] `check-empty --platform wechat` 已实现；当前真机空田连续 5/5 次=EMPTY 24/24、0 unknown，收获前成熟整田=NOT_EMPTY 24/24。
+- [x] 微信普通成熟整田已真机执行一次手形一键收获，收获后完整空田终验通过。
 - [x] 625 / 627 两种已见窗口宽度均由归一化 ROI 支持。
-- [ ] 微信独立 picker / preview / confirm / harvest 按钮与标志参数化。
-- [ ] 复用同一状态机。
-- [ ] 跑通微信完整种植和收获一轮。
+- [x] 当前土地事实更新为 6 紫 + 18 金；现役纯紫 `safe_special_2x2` 只保留 `purple_a`。
+- [ ] 微信独立 picker / preview / confirm 参数化；种植动作仍保持关闭。
+- [ ] 复用同一状态机并跑通微信完整种植+收获一轮。
 
 ## V2-5 Planner / 库存
 

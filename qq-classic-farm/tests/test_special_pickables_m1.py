@@ -46,7 +46,7 @@ class SpecialPickableTests(unittest.TestCase):
         return {"count": len(items), "items": list(items)}
 
     def test_qq_and_wechat_special_centers_follow_layout(self):
-        for platform, count in (("qq", 3), ("wechat", 2)):
+        for platform, count in (("qq", 3), ("wechat", 1)):
             with self.subTest(platform=platform):
                 capture = self.capture(platform)
                 centers = _special_centers(capture, platform, self.layout)
