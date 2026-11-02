@@ -33,20 +33,20 @@
         "verified_from": "2026-11-01 controlled QQ white-radish click plus historical QQ 2x2 preview/confirm samples"
       },
       "empty_check": {
-        "calibration_version": 1,
+        "calibration_version": 2,
         "verified_window_size": [603, 1111],
-        "soil_offset": [-34, -11],
+        "soil_offset": [-6, 23],
         "occupancy_offset": [-16, 16],
         "patch_radius": 2,
         "soil_prototypes": {
-          "purple": [196, 154, 225],
-          "gold": [248, 198, 66]
+          "purple": [190, 144, 220],
+          "gold": [247, 191, 60]
         },
-        "empty_soil_max_distance": 20,
+        "empty_soil_max_distance": 12,
         "occupied_soil_max_distance": 90,
         "occupied_luminance_max": 130,
         "empty_luminance_min": 160,
-        "calibrated_from": "2026-11-01 true empty QQ field plus 24-cell planted read-only regression",
+        "calibrated_from": "2026-11-02 live QQ 603x1111 true-empty field immediately after one-key harvest, game version 1.16.1.6; 6 purple / 18 gold",
         "grade_policy": "infer nearest purple/gold prototype; do not trust legacy land_grades for V2 empty check"
       },
       "main_window_entry": {

@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QQ_TARGET_ICONS = {
     "泡泡棉花糖种子": ROOT / "assets/ui/picker/qq-cotton-candy.png",
     "天山红枫种子": ROOT / "assets/ui/picker/qq-red-maple.png",
+    "紫薇种子": ROOT / "assets/ui/picker/qq-purple-myrtle.png",
 }
 QQ_SLOT_X = (95, 191, 287, 383, 480)
 QQ_PAGE_ROI = (282, 817, 342, 863)

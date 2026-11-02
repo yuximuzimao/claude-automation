@@ -2,7 +2,7 @@
   "schema_version": 1,
   "inventory_revision": 1,
   "quantity_observed_at": "2026-10-28T17:25:30+08:00",
-  "quantity_updated_through": "2026-10-29 (only explicitly recorded deltas)",
+  "quantity_updated_through": "2026-11-02 (QQ 紫薇 live verified 76 then one-key planted 24 -> 52; other quantities remain historical/dirty)",
   "platforms": {
     "qq": {
       "quantities": {
@@ -18,7 +18,7 @@
         "山丹丹种子": 60,
         "银星海棠种子": 40,
         "萱草种子": 44,
-        "紫薇种子": 76,
+        "紫薇种子": 52,
         "梧桐种子": 76,
         "月光花种子": 20,
         "天山红枫种子": 18,
@@ -41,13 +41,14 @@
         "月见草种子": 26
       },
       "inventory_dirty": true,
-      "inventory_dirty_reason": "Historical 2026-10-28 snapshot plus recorded 2026-10-29 deltas; no live revalidation yet. Block real clicks until synced.",
+      "inventory_dirty_reason": "Inventory is still globally dirty. 2026-11-02 live picker reverified QQ 泡泡棉花糖=21 and 紫薇=76; confirmed one-key planting consumed 24 紫薇, so 紫薇 is now exactly 52. Other seed quantities remain historical.",
       "last_daily_date": "2026-10-29",
       "last_successful_cycle": null,
       "last_inventory_sync_at": "2026-10-28T17:25:30+08:00",
       "known_deltas_applied": {
         "泡泡棉花糖种子": 21,
-        "天山红枫种子": 18
+        "天山红枫种子": 18,
+        "紫薇种子": 52
       }
     },
     "wechat": {

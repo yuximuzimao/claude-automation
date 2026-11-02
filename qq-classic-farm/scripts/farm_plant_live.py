@@ -24,7 +24,7 @@ from farm_qq_clean import (check_qq_empty_field, check_wechat_empty_field,
 from farm_plant_special import Cell, SpecialPlantStop
 
 
-QQ_CONFIRMED_ORDINARY_SEEDS = frozenset({"天山红枫种子"})
+QQ_CONFIRMED_ORDINARY_SEEDS = frozenset({"天山红枫种子", "紫薇种子"})
 
 
 class LivePlantAdapter:

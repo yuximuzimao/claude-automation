@@ -30,7 +30,7 @@ DIRTY/UNKNOWN → STOP
 验证：清理前 226 项测试；清理后 173 项现役测试全部通过。
 `farm_qq_clean.py` 暂留，V2-1 只复用“小 ROI 空地模板”思路并重写接口。
 
-## V2-1 QQ 空田检查器 — 离线完成，live EMPTY 终验待授权
+## V2-1 QQ 空田检查器 — 已完成
 
 目标：
 
@@ -48,7 +48,7 @@ check-empty --platform qq → EMPTY | NOT_EMPTY | UNKNOWN
 - [x] 实现 `EMPTY / NOT_EMPTY / UNKNOWN`。
 - [x] Runner 新增只读 `check-empty`：两次窗口身份确认 + 一次截图，0 点击。
 - [x] 真实截图离线回放：真空田=EMPTY（24/24）；当前24格月见草=NOT_EMPTY（24/24）；全屏遮罩=UNKNOWN（24/24）；残留大型作物=NOT_EMPTY。
-- [ ] 等用户在当前 Chat 明确允许且获得新的 QQ 空田现场后，执行 live EMPTY 终验。
+- [x] 2026-11-02 真机一键收获后获得新空田；当前 1.16.1.6 土地配色重新校准，最终 ROI 在连续 5 次 live check 中均返回 EMPTY 24/24、0 unknown。
 
 旧 19×19 atlas 与两张 sentinel negative 资产已删除；受控白萝卜 empty/seedling/mature/harvested 四态样本保留作历史实测证据。
 
@@ -76,7 +76,8 @@ EMPTY → 四格 placement → 普通一键种植 → GROWING
 - [x] live adapter：one-key ON 正例已用 2026-11-01 实机截图校准；OFF / ON / UNKNOWN 三态均为正例/拒识逻辑，真实 ON 截图直接返回 `picker_y_shift=21`、`one_key_mode=True`。
 - [x] picker 动作已按事务分流：普通种子必须 ON；四格种子必须 OFF；两者都绑定当前 phase、同一 seed、同一 slot。
 - [x] 当前全项目 161 项测试全部通过。
-- [ ] 当前 Chat 已授权真机；待允许时段并出现合适现场后做真实完整种植验收。
+- [x] QQ 普通 one-key 子路径已真机跑通：EMPTY → 第3页第3槽紫薇图标/数量76/ON 全部验证 → 单击已验证槽位 → 24/24 occupied、0 unknown。
+- [ ] 四格特殊种子 + 剩余普通格的完整混合路径仍待真机验收。
 
 验收不变：QQ 一个本地 phase 从 EMPTY 连续完成整轮种植；正常路径无逐点击模型往返。
 
