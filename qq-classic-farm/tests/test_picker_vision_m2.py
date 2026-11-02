@@ -29,6 +29,34 @@ class PickerVisionTests(unittest.TestCase):
         frame = WindowFrame("QQ小程序", "QQ经典农场", 979, 101, 603, 1111)
         return FarmCapture(frame, np.zeros((1111, 603), dtype=np.float32), rgb=rgb)
 
+    def wechat_capture(self, *, golden_slot: int | None = 1, one_key_on: bool = True):
+        rgb = np.zeros((1155, 625, 3), dtype=np.uint8)
+        if golden_slot is not None:
+            template = np.asarray(
+                Image.open(ROOT / "assets/ui/picker/wechat-golden-fruit.png").convert("RGB")
+            )
+            x = (100, 200, 300, 400, 500)[golden_slot - 1]
+            rgb[827:882, x - 34:x + 34] = template
+        if one_key_on:
+            on = np.asarray(
+                Image.open(ROOT / "assets/ui/picker/wechat-one-key-on.png").convert("RGB")
+            )
+            rgb[899:930, 384:416] = on
+        frame = WindowFrame("微信", "QQ经典农场", 967, 107, 625, 1155)
+        return FarmCapture(frame, np.zeros((1155, 625), dtype=np.float32), rgb=rgb)
+
+    @patch("farm_picker_vision._read_text", side_effect=["2/5", "94"])
+    def test_wechat_verified_page_icon_quantity_and_on(self, ocr):
+        result = observe_picker(
+            self.wechat_capture(), "wechat", 1, "黄金果种子", Path("/tmp/ocr"))
+        self.assertEqual(result["page"], 2)
+        self.assertEqual(result["total_pages"], 5)
+        self.assertTrue(result["target_icon_verified"])
+        self.assertEqual(result["target_quantity"], 94)
+        self.assertIs(result["one_key_planting"], True)
+        self.assertEqual(result["picker_y_shift"], 0)
+        self.assertEqual(ocr.call_count, 2)
+
     @patch("farm_picker_vision._read_text", side_effect=["4/7", "18"])
     def test_verified_page_icon_quantity(self, ocr):
         result = observe_picker(self.capture(), "qq", 1, "天山红枫种子", Path("/tmp/ocr"))

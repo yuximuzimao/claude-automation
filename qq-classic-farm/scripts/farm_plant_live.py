@@ -18,13 +18,19 @@ from farm_harvest_live import _identity, _same_handle, require_live_window
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
-from farm_picker_vision import observe_picker, picker_arrow_verified
+from farm_picker_vision import (
+    QQ_SLOT_X, WECHAT_ICON_Y, WECHAT_LEFT_ARROW_ROI, WECHAT_RIGHT_ARROW_ROI,
+    WECHAT_SLOT_X, observe_picker, picker_arrow_verified,
+)
 from farm_qq_clean import (check_qq_empty_field, check_wechat_empty_field,
                            observe_qq_preview_cells, qq_special_confirm_point)
 from farm_plant_special import Cell, SpecialPlantStop
 
 
-QQ_CONFIRMED_ORDINARY_SEEDS = frozenset({"天山红枫种子", "紫薇种子"})
+CONFIRMED_ORDINARY_SEEDS = {
+    "qq": frozenset({"天山红枫种子", "紫薇种子"}),
+    "wechat": frozenset({"黄金果种子"}),
+}
 
 
 class LivePlantAdapter:
@@ -166,10 +172,17 @@ class LivePlantAdapter:
         self.pending_special_seed = None
         handle, shot = self._capture()
         empty_check = self._empty_check(shot)
-        preview_cells = (observe_qq_preview_cells(shot, self.layout)
-                         if self.platform == "qq" else None)
+        if self.platform == "qq":
+            preview_cells = observe_qq_preview_cells(shot, self.layout)
+        else:
+            # WeChat special preview is not calibrated yet. For the ordinary
+            # one-key path, a known EMPTY/NOT_EMPTY field is sufficient to
+            # prove no picker/confirmation overlay is covering the field.
+            preview_cells = (frozenset()
+                             if empty_check.status in ("EMPTY", "NOT_EMPTY")
+                             else None)
         confirm_point = None
-        if isinstance(preview_cells, frozenset) and len(preview_cells) == 4:
+        if self.platform == "qq" and isinstance(preview_cells, frozenset) and len(preview_cells) == 4:
             confirm_point = qq_special_confirm_point(
                 shot, preview_cells, self.layout)
         if (preview_cells == frozenset()
@@ -265,7 +278,8 @@ class LivePlantAdapter:
             or any(type(v) is not int for v in anchor_cell)
             or not (0 <= anchor_cell[0] < 6 and 0 <= anchor_cell[1] < 4)):
             raise SpecialPlantStop("INVALID_PLOT", "Invalid plot cell")
-        if (not self.execute or self.click_binary is None or self.platform != "qq"
+        if (not self.execute or self.click_binary is None
+            or self.platform not in ("qq", "wechat")
             or self.phase_origin is None):
             raise SpecialPlantStop(
                 "PLANT_PHASE_UNAUTHORIZED",
@@ -313,14 +327,14 @@ class LivePlantAdapter:
         self.pending_picker_origin = self.phase_origin
 
     def turn_pages(self, direction: int, count: int) -> None:
-        """Only QQ verified bounded arrow navigation; never selects a seed."""
+        """Verified bounded picker navigation for calibrated QQ/WeChat UIs."""
         require_live_window()
         view, shot, handle = self.last_picker, self.last_picker_capture, self.last_handle
         if not self.execute or self.click_binary is None:
             raise SpecialPlantStop("PICKER_EXECUTION_DISABLED", "Real picker navigation not enabled")
-        if self.platform != "qq" or direction not in (-1, 1):
+        if self.platform not in ("qq", "wechat") or direction not in (-1, 1):
             raise SpecialPlantStop("PICKER_DIRECTION_UNVERIFIED",
-                                   "Only QQ verified arrow navigation is available")
+                                   "Picker arrow navigation is not calibrated")
         if (view is None or shot is None or handle is None
             or self.phase_origin is None
             or self.pending_picker_origin != self.phase_origin
@@ -328,23 +342,32 @@ class LivePlantAdapter:
             or type(view.page) is not int or type(self.last_picker_total) is not int
             or type(self.last_picker_y_shift) is not int
             or not -100 <= self.last_picker_y_shift <= 100
+            or (self.platform == "wechat" and self.last_picker_y_shift != 0)
             or type(count) is not int or not 1 <= count <= 7
             or not 1 <= view.page + direction * count <= self.last_picker_total):
             raise SpecialPlantStop("PICKER_PAGE_UNKNOWN", "Cannot safely bound picker turns")
         if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
             raise SpecialPlantStop("PICKER_STALE_PRECONDITION", "Picker capture older than 2 seconds")
-        if not picker_arrow_verified(shot, direction, self.last_picker_y_shift):
+        if not picker_arrow_verified(
+            shot, direction, self.last_picker_y_shift, platform=self.platform
+        ):
             raise SpecialPlantStop("PICKER_ARROW_UNVERIFIED", "Requested arrow not visually confirmed")
         current = find_farm_window(self.platform, self.layout, self.registry_binary)
         if not _same_handle(handle, current):
             raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed before navigation")
         f = handle.frame
+        if self.platform == "qq":
+            arrow_x = (569 if direction == 1 else 31) * f.width / 603
+            arrow_y = (771 + self.last_picker_y_shift) * f.height / 1111
+        else:
+            roi = WECHAT_RIGHT_ARROW_ROI if direction == 1 else WECHAT_LEFT_ARROW_ROI
+            arrow_x = ((roi[0] + roi[2]) / 2) * f.width / 625
+            arrow_y = ((roi[1] + roi[3]) / 2) * f.height / 1155
         batch = {
             "window_id": handle.window_id, "pid": handle.pid,
             "owner": f.owner, "title": f.title,
             "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
-            "actions": [{"x": (569 if direction == 1 else 31) * f.width / 603,
-                         "y": (771 + self.last_picker_y_shift) * f.height / 1111,
+            "actions": [{"x": arrow_x, "y": arrow_y,
                          "delay_ms": 450} for _ in range(count)],
         }
         try:
@@ -373,8 +396,9 @@ class LivePlantAdapter:
         self.pending_ordinary_seed = None
         self.pending_special_seed = None
         if (type(count) is not int or not 1 <= count <= 24
-            or self.platform != "qq" or not isinstance(seed, str) or not seed
-            or seed not in QQ_CONFIRMED_ORDINARY_SEEDS
+            or self.platform not in CONFIRMED_ORDINARY_SEEDS
+            or not isinstance(seed, str) or not seed
+            or seed not in CONFIRMED_ORDINARY_SEEDS[self.platform]
             or seed != self.last_picker_target_seed
             or self.last_picker is None or self.last_picker.one_key_planting is not True
             or self.last_picker.target_icon_verified is not True
@@ -430,7 +454,8 @@ class LivePlantAdapter:
             and type(view.target_quantity) is int
             and view.target_quantity >= 1
         )
-        if (not self.execute or self.click_binary is None or self.platform != "qq"
+        if (not self.execute or self.click_binary is None
+            or self.platform not in ("qq", "wechat")
             or view is None or shot is None or handle is None
             or self.phase_origin is None
             or self.pending_picker_origin != self.phase_origin
@@ -449,15 +474,18 @@ class LivePlantAdapter:
         current = find_farm_window(self.platform, self.layout, self.registry_binary)
         if not _same_handle(handle, current):
             raise SpecialPlantStop("USER_INTERFERENCE", "Farm window changed before seed selection")
-        from farm_picker_vision import QQ_SLOT_X
         f = handle.frame
+        if self.platform == "qq":
+            seed_x = QQ_SLOT_X[slot - 1] * f.width / 603
+            seed_y = (785 + self.last_picker_y_shift) * f.height / 1111
+        else:
+            seed_x = WECHAT_SLOT_X[slot - 1] * f.width / 625
+            seed_y = ((WECHAT_ICON_Y[0] + WECHAT_ICON_Y[1]) / 2) * f.height / 1155
         batch = {
             "window_id": handle.window_id, "pid": handle.pid,
             "owner": f.owner, "title": f.title,
             "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
-            "actions": [{"x": QQ_SLOT_X[slot - 1] * f.width / 603,
-                         "y": (785 + self.last_picker_y_shift) * f.height / 1111,
-                         "delay_ms": 100}],
+            "actions": [{"x": seed_x, "y": seed_y, "delay_ms": 100}],
         }
         # Consume authority before the irreversible action, even on timeout.
         self.pending_picker_origin = None

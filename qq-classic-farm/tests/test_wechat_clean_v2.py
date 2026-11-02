@@ -16,7 +16,7 @@ from farm_capture import FarmCapture
 from farm_geometry import WindowFrame
 from farm_io import WindowHandle
 from farm_plant_live import LivePlantAdapter
-from farm_plant_special import SpecialPlantStop
+from farm_plant_picker import PickerView
 from farm_qq_clean import ALL_CELLS, check_wechat_empty_field
 from farm_runner import read_only_empty_check
 
@@ -134,7 +134,9 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
         self.assertEqual(registry.call_count, 2)
         capture.assert_called_once()
 
-    def test_live_empty_gate_is_read_only_and_does_not_unlock_wechat_actions(self):
+    def test_live_empty_gate_and_wechat_fixed_plot_action(self):
+        from types import SimpleNamespace
+
         empty = self.shot(self.image(625))
         planted = self.shot(self.image(625, occupied=ALL_CELLS), capture_id="planted")
         handle = WindowHandle(99, 88, empty.frame)
@@ -155,12 +157,63 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
                 frozenset({(3, 2)})))
             cg.assert_not_called()
 
-        with patch("farm_plant_live.subprocess.run",
-                   side_effect=AssertionError("No CGEvent")) as cg:
-            with self.assertRaises(SpecialPlantStop) as caught:
-                adapter.open_plot((3, 2))
-            self.assertEqual(caught.exception.code, "PLANT_PHASE_UNAUTHORIZED")
-            cg.assert_not_called()
+        response = SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps({
+                "status": "clicks_sent_unverified",
+                "click_count": 1,
+            }),
+        )
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.find_farm_window", return_value=handle),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg):
+            adapter.open_plot((3, 2))
+        payload = json.loads(cg.call_args.kwargs["input"])
+        self.assertEqual(len(payload["actions"]), 1)
+        self.assertEqual(adapter.pending_picker_origin, adapter.phase_origin)
+
+    def test_wechat_verified_golden_fruit_selection_uses_slot_center(self):
+        from types import SimpleNamespace
+
+        empty = self.shot(self.image(625))
+        handle = WindowHandle(99, 88, empty.frame)
+        adapter = LivePlantAdapter(
+            "wechat", self.layout, Path("/tmp/registry"),
+            Path("/tmp/click"), execute=True)
+
+        with patch.object(adapter, "_capture", return_value=(handle, empty)):
+            self.assertTrue(adapter.require_empty_field())
+
+        adapter.pending_picker_origin = adapter.phase_origin
+        adapter.last_handle = handle
+        adapter.last_picker_capture = empty
+        adapter.last_picker_expected_slot = 1
+        adapter.last_picker_target_seed = "黄金果种子"
+        adapter.last_picker_y_shift = 0
+        adapter.last_picker = PickerView(
+            page=2, target_icon_verified=True,
+            target_quantity=94, one_key_planting=True,
+        )
+        adapter.arm_ordinary_selection(24, "黄金果种子")
+
+        response = SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps({
+                "status": "clicks_sent_unverified",
+                "click_count": 1,
+            }),
+        )
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns",
+                    return_value=empty.captured_at_ns + 10),
+              patch("farm_plant_live.find_farm_window", return_value=handle),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg):
+            adapter.select_seed(1)
+
+        payload = json.loads(cg.call_args.kwargs["input"])
+        self.assertEqual(len(payload["actions"]), 1)
+        self.assertAlmostEqual(payload["actions"][0]["x"], 100.0)
+        self.assertAlmostEqual(payload["actions"][0]["y"], 854.5)
 
 
 if __name__ == "__main__":

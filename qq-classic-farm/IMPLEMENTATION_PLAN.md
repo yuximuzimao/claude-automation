@@ -75,7 +75,7 @@ EMPTY → 四格 placement → 普通一键种植 → GROWING
 - [x] live adapter：confirm 已接入单次 CGEvent；只有“精确 2×2 preview + 绿色确认按钮”同时成立才允许点击。
 - [x] live adapter：one-key ON 正例已用 2026-11-01 实机截图校准；OFF / ON / UNKNOWN 三态均为正例/拒识逻辑，真实 ON 截图直接返回 `picker_y_shift=21`、`one_key_mode=True`。
 - [x] picker 动作已按事务分流：普通种子必须 ON；四格种子必须 OFF；两者都绑定当前 phase、同一 seed、同一 slot。
-- [x] 当前全项目 161 项测试全部通过。
+- [x] 当前全项目 170 项测试全部通过。
 - [x] QQ 普通 one-key 子路径已真机跑通：EMPTY → 第3页第3槽紫薇图标/数量76/ON 全部验证 → 单击已验证槽位 → 24/24 occupied、0 unknown。
 - [ ] 四格特殊种子 + 剩余普通格的完整混合路径仍待真机验收。
 
@@ -97,12 +97,16 @@ MATURE → 四格可摘 → 一键收获 → EMPTY
 ## V2-4 微信参数化
 
 - [x] 微信固定 4×6 网格继续复用归一化几何；当前 1.16.1.6 独立空田 ROI 已用 live 正负样本重新校准。
-- [x] `check-empty --platform wechat` 已实现；当前真机空田连续 5/5 次=EMPTY 24/24、0 unknown，收获前成熟整田=NOT_EMPTY 24/24。
+- [x] `check-empty --platform wechat` 已实现；真机空田=EMPTY 24/24，成熟整田=NOT_EMPTY 24/24。
 - [x] 微信普通成熟整田已真机执行一次手形一键收获，收获后完整空田终验通过。
 - [x] 625 / 627 两种已见窗口宽度均由归一化 ROI 支持。
 - [x] 当前土地事实更新为 6 紫 + 18 金；现役纯紫 `safe_special_2x2` 只保留 `purple_a`。
-- [ ] 微信独立 picker / preview / confirm 参数化；种植动作仍保持关闭。
-- [ ] 复用同一状态机并跑通微信完整种植+收获一轮。
+- [x] 微信普通 picker 已参数化：第2/5页第1槽黄金果图标/数量94/one-key ON 实机截图由正式视觉函数验证，左右箭头均可验证。
+- [x] 微信固定格 open_plot、翻页、普通选种已接入正式 LivePlantAdapter；全部沿用 phase、窗口、时间、图标、数量、one-key 门禁。
+- [x] 微信普通 one-key 子路径已真机跑通：EMPTY → 黄金果×24 → 24/24 occupied；黄金果当前确认数量70。占用 ROI 已用该现场收敛为当前版本参数。
+- [x] 当前全项目 170 项测试全部通过。
+- [ ] 微信四格 preview / confirm 仍未校准。
+- [ ] 当前黄金果成熟后再跑一次收获，完成微信“种植→成熟→收获→EMPTY”整轮验收。
 
 ## V2-5 Planner / 库存
 

@@ -27,17 +27,16 @@ class GeometryTests(unittest.TestCase):
         moved = WindowFrame("QQ小程序", "QQ经典农场", 10, 500, 603, 1111)
         self.assertEqual(moved.screen_point(x, y), (10 + x, 500 + y))
 
-    def test_verified_qq_plot_action_point_matches_live_calibration(self):
-        frame = WindowFrame("QQ小程序", "QQ经典农场", 0, 0, 603, 1111)
-        x, y = plot_action_point("qq", 3, 2, frame, self.layout)
+    def test_verified_plot_action_points_match_live_calibration(self):
+        qq = WindowFrame("QQ小程序", "QQ经典农场", 0, 0, 603, 1111)
+        x, y = plot_action_point("qq", 3, 2, qq, self.layout)
         self.assertAlmostEqual(x, 301.52, delta=0.03)
         self.assertAlmostEqual(y, 689.09, delta=0.03)
 
-        with self.assertRaises(GeometryStop) as caught:
-            plot_action_point("wechat", 3, 2,
-                              WindowFrame("微信", "QQ经典农场", 0, 0, 625, 1155),
-                              self.layout)
-        self.assertEqual(caught.exception.code, "PLOT_CLICK_UNCALIBRATED")
+        wechat = WindowFrame("微信", "QQ经典农场", 0, 0, 625, 1155)
+        x, y = plot_action_point("wechat", 3, 2, wechat, self.layout)
+        self.assertAlmostEqual(x, 304.19, delta=0.03)
+        self.assertAlmostEqual(y, 734.73, delta=0.03)
 
     def test_retina_pixel_to_local_then_screen(self):
         frame = WindowFrame("QQ小程序", "QQ经典农场", 120, 40, 603, 1111)

@@ -17,6 +17,8 @@ from farm_plant_special import SpecialPlantStop
 
 FRAME = WindowFrame("QQ小程序", "QQ经典农场", 979, 101, 603, 1111)
 HANDLE = WindowHandle(6951, 53086, FRAME)
+WECHAT_FRAME = WindowFrame("微信", "QQ经典农场", 967, 107, 625, 1155)
+WECHAT_HANDLE = WindowHandle(12496, 1369, WECHAT_FRAME)
 
 
 class PickerNavigationTests(unittest.TestCase):
@@ -67,7 +69,8 @@ class PickerNavigationTests(unittest.TestCase):
         adapter.turn_pages(1, 1)
         payload = json.loads(run.call_args.kwargs["input"])
         self.assertEqual(payload["actions"][0]["y"], 729)
-        arrow.assert_called_once_with(initial_capture, 1, -42)
+        arrow.assert_called_once_with(
+            initial_capture, 1, -42, platform="qq")
 
     @patch("farm_plant_live.require_live_window")
     @patch("farm_plant_live.monotonic_ns", return_value=1_500_000_000)
@@ -108,6 +111,42 @@ class PickerNavigationTests(unittest.TestCase):
         self.assertTrue(caught.exception.action_may_have_been_sent)
         self.assertEqual(run.call_count, 1)
         self.assertIsNone(adapter.last_picker)
+
+    @patch("farm_plant_live.require_live_window")
+    @patch("farm_plant_live.monotonic_ns", return_value=1_500_000_000)
+    @patch("farm_plant_live.picker_arrow_verified", return_value=True)
+    @patch("farm_plant_live.find_farm_window", return_value=WECHAT_HANDLE)
+    @patch("farm_plant_live.subprocess.run")
+    def test_wechat_arrow_uses_calibrated_roi_center(
+        self, run, registry, arrow, clock, time
+    ):
+        adapter = LivePlantAdapter(
+            "wechat", {}, Path("/tmp/registry"),
+            Path("/tmp/click"), execute=True)
+        adapter.phase_origin = _identity(WECHAT_HANDLE)
+        adapter.pending_picker_origin = _identity(WECHAT_HANDLE)
+        adapter.last_handle = WECHAT_HANDLE
+        adapter.last_picker = SimpleNamespace(page=1)
+        adapter.last_picker_total = 5
+        adapter.last_picker_y_shift = 0
+        adapter.last_picker_capture = SimpleNamespace(
+            captured_at_ns=1_000_000_000)
+        initial_capture = adapter.last_picker_capture
+        run.return_value = SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps({
+                "status": "clicks_sent_unverified",
+                "click_count": 1,
+            }),
+        )
+
+        adapter.turn_pages(1, 1)
+
+        payload = json.loads(run.call_args.kwargs["input"])
+        self.assertEqual(payload["actions"][0]["x"], 596)
+        self.assertEqual(payload["actions"][0]["y"], 843.5)
+        arrow.assert_called_once_with(
+            initial_capture, 1, 0, platform="wechat")
 
 
 if __name__ == "__main__":

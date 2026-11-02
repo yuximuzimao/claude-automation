@@ -70,12 +70,16 @@
       "normalized_u_step": [-0.0680875, 0.0187579],
       "normalized_v_step": [0.0680421, 0.0187912],
       "fit_rms_pixels": 0.149,
+      "planting": {
+        "plot_click_offset_normalized": [-0.0155041459, 0.0165784878],
+        "verified_from": "2026-11-02 live WeChat cell (3,2): shared QQ normalized offset opened picker on first click"
+      },
       "empty_check": {
-        "calibration_version": 2,
+        "calibration_version": 3,
         "verified_window_width_range": [625, 627],
         "verified_window_height": 1155,
         "soil_offset_normalized": [-0.0608, 0.0051948052],
-        "occupancy_offset_normalized": [-0.0256, -0.0103896104],
+        "occupancy_offset_normalized": [-0.0032, 0.0],
         "patch_radius": 2,
         "soil_prototypes": {
           "purple": [227, 202, 200],
@@ -83,9 +87,9 @@
         },
         "empty_soil_max_distance": 40,
         "occupied_soil_max_distance": 220,
-        "occupied_luminance_max": 130,
+        "occupied_luminance_max": 140,
         "empty_luminance_min": 160,
-        "calibrated_from": "2026-11-02 live WeChat 625x1155 true-empty and mature-full-field pair, game version 1.16.1.6; 6 purple / 18 gold",
+        "calibrated_from": "2026-11-02 live WeChat 625x1155 true-empty, mature-full-field and 24-cell golden-fruit seedling screenshots, game version 1.16.1.6; 6 purple / 18 gold",
         "grade_policy": "infer nearest purple/gold prototype; never trust a stored land-grade map"
       },
       "safe_special_2x2": [

@@ -42,6 +42,19 @@ QQ_ONE_KEY_ON = ROOT / "assets/ui/picker/qq-one-key-on.png"
 QQ_ONE_KEY_ENABLE_CONFIRM_ROI = (56, 409, 548, 738)
 QQ_ONE_KEY_ENABLE_CONFIRM = ROOT / "assets/ui/picker/qq-one-key-enable-confirm.png"
 
+# WeChat 1.16.1.6 live calibration, 625x1155 independent farm window.
+WECHAT_TARGET_ICONS = {
+    "黄金果种子": ROOT / "assets/ui/picker/wechat-golden-fruit.png",
+}
+WECHAT_SLOT_X = (100, 200, 300, 400, 500)
+WECHAT_PAGE_ROI = (270, 880, 350, 950)
+WECHAT_BADGE_Y = (795, 832)
+WECHAT_ICON_Y = (827, 882)
+WECHAT_ONE_KEY_ON_ROI = (384, 899, 416, 930)
+WECHAT_ONE_KEY_ON = ROOT / "assets/ui/picker/wechat-one-key-on.png"
+WECHAT_RIGHT_ARROW_ROI = (578, 817, 614, 870)
+WECHAT_LEFT_ARROW_ROI = (10, 817, 46, 870)
+
 
 def _crop(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | None:
     if getattr(capture, "rgb", None) is None:
@@ -55,6 +68,21 @@ def _crop(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | 
     coords = (round(x0 * sx), round(y0 * sy),
               round(x1 * sx), round(y1 * sy))
     a, b, c, d = coords
+    if a < 0 or b < 0 or c > w or d > h or a >= c or b >= d:
+        return None
+    return capture.rgb[b:d, a:c]
+
+
+def _crop_wechat(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | None:
+    if getattr(capture, "rgb", None) is None:
+        return None
+    h, w = capture.rgb.shape[:2]
+    if not 600 <= capture.frame.width <= 660 or not 1120 <= capture.frame.height <= 1190:
+        return None
+    sx, sy = w / 625, h / 1155
+    x0, y0, x1, y1 = box
+    a, b, c, d = (round(x0 * sx), round(y0 * sy),
+                   round(x1 * sx), round(y1 * sy))
     if a < 0 or b < 0 or c > w or d > h or a >= c or b >= d:
         return None
     return capture.rgb[b:d, a:c]
@@ -227,6 +255,66 @@ def observe_one_key_mode(capture: FarmCapture, platform: str,
     return None
 
 
+@lru_cache(maxsize=1)
+def _wechat_on_template() -> np.ndarray | None:
+    try:
+        return np.asarray(Image.open(WECHAT_ONE_KEY_ON).convert("RGB"))
+    except (OSError, ValueError):
+        return None
+
+
+def _observe_wechat_picker(capture: FarmCapture, expected_slot: int,
+                           target_seed: str, ocr_binary: Path | None,
+                           unknown: dict) -> dict:
+    counter = _read_text(_crop_wechat(capture, WECHAT_PAGE_ROI), ocr_binary)
+    if not isinstance(counter, str):
+        return unknown
+    match = re.fullmatch(r"\s*(\d{1,2})\s*/\s*(\d{1,2})\s*", counter)
+    if match is None:
+        return unknown
+    page, total = map(int, match.groups())
+    if not 1 <= page <= total <= 20:
+        return unknown
+
+    on_patch = _crop_wechat(capture, WECHAT_ONE_KEY_ON_ROI)
+    on_template = _wechat_on_template()
+    on = None
+    if on_patch is not None and on_template is not None:
+        on = _correlation(on_template, on_patch) >= 0.96
+
+    result = {**unknown, "page": page, "total_pages": total,
+              "picker_y_shift": 0, "one_key_planting": True if on else None}
+    template_path = WECHAT_TARGET_ICONS.get(target_seed)
+    if template_path is None or not template_path.is_file():
+        return result
+    try:
+        template = np.asarray(Image.open(template_path).convert("RGB"))
+        scores = []
+        for x in WECHAT_SLOT_X:
+            patch = _crop_wechat(
+                capture, (x - 34, WECHAT_ICON_Y[0], x + 34, WECHAT_ICON_Y[1]))
+            if patch is None:
+                return result
+            scores.append(_correlation(template, patch))
+    except (OSError, ValueError):
+        return result
+    own = scores[expected_slot - 1]
+    other = max(v for i, v in enumerate(scores) if i != expected_slot - 1)
+    result["icon_score"] = round(own, 4)
+    result["target_icon_verified"] = own >= 0.90 and own - other >= 0.12
+    if not result["target_icon_verified"]:
+        return result
+    x = WECHAT_SLOT_X[expected_slot - 1]
+    badge = _read_text(
+        _crop_wechat(capture, (x - 32, WECHAT_BADGE_Y[0],
+                               x + 32, WECHAT_BADGE_Y[1])),
+        ocr_binary,
+    )
+    if isinstance(badge, str) and re.fullmatch(r"[1-9]\d{0,3}", badge):
+        result["target_quantity"] = int(badge)
+    return result
+
+
 def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
                    target_seed: str, ocr_binary: Path | None) -> dict:
     """Return page, total, icon, quantity; unknown values never grant selection."""
@@ -234,7 +322,12 @@ def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
                "target_icon_verified": None, "target_quantity": None,
                "icon_score": None, "one_key_planting": None,
                "picker_y_shift": None, "one_key_confirmation_pending": None}
-    if platform != "qq" or type(expected_slot) is not int or not 1 <= expected_slot <= 5:
+    if type(expected_slot) is not int or not 1 <= expected_slot <= 5:
+        return unknown
+    if platform == "wechat":
+        return _observe_wechat_picker(
+            capture, expected_slot, target_seed, ocr_binary, unknown)
+    if platform != "qq":
         return unknown
     if observe_one_key_enable_confirmation(capture, platform):
         return {**unknown, "one_key_confirmation_pending": True}
@@ -287,12 +380,22 @@ def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
 
 
 def picker_arrow_verified(capture: FarmCapture, direction: int,
-                          picker_y_shift: int = 0) -> bool:
-    """Verify the actual QQ page-turn arrow before a bounded navigation batch."""
+                          picker_y_shift: int = 0,
+                          platform: str = "qq") -> bool:
+    """Verify the requested platform page-turn arrow before navigation."""
     if direction not in (-1, 1):
         return False
-    patch = _crop(capture, _shift_y(QQ_RIGHT_ARROW_ROI if direction == 1
-                                   else QQ_LEFT_ARROW_ROI, picker_y_shift))
+    if platform == "qq":
+        patch = _crop(capture, _shift_y(
+            QQ_RIGHT_ARROW_ROI if direction == 1 else QQ_LEFT_ARROW_ROI,
+            picker_y_shift))
+    elif platform == "wechat":
+        patch = _crop_wechat(
+            capture,
+            WECHAT_RIGHT_ARROW_ROI if direction == 1 else WECHAT_LEFT_ARROW_ROI,
+        )
+    else:
+        return False
     if patch is None:
         return False
     r, g, b = (patch[:, :, i].astype(np.int16) for i in range(3))
