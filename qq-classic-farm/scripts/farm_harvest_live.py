@@ -15,9 +15,9 @@ from time import monotonic_ns, sleep
 from typing import Callable
 
 from farm_capture import capture_window
-from farm_geometry import WindowFrame
 from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest
-from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
+from farm_io import (WindowHandle, click_batch_target, find_farm_window,
+                     parse_click_batch_result)
 from farm_qq_clean import check_qq_empty_field
 from farm_vision import probe_harvest
 
@@ -53,7 +53,9 @@ def _identity(handle: WindowHandle) -> tuple[int, int, str, str, float, float]:
 
 
 def _same_handle(a: WindowHandle, b: WindowHandle) -> bool:
-    return _identity(a) == _identity(b) and a.frame == b.frame
+    return (_identity(a) == _identity(b)
+            and a.frame == b.frame
+            and a.live_frame == b.live_frame)
 
 
 class LiveHarvestAdapter:
@@ -163,13 +165,11 @@ class LiveHarvestAdapter:
         current = find_farm_window(self.platform, self.layout, self.registry_binary)
         if not _same_handle(handle, current):
             raise HarvestStop("USER_INTERFERENCE", "Window changed before batch")
-        f: WindowFrame = current.frame
-        batch = {
-            "window_id": current.window_id, "pid": current.pid,
-            "owner": f.owner, "title": f.title,
-            "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
-            "actions": [{"x": x, "y": y, "delay_ms": 100} for x, y in points],
-        }
+        batch = click_batch_target(current)
+        batch["actions"] = [
+            {"x": x, "y": y, "delay_ms": 100}
+            for x, y in points
+        ]
         try:
             proc = subprocess.run([str(self.click_binary), "--execute"],
                                   input=json.dumps(batch), text=True,

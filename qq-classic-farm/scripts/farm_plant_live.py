@@ -15,7 +15,8 @@ from time import monotonic_ns, sleep
 from farm_capture import capture_window
 from farm_geometry import GeometryStop, plot_action_point
 from farm_harvest_live import _identity, _same_handle, require_live_window
-from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
+from farm_io import (WindowHandle, click_batch_target, find_farm_window,
+                     parse_click_batch_result)
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import (
@@ -299,14 +300,8 @@ class LivePlantAdapter:
         except GeometryStop as exc:
             raise SpecialPlantStop(exc.code, str(exc)) from exc
 
-        f = current.frame
-        batch = {
-            "window_id": current.window_id, "pid": current.pid,
-            "owner": f.owner, "title": f.title,
-            "frame": {"x": f.x, "y": f.y,
-                      "width": f.width, "height": f.height},
-            "actions": [{"x": x, "y": y, "delay_ms": 100}],
-        }
+        batch = click_batch_target(current)
+        batch["actions"] = [{"x": x, "y": y, "delay_ms": 100}]
         # A failed/uncertain click never leaves picker authority behind.
         self.pending_picker_origin = None
         self.pending_empty_count = None
@@ -363,13 +358,11 @@ class LivePlantAdapter:
             roi = WECHAT_RIGHT_ARROW_ROI if direction == 1 else WECHAT_LEFT_ARROW_ROI
             arrow_x = ((roi[0] + roi[2]) / 2) * f.width / 625
             arrow_y = ((roi[1] + roi[3]) / 2) * f.height / 1155
-        batch = {
-            "window_id": handle.window_id, "pid": handle.pid,
-            "owner": f.owner, "title": f.title,
-            "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
-            "actions": [{"x": arrow_x, "y": arrow_y,
-                         "delay_ms": 450} for _ in range(count)],
-        }
+        batch = click_batch_target(handle)
+        batch["actions"] = [
+            {"x": arrow_x, "y": arrow_y, "delay_ms": 450}
+            for _ in range(count)
+        ]
         try:
             result = subprocess.run(
                 [str(self.click_binary), "--execute"], input=json.dumps(batch),
@@ -481,12 +474,8 @@ class LivePlantAdapter:
         else:
             seed_x = WECHAT_SLOT_X[slot - 1] * f.width / 625
             seed_y = ((WECHAT_ICON_Y[0] + WECHAT_ICON_Y[1]) / 2) * f.height / 1155
-        batch = {
-            "window_id": handle.window_id, "pid": handle.pid,
-            "owner": f.owner, "title": f.title,
-            "frame": {"x": f.x, "y": f.y, "width": f.width, "height": f.height},
-            "actions": [{"x": seed_x, "y": seed_y, "delay_ms": 100}],
-        }
+        batch = click_batch_target(handle)
+        batch["actions"] = [{"x": seed_x, "y": seed_y, "delay_ms": 100}]
         # Consume authority before the irreversible action, even on timeout.
         self.pending_picker_origin = None
         self.pending_empty_count = None
@@ -539,14 +528,8 @@ class LivePlantAdapter:
             raise SpecialPlantStop("USER_INTERFERENCE",
                                    "Farm window changed before special confirmation")
         x, y = point
-        f = current.frame
-        batch = {
-            "window_id": current.window_id, "pid": current.pid,
-            "owner": f.owner, "title": f.title,
-            "frame": {"x": f.x, "y": f.y,
-                      "width": f.width, "height": f.height},
-            "actions": [{"x": x, "y": y, "delay_ms": 100}],
-        }
+        batch = click_batch_target(current)
+        batch["actions"] = [{"x": x, "y": y, "delay_ms": 100}]
         # Consume the preview/confirm authority before the irreversible click.
         self.last_handle = None
         self.last_field = None

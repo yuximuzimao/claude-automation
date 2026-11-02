@@ -23,6 +23,7 @@ struct Batch: Decodable {
     let owner: String
     let title: String
     let frame: Frame
+    let window_frame: Frame?
     let actions: [Action]
 }
 struct Result: Encodable {
@@ -95,10 +96,11 @@ func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
           (target[kCGWindowOwnerPID as String] as? Int) == batch.pid,
           let current = bounds(target)
     else { stop("WINDOW_NOT_FOUND", "Target window identity changed", clicksSent: clicksSent) }
-    if abs(current.origin.x - batch.frame.x) > 1 ||
-       abs(current.origin.y - batch.frame.y) > 1 ||
-       abs(current.width - batch.frame.width) > 1 ||
-       abs(current.height - batch.frame.height) > 1 {
+    let expectedWindow = batch.window_frame ?? batch.frame
+    if abs(current.origin.x - expectedWindow.x) > 1 ||
+       abs(current.origin.y - expectedWindow.y) > 1 ||
+       abs(current.width - expectedWindow.width) > 1 ||
+       abs(current.height - expectedWindow.height) > 1 {
         stop("WINDOW_SIZE_CHANGED", "Window moved/resized since batch preparation", clicksSent: clicksSent)
     }
     guard NSWorkspace.shared.frontmostApplication?.processIdentifier == pid_t(batch.pid) else {
@@ -136,6 +138,17 @@ guard batch.window_id > 0, batch.pid > 0,
       [batch.frame.x, batch.frame.y, batch.frame.width, batch.frame.height].allSatisfy({ $0.isFinite }),
       (1...24).contains(batch.actions.count)
 else { stop("INVALID_BATCH", "Invalid window identity/frame/action count") }
+let expectedWindow = batch.window_frame ?? batch.frame
+guard expectedWindow.width > 0, expectedWindow.height > 0,
+      [expectedWindow.x, expectedWindow.y,
+       expectedWindow.width, expectedWindow.height].allSatisfy({ $0.isFinite })
+else { stop("INVALID_BATCH", "Invalid OS window frame") }
+let frameTolerance = 1.0
+guard batch.frame.x >= expectedWindow.x - frameTolerance,
+      batch.frame.y >= expectedWindow.y - frameTolerance,
+      batch.frame.x + batch.frame.width <= expectedWindow.x + expectedWindow.width + frameTolerance,
+      batch.frame.y + batch.frame.height <= expectedWindow.y + expectedWindow.height + frameTolerance
+else { stop("CANVAS_OUTSIDE_WINDOW", "Game canvas must stay inside the target OS window") }
 for a in batch.actions {
     guard a.x.isFinite, a.y.isFinite,
           a.x >= 0, a.y >= 0,

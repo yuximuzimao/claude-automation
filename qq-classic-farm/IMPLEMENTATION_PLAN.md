@@ -24,12 +24,12 @@ DIRTY/UNKNOWN → STOP
 
 截至 2026-11-02：
 
-- QQ / 微信 `check-empty` 均已通过当前 1.16.1.6 真机正负样本；
+- QQ / 微信 `check-empty` 均已通过当前 1.16.1.6 真机正负样本；微信 `1039×1155` 左侧栏窗口已验证可归一化为右侧 `625×1155` game canvas，双 frame CGEvent `--preflight` 真机返回 `preflight_ok_no_click`；
 - QQ 普通 one-key：EMPTY → 紫薇×24 → occupied 24/24 已真机通过；
 - 微信普通 one-key：EMPTY → 黄金果×24 → occupied 24/24 已真机通过；
 - 微信成熟普通整田：一键收获 → EMPTY 已真机通过；
 - QQ 四格 preview/confirm 已离线校准并接入动作层；
-- 全项目 170 项测试通过。
+- 全项目 173 项测试通过。
 
 详细阶段历史见 `docs/archive/README.md`。
 

@@ -27,6 +27,34 @@ class WindowHandle:
     window_id: int
     pid: int
     frame: WindowFrame
+    # Full OS-level farm window. Usually identical to frame; embedded WeChat
+    # keeps frame as the calibrated game canvas while preserving this for
+    # strict move/resize/occlusion checks in the CGEvent helper.
+    window_frame: WindowFrame | None = None
+
+    @property
+    def live_frame(self) -> WindowFrame:
+        return self.window_frame or self.frame
+
+
+def click_batch_target(handle: WindowHandle) -> dict:
+    """Stable batch identity: canvas for local actions, OS window for live gates."""
+    canvas = handle.frame
+    live = handle.live_frame
+    return {
+        "window_id": handle.window_id,
+        "pid": handle.pid,
+        "owner": canvas.owner,
+        "title": canvas.title,
+        "frame": {
+            "x": canvas.x, "y": canvas.y,
+            "width": canvas.width, "height": canvas.height,
+        },
+        "window_frame": {
+            "x": live.x, "y": live.y,
+            "width": live.width, "height": live.height,
+        },
+    }
 
 
 def parse_click_batch_result(stdout: str, returncode: int, expected: int) -> int:
@@ -80,13 +108,28 @@ def find_farm_window(platform: str, layout: dict, registry_binary: Path) -> Wind
         if len(matches) != 1:
             raise IOStop("WINDOW_NOT_FOUND", f"Expected one farm window, found {len(matches)}")
         w = matches[0]
-        frame = WindowFrame(w["owner"], w["title"], w["x"], w["y"], w["width"], w["height"])
+        raw_frame = WindowFrame(
+            w["owner"], w["title"], w["x"], w["y"], w["width"], w["height"]
+        )
+        frame = raw_frame
+        if platform == "wechat":
+            embedded = layout["platforms"]["wechat"].get("embedded_canvas")
+            if embedded:
+                min_width, max_width = embedded["verified_window_width_range"]
+                expected_height = embedded["verified_window_height"]
+                if min_width <= frame.width <= max_width and frame.height == expected_height:
+                    sidebar_width = embedded["left_sidebar_width"]
+                    frame = WindowFrame(
+                        frame.owner, frame.title,
+                        frame.x + sidebar_width, frame.y,
+                        frame.width - sidebar_width, frame.height,
+                    )
         validate_farm_window(frame, platform, layout)
         if type(w["window_id"]) is not int or w["window_id"] <= 0:
             raise ValueError("Invalid window ID")
         if type(w["pid"]) is not int or w["pid"] <= 0:
             raise ValueError("Invalid process ID")
-        return WindowHandle(w["window_id"], w["pid"], frame)
+        return WindowHandle(w["window_id"], w["pid"], frame, raw_frame)
     except (IOStop, GeometryStop):
         raise
     except (ValueError, KeyError, TypeError, IndexError) as exc:

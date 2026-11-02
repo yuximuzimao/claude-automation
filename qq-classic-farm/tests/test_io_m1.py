@@ -33,6 +33,14 @@ class RegistryTests(unittest.TestCase):
             **changes,
         }
 
+    def wechat_window(self, **changes):
+        return {
+            **{"window_id": 21, "pid": 1369, "owner": "微信",
+               "title": "QQ经典农场", "x": 967, "y": 107,
+               "width": 625, "height": 1155},
+            **changes,
+        }
+
     def test_single_exact_window(self):
         with patch("farm_io.subprocess.run", return_value=self.response([self.qq_window()])) as call:
             found = find_farm_window("qq", self.layout, Path("/tmp/farm_registry"))
@@ -40,6 +48,23 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(found.pid, 345)
         self.assertEqual(found.frame.screen_point(20, 30), (120, 230))
         self.assertEqual(call.call_args.args[0], ["/tmp/farm_registry", "--platform", "qq"])
+
+    def test_wechat_embedded_sidebar_uses_rightmost_calibrated_canvas(self):
+        wide = self.wechat_window(x=553, width=1039)
+        with patch("farm_io.subprocess.run",
+                   return_value=self.response([wide], platform="wechat")):
+            found = find_farm_window("wechat", self.layout, Path("/tmp/farm_registry"))
+        self.assertEqual(found.window_id, 21)
+        self.assertEqual(found.pid, 1369)
+        self.assertEqual(
+            (found.frame.x, found.frame.y, found.frame.width, found.frame.height),
+            (967, 107, 625, 1155),
+        )
+        self.assertEqual(
+            (found.window_frame.x, found.window_frame.y,
+             found.window_frame.width, found.window_frame.height),
+            (553, 107, 1039, 1155),
+        )
 
     def test_no_window_or_duplicate_window_stops(self):
         for items in ([], [self.qq_window(), self.qq_window(window_id=13)]):
