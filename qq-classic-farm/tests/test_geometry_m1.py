@@ -8,7 +8,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from farm_geometry import GeometryStop, WindowFrame, plot_local_point, validate_farm_window
+from farm_geometry import (GeometryStop, WindowFrame, plot_action_point,
+                           plot_local_point, validate_farm_window)
 
 
 class GeometryTests(unittest.TestCase):
@@ -25,6 +26,17 @@ class GeometryTests(unittest.TestCase):
         self.assertEqual(frame.screen_point(100, 200), (900, 300))
         moved = WindowFrame("QQ小程序", "QQ经典农场", 10, 500, 603, 1111)
         self.assertEqual(moved.screen_point(x, y), (10 + x, 500 + y))
+
+    def test_verified_plot_action_points_match_live_calibration(self):
+        qq = WindowFrame("QQ小程序", "QQ经典农场", 0, 0, 603, 1111)
+        x, y = plot_action_point("qq", 3, 2, qq, self.layout)
+        self.assertAlmostEqual(x, 301.52, delta=0.03)
+        self.assertAlmostEqual(y, 689.09, delta=0.03)
+
+        wechat = WindowFrame("微信", "QQ经典农场", 0, 0, 625, 1155)
+        x, y = plot_action_point("wechat", 3, 2, wechat, self.layout)
+        self.assertAlmostEqual(x, 304.19, delta=0.03)
+        self.assertAlmostEqual(y, 734.73, delta=0.03)
 
     def test_retina_pixel_to_local_then_screen(self):
         frame = WindowFrame("QQ小程序", "QQ经典农场", 120, 40, 603, 1111)

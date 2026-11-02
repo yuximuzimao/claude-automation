@@ -90,3 +90,23 @@ def plot_local_point(
     y = (oy + u * uy + v * vy) * frame.height
     frame.screen_point(x, y)
     return x, y
+
+
+def plot_action_point(
+    platform: str, u: int, v: int, frame: WindowFrame, layout: dict
+) -> tuple[float, float]:
+    """Return the calibrated clickable point for one fixed farm cell."""
+    x, y = plot_local_point(platform, u, v, frame, layout)
+    try:
+        dx, dy = layout["platforms"][platform]["planting"]["plot_click_offset_normalized"]
+    except (KeyError, TypeError, ValueError) as exc:
+        raise GeometryStop("PLOT_CLICK_UNCALIBRATED",
+                           f"No calibrated plot click offset for {platform}") from exc
+    if (type(dx) not in (int, float) or type(dy) not in (int, float)
+        or not all(isfinite(value) for value in (dx, dy))):
+        raise GeometryStop("PLOT_CLICK_UNCALIBRATED",
+                           f"Invalid plot click offset for {platform}")
+    x += dx * frame.width
+    y += dy * frame.height
+    frame.screen_point(x, y)
+    return x, y

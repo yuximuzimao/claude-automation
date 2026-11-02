@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QQ_TARGET_ICONS = {
     "泡泡棉花糖种子": ROOT / "assets/ui/picker/qq-cotton-candy.png",
     "天山红枫种子": ROOT / "assets/ui/picker/qq-red-maple.png",
+    "紫薇种子": ROOT / "assets/ui/picker/qq-purple-myrtle.png",
 }
 QQ_SLOT_X = (95, 191, 287, 383, 480)
 QQ_PAGE_ROI = (282, 817, 342, 863)
@@ -35,10 +36,24 @@ QQ_LEFT_ARROW_ROI = (15, 745, 55, 797)
 # An enabled toggle is NOT calibrated; do not infer True from not matching OFF.
 QQ_ONE_KEY_OFF_ROI = (370, 779, 400, 810)
 QQ_ONE_KEY_OFF = ROOT / "assets/ui/picker/qq-one-key-off.png"
+QQ_ONE_KEY_ON = ROOT / "assets/ui/picker/qq-one-key-on.png"
 # Real 2026-11-01 QQ: clicking OFF opens a confirmation dialog. It does
 # NOT establish ON; confirming may plant all empty plots immediately.
 QQ_ONE_KEY_ENABLE_CONFIRM_ROI = (56, 409, 548, 738)
 QQ_ONE_KEY_ENABLE_CONFIRM = ROOT / "assets/ui/picker/qq-one-key-enable-confirm.png"
+
+# WeChat 1.16.1.6 live calibration, 625x1155 independent farm window.
+WECHAT_TARGET_ICONS = {
+    "黄金果种子": ROOT / "assets/ui/picker/wechat-golden-fruit.png",
+}
+WECHAT_SLOT_X = (100, 200, 300, 400, 500)
+WECHAT_PAGE_ROI = (270, 880, 350, 950)
+WECHAT_BADGE_Y = (795, 832)
+WECHAT_ICON_Y = (827, 882)
+WECHAT_ONE_KEY_ON_ROI = (384, 899, 416, 930)
+WECHAT_ONE_KEY_ON = ROOT / "assets/ui/picker/wechat-one-key-on.png"
+WECHAT_RIGHT_ARROW_ROI = (578, 817, 614, 870)
+WECHAT_LEFT_ARROW_ROI = (10, 817, 46, 870)
 
 
 def _crop(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | None:
@@ -53,6 +68,21 @@ def _crop(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | 
     coords = (round(x0 * sx), round(y0 * sy),
               round(x1 * sx), round(y1 * sy))
     a, b, c, d = coords
+    if a < 0 or b < 0 or c > w or d > h or a >= c or b >= d:
+        return None
+    return capture.rgb[b:d, a:c]
+
+
+def _crop_wechat(capture: FarmCapture, box: tuple[int, int, int, int]) -> np.ndarray | None:
+    if getattr(capture, "rgb", None) is None:
+        return None
+    h, w = capture.rgb.shape[:2]
+    if not 600 <= capture.frame.width <= 660 or not 1120 <= capture.frame.height <= 1190:
+        return None
+    sx, sy = w / 625, h / 1155
+    x0, y0, x1, y1 = box
+    a, b, c, d = (round(x0 * sx), round(y0 * sy),
+                   round(x1 * sx), round(y1 * sy))
     if a < 0 or b < 0 or c > w or d > h or a >= c or b >= d:
         return None
     return capture.rgb[b:d, a:c]
@@ -108,55 +138,72 @@ def _off_template() -> np.ndarray | None:
         return None
 
 
-def _off_checkbox_score(capture: FarmCapture, offset: int) -> float:
-    """Local fixed-control template only; no inference about field occupancy."""
+@lru_cache(maxsize=1)
+def _on_template() -> np.ndarray | None:
+    try:
+        return np.asarray(Image.open(QQ_ONE_KEY_ON).convert("RGB"))
+    except (OSError, ValueError):
+        return None
+
+
+def _checkbox_score(capture: FarmCapture, offset: int,
+                    reference: np.ndarray | None) -> float:
+    """Match only the fixed checkbox interior, not animated surrounding grass."""
     patch = _crop(capture, _shift_y(QQ_ONE_KEY_OFF_ROI, offset))
-    reference = _off_template()
     if patch is None or reference is None:
         return -1.0
     if patch.shape != reference.shape:
         patch = np.asarray(Image.fromarray(patch).resize(
             (reference.shape[1], reference.shape[0])))
-    # Compare only the brown square, not the animated grass surrounding it.
     actual = patch[6:26, 6:24].astype(np.int16)
     expected = reference[6:26, 6:24].astype(np.int16)
     per_pixel = np.max(np.abs(actual - expected), axis=2)
     return float(np.mean(per_pixel <= 14))
 
 
-def _off_checkbox_distance(capture: FarmCapture, offset: int) -> float:
+def _checkbox_distance(capture: FarmCapture, offset: int,
+                       reference: np.ndarray | None) -> float:
     patch = _crop(capture, _shift_y(QQ_ONE_KEY_OFF_ROI, offset))
-    reference = _off_template()
     if patch is None or reference is None:
         return float("inf")
     if patch.shape != reference.shape:
         patch = np.asarray(Image.fromarray(patch).resize(
             (reference.shape[1], reference.shape[0])))
-    return float(np.mean(np.abs(patch.astype(np.int16) - reference.astype(np.int16))))
+    return float(np.mean(np.abs(
+        patch.astype(np.int16) - reference.astype(np.int16))))
+
+
+def _best_toggle_match(capture: FarmCapture, offset: int) -> tuple[float, float]:
+    """Return best score/distance across explicit OFF and ON templates."""
+    pairs = [
+        (_checkbox_score(capture, offset, _off_template()),
+         _checkbox_distance(capture, offset, _off_template())),
+        (_checkbox_score(capture, offset, _on_template()),
+         _checkbox_distance(capture, offset, _on_template())),
+    ]
+    return max(pairs, key=lambda item: (item[0], -item[1]))
 
 
 def find_qq_picker_y_shift(capture: FarmCapture, platform: str) -> int | None:
-    """Locate QQ picker vertical placement from its verified OFF checkbox.
-
-    The previous picker calibration was at checkbox y=821; clicking another
-    plot opens the SAME picker at y=779. Both positions must share one local
-    offset for page, badges, icons and arrows. Unknown/checked controls STOP.
-    """
+    """Locate QQ picker vertical placement from an explicit OFF or ON checkbox."""
     if platform != "qq":
         return None
-    candidates = [(offset, _off_checkbox_score(capture, offset))
-                  for offset in range(-65, 96)]
-    accepted = [(offset, score) for offset, score in candidates if score >= 0.98]
+    candidates = [
+        (offset, *_best_toggle_match(capture, offset))
+        for offset in range(-65, 96)
+    ]
+    accepted = [(offset, score, distance)
+                for offset, score, distance in candidates if score >= 0.98]
     if not accepted:
         return None
-    # The checkbox interior is a solid square (several adjacent y values
-    # score 1.0). Use the full control border to disambiguate exact y.
-    best_offset = min((offset for offset, _ in accepted),
-                      key=lambda offset: _off_checkbox_distance(capture, offset))
-    if (_off_checkbox_distance(capture, best_offset) > 12
-        or any(abs(offset - best_offset) > 5 for offset, _ in accepted)):
-        return None  # Ambiguous or visually changed control.
-    return best_offset - 42  # current OFF reference y=779; old base y=821.
+    # Several adjacent y values can share the same interior score; the full
+    # 30x31 template distance chooses the aligned border position.
+    best_offset, _score, best_distance = min(
+        accepted, key=lambda item: item[2])
+    if (best_distance > 12
+        or any(abs(offset - best_offset) > 5 for offset, _, _ in accepted)):
+        return None
+    return best_offset - 42
 
 
 @lru_cache(maxsize=1)
@@ -191,14 +238,81 @@ def observe_one_key_enable_confirmation(capture: FarmCapture, platform: str) -> 
 
 def observe_one_key_mode(capture: FarmCapture, platform: str,
                          picker_y_shift: int | None = None) -> bool | None:
-    """Only prove QQ picker toggle OFF; an enabled state stays unknown."""
+    """Return explicit QQ picker toggle state from OFF/ON positive templates."""
     if platform != "qq":
         return None
     shift = (find_qq_picker_y_shift(capture, platform)
              if picker_y_shift is None else picker_y_shift)
     if shift is None:
         return None
-    return False if _off_checkbox_score(capture, shift + 42) >= 0.98 else None
+    raw_offset = shift + 42
+    off_score = _checkbox_score(capture, raw_offset, _off_template())
+    on_score = _checkbox_score(capture, raw_offset, _on_template())
+    if off_score >= 0.98 and on_score < 0.90:
+        return False
+    if on_score >= 0.98 and off_score < 0.90:
+        return True
+    return None
+
+
+@lru_cache(maxsize=1)
+def _wechat_on_template() -> np.ndarray | None:
+    try:
+        return np.asarray(Image.open(WECHAT_ONE_KEY_ON).convert("RGB"))
+    except (OSError, ValueError):
+        return None
+
+
+def _observe_wechat_picker(capture: FarmCapture, expected_slot: int,
+                           target_seed: str, ocr_binary: Path | None,
+                           unknown: dict) -> dict:
+    counter = _read_text(_crop_wechat(capture, WECHAT_PAGE_ROI), ocr_binary)
+    if not isinstance(counter, str):
+        return unknown
+    match = re.fullmatch(r"\s*(\d{1,2})\s*/\s*(\d{1,2})\s*", counter)
+    if match is None:
+        return unknown
+    page, total = map(int, match.groups())
+    if not 1 <= page <= total <= 20:
+        return unknown
+
+    on_patch = _crop_wechat(capture, WECHAT_ONE_KEY_ON_ROI)
+    on_template = _wechat_on_template()
+    on = None
+    if on_patch is not None and on_template is not None:
+        on = _correlation(on_template, on_patch) >= 0.96
+
+    result = {**unknown, "page": page, "total_pages": total,
+              "picker_y_shift": 0, "one_key_planting": True if on else None}
+    template_path = WECHAT_TARGET_ICONS.get(target_seed)
+    if template_path is None or not template_path.is_file():
+        return result
+    try:
+        template = np.asarray(Image.open(template_path).convert("RGB"))
+        scores = []
+        for x in WECHAT_SLOT_X:
+            patch = _crop_wechat(
+                capture, (x - 34, WECHAT_ICON_Y[0], x + 34, WECHAT_ICON_Y[1]))
+            if patch is None:
+                return result
+            scores.append(_correlation(template, patch))
+    except (OSError, ValueError):
+        return result
+    own = scores[expected_slot - 1]
+    other = max(v for i, v in enumerate(scores) if i != expected_slot - 1)
+    result["icon_score"] = round(own, 4)
+    result["target_icon_verified"] = own >= 0.90 and own - other >= 0.12
+    if not result["target_icon_verified"]:
+        return result
+    x = WECHAT_SLOT_X[expected_slot - 1]
+    badge = _read_text(
+        _crop_wechat(capture, (x - 32, WECHAT_BADGE_Y[0],
+                               x + 32, WECHAT_BADGE_Y[1])),
+        ocr_binary,
+    )
+    if isinstance(badge, str) and re.fullmatch(r"[1-9]\d{0,3}", badge):
+        result["target_quantity"] = int(badge)
+    return result
 
 
 def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
@@ -208,7 +322,12 @@ def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
                "target_icon_verified": None, "target_quantity": None,
                "icon_score": None, "one_key_planting": None,
                "picker_y_shift": None, "one_key_confirmation_pending": None}
-    if platform != "qq" or type(expected_slot) is not int or not 1 <= expected_slot <= 5:
+    if type(expected_slot) is not int or not 1 <= expected_slot <= 5:
+        return unknown
+    if platform == "wechat":
+        return _observe_wechat_picker(
+            capture, expected_slot, target_seed, ocr_binary, unknown)
+    if platform != "qq":
         return unknown
     if observe_one_key_enable_confirmation(capture, platform):
         return {**unknown, "one_key_confirmation_pending": True}
@@ -261,12 +380,22 @@ def observe_picker(capture: FarmCapture, platform: str, expected_slot: int,
 
 
 def picker_arrow_verified(capture: FarmCapture, direction: int,
-                          picker_y_shift: int = 0) -> bool:
-    """Verify the actual QQ page-turn arrow before a bounded navigation batch."""
+                          picker_y_shift: int = 0,
+                          platform: str = "qq") -> bool:
+    """Verify the requested platform page-turn arrow before navigation."""
     if direction not in (-1, 1):
         return False
-    patch = _crop(capture, _shift_y(QQ_RIGHT_ARROW_ROI if direction == 1
-                                   else QQ_LEFT_ARROW_ROI, picker_y_shift))
+    if platform == "qq":
+        patch = _crop(capture, _shift_y(
+            QQ_RIGHT_ARROW_ROI if direction == 1 else QQ_LEFT_ARROW_ROI,
+            picker_y_shift))
+    elif platform == "wechat":
+        patch = _crop_wechat(
+            capture,
+            WECHAT_RIGHT_ARROW_ROI if direction == 1 else WECHAT_LEFT_ARROW_ROI,
+        )
+    else:
+        return False
     if patch is None:
         return False
     r, g, b = (patch[:, :, i].astype(np.int16) for i in range(3))

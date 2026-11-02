@@ -68,10 +68,10 @@ func bounds(_ info: [String: Any]) -> CGRect? {
     return CGRect(x: x, y: y, width: w, height: h)
 }
 // Dock and Notification Center expose transparent full-screen system surfaces
-// with alpha=1, despite passing pointer events to the farm. Do not disable
-// occlusion checks globally: only these exact main-display surfaces may be
-// ignored, and only when an independent Accessibility hit-test resolves to
-// the *target farm process*. Visible panels, other apps and unknown layers STOP.
+// with alpha=1, despite passing pointer events to the farm. Ignore only these
+// exact main-display/layer combinations. Occlusion checking remains strict:
+// after those system pass-through surfaces, the first real visible window at
+// the click point must be the target farm. Other apps and unknown layers STOP.
 func isSystemPassThrough(_ info: [String: Any], _ rect: CGRect) -> Bool {
     let owner = field(info, kCGWindowOwnerName)
     let layer = info[kCGWindowLayer as String] as? Int ?? -1
@@ -83,17 +83,6 @@ func isSystemPassThrough(_ info: [String: Any], _ rect: CGRect) -> Bool {
         && abs(rect.minY - screen.minY) <= 2
         && abs(rect.width - screen.width) <= 2
         && abs(rect.height - screen.height) <= 2
-}
-
-func accessibilityHitIsTarget(_ point: CGPoint, _ targetPID: Int) -> Bool {
-    let system = AXUIElementCreateSystemWide()
-    var element: AXUIElement?
-    guard AXUIElementCopyElementAtPosition(system, Float(point.x),
-                                          Float(point.y), &element) == .success,
-          let hit = element else { return false }
-    var hitPID: pid_t = 0
-    return AXUIElementGetPid(hit, &hitPID) == .success
-        && hitPID == pid_t(targetPID)
 }
 
 func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
@@ -120,11 +109,10 @@ func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
         let alpha = info[kCGWindowAlpha as String] as? Double ?? 1
         guard alpha > 0.01, let rect = bounds(info), rect.contains(point) else { continue }
         let id = info[kCGWindowNumber as String] as? Int ?? -1
-        if id == batch.window_id { return }
-        if isSystemPassThrough(info, rect)
-            && accessibilityHitIsTarget(point, batch.pid) {
+        if isSystemPassThrough(info, rect) {
             continue
         }
+        if id == batch.window_id { return }
         stop("WINDOW_OCCLUDED", "Another visible window covers click target", clicksSent: clicksSent)
     }
     stop("WINDOW_OCCLUDED", "Target window is not topmost at click point", clicksSent: clicksSent)

@@ -12,7 +12,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from farm_capture import FarmCapture
 from farm_geometry import WindowFrame
-from farm_picker_vision import (observe_picker, observe_one_key_mode,
+from farm_picker_vision import (find_qq_picker_y_shift, observe_picker,
+                                observe_one_key_mode,
                                 observe_one_key_enable_confirmation, right_arrow_verified)
 
 
@@ -27,6 +28,34 @@ class PickerVisionTests(unittest.TestCase):
             rgb[754:817, x - 34:x + 34] = template
         frame = WindowFrame("QQ小程序", "QQ经典农场", 979, 101, 603, 1111)
         return FarmCapture(frame, np.zeros((1111, 603), dtype=np.float32), rgb=rgb)
+
+    def wechat_capture(self, *, golden_slot: int | None = 1, one_key_on: bool = True):
+        rgb = np.zeros((1155, 625, 3), dtype=np.uint8)
+        if golden_slot is not None:
+            template = np.asarray(
+                Image.open(ROOT / "assets/ui/picker/wechat-golden-fruit.png").convert("RGB")
+            )
+            x = (100, 200, 300, 400, 500)[golden_slot - 1]
+            rgb[827:882, x - 34:x + 34] = template
+        if one_key_on:
+            on = np.asarray(
+                Image.open(ROOT / "assets/ui/picker/wechat-one-key-on.png").convert("RGB")
+            )
+            rgb[899:930, 384:416] = on
+        frame = WindowFrame("微信", "QQ经典农场", 967, 107, 625, 1155)
+        return FarmCapture(frame, np.zeros((1155, 625), dtype=np.float32), rgb=rgb)
+
+    @patch("farm_picker_vision._read_text", side_effect=["2/5", "94"])
+    def test_wechat_verified_page_icon_quantity_and_on(self, ocr):
+        result = observe_picker(
+            self.wechat_capture(), "wechat", 1, "黄金果种子", Path("/tmp/ocr"))
+        self.assertEqual(result["page"], 2)
+        self.assertEqual(result["total_pages"], 5)
+        self.assertTrue(result["target_icon_verified"])
+        self.assertEqual(result["target_quantity"], 94)
+        self.assertIs(result["one_key_planting"], True)
+        self.assertEqual(result["picker_y_shift"], 0)
+        self.assertEqual(ocr.call_count, 2)
 
     @patch("farm_picker_vision._read_text", side_effect=["4/7", "18"])
     def test_verified_page_icon_quantity(self, ocr):
@@ -56,14 +85,25 @@ class PickerVisionTests(unittest.TestCase):
         self.assertIsNone(observe_picker(self.capture(), "wechat", 1,
                                         "天山红枫种子", None)["page"])
 
-    def test_real_qq_unchecked_toggle_template_is_fail_closed(self):
+    def test_real_qq_toggle_templates_prove_off_on_or_unknown(self):
         capture = self.capture(maple_slot=None)
-        reference = np.asarray(Image.open(ROOT / "assets/ui/picker/qq-one-key-off.png").convert("RGB"))
-        capture.rgb[779:810, 370:400] = reference
+        off = np.asarray(Image.open(
+            ROOT / "assets/ui/picker/qq-one-key-off.png").convert("RGB"))
+        capture.rgb[779:810, 370:400] = off
         self.assertIs(observe_one_key_mode(capture, "qq"), False)
         self.assertIsNone(observe_one_key_mode(capture, "wechat"))
-        # A checkmark/overlay changes the interior; it is NOT proof of ON.
-        capture.rgb[785:801, 378:392] = [255, 245, 255]
+
+        # Real 2026-11-01 ON control is shifted down by raw +63, which maps
+        # to picker_y_shift +21 under the shared QQ picker geometry.
+        capture = self.capture(maple_slot=None)
+        on = np.asarray(Image.open(
+            ROOT / "assets/ui/picker/qq-one-key-on.png").convert("RGB"))
+        capture.rgb[842:873, 370:400] = on
+        self.assertEqual(find_qq_picker_y_shift(capture, "qq"), 21)
+        self.assertIs(observe_one_key_mode(capture, "qq"), True)
+
+        # An arbitrary altered square is neither positive template.
+        capture.rgb[848:864, 378:392] = [255, 245, 255]
         self.assertIsNone(observe_one_key_mode(capture, "qq"))
 
     @patch("farm_picker_vision._read_text", side_effect=["1/7", "18"])

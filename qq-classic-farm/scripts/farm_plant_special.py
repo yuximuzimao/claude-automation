@@ -1,9 +1,9 @@
-"""M2 one-special-seed local transaction, with injectable UI I/O.
+"""V2 special-crop transaction.
 
-This is NOT a live click entry point. The adapter must independently verify
-window identity, overlay, 2x2 preview and all 24 field cells from local
-captures; it must guard Mac operation times before any real input.
-Planner chooses seed/placement. Runner only validates and executes.
+The Runner owns expected state. It does not reconstruct a 24-cell semantic map
+after each click. One phase starts from a separately verified EMPTY field,
+tracks confirmed placements locally, and validates only the UI/ROIs expected
+to change for this transaction.
 """
 from __future__ import annotations
 
@@ -30,12 +30,10 @@ class SpecialPlantStop(ValueError):
 class SpecialPlantView:
     capture_id: str
     captured_at_ns: int
-    # (window_id, pid, owner, title, x, y) as with M1.
+    # (window_id, pid, owner, title, x, y)
     window_identity: tuple
     overlay: str
-    # All 24 cells must be independently classified before/after planting.
-    field_cells: Mapping[Cell, bool] | None
-    # Empty set = verified absent, None = unknown; never equate the two.
+    # Empty set = verified no preview. None = unknown.
     preview_cells: frozenset[Cell] | None
 
 
@@ -44,9 +42,11 @@ class SpecialPlantAdapter(PickerAdapter, Protocol):
     def open_plot(self, anchor_cell: Cell) -> None: ...
     def select_seed(self, slot: int) -> None: ...
     def confirm_special(self) -> None: ...
+    def wait(self, seconds: float) -> None: ...
+    def verify_cells_occupied(self, cells: frozenset[Cell]) -> bool | None: ...
 
 
-def _check_view(view: SpecialPlantView, *, field_required: bool) -> None:
+def _check_view(view: SpecialPlantView) -> None:
     if not isinstance(view, SpecialPlantView):
         raise SpecialPlantStop("PLANT_OBSERVATION_UNAVAILABLE", "Invalid local field observation")
     identity = view.window_identity
@@ -65,18 +65,12 @@ def _check_view(view: SpecialPlantView, *, field_required: bool) -> None:
     if view.preview_cells is not None and (
         not isinstance(view.preview_cells, frozenset)
         or not view.preview_cells.issubset(ALL_CELLS)):
-        raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED", "Malformed 2x2 preview evidence")
-    if field_required and (
-        view.field_cells is None
-        or not isinstance(view.field_cells, Mapping)
-        or set(view.field_cells) != ALL_CELLS
-        or any(type(v) is not bool for v in view.field_cells.values())):
-        raise SpecialPlantStop("PLANT_FIELD_UNVERIFIED", "Missing independent 24-cell classification")
+        raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED", "Malformed preview evidence")
 
 
 def _fresh(previous: SpecialPlantView, current: SpecialPlantView, after_action_ns: int) -> None:
     try:
-        _check_view(current, field_required=False)
+        _check_view(current)
     except SpecialPlantStop as exc:
         raise SpecialPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
     if current.window_identity != previous.window_identity:
@@ -92,16 +86,23 @@ def _fresh(previous: SpecialPlantView, current: SpecialPlantView, after_action_n
 
 def _observe(adapter: SpecialPlantAdapter, *, action_sent: bool) -> SpecialPlantView:
     try:
-        return adapter.observe_field()
+        view = adapter.observe_field()
     except Exception as exc:
         raise SpecialPlantStop("PLANT_OBSERVATION_UNAVAILABLE",
                                "Cannot obtain trusted local field observation",
                                action_may_have_been_sent=action_sent) from exc
+    if not isinstance(view, SpecialPlantView):
+        raise SpecialPlantStop("PLANT_OBSERVATION_UNAVAILABLE",
+                               "Invalid local field observation",
+                               action_may_have_been_sent=action_sent)
+    return view
 
 
 def _act(call: Callable, *args) -> None:
     try:
         call(*args)
+    except SpecialPlantStop:
+        raise
     except Exception as exc:
         raise SpecialPlantStop("PLANT_ACTION_UNCERTAIN",
                                "UI action may have been sent; never retry blindly",
@@ -122,17 +123,7 @@ def _after_action_clock(clock_ns: Callable[[], int]) -> int:
     return value
 
 
-def plant_one_special(
-    adapter: SpecialPlantAdapter, *, platform: str, seed: str, placement: str,
-    stable_order: Sequence[str], quantities: Mapping[str, int], layout: dict,
-    clock_ns: Callable[[], int] = monotonic_ns,
-) -> dict:
-    """Verify empty target -> picker -> exact preview -> confirm -> occupied target.
-
-    On any uncertainty STOP. Only a verified postcondition produces an updated
-    *copy* of quantities; the caller persists it transactionally afterward.
-    """
-    started = perf_counter()
+def _placement(platform: str, placement: str, layout: dict) -> tuple[Cell, frozenset[Cell]]:
     try:
         candidates = layout["platforms"][platform]["safe_special_2x2"]
         matches = [x for x in candidates if x["id"] == placement]
@@ -148,10 +139,27 @@ def plant_one_special(
             or max(u for u, _ in target) - min(u for u, _ in target) != 1
             or max(v for _, v in target) - min(v for _, v in target) != 1):
             raise ValueError("Invalid 2x2 geometry")
+        return anchor, target
     except (KeyError, TypeError, ValueError) as exc:
         raise SpecialPlantStop("INVALID_PLACEMENT", str(exc)) from exc
 
-    # Fail on stale/insufficient inventory BEFORE opening a live picker.
+
+def plant_one_special(
+    adapter: SpecialPlantAdapter, *, platform: str, seed: str, placement: str,
+    known_occupied: frozenset[Cell], stable_order: Sequence[str],
+    quantities: Mapping[str, int], layout: dict,
+    clock_ns: Callable[[], int] = monotonic_ns,
+) -> dict:
+    """Plant one planned 2x2 crop and return the Runner's updated known state."""
+    started = perf_counter()
+    anchor, target = _placement(platform, placement, layout)
+
+    if (not isinstance(known_occupied, frozenset)
+        or not known_occupied.issubset(ALL_CELLS)):
+        raise SpecialPlantStop("PLANT_STATE_INVALID", "Invalid Runner occupied-cell state")
+    if target & known_occupied:
+        raise SpecialPlantStop("PLANT_TARGET_OCCUPIED", "Planned 2x2 overlaps known placement")
+
     try:
         compute_picker_position(platform, seed, stable_order, quantities)
         if type(quantities.get(seed, 0)) is not int or quantities[seed] < 1:
@@ -160,18 +168,25 @@ def plant_one_special(
         raise SpecialPlantStop(exc.code, str(exc)) from exc
 
     before = _observe(adapter, action_sent=False)
-    _check_view(before, field_required=True)
+    _check_view(before)
     if before.preview_cells != frozenset():
-        raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED", "A preview is already active or unknown")
-    if any(before.field_cells[cell] for cell in target):
-        raise SpecialPlantStop("PLANT_TARGET_OCCUPIED", "Target 2x2 is not independently empty")
+        raise SpecialPlantStop("PLANT_PREVIEW_UNVERIFIED",
+                               "A preview is already active or unknown")
 
     _act(adapter.open_plot, anchor)
     try:
-        picker = prepare_picker_target(adapter, platform=platform, seed=seed, needed=1,
-                                       stable_order=stable_order, quantities=quantities)
+        picker = prepare_picker_target(
+            adapter, platform=platform, seed=seed, needed=1,
+            stable_order=stable_order, quantities=quantities,
+        )
     except (PickerStop, PickerStateError) as exc:
         raise SpecialPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
+
+    # Critical invariant: only click the slot just verified for this exact seed.
+    # Live adapters additionally bind this picker session to special/OFF mode.
+    arm_special = getattr(adapter, "arm_special_selection", None)
+    if arm_special is not None:
+        _act(arm_special, seed)
     _act(adapter.select_seed, picker["position"]["slot"])
     selected_at = _after_action_clock(clock_ns)
     preview = _observe(adapter, action_sent=True)
@@ -182,26 +197,32 @@ def plant_one_special(
                                action_may_have_been_sent=True)
 
     _act(adapter.confirm_special)
+    _act(adapter.wait, 0.5)
     confirmed_at = _after_action_clock(clock_ns)
     after = _observe(adapter, action_sent=True)
     _fresh(preview, after, confirmed_at)
-    try:
-        _check_view(after, field_required=True)
-    except SpecialPlantStop as exc:
-        raise SpecialPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
     if after.preview_cells != frozenset():
         raise SpecialPlantStop("PLANT_CONFIRM_UNVERIFIED",
-                               "Preview not independently confirmed closed",
+                               "Preview did not close after confirmation",
                                action_may_have_been_sent=True)
-    if any(after.field_cells[cell] is not (before.field_cells[cell] or cell in target)
-           for cell in ALL_CELLS):
+    try:
+        occupied_verified = adapter.verify_cells_occupied(target)
+    except Exception as exc:
+        raise SpecialPlantStop("PLANT_POSTCONDITION_UNAVAILABLE",
+                               "Cannot verify planned 2x2 target ROIs",
+                               action_may_have_been_sent=True) from exc
+    if occupied_verified is not True:
         raise SpecialPlantStop("PLANT_POSTCONDITION_MISMATCH",
-                               "Target not occupied or other cells changed unexpectedly",
+                               "Planned 2x2 target ROIs are not confirmed occupied",
                                action_may_have_been_sent=True)
+
+    occupied_after = frozenset(known_occupied | target)
     updated = consume_confirmed(stable_order, quantities, seed, 1)
     return {
         "status": "special_plant_verified", "platform": platform, "seed": seed,
         "placement": placement, "picker": picker["position"],
+        "occupied_after": [list(cell) for cell in sorted(occupied_after)],
         "quantities_after": updated, "persisted": False,
-        "llm_round_trips": 0, "phase_duration_ms": round((perf_counter()-started)*1000, 2),
+        "llm_round_trips": 0,
+        "phase_duration_ms": round((perf_counter() - started) * 1000, 2),
     }

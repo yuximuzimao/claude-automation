@@ -46,7 +46,7 @@ class SpecialPickableTests(unittest.TestCase):
         return {"count": len(items), "items": list(items)}
 
     def test_qq_and_wechat_special_centers_follow_layout(self):
-        for platform, count in (("qq", 3), ("wechat", 2)):
+        for platform, count in (("qq", 3), ("wechat", 1)):
             with self.subTest(platform=platform):
                 capture = self.capture(platform)
                 centers = _special_centers(capture, platform, self.layout)
@@ -211,8 +211,7 @@ class SpecialPickableTests(unittest.TestCase):
         self.assertEqual(grab.call_count, 1)
         vision.assert_called_once_with(capture, {}, "qq", self.layout)
         self.assertEqual(result["harvest"], probe)
-        self.assertEqual(result["field_alignment"]["code"], "FIELD_COLOR_REQUIRED")
-        self.assertFalse(result["field_alignment"]["can_authorize_clicks"])
+        self.assertNotIn("field_alignment", result)
         self.assertEqual(result["click_count"], 0)
         self.assertEqual(result["llm_round_trips"], 0)
 

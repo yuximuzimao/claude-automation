@@ -11,7 +11,6 @@ from pathlib import Path
 import subprocess
 
 from farm_capture import capture_window
-from farm_field import FieldStop, probe_field_translation
 from farm_geometry import GeometryStop, WindowFrame, validate_farm_window
 from farm_harvest import HarvestStop
 from farm_vision import probe_harvest
@@ -99,11 +98,6 @@ def probe_window_harvest(platform: str, layout: dict, anchors: dict,
     handle = find_farm_window(platform, layout, registry_binary)
     capture = capture_window(handle.frame, platform, layout)
     probe = probe_harvest(capture, anchors, platform, layout)
-    try:
-        field_alignment = probe_field_translation(capture, platform, layout)
-    except FieldStop as exc:
-        field_alignment = {"status": "unavailable", "code": exc.code,
-                           "can_authorize_clicks": False}
     return {
         "status": "read_only_probe",
         "platform": platform,
@@ -115,7 +109,6 @@ def probe_window_harvest(platform: str, layout: dict, anchors: dict,
             "width": handle.frame.width, "height": handle.frame.height,
         },
         "harvest": probe,
-        "field_alignment": field_alignment,
         "click_count": 0,
         "llm_round_trips": 0,
     }

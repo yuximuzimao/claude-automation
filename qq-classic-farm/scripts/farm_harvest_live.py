@@ -15,13 +15,10 @@ from time import monotonic_ns, sleep
 from typing import Callable
 
 from farm_capture import capture_window
-from farm_field_postcondition import (
-    FieldPostcondition, FieldPostconditionStop, compare_empty_field_postcondition,
-)
 from farm_geometry import WindowFrame
 from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest
 from farm_io import WindowHandle, find_farm_window, parse_click_batch_result
-from farm_qq_clean import observe_qq_clean_cells
+from farm_qq_clean import check_qq_empty_field
 from farm_vision import probe_harvest
 
 
@@ -96,16 +93,14 @@ class LiveHarvestAdapter:
         if not _same_handle(handle, again):
             raise HarvestStop("USER_INTERFERENCE", "Window changed during capture")
         probe = probe_harvest(capture, self.anchors, self.platform, self.layout)
-        clean = (observe_qq_clean_cells(capture, self.layout)
-                 if self.platform == "qq" else None)
+        empty_check = (check_qq_empty_field(capture, self.layout)
+                       if self.platform == "qq" else None)
         hand = probe.get("hand", {})
         point = tuple(hand["local_center"]) if hand.get("matched") else None
         candidates = probe.get("raw_pickable_candidates", probe.get("pickables", []))
-        # Center patches and lower sentinels cover only part of each tile.
-        # A verified real seedling outside those ROIs can still look clean.
-        # Therefore clean==24 is only a local-template *candidate*, never a
-        # terminal state or independent occupancy proof.
-        candidate_clean = clean == 24 and point is None and len(candidates) == 0
+        candidate_clean = (empty_check is not None
+                           and empty_check.status == "EMPTY"
+                           and point is None and len(candidates) == 0)
         # The current detector produces *candidate* stars, not independently
         # verified 2x2 crop occupancy. Never promote them to click targets.
         self.last_diagnostics = {
@@ -120,9 +115,13 @@ class LiveHarvestAdapter:
             "overlay": "unknown",
             "calibration_verified": False,
             "occupied_special": None,
-            "empty_cells_candidate": clean,
-            "candidate_clean_local_templates": candidate_clean,
-            "clean_field_verified": False,
+            "empty_check_status": empty_check.status if empty_check is not None else "UNKNOWN",
+            "empty_check_reason": empty_check.reason if empty_check is not None else "UNSUPPORTED_PLATFORM",
+            "empty_cells": len(empty_check.empty_cells) if empty_check is not None else 0,
+            "occupied_cells": len(empty_check.occupied_cells) if empty_check is not None else 0,
+            "unknown_cells": len(empty_check.unknown_cells) if empty_check is not None else 24,
+            "empty_field_candidate": candidate_clean,
+            "clean_field_verified": empty_check is not None and empty_check.status == "EMPTY",
             "already_clean_verified": False,
             "can_authorize_clicks": False,
         }
@@ -140,40 +139,6 @@ class LiveHarvestAdapter:
         self.last_handle = handle
         self.last_observation = obs
         return obs
-
-    def verify_clean_field_against_reference(
-        self, reference_handle: WindowHandle, empty, idle,
-        *, empty_reference_verified: bool = False,
-    ) -> FieldPostcondition:
-        """Local post-harvest check, never a replacement for crop/overlay preflight."""
-        self.last_observation = None
-        self.last_handle = None
-        self.last_diagnostics = {}
-        require_live_window()
-        before = find_farm_window(self.platform, self.layout, self.registry_binary)
-        if not _same_handle(reference_handle, before):
-            raise HarvestStop("USER_INTERFERENCE", "Window changed since empty reference")
-        current = capture_window(before.frame, self.platform, self.layout)
-        after = find_farm_window(self.platform, self.layout, self.registry_binary)
-        if not _same_handle(before, after):
-            raise HarvestStop("USER_INTERFERENCE", "Window changed during postcondition")
-        try:
-            result = compare_empty_field_postcondition(
-                empty, idle, current, self.platform, self.layout,
-                empty_reference_verified=empty_reference_verified,
-            )
-        except FieldPostconditionStop as exc:
-            raise HarvestStop(exc.code, str(exc)) from exc
-        self.last_diagnostics = {
-            "postcondition": result.status,
-            "clean_cells": [list(p) for p in result.clean_cells],
-            "changed_cells": [list(p) for p in result.changed_cells],
-            "unknown_cells": [list(p) for p in result.unknown_cells],
-            "clean_field_verified": result.clean_field_verified,
-            "can_authorize_clicks": False,
-            "capture_ids": list(result.capture_ids),
-        }
-        return result
 
     def click_batch(self, points: tuple[tuple[float, float], ...]) -> int:
         require_live_window()
