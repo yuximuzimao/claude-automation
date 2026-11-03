@@ -42,7 +42,7 @@
 - 已完整按时间顺序阅读 **36 天历史**，未使用关键词预筛代替全文阅读。
 - 当前第一轮细粒度语义候选索引为 **3442 张 topic cards**；其中 10/13 → 10/18 新增 **318 张**（70 / 54 / 49 / 55 / 50 / 40），均完成整日全文复核、来源范围门禁并 promotion。
 - 旧跨日归一层保留 **20 个合集**，但当前只视为历史/实验结构，不再默认视作最终页面方案。
-- 黑话基础规则已写入 `docs/rules/analysis.md`；当前 runtime 页面黑话页已能展示 **30 个词条**。
+- 黑话基础规则已写入 `docs/rules/analysis.md`；当前 runtime 页面黑话页已能展示 **36 个词条**。
 - 完整历史第一轮语义基线归档见 `docs/archive/neat/2026-10-15-complete-history-semantic-analysis.md`。
 
 ## 当前阅读 / 资料库原型状态
@@ -54,7 +54,7 @@
 - 第一轮 topic card = 候选索引，不是最终展示清单；
 - 页面顶层只保留 **新信息 / 资料库 / 无限服 / 黑话** 四个入口；旧“主信息 / 待核验 / 合集 / 本期总览 / 长期追踪 / 攻略知识 / 项目相关”不再作为默认 UI；
 - 每个 Silver 主题仍显示稳定基线编号（如 `#023`），编号不随筛选、搜索、翻页或用户裁决而重排；**Silver 不因展示需要物理拆分**，一个 Silver 可以投影为多个独立 QA；
-- 2026-11-03 已把现有 **348 / 348 Silver 全量投影为 1034 个 QA**，其中当前 **301 个首次阅读 Silver 对应 899 个首次阅读 QA**。正式投影为 `runtime/analysis-work/knowledge-display-projection-v1.json`；页面构建启用全覆盖门禁，缺任一 Silver 投影时直接失败，不静默退回旧式长正文；
+- 2026-11-03 已把现有 **348 / 348 Silver 全量投影为 1027 个普通 QA**，其中当前 **301 个首次阅读 Silver 对应 893 个首次阅读 QA**；另有 **36 个独立黑话词条**。正式投影为 `runtime/analysis-work/knowledge-display-projection-v1.json`；页面构建启用全覆盖门禁，缺任一 Silver 投影时直接失败，不静默退回旧式长正文；
 - QA 默认只显示 **问题 + 直接结论 + 高/中/低单字置信度**；只有省略会导致误用的条件才进入默认层。依据、来源、判档原因和具体核验建议默认折叠；除置信度外默认零标签，职业/副本等已由分类、搜索或问题提供的信息不得重复展示；
 - 置信度属于 QA，不属于整个 Silver：**高=可直接使用，中=可用但重要场景建议核验，低=仅供参考、执行前应核验**。QA 语义指纹不包含置信度，因此仅升降置信度不会重新打扰用户；问题、结论、生命周期或时间范围实质变化才会使旧 QA 裁决失效；
 - 时效性 QA 使用 `time_bound + time_context`；默认按钮为 **没用 / 留阶段记录**，普通 durable QA 为 **没用 / 存资料库**。time-bound 在服务端硬拒绝普通 `knowledge` 决策，避免首周行情、活动窗口、短期价格等污染长期资料库；
@@ -87,11 +87,11 @@
 - 页面全量 source links：high **2589** / medium **20** / none **834**；其中正式首次阅读候选层为 **2164 high / 4 medium / 110 none**；
 - Silver 清洗前的首次阅读候选：**2278 条事实切片**；它们只是历史候选索引，当前 **0 张 raw Topic Card** 直接进入首次阅读；
 - 当前正式 Silver 工作集共 **348 个知识单元 = 339 queue + 9 knowledge**（原346条全量二审，另从同一讨论核实补回2条独立事实）；候选索引现为 **1698 full / 546 unabsorbed / 34 partial**，叠加最新 dossier 等规范化组件后 normalized 为 **1745 full / 502 unabsorbed / 31 partial**。这些 card-level 状态只描述来源覆盖，不再决定用户可见队列；
-- 当前正式首次阅读队列：**301 个 Silver 主题 / 899 个 QA**；Silver 层 339 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。页面分页仍以 Silver 主题容器为单位，QA 在主题内独立裁决；若真实浏览仍觉得单批信息量过大，再按用户体验调整；
+- 当前正式首次阅读队列：**301 个 Silver 主题 / 893 个普通 QA**；Silver 层 339 个 queue 中有 **12 个无限服历史基线**已吸收到动态 dossier，不再作为重复新信息展示，用户实际终审又进一步移除了已确认无用的正式 Silver。页面分页仍以 Silver 主题容器为单位，QA 在主题内独立裁决；若真实浏览仍觉得单批信息量过大，再按用户体验调整；
 - 无限服旧阶段“约125条候选”已作废。正式 Silver 重建后实际只有 **12 个无限服 queue 单元**需要进入动态档案；当前已全部按 `baseline_absorb` 吸收，dossier 为 **6 个维度 / 38 个动态 signal**（原27 + 新11），并建立 Silver→signal→原文血缘。重复执行 JSON 全等；未来只有 `visible_update`（state/scope/boundary 实质变化）才重新进入新信息。
 - 当前资料库知识：**10 条 reviewed knowledge**；已阅语义状态共 **44 条（10 knowledge + 34 discard）**。这些状态包含历史已确认语义与当前人工终审，不应把总数直接当作本轮新增点击数。正式 Silver 本体仍为 9 条 initial knowledge，其余 knowledge 状态来自用户后续终审。
 
-- 当前展示投影：**348 / 348 Silver → 1034 QA**，其中 confidence 为 **18 high / 861 medium / 155 low**，lifecycle 为 **972 durable / 62 time_bound**；自动生成不主动授予 high，high 只来自明确人工覆盖。31 条旧候选无标准 QA 结构的复杂 Silver 已全部人工拆解，当前 mechanical fallback = **0**。
+- 当前展示投影：**348 / 348 Silver → 1027 个普通 QA**，其中 confidence 为 **17 high / 855 medium / 155 low**，lifecycle 为 **965 durable / 62 time_bound**；自动生成不主动授予 high，high 只来自明确人工覆盖。31 条旧候选无标准 QA 结构的复杂 Silver 已全部人工拆解，当前 mechanical fallback = **0**。
 
 这些数字只是当前完整历史回看与展示投影基线，不是未来每日分析的正常批量，也不是永久业务常量。
 
@@ -103,7 +103,7 @@
 2. **2026-10-29 完成独立的 346 条 Silver 二次审计验收与统一发布。** 从 `accepted-results` 复用全部 346 条结果，逐条校验结构、ID、覆盖、顺序及原用户裁决；**325 条重写 / 21 条保持**，另有 **2 条来自同一讨论、已与全局索引查重的独立 rescued unit**（术士循环提示、DK创建门槛分歧），正式 Silver 共 348 条。正式 Silver 只一次性写入；页面 `review-live/page.html` 和 `page-v2-details` 已重建；**303/303 tests OK**，质量 **0 errors / 1 个既有来源锚点 warning**。原 346 个 ID 顺序及 initial_state 不变，用户裁决文件字节未改，重建后 **10 knowledge + 34 discard**。完整发布校验及 SHA 记录见私密 `runtime/analysis-work/secondary-audit/staged-all-346-manifest.json`。
 3. 2026-10-28 的上一轮全量语义校准（60条重写/286条保持）仍是历史阶段事实，详见对应 NEAT 归档；现行正式 Silver 以 2026-10-29 的独立验收发布为准。稳定规则：具体事实优先、窄事实不泛化、用户 discard 不下沉到原文、冲突口径并列保留、连续 raw_context 不挖相邻无关聊天。
 4. **2026-11-01 的348条私密攻略/FAQ候选阶段已经完成历史使命。** 其全量覆盖审计仍保留为历史证据：**348/348 Silver、1833/1833 canonical facts、1809 evidence refs PASS**；但旧私密 FAQ/HTML 预览已退役，不能再当现役页面或规则 owner。
-5. **2026-11-03 已完成正式 Silver→QA 展示层落地。** 348 条 Silver 全覆盖为 1034 个 QA；正式 review 页面已读取该投影，QA 级 `没用 / 存资料库 / 留阶段记录` 可持久化，time-bound 不能进入长期资料库，QA 语义变化会使旧裁决失效而仅置信度变化不会重新打扰。全套回归 **316 tests OK**，正式 `review-live/page.html` 已重建。
-6. **下一步只需要用户正常浏览正式 review 页面。** 不要求重新逐条清全部 899 个首次阅读 QA；发现稳定的拆分、置信度、时效性或表述问题就反馈，再按错误类型修投影规则。继续冻结新采集；用户确认正式页面稳定后，才恢复真实 incremental batch，并在 daily 语义生产中同步维护 QA 投影。
+5. **2026-11-03 已完成正式 Silver→QA 展示层落地，并完成首轮黑话路由修正。** 348 条 Silver 当前全覆盖为 1027 个普通 QA；从用户确认的 #063“775”案例出发，7 个纯词义 QA 已从普通审核队列移出，AA 沿用既有词条，其余新增为黑话，黑话总数 36。#063 q01 误存的普通 `knowledge` 裁决已清除。正式 review 页面已读取该投影，QA 级 `没用 / 存资料库 / 留阶段记录` 可持久化，time-bound 不能进入长期资料库，QA 语义变化会使旧裁决失效而仅置信度变化不会重新打扰。
+6. **下一步只需要用户正常浏览正式 review 页面。** 不要求重新逐条清全部 893 个首次阅读 QA；发现稳定的拆分、置信度、时效性或表述问题就反馈，再按错误类型修投影规则。继续冻结新采集；用户确认正式页面稳定后，才恢复真实 incremental batch，并在 daily 语义生产中同步维护 QA 投影。
 
 下一步严格以 `tasks/todo.md` 为准。
