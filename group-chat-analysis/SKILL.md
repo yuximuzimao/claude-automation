@@ -23,6 +23,7 @@
 | `docs/OPERATING-SOP.md` | 唯一任务分类与完整运行 SOP | 采集、恢复、分析、跨项目候选或自动化时 |
 | `docs/ARCHITECTURE.md` | 稳定模块边界与数据流 | 设计/实现跨模块功能时 |
 | `docs/rules/README.md` | 长期规则 owner 目录 | SOP 已完成分类、需要查看 owner 清单时 |
+| `docs/rules/presentation.md` | Silver → QA 展示、置信度、时效性与 QA 级审核契约 | 改知识展示/页面审核粒度时 |
 | `schemas/capture-page.schema.json` | 单页原始OCR捕获的数据契约 | 改capture输出/normalize输入时 |
 | `schemas/message-record.schema.json` | 单条规范化消息的数据契约 | 改消息结构/存储/去重时 |
 | `schemas/batch-state.schema.json` | 可恢复批次状态与页恢复契约 | 改恢复点/批次状态时 |

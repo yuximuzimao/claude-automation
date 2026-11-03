@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.analysis.first_read_projection import build_first_read_projection
+from src.analysis.knowledge_display_projection import apply_knowledge_display_projection
 from src.analysis.quality import sha256_file
 from src.analysis.reviewed_semantic_state import build_reviewed_semantic_state
 from src.analysis.semantic_fingerprint import semantic_fingerprint
@@ -29,6 +30,7 @@ BLACKWORD_FILE = WORK / "normalized-v1" / "blackword-dictionary-v1.md"
 REORG_TRIAGE = WORK / "reorg-v2" / "card-triage.json"
 INFINITE_DOSSIER = WORK / "infinite-dossier-v1.json"
 SILVER_KNOWLEDGE = WORK / "silver-knowledge-v1.json"
+KNOWLEDGE_DISPLAY_PROJECTION = WORK / "knowledge-display-projection-v1.json"
 SILVER_CANDIDATES = WORK / "silver-candidates-v1.json"
 FIRST_READ_PROJECTION = WORK / "first-read-projection-v1.json"
 REVIEWED_SEMANTIC_DECISIONS = WORK / "reviewed-semantic-decisions-v1.json"
@@ -1738,6 +1740,14 @@ def main(argv: list[str] | None = None) -> None:
     annotate_silver_display_topics(normalized_knowledge)
     annotate_silver_display_numbers(normalized_knowledge)
     annotate_silver_display_copy(normalized_knowledge)
+    if KNOWLEDGE_DISPLAY_PROJECTION.exists():
+        display_projection = json.loads(
+            KNOWLEDGE_DISPLAY_PROJECTION.read_text(encoding="utf-8")
+        )
+        normalized_knowledge = apply_knowledge_display_projection(
+            normalized_knowledge,
+            display_projection,
+        )
 
     silver_component_ids = {
         ref.get("card_id")

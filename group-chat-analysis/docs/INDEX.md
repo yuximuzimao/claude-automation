@@ -21,7 +21,8 @@
 | QQ窗口定位、滚动、截图/窗口捕获、Apple Vision OCR | `rules/capture.md` |
 | 运行时数据、文件生命周期、GPT稳定分析入口 | `rules/storage.md` |
 | OCR结果重建消息、排序、跨屏去重 | `rules/normalization.md` |
-| GPT筛选、摘要、输出、跨项目写入边界 | `rules/analysis.md` |
+| GPT筛选、Silver语义边界、跨项目写入边界 | `rules/analysis.md` |
+| Silver → QA 展示、置信度、时效性、QA级审核 | `rules/presentation.md` |
 | 权限、隐私、安全禁止路径 | `rules/privacy-and-safety.md` |
 
 ## 数据契约

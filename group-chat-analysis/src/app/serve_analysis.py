@@ -13,6 +13,10 @@ import sys
 from typing import Callable
 from urllib.parse import unquote, urlsplit
 
+from src.analysis.display_review_decision_store import (
+    DisplayReviewDecisionError,
+    DisplayReviewDecisionStore,
+)
 from src.analysis.review_decision_store import (
     ReviewDecisionError,
     ReviewDecisionStore,
@@ -45,6 +49,11 @@ class ReviewApp:
             silver_path=self.work / "silver-knowledge-v1.json",
             decisions_path=self.work / "reviewed-semantic-decisions-v1.json",
             state_path=self.work / "reviewed-semantic-state-v1.json",
+            now=now,
+        )
+        self.display_store = DisplayReviewDecisionStore(
+            projection_path=self.work / "knowledge-display-projection-v1.json",
+            decisions_path=self.work / "display-review-decisions-v1.json",
             now=now,
         )
         self.render_executor = render_executor or self._render
@@ -184,6 +193,12 @@ class ReviewHandler(BaseHTTPRequestHandler):
             except Exception as exc:
                 self._json(500, {"error": type(exc).__name__, "message": str(exc)})
             return
+        if path == "/api/display-review-state":
+            try:
+                self._json(200, self.app.display_store.list_decisions())
+            except Exception as exc:
+                self._json(500, {"error": type(exc).__name__, "message": str(exc)})
+            return
         if path in {"/", "/index.html"}:
             try:
                 self._bytes(
@@ -209,7 +224,7 @@ class ReviewHandler(BaseHTTPRequestHandler):
         if self._reject_nonlocal():
             return
         path = urlsplit(self.path).path
-        if path != "/api/review-decision":
+        if path not in {"/api/review-decision", "/api/display-review-decision"}:
             self._json(404, {"error": "not_found"})
             return
         if not self._origin_is_local():
@@ -237,6 +252,26 @@ class ReviewHandler(BaseHTTPRequestHandler):
         if not isinstance(body, dict):
             self._json(400, {"error": "json_object_required"})
             return
+        if path == "/api/display-review-decision":
+            try:
+                result = self.app.display_store.apply(
+                    body.get("qa_id"),
+                    body.get("decision"),
+                )
+            except DisplayReviewDecisionError as exc:
+                self._json(
+                    400,
+                    {"error": "invalid_display_review_decision", "message": str(exc)},
+                )
+                return
+            except Exception as exc:
+                self._json(500, {"error": type(exc).__name__, "message": str(exc)})
+                return
+            response = dict(result)
+            response["render_status"] = "not_needed"
+            self._json(200, response)
+            return
+
         try:
             result = self.app.store.apply(
                 body.get("knowledge_id"),

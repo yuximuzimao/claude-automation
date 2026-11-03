@@ -90,6 +90,19 @@ h1{{font-size:21px;margin:0}}
 .struct-table th{{color:#657186;font-weight:650;background:#fafbfc}}
 .struct-table td:first-child{{white-space:nowrap;color:#516078;font-weight:650}}
 .unit-note{{font-size:12px;color:#778397;margin-top:7px}}
+.qa-list{{display:grid;gap:10px;margin-top:8px}}
+.qa-item{{border-top:1px solid #edf0f4;padding-top:10px}}
+.qa-item:first-child{{border-top:0;padding-top:0}}
+.qa-head{{display:flex;align-items:flex-start;gap:7px;font-size:15px;font-weight:700;line-height:1.5}}
+.qa-confidence{{display:inline-flex;align-items:center;justify-content:center;flex:0 0 19px;height:19px;border-radius:5px;font-size:11px;font-weight:800;margin-top:2px}}
+.qa-confidence.high{{background:#e8f4ee;color:#205c42}}
+.qa-confidence.medium{{background:#fff4da;color:#805a11}}
+.qa-confidence.low{{background:#f9e7e7;color:#8a3434}}
+.qa-time{{display:inline-block;margin:4px 0 0 26px;font-size:11px;color:#7a6470;background:#f7eef2;border-radius:999px;padding:2px 7px}}
+.qa-answer{{margin:5px 0 0 26px;color:#303d52;font-size:15px}}
+.qa-item details{{margin:7px 0 0 26px;border-top:1px dashed #e6eaf0;padding-top:6px}}
+.qa-item summary{{cursor:pointer;color:#66758c;font-size:11px}}
+.qa-actions{{margin-left:26px}}
 .context{{margin:9px 0;background:var(--soft);border-left:3px solid #cbd5e1;border-radius:7px;padding:8px 10px;color:#566277;font-size:13px}}
 .context b{{color:#3f4a5c}}
 .meta{{display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:#8a95a5;font-size:11px;margin-bottom:5px}}
@@ -198,6 +211,7 @@ function localDecision(id){{
 }}
 function setDecision(id,value){{localStorage.setItem('gca-v3:'+id,value);renderNew();renderKnowledge()}}
 const unitById=Object.fromEntries(UNITS.map(u=>[u.knowledge_id,u]));
+const qaById=Object.fromEntries(UNITS.flatMap(u=>(u.display_qas||[]).map(qa=>[qa.qa_id,{{unit:u,qa}}])));
 function unitDecision(id){{
   const u=unitById[id]||{{}};
   const fp=u.semantic_fingerprint||'';
@@ -206,6 +220,18 @@ function unitDecision(id){{
     if(semantic)return semantic;
   }}
   return localStorage.getItem('gca-unit:'+id)||''
+}}
+function qaDecision(qa){{
+  const key=qa.qa_fingerprint||qa.qa_id||'';
+  return key?localStorage.getItem('gca-display-qa:'+key)||'':''
+}}
+function inheritedQaDecision(u,qa){{
+  const explicit=qaDecision(qa);
+  if(explicit)return explicit;
+  const parent=unitDecision(u.knowledge_id)||(u.v3_reviewed_decision||'')||(u.initial_state==='knowledge'?'knowledge':'');
+  if(parent==='discard')return 'discard';
+  if(parent==='knowledge')return qa.lifecycle==='time_bound'?'archive':'knowledge';
+  return ''
 }}
 async function persistUnitDecision(id,value){{
   const api=window.GCA_REVIEW_API;
@@ -227,6 +253,26 @@ async function persistUnitDecision(id,value){{
     alert('正式保存失败，本次选择目前只保存在此浏览器。请保持页面不关闭并检查本地服务。')
   }}
 }}
+async function persistQaDecision(qaId,value){{
+  const api=window.GCA_REVIEW_API;
+  if(!api||!api.csrf)return;
+  try{{
+    const response=await fetch('/api/display-review-decision',{{
+      method:'POST',
+      credentials:'same-origin',
+      headers:{{'Content-Type':'application/json','X-GCA-CSRF':api.csrf}},
+      body:JSON.stringify({{qa_id:qaId,decision:value}})
+    }});
+    if(!response.ok){{
+      let detail='HTTP '+response.status;
+      try{{const body=await response.json();detail=body.message||body.error||detail}}catch(_e){{}}
+      throw new Error(detail)
+    }}
+  }}catch(error){{
+    console.error('display QA review persistence failed',error);
+    alert('QA 审核保存失败，本次选择目前只保存在此浏览器。请保持页面不关闭并检查本地服务。')
+  }}
+}}
 function setUnitDecision(id,value){{
   const u=unitById[id]||{{}};
   const fp=u.semantic_fingerprint||'';
@@ -234,6 +280,14 @@ function setUnitDecision(id,value){{
   localStorage.setItem('gca-unit:'+id,value);
   renderNew();renderKnowledge();
   void persistUnitDecision(id,value)
+}}
+function setQaDecision(qaId,value){{
+  const row=qaById[qaId];
+  if(!row)return;
+  const key=row.qa.qa_fingerprint||qaId;
+  localStorage.setItem('gca-display-qa:'+key,value);
+  renderNew();renderKnowledge();
+  void persistQaDecision(qaId,value)
 }}
 async function syncFormalUnitDecisions(){{
   const api=window.GCA_REVIEW_API;
@@ -254,12 +308,40 @@ async function syncFormalUnitDecisions(){{
     console.error('formal review state sync failed',error)
   }}
 }}
+async function syncDisplayQaDecisions(){{
+  const api=window.GCA_REVIEW_API;
+  if(!api||!api.csrf)return;
+  try{{
+    const response=await fetch('/api/display-review-state',{{credentials:'same-origin',cache:'no-store'}});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    const payload=await response.json();
+    for(const item of payload.items||[]){{
+      const row=qaById[item.qa_id];
+      if(!row)continue;
+      const key=row.qa.qa_fingerprint||item.qa_id;
+      localStorage.setItem('gca-display-qa:'+key,item.decision)
+    }}
+    renderNew();renderKnowledge()
+  }}catch(error){{
+    console.error('display QA review state sync failed',error)
+  }}
+}}
 function isQueue(c){{return c.v3_first_read_queue&&!localDecision(c.card_id)}}
 function isKnowledge(c){{return !COMPONENT_IDS.has(c.card_id)&&(c.v3_knowledge||localDecision(c.card_id)==='knowledge')}}
-function unitIsQueue(u){{return u.v3_first_read_queue&&!unitDecision(u.knowledge_id)}}
-function unitIsKnowledge(u){{return u.initial_state==='knowledge'||u.v3_reviewed_decision==='knowledge'||unitDecision(u.knowledge_id)==='knowledge'}}
+function unitIsQueue(u){{
+  if(u.display_projection_status==='hidden_no_value')return false;
+  const qas=u.display_qas||[];
+  if(qas.length)return u.v3_first_read_queue&&qas.some(qa=>!inheritedQaDecision(u,qa));
+  return u.v3_first_read_queue&&!unitDecision(u.knowledge_id)
+}}
+function unitIsKnowledge(u){{
+  if(u.display_projection_status==='hidden_no_value')return false;
+  const qas=u.display_qas||[];
+  if(qas.length)return qas.some(qa=>inheritedQaDecision(u,qa)==='knowledge');
+  return u.initial_state==='knowledge'||u.v3_reviewed_decision==='knowledge'||unitDecision(u.knowledge_id)==='knowledge'
+}}
 function searchText(c){{return [c.card_id,c.title,c.semantic_summary,c.display_eyebrow,c.display_context,c.display_new_fact,...(c.tags||[]),...(c.collection_candidates||[]),...(c.v3_topics||[]).map(x=>x.label)].join(' ').toLowerCase()}}
-function unitSearchText(u){{return [u.knowledge_id,u.display_subject,u.subject,u.display_question,u.question,...(u.canonical_facts||[]),...(u.search_terms||[]),...(u.topics||[])].join(' ').toLowerCase()}}
+function unitSearchText(u){{return [u.knowledge_id,u.display_subject,u.subject,u.display_question,u.question,...(u.display_qas||[]).flatMap(qa=>[qa.question,qa.answer,qa.time_context]),...(u.canonical_facts||[]),...(u.search_terms||[]),...(u.topics||[])].join(' ').toLowerCase()}}
 const PRIMARY_TOPIC_ORDER=['职业','副本攻略','任务与练级','装备机制','专业技能','经济 / 打金','插件 / 故障排查','防诈骗经验','PVP / 野外生态','其他'];
 function itemTopics(x){{return x.display_topics||['其他']}}
 function itemSubtopics(x,key){{return ((x.display_subtopics||{{}})[key]||[])}}
@@ -342,7 +424,44 @@ function structuredHtml(u){{
   }}
   return ''
 }}
+function qaEvidenceHtml(qa){{
+  const evidence=(qa.evidence_refs||[]).filter(Boolean);
+  const evidenceHtml=evidence.map(id=>{{
+    const c=byId[id];
+    const link=c&&c.source_link||{{}};
+    if(link.confidence==='high'&&link.detail_href)return `<button class="source" onclick="openSource('${{esc(link.detail_href)}}')">${{esc(id)}} · 查看原文 →</button>`;
+    return esc(id)
+  }}).join('<br>');
+  const note=qa.verification_note?`<div class="unit-note"><b>核验说明：</b>${{esc(qa.verification_note)}}</div>`:'';
+  const sources=evidence.length?`<div class="unit-note"><b>依据：</b><br>${{evidenceHtml}}</div>`:'';
+  return note+sources
+}}
+function qaHtml(u,qa,mode){{
+  const confidenceLabel={{high:'高',medium:'中',low:'低'}}[qa.confidence]||'';
+  const decision=inheritedQaDecision(u,qa);
+  if(mode==='new'&&decision)return '';
+  if(mode==='knowledge'&&decision!=='knowledge')return '';
+  const time=qa.lifecycle==='time_bound'&&qa.time_context?`<div class="qa-time">${{esc(qa.time_context)}}</div>`:'';
+  const details=(qa.verification_note||(qa.evidence_refs||[]).length)?`<details><summary>依据 / 核验说明</summary>${{qaEvidenceHtml(qa)}}</details>`:'';
+  let actions='';
+  if(mode==='new'){{
+    const keep=qa.lifecycle==='time_bound'
+      ?`<button class="keep" onclick="setQaDecision('${{esc(qa.qa_id)}}','archive')">留阶段记录</button>`
+      :`<button class="keep" onclick="setQaDecision('${{esc(qa.qa_id)}}','knowledge')">存资料库</button>`;
+    actions=`<div class="actions qa-actions"><button onclick="setQaDecision('${{esc(qa.qa_id)}}','discard')">没用</button>${{keep}}</div>`
+  }}
+  return `<section class="qa-item" data-qa-id="${{esc(qa.qa_id)}}" data-lifecycle="${{esc(qa.lifecycle||'durable')}}"><div class="qa-head"><span class="qa-confidence ${{esc(qa.confidence||'')}}">${{esc(confidenceLabel)}}</span><span>${{esc(qa.question||'')}}</span></div>${{time}}<div class="qa-answer">${{esc(qa.answer||'')}}</div>${{details}}${{actions}}</section>`
+}}
 function unitHtml(u,mode){{
+  if(u.display_projection_status==='hidden_no_value')return '';
+  const qas=u.display_qas||[];
+  const number=u.display_number?`#${{String(u.display_number).padStart(3,'0')}}`:'';
+  if(qas.length){{
+    const visible=qas.map(qa=>qaHtml(u,qa,mode)).filter(Boolean);
+    if(!visible.length)return '';
+    const title=visible.length>1?(u.display_subject||u.subject||''):'';
+    return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}</div>${{title?`<h3>${{esc(title)}}</h3>`:''}}<div class="qa-list">${{visible.join('')}}</div></article>`
+  }}
   const topics=displayTopicText(u);
   const facts=(u.canonical_facts||[]).filter(Boolean);
   const factsHtml=facts.map(f=>`<div class="fact">${{esc(f)}}</div>`).join('');
@@ -355,7 +474,6 @@ function unitHtml(u,mode){{
     return esc(id)
   }}).join('<br>');
   const actions=mode==='new'?`<div class="actions"><button onclick="setUnitDecision('${{esc(u.knowledge_id)}}','discard')">没用</button><button class="keep" onclick="setUnitDecision('${{esc(u.knowledge_id)}}','knowledge')">存资料库</button></div>`:'';
-  const number=u.display_number?`#${{String(u.display_number).padStart(3,'0')}}`:'';
   return `<article class="unit"><div class="meta">${{number?`<span><b>${{esc(number)}}</b></span>`:''}}<span>已标准化</span><span>${{esc(u.kind||'')}}</span>${{topics?`<span>${{esc(topics)}}</span>`:''}}</div><div class="question">${{esc(u.display_question||u.question||'')}}</div><h3>${{esc(u.display_subject||u.subject||'')}}</h3>${{factsHtml}}${{structuredHtml(u)}}<details><summary>证据来源 · ${{evidence.length}} 条</summary><div class="unit-note">${{evidenceHtml}}</div></details>${{actions}}</article>`
 }}
 function renderGrouped(cards,el,mode){{
@@ -429,7 +547,7 @@ document.getElementById('newPrev').onclick=()=>{{newPage--;renderNew();window.sc
 document.getElementById('newNext').onclick=()=>{{newPage++;renderNew();window.scrollTo({{top:150,behavior:'smooth'}})}};
 document.getElementById('kbSearch').addEventListener('input',renderKnowledge);
 document.getElementById('slangSearch').addEventListener('input',renderSlang);
-renderNew();renderKnowledge();renderDossier();renderSlang();void syncFormalUnitDecisions();
+renderNew();renderKnowledge();renderDossier();renderSlang();void syncFormalUnitDecisions();void syncDisplayQaDecisions();
 </script>
 </body>
 </html>'''

@@ -6,15 +6,19 @@
 
 ## 本轮接续要点
 
-- 当前阶段已经完成 **348 条 Silver 私密知识候选全量整理与跨批收口**，`knowledge-resume-state.json` 已为 `awaiting_user_review`；继续暂停采集，下一步是用户抽查而不是继续生成历史批次。
-- 只使用 `wow-infinite-time` 已完整验收的 2026-09-13 → 2026-10-18 共 36/36 天历史；第二群暂不采，第一个群也不补 2026-10-19 之后消息。
-- 当前正式基线：**348 Silver / 301 首次阅读 / 10 reviewed knowledge / 44 reviewed semantic states（10 knowledge + 34 discard）/ 38 dossier signals**。2026-10-29统一发布时保留原346 ID与裁决，并补回2条同讨论独立事实；2026-11-01私密知识化全量审计为 **348/348 Silver、1833/1833 canonical facts、1809 evidence refs PASS**，但这些FAQ候选没有自动写回正式页面。
-- 当前稳定清洗边界：具体事实优先于泛化方法论；`coverage=full` 不代表 canonical 原文没有其它事实；上层 discard 不向下继承原文；窄用途事实保持窄表达；冲突口径保留冲突；连续原文窗口允许夹相邻无关聊天，但不得把邻聊当新知识来源。资料库 knowledge 也允许重构内容，但用户 knowledge/discard 裁决不可被模型改变。`#114 / #150 / #152 / #171` 当前仍明确保留待看。
-- 正式页面当前应从 `src/analysis/page_builder.py` / `page_renderer.py` 构建；正式用户裁决通过 `src/app/serve_analysis.py` 持久化。不要恢复旧 runtime 原型脚本为代码 owner。
-- 正式 Question Registry 入口是 `runtime/analysis-work/question-cluster-registry-current.json`；历史 v71 只作 bootstrap 快照。
-- 当前没有待消费 incremental checkpoint。checkpoint 能力保留，但用户已经明确当前不继续采集。
-- 2026-10-25 用户进一步澄清页面分类：无限服继续独立；普通信息恢复“职业 / 副本攻略 / 任务与练级 / 装备机制 / 专业技能 / 经济与打金 / 插件与故障排查 / 防诈骗经验 / PVP与野外生态 / 其他”的稳定一级结构。当前仅职业按具体职业、副本按具体副本提供二级，其他专题暂不下钻；Silver 内部细粒度 `topics` 只做映射、清洗和搜索，不直接生成新的一级标签。现役契约见 `rules/analysis.md`。
-- 阅读页每个 Silver 单元已有稳定编号，不随筛选、搜索、翻页或裁决重排；用户可以直接按 `#编号` 反馈。`#304` 已纠正为“雷霆 → 惊雷（锻造武器升级）”，一级归类为“装备机制”。正式 review server 的“没用 / 存资料库”已完成真实点击、重建和重开验证，裁决可持久化。
-- 最新阶段证据归档：`docs/archive/neat/2026-11-01-complete-silver-knowledge-candidate-conversion.md`；上一轮正式Silver二次清洗见 `docs/archive/neat/2026-10-28-full-silver-secondary-cleaning.md`。私密候选导航见 `runtime/analysis-work/guide-knowledge-pilot-20261030/history-knowledge-index.md`，同题边界见 `history-crossbatch-review.md`。
+- 当前正式阶段已经从“私密 FAQ 候选试验”切换到 **正式 Silver→QA 展示层验收**。旧私密 FAQ/HTML 预览已退役并删除，不再恢复或继续维护。
+- 现有 **348 / 348 Silver 已投影为 1034 个 QA**；当前正式首次阅读为 **301 个 Silver 主题 / 899 个 QA**。Silver 事实层和历史用户 knowledge/discard 裁决没有因为展示拆分而改写。
+- 页面默认只显示 **问题 + 直接结论 + 高/中/低单字置信度**；必要条件只有省略会导致误用时才显示。依据、来源、判档理由和具体核验建议默认折叠；除置信度外默认零标签。现役契约见 `docs/rules/presentation.md`。
+- **Silver 不拆，页面 QA 可拆。** 拆分标准是答案能否被独立搜索并独立改变判断/操作。QA 有独立语义指纹和独立裁决；仅置信度变化不会重新进入待审，问题/结论/生命周期或时间范围实质变化会使旧 QA 裁决失效。
+- 时效性 QA 使用 `time_bound + time_context`。durable QA 的动作是“没用 / 存资料库”；time-bound QA 是“没用 / 留阶段记录”，服务端硬拒绝 time-bound → knowledge，避免首周行情、活动窗口、短期价格进入长期资料库。后续“已验证 / 被推翻 / 部分验证”关系仍在 Todo，等恢复新数据后再做。
+- QA 级裁决写入 `runtime/analysis-work/display-review-decisions-v1.json`；正式投影为 `runtime/analysis-work/knowledge-display-projection-v1.json`。页面构建要求投影覆盖全部 Silver，缺任一 knowledge_id 会失败，不允许静默回退旧长正文。
+- 正式页面仍由 `src/analysis/page_builder.py` / `page_renderer.py` 构建，正式用户裁决仍通过 `src/app/serve_analysis.py` 持久化。不要恢复 runtime 原型脚本为代码 owner。
+- 当前完整回归为 **316 tests OK**；正式 `runtime/reports/review-live/page.html` 已按 QA 投影重建。下一步是用户直接浏览该正式页面，发现稳定错误类型后按类型修，不要求逐条重审全部 QA。
+- 继续只使用 `wow-infinite-time` 已完整验收的 2026-09-13 → 2026-10-18 共 36/36 天历史；第二群暂不采，第一个群也不补 2026-10-19 之后消息。用户确认正式 QA 页面稳定后，才考虑恢复真实 incremental batch。
+- 当前正式基线仍为 **348 Silver / 301 首次阅读 Silver / 10 reviewed knowledge / 44 reviewed semantic states（10 knowledge + 34 discard）/ 38 dossier signals**。QA 展示层是在此基线上叠加，不改变这些 Silver 语义统计。
+- 当前稳定清洗边界仍不变：具体事实优先于泛化方法论；`coverage=full` 不代表 canonical 原文没有其它事实；上层 discard 不向下继承原文；窄用途事实保持窄表达；冲突口径保留冲突；连续原文窗口允许夹相邻无关聊天，但不得把邻聊当新知识来源。资料库 knowledge 允许重构内容，但用户 knowledge/discard 裁决不可被模型改变。`#114 / #150 / #152 / #171` 当前仍明确保留待看。
+- 正式 Question Registry 入口仍是 `runtime/analysis-work/question-cluster-registry-current.json`；历史 v71 只作 bootstrap 快照。当前没有待消费 incremental checkpoint。
+- 页面一级分类保持“职业 / 副本攻略 / 任务与练级 / 装备机制 / 专业技能 / 经济与打金 / 插件与故障排查 / 防诈骗经验 / PVP与野外生态 / 其他”；仅职业和副本提供现有二级；无限服继续独立 dossier。
+- 最新阶段证据归档：`docs/archive/neat/2026-11-03-silver-to-qa-display-projection.md`；上一阶段候选知识化归档：`docs/archive/neat/2026-11-01-complete-silver-knowledge-candidate-conversion.md`。
 
 其余规则一律按 `SKILL.md → docs/OPERATING-SOP.md → 对应 rules owner` 进入，不从历史 archive 或旧聊天记录反推现役流程。

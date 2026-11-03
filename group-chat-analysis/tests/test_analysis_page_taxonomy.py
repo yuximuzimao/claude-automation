@@ -93,6 +93,28 @@ class AnalysisPageTaxonomyTests(unittest.TestCase):
         self.assertIn("if(!variants.length)return '';", html)
         self.assertIn("filter(x=>x.display!==false)", html)
 
+    def test_renderer_supports_compact_display_qas(self) -> None:
+        html = build_page_v3([], [], {}, [{
+            "knowledge_id": "K-TEST",
+            "kind": "mechanism",
+            "canonical_facts": ["不应默认铺开的长事实"],
+            "display_qas": [{
+                "qa_id": "K-TEST::q01",
+                "question": "能直接用吗？",
+                "answer": "可以。",
+                "confidence": "high",
+                "lifecycle": "durable",
+                "time_context": "",
+                "verification_note": "内部说明",
+                "evidence_refs": ["T1"],
+            }],
+        }])
+        self.assertIn("function qaHtml", html)
+        self.assertIn("display_qas", html)
+        self.assertIn("qa-confidence", html)
+        self.assertIn("核验说明", html)
+        self.assertIn("time_bound", html)
+
 
 if __name__ == "__main__":
     unittest.main()

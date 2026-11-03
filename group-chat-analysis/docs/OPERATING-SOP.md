@@ -14,7 +14,7 @@
 | `NORMALIZATION_CONTRACT` | OCR block 如何重建消息、日期、顺序、fragment、媒体占位或跨页去重。 | `rules/normalization.md`。 |
 | `STORAGE_CONTRACT` | batch state、canonical messages、current.md、原子提交或私密数据生命周期。 | `rules/storage.md`。 |
 | `ANALYSIS_BATCH` | 对 completed `current.md` 做一次正式分析。 | `rules/analysis.md`。 |
-| `ANALYSIS_DESIGN` | 修改分类、价值、可信度、页面、长期追踪、黑话等分析契约。 | `rules/analysis.md`。 |
+| `ANALYSIS_DESIGN` | 修改分类、价值、可信度、页面、长期追踪、黑话等分析契约。 | 语义边界读 `rules/analysis.md`；Silver→QA 页面展示、置信度与审核粒度读 `rules/presentation.md`。 |
 | `PROMOTION` | 把群聊候选交给魔兽或其它项目核验/保存。 | `rules/analysis.md`；用户确认后进入目标项目自己的 SKILL/SOP。 |
 | `AUTOMATION` | 定时采集、定时分析、失败告警或无人值守编排。 | `rules/capture.md` + `rules/storage.md` + `tests/README.md`。 |
 | `PRIVACY_OR_SAFETY` | 权限、QQ 操作范围、模型暴露、Git 私密数据或禁止技术路线。 | `rules/privacy-and-safety.md`。 |

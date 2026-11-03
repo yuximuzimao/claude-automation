@@ -43,9 +43,11 @@ src/
 - `inbox/builder.py`：只从 completed/analyzed 的 canonical records 生成 current.md，非法或不一致输入不得覆盖旧文件。
 - `app/run_analysis.py`：**正式分析发布 runner**。语义审阅仍由模型/人工完成，但发布状态机完全确定性：review receipt 精确绑定 completed batch、`current.md`、canonical batch 和分析产物 hash；随后质量门禁 → staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`。失败只留 run manifest，不碰 canonical；重复执行幂等；发布指针已切但状态写失败可向前恢复；历史 release 可显式回滚。
 - `analysis/analysis_release.py`：review receipt / release hash、原子 JSON、release current 指针与回滚完整性门禁。
-- `analysis/page_builder.py` / `page_renderer.py`：正式 Gold/阅读页面构建 owner；页面代码不再依赖 Git 忽略的 runtime 脚本。
-- `analysis/review_decision_store.py`：用户“没用 / 存资料库”唯一持久写入逻辑；只允许正式 queue Silver，写 reviewed semantic decisions/state，不修改 Silver 事实层。
-- `app/serve_analysis.py`：仅监听 `127.0.0.1` 的正式本机阅读入口；同源 + CSRF 门禁持久化用户裁决，并在写入后重建 review 页面。
+- `analysis/page_builder.py` / `page_renderer.py`：正式 Gold/阅读页面构建 owner；Silver 事实层保持不变，页面可 overlay QA 展示投影。
+- `analysis/knowledge_display_projection.py`：Silver→QA 展示投影的正式校验/overlay owner；负责 QA id、置信度、生命周期、时间节点、semantic fingerprint 与全 Silver 覆盖门禁。
+- `analysis/review_decision_store.py`：Silver 级用户“没用 / 存资料库”持久写入逻辑；只允许正式 queue Silver，写 reviewed semantic decisions/state，不修改 Silver 事实层。
+- `analysis/display_review_decision_store.py`：QA 级用户裁决 owner；独立保存 `discard / knowledge / archive`，拒绝 `time_bound → knowledge`，并按 QA semantic fingerprint 过滤 stale 决策。
+- `app/serve_analysis.py`：仅监听 `127.0.0.1` 的正式本机阅读入口；同源 + CSRF 门禁同时持久化 Silver 级与 QA 级裁决。
 
 尚未完成：
 

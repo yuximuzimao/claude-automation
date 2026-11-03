@@ -50,6 +50,43 @@ class AnalysisReviewServerTests(unittest.TestCase):
             + "\n",
             encoding="utf-8",
         )
+        (work / "knowledge-display-projection-v1.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "status": "reviewed_knowledge_display_projection",
+                    "items": [{
+                        "knowledge_id": "K-Q",
+                        "display_status": "visible",
+                        "qas": [
+                            {
+                                "qa_id": "K-Q::q01",
+                                "question": "长期问题？",
+                                "answer": "长期结论。",
+                                "confidence": "high",
+                                "lifecycle": "durable",
+                                "time_context": "",
+                                "verification_note": "",
+                                "evidence_refs": ["T1"],
+                            },
+                            {
+                                "qa_id": "K-Q::q02",
+                                "question": "阶段问题？",
+                                "answer": "阶段结论。",
+                                "confidence": "medium",
+                                "lifecycle": "time_bound",
+                                "time_context": "P6首周",
+                                "verification_note": "阶段信息",
+                                "evidence_refs": ["T1"],
+                            },
+                        ],
+                    }],
+                },
+                ensure_ascii=False,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
         self.render_calls = 0
 
         def render(page: Path, details: Path) -> dict:
@@ -143,6 +180,91 @@ class AnalysisReviewServerTests(unittest.TestCase):
             ).read_text(encoding="utf-8")
         )
         self.assertEqual(decisions["items"][0]["decision"], "knowledge")
+
+    def test_display_review_decisions_are_granular_and_persistent(self) -> None:
+        status, body = self.request(
+            "POST",
+            "/api/display-review-decision",
+            body={"qa_id": "K-Q::q01", "decision": "discard"},
+            token="fixed-token",
+            origin=f"http://127.0.0.1:{self.server.server_port}",
+        )
+        self.assertEqual(status, 200)
+        payload = json.loads(body)
+        self.assertEqual(payload["qa_id"], "K-Q::q01")
+        self.assertEqual(payload["decision"], "discard")
+
+        status, body = self.request("GET", "/api/display-review-state")
+        self.assertEqual(status, 200)
+        rows = {row["qa_id"]: row["decision"] for row in json.loads(body)["items"]}
+        self.assertEqual(rows, {"K-Q::q01": "discard"})
+
+    def test_display_review_state_survives_confidence_only_change(self) -> None:
+        status, _ = self.request(
+            "POST",
+            "/api/display-review-decision",
+            body={"qa_id": "K-Q::q01", "decision": "discard"},
+            token="fixed-token",
+            origin=f"http://127.0.0.1:{self.server.server_port}",
+        )
+        self.assertEqual(status, 200)
+        projection_path = (
+            self.root / "runtime" / "analysis-work" / "knowledge-display-projection-v1.json"
+        )
+        projection = json.loads(projection_path.read_text(encoding="utf-8"))
+        projection["items"][0]["qas"][0]["confidence"] = "medium"
+        projection_path.write_text(
+            json.dumps(projection, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        status, body = self.request("GET", "/api/display-review-state")
+        self.assertEqual(status, 200)
+        rows = {row["qa_id"]: row["decision"] for row in json.loads(body)["items"]}
+        self.assertEqual(rows, {"K-Q::q01": "discard"})
+
+    def test_display_review_state_drops_stale_semantic_decision(self) -> None:
+        status, _ = self.request(
+            "POST",
+            "/api/display-review-decision",
+            body={"qa_id": "K-Q::q01", "decision": "discard"},
+            token="fixed-token",
+            origin=f"http://127.0.0.1:{self.server.server_port}",
+        )
+        self.assertEqual(status, 200)
+        projection_path = (
+            self.root / "runtime" / "analysis-work" / "knowledge-display-projection-v1.json"
+        )
+        projection = json.loads(projection_path.read_text(encoding="utf-8"))
+        projection["items"][0]["qas"][0]["answer"] = "结论已经改变。"
+        projection_path.write_text(
+            json.dumps(projection, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        status, body = self.request("GET", "/api/display-review-state")
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(body)["items"], [])
+
+    def test_time_bound_qa_cannot_enter_long_term_knowledge(self) -> None:
+        status, body = self.request(
+            "POST",
+            "/api/display-review-decision",
+            body={"qa_id": "K-Q::q02", "decision": "knowledge"},
+            token="fixed-token",
+            origin=f"http://127.0.0.1:{self.server.server_port}",
+        )
+        self.assertEqual(status, 400)
+        self.assertIn("time_bound", json.loads(body)["message"])
+
+    def test_time_bound_qa_can_be_archived(self) -> None:
+        status, body = self.request(
+            "POST",
+            "/api/display-review-decision",
+            body={"qa_id": "K-Q::q02", "decision": "archive"},
+            token="fixed-token",
+            origin=f"http://127.0.0.1:{self.server.server_port}",
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(body)["decision"], "archive")
 
     def test_csrf_and_cross_origin_are_rejected(self) -> None:
         status, _ = self.request(
