@@ -23,6 +23,12 @@ EMPTY_CHECK = EmptyFieldCheck("EMPTY", ALL_CELLS, (), (), "ALL_24_EMPTY")
 CST = timezone(timedelta(hours=8))
 FRAME = WindowFrame("QQ小程序", "QQ经典农场", 979, 101, 603, 1111)
 HANDLE = WindowHandle(6951, 53086, FRAME)
+WECHAT_FRAME = WindowFrame("微信", "QQ经典农场", 967, 107, 625, 1155)
+WECHAT_HANDLE = WindowHandle(14468, 1369, WECHAT_FRAME)
+NOT_EMPTY_CHECK = EmptyFieldCheck("NOT_EMPTY", (), ALL_CELLS, (), "OCCUPIED_CELL_DETECTED")
+PARTIAL_NOT_EMPTY_CHECK = EmptyFieldCheck(
+    "NOT_EMPTY", (), ALL_CELLS[:-1], ALL_CELLS[-1:], "OCCUPIED_CELL_DETECTED"
+)
 
 
 class FakeCapture:
@@ -35,24 +41,90 @@ class LiveAdapterTests(unittest.TestCase):
         return LiveHarvestAdapter("qq", {}, {}, Path("/tmp/registry"),
                                   Path("/tmp/click-helper"), execute=execute)
 
-    def test_all_six_blackouts_and_boundaries_use_mac_clock(self):
-        for h, m in ((0, 0), (0, 59), (8, 0), (8, 59),
-                     (12, 0), (12, 59), (14, 0), (14, 4),
-                     (16, 0), (16, 59), (20, 0), (20, 59),
-                     (23, 59), (7, 59)):
-            with self.subTest(h=h, m=m):
-                with self.assertRaises(HarvestStop) as caught:
-                    require_live_window(clock=lambda: datetime(2026, 10, 31, h, m, tzinfo=CST))
-                self.assertEqual(caught.exception.code, "FARM_OPERATION_TIME_BLOCKED")
-        for h, m in ((1, 0), (9, 0), (13, 0), (14, 5),
-                     (17, 0), (21, 0), (6, 40)):
-            with self.subTest(h=h, m=m):
-                require_live_window(clock=lambda: datetime(2026, 10, 31, h, m, tzinfo=CST))
+    def wechat_adapter(self, *, execute=False, expected_special=None):
+        return LiveHarvestAdapter(
+            "wechat", {}, {}, Path("/tmp/registry"), Path("/tmp/click-helper"),
+            execute=execute, expected_special_placements=expected_special,
+        )
 
-    def test_unknown_local_clock_fails_closed(self):
-        with self.assertRaises(HarvestStop) as caught:
-            require_live_window(clock=lambda: datetime(2026, 10, 31, 6, 30))
-        self.assertEqual(caught.exception.code, "FARM_OPERATION_TIME_UNKNOWN")
+    @patch("farm_harvest_live.require_live_window")
+    @patch("farm_harvest_live.check_wechat_empty_field", return_value=NOT_EMPTY_CHECK)
+    @patch("farm_harvest_live.probe_harvest")
+    @patch("farm_harvest_live.capture_window")
+    @patch("farm_harvest_live.find_farm_window")
+    def test_known_ordinary_wechat_field_authorizes_only_global_hand(
+        self, registry, capture, probe, _check, _clock
+    ):
+        registry.return_value = WECHAT_HANDLE
+        capture.return_value = FakeCapture()
+        probe.return_value = {
+            "hand": {"matched": True, "score": 0.988, "local_center": [308.0, 860.0]},
+            "raw_pickable_candidates": [
+                {"local_center": [357.0, 560.5], "score": 0.58},
+                {"local_center": [187.0, 646.5], "score": 0.57},
+            ],
+            "pickables": [],
+        }
+        adapter = self.wechat_adapter(expected_special=frozenset())
+        obs = adapter.observe()
+        self.assertEqual(obs.overlay, "none")
+        self.assertTrue(obs.calibration_verified)
+        self.assertEqual(obs.occupied_special, frozenset())
+        self.assertEqual(obs.special, ())
+        self.assertEqual(obs.empty_cells, (False,) * 24)
+        self.assertEqual(prepare_harvest(obs), ((308.0, 860.0),))
+        self.assertTrue(adapter.last_diagnostics["can_authorize_clicks"])
+
+    @patch("farm_harvest_live.require_live_window")
+    @patch("farm_harvest_live.check_wechat_empty_field", return_value=PARTIAL_NOT_EMPTY_CHECK)
+    @patch("farm_harvest_live.probe_harvest")
+    @patch("farm_harvest_live.capture_window")
+    @patch("farm_harvest_live.find_farm_window")
+    def test_known_ordinary_wechat_field_with_unknown_cell_stays_fail_closed(
+        self, registry, capture, probe, _check, _clock
+    ):
+        registry.return_value = WECHAT_HANDLE
+        capture.return_value = FakeCapture()
+        probe.return_value = {
+            "hand": {"matched": True, "score": 0.99, "local_center": [308.0, 860.0]},
+            "raw_pickable_candidates": [],
+            "pickables": [],
+        }
+        obs = self.wechat_adapter(expected_special=frozenset()).observe()
+        self.assertFalse(obs.calibration_verified)
+        self.assertIsNone(obs.occupied_special)
+        with self.assertRaises(HarvestStop):
+            prepare_harvest(obs)
+
+    @patch("farm_harvest_live.require_live_window")
+    @patch("farm_harvest_live.check_wechat_empty_field", return_value=NOT_EMPTY_CHECK)
+    @patch("farm_harvest_live.probe_harvest")
+    @patch("farm_harvest_live.capture_window")
+    @patch("farm_harvest_live.find_farm_window")
+    def test_wechat_field_without_known_special_context_stays_fail_closed(
+        self, registry, capture, probe, _check, _clock
+    ):
+        registry.return_value = WECHAT_HANDLE
+        capture.return_value = FakeCapture()
+        probe.return_value = {
+            "hand": {"matched": True, "score": 0.99, "local_center": [308.0, 860.0]},
+            "raw_pickable_candidates": [],
+            "pickables": [],
+        }
+        obs = self.wechat_adapter(expected_special=None).observe()
+        self.assertFalse(obs.calibration_verified)
+        self.assertIsNone(obs.occupied_special)
+        with self.assertRaises(HarvestStop):
+            prepare_harvest(obs)
+
+    def test_interactive_live_window_has_no_time_blackout(self):
+        for h, m in ((0, 0), (8, 30), (12, 35), (14, 2), (16, 30), (20, 30)):
+            with self.subTest(h=h, m=m):
+                require_live_window(
+                    clock=lambda h=h, m=m: datetime(2026, 10, 31, h, m, tzinfo=CST)
+                )
+        # Clock validation is intentionally deferred with scheduler policy.
+        require_live_window(clock=lambda: datetime(2026, 10, 31, 6, 30))
 
     @patch("farm_harvest_live.require_live_window")
     @patch("farm_harvest_live.probe_harvest")

@@ -53,9 +53,12 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
         for index, cell in enumerate(ALL_CELLS):
             sx, sy = self._point(cell, self.cfg["soil_offset"])
             ox, oy = self._point(cell, self.cfg["occupancy_offset"])
-            soil = np.asarray((160, 215, 77), dtype=np.uint8) if cell in preview else (
-                purple if index < 5 else gold)
+            px, py = self._point(
+                cell, self.qq["planting"]["preview_offset"])
+            soil = purple if index < 5 else gold
             self._paint(rgb, sx, sy, soil)
+            if cell in preview:
+                self._paint(rgb, px, py, np.asarray((160, 215, 77), dtype=np.uint8))
             if cell in occupied:
                 marker = (120, 90, 45)
             elif cell in ambiguous:
@@ -124,13 +127,14 @@ class QQEmptyFieldV2Tests(unittest.TestCase):
         rgb[y-38:y+39, x-38:x+39] = (130, 190, 40)
         rgb[y-10:y+10, x-10:x+10] = (245, 245, 220)
         # The synthetic square is larger than the real round button. Restore
-        # the 24 tiny soil sampling ROIs so the test isolates confirm-button
+        # the 24 preview sampling ROIs so the test isolates confirm-button
         # verification instead of manufacturing extra preview cells.
         for cell in ALL_CELLS:
-            sx, sy = self._point(cell, self.cfg["soil_offset"])
-            r = self.cfg["patch_radius"]
-            rgb[sy-r:sy+r+1, sx-r:sx+r+1] = original[
-                sy-r:sy+r+1, sx-r:sx+r+1]
+            px, py = self._point(
+                cell, self.qq["planting"]["preview_offset"])
+            r = self.qq["planting"]["preview_patch_radius"]
+            rgb[py-r:py+r+1, px-r:px+r+1] = original[
+                py-r:py+r+1, px-r:px+r+1]
 
         point = qq_special_confirm_point(self.shot(rgb), target, self.layout)
         self.assertIsNotNone(point)

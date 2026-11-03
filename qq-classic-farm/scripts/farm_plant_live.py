@@ -20,8 +20,9 @@ from farm_io import (WindowHandle, click_batch_target, find_farm_window,
 from farm_plant_ordinary import OrdinaryPlantView
 from farm_plant_picker import PickerView
 from farm_picker_vision import (
-    QQ_SLOT_X, WECHAT_ICON_Y, WECHAT_LEFT_ARROW_ROI, WECHAT_RIGHT_ARROW_ROI,
-    WECHAT_SLOT_X, observe_picker, picker_arrow_verified,
+    QQ_ONE_KEY_OFF_ROI, QQ_SLOT_X, WECHAT_ICON_Y,
+    WECHAT_LEFT_ARROW_ROI, WECHAT_RIGHT_ARROW_ROI, WECHAT_SLOT_X,
+    observe_picker, picker_arrow_verified,
 )
 from farm_qq_clean import (check_qq_empty_field, check_wechat_empty_field,
                            observe_qq_preview_cells, qq_special_confirm_point)
@@ -405,6 +406,101 @@ class LivePlantAdapter:
                                    "Ordinary plan must match verified picker and phase")
         self.pending_empty_count = count
         self.pending_ordinary_seed = seed
+
+    def ensure_one_key_mode(self, desired: bool) -> PickerView:
+        """Safely turn a positively verified QQ ON checkbox OFF.
+
+        OFF->ON remains deliberately unimplemented because QQ shows a
+        confirmation modal that can trigger one-key planting.
+        """
+        require_live_window()
+        if type(desired) is not bool:
+            raise SpecialPlantStop("ONE_KEY_MODE_INVALID", "One-key mode must be boolean")
+        view = self.last_picker
+        shot = self.last_picker_capture
+        handle = self.last_handle
+        slot = self.last_picker_expected_slot
+        seed = self.last_picker_target_seed
+        shift = self.last_picker_y_shift
+        if desired is True:
+            raise SpecialPlantStop(
+                "ONE_KEY_ENABLE_UNCALIBRATED",
+                "OFF-to-ON confirmation is not calibrated",
+            )
+        if (view is None or shot is None or handle is None
+            or type(slot) is not int or not 1 <= slot <= 5
+            or not isinstance(seed, str) or not seed
+            or type(shift) is not int or not -100 <= shift <= 100
+            or view.target_icon_verified is not True
+            or type(view.target_quantity) is not int
+            or type(view.page) is not int):
+            raise SpecialPlantStop(
+                "ONE_KEY_NOT_VERIFIED",
+                "Picker target and checkbox must be verified before mode change",
+            )
+        if view.one_key_planting is False:
+            return view
+        if view.one_key_planting is not True:
+            raise SpecialPlantStop(
+                "ONE_KEY_NOT_VERIFIED",
+                "Unknown checkbox state cannot authorize a click",
+            )
+        if not self.execute or self.click_binary is None:
+            raise SpecialPlantStop(
+                "PICKER_EXECUTION_DISABLED",
+                "Real one-key mode change is not enabled",
+            )
+        if not 0 <= monotonic_ns() - shot.captured_at_ns <= 2_000_000_000:
+            raise SpecialPlantStop(
+                "PICKER_STALE_PRECONDITION",
+                "Picker screenshot older than 2 seconds",
+            )
+        current = find_farm_window(self.platform, self.layout, self.registry_binary)
+        if not _same_handle(handle, current):
+            raise SpecialPlantStop(
+                "USER_INTERFERENCE",
+                "Farm window changed before one-key mode change",
+            )
+
+        raw_offset = shift + 42
+        x0, y0, x1, y1 = QQ_ONE_KEY_OFF_ROI
+        checkbox_x = ((x0 + x1) / 2) * handle.frame.width / 603
+        checkbox_y = (((y0 + y1) / 2) + raw_offset) * handle.frame.height / 1111
+        batch = click_batch_target(handle)
+        batch["actions"] = [{"x": checkbox_x, "y": checkbox_y, "delay_ms": 100}]
+        try:
+            result = subprocess.run(
+                [str(self.click_binary), "--execute"], input=json.dumps(batch),
+                text=True, capture_output=True, timeout=30, check=False,
+            )
+            parse_click_batch_result(result.stdout, result.returncode, 1)
+        except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
+            raise SpecialPlantStop(
+                "ONE_KEY_ACTION_UNCERTAIN",
+                "Checkbox click outcome uncertain; never retry blindly",
+                action_may_have_been_sent=True,
+            ) from exc
+
+        sleep(0.25)
+        try:
+            refreshed = self.observe(slot, seed)
+        except Exception as exc:
+            raise SpecialPlantStop(
+                "ONE_KEY_ACTION_UNCERTAIN",
+                "Cannot re-observe picker after checkbox click",
+                action_may_have_been_sent=True,
+            ) from exc
+        if (refreshed.page != view.page
+            or refreshed.target_icon_verified is not True
+            or refreshed.target_quantity != view.target_quantity
+            or refreshed.one_key_planting is not False):
+            raise SpecialPlantStop(
+                "ONE_KEY_NOT_VERIFIED",
+                "Checkbox did not become verified OFF without target drift",
+                action_may_have_been_sent=True,
+            )
+        self.last_picker = refreshed
+        return refreshed
 
     def arm_special_selection(self, seed: str) -> None:
         """Bind this exact verified OFF-mode picker target to a 2x2 transaction."""

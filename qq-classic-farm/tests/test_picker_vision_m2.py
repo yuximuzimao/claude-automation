@@ -102,8 +102,19 @@ class PickerVisionTests(unittest.TestCase):
         self.assertEqual(find_qq_picker_y_shift(capture, "qq"), 21)
         self.assertIs(observe_one_key_mode(capture, "qq"), True)
 
+        # 1.16.2.7 changed the checkbox surround while preserving the
+        # green checked core. The state must remain positively identifiable.
+        capture = self.capture(maple_slot=None)
+        on = np.asarray(Image.open(
+            ROOT / "assets/ui/picker/qq-one-key-on.png").convert("RGB"))
+        capture.rgb[779:810, 370:400] = on
+        capture.rgb[779:785, 370:400] = [175, 130, 70]
+        capture.rgb[804:810, 370:400] = [175, 130, 70]
+        self.assertIs(observe_one_key_mode(capture, "qq"), True)
+        self.assertEqual(find_qq_picker_y_shift(capture, "qq"), -42)
+
         # An arbitrary altered square is neither positive template.
-        capture.rgb[848:864, 378:392] = [255, 245, 255]
+        capture.rgb[785:804, 376:394] = [255, 245, 255]
         self.assertIsNone(observe_one_key_mode(capture, "qq"))
 
     @patch("farm_picker_vision._read_text", side_effect=["1/7", "18"])

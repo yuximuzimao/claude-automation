@@ -25,6 +25,8 @@
       },
       "planting": {
         "plot_click_offset_normalized": [-0.0155041459, 0.0165784878],
+        "preview_offset": [0, 0],
+        "preview_patch_radius": 2,
         "preview_green_margin_min": 45,
         "special_confirm_offset_normalized": [-0.0545605307, -0.1291629163],
         "special_confirm_radius": 38,
@@ -33,20 +35,20 @@
         "verified_from": "2026-11-01 controlled QQ white-radish click plus historical QQ 2x2 preview/confirm samples"
       },
       "empty_check": {
-        "calibration_version": 2,
+        "calibration_version": 3,
         "verified_window_size": [603, 1111],
         "soil_offset": [-6, 23],
         "occupancy_offset": [-16, 16],
+        "occupied_luminance_max": 130,
         "patch_radius": 2,
         "soil_prototypes": {
           "purple": [190, 144, 220],
           "gold": [247, 191, 60]
         },
         "empty_soil_max_distance": 12,
-        "occupied_soil_max_distance": 90,
-        "occupied_luminance_max": 130,
+        "occupied_soil_max_distance": 120,
         "empty_luminance_min": 160,
-        "calibrated_from": "2026-11-02 live QQ 603x1111 true-empty field immediately after one-key harvest, game version 1.16.1.6; 6 purple / 18 gold",
+        "calibrated_from": "2026-11-02 true-empty QQ field + 2026-11-03 QQ 1.16.2.7 mature purple-myrtle and immediate post-harvest true-empty field; original occupancy ROI retained, occupied soil tolerance raised to 120",
         "grade_policy": "infer nearest purple/gold prototype; do not trust legacy land_grades for V2 empty check"
       },
       "main_window_entry": {
@@ -81,11 +83,24 @@
         "verified_from": "2026-11-02 live WeChat cell (3,2): shared QQ normalized offset opened picker on first click"
       },
       "empty_check": {
-        "calibration_version": 3,
+        "calibration_version": 4,
         "verified_window_width_range": [625, 627],
         "verified_window_height": 1155,
         "soil_offset_normalized": [-0.0608, 0.0051948052],
-        "occupancy_offset_normalized": [-0.0032, 0.0],
+        "occupancy_probes": [
+          {
+            "id": "growing",
+            "offset_normalized": [-0.0032, 0.0],
+            "occupied_luminance_max": 140,
+            "verified_from": "2026-11-02 live 24-cell golden-fruit seedling field"
+          },
+          {
+            "id": "mature",
+            "offset_normalized": [-0.0256, -0.0103896104],
+            "occupied_luminance_max": 130,
+            "verified_from": "2026-11-02 live mature full field and 2026-11-03 live mature golden-fruit field"
+          }
+        ],
         "patch_radius": 2,
         "soil_prototypes": {
           "purple": [227, 202, 200],
@@ -93,9 +108,8 @@
         },
         "empty_soil_max_distance": 40,
         "occupied_soil_max_distance": 220,
-        "occupied_luminance_max": 140,
         "empty_luminance_min": 160,
-        "calibrated_from": "2026-11-02 live WeChat 625x1155 true-empty, mature-full-field and 24-cell golden-fruit seedling screenshots, game version 1.16.1.6; 6 purple / 18 gold",
+        "calibrated_from": "2026-11-02 live true-empty + seedling + mature-full-field evidence, revalidated 2026-11-03 after separating growing/mature occupancy probes; game version 1.16.1.6; 6 purple / 18 gold",
         "grade_policy": "infer nearest purple/gold prototype; never trust a stored land-grade map"
       },
       "safe_special_2x2": [

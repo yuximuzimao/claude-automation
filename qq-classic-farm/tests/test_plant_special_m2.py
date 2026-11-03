@@ -46,6 +46,12 @@ class FakeAdapter:
     def turn_pages(self, direction, count):
         self.calls.append(("turn", direction, count))
 
+    def ensure_one_key_mode(self, desired):
+        self.calls.append(("one_key", desired))
+        if desired is not False:
+            raise RuntimeError("only OFF is modeled here")
+        return PickerView(2, True, 3, False)
+
     def open_plot(self, anchor):
         self.calls.append(("open", anchor))
         if self.fail == "open":
@@ -91,6 +97,7 @@ class SpecialPlantV2Tests(unittest.TestCase):
         result = self.run_one(fake)
         self.assertEqual(result["status"], "special_plant_verified")
         self.assertEqual(result["picker"], {"page": 2, "slot": 2, "visible_index": 6})
+        self.assertIn(("one_key", False), fake.calls)
         self.assertIn(("select", 2), fake.calls)
         self.assertIn(("verify_occupied", TARGET), fake.calls)
         self.assertEqual(

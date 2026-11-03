@@ -18,33 +18,19 @@ from farm_capture import capture_window
 from farm_harvest import HarvestObservation, HarvestStop, prepare_harvest
 from farm_io import (WindowHandle, click_batch_target, find_farm_window,
                      parse_click_batch_result)
-from farm_qq_clean import check_qq_empty_field
+from farm_qq_clean import ALL_CELLS, check_qq_empty_field, check_wechat_empty_field
 from farm_vision import probe_harvest
-
-
-# Mac local clock, not the automation server timezone. End is exclusive.
-BLACKOUTS = ((0, 60), (480, 540), (720, 780), (840, 845),
-             (960, 1020), (1200, 1260))
 
 
 def require_live_window(*, clock: Callable[[], datetime] = lambda: datetime.now().astimezone(),
                         margin_minutes: int = 2) -> None:
-    """No live farm observation or input during business automation windows."""
-    try:
-        now = clock()
-        if not isinstance(now, datetime) or now.tzinfo is None or now.utcoffset() is None:
-            raise ValueError("Local offset-aware Mac clock required")
-        minute = now.hour * 60 + now.minute
-        if any(any(start <= (minute + offset) % 1440 < end
-                   for offset in range(margin_minutes + 1))
-               for start, end in BLACKOUTS):
-            raise HarvestStop("FARM_OPERATION_TIME_BLOCKED",
-                              "Mac local clock is inside/too close to a prohibited interval")
-    except HarvestStop:
-        raise
-    except Exception as exc:
-        raise HarvestStop("FARM_OPERATION_TIME_UNKNOWN",
-                          "Cannot verify Mac local operation time") from exc
+    """Interactive Chat execution has no clock blackout.
+
+    Business-automation collision windows belong in the future scheduler layer,
+    because a live Chat instruction already confirms the desktop is available.
+    Keep this seam for call-site compatibility until scheduling is implemented.
+    """
+    return None
 
 
 def _identity(handle: WindowHandle) -> tuple[int, int, str, str, float, float]:
@@ -69,13 +55,15 @@ class LiveHarvestAdapter:
 
     def __init__(self, platform: str, layout: dict, anchors: dict,
                  registry_binary: Path, click_binary: Path | None = None,
-                 *, execute: bool = False):
+                 *, execute: bool = False,
+                 expected_special_placements: frozenset[str] | None = None):
         self.platform = platform
         self.layout = layout
         self.anchors = anchors
         self.registry_binary = Path(registry_binary)
         self.click_binary = Path(click_binary) if click_binary is not None else None
         self.execute = execute
+        self.expected_special_placements = expected_special_placements
         self.last_observation: HarvestObservation | None = None
         self.last_handle: WindowHandle | None = None
         self.last_diagnostics: dict = {}
@@ -96,15 +84,38 @@ class LiveHarvestAdapter:
             raise HarvestStop("USER_INTERFERENCE", "Window changed during capture")
         probe = probe_harvest(capture, self.anchors, self.platform, self.layout)
         empty_check = (check_qq_empty_field(capture, self.layout)
-                       if self.platform == "qq" else None)
+                       if self.platform == "qq"
+                       else check_wechat_empty_field(capture, self.layout))
         hand = probe.get("hand", {})
         point = tuple(hand["local_center"]) if hand.get("matched") else None
         candidates = probe.get("raw_pickable_candidates", probe.get("pickables", []))
-        candidate_clean = (empty_check is not None
-                           and empty_check.status == "EMPTY"
+        candidate_clean = (empty_check.status == "EMPTY"
                            and point is None and len(candidates) == 0)
-        # The current detector produces *candidate* stars, not independently
-        # verified 2x2 crop occupancy. Never promote them to click targets.
+
+        # Raw star matches are only candidates: ordinary crops can produce them.
+        # A live ordinary-only harvest is trusted only when the caller carries
+        # forward Runner-owned field state proving there are zero special plots.
+        ordinary_only = self.expected_special_placements == frozenset()
+        fully_empty = (
+            empty_check.status == "EMPTY"
+            and len(empty_check.empty_cells) == len(ALL_CELLS)
+            and not empty_check.occupied_cells
+            and not empty_check.unknown_cells
+        )
+        fully_occupied = (
+            empty_check.status == "NOT_EMPTY"
+            and len(empty_check.occupied_cells) == len(ALL_CELLS)
+            and not empty_check.empty_cells
+            and not empty_check.unknown_cells
+        )
+        calibration_verified = ordinary_only and (fully_empty or fully_occupied)
+        overlay = "none" if calibration_verified else "unknown"
+        occupied_special = frozenset() if calibration_verified else None
+        empty_cells = (
+            tuple(cell in set(empty_check.empty_cells) for cell in sorted(ALL_CELLS))
+            if calibration_verified else None
+        )
+
         self.last_diagnostics = {
             "hand_detected": point is not None,
             "hand_score": hand.get("score"),
@@ -114,29 +125,33 @@ class LiveHarvestAdapter:
                                            probe.get("pickables", [])),
             "legacy_safe_placement_matches": probe.get("pickables", []),
             "ignored_outside_special_centers": probe.get("ignored_outside_special_centers"),
-            "overlay": "unknown",
-            "calibration_verified": False,
-            "occupied_special": None,
-            "empty_check_status": empty_check.status if empty_check is not None else "UNKNOWN",
-            "empty_check_reason": empty_check.reason if empty_check is not None else "UNSUPPORTED_PLATFORM",
-            "empty_cells": len(empty_check.empty_cells) if empty_check is not None else 0,
-            "occupied_cells": len(empty_check.occupied_cells) if empty_check is not None else 0,
-            "unknown_cells": len(empty_check.unknown_cells) if empty_check is not None else 24,
+            "expected_special_placements": (
+                sorted(self.expected_special_placements)
+                if isinstance(self.expected_special_placements, frozenset) else None
+            ),
+            "overlay": overlay,
+            "calibration_verified": calibration_verified,
+            "occupied_special": sorted(occupied_special) if occupied_special is not None else None,
+            "empty_check_status": empty_check.status,
+            "empty_check_reason": empty_check.reason,
+            "empty_cells": len(empty_check.empty_cells),
+            "occupied_cells": len(empty_check.occupied_cells),
+            "unknown_cells": len(empty_check.unknown_cells),
             "empty_field_candidate": candidate_clean,
-            "clean_field_verified": empty_check is not None and empty_check.status == "EMPTY",
-            "already_clean_verified": False,
-            "can_authorize_clicks": False,
+            "clean_field_verified": empty_check.status == "EMPTY",
+            "already_clean_verified": calibration_verified and empty_check.status == "EMPTY",
+            "can_authorize_clicks": calibration_verified,
         }
         obs = HarvestObservation(
-            overlay="unknown",
-            calibration_verified=False,
+            overlay=overlay,
+            calibration_verified=calibration_verified,
             window_identity=_identity(handle),
             window_width=handle.frame.width, window_height=handle.frame.height,
             capture_id=capture.capture_id or "",
             captured_at_ns=capture.captured_at_ns or 0,
             hand=point, special=(),
-            occupied_special=None,
-            empty_cells=None,
+            occupied_special=occupied_special,
+            empty_cells=empty_cells,
         )
         self.last_handle = handle
         self.last_observation = obs

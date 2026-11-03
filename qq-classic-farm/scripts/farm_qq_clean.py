@@ -75,10 +75,10 @@ def observe_qq_preview_cells(
         origin = np.asarray(qq["origin"], dtype=np.float64)
         u_step = np.asarray(qq["u_step"], dtype=np.float64)
         v_step = np.asarray(qq["v_step"], dtype=np.float64)
-        soil_offset = np.asarray(empty_cfg["soil_offset"], dtype=np.float64)
-        radius = int(empty_cfg["patch_radius"])
+        preview_offset = np.asarray(plant_cfg["preview_offset"], dtype=np.float64)
+        radius = int(plant_cfg["preview_patch_radius"])
         margin_min = float(plant_cfg["preview_green_margin_min"])
-        if (soil_offset.shape != (2,) or not 1 <= radius <= 8 or margin_min <= 0):
+        if (preview_offset.shape != (2,) or not 1 <= radius <= 8 or margin_min <= 0):
             return None
     except (KeyError, TypeError, ValueError):
         return None
@@ -87,7 +87,7 @@ def observe_qq_preview_cells(
     for cell in ALL_CELLS:
         u, v = cell
         base = origin + u * u_step + v * v_step
-        x, y = np.rint(base + soil_offset).astype(int)
+        x, y = np.rint(base + preview_offset).astype(int)
         patch = _patch(rgb, int(x), int(y), radius)
         if patch is None:
             return None
@@ -185,11 +185,20 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
         u_step = np.asarray(wechat["normalized_u_step"], dtype=np.float64)
         v_step = np.asarray(wechat["normalized_v_step"], dtype=np.float64)
         soil_offset = np.asarray(cfg["soil_offset_normalized"], dtype=np.float64)
-        occupancy_offset = np.asarray(
-            cfg["occupancy_offset_normalized"], dtype=np.float64)
-        if any(x.shape != (2,) for x in (
-            origin, u_step, v_step, soil_offset, occupancy_offset
-        )):
+        occupancy_probes = [
+            (
+                str(row["id"]),
+                np.asarray(row["offset_normalized"], dtype=np.float64),
+                float(row["occupied_luminance_max"]),
+            )
+            for row in cfg["occupancy_probes"]
+        ]
+        if any(x.shape != (2,) for x in (origin, u_step, v_step, soil_offset)):
+            return _unknown("INVALID_CALIBRATION")
+        if (not occupancy_probes
+            or len({probe_id for probe_id, _, _ in occupancy_probes}) != len(occupancy_probes)
+            or any(not probe_id or offset.shape != (2,)
+                   for probe_id, offset, _ in occupancy_probes)):
             return _unknown("INVALID_CALIBRATION")
 
         radius = cfg["patch_radius"]
@@ -204,10 +213,10 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
 
         empty_soil_max = float(cfg["empty_soil_max_distance"])
         occupied_soil_max = float(cfg["occupied_soil_max_distance"])
-        occupied_lum_max = float(cfg["occupied_luminance_max"])
         empty_lum_min = float(cfg["empty_luminance_min"])
         if not (0 < empty_soil_max < occupied_soil_max
-                and occupied_lum_max < empty_lum_min):
+                and all(0 < occupied_lum_max < empty_lum_min
+                        for _, _, occupied_lum_max in occupancy_probes)):
             return _unknown("INVALID_CALIBRATION")
     except (KeyError, TypeError, ValueError):
         return _unknown("INVALID_CALIBRATION")
@@ -221,19 +230,17 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
         u, v = cell
         base = (origin + u * u_step + v * v_step) * scale
 
-        points = [
-            np.rint(base + soil_offset * scale).astype(int),
-            np.rint(base + occupancy_offset * scale).astype(int),
-        ]
-        patches = [
-            _patch(rgb, int(point[0]), int(point[1]), radius)
-            for point in points
-        ]
-        if any(patch is None for patch in patches):
+        soil_point = np.rint(base + soil_offset * scale).astype(int)
+        soil_patch = _patch(rgb, int(soil_point[0]), int(soil_point[1]), radius)
+        occupancy_patches = []
+        for probe_id, occupancy_offset, occupied_lum_max in occupancy_probes:
+            point = np.rint(base + occupancy_offset * scale).astype(int)
+            patch = _patch(rgb, int(point[0]), int(point[1]), radius)
+            occupancy_patches.append((probe_id, occupied_lum_max, patch))
+        if soil_patch is None or any(patch is None for _, _, patch in occupancy_patches):
             unknown.append(cell)
             continue
 
-        soil_patch, occupancy_patch = patches
         soil_rgb = np.median(soil_patch.reshape(-1, 3), axis=0)
         distances = {
             name: _distance(soil_rgb, prototype)
@@ -241,14 +248,22 @@ def check_wechat_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCh
         }
         grade = min(distances, key=distances.get)
         soil_distance = distances[grade]
-        occupancy_luminance = float(np.median(
-            occupancy_patch.astype(np.float64).mean(axis=2)))
+        occupancy_luminances = [
+            (
+                probe_id,
+                occupied_lum_max,
+                float(np.median(patch.astype(np.float64).mean(axis=2))),
+            )
+            for probe_id, occupied_lum_max, patch in occupancy_patches
+        ]
 
         if (soil_distance <= occupied_soil_max
-            and occupancy_luminance < occupied_lum_max):
+            and any(luminance < occupied_lum_max
+                    for _, occupied_lum_max, luminance in occupancy_luminances)):
             occupied.append(cell)
         elif (soil_distance <= empty_soil_max
-              and occupancy_luminance > empty_lum_min):
+              and all(luminance > empty_lum_min
+                      for _, _, luminance in occupancy_luminances)):
             empty.append(cell)
         else:
             unknown.append(cell)
@@ -304,7 +319,9 @@ def check_qq_empty_field(capture: FarmCapture, layout: dict) -> EmptyFieldCheck:
         v_step = np.asarray(qq["v_step"], dtype=np.float64)
         soil_offset = np.asarray(cfg["soil_offset"], dtype=np.float64)
         occupancy_offset = np.asarray(cfg["occupancy_offset"], dtype=np.float64)
-        if any(x.shape != (2,) for x in (origin, u_step, v_step, soil_offset, occupancy_offset)):
+        if any(x.shape != (2,) for x in (
+            origin, u_step, v_step, soil_offset, occupancy_offset
+        )):
             return _unknown("INVALID_CALIBRATION")
 
         radius = cfg["patch_radius"]

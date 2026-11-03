@@ -226,6 +226,42 @@ class LivePlantTests(unittest.TestCase):
                 adapter.select_seed(3)
             self.assertEqual(cg.call_count, 1)
 
+    def test_verified_on_picker_can_switch_off_then_reverify_same_target(self):
+        import json
+        from types import SimpleNamespace
+        from farm_plant_picker import PickerView
+        from farm_harvest_live import _identity
+
+        adapter = self.adapter(execute=True)
+        adapter.phase_origin = _identity(HANDLE)
+        adapter.pending_picker_origin = _identity(HANDLE)
+        adapter.last_handle = HANDLE
+        adapter.last_picker_capture = FakeCapture()
+        adapter.last_picker_expected_slot = 3
+        adapter.last_picker_target_seed = "泡泡棉花糖种子"
+        adapter.last_picker = PickerView(
+            page=1, target_icon_verified=True,
+            target_quantity=21, one_key_planting=True)
+        adapter.last_picker_y_shift = -42
+        response = SimpleNamespace(returncode=0, stdout=json.dumps({
+            "status": "clicks_sent_unverified", "click_count": 1,
+        }))
+        refreshed = PickerView(
+            page=1, target_icon_verified=True,
+            target_quantity=21, one_key_planting=False)
+        with (patch("farm_plant_live.require_live_window"),
+              patch("farm_plant_live.monotonic_ns",
+                    return_value=FakeCapture.captured_at_ns + 10),
+              patch("farm_plant_live.find_farm_window", return_value=HANDLE),
+              patch("farm_plant_live.subprocess.run", return_value=response) as cg,
+              patch.object(adapter, "observe", return_value=refreshed)):
+            actual = adapter.ensure_one_key_mode(False)
+        self.assertIs(actual.one_key_planting, False)
+        payload = json.loads(cg.call_args.kwargs["input"])
+        self.assertEqual(len(payload["actions"]), 1)
+        self.assertAlmostEqual(payload["actions"][0]["x"], 385.0, delta=0.1)
+        self.assertAlmostEqual(payload["actions"][0]["y"], 794.5, delta=0.1)
+
     def test_verified_special_off_picker_selection_is_single_gated_cgevent(self):
         import json
         from types import SimpleNamespace

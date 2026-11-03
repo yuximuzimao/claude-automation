@@ -16,6 +16,7 @@ struct Action: Decodable {
     let x: Double // WINDOW-LOCAL logical coordinate
     let y: Double
     let delay_ms: Int
+    let hover_ms: Int?
 }
 struct Batch: Decodable {
     let window_id: Int
@@ -33,10 +34,9 @@ struct Result: Encodable {
 }
 
 func allowedNow() -> Bool {
-    let c = Calendar.current.dateComponents([.hour, .minute], from: Date())
-    guard let h = c.hour, let m = c.minute else { return false }
-    let t = h * 60 + m
-    return ![(0,60),(480,540),(720,780),(840,845),(960,1020),(1200,1260)].contains { t >= $0.0 && t < $0.1 }
+    // Interactive Chat operation is explicitly user-authorized.
+    // Time collision windows belong to the future scheduler layer.
+    return true
 }
 
 func stop(_ code: String, _ detail: String, clicksSent: Int = 0) -> Never {
@@ -188,6 +188,17 @@ for a in batch.actions {
     }
     let p = CGPoint(x: batch.frame.x + a.x, y: batch.frame.y + a.y)
     liveWindow(batch, p, clicksSent: clicked) // Recheck before every click.
+    if let hoverMs = a.hover_ms, hoverMs > 0 {
+        guard hoverMs <= 1000 else {
+            stop("INVALID_HOVER", "Hover delay exceeds safety bound", clicksSent: clicked)
+        }
+        guard let move = CGEvent(mouseEventSource: nil, mouseType: .mouseMoved,
+                                 mouseCursorPosition: p, mouseButton: .left)
+        else { stop("CGEVENT_FAILED", "Cannot construct mouse move", clicksSent: clicked) }
+        move.post(tap: .cghidEventTap)
+        usleep(useconds_t(hoverMs * 1000))
+        liveWindow(batch, p, clicksSent: clicked)
+    }
     guard let down = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown,
                              mouseCursorPosition: p, mouseButton: .left),
           let up = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp,

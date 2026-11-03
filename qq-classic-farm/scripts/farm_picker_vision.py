@@ -173,6 +173,17 @@ def _checkbox_distance(capture: FarmCapture, offset: int,
         patch.astype(np.int16) - reference.astype(np.int16))))
 
 
+def _checkbox_green_pixels(capture: FarmCapture, offset: int) -> int:
+    """Count the stable green checked core, ignoring animated picker surround."""
+    patch = _crop(capture, _shift_y(QQ_ONE_KEY_OFF_ROI, offset))
+    if patch is None or patch.shape[0] < 26 or patch.shape[1] < 24:
+        return 0
+    core = patch[6:26, 6:24].astype(np.int16)
+    r, g, b = (core[:, :, i] for i in range(3))
+    checked = (g > 150) & (g > r + 20) & (g > b + 20)
+    return int(np.count_nonzero(checked))
+
+
 def _best_toggle_match(capture: FarmCapture, offset: int) -> tuple[float, float]:
     """Return best score/distance across explicit OFF and ON templates."""
     pairs = [
@@ -194,14 +205,32 @@ def find_qq_picker_y_shift(capture: FarmCapture, platform: str) -> int | None:
     ]
     accepted = [(offset, score, distance)
                 for offset, score, distance in candidates if score >= 0.98]
-    if not accepted:
+    if accepted:
+        # Several adjacent y values can share the same interior score; the full
+        # 30x31 template distance chooses the aligned border position.
+        best_offset, _score, best_distance = min(
+            accepted, key=lambda item: item[2])
+        if (best_distance <= 12
+            and not any(abs(offset - best_offset) > 5
+                        for offset, _, _ in accepted)):
+            return best_offset - 42
+
+    # QQ 1.16.2.7 changed the animated checkbox surround but retained the
+    # checked green core. Use that positive core plus bounded ON-template
+    # distance as a fallback; never infer OFF from the absence of green.
+    on_reference = _on_template()
+    on_candidates = []
+    for offset in range(-65, 96):
+        green = _checkbox_green_pixels(capture, offset)
+        distance = _checkbox_distance(capture, offset, on_reference)
+        if green >= 80 and distance <= 18:
+            on_candidates.append((offset, green, distance))
+    if not on_candidates:
         return None
-    # Several adjacent y values can share the same interior score; the full
-    # 30x31 template distance chooses the aligned border position.
-    best_offset, _score, best_distance = min(
-        accepted, key=lambda item: item[2])
-    if (best_distance > 12
-        or any(abs(offset - best_offset) > 5 for offset, _, _ in accepted)):
+    best_offset, best_green, best_distance = max(
+        on_candidates, key=lambda item: (item[1], -item[2]))
+    peers = [row for row in on_candidates if row[1] >= best_green - 5]
+    if any(abs(offset - best_offset) > 5 for offset, _, _ in peers):
         return None
     return best_offset - 42
 
@@ -248,9 +277,12 @@ def observe_one_key_mode(capture: FarmCapture, platform: str,
     raw_offset = shift + 42
     off_score = _checkbox_score(capture, raw_offset, _off_template())
     on_score = _checkbox_score(capture, raw_offset, _on_template())
-    if off_score >= 0.98 and on_score < 0.90:
+    green = _checkbox_green_pixels(capture, raw_offset)
+    on_distance = _checkbox_distance(capture, raw_offset, _on_template())
+    if off_score >= 0.98 and on_score < 0.90 and green < 20:
         return False
-    if on_score >= 0.98 and off_score < 0.90:
+    if ((on_score >= 0.98 and off_score < 0.90)
+        or (green >= 80 and on_distance <= 18)):
         return True
     return None
 

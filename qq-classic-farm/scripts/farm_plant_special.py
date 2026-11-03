@@ -12,7 +12,7 @@ from math import isfinite
 from time import monotonic_ns, perf_counter
 from typing import Callable, Mapping, Protocol, Sequence
 
-from farm_plant_picker import PickerAdapter, PickerStop, prepare_picker_target
+from farm_plant_picker import PickerAdapter, PickerStop, PickerView, prepare_picker_target
 from seed_order import PickerStateError, compute_picker_position, consume_confirmed
 
 Cell = tuple[int, int]
@@ -181,6 +181,41 @@ def plant_one_special(
         )
     except (PickerStop, PickerStateError) as exc:
         raise SpecialPlantStop(exc.code, str(exc), action_may_have_been_sent=True) from exc
+
+    # Special crops require an explicitly verified OFF one-key mode. A live
+    # adapter may safely turn a verified ON checkbox OFF and then re-observe
+    # the same target; absence/unknown state never counts as OFF.
+    if picker.get("one_key_planting") is not False:
+        ensure_mode = getattr(adapter, "ensure_one_key_mode", None)
+        if ensure_mode is None:
+            raise SpecialPlantStop(
+                "ONE_KEY_NOT_VERIFIED",
+                "Special planting requires a verified OFF one-key mode",
+                action_may_have_been_sent=True,
+            )
+        try:
+            refreshed = ensure_mode(False)
+        except SpecialPlantStop:
+            raise
+        except Exception as exc:
+            raise SpecialPlantStop(
+                "ONE_KEY_ACTION_UNCERTAIN",
+                "Cannot verify one-key OFF after picker action",
+                action_may_have_been_sent=True,
+            ) from exc
+        if (not isinstance(refreshed, PickerView)
+            or refreshed.one_key_planting is not False
+            or refreshed.target_icon_verified is not True
+            or type(refreshed.target_quantity) is not int
+            or refreshed.target_quantity < 1
+            or refreshed.page != picker["position"]["page"]):
+            raise SpecialPlantStop(
+                "ONE_KEY_NOT_VERIFIED",
+                "Picker target must remain verified after switching one-key OFF",
+                action_may_have_been_sent=True,
+            )
+        picker["one_key_planting"] = False
+        picker["visible_quantity"] = refreshed.target_quantity
 
     # Critical invariant: only click the slot just verified for this exact seed.
     # Live adapters additionally bind this picker session to special/OFF mode.

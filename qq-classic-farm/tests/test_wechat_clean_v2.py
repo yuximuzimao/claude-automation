@@ -1,6 +1,7 @@
 """WeChat V2 fixed-grid empty-field checks; synthetic only, no desktop input."""
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 import sys
@@ -61,13 +62,17 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
                 self._point(cell, self.cfg["soil_offset_normalized"], width),
                 (120, 120, 120) if cell in ambiguous else soil,
             )
-            self._paint(
-                rgb,
-                self._point(cell, self.cfg["occupancy_offset_normalized"], width),
-                ((145, 145, 145) if cell in ambiguous
-                 else (60, 60, 60) if cell in occupied
-                 else (190, 190, 190)),
-            )
+            for probe in self.cfg["occupancy_probes"]:
+                value = (190, 190, 190)
+                if cell in ambiguous:
+                    value = (145, 145, 145)
+                elif cell in occupied and probe["id"] == "growing":
+                    value = (60, 60, 60)
+                self._paint(
+                    rgb,
+                    self._point(cell, probe["offset_normalized"], width),
+                    value,
+                )
         return rgb
 
     def shot(self, rgb, *, capture_id="wechat-v2"):
@@ -95,6 +100,63 @@ class WeChatEmptyFieldV2Tests(unittest.TestCase):
         self.assertEqual(result.status, "NOT_EMPTY")
         self.assertEqual(set(result.occupied_cells), set(ALL_CELLS))
         self.assertEqual(result.unknown_cells, ())
+
+    def test_dual_occupancy_probes_accept_seedling_or_mature_and_require_both_bright_for_empty(self):
+        layout = copy.deepcopy(self.layout)
+        cfg = layout["platforms"]["wechat"]["empty_check"]
+        cfg.pop("occupancy_offset_normalized", None)
+        cfg.pop("occupied_luminance_max", None)
+        cfg["occupancy_probes"] = [
+            {
+                "id": "growing",
+                "offset_normalized": [-0.0032, 0.0],
+                "occupied_luminance_max": 140,
+            },
+            {
+                "id": "mature",
+                "offset_normalized": [-0.0256, -0.0103896104],
+                "occupied_luminance_max": 130,
+            },
+        ]
+
+        def image_for(*, occupied_probe=None, ambiguous_probe=None):
+            rgb = np.zeros((1155, 625, 3), dtype=np.uint8)
+            for cell in ALL_CELLS:
+                grade = "purple" if cell in self.purple else "gold"
+                self._paint(
+                    rgb,
+                    self._point(cell, cfg["soil_offset_normalized"], 625),
+                    cfg["soil_prototypes"][grade],
+                )
+                for probe in cfg["occupancy_probes"]:
+                    value = (190, 190, 190)
+                    if probe["id"] == occupied_probe:
+                        value = (60, 60, 60)
+                    if probe["id"] == ambiguous_probe:
+                        value = (145, 145, 145)
+                    self._paint(
+                        rgb,
+                        self._point(cell, probe["offset_normalized"], 625),
+                        value,
+                    )
+            return rgb
+
+        for probe_id in ("growing", "mature"):
+            with self.subTest(probe_id=probe_id):
+                result = check_wechat_empty_field(
+                    self.shot(image_for(occupied_probe=probe_id)), layout)
+                self.assertEqual(result.status, "NOT_EMPTY")
+                self.assertEqual(set(result.occupied_cells), set(ALL_CELLS))
+                self.assertEqual(result.unknown_cells, ())
+
+        empty = check_wechat_empty_field(self.shot(image_for()), layout)
+        self.assertEqual(empty.status, "EMPTY")
+        self.assertEqual(set(empty.empty_cells), set(ALL_CELLS))
+
+        ambiguous = check_wechat_empty_field(
+            self.shot(image_for(ambiguous_probe="growing")), layout)
+        self.assertEqual(ambiguous.status, "UNKNOWN")
+        self.assertEqual(set(ambiguous.unknown_cells), set(ALL_CELLS))
 
     def test_ambiguous_cell_is_unknown_not_empty(self):
         target = {(0, 0)}
