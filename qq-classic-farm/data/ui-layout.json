@@ -8,31 +8,54 @@
     "v_range": [0, 3],
     "cell_count": 24
   },
+  "cross_platform_coordinate_layers": {
+    "qq_to_wechat": {
+      "scene": {
+        "type": "uniform_scale_translate",
+        "scale": 1.0446300059,
+        "translation": [61.4779873, -3.0061796],
+        "formula": "wechat = qq * scale + translation",
+        "verified_from": "independently calibrated QQ 603x1111 and WeChat 625x1155 24-cell land grids; mean error 0.16px, RMS 0.18px, max 0.27px"
+      },
+      "fixed_ui": {
+        "type": "axis_scale",
+        "scale": [1.0364842454, 1.0396039604],
+        "formula": "wechat.x = qq.x * 625/603; wechat.y = qq.y * 1155/1111",
+        "verified_from": "six bottom home toolbar controls (warehouse/shop/pet/album/outfit/friends); mean error 0.98px, RMS 1.00px, max 1.33px"
+      },
+      "unclassified": "picker, popup and dynamic controls must be assigned to a layer only after direct validation"
+    },
+    "home_review": {
+      "status": "user_confirmed",
+      "confirmed_at": "2026-11-04",
+      "scene_land_points": 24,
+      "fixed_ui_points": 12,
+      "scope": "QQ and WeChat home farm screens at their standard baseline windows; all displayed land centers and home fixed UI markers visually confirmed by the user"
+    }
+  },
   "platforms": {
     "qq": {
       "baseline_window_size": [603, 1111],
-      "origin": [351.8319, 566.2033],
-      "u_step": [-40.9923, 20.9012],
-      "v_step": [41.007, 20.8822],
-      "normalized_origin": [0.5834691, 0.5096339],
-      "normalized_u_step": [-0.0679806, 0.018813],
-      "normalized_v_step": [0.068005, 0.0187958],
-      "fit_rms_pixels": 0.142,
+      "origin": [341.6461, 583.8971],
+      "u_step": [-40.6902, 20.8311],
+      "v_step": [40.7111, 20.7718],
+      "normalized_origin": [0.5665773, 0.52556],
+      "normalized_u_step": [-0.0674797, 0.0187499],
+      "normalized_v_step": [0.0675142, 0.0186965],
+      "fit_rms_pixels": 1.2894,
+      "standard_view_verified_from": "2026-11-03 QQ 1.16.2.7 clean reopen from QQ main window; all 24 visible land tiles cross-checked against local tile-color centroids; max residual 3.70px",
       "land_grades": {
         "purple_cells": [[0,0],[0,1],[0,2],[0,3],[1,0],[1,1]],
         "gold_cells": [[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[3,0],[3,1],[3,2],[3,3],[4,0],[4,1],[4,2],[4,3],[5,0],[5,1],[5,2],[5,3]],
         "verified_from": "2026-10-31 18:39 CST live QQ clean field: 6 purple / 18 gold; differs from 2026-10-28 snapshot"
       },
       "planting": {
-        "plot_click_offset_normalized": [-0.0155041459, 0.0165784878],
+        "plot_click_offset_normalized": [0.0, 0.0],
         "preview_offset": [0, 0],
         "preview_patch_radius": 2,
         "preview_green_margin_min": 45,
-        "special_confirm_offset_normalized": [-0.0545605307, -0.1291629163],
-        "special_confirm_radius": 38,
-        "special_confirm_lime_min": 3000,
-        "special_confirm_white_min": 250,
-        "verified_from": "2026-11-01 controlled QQ white-radish click plus historical QQ 2x2 preview/confirm samples"
+        "special_confirm_offset_normalized": [0.0811, -0.1288],
+        "verified_from": "2026-11-03 QQ 1.16.2.7 clean reopen: plot click point is the standard visible tile center; legacy extra click offset removed. Special confirm geometry remains a separate calibration concern."
       },
       "empty_check": {
         "calibration_version": 3,
@@ -57,11 +80,8 @@
         "normalized_farm_icon_center": [0.02502, 0.33082],
         "verified_at": "2026-10-28"
       },
-      "safe_special_2x2": [
-        {"id": "gold_a", "grade": "gold", "anchor_cell": [2, 0], "cells": [[2, 0], [2, 1], [3, 0], [3, 1]]},
-        {"id": "gold_b", "grade": "gold", "anchor_cell": [4, 0], "cells": [[4, 0], [4, 1], [5, 0], [5, 1]]},
-        {"id": "gold_c", "grade": "gold", "anchor_cell": [4, 2], "cells": [[4, 2], [4, 3], [5, 2], [5, 3]]}
-      ]
+      "safe_special_2x2": [],
+      "special_direct_entry_status": "uncalibrated; rebuild from direct land click -> initial preview -> confirm point only"
     },
     "wechat": {
       "baseline_window_size": [625, 1155],
@@ -71,16 +91,20 @@
         "verified_window_height": 1155,
         "verified_from": "2026-11-02 live WeChat game window with left WeChat Games sidebar; rightmost canvas starts at x=967 and matches the calibrated 625x1155 farm canvas"
       },
-      "origin": [356.4956, 607.1813],
+      "origin": [418.4956, 607.1813],
       "u_step": [-42.5547, 21.6654],
       "v_step": [42.5263, 21.7038],
-      "normalized_origin": [0.570393, 0.5256981],
+      "normalized_origin": [0.66959296, 0.5256981],
       "normalized_u_step": [-0.0680875, 0.0187579],
       "normalized_v_step": [0.0680421, 0.0187912],
       "fit_rms_pixels": 0.149,
       "planting": {
         "plot_click_offset_normalized": [-0.0155041459, 0.0165784878],
-        "verified_from": "2026-11-02 live WeChat cell (3,2): shared QQ normalized offset opened picker on first click"
+        "preview_offset_normalized": [0.0, 0.0],
+        "preview_patch_radius": 2,
+        "preview_green_margin_min": 40,
+        "special_confirm_offset_normalized": [0.0277, -0.1246],
+        "verified_from": "2026-11-03 live WeChat 1.16.2.7: green 2x2 preview center ROIs separated from non-preview cells; two moved previews plus collapsed 625x1155 preview show confirm center at a stable relative offset"
       },
       "empty_check": {
         "calibration_version": 4,

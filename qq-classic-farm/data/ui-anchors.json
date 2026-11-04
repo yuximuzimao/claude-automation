@@ -3,13 +3,24 @@
   "captured_at": "2026-10-25",
   "matching": {
     "default_threshold": 0.82,
-    "default_scales": [0.9, 0.95, 1.0, 1.05, 1.1]
+    "default_scales": [
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1
+    ]
   },
   "anchors": {
     "onekey_harvest": {
       "template": "assets/ui/onekey-harvest.png",
       "threshold": 0.82,
-      "roi_normalized": [0.1, 0.5, 0.8, 0.45],
+      "roi_normalized": [
+        0.1,
+        0.5,
+        0.8,
+        0.45
+      ],
       "click": "template_center",
       "validation": {
         "qq_positive_score": 0.914,
@@ -19,8 +30,13 @@
     },
     "onekey_farm": {
       "template": "assets/ui/onekey-farm.png",
-      "threshold": 0.80,
-      "roi_normalized": [0.1, 0.5, 0.8, 0.45],
+      "threshold": 0.8,
+      "roi_normalized": [
+        0.1,
+        0.5,
+        0.8,
+        0.45
+      ],
       "click": "template_center",
       "validation": {
         "qq_positive_score": 0.819,
@@ -30,7 +46,12 @@
     "fertilizer_normal": {
       "template": "assets/ui/fertilizer-normal.png",
       "threshold": 0.82,
-      "roi_normalized": [0.0, 0.45, 0.8, 0.5],
+      "roi_normalized": [
+        0.0,
+        0.45,
+        0.8,
+        0.5
+      ],
       "click": "template_center",
       "advanced_from_normal": {
         "base_dx_pixels": 95,
@@ -41,6 +62,1480 @@
         "qq_positive_score": 1.0,
         "wechat_positive_score": 0.941,
         "clean_farm_false_score": 0.499
+      }
+    }
+  },
+  "fixed_points": {
+    "home": {
+      "status": "user_confirmed",
+      "confirmed_at": "2026-11-04",
+      "coordinate_layer": "fixed_ui",
+      "qq_baseline_window_size": [
+        603,
+        1111
+      ],
+      "wechat_baseline_window_size": [
+        625,
+        1155
+      ],
+      "wechat_transform": {
+        "x": "qq_x * 625/603",
+        "y": "qq_y * 1155/1111"
+      },
+      "points": [
+        {
+          "id": "share",
+          "name": "分享",
+          "qq": [
+            52.5,
+            233.5
+          ],
+          "wechat": [
+            54.42,
+            242.75
+          ]
+        },
+        {
+          "id": "music",
+          "name": "音乐",
+          "qq": [
+            45.5,
+            315
+          ],
+          "wechat": [
+            47.16,
+            327.48
+          ]
+        },
+        {
+          "id": "menu",
+          "name": "菜单",
+          "qq": [
+            45.5,
+            389
+          ],
+          "wechat": [
+            47.16,
+            404.41
+          ]
+        },
+        {
+          "id": "mall",
+          "name": "右上商城",
+          "qq": [
+            547,
+            238.5
+          ],
+          "wechat": [
+            566.96,
+            247.95
+          ]
+        },
+        {
+          "id": "milk",
+          "name": "奶茶热销",
+          "qq": [
+            545.5,
+            332.5
+          ],
+          "wechat": [
+            565.4,
+            345.67
+          ]
+        },
+        {
+          "id": "task",
+          "name": "任务/升级书",
+          "qq": [
+            55.5,
+            936.5
+          ],
+          "wechat": [
+            57.52,
+            973.59
+          ]
+        },
+        {
+          "id": "warehouse",
+          "name": "仓库",
+          "qq": [
+            57,
+            1028.5
+          ],
+          "wechat": [
+            59.08,
+            1069.23
+          ]
+        },
+        {
+          "id": "shop",
+          "name": "商店",
+          "qq": [
+            149.5,
+            1028
+          ],
+          "wechat": [
+            154.95,
+            1068.71
+          ]
+        },
+        {
+          "id": "pet",
+          "name": "宠物",
+          "qq": [
+            242,
+            1028
+          ],
+          "wechat": [
+            250.83,
+            1068.71
+          ]
+        },
+        {
+          "id": "album",
+          "name": "图鉴",
+          "qq": [
+            334,
+            1028
+          ],
+          "wechat": [
+            346.19,
+            1068.71
+          ]
+        },
+        {
+          "id": "outfit",
+          "name": "装扮",
+          "qq": [
+            426.5,
+            1028
+          ],
+          "wechat": [
+            442.06,
+            1068.71
+          ]
+        },
+        {
+          "id": "friends",
+          "name": "好友",
+          "qq": [
+            534.5,
+            1040
+          ],
+          "wechat": [
+            554,
+            1081.19
+          ]
+        }
+      ]
+    },
+    "scenes": {
+      "warehouse": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-04",
+        "coordinate_layer": "scene_ui",
+        "cross_platform_method": "independently_calibrated",
+        "qq_baseline_window_size": [
+          603,
+          1111
+        ],
+        "wechat_baseline_window_size": [
+          625,
+          1155
+        ],
+        "points": [
+          {
+            "id": "close",
+            "name": "关闭仓库",
+            "qq": [
+              568,
+              118
+            ],
+            "wechat": [
+              591,
+              126
+            ],
+            "kind": "fixed"
+          },
+          {
+            "id": "fruit",
+            "name": "果实页签",
+            "qq": [
+              90,
+              199
+            ],
+            "wechat": [
+              93,
+              210
+            ],
+            "kind": "fixed"
+          },
+          {
+            "id": "super-fruit",
+            "name": "超变果实页签",
+            "qq": [
+              231,
+              199
+            ],
+            "wechat": [
+              239,
+              210
+            ],
+            "kind": "fixed"
+          },
+          {
+            "id": "seed",
+            "name": "种子页签",
+            "qq": [
+              372,
+              199
+            ],
+            "wechat": [
+              386,
+              210
+            ],
+            "kind": "fixed"
+          },
+          {
+            "id": "items",
+            "name": "道具页签",
+            "qq": [
+              513,
+              199
+            ],
+            "wechat": [
+              533,
+              210
+            ],
+            "kind": "fixed"
+          },
+          {
+            "id": "lock",
+            "name": "批量锁定",
+            "qq": [
+              527,
+              261
+            ],
+            "wechat": [
+              550,
+              275
+            ],
+            "kind": "fixed"
+          },
+          {
+            "id": "slot-r1c1",
+            "name": "物品格 R1C1",
+            "qq": [
+              85,
+              359
+            ],
+            "wechat": [
+              90,
+              375
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r1c2",
+            "name": "物品格 R1C2",
+            "qq": [
+              194,
+              359
+            ],
+            "wechat": [
+              202,
+              375
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r1c3",
+            "name": "物品格 R1C3",
+            "qq": [
+              302,
+              359
+            ],
+            "wechat": [
+              313,
+              375
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r1c4",
+            "name": "物品格 R1C4",
+            "qq": [
+              411,
+              359
+            ],
+            "wechat": [
+              424,
+              375
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r1c5",
+            "name": "物品格 R1C5",
+            "qq": [
+              519,
+              359
+            ],
+            "wechat": [
+              535,
+              375
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r2c1",
+            "name": "物品格 R2C1",
+            "qq": [
+              85,
+              470
+            ],
+            "wechat": [
+              90,
+              492
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r2c2",
+            "name": "物品格 R2C2",
+            "qq": [
+              194,
+              470
+            ],
+            "wechat": [
+              202,
+              492
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r2c3",
+            "name": "物品格 R2C3",
+            "qq": [
+              302,
+              470
+            ],
+            "wechat": [
+              313,
+              492
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r2c4",
+            "name": "物品格 R2C4",
+            "qq": [
+              411,
+              470
+            ],
+            "wechat": [
+              424,
+              492
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r2c5",
+            "name": "物品格 R2C5",
+            "qq": [
+              519,
+              470
+            ],
+            "wechat": [
+              535,
+              492
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r3c1",
+            "name": "物品格 R3C1",
+            "qq": [
+              85,
+              582
+            ],
+            "wechat": [
+              90,
+              605
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r3c2",
+            "name": "物品格 R3C2",
+            "qq": [
+              194,
+              582
+            ],
+            "wechat": [
+              202,
+              605
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r3c3",
+            "name": "物品格 R3C3",
+            "qq": [
+              302,
+              582
+            ],
+            "wechat": [
+              313,
+              605
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r3c4",
+            "name": "物品格 R3C4",
+            "qq": [
+              411,
+              582
+            ],
+            "wechat": [
+              424,
+              605
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r3c5",
+            "name": "物品格 R3C5",
+            "qq": [
+              519,
+              582
+            ],
+            "wechat": [
+              535,
+              605
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r4c1",
+            "name": "物品格 R4C1",
+            "qq": [
+              85,
+              694
+            ],
+            "wechat": [
+              90,
+              718
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r4c2",
+            "name": "物品格 R4C2",
+            "qq": [
+              194,
+              694
+            ],
+            "wechat": [
+              202,
+              718
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r4c3",
+            "name": "物品格 R4C3",
+            "qq": [
+              302,
+              694
+            ],
+            "wechat": [
+              313,
+              718
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r4c4",
+            "name": "物品格 R4C4",
+            "qq": [
+              411,
+              694
+            ],
+            "wechat": [
+              424,
+              718
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "slot-r4c5",
+            "name": "物品格 R4C5",
+            "qq": [
+              519,
+              694
+            ],
+            "wechat": [
+              535,
+              718
+            ],
+            "kind": "grid_slot"
+          },
+          {
+            "id": "sell",
+            "name": "出售",
+            "qq": [
+              182,
+              1027
+            ],
+            "wechat": [
+              188,
+              1068
+            ],
+            "kind": "action"
+          },
+          {
+            "id": "sell-all",
+            "name": "批量出售",
+            "qq": [
+              420,
+              1027
+            ],
+            "wechat": [
+              436,
+              1068
+            ],
+            "kind": "action"
+          }
+        ],
+        "notes": [
+          "Grid slots identify positions only; item identity and inventory contents are dynamic.",
+          "Sell and batch-sell points are coordinates only; never invoke them during calibration."
+        ]
+      },
+      "shop": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-04",
+        "coordinate_layer": "scene_ui",
+        "cross_platform_method": "independently_calibrated",
+        "qq_baseline_window_size": [
+          603,
+          1111
+        ],
+        "wechat_baseline_window_size": [
+          625,
+          1155
+        ],
+        "views": {
+          "seeds": {
+            "label": "种子",
+            "points": [
+              {
+                "id": "close",
+                "name": "关闭商店",
+                "qq": [
+                  568,
+                  118
+                ],
+                "wechat": [
+                  591,
+                  126
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-seeds",
+                "name": "种子页签",
+                "qq": [
+                  114,
+                  247
+                ],
+                "wechat": [
+                  118,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-pets",
+                "name": "宠物页签",
+                "qq": [
+                  302,
+                  247
+                ],
+                "wechat": [
+                  313,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-tools",
+                "name": "道具页签",
+                "qq": [
+                  490,
+                  247
+                ],
+                "wechat": [
+                  510,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "seed-1-1",
+                "name": "种子格 R1C1",
+                "qq": [
+                  100,
+                  359
+                ],
+                "wechat": [
+                  103,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "曼陀罗华",
+                  "wechat": "红毛丹"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-1-2",
+                "name": "种子格 R1C2",
+                "qq": [
+                  247,
+                  359
+                ],
+                "wechat": [
+                  242,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "曼珠沙华",
+                  "wechat": "莴笋"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-1-3",
+                "name": "种子格 R1C3",
+                "qq": [
+                  379,
+                  359
+                ],
+                "wechat": [
+                  380,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "苦瓜",
+                  "wechat": "芭蕉"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-1-4",
+                "name": "种子格 R1C4",
+                "qq": [
+                  523,
+                  359
+                ],
+                "wechat": [
+                  519,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "天堂鸟",
+                  "wechat": "依米花"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-2-1",
+                "name": "种子格 R2C1",
+                "qq": [
+                  100,
+                  494
+                ],
+                "wechat": [
+                  103,
+                  511
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "冬瓜",
+                  "wechat": "番荔枝"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-2-2",
+                "name": "种子格 R2C2",
+                "qq": [
+                  247,
+                  494
+                ],
+                "wechat": [
+                  242,
+                  511
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "豹皮花",
+                  "wechat": "大王花"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-2-3",
+                "name": "种子格 R2C3",
+                "qq": [
+                  379,
+                  494
+                ],
+                "wechat": [
+                  380,
+                  511
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "杏子",
+                  "wechat": "橄榄"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-2-4",
+                "name": "种子格 R2C4",
+                "qq": [
+                  523,
+                  494
+                ],
+                "wechat": [
+                  519,
+                  511
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "金桔",
+                  "wechat": "人参果"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-3-1",
+                "name": "种子格 R3C1",
+                "qq": [
+                  100,
+                  630
+                ],
+                "wechat": [
+                  103,
+                  648
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "红毛丹",
+                  "wechat": "百香果"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-3-2",
+                "name": "种子格 R3C2",
+                "qq": [
+                  247,
+                  630
+                ],
+                "wechat": [
+                  242,
+                  648
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "莴笋",
+                  "wechat": "金花茶"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-3-3",
+                "name": "种子格 R3C3",
+                "qq": [
+                  379,
+                  630
+                ],
+                "wechat": [
+                  380,
+                  648
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "芭蕉",
+                  "wechat": "灯笼果"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-3-4",
+                "name": "种子格 R3C4",
+                "qq": [
+                  523,
+                  630
+                ],
+                "wechat": [
+                  519,
+                  648
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "依米花",
+                  "wechat": "天山雪莲"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-4-1",
+                "name": "种子格 R4C1",
+                "qq": [
+                  100,
+                  766
+                ],
+                "wechat": [
+                  103,
+                  785
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "番荔枝",
+                  "wechat": "芦荟"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-4-2",
+                "name": "种子格 R4C2",
+                "qq": [
+                  247,
+                  766
+                ],
+                "wechat": [
+                  242,
+                  785
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "大王花",
+                  "wechat": "金边灵芝"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-4-3",
+                "name": "种子格 R4C3",
+                "qq": [
+                  379,
+                  766
+                ],
+                "wechat": [
+                  380,
+                  785
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "橄榄",
+                  "wechat": "薄荷"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-4-4",
+                "name": "种子格 R4C4",
+                "qq": [
+                  523,
+                  766
+                ],
+                "wechat": [
+                  519,
+                  785
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "人参果",
+                  "wechat": "何首乌"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-5-1",
+                "name": "种子格 R5C1",
+                "qq": [
+                  100,
+                  900
+                ],
+                "wechat": [
+                  103,
+                  922
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "百香果",
+                  "wechat": "晚香玉"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-5-2",
+                "name": "种子格 R5C2",
+                "qq": [
+                  247,
+                  900
+                ],
+                "wechat": [
+                  242,
+                  922
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "金花茶",
+                  "wechat": "人参"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-5-3",
+                "name": "种子格 R5C3",
+                "qq": [
+                  379,
+                  900
+                ],
+                "wechat": [
+                  380,
+                  922
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "灯笼果",
+                  "wechat": "鳄梨"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-5-4",
+                "name": "种子格 R5C4",
+                "qq": [
+                  523,
+                  900
+                ],
+                "wechat": [
+                  519,
+                  922
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "天山雪莲",
+                  "wechat": "似血杜鹃"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-6-1",
+                "name": "种子格 R6C1",
+                "qq": [
+                  100,
+                  1034
+                ],
+                "wechat": [
+                  103,
+                  1059
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "芦荟",
+                  "wechat": "文殊兰"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-6-2",
+                "name": "种子格 R6C2",
+                "qq": [
+                  247,
+                  1034
+                ],
+                "wechat": [
+                  242,
+                  1059
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "金边灵芝",
+                  "wechat": "郁金香"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-6-3",
+                "name": "种子格 R6C3",
+                "qq": [
+                  379,
+                  1034
+                ],
+                "wechat": [
+                  380,
+                  1059
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "薄荷",
+                  "wechat": "薰衣草"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              },
+              {
+                "id": "seed-6-4",
+                "name": "种子格 R6C4",
+                "qq": [
+                  523,
+                  1034
+                ],
+                "wechat": [
+                  519,
+                  1059
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "何首乌",
+                  "wechat": "马蹄莲"
+                },
+                "note": "商品格只标记，不点击，避免触发购买"
+              }
+            ]
+          },
+          "pets": {
+            "label": "宠物",
+            "points": [
+              {
+                "id": "close",
+                "name": "关闭商店",
+                "qq": [
+                  568,
+                  118
+                ],
+                "wechat": [
+                  591,
+                  126
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-seeds",
+                "name": "种子页签",
+                "qq": [
+                  114,
+                  247
+                ],
+                "wechat": [
+                  118,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-pets",
+                "name": "宠物页签",
+                "qq": [
+                  302,
+                  247
+                ],
+                "wechat": [
+                  313,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-tools",
+                "name": "道具页签",
+                "qq": [
+                  490,
+                  247
+                ],
+                "wechat": [
+                  510,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "pet-card-1",
+                "name": "宠物卡 1",
+                "qq": [
+                  100,
+                  357
+                ],
+                "wechat": [
+                  103,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "柯基",
+                  "wechat": "柯基"
+                },
+                "note": "商品卡只标记，不点击，避免购买"
+              },
+              {
+                "id": "pet-card-2",
+                "name": "宠物卡 2",
+                "qq": [
+                  234,
+                  357
+                ],
+                "wechat": [
+                  242,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "牧羊犬",
+                  "wechat": "牧羊犬"
+                },
+                "note": "商品卡只标记，不点击，避免购买"
+              },
+              {
+                "id": "pet-card-3",
+                "name": "宠物卡 3",
+                "qq": [
+                  366,
+                  357
+                ],
+                "wechat": [
+                  380,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "斑点狗",
+                  "wechat": "斑点狗"
+                },
+                "note": "商品卡只标记，不点击，避免购买"
+              }
+            ]
+          },
+          "tools": {
+            "label": "道具",
+            "points": [
+              {
+                "id": "close",
+                "name": "关闭商店",
+                "qq": [
+                  568,
+                  118
+                ],
+                "wechat": [
+                  591,
+                  126
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-seeds",
+                "name": "种子页签",
+                "qq": [
+                  114,
+                  247
+                ],
+                "wechat": [
+                  118,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-pets",
+                "name": "宠物页签",
+                "qq": [
+                  302,
+                  247
+                ],
+                "wechat": [
+                  313,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tab-tools",
+                "name": "道具页签",
+                "qq": [
+                  490,
+                  247
+                ],
+                "wechat": [
+                  510,
+                  260
+                ],
+                "kind": "fixed"
+              },
+              {
+                "id": "tool-1",
+                "name": "道具格 1",
+                "qq": [
+                  100,
+                  359
+                ],
+                "wechat": [
+                  103,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "萌宠柯…",
+                  "wechat": "萌宠柯…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-2",
+                "name": "道具格 2",
+                "qq": [
+                  247,
+                  359
+                ],
+                "wechat": [
+                  242,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "春耕纪…",
+                  "wechat": "春耕纪…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-3",
+                "name": "道具格 3",
+                "qq": [
+                  379,
+                  359
+                ],
+                "wechat": [
+                  380,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-4",
+                "name": "道具格 4",
+                "qq": [
+                  523,
+                  359
+                ],
+                "wechat": [
+                  519,
+                  374
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-5",
+                "name": "道具格 5",
+                "qq": [
+                  100,
+                  493
+                ],
+                "wechat": [
+                  103,
+                  512
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-6",
+                "name": "道具格 6",
+                "qq": [
+                  247,
+                  493
+                ],
+                "wechat": [
+                  242,
+                  512
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-7",
+                "name": "道具格 7",
+                "qq": [
+                  379,
+                  493
+                ],
+                "wechat": [
+                  380,
+                  512
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-8",
+                "name": "道具格 8",
+                "qq": [
+                  523,
+                  493
+                ],
+                "wechat": [
+                  519,
+                  512
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              },
+              {
+                "id": "tool-9",
+                "name": "道具格 9",
+                "qq": [
+                  100,
+                  630
+                ],
+                "wechat": [
+                  103,
+                  649
+                ],
+                "kind": "product",
+                "platform_names": {
+                  "qq": "青野农…",
+                  "wechat": "青野农…"
+                },
+                "note": "截图中的商品名称被截断；按格位确认，不猜完整名称，不点击"
+              }
+            ]
+          }
+        },
+        "notes": [
+          "The three shop states (seeds, pets, tools) are user-confirmed.",
+          "Grid coordinates identify currently visible product slots; platform-specific item names are retained where they differ.",
+          "Product cards and purchase controls are coordinate references only; do not click them during calibration."
+        ]
+      },
+      "pet": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-04",
+        "purpose": "safety_exit_only",
+        "automation_target": false,
+        "coordinate_layer": "scene_ui",
+        "cross_platform_method": "independently_calibrated",
+        "qq_baseline_window_size": [
+          603,
+          1111
+        ],
+        "wechat_baseline_window_size": [
+          625,
+          1155
+        ],
+        "views": {
+          "main": {
+            "label": "宠物首页（仅安全退出）",
+            "points": [
+              {
+                "id": "close",
+                "name": "关闭宠物页面",
+                "qq": [
+                  568,
+                  118
+                ],
+                "wechat": [
+                  591,
+                  126
+                ],
+                "kind": "safety_exit",
+                "note": "仅用于误入时退出；正常自动化流程不应进入独立宠物页面。"
+              }
+            ]
+          }
+        },
+        "notes": [
+          "Independent pet page is not an automation target.",
+          "Only the close button is retained as a safety exit in case of accidental entry.",
+          "All pet skill, status, food, and pet-slot coordinates are intentionally excluded; do not enter this page in normal automation."
+        ]
+      }
+    }
+  },
+  "pending_points": {
+    "scenes": {
+      "friend-actions": {
+        "status": "candidate_pending_user_confirmation",
+        "captured_at": "2026-11-04",
+        "coordinate_layer": "scene_ui",
+        "cross_platform_method": "pending_independent_wechat_capture",
+        "qq_baseline_window_size": [
+          603,
+          1111
+        ],
+        "wechat_baseline_window_size": [
+          625,
+          1155
+        ],
+        "views": {
+          "single": {
+            "label": "单按钮标准位置",
+            "points": [
+              {
+                "id": "single-action",
+                "name": "单按钮中心",
+                "qq": [
+                  299,
+                  802
+                ],
+                "wechat": null,
+                "kind": "candidate",
+                "note": "QQ 1.16.3.8 当前截图候选；待用户在统一核对页确认。微信本轮拜访对象未出现一键按钮，因此不填坐标。此候选不可供 Runner 点击。"
+              }
+            ]
+          }
+        },
+        "notes": [
+          "按钮当前显示为偷取或务农不影响点位定义；本配置只记录单按钮布局位置，不绑定业务语义。",
+          "此场景仍为候选配置；用户确认前不得进入 Runner 或自动点击。",
+          "双按钮布局当前没有可采集的实景，留在 Todo；不得从历史截图推导现役坐标。"
+        ]
       }
     }
   },
