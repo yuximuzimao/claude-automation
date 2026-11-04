@@ -48,10 +48,11 @@
   "guide": [
     "接取：被折磨的维林。",
     "乌弗朗之厅里面的被折磨的维林要求你去夺取维林的锁链钥匙。",
+    "五开执行：任务物不共享；同一来源可由五个角色依次拾取。",
     "交付：被折磨的维林。"
   ],
   "fivebox": {
-    "status": "shared"
+    "status": "sequential_loot"
   },
   "timing_rule_ref": "fixed-service-seconds",
   "evidence": [
@@ -80,14 +81,26 @@
       ]
     },
     {
-      "evidence_id": "evidence-fivebox-type-mapping",
+      "evidence_id": "evidence-fivebox-type-mapping-legacy",
       "source_type": "user_live",
-      "source_ref": "data/observations/fivebox-task-types.json#tasks.12949; legacy_type=named_kill_task_item_group_shared_confirmed",
-      "observed_at": null,
+      "source_ref": "data/observations/fivebox-task-types.json#tasks.12949; legacy_type=named_kill_task_item_group_shared_confirmed; superseded_by=2026-11-05-second-dk-live-run",
+      "observed_at": "2026-10-19",
       "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
       "confidence": "verified",
       "supports_fields": [
         "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-fivebox-sequential-loot-2026-11-05",
+      "source_type": "user_live",
+      "source_ref": "2026-11-05第二组DK实跑：23:06开始，00:01飞艇任务完成后衔接此前提前接取的暗影拱顶任务；《夺取钥匙》确认同一来源由五个角色依次拾取。",
+      "observed_at": "2026-11-05",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status",
+        "guide"
       ]
     }
   ],

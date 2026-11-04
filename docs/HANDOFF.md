@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-11-01
+更新时间：2026-11-04
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
-当前焦点：无工作区级未完成交接；各项目当前状态与待办以各自`CURRENT.md` / `tasks/todo.md`为准。
+当前焦点：Codex Monitor 计划扩展为桌面状态岛；下一步先完成产品形态与接入设计，尚未开始实现。共享桌面调度与无人监管自动化对抗性审查的完整结论见 `docs/archive/2026-11-04-agent-autoloop-status-island/README.md`；各项目当前状态与待办仍以各自 `CURRENT.md` / `tasks/todo.md` 为准。
 
 审单收口（2026-10-30）：逐包复制组合公式、自动化回归和浮窗重启记录已归档到 `order-review/docs/archive/2026-10-30-package-formula-copy/neat-handoff.md`；当前能力与使用方式只见项目 `docs/CURRENT.md` / `docs/usage.md`。
 
@@ -21,7 +21,7 @@ QQ经典农场辅助（2026-10-24）：已跑通并固化化肥催熟（普通�
 
 LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 核对基线一致。`/api/save` 使用 ETag/If-Match 拒绝旧标签页整文件覆盖，428/409/200 路径均已在线验证。
 
-魔兽当前状态：当前执行组为第二组兽人双手鲜血DK×5，正在继续北风苔原第二次实跑。2026-10-08 00:15已在牦牛村完成集中交接并暂停，下一步回菲兹兰克泵站执行现役Profile `step-40`，完成《修修补补》《机械副官》《击败机甲专家》。唯一真值见 `wow-quest-route/docs/verified-routes/CURRENT.md`，后续只按Journey和现场反馈修受影响任务簇。
+魔兽当前状态：当前执行组为第二组兽人双手鲜血DK×5，冰冠第二次实跑继续中。最近一轮为2026-11-04 23:06至2026-11-05 00:20（74分钟），00:01完成飞艇任务后接续此前提前接取的暗影拱顶任务；12949《夺取钥匙》已纠正为依次拾取。唯一真值见 `wow-quest-route/docs/verified-routes/CURRENT.md`，下次按用户已更新的游戏历程恢复。
 
 魔兽工程收尾（2026-09-11）：赞加步骤10/13的《多头蛇之王》《猎杀恐爪》条件交付已重新物化到正式Route Atlas JSON/HTML；生成器中《赞加沼泽的植物》《枯萎的孢芽》条件语义也已收口。Python 3.13隔离环境可安装`test` extra，指定player-text pytest已通过；原`tasks/codex-handoff.md`已归档到项目`docs/archive/neat/`。
 

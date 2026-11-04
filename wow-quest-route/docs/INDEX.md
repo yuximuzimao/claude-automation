@@ -77,6 +77,6 @@
 - `archive/lib/`
 - `archive/tests/`
 - `archive/tasks/`
-- 最新阶段NEAT：`archive/neat/2026-10-18-storm-timing-dk-route-retirement-neat.md`
+- 最新阶段NEAT：`archive/neat/2026-11-05-icecrown-shadow-vault-live-run-neat.md`；上一阶段：`archive/neat/2026-10-18-storm-timing-dk-route-retirement-neat.md`
 - Route Lifecycle架构迁移历史：`archive/analysis/2026-09-21-route-lifecycle-migration-history.md`
 - Publisher替代期页面/对拍产物：`archive/routes/2026-09-route-lifecycle-publisher-cutover/`

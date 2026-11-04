@@ -2587,6 +2587,37 @@
         "state": "13125《凝固的空气》已完成；冰冠继续点以此Journey末端为准。"
       },
       "status": "partial_live_run_recorded_reordered_slices_preserved"
+    },
+    {
+      "run_id": "2026-11-04-05-icecrown-second-dk-2306-0020",
+      "date": "2026-11-04",
+      "continuation_date": "2026-11-05",
+      "route_key": "icecrown_second_dk_live_continuation_shadow_vault",
+      "profile_ids": [
+        "icecrown-fivebox"
+      ],
+      "profile_versions_at_run": {
+        "icecrown-fivebox": 3
+      },
+      "run_kind": "second_fivebox_live_partial",
+      "time_precision": "exact_minute_user_reported",
+      "effective_start_local": "2026-11-04T23:06:00+08:00",
+      "effective_end_local": "2026-11-05T00:20:00+08:00",
+      "wall_clock_minutes": 74,
+      "actual_minutes": 74,
+      "pause_windows": [],
+      "route_window": "冰冠第二组DK续跑：23:06开始；00:01完成飞艇上的任务后，接续此前提前接取的暗影拱顶任务；00:20结束本轮。",
+      "actual_contains_learning_or_route_errors": false,
+      "calibration_eligible": false,
+      "calibration_note": "用户评价本轮较简单，未报告路线错误或额外等待。74分钟作为本次真实墙钟保留；覆盖任务块及起止端点尚不足以与单一正式步骤做同终点Timing校准。",
+      "route_corrections_confirmed_by_run": [
+        "12949《夺取钥匙》不共享；同一来源由五个角色依次拾取，覆盖此前首组实跑的共享判断。"
+      ],
+      "runtime_end_state": {
+        "user_stop_local": "2026-11-05T00:20:00+08:00",
+        "state": "本轮飞艇任务已于00:01完成，并接续此前提前接取的暗影拱顶任务；00:20停止。具体停止时任务栏/下一任务以本次更新的游戏历程为准。"
+      },
+      "status": "live_run_recorded_mechanic_correction"
     }
   ]
 }
