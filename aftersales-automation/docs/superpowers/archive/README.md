@@ -21,5 +21,6 @@
 - `2026-10-jl-account-boundary-stop-safety/`：鲸灵多账号扫描账号边界、紧急停止最高优先级、异常 target 实际消失校验，以及 current-session 仅作辅助缓存的完成交接。
 - [2026-10 线下换货人工分支与专属提醒](2026-10-offline-exchange/neat-handoff.md)：独立类型、退货签收核验、ERP 零采集、人工提醒持久去重，以及 602 项测试与安全重启证据。
 - [2026-10-21 Mac 提醒事项统一迁移](../../../../docs/archive/2026-10-21-mac-reminders/README.md)：售后通知迁移、小爪共享输入修复、用户接收验证与跨项目提醒约定归档。
+- [2026-11 Agent Autoloop 接入售后操作队列](2026-11-agent-autoloop-migration/neat-handoff.md)：现有操作映射、Autoloop 源码机制、停止/失联安全差异、九项逐项讨论清单和五阶段迁移路线；仅完成审查，未实施。
 
 当前生效口径：[自动处理授权与统计口径](../../automation-policy.md)。仍待实施的问题见[待处理问题台账](../../../tasks/todo.md)；退货入库专项待实测见 `../../../../return-inbound/tasks/todo.md`。
