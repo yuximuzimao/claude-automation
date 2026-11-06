@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "required_code_patterns": [
+    {
+      "pattern": "(?i)\\b(?:pyautogui|playwright|selenium|puppeteer|mouse|keyboard)\\s*\\.\\s*(?:click|move|press|write|type|key|navigate|goto)",
+      "reason": "候选改动包含浏览器或桌面自动操作"
+    },
+    {
+      "pattern": "(?i)\\b(?:retry|auto_retry|stop_worker|stop_task|switch_account|switchaccount|refund|inbound|enqueue|resume_task)\\s*\\(",
+      "reason": "候选改动包含重试、停止、账号或业务动作"
+    },
+    {
+      "pattern": "(?i)\\b(?:queue\\.put|queue\\.add|schedule\\.every|setinterval|cron\\.schedule)\\s*\\(",
+      "reason": "候选改动包含任务队列或调度"
+    },
+    {
+      "pattern": "(?i)\\b(?:max_retries|retry_limit|max_active|max_concurrency|concurrency_limit)\\s*[:=]",
+      "reason": "候选改动包含重试或并发限制"
+    }
+  ],
+  "required_code_terms": [],
+  "guidance": [
+    "先按任务阶段判断：开发、试做、调试且尚未准备真实无人监管运行时，不进入 Review Gate；不能仅因代码出现自动化调用模式就触发审查。",
+    "unattended_first_run 表示首次准备真实无人监管运行，必须审查完整运行代码、配置和规则；unattended_change 表示项目已经实际运行，只审查影响下一次真实执行行为的本轮变更。",
+    "在已运行项目中，结合用户原始目标、实际差异、代码调用关系和可达运行行为分类；文件路径只能作辅助线索。纯展示、文案、文档示例及确认不影响执行行为的修改可免审。",
+    "浏览器或桌面操作、账号权限、业务写入、队列、重试、恢复、停止等代码模式仅在 unattended_change 阶段作为保守审查底线；开发阶段不因命中这些模式而触发 Review。",
+    "已运行项目存在可达自动化风险但影响不明时要求 Review；材料不足以判断是否影响执行时返回 needs_classification。"
+  ]
+}
