@@ -2,7 +2,7 @@
 
 ## DO FIRST
 
-1. 当前阶段是坐标制作与用户逐点核对：先读 docs/CURRENT.md 和 tasks/todo.md，再打开工作区根目录 _sandbox/farm-coordinate-review.html。
+1. 先读 docs/CURRENT.md 和 tasks/todo.md，确认当前坐标核对与暂缓事项；需要回看点位时打开工作区根目录 _sandbox/farm-coordinate-review.html。
 2. 读 docs/INDEX.md，按当前场景只加载所需规则和资料。
 3. 真机观察前读 docs/CURRENT.md；有游戏操作时再读 docs/gameplay-rules.md。
 4. 选种/库存/成熟时间问题：读 docs/seed-catalog.md 与 data/seed-catalog.json。
@@ -11,14 +11,14 @@
 
 ## 当前阶段
 
-当前只做 QQ / 微信农场 UI 坐标制作与逐点核对，尚未进入自动化实施阶段。此前助手设计/实现的自动化方案已被用户推翻。后续脚本是否复用、局部改造或重写，等用户逐步确认坐标和需求后再决定。
+本轮坐标核对已归档。先按 CURRENT 与 Todo 复核剩余定位数据，再与用户确定新脚本方向。
 
 工作方式：
 - 用户逐步指挥页面、场景和点位；助手负责截图/标注/坐标整理与文档同步。
 - 唯一坐标核对页是工作区根目录 _sandbox/farm-coordinate-review.html，所有场景共用。
 - 候选点只有用户明确确认后才成为正式点位。
 - 坐标核对阶段只标点，不点击有业务副作用的按钮。
-- 不从旧脚本、历史截图、拖动 preview 或未验证公式推导正式坐标。
+- 用户确认的点位、映射和颜色状态是准据。重叠的旧配对、旧偏移和旧计划作废，额外旧数据等用到再核对。禁止从拖动 preview 或未验证公式推导正式坐标。
 - 当前坐标核对阶段不主动开展代码重构、自动化验收或定时化；发现旧代码疑点先登记 Todo。此为阶段性暂缓。坐标核对完成并进入新脚本设计后，必须按用户新需求重新评估旧代码，可保留、改造、删除或重写，不预设兼容或全量重写。
 
 ## 坐标规则
@@ -27,7 +27,7 @@
 - 土地网格等场景层使用已验证的 scene 换算；首页贴窗口边缘的固定控件使用 fixed_ui 轴向比例换算。
 - picker、弹窗、动态按钮、preview、确认按钮等未分类控件必须有直接样本验证，不能套用 scene / fixed_ui 公式。
 - 窗口或场景不符合标准基线时，不得直接复用标准坐标。
-- 结构化坐标事实保存在 data/ui-layout.json 和 data/ui-anchors.json；pending 候选不是正式坐标。
+- 结构化坐标事实保存在 data/ui-layout.json 和 data/ui-anchors.json；土地中心以各平台 confirmed_land_centers 显式点为准，拟合公式仅供近似。不同版本的样本不得互相冒充；pending 候选不是正式坐标。
 
 ## ENTRY MAP
 
@@ -62,4 +62,4 @@
 - UI 点位：data/ui-anchors.json
 - 玩法事实：docs/gameplay-rules.md
 - 种子资料：docs/seed-catalog.md、data/seed-catalog.json
-- 历史：docs/archive/
+- 历史索引：docs/archive/README.md

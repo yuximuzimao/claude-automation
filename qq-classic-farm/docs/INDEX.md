@@ -6,15 +6,15 @@
 
 - ../SKILL.md：项目一级入口与当前坐标核对边界。
 - ../CLAUDE.md：稳定工作约束与安全边界。
-- CURRENT.md：当前 QQ / 微信坐标核对阶段、已确认点位与现场。
-- ../tasks/todo.md：当前坐标核对待办，以及坐标完成后对整个项目进行重新盘点和重整的任务。
+- CURRENT.md：当前阶段、已确认坐标范围与交接。
+- ../tasks/todo.md：下一轮定位复核与条件性待办。
 - 工作区根 _sandbox/farm-coordinate-review.html：QQ / 微信唯一统一坐标核对页。
 - ../README.md：项目概览。
 
 ## 坐标与稳定资料
 
-- ../data/ui-layout.json：土地网格、标准窗口、scene / fixed_ui 坐标层。
-- ../data/ui-anchors.json：首页固定点、场景点位与待确认候选。
+- ../data/ui-layout.json：用户确认的土地中心、拟合网格、标准窗口与坐标层。 `plot_policy` 记录四格入口、禁点和逐格颜色状态。
+- ../data/ui-anchors.json：首页固定点、场景点位、版本限定样本与待确认候选。
 - ../data/seed-order.json、../data/farm-state.json：旧 Runner 路线的数据文件，当前坐标阶段不作为执行依据。
 - gameplay-rules.md：玩法事实；其中旧 Runner / 自动化实现描述不代表当前已批准方案。
 - seed-catalog.md / ../data/seed-catalog.json：种子资料。

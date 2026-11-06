@@ -6,7 +6,9 @@
     "formula": "center(u,v) = origin + u * u_step + v * v_step",
     "u_range": [0, 5],
     "v_range": [0, 3],
-    "cell_count": 24
+    "cell_count": 24,
+    "confirmed_points_source": "platforms.<platform>.confirmed_land_centers.points",
+    "formula_role": "The grid fit is an approximation; use the user-confirmed explicit points as coordinate facts."
   },
   "cross_platform_coordinate_layers": {
     "qq_to_wechat": {
@@ -35,6 +37,19 @@
   },
   "platforms": {
     "qq": {
+      "confirmed_land_centers": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-05",
+        "coordinate_order": "points[u][v], window-local pixels; includes the title bar",
+        "points": [
+          [[341.6,583.9],[382.4,604.7],[423.1,625.4],[463.8,646.2]],
+          [[301,604.7],[341.7,625.5],[382.4,646.3],[423.1,667]],
+          [[260.3,625.6],[301,646.3],[341.7,667.1],[382.4,687.9]],
+          [[219.6,646.4],[260.3,667.2],[301,687.9],[341.7,708.7]],
+          [[178.9,667.2],[219.6,688],[260.3,708.8],[301,729.5]],
+          [[138.2,688.1],[178.9,708.8],[219.6,729.6],[260.3,750.4]]
+        ]
+      },
       "baseline_window_size": [603, 1111],
       "origin": [341.6461, 583.8971],
       "u_step": [-40.6902, 20.8311],
@@ -84,6 +99,19 @@
       "special_direct_entry_status": "uncalibrated; rebuild from direct land click -> initial preview -> confirm point only"
     },
     "wechat": {
+      "confirmed_land_centers": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-05",
+        "coordinate_order": "points[u][v], window-local pixels; includes the title bar",
+        "points": [
+          [[418.3,607],[460.9,628.7],[503.5,650.3],[546,672]],
+          [[375.9,628.7],[418.4,650.4],[460.9,672.1],[503.5,693.8]],
+          [[333.4,650.5],[375.9,672.1],[418.4,693.9],[460.9,715.6]],
+          [[290.9,672.2],[333.4,694],[375.9,715.6],[418.4,737.3]],
+          [[248.4,694],[290.9,715.7],[333.4,737.4],[375.9,759.1]],
+          [[205.8,715.8],[248.4,737.4],[290.9,759.2],[333.4,780.9]]
+        ]
+      },
       "baseline_window_size": [625, 1155],
       "embedded_canvas": {
         "left_sidebar_width": 414,
@@ -141,9 +169,177 @@
       ]
     }
   },
+  "plot_policy": {
+    "confirmed_at": "2026-11-06",
+    "plot_numbering": {
+      "formula": "4*u+v+1",
+      "range": [
+        1,
+        24
+      ],
+      "scope": "QQ and WeChat initial view"
+    },
+    "forbidden_single_click": [
+      3,
+      4,
+      8,
+      21
+    ],
+    "special_2x2": {
+      "direct_entry_map": [
+        {
+          "entry_plot": 1,
+          "plots": [
+            1,
+            2,
+            5,
+            6
+          ]
+        },
+        {
+          "entry_plot": 7,
+          "plots": [
+            3,
+            4,
+            7,
+            8
+          ]
+        },
+        {
+          "entry_plot": 13,
+          "plots": [
+            9,
+            10,
+            13,
+            14
+          ]
+        },
+        {
+          "entry_plot": 15,
+          "plots": [
+            11,
+            12,
+            15,
+            16
+          ]
+        },
+        {
+          "entry_plot": 21,
+          "plots": [
+            17,
+            18,
+            21,
+            22
+          ]
+        },
+        {
+          "entry_plot": 23,
+          "plots": [
+            19,
+            20,
+            23,
+            24
+          ]
+        }
+      ],
+      "require_all_four_same_grade": true,
+      "default_required_grade": "purple",
+      "blue_switch": {
+        "min_level": 148,
+        "trigger_group_entry_plot": 1,
+        "trigger_grade": "blue",
+        "required_grade_after": "blue"
+      },
+      "upgrade_milestones": {
+        "first_blue_unlock_level": 125,
+        "all_purple_unlock_level": 159
+      },
+      "future_all_blue": {
+        "status": "record_only",
+        "all_24_grade": "blue",
+        "last_entry_plot": 21,
+        "group_count": 6
+      },
+      "user_review": {
+        "confirmed_at": "2026-11-06",
+        "source": "User manual verification",
+        "direct_entry_and_initial_coverage": "user_confirmed",
+        "confirmation_control": "user_confirmed_in_live_ui",
+        "confirmation_xy": "not_transcribed_in_current_policy"
+      }
+    },
+    "grade_state": {
+      "transitions": {
+        "gold": "purple",
+        "purple": "blue"
+      },
+      "update_from": "User-reported land upgrades, by platform and plot number.",
+      "observed_at": "2026-11-06",
+      "baseline_evidence": "Per-plot visible soil in QQ and WeChat planting screenshots, including bottom-page2 and alternate views.",
+      "by_platform": {
+        "qq": {
+          "01": "purple",
+          "02": "purple",
+          "03": "purple",
+          "04": "purple",
+          "05": "purple",
+          "06": "purple",
+          "07": "gold",
+          "08": "gold",
+          "09": "gold",
+          "10": "gold",
+          "11": "gold",
+          "12": "gold",
+          "13": "gold",
+          "14": "gold",
+          "15": "gold",
+          "16": "gold",
+          "17": "gold",
+          "18": "gold",
+          "19": "gold",
+          "20": "gold",
+          "21": "gold",
+          "22": "gold",
+          "23": "gold",
+          "24": "gold"
+        },
+        "wechat": {
+          "01": "purple",
+          "02": "purple",
+          "03": "purple",
+          "04": "purple",
+          "05": "purple",
+          "06": "purple",
+          "07": "purple",
+          "08": "purple",
+          "09": "purple",
+          "10": "purple",
+          "11": "gold",
+          "12": "gold",
+          "13": "gold",
+          "14": "gold",
+          "15": "gold",
+          "16": "gold",
+          "17": "gold",
+          "18": "gold",
+          "19": "gold",
+          "20": "gold",
+          "21": "gold",
+          "22": "gold",
+          "23": "gold",
+          "24": "gold"
+        }
+      }
+    },
+    "supersedes": [
+      "platforms.*.safe_special_2x2 for direct entry and coverage selection",
+      "platforms.*.planting.special_confirm_offset_normalized as an unverified legacy confirmation coordinate",
+      "overlapping older plan placements and screenshot-derived pairings"
+    ]
+  },
   "usage": [
-    "When window size matches the baseline, generate all 24 plot centers directly from the formula instead of detecting each plot.",
-    "When window size differs, scale with normalized coordinates first and then verify or correct with a visual anchor before clicking.",
+    "When the window matches the baseline, use the user-confirmed explicit plot centers; the affine fit is only an approximation.",
+    "When window size or view differs from the verified baseline, verify a new sample before reusing coordinates.",
     "These coordinates describe plot centers only. Dynamic buttons must still be located by state or image anchor."
   ]
 }

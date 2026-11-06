@@ -1495,16 +1495,107 @@
           "Only the close button is retained as a safety exit in case of accidental entry.",
           "All pet skill, status, food, and pet-slot coordinates are intentionally excluded; do not enter this page in normal automation."
         ]
-      }
-    }
-  },
-  "pending_points": {
-    "scenes": {
-      "friend-actions": {
-        "status": "candidate_pending_user_confirmation",
-        "captured_at": "2026-11-04",
+      },
+      "merchant": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-05",
         "coordinate_layer": "scene_ui",
-        "cross_platform_method": "pending_independent_wechat_capture",
+        "qq_baseline_window_size": [
+          603,
+          1111
+        ],
+        "wechat_baseline_window_size": [
+          625,
+          1155
+        ],
+        "views": {
+          "bubble": {
+            "label": "仓鼠物品气泡",
+            "points": [
+              {
+                "id": "hamster-bubble",
+                "name": "仓鼠物品气泡中心",
+                "qq": [
+                  137,
+                  748
+                ],
+                "wechat": [
+                  141,
+                  772
+                ],
+                "kind": "scene_ui",
+                "note": "用户确认原有截图中标记位置；自然出现时样本。"
+              }
+            ]
+          },
+          "popup": {
+            "label": "神秘商人弹窗",
+            "points": [
+              {
+                "id": "close",
+                "name": "关闭 X",
+                "qq": [
+                  499,
+                  289
+                ],
+                "wechat": [
+                  519,
+                  304
+                ],
+                "kind": "safety_exit"
+              },
+              {
+                "id": "item",
+                "name": "商品卡中心",
+                "qq": [
+                  301,
+                  683
+                ],
+                "wechat": [
+                  315,
+                  719
+                ],
+                "kind": "item"
+              },
+              {
+                "id": "leave",
+                "name": "离开按钮",
+                "qq": [
+                  165,
+                  965
+                ],
+                "wechat": [
+                  171,
+                  1005
+                ],
+                "kind": "action"
+              },
+              {
+                "id": "buy",
+                "name": "购买按钮",
+                "qq": [
+                  433,
+                  965
+                ],
+                "wechat": [
+                  452,
+                  1005
+                ],
+                "kind": "action",
+                "note": "只记录位置，不执行购买。"
+              }
+            ]
+          }
+        },
+        "notes": [
+          "用户确认截图中标记与按钮对齐；微信旧截图缺少 44 像素顶栏，已用完整原图逐点对齐并将纵坐标修正 +44。",
+          "所有点位仅用于坐标记录，不代表授权购买或其他游戏操作。"
+        ]
+      },
+      "friend-actions": {
+        "status": "partially_user_confirmed",
+        "confirmed_at": "2026-11-05",
+        "coordinate_layer": "scene_ui",
         "qq_baseline_window_size": [
           603,
           1111
@@ -1522,20 +1613,800 @@
                 "name": "单按钮中心",
                 "qq": [
                   299,
-                  802
+                  820
                 ],
                 "wechat": null,
-                "kind": "candidate",
-                "note": "QQ 1.16.3.8 当前截图候选；待用户在统一核对页确认。微信本轮拜访对象未出现一键按钮，因此不填坐标。此候选不可供 Runner 点击。"
+                "kind": "user_confirmed",
+                "note": "用户确认 QQ 1.16.3.8 的单按钮截图与点位；当前微信没有同版本有效样本。"
               }
             ]
           }
         },
         "notes": [
-          "按钮当前显示为偷取或务农不影响点位定义；本配置只记录单按钮布局位置，不绑定业务语义。",
-          "此场景仍为候选配置；用户确认前不得进入 Runner 或自动点击。",
-          "双按钮布局当前没有可采集的实景，留在 Todo；不得从历史截图推导现役坐标。"
+          "微信 1.15.1.4 历史截图的单、双按钮标记已获用户确认，但仅代表历史样本，不作为当前版本坐标。",
+          "QQ 双按钮和微信当前版本有效样本仍未采集，不得由其他版本推断。"
         ]
+      },
+      "share": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-06",
+        "coordinate_layer": "scene_ui",
+        "views": {
+          "share-page": {
+            "label": "农场分享页",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "open-selector",
+                "name": "分享（打开联系人选择器）",
+                "qq": [
+                  421,
+                  913
+                ],
+                "wechat": [
+                  437,
+                  950
+                ]
+              },
+              {
+                "id": "close",
+                "name": "关闭分享页",
+                "qq": [
+                  565,
+                  182
+                ],
+                "wechat": [
+                  586,
+                  192
+                ]
+              }
+            ],
+            "note": "坐标相对于农场画布。当前版本暂无领取按钮或领取后的奖励提示样本。"
+          },
+          "contact-list": {
+            "label": "联系人列表",
+            "coordinate_space": "contact_selector",
+            "size": {
+              "qq": [
+                600,
+                600
+              ],
+              "wechat": [
+                744,
+                560
+              ]
+            },
+            "points": [
+              {
+                "id": "search",
+                "name": "搜索框",
+                "qq": [
+                  162,
+                  64
+                ],
+                "wechat": [
+                  172,
+                  34
+                ]
+              },
+              {
+                "id": "message",
+                "name": "留言输入框",
+                "qq": [
+                  435,
+                  491
+                ],
+                "wechat": [
+                  528,
+                  470
+                ]
+              },
+              {
+                "id": "cancel",
+                "name": "取消",
+                "qq": [
+                  425,
+                  534
+                ],
+                "wechat": [
+                  476,
+                  521
+                ]
+              }
+            ],
+            "note": "搜索框、留言和取消在这里标记一次；未选联系人时发送按钮不可用。"
+          },
+          "search-result": {
+            "label": "搜索结果",
+            "coordinate_space": "contact_selector",
+            "size": {
+              "qq": [
+                600,
+                600
+              ],
+              "wechat": [
+                744,
+                560
+              ]
+            },
+            "points": [
+              {
+                "id": "result",
+                "name": "搜索结果勾选圈",
+                "qq": [
+                  59,
+                  145
+                ],
+                "wechat": [
+                  32,
+                  121
+                ],
+                "note": "搜索结果的勾选圈在选中前后位置相同。此点仅对应截图中的首条搜索结果；列表会随关键词变化。"
+              },
+              {
+                "id": "clear",
+                "name": "清空搜索",
+                "qq": [
+                  257,
+                  64
+                ],
+                "wechat": [
+                  306,
+                  34
+                ]
+              }
+            ],
+            "note": "搜索结果中的勾选圈和清空搜索按钮在这里标记一次。"
+          },
+          "selected": {
+            "label": "选中联系人",
+            "coordinate_space": "contact_selector",
+            "size": {
+              "qq": [
+                600,
+                600
+              ],
+              "wechat": [
+                744,
+                560
+              ]
+            },
+            "points": [
+              {
+                "id": "send",
+                "name": "发送按钮",
+                "qq": [
+                  511,
+                  534
+                ],
+                "wechat": [
+                  612,
+                  521
+                ],
+                "qqName": "确定",
+                "wechatName": "发送",
+                "note": "勾选联系人后按钮亮起。QQ“确定”和微信“发送”都会提交分享，仅核对位置。"
+              },
+              {
+                "id": "remove",
+                "name": "移除已选联系人",
+                "qq": [
+                  542,
+                  112
+                ],
+                "wechat": [
+                  713,
+                  82
+                ]
+              }
+            ],
+            "note": "勾选后发送按钮亮起；勾选圈与清空搜索的位置见「搜索结果」。"
+          }
+        },
+        "notes": [
+          "分享页坐标以农场画布左上角为原点，联系人选择器坐标以各自弹窗截图左上角为原点。",
+          "同一控件在不同状态中位置相同的只登记一次。发送按钮位置以选中状态为样本，仅记录坐标。",
+          "最近聊天首条不作为定位点；奖励领取后界面尚无当前版本样本。"
+        ]
+      },
+      "mall-welfare": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-06",
+        "coordinate_layer": "scene_ui",
+        "views": {
+          "home": {
+            "label": "商城首页",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "gift-tab",
+                "name": "礼包商城入口",
+                "qq": [
+                  230,
+                  1057
+                ],
+                "wechat": [
+                  240,
+                  1099
+                ]
+              },
+              {
+                "id": "return",
+                "name": "返回农场",
+                "qq": [
+                  76,
+                  159
+                ],
+                "wechat": [
+                  80,
+                  169
+                ],
+                "note": "两屏的返回按钮位置相同，统一在商城首页标记。"
+              }
+            ],
+            "note": "商城首页为当前默认进入的特惠商城。"
+          },
+          "gift": {
+            "label": "礼包商城 · 每日福利",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "welfare-title",
+                "name": "每日福利卡片标题",
+                "qq": [
+                  171,
+                  370
+                ],
+                "wechat": [
+                  177,
+                  386
+                ],
+                "note": "用于识别每日福利卡片。"
+              },
+              {
+                "id": "daily-limit",
+                "name": "每日限购状态",
+                "qq": [
+                  171,
+                  610
+                ],
+                "wechat": [
+                  177,
+                  635
+                ],
+                "note": "截图时两端均显示每日限购 1/1。"
+              },
+              {
+                "id": "free",
+                "name": "免费按钮",
+                "qq": [
+                  171,
+                  659
+                ],
+                "wechat": [
+                  177,
+                  685
+                ],
+                "note": "此处记录免费按钮的位置；领取后的画面见「恭喜获得」。"
+              }
+            ],
+            "note": "仅核对每日福利卡片。返回位置见商城首页。"
+          },
+          "reward": {
+            "label": "恭喜获得",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "reward-title",
+                "name": "恭喜获得标题",
+                "qq": [
+                  301,
+                  225
+                ],
+                "wechat": [
+                  313,
+                  236
+                ],
+                "note": "弹窗识别点。"
+              },
+              {
+                "id": "dismiss-blank",
+                "name": "关闭弹窗的空白点",
+                "qq": [
+                  300,
+                  980
+                ],
+                "wechat": [
+                  313,
+                  1015
+                ],
+                "note": "界面提示点击空白处关闭。用户确认截图标记位于底部导航上方、两张卡片之间。"
+              }
+            ],
+            "note": "两端弹窗均显示获得化肥（1小时）×1，遮罩下的每日限购为 0/1。"
+          }
+        },
+        "notes": [
+          "商城首页与礼包商城共五组点位已由用户确认。微信坐标以右侧 625×1155 农场画布为准。",
+          "领取后的奖励弹窗标题和关闭空白位置已由用户确认。"
+        ]
+      },
+      "friend-list": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-06",
+        "coordinate_layer": "scene_ui",
+        "views": {
+          "first-visit": {
+            "label": "首行拜访",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "first-visit",
+                "name": "第一行「拜访」按钮",
+                "qq": [
+                  513,
+                  389
+                ],
+                "wechat": [
+                  533,
+                  408
+                ],
+                "note": "截图为 QQ「好友」和微信「同玩好友」的互动列表首行。微信坐标以右侧农场画布为准。"
+              }
+            ]
+          }
+        }
+      },
+      "friend-farm-navigation": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-06",
+        "coordinate_layer": "scene_ui",
+        "views": {
+          "first": {
+            "label": "首次进入",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "single-action",
+                "name": "单按钮",
+                "qq": [
+                  297,
+                  820
+                ],
+                "wechat": [
+                  283,
+                  852
+                ],
+                "note": "两端首次进入的本次样本均显示「一键偷取」。 微信单按钮使用 (283, 852)，已实测命中「一键偷取」。"
+              },
+              {
+                "id": "second-friend",
+                "name": "第 2 位好友",
+                "qq": [
+                  241,
+                  996
+                ],
+                "wechat": [
+                  251,
+                  1036
+                ],
+                "note": "进入第 1 位好友后，按第一张截图中从左数第 2 个好友位定位。"
+              },
+              {
+                "id": "third-friend",
+                "name": "第 3 位好友",
+                "qq": [
+                  382,
+                  996
+                ],
+                "wechat": [
+                  397,
+                  1036
+                ],
+                "note": "仍按第一张截图中从左数第 3 个好友位定位。"
+              }
+            ]
+          },
+          "next": {
+            "label": "后续好友",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "single-action",
+                "name": "单按钮",
+                "qq": [
+                  297,
+                  820
+                ],
+                "wechat": [
+                  283,
+                  852
+                ],
+                "note": "两端后续好友的本次样本均显示「一键务农」。 微信单按钮使用 (283, 852)，已实测命中「一键偷取」。"
+              },
+              {
+                "id": "fourth-onward",
+                "name": "第 4 位起的下一位好友",
+                "qq": [
+                  442,
+                  996
+                ],
+                "wechat": [
+                  459,
+                  1036
+                ],
+                "note": "从第 4 位开始用第二张截图的点位，点当前高亮好友右边最后一个完整显示的好友位。"
+              }
+            ]
+          }
+        },
+        "notes": [
+          "第 2、3 位使用首次进入图对应好友位；第 4 位起使用后续好友图中当前高亮右边最后一个完整显示的好友位。",
+          "微信 1.15.1.4 双按钮样本为历史参考，仍记录在 versioned_reference_samples。",
+          "微信单按钮点击点 (283, 852) 在 2026-11-06 实测单次命中「一键偷取」；双按钮暂无当前版本实测。"
+        ]
+      },
+      "task-book": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-06",
+        "coordinate_layer": "scene_ui",
+        "views": {
+          "daily": {
+            "label": "每日任务",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "daily-heading",
+                "name": "每日任务区域标题",
+                "qq": [
+                  301,
+                  450
+                ],
+                "wechat": [
+                  313,
+                  470
+                ],
+                "note": "用来定位每日任务区。"
+              },
+              {
+                "id": "login-status",
+                "name": "每日登录游戏按钮",
+                "qq": [
+                  483,
+                  580
+                ],
+                "wechat": [
+                  501,
+                  605
+                ],
+                "note": "两端实拍为绿色「领取」。"
+              },
+              {
+                "id": "harvest-status",
+                "name": "采摘 1 次果实按钮",
+                "qq": [
+                  483,
+                  733
+                ],
+                "wechat": [
+                  501,
+                  764
+                ],
+                "note": "两端实拍为黄色「前往」，对应 0/1。"
+              },
+              {
+                "id": "friend-status",
+                "name": "好友农场互动按钮",
+                "qq": [
+                  483,
+                  887
+                ],
+                "wechat": [
+                  501,
+                  923
+                ],
+                "note": "两端实拍为黄色「前往」，对应 0/1。"
+              },
+              {
+                "id": "close",
+                "name": "关闭任务书",
+                "qq": [
+                  563,
+                  136
+                ],
+                "wechat": [
+                  585,
+                  144
+                ],
+                "note": "右上角关闭按钮。"
+              }
+            ]
+          }
+        },
+        "notes": [
+          "任务内容和按钮状态动态变化，按当前界面判断。"
+        ]
+      },
+      "planting-switch": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-06",
+        "coordinate_layer": "picker_relative",
+        "anchor": "Top-left of the first-page 1/ prefix, located once per picker opening and reused after page turns.",
+        "platforms": {
+          "qq": {
+            "canvas_size": [
+              603,
+              1111
+            ],
+            "first_page_template_size": [
+              16,
+              15
+            ],
+            "search_rect_xyxy_exclusive": [
+              295,
+              745,
+              315,
+              931
+            ],
+            "checkbox_offset": [
+              88,
+              8
+            ],
+            "seed_slot_offsets": [
+              [
+                -188,
+                -61
+              ],
+              [
+                -91,
+                -61
+              ],
+              [
+                5,
+                -61
+              ],
+              [
+                103,
+                -61
+              ],
+              [
+                201,
+                -61
+              ]
+            ],
+            "previous_page_offset": [
+              -264,
+              -61
+            ],
+            "next_page_offset": [
+              273,
+              -61
+            ]
+          },
+          "wechat": {
+            "canvas_size": [
+              625,
+              1155
+            ],
+            "first_page_template_size": [
+              17,
+              16
+            ],
+            "search_rect_xyxy_exclusive": [
+              307,
+              776,
+              328,
+              969
+            ],
+            "checkbox_offset": [
+              90,
+              8
+            ],
+            "seed_slot_offsets": [
+              [
+                -195,
+                -63
+              ],
+              [
+                -95,
+                -63
+              ],
+              [
+                6,
+                -63
+              ],
+              [
+                106,
+                -63
+              ],
+              [
+                207,
+                -63
+              ]
+            ],
+            "previous_page_offset": [
+              -274,
+              -63
+            ],
+            "next_page_offset": [
+              283,
+              -63
+            ]
+          }
+        },
+        "notes": [
+          "Coordinates are canvas-local logical pixels. Add each offset to the located first-page prefix top-left.",
+          "Only use controls visible on the current page."
+        ]
+      },
+      "fertilizer-switch": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-07",
+        "coordinate_layer": "scene_ui",
+        "entry_plot": 1,
+        "views": {
+          "onekey": {
+            "label": "01 号地 · 一键施肥",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "onekey-fertilizer",
+                "name": "一键施肥勾选框",
+                "qq": [
+                  425,
+                  754
+                ],
+                "wechat": [
+                  441,
+                  786
+                ],
+                "note": "两端截图均为已勾选。施肥栏随土地移动，坐标仅适用于初始视角打开 01 号地的施肥面板。"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "pending_points": {
+    "scenes": {
+      "fertilizer-switch": {
+        "status": "pending_user_confirmation",
+        "entry_plot": 1,
+        "views": {
+          "onekey": {
+            "label": "01 号地 · 一键施肥",
+            "coordinate_space": "farm_canvas",
+            "size": {
+              "qq": [
+                603,
+                1111
+              ],
+              "wechat": [
+                625,
+                1155
+              ]
+            },
+            "points": [
+              {
+                "id": "ordinary-fertilizer",
+                "name": "普通化肥",
+                "qq": [
+                  297,
+                  676
+                ],
+                "wechat": [
+                  306,
+                  705
+                ],
+                "note": "01 号地两肥布局左侧的普通化肥桶，候选点。"
+              },
+              {
+                "id": "advanced-fertilizer",
+                "name": "高级化肥",
+                "qq": [
+                  392,
+                  676
+                ],
+                "wechat": [
+                  406,
+                  705
+                ],
+                "note": "01 号地两肥布局右侧的高级化肥桶，候选点。"
+              }
+            ]
+          }
+        }
       }
     }
   },
@@ -1543,5 +2414,54 @@
     "Templates are semantic crops of the target control, not large scene-background crops.",
     "A failed or below-threshold match must never fall back to guessed coordinates.",
     "The fertilizer advanced-button offset is valid only after one-key farming has been cleared and the menu has the normal two-fertilizer layout."
-  ]
+  ],
+  "versioned_reference_samples": {
+    "friend-actions": {
+      "wechat_1.15.1.4": {
+        "status": "user_confirmed_for_sample_version_only",
+        "confirmed_at": "2026-11-05",
+        "platform": "wechat",
+        "game_version": "1.15.1.4",
+        "baseline_canvas_size": [
+          625,
+          1155
+        ],
+        "scope": "仅对所核对的微信 1.15.1.4 画面有效，不代表 1.16.3.8 或其他版本。",
+        "views": {
+          "single": {
+            "points": [
+              {
+                "id": "single-action",
+                "name": "单按钮中心",
+                "wechat": [
+                  309,
+                  854
+                ]
+              }
+            ]
+          },
+          "double": {
+            "points": [
+              {
+                "id": "dual-a",
+                "name": "并列按钮 A 中心",
+                "wechat": [
+                  259,
+                  854
+                ]
+              },
+              {
+                "id": "dual-b",
+                "name": "并列按钮 B 中心",
+                "wechat": [
+                  359,
+                  854
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
 }

@@ -11,3 +11,6 @@
 - neat/2026-11-02-runner-v2-direction-correction-live-baseline.md：2026-11-02 当时的 V2 方向纠偏、V1 代码清理、QQ/微信普通收获与普通 one-key 真机基线；属于历史技术阶段，不代表当前方案。
 - neat/2026-11-05-friend-action-coordinate-calibration.md：统一坐标核对页规则、QQ 好友农场单按钮候选配置、微信当前无按钮与双按钮待自然采集。
 - neat/2026-11-05-coordinate-review-phase-and-script-rebuild-direction.md：用户明确推翻此前自动化路线后的当前阶段纠偏；记录已确认坐标范围、逐点核对流程、未完成场景，以及坐标完成后对整个项目重新盘点的安排。
+- neat/2026-11-05-confirmed-coordinates-hamster-observations.md：本批核对页坐标的用户确认、平台/版本边界、截图裁切纠偏及仓鼠气泡有限离线观察。
+- neat/2026-11-06-hamster-recognition-provisional.md：仓鼠识别方案暂定、严格色点与连续扫描约束、有限试验和自然出现后的验证条件。
+- neat/2026-11-07-coordinate-review-handoff.md：本轮坐标成果与截图证据、四格确认算法及成熟星标旧资料的复核入口。
