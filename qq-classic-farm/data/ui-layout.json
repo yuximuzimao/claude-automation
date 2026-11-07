@@ -14,10 +14,11 @@
     "qq_to_wechat": {
       "scene": {
         "type": "uniform_scale_translate",
-        "scale": 1.0446300059,
-        "translation": [61.4779873, -3.0061796],
+        "scale": 1.0445939871,
+        "translation": [-1.014271, -2.979302],
         "formula": "wechat = qq * scale + translation",
-        "verified_from": "independently calibrated QQ 603x1111 and WeChat 625x1155 24-cell land grids; mean error 0.16px, RMS 0.18px, max 0.27px"
+        "scope": "QQ 603x1111 and WeChat 625x1155 confirmed default land views only.",
+        "verified_from": "Fit to the 24 paired user-confirmed centers for the default views. The explicit centers take precedence."
       },
       "fixed_ui": {
         "type": "axis_scale",
@@ -32,7 +33,7 @@
       "confirmed_at": "2026-11-04",
       "scene_land_points": 24,
       "fixed_ui_points": 12,
-      "scope": "QQ and WeChat home farm screens at their standard baseline windows; all displayed land centers and home fixed UI markers visually confirmed by the user"
+      "scope": "QQ and WeChat default land views and home fixed UI. WeChat default land centers were reconfirmed on 2026-11-07."
     }
   },
   "platforms": {
@@ -101,15 +102,17 @@
     "wechat": {
       "confirmed_land_centers": {
         "status": "user_confirmed",
-        "confirmed_at": "2026-11-05",
+        "confirmed_at": "2026-11-07",
+        "scope": "Default WeChat 625x1155 farm canvas, game version 1.16.3.8.",
+        "reference_sample": "wechat-fertilizer-check-20261106-current.png",
         "coordinate_order": "points[u][v], window-local pixels; includes the title bar",
         "points": [
-          [[418.3,607],[460.9,628.7],[503.5,650.3],[546,672]],
-          [[375.9,628.7],[418.4,650.4],[460.9,672.1],[503.5,693.8]],
-          [[333.4,650.5],[375.9,672.1],[418.4,693.9],[460.9,715.6]],
-          [[290.9,672.2],[333.4,694],[375.9,715.6],[418.4,737.3]],
-          [[248.4,694],[290.9,715.7],[333.4,737.4],[375.9,759.1]],
-          [[205.8,715.8],[248.4,737.4],[290.9,759.2],[333.4,780.9]]
+          [[355.8,607],[398.4,628.7],[441,650.3],[483.5,672]],
+          [[313.4,628.7],[355.9,650.4],[398.4,672.1],[441,693.8]],
+          [[270.9,650.5],[313.4,672.1],[355.9,693.9],[398.4,715.6]],
+          [[228.4,672.2],[270.9,694],[313.4,715.6],[355.9,737.3]],
+          [[185.9,694],[228.4,715.7],[270.9,737.4],[313.4,759.1]],
+          [[143.3,715.8],[185.9,737.4],[228.4,759.2],[270.9,780.9]]
         ]
       },
       "baseline_window_size": [625, 1155],
@@ -119,13 +122,13 @@
         "verified_window_height": 1155,
         "verified_from": "2026-11-02 live WeChat game window with left WeChat Games sidebar; rightmost canvas starts at x=967 and matches the calibrated 625x1155 farm canvas"
       },
-      "origin": [418.4956, 607.1813],
-      "u_step": [-42.5547, 21.6654],
-      "v_step": [42.5263, 21.7038],
-      "normalized_origin": [0.66959296, 0.5256981],
-      "normalized_u_step": [-0.0680875, 0.0187579],
-      "normalized_v_step": [0.0680421, 0.0187912],
-      "fit_rms_pixels": 0.149,
+      "origin": [355.8949, 606.9492],
+      "u_step": [-42.5093, 21.7650],
+      "v_step": [42.5217, 21.6950],
+      "normalized_origin": [0.5694318095, 0.5254971140],
+      "normalized_u_step": [-0.0680148571, 0.0188441558],
+      "normalized_v_step": [0.0680346667, 0.0187835498],
+      "fit_rms_pixels": 0.0511,
       "planting": {
         "plot_click_offset_normalized": [-0.0155041459, 0.0165784878],
         "preview_offset_normalized": [0.0, 0.0],
@@ -265,7 +268,7 @@
         "source": "User manual verification",
         "direct_entry_and_initial_coverage": "user_confirmed",
         "confirmation_control": "user_confirmed_in_live_ui",
-        "confirmation_xy": "not_transcribed_in_current_policy"
+        "confirmation_xy": "scene_relative_rule_in_ui-anchors.json:fixed_points.scenes.special-confirm"
       }
     },
     "grade_state": {

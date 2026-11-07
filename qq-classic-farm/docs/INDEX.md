@@ -6,10 +6,15 @@
 
 - ../SKILL.md：项目一级入口与当前坐标核对边界。
 - ../CLAUDE.md：稳定工作约束与安全边界。
-- CURRENT.md：当前阶段、已确认坐标范围与交接。
-- ../tasks/todo.md：下一轮定位复核与条件性待办。
+- CURRENT.md：当前阶段、已确认坐标范围与微信试行节奏。
+- ../tasks/todo.md：流程设计、旧实现评估和条件性补采事项。
 - 工作区根 _sandbox/farm-coordinate-review.html：QQ / 微信唯一统一坐标核对页。
 - ../README.md：项目概览。
+
+## 独立操作
+
+- ../scripts/farm_fertilize_once.py：普通施肥一次。
+- ../assets/ui/qq-fertilizer-onekey-tick.png、../assets/ui/wechat-fertilizer-onekey-tick.png：两端一键施肥已勾选的小勾模板。
 
 ## 坐标与稳定资料
 
@@ -26,5 +31,5 @@
 
 ## 历史
 
-- archive/README.md：阶段归档索引。
+- archive/README.md：阶段归档索引，含坐标核对和微信点按试验。
 - archive/：退出当前工作流的历史阶段。

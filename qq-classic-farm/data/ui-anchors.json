@@ -2351,33 +2351,7 @@
                   786
                 ],
                 "note": "两端截图均为已勾选。施肥栏随土地移动，坐标仅适用于初始视角打开 01 号地的施肥面板。"
-              }
-            ]
-          }
-        }
-      }
-    }
-  },
-  "pending_points": {
-    "scenes": {
-      "fertilizer-switch": {
-        "status": "pending_user_confirmation",
-        "entry_plot": 1,
-        "views": {
-          "onekey": {
-            "label": "01 号地 · 一键施肥",
-            "coordinate_space": "farm_canvas",
-            "size": {
-              "qq": [
-                603,
-                1111
-              ],
-              "wechat": [
-                625,
-                1155
-              ]
-            },
-            "points": [
+              },
               {
                 "id": "ordinary-fertilizer",
                 "name": "普通化肥",
@@ -2389,7 +2363,7 @@
                   306,
                   705
                 ],
-                "note": "01 号地两肥布局左侧的普通化肥桶，候选点。"
+                "note": "01 号地两肥布局左侧的普通化肥桶。坐标仅适用于初始视角打开 01 号地的两肥布局。"
               },
               {
                 "id": "advanced-fertilizer",
@@ -2402,13 +2376,99 @@
                   406,
                   705
                 ],
-                "note": "01 号地两肥布局右侧的高级化肥桶，候选点。"
+                "note": "01 号地两肥布局右侧的高级化肥桶。坐标仅适用于初始视角打开 01 号地的两肥布局。"
               }
             ]
           }
         }
+      },
+      "special-confirm": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-07",
+        "coordinate_layer": "scene_relative",
+        "game_version": "1.16.3.8",
+        "coordinate_space": "farm_canvas_logical_pixels",
+        "anchor": "Mean of the four confirmed standard plot centers covered by the initial preview, translated by the current whole-field displacement.",
+        "formula": "confirm = mean(standard_centers_of_covered_plots) + scene_translation_xy + coverage_center_to_button_offset_xy",
+        "platforms": {
+          "qq": {
+            "canvas_size": [
+              603,
+              1111
+            ],
+            "coverage_center_to_button_offset_xy": [
+              18.5,
+              -140.6
+            ]
+          },
+          "wechat": {
+            "canvas_size": [
+              625,
+              1155
+            ],
+            "coverage_center_to_button_offset_xy": [
+              18.6,
+              -144.7
+            ]
+          }
+        },
+        "validation": {
+          "sampled_selected_plots": [
+            1,
+            7,
+            13,
+            15,
+            23,
+            17
+          ],
+          "translation_sample": {
+            "selected_plot": 17,
+            "covered_plots": [
+              17,
+              18,
+              21,
+              22
+            ],
+            "qq": [
+              45,
+              0
+            ],
+            "wechat": [
+              47,
+              0
+            ]
+          },
+          "max_axis_error_pixels": {
+            "qq": 0.9,
+            "wechat": 0.5
+          }
+        },
+        "notes": [
+          "Measure the whole-field translation on the current preview frame from multiple stable scene landmarks. The 17-plot displacements are sample observations.",
+          "Use only an initial 2x2 preview with the expected visible coverage and green confirmation button. The translation must agree across the scene landmarks."
+        ]
+      },
+      "reward-level-dismiss": {
+        "status": "user_confirmed",
+        "confirmed_at": "2026-11-07",
+        "applies_to": [
+          "reward_overlay",
+          "level_up_overlay"
+        ],
+        "anchor_ref": {
+          "scene": "mall-welfare",
+          "view": "reward",
+          "point_id": "dismiss-blank"
+        },
+        "notes": [
+          "Reuse the confirmed blank dismiss point from the fertilizer reward screen.",
+          "Use only after identifying the overlay and checking that the target is blank on the current screen. Verify dismissal before continuing."
+        ]
       }
     }
+  },
+  "pending_points": {
+    "scenes": {}
   },
   "safety": [
     "Templates are semantic crops of the target control, not large scene-background crops.",

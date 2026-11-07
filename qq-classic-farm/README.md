@@ -21,6 +21,27 @@
 
 QQ / 微信坐标必须区分 scene、fixed_ui 和未分类的场景内 UI。候选点只有用户明确确认后才进入正式配置。坐标核对期间只标点，不执行收获、种植、施肥、购买、领取奖励或分享发送等业务动作。
 
+## 独立操作脚本
+
+`scripts/farm_fertilize_once.py` 从已打开、无遮挡、土地无偏移的农场首页出发。01 号地需能打开已核对的两肥面板。脚本只做一轮普通肥，按小区域里的勾决定是否需要先勾选一键施肥。
+
+让目标农场处于前台，再从本项目目录调用。默认命令仅做无点击预检，传入 `--execute` 才发送点击。微信将 `qq` 换成 `wechat`。
+
+微信开关小程序和试行节奏见 [当前状态](docs/CURRENT.md#微信试行操作节奏)。
+
+```sh
+python3.13 scripts/farm_fertilize_once.py --platform qq
+python3.13 scripts/farm_fertilize_once.py --platform qq --execute
+```
+
+可用退出码做 if/else 拼接。执行模式退出码 `0` 表示普通化肥的点击已发送。退出码 `2` 时读取输出的停止原因，避免整段重放。缺少本地 Swift 辅助程序时，先运行以下命令。
+
+```sh
+mkdir -p _sandbox
+swiftc scripts/window_registry.swift -o _sandbox/farm_window_registry
+swiftc scripts/farm_click_batch.swift -o _sandbox/farm_click_batch
+```
+
 ## 旧代码边界
 
-工作区仍保留此前的 Runner、脚本和测试；它们目前不代表当前自动化方案。**暂缓处理仅适用于当前坐标核对阶段，不是永久弃用旧代码。**坐标完成后会整体复核项目内容，再按新需求决定旧代码和其他资料哪些值得保留、改造、合并、删除或重写；不预设必须兼容，也不预设全部重写。
+工作区保留此前的 Runner、脚本和测试，供新流程设计按需评估。是否复用以新流程的需求和验证结果为准。
