@@ -6,9 +6,9 @@
 2. 读 docs/INDEX.md，按当前场景只加载所需规则和资料。
 3. 真机观察前读 docs/CURRENT.md；有游戏操作时再读 docs/gameplay-rules.md。
 4. 选种/库存/成熟时间问题：读 docs/seed-catalog.md 与 data/seed-catalog.json。
-5. 按现行流程需要逐项评估旧 Runner 模块。旧计划与设计稿的索引见 docs/INDEX.md。
+5. 新增独立动作前先读 tasks/todo.md 的后续脚本条目。
 6. 历史只在考古或 NEAT 收尾时进入 docs/archive/；历史不得驱动当前坐标核对。
-7. 按键精灵式独立操作见 README.md「独立操作脚本」。普通施肥一次的入口是 scripts/farm_fertilize_once.py。
+7. 按键精灵式独立操作见 README.md「独立操作脚本」。
 
 ## 当前阶段
 
@@ -40,10 +40,15 @@
 | 工作区根 _sandbox/farm-coordinate-review.html | QQ / 微信统一坐标核对页 |
 | data/ui-layout.json | 土地网格、标准窗口和坐标层 |
 | data/ui-anchors.json | 固定 UI、已确认点与待确认候选 |
-| docs/gameplay-rules.md | 游戏玩法事实；其中 Runner/自动化实现描述不代表当前已批准方案 |
+| docs/gameplay-rules.md | 游戏规则、独立动作条件和开场方式 |
 | docs/seed-catalog.md / data/seed-catalog.json | 种子资料 |
+| docs/farm-planning-reference.md / data/farm-planning-reference.json | 规划公式、商店种子、生长阶段和土地升级 |
 | scripts/farm_fertilize_once.py | 从标准农场首页给作物施普通肥一次 |
-| IMPLEMENTATION_PLAN.md | 已暂停的旧 Runner V2 计划，仅供未来评估 |
+| scripts/farm_harvest_once.py | 从标准农场首页点一次手形「一键收获」 |
+| scripts/farm_plant_once.py | 从标准农场首页按本轮计划种普通种子或四格混种 |
+| scripts/farm_daily_task_once.py | 当天收获后，首位好友互动一次并点一次任务领奖 |
+| scripts/farm_daily_fertilizer_reward.py | 领取礼包商城的每日免费化肥 |
+| scripts/farm_hamster_once.py | 从首页识别仓鼠，命中后购买一次 |
 | docs/archive/ | 历史阶段归档 |
 
 ## 安全边界
@@ -53,7 +58,6 @@
 - 好友农场只在用户明确授权的坐标核对或正常日常互动中观察，不主动单独进入。
 - 真机输入须取得当前 Chat 对该平台及动作的明确授权。遇到账号安全或重新登录提示即停，交由用户处理。
 - 候选坐标、历史截图位置和脚本常量都不能替代用户确认。
-- 不默认沿用现有 Runner / 脚本；未来实现方式由用户在坐标核对完成后决定。
 
 ## PATHS
 
@@ -64,5 +68,11 @@
 - UI 点位：data/ui-anchors.json
 - 玩法事实：docs/gameplay-rules.md
 - 种子资料：docs/seed-catalog.md、data/seed-catalog.json
+- 规划底表：docs/farm-planning-reference.md、data/farm-planning-reference.json
 - 普通施肥一次：scripts/farm_fertilize_once.py
+- 一键收获一次：scripts/farm_harvest_once.py
+- 普通种植与四格混种：scripts/farm_plant_once.py、assets/ui/planting/
+- 种植计划：data/operation-plan.json、data/operation-plan-next.json，设置规则见 README.md「本轮计划文件」
+- 日常任务与免费化肥：scripts/farm_daily_task_once.py、scripts/farm_daily_fertilizer_reward.py，公用脚本 scripts/farm_daily_clicks.py，回家按钮模板 assets/ui/daily/
+- 仓鼠：scripts/farm_hamster_once.py，按钮模板 assets/ui/merchant/
 - 历史索引（含点按试验）：docs/archive/README.md

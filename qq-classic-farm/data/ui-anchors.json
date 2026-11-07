@@ -1497,6 +1497,18 @@
         ]
       },
       "merchant": {
+        "recognition": {
+          "qq": {
+            "rgb_points": [[137, 839, [252, 227, 189]], [152, 831, [252, 228, 190]], [121, 845, [101, 73, 41]]],
+            "buy_roi": [382, 935, 99, 59],
+            "reward_roi": [152, 178, 299, 92]
+          },
+          "wechat": {
+            "rgb_points": [[135, 829, [250, 231, 204]], [150, 860, [252, 228, 190]], [143, 838, [250, 231, 202]]],
+            "buy_roi": [400, 976, 99, 60],
+            "reward_roi": [159, 188, 306, 94]
+          }
+        },
         "status": "user_confirmed",
         "confirmed_at": "2026-11-05",
         "coordinate_layer": "scene_ui",
@@ -1582,14 +1594,14 @@
                   1005
                 ],
                 "kind": "action",
-                "note": "只记录位置，不执行购买。"
+                "note": "识别到商人购买按钮后使用此点。"
               }
             ]
           }
         },
         "notes": [
           "用户确认截图中标记与按钮对齐；微信旧截图缺少 44 像素顶栏，已用完整原图逐点对齐并将纵坐标修正 +44。",
-          "所有点位仅用于坐标记录，不代表授权购买或其他游戏操作。"
+          "仓鼠独立脚本在执行模式下先识别，再使用气泡和购买点。"
         ]
       },
       "friend-actions": {
@@ -2319,6 +2331,21 @@
           "Only use controls visible on the current page."
         ]
       },
+      "planting-enable-prompt": {
+        "sampled_at": "2026-11-08",
+        "game_version": "1.16.3.8",
+        "coordinate_space": "farm_canvas_logical_pixels",
+        "platforms": {
+          "qq": {
+            "prompt_search_rect": [96, 514, 507, 585],
+            "confirm_point": [418, 651]
+          },
+          "wechat": {
+            "prompt_search_rect": [98, 536, 529, 612],
+            "confirm_point": [434, 679]
+          }
+        }
+      },
       "fertilizer-switch": {
         "status": "user_confirmed",
         "confirmed_at": "2026-11-07",
@@ -2390,6 +2417,7 @@
         "coordinate_space": "farm_canvas_logical_pixels",
         "anchor": "Mean of the four confirmed standard plot centers covered by the initial preview, translated by the current whole-field displacement.",
         "formula": "confirm = mean(standard_centers_of_covered_plots) + scene_translation_xy + coverage_center_to_button_offset_xy",
+        "direct_button_search_margin_xy": [52, 14],
         "platforms": {
           "qq": {
             "canvas_size": [
@@ -2444,8 +2472,7 @@
           }
         },
         "notes": [
-          "Measure the whole-field translation on the current preview frame from multiple stable scene landmarks. The 17-plot displacements are sample observations.",
-          "Use only an initial 2x2 preview with the expected visible coverage and green confirmation button. The translation must agree across the scene landmarks."
+          "Use the initial 2x2 preview. The standalone planting script searches for the green button on the current frame within the bounded region around the standard center plus platform offset, and clicks the matched center. The 17-plot displacements are sample observations."
         ]
       },
       "reward-level-dismiss": {

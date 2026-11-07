@@ -7,10 +7,10 @@
     "quantity_initial_snapshot is the warehouse inventory snapshot captured on 2026-10-22 before subsequent verified inventory changes.",
     "quantity_latest_known may differ where later verified planting, purchases, or other inventory changes occurred."
   ],
-  "seed_count_unique": 46,
+  "seed_count_unique": 49,
   "platform_entry_counts": {
-    "qq": 44,
-    "wechat": 24
+    "qq": 46,
+    "wechat": 26
   },
   "seeds": [
     {
@@ -21,7 +21,7 @@
           "platform": "qq",
           "slot": "s1r3c3",
           "name": "似何莲种子",
-          "quantity_latest_known": 2,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -38,7 +38,10 @@
             "exp": "经验：3393/季",
             "income": "收入： ①） 8.2万/季"
           },
-          "quantity_initial_snapshot": 2
+          "quantity_initial_snapshot": 2,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -50,7 +53,7 @@
           "platform": "qq",
           "slot": "s1r2c4",
           "name": "凤仙花种子",
-          "quantity_latest_known": 1,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -67,7 +70,10 @@
             "exp": "经验：3393/季",
             "income": "收入： ①） 8.2万/季"
           },
-          "quantity_initial_snapshot": 1
+          "quantity_initial_snapshot": 1,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -80,8 +86,8 @@
           "slot": "r2c1",
           "name": "勿忘我种子",
           "quantity_latest_known": 16,
-          "quantity_confidence": "tracked",
-          "quantity_latest_known_basis": "2026-10-28 QQ picker observed 28 before one-key planting; 12 ordinary plots were planted with 勿忘我, leaving 16.",
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -98,7 +104,12 @@
             "exp": "经验：3958/季",
             "income": "收入： ①） 9.6万/季"
           },
-          "quantity_initial_snapshot": 28
+          "quantity_initial_snapshot": 28,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00"
         }
       }
     },
@@ -127,7 +138,14 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 22
+          "quantity_initial_snapshot": 22,
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -150,7 +168,14 @@
             "exp": "经验： 3742/季",
             "income": "收入： 9.5万/季"
           },
-          "quantity_initial_snapshot": 103
+          "quantity_initial_snapshot": 103,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -179,8 +204,10 @@
             "exp": "经验：688/季",
             "income": "收入： 國10/季"
           },
-          "quantity_latest_known_basis": "3 seeds consumed by verified one-key planting test; option disappeared from page 8.",
-          "quantity_initial_snapshot": 3
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_initial_snapshot": 3,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -209,13 +236,20 @@
             "exp": "经验：36191/季",
             "income": "收入： ①） 20万/季"
           },
-          "quantity_initial_snapshot": 4
+          "quantity_initial_snapshot": 4,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "r1c2",
           "name": "哈哈南瓜种子",
-          "quantity_latest_known": 6,
+          "quantity_latest_known": 9,
           "mature_time": "24小时",
           "harvests": "1季",
           "yield_per_harvest": "10个/季",
@@ -232,7 +266,14 @@
             "exp": "经验： 39916/季",
             "income": "收入： 20万/季"
           },
-          "quantity_initial_snapshot": 6
+          "quantity_initial_snapshot": 6,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -262,7 +303,13 @@
             "income": "收入： 9.6万/季"
           },
           "quantity_initial_snapshot": 77,
-          "quantity_latest_known_basis": "77 shown in verified QQ seed selector before planting; 24 consumed by one-key planting on 2026-10-23."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -291,7 +338,14 @@
             "exp": "经验： 4365/季",
             "income": "收入： 11万/季"
           },
-          "quantity_initial_snapshot": 30
+          "quantity_initial_snapshot": 30,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -320,7 +374,14 @@
             "exp": "经验：2261/季",
             "income": "收入： 5.5万/季"
           },
-          "quantity_initial_snapshot": 30
+          "quantity_initial_snapshot": 30,
+          "latest_warehouse_position": {
+            "page": 7,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -349,7 +410,14 @@
             "exp": "经验：3958/季",
             "income": "收入： 9.6万/季"
           },
-          "quantity_initial_snapshot": 60
+          "quantity_initial_snapshot": 60,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -372,7 +440,14 @@
             "exp": "经验：4365/季",
             "income": "收入： 11万/季"
           },
-          "quantity_initial_snapshot": 72
+          "quantity_initial_snapshot": 72,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -401,7 +476,14 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 108
+          "quantity_initial_snapshot": 108,
+          "latest_warehouse_position": {
+            "page": 6,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -424,7 +506,14 @@
             "exp": "经验： 3742/季",
             "income": "收入： 9.5万/季"
           },
-          "quantity_initial_snapshot": 108
+          "quantity_initial_snapshot": 108,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -436,7 +525,7 @@
           "platform": "qq",
           "slot": "r2c2",
           "name": "昙花种子",
-          "quantity_latest_known": 4,
+          "quantity_latest_known": 0,
           "mature_time": "8小时",
           "harvests": "2季",
           "yield_per_harvest": "172个/季",
@@ -453,7 +542,10 @@
             "exp": "经验：1979/季",
             "income": "收入： 4.8万/季"
           },
-          "quantity_initial_snapshot": 4
+          "quantity_initial_snapshot": 4,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -467,7 +559,7 @@
           "name": "星语铃花种子",
           "quantity_latest_known": 0,
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 QQ picker showed 2; both were planted into 2x2 special plots, leaving 0.",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "1380个/季",
@@ -484,13 +576,14 @@
             "exp": "经验：18095/季",
             "income": "收入： 44万/季"
           },
-          "quantity_initial_snapshot": 2
+          "quantity_initial_snapshot": 2,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "r1c3",
           "name": "星语铃花种子",
-          "quantity_latest_known": 10,
+          "quantity_latest_known": 8,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "1596个/季",
@@ -507,7 +600,14 @@
             "exp": "经验： 19958/季",
             "income": "收入： 51万/季"
           },
-          "quantity_initial_snapshot": 10
+          "quantity_initial_snapshot": 10,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -519,7 +619,7 @@
           "platform": "qq",
           "slot": "r4c3",
           "name": "月下美人种子",
-          "quantity_latest_known": 12,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -536,7 +636,10 @@
             "exp": "经验：3958/季",
             "income": "收入： 9.6万/季"
           },
-          "quantity_initial_snapshot": 12
+          "quantity_initial_snapshot": 12,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -559,7 +662,14 @@
             "exp": "经验： 4365/季",
             "income": "收入： 11万/季"
           },
-          "quantity_initial_snapshot": 72
+          "quantity_initial_snapshot": 72,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -588,7 +698,14 @@
             "exp": "经验：3958/季",
             "income": "收入： 9.6万/季"
           },
-          "quantity_initial_snapshot": 20
+          "quantity_initial_snapshot": 20,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -600,7 +717,7 @@
           "platform": "qq",
           "slot": "s2r4c4",
           "name": "月见草种子",
-          "quantity_latest_known": 51,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -617,14 +734,16 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_latest_known_basis": "75 shown on QQ seed selector page 9/9 before planting; 24 consumed by one-key planting on 2026-10-23 evening fast-path run.",
-          "quantity_initial_snapshot": 96
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_initial_snapshot": 96,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "r4c5",
           "name": "月见草种子",
-          "quantity_latest_known": 43,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "399个/季",
@@ -641,8 +760,10 @@
             "exp": "经验： 3742/季",
             "income": "收入： 9.5万/季"
           },
-          "quantity_latest_known_basis": "67 observed in warehouse snapshot; 24 consumed by verified WeChat one-key planting on 2026-10-22.",
-          "quantity_initial_snapshot": 67
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_initial_snapshot": 67,
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -671,7 +792,14 @@
             "exp": "经验： 4365/季",
             "income": "收入： 11万/季"
           },
-          "quantity_initial_snapshot": 30
+          "quantity_initial_snapshot": 30,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -700,7 +828,14 @@
             "exp": "经验：3958/季",
             "income": "收入： ①） 9.6万/季"
           },
-          "quantity_initial_snapshot": 76
+          "quantity_initial_snapshot": 76,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -730,8 +865,13 @@
             "income": "收入： ◎5万/季"
           },
           "quantity_initial_snapshot": 68,
-          "quantity_confidence": "tracked",
-          "quantity_latest_known_basis": "2026-10-24 QQ seed picker observed 44; 20 seeds planted in the current activity round, leaving 24."
+          "quantity_confidence": "verified",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 6,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00"
         },
         "wechat": {
           "platform": "wechat",
@@ -756,7 +896,8 @@
           },
           "quantity_initial_snapshot": 16,
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-24 WeChat seed picker was checked across all 5 pages and 森野甜莓 no longer appeared; prior known inventory was 16 and the user had planted the activity crop once, so current working inventory is 0."
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00"
         }
       }
     },
@@ -768,15 +909,14 @@
           "platform": "qq",
           "slot": "r1c5",
           "name": "森野黄金芽种子",
-          "quantity_latest_known": 0,
+          "quantity_latest_known": 7,
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 QQ picker showed 1 remaining before planting; that last 森野黄金芽 was planted, leaving 0.",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "10个/季",
-          "exp_per_harvest": "18095/季",
+          "exp_per_harvest": "18526/季",
           "income_per_harvest": "50万/季",
-          "seed_price_display": null,
           "fruit_value_display": "50000/个",
           "raw_detail_rows": {
             "price": "",
@@ -787,27 +927,36 @@
             "exp": "经验：18095/季",
             "income": "收入： 50万/季"
           },
-          "quantity_initial_snapshot": 1
+          "quantity_initial_snapshot": 1,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "details_observed_at": "2026-11-08T01:47:30+08:00"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "picker-p1c5-2026-10-24",
           "name": "森野黄金芽种子",
-          "quantity_latest_known": 0,
+          "quantity_latest_known": 4,
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 WeChat picker showed 1 remaining; that last 森野黄金芽 was planted into a complete purple 2x2, leaving 0.",
+          "quantity_latest_known_basis": "Read back from the live warehouse after the verified 2026-11-08 mixed planting trial.",
           "mature_time": "12小时",
           "harvests": "1季",
-          "yield_per_harvest": null,
-          "exp_per_harvest": null,
-          "income_per_harvest": null,
-          "seed_price_display": null,
-          "fruit_value_display": null,
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "20296/季",
+          "income_per_harvest": "50万/季",
+          "fruit_value_display": "50000/个",
           "raw_detail_rows": {},
-          "quantity_confidence": "tracked",
-          "quantity_latest_known_basis": "2026-10-24 WeChat seed picker observed 3 after the prior manual activity planting; two 4-plot 森野黄金芽 were planted on the two complete purple-land 2x2 blocks, leaving 1.",
           "quantity_first_observed": 3,
-          "quantity_first_observed_at": "2026-10-24"
+          "quantity_first_observed_at": "2026-10-24",
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T03:26:25+08:00",
+          "details_observed_at": "2026-11-08T01:48:08+08:00"
         }
       },
       "planting_type": "4格特殊种子",
@@ -838,7 +987,14 @@
             "exp": "经验：2261/季",
             "income": "收入： の 5.5万/季"
           },
-          "quantity_initial_snapshot": 92
+          "quantity_initial_snapshot": 92,
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -861,7 +1017,14 @@
             "exp": "经验： 2494/季",
             "income": "收入： 6.3万/季"
           },
-          "quantity_initial_snapshot": 116
+          "quantity_initial_snapshot": 116,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -890,7 +1053,14 @@
             "exp": "经验：3958/季",
             "income": "收入： ①） 9.6万/季"
           },
-          "quantity_initial_snapshot": 39
+          "quantity_initial_snapshot": 39,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -902,7 +1072,7 @@
           "platform": "qq",
           "slot": "r1c4",
           "name": "泡泡棉花糖种子",
-          "quantity_latest_known": 24,
+          "quantity_latest_known": 18,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "1380个/季",
@@ -919,7 +1089,14 @@
             "exp": "经验：18095/季",
             "income": "收入： 44万/季"
           },
-          "quantity_initial_snapshot": 24
+          "quantity_initial_snapshot": 24,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -942,7 +1119,14 @@
             "exp": "经验： 19958/季",
             "income": "收入： 51万/季"
           },
-          "quantity_initial_snapshot": 8
+          "quantity_initial_snapshot": 8,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -957,8 +1141,8 @@
           "quantity_latest_known": 4,
           "mature_time": "8小时",
           "harvests": "2季",
-          "yield_per_harvest": "690个/季",
-          "exp_per_harvest": "9048/季",
+          "yield_per_harvest": "714个/季",
+          "exp_per_harvest": "9263/季",
           "income_per_harvest": "22万/季",
           "seed_price_display": "1.2万",
           "fruit_value_display": "320/个",
@@ -971,7 +1155,15 @@
             "exp": "经验：9048/季",
             "income": "收入： ◎22万/季"
           },
-          "quantity_initial_snapshot": 4
+          "quantity_initial_snapshot": 4,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified",
+          "details_observed_at": "2026-11-08T01:46:23+08:00"
         },
         "wechat": {
           "platform": "wechat",
@@ -980,9 +1172,9 @@
           "quantity_latest_known": 8,
           "mature_time": "8小时",
           "harvests": "2季",
-          "yield_per_harvest": "798个/季",
-          "exp_per_harvest": "9979/季",
-          "income_per_harvest": "25万/季",
+          "yield_per_harvest": "817个/季",
+          "exp_per_harvest": "10148/季",
+          "income_per_harvest": "26万/季",
           "seed_price_display": "1.2万",
           "fruit_value_display": "320/个",
           "raw_detail_rows": {
@@ -994,7 +1186,15 @@
             "exp": "经验： 9979/季",
             "income": "收入： ◎ 25万/季"
           },
-          "quantity_initial_snapshot": 8
+          "quantity_initial_snapshot": 8,
+          "latest_warehouse_position": {
+            "page": 1,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified",
+          "details_observed_at": "2026-11-08T01:47:56+08:00"
         }
       }
     },
@@ -1006,7 +1206,7 @@
           "platform": "qq",
           "slot": "s1r4c4",
           "name": "狗尾草种子",
-          "quantity_latest_known": 696,
+          "quantity_latest_known": 686,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1023,7 +1223,14 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 696
+          "quantity_initial_snapshot": 696,
+          "latest_warehouse_position": {
+            "page": 6,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -1046,7 +1253,14 @@
             "exp": "经验： 3742/季",
             "income": "收入： 9.5万/季"
           },
-          "quantity_initial_snapshot": 664
+          "quantity_initial_snapshot": 664,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1075,7 +1289,14 @@
             "exp": "经验：3393/季",
             "income": "收入： ①） 8.2万/季"
           },
-          "quantity_initial_snapshot": 171
+          "quantity_initial_snapshot": 171,
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -1098,7 +1319,14 @@
             "exp": "经验： 3742/季",
             "income": "收入： 9.5万/季"
           },
-          "quantity_initial_snapshot": 67
+          "quantity_initial_snapshot": 67,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1110,7 +1338,7 @@
           "platform": "qq",
           "slot": "s1r3c4",
           "name": "米兰种子",
-          "quantity_latest_known": 2,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1127,7 +1355,10 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 2
+          "quantity_initial_snapshot": 2,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1139,7 +1370,7 @@
           "platform": "qq",
           "slot": "s2r4c3",
           "name": "紫茉莉种子",
-          "quantity_latest_known": 72,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1156,13 +1387,16 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 72
+          "quantity_initial_snapshot": 72,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "r4c4",
           "name": "紫茉莉种子",
-          "quantity_latest_known": 80,
+          "quantity_latest_known": 1,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "399个/季",
@@ -1180,7 +1414,13 @@
             "income": "收入： 9.5万/季"
           },
           "quantity_initial_snapshot": 72,
-          "quantity_latest_known_basis": "72 observed in warehouse snapshot; +8 acquired from verified WeChat hamster/mystery-merchant purchase on 2026-10-23."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1193,7 +1433,7 @@
           "slot": "r3c5",
           "name": "紫薇种子",
           "quantity_latest_known": 52,
-          "quantity_latest_known_basis": "76 verified in QQ picker on 2026-11-02; 24 consumed by verified one-key planting.",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1210,7 +1450,13 @@
             "exp": "经验：3958/季",
             "income": "收入： 9.6万/季"
           },
-          "quantity_initial_snapshot": 76
+          "quantity_initial_snapshot": 76,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1239,7 +1485,14 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 127
+          "quantity_initial_snapshot": 127,
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -1262,7 +1515,14 @@
             "exp": "经验： 3742/季",
             "income": "收入： 9.5万/季"
           },
-          "quantity_initial_snapshot": 105
+          "quantity_initial_snapshot": 105,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1291,7 +1551,14 @@
             "exp": "经验：1696/季",
             "income": "收入： ©. 4.1万/季"
           },
-          "quantity_initial_snapshot": 298
+          "quantity_initial_snapshot": 298,
+          "latest_warehouse_position": {
+            "page": 7,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -1315,7 +1582,13 @@
             "income": "收入： 4.7万/季"
           },
           "quantity_initial_snapshot": 165,
-          "quantity_latest_known_basis": "165 shown on WeChat seed selector page 5/5 before planting; 24 consumed by one-key planting on 2026-10-23 evening fast-path run."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1331,13 +1604,26 @@
           "quantity_first_observed": 30,
           "quantity_first_observed_at": "2026-10-24T18:28:15+08:00",
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "QQ picker page 2 slot 2 screenshot; red-berry icon matches 茱萸. No later known consumption."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "357个/季",
+          "exp_per_harvest": "4052/季",
+          "income_per_harvest": "9.9万/季",
+          "fruit_value_display": "280/个",
+          "details_observed_at": "2026-11-08T01:47:29+08:00",
+          "seed_price_display": "2000"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "r1c5",
           "name": "茱萸种子",
-          "quantity_latest_known": 30,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "399个/季",
@@ -1354,7 +1640,10 @@
             "exp": "经验： 4365/季",
             "income": "收入： 11万/季"
           },
-          "quantity_initial_snapshot": 30
+          "quantity_initial_snapshot": 30,
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1366,7 +1655,7 @@
           "platform": "qq",
           "slot": "r2c3",
           "name": "荷包牡丹种子",
-          "quantity_latest_known": 23,
+          "quantity_latest_known": 0,
           "mature_time": "8小时",
           "harvests": "2季",
           "yield_per_harvest": "172个/季",
@@ -1383,7 +1672,10 @@
             "exp": "经验：1979/季",
             "income": "收入： 4.8万/季"
           },
-          "quantity_initial_snapshot": 23
+          "quantity_initial_snapshot": 23,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1412,7 +1704,14 @@
             "exp": "经验：3958/季",
             "income": "收入： ①） 9.6万/季"
           },
-          "quantity_initial_snapshot": 44
+          "quantity_initial_snapshot": 44,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1441,7 +1740,14 @@
             "exp": "经验：1696/季",
             "income": "收入： 4.1万/季"
           },
-          "quantity_initial_snapshot": 17
+          "quantity_initial_snapshot": 17,
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1470,7 +1776,14 @@
             "exp": "经验：1696/季",
             "income": "收入： 4.1万/季"
           },
-          "quantity_initial_snapshot": 30
+          "quantity_initial_snapshot": 30,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1482,7 +1795,7 @@
           "platform": "qq",
           "slot": "s1r3c1",
           "name": "金银花种子",
-          "quantity_latest_known": 1,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1499,7 +1812,10 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 1
+          "quantity_initial_snapshot": 1,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1528,7 +1844,14 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 84
+          "quantity_initial_snapshot": 84,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 3
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1557,7 +1880,14 @@
             "exp": "经验：3958/季",
             "income": "收入： 9.6万/季"
           },
-          "quantity_initial_snapshot": 40
+          "quantity_initial_snapshot": 40,
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1569,7 +1899,7 @@
           "platform": "qq",
           "slot": "r4c4",
           "name": "银杏树苗种子",
-          "quantity_latest_known": 113,
+          "quantity_latest_known": 121,
           "mature_time": "8小时",
           "harvests": "2季",
           "yield_per_harvest": "172个/季",
@@ -1586,8 +1916,14 @@
             "exp": "经验：1696/季",
             "income": "收入： ◎4.1万/季"
           },
-          "quantity_latest_known_basis": "105 observed in warehouse snapshot; +8 acquired from verified hamster/mystery-merchant purchase on 2026-10-22.",
-          "quantity_initial_snapshot": 105
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_initial_snapshot": 105,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1616,7 +1952,14 @@
             "exp": "经验：1696/季",
             "income": "收入： 4.1万/季"
           },
-          "quantity_initial_snapshot": 28
+          "quantity_initial_snapshot": 28,
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1628,7 +1971,7 @@
           "platform": "qq",
           "slot": "s1r4c1",
           "name": "鹭草种子",
-          "quantity_latest_known": 2,
+          "quantity_latest_known": 0,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "345个/季",
@@ -1645,7 +1988,10 @@
             "exp": "经验：3393/季",
             "income": "收入： 8.2万/季"
           },
-          "quantity_initial_snapshot": 2
+          "quantity_initial_snapshot": 2,
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Previously documented seed was absent from the full live warehouse seed-tab scan.",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1674,7 +2020,14 @@
             "exp": "经验：3958/季",
             "income": "收入： ①） 9.6万/季"
           },
-          "quantity_initial_snapshot": 63
+          "quantity_initial_snapshot": 63,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified"
         },
         "wechat": {
           "platform": "wechat",
@@ -1698,7 +2051,13 @@
             "income": "收入： 11万/季"
           },
           "quantity_initial_snapshot": 118,
-          "quantity_latest_known_basis": "94 verified in WeChat picker on 2026-11-02; 24 consumed by verified one-key planting, leaving 70."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_confidence": "verified"
         }
       }
     },
@@ -1710,7 +2069,7 @@
           "platform": "qq",
           "slot": "warehouse-p6c3-2026-10-28",
           "name": "森野白桃种子",
-          "quantity_latest_known": 64,
+          "quantity_latest_known": 88,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "10个/季",
@@ -1727,13 +2086,18 @@
             "income": "收入：5万/季"
           },
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 live QQ warehouse."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 6,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "warehouse-p4c3-2026-10-28",
           "name": "森野白桃种子",
-          "quantity_latest_known": 12,
+          "quantity_latest_known": 8,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "10个/季",
@@ -1750,7 +2114,12 @@
             "income": "收入：5万/季"
           },
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 live WeChat warehouse."
+          "quantity_latest_known_basis": "Read back from the live warehouse after the verified 2026-11-08 mixed planting trial.",
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T03:26:25+08:00"
         }
       }
     },
@@ -1762,7 +2131,7 @@
           "platform": "qq",
           "slot": "warehouse-p4c1-2026-10-28",
           "name": "天山红枫种子",
-          "quantity_latest_known": 30,
+          "quantity_latest_known": 18,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "351个/季",
@@ -1780,13 +2149,18 @@
             "income": "收入：9.8万/季"
           },
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 live QQ warehouse."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "warehouse-p2c5-2026-10-28",
           "name": "天山红枫种子",
-          "quantity_latest_known": 30,
+          "quantity_latest_known": 14,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "405个/季",
@@ -1804,7 +2178,12 @@
             "income": "收入：11万/季"
           },
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 live WeChat warehouse."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 3,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00"
         }
       }
     },
@@ -1833,13 +2212,18 @@
             "income": "收入：5万/季"
           },
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 live QQ warehouse."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 6,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00"
         },
         "wechat": {
           "platform": "wechat",
           "slot": "warehouse-p4c4-2026-10-28",
           "name": "森野甜橙种子",
-          "quantity_latest_known": 108,
+          "quantity_latest_known": 104,
           "mature_time": "12小时",
           "harvests": "1季",
           "yield_per_harvest": "10个/季",
@@ -1856,9 +2240,131 @@
             "income": "收入：5万/季"
           },
           "quantity_confidence": "verified",
-          "quantity_latest_known_basis": "2026-10-28 live WeChat warehouse."
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "latest_warehouse_position": {
+            "page": 4,
+            "slot": 5
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00"
+        }
+      }
+    },
+    {
+      "name": "森野红柚种子",
+      "image": "assets/seeds/seed-047.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "name": "森野红柚种子",
+          "quantity_first_observed": 132,
+          "quantity_first_observed_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known": 132,
+          "latest_warehouse_position": {
+            "page": 7,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified",
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3474/季",
+          "income_per_harvest": "5万/季",
+          "fruit_value_display": "5000/个",
+          "details_observed_at": "2026-11-08T01:47:09+08:00"
+        },
+        "wechat": {
+          "platform": "wechat",
+          "name": "森野红柚种子",
+          "quantity_first_observed": 132,
+          "quantity_first_observed_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known": 132,
+          "latest_warehouse_position": {
+            "page": 5,
+            "slot": 1
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified",
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "10个/季",
+          "exp_per_harvest": "3806/季",
+          "income_per_harvest": "5万/季",
+          "fruit_value_display": "5000/个",
+          "details_observed_at": "2026-11-08T01:48:29+08:00"
+        }
+      }
+    },
+    {
+      "name": "白萝卜种子",
+      "image": "assets/seeds/seed-048.png",
+      "observations": {
+        "qq": {
+          "platform": "qq",
+          "name": "白萝卜种子",
+          "quantity_first_observed": 24,
+          "quantity_first_observed_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known": 24,
+          "latest_warehouse_position": {
+            "page": 7,
+            "slot": 4
+          },
+          "quantity_latest_known_at": "2026-11-08T01:46:56+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified",
+          "mature_time": "1分钟",
+          "harvests": "1季",
+          "yield_per_harvest": "5个/季",
+          "exp_per_harvest": "1/季",
+          "income_per_harvest": "10/季",
+          "fruit_value_display": "2/个",
+          "details_observed_at": "2026-11-08T01:47:11+08:00",
+          "seed_price_display": "1",
+          "seed_grade_display": "1品"
+        }
+      }
+    },
+    {
+      "name": "木槿种子",
+      "image": "assets/seeds/seed-049.png",
+      "observations": {
+        "wechat": {
+          "platform": "wechat",
+          "name": "木槿种子",
+          "quantity_first_observed": 4,
+          "quantity_first_observed_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known": 4,
+          "latest_warehouse_position": {
+            "page": 2,
+            "slot": 2
+          },
+          "quantity_latest_known_at": "2026-11-08T01:48:09+08:00",
+          "quantity_latest_known_basis": "Full live warehouse seed-tab scan; count read from the visible entry.",
+          "quantity_confidence": "verified",
+          "mature_time": "12小时",
+          "harvests": "1季",
+          "yield_per_harvest": "408个/季",
+          "exp_per_harvest": "4439/季",
+          "income_per_harvest": "11万/季",
+          "fruit_value_display": "280/个",
+          "details_observed_at": "2026-11-08T01:48:07+08:00",
+          "seed_price_display": "2000"
         }
       }
     }
-  ]
+  ],
+  "latest_warehouse_scan": {
+    "qq": {
+      "started_at": "2026-11-08T01:46:23+08:00",
+      "completed_at": "2026-11-08T01:46:56+08:00",
+      "in_stock_entries": 34
+    },
+    "wechat": {
+      "started_at": "2026-11-08T01:47:56+08:00",
+      "completed_at": "2026-11-08T01:48:09+08:00",
+      "in_stock_entries": 23
+    }
+  }
 }

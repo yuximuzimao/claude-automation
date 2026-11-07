@@ -8,8 +8,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from farm_geometry import (GeometryStop, WindowFrame, plot_action_point,
-                           plot_local_point, validate_farm_window)
+from farm_geometry import GeometryStop, WindowFrame, validate_farm_window
 
 
 class GeometryTests(unittest.TestCase):
@@ -20,38 +19,14 @@ class GeometryTests(unittest.TestCase):
     def test_qq_baseline_and_moved_window(self):
         frame = WindowFrame("QQ小程序", "QQ经典农场", 800, 100, 603, 1111)
         validate_farm_window(frame, "qq", self.layout)
-        x, y = plot_local_point("qq", 0, 0, frame, self.layout)
-        self.assertAlmostEqual(x, 351.8319, delta=0.01)
-        self.assertAlmostEqual(y, 566.2033, delta=0.01)
         self.assertEqual(frame.screen_point(100, 200), (900, 300))
         moved = WindowFrame("QQ小程序", "QQ经典农场", 10, 500, 603, 1111)
-        self.assertEqual(moved.screen_point(x, y), (10 + x, 500 + y))
-
-    def test_verified_plot_action_points_match_live_calibration(self):
-        qq = WindowFrame("QQ小程序", "QQ经典农场", 0, 0, 603, 1111)
-        x, y = plot_action_point("qq", 3, 2, qq, self.layout)
-        self.assertAlmostEqual(x, 301.52, delta=0.03)
-        self.assertAlmostEqual(y, 689.09, delta=0.03)
-
-        wechat = WindowFrame("微信", "QQ经典农场", 0, 0, 625, 1155)
-        x, y = plot_action_point("wechat", 3, 2, wechat, self.layout)
-        self.assertAlmostEqual(x, 304.19, delta=0.03)
-        self.assertAlmostEqual(y, 734.73, delta=0.03)
+        self.assertEqual(moved.screen_point(100, 200), (110, 700))
 
     def test_retina_pixel_to_local_then_screen(self):
         frame = WindowFrame("QQ小程序", "QQ经典农场", 120, 40, 603, 1111)
         self.assertEqual(frame.pixel_to_local(400, 600, 1206, 2222), (200, 300))
         self.assertEqual(frame.pixel_to_screen(400, 600, 1206, 2222), (320, 340))
-
-    def test_wechat_grid_and_special_anchor(self):
-        frame = WindowFrame("微信", "QQ经典农场", 0, 0, 625, 1155)
-        validate_farm_window(frame, "wechat", self.layout)
-        anchor = self.layout["platforms"]["wechat"]["safe_special_2x2"][0]
-        x, y = plot_local_point("wechat", *anchor["anchor_cell"], frame, self.layout)
-        self.assertGreater(x, 0)
-        self.assertLess(x, frame.width)
-        self.assertGreater(y, 0)
-        self.assertLess(y, frame.height)
 
     def test_mismatched_image_frame_stops(self):
         frame = WindowFrame("QQ小程序", "QQ经典农场", 0, 0, 603, 1111)
@@ -75,8 +50,6 @@ class GeometryTests(unittest.TestCase):
             frame.screen_point(603, 0)
         with self.assertRaises(GeometryStop):
             frame.pixel_to_local(1206, 0, 1206, 2222)
-        with self.assertRaises(GeometryStop):
-            plot_local_point("qq", 6, 0, frame, self.layout)
         with self.assertRaises(GeometryStop):
             WindowFrame("QQ小程序", "QQ经典农场", 0, 0, -1, 1111)
 

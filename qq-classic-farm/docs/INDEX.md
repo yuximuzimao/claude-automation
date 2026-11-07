@@ -7,27 +7,29 @@
 - ../SKILL.md：项目一级入口与当前坐标核对边界。
 - ../CLAUDE.md：稳定工作约束与安全边界。
 - CURRENT.md：当前阶段、已确认坐标范围与微信试行节奏。
-- ../tasks/todo.md：流程设计、旧实现评估和条件性补采事项。
+- ../tasks/todo.md：后续独立脚本、验收和条件性补采。
 - 工作区根 _sandbox/farm-coordinate-review.html：QQ / 微信唯一统一坐标核对页。
 - ../README.md：项目概览。
 
 ## 独立操作
 
 - ../scripts/farm_fertilize_once.py：普通施肥一次。
+- ../scripts/farm_harvest_once.py：手形「一键收获」一次。
+- ../scripts/farm_plant_once.py：普通种植与四格混种。
+- ../scripts/farm_daily_task_once.py、../scripts/farm_daily_fertilizer_reward.py：日常任务和每日免费化肥。共用 ../scripts/farm_daily_clicks.py 与 ../assets/ui/daily/ 中的回家按钮模板。
+- ../scripts/farm_hamster_once.py：仓鼠识别与购买。购买和奖励画面模板在 ../assets/ui/merchant/。
+- ../data/operation-plan.json、../data/operation-plan-next.json：本轮和下一轮计划（本地文件），字段见 ../README.md「本轮计划文件」。
+- ../assets/ui/planting/：QQ / 微信种植栏第一页、开启提示和四格确认键模板。勾选状态复用 ../assets/ui/picker/ 的 `*-one-key-{on,off}.png`。
 - ../assets/ui/qq-fertilizer-onekey-tick.png、../assets/ui/wechat-fertilizer-onekey-tick.png：两端一键施肥已勾选的小勾模板。
+- ../scripts/open_qq_farm.swift：已验证的 QQ 开场入口。窗口、点按和拖动基础工具分别为 ../scripts/window_registry.swift、../scripts/farm_click_batch.swift、../scripts/farm_drag.swift。
 
 ## 坐标与稳定资料
 
 - ../data/ui-layout.json：用户确认的土地中心、拟合网格、标准窗口与坐标层。 `plot_policy` 记录四格入口、禁点和逐格颜色状态。
 - ../data/ui-anchors.json：首页固定点、场景点位、版本限定样本与待确认候选。
-- ../data/seed-order.json、../data/farm-state.json：旧 Runner 路线的数据文件，当前坐标阶段不作为执行依据。
-- gameplay-rules.md：玩法事实；其中旧 Runner / 自动化实现描述不代表当前已批准方案。
+- gameplay-rules.md：玩法规则和独立动作条件。
 - seed-catalog.md / ../data/seed-catalog.json：种子资料。
-
-## 暂停的旧实现资料
-
-- ../IMPLEMENTATION_PLAN.md：旧 Runner V2 实施计划，当前暂停；坐标完成后的项目整体重整中重新评估。
-- superpowers/specs/2026-11-01-deterministic-farm-runner-v2-design.md：旧 Runner V2 设计，当前不作为实施依据；保留供后续整体评估。
+- farm-planning-reference.md / ../data/farm-planning-reference.json：规划公式、商店种子基础数据、生长阶段及 24 块地升级表。
 
 ## 历史
 

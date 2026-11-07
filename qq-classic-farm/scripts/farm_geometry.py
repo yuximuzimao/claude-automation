@@ -74,39 +74,3 @@ def validate_farm_window(
     if (abs(frame.width / baseline_w - 1) > max_size_deviation
         or abs(frame.height / baseline_h - 1) > max_size_deviation):
         raise GeometryStop("WINDOW_SIZE_CHANGED", "Farm canvas differs from calibrated baseline")
-
-
-def plot_local_point(
-    platform: str, u: int, v: int, frame: WindowFrame, layout: dict
-) -> tuple[float, float]:
-    validate_farm_window(frame, platform, layout)
-    if type(u) is not int or type(v) is not int or not 0 <= u <= 5 or not 0 <= v <= 3:
-        raise GeometryStop("INVALID_PLOT", f"Plot outside 4x6 grid: {(u, v)}")
-    config = layout["platforms"][platform]
-    ox, oy = config["normalized_origin"]
-    ux, uy = config["normalized_u_step"]
-    vx, vy = config["normalized_v_step"]
-    x = (ox + u * ux + v * vx) * frame.width
-    y = (oy + u * uy + v * vy) * frame.height
-    frame.screen_point(x, y)
-    return x, y
-
-
-def plot_action_point(
-    platform: str, u: int, v: int, frame: WindowFrame, layout: dict
-) -> tuple[float, float]:
-    """Return the calibrated clickable point for one fixed farm cell."""
-    x, y = plot_local_point(platform, u, v, frame, layout)
-    try:
-        dx, dy = layout["platforms"][platform]["planting"]["plot_click_offset_normalized"]
-    except (KeyError, TypeError, ValueError) as exc:
-        raise GeometryStop("PLOT_CLICK_UNCALIBRATED",
-                           f"No calibrated plot click offset for {platform}") from exc
-    if (type(dx) not in (int, float) or type(dy) not in (int, float)
-        or not all(isfinite(value) for value in (dx, dy))):
-        raise GeometryStop("PLOT_CLICK_UNCALIBRATED",
-                           f"Invalid plot click offset for {platform}")
-    x += dx * frame.width
-    y += dy * frame.height
-    frame.screen_point(x, y)
-    return x, y

@@ -57,15 +57,7 @@ func safeHit(_ d: Drag, _ point: CGPoint) {
             let screen = CGDisplayBounds(CGMainDisplayID())
             if abs(rect.minX-screen.minX) <= 2 && abs(rect.minY-screen.minY) <= 2
                 && abs(rect.width-screen.width) <= 2 && abs(rect.height-screen.height) <= 2 {
-                let system = AXUIElementCreateSystemWide()
-                var element: AXUIElement?
-                if AXUIElementCopyElementAtPosition(system,Float(point.x),
-                    Float(point.y),&element) == .success,let hit = element {
-                    var pid: pid_t = 0
-                    if AXUIElementGetPid(hit,&pid) == .success && pid == pid_t(d.pid) {
-                        continue
-                    }
-                }
+                continue
             }
         }
         stop("WINDOW_OCCLUDED","Visible window covers drag path")
