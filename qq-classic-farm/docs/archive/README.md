@@ -14,5 +14,5 @@
 - neat/2026-11-05-confirmed-coordinates-hamster-observations.md：本批核对页坐标的用户确认、平台/版本边界、截图裁切纠偏及仓鼠气泡有限离线观察。
 - neat/2026-11-06-hamster-recognition-provisional.md：仓鼠识别方案暂定、严格色点与连续扫描约束、有限试验和自然出现后的验证条件。
 - neat/2026-11-07-coordinate-review-handoff.md：本轮坐标成果与截图证据、四格确认算法及成熟星标旧资料的复核入口。
-- neat/2026-11-08-independent-actions-and-wechat-input-trials.md：正式坐标补齐、独立施肥脚本、微信施肥和一键收获观察，以及本机三组点按对照。
+- neat/2026-11-08-independent-actions-and-wechat-input-trials.md：正式坐标补齐、微信施肥和一键收获、本机点按对照及封存前的最后一轮。
 - neat/2026-11-08-farm-independent-actions-closeout.md：两端混种、QQ 日常与仓鼠真机验收，以及本轮收获前提醒。

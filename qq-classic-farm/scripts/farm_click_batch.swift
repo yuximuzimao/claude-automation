@@ -120,20 +120,35 @@ func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
     stop("WINDOW_OCCLUDED", "Target window is not topmost at click point", clicksSent: clicksSent)
 }
 
-guard CommandLine.arguments.count == 1 ||
-      (CommandLine.arguments.count == 2 &&
-       ["--preflight", "--execute"].contains(CommandLine.arguments[1])) else {
-    stop("INVALID_ARGUMENT", "Use no arguments, --preflight, or --execute")
+let arguments = Array(CommandLine.arguments.dropFirst())
+let wechatMain = arguments.count == 2 && arguments.last == "--wechat-main"
+let mode = arguments.first
+guard arguments.isEmpty ||
+      ((arguments.count == 1 || wechatMain) && (mode == "--preflight" || mode == "--execute")) else {
+    stop("INVALID_ARGUMENT", "Use no arguments, --preflight, or --execute; --wechat-main is optional for input modes")
 }
-let execute = CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "--execute"
-let preflight = CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "--preflight"
+let execute = mode == "--execute"
+let preflight = mode == "--preflight"
 let input = FileHandle.standardInput.readDataToEndOfFile()
 guard let batch = try? JSONDecoder().decode(Batch.self, from: input) else {
     stop("INVALID_BATCH", "Expected JSON Batch on stdin")
 }
-guard batch.window_id > 0, batch.pid > 0,
-      !batch.owner.isEmpty, batch.title == "QQ经典农场",
-      ["QQ小程序", "微信", "WeChat"].contains(batch.owner),
+let wechatOwners = ["微信", "WeChat"]
+if execute && wechatOwners.contains(batch.owner) {
+    let statusURL = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent().deletingLastPathComponent()
+        .appendingPathComponent("data/wechat-live-status.txt")
+    let status = try? String(contentsOf: statusURL, encoding: .utf8)
+    guard status?.trimmingCharacters(in: .whitespacesAndNewlines) == "active" else {
+        stop("WECHAT_FARM_SEALED", "WeChat farm live input is disabled")
+    }
+}
+let validIdentity = wechatMain
+    ? (wechatOwners.contains(batch.owner) && wechatOwners.contains(batch.title)
+       && [1007, 1008].contains(batch.frame.width) && batch.frame.height == 974
+       && batch.window_frame == nil && batch.actions.count == 1)
+    : (batch.title == "QQ经典农场" && (["QQ小程序"] + wechatOwners).contains(batch.owner))
+guard batch.window_id > 0, batch.pid > 0, validIdentity,
       batch.frame.width > 0, batch.frame.height > 0,
       [batch.frame.x, batch.frame.y, batch.frame.width, batch.frame.height].allSatisfy({ $0.isFinite }),
       (1...24).contains(batch.actions.count)

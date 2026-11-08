@@ -92,6 +92,15 @@ let execute = CommandLine.arguments[1] == "--execute"
 guard let d = try? JSONDecoder().decode(
     Drag.self,from:FileHandle.standardInput.readDataToEndOfFile()
 ) else { stop("INVALID_DRAG","Invalid JSON drag request") }
+if execute && ["微信", "WeChat"].contains(d.owner) {
+    let statusURL = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent().deletingLastPathComponent()
+        .appendingPathComponent("data/wechat-live-status.txt")
+    let status = try? String(contentsOf: statusURL, encoding: .utf8)
+    guard status?.trimmingCharacters(in: .whitespacesAndNewlines) == "active" else {
+        stop("WECHAT_FARM_SEALED", "WeChat farm live input is disabled")
+    }
+}
 guard d.window_id > 0,d.pid > 0,d.title == "QQ经典农场",
       ["QQ小程序","微信","WeChat"].contains(d.owner),
       (8...32).contains(d.steps),

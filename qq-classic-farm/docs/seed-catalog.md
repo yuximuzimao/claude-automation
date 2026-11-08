@@ -46,7 +46,7 @@
 
 - `quantity_initial_snapshot`：仅用于 2026-10-22 首次仓库采集时已经存在的条目。
 - `quantity_first_observed` / `quantity_first_observed_at`：用于首次在后续日期才建档的新种子/新平台观察。
-- `quantity_latest_known`：当前已知的最新数量，`quantity_latest_known_at` 记录当轮仓库清点完成时间。此前已建档但本平台全表未出现的种子，本轮记为 `0`。从未在该平台建档的种子保留无记录。
+- `quantity_latest_known`：当前已知的最新数量，`quantity_latest_known_at` 记录仓库清点完成或确认种植扣减的时间。此前已建档但本平台全表未出现的种子，清点时记为 `0`。从未在该平台建档的种子保留无记录。
 - `latest_warehouse_position`：最近整仓清点时的页码和槽位。它只代表该次仓库顺序，零库存条目没有位置。
 - `mature_time`：仓库详情显示的基础成熟时间。
 - `harvests`：可收季数。

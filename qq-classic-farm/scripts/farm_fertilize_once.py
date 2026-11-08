@@ -15,33 +15,91 @@ from anchor_locator import load_gray, normalized_cross_correlation
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CHECKBOX_WIDTH, CHECKBOX_HEIGHT = 36, 34
-TICK_THRESHOLD = 0.92
+UI = ROOT / "assets/ui"
 
 
 class FertilizerStop(RuntimeError):
     pass
 
 
-def tick_score(region, template):
-    if region.shape != (CHECKBOX_HEIGHT, CHECKBOX_WIDTH):
-        raise FertilizerStop("INVALID_CHECKBOX_CAPTURE")
+def require_wechat_live():
+    try:
+        status = (ROOT / "data/wechat-live-status.txt").read_text(encoding="utf-8").strip()
+    except (OSError, UnicodeError):
+        status = None
+    if status != "active":
+        raise FertilizerStop("WECHAT_FARM_SEALED")
+
+
+def template_center(region, template, origin, threshold):
     scores = normalized_cross_correlation(region, template)
     if scores is None:
-        raise FertilizerStop("INVALID_TICK_TEMPLATE")
-    return float(scores.max())
+        raise FertilizerStop("INVALID_FERTILIZER_TEMPLATE")
+    y, x = np.unravel_index(scores.argmax(), scores.shape)
+    if scores[y, x] < threshold:
+        return None
+    height, width = template.shape
+    return (origin[0] + x + width / 2, origin[1] + y + height / 2)
 
 
-def fertilize_once(click, capture_checkbox, land, checkbox, fertilizer, template):
+def fertilize_once(click, locate, land):
+    work = locate("work")
+    if work is not None:
+        click(work, 1000)
     click(land, 350)
-    score = tick_score(capture_checkbox(), template)
-    if score < TICK_THRESHOLD:
-        click(checkbox, 180)
-        score = tick_score(capture_checkbox(), template)
-        if score < TICK_THRESHOLD:
+    checked, checkbox, fertilizer = locate("panel")
+    if not checked:
+        click(checkbox, 350)
+        confirm = locate("enable_prompt")
+        if confirm is None:
+            raise FertilizerStop("ONE_KEY_FERTILIZER_PROMPT_NOT_FOUND")
+        click(confirm, 350)
+        checked, _, fertilizer = locate("panel")
+        if not checked:
             raise FertilizerStop("CHECKBOX_NOT_CONFIRMED")
     click(fertilizer, 0)
-    return score
+    return work is not None
+
+
+def fertilizer_locator(capture, platform, spec):
+    templates = {name: load_gray(UI / "fertilizer" / f"{platform}-{name}.png")
+                 for name in ("ordinary", "checkbox-off", "enable-prompt")}
+    templates["tick"] = load_gray(UI / f"{platform}-fertilizer-onekey-tick.png")
+    if platform == "qq":
+        templates["work"] = load_gray(UI / "onekey-farm.png")[67:119, 22:78]
+    else:
+        templates["work"] = load_gray(UI / "fertilizer/wechat-onekey-work.png")
+
+    work_rect = spec["work_rect"]
+    prompt_rect = spec["prompt_rect"]
+    bucket_rect = spec["bucket_rect"]
+    checkbox_rect = spec["checkbox_rect"]
+    panel_rect = (min(bucket_rect[0], checkbox_rect[0]), min(bucket_rect[1], checkbox_rect[1]),
+                  max(bucket_rect[2], checkbox_rect[2]), max(bucket_rect[3], checkbox_rect[3]))
+
+    def panel_match(image, rect, name, threshold):
+        x0, y0, x1, y1 = rect
+        x, y = panel_rect[:2]
+        return template_center(image[y0-y:y1-y, x0-x:x1-x], templates[name], rect[:2], threshold)
+
+    def locate(kind):
+        if kind == "work":
+            return template_center(capture(work_rect), templates["work"], work_rect[:2], 0.86)
+        if kind == "enable_prompt":
+            prompt = template_center(capture(prompt_rect), templates["enable-prompt"], prompt_rect[:2], 0.94)
+            return spec["confirm_point"] if prompt is not None else None
+
+        image = capture(panel_rect)
+        fertilizer = panel_match(image, bucket_rect, "ordinary", 0.90)
+        if fertilizer is None:
+            raise FertilizerStop("ORDINARY_FERTILIZER_NOT_FOUND")
+        tick = panel_match(image, checkbox_rect, "tick", 0.92)
+        unchecked = panel_match(image, checkbox_rect, "checkbox-off", 0.90)
+        if (tick is None) == (unchecked is None):
+            raise FertilizerStop("FERTILIZER_CHECKBOX_STATE_UNKNOWN")
+        return tick is not None, unchecked, fertilizer
+
+    return locate
 
 
 def farm_canvas(window, size, sidebar_width):
@@ -57,12 +115,14 @@ def farm_canvas(window, size, sidebar_width):
     }
 
 
-def checkbox_capture(canvas, checkbox):
-    x = canvas["x"] + checkbox[0] - CHECKBOX_WIDTH // 2
-    y = canvas["y"] + checkbox[1] - CHECKBOX_HEIGHT // 2
+def capture_region(canvas, region):
+    x0, y0, x1, y1 = region
+    if not (0 <= x0 < x1 <= canvas["width"] and 0 <= y0 < y1 <= canvas["height"]):
+        raise FertilizerStop("CAPTURE_REGION_OUTSIDE_WINDOW")
+    x, y = canvas["x"] + x0, canvas["y"] + y0
     if x != round(x) or y != round(y):
         raise FertilizerStop("NONINTEGRAL_CAPTURE_ORIGIN")
-    size = (CHECKBOX_WIDTH, CHECKBOX_HEIGHT)
+    size = (x1 - x0, y1 - y0)
     rect = f"{round(x)},{round(y)},{size[0]},{size[1]}"
     with tempfile.TemporaryDirectory(prefix="farm-fertilizer-") as directory:
         path = Path(directory) / "checkbox.png"
@@ -74,13 +134,18 @@ def checkbox_capture(canvas, checkbox):
             if image.size == tuple(2 * dimension for dimension in size):
                 image = image.resize(size, Image.Resampling.LANCZOS)
             if image.size != size:
-                raise FertilizerStop("INVALID_CHECKBOX_CAPTURE")
+                raise FertilizerStop("INVALID_REGION_CAPTURE")
             return np.asarray(image.convert("L"), dtype=np.float32)
 
 
-def click_batch(helper, mode, target, actions):
+def click_batch(helper, mode, target, actions, *, wechat_main=False):
+    if mode == "--execute" and target["owner"] in ("微信", "WeChat"):
+        require_wechat_live()
+    command = [str(helper), mode]
+    if wechat_main:
+        command.append("--wechat-main")
     result = subprocess.run(
-        [str(helper), mode],
+        command,
         input=json.dumps({**target, "actions": actions}),
         text=True, capture_output=True, timeout=5,
     )
@@ -108,11 +173,11 @@ def main():
         anchors = json.loads((ROOT / "data/ui-anchors.json").read_text())
         config = layout["platforms"][platform]
         land = config["confirmed_land_centers"]["points"][0][0]
-        view = anchors["fixed_points"]["scenes"]["fertilizer-switch"]["views"]["onekey"]
+        scene = anchors["fixed_points"]["scenes"]["fertilizer-switch"]
+        view = scene["views"]["onekey"]
         points = {point["id"]: point[platform] for point in view["points"]}
         checkbox = points["onekey-fertilizer"]
         fertilizer = points["ordinary-fertilizer"]
-        template = load_gray(ROOT / "assets/ui" / f"{platform}-fertilizer-onekey-tick.png")
 
         registry = subprocess.run(
             [str(args.registry), "--platform", platform],
@@ -134,11 +199,9 @@ def main():
             ])
 
         if args.execute:
-            score = fertilize_once(
-                click, lambda: checkbox_capture(canvas, checkbox),
-                land, checkbox, fertilizer, template,
-            )
-            result = {"status": "fertilizer_click_sent", "checkbox_score": round(score, 3)}
+            locate = fertilizer_locator(lambda rect: capture_region(canvas, rect), platform, scene["recognition"][platform])
+            worked = fertilize_once(click, locate, land)
+            result = {"status": "fertilizer_click_sent", "onekey_work_clicked": worked}
         else:
             click_batch(args.click_helper, "--preflight", target, [
                 {"x": x, "y": y, "delay_ms": 0} for x, y in (land, checkbox, fertilizer)

@@ -2,7 +2,7 @@
 
 ## DO FIRST
 
-1. 先读 docs/CURRENT.md 和 tasks/todo.md，确认独立操作设计范围、微信试行节奏和补采事项；需要回看点位时打开工作区根目录 _sandbox/farm-coordinate-review.html。
+1. 先读 docs/CURRENT.md 的平台运行状态，再读 tasks/todo.md，确认启用范围和补采事项；需要回看点位时打开工作区根目录 _sandbox/farm-coordinate-review.html。
 2. 读 docs/INDEX.md，按当前场景只加载所需规则和资料。
 3. 真机观察前读 docs/CURRENT.md；有游戏操作时再读 docs/gameplay-rules.md。
 4. 选种/库存/成熟时间问题：读 docs/seed-catalog.md 与 data/seed-catalog.json。
@@ -35,6 +35,7 @@
 | 文件 | 用途 |
 | --- | --- |
 | docs/CURRENT.md | 当前阶段、已确认坐标范围、现场与操作边界 |
+| data/wechat-live-status.txt | 微信真机开关 |
 | tasks/todo.md | 独立操作设计、真机验收和条件性补采 |
 | docs/INDEX.md | 文档导航 |
 | 工作区根 _sandbox/farm-coordinate-review.html | QQ / 微信统一坐标核对页 |
@@ -43,10 +44,12 @@
 | docs/gameplay-rules.md | 游戏规则、独立动作条件和开场方式 |
 | docs/seed-catalog.md / data/seed-catalog.json | 种子资料 |
 | docs/farm-planning-reference.md / data/farm-planning-reference.json | 规划公式、商店种子、生长阶段和土地升级 |
-| scripts/farm_fertilize_once.py | 从标准农场首页给作物施普通肥一次 |
-| scripts/farm_harvest_once.py | 从标准农场首页点一次手形「一键收获」 |
+| scripts/farm_window.py | 打开或关闭小程序 |
+| scripts/farm_fertilize_once.py | 从标准首页检查一键务农并施普通肥一次 |
+| scripts/farm_harvest_once.py | 按实种计划逐个收四格星标，再点手形「一键收获」 |
 | scripts/farm_plant_once.py | 从标准农场首页按本轮计划种普通种子或四格混种 |
 | scripts/farm_daily_task_once.py | 当天收获后，首位好友互动一次并点一次任务领奖 |
+| scripts/farm_friend_sweep.py | 连续拜访好友并各互动一次，未识别到按钮时回家 |
 | scripts/farm_daily_fertilizer_reward.py | 领取礼包商城的每日免费化肥 |
 | scripts/farm_hamster_once.py | 从首页识别仓鼠，命中后购买一次 |
 | docs/archive/ | 历史阶段归档 |
@@ -62,6 +65,7 @@
 ## PATHS
 
 - 当前阶段：docs/CURRENT.md
+- 微信真机开关：data/wechat-live-status.txt
 - Todo：tasks/todo.md
 - 坐标核对页：工作区根目录 _sandbox/farm-coordinate-review.html
 - 网格与坐标层：data/ui-layout.json
@@ -69,10 +73,12 @@
 - 玩法事实：docs/gameplay-rules.md
 - 种子资料：docs/seed-catalog.md、data/seed-catalog.json
 - 规划底表：docs/farm-planning-reference.md、data/farm-planning-reference.json
-- 普通施肥一次：scripts/farm_fertilize_once.py
-- 一键收获一次：scripts/farm_harvest_once.py
+- 小程序开关：scripts/farm_window.py、assets/ui/window/
+- 普通施肥一次：scripts/farm_fertilize_once.py、assets/ui/fertilizer/
+- 收获：scripts/farm_harvest_once.py、assets/ui/harvest/
 - 普通种植与四格混种：scripts/farm_plant_once.py、assets/ui/planting/
 - 种植计划：data/operation-plan.json、data/operation-plan-next.json，设置规则见 README.md「本轮计划文件」
 - 日常任务与免费化肥：scripts/farm_daily_task_once.py、scripts/farm_daily_fertilizer_reward.py，公用脚本 scripts/farm_daily_clicks.py，回家按钮模板 assets/ui/daily/
+- 好友连续互动：scripts/farm_friend_sweep.py、assets/ui/friends/
 - 仓鼠：scripts/farm_hamster_once.py，按钮模板 assets/ui/merchant/
 - 历史索引（含点按试验）：docs/archive/README.md

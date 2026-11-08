@@ -22,6 +22,16 @@
         0.45
       ],
       "click": "template_center",
+      "platforms": {
+        "qq": {
+          "hand_rect": [226, 741, 369, 900],
+          "special_rects": {"01": [324, 520, 356, 551]}
+        },
+        "wechat": {
+          "hand_rect": [232, 774, 387, 935],
+          "special_rects": {"01": [337, 543, 369, 574], "07": [422, 586, 454, 617]}
+        }
+      },
       "validation": {
         "qq_positive_score": 0.914,
         "wechat_positive_score": 1.0,
@@ -2023,6 +2033,10 @@
         "status": "user_confirmed",
         "confirmed_at": "2026-11-06",
         "coordinate_layer": "scene_ui",
+        "action_strip_xyxy": {
+          "qq": [207, 775, 410, 865],
+          "wechat": [212, 805, 425, 903]
+        },
         "views": {
           "first": {
             "label": "首次进入",
@@ -2351,6 +2365,24 @@
         "confirmed_at": "2026-11-07",
         "coordinate_layer": "scene_ui",
         "entry_plot": 1,
+        "recognition": {
+          "sampled_at": "2026-11-08",
+          "coordinate_space": "farm_canvas_logical_pixels; rectangles are x0,y0,x1,y1",
+          "qq": {
+            "work_rect": [244, 768, 354, 882],
+            "bucket_rect": [253, 638, 341, 714],
+            "checkbox_rect": [389, 718, 461, 795],
+            "prompt_rect": [90, 509, 268, 559],
+            "confirm_point": [419, 648]
+          },
+          "wechat": {
+            "work_rect": [252, 795, 366, 914],
+            "bucket_rect": [262, 667, 350, 743],
+            "checkbox_rect": [404, 750, 477, 828],
+            "prompt_rect": [94, 530, 279, 583],
+            "confirm_point": [436, 677]
+          }
+        },
         "views": {
           "onekey": {
             "label": "01 号地 · 一键施肥",

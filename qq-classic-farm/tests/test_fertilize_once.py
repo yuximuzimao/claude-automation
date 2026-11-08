@@ -7,87 +7,79 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
+from farm_fertilize_once import FertilizerStop, farm_canvas, fertilize_once, template_center
 
-def test_checked_tick_allows_exactly_one_fertilizer_click():
-    from farm_fertilize_once import fertilize_once
 
-    tick = np.full((19, 21), 95, dtype=np.float32)
-    tick[8:13, 2:9] = 179
-    tick[3:10, 9:18] = 180
-    checkbox = np.full((34, 36), 95, dtype=np.float32)
-    checkbox[8:27, 7:28] = tick
-    land, checkbox_center, fertilizer = (341.6, 583.9), (425, 754), (297, 676)
+LAND = (355.8, 607)
+WORK = (309, 853)
+CHECKBOX = (440, 799)
+CONFIRM = (436, 677)
+FERTILIZER = (307, 709)
+
+
+def run_fertilize(states, events):
+    states = iter(states)
+
+    def locate(kind):
+        events.append(kind)
+        return next(states)
+
+    return fertilize_once(lambda point, delay: events.append((point, delay)), locate, LAND)
+
+
+def test_already_checked_without_work_uses_one_dose():
     events = []
-
-    def capture():
-        events.append("capture-checkbox")
-        return checkbox
-
-    fertilize_once(
-        lambda point, delay: events.append(point),
-        capture, land, checkbox_center, fertilizer, tick,
-    )
-    assert events == [land, "capture-checkbox", fertilizer]
+    assert run_fertilize([None, (True, None, FERTILIZER)], events) is False
+    assert events == ["work", (LAND, 350), "panel", (FERTILIZER, 0)]
 
 
-def test_missing_tick_toggles_once_and_then_applies_fertilizer():
-    from farm_fertilize_once import fertilize_once
-
-    tick = np.full((19, 21), 95, dtype=np.float32)
-    tick[8:13, 2:9] = 179
-    tick[3:10, 9:18] = 180
-    unchecked = np.full((34, 36), 95, dtype=np.float32)
-    checked = unchecked.copy()
-    checked[8:27, 7:28] = tick
-    frames = iter([unchecked, checked])
-    land, checkbox_center, fertilizer = (355.8, 607), (441, 786), (306, 705)
+def test_work_precedes_plot_and_waits_one_second():
     events = []
-
-    def capture():
-        events.append("capture-checkbox")
-        return next(frames)
-
-    fertilize_once(
-        lambda point, delay: events.append(point),
-        capture, land, checkbox_center, fertilizer, tick,
-    )
-    assert events == [land, "capture-checkbox", checkbox_center, "capture-checkbox", fertilizer]
+    assert run_fertilize([WORK, (True, None, FERTILIZER)], events) is True
+    assert events == ["work", (WORK, 1000), (LAND, 350), "panel", (FERTILIZER, 0)]
 
 
-def test_still_unchecked_after_toggle_does_not_apply_fertilizer():
-    from farm_fertilize_once import FertilizerStop, fertilize_once
-
-    tick = np.arange(399, dtype=np.float32).reshape(19, 21)
-    land, checkbox_center = (355.8, 607), (441, 786)
+def test_unchecked_toggles_confirms_and_reads_back_before_dosing():
     events = []
-    with pytest.raises(FertilizerStop, match="CHECKBOX_NOT_CONFIRMED"):
-        fertilize_once(
-            lambda point, delay: events.append(point),
-            lambda: np.full((34, 36), 95, dtype=np.float32),
-            land, checkbox_center, (306, 705), tick,
-        )
-    assert events == [land, checkbox_center]
+    moved_bucket = (307, 696)
+    run_fertilize([None, (False, CHECKBOX, FERTILIZER), CONFIRM, (True, None, moved_bucket)], events)
+    assert events == [
+        "work", (LAND, 350), "panel", (CHECKBOX, 350),
+        "enable_prompt", (CONFIRM, 350), "panel", (moved_bucket, 0),
+    ]
 
 
-def test_capture_error_does_not_toggle_checkbox():
-    from farm_fertilize_once import fertilize_once
+@pytest.mark.parametrize(("tail", "reason"), [
+    ([None], "ONE_KEY_FERTILIZER_PROMPT_NOT_FOUND"),
+    ([CONFIRM, (False, CHECKBOX, FERTILIZER)], "CHECKBOX_NOT_CONFIRMED"),
+])
+def test_unconfirmed_checkbox_never_doses(tail, reason):
+    events = []
+    with pytest.raises(FertilizerStop, match=reason):
+        run_fertilize([None, (False, CHECKBOX, FERTILIZER), *tail], events)
+    assert (FERTILIZER, 0) not in events
+    assert events.count((CHECKBOX, 350)) == 1
 
-    def capture():
+
+def test_capture_failure_stops_before_any_click():
+    def capture_failed(kind):
         raise OSError("screenshot unavailable")
 
     events = []
-    land = (341.6, 583.9)
     with pytest.raises(OSError, match="screenshot unavailable"):
-        fertilize_once(
-            lambda point, delay: events.append(point),
-            capture, land, (425, 754), (297, 676), np.empty((19, 21)),
-        )
-    assert events == [land]
+        fertilize_once(lambda *args: events.append(args), capture_failed, LAND)
+    assert events == []
+
+
+def test_template_center_maps_shifted_control_back_to_canvas():
+    rng = np.random.default_rng(35)
+    template = rng.integers(50, 220, size=(6, 8)).astype(np.float32)
+    region = np.full((30, 26), 95, dtype=np.float32)
+    region[13:19, 9:17] = template
+    assert template_center(region, template, (400, 754), 0.90) == (413, 770)
 
 
 def test_embedded_wechat_clicks_use_right_farm_canvas():
-    from farm_fertilize_once import farm_canvas
-
     window = {"x": 835, "y": 149, "width": 1039, "height": 1155}
     assert farm_canvas(window, (625, 1155), 414) == {
         "x": 1249, "y": 149, "width": 625, "height": 1155,
