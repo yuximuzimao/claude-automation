@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Visit consecutive friends, use their shared interaction point once, and return home."""
+"""Visit consecutive friends, click one recognized interaction button per friend, and return home."""
 from __future__ import annotations
 
 import argparse
@@ -16,27 +16,25 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_VISITS = 100
 
 
-def interaction_state(image, templates, origin, shared_point):
-    centers = [point for template in templates
-               if (point := template_center(image, template, origin, 0.88)) is not None]
-    if not centers:
-        return "no_action"
-    x, y = shared_point
-    if any(abs(cx - x) <= 28 and abs(cy - y) <= 10 for cx, cy in centers):
-        return "action"
-    return "shared_point_outside_button"
+def interaction_target(image, templates, origin):
+    """Return the first recognized interaction-button center, preferring steal then work."""
+    for template in templates:
+        point = template_center(image, template, origin, 0.88)
+        if point is not None:
+            return point
+    return None
 
 
-def sweep(click, read_action, go_home, entry, first_visit, action_point, next_points, limit=MAX_VISITS):
+def sweep(click, read_action, go_home, entry, first_visit, next_points, limit=MAX_VISITS):
     click(entry, 650)
     click(first_visit, 850)
     interactions = 0
     for index in range(limit):
-        state = read_action()
-        if state != "action":
+        action = read_action()
+        if action is None:
             go_home()
-            return state, interactions
-        click(action_point, 650)
+            return "no_action", interactions
+        click(action, 650)
         interactions += 1
         if index + 1 < limit:
             click(next_points[min(index, 2)], 850)
@@ -64,7 +62,6 @@ def main():
         later = visits["next"]["points"]
         entry = find_point(fixed["home"]["points"], platform, "friends")
         first_visit = find_point(scenes["friend-list"]["views"]["first-visit"]["points"], platform, "first-visit")
-        shared = find_point(first, platform, "single-action")
         next_points = [find_point(first, platform, name) for name in ("second-friend", "third-friend")]
         next_points.append(find_point(later, platform, "fourth-onward"))
         templates = [load_gray(ROOT / "assets/ui/friends" / f"{platform}-{name}.png") for name in ("steal", "work")]
@@ -78,19 +75,19 @@ def main():
             clicks += 1
 
         def read_action():
-            return interaction_state(capture_region(target["frame"], strip), templates, strip[:2], shared)
+            return interaction_target(capture_region(target["frame"], strip), templates, strip[:2])
 
         def go_home():
             click(return_home_point(frame, platform, layout), 800)
 
         if not args.execute:
             click_batch(args.click_helper, "--preflight", target, [
-                {"x": x, "y": y, "delay_ms": 0} for x, y in (entry, first_visit, shared, *next_points)
+                {"x": x, "y": y, "delay_ms": 0} for x, y in (entry, first_visit, *next_points)
             ])
             print(json.dumps({"status": "preflight_ok_no_click", "clicks_sent": 0}))
             return 0
 
-        reason, interactions = sweep(click, read_action, go_home, entry, first_visit, shared, next_points)
+        reason, interactions = sweep(click, read_action, go_home, entry, first_visit, next_points)
         status = "return_home_click_sent" if reason == "no_action" else "stopped_return_home_click_sent"
         print(json.dumps({"status": status, "reason": reason, "interaction_clicks": interactions, "clicks_sent": clicks}))
         return 0 if reason == "no_action" else 2

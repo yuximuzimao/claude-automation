@@ -1458,9 +1458,32 @@
             ]
           }
         },
+        "purchase_dialog": {
+          "status": "live_sample_confirmed",
+          "observed_at": "2026-11-01",
+          "platform": "qq",
+          "baseline_window_size": [
+            603,
+            1111
+          ],
+          "white_radish": {
+            "max_button": [
+              466,
+              603
+            ],
+            "confirm_button": [
+              302,
+              744
+            ],
+            "max_quantity": 99,
+            "evidence": "_sandbox/farm-incident-20261101/qq-radish-buy-dialog.jpg",
+            "note": "MAX is the rightmost quantity-control icon. Coordinates were re-located from the live QQ purchase dialog at 2x logical mapping."
+          }
+        },
         "notes": [
           "The three shop states (seeds, pets, tools) are user-confirmed.",
           "Grid coordinates identify currently visible product slots; platform-specific item names are retained where they differ.",
+          "White-radish purchase-dialog MAX and confirm coordinates come from the 2026-11-01 live QQ sample.",
           "Product cards and purchase controls are coordinate references only; do not click them during calibration."
         ]
       },

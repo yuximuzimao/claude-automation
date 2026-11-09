@@ -1,4 +1,4 @@
-"""Guarded click runner shared by the independent daily farm actions."""
+"""Guarded click helper shared by the independent daily farm actions."""
 from __future__ import annotations
 
 import argparse
