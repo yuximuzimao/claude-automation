@@ -60,7 +60,25 @@ def checkbox_state(image, point, templates):
     return states[0]
 
 
-def plant(click, capture, steps, lands, picker, prompt, confirm, templates):
+def seed_slot_offset(picker, slot, page_items=5):
+    if type(page_items) is not int or not 1 <= page_items <= 5 or not 1 <= slot <= page_items:
+        raise ValueError("INVALID_SEED_PAGE_ITEMS_OR_SLOT")
+    # Slot is the ordinal within the page, not the fixed five-icon coordinate.
+    position = slot - 1 + (5 - page_items) / 2
+    left = int(position)
+    right = min(left + 1, 4)
+    fraction = position - left
+    offsets = picker["seed_slot_offsets"]
+    return tuple(a + (b - a) * fraction for a, b in zip(offsets[left], offsets[right]))
+
+
+def plan_page_sizes(path, platform):
+    planting = json.loads(path.read_text())[platform]["planting"]
+    entries = planting["special"] + ([planting["ordinary"]] if planting["ordinary"] else [])
+    return [entry.get("page_items", 5) for entry in entries]
+
+
+def plant(click, capture, steps, lands, picker, prompt, confirm, templates, page_sizes=None):
     for index, (plot, page, slot, group) in enumerate(steps):
         click(lands[plot], PICKER_DELAY_MS)
         image = capture()
@@ -84,7 +102,7 @@ def plant(click, capture, steps, lands, picker, prompt, confirm, templates):
 
         for _ in range(page - 1):
             click(shifted(anchor, picker["next_page_offset"]), PAGE_DELAY_MS)
-        click(shifted(anchor, picker["seed_slot_offsets"][slot - 1]), PREVIEW_DELAY_MS if group else 0)
+        click(shifted(anchor, seed_slot_offset(picker, slot, page_sizes[index] if page_sizes else 5)), PREVIEW_DELAY_MS if group else 0)
         if not group:
             sleep(ORDINARY_SETTLE_SECONDS)
             continue
@@ -131,6 +149,17 @@ def plan_object(value, keys, name):
 
 
 def seed_position(value, keys, name):
+    if isinstance(value, dict):
+        if "quantity" in value and (type(value["quantity"]) is not int or value["quantity"] <= 0):
+            raise ValueError("INVALID_PLANNED_SEED_QUANTITY")
+        if "seed_name" in value and not isinstance(value["seed_name"], str):
+            raise ValueError("INVALID_PLANNED_SEED_NAME")
+        value = {key: item for key, item in value.items() if key not in ("seed_name", "quantity")}
+    if isinstance(value, dict) and "page_items" in value:
+        count = value["page_items"]
+        if type(count) is not int or not 1 <= count <= 5 or not 1 <= value.get("slot", 0) <= count:
+            raise ValueError("INVALID_SEED_PAGE_ITEMS_OR_SLOT")
+        value = {key: item for key, item in value.items() if key != "page_items"}
     position = plan_object(value, keys, name)
     if any(type(position[key]) is not int for key in keys):
         raise ValueError(f"{name} fields must be integers")
@@ -140,7 +169,13 @@ def seed_position(value, keys, name):
 def read_plan(path, platform, policy):
     plan = plan_object(json.loads(path.read_text(encoding="utf-8")), ("qq", "wechat"), "plan")
     selected = plan_object(plan[platform], ("planting", "daily"), platform)
-    planting = plan_object(selected["planting"], ("special", "ordinary"), f"{platform}.planting")
+    planting = selected["planting"]
+    keys = ("special", "ordinary", "ordinary_after_exhaustion") if isinstance(planting, dict) and "ordinary_after_exhaustion" in planting else ("special", "ordinary")
+    planting = plan_object(planting, keys, f"{platform}.planting")
+    if "ordinary_after_exhaustion" in planting:
+        if planting["ordinary"] is None:
+            raise ValueError("FOLLOWUP_REQUIRES_FIRST_ORDINARY")
+        seed_position(planting["ordinary_after_exhaustion"], ("page", "slot"), "ordinary_after_exhaustion")
     daily = plan_object(selected["daily"], DAILY_ACTIONS, f"{platform}.daily")
     if any(type(flag) is not bool for flag in daily.values()):
         raise ValueError(f"{platform}.daily fields must be true or false")
@@ -163,13 +198,27 @@ def main():
     mode.add_argument("--execute", action="store_true", help="Post clicks. Default is a no-click preflight.")
     parser.add_argument("--registry", type=Path, default=ROOT / "_sandbox/farm_window_registry")
     parser.add_argument("--click-helper", type=Path, default=ROOT / "_sandbox/farm_click_batch")
+    parser.add_argument("--followup-entry", type=int, help="Only plant the exhaustion follow-up, using a live-confirmed empty plot.")
     args = parser.parse_args()
 
     try:
         platform = args.platform
         layout = json.loads((ROOT / "data/ui-layout.json").read_text())
         steps, daily = read_plan(args.plan, platform, layout["plot_policy"])
+        planting = json.loads(args.plan.read_text())[platform]["planting"]
+        followup = planting.get("ordinary_after_exhaustion")
+        page_sizes = plan_page_sizes(args.plan, platform)
+        if args.followup_entry is not None:
+            if not followup:
+                raise ValueError("NO_EXHAUSTION_FOLLOWUP_IN_PLAN")
+            plot = args.followup_entry
+            occupied_special = {p for _, _, _, group in steps if group for p in group}
+            if not 1 <= plot <= 24 or plot in layout["plot_policy"]["forbidden_single_click"] or plot in occupied_special:
+                raise ValueError("INVALID_FOLLOWUP_EMPTY_ENTRY")
+            steps = [(plot, followup["page"], followup["slot"], None)]
+            page_sizes = [followup.get("page_items", 5)]
         result = {
+            "followup_pending": followup is not None and args.followup_entry is None,
             "platform": platform,
             "steps": [step[:3] for step in steps],
             "daily_pending": [key for key in DAILY_ACTIONS if daily[key]],
@@ -219,7 +268,10 @@ def main():
             return gray
 
         if args.execute:
-            plant(click, capture, steps, lands, picker, prompt, confirm, templates)
+            plant(click, capture, steps, lands, picker, prompt, confirm, templates, page_sizes)
+            if followup is not None and args.followup_entry is None:
+                print(json.dumps({"status": "first_planting_complete_followup_requires_empty_entry", **result}))
+                return 3  # Intentional handoff: never claim the full mixed field is complete.
             status = "planting_clicks_sent_unverified"
         else:
             click_batch(args.click_helper, "--preflight", target,

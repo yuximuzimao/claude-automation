@@ -10,6 +10,35 @@ from farm_radish_restock import DEFAULT_PURCHASES
 from farm_radish_xp import DEFAULT_ROUNDS, RADISH_BATCH, radish_plan
 
 
+import json
+import pytest
+
+
+@pytest.fixture
+def sample_catalog(tmp_path):
+    seeds=[]
+    for i in range(33):
+        name = "森野白桃种子" if i == 27 else "白萝卜种子" if i == 32 else f"seed-{i}"
+        seeds.append({"name": name, "observations": {"qq": {
+            "quantity_latest_known": 120,
+            "latest_warehouse_position": {"page": i//5+1, "slot": i%5+1},
+        }}})
+    path=tmp_path/'catalog.json'
+    path.write_text(json.dumps({"seeds":seeds}))
+    return path
+
+
+@pytest.fixture
+def sample_plan(tmp_path):
+    empty={"planting":{"special":[],"ordinary":None},"daily":{"tasks":False,"fertilizer_reward":False,"share":False}}
+    plan={"qq":{"planting":{
+        "special":[{"plot":1,"page":1,"slot":4}],
+        "ordinary":{"page":6,"slot":3,"quantity":12},
+        "ordinary_after_exhaustion":{"page":6,"slot":3,"page_items":5,"quantity":8},
+    },"daily":empty["daily"]},"wechat":empty}
+    path=tmp_path/'plan.json';path.write_text(json.dumps(plan));return path
+
+
 def test_radish_default_is_five_full_fields():
     assert DEFAULT_ROUNDS == 5
     assert DEFAULT_ROUNDS * RADISH_BATCH == 120
@@ -21,11 +50,11 @@ def test_monthly_restock_is_thirty_seven_max_purchases():
     assert DEFAULT_PURCHASES * 99 >= 30 * DEFAULT_ROUNDS * RADISH_BATCH
 
 
-def test_radish_plan_is_qq_ordinary_page7_slot4_only():
-    plan = radish_plan()
+def test_radish_plan_is_qq_ordinary_page7_slot3_only(sample_catalog):
+    plan = radish_plan(sample_catalog)
     assert plan["qq"]["planting"] == {
         "special": [],
-        "ordinary": {"page": 7, "slot": 4},
+        "ordinary": {"page": 7, "slot": 3, "page_items": 3},
     }
     assert plan["wechat"]["planting"] == {"special": [], "ordinary": None}
 
@@ -42,3 +71,144 @@ def test_qq_round_uses_original_daily_task_then_friend_sweep():
         "farm_friend_sweep.py",
         "farm_daily_fertilizer_reward.py",
     ]
+
+
+import json
+from types import SimpleNamespace
+import numpy as np
+import pytest
+import farm_radish_restock as restock
+import farm_fertilize_once as fertilizer
+
+
+@pytest.mark.parametrize('hit_at', [1, 4, 10, None])
+def test_restock_purchase_requires_local_match(monkeypatch, capsys, hit_at):
+    events = []
+    scans = []
+    monkeypatch.setattr(sys, 'argv', ['restock', '--execute', '--purchases', '1'])
+    monkeypatch.setattr(restock, 'farm_target', lambda *a: (None, {
+        'window_id': 1, 'pid': 2, 'owner': 'QQ小程序', 'title': 'QQ经典农场', 'frame': {},
+    }))
+    monkeypatch.setattr(restock, 'click_batch', lambda *a: events.append(('click', len(a[3]))))
+    def drag(*a, **kw):
+        events.append(('drag',))
+        return SimpleNamespace(returncode=0, stdout='{"status":"drag_sent_unverified"}')
+    monkeypatch.setattr(restock.subprocess, 'run', drag)
+    monkeypatch.setattr(restock, 'capture_region', lambda frame, roi: scans.append(roi))
+    monkeypatch.setattr(restock, 'template_center', lambda *a: (100, 360) if len(scans) == hit_at else None)
+    original_seek = restock.seek_radish
+    monkeypatch.setattr(restock, 'seek_radish', lambda scroll, match: original_seek(scroll, match, lambda seconds: events.append(('wait', seconds))))
+    assert restock.main() == (0 if hit_at else 2)
+    assert scans == [restock.RADISH_ROI] * (hit_at or 10)
+    assert events.count(('wait', 1.5)) == (hit_at or 10)
+    assert events.count(('click', 3)) == (1 if hit_at else 0)
+    if hit_at:
+        assert events.index(('click', 3)) > max(i for i,e in enumerate(events) if e == ('drag',))
+    else:
+        assert events.count(('click', 1)) == 1  # Only opening shop, never buying.
+        assert 'AGENT_REQUIRED' in capsys.readouterr().out
+
+
+def test_seek_does_not_retry_input_or_capture_error():
+    for failing_stage in ['scroll', 'capture']:
+        calls = []
+        def scroll():
+            calls.append('scroll')
+            if failing_stage == 'scroll':
+                raise RuntimeError('input failed')
+        def match():
+            raise RuntimeError('capture failed')
+        with pytest.raises(RuntimeError):
+            restock.seek_radish(scroll, match, lambda _: None)
+        assert calls == ['scroll']
+
+
+def test_real_radish_template_matches_only_when_inside_roi():
+    from anchor_locator import load_gray
+    template = load_gray(restock.RADISH_TEMPLATE)
+    frame = np.full((1111, 603), 220, dtype=np.float32)
+    height, width = template.shape
+    frame[327:327+height, 200:200+width] = template  # Neighbouring card must not unlock.
+    x0,y0,x1,y1 = restock.RADISH_ROI
+    assert restock.template_center(frame[y0:y1,x0:x1], template, (x0,y0), .90) is None
+    frame[327:327+height, 68:68+width] = template
+    assert restock.template_center(frame[y0:y1,x0:x1], template, (x0,y0), .90) is not None
+
+
+@pytest.mark.parametrize('requested,reported,returncode,ok', [(1,1,0,True),(3,3,0,True),(3,1,0,False),(3,1,2,False)])
+def test_click_batch_counts_and_partial_failure(monkeypatch, requested, reported, returncode, ok):
+    monkeypatch.setattr(fertilizer.subprocess, 'run', lambda *a,**k: SimpleNamespace(
+        returncode=returncode, stdout=json.dumps({'status':'clicks_sent_unverified','click_count':reported,'code':'PARTIAL'})))
+    call = lambda: fertilizer.click_batch('helper','--execute',{'owner':'QQ小程序'},[{}]*requested)
+    if ok:
+        call()
+    else:
+        with pytest.raises(fertilizer.FertilizerStop):
+            call()
+
+
+@pytest.mark.parametrize('count,positions', [(1,[3]),(2,[2.5,3.5]),(3,[2,3,4]),(4,[1.5,2.5,3.5,4.5]),(5,[1,2,3,4,5])])
+def test_centered_picker_positions(count, positions):
+    from farm_plant_once import seed_slot_offset
+    picker={'seed_slot_offsets':[[100*i,50] for i in range(1,6)]}
+    assert [seed_slot_offset(picker,i,count) for i in range(1,count+1)] == [(100*p,50) for p in positions]
+
+
+def test_radish_uses_both_fertilizers_before_harvest(monkeypatch, sample_catalog):
+    import farm_radish_xp as xp
+    calls=[]
+    original_plan=xp.radish_plan
+    monkeypatch.setattr(xp,'radish_plan',lambda:original_plan(sample_catalog))
+    monkeypatch.setattr(sys,'argv',['xp','--rounds','1','--execute'])
+    monkeypatch.setattr(xp,'run_script',lambda *args:calls.append(args))
+    monkeypatch.setattr(xp,'sleep',lambda _:None)
+    assert xp.main()==0
+    assert [c[0] for c in calls]==['farm_plant_once.py','farm_fertilize_once.py','farm_fertilize_once.py','farm_harvest_once.py']
+    assert calls[2][3:5]==('--kind','organic')
+
+
+def test_same_day_mature_skips_fertilizer_and_daily():
+    steps=workflow(0,ROOT/'data/operation-plan.json',field_state='mature',tasks=False,friends=False,reward=False)
+    assert [Path(s[1]).name for s in steps]==['farm_harvest_once.py','farm_plant_once.py']
+
+
+def test_empty_field_daily_round_does_not_harvest_or_fertilize_initially():
+    steps=workflow(5,ROOT/'data/operation-plan.json',field_state='empty')
+    assert Path(steps[0][1]).name=='farm_radish_xp.py'
+
+
+def test_radish_position_compacts_after_peach_exhaustion(tmp_path, sample_catalog):
+    import farm_radish_xp as xp
+    data=json.loads(sample_catalog.read_text())
+    for seed in data['seeds']:
+        if seed['name']=='森野白桃种子':seed['observations']['qq']['quantity_latest_known']=0
+    path=tmp_path/'catalog.json';path.write_text(json.dumps(data))
+    assert xp.radish_plan(path)['qq']['planting']['ordinary']=={'page':7,'slot':2,'page_items':2}
+
+
+def test_next_plan_has_exhaustion_followup_at_shifted_slot(sample_plan):
+    from farm_plant_once import read_plan,plan_page_sizes
+    path=sample_plan
+    plan=json.loads(path.read_text())['qq']['planting']
+    assert plan['ordinary']['quantity']==12
+    assert plan['ordinary_after_exhaustion']['quantity']==8
+    assert plan['ordinary_after_exhaustion']['slot']==3
+    steps,_=read_plan(path,'qq',json.loads((ROOT/'data/ui-layout.json').read_text())['plot_policy'])
+    assert steps[-1][:3]==(24,6,3)
+    assert plan_page_sizes(path,'qq')==[5,5]
+
+
+def test_followup_check_plan_only_selects_orange(monkeypatch,capsys,sample_plan):
+    import farm_plant_once as planting
+    monkeypatch.setattr(sys,'argv',['plant','--platform','qq','--plan',str(sample_plan),'--check-plan','--followup-entry','10'])
+    assert planting.main()==0
+    result=json.loads(capsys.readouterr().out)
+    assert result['steps']==[[10,6,3]]
+    assert result['followup_pending'] is False
+
+
+def test_followup_rejects_special_covered_entry(monkeypatch,capsys,sample_plan):
+    import farm_plant_once as planting
+    monkeypatch.setattr(sys,'argv',['plant','--platform','qq','--plan',str(sample_plan),'--check-plan','--followup-entry','1'])
+    assert planting.main()==2
+    assert 'INVALID_FOLLOWUP_EMPTY_ENTRY' in capsys.readouterr().out

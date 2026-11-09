@@ -61,9 +61,11 @@ def fertilize_once(click, locate, land):
     return work is not None
 
 
-def fertilizer_locator(capture, platform, spec):
+def fertilizer_locator(capture, platform, spec, kind="ordinary"):
     templates = {name: load_gray(UI / "fertilizer" / f"{platform}-{name}.png")
                  for name in ("ordinary", "checkbox-off", "enable-prompt")}
+    if kind == "organic":
+        templates["organic"] = load_gray(UI / "fertilizer" / f"{platform}-organic.png")
     templates["tick"] = load_gray(UI / f"{platform}-fertilizer-onekey-tick.png")
     if platform == "qq":
         templates["work"] = load_gray(UI / "onekey-farm.png")[67:119, 22:78]
@@ -72,7 +74,7 @@ def fertilizer_locator(capture, platform, spec):
 
     work_rect = spec["work_rect"]
     prompt_rect = spec["prompt_rect"]
-    bucket_rect = spec["bucket_rect"]
+    bucket_rect = spec["organic_bucket_rect"] if kind == "organic" else spec["bucket_rect"]
     checkbox_rect = spec["checkbox_rect"]
     panel_rect = (min(bucket_rect[0], checkbox_rect[0]), min(bucket_rect[1], checkbox_rect[1]),
                   max(bucket_rect[2], checkbox_rect[2]), max(bucket_rect[3], checkbox_rect[3]))
@@ -82,17 +84,17 @@ def fertilizer_locator(capture, platform, spec):
         x, y = panel_rect[:2]
         return template_center(image[y0-y:y1-y, x0-x:x1-x], templates[name], rect[:2], threshold)
 
-    def locate(kind):
-        if kind == "work":
+    def locate(request):
+        if request == "work":
             return template_center(capture(work_rect), templates["work"], work_rect[:2], 0.86)
-        if kind == "enable_prompt":
+        if request == "enable_prompt":
             prompt = template_center(capture(prompt_rect), templates["enable-prompt"], prompt_rect[:2], 0.94)
             return spec["confirm_point"] if prompt is not None else None
 
         image = capture(panel_rect)
-        fertilizer = panel_match(image, bucket_rect, "ordinary", 0.90)
+        fertilizer = panel_match(image, bucket_rect, kind, 0.90)
         if fertilizer is None:
-            raise FertilizerStop("ORDINARY_FERTILIZER_NOT_FOUND")
+            raise FertilizerStop(f"{kind.upper()}_FERTILIZER_NOT_FOUND")
         tick = panel_match(image, checkbox_rect, "tick", 0.92)
         unchecked = panel_match(image, checkbox_rect, "checkbox-off", 0.90)
         if (tick is None) == (unchecked is None):
@@ -154,7 +156,7 @@ def click_batch(helper, mode, target, actions, *, wechat_main=False):
         raise FertilizerStop("UNEXPECTED_CLICK_HELPER_RESULT")
     if result.returncode:
         raise FertilizerStop(reply.get("code", "CLICK_HELPER_FAILED"))
-    expected = ("clicks_sent_unverified", 1) if mode == "--execute" else ("preflight_ok_no_click", 0)
+    expected = ("clicks_sent_unverified", len(actions)) if mode == "--execute" else ("preflight_ok_no_click", 0)
     if (reply.get("status"), reply.get("click_count")) != expected:
         raise FertilizerStop("UNEXPECTED_CLICK_HELPER_RESULT")
 
@@ -162,6 +164,7 @@ def click_batch(helper, mode, target, actions, *, wechat_main=False):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--platform", choices=("qq", "wechat"), required=True)
+    parser.add_argument("--kind", choices=("ordinary", "organic"), default="ordinary")
     parser.add_argument("--execute", action="store_true", help="Post clicks. Default is a no-click preflight.")
     parser.add_argument("--registry", type=Path, default=ROOT / "_sandbox/farm_window_registry")
     parser.add_argument("--click-helper", type=Path, default=ROOT / "_sandbox/farm_click_batch")
@@ -169,6 +172,8 @@ def main():
 
     try:
         platform = args.platform
+        if args.kind == "organic" and platform != "qq":
+            raise FertilizerStop("ORGANIC_TEMPLATE_NOT_VERIFIED_FOR_PLATFORM")
         layout = json.loads((ROOT / "data/ui-layout.json").read_text())
         anchors = json.loads((ROOT / "data/ui-anchors.json").read_text())
         config = layout["platforms"][platform]
@@ -177,7 +182,7 @@ def main():
         view = scene["views"]["onekey"]
         points = {point["id"]: point[platform] for point in view["points"]}
         checkbox = points["onekey-fertilizer"]
-        fertilizer = points["ordinary-fertilizer"]
+        fertilizer = points["advanced-fertilizer" if args.kind == "organic" else "ordinary-fertilizer"]
 
         registry = subprocess.run(
             [str(args.registry), "--platform", platform],
@@ -199,9 +204,9 @@ def main():
             ])
 
         if args.execute:
-            locate = fertilizer_locator(lambda rect: capture_region(canvas, rect), platform, scene["recognition"][platform])
+            locate = fertilizer_locator(lambda rect: capture_region(canvas, rect), platform, scene["recognition"][platform], args.kind)
             worked = fertilize_once(click, locate, land)
-            result = {"status": "fertilizer_click_sent", "onekey_work_clicked": worked}
+            result = {"status": "fertilizer_click_sent", "onekey_work_clicked": worked, "kind": args.kind}
         else:
             click_batch(args.click_helper, "--preflight", target, [
                 {"x": x, "y": y, "delay_ms": 0} for x, y in (land, checkbox, fertilizer)

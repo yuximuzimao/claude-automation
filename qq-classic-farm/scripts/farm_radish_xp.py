@@ -12,17 +12,27 @@ from time import sleep
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RADISH_PAGE = 7
-RADISH_SLOT = 4
 RADISH_BATCH = 24
 DEFAULT_ROUNDS = 5
 POST_FERTILIZER_WAIT_SECONDS = 2.2
 
 
-def radish_plan():
+def radish_plan(catalog_path=ROOT / "data/seed-catalog.json"):
+    catalog = json.loads(catalog_path.read_text())
+    entries = [seed for seed in catalog["seeds"]
+               if seed.get("observations", {}).get("qq", {}).get("quantity_latest_known", 0) > 0]
+    entries.sort(key=lambda seed: (
+        seed["observations"]["qq"]["latest_warehouse_position"]["page"],
+        seed["observations"]["qq"]["latest_warehouse_position"]["slot"],
+    ))
+    index = next((i for i, seed in enumerate(entries) if seed["name"] == "白萝卜种子"), None)
+    if index is None:
+        raise ValueError("RADISH_NOT_IN_KNOWN_INVENTORY")
+    page, slot = index // 5 + 1, index % 5 + 1
+    page_items = min(5, len(entries) - (page - 1) * 5)
     return {
         "qq": {
-            "planting": {"special": [], "ordinary": {"page": RADISH_PAGE, "slot": RADISH_SLOT}},
+            "planting": {"special": [], "ordinary": {"page": page, "slot": slot, "page_items": page_items}},
             "daily": {"tasks": False, "fertilizer_reward": False, "share": False},
         },
         "wechat": {
@@ -57,7 +67,7 @@ def main():
         "rounds": args.rounds,
         "seeds_consumed": args.rounds * RADISH_BATCH,
         "planting_exp": args.rounds * RADISH_BATCH * 10,
-        "round_order": ["plant", "ordinary_fertilizer", "harvest"],
+        "round_order": ["plant", "ordinary_fertilizer", "organic_fertilizer", "harvest"],
     }
     if not args.execute:
         print(json.dumps({"status": "plan_ok_no_click", **summary}))
@@ -71,6 +81,8 @@ def main():
             for number in range(1, args.rounds + 1):
                 run_script("farm_plant_once.py", "--platform", "qq", "--plan", str(plan), "--execute")
                 run_script("farm_fertilize_once.py", "--platform", "qq", "--execute")
+                sleep(POST_FERTILIZER_WAIT_SECONDS)
+                run_script("farm_fertilize_once.py", "--platform", "qq", "--kind", "organic", "--execute")
                 sleep(POST_FERTILIZER_WAIT_SECONDS)
                 run_script("farm_harvest_once.py", "--platform", "qq", "--execute")
                 completed.append(number)

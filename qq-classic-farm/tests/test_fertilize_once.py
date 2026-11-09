@@ -84,3 +84,20 @@ def test_embedded_wechat_clicks_use_right_farm_canvas():
     assert farm_canvas(window, (625, 1155), 414) == {
         "x": 1249, "y": 149, "width": 625, "height": 1155,
     }
+
+
+@pytest.mark.parametrize('kind', ['ordinary', 'organic'])
+def test_panel_request_keeps_selected_fertilizer_kind(kind):
+    import json
+    from farm_fertilize_once import ROOT, UI, fertilizer_locator
+    from anchor_locator import load_gray
+    spec=json.loads((ROOT/'data/ui-anchors.json').read_text())['fixed_points']['scenes']['fertilizer-switch']['recognition']['qq']
+    image=np.full((1111,603),230,dtype=np.float32)
+    bucket_rect=spec['organic_bucket_rect' if kind=='organic' else 'bucket_rect']
+    for path,(x,y) in [(UI/'fertilizer'/f'qq-{kind}.png',(bucket_rect[0]+3,650)),(UI/'qq-fertilizer-onekey-tick.png',(400,730))]:
+        template=load_gray(path)
+        h,w=template.shape
+        image[y:y+h,x:x+w]=template
+    locate=fertilizer_locator(lambda r:image[r[1]:r[3],r[0]:r[2]],'qq',spec,kind)
+    checked,_,point=locate('panel')
+    assert checked and bucket_rect[0] <= point[0] < bucket_rect[2]

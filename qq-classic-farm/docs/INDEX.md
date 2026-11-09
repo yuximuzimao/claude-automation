@@ -15,11 +15,13 @@
 
 ## 独立操作
 
-- ../scripts/farm_fertilize_once.py：带一键务农和勾选确认的普通施肥。
+- operation-sop.md：按次操作决策与脚本组合入口。
+
+- ../scripts/farm_fertilize_once.py：带一键务农和勾选确认的普通肥/QQ 有机肥；右侧肥桶模板 ../assets/ui/fertilizer/qq-organic.png。
 - ../scripts/farm_harvest_once.py 与 ../assets/ui/harvest/：四格星标与手形「一键收获」。
 - ../scripts/farm_plant_once.py：普通种植与四格混种，默认读取唯一计划 ../data/operation-plan.json。
-- ../scripts/farm_radish_restock.py：QQ 白萝卜月度补货，MAX 99 ×37。
-- ../scripts/farm_radish_xp.py：QQ 白萝卜 5 轮 `种植 → 普通肥 → 收获` 循环。
+- ../scripts/farm_radish_restock.py 与 ../assets/ui/shop/qq-white-radish.png：QQ 白萝卜补货与首格识别模板。
+- ../scripts/farm_radish_xp.py：QQ 白萝卜 5 轮 `种植 → 普通肥 → 有机肥 → 收获` 循环。
 - ../scripts/farm_qq_round.py：QQ 小程序已打开后的整轮田内串联入口。
 - ../scripts/farm_daily_task_once.py：互动当前首位可互动好友并领取任务书奖励；整轮中先执行它，再做好友全扫。
 - ../scripts/farm_daily_fertilizer_reward.py：领取每日免费化肥。

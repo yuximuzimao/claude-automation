@@ -18,27 +18,39 @@ def command(script, *args):
     return ["python3.13", str(ROOT / "scripts" / script), *args]
 
 
-def workflow(radish_rounds, harvest_plan):
-    return [
-        command("farm_fertilize_once.py", "--platform", "qq", "--execute"),
-        ("sleep", POST_INITIAL_FERTILIZER_WAIT_SECONDS),
-        command("farm_harvest_once.py", "--platform", "qq", "--planted-plan", str(harvest_plan), "--execute"),
-        command("farm_radish_xp.py", "--rounds", str(radish_rounds), "--execute"),
-        command("farm_plant_once.py", "--platform", "qq", "--execute"),
-        command("farm_daily_task_once.py", "--platform", "qq", "--execute"),
-        command("farm_friend_sweep.py", "--platform", "qq", "--execute"),
-        command("farm_daily_fertilizer_reward.py", "--platform", "qq", "--execute"),
-    ]
+def workflow(radish_rounds, harvest_plan, *, field_state="tail", tasks=True, friends=True, reward=True):
+    if field_state not in ("tail", "mature", "empty") or not 0 <= radish_rounds <= 5:
+        raise ValueError("INVALID_FIELD_STATE_OR_RADISH_ROUNDS")
+    steps = []
+    if field_state == "tail":
+        steps += [command("farm_fertilize_once.py", "--platform", "qq", "--execute"),
+                  ("sleep", POST_INITIAL_FERTILIZER_WAIT_SECONDS)]
+    if field_state != "empty":
+        steps.append(command("farm_harvest_once.py", "--platform", "qq", "--planted-plan", str(harvest_plan), "--execute"))
+    if radish_rounds:
+        steps.append(command("farm_radish_xp.py", "--rounds", str(radish_rounds), "--execute"))
+    steps.append(command("farm_plant_once.py", "--platform", "qq", "--execute"))
+    if tasks:
+        steps.append(command("farm_daily_task_once.py", "--platform", "qq", "--execute"))
+    if friends:
+        steps.append(command("farm_friend_sweep.py", "--platform", "qq", "--execute"))
+    if reward:
+        steps.append(command("farm_daily_fertilizer_reward.py", "--platform", "qq", "--execute"))
+    return steps
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--radish-rounds", type=int, default=5)
+    parser.add_argument("--radish-rounds", type=int, choices=range(6), default=0)
+    parser.add_argument("--field-state", choices=("tail", "mature", "empty"), required=True)
+    parser.add_argument("--tasks", action="store_true")
+    parser.add_argument("--friends", action="store_true")
+    parser.add_argument("--reward", action="store_true")
     parser.add_argument("--harvest-plan", type=Path, default=ROOT / "data/operation-plan.json")
     parser.add_argument("--execute", action="store_true")
     args = parser.parse_args()
 
-    steps = workflow(args.radish_rounds, args.harvest_plan)
+    steps = workflow(args.radish_rounds, args.harvest_plan, field_state=args.field_state, tasks=args.tasks, friends=args.friends, reward=args.reward)
     if not args.execute:
         printable = [
             {"sleep_seconds": step[1]} if isinstance(step, tuple) else {"command": step[2:]}
@@ -61,7 +73,7 @@ def main():
         name = Path(step[1]).name
         if result.returncode:
             print(json.dumps({
-                "status": "stopped",
+                "status": "awaiting_empty_entry" if result.returncode == 3 and name == "farm_plant_once.py" else "stopped",
                 "failed_stage": name,
                 "completed_stages": completed,
                 "detail": result.stdout.strip() or result.stderr.strip(),

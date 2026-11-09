@@ -37,12 +37,12 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 田内脚本从已打开、无遮挡、土地无偏移的标准农场首页出发。
 
 - `scripts/farm_window.py`：打开或关闭小程序。QQ 打开复用现有 Swift 入口。
-- `scripts/farm_fertilize_once.py`：检查一键务农和施肥勾选状态，再点普通肥一次。
+- `scripts/farm_fertilize_once.py`：检查一键务农和施肥勾选状态，再点普通肥一次；QQ 可选 `--kind organic` 识别有机肥。
 - `scripts/farm_harvest_once.py`：识别手形「一键收获」；混种时使用 `--planted-plan`，先逐个收四格星标，再点手形按钮。
 - `scripts/farm_plant_once.py`：读取唯一计划 `data/operation-plan.json`，逐颗种四格，再按计划补普通种子。
-- `scripts/farm_radish_restock.py`：QQ 白萝卜月度补货。打开商店后滚到最上，第一格白萝卜使用 MAX=99，连续购买 37 次并关闭商店；一次补 3,663 颗，按每天 120 颗可覆盖 30 天并余 63 颗。
-- `scripts/farm_radish_xp.py`：QQ 白萝卜种植经验循环。默认 5 轮，每轮固定 `种 24 → 普通肥 → 收获`，合计消耗 120 颗并获得 1,200 每日种植经验；不再每轮进商店，也不等待自然成熟。
-- `scripts/farm_qq_round.py`：QQ 小程序已经打开后的薄串联入口。当前顺序为当前作物施肥/收获 → 白萝卜 5 轮 → 正式种植 → 每日任务（互动首位好友并领奖）→ 好友全扫 → 每日免费化肥。它不负责打开/关闭小程序，也不做 Agent 视觉复核。
+- `scripts/farm_radish_restock.py`：QQ 白萝卜月度补货。按 [白萝卜补货规则](docs/gameplay-rules.md#白萝卜补货) 翻动并识别首格，命中后使用 MAX=99，连续购买 37 次并关闭商店；一次补 3,663 颗，按每天 120 颗可覆盖 30 天并余 63 颗。
+- `scripts/farm_radish_xp.py`：QQ 白萝卜种植经验循环。默认 5 轮，每轮固定 `种 24 → 普通肥 → 有机肥 → 收获`，合计消耗 120 颗，理论种植经验1,200（实际受当天游戏上限影响）；不再每轮进商店，也不等待自然成熟。
+- `scripts/farm_qq_round.py`：QQ 小程序已经打开后的薄串联入口。根据显式 `--field-state`、`--radish-rounds` 与日常开关组合步骤，默认萝卜0轮、日常不执行；选择条件见操作SOP。它不负责打开/关闭小程序，也不做 Agent 视觉复核。
 - `scripts/farm_daily_task_once.py`：独立每日任务脚本，先互动当前排在首位的可互动好友，再领取任务书奖励；整轮中先执行它，后续好友全扫利用可互动好友自动前移的排序继续处理。
 - `scripts/farm_daily_fertilizer_reward.py`：领取礼包商城每日免费化肥。
 - `scripts/farm_friend_sweep.py`：连续拜访好友；识别到「一键偷取」或「一键务农」后直接点该按钮实际中心，首次无按钮时回家。
@@ -66,8 +66,9 @@ python3.13 scripts/farm_radish_restock.py
 python3.13 scripts/farm_radish_restock.py --execute
 python3.13 scripts/farm_radish_xp.py
 python3.13 scripts/farm_radish_xp.py --execute
-python3.13 scripts/farm_qq_round.py
-python3.13 scripts/farm_qq_round.py --execute
+python3.13 scripts/farm_qq_round.py --field-state mature
+# 实际参数先按 docs/operation-sop.md 选择；默认不重复萝卜和日常
+python3.13 scripts/farm_qq_round.py --field-state mature --execute
 python3.13 scripts/farm_daily_task_once.py --platform qq
 python3.13 scripts/farm_daily_fertilizer_reward.py --platform qq
 python3.13 scripts/farm_friend_sweep.py --platform qq
@@ -85,18 +86,19 @@ swiftc scripts/farm_click_batch.swift -o _sandbox/farm_click_batch
 swiftc scripts/farm_drag.swift -o _sandbox/farm_drag
 ```
 
+按日期与土地状态选择脚本见 [按次操作决策](docs/operation-sop.md)。
+
 ## 唯一种植计划
 
 `data/operation-plan.json` 是唯一计划文件，也是 `farm_plant_once.py` 的默认输入。每次种植前按最新已知库存和当前 picker 页槽更新它；不再维护第二份计划或多轮预排计划。微信封存期间其计划保持空，不作为恢复后的现成方案。
 
-- 页码从 1 起，槽位为 1–5；每条步骤填写轮到它时的实际页码和槽位。
+- 页码从 1 起，`slot` 为该页种子序号 1–5；不足 5 个的页面填写 `page_items`，脚本按居中规则换算点击位置；每条步骤填写轮到它时的实际页码和槽位。
 - `special` 按数组顺序逐颗执行，每颗四格种子占 2×2 土地并消耗 1 颗。
 - `ordinary` 是普通种子的页码和槽位；每个实际新种下的 1×1 地块消耗 1 颗。不种普通种子填 `null`。
 - 种子用完可能导致后续 picker 槽位前移。库存记录中的仓库页槽是最近一次完整清点的位置；下一轮种植前要核对目标种子当前 picker 位置。
+- 普通种子用尽后的第二种用 `ordinary_after_exhaustion` 表示；首次执行返回待补种状态，Agent确认空地后以 `--followup-entry` 仅执行第二段，详见操作决策。
 - 三个日常开关 `tasks`、`fertilizer_reward`、`share` 使用 JSON 布尔值。地里施普通肥仍由独立施肥脚本处理。
 
 ## 种植后的库存与提醒
 
-种植脚本正常完成后按计划消耗更新 `data/seed-catalog.json` 和 `docs/seed-catalog.md`。白萝卜经验循环默认每次扣 120；月度补货脚本正常完成后按购买次数 ×99 直接增加白萝卜已知库存，默认 +3663，不需要为萝卜重新打开仓库。其它新种子仍按用户通知后完整清点仓库。
-
-每次正式种植完成后创建收菜提醒。有可靠阶段数据时，提醒时间取最后一个非零生长阶段开始时刻，即 `成熟时间 − 最后阶段基础时长 × 土地耗时倍率`；没有阶段数据才回退到成熟前 1 小时。当前森野黄金芽和森野白桃在 QQ 金/紫晶地上最后阶段均为 `8640s × 0.8 = 6912s = 1小时55分12秒`。提醒通过工作区根目录 `docs/reminders.md` 的现有「创建提醒」快捷指令发送并读回核验。
+统一遵循 [SKILL 种植后的强制收尾](SKILL.md#种植后的强制收尾)。正常按实际完成操作记账，异常或未知库存变化才清点；正式作物提醒时间由阶段数据计算，并通过现有 Mac 快捷指令创建和读回核验。
