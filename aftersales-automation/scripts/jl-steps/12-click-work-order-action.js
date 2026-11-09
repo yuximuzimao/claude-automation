@@ -15,7 +15,7 @@
 
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
-const { assertNotAborted, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
+const { assertNotAborted, isRiskControlError, jinglingCircuit, waitAbortable } = require(path.join(__dirname, '../../lib/wait'));
 
 const JL_DOMAIN = 'scrm.jlsupp.com';
 const ACTION_TEXTS = ['处理', '查看', '售后处理'];
@@ -134,6 +134,19 @@ function buildFindActionButtonExpression(workOrderNum) {
   }
   function summary(el, actionButtons, sourceText) {
     const btn = actionButtons[0] || null;
+    const rect = btn ? rectOf(btn) : null;
+    const hit = rect ? document.elementFromPoint(rect.centerX, rect.centerY) : null;
+    const scrollContainers = [];
+    for (let parent = btn?.parentElement; parent && scrollContainers.length < 4; parent = parent.parentElement) {
+      if (parent.clientHeight && parent.scrollHeight > parent.clientHeight) {
+        scrollContainers.push({
+          tag: parent.tagName,
+          top: parent.scrollTop,
+          maxTop: parent.scrollHeight - parent.clientHeight,
+          overflowY: getComputedStyle(parent).overflowY
+        });
+      }
+    }
     return {
       elementText: textOf(el),
       sourceText,
@@ -141,14 +154,18 @@ function buildFindActionButtonExpression(workOrderNum) {
       tagName: el.tagName,
       actionButtonCount: actionButtons.length,
       actionButtonText: btn ? textOf(btn) : null,
-      rect: btn ? rectOf(btn) : null,
+      rect,
       containerRect: rectOf(el),
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
         scrollX: window.scrollX,
         scrollY: window.scrollY
-      }
+      },
+      centerHit: hit ? (btn.contains(hit) ? 'button' : hit.tagName) : null,
+      scrollContainers,
+      visibility: document.visibilityState,
+      focused: document.hasFocus()
     };
   }
 
@@ -247,7 +264,12 @@ async function findJlPageTarget() {
 async function findActionButton(targetId, workOrderNum) {
   const result = await cdp.eval(targetId, buildFindActionButtonExpression(workOrderNum));
   if (!result || !result.success) {
-    throw new Error(result && result.error ? result.error : '未找到指定工单处理按钮');
+    const error = new Error(result && result.error ? result.error : '未找到指定工单处理按钮');
+    error.openEvidence = {
+      textNodeCount: result?.textNodeCount,
+      candidateCount: result?.candidates?.length,
+    };
+    throw error;
   }
   return result.button;
 }
@@ -267,6 +289,8 @@ function clamp(value, min, max) {
 async function scrollActionButtonIntoView(targetId, workOrderNum, abortSignal = null) {
   assertNotAborted(abortSignal);
   let found = await findActionButton(targetId, workOrderNum);
+  const initial = buttonEvidence(found);
+  const wheelDeltas = [];
   assertNotAborted(abortSignal);
   for (let step = 0; step <= MAX_WHEEL_STEPS; step++) {
     assertNotAborted(abortSignal);
@@ -277,6 +301,7 @@ async function scrollActionButtonIntoView(targetId, workOrderNum, abortSignal = 
     const deltaY = found.rect && found.rect.centerY < VIEWPORT_MARGIN_PX
       ? -WHEEL_STEP_PX
       : WHEEL_STEP_PX;
+    wheelDeltas.push(deltaY);
     await cdp.dispatchMouseEvent(targetId, {
       type: 'mouseWheel',
       x: clamp(found.rect ? found.rect.centerX : viewport.width / 2, 20, viewport.width - 20),
@@ -290,7 +315,15 @@ async function scrollActionButtonIntoView(targetId, workOrderNum, abortSignal = 
     found = await findActionButton(targetId, workOrderNum);
     assertNotAborted(abortSignal);
   }
-  throw new Error(`处理按钮滚动后仍不在可视区: ${workOrderNum}`);
+  const error = new Error(`处理按钮滚动后仍不在可视区: ${workOrderNum}`);
+  error.workOrderBrowserFailure = 'button_outside_viewport';
+  error.openEvidence = { initial, final: buttonEvidence(found), wheelDeltas };
+  throw error;
+}
+
+function buttonEvidence(button) {
+  const { rect, viewport, centerHit, scrollContainers, visibility, focused } = button;
+  return { rect, viewport, centerHit, scrollContainers, visibility, focused };
 }
 
 async function clickPointLikeHuman(targetId, x, y, abortSignal = null) {
@@ -353,8 +386,18 @@ async function readTargetPageInfo(targetId, workOrderNum, targetUrl) {
       bodyContainsWorkOrderNum: false,
       containsWorkOrderNum: String(targetUrl || '').includes(workOrderNum),
       readError: error.message,
+      cdpDiagnosticId: error.cdpDiagnosticId,
     };
   }
+}
+
+function assertDetailTargetNoRisk(targetId, fields, cdpDiagnosticId) {
+  const source = Object.keys(fields).find(key => isRiskControlError(fields[key]));
+  if (!source) return;
+  const error = new Error(`工单详情标签页出现风控信号（${source}）`);
+  error.browserRiskSignal = true;
+  error.openEvidence = { riskTargetId: targetId, riskSource: source, riskCdpDiagnosticId: cdpDiagnosticId };
+  throw error;
 }
 
 async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options = {}) {
@@ -362,11 +405,15 @@ async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options 
   const abortSignal = options.abortSignal || null;
   const startedAt = Date.now();
   let lastNewTargets = [];
+  const observed = new Map();
+  let candidateOverflow = false;
+  let polls = 0;
 
   while (Date.now() - startedAt <= timeoutMs) {
     assertNotAborted(abortSignal);
     const targets = await cdp.getTargets();
     assertNotAborted(abortSignal);
+    polls++;
     const newTargets = (targets || []).filter(t =>
       t &&
       t.type === 'page' &&
@@ -381,8 +428,30 @@ async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options 
 
     for (const target of newTargets) {
       assertNotAborted(abortSignal);
+      assertDetailTargetNoRisk(target.id, { targetUrl: target.url, targetTitle: target.title });
       const page = await readTargetPageInfo(target.id, workOrderNum, target.url);
       assertNotAborted(abortSignal);
+      assertDetailTargetNoRisk(target.id, {
+        pageUrl: page.url, pageTitle: page.title, readError: page.readError,
+      }, page.cdpDiagnosticId);
+      const prior = observed.get(target.id);
+      if (prior || observed.size < 8) {
+        observed.set(target.id, {
+          id: target.id,
+          firstSeenMs: prior?.firstSeenMs ?? Date.now() - startedAt,
+          firstPageKind: prior?.firstPageKind ?? cdp.pageKind(target.url),
+          lastSeenMs: Date.now() - startedAt,
+          lastPageKind: cdp.pageKind(page.url || target.url),
+          sawLogin: prior?.sawLogin === true || [page.url, target.url].some(url => cdp.pageKind(url) === 'jl_login'),
+          readyState: page.readyState || null,
+          urlMatched: page.urlContainsWorkOrderNum,
+          bodyMatched: page.bodyContainsWorkOrderNum,
+          readFailures: (prior?.readFailures || 0) + Number(Boolean(page.readError)),
+          lastCdpDiagnosticId: page.cdpDiagnosticId || prior?.lastCdpDiagnosticId,
+        });
+      } else {
+        candidateOverflow = true;
+      }
       if (page.containsWorkOrderNum) {
         return {
           newTargetId: target.id,
@@ -399,7 +468,17 @@ async function waitForNewWorkOrderTarget(beforeTargetIds, workOrderNum, options 
   }
 
   const error = new Error(`未识别到属于工单 ${workOrderNum} 的新标签页: ${JSON.stringify(lastNewTargets)}`);
+  const candidates = [...observed.values()];
+  if (!candidates.some(candidate => candidate.sawLogin) && !candidateOverflow) {
+    error.workOrderBrowserFailure = 'detail_tab_unconfirmed';
+  }
   error.newTargetIds = lastNewTargets.map(target => target.id);
+  error.openEvidence = {
+    elapsedMs: Date.now() - startedAt, timeoutMs, polls, candidateOverflow,
+    candidates: candidates.map(candidate => ({
+      ...candidate, presentAtLastPoll: error.newTargetIds.includes(candidate.id),
+    })),
+  };
   throw error;
 }
 
@@ -407,34 +486,60 @@ async function clickWorkOrderAction(workOrderNum, options = {}) {
   const order = assertWorkOrderNum(workOrderNum);
   const abortSignal = options.abortSignal || null;
   assertNotAborted(abortSignal);
+  const circuit = options.circuit || jinglingCircuit;
+  const circuitState = circuit.read();
+  if (circuitState?.tripped) throw new Error(`风控熔断中: ${circuitState.reason || '未知原因'}`);
   const target = options.targetId
     ? { id: options.targetId }
     : await findJlPageTarget();
   assertNotAborted(abortSignal);
 
-  const beforeTargets = await cdp.getTargets();
-  assertNotAborted(abortSignal);
-  const beforeTargetIds = new Set((beforeTargets || [])
-    .filter(t => t && t.type === 'page' && t.id)
-    .map(t => t.id));
+  let stage = 'list_tabs_before_click';
+  let positioned;
+  let newTab;
+  try {
+    const beforeTargets = await cdp.getTargets();
+    assertNotAborted(abortSignal);
+    const beforeTargetIds = new Set((beforeTargets || [])
+      .filter(t => t && t.type === 'page' && t.id)
+      .map(t => t.id));
 
-  const positioned = await scrollActionButtonIntoView(target.id, order, abortSignal);
-  assertNotAborted(abortSignal);
-  const rect = positioned.button.rect;
-  await clickPointLikeHuman(target.id, rect.centerX, rect.centerY, abortSignal);
-  await waitAbortable(AFTER_CLICK_WAIT_MS, abortSignal);
+    stage = 'position_button';
+    positioned = await scrollActionButtonIntoView(target.id, order, abortSignal);
+    assertNotAborted(abortSignal);
+    const { centerX, centerY } = positioned.button.rect;
+    stage = 'click_button';
+    await clickPointLikeHuman(target.id, centerX, centerY, abortSignal);
+    await waitAbortable(AFTER_CLICK_WAIT_MS, abortSignal);
 
-  const newTab = await waitForNewWorkOrderTarget(beforeTargetIds, order, {
-    ...options,
-    abortSignal,
-  });
+    stage = 'identify_new_tab';
+    newTab = await waitForNewWorkOrderTarget(beforeTargetIds, order, {
+      ...options,
+      abortSignal,
+    });
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      if (error.browserRiskSignal) {
+        circuit.trip(error, 'jl_work_order_detail');
+        error.browserRiskHandled = true;
+      }
+      error.openDiagnostic = {
+        workOrderNum: order, targetId: target.id, stage,
+        cdpDiagnosticId: error.cdpDiagnosticId,
+        buttonBeforeClick: positioned ? buttonEvidence(positioned.button) : undefined,
+        ...error.openEvidence,
+      };
+      cdp.logBrowserDiagnostic('jl_work_order_open_failed', error.openDiagnostic);
+    }
+    throw error;
+  }
   return {
     success: true,
     targetId: target.id,
     workOrderNum: order,
     clicked: {
       text: positioned.button.actionButtonText,
-      rect,
+      rect: positioned.button.rect,
       wheelSteps: positioned.wheelSteps,
       moveDelayMs: MOVE_DELAY_MS,
       pressDelayMs: PRESS_DELAY_MS,
@@ -456,7 +561,7 @@ if (require.main === module) {
       process.exit(0);
     })
     .catch(error => {
-      console.log(JSON.stringify({ success: false, error: error.message }));
+      console.log(JSON.stringify({ success: false, error: error.message, diagnostic: error.openDiagnostic }));
       process.exit(1);
     });
 }

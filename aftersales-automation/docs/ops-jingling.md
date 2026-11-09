@@ -15,6 +15,20 @@
 | `cdp.navigate(targetId, url)` | 导航并等待页面加载 | 鲸灵详情仍须走业务路由规则 |
 | `cdp.scroll(targetId, direction)` | 页面滚动 | `direction` 为 `up` / `down` |
 
+### 浏览器异常取证
+
+按工单号在 `server.log` 找 `[browser-diagnostic]` 的 `jl_fixed_batch_work_order_failed` 或 `jl_work_order_open_failed`，再用 `cdpDiagnosticId` 找同一条指令的 `cdp_transport`。固定批次在逐单流程捕获连接异常后另记 `cdp_target_snapshot`。这是一次最多 1 秒的本机 9222 只读取样，随停止信号取消，不访问平台、不等待取样结果才抛错、不重发指令。它只代表取样时的状态，可能已晚于原故障。
+
+| 可能原因 | 从哪些记录判断 |
+|---|---|
+| Chrome 调试端口不可达、拒绝连接或响应异常 | `target_list_unavailable`，查看本机错误码或调试 HTTP 状态。 |
+| 单个标签已关闭、被替换或暂时不可见 | 调试端口可读但 `target_absent`。核对目标 ID 是主列表、当前详情、ERP，还是已关闭的上一张详情。 |
+| 目标仍在但握手拒绝，或指令发出后断开、超时或被 Chrome 拒绝 | `target_present`，再看 `opened`、`commandSent`、`kind`、调用位置、关闭码及协议错误码。Chrome 客户端有暴露握手 HTTP 状态时才记录。发出指令不能证明页面或平台已执行。激活标签时如果 Chrome 返回 HTTP 错误，另按目标 ID 和时间查 `cdp_activate_http_error`。 |
+| 点击后未观察到详情页、候选页闪退、跳登录、加载未完成或工单号不符 | `identify_new_tab` 记录轮询次数、观察到的候选 ID、首末页面类型、是否在最后一次轮询中存在、DOM 就绪与工单号匹配情况，以及候选读取失败关联的诊断编号。两次轮询之间一闪即逝的标签仍可能漏观测。 |
+| 按钮没定位到、滚动容器没移动或到边、按钮位置越界或被遮挡 | 看 `position_button` 的匹配数量、起止按钮坐标、视口、滚动容器偏移和滚轮方向。定位成功后点击或识别新标签失败时，还能看点击前按钮中心是否命中按钮。 |
+
+固定批次对单工单浏览器异常的跳过条件和观测口径见 [队列操作指南](ops-queue.md#81-单工单浏览器异常)。
+
 ---
 
 ## 2. 鲸灵平台操作技术细节

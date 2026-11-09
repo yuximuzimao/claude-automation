@@ -25,6 +25,7 @@ const {
   buildSimulationPayload,
   createEnsureQueueItem,
   createOfflineExchangeReminder,
+  createBrowserSkipReminder,
   runCli,
 } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
 const {
@@ -1655,10 +1656,14 @@ test('翻页失败不得误标消失，必须写回待确认并停止后续工�
 
 test('详情处理异常仍关闭目标tab、写回人工复核simulation并停止下一单', async () => {
   const persistedFailures = [];
+  const browserDiagnostics = [];
+  const targetSnapshots = [];
   const fixture = batchDependencies({
+    logBrowserDiagnostic: (event, details) => browserDiagnostics.push({ event, ...details }),
+    captureFailedTarget: (error, signal) => targetSnapshots.push([error.cdpDiagnosticId, signal]),
     collectDetail: async ({ detailTargetId }) => {
       assert.equal(detailTargetId, `detail-${ORDER_1}`);
-      throw new Error('采集失败');
+      throw Object.assign(new Error('采集失败'), { cdpDiagnosticId: 'socket-1' });
     },
     persistOutcome: async ({ ticket, processed }) => {
       persistedFailures.push({ ticket, processed });
@@ -1684,6 +1689,209 @@ test('详情处理异常仍关闭目标tab、写回人工复核simulation并停�
     ]
   );
   assert.deepEqual(fixture.getTargets(), ['list-tab']);
+  assert.equal(browserDiagnostics.length, 2);
+  assert.equal(browserDiagnostics[0].stage, 'process_detail');
+  assert.equal(browserDiagnostics[0].workOrderNum, ORDER_1);
+  assert.equal(browserDiagnostics[0].detailTargetId, `detail-${ORDER_1}`);
+  assert.equal(browserDiagnostics[0].cdpDiagnosticId, 'socket-1');
+  assert.deepEqual(targetSnapshots, [['socket-1', undefined]]);
+});
+
+test('可隔离的列表浏览器故障或详情未确认会留下待人工和逐单提醒，再处理下一张', async () => {
+  const cases = [
+    { code: 'cdp_transport', error: { cdpDiagnosticId: 'socket-1', cdpTargetId: 'list-tab', cdpFailureKind: 'handshake_error', cdpMethod: 'Runtime.evaluate' } },
+    { code: 'button_outside_viewport', error: { workOrderBrowserFailure: 'button_outside_viewport' } },
+    { code: 'detail_tab_unconfirmed', error: { workOrderBrowserFailure: 'detail_tab_unconfirmed' } },
+  ];
+  for (const { code, error } of cases) {
+    const attempted = [];
+    const reminders = [];
+    const fixture = batchDependencies({
+      remindBrowserSkip: async detail => { reminders.push(detail); return 'sent'; },
+    });
+    const open = fixture.dependencies.clickWorkOrderAction;
+    fixture.dependencies.clickWorkOrderAction = async (...args) => {
+      attempted.push(args[0]);
+      if (args[0] === ORDER_1) throw Object.assign(new Error('浏览器单工单故障'), error);
+      return open(...args);
+    };
+    const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
+    assert.deepEqual(attempted, [ORDER_1, ORDER_2]);
+    assert.equal(result.items[0].decision.action, 'escalate');
+    assert.equal(result.items[0].collectedData.browserSkipReason, code);
+    assert.equal(reminders.length, 1);
+    assert.equal(reminders[0].workOrderNum, ORDER_1);
+    assert.equal(reminders[0].reason, code);
+    assert.equal(fixture.calls.some(call => call[0] === 'execute'), false);
+    assert.deepEqual(result.browserObservation, {
+      attempted: 2, browserFaults: 1, skipped: 1, attemptedAfterSkip: 1, completedAfterSkip: 1,
+    });
+  }
+});
+
+test('店铺校验失败或仍有意外标签页时，浏览器故障要求隔离并停止整轮扫描', async () => {
+  for (const unsafe of ['wrong-shop', 'missing-list', 'unexpected-tab', 'captcha']) {
+    const trips = [];
+    const fixture = batchDependencies({
+      tripBrowserRisk: error => trips.push(error),
+      clickWorkOrderAction: async workOrderNum => {
+        assert.equal(workOrderNum, ORDER_1);
+        throw Object.assign(new Error('浏览器故障'), {
+          workOrderBrowserFailure: 'detail_tab_unconfirmed',
+        });
+      },
+      remindBrowserSkip: async () => assert.fail('未通过安全检查不应发逐单跳过提醒'),
+    });
+    if (unsafe === 'missing-list') {
+      const targets = fixture.dependencies.getTargets;
+      let baseline = true;
+      fixture.dependencies.getTargets = async () => {
+        if (baseline) {
+          baseline = false;
+          return targets();
+        }
+        return [];
+      };
+    } else if (unsafe === 'unexpected-tab') {
+      const targets = fixture.dependencies.getTargets;
+      let baseline = true;
+      fixture.dependencies.getTargets = async () => {
+        if (baseline) {
+          baseline = false;
+          return targets();
+        }
+        return [...await targets(), { id: 'late-tab', type: 'page', url: 'about:blank' }];
+      };
+    } else {
+      fixture.dependencies.readShopName = async () => ({
+        success: true, state: 'logged-in',
+        shopName: unsafe === 'wrong-shop' ? '其他店铺' : '测试店铺',
+        title: unsafe === 'captcha' ? 'captcha' : '',
+      });
+    }
+    await assert.rejects(processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }), error => {
+      assert.equal(error.accountStateUntrusted, true);
+      assert.equal(error.jlTargetId, 'list-tab');
+      assert.equal(error.batch.success, false);
+      assert.equal(error.batch.items[1].status, 'pending');
+      return true;
+    });
+    assert.ok(fixture.calls.some(call => call[0] === 'invalidateSession'));
+    assert.equal(trips.length, unsafe === 'captcha' ? 1 : 0);
+  }
+});
+
+test('定位或采集阶段出现新增未知标签时，同样停轮且不打开下一张', async () => {
+  for (const stage of ['locateWorkOrder', 'collectDetail']) {
+    let hasExtra = false;
+    const fixture = batchDependencies({
+      [stage]: async () => {
+        hasExtra = true;
+        throw Object.assign(new Error('浏览器控制连接中断'), {
+          cdpDiagnosticId: 'socket-1', cdpFailureKind: 'handshake_error', cdpMethod: 'Runtime.evaluate',
+          cdpTargetId: stage === 'locateWorkOrder' ? 'list-tab' : `detail-${ORDER_1}`,
+        });
+      },
+      remindBrowserSkip: async () => assert.fail('现场有未知标签时不能作为单工单跳过'),
+    });
+    const getTargets = fixture.dependencies.getTargets;
+    fixture.dependencies.getTargets = async () => {
+      const targets = await getTargets();
+      if (hasExtra) targets.push({ id: 'unknown', type: 'page', url: 'chrome-error://chromewebdata/' });
+      return targets;
+    };
+    await assert.rejects(processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }), error => {
+      assert.equal(error.accountStateUntrusted, true);
+      assert.equal(error.batch.browserObservation.browserFaults, 1);
+      assert.equal(error.batch.browserObservation.skipped, 0);
+      return true;
+    });
+    assert.equal(fixture.calls.some(call => call[0] === 'open' && call[1] === ORDER_2), false);
+  }
+});
+
+test('跳过一张后人工停止也保留一次完整的批次观测记录', async () => {
+  const controller = new AbortController();
+  const observations = [];
+  const fixture = batchDependencies({
+    clickWorkOrderAction: async workOrderNum => {
+      assert.equal(workOrderNum, ORDER_1);
+      throw Object.assign(new Error('按钮未进入可视区'), { workOrderBrowserFailure: 'button_outside_viewport' });
+    },
+    remindBrowserSkip: async () => { controller.abort(); return 'sent'; },
+    logBrowserDiagnostic: (event, details) => {
+      if (event === 'jl_fixed_batch_browser_observation') observations.push(details);
+    },
+  });
+  await assert.rejects(
+    processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies, abortSignal: controller.signal }),
+    { name: 'AbortError' }
+  );
+  assert.deepEqual(observations, [{
+    accountNum: '3', result: 'cancelled', attempted: 1, browserFaults: 1, skipped: 1,
+    attemptedAfterSkip: 0, completedAfterSkip: 0,
+  }]);
+});
+
+test('详情页短暂出现的风控信号立即熔断，不关候选页或继续下一张', async () => {
+  const trips = [];
+  const fixture = batchDependencies({
+    clickWorkOrderAction: async workOrderNum => {
+      assert.equal(workOrderNum, ORDER_1);
+      throw Object.assign(new Error('工单详情标签页出现风控信号'), {
+        browserRiskSignal: true, newTargetIds: ['risk-tab'],
+      });
+    },
+    tripBrowserRisk: error => trips.push(error),
+    closeTarget: async () => assert.fail('发现风控后不能继续处理候选页'),
+    remindBrowserSkip: async () => assert.fail('风控不能作为单工单跳过'),
+  });
+  await assert.rejects(processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }), /风控信号/);
+  assert.equal(trips.length, 1);
+});
+
+test('自动执行阶段的浏览器连接失败维持停批，后续工单不打开', async () => {
+  const fixture = batchDependencies({
+    executeDecision: async ({ detailTargetId }) => {
+      throw Object.assign(new Error('控制连接中断'), {
+        cdpDiagnosticId: 'write-1', cdpTargetId: detailTargetId, cdpFailureKind: 'socket_error', cdpMethod: 'Runtime.evaluate',
+      });
+    },
+    remindBrowserSkip: async () => assert.fail('有执行意图时不能作为普通工单跳过'),
+  });
+  await assert.rejects(processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }), /控制连接中断/);
+  assert.deepEqual(fixture.calls.filter(call => call[0] === 'open').map(call => call[1]), [ORDER_1]);
+});
+
+test('鼠标释放的连接错误不继续下一张，避免用不明鼠标状态触发操作', async () => {
+  const fixture = batchDependencies({
+    clickWorkOrderAction: async workOrderNum => {
+      assert.equal(workOrderNum, ORDER_1);
+      throw Object.assign(new Error('控制连接中断'), {
+        cdpDiagnosticId: 'mouse-1', cdpTargetId: 'list-tab', cdpFailureKind: 'socket_error',
+        cdpMethod: 'Input.dispatchMouseEvent', cdpMouseEvent: 'mouseReleased',
+      });
+    },
+    remindBrowserSkip: async () => assert.fail('鼠标状态不明时不能作为普通工单跳过'),
+  });
+  await assert.rejects(processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies }), /控制连接中断/);
+});
+
+test('工单浏览器异常提醒发送成功后持久去重，发送失败保留后续通知机会', () => {
+  const item = { id: 'ticket-1' };
+  const titles = [];
+  const notify = createBrowserSkipReminder({
+    db: { readQueue: () => ({ items: [item] }), updateQueueItem: (_id, patch) => Object.assign(item, patch) },
+    sendReminder: title => { titles.push(title); return titles.length > 1; },
+    now: () => '2026-11-08T12:00:00.000Z',
+  });
+  const input = { account: { matchedNote: '测试店铺' }, queueItem: item, workOrderNum: ORDER_1, reason: 'cdp_transport' };
+  assert.equal(notify(input), 'send_failed');
+  assert.equal(item.browserSkipReminderAt, undefined);
+  assert.equal(notify(input), 'sent');
+  assert.equal(notify(input), 'already_sent');
+  assert.equal(titles.length, 2);
+  assert.match(titles[1], new RegExp(`测试店铺.*${ORDER_1}.*本轮已跳过`));
 });
 
 test('详情采集中停止时保留当前tab原样，不写失败结果也不打开下一单', async () => {

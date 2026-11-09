@@ -101,6 +101,12 @@ async function main() {
 
   let result;
   try {
+    if (cmd === 'reset-circuit') {
+      const { jinglingCircuit } = require('./lib/wait');
+      jinglingCircuit.reset();
+      console.log(JSON.stringify(ok({ reset: true, message: '已记录人工复位，后续鲸灵任务可正常调度' })));
+      return;
+    }
     const { jlId, erpId } = await getTargetIds();
 
     switch (cmd) {
@@ -197,16 +203,6 @@ async function main() {
         if (!args[1]) throw new Error('缺少规格商家编码');
         const { productArchive } = require('./lib/product/archive');
         result = await productArchive(erpId, args[1]);
-        break;
-      }
-      case 'reset-circuit': {
-        const { clearCircuitBreaker, isCircuitBreakerTripped } = require('./lib/server/pipeline');
-        if (isCircuitBreakerTripped()) {
-          clearCircuitBreaker();
-          result = ok({ reset: true, message: '风控熔断状态已清除，鲸灵任务队列已恢复' });
-        } else {
-          result = ok({ reset: false, message: '熔断器未触发，无需清除' });
-        }
         break;
       }
       default:

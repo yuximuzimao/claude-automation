@@ -16,6 +16,7 @@ const { extractShippedTrackings, createReminder } = require('../helpers');
 const { expireStaleAlerts } = require('../jl/alerts');
 const { getTicketPlatformStage } = require('../after-sales-platform-stage');
 const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
+const { jinglingCircuit } = require('../wait');
 const scanHud = require('./scan-hud');
 const wanwuState = require('../../wanwu/state');
 const { scanWanwu } = require('../../wanwu/scanner');
@@ -75,6 +76,7 @@ function updateAccountStatus(num, patch) {
 
 function buildA1FixedBatchFailureStatus(op, error, now = () => new Date().toISOString()) {
   if (!op || op.type !== 'a1-fixed-batch' || !op.params || !op.params.accountNum) return null;
+  if (error?.jinglingCircuitBlocked) return null;
   const message = ((error && error.message) || String(error || '未知错误')).slice(0, 200);
   return {
     accountNum: op.params.accountNum,
@@ -414,7 +416,7 @@ function processNext() {
     } else {
       next.status = 'error'; next.result = { error: e.message }; next.doneAt = new Date().toISOString();
       finishScanHud(next, 'error', { error: e });
-      if (next.type === 'execute' && next.params && next.params.simId) {
+      if (!e.jinglingCircuitBlocked && next.type === 'execute' && next.params && next.params.simId) {
         try { db.updateSimulation(next.params.simId, { executeError: e.message }); } catch {}
       }
       const accountFailure = buildA1FixedBatchFailureStatus(next, e);
@@ -525,7 +527,18 @@ async function isolateUntrustedJlTarget(targetId, op, dependencies = {}) {
 
 // ── 执行分派 ──────────────────────────────────────────────────────
 
+const JINGLING_OPERATIONS = new Set(['scan', 'open-account', 'reinfer', 'reprocess-one', 'execute', 'open-ticket', 'a1-fixed-batch']);
+
 async function executeOp(op) {
+  if (JINGLING_OPERATIONS.has(op.type)) {
+    assertNotAborted(op);
+    const circuit = jinglingCircuit.read();
+    if (circuit?.tripped) {
+      const error = new Error(`风控熔断中: ${circuit.reason || '未知原因'}`);
+      error.jinglingCircuitBlocked = true;
+      throw error;
+    }
+  }
   switch (op.type) {
     case 'scan':           return execScan(op);
     case 'wanwu-scan':     return execWanwuScan(op);
@@ -1042,6 +1055,7 @@ async function execScan(op) {
       });
       console.error(`[execScan] 账号${num} 失败:`, e.message);
 
+      if (e.browserRiskSignal) throw e;
       if (accountStateUntrusted) {
         try {
           await isolateUntrustedJlTarget(e.jlTargetId, op);

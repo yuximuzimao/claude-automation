@@ -1,5 +1,62 @@
 'use strict';
 
+const fs = require('node:fs');
+const path = require('node:path');
+const JL_CIRCUIT_FILE = path.join(__dirname, '../data/circuit-breaker.json');
+
+function createCircuitReader(readFile, filePath) {
+  return () => {
+    try { return JSON.parse(readFile(filePath, 'utf8')); } catch (error) {
+      if (error?.code === 'ENOENT') return null;
+      throw error;
+    }
+  };
+}
+
+function createJinglingCircuit(filePath, {
+  readFile = fs.readFileSync,
+  writeFile = (...args) => fs.writeFileSync(...args),
+  now = () => new Date().toISOString(),
+} = {}) {
+  const readState = createCircuitReader(readFile, filePath);
+  const writeState = state => writeFile(filePath, JSON.stringify(state, null, 2));
+  let unpersistedTrip = null;
+  return {
+    read() {
+      let state;
+      try {
+        state = readState();
+      } catch (cause) {
+        return unpersistedTrip || { tripped: true, reason: `熔断状态读取失败: ${cause.code || cause.name}` };
+      }
+      if (state !== null && typeof state?.tripped !== 'boolean') {
+        return unpersistedTrip || { tripped: true, reason: '熔断状态格式无效' };
+      }
+      // 仅接受故障发生后由人工写入的复位记录，缺少文件本身不能解除内存熔断。
+      if (unpersistedTrip && state?.tripped === false && Date.parse(state.resetAt) > Date.parse(unpersistedTrip.trippedAt)) {
+        unpersistedTrip = null;
+      }
+      return unpersistedTrip || state;
+    },
+    trip(error, label) {
+      const state = { tripped: true, reason: error.message, trippedAt: now(), trippedBy: label };
+      try {
+        writeState(state);
+        unpersistedTrip = null;
+      } catch (cause) {
+        unpersistedTrip = state;
+        console.error(`[熔断] 状态写入失败，当前进程保持熔断: ${cause.code || cause.name}`);
+      }
+    },
+    reset() {
+      writeState({ tripped: false, resetAt: now() });
+      unpersistedTrip = null;
+    },
+  };
+}
+
+const jinglingCircuit = createJinglingCircuit(JL_CIRCUIT_FILE);
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -118,6 +175,10 @@ async function waitFor(fn, { timeoutMs = 10000, intervalMs = 500, label = '' } =
 module.exports = {
   sleep,
   retry,
+  isRiskControlError,
+  createCircuitReader,
+  createJinglingCircuit,
+  jinglingCircuit,
   waitFor,
   createAbortError,
   assertNotAborted,

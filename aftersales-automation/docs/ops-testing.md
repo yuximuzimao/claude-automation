@@ -93,4 +93,12 @@ node --test test/jl/after-sale-type.test.js test/jl/read-urgent-after-sale-list.
 
 覆盖类别优先识别、ERP 零采集、退货运单独立核验、三种签收状态固定人工、旧换货阶段不覆盖、结果保存后提醒、持久去重及发送失败记录。全部使用模拟页面和提醒依赖；真实样本观察只按 `tasks/todo.md` 在正常扫描自然发生时核对，不为验证主动重采工单或创建测试提醒。
 
+## 8. 浏览器异常诊断与单工单续扫
+
+```bash
+node --test test/jl/click-work-order-action.test.js test/jl/process-single-account-fixed-batch.test.js test/server/a1-fixed-batch-op-queue.test.js
+```
+
+用模拟浏览器和提醒依赖验证诊断关联、原动作不重试、跳过后继续、提醒去重、停止与熔断边界。全量回归前后核对工单队列、账号状态、会话缓存、首页提醒缓存、simulation、执行账本和熔断状态文件。真实提醒落地与后续工单处理结果，只在[待办](../tasks/todo.md#生产观察不主动触发真实业务)记录的自然样本中核对。
+
 ---

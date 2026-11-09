@@ -2,7 +2,7 @@
 'use strict';
 
 const { matchShopName } = require('../../lib/jl/login-state');
-const { assertNotAborted, waitAbortable } = require('../../lib/wait');
+const { assertNotAborted, createCircuitReader, isRiskControlError, jinglingCircuit, waitAbortable } = require('../../lib/wait');
 const { getSkipCompletionStatus } = require('../../lib/server/pipeline-status');
 const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execution-journal');
 const { getHoursUntilNextScan } = require('../../lib/constants');
@@ -70,6 +70,11 @@ async function assertCurrentAccountShop(targetId, context, dependencies) {
   }
   const state = await dependencies.readShopName(targetId, 0, { abortSignal });
   assertNotAborted(abortSignal);
+  if (context.requireCleanTabs && [state?.url, state?.title, state?.error].some(isRiskControlError)) {
+    const error = new Error('跳过工单前发现页面风控信号');
+    error.browserRiskSignal = true;
+    throw error;
+  }
   if (state && state.success === true && state.state === 'logged-out') {
     const error = new Error('账号登录已失效');
     error.accountSessionExpired = true;
@@ -118,6 +123,14 @@ async function assertCurrentAccountListTarget(listTargetId, context, dependencie
     if (!target) throw new Error(`售后列表主 tab 不存在: ${listTargetId}`);
     if (!isJlTarget(target)) throw new Error(`售后列表主 tab 不是鲸灵域: ${target.url || listTargetId}`);
     if (!isAfterSaleListTarget(target)) throw new Error(`售后列表主 tab 不在售后列表页: ${target.url || listTargetId}`);
+    if (context.requireCleanTabs) {
+      if (!context.account?.matchedNote) throw new Error('跳过工单前无法确认当前店铺');
+      if (!(context.beforeTargetIds instanceof Set)) throw new Error('跳过工单前缺少标签页基线');
+      const unexpected = targets.find(page => page?.type === 'page' && targetIdOf(page) !== listTargetId && (
+        isJlTarget(page) || !context.beforeTargetIds.has(targetIdOf(page))
+      ));
+      if (unexpected) throw new Error(`跳过工单前仍有未收尾的标签页: ${targetIdOf(unexpected)}`);
+    }
     await assertCurrentAccountShop(listTargetId, context, dependencies);
     return target;
   } catch (error) {
@@ -263,15 +276,6 @@ function createRefreshList({ reload, assertReady, readSortCheck, readCurrentPage
       previousSignature = signature;
       return stableReads >= 2 ? state : null;
     }, { timeoutMs: 15000, intervalMs: 500, label: '分页异常后刷新售后列表' });
-  };
-}
-
-function createCircuitReader(readFile, filePath) {
-  return () => {
-    try { return JSON.parse(readFile(filePath, 'utf8')); } catch (error) {
-      if (error && error.code === 'ENOENT') return null;
-      throw error;
-    }
   };
 }
 
@@ -657,6 +661,7 @@ async function processOpenedDetail(context, dependencies) {
   // 从这里进入平台写操作临界区：开始前可以停；一旦页面动作已发出，
   // 必须完成结果验证和 journal 记账，避免留下“平台可能已执行”的不确定状态。
   assertNotAborted(context && context.abortSignal);
+  context.onAutoExecutionEntered?.();
   await dependencies.reserveAutoExecution({ ...context, collectedData, decision });
 
   assertNotAborted(context && context.abortSignal);
@@ -842,7 +847,32 @@ function buildGoneDecision(ticket, located) {
   };
 }
 
-function buildFailureProcessed(ticket, error) {
+const BROWSER_SKIP_LABELS = {
+  button_outside_viewport: '处理按钮未进入可视区',
+  detail_tab_unconfirmed: '工单详情页未能确认',
+  cdp_transport: '浏览器控制连接异常',
+};
+
+function isCdpTransportFailure(error) {
+  return error.cdpDiagnosticId && ['handshake_error', 'socket_error', 'timeout'].includes(error.cdpFailureKind);
+}
+
+function ticketBrowserSkipReason(error, stage, { listTargetId, detailTargetId, detailClosed, autoExecutionEntered }) {
+  if (autoExecutionEntered || error.browserRiskSignal || error.accountSessionExpired || error.accountMainStateUntrusted ||
+      error.accountStateUntrusted || isRiskControlError(error.message)) return null;
+  if (stage === 'open_detail' &&
+      ['button_outside_viewport', 'detail_tab_unconfirmed'].includes(error.workOrderBrowserFailure)) {
+    return error.workOrderBrowserFailure;
+  }
+  if (!isCdpTransportFailure(error)) return null;
+  // 只接受页面读取或滚轮的连接异常。按下/释放中断时鼠标状态不明，不能打开下一张。
+  if (error.cdpMethod !== 'Runtime.evaluate' && error.cdpMouseEvent !== 'mouseWheel') return null;
+  if (['locate_on_list', 'open_detail'].includes(stage) && error.cdpTargetId === listTargetId) return 'cdp_transport';
+  if (stage === 'process_detail' && detailClosed && error.cdpTargetId === detailTargetId) return 'cdp_transport';
+  return null;
+}
+
+function buildFailureProcessed(ticket, error, browserSkipReason) {
   const message = (error && error.message) || String(error || '未知错误');
   const reason = `fixed_batch处理失败: ${message}`;
   return {
@@ -852,6 +882,7 @@ function buildFailureProcessed(ticket, error) {
       ticket,
       fixedBatchError: true,
       error: message,
+      ...(browserSkipReason ? { browserSkipReason } : {}),
     },
     decision: {
       action: 'escalate',
@@ -862,6 +893,22 @@ function buildFailureProcessed(ticket, error) {
       warnings: [reason],
       context: { workOrderNum: ticket && ticket.workOrderNum, fixedBatchFailed: true },
     },
+  };
+}
+
+function createBrowserSkipReminder({ db, sendReminder, now = () => new Date().toISOString() }) {
+  return ({ account, queueItem, workOrderNum, reason }) => {
+    const current = (db.readQueue().items || []).find(item => item.id === queueItem.id);
+    if (!current) throw new Error('浏览器异常提醒缺少已保存的工单');
+    if (current.browserSkipReminderAt) return 'already_sent';
+    const label = account.matchedNote || current.accountNote || '未知店铺';
+    const title = `【售后工单待人工】${label} 工单${workOrderNum}：${BROWSER_SKIP_LABELS[reason]}，本轮已跳过，请查看售后系统`;
+    if (sendReminder(title) !== true) return 'send_failed';
+    const stamp = now();
+    db.updateQueueItem(queueItem.id, { browserSkipReminderAt: stamp });
+    const saved = (db.readQueue().items || []).find(item => item.id === queueItem.id);
+    if (saved?.browserSkipReminderAt !== stamp) throw new Error('浏览器异常提醒去重状态写入后核验失败');
+    return 'sent';
   };
 }
 
@@ -980,8 +1027,8 @@ function loadDefaultDependencies() {
   const remindOfflineExchange = createOfflineExchangeReminder({
     db, sendReminder: createReminder, log: message => process.stdout.write(`${message}\n`),
   });
+  const remindBrowserSkip = createBrowserSkipReminder({ db, sendReminder: createReminder });
   const { createAutoExecutionJournal } = require('../../lib/server/auto-execution-journal');
-  const fs = require('node:fs');
   const path = require('node:path');
   const {
     saveSessionState: writeSessionState,
@@ -1001,20 +1048,11 @@ function loadDefaultDependencies() {
       pagination: step10.normalizePaginationState(raw && raw.pagination),
     };
   };
-  const circuitFile = path.join(__dirname, '../../data/circuit-breaker.json');
   const sessionStateFile = path.join(__dirname, '../../data/current-session.json');
   const executionJournal = createAutoExecutionJournal();
-  const readCircuit = createCircuitReader(fs.readFileSync, circuitFile);
+  const readCircuit = jinglingCircuit.read;
   if (typeof globalThis.__tripCircuitBreaker !== 'function') {
-    globalThis.__tripCircuitBreaker = (error, label) => {
-      const state = {
-        tripped: true,
-        reason: (error && error.message) || '未知风控错误',
-        trippedAt: new Date().toISOString(),
-        trippedBy: label || 'fixed_batch',
-      };
-      fs.writeFileSync(circuitFile, JSON.stringify(state, null, 2));
-    };
+    globalThis.__tripCircuitBreaker = jinglingCircuit.trip;
   }
   return {
     openAccountFlow,
@@ -1022,6 +1060,10 @@ function loadDefaultDependencies() {
     invalidateSessionState: () => clearSessionState(sessionStateFile),
     prepareAfterSaleList,
     clickWorkOrderAction,
+    logBrowserDiagnostic: cdp.logBrowserDiagnostic,
+    captureFailedTarget: cdp.captureFailedTarget,
+    remindBrowserSkip,
+    tripBrowserRisk: error => jinglingCircuit.trip(error, 'fixed_batch_browser'),
     locateWorkOrder: (targetId, workOrderNum, options = {}) => {
       const abortSignal = options.abortSignal || null;
       const abortableReadCurrentPage = async id => {
@@ -1120,12 +1162,15 @@ function loadDefaultDependencies() {
       const sim = buildSimulationPayload({ account, queueItem, ticket, processed, source });
       const queueStatus = statusForProcessed(processed, queueItem);
       db.appendSimulation(sim);
-      db.updateQueueItem(queueItem.id, {
+      const savedItem = db.updateQueueItem(queueItem.id, {
         status: queueStatus,
         waitingRescan: !!(processed.decision && processed.decision.waitingRescan),
         ...(processed.collectedData && processed.collectedData.ticket && processed.collectedData.ticket.type === '线下换货'
           ? { type: '线下换货' } : {}),
       });
+      if (processed.collectedData?.browserSkipReason && savedItem?.status !== queueStatus) {
+        throw new Error('浏览器异常工单未保存为待人工');
+      }
       remindOfflineExchange({ account, queueItem, ticket, processed });
       return { ...sim, queueStatus };
     },
@@ -1200,6 +1245,7 @@ async function throwAccountEndStateFailure(cause, context, dependencies) {
 
   const error = new Error(`账号结束店铺状态不可信: ${(cause && cause.message) || cause || 'unknown'}${suffix}`);
   error.accountStateUntrusted = true;
+  if (cause?.browserRiskSignal) error.browserRiskSignal = true;
   error.jlTargetId = (cause && cause.jlTargetId) || targetId || null;
   error.batch = { success: false, account: accountResult, snapshot, items };
   throw error;
@@ -1210,8 +1256,24 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   if (options.thresholdHours != null && Number(options.thresholdHours) !== 48) {
     throw new Error('生产处理范围固定为48小时，不允许改写 thresholdHours');
   }
-  const thresholdHours = 48;
   const dependencies = options.dependencies || loadDefaultDependencies();
+  const browserObservation = { attempted: 0, browserFaults: 0, skipped: 0, attemptedAfterSkip: 0, completedAfterSkip: 0 };
+  let result = 'completed';
+  try {
+    return await runFixedBatch(account, options, dependencies, browserObservation);
+  } catch (error) {
+    result = isAbortError(error) ? 'cancelled' : 'stopped';
+    if (error?.batch) error.batch.browserObservation = browserObservation;
+    throw error;
+  } finally {
+    dependencies.logBrowserDiagnostic?.('jl_fixed_batch_browser_observation', {
+      accountNum: account, result, ...browserObservation,
+    });
+  }
+}
+
+async function runFixedBatch(account, options, dependencies, browserObservation) {
+  const thresholdHours = 48;
   if (typeof options.onTicketProgress === 'function') {
     const origOnProgress = dependencies.onProgress;
     dependencies.onProgress = async (item) => {
@@ -1285,19 +1347,40 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     ? await dependencies.resolveErpTargetId(options.erpTargetId)
     : (options.erpTargetId || null);
   assertNotAborted(options.abortSignal);
+  // 后续工单不能把前一张遗留的标签当成初始状态。
+  const beforeBatchTargetIds = processableItems.length
+    ? new Set((await dependencies.getTargets()).filter(page => page?.type === 'page').map(targetIdOf))
+    : new Set();
+  assertNotAborted(options.abortSignal);
+  if (processableItems.length && !beforeBatchTargetIds.has(prepared.targetId)) {
+    await throwAccountEndStateFailure(new Error('固定批次开始时未找到售后列表主标签页'), {
+      accountResult, snapshot, items, targetId: prepared.targetId, abortSignal: options.abortSignal,
+    }, dependencies);
+  }
   const sharedReturnContext = {
     batchWorkOrderNums: new Set(processableItems.map(item => String(item.workOrderNum))),
     collectedDataByWorkOrder: new Map(),
     batchItemsByWorkOrder: new Map(processableItems.map(item => [String(item.workOrderNum), item])),
   };
 
+  const attemptedAfterSkip = new Set();
+  let previousClosedDetail;
   for (const item of processableItems) {
     assertNotAborted(options.abortSignal);
     await assertBatchAllowed();
+    browserObservation.attempted++;
+    if (browserObservation.skipped) {
+      browserObservation.attemptedAfterSkip++;
+      attemptedAfterSkip.add(item.workOrderNum);
+    }
     item.status = 'processing';
     await reportProgress(dependencies, item);
     let detailTargetId = null;
     let processingError = null;
+    let processingStage = 'locate_on_list';
+    let secondaryFailure;
+    let autoExecutionEntered = false;
+    let browserFault = false;
 
     try {
       const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum, {
@@ -1328,6 +1411,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         continue;
       }
 
+      processingStage = 'open_detail';
       const opened = await dependencies.clickWorkOrderAction(item.workOrderNum, {
         targetId: prepared.targetId,
         abortSignal: options.abortSignal,
@@ -1337,6 +1421,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       item.detailTargetId = detailTargetId;
       assertNotAborted(options.abortSignal);
 
+      processingStage = 'process_detail';
       const outcome = await processOpenedDetailAndPersist({
         account: accountResult,
         listTargetId: prepared.targetId,
@@ -1346,6 +1431,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         queueItem: item.queueItem,
         abortSignal: options.abortSignal,
         disableAutoExecute: options.disableAutoExecute === true,
+        onAutoExecutionEntered: () => { autoExecutionEntered = true; },
         sharedReturnContext,
         allowSharedReturnDefer: true,
       }, dependencies, { source: 'fixed_batch' });
@@ -1357,7 +1443,13 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       item.persistedSimulationId = persisted && persisted.id;
     } catch (error) {
       processingError = error;
-      if (!isAbortError(error) && !detailTargetId && Array.isArray(error.newTargetIds)) {
+      browserFault = Boolean(error.workOrderBrowserFailure || isCdpTransportFailure(error));
+      if (!options.abortSignal?.aborted && error.browserRiskSignal) {
+        if (!error.browserRiskHandled) dependencies.tripBrowserRisk?.(error);
+      } else {
+        dependencies.captureFailedTarget?.(error, options.abortSignal);
+      }
+      if (!isAbortError(error) && !error.browserRiskSignal && !detailTargetId && Array.isArray(error.newTargetIds)) {
         for (const unexpectedTargetId of error.newTargetIds) {
           assertNotAborted(options.abortSignal);
           try {
@@ -1367,13 +1459,17 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
               abortSignal: options.abortSignal,
             });
           } catch (cleanupError) {
+            browserFault ||= Boolean(isCdpTransportFailure(cleanupError));
+            dependencies.captureFailedTarget?.(cleanupError, options.abortSignal);
+            secondaryFailure = { stage: processingStage, cdpDiagnosticId: error.cdpDiagnosticId };
+            processingStage = 'cleanup_unexpected_tab';
             processingError = cleanupError;
             break;
           }
         }
       }
     } finally {
-      if (detailTargetId && !isAbortError(processingError) && !(options.abortSignal && options.abortSignal.aborted)) {
+      if (detailTargetId && !isAbortError(processingError) && !processingError?.browserRiskSignal && !options.abortSignal?.aborted) {
         try {
           await closeAndVerifyDetailTarget(detailTargetId, dependencies, {
             account: accountResult,
@@ -1381,7 +1477,16 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
             abortSignal: options.abortSignal,
           });
           item.detailClosed = true;
+          if (!processingError) {
+            previousClosedDetail = { workOrderNum: item.workOrderNum, targetId: detailTargetId, closedAtMs: Date.now() };
+          }
         } catch (closeError) {
+          browserFault ||= Boolean(isCdpTransportFailure(closeError));
+          dependencies.captureFailedTarget?.(closeError, options.abortSignal);
+          if (processingError) {
+            secondaryFailure = { stage: processingStage, cdpDiagnosticId: processingError.cdpDiagnosticId };
+          }
+          processingStage = 'close_detail';
           processingError = closeError;
         }
       }
@@ -1390,7 +1495,45 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     assertNotAborted(options.abortSignal);
     if (processingError) {
       if (isAbortError(processingError)) throw processingError;
-      const failureProcessed = buildFailureProcessed(item.ticket, processingError);
+      if (browserFault) browserObservation.browserFaults++;
+      const candidate = ticketBrowserSkipReason(processingError, processingStage, {
+        listTargetId: prepared.targetId, detailTargetId, detailClosed: item.detailClosed, autoExecutionEntered,
+      });
+      let browserSkipReason = null;
+      let continuationBlocked;
+      if (candidate) {
+        try {
+          await assertBatchAllowed();
+          await assertCurrentAccountListTarget(prepared.targetId, {
+            account: accountResult,
+            abortSignal: options.abortSignal,
+            requireCleanTabs: true,
+            beforeTargetIds: beforeBatchTargetIds,
+          }, dependencies);
+          browserSkipReason = candidate;
+        } catch (error) {
+          if (isAbortError(error)) throw error;
+          if (error.browserRiskSignal) dependencies.tripBrowserRisk?.(error);
+          continuationBlocked = error;
+        }
+      }
+      dependencies.logBrowserDiagnostic?.('jl_fixed_batch_work_order_failed', {
+        accountNum: account,
+        workOrderNum: item.workOrderNum,
+        stage: processingStage,
+        listTargetId: prepared.targetId,
+        detailTargetId,
+        erpTargetId,
+        cdpDiagnosticId: processingError.cdpDiagnosticId,
+        earlierFailure: secondaryFailure,
+        previousClosedDetail,
+        browserSkipReason,
+        continuationBlocked: continuationBlocked ? {
+          error: continuationBlocked.message,
+          cdpDiagnosticId: continuationBlocked.cdpDiagnosticId,
+        } : undefined,
+      });
+      const failureProcessed = buildFailureProcessed(item.ticket, processingError, browserSkipReason);
       try {
         const persisted = await dependencies.persistOutcome({
           account: accountResult,
@@ -1408,9 +1551,38 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         item.error = `${processingError.message}; 写回失败: ${persistError.message}`;
         processingError.persistError = persistError;
       }
+      if (browserSkipReason && item.status === 'simulated') {
+        browserObservation.skipped++;
+        sharedReturnContext.collectedDataByWorkOrder.delete(item.workOrderNum);
+        sharedReturnContext.batchItemsByWorkOrder.delete(item.workOrderNum);
+        assertNotAborted(options.abortSignal);
+        let reminderResult;
+        try {
+          reminderResult = await dependencies.remindBrowserSkip({
+            account: accountResult, queueItem: item.queueItem, workOrderNum: item.workOrderNum, reason: browserSkipReason,
+          });
+        } catch (error) {
+          reminderResult = 'failed';
+          item.browserSkipReminderError = error.message;
+        }
+        dependencies.logBrowserDiagnostic?.('jl_work_order_browser_skipped', {
+          accountNum: account, workOrderNum: item.workOrderNum, reason: browserSkipReason,
+          reminderResult, reminderError: item.browserSkipReminderError,
+        });
+        await reportProgress(dependencies, item);
+        continue;
+      }
       await reportProgress(dependencies, item);
+      if (continuationBlocked?.accountSessionExpired || continuationBlocked?.accountMainStateUntrusted) {
+        await throwAccountEndStateFailure(continuationBlocked, {
+          accountResult, snapshot, items, targetId: prepared.targetId, abortSignal: options.abortSignal,
+        }, dependencies);
+      }
       processingError.batch = { success: false, account: accountResult, snapshot, items };
       throw processingError;
+    }
+    if (attemptedAfterSkip.has(item.workOrderNum) && item.status !== 'deferred_shared_return') {
+      browserObservation.completedAfterSkip++;
     }
     await reportProgress(dependencies, item);
   }
@@ -1472,6 +1644,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       error.batch = { success: false, account: accountResult, snapshot, items };
       throw error;
     }
+    if (attemptedAfterSkip.has(item.workOrderNum)) browserObservation.completedAfterSkip++;
     await reportProgress(dependencies, item);
   }
 
@@ -1507,11 +1680,11 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
 
   try {
     assertNotAborted(options.abortSignal);
-    const accountNote = (accountResult && accountResult.matchedNote) || `账号${accountNum}`;
+    const accountNote = (accountResult && accountResult.matchedNote) || `账号${account}`;
     if (typeof dependencies.fetchAndCacheAlerts !== 'function') {
       throw new Error('首页提醒采集依赖未装配');
     }
-    await dependencies.fetchAndCacheAlerts(accountNum, accountNote, {
+    await dependencies.fetchAndCacheAlerts(account, accountNote, {
       abortSignal: options.abortSignal,
     });
     assertNotAborted(options.abortSignal);
@@ -1548,6 +1721,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     items,
     waitingRescanAbsences,
     cleanup,
+    browserObservation,
   };
 }
 
@@ -1593,6 +1767,7 @@ module.exports = {
   buildSimulationPayload,
   createEnsureQueueItem,
   createOfflineExchangeReminder,
+  createBrowserSkipReminder,
   loadDefaultDependencies,
   resolveSharedReturnGroupForBatch,
   runCli,

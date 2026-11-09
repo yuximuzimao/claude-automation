@@ -7,6 +7,7 @@
 | 遇到的问题 | 打开文档 |
 |---|---|
 | 鲸灵页面、CDP、工单详情、备注、账号切换 | [ops-jingling.md](ops-jingling.md) |
+| 浏览器连接、按钮越界或详情页识别失败，需查某张工单的日志 | [浏览器异常取证](ops-jingling.md#浏览器异常取证) |
 | ERP 导航、登录恢复、物流弹窗、图片上传 | [ops-erp.md](ops-erp.md) |
 | 修改代码后的分步测试与验收 | [ops-testing.md](ops-testing.md) |
 | 新增提醒、提醒没收到或提醒发送失败 | [工作区提醒说明](../../docs/reminders.md) |

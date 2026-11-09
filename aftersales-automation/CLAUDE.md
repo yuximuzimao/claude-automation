@@ -49,9 +49,7 @@
 
 ## Git 存档规则
 
-改动验证通过后立即 commit + push，不攒到 session 结束。
-暂存：`git add lib/ cli.js server.js public/ tasks/ docs/ test/`；旧 `collect.js` / `scan-all.js` 只有明确修复 legacy 行为时单独暂存，日常 A1 入口不走它们
-不提交：`data/`、`*.log`、`.server.lock`
+归档、暂存和推送遵循[工作区 Git 规则](../docs/git.md)。暂存按本次明确的文件或差异范围执行，尤其要区分历史未提交改动与本轮变更。
 
 ## 代码生效铁律
 

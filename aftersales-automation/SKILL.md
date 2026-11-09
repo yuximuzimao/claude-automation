@@ -22,9 +22,9 @@ entry: cli.js
 | `lib/infer.js` | 规则推理引擎，主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/after-sales-platform-stage.js` | 平台工单阶段观察与窄状态分类；所有阶段留存，当前只让“换货+待商家二次发货”进入人工观察分支 | 改平台阶段留存、分类或观察期升级时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
-| `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
+| `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` 与结构化连接诊断 | 写/改浏览器操作或按[诊断指南](docs/ops-jingling.md#浏览器异常取证)复盘时 |
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
-| `lib/wait.js` | `sleep()`, `waitFor()`, `retry()` 工具；内置 `FORCE_NO_RETRY_DOMAINS` 自动禁止鲸灵重试 + `isRiskControlError()` 风控信号检测 + 熔断钩子 | 需要等待/重试/风控防护时 |
+| `lib/wait.js` | 等待工具、鲸灵行为不重试、风控信号检测与共享熔断状态 | 需要等待或排查[风控和人工复位](docs/ops-queue.md#81-单工单浏览器异常)时 |
 | `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` + `createReminder()` | 提取快递单号或发送提醒事项时；接入与失败处理先读 `../docs/reminders.md` |
 | `../docs/reminders.md` | 工作区共享的 Mac 提醒事项接入与排查 | 新增任何提醒、变更快捷指令/输入位置或排查发送失败时 |
 | `test/helpers-reminder.test.js` + `test/erp/notification.test.js` | 提醒事项发送与 ERP 异常提醒回归，隔离真实快捷指令 | 修改提醒发送或 ERP 告警时；运行方式见 `docs/ops-testing.md §6` |
@@ -82,7 +82,7 @@ entry: cli.js
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化；统计累计处理量合并 live queue、归档 case 和现存 live simulation 并按工单号去重，评价正确率只按每单最新明确评价计算；反馈洞察用 `markFeedbackInsighted(ids)` 写 `insightedAt`，保留原文 | 改数据读写、统计口径或收口手动洞察时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，固定 48h，忽略前端传入的 thresholdHours / accounts / disableAutoExecute 等可篡改参数；是否自动执行由 Step14 的 shouldAutoExecute + executionJournal 决定 | 改 A1 后端入口或入队参数时 |
-| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。固定批次失败会持久写入账号 `error/expired` 状态；紧急停止使用 AbortController + 步骤间检查点；定时自动扫描在浏览器操作前先启动 10 秒状态窗并持续推送店铺/工单进度，详见 `docs/ops-queue.md` | 改队列/执行/重新采集/停止/定时扫描进度逻辑时 |
+| `lib/server/op-queue.js` | 串行化扫描、账号打开、查看、执行与重采，调度前检查共享熔断。单工单浏览器异常、账号级失败和停止按[队列操作指南](docs/ops-queue.md)分流 | 改队列、执行、重采、停止或定时扫描进度时 |
 | `lib/server/scan-hud.js` + `scripts/scan-status-hud.js` | macOS 定时扫描浮动状态窗：10 秒预告倒计时、店铺/工单实时进度、异常/停止/完成终态后自动关闭；只观察队列状态，不改变业务决策 | 改自动扫描提醒、状态窗文案或显示字段时 |
 | `wanwu/` | 万物心选（棒棒糖后台管理）独立只读巡检模块：每天 07:00/15:00 通过统一 op-queue 扫描，必要时单次登录，待办数字间隔 3 秒双读一致后才确认；无论成功失败均关闭本次标签页。复用提醒、状态窗和顶部红绿状态框，不保存账号密码或平台 Session | 改万物扫描、登录、待办口径、调度或顶部状态时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |

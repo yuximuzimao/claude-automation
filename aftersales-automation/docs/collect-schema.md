@@ -1,7 +1,6 @@
 # 售后采集数据 Schema（接口合约）
 
-> 当前生产 `target-aware-collector`、兼容 `collect.js` 与 `infer.js` 之间的统一约定。
-> **变更任一字段必须同步更新本文档和 infer.js 中对应读取路径。**
+> 现役 `target-aware-collector`、固定批次写回和推理之间的数据合约。字段变更应核对实际生产者与读取方，并同步更新本页。
 
 ---
 
@@ -149,6 +148,15 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 
 生产写回先保存 simulation 和队列结果，再发送提醒；发送状态写入后重新读取核验。提醒范围和业务结果以 [flow-5.4 §线下换货](flow-5.4.md#线下换货) 为准。
 
+## 固定批次单工单浏览器异常
+
+| 字段 | 位置 | 说明 |
+|---|---|---|
+| `browserSkipReason` | `simulation.collectedData` | 通过单工单跳过校验时记录，取值为 `button_outside_viewport`、`detail_tab_unconfirmed` 或 `cdp_transport`。对应决策为 `escalate`。 |
+| `browserSkipReminderAt` | queue item | 提醒发送成功后持久化的 ISO 时间。同一 queue item 据此去重。缺失表示尚无成功记录。 |
+
+跳过条件、提醒时机和观测统计见[队列操作指南](ops-queue.md#81-单工单浏览器异常)。
+
 ## `logistics` 字段（鲸灵发货物流，logistics 采集）
 
 ```js
@@ -295,6 +303,5 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 
 ## 变更规范
 
-1. collect.js 新增/改名字段 → 更新本文档对应行
-2. collect.js 删除字段 → 更新本文档 + 确认 infer.js 无引用
-3. infer.js 新增读取字段 → 确认 collect.js 已产出 + 更新本文档
+1. 采集器或固定批次写回新增、改名或删除字段时，更新本页并核对现役读取方。
+2. 推理新增字段依赖时，确认现役采集器产出该字段。已有记录缺失字段时，按对应读取契约验证。

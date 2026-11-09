@@ -39,6 +39,8 @@ test('a1-fixed-batch失败会生成账号级持久异常状态', () => {
       note: '百浩-RITEKOKO',
     },
   });
+  const blocked = Object.assign(new Error('风控熔断中'), { jinglingCircuitBlocked: true });
+  assert.equal(buildA1FixedBatchFailureStatus({ type: 'a1-fixed-batch', params: { accountNum: '3' } }, blocked), null);
 });
 
 test('a1-fixed-batch登录异常仍归类为登录失效', () => {
@@ -359,6 +361,78 @@ test('等待重查完整复用扫描处理链路，七天无理由命中后可�
     ['executed'],
     ['persist', 'reprocess', 'q-recheck-1', 'auto_executed'],
   ]);
+});
+
+test('已持久熔断时，查看、重采和执行在打开任何平台页面前被队列拦截', async t => {
+  const { jinglingCircuit } = require('../../lib/wait');
+  const readCircuit = t.mock.method(jinglingCircuit, 'read', () => ({ tripped: true, reason: '模拟风控' }));
+  const open = t.mock.method(require('../../lib/jl/open-account-flow'), 'openAccountFlow', async () => {
+    assert.fail('熔断中不能打开平台页面');
+  });
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const opQueue = require('../../lib/server/op-queue');
+  for (const type of ['open-ticket', 'reprocess-one', 'execute', 'scan', 'open-account']) {
+    const op = opQueue.enqueue(type, `模拟 ${type}`, {});
+    const completed = await waitFor(() => {
+      const last = opQueue.getState().lastCompleted;
+      return last?.id === op.id && last;
+    });
+    assert.equal(completed.status, 'error');
+    assert.match(completed.result.error, /风控熔断中: 模拟风控/);
+  }
+  assert.equal(readCircuit.mock.callCount(), 5);
+  assert.equal(open.mock.callCount(), 0);
+});
+
+test('共享熔断使用现有文件和人工复位所需的状态格式', t => {
+  const { jinglingCircuit } = require('../../lib/wait');
+  const write = t.mock.method(require('node:fs'), 'writeFileSync', () => {});
+  jinglingCircuit.trip(new Error('模拟 HTTP 426'), 'jl_work_order_detail');
+  assert.equal(write.mock.callCount(), 1);
+  const [file, content] = write.mock.calls[0].arguments;
+  assert.match(file, /\/data\/circuit-breaker\.json$/);
+  const record = JSON.parse(content);
+  assert.equal(record.tripped, true);
+  assert.equal(record.reason, '模拟 HTTP 426');
+  assert.equal(record.trippedBy, 'jl_work_order_detail');
+  assert.ok(Number.isFinite(Date.parse(record.trippedAt)));
+});
+
+test('熔断写盘失败后保持阻断，人工复位记录可恢复仍在运行的服务', t => {
+  const { createJinglingCircuit } = require('../../lib/wait');
+  const file = 'mock-circuit.json';
+  let saved = JSON.stringify({ tripped: false, resetAt: '2026-11-09T01:00:00.000Z' });
+  let canWrite = false;
+  let canRead = true;
+  const storage = {
+    readFile: () => {
+      if (!canRead) throw Object.assign(new Error('read failure'), { code: 'EACCES' });
+      if (!saved) throw Object.assign(new Error('not found'), { code: 'ENOENT' });
+      return saved;
+    },
+    writeFile: (_file, value) => {
+      if (!canWrite) throw Object.assign(new Error('storage failure'), { code: 'EIO' });
+      saved = value;
+    },
+  };
+  const running = createJinglingCircuit(file, { ...storage, now: () => '2026-11-09T02:00:00.000Z' });
+  const manual = createJinglingCircuit(file, { ...storage, now: () => '2026-11-09T03:00:00.000Z' });
+  t.mock.method(console, 'error', () => {});
+  running.trip(new Error('模拟风控'), 'fixture');
+  assert.equal(running.read().tripped, true);
+  saved = '{';
+  assert.equal(running.read().reason, '模拟风控');
+  assert.equal(manual.read().tripped, true);
+  canRead = false;
+  assert.equal(running.read().reason, '模拟风控');
+  assert.equal(manual.read().tripped, true);
+  canRead = true;
+  saved = null;
+  assert.equal(running.read().tripped, true);
+  assert.throws(() => manual.reset(), /storage failure/);
+  canWrite = true;
+  manual.reset();
+  assert.equal(running.read().tripped, false);
 });
 
 test('op-queue executes a1-fixed-batch through Step14 with fixed 48h defaults', async () => {

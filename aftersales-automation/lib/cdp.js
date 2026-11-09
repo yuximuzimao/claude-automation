@@ -5,35 +5,131 @@
  * （port 3456 被 web-access skill 占用，无法使用）
  */
 const http = require('http');
+const { randomUUID } = require('node:crypto');
 
 const CHROME_PORT = 9222;
 const EVAL_TIMEOUT = 125000;
 
+function logBrowserDiagnostic(event, details) {
+  console.error('[browser-diagnostic] ' + JSON.stringify({
+    at: new Date().toISOString(), event, ...details,
+  }));
+}
+
+// 用固定标签描述路由，避免诊断记录带出查询参数、详情页标题或页面内容。
+function pageKind(url) {
+  try {
+    const { hostname, pathname, protocol } = new URL(url);
+    if (hostname === 'scrm.jlsupp.com') {
+      if (pathname.endsWith('/after-sale-list')) return 'jl_list';
+      if (pathname.endsWith('/after-sale-detail')) return 'jl_detail';
+      if (pathname.includes('/login')) return 'jl_login';
+      return 'jl_other';
+    }
+    if (hostname.endsWith('.superboss.cc')) return 'erp';
+    if (url === 'about:blank') return 'blank';
+    if (protocol === 'chrome-error:') return 'chrome_error';
+  } catch {}
+  return 'other';
+}
+
+function captureFailedTarget(error, abortSignal) {
+  const { cdpDiagnosticId: diagnosticId, cdpTargetId: targetId } = error;
+  if (!diagnosticId || abortSignal?.aborted) return;
+  // 独立取证，只读本机 DevTools HTTP 接口，不等待、不重发指令。
+  const timeout = AbortSignal.timeout(1000);
+  const signal = abortSignal ? AbortSignal.any([abortSignal, timeout]) : timeout;
+  void cdp.getTargets({ signal }).then(targets => {
+    if (!Array.isArray(targets)) {
+      logBrowserDiagnostic('cdp_target_snapshot', { diagnosticId, result: 'invalid_target_list' });
+      return;
+    }
+    const target = targets.find(item => item?.id === targetId);
+    logBrowserDiagnostic('cdp_target_snapshot', {
+      diagnosticId,
+      result: target ? 'target_present' : 'target_absent',
+      targetType: target?.type,
+      pageKind: target ? pageKind(target.url) : undefined,
+      pageCount: targets.filter(item => item?.type === 'page').length,
+    });
+  }).catch(probeError => {
+    logBrowserDiagnostic('cdp_target_snapshot', {
+      diagnosticId,
+      result: 'target_list_unavailable',
+      errorCode: probeError.code || probeError.name,
+      httpStatus: probeError.httpStatus,
+    });
+  });
+}
+
 // 一次性 CDP WebSocket 调用（用完即关）
 function cdpCall(targetId, method, params, timeout) {
   return new Promise((resolve, reject) => {
+    const startedAt = Date.now();
+    const origin = {};
+    Error.captureStackTrace(origin, cdpCall);
     const ws = new WebSocket(`ws://localhost:${CHROME_PORT}/devtools/page/${targetId}`);
     const id = Math.floor(Math.random() * 100000);
+    let opened = false;
+    let commandSent = false;
+    let settled = false;
+    let socketClose;
+    const reportFailure = (error, kind, cause) => {
+      const diagnosticId = randomUUID();
+      error.cdpDiagnosticId = diagnosticId;
+      error.cdpTargetId = targetId;
+      error.cdpFailureKind = kind;
+      error.cdpMethod = method;
+      error.cdpMouseEvent = method === 'Input.dispatchMouseEvent' ? params?.type : undefined;
+      const status = cause?.statusCode ?? cause?.cause?.statusCode;
+      logBrowserDiagnostic('cdp_transport', {
+        diagnosticId, targetId, method, kind, opened, commandSent, elapsedMs: Date.now() - startedAt,
+        mouseEvent: error.cdpMouseEvent,
+        errorCode: cause?.code ?? cause?.cause?.code,
+        protocolErrorCode: kind === 'protocol_error' ? cause?.code : undefined,
+        handshakeHttpStatus: Number.isInteger(status) ? status : undefined,
+        socketClose,
+        callSite: origin.stack.split('\n').slice(1, 6).map(line => line.trim()),
+      });
+    };
     const timer = setTimeout(() => {
+      settled = true;
       ws.close();
-      reject(new Error(`CDP timeout: ${method} (target: ${targetId})`));
+      const error = new Error(`CDP timeout: ${method} (target: ${targetId})`);
+      reject(error);
+      reportFailure(error, 'timeout');
     }, timeout || 30000);
 
     ws.addEventListener('open', () => {
+      opened = true;
       ws.send(JSON.stringify({ id, method, params: params || {} }));
+      commandSent = true;
+    });
+    ws.addEventListener('close', event => {
+      if (!settled) socketClose = { code: event.code, wasClean: event.wasClean };
     });
     ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
       if (msg.id === id) {
+        settled = true;
         clearTimeout(timer);
         ws.close();
-        if (msg.error) reject(new Error(msg.error.message || JSON.stringify(msg.error)));
-        else resolve(msg.result);
+        if (msg.error) {
+          const error = new Error(msg.error.message || JSON.stringify(msg.error));
+          reject(error);
+          reportFailure(error, 'protocol_error', msg.error);
+        } else {
+          resolve(msg.result);
+        }
       }
     });
     ws.addEventListener('error', (e) => {
+      if (settled) return;
+      settled = true;
       clearTimeout(timer);
-      reject(new Error('WebSocket error: ' + (e.message || 'connection failed')));
+      const error = new Error('WebSocket error: ' + (e.message || 'connection failed'));
+      reject(error);
+      reportFailure(error, opened ? 'socket_error' : 'handshake_error', e.error);
     });
   });
 }
@@ -87,17 +183,20 @@ async function dispatchMouseEvent(targetId, event, timeout) {
 }
 
 // 列出所有标签页（Chrome HTTP API）
-function getTargets() {
+function getTargets({ signal } = {}) {
   return new Promise((resolve, reject) => {
     const req = http.request({
       hostname: 'localhost', port: CHROME_PORT, path: '/json',
-      method: 'GET', timeout: 10000,
+      method: 'GET', timeout: 10000, signal,
     }, (res) => {
       const chunks = [];
       res.on('data', c => chunks.push(c));
       res.on('end', () => {
         try { resolve(JSON.parse(Buffer.concat(chunks).toString())); }
-        catch(e) { reject(e); }
+        catch (error) {
+          error.httpStatus = res.statusCode;
+          reject(error);
+        }
       });
     });
     req.on('error', reject);
@@ -237,7 +336,12 @@ function activateTarget(targetId) {
     }, (res) => {
       const chunks = [];
       res.on('data', c => chunks.push(c));
-      res.on('end', () => resolve());
+      res.on('end', () => {
+        if (res.statusCode >= 400) {
+          logBrowserDiagnostic('cdp_activate_http_error', { targetId, status: res.statusCode });
+        }
+        resolve();
+      });
     });
     req.on('error', reject);
     req.on('timeout', () => { req.destroy(); reject(new Error('activateTarget timeout')); });
@@ -341,6 +445,9 @@ async function clearJlCookiesAndStorage(targetId) {
 const cdp = {
   eval: evalJs,
   cdpCall,
+  logBrowserDiagnostic,
+  pageKind,
+  captureFailedTarget,
   clearJlCookiesAndStorage,
   clickAt,
   clickPoint,
