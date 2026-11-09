@@ -220,15 +220,15 @@
           [
             1,
             1
+          ],
+          [
+            1,
+            2
           ]
         ],
         "gold_cells": [
           [
             1,
-            2
-          ],
-          [
-            1,
             3
           ],
           [
@@ -296,17 +296,18 @@
             3
           ]
         ],
-        "verified_from": "2026-10-31 18:39 CST live QQ clean field: 6 purple / 18 gold; differs from 2026-10-28 snapshot",
-        "reported_change_pending": {
+        "verified_from": "2026-11-09 user confirmation: plot upgrades are sequential; plot 07 is [u=1,v=2] using confirmed numbering formula 4*u+v+1.",
+        "last_confirmed_upgrade": {
           "reported_at": "2026-11-09",
-          "change": "One QQ plot was upgraded from gold to purple crystal.",
-          "reported_counts_after_change": {
-            "purple": 7,
-            "gold": 17
-          },
-          "exact_cell": null,
-          "map_update_status": "awaiting_plot_identifier",
-          "note": "The mapped purple_cells/gold_cells arrays remain the prior 6-purple/18-gold baseline until the exact plot is identified."
+          "change": "One QQ gold plot was upgraded to purple crystal.",
+          "plot_number": 7,
+          "cell": [
+            1,
+            2
+          ],
+          "map_update_status": "confirmed_and_mapped",
+          "numbering_formula": "plot = 4*u + v + 1",
+          "note": "User confirmed plot upgrades are sequential; plot 07 is [u=1,v=2]."
         }
       },
       "planting": {
