@@ -30,7 +30,7 @@ def test_radish_plan_is_qq_ordinary_page7_slot4_only():
     assert plan["wechat"]["planting"] == {"special": [], "ordinary": None}
 
 
-def test_qq_round_order_keeps_friend_sweep_before_task_claim():
+def test_qq_round_uses_original_daily_task_then_friend_sweep():
     steps = workflow(5, ROOT / "data/operation-plan.json")
     scripts = [Path(step[1]).name for step in steps if not isinstance(step, tuple)]
     assert scripts == [
@@ -38,7 +38,7 @@ def test_qq_round_order_keeps_friend_sweep_before_task_claim():
         "farm_harvest_once.py",
         "farm_radish_xp.py",
         "farm_plant_once.py",
+        "farm_daily_task_once.py",
         "farm_friend_sweep.py",
-        "farm_daily_task_claim.py",
         "farm_daily_fertilizer_reward.py",
     ]

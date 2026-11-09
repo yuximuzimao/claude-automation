@@ -13,3 +13,4 @@
 - neat/2026-11-08-independent-actions-and-wechat-input-trials.md：正式坐标补齐、微信施肥和一键收获、本机点按对照及封存前的最后一轮。
 - neat/2026-11-08-farm-independent-actions-closeout.md：两端混种、QQ 日常与仓鼠真机验收，以及当轮提醒记录。
 - neat/2026-11-09-project-scope-and-reminder-reset.md：QQ 保持独立脚本、微信封存、单一当前计划、按键精灵式成功口径、阶段提醒规则、白萝卜/整轮串联脚本，以及旧 Runner 清理。
+- neat/2026-11-09-wechat-inventory-land-grade-friend-flow.md：微信库存截图更新、QQ 紫晶地升级待补格号、森野活动到期后的种植规划、好友每位只点击一次及恢复原每日任务脚本、项目临时文件清扫。

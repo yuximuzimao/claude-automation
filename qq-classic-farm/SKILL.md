@@ -39,6 +39,8 @@
 - picker、弹窗、动态按钮、preview、确认按钮等未分类控件必须有直接样本验证，不能套用 scene / fixed_ui 公式。
 - 土地中心以 `data/ui-layout.json` 中用户确认的显式点为准；拟合公式只作近似。候选点不是正式坐标。
 - 坐标核对只在用户明确要求时进行，并且只标点、截图和整理资料；不点击收获、种植、施肥、购买、领奖或分享等有副作用的按钮。
+- 好友连续互动每位只识别底部小条并点击一次。双按钮只点击其中一个识别到的按钮中心；点击后不再检查重排后的单按钮，直接进入下一位好友。
+- 每日任务脚本先互动当前首位可互动好友并领奖；游戏会把剩余可互动好友自动前移，随后好友全扫继续处理，不需要独立纯领奖脚本。
 - 真机操作遇到账号安全、重新登录或授权提示立即停止，交由用户处理；不得盲目重试。
 
 ## ENTRY MAP
@@ -62,8 +64,8 @@
 | `scripts/farm_radish_restock.py` | QQ 白萝卜月度补货：MAX 99 ×37 |
 | `scripts/farm_radish_xp.py` | QQ 白萝卜 5 轮种植→普通肥→收获循环 |
 | `scripts/farm_qq_round.py` | QQ 小程序已打开后的整轮田内串行入口 |
-| `scripts/farm_daily_task_once.py` | 单独执行一次好友互动 + 每日任务领奖 |
-| `scripts/farm_daily_task_claim.py` / `farm_daily_fertilizer_reward.py` | 好友已扫后的任务领奖 / 免费化肥 |
+| `scripts/farm_daily_task_once.py` | 互动首位可互动好友 + 每日任务领奖；整轮中先于好友全扫执行 |
+| `scripts/farm_daily_fertilizer_reward.py` | 每日免费化肥 |
 | `scripts/farm_friend_sweep.py` | 好友连续互动，按识别到的实际按钮中心点击 |
 | `scripts/farm_hamster_once.py` | 仓鼠识别与购买 |
 | `../docs/reminders.md` | 共享 Mac 提醒事项接入协议 |

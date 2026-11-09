@@ -4,8 +4,14 @@
   "coordinate_system": "window-local logical pixels at the recorded baseline window size",
   "grid_model": {
     "formula": "center(u,v) = origin + u * u_step + v * v_step",
-    "u_range": [0, 5],
-    "v_range": [0, 3],
+    "u_range": [
+      0,
+      5
+    ],
+    "v_range": [
+      0,
+      3
+    ],
     "cell_count": 24,
     "confirmed_points_source": "platforms.<platform>.confirmed_land_centers.points",
     "formula_role": "The grid fit is an approximation; use the user-confirmed explicit points as coordinate facts."
@@ -15,14 +21,20 @@
       "scene": {
         "type": "uniform_scale_translate",
         "scale": 1.0445939871,
-        "translation": [-1.014271, -2.979302],
+        "translation": [
+          -1.014271,
+          -2.979302
+        ],
         "formula": "wechat = qq * scale + translation",
         "scope": "QQ 603x1111 and WeChat 625x1155 confirmed default land views only.",
         "verified_from": "Fit to the 24 paired user-confirmed centers for the default views. The explicit centers take precedence."
       },
       "fixed_ui": {
         "type": "axis_scale",
-        "scale": [1.0364842454, 1.0396039604],
+        "scale": [
+          1.0364842454,
+          1.0396039604
+        ],
         "formula": "wechat.x = qq.x * 625/603; wechat.y = qq.y * 1155/1111",
         "verified_from": "six bottom home toolbar controls (warehouse/shop/pet/album/outfit/friends); mean error 0.98px, RMS 1.00px, max 1.33px"
       },
@@ -43,46 +55,304 @@
         "confirmed_at": "2026-11-05",
         "coordinate_order": "points[u][v], window-local pixels; includes the title bar",
         "points": [
-          [[341.6,583.9],[382.4,604.7],[423.1,625.4],[463.8,646.2]],
-          [[301,604.7],[341.7,625.5],[382.4,646.3],[423.1,667]],
-          [[260.3,625.6],[301,646.3],[341.7,667.1],[382.4,687.9]],
-          [[219.6,646.4],[260.3,667.2],[301,687.9],[341.7,708.7]],
-          [[178.9,667.2],[219.6,688],[260.3,708.8],[301,729.5]],
-          [[138.2,688.1],[178.9,708.8],[219.6,729.6],[260.3,750.4]]
+          [
+            [
+              341.6,
+              583.9
+            ],
+            [
+              382.4,
+              604.7
+            ],
+            [
+              423.1,
+              625.4
+            ],
+            [
+              463.8,
+              646.2
+            ]
+          ],
+          [
+            [
+              301,
+              604.7
+            ],
+            [
+              341.7,
+              625.5
+            ],
+            [
+              382.4,
+              646.3
+            ],
+            [
+              423.1,
+              667
+            ]
+          ],
+          [
+            [
+              260.3,
+              625.6
+            ],
+            [
+              301,
+              646.3
+            ],
+            [
+              341.7,
+              667.1
+            ],
+            [
+              382.4,
+              687.9
+            ]
+          ],
+          [
+            [
+              219.6,
+              646.4
+            ],
+            [
+              260.3,
+              667.2
+            ],
+            [
+              301,
+              687.9
+            ],
+            [
+              341.7,
+              708.7
+            ]
+          ],
+          [
+            [
+              178.9,
+              667.2
+            ],
+            [
+              219.6,
+              688
+            ],
+            [
+              260.3,
+              708.8
+            ],
+            [
+              301,
+              729.5
+            ]
+          ],
+          [
+            [
+              138.2,
+              688.1
+            ],
+            [
+              178.9,
+              708.8
+            ],
+            [
+              219.6,
+              729.6
+            ],
+            [
+              260.3,
+              750.4
+            ]
+          ]
         ]
       },
-      "baseline_window_size": [603, 1111],
-      "origin": [341.6461, 583.8971],
-      "u_step": [-40.6902, 20.8311],
-      "v_step": [40.7111, 20.7718],
-      "normalized_origin": [0.5665773, 0.52556],
-      "normalized_u_step": [-0.0674797, 0.0187499],
-      "normalized_v_step": [0.0675142, 0.0186965],
+      "baseline_window_size": [
+        603,
+        1111
+      ],
+      "origin": [
+        341.6461,
+        583.8971
+      ],
+      "u_step": [
+        -40.6902,
+        20.8311
+      ],
+      "v_step": [
+        40.7111,
+        20.7718
+      ],
+      "normalized_origin": [
+        0.5665773,
+        0.52556
+      ],
+      "normalized_u_step": [
+        -0.0674797,
+        0.0187499
+      ],
+      "normalized_v_step": [
+        0.0675142,
+        0.0186965
+      ],
       "fit_rms_pixels": 1.2894,
       "standard_view_verified_from": "2026-11-03 QQ 1.16.2.7 clean reopen from QQ main window; all 24 visible land tiles cross-checked against local tile-color centroids; max residual 3.70px",
       "land_grades": {
-        "purple_cells": [[0,0],[0,1],[0,2],[0,3],[1,0],[1,1]],
-        "gold_cells": [[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[3,0],[3,1],[3,2],[3,3],[4,0],[4,1],[4,2],[4,3],[5,0],[5,1],[5,2],[5,3]],
-        "verified_from": "2026-10-31 18:39 CST live QQ clean field: 6 purple / 18 gold; differs from 2026-10-28 snapshot"
+        "purple_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "gold_cells": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "verified_from": "2026-10-31 18:39 CST live QQ clean field: 6 purple / 18 gold; differs from 2026-10-28 snapshot",
+        "reported_change_pending": {
+          "reported_at": "2026-11-09",
+          "change": "One QQ plot was upgraded from gold to purple crystal.",
+          "reported_counts_after_change": {
+            "purple": 7,
+            "gold": 17
+          },
+          "exact_cell": null,
+          "map_update_status": "awaiting_plot_identifier",
+          "note": "The mapped purple_cells/gold_cells arrays remain the prior 6-purple/18-gold baseline until the exact plot is identified."
+        }
       },
       "planting": {
-        "plot_click_offset_normalized": [0.0, 0.0],
-        "preview_offset": [0, 0],
+        "plot_click_offset_normalized": [
+          0.0,
+          0.0
+        ],
+        "preview_offset": [
+          0,
+          0
+        ],
         "preview_patch_radius": 2,
         "preview_green_margin_min": 45,
-        "special_confirm_offset_normalized": [0.0811, -0.1288],
+        "special_confirm_offset_normalized": [
+          0.0811,
+          -0.1288
+        ],
         "verified_from": "2026-11-03 QQ 1.16.2.7 clean reopen: plot click point is the standard visible tile center; legacy extra click offset removed. Special confirm geometry remains a separate calibration concern."
       },
       "empty_check": {
         "calibration_version": 3,
-        "verified_window_size": [603, 1111],
-        "soil_offset": [-6, 23],
-        "occupancy_offset": [-16, 16],
+        "verified_window_size": [
+          603,
+          1111
+        ],
+        "soil_offset": [
+          -6,
+          23
+        ],
+        "occupancy_offset": [
+          -16,
+          16
+        ],
         "occupied_luminance_max": 130,
         "patch_radius": 2,
         "soil_prototypes": {
-          "purple": [190, 144, 220],
-          "gold": [247, 191, 60]
+          "purple": [
+            190,
+            144,
+            220
+          ],
+          "gold": [
+            247,
+            191,
+            60
+          ]
         },
         "empty_soil_max_distance": 12,
         "occupied_soil_max_distance": 120,
@@ -91,9 +361,18 @@
         "grade_policy": "infer nearest purple/gold prototype; do not trust legacy land_grades for V2 empty check"
       },
       "main_window_entry": {
-        "baseline_window_size": [1239, 928],
-        "farm_icon_center": [31, 307],
-        "normalized_farm_icon_center": [0.02502, 0.33082],
+        "baseline_window_size": [
+          1239,
+          928
+        ],
+        "farm_icon_center": [
+          31,
+          307
+        ],
+        "normalized_farm_icon_center": [
+          0.02502,
+          0.33082
+        ],
         "verified_at": "2026-10-28"
       },
       "safe_special_2x2": [],
@@ -107,59 +386,214 @@
         "reference_sample": "wechat-fertilizer-check-20261106-current.png",
         "coordinate_order": "points[u][v], window-local pixels; includes the title bar",
         "points": [
-          [[355.8,607],[398.4,628.7],[441,650.3],[483.5,672]],
-          [[313.4,628.7],[355.9,650.4],[398.4,672.1],[441,693.8]],
-          [[270.9,650.5],[313.4,672.1],[355.9,693.9],[398.4,715.6]],
-          [[228.4,672.2],[270.9,694],[313.4,715.6],[355.9,737.3]],
-          [[185.9,694],[228.4,715.7],[270.9,737.4],[313.4,759.1]],
-          [[143.3,715.8],[185.9,737.4],[228.4,759.2],[270.9,780.9]]
+          [
+            [
+              355.8,
+              607
+            ],
+            [
+              398.4,
+              628.7
+            ],
+            [
+              441,
+              650.3
+            ],
+            [
+              483.5,
+              672
+            ]
+          ],
+          [
+            [
+              313.4,
+              628.7
+            ],
+            [
+              355.9,
+              650.4
+            ],
+            [
+              398.4,
+              672.1
+            ],
+            [
+              441,
+              693.8
+            ]
+          ],
+          [
+            [
+              270.9,
+              650.5
+            ],
+            [
+              313.4,
+              672.1
+            ],
+            [
+              355.9,
+              693.9
+            ],
+            [
+              398.4,
+              715.6
+            ]
+          ],
+          [
+            [
+              228.4,
+              672.2
+            ],
+            [
+              270.9,
+              694
+            ],
+            [
+              313.4,
+              715.6
+            ],
+            [
+              355.9,
+              737.3
+            ]
+          ],
+          [
+            [
+              185.9,
+              694
+            ],
+            [
+              228.4,
+              715.7
+            ],
+            [
+              270.9,
+              737.4
+            ],
+            [
+              313.4,
+              759.1
+            ]
+          ],
+          [
+            [
+              143.3,
+              715.8
+            ],
+            [
+              185.9,
+              737.4
+            ],
+            [
+              228.4,
+              759.2
+            ],
+            [
+              270.9,
+              780.9
+            ]
+          ]
         ]
       },
-      "baseline_window_size": [625, 1155],
+      "baseline_window_size": [
+        625,
+        1155
+      ],
       "embedded_canvas": {
         "left_sidebar_width": 414,
-        "verified_window_width_range": [1039, 1041],
+        "verified_window_width_range": [
+          1039,
+          1041
+        ],
         "verified_window_height": 1155,
         "verified_from": "2026-11-02 live WeChat game window with left WeChat Games sidebar; rightmost canvas starts at x=967 and matches the calibrated 625x1155 farm canvas"
       },
-      "origin": [355.8949, 606.9492],
-      "u_step": [-42.5093, 21.7650],
-      "v_step": [42.5217, 21.6950],
-      "normalized_origin": [0.5694318095, 0.5254971140],
-      "normalized_u_step": [-0.0680148571, 0.0188441558],
-      "normalized_v_step": [0.0680346667, 0.0187835498],
+      "origin": [
+        355.8949,
+        606.9492
+      ],
+      "u_step": [
+        -42.5093,
+        21.765
+      ],
+      "v_step": [
+        42.5217,
+        21.695
+      ],
+      "normalized_origin": [
+        0.5694318095,
+        0.525497114
+      ],
+      "normalized_u_step": [
+        -0.0680148571,
+        0.0188441558
+      ],
+      "normalized_v_step": [
+        0.0680346667,
+        0.0187835498
+      ],
       "fit_rms_pixels": 0.0511,
       "planting": {
-        "plot_click_offset_normalized": [-0.0155041459, 0.0165784878],
-        "preview_offset_normalized": [0.0, 0.0],
+        "plot_click_offset_normalized": [
+          -0.0155041459,
+          0.0165784878
+        ],
+        "preview_offset_normalized": [
+          0.0,
+          0.0
+        ],
         "preview_patch_radius": 2,
         "preview_green_margin_min": 40,
-        "special_confirm_offset_normalized": [0.0277, -0.1246],
+        "special_confirm_offset_normalized": [
+          0.0277,
+          -0.1246
+        ],
         "verified_from": "2026-11-03 live WeChat 1.16.2.7: green 2x2 preview center ROIs separated from non-preview cells; two moved previews plus collapsed 625x1155 preview show confirm center at a stable relative offset"
       },
       "empty_check": {
         "calibration_version": 4,
-        "verified_window_width_range": [625, 627],
+        "verified_window_width_range": [
+          625,
+          627
+        ],
         "verified_window_height": 1155,
-        "soil_offset_normalized": [-0.0608, 0.0051948052],
+        "soil_offset_normalized": [
+          -0.0608,
+          0.0051948052
+        ],
         "occupancy_probes": [
           {
             "id": "growing",
-            "offset_normalized": [-0.0032, 0.0],
+            "offset_normalized": [
+              -0.0032,
+              0.0
+            ],
             "occupied_luminance_max": 140,
             "verified_from": "2026-11-02 live 24-cell golden-fruit seedling field"
           },
           {
             "id": "mature",
-            "offset_normalized": [-0.0256, -0.0103896104],
+            "offset_normalized": [
+              -0.0256,
+              -0.0103896104
+            ],
             "occupied_luminance_max": 130,
             "verified_from": "2026-11-02 live mature full field and 2026-11-03 live mature golden-fruit field"
           }
         ],
         "patch_radius": 2,
         "soil_prototypes": {
-          "purple": [227, 202, 200],
-          "gold": [241, 215, 105]
+          "purple": [
+            227,
+            202,
+            200
+          ],
+          "gold": [
+            241,
+            215,
+            105
+          ]
         },
         "empty_soil_max_distance": 40,
         "occupied_soil_max_distance": 220,
@@ -168,7 +602,32 @@
         "grade_policy": "infer nearest purple/gold prototype; never trust a stored land-grade map"
       },
       "safe_special_2x2": [
-        {"id": "purple_a", "grade": "purple", "anchor_cell": [0, 0], "cells": [[0, 0], [0, 1], [1, 0], [1, 1]]}
+        {
+          "id": "purple_a",
+          "grade": "purple",
+          "anchor_cell": [
+            0,
+            0
+          ],
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
       ]
     }
   },
@@ -279,7 +738,13 @@
       "update_from": "User-reported land upgrades, by platform and plot number.",
       "observed_at": "2026-11-06",
       "baseline_evidence": "Per-plot visible soil in QQ and WeChat planting screenshots, including bottom-page2 and alternate views.",
-      "latest_update": {"platform": "wechat", "plot": "11", "grade": "purple", "observed_at": "2026-11-08", "evidence": "User reported one upgrade; the cleared field confirmed plot 11 and the task counter showed 11/12."},
+      "latest_update": {
+        "platform": "wechat",
+        "plot": "11",
+        "grade": "purple",
+        "observed_at": "2026-11-08",
+        "evidence": "User reported one upgrade; the cleared field confirmed plot 11 and the task counter showed 11/12."
+      },
       "by_platform": {
         "qq": {
           "01": "purple",

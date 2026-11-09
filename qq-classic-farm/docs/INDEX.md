@@ -21,8 +21,8 @@
 - ../scripts/farm_radish_restock.py：QQ 白萝卜月度补货，MAX 99 ×37。
 - ../scripts/farm_radish_xp.py：QQ 白萝卜 5 轮 `种植 → 普通肥 → 收获` 循环。
 - ../scripts/farm_qq_round.py：QQ 小程序已打开后的整轮田内串联入口。
-- ../scripts/farm_daily_task_once.py：独立执行“首位好友互动 + 任务领奖”。
-- ../scripts/farm_daily_task_claim.py、../scripts/farm_daily_fertilizer_reward.py：好友全扫后的任务领奖与每日免费化肥；共用 ../scripts/farm_daily_clicks.py。
+- ../scripts/farm_daily_task_once.py：互动当前首位可互动好友并领取任务书奖励；整轮中先执行它，再做好友全扫。
+- ../scripts/farm_daily_fertilizer_reward.py：领取每日免费化肥。
 - ../scripts/farm_friend_sweep.py 与 ../assets/ui/friends/：连续拜访好友，点击实时识别到的偷取/务农按钮中心。
 - ../scripts/farm_hamster_once.py：仓鼠识别与购买。购买和奖励画面模板在 ../assets/ui/merchant/。
 - ../assets/ui/planting/：QQ / 微信种植栏第一页、开启提示和四格确认键模板。勾选状态复用 ../assets/ui/picker/ 的 `*-one-key-{on,off}.png`。

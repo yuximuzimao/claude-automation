@@ -42,9 +42,8 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 - `scripts/farm_plant_once.py`：读取唯一计划 `data/operation-plan.json`，逐颗种四格，再按计划补普通种子。
 - `scripts/farm_radish_restock.py`：QQ 白萝卜月度补货。打开商店后滚到最上，第一格白萝卜使用 MAX=99，连续购买 37 次并关闭商店；一次补 3,663 颗，按每天 120 颗可覆盖 30 天并余 63 颗。
 - `scripts/farm_radish_xp.py`：QQ 白萝卜种植经验循环。默认 5 轮，每轮固定 `种 24 → 普通肥 → 收获`，合计消耗 120 颗并获得 1,200 每日种植经验；不再每轮进商店，也不等待自然成熟。
-- `scripts/farm_qq_round.py`：QQ 小程序已经打开后的薄串联入口。当前顺序为当前作物施肥/收获 → 白萝卜 5 轮 → 正式种植 → 好友全扫 → 每日任务领奖 → 每日免费化肥。它不负责打开/关闭小程序，也不做 Agent 视觉复核。
-- `scripts/farm_daily_task_once.py`：需要单独跑每日任务时，执行一次好友互动和任务书领奖。
-- `scripts/farm_daily_task_claim.py`：好友互动已经由全扫完成后，只领取任务书奖励。
+- `scripts/farm_qq_round.py`：QQ 小程序已经打开后的薄串联入口。当前顺序为当前作物施肥/收获 → 白萝卜 5 轮 → 正式种植 → 每日任务（互动首位好友并领奖）→ 好友全扫 → 每日免费化肥。它不负责打开/关闭小程序，也不做 Agent 视觉复核。
+- `scripts/farm_daily_task_once.py`：独立每日任务脚本，先互动当前排在首位的可互动好友，再领取任务书奖励；整轮中先执行它，后续好友全扫利用可互动好友自动前移的排序继续处理。
 - `scripts/farm_daily_fertilizer_reward.py`：领取礼包商城每日免费化肥。
 - `scripts/farm_friend_sweep.py`：连续拜访好友；识别到「一键偷取」或「一键务农」后直接点该按钮实际中心，首次无按钮时回家。
 - `scripts/farm_hamster_once.py`：标准首页识别仓鼠；加 `--execute` 时命中才购买并关闭奖励。
@@ -70,7 +69,6 @@ python3.13 scripts/farm_radish_xp.py --execute
 python3.13 scripts/farm_qq_round.py
 python3.13 scripts/farm_qq_round.py --execute
 python3.13 scripts/farm_daily_task_once.py --platform qq
-python3.13 scripts/farm_daily_task_claim.py --platform qq
 python3.13 scripts/farm_daily_fertilizer_reward.py --platform qq
 python3.13 scripts/farm_friend_sweep.py --platform qq
 python3.13 scripts/farm_hamster_once.py --platform qq --execute

@@ -25,8 +25,8 @@ def workflow(radish_rounds, harvest_plan):
         command("farm_harvest_once.py", "--platform", "qq", "--planted-plan", str(harvest_plan), "--execute"),
         command("farm_radish_xp.py", "--rounds", str(radish_rounds), "--execute"),
         command("farm_plant_once.py", "--platform", "qq", "--execute"),
+        command("farm_daily_task_once.py", "--platform", "qq", "--execute"),
         command("farm_friend_sweep.py", "--platform", "qq", "--execute"),
-        command("farm_daily_task_claim.py", "--platform", "qq", "--execute"),
         command("farm_daily_fertilizer_reward.py", "--platform", "qq", "--execute"),
     ]
 
