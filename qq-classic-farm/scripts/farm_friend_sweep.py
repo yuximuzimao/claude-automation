@@ -25,6 +25,13 @@ def interaction_target(image, templates, origin):
     return None
 
 
+def read_interaction_target(target, platform, navigation):
+    strip = navigation["action_strip_xyxy"][platform]
+    templates = [load_gray(ROOT / "assets/ui/friends" / f"{platform}-{name}.png")
+                 for name in ("steal", "work")]
+    return interaction_target(capture_region(target["frame"], strip), templates, strip[:2])
+
+
 def sweep(click, read_action, go_home, entry, first_visit, next_points, limit=MAX_VISITS):
     click(entry, 650)
     click(first_visit, 850)
@@ -64,8 +71,6 @@ def main():
         first_visit = find_point(scenes["friend-list"]["views"]["first-visit"]["points"], platform, "first-visit")
         next_points = [find_point(first, platform, name) for name in ("second-friend", "third-friend")]
         next_points.append(find_point(later, platform, "fourth-onward"))
-        templates = [load_gray(ROOT / "assets/ui/friends" / f"{platform}-{name}.png") for name in ("steal", "work")]
-        strip = navigation["action_strip_xyxy"][platform]
         frame, target = farm_target(args.registry, platform, layout)
 
         def click(point, delay):
@@ -75,7 +80,7 @@ def main():
             clicks += 1
 
         def read_action():
-            return interaction_target(capture_region(target["frame"], strip), templates, strip[:2])
+            return read_interaction_target(target, platform, navigation)
 
         def go_home():
             click(return_home_point(frame, platform, layout), 800)

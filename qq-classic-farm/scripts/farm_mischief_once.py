@@ -101,7 +101,7 @@ def main():
     modes=parser.add_mutually_exclusive_group()
     modes.add_argument('--execute',action='store_true')
     modes.add_argument('--image',type=Path,help='Recognize a saved crop or window; never input.')
-    parser.add_argument('--max-visits',type=int,default=100)
+    parser.add_argument('--max-visits',type=int,default=100, help='Safety bound on friends, not action quota; normal runs continue until both counters show zero.')
     args=parser.parse_args()
     progress={'stage':'prepare','friend_visit':0,'grass_gestures':0,'bug_gestures':0}
     try:
@@ -147,7 +147,7 @@ def main():
         reason=sweep(click,inspect,drag,home,find_point(fixed['home']['points'],'qq','friends'),
                      find_point(scenes['friend-list']['views']['first-visit']['points'],'qq','first-visit'),
                      next_points,path[0],progress,args.max_visits)
-        print(json.dumps({'status':'completed' if reason=='shared_quota_exhausted' else 'stopped_returned_home','reason':reason,**progress},ensure_ascii=False))
+        print(json.dumps({'status':'completed' if reason=='shared_quota_exhausted' else 'stopped_returned_home','reason':reason,'shared_remaining':0 if reason=='shared_quota_exhausted' else None,**progress},ensure_ascii=False))
         return 0 if reason=='shared_quota_exhausted' else 2
     except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError,FertilizerStop) as exc:
         print(json.dumps({'status':'stopped','reason':str(exc),**progress},ensure_ascii=False));return 2

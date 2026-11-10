@@ -31,6 +31,8 @@
 - ../scripts/farm_radish_xp.py：QQ 白萝卜 5 轮 `种植 → 普通肥 → 有机肥 → 收获` 循环。
 - ../scripts/farm_qq_round.py：QQ 小程序已打开后的整轮田内串联入口。
 - ../scripts/farm_share_once.py：QQ固定联系人分享、领取奖励并关闭分享页；使用条件见gameplay-rules「每日首次分享」。
+- ../assets/ui/share/：领取文字模板及来源。
+- ../scripts/farm_daily_clicks.py / ../tests/test_friend_sweep_and_harvest.py：日常共享输入与单/双按钮交互验证。
 - ../tests/test_share_once.py：分享流程及失败停止的无输入测试。
 - ../tests/test_batch_m1.py：CGEvent点击与分享Unicode输入保护的编译验证测试。
 - ../scripts/farm_daily_task_once.py：互动当前首位可互动好友并领取任务书奖励；整轮中先执行它，再做好友全扫。

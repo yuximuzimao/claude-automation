@@ -61,3 +61,23 @@ def test_special_harvest_uses_confirmed_point_without_images():
     assert special_points([], config) == []
     with pytest.raises(ValueError, match="SPECIAL_HARVEST_POINT_NOT_VALIDATED_07"):
         special_points([1, 7], config)
+
+
+def test_daily_task_resolves_same_dual_button_target(monkeypatch, capsys):
+    import farm_daily_clicks as daily
+    import farm_friend_sweep as friends
+    from farm_daily_task_once import task_steps
+    events = []
+    target = {'frame': {}}
+    monkeypatch.setattr(sys, 'argv', ['daily', '--platform', 'qq', '--execute'])
+    monkeypatch.setattr(daily, 'farm_target', lambda *a: (None, target))
+    monkeypatch.setattr(friends, 'read_interaction_target', lambda *a: [257, 820])
+    monkeypatch.setattr(daily, 'return_home_point', lambda *a: [550, 840])
+    monkeypatch.setattr(daily, 'click_batch', lambda *a: events.extend(a[-1]))
+    assert daily.run_daily('test', task_steps) == 0
+    assert [events[2]['x'], events[2]['y']] == [257, 820]
+    assert not any(e['x'] == 297 and e['y'] == 820 for e in events)
+    events.clear()
+    monkeypatch.setattr(friends, 'read_interaction_target', lambda *a: None)
+    assert daily.run_daily('test', task_steps) == 2
+    assert len(events) == 2  # No blind interaction or subsequent task claim.

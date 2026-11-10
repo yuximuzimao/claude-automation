@@ -76,33 +76,31 @@ def run_share(steps, nickname, farm, windows, click, type_text, return_farm, pro
 
 def restore_farm(original, registry, layout):
     # Activate only the original farm process; Stage Manager may have reduced its window.
-    code = r"""
-import AppKit
-import CoreGraphics
-let pid = Int32(CommandLine.arguments[1])!
-let wid = Int(CommandLine.arguments[2])!
-let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
-guard list.contains(where: {
-    ($0[kCGWindowNumber as String] as? Int) == wid &&
-    ($0[kCGWindowOwnerPID as String] as? Int32) == pid &&
-    ($0[kCGWindowOwnerName as String] as? String) == "QQ小程序" &&
-    ($0[kCGWindowName as String] as? String) == "QQ经典农场"
-}), let app = NSRunningApplication(processIdentifier: pid), app.localizedName == "QQ小程序" else { exit(2) }
-guard app.activate(options: [.activateAllWindows]) else { exit(3) }
-Thread.sleep(forTimeInterval: 0.8)
-guard NSWorkspace.shared.frontmostApplication?.processIdentifier == pid else { exit(4) }
-"""
-    subprocess.run(['/usr/bin/swift', '-e', code, str(original['pid']), str(original['window_id'])],
-                   capture_output=True, text=True, check=True, timeout=15)
+    result = subprocess.run([str(ROOT / '_sandbox/farm_home_window'), '--prepare'],
+                            capture_output=True, text=True, check=True, timeout=15)
+    prepared = json.loads(result.stdout)
+    if prepared.get('state') != 'window_ready':
+        raise ValueError('FARM_WINDOW_NOT_READY_AFTER_SHARE')
+    if any(prepared.get(key) != original[key] for key in ('window_id', 'pid', 'owner', 'title')):
+        raise ValueError('FARM_IDENTITY_CHANGED_AFTER_SHARE')
     _, current = farm_target(registry, 'qq', layout)
     if any(current[key] != original[key] for key in ('window_id', 'pid', 'owner', 'title')):
         raise ValueError('FARM_IDENTITY_CHANGED_AFTER_SHARE')
     return current
 
 
+def require_claim_button(shot):
+    from farm_vision import match_anchor
+    claim = match_anchor(shot, {'template':'assets/ui/share/qq-claim.png',
+        'roi_normalized':[370/603,880/1111,100/603,65/1111], 'threshold':0.92}, [1.0])
+    if not claim['matched']:
+        raise ValueError('SHARE_CLAIM_NOT_AVAILABLE_NO_CLICK')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true', help='Send one share. Default prints the plan without input or window access.')
+    parser.add_argument('--claim-only', action='store_true', help='Recover an already sent share; never opens the contact selector.')
     parser.add_argument('--registry', type=Path, default=ROOT / '_sandbox/farm_window_registry')
     parser.add_argument('--click-helper', type=Path, default=ROOT / '_sandbox/farm_click_batch')
     args = parser.parse_args()
@@ -111,6 +109,8 @@ def main():
         anchors = json.loads((ROOT / 'data/ui-anchors.json').read_text())['fixed_points']
         nickname = anchors['scenes']['share']['qq_recipient']
         steps = share_steps(anchors)
+        if args.claim_only:
+            steps = [step for step in steps if step[0] in ('open_share', 'claim', 'dismiss_reward', 'close_share')]
         if not args.execute:
             print(json.dumps({'status': 'plan_ok_no_input', 'recipient': nickname, 'steps': steps,
                               'return_focus': 'activate_original_farm_process_and_refresh_window'}, ensure_ascii=False))
@@ -127,6 +127,24 @@ def main():
             return payload['windows']
 
         def click(target, point, delay, selector):
+            if progress['stage'] == 'claim':
+                from farm_capture import capture_window
+                from farm_home_check import HomeRecognizer
+                from PIL import Image
+                frame, current = farm_target(args.registry, 'qq', layout)
+                if any(current[key] != target[key] for key in ('window_id', 'pid', 'owner', 'title', 'frame')):
+                    raise ValueError('FARM_CHANGED_BEFORE_CLAIM')
+                shot = capture_window(frame, 'qq', layout)
+                result = HomeRecognizer().classify(Image.fromarray(shot.rgb))
+                if not result['features']['share-heading']['matched'] or not result['features']['panel-close']['matched']:
+                    raise ValueError('SHARE_PANEL_NOT_FOUND')
+                require_claim_button(shot)
+            if progress['stage'] == 'dismiss_reward':
+                from farm_capture import capture_window
+                from farm_hamster_once import require_screen
+                frame, _ = farm_target(args.registry, 'qq', layout)
+                roi = anchors['scenes']['merchant']['recognition']['qq']['reward_roi']
+                require_screen(lambda: capture_window(frame, 'qq', layout), 'qq', 'reward', roi)
             click_batch(args.click_helper, '--execute', target,
                         [{'x': point[0], 'y': point[1], 'delay_ms': delay}], qq_share=selector)
 

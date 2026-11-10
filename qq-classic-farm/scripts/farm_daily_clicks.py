@@ -70,6 +70,11 @@ def run_daily(description, steps_for):
 
         if args.execute:
             for point, delay in steps:
+                if point == "friend-action":
+                    from farm_friend_sweep import read_interaction_target
+                    point = read_interaction_target(target, platform, anchors["scenes"]["friend-farm-navigation"])
+                    if point is None:
+                        raise ValueError("FRIEND_ACTION_NOT_FOUND")
                 if point is None:
                     point = return_home_point(frame, platform, layout)
                 x, y = point
@@ -78,7 +83,7 @@ def run_daily(description, steps_for):
             status = "daily_clicks_sent_unverified"
         else:
             click_batch(args.click_helper, "--preflight", target, [
-                {"x": point[0], "y": point[1], "delay_ms": 0} for point, _ in steps if point is not None
+                {"x": point[0], "y": point[1], "delay_ms": 0} for point, _ in steps if point is not None and not isinstance(point, str)
             ])
             status = "preflight_ok_no_click"
         print(json.dumps({"status": status, "clicks_sent": clicks_sent}))

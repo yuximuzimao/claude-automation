@@ -90,3 +90,13 @@ def test_compiled_path_validation_never_inputs(helper,mutation,expected):
     r=subprocess.run([str(helper),'--validate'],input=json.dumps(payload),capture_output=True,text=True,timeout=5)
     assert r.returncode==expected
     assert json.loads(r.stdout)['events_sent']==0
+
+
+def test_full_run_continues_past_first_friend_until_shared_zero():
+    menus = [menu('grass','bug'), menu('bug'), menu('grass','bug')] * 3
+    menus += [menu('grass','bug'), menu(state='exhausted')]
+    reason, events, progress = run(menus, limit=100)
+    assert reason == 'shared_quota_exhausted'
+    assert progress['friend_visit'] == 4
+    assert progress['grass_gestures'] == 4 and progress['bug_gestures'] == 3
+    assert events[-1] == ('home',)

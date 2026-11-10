@@ -8,13 +8,12 @@ def task_steps(anchors, platform):
     scenes = anchors["scenes"]
     home = anchors["home"]["points"]
     friends = scenes["friend-list"]["views"]["first-visit"]["points"]
-    visit = scenes["friend-farm-navigation"]["views"]["first"]["points"]
     tasks = scenes["task-book"]["views"]["daily"]["points"]
     reward = scenes["mall-welfare"]["views"]["reward"]["points"]
     return (
         (find_point(home, platform, "friends"), 650),
         (find_point(friends, platform, "first-visit"), 850),
-        (find_point(visit, platform, "single-action"), 650),
+        ("friend-action", 650),
         (None, 800),  # Locate the visible return-home button before leaving the friend farm.
         (find_point(home, platform, "task"), 650),
         (find_point(tasks, platform, "login-status"), 900),

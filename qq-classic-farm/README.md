@@ -48,7 +48,7 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 - `scripts/farm_share_once.py`：QQ固定联系人分享、领奖并回土地；默认只打印计划，`--execute`执行。发送后按原进程返回农场，流程及验收要求见[玩法规则](docs/gameplay-rules.md#每日首次分享)，尚未接入整轮。
 - `scripts/farm_daily_task_once.py`：独立每日任务脚本，先互动当前排在首位的可互动好友，再领取任务书奖励；整轮中先执行它，后续好友全扫利用可互动好友自动前移的排序继续处理。
 - `scripts/farm_daily_fertilizer_reward.py`：领取礼包商城每日免费化肥。
-- `scripts/farm_mischief_once.py`：好友种草/放虫，按共享余额结束；默认无输入，真机待验收，见[专项流程](docs/mischief.md)。
+- `scripts/farm_mischief_once.py`：好友种草/放虫，按共享余额结束；默认无输入，`--execute`连续处理至共享余额双0，见[专项流程](docs/mischief.md)。
 - `scripts/farm_friend_sweep.py`：连续拜访好友；识别到「一键偷取」或「一键务农」后直接点该按钮实际中心，首次无按钮时回家。
 - `scripts/farm_hamster_once.py`：标准首页识别仓鼠；加 `--execute` 时命中才购买并关闭奖励。
 

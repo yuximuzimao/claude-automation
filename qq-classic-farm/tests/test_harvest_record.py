@@ -16,7 +16,12 @@ import farm_qq_round as round_script
 @pytest.fixture
 def record(tmp_path):
     # A completed batch, independent of the next planting plan/picker changes.
-    j = json.loads((ROOT / 'data/operation-plan.json').read_text())
+    j = {platform: {'planting': {'special': [], 'ordinary': None},
+                    'daily': {'tasks': False, 'fertilizer_reward': False, 'share': False}}
+         for platform in ('qq', 'wechat')}
+    j['qq']['planting'] = {
+        'special': [{'plot': 1, 'page': 1, 'slot': 4, 'seed_name': '四格测试种子', 'quantity': 1}],
+        'ordinary': {'page': 6, 'slot': 3, 'page_items': 5, 'seed_name': '普通测试种子', 'quantity': 20}}
     path = tmp_path / 'planted.json'
     path.write_text(json.dumps(j))
     return path

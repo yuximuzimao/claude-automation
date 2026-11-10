@@ -84,10 +84,38 @@ def test_restore_rebinds_geometry_but_rejects_different_farm(monkeypatch):
     original={'pid':123,'window_id':456,'owner':'QQ小程序','title':'QQ经典农场','frame':{'x':1}}
     moved={**original,'frame':{'x':200}}
     calls=[]
-    monkeypatch.setattr(share.subprocess,'run',lambda *a,**k:calls.append(a))
+    def prepare(*a, **k):
+        calls.append(a)
+        from types import SimpleNamespace
+        return SimpleNamespace(stdout=json.dumps({'state':'window_ready', **original}))
+    monkeypatch.setattr(share.subprocess,'run',prepare)
     monkeypatch.setattr(share,'farm_target',lambda *a:(None,moved))
     assert share.restore_farm(original,'registry',{})==moved
-    assert calls[0][0][-2:]==['123','456']
+    assert calls[0][0][-1]=='--prepare'
     monkeypatch.setattr(share,'farm_target',lambda *a:(None,{**moved,'pid':999}))
     with pytest.raises(ValueError,match='IDENTITY_CHANGED'):
         share.restore_farm(original,'registry',{})
+
+
+def test_claim_only_never_sends(monkeypatch, capsys):
+    monkeypatch.setattr(sys, 'argv', ['share', '--claim-only'])
+    monkeypatch.setattr(share.subprocess, 'run', lambda *a, **k: pytest.fail('no window access'))
+    assert share.main() == 0
+    steps = json.loads(capsys.readouterr().out)['steps']
+    assert [s[0] for s in steps] == ['open_share', 'claim', 'dismiss_reward', 'close_share']
+
+
+def test_missing_claim_button_rejected_before_click(monkeypatch):
+    import farm_vision
+    monkeypatch.setattr(farm_vision, 'match_anchor', lambda *a: {'matched': False})
+    with pytest.raises(ValueError, match='CLAIM_NOT_AVAILABLE_NO_CLICK'):
+        share.require_claim_button(object())
+
+
+def test_restore_rejects_wrong_identity_before_geometry_read(monkeypatch):
+    from types import SimpleNamespace
+    monkeypatch.setattr(share.subprocess, 'run', lambda *a, **k: SimpleNamespace(stdout=json.dumps(
+        {'state':'window_ready','pid':999,'window_id':1,'owner':'QQ小程序','title':'QQ经典农场'})))
+    monkeypatch.setattr(share, 'farm_target', lambda *a: pytest.fail('wrong farm must stop'))
+    with pytest.raises(ValueError, match='IDENTITY_CHANGED'):
+        share.restore_farm({'pid':123,'window_id':1,'owner':'QQ小程序','title':'QQ经典农场'}, 'registry', {})

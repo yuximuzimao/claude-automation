@@ -44,6 +44,6 @@ python3.13 scripts/farm_mischief_once.py --image /absolute/path/to/screenshot.pn
 python3.13 scripts/farm_mischief_once.py --execute
 ```
 
-首次真机建议 `--max-visits 1` 限定一位可操作好友，观察按住图标能否连续逐地生效、点24后场景是否偏移以及两处余额是否同步下降。若第一位成熟会直接跳过并回家；访问上限退出是未完成，不是脚本错误重试信号。确认后再做完整余额流程。
+正常运行使用 `--execute`，连续访问好友直到共享100次余额用完并识别到灰色双0；不要传 `--max-visits 1`。`--max-visits` 仅为好友访问安全上限，不是应消耗次数。限一位仅用于明确要求的局部调试；访问上限退出表示未完成，不能推断余额或自动重跑。
 
 模板来自用户提供的5张截图，`assets/ui/mischief/sources.json`记录来源序号和裁剪区域。原图仅保存在工作区 `_sandbox/farm-mischief/`。控件识别使用局部形状和颜色共同判断，防止绿色和灰色同形图标混淆。暂不OCR读取全部1–100数值；只严格识别结束所需的灰色双0，其余次数以游戏界面为准。
