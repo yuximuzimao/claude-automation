@@ -81,6 +81,32 @@ class BatchHelperTests(unittest.TestCase):
         self.assertEqual(result["code"], "CLICK_OUTSIDE_WINDOW")
         self.assertEqual(result["click_count"], 0)
 
+    def invoke_share(self, *, text=None, owner="QQ", width=600, flag="--qq-share", point=(59,145)):
+        payload={"window_id":123,"pid":456,"owner":owner,"title":"分享",
+                 "frame":{"x":400,"y":200,"width":width,"height":600},
+                 "actions":[{"x":point[0],"y":point[1],"delay_ms":1000}]}
+        if text is not None: payload["text"]=text
+        result=subprocess.run([str(self.binary),"--validate",flag],input=json.dumps(payload),
+                              text=True,capture_output=True,timeout=10)
+        return result.returncode,json.loads(result.stdout)
+
+    def test_share_selector_validation_posts_no_click(self):
+        code,result=self.invoke_share()
+        self.assertEqual((code,result['status'],result['click_count']),(0,'validated_no_click',0))
+
+    def test_share_unicode_validation_posts_no_key(self):
+        code,result=self.invoke_share(text='灬🐈‍⬛、御汐。',flag='--qq-share-text',point=(162,64))
+        self.assertEqual((code,result['status'],result['click_count']),(0,'validated_no_click',0))
+
+    def test_share_rejects_wrong_window_or_text_context(self):
+        for kwargs in ({'owner':'QQ小程序'},{'width':603},
+                       {'text':'灬🐈‍⬛、御汐。'},
+                       {'text':'wrong','flag':'--qq-share-text','point':(162,64)},
+                       {'text':'灬🐈‍⬛、御汐。','flag':'--qq-share-text'}):
+            code,result=self.invoke_share(**kwargs)
+            self.assertEqual(code,2)
+            self.assertEqual(result['click_count'],0)
+
 
 if __name__ == "__main__":
     unittest.main()

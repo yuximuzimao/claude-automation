@@ -34,7 +34,7 @@ def sample_plan(tmp_path):
     plan={"qq":{"planting":{
         "special":[{"plot":1,"page":1,"slot":4}],
         "ordinary":{"page":6,"slot":3,"quantity":12},
-        "ordinary_after_exhaustion":{"page":6,"slot":3,"page_items":5,"quantity":8},
+        "ordinary_after_exhaustion":[{"page":6,"slot":3,"page_items":5,"quantity":8}],
     },"daily":empty["daily"]},"wechat":empty}
     path=tmp_path/'plan.json';path.write_text(json.dumps(plan));return path
 
@@ -186,29 +186,67 @@ def test_radish_position_compacts_after_peach_exhaustion(tmp_path, sample_catalo
     assert xp.radish_plan(path)['qq']['planting']['ordinary']=={'page':7,'slot':2,'page_items':2}
 
 
-def test_next_plan_has_exhaustion_followup_at_shifted_slot(sample_plan):
-    from farm_plant_once import read_plan,plan_page_sizes
-    path=sample_plan
-    plan=json.loads(path.read_text())['qq']['planting']
-    assert plan['ordinary']['quantity']==12
-    assert plan['ordinary_after_exhaustion']['quantity']==8
-    assert plan['ordinary_after_exhaustion']['slot']==3
-    steps,_=read_plan(path,'qq',json.loads((ROOT/'data/ui-layout.json').read_text())['plot_policy'])
-    assert steps[-1][:3]==(24,6,3)
-    assert plan_page_sizes(path,'qq')==[5,5]
+def test_exhaustion_plan_contains_complete_sequence(sample_plan):
+    from farm_plant_once import read_plan, plan_page_sizes
+    policy=json.loads((ROOT/'data/ui-layout.json').read_text())['plot_policy']
+    steps,_=read_plan(sample_plan,'qq',policy)
+    assert [s[:3] for s in steps]==[(1,1,4),(24,6,3),(23,6,3)]
+    assert plan_page_sizes(sample_plan,'qq')==[5,5,5]
 
 
-def test_followup_check_plan_only_selects_orange(monkeypatch,capsys,sample_plan):
+def test_check_plan_needs_no_window_or_agent_entry(monkeypatch,capsys,sample_plan):
     import farm_plant_once as planting
-    monkeypatch.setattr(sys,'argv',['plant','--platform','qq','--plan',str(sample_plan),'--check-plan','--followup-entry','10'])
+    monkeypatch.setattr(sys,'argv',['plant','--platform','qq','--plan',str(sample_plan),'--check-plan'])
+    monkeypatch.setattr(planting.subprocess,'run',lambda *a,**k: pytest.fail('must not open or inspect windows'))
     assert planting.main()==0
     result=json.loads(capsys.readouterr().out)
-    assert result['steps']==[[10,6,3]]
-    assert result['followup_pending'] is False
+    assert result['steps']==[[1,1,4],[24,6,3],[23,6,3]]
 
 
-def test_followup_rejects_special_covered_entry(monkeypatch,capsys,sample_plan):
-    import farm_plant_once as planting
-    monkeypatch.setattr(sys,'argv',['plant','--platform','qq','--plan',str(sample_plan),'--check-plan','--followup-entry','1'])
-    assert planting.main()==2
-    assert 'INVALID_FOLLOWUP_EMPTY_ENTRY' in capsys.readouterr().out
+def test_three_ordinary_selections_descend_without_counting_special():
+    from farm_plant_once import planting_steps
+    policy=json.loads((ROOT/'data/ui-layout.json').read_text())['plot_policy']
+    assert [s[0] for s in planting_steps([(1,1,4)],(6,3),policy,[(6,3),(6,3)])]==[1,24,23,22]
+    assert [s[0] for s in planting_steps([], (6,3),policy,[(6,3),(6,3)])]==[24,23,22]
+    assert [s[0] for s in planting_steps([], (7,2),policy)]==[1]
+
+
+def test_descending_entry_rejects_forbidden_or_covered_plot():
+    from farm_plant_once import planting_steps
+    policy=json.loads((ROOT/'data/ui-layout.json').read_text())['plot_policy']
+    with pytest.raises(ValueError,match='INVALID_ORDINARY_ENTRY_21'):
+        planting_steps([(1,1,4)],(6,3),policy,[(6,3)]*3)
+    with pytest.raises(ValueError,match='INVALID_ORDINARY_ENTRY_24'):
+        planting_steps([(23,1,4)],(6,3),policy)
+
+
+@pytest.mark.parametrize('quantities',[(20,8),(12,7),(None,8)])
+def test_exhaustion_rejects_invalid_capacity(sample_plan,quantities):
+    from farm_plant_once import read_plan
+    data=json.loads(sample_plan.read_text());p=data['qq']['planting']
+    p['ordinary']['quantity'],p['ordinary_after_exhaustion'][0]['quantity']=quantities
+    sample_plan.write_text(json.dumps(data))
+    policy=json.loads((ROOT/'data/ui-layout.json').read_text())['plot_policy']
+    with pytest.raises(ValueError): read_plan(sample_plan,'qq',policy)
+
+
+def test_ordinary_sequence_waits_and_stops_without_retry(monkeypatch):
+    import farm_plant_once as p
+    clicks=[];waits=[]
+    monkeypatch.setattr(p,'picker_anchor',lambda *a:(0,0))
+    monkeypatch.setattr(p,'checkbox_state',lambda *a:'on')
+    monkeypatch.setattr(p,'match',lambda *a:((0,0),0))
+    monkeypatch.setattr(p,'sleep',lambda seconds:waits.append(seconds))
+    picker={'checkbox_offset':(0,0),'next_page_offset':(8,8),'seed_slot_offsets':[(i,100) for i in range(5)]}
+    args=([(24,1,1,None),(23,1,1,None),(22,1,1,None)],{i:(i,0) for i in (24,23,22)},picker,
+          {'prompt_search_rect':[]},{},{'page-prefix':None,'enable-prompt':None})
+    p.plant(lambda point,delay:clicks.append(point),lambda:None,*args)
+    assert clicks==[(24,0),(0,100),(23,0),(0,100),(22,0),(0,100)]
+    assert waits==[2.8]*3
+    clicks.clear()
+    def fail_on_second(point,delay):
+        clicks.append(point)
+        if point==(23,0): raise ValueError('input failed')
+    with pytest.raises(ValueError,match='input failed'):
+        p.plant(fail_on_second,lambda:None,*args)
+    assert clicks==[(24,0),(0,100),(23,0)]

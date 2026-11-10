@@ -73,7 +73,7 @@ def main():
         name = Path(step[1]).name
         if result.returncode:
             print(json.dumps({
-                "status": "awaiting_empty_entry" if result.returncode == 3 and name == "farm_plant_once.py" else "stopped",
+                "status": "stopped",
                 "failed_stage": name,
                 "completed_stages": completed,
                 "detail": result.stdout.strip() or result.stderr.strip(),

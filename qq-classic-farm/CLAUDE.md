@@ -28,6 +28,6 @@
 
 ## Git / 数据边界
 
-- `data/seed-catalog.json`、`data/farm-planning-reference.json`、`data/ui-layout.json`、`data/ui-anchors.json`、`assets/seeds/`、`assets/ui/` 与 `scripts/` 是可版本化知识和工具资产。
+- `data/seed-catalog.json`、`data/farm-planning-reference.json`、`data/ui-layout.json`、`data/ui-anchors.json`、`data/home-recognition.json`、`assets/seeds/`、`assets/ui/` 与 `scripts/` 是可版本化知识和工具资产。
 - 原始整屏截图、OCR 中间产物、坐标探针和实验脚本放工作区根 `_sandbox/`，不提交。
 - 种子数量是最近一次清点加已确认种植扣减后的已知值；不要在每次操作时打开仓库刷新。

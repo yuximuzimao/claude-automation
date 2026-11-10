@@ -26,6 +26,7 @@ struct Batch: Decodable {
     let frame: Frame
     let window_frame: Frame?
     let actions: [Action]
+    let text: String?
 }
 struct Result: Encodable {
     let status: String
@@ -122,9 +123,11 @@ func liveWindow(_ batch: Batch, _ point: CGPoint, clicksSent: Int) {
 
 let arguments = Array(CommandLine.arguments.dropFirst())
 let wechatMain = arguments.count == 2 && arguments.last == "--wechat-main"
+let qqShare = arguments.count == 2 && arguments.last == "--qq-share"
+let qqShareText = arguments.count == 2 && arguments.last == "--qq-share-text"
 let mode = arguments.first
 guard arguments.isEmpty ||
-      ((arguments.count == 1 || wechatMain) && (mode == "--preflight" || mode == "--execute")) else {
+      ((arguments.count == 1 || wechatMain || qqShare || qqShareText) && (mode == "--preflight" || mode == "--execute" || mode == "--validate")) else {
     stop("INVALID_ARGUMENT", "Use no arguments, --preflight, or --execute; --wechat-main is optional for input modes")
 }
 let execute = mode == "--execute"
@@ -143,7 +146,10 @@ if execute && wechatOwners.contains(batch.owner) {
         stop("WECHAT_FARM_SEALED", "WeChat farm live input is disabled")
     }
 }
-let validIdentity = wechatMain
+let qqSelector = (qqShare || qqShareText) && batch.owner == "QQ"
+    && batch.frame.width == 600 && batch.frame.height == 600
+    && batch.window_frame == nil && batch.actions.count == 1
+let validIdentity = (qqShare || qqShareText) ? qqSelector : wechatMain
     ? (wechatOwners.contains(batch.owner) && wechatOwners.contains(batch.title)
        && [1007, 1008].contains(batch.frame.width) && batch.frame.height == 974
        && batch.window_frame == nil && batch.actions.count == 1)
@@ -153,6 +159,13 @@ guard batch.window_id > 0, batch.pid > 0, validIdentity,
       [batch.frame.x, batch.frame.y, batch.frame.width, batch.frame.height].allSatisfy({ $0.isFinite }),
       (1...24).contains(batch.actions.count)
 else { stop("INVALID_BATCH", "Invalid window identity/frame/action count") }
+if qqShareText {
+    guard batch.text == "灬🐈‍⬛、御汐。", batch.actions[0].x == 162, batch.actions[0].y == 64 else {
+        stop("INVALID_SHARE_TEXT", "Only the configured nickname in the search field is allowed")
+    }
+} else if batch.text != nil {
+    stop("INVALID_BATCH", "Text requires --qq-share-text")
+}
 let expectedWindow = batch.window_frame ?? batch.frame
 guard expectedWindow.width > 0, expectedWindow.height > 0,
       [expectedWindow.x, expectedWindow.y,
@@ -193,6 +206,26 @@ if preflight {
     }
     let result = Result(status: "preflight_ok_no_click", code: nil, click_count: 0)
     let data = try JSONEncoder().encode(result)
+    print(String(decoding: data, as: UTF8.self))
+    exit(0)
+}
+if qqShareText {
+    let a = batch.actions[0]
+    let p = CGPoint(x: batch.frame.x + a.x, y: batch.frame.y + a.y)
+    liveWindow(batch, p, clicksSent: 0)
+    let utf16 = Array(batch.text!.utf16)
+    guard let down = CGEvent(keyboardEventSource: nil, virtualKey: 0, keyDown: true),
+          let up = CGEvent(keyboardEventSource: nil, virtualKey: 0, keyDown: false) else {
+        stop("CGEVENT_FAILED", "Cannot construct Unicode input")
+    }
+    utf16.withUnsafeBufferPointer { buffer in
+        down.keyboardSetUnicodeString(stringLength: utf16.count, unicodeString: buffer.baseAddress)
+        up.keyboardSetUnicodeString(stringLength: utf16.count, unicodeString: buffer.baseAddress)
+    }
+    down.post(tap: .cghidEventTap)
+    up.post(tap: .cghidEventTap)
+    if a.delay_ms > 0 { usleep(useconds_t(a.delay_ms * 1000)) }
+    let data = try JSONEncoder().encode(Result(status: "text_sent_unverified", code: nil, click_count: 0))
     print(String(decoding: data, as: UTF8.self))
     exit(0)
 }

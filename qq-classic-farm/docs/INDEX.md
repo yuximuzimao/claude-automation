@@ -15,6 +15,12 @@
 
 ## 独立操作
 
+- home-check.md：首页确认器使用、识别范围及离线复验。
+- ../scripts/farm_home_check.py / ../scripts/farm_home_window.swift：图片识别与QQ窗口检查入口。
+- ../data/home-recognition.json / ../assets/ui/home/：首页识别配置与模板。
+- ../tests/test_home_check.py：首页边界测试。
+- ../tests/check_home_screenshots.py / ../tests/home-screenshot-corpus.json：本地已存截图回放与校验清单。
+
 - operation-sop.md：按次操作决策与脚本组合入口。
 
 - ../scripts/farm_fertilize_once.py：带一键务农和勾选确认的普通肥/QQ 有机肥；右侧肥桶模板 ../assets/ui/fertilizer/qq-organic.png。
@@ -23,8 +29,15 @@
 - ../scripts/farm_radish_restock.py 与 ../assets/ui/shop/qq-white-radish.png：QQ 白萝卜补货与首格识别模板。
 - ../scripts/farm_radish_xp.py：QQ 白萝卜 5 轮 `种植 → 普通肥 → 有机肥 → 收获` 循环。
 - ../scripts/farm_qq_round.py：QQ 小程序已打开后的整轮田内串联入口。
+- ../scripts/farm_share_once.py：QQ固定联系人分享、领取奖励并关闭分享页；使用条件见gameplay-rules「每日首次分享」。
+- ../tests/test_share_once.py：分享流程及失败停止的无输入测试。
+- ../tests/test_batch_m1.py：CGEvent点击与分享Unicode输入保护的编译验证测试。
 - ../scripts/farm_daily_task_once.py：互动当前首位可互动好友并领取任务书奖励；整轮中先执行它，再做好友全扫。
 - ../scripts/farm_daily_fertilizer_reward.py：领取每日免费化肥。
+- mischief.md：好友种草/放虫操作规则与共享次数定义。
+- ../scripts/farm_mischief_once.py / ../scripts/farm_path_drag.swift：独立种草/放虫流程与连续路径拖动。
+- ../assets/ui/mischief/：操作图标、成熟提示与零次数模板，sources.json记录来源。
+- ../tests/test_mischief_once.py：分支、停止、路线与原生无输入验证。
 - ../scripts/farm_friend_sweep.py 与 ../assets/ui/friends/：连续拜访好友，点击实时识别到的偷取/务农按钮中心。
 - ../scripts/farm_hamster_once.py：仓鼠识别与购买。购买和奖励画面模板在 ../assets/ui/merchant/。
 - ../assets/ui/planting/：QQ / 微信种植栏第一页、开启提示和四格确认键模板。勾选状态复用 ../assets/ui/picker/ 的 `*-one-key-{on,off}.png`。

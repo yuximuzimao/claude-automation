@@ -16,3 +16,4 @@
 - neat/2026-11-09-wechat-inventory-land-grade-friend-flow.md：微信库存截图更新、QQ 07 号地紫晶升级及映射、森野活动到期后的种植规划、好友每位只点击一次及恢复原每日任务脚本、项目临时文件清扫。
 
 - neat/2026-11-10-qq-restock-centered-picker-and-supervised-flow.md：补货误购修正、居中选种、双肥循环、日常恢复与提醒验收、下一批混种接续及有人监管降耗方向。
+- neat/2026-11-10-home-share-mischief-closeout.md：收种与下批计划、递减入口、分享实测及恢复、首页确认器离线/真机验收、种草放虫开发和次日验证安排。

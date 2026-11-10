@@ -3,7 +3,7 @@
 ## DO FIRST
 
 1. 先读 `docs/CURRENT.md`，确认 QQ / 微信当前运行边界和最近现场状态。
-2. 读 `tasks/todo.md` 与 `docs/INDEX.md`，确认现有功能和待办；用户发起开发或继续开发时，按 Todo「下次会话优先开发」进入，不先重做已验收流程。
+2. 读 `tasks/todo.md` 与 `docs/INDEX.md`，确认现有功能和待办；用户发起开发或继续开发时，按 Todo 的当前优先事项进入，不先重做已验收流程。
 3. 用户发起“操作农场／收菜／跑一轮”时先读 `docs/operation-sop.md`，根据当天已完成动作和田内状态选脚本；再按需读 `docs/gameplay-rules.md`。当前 Chat 的操作请求即为对应例行范围授权，不要求用户逐项点名脚本。
 4. 选种、库存或种植计划问题读 `docs/seed-catalog.md`、`data/seed-catalog.json`；收益、经验和生长时间计算再读 `docs/farm-planning-reference.md` 与对应 JSON。
 5. 任何种植后的提醒操作，先读工作区根目录 `docs/reminders.md`，复用现有快捷指令。
@@ -20,7 +20,7 @@
 
 实际种植时执行本节；白萝卜补货只执行对应补货记账，不创建收菜提醒。白萝卜月度补货与每日经验循环分开：补货脚本一次购买 37×99=3663 颗；每日白萝卜 5 轮固定消耗 120 颗，不为这些临时萝卜创建收菜提醒。
 
-1. **按键精灵口径。** 已验证脚本正常退出 0，就按计划动作成功处理，不做例行截图、不让 Agent 再逐格判断。计划含耗尽补种时，退出码3表示第一段已完成、等待确认空地接续，按 operation-sop 处理，不能当作全计划完成或重跑。其它明确 `stopped` / 非0、界面阻断或实际遗漏再诊断。
+1. **按键精灵口径。** 已验证脚本正常退出 0，就按计划动作成功处理，不做例行截图、不让 Agent 再逐格判断。计划含耗尽补种时由种植脚本连续完成全部段，入口与失败边界见 operation-sop；不再交由Agent选择补种地块。其它明确 `stopped` / 非0、界面阻断或实际遗漏再诊断。
 2. **按计划扣库存。** 正式种植脚本正常完成后，四格特殊种子按计划每颗扣 1；普通种子按计划实际应铺的空格数扣减。白萝卜经验循环正常完成后按 `轮数 × 24` 扣减白萝卜已知库存。更新 `data/seed-catalog.json` 与 `docs/seed-catalog.md`，不为正常轮次重新打开仓库。
 3. **白萝卜补货是唯一购买例外。** `farm_radish_restock.py` 正常完成后，按实际完成购买次数 ×99 直接增加白萝卜已知库存；默认 37 次即 +3663，不再为这次补货打开仓库清点。
 4. **补记人工种植。** 如果 `docs/CURRENT.md` 明确记录有一轮用户手动种植尚未入账，则下一次由助手完成正式种植后，把这笔待补差额和本轮差额一起写入，再清掉待补标记。
@@ -30,7 +30,7 @@
 8. **同批混种。** 统一收菜的一批作物若提醒时刻不同，取最早需要介入的提醒时刻，避免错过任何作物的最后阶段。
 9. **创建并核验提醒。** 按工作区根 `docs/reminders.md` 调用现有「创建提醒」快捷指令，再读回标题和时间。提醒发送失败要明确报告。
 
-打开小程序脚本完成后等待 5 秒，由 Agent 确认已进入自己的土地首页，再运行内部连续脚本；关闭后确认窗口状态。田内固定动作不插入额外 Agent 视觉确认。库存数量是最近一次仓库清点加已记录操作增减后的已知值，不是实时仓库真值。
+打开小程序脚本完成后运行 `farm_home_check.py --live --prepare`：激活现有农场、等待5秒并确认标准无遮挡首页；仅 `ready_for_input=true` 才运行内部连续脚本，失败时交Agent核实。关闭后确认窗口状态。田内固定动作不插入额外 Agent 视觉确认。库存数量是最近一次仓库清点加已记录操作增减后的已知值，不是实时仓库真值。
 
 ## 坐标与操作规则
 
@@ -58,6 +58,10 @@
 | `docs/seed-catalog.md` / `data/seed-catalog.json` | 种子资料与已知库存 |
 | `docs/farm-planning-reference.md` / `data/farm-planning-reference.json` | 收益、经验、生长阶段和土地升级计算 |
 | `data/operation-plan.json` | 唯一种植计划 |
+| `docs/home-check.md` | 本地首页确认器的模式、识别边界与离线复验入口 |
+| `scripts/farm_home_check.py` / `scripts/farm_home_window.swift` | 图片首页识别与QQ窗口状态检查 |
+| `data/home-recognition.json` / `assets/ui/home/` | 首页识别配置、模板和来源记录 |
+| `tests/test_home_check.py` / `tests/check_home_screenshots.py` / `tests/home-screenshot-corpus.json` | 首页边界测试与本地历史截图回放清单 |
 | `scripts/farm_window.py` | 小程序开关 |
 | `scripts/farm_fertilize_once.py` / `assets/ui/fertilizer/qq-organic.png` | 普通肥与 QQ 有机肥图片定位 |
 | `scripts/farm_harvest_once.py` | 四格星标与手形一键收获 |
@@ -65,9 +69,14 @@
 | `scripts/farm_radish_restock.py` / `assets/ui/shop/qq-white-radish.png` | QQ 白萝卜月度补货及商店首格识图模板；流程见 `docs/gameplay-rules.md`「白萝卜补货」 |
 | `scripts/farm_radish_xp.py` | QQ 白萝卜 5 轮种植→普通肥→有机肥→收获循环 |
 | `scripts/farm_qq_round.py` | QQ 小程序已打开后的整轮田内串行入口 |
+| `scripts/farm_share_once.py` | QQ固定联系人分享、领奖并回土地；流程与验收边界见gameplay-rules「每日首次分享」 |
 | `scripts/farm_daily_task_once.py` | 互动首位可互动好友 + 每日任务领奖；整轮中先于好友全扫执行 |
 | `scripts/farm_daily_fertilizer_reward.py` | 每日免费化肥 |
+| `docs/mischief.md` | 好友种草/放虫流程、共享次数与验收入口 |
+| `scripts/farm_mischief_once.py` / `scripts/farm_path_drag.swift` | 好友种草/放虫独立流程与连续拖动工具 |
+| `assets/ui/mischief/` / `tests/test_mischief_once.py` | 用户截图控件模板、来源及无输入测试 |
 | `scripts/farm_friend_sweep.py` | 好友连续互动，按识别到的实际按钮中心点击 |
+| `tests/test_share_once.py` / `tests/test_batch_m1.py` | 分享流程无输入测试与CGEvent输入保护测试 |
 | `scripts/farm_hamster_once.py` | 仓鼠识别与购买 |
 | `../docs/reminders.md` | 共享 Mac 提醒事项接入协议 |
 | `docs/archive/README.md` | 历史阶段索引 |

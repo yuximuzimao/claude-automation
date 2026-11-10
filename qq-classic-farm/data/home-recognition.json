@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "size": [
+    603,
+    1111
+  ],
+  "templates": [
+    {
+      "id": "title",
+      "path": "assets/ui/home/qq-title.png",
+      "roi": [
+        238,
+        4,
+        365,
+        36
+      ],
+      "kind": "home",
+      "source": "farm-share-test.png",
+      "source_rect": [
+        250,
+        10,
+        353,
+        29
+      ]
+    },
+    {
+      "id": "warehouse",
+      "path": "assets/ui/home/qq-warehouse.png",
+      "roi": [
+        18,
+        1032,
+        96,
+        1077
+      ],
+      "kind": "home",
+      "source": "farm-share-test.png",
+      "source_rect": [
+        28,
+        1042,
+        86,
+        1067
+      ]
+    },
+    {
+      "id": "shop",
+      "path": "assets/ui/home/qq-shop.png",
+      "roi": [
+        114,
+        1032,
+        188,
+        1077
+      ],
+      "kind": "home",
+      "source": "farm-share-test.png",
+      "source_rect": [
+        124,
+        1042,
+        178,
+        1067
+      ]
+    },
+    {
+      "id": "atlas",
+      "path": "assets/ui/home/qq-atlas.png",
+      "roi": [
+        307,
+        1032,
+        378,
+        1077
+      ],
+      "kind": "home",
+      "source": "farm-share-test.png",
+      "source_rect": [
+        317,
+        1042,
+        368,
+        1067
+      ]
+    },
+    {
+      "id": "share",
+      "path": "assets/ui/home/qq-share.png",
+      "roi": [
+        20,
+        202,
+        84,
+        275
+      ],
+      "kind": "home",
+      "source": "farm-share-test.png",
+      "source_rect": [
+        30,
+        212,
+        74,
+        265
+      ]
+    },
+    {
+      "id": "scene-sign",
+      "path": "assets/ui/home/qq-scene-sign.png",
+      "roi": [
+        0,
+        380,
+        350,
+        580
+      ],
+      "kind": "home",
+      "source": "farm-share-test.png",
+      "source_rect": [
+        168,
+        486,
+        228,
+        523
+      ],
+      "alignment_tolerance": 4
+    },
+    {
+      "id": "preview-cancel",
+      "path": "assets/ui/home/qq-preview-cancel.png",
+      "roi": [
+        10,
+        380,
+        570,
+        850
+      ],
+      "kind": "overlay",
+      "source": "qq-after-fixed-confirm-attempt.png",
+      "source_rect": [
+        190,
+        565,
+        233,
+        607
+      ]
+    },
+    {
+      "id": "plant-toggle",
+      "path": "assets/ui/home/qq-plant-toggle.png",
+      "roi": [
+        50,
+        600,
+        575,
+        950
+      ],
+      "kind": "overlay",
+      "source": "qq-picker-last-three.png",
+      "source_rect": [
+        406,
+        746,
+        488,
+        767
+      ],
+      "threshold": 0.82
+    },
+    {
+      "id": "fertilize-toggle",
+      "path": "assets/ui/home/qq-fertilize-toggle.png",
+      "roi": [
+        50,
+        580,
+        575,
+        950
+      ],
+      "kind": "overlay",
+      "source": "qq-fertilizer-01-20261106.png",
+      "source_rect": [
+        446,
+        746,
+        528,
+        767
+      ],
+      "threshold": 0.82
+    },
+    {
+      "id": "crop-shovel",
+      "path": "assets/ui/home/qq-crop-shovel.png",
+      "roi": [
+        30,
+        400,
+        575,
+        850
+      ],
+      "kind": "overlay",
+      "source": "qq-fertilizer-01-20261106.png",
+      "source_rect": [
+        519,
+        505,
+        550,
+        537
+      ]
+    },
+    {
+      "id": "friend-return",
+      "path": "assets/ui/home/qq-friend-return.png",
+      "roi": [
+        460,
+        750,
+        603,
+        920
+      ],
+      "kind": "friend",
+      "source": "qq-friend-farm-20261106-first.png",
+      "source_rect": [
+        529,
+        802,
+        584,
+        850
+      ]
+    },
+    {
+      "id": "reward-title",
+      "path": "assets/ui/home/qq-reward-title.png",
+      "roi": [
+        110,
+        155,
+        495,
+        300
+      ],
+      "kind": "overlay",
+      "source": "qq-daily-current.png",
+      "source_rect": [
+        170,
+        204,
+        430,
+        246
+      ]
+    },
+    {
+      "id": "share-heading",
+      "path": "assets/ui/home/qq-share-heading.png",
+      "roi": [
+        50,
+        170,
+        550,
+        290
+      ],
+      "kind": "non_home",
+      "source": "qq-share-open.png",
+      "source_rect": [
+        83,
+        207,
+        515,
+        248
+      ]
+    },
+    {
+      "id": "panel-close",
+      "path": "assets/ui/home/qq-panel-close.png",
+      "roi": [
+        515,
+        30,
+        603,
+        250
+      ],
+      "kind": "non_home",
+      "source": "qq-share-open.png",
+      "source_rect": [
+        548,
+        165,
+        582,
+        199
+      ]
+    }
+  ]
+}

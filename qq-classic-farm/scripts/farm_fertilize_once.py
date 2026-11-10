@@ -140,12 +140,14 @@ def capture_region(canvas, region):
             return np.asarray(image.convert("L"), dtype=np.float32)
 
 
-def click_batch(helper, mode, target, actions, *, wechat_main=False):
+def click_batch(helper, mode, target, actions, *, wechat_main=False, qq_share=False):
     if mode == "--execute" and target["owner"] in ("微信", "WeChat"):
         require_wechat_live()
     command = [str(helper), mode]
     if wechat_main:
         command.append("--wechat-main")
+    if qq_share:
+        command.append("--qq-share")
     result = subprocess.run(
         command,
         input=json.dumps({**target, "actions": actions}),

@@ -74,7 +74,7 @@ def seed_slot_offset(picker, slot, page_items=5):
 
 def plan_page_sizes(path, platform):
     planting = json.loads(path.read_text())[platform]["planting"]
-    entries = planting["special"] + ([planting["ordinary"]] if planting["ordinary"] else [])
+    entries = planting["special"] + ([planting["ordinary"]] if planting["ordinary"] else []) + planting.get("ordinary_after_exhaustion", [])
     return [entry.get("page_items", 5) for entry in entries]
 
 
@@ -121,7 +121,7 @@ def plant(click, capture, steps, lands, picker, prompt, confirm, templates, page
         click(shifted(point, (half_w, half_h)), CONFIRM_DELAY_MS)
 
 
-def planting_steps(special, ordinary, policy):
+def planting_steps(special, ordinary, policy, followups=()):
     groups = {entry["entry_plot"]: entry["plots"] for entry in policy["special_2x2"]["direct_entry_map"]}
     forbidden = set(policy["forbidden_single_click"])
     steps = []
@@ -132,11 +132,14 @@ def planting_steps(special, ordinary, policy):
             raise ValueError(f"INVALID_SPECIAL_ENTRY_{plot:02}")
         steps.append((plot, page, slot, group))
         covered.update(group)
-    if ordinary:
-        plot = 24 if special else 1
-        if plot in covered:
-            raise ValueError("ORDINARY_ENTRY_24_COVERED_BY_SPECIAL")
-        steps.append((plot, *ordinary, None))
+    ordinary_positions = ([ordinary] if ordinary else []) + list(followups)
+    for index, position in enumerate(ordinary_positions):
+        # Count ordinary selections only; four-plot crops have explicit entries.
+        # Preserve the verified single ordinary-only flow (including radish).
+        plot = 24 - index if special or followups else 1
+        if plot < 1 or plot in forbidden or plot in covered:
+            raise ValueError(f"INVALID_ORDINARY_ENTRY_{plot:02}")
+        steps.append((plot, *position, None))
     if any(page < 1 or not 1 <= slot <= 5 for _, page, slot, _ in steps):
         raise ValueError("PLAN_REQUIRES_PAGE_AT_LEAST_1_AND_SLOT_1_TO_5")
     return steps
@@ -172,10 +175,13 @@ def read_plan(path, platform, policy):
     planting = selected["planting"]
     keys = ("special", "ordinary", "ordinary_after_exhaustion") if isinstance(planting, dict) and "ordinary_after_exhaustion" in planting else ("special", "ordinary")
     planting = plan_object(planting, keys, f"{platform}.planting")
-    if "ordinary_after_exhaustion" in planting:
-        if planting["ordinary"] is None:
-            raise ValueError("FOLLOWUP_REQUIRES_FIRST_ORDINARY")
-        seed_position(planting["ordinary_after_exhaustion"], ("page", "slot"), "ordinary_after_exhaustion")
+    followups = planting.get("ordinary_after_exhaustion", [])
+    if not isinstance(followups, list):
+        raise ValueError("EXHAUSTION_FOLLOWUPS_MUST_BE_ARRAY")
+    if followups and planting["ordinary"] is None:
+        raise ValueError("FOLLOWUP_REQUIRES_FIRST_ORDINARY")
+    followup_positions = [seed_position(item, ("page", "slot"), f"ordinary_after_exhaustion[{index}]")
+                          for index, item in enumerate(followups)]
     daily = plan_object(selected["daily"], DAILY_ACTIONS, f"{platform}.daily")
     if any(type(flag) is not bool for flag in daily.values()):
         raise ValueError(f"{platform}.daily fields must be true or false")
@@ -186,7 +192,14 @@ def read_plan(path, platform, policy):
     ordinary = planting["ordinary"]
     if ordinary is not None:
         ordinary = seed_position(ordinary, ("page", "slot"), f"{platform}.planting.ordinary")
-    return planting_steps(special, ordinary, policy), daily
+    steps = planting_steps(special, ordinary, policy, followup_positions)
+    if followups:
+        entries = [planting["ordinary"], *followups]
+        quantities = [item.get("quantity") for item in entries]
+        capacity = 24 - sum(len(group) for _, _, _, group in steps if group)
+        if any(type(q) is not int or q <= 0 for q in quantities) or sum(quantities) != capacity:
+            raise ValueError("EXHAUSTION_QUANTITIES_MUST_FILL_REMAINING_FIELD")
+    return steps, daily
 
 
 def main():
@@ -198,27 +211,14 @@ def main():
     mode.add_argument("--execute", action="store_true", help="Post clicks. Default is a no-click preflight.")
     parser.add_argument("--registry", type=Path, default=ROOT / "_sandbox/farm_window_registry")
     parser.add_argument("--click-helper", type=Path, default=ROOT / "_sandbox/farm_click_batch")
-    parser.add_argument("--followup-entry", type=int, help="Only plant the exhaustion follow-up, using a live-confirmed empty plot.")
     args = parser.parse_args()
 
     try:
         platform = args.platform
         layout = json.loads((ROOT / "data/ui-layout.json").read_text())
         steps, daily = read_plan(args.plan, platform, layout["plot_policy"])
-        planting = json.loads(args.plan.read_text())[platform]["planting"]
-        followup = planting.get("ordinary_after_exhaustion")
         page_sizes = plan_page_sizes(args.plan, platform)
-        if args.followup_entry is not None:
-            if not followup:
-                raise ValueError("NO_EXHAUSTION_FOLLOWUP_IN_PLAN")
-            plot = args.followup_entry
-            occupied_special = {p for _, _, _, group in steps if group for p in group}
-            if not 1 <= plot <= 24 or plot in layout["plot_policy"]["forbidden_single_click"] or plot in occupied_special:
-                raise ValueError("INVALID_FOLLOWUP_EMPTY_ENTRY")
-            steps = [(plot, followup["page"], followup["slot"], None)]
-            page_sizes = [followup.get("page_items", 5)]
         result = {
-            "followup_pending": followup is not None and args.followup_entry is None,
             "platform": platform,
             "steps": [step[:3] for step in steps],
             "daily_pending": [key for key in DAILY_ACTIONS if daily[key]],
@@ -269,9 +269,6 @@ def main():
 
         if args.execute:
             plant(click, capture, steps, lands, picker, prompt, confirm, templates, page_sizes)
-            if followup is not None and args.followup_entry is None:
-                print(json.dumps({"status": "first_planting_complete_followup_requires_empty_entry", **result}))
-                return 3  # Intentional handoff: never claim the full mixed field is complete.
             status = "planting_clicks_sent_unverified"
         else:
             click_batch(args.click_helper, "--preflight", target,
