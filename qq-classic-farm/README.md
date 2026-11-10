@@ -40,7 +40,7 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 
 - `scripts/farm_window.py`：打开或关闭小程序。QQ 打开复用现有 Swift 入口。
 - `scripts/farm_fertilize_once.py`：检查一键务农和施肥勾选状态，再点普通肥一次；QQ 可选 `--kind organic` 识别有机肥。
-- `scripts/farm_harvest_once.py`：识别手形「一键收获」；混种时使用 `--planted-plan`，先逐个收四格星标，再点手形按钮。
+- `scripts/farm_harvest_once.py`：识别手形「一键收获」；混种时使用 `--planted-plan`，通过记录校验和成熟前置确认后，按固定点逐个收四格，再点手形按钮。
 - `scripts/farm_plant_once.py`：读取唯一计划 `data/operation-plan.json`，逐颗种四格，再按计划补普通种子。
 - `scripts/farm_radish_restock.py`：QQ 白萝卜月度补货。按 [白萝卜补货规则](docs/gameplay-rules.md#白萝卜补货) 翻动并识别首格，命中后使用 MAX=99，连续购买 37 次并关闭商店；一次补 3,663 颗，按每天 120 颗可覆盖 30 天并余 63 颗。
 - `scripts/farm_radish_xp.py`：QQ 白萝卜种植经验循环。默认 5 轮，每轮固定 `种 24 → 普通肥 → 有机肥 → 收获`，合计消耗 120 颗，理论种植经验1,200（实际受当天游戏上限影响）；不再每轮进商店，也不等待自然成熟。
@@ -61,18 +61,18 @@ python3.13 scripts/farm_window.py open --platform qq --execute
 python3.13 scripts/farm_window.py close --platform qq --execute
 python3.13 scripts/farm_fertilize_once.py --platform qq
 python3.13 scripts/farm_fertilize_once.py --platform qq --execute
-python3.13 scripts/farm_harvest_once.py --platform qq
-python3.13 scripts/farm_harvest_once.py --platform qq --execute
-python3.13 scripts/farm_harvest_once.py --platform qq --planted-plan data/operation-plan.json
+python3.13 scripts/farm_harvest_once.py --platform qq --ordinary-only
+python3.13 scripts/farm_harvest_once.py --platform qq --ordinary-only --execute
+python3.13 scripts/farm_harvest_once.py --platform qq --planted-plan ../_sandbox/本批实种.json --check-plan
 python3.13 scripts/farm_plant_once.py --platform qq --check-plan
 python3.13 scripts/farm_plant_once.py --platform qq --execute
 python3.13 scripts/farm_radish_restock.py
 python3.13 scripts/farm_radish_restock.py --execute
 python3.13 scripts/farm_radish_xp.py
 python3.13 scripts/farm_radish_xp.py --execute
-python3.13 scripts/farm_qq_round.py --field-state mature
+python3.13 scripts/farm_qq_round.py --field-state mature --harvest-plan ../_sandbox/本批实种.json
 # 实际参数先按 docs/operation-sop.md 选择；默认不重复萝卜和日常
-python3.13 scripts/farm_qq_round.py --field-state mature --execute
+python3.13 scripts/farm_qq_round.py --field-state mature --harvest-plan ../_sandbox/本批实种.json --execute
 python3.13 scripts/farm_share_once.py
 python3.13 scripts/farm_daily_task_once.py --platform qq
 python3.13 scripts/farm_daily_fertilizer_reward.py --platform qq

@@ -9,6 +9,9 @@ from pathlib import Path
 import subprocess
 from time import sleep
 
+from farm_harvest_once import validate_planted_plan
+from farm_plant_once import read_plan
+
 
 ROOT = Path(__file__).resolve().parents[1]
 POST_INITIAL_FERTILIZER_WAIT_SECONDS = 2.2
@@ -26,7 +29,7 @@ def workflow(radish_rounds, harvest_plan, *, field_state="tail", tasks=True, fri
         steps += [command("farm_fertilize_once.py", "--platform", "qq", "--execute"),
                   ("sleep", POST_INITIAL_FERTILIZER_WAIT_SECONDS)]
     if field_state != "empty":
-        steps.append(command("farm_harvest_once.py", "--platform", "qq", "--planted-plan", str(harvest_plan), "--execute"))
+        steps.append(command("farm_harvest_once.py", "--platform", "qq", "--planted-plan", str(harvest_plan), "--mature-confirmed", "--execute"))
     if radish_rounds:
         steps.append(command("farm_radish_xp.py", "--rounds", str(radish_rounds), "--execute"))
     steps.append(command("farm_plant_once.py", "--platform", "qq", "--execute"))
@@ -46,9 +49,20 @@ def main():
     parser.add_argument("--tasks", action="store_true")
     parser.add_argument("--friends", action="store_true")
     parser.add_argument("--reward", action="store_true")
-    parser.add_argument("--harvest-plan", type=Path, default=ROOT / "data/operation-plan.json")
+    parser.add_argument("--harvest-plan", type=Path, help="Explicit completed planting record; required for nonempty field.")
     parser.add_argument("--execute", action="store_true")
     args = parser.parse_args()
+
+    try:
+        layout = json.loads((ROOT / "data/ui-layout.json").read_text())
+        anchors = json.loads((ROOT / "data/ui-anchors.json").read_text())
+        if args.field_state != "empty":
+            validate_planted_plan(args.harvest_plan, "qq", layout, anchors, full_field=True)
+        read_plan(ROOT / "data/operation-plan.json", "qq", layout["plot_policy"])
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        print(json.dumps({"status": "rejected_rewrite_required", "failed_stage": "preflight",
+                          "completed_stages": [], "reason": str(exc)}, ensure_ascii=False))
+        return 2
 
     steps = workflow(args.radish_rounds, args.harvest_plan, field_state=args.field_state, tasks=args.tasks, friends=args.friends, reward=args.reward)
     if not args.execute:

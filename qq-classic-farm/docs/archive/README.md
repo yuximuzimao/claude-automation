@@ -17,3 +17,7 @@
 
 - neat/2026-11-10-qq-restock-centered-picker-and-supervised-flow.md：补货误购修正、居中选种、双肥循环、日常恢复与提醒验收、下一批混种接续及有人监管降耗方向。
 - neat/2026-11-10-home-share-mischief-closeout.md：收种与下批计划、递减入口、分享实测及恢复、首页确认器离线/真机验收、种草放虫开发和次日验证安排。
+
+- 2026-11-10-star-recognition/README.md：退役的QQ/微信四格星标图片与搜索区域；现役改为有前置条件的固定点点击。
+
+- neat/2026-11-10-fixed-harvest-record-validation.md：17:46收种、实种记录写完即验、固定点收获及本阶段验证边界。

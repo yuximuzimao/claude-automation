@@ -84,7 +84,7 @@ def main():
                 sleep(POST_FERTILIZER_WAIT_SECONDS)
                 run_script("farm_fertilize_once.py", "--platform", "qq", "--kind", "organic", "--execute")
                 sleep(POST_FERTILIZER_WAIT_SECONDS)
-                run_script("farm_harvest_once.py", "--platform", "qq", "--execute")
+                run_script("farm_harvest_once.py", "--platform", "qq", "--ordinary-only", "--execute")
                 completed.append(number)
         print(json.dumps({"status": "radish_rounds_sent", "completed_rounds": completed, **summary}))
         return 0
