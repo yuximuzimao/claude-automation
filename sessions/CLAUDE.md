@@ -27,7 +27,8 @@ jl inject <编号>     # 把 session 注入 9222 自动化 Chrome 并导航到�
 | 启动脚本 | `start-chrome-debug.sh` |
 | 用户快捷方式 | `/Users/chat/Applications/自动化Chrome.app` |
 | 开机启动 | `~/Library/LaunchAgents/com.jl.chrome-debug.plist` |
-| 存储清理 | `~/Library/LaunchAgents/com.iroha.chrome-cleanup.plist` → `cleanup-chrome.js` |
+| 存储清理 | 每天 03:07；`~/Library/LaunchAgents/com.iroha.chrome-cleanup.plist` → `cleanup-chrome.js` |
+| Node 运行时 | `~/.nvm/versions/node/v22.22.1/bin/node`（LaunchAgent 使用绝对路径；切换 Node 版本时需同步更新） |
 | 启动日志 | `/tmp/chrome-debug.log`、`/tmp/chrome-launch.log` |
 
 `自动化Chrome.app` 的入口是 `Contents/MacOS/applet` shell 脚本：调用 `start-chrome-debug.sh`，轮询 `http://127.0.0.1:9222/json/version`，再用 `open -a "Google Chrome"` 带到前台。不要再用 AppleScript `System Events` 查找 `first process whose name contains "Google Chrome"`；Chrome 已启动但进程列表未刷新时会触发“无效的索引”弹窗。
