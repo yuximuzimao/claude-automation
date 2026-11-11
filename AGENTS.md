@@ -62,21 +62,23 @@
 | `kk-event-minesweeper/` | `SKILL.md`、`README.md`；项目已完成且默认不维护 |
 | `qq-classic-farm/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前状态见 `docs/CURRENT.md` |
 | `personal-profile/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前简历/求职状态见 `docs/CURRENT.md` |
+| `software-engineering-study/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前学习状态见 `docs/CURRENT.md` |
 
 悦希/HEE 商品相关任务如涉及尚未完成视觉建档的新品，先读 `product-mapping/tasks/todo.md` 的当前新品待办。待办中已记录标准 ERP 名称、当前编码和缺失视觉资料的商品不得归为普通未知，也不得复用旧版外观或创建错误训练类别；装箱尺寸、箱规与组合规则统一由 `order-review` 自己维护。
 
 ## Codex / Claude Code 协作
 
 - 本工作区仍保留 Claude Code 项目规则；Codex 不应覆盖或稀释这些规则。
-- 启动后先读 `CLAUDE.md` → `docs/HANDOFF.md`（如果存在）→ `docs/codex-handoff/inbox.json`（检查是否有 Claude Code 发来的协作请求）→ `git status` → `git log --oneline -5`，了解 Claude Code 最新状态。
-- 完成工作后更新 `docs/HANDOFF.md`（如果做了实质性改动），确保 Claude Code 下次启动能接上。
+- **独立执行时**，按本次任务读取项目入口和现役状态即可；不要求追踪另一个 Agent 的会话，不必读取或创建 `docs/HANDOFF.md` / `docs/codex-handoff/inbox.json`。
+- **跨 Agent 接力时**（用户要求继续另一 Agent 的工作，或明确要求双方协作），再读取 `docs/HANDOFF.md`、根目录 `docs/codex-handoff/inbox.json`，并检查 `git status` / `git log --oneline -5`，确认对方留下的现场和未提交边界。
+- 只有需要另一 Agent 接手未完成工作时，才更新 `docs/HANDOFF.md` 或登记 inbox；独立完成的任务不必制造交接材料。
 - `codex-plugin-cc` 适合做审查和救援：普通审查用 `/codex:review`，挑战设计和风险假设用 `/codex:adversarial-review`。
 - 审查和修复分阶段进行。审查阶段只报告问题；修复阶段再改代码。
-- `AGENTS.md` / `CLAUDE.md` / 项目 `SKILL.md` 是开工前的预防性入口；`neat-freak` 是阶段收尾兜底，必须全文审查当前活跃知识并反向审计项目是否偏离这些结构规范，包括职责混装、渐进式加载失效、重复权威、旧入口残留和Git忽略误伤。历史archive完整枚举但不默认全文重读，只检查archive索引、本轮有变更的历史文件和当前任务明确需要回溯的最近历史。`systematic-debugging` 和 `verification-before-completion` 用于 bug 和完成前验证。
+- `AGENTS.md` / `CLAUDE.md` / 项目 `SKILL.md` 是开工前的预防性入口；`neat-freak` 是阶段收尾兜底，必须全文审查当前活跃知识并反向审计项目是否偏离这些结构规范，包括职责混装、渐进式加载失效、重复权威、旧入口残留和Git忽略误伤。历史archive完整枚举但不默认全文重读，只检查archive索引、本轮有变更的历史文件和当前任务明确需要回溯的最近历史。
 
-### Codex → Claude Code 协作收件箱
+### Codex ↔ Claude Code 协作收件箱
 
-当 Codex 需要 Claude Code 审查计划、方案或代码时，使用 `docs/codex-handoff/` 协议：
+当 Codex 或 Claude Code 需要对方审查计划、方案或代码，或接手未完成工作时，使用 `docs/codex-handoff/` 协议；独立执行不使用该协议：
 
 1. **写全文**：将完整内容写入 `docs/codex-handoff/{project}-{action}.md`
 2. **注册到收件箱**：在 `docs/codex-handoff/inbox.json` 的 `pending` 数组追加条目：
@@ -92,12 +94,12 @@
   "status": "unread"
 }
 ```
-3. **通知用户**：告诉用户"可以让 Claude Code 查看 docs/codex-handoff/ 里的协作请求"，不要假设 Claude Code 会自动读。
-4. **自己检查收件箱**：启动时检查 `inbox.json` 是否有 Claude Code 发来的协作请求（from: "claude"），如有则读取对应文件。
+3. **通知用户**：告诉用户可以让另一 Agent 查看 `docs/codex-handoff/` 里的协作请求；不要假设对方会自动读取。
+4. **接力时检查收件箱**：仅当本次确实处于跨 Agent 协作或接手场景时，检查 `inbox.json` 中 `from: "claude"` 且 `status: "unread"` 的条目；独立执行时不必检查。
 
 ### Claude Code → Codex 协作（收件箱反向）
 
-Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同上，`from` 字段设为 `"claude"`，状态 `"unread"`。Codex 启动时检查 `inbox.json` 中 `from: "claude"` 且 `status: "unread"` 的条目。
+Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同上，`from` 字段设为 `"claude"`，状态 `"unread"`。Codex 在跨 Agent 接力或明确协作时检查该类条目；独立执行时不必读取。
 
 ## 项目结构与文档维护
 

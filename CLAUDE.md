@@ -92,7 +92,7 @@ Worktree 的目的是真正需要时提供隔离、并行和可回滚边界，**
 
 ## Git 版本管理
 
-1. 代码验证通过后立即 commit + push，不攒到 session 结束
+1. 日常修改验证通过后保留在当前工作区，不自动 commit / push；仅当用户明确要求“按 neat 归档”、提交或推送时，才执行对应的 commit / push
 2. commit 默认只含代码/文档文件，排除运行时数据（`data/` 下的 JSON/jsonl、日志文件）；用户明确要求归档已完成业务数据轮次时例外，必须单独提交并在 commit message 中说明范围
 3. 禁止 force push，禁止修改已 push 的 commit
 4. commit 格式：`<type>(<scope>): <描述>`（type: fix/feat/refactor/docs, scope: aftersales/product-mapping/transfer/workspace）
@@ -102,7 +102,7 @@ Worktree 的目的是真正需要时提供隔离、并行和可回滚边界，**
 ## SKILL.md 同步铁律
 
 - 任何 commit 包含文件重命名/删除/新增/移动 → 同步更新所属项目 `SKILL.md` PATHS 区块，新文件属核心流程则补 ENTRY MAP
-- 谁制造变更谁更新地图：Claude 改的文件 Claude 更新，用户改的文件 Claude 主动检查并更新。pre-commit hook 做安全网
+- 谁制造变更谁更新地图：当前实际修改文件的 Agent 负责同步所属项目 `SKILL.md` PATHS 区块；新文件属于核心流程时补 ENTRY MAP。不按 Claude / Codex 身份分配。pre-commit hook 做安全网。
 
 ## 项目结构与文档职责
 
@@ -140,7 +140,7 @@ Worktree 的目的是真正需要时提供隔离、并行和可回滚边界，**
 
 永久规则、当前状态和历史必须分离；NEAT只是阶段归档，不承担永久规则入口。执行`neat-freak`收尾时按本节做正向/反向结构审计，重点检查职责混装、渐进式加载失效、重复权威、并行Todo/决策清单、旧入口残留和未归档历史。
 
-新项目历史默认使用`docs/archive/`；`sessions/`默认保留给运行时/认证会话。临时产出放工作区`_sandbox/`。跨agent未完成交接可用`docs/HANDOFF.md`；已验证完成状态以Git commit为准。
+新项目历史默认使用`docs/archive/`；`sessions/`默认保留给运行时/认证会话。临时产出放工作区`_sandbox/`。跨agent未完成交接可用`docs/HANDOFF.md`；日常已验证状态以现役文件、CURRENT 与验证结果为准，用户明确要求 neat 归档/提交后再用 Git commit 固化阶段状态。
 
 ## 项目结构变更门禁
 
@@ -150,13 +150,14 @@ Worktree 的目的是真正需要时提供隔离、并行和可回滚边界，**
 - `.gitignore` 的目录规则必须审计作用域。只想忽略根目录时必须写根锚定形式（如 `/sessions/`），禁止用 `sessions/` 误伤子项目同名文档。新增/修改ignore后至少验证一个“应该忽略”样本和一个“绝不该忽略”样本。
 - 项目文档目录默认应进入Git。任何文档目录被ignore时必须先判断这是设计意图还是规则误伤，不能长期靠 `git add -f` 维持正常流程。
 
-## Codex 协作
+## 跨 Agent 协作（可选）
 
-- Codex CLI 与本工作区并行使用，`AGENTS.md` 为其入口规则
-- 分工：Claude Code 主驾驶（业务操作+写操作），Codex 审查/救援/补测试/风险挑战
-- 交接：`docs/HANDOFF.md` + git commit 双重握手，启动后先读 HANDOFF.md + git status
-- **Codex 收件箱**：SessionStart hook 只检查工作区根目录 `docs/codex-handoff/inbox.json`。有未处理条目时注入通知，询问用户是否读全文。协议详见 `docs/codex-handoff/README.md`
-- **向 Codex 发请求**：写入合适的 handoff markdown（工作区级默认 `docs/codex-handoff/{project}-{action}.md`，子项目材料可放 `<project>/docs/codex-handoff/`），只在根目录 `docs/codex-handoff/inbox.json` 追加 `{"from": "claude", "status": "unread"}` 条目。完成后移到 processed
+- Codex App 与 Claude Code 都可以独立发起和执行任务；没有固定的主驾驶、辅助或业务写入分工。谁当前承担任务，谁负责推进完整流程。
+- 需要协作时，双方可以互相请求审查、救援、补测试、风险挑战、接手未完成工作，或代为执行 Git 操作。**Git 没有固定 Agent Owner**，具体规则见 [`docs/git.md`](docs/git.md)。
+- 独立执行时，不必检查或创建另一个 Agent 的收件箱/交接文件，也不必等待另一方。
+- 只有确实需要另一个 Agent 接手或参与时，才使用 `docs/HANDOFF.md`、`docs/codex-handoff/` 和 Git 状态记录交接边界；用户要求归档、提交或推送时，按工作区 Git 规则执行。
+- **Codex 收件箱**：Claude Code 环境配置了 SessionStart hook 时，可检查工作区根目录 `docs/codex-handoff/inbox.json` 并提示用户是否读取未处理请求；这只是协作通知，不代表 Codex App / Claude Code 独立工作时都必须读取收件箱。协议详见 `docs/codex-handoff/README.md`。
+- **双向发起请求**：任一 Agent 发起跨 Agent 请求时，将完整内容写入合适的 handoff markdown，并在根目录 `docs/codex-handoff/inbox.json` 追加对应 `from` 字段（`codex` 或 `claude`）的条目；接收方处理后移入 `processed`。
 
 ## 新项目开工
 
