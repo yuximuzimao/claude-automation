@@ -1,9 +1,13 @@
 # Handoff
 
-更新时间：2026-11-04
+更新时间：2026-11-11
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
-当前焦点：Codex Monitor 计划扩展为桌面状态岛；下一步先完成产品形态与接入设计，尚未开始实现。共享桌面调度与无人监管自动化对抗性审查的完整结论见 `docs/archive/2026-11-04-agent-autoloop-status-island/README.md`；各项目当前状态与待办仍以各自 `CURRENT.md` / `tasks/todo.md` 为准。
+当前焦点：Status Island（原 Codex Monitor）双设备部署方案第 3 阶段“任务入口与触发源映射”；已确认黑苹果登录 / Session 同步及两端账号数据归属，下一项讨论 Mac mini 售后网页调用黑苹果本地浏览器 / 登录桥接服务。双设备部署与生产入口迁移尚未实施。工作区 Review Gate V2 核心实现已完成：三项 Important 缺陷均已修复，完整回归 63/63 通过，最终独立 Reviewer 无 finding，隔离 Final Check 返回 `delivered`。原始 Work 基线已被并行任务推进，因此没有伪造真实工作区 Delivery 记录；本次按用户接受的隔离验收结果收尾。当前采用 Agent 显式调用 `deliver`，不部署自动 Hook。NEAT 与 Review 独立，历史 dirty 文件不自动送审；最终证据见 `docs/archive/2026-11-06-review-gate-v2-handoff/README.md`。共享桌面调度原讨论见 `docs/archive/2026-11-04-agent-autoloop-status-island/README.md`；各项目当前状态与待办仍以各自 `CURRENT.md` / `tasks/todo.md` 为准。
+
+农场坐标校准（2026-11-06）：用户确认统一核对页原有截图与坐标；显式土地中心和 UI 点分别写入 `qq-classic-farm/data/ui-layout.json` / `data/ui-anchors.json`，缺图缺点不推断。本次已按 QQ、微信顺序采集分享页、联系人列表、搜索结果及选中状态；截图后两边均取消选中，未发送或领取。用户已核对「分享」场景；去重后 9 组点位已登记到 `qq-classic-farm/data/ui-anchors.json`，截图路径和窗口边界见项目 `docs/CURRENT.md`，后续事项见 `tasks/todo.md`。仓鼠识别方案暂定为三固定色点严格 RGB 全等、连续扫描任一帧命中即停止，待仓鼠自然出现时再验证；证据见 `qq-classic-farm/docs/archive/neat/2026-11-06-hamster-recognition-provisional.md`。
+
+农场坐标核对（2026-11-07）：本轮已归档，确认数据见农场项目的 data/ui-layout.json、data/ui-anchors.json。01 号地施肥勾选框已确认，两种化肥已标候选点。下个会话先按项目 Todo 复核四格确认按钮定位和六组四格／24 格普通作物的成熟星标，再确定新脚本方案。归档见 `qq-classic-farm/docs/archive/neat/2026-11-07-coordinate-review-handoff.md`。
 
 审单收口（2026-10-30）：逐包复制组合公式、自动化回归和浮窗重启记录已归档到 `order-review/docs/archive/2026-10-30-package-formula-copy/neat-handoff.md`；当前能力与使用方式只见项目 `docs/CURRENT.md` / `docs/usage.md`。
 

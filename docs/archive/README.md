@@ -12,4 +12,7 @@
 - [2026-11-01-codexpro-0302/](2026-11-01-codexpro-0302/README.md) — 0.30.2 分页补丁兼容、编号区间边界、8 项回归与实机配置核对、快捷启动请求日志，以及本轮 NEAT 审查和售后待办登记。
 - [2026-11-06-review-gate-v2-handoff/](2026-11-06-review-gate-v2-handoff/README.md) — Review Gate V2 的阶段交接、三项 Important 修复、63 项回归、独立复审及最终隔离验收；当前操作规则见 `docs/review-gate/README.md`。
 - [2026-11-06-review-gate-runtime-boundary/](2026-11-06-review-gate-runtime-boundary/README.md) — Review Gate 触发时点调整：开发阶段免审、首次无人监管运行完整审查、已运行项目只审查影响下一次执行的变更；含实现和回归记录。
+- [2026-11-04-agent-autoloop-status-island/](2026-11-04-agent-autoloop-status-island/README.md) — Agent Autoloop 开源分析、共享桌面串行调度、无人监管自动化对抗性审查，以及将 Codex Monitor 扩展为 Status Island 的用户决定、助手建议和下一阶段设计待办。
 - [2026-11-05-chatgpt-app-external-chrome/](2026-11-05-chatgpt-app-external-chrome/README.md) — ChatGPT 桌面 App 外部 Chrome Native Messaging 注册、Profile 识别修复，以及 Browser 插件读取/接管/DOM 验证；CUA 备用路径和设置页状态保留为未处理边界。
+- [2026-11-06-autoloop-adapter-runtime-design/](2026-11-06-autoloop-adapter-runtime-design/README.md) — Autoloop 适配层与统一桌面调度运行模型的两阶段讨论结论、项目职责边界、队列规则及下一阶段顺序修正。
+- [2026-11-09-status-island-dual-device-design/](2026-11-09-status-island-dual-device-design/README.md) — Status Island 双设备部署模型、黑苹果人工操作与 Mac mini 自动执行分工、售后单一业务服务、Session 同步方向、限时注入许可和下一阶段恢复点。

@@ -1,6 +1,6 @@
-# Codex Monitor
+# Status Island
 
-项目中文名：用量监控软件
+项目中文名：状态岛
 
 ## Session 启动
 1. 读 `tasks/todo.md` — 确认当前阶段和待办

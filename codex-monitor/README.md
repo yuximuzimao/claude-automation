@@ -1,6 +1,6 @@
-# Codex Monitor
+# Status Island
 
-Local usage monitor for Codex and Claude Code.
+Desktop status island project, currently retaining local usage monitoring for Codex and Claude Code.
 
 The app reads local JSONL session logs, keeps token usage split by source and model, aggregates today / rolling 30-day usage, and presents a small tkinter floating window. It does not read credentials or call internal HTTP quota endpoints.
 

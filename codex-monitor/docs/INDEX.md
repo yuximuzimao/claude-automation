@@ -1,8 +1,8 @@
-# Codex Monitor 项目规则索引
+# Status Island 项目规则索引
 
 ## 1. 项目目标
 
-Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 token 消耗估算。第一版优先保证数据准确、安全边界清楚、可验证，再做菜单栏、实时监听和复杂 UI。
+Status Island 是在原用量监控应用基础上扩展的双设备桌面状态岛项目。当前稳定实现仍负责本机 Codex / Claude Code JSONL 用量估算；双设备任务调度、账号桥接和跨设备协调按阶段设计，尚未实现。优先保证现有统计准确、安全边界清楚、可验证。
 
 ## 2. 数据源
 
@@ -75,7 +75,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - 刷新中再次触发自动刷新时只合并为下一次请求，不并发堆叠多个 reader/aggregate worker。
 - 折叠态倒计时文本必须使用 Canvas text item，并由 `itemconfigure(text=...)` 更新；不要在胶囊 Canvas 中嵌入 `tk.Label`，否则点击/hover 后 macOS/Tk 可能短暂绘制灰色 Label 背景。
 - UI 入口必须持有 `SingleInstance` 文件锁。后台 LaunchAgent 获取锁失败应立即退出；可见 App 可短暂等待锁释放，避免刚切换后台实例时静默打不开。
-- 当前材质实现是 Tkinter 前景 + 独立 AppKit `NSVisualEffectView` backing window，两条渲染链路无法完全复现原生 vibrancy、字体合成和动态材质。现阶段保持当前稳定实现；只有触发长期迁移条件时才按 `docs/FUTURE.md` 评估 `NSPanel + SwiftUI/AppKit` 原生前端，不把该方向当作当前待办。
+- 当前材质实现是 Tkinter 前景 + 独立 AppKit `NSVisualEffectView` backing window，两条渲染链路无法完全复现原生 vibrancy、字体合成和动态材质。Status Island 设计阶段会比较继续使用当前 Tk / AppKit 与评估 `NSPanel + SwiftUI/AppKit`，但这只是技术选型评估，不代表已批准迁移；若最终决定迁移，按 `docs/FUTURE.md` 的原型与验收边界执行。
 
 ## 6. 聚合层口径
 
@@ -116,3 +116,10 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - `watchdog` 不是标准库；未安装时会走 polling fallback。polling 只能做轻量 mtime 检测，不能直接触发主线程聚合或高频后台聚合。
 - 测试 fixture 必须脱敏，只保留结构和 token 数字。
 - 开机自启只生成 plist，不自动 bootstrap；写错 plist 后由用户手动启用/回滚，避免挂起登录态。
+
+## 8. Status Island 规划入口
+
+- 当前状态：第 1、2 阶段架构讨论已确认；第 3 阶段任务入口映射进行中。尚未安装 Autoloop、配置 Tailscale、接入生产任务或修改 UI。
+- 当前待办与下一会话主题见 `tasks/todo.md`；长期方向与 UI 技术边界见 `docs/FUTURE.md`。
+- 双设备部署模型、售后人工 / 自动操作边界和详细恢复点见 [2026-11-09 归档](../../docs/archive/2026-11-09-status-island-dual-device-design/README.md)。
+- 历史讨论：初始开源研究见 `../../docs/archive/2026-11-04-agent-autoloop-status-island/README.md`；第 1、2 阶段讨论见 `../../docs/archive/2026-11-06-autoloop-adapter-runtime-design/README.md`。
