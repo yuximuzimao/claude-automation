@@ -30,5 +30,4 @@ export CODEXPRO_INHERIT_ENV="${CODEXPRO_INHERIT_ENV:-0}"
 unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy
 
 exec codexpro start \
-  --log-requests \
   --allow-root /Users/chat/.config/superpowers/worktrees
