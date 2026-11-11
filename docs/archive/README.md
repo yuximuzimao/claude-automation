@@ -16,3 +16,5 @@
 - [2026-11-05-chatgpt-app-external-chrome/](2026-11-05-chatgpt-app-external-chrome/README.md) — ChatGPT 桌面 App 外部 Chrome Native Messaging 注册、Profile 识别修复，以及 Browser 插件读取/接管/DOM 验证；CUA 备用路径和设置页状态保留为未处理边界。
 - [2026-11-06-autoloop-adapter-runtime-design/](2026-11-06-autoloop-adapter-runtime-design/README.md) — Autoloop 适配层与统一桌面调度运行模型的两阶段讨论结论、项目职责边界、队列规则及下一阶段顺序修正。
 - [2026-11-09-status-island-dual-device-design/](2026-11-09-status-island-dual-device-design/README.md) — Status Island 双设备部署模型、黑苹果人工操作与 Mac mini 自动执行分工、售后单一业务服务、Session 同步方向、限时注入许可和下一阶段恢复点。
+
+- [2026-11-11-review-gate-concurrent-scope/](2026-11-11-review-gate-concurrent-scope/README.md) — Review Gate 无关并发范围修复：89 项回归、24 项新增用例、两项独立审查 finding 修复及最终空 findings；保留原农场 blocked 证据，不重置 Work。

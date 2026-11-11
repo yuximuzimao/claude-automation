@@ -493,7 +493,7 @@ class DeliveryTests(unittest.TestCase):
         work = gate.capture_work(self.repo, self.request, "unattended_change")
         self.write("farm/worker.py", "def run():\n    special_action()\n")
         self.write("farm/.review-gate.json", json.dumps({"version": 1, "required_code_terms": ["special_action("]}))
-        with self.assertRaisesRegex(gate.GateError, "范围外"):
+        with self.assertRaisesRegex(gate.GateError, "必要规则或策略变化.*farm/.review-gate.json"):
             gate.create_candidate(self.repo, work, self.claim())
 
     def test_project_policy_never_uses_unsafe_candidate_paths(self):
@@ -557,6 +557,311 @@ class DeliveryTests(unittest.TestCase):
         os.utime(checks, ns=(1_000_000_000, 1_000_000_000))
         with self.assertRaises(gate.GateError):
             gate._checks_after(prepared, checks)
+
+
+class ConcurrentScopeTests(unittest.TestCase):
+    git = DeliveryTests.git
+    write = DeliveryTests.write
+    claim = DeliveryTests.claim
+
+    def setUp(self):
+        DeliveryTests.setUp(self)
+        self.write("farm/SKILL.md", "farm entry\n")
+        self.write("chat/SKILL.md", "independent chat entry\n")
+        self.write("chat/current.md", "chat baseline\n")
+        self.write("shared/helper.py", "def helper(): return 1\n")
+        self.write("CLAUDE.md", "workspace rules\n")
+        self.git("add", ".")
+        self.git("commit", "-qm", "scope fixture")
+        self.request["base"] = self.git("rev-parse", "HEAD").strip()
+
+    def exclude(self, claim, *names):
+        claim["outside_scope"] = {name: {
+            "reason": "Independent chat documentation; user confirmed this task is unrelated.",
+            "evidence": "farm/worker.py is self-contained; rules.md supplies its only context; no imports, configuration reads or calls to chat."}
+            for name in names}
+        return claim
+
+    def assessment(self, material):
+        return {"classification": "review_required", "reason": "Fixture scope checked",
+                "evidence": [], "runtime_manifest_required": False, "impact_scope_complete": True}
+
+    def prepare(self, work, claim):
+        reviewer = mock.Mock(return_value={"findings": []})
+        prepared = gate.prepare_delivery(self.repo, work, claim, self.policy, self.assessment, reviewer)
+        reviewer.assert_called_once()
+        self.assertEqual(prepared["state"], "waiting_verification")
+        return prepared
+
+    def test_unrelated_worktree_then_index_then_commit_preserves_review(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        self.write("chat/current.md", "concurrent chat edit\n")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        prepared = self.prepare(work, claim)
+        candidate = prepared["candidate"]
+        self.assertNotIn("chat/current.md", candidate["files"])
+        self.assertEqual(prepared["observations"]["outside_changes"]["chat/current.md"]["current"]["status"], " M")
+        self.write("chat/current.md", "another unrelated edit\n")
+        self.git("add", "chat/current.md")
+        gate._check_candidate(self.repo, work, candidate)
+        self.git("commit", "-qm", "concurrent chat only")
+        gate._check_candidate(self.repo, work, candidate)
+        result = gate.complete_delivery(self.repo, work, prepared, self.policy,
+            [{"name": "fixture", "result": "passed", "evidence": "isolated test"}], [], self.assessment)
+        self.assertEqual(result["state"], "delivered")
+        self.assertEqual(candidate["head"], work["start"]["head"])
+        self.assertNotEqual(result["observations"]["head"], candidate["head"])
+        self.assertTrue(result["observations"]["outside_changes"]["chat/current.md"]["head_changed"])
+
+    def test_mixed_changes_still_reject_undeclared_candidate(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        self.write("chat/current.md", "unrelated\n")
+        self.write("farm/worker.py", "unclaimed concurrent content\n")
+        with self.assertRaisesRegex(gate.GateError, "独立声明不一致.*farm/worker.py"):
+            gate.create_candidate(self.repo, work, claim)
+
+    def test_unrelated_change_during_reviewer_does_not_revoke_result(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        def reviewer(_):
+            self.write("chat/current.md", "changed while reviewing\n")
+            return {"findings": []}
+        prepared = gate.prepare_delivery(self.repo, work, claim, self.policy, self.assessment, reviewer)
+        self.assertEqual(prepared["state"], "waiting_verification")
+        self.assertIn("chat/current.md", prepared["observations"]["outside_changes"])
+
+    def test_shared_dependency_and_context_still_block(self):
+        self.request["context"].append("shared/helper.py")
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        self.write("chat/current.md", "unrelated\n")
+        self.write("shared/helper.py", "changed dependency\n")
+        with self.assertRaisesRegex(gate.GateError, "必要上下文.*shared/helper.py"):
+            gate.create_candidate(self.repo, work, claim)
+
+    def test_cross_project_dependency_cannot_be_excluded(self):
+        self.request["context"].append("chat/current.md")
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        with self.assertRaisesRegex(gate.GateError, "不能排除.*chat/current.md"):
+            gate.create_candidate(self.repo, work, self.exclude(self.claim(), "chat/current.md"))
+
+    def test_scope_evidence_unknown_blocks_first_run_even_after_review(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        self.write("chat/current.md", "unrelated claim not proven\n")
+        assessment = {**self.assessment(None), "impact_scope_complete": False,
+                      "reason": "chat/current.md dependency relation unresolved"}
+        reviewer = mock.Mock(return_value={"findings": []})
+        prepared = gate.prepare_delivery(self.repo, work, claim, self.policy,
+                                         lambda _: assessment, reviewer)
+        reviewer.assert_called_once()
+        self.assertEqual(prepared["state"], "needs_classification")
+        self.assertFalse(prepared["risk"]["assessment_complete"])
+        self.assertIn("chat/current.md", prepared["risk"]["reason"])
+        with self.assertRaises(gate.GateError):
+            gate.complete_delivery(self.repo, work, prepared, self.policy, [], [], self.assessment)
+
+    def test_scope_claim_cannot_exclude_root_shared_or_own_project(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        for name in ("CLAUDE.md", "shared/helper.py", "farm/new.py", "chat/.review-gate.json"):
+            with self.subTest(name=name), self.assertRaisesRegex(gate.GateError, "不能排除"):
+                gate.create_candidate(self.repo, work, self.exclude(self.claim(), name))
+        claim = self.exclude(self.claim(), "chat/current.md")
+        claim["outside_scope"]["chat/current.md"]["evidence"] = ""
+        with self.assertRaisesRegex(gate.GateError, "核实证据"):
+            gate.create_candidate(self.repo, work, claim)
+
+    def test_new_deleted_and_renamed_unrelated_files_require_exact_paths(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        self.git("mv", "chat/current.md", "chat/moved.md")
+        self.write("chat/new.md", "new unrelated document\n")
+        claim = self.exclude(self.claim(), "chat/current.md", "chat/moved.md", "chat/new.md")
+        self.prepare(work, claim)
+        del claim["outside_scope"]["chat/current.md"]
+        with self.assertRaisesRegex(gate.GateError, "依赖关系未确认.*chat/current.md"):
+            gate.create_candidate(self.repo, work, claim)
+
+    def test_rename_into_relevant_project_cannot_hide_destination(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        self.git("mv", "chat/current.md", "farm/from_chat.md")
+        with self.assertRaisesRegex(gate.GateError, "依赖关系未确认.*farm/from_chat.md"):
+            gate.create_candidate(self.repo, work, self.exclude(self.claim(), "chat/current.md"))
+
+    def test_root_rules_change_invalidates_existing_review(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        prepared = self.prepare(work, self.claim())
+        self.write("CLAUDE.md", "changed root safety rules\n")
+        with self.assertRaisesRegex(gate.GateError, "必要规则或策略变化.*CLAUDE.md"):
+            gate._check_candidate(self.repo, work, prepared["candidate"])
+
+    def test_policy_creation_even_ignored_and_engine_change_are_bound(self):
+        (self.repo / ".git/info/exclude").write_text("farm/.review-gate.json\n")
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        prepared = self.prepare(work, self.claim())
+        self.write("farm/.review-gate.json", '{"version":1,"required_code_terms":["special("]}')
+        with self.assertRaisesRegex(gate.GateError, "策略变化.*farm/.review-gate.json"):
+            gate._check_candidate(self.repo, work, prepared["candidate"])
+        (self.repo / "farm/.review-gate.json").unlink()
+        with mock.patch.object(gate, "_engine", return_value={key: "changed" for key in work["engine"]}):
+            with self.assertRaisesRegex(gate.GateError, "审查工具或全局策略变化"):
+                gate._check_candidate(self.repo, work, prepared["candidate"])
+
+    def test_relevant_head_change_and_non_descendant_head_rejected(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        prepared = self.prepare(work, self.claim())
+        self.write("farm/worker.py", "committed related change\n")
+        self.git("add", "farm/worker.py")
+        self.git("commit", "-qm", "related change")
+        with self.assertRaisesRegex(gate.GateError, "HEAD 中相关文件变化.*farm/worker.py"):
+            gate._check_candidate(self.repo, work, prepared["candidate"])
+        # Fixture-only checkout: production code never mutates Git.
+        self.git("checkout", "--detach", "HEAD~2")
+        with self.assertRaises(gate.GateError):
+            gate._check_candidate(self.repo, work, prepared["candidate"])
+
+    def test_unrelated_index_only_change_is_observed_without_invalidating_candidate(self):
+        self.write("chat/current.md", "staged A\n")
+        self.git("add", "chat/current.md")
+        self.write("chat/current.md", "working C\n")
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        candidate = gate.create_candidate(self.repo, work, claim)
+        self.write("chat/current.md", "staged B\n")
+        self.git("add", "chat/current.md")
+        self.write("chat/current.md", "working C\n")
+        gate._check_candidate(self.repo, work, candidate)
+        observations = {}
+        gate._current(self.repo, work, claim["outside_scope"], observations=observations)
+        observed = observations["outside_changes"]["chat/current.md"]
+        self.assertEqual(observed["start"]["entry"], observed["current"]["entry"])
+        self.assertNotEqual(observed["start"]["index"], observed["current"]["index"])
+
+    def test_scope_declaration_change_requires_new_review(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        prepared = self.prepare(work, claim)
+        original_id = prepared["candidate"]["id"]
+        claim["outside_scope"]["chat/current.md"]["evidence"] += " Additional verified evidence."
+        new = gate.create_candidate(self.repo, work, claim)
+        self.assertNotEqual(original_id, new["id"])
+        with self.assertRaises(gate.GateError):
+            gate._check_receipt(self.repo, work, new, prepared["receipt"], [])
+
+    def test_unrelated_change_during_work_capture_is_observational(self):
+        original = gate._inventory
+        def capture_then_change(repo, names=()):
+            inventory = original(repo, names)
+            self.write("chat/current.md", "unrelated change during capture\n")
+            return inventory
+        with mock.patch.object(gate, "_inventory", side_effect=capture_then_change):
+            work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        self.prepare(work, self.exclude(self.claim(), "chat/current.md"))
+
+    def test_relevant_change_during_work_capture_still_blocks(self):
+        original = gate._inventory
+        def capture_then_change(repo, names=()):
+            inventory = original(repo, names)
+            self.write("farm/worker.py", "relevant change during capture\n")
+            return inventory
+        with mock.patch.object(gate, "_inventory", side_effect=capture_then_change):
+            with self.assertRaisesRegex(gate.GateError, "捕获 Work 基线时文件发生变化"):
+                gate.capture_work(self.repo, self.request, "unattended_first_run")
+
+    def test_final_observation_checks_the_reviewed_candidate(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        prepared = self.prepare(work, self.claim())
+        original = gate._current
+        def mutate_on_observation(repo, work, outside_scope=None, **kwargs):
+            if kwargs.get("observations") is not None:
+                self.write("farm/worker.py", "changed during final observation\n")
+            return original(repo, work, outside_scope, **kwargs)
+        with mock.patch.object(gate, "_current", side_effect=mutate_on_observation):
+            with self.assertRaisesRegex(gate.GateError, "独立声明不一致.*farm/worker.py"):
+                gate.complete_delivery(self.repo, work, prepared, self.policy,
+                    [{"name": "fixture", "result": "passed", "evidence": "isolated test"}], [], self.assessment)
+
+    def test_risk_floor_preserves_specific_dependency_doubt(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_change")
+        self.write("farm/worker.py", "pyautogui.click(1, 2)\n")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        assessment = {**self.assessment(None), "impact_scope_complete": False,
+                      "reason": "chat/current.md: unresolved shared configuration dependency"}
+        prepared = gate.prepare_delivery(self.repo, work, claim, self.policy,
+                                         lambda _: assessment, lambda _: {"findings": []})
+        self.assertEqual(prepared["state"], "needs_classification")
+        self.assertIn("chat/current.md", prepared["reason"])
+
+    def test_new_dependency_in_excluded_file_blocks_without_reusing_old_scope(self):
+        self.write("chat/runtime.py", "print('independent chat job')\n")
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        claim = self.exclude(self.claim(), "chat/runtime.py")
+        prepared = self.prepare(work, claim)
+        self.write("chat/runtime.py", "import subprocess\nsubprocess.run(['python3', 'farm/worker.py'])\n")
+        seen = []
+        def assess_latest(material):
+            text = material["outside_material"]["chat/runtime.py"]["worktree"]["text"]
+            seen.append(text)
+            return {**self.assessment(material), "impact_scope_complete": "farm/worker.py" not in text,
+                    "reason": "chat/runtime.py now calls farm/worker.py; dependency must be included"}
+        with self.assertRaisesRegex(gate.GateError, "最终风险复核未完成.*chat/runtime.py"):
+            gate.complete_delivery(self.repo, work, prepared, self.policy,
+                [{"name": "fixture", "result": "passed", "evidence": "isolated test"}], [], assess_latest)
+        self.assertIn("subprocess.run", seen[0])
+        gate._check_candidate(self.repo, work, prepared["candidate"])
+        self.assertNotEqual(gate._digest(gate._outside_material(self.repo, work, prepared["candidate"])),
+                            prepared["risk"]["scope_hash"])
+
+    def test_excluded_content_mutating_during_scope_assessment_is_not_accepted(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        prepared = self.prepare(work, self.exclude(self.claim(), "chat/current.md"))
+        def assessor(material):
+            self.write("chat/current.md", "changed after the classifier captured its evidence\n")
+            return self.assessment(material)
+        with self.assertRaisesRegex(gate.GateError, "范围外核查期间内容变化.*chat/current.md"):
+            gate.complete_delivery(self.repo, work, prepared, self.policy,
+                [{"name": "fixture", "result": "passed", "evidence": "isolated test"}], [], assessor)
+
+    def test_exclusions_without_current_material_cannot_be_classified_complete(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        candidate = gate.create_candidate(self.repo, work, self.exclude(self.claim(), "chat/current.md"))
+        assessor = mock.Mock(side_effect=AssertionError("must not assess missing scope evidence"))
+        risk = gate.classify_candidate(candidate, self.policy, assessor)
+        assessor.assert_not_called()
+        self.assertFalse(risk["assessment_complete"])
+
+    def test_final_observation_rejects_new_dependency_in_excluded_file(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        prepared = self.prepare(work, self.exclude(self.claim(), "chat/current.md"))
+        original = gate._current
+        def mutate_on_observation(repo, work, outside_scope=None, **kwargs):
+            if kwargs.get("observations") is not None:
+                self.write("chat/current.md", "Now invoke farm/worker.py and share its browser session\n")
+            return original(repo, work, outside_scope, **kwargs)
+        with mock.patch.object(gate, "_current", side_effect=mutate_on_observation):
+            with self.assertRaisesRegex(gate.GateError, "最终观测与范围核查版本不一致.*chat/current.md"):
+                gate.complete_delivery(self.repo, work, prepared, self.policy,
+                    [{"name": "fixture", "result": "passed", "evidence": "isolated test"}], [], self.assessment)
+
+    def test_incomplete_exemption_preserves_specific_scope_doubt(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_change")
+        self.write("farm/worker.py", "print('display')\n")
+        claim = self.exclude(self.claim(), "chat/current.md")
+        assessment = {**self.assessment(None), "classification": "review_not_required",
+                      "impact_scope_complete": False, "reason": "chat/current.md: unresolved configuration read"}
+        prepared = gate.prepare_delivery(self.repo, work, claim, self.policy,
+                                         lambda _: assessment, lambda _: {"findings": []})
+        self.assertEqual(prepared["state"], "needs_classification")
+        self.assertIn("chat/current.md", prepared["reason"])
+
+    def test_legacy_work_remains_historical_and_is_not_migrated(self):
+        work = gate.capture_work(self.repo, self.request, "unattended_first_run")
+        old = gate._seal({key: (3 if key == "version" else value) for key, value in work.items()
+                          if key not in ("id", "guards", "engine", "projects")})
+        before = json.dumps(old, sort_keys=True)
+        with self.assertRaisesRegex(gate.GateError, "旧 Work.*不得改写"):
+            gate.create_candidate(self.repo, old, self.claim())
+        self.assertEqual(json.dumps(old, sort_keys=True), before)
 
 
 if __name__ == "__main__":
