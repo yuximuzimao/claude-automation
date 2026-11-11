@@ -210,6 +210,15 @@
     },
     {
       "location_ref": "icecrown-p035",
+      "service_action_id": "a0131",
+      "task_id": 13059,
+      "visit_id": "a0095",
+      "x": 33.1,
+      "y": 37.8,
+      "zone_id": 210
+    },
+    {
+      "location_ref": "icecrown-p035",
       "service_action_id": "a0096",
       "task_id": 13042,
       "visit_id": "a0095",
@@ -278,15 +287,6 @@
       "visit_id": "a0110",
       "x": 28.0,
       "y": 40.0,
-      "zone_id": 210
-    },
-    {
-      "location_ref": "icecrown-p045",
-      "service_action_id": "a0131",
-      "task_id": 13059,
-      "visit_id": "a0129",
-      "x": 33.1,
-      "y": 37.8,
       "zone_id": 210
     },
     {
@@ -1055,7 +1055,7 @@
       "zone_id": 210
     }
   ],
-  "input_fingerprint": "61ac8094308e1d98d54a0a384da66785a48c8d58fa45131c1cac6a974a211d52",
+  "input_fingerprint": "0d9797935e158c17caaf499f9cd1d6096210ac5669a57cd1f2e5d2185c5e2297",
   "issues": [],
   "profile_id": "icecrown-fivebox",
   "spatial_instances": [
@@ -1161,7 +1161,8 @@
     {
       "basis": "canonical_visit_occurrence",
       "cluster_ids": [
-        "objective-a0096"
+        "objective-a0096",
+        "objective-a0131"
       ],
       "instance_id": "visit-a0095",
       "location_ref": "icecrown-p035",
@@ -1208,18 +1209,6 @@
       "visit_id": "a0110",
       "x": 28.0,
       "y": 40.0,
-      "zone_id": 210
-    },
-    {
-      "basis": "canonical_visit_occurrence",
-      "cluster_ids": [
-        "objective-a0131"
-      ],
-      "instance_id": "visit-a0129",
-      "location_ref": "icecrown-p045",
-      "visit_id": "a0129",
-      "x": 33.1,
-      "y": 37.8,
       "zone_id": 210
     },
     {
@@ -2234,7 +2223,7 @@
     "background_layer_count": 0,
     "foreground_service_count": 117,
     "shared_service_override_count": 2,
-    "spatial_instance_count": 96,
+    "spatial_instance_count": 95,
     "target_cluster_count": 113
   },
   "target_clusters": [
@@ -2531,7 +2520,7 @@
         13059
       ],
       "visit_ids": [
-        "a0129"
+        "a0095"
       ]
     },
     {

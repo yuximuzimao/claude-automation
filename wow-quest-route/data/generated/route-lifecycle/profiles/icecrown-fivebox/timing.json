@@ -514,6 +514,16 @@
     },
     {
       "action_ids": [
+        "a0130",
+        "a0137"
+      ],
+      "component": "accept_turnin",
+      "seconds": 58.2,
+      "step_id": "step-06",
+      "visit_id": "a0095"
+    },
+    {
+      "action_ids": [
         "a0100",
         "a0102"
       ],
@@ -555,30 +565,12 @@
     },
     {
       "action_ids": [
-        "a0130"
-      ],
-      "component": "accept_turnin",
-      "seconds": 48.6,
-      "step_id": "step-08",
-      "visit_id": "a0129"
-    },
-    {
-      "action_ids": [
         "a0135"
       ],
       "component": "accept_turnin",
       "seconds": 48.6,
       "step_id": "step-08",
       "visit_id": "a0134"
-    },
-    {
-      "action_ids": [
-        "a0137"
-      ],
-      "component": "accept_turnin",
-      "seconds": 48.6,
-      "step_id": "step-08",
-      "visit_id": "a0136"
     },
     {
       "action_ids": [
@@ -2063,6 +2055,28 @@
       "task_id": 12949
     },
     {
+      "action_id": "a0131",
+      "component": "objective_service",
+      "resolution": {
+        "resolved_inputs": {
+          "accept_turnin_base_seconds_per_stop": 39.0,
+          "accept_turnin_per_task_seconds": 9.6,
+          "combat_seconds_per_mob": 15.0,
+          "fixed_object_seconds_per_character": 7.0,
+          "fixed_service_seconds": 300.0,
+          "party_size": 5,
+          "personal_drop_tail_sigma_multiplier": 1.2,
+          "personal_loot_seconds_per_corpse": 9.0
+        },
+        "rule_kind": "fixed_seconds",
+        "rule_ref": "fixed-service-seconds",
+        "task_id": 13059
+      },
+      "seconds": 300.0,
+      "step_id": "step-06",
+      "task_id": 13059
+    },
+    {
       "action_id": "a0096",
       "component": "objective_service",
       "resolution": {
@@ -2217,28 +2231,6 @@
       "seconds": 420.0,
       "step_id": "step-07",
       "task_id": 13091
-    },
-    {
-      "action_id": "a0131",
-      "component": "objective_service",
-      "resolution": {
-        "resolved_inputs": {
-          "accept_turnin_base_seconds_per_stop": 39.0,
-          "accept_turnin_per_task_seconds": 9.6,
-          "combat_seconds_per_mob": 15.0,
-          "fixed_object_seconds_per_character": 7.0,
-          "fixed_service_seconds": 300.0,
-          "party_size": 5,
-          "personal_drop_tail_sigma_multiplier": 1.2,
-          "personal_loot_seconds_per_corpse": 9.0
-        },
-        "rule_kind": "fixed_seconds",
-        "rule_ref": "fixed-service-seconds",
-        "task_id": 13059
-      },
-      "seconds": 300.0,
-      "step_id": "step-08",
-      "task_id": 13059
     },
     {
       "action_id": "a0133",
@@ -3842,7 +3834,7 @@
       "task_id": 13164
     }
   ],
-  "input_fingerprint": "0e35ed1a63f911e0e66b1ad30433869ae24b0e6981d905e45df63540d03f4ed0",
+  "input_fingerprint": "fd6a0a6b325e471d3d8b8992a96e200dd201e81f83503502961a5773463792e6",
   "issues": [
     {
       "edge_id": "a0001->a0003",
@@ -4545,16 +4537,7 @@
       "zone_id": 210
     },
     {
-      "edge_id": "a0125->a0129",
-      "kind": "map_dimensions_required",
-      "profile_id": "icecrown-fivebox",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-08",
-      "zone_id": 210
-    },
-    {
-      "edge_id": "a0129->a0132",
+      "edge_id": "a0125->a0132",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
       "resolved_by": "legacy_step_baseline",
@@ -4572,16 +4555,7 @@
       "zone_id": 210
     },
     {
-      "edge_id": "a0134->a0136",
-      "kind": "map_dimensions_required",
-      "profile_id": "icecrown-fivebox",
-      "resolved_by": "legacy_step_baseline",
-      "severity": "info",
-      "step_id": "step-08",
-      "zone_id": 210
-    },
-    {
-      "edge_id": "a0136->a0138",
+      "edge_id": "a0134->a0138",
       "kind": "map_dimensions_required",
       "profile_id": "icecrown-fivebox",
       "resolved_by": "legacy_step_baseline",
@@ -6089,15 +6063,17 @@
     },
     {
       "action_id": "a0108",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-07",
       "task_id": 13092
     },
     {
       "action_id": "a0206",
-      "kind": "timing_fivebox_mechanism_pending",
-      "severity": "requirement",
+      "kind": "timing_rule_ref_required",
+      "resolved_by": "legacy_step_baseline",
+      "severity": "info",
       "step_id": "step-14",
       "task_id": 13214
     },
@@ -6219,7 +6195,7 @@
       "severity": "requirement"
     }
   ],
-  "known_seconds": 42570.868,
+  "known_seconds": 42762.993,
   "model_id": "component-wall-clock-v2",
   "point_estimate_complete": false,
   "profile_id": "icecrown-fivebox",
@@ -6503,16 +6479,16 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": 10.6,
+      "center_minutes": 16.57,
       "complete": true,
       "components": {
-        "accept_turnin_seconds": 126.0,
+        "accept_turnin_seconds": 184.2,
         "move_seconds": 0.0,
-        "objective_service_seconds": 510.0,
+        "objective_service_seconds": 810.0,
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 636.0,
+      "known_seconds": 994.2,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
@@ -6521,15 +6497,15 @@
       },
       "range_minutes": [
         3.724,
-        10.6
+        16.57
       ],
       "step_id": "step-06",
-      "title": "白骨女巫预开：先拿骨头任务，再开始大范围杀维库人",
+      "title": "白骨女巫预开 → 地下大厅首访：《瓦古的复仇》",
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 44.573,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 0.0,
@@ -6538,24 +6514,6 @@
         "wait_seconds": 0.0
       },
       "known_seconds": 2674.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
-      "step_id": "step-07",
-      "title": "Jotunheim第一大圈：击杀 + 插旗 + 烧旗 + 囚犯 + 骨头 + 恐怖之水",
-      "unresolved_component_count": 5
-    },
-    {
-      "center_minutes": 11.56,
-      "complete": true,
-      "components": {
-        "accept_turnin_seconds": 213.6,
-        "move_seconds": 0.0,
-        "objective_service_seconds": 480.0,
-        "special_seconds": 0.0,
-        "wait_seconds": 0.0
-      },
-      "known_seconds": 693.6,
       "point_estimate_complete": true,
       "range_basis": {
         "basis": "legacy_step_baseline_residual",
@@ -6563,11 +6521,36 @@
         "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
       },
       "range_minutes": [
+        5.156,
+        44.573
+      ],
+      "step_id": "step-07",
+      "title": "Jotunheim第一大圈：击杀 + 插旗 + 烧旗 + 囚犯 + 骨头 + 恐怖之水",
+      "unresolved_component_count": 0
+    },
+    {
+      "center_minutes": 6.516,
+      "complete": true,
+      "components": {
+        "accept_turnin_seconds": 116.4,
+        "move_seconds": 0.0,
+        "objective_service_seconds": 180.0,
+        "special_seconds": 0.0,
+        "wait_seconds": 0.0
+      },
+      "known_seconds": 390.955,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 94.555,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
         4.87,
-        11.56
+        8.973
       ],
       "step_id": "step-08",
-      "title": "Jotunheim第二短圈 → 白骨女巫后续",
+      "title": "Jotunheim第二短圈：《巫妖王之眼》接→做→交",
       "unresolved_component_count": 0
     },
     {
@@ -6621,8 +6604,8 @@
       "unresolved_component_count": 0
     },
     {
-      "center_minutes": null,
-      "complete": false,
+      "center_minutes": 4.216,
+      "complete": true,
       "components": {
         "accept_turnin_seconds": 116.4,
         "move_seconds": 0.0,
@@ -6630,13 +6613,20 @@
         "special_seconds": 0.0,
         "wait_seconds": 0.0
       },
-      "known_seconds": 116.4,
-      "point_estimate_complete": false,
-      "range_basis": null,
-      "range_minutes": null,
+      "known_seconds": 252.971,
+      "point_estimate_complete": true,
+      "range_basis": {
+        "basis": "legacy_step_baseline_residual",
+        "residual_seconds": 136.571,
+        "source_ref": "data/route-atlas/icecrown-step-timing-overrides.json"
+      },
+      "range_minutes": [
+        3.151,
+        5.806
+      ],
       "step_id": "step-14",
       "title": "瓦哈拉斯首轮：做到《堕落的英雄》→ 暗影拱顶",
-      "unresolved_component_count": 4
+      "unresolved_component_count": 0
     },
     {
       "center_minutes": 13.03,
@@ -7554,9 +7544,9 @@
   ],
   "summary": {
     "error_count": 0,
-    "issue_count": 271,
+    "issue_count": 269,
     "range_model_status": "requirements",
-    "requirement_count": 34,
+    "requirement_count": 32,
     "step_count": 58
   }
 }

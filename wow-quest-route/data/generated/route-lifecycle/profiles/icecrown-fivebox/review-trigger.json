@@ -1,0 +1,47 @@
+{
+  "context_source_ref": null,
+  "diagnoses": [
+    "blocked_unknown"
+  ],
+  "input_fingerprint": "8abb6da4c75d9e7dd0d1aaaa4ecdee5f4d4ed004b07306e58d5177ee8310ba6d",
+  "issues": [
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "availability_route_replay"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "cross_profile_continuity"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_timing"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_xp"
+    },
+    {
+      "kind": "upstream_stage_requirements_for_review",
+      "severity": "requirement",
+      "stage_name": "derived_economy"
+    },
+    {
+      "kind": "review_context_required",
+      "severity": "requirement"
+    }
+  ],
+  "kind": "profile",
+  "model_id": "route-review-trigger-v1",
+  "optimization_failures": [],
+  "optimization_unknowns": [],
+  "profile_id": "icecrown-fivebox",
+  "selection_events": [],
+  "status": "requirements",
+  "target_id": "icecrown-fivebox",
+  "target_version": 4
+}

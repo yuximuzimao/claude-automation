@@ -17,11 +17,11 @@
   "availability": {
     "quest_level": 80,
     "min_level": 77,
-    "pre_any": [
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [
       13092
     ],
-    "pre_all": [],
-    "parent_active": [],
     "exclusive_with": [],
     "required_reputation": null,
     "required_class": [],
@@ -89,6 +89,7 @@
   "guide": [
     "接取：贝索德·菲格。",
     "地下大厅的贝索德·菲格要你扔出他的剑，在受难之环中挑战并杀死伊尔斯卡领主。",
+    "《占命卜运》仍在任务栏中时即可接取《瓦古的复仇》，无需先完成或交付《占命卜运》。首次进入地下大厅时即可完成；击败伊尔斯卡领主后，直接在洞内向贝索德·菲格交付，无需第二次进入地下大厅。",
     "交付：贝索德·菲格。"
   ],
   "fivebox": {
@@ -105,7 +106,6 @@
       "confidence": "verified",
       "supports_fields": [
         "identity",
-        "availability",
         "guide"
       ]
     },
@@ -129,6 +129,18 @@
       "confidence": "verified",
       "supports_fields": [
         "fivebox.status"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-13059-first-hall-20261105",
+      "source_type": "user_live",
+      "source_ref": "用户2026-11-05实跑反馈 + data/journey/current-second-dk.json：Accept13092 → Accept13059 → Complete13059 → Complete13092，证明13059可在13092尚未完成时接取并完成。",
+      "observed_at": "2026-11-05",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "availability",
+        "guide"
       ]
     },
     {

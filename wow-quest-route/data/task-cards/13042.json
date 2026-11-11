@@ -48,6 +48,7 @@
   "guide": [
     "接取：白骨女巫。",
     "约尔达村的白骨女巫要你调查学徒奥斯特基格，弄清楚恐怖博士的计划。 /  / 事成之后，击败学徒奥斯特基格，并回来向女巫汇报。",
+    "地下大厅入口约在冰冠冰川(33,32)，位于任务目标点左上方（西北侧）。",
     "交付：白骨女巫。"
   ],
   "fivebox": {
@@ -100,14 +101,26 @@
       "supports_fields": [
         "presentation.note_override"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-underhalls-entry-20261105",
+      "source_type": "user_live",
+      "source_ref": "用户2026-11-05实跑反馈：确认地下大厅入口约在(33,32)，位于任务目标点左上方（西北侧）",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "同一目标可连续拾取/操作；总体任务进度共享。",
+      "text": "地下大厅入口约(33,32)，位于任务目标点左上方（西北侧）；同一目标可连续拾取/操作。",
       "scope": "all",
-      "source_ref": "2026-09-26 Route Atlas note audit",
-      "reason": "逐任务Presentation审计：删除迁移标记、实跑过程、重复状态和路线设计说明，只保留当前任务执行必要信息。"
+      "source_ref": "2026-11-05 user live confirmation",
+      "reason": "根据用户本次实跑确认补充地下大厅入口坐标与相对方位；保留同一目标连续拾取/操作提示，删除与共享标签重复的描述。"
     }
   }
 }

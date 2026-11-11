@@ -1010,6 +1010,18 @@
         "task_id": 13092
       },
       {
+        "action_id": "a0130",
+        "kind": "min_level",
+        "required_min_level": 77,
+        "resolver": "derived_xp",
+        "task_id": 13059
+      },
+      {
+        "action_id": "a0130",
+        "kind": "once_task_entry_completion_unknown",
+        "task_id": 13059
+      },
+      {
         "action_id": "a0102",
         "kind": "min_level",
         "required_min_level": 77,
@@ -1052,18 +1064,6 @@
         "action_id": "a0128",
         "kind": "once_task_entry_completion_unknown",
         "task_id": 13121
-      },
-      {
-        "action_id": "a0130",
-        "kind": "min_level",
-        "required_min_level": 77,
-        "resolver": "derived_xp",
-        "task_id": 13059
-      },
-      {
-        "action_id": "a0130",
-        "kind": "once_task_entry_completion_unknown",
-        "task_id": 13059
       },
       {
         "action_id": "a0139",
@@ -3597,6 +3597,30 @@
         "task_id": 13092
       },
       {
+        "action_id": "a0130",
+        "checks": [
+          {
+            "kind": "min_level",
+            "required": 77,
+            "resolver": "derived_xp",
+            "status": "deferred"
+          },
+          {
+            "kind": "parent_active",
+            "status": "pass_or_deferred",
+            "task_ids": [
+              13092
+            ]
+          },
+          {
+            "kind": "repeatability",
+            "status": "deferred",
+            "value": "entry_completion_unknown"
+          }
+        ],
+        "task_id": 13059
+      },
+      {
         "action_id": "a0102",
         "checks": [
           {
@@ -3667,30 +3691,6 @@
           }
         ],
         "task_id": 13121
-      },
-      {
-        "action_id": "a0130",
-        "checks": [
-          {
-            "kind": "min_level",
-            "required": 77,
-            "resolver": "derived_xp",
-            "status": "deferred"
-          },
-          {
-            "kind": "pre_any",
-            "status": "pass",
-            "task_ids": [
-              13092
-            ]
-          },
-          {
-            "kind": "repeatability",
-            "status": "deferred",
-            "value": "entry_completion_unknown"
-          }
-        ],
-        "task_id": 13059
       },
       {
         "action_id": "a0139",
@@ -6805,7 +6805,7 @@
     "final_state_known": true,
     "required_entry_locations": []
   },
-  "input_fingerprint": "3796e6ffc580fc8306fe635a390525a95702f8e4926123903da4edee5cab544d",
+  "input_fingerprint": "91cbdf844b90019e987ad1e73207947803467166c3053ca59a14c26bb38c8c60",
   "issues": [
     {
       "kind": "actual_entry_active_tasks_required",

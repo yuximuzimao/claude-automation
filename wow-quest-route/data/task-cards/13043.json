@@ -80,6 +80,7 @@
   },
   "guide": [
     "接取：恐怖博士的著作《制造一个更好的血肉巨人》。",
+    "乘骑位置：与学徒奥斯特基格在同一楼层；从学徒所在位置向左进入恐怖大厅，尼尔盖德在大厅最里面。",
     "登上尼尔盖德并控制它。抵御来自恐惧大厅的居民的攻击，直到恐怖博士现身。 /  / 操纵尼尔盖德杀死恐怖博士，然后返回约尔达村，向白骨女巫复命。",
     "交付：白骨女巫。"
   ],
@@ -122,14 +123,37 @@
       "supports_fields": [
         "fivebox.status"
       ]
+    },
+    {
+      "evidence_id": "evidence-wowpro-horde-13043-nergeld-location",
+      "source_type": "public_reference",
+      "source_ref": "https://www.wow-pro.com/source-code-icecrown-horde/; QID 13043: Go left from the Apprentice Osterkilgr into the Hall of Horrors; mount Nergeld.",
+      "observed_at": null,
+      "version_scope": "WotLK Icecrown Horde route",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide",
+        "presentation.note_override"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-13043-completed-20261105",
+      "source_type": "user_live",
+      "source_ref": "用户2026-11-05实跑：22:54找到尼尔盖德乘骑位置，22:56完成《一加一大于二》。",
+      "observed_at": "2026-11-05 22:54-22:56（用户本地时间）",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "guide"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "学徒奥斯特基格所在楼层，从学徒位置向左进入恐怖大厅；尼尔盖德在大厅最里面，找到后乘骑。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "Wow-Pro Horde Icecrown route QID 13043 + 用户2026-11-05实跑",
+      "reason": "补充乘骑目标相对学徒的位置和进入方向，避免再次在地下大厅内寻找；不修改Route Profile地图点。"
     }
   }
 }

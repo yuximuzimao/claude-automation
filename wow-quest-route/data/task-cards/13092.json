@@ -92,7 +92,7 @@
     "交付：白骨女巫。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "not_shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -119,14 +119,25 @@
       "supports_fields": [
         "rewards"
       ]
+    },
+    {
+      "evidence_id": "evidence-user-live-13092-fivebox-20261105",
+      "source_type": "user_live",
+      "source_ref": "用户2026-11-05实跑反馈：五开不共享。",
+      "observed_at": null,
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
+      ]
     }
   ],
   "presentation": {
     "note_override": {
-      "text": "",
+      "text": "本段不必强行凑满15个维库人的徽记；后续若顺路遇到维库人，再继续拾取即可，不要为此专门停留刷怪或绕路。",
       "scope": "all",
-      "source_ref": "docs/archive/generated/route-atlas/workbench-routes.json",
-      "reason": "机械迁移确认当前正式workbench没有可归属到该任务的独立备注；显式保持为空。"
+      "source_ref": "用户2026-11-05实跑反馈",
+      "reason": "当前经过时不要求完成全部收集；保留后续顺路补齐的机会，避免为此额外停留或绕路。"
     }
   }
 }

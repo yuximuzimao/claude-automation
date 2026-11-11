@@ -46,7 +46,7 @@
     "交付：残忍的亚纳尔。"
   ],
   "fivebox": {
-    "status": "pending"
+    "status": "shared"
   },
   "timing_rule_ref": null,
   "evidence": [
@@ -72,6 +72,17 @@
       "confidence": "verified",
       "supports_fields": [
         "rewards"
+      ]
+    },
+    {
+      "evidence_id": "evidence-user-live-13214-fivebox-20261105",
+      "source_type": "user_live",
+      "source_ref": "用户2026-11-05实跑反馈：五开共享。",
+      "observed_at": "2026-11-05",
+      "version_scope": "TitanReforged-Wotlk-ChinaRegion 3.80.2 / 时光服",
+      "confidence": "verified",
+      "supports_fields": [
+        "fivebox.status"
       ]
     }
   ],

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "profile_id": "icecrown-fivebox",
-  "version": 3,
+  "version": 4,
   "status": "draft",
   "scope": {
     "route_scope": "冰冠冰川",
@@ -1333,6 +1333,26 @@
       "action_id": "a0095"
     },
     {
+      "kind": "accept",
+      "task_id": 13059,
+      "location_ref": "icecrown-p035",
+      "npc_name": "贝索德·菲格",
+      "action_id": "a0130"
+    },
+    {
+      "kind": "objective",
+      "task_id": 13059,
+      "location_ref": "icecrown-p035",
+      "action_id": "a0131"
+    },
+    {
+      "kind": "turnin",
+      "task_id": 13059,
+      "location_ref": "icecrown-p035",
+      "npc_name": "贝索德·菲格",
+      "action_id": "a0137"
+    },
+    {
       "kind": "objective",
       "task_id": 13042,
       "location_ref": "icecrown-p035",
@@ -1491,24 +1511,6 @@
     },
     {
       "kind": "location",
-      "location_ref": "icecrown-p045",
-      "action_id": "a0129"
-    },
-    {
-      "kind": "accept",
-      "task_id": 13059,
-      "location_ref": "icecrown-p045",
-      "npc_name": "贝索德·菲格",
-      "action_id": "a0130"
-    },
-    {
-      "kind": "objective",
-      "task_id": 13059,
-      "location_ref": "icecrown-p045",
-      "action_id": "a0131"
-    },
-    {
-      "kind": "location",
       "location_ref": "icecrown-p046",
       "action_id": "a0132"
     },
@@ -1529,18 +1531,6 @@
       "location_ref": "icecrown-p047",
       "npc_name": "白骨女巫",
       "action_id": "a0135"
-    },
-    {
-      "kind": "location",
-      "location_ref": "icecrown-p048",
-      "action_id": "a0136"
-    },
-    {
-      "kind": "turnin",
-      "task_id": 13059,
-      "location_ref": "icecrown-p048",
-      "npc_name": "贝索德·菲格",
-      "action_id": "a0137"
     },
     {
       "kind": "location",
@@ -4771,7 +4761,7 @@
     },
     {
       "step_id": "step-06",
-      "title": "白骨女巫预开：先拿骨头任务，再开始大范围杀维库人",
+      "title": "白骨女巫预开 → 地下大厅首访：《瓦古的复仇》",
       "summary": null,
       "action_ids": [
         "a0090",
@@ -4780,6 +4770,9 @@
         "a0093",
         "a0094",
         "a0095",
+        "a0130",
+        "a0131",
+        "a0137",
         "a0096",
         "a0097",
         "a0098",
@@ -4812,22 +4805,17 @@
     },
     {
       "step_id": "step-08",
-      "title": "Jotunheim第二短圈 → 白骨女巫后续",
+      "title": "Jotunheim第二短圈：《巫妖王之眼》接→做→交",
       "summary": null,
       "action_ids": [
         "a0125",
         "a0126",
         "a0127",
         "a0128",
-        "a0129",
-        "a0130",
-        "a0131",
         "a0132",
         "a0133",
         "a0134",
-        "a0135",
-        "a0136",
-        "a0137"
+        "a0135"
       ]
     },
     {
@@ -6071,17 +6059,6 @@
           "mode": "fly"
         }
       },
-      "icecrown-p045": {
-        "display_name": "地下大厅·贝索德·菲格",
-        "x": 33.1,
-        "y": 37.8,
-        "phase": "ice08",
-        "transport": "fly",
-        "incoming_movement": {
-          "kind": "self_move",
-          "mode": "fly"
-        }
-      },
       "icecrown-p046": {
         "display_name": "巫妖王之眼",
         "x": 26.2,
@@ -6097,17 +6074,6 @@
         "display_name": "白骨女巫",
         "x": 32.5,
         "y": 43.0,
-        "phase": "ice08",
-        "transport": "fly",
-        "incoming_movement": {
-          "kind": "self_move",
-          "mode": "fly"
-        }
-      },
-      "icecrown-p048": {
-        "display_name": "地下大厅·贝索德·菲格",
-        "x": 33.1,
-        "y": 37.8,
         "phase": "ice08",
         "transport": "fly",
         "incoming_movement": {
@@ -8452,6 +8418,11 @@
       "date": "2026-10-19",
       "kind": "timing_service_overlap",
       "summary": "按第二组DK实跑确认两组同批任务采用包含关系：步骤19以《致命的剧毒》为主体覆盖《天灾的战术》《保卫前线基地》；步骤21以《天灾石》为主体覆盖《净化天灾城》《永不安息的亡者》。"
+    },
+    {
+      "date": "2026-11-05",
+      "kind": "route_order_correction",
+      "summary": "按实跑顺序将《瓦古的复仇》（13059）的接/做/交移至第一次进入地下大厅的visit，完成后立即在洞内交付；删除后续重复大厅往返。步骤14收束为《巫妖王之眼》（13121）接/做/交。"
     }
   ]
 }
