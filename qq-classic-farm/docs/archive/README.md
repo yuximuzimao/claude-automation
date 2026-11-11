@@ -23,3 +23,5 @@
 - neat/2026-11-10-fixed-harvest-record-validation.md：17:46收种、实种记录写完即验、固定点收获及本阶段验证边界。
 
 - neat/2026-11-11-daily-share-quota-fixes.md：收种与提醒、双按钮日常修复、分享返回及领奖防误点、共享100次完整验证、下一计划与NEAT。
+
+- neat/2026-11-11-harvest-and-single-run-tasks.md：自然成熟收种、黄金芽增量、两次单次任务授权与验证边界。

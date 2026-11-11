@@ -35,7 +35,7 @@
 - ../scripts/farm_daily_clicks.py / ../tests/test_friend_sweep_and_harvest.py：日常共享输入与单/双按钮交互验证。
 - ../tests/test_share_once.py：分享流程及失败停止的无输入测试。
 - ../tests/test_batch_m1.py：CGEvent点击与分享Unicode输入保护的编译验证测试。
-- ../scripts/farm_daily_task_once.py：互动当前首位可互动好友并领取任务书奖励；整轮中先执行它，再做好友全扫。
+- ../scripts/farm_daily_task_once.py：独立每日任务领奖工具；使用条件见operation-sop。
 - ../scripts/farm_daily_fertilizer_reward.py：领取每日免费化肥。
 - mischief.md：好友种草/放虫操作规则与共享次数定义。
 - ../scripts/farm_mischief_once.py / ../scripts/farm_path_drag.swift：独立种草/放虫流程与连续路径拖动。

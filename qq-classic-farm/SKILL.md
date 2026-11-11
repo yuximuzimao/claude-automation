@@ -12,7 +12,7 @@
 
 - **QQ：保持现有 PC 独立脚本可用。** 按用户当前授权操作；确有需要时可以继续开发 QQ 的独立功能。
 - **微信：真机封存。** `data/wechat-live-status.txt` 为 `sealed`。未经用户明确恢复，不打开、不登录、不进行田内操作，也不做微信真机补采。代码、坐标和资料保留。
-- **旧 Runner 已彻底退役。** 不恢复 Planner → RUN_PLAN → Runner、自恢复续跑、无人值守调度或旧库存状态模型。现役执行以独立脚本为单位，不另建通用执行器。
+- **旧 Runner 已彻底退役。** 不恢复 Planner → RUN_PLAN → Runner、自恢复续跑或旧库存状态模型；用户授权的单次定时执行边界见CURRENT。现役执行以独立脚本为单位，不另建通用执行器。
 - **当前种植计划只有一份：** `data/operation-plan.json`。不再建立下一轮副本或多轮预排计划。
 - QQ 自动化不等于无人监管运行；没有用户明确要求，不创建定时执行、自动重试或后台续跑。
 
@@ -41,7 +41,7 @@
 - 土地中心以 `data/ui-layout.json` 中用户确认的显式点为准；拟合公式只作近似。候选点不是正式坐标。
 - 坐标核对只在用户明确要求时进行，并且只标点、截图和整理资料；不点击收获、种植、施肥、购买、领奖或分享等有副作用的按钮。
 - 好友连续互动每位只识别底部小条并点击一次。双按钮只点击其中一个识别到的按钮中心；点击后不再检查重排后的单按钮，直接进入下一位好友。
-- 每日任务脚本复用好友全扫的实时按钮中心（单/双按钮均适用），先互动当前首位可互动好友并领奖；游戏会把剩余可互动好友自动前移，随后好友全扫继续处理，不需要独立纯领奖脚本。
+- 日常脚本选择以operation-sop为准；每日任务领奖工具保留供明确单独请求时使用，例行安排不调用。
 - 真机操作遇到账号安全、重新登录或授权提示立即停止，交由用户处理；不得盲目重试。
 
 ## ENTRY MAP
@@ -74,7 +74,7 @@
 | `assets/ui/share/` | 分享领取文字模板与来源；点击前拒绝同位置分享按钮 |
 | `scripts/farm_daily_clicks.py` / `tests/test_friend_sweep_and_harvest.py` | 日常共享输入与单/双按钮交互验证 |
 | `scripts/farm_share_once.py` | QQ固定联系人分享、领奖并回土地；流程与验收边界见gameplay-rules「每日首次分享」 |
-| `scripts/farm_daily_task_once.py` | 互动首位可互动好友 + 每日任务领奖；整轮中先于好友全扫执行 |
+| `scripts/farm_daily_task_once.py` | 互动首位可互动好友 + 每日任务领奖；仅明确单独请求时使用 |
 | `scripts/farm_daily_fertilizer_reward.py` | 每日免费化肥 |
 | `docs/mischief.md` | 好友种草/放虫流程、共享次数与验收入口 |
 | `scripts/farm_mischief_once.py` / `scripts/farm_path_drag.swift` | 好友种草/放虫独立流程与连续拖动工具 |
@@ -83,4 +83,4 @@
 | `tests/test_share_once.py` / `tests/test_batch_m1.py` | 分享流程无输入测试与CGEvent输入保护测试 |
 | `scripts/farm_hamster_once.py` | 仓鼠识别与购买 |
 | `../docs/reminders.md` | 共享 Mac 提醒事项接入协议 |
-| `docs/archive/README.md` | 历史阶段索引 |
+| `docs/archive/README.md` | 历史阶段索引（含收种与单次任务归档） |

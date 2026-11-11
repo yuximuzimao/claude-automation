@@ -8,7 +8,7 @@
 
 - **QQ：** 保留现有 PC 独立脚本，按用户授权操作；需要时可以继续开发具体功能。
 - **微信：** `data/wechat-live-status.txt` 保持 `sealed`。保留代码和资料，不进行真机操作，直到用户明确恢复。
-- **旧 Runner：** 已退役并清理，不恢复通用执行器、自恢复续跑或无人值守调度。
+- **旧 Runner：** 已退役并清理，不恢复通用执行器或自恢复续跑；单次定时授权见CURRENT。
 - **规划资料：** 保留种子数据库、土地等级与种植规则、收益和经验计算。
 - **提醒：** 每次实际种植完成后，更新已知种子库存并创建收菜提醒。
 
@@ -46,7 +46,7 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 - `scripts/farm_radish_xp.py`：QQ 白萝卜种植经验循环。默认 5 轮，每轮固定 `种 24 → 普通肥 → 有机肥 → 收获`，合计消耗 120 颗，理论种植经验1,200（实际受当天游戏上限影响）；不再每轮进商店，也不等待自然成熟。
 - `scripts/farm_qq_round.py`：QQ 小程序已经打开后的薄串联入口。根据显式 `--field-state`、`--radish-rounds` 与日常开关组合步骤，默认萝卜0轮、日常不执行；选择条件见操作SOP。它不负责打开/关闭小程序，也不做 Agent 视觉复核。
 - `scripts/farm_share_once.py`：QQ固定联系人分享、领奖并回土地；默认只打印计划，`--execute`执行。发送后按原进程返回农场，流程及验收要求见[玩法规则](docs/gameplay-rules.md#每日首次分享)，尚未接入整轮。
-- `scripts/farm_daily_task_once.py`：独立每日任务脚本，先互动当前排在首位的可互动好友，再领取任务书奖励；整轮中先执行它，后续好友全扫利用可互动好友自动前移的排序继续处理。
+- `scripts/farm_daily_task_once.py`：独立每日任务领奖工具；仅明确单独请求时使用，例行选择见操作SOP。
 - `scripts/farm_daily_fertilizer_reward.py`：领取礼包商城每日免费化肥。
 - `scripts/farm_mischief_once.py`：好友种草/放虫，按共享余额结束；默认无输入，`--execute`连续处理至共享余额双0，见[专项流程](docs/mischief.md)。
 - `scripts/farm_friend_sweep.py`：连续拜访好友；识别到「一键偷取」或「一键务农」后直接点该按钮实际中心，首次无按钮时回家。
