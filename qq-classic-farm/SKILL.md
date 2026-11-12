@@ -10,13 +10,13 @@
 
 具体工具、完整参数、成功返回值、异常截图/关闭和未实现入口，统一见 `docs/execution-tools.md`。进入实际操作前按该页区分已具备能力与缺口，不临时选择通用桌面工具替代缺失流程。
 
-用户明确要求定时收种与自动安排下一轮时，先读 `docs/automation-trial.md` 的有界试验规则；当前轮次只见CURRENT。
+用户明确要求定时收种、定时日常或自动安排下一轮时，先读 `docs/automation-trial.md` 的有界试验规则；当前轮次只见CURRENT。
 
 ## 当前运行边界
 
 - **QQ：保持现有 PC 独立脚本可用。** 按用户当前授权操作；确有需要时可以继续开发 QQ 的独立功能。
 - **微信：真机封存。** `data/wechat-live-status.txt` 为 `sealed`。未经用户明确恢复，不打开、不登录、不进行田内操作，也不做微信真机补采。代码、坐标和资料保留。
-- **旧 Runner 已彻底退役。** 不恢复 Planner → RUN_PLAN → Runner、自恢复续跑或旧库存状态模型；用户授权的单次定时执行边界见CURRENT。现役执行以独立脚本为单位，不另建通用执行器。
+- **旧 Runner 已彻底退役。** 不恢复 Planner → RUN_PLAN → Runner、自恢复续跑或旧库存状态模型；用户授权的定时与有限续排边界见CURRENT。现役执行以独立脚本为单位，不另建通用执行器。
 - **当前种植计划只有一份：** `data/operation-plan.json`。不再建立下一轮副本或多轮预排计划。
 - QQ 自动化不等于无人监管运行；没有用户明确要求，不创建定时执行、自动重试或后台续跑。
 
@@ -57,8 +57,9 @@
 | `scripts/farm_inventory.py` / `tests/test_inventory.py` | QQ完整库存捕获和校验回写入口及无输入测试 |
 | `assets/ui/warehouse/` | 仓库标题/种子页模板及真实截图来源 |
 | `docs/execution-tools.md` | 具体工具调用、返回判据、诊断/退出与缺失能力 |
-| `docs/automation-trial.md` | 两轮medium自动规划与续排试验边界 |
+| `docs/automation-trial.md` | 连续medium自动规划与续排试验边界 |
 | `docs/archive/neat/2026-11-12-continuous-farm-trial.md` | 本阶段收种、库存入口和有限续排试验归档 |
+| `docs/archive/neat/2026-11-12-daily-zero-review-closeout.md` | 日常灰零、Review收敛及连续试跑阶段归档 |
 | `docs/CURRENT.md` | 当前平台状态、最近现场与现行计划 |
 | `data/wechat-live-status.txt` | 微信真机封存开关 |
 | `tasks/todo.md` | QQ 可按需开发的功能与条件性补采 |
@@ -95,6 +96,7 @@
 | `docs/mischief.md` | 好友种草/放虫流程、共享次数与验收入口 |
 | `scripts/farm_mischief_once.py` / `scripts/farm_path_drag.swift` | 好友种草/放虫独立流程与连续拖动工具 |
 | `assets/ui/mischief/` / `tests/test_mischief_once.py` | 用户截图控件模板、来源及无输入测试 |
+| `assets/ui/mischief/qq-disabled-menu.png` | 真实双灰零回归样本 |
 | `scripts/farm_friend_sweep.py` | 好友连续互动，按识别到的实际按钮中心点击 |
 | `tests/test_share_once.py` / `tests/test_batch_m1.py` | 分享流程无输入测试与CGEvent输入保护测试 |
 | `scripts/farm_hamster_once.py` | 仓鼠识别与购买 |

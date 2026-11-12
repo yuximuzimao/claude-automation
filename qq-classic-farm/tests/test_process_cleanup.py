@@ -83,3 +83,44 @@ def test_start_windows(clock, allowed):
 def test_next_allowed_rolls_over_midnight():
     at=datetime.fromisoformat('2026-11-11T23:51:00+08:00')
     assert next_allowed_start(at,[0,8,12,16,20]).isoformat()=='2026-11-12T01:01:00+08:00'
+
+
+def test_stdin_payload_success_does_not_release(monkeypatch):
+    import farm_process
+    monkeypatch.setattr(farm_process,'release_mouse',lambda:pytest.fail('successful action must not release'))
+    result=run_action([sys.executable,'-c','import sys; print(sys.stdin.read())'],timeout=3,input='{"points": [1,2]}')
+    assert result.returncode==0 and result.stdout.strip()=='{"points": [1,2]}'
+
+
+def test_stdin_nonzero_releases_once_and_reports_failure(monkeypatch):
+    import farm_process
+    releases=[]
+    monkeypatch.setattr(farm_process,'release_mouse',lambda:releases.append(True))
+    result=run_action([sys.executable,'-c','import sys; sys.stdin.read(); sys.exit(2)'],timeout=3,input='{}')
+    assert result.returncode==2 and releases==[True]
+    def fail():raise farm_process.ActionCleanupError('INPUT_RELEASE_FAILED: fixture')
+    monkeypatch.setattr(farm_process,'release_mouse',fail)
+    with pytest.raises(farm_process.ActionCleanupError,match='INPUT_RELEASE_FAILED'):
+        run_action([sys.executable,'-c','import sys; sys.exit(2)'],timeout=3,input='{}')
+
+
+@pytest.mark.parametrize('signum', [signal.SIGINT, signal.SIGTERM])
+def test_cancel_during_popen_assignment_reaps_child(tmp_path,monkeypatch,signum):
+    import farm_process
+    real_popen=subprocess.Popen
+    children=[]; releases=[]
+    def launch(*args,**kwargs):
+        child=real_popen(*args,**kwargs);children.append(child)
+        os.kill(os.getpid(),signum)
+        return child
+    monkeypatch.setattr(farm_process.subprocess,'Popen',launch)
+    monkeypatch.setattr(farm_process,'release_mouse',lambda:releases.append(True))
+    try:
+        with pytest.raises(farm_process.ActionCancelled,match='ACTION_CANCELLED_SIGNAL'):
+            run_action([sys.executable,'-c','import time;time.sleep(60)'],timeout=3,input='{}')
+        assert len(children)==1 and children[0].returncode is not None
+        assert releases==[True]
+    finally:
+        for child in children:
+            if child.poll() is None:child.kill()
+            child.wait(timeout=5)

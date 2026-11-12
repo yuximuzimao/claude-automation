@@ -25,21 +25,38 @@ def release_mouse():
         raise ActionCleanupError("INPUT_RELEASE_FAILED: " + (result.stderr.strip() or result.stdout.strip()))
 
 
-def run_action(argv, *, timeout):
+def run_action(argv, *, timeout, input=None):
     # Nested scripts inherit this process group; they must not detach children.
     env = dict(os.environ, **{MANAGED_ENV: "1"})
-    proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                            text=True, start_new_session=True, env=env)
+    proc = None
+    cancelled = None
     previous = {}
     release_needed = True
 
     def cancel(signum, _frame):
-        raise ActionCancelled(f"ACTION_CANCELLED_SIGNAL_{signum}")
+        nonlocal cancelled
+        cancelled = signum
+        # Never unwind Popen before its process handle has been assigned.
+        # If already running, stop the group so communicate wakes promptly.
+        if proc is not None:
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
 
     try:
         for sig in (signal.SIGINT, signal.SIGTERM):
             previous[sig] = signal.signal(sig, cancel)
-        stdout, stderr = proc.communicate(timeout=timeout)
+        if cancelled is not None:
+            raise ActionCancelled(f"ACTION_CANCELLED_SIGNAL_{cancelled}")
+        proc = subprocess.Popen(argv, stdin=subprocess.PIPE if input is not None else None,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                text=True, start_new_session=True, env=env)
+        if cancelled is not None:
+            raise ActionCancelled(f"ACTION_CANCELLED_SIGNAL_{cancelled}")
+        stdout, stderr = proc.communicate(input=input, timeout=timeout)
+        if cancelled is not None:
+            raise ActionCancelled(f"ACTION_CANCELLED_SIGNAL_{cancelled}")
         release_needed = proc.returncode != 0
         return subprocess.CompletedProcess(argv, proc.returncode, stdout, stderr)
     finally:
@@ -48,16 +65,17 @@ def run_action(argv, *, timeout):
         for sig in previous:
             signal.signal(sig, signal.SIG_IGN)
         try:
-            try:
-                os.killpg(proc.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-            proc.communicate()
-            if release_needed:
+            if proc is not None:
                 try:
-                    release_mouse()
-                except (OSError, subprocess.SubprocessError) as exc:
-                    raise ActionCleanupError(f"INPUT_RELEASE_FAILED: {exc}") from exc
+                    os.killpg(proc.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                proc.communicate()
+                if release_needed:
+                    try:
+                        release_mouse()
+                    except (OSError, subprocess.SubprocessError) as exc:
+                        raise ActionCleanupError(f"INPUT_RELEASE_FAILED: {exc}") from exc
         finally:
             for sig, handler in previous.items():
                 signal.signal(sig, handler)

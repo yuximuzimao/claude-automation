@@ -21,7 +21,7 @@
 - ../tests/test_home_check.py：首页边界测试。
 - ../tests/check_home_screenshots.py / ../tests/home-screenshot-corpus.json：本地已存截图回放与校验清单。
 
-- automation-trial.md：两轮medium自动规划与续排试验操作边界。
+- automation-trial.md：连续medium收种与日常续排试验操作边界。
 - inventory-sop.md：QQ仓库捕获、AI读图、库存校验回写的完整操作。
 - ../data/.inventory-apply.lock：库存文件提交锁。
 - ../scripts/farm_inventory.py / ../tests/test_inventory.py：库存入口与测试。
@@ -50,6 +50,7 @@
 - ../scripts/farm_daily_fertilizer_reward.py：领取每日免费化肥。
 - mischief.md：好友种草/放虫操作规则与共享次数定义。
 - ../scripts/farm_mischief_once.py / ../scripts/farm_path_drag.swift：独立种草/放虫流程与连续路径拖动。
+- ../assets/ui/mischief/qq-disabled-menu.png：真实双灰零回归样本。
 - ../assets/ui/mischief/：操作图标、成熟提示与零次数模板，sources.json记录来源。
 - ../tests/test_mischief_once.py：分支、停止、路线与原生无输入验证。
 - ../scripts/farm_friend_sweep.py 与 ../assets/ui/friends/：连续拜访好友，点击实时识别到的偷取/务农按钮中心。
@@ -71,6 +72,8 @@
 - ../data/operation-plan.json：唯一当前种植计划。
 
 ## 历史
+
+- archive/neat/2026-11-12-daily-zero-review-closeout.md：日常灰零与取消修正、Review范围收敛、库存核对及连续试跑授权。
 
 - archive/neat/2026-11-12-continuous-farm-trial.md：本阶段有限续排、库存入口及收尾纠偏记录。
 - archive/README.md：阶段归档索引。

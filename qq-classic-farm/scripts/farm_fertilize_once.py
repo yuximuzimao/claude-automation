@@ -140,7 +140,7 @@ def capture_region(canvas, region):
             return np.asarray(image.convert("L"), dtype=np.float32)
 
 
-def click_batch(helper, mode, target, actions, *, wechat_main=False, qq_share=False):
+def click_batch(helper, mode, target, actions, *, wechat_main=False, qq_share=False, managed=False):
     if mode == "--execute" and target["owner"] in ("微信", "WeChat"):
         require_wechat_live()
     command = [str(helper), mode]
@@ -148,11 +148,12 @@ def click_batch(helper, mode, target, actions, *, wechat_main=False, qq_share=Fa
         command.append("--wechat-main")
     if qq_share:
         command.append("--qq-share")
-    result = subprocess.run(
-        command,
-        input=json.dumps({**target, "actions": actions}),
-        text=True, capture_output=True, timeout=5,
-    )
+    payload = json.dumps({**target, "actions": actions})
+    if managed and mode == "--execute":
+        from farm_process import run_action
+        result = run_action(command, input=payload, timeout=5)
+    else:
+        result = subprocess.run(command, input=payload, text=True, capture_output=True, timeout=5)
     reply = json.loads(result.stdout)
     if not isinstance(reply, dict):
         raise FertilizerStop("UNEXPECTED_CLICK_HELPER_RESULT")

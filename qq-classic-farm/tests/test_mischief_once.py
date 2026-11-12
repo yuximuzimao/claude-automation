@@ -100,3 +100,61 @@ def test_full_run_continues_past_first_friend_until_shared_zero():
     assert progress['friend_visit'] == 4
     assert progress['grass_gestures'] == 4 and progress['bug_gestures'] == 3
     assert events[-1] == ('home',)
+
+
+@pytest.mark.parametrize('names', [('grass',), ('bug',), ('grass','bug')])
+def test_disabled_zero_buttons_are_never_actionable(names):
+    from farm_mischief_once import MenuReader
+    from PIL import Image
+    reader=MenuReader()
+    image=Image.new('RGB',(400,160),(220,210,180))
+    for i,name in enumerate(names):
+        x=80+i*108
+        image.paste(Image.fromarray(reader.templates[name+'-gray']),(x,65))
+        image.paste(Image.fromarray(reader.templates['zero-badge']),(x+9,36))
+    result=reader.read(image)
+    assert result['state']=='exhausted'
+    assert result['actions']=={}
+
+@pytest.mark.parametrize('name', ['grass','bug'])
+def test_enabled_button_remains_actionable(name):
+    from farm_mischief_once import MenuReader
+    from PIL import Image
+    reader=MenuReader()
+    image=Image.new('RGB',(250,160),(220,210,180))
+    image.paste(Image.fromarray(reader.templates[name]),(80,65))
+    assert reader.read(image)['state']=='actionable'
+
+
+def test_real_disabled_menu_regression():
+    from farm_mischief_once import MenuReader
+    from PIL import Image
+    with Image.open(ROOT/'assets/ui/mischief/qq-disabled-menu.png') as image:
+        result=MenuReader().read(image)
+    assert result == {'state':'exhausted','actions':{},'shared_remaining':0}
+
+
+def test_drag_uses_managed_input_and_never_retries(monkeypatch):
+    import farm_mischief_once as farm
+    calls=[]
+    def managed(argv,**kwargs):
+        calls.append((argv,kwargs))
+        raise farm.ActionCancelled('ACTION_CANCELLED_SIGNAL_15')
+    monkeypatch.setattr(farm,'run_action',managed)
+    with pytest.raises(farm.ActionCancelled):farm.drag_once(Path('/fake/helper'),{'points': [[1,2]]})
+    assert len(calls)==1
+    assert calls[0][1]['timeout']==20
+    assert json.loads(calls[0][1]['input'])=={'points': [[1,2]]}
+
+
+def test_managed_click_keeps_protocol_checks(monkeypatch):
+    import farm_process
+    import farm_fertilize_once as clicks
+    from types import SimpleNamespace
+    calls=[]
+    def run(argv,**kwargs):
+        calls.append((argv,kwargs))
+        return SimpleNamespace(returncode=0,stdout='{"status":"clicks_sent_unverified","click_count":1}')
+    monkeypatch.setattr(farm_process,'run_action',run)
+    clicks.click_batch('/fake/helper','--execute',{'owner':'QQ小程序'},[{'x':1,'y':2}],managed=True)
+    assert len(calls)==1 and json.loads(calls[0][1]['input'])['actions']==[{'x':1,'y':2}]

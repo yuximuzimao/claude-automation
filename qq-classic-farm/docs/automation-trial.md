@@ -1,6 +1,6 @@
-# 两轮自动规划与续排试验
+# 连续运行与续排试验
 
-2026-11-11用户授权QQ两轮medium试验；当前轮次/排期见CURRENT。最多自动执行两轮，第1轮成功后续排第2轮ACTIVE；第2轮成功后只保存第3轮候选PAUSED，等待用户决定是否测试low。未完成种植计划/排期校验的旧试跑不计入连续成功次数；实际计数只见CURRENT。固定gpt-6.1-terra、medium，不自行降档，不修改独立日常任务。
+用户2026-11-12最新授权两个任务都续排测试，覆盖原两轮及日常单次限制。从下一次执行起各试跑3次，分别计数，当前计数与排期只见CURRENT。固定gpt-6.1-terra/medium。每轮完整成功后仅续排下一次；异常停止、不重试。完成各自3次后暂停对应任务，不自行降档。
 
 ## 排期与桌面边界
 
@@ -44,13 +44,13 @@ CURRENT或pending要求核清仓鼠购买时，转[操作SOP§6](operation-sop.m
 4. 使用购买后最新库存，按操作SOP§4“制定和校验唯一计划”的Python文件处理及校验入口更新operation-plan.json，不提前扣未来库存。活动种子优先、同批次长一致、优先单种满田；具体种子与数量只读取CURRENT和唯一计划。已有库存数量增加只更新数量；新增种子需处理下一次重开后的顺序核对标记。计划读回核对名称/数量/库存/占地/页槽，并做不带--execute的整轮校验。若新种子可能改变重开顺序，计划标记为待重开核对，下一任务开窗后必须先核对，不把临时末尾顺序称为已验证稳定顺序。
 5. 其它种子选择不明确、活动状态未知、库存更新失败、提醒未核验或关闭失败均不算完整成功、不自动续排。失败保留已完成边界，无自动重试/现场改代码。
 
-## 续排及两轮验收
+## 续排与验收
 
 只有上述收尾完成才通过automation_update更新同一任务qq-11-11-21-13，不创建并行收种任务，不直接改TOML或数据库。保留projectId/local/gpt-6.1-terra/medium；单次COUNT=1。电脑本地目标时间先用farm_process校验，再完整转UTC生成规则，包含跨日；应用排期显示核对电脑本地时刻，提示词只引用目标和现役入口。批次、实种记录、库存、计划和轮次只更新CURRENT及各数据owner；提示词保持目标和入口引用，不复制这些字段，也不继承旧批次命令。
 
-第1轮之后更新第2轮ACTIVE，第2轮之后更新第3轮候选PAUSED。读回实际配置和next_run_at并转换本地时间核对；PAUSED无next_run_at正常，候选规则离线核对，不宣称验证了第3轮真实触发。工具失败或读回不一致则暂停收种并报告，不创建重复任务。
+收种每轮成功后按本批实际种植时间计算下一轮；本次试验未满3次则更新下一轮ACTIVE，满3次后仅保存下一候选PAUSED。读回实际配置和next_run_at并转换本地时间核对；PAUSED无next_run_at正常，候选规则离线核对，不宣称验证了第3轮真实触发。工具失败或读回不一致则暂停收种并报告，不创建重复任务。
 
-CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒UID、任务ID/时间/状态及成功计数。新种子顺序仅临时确认时该项不能提前记完整通过，待下一次重开核实后补齐；连续两次完整通过再请用户评估low，不自行切换。日常任务保持独立，原每日范围不变；共享开窗保护修复照常生效。
+CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒UID、任务ID/时间/状态及成功计数。新种子顺序仅临时确认时该项不能提前记完整通过，待下一次重开核实后补齐；本次3次完整通过后再请用户评估low，不自行切换。日常任务保持独立，原每日范围不变；共享开窗保护修复照常生效。
 
 ## 自动任务工具调用与读回
 
@@ -58,15 +58,19 @@ CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒U
 
 1. 从CURRENT取收种任务ID，通过终端`python3.13`的`tomllib`读取`/Users/chat/.codex/automations/<id>/automation.toml`，保存完整现有字段；应用侧用`automation_update(mode="view", id=...)`查看。仅更新原收种任务，不触碰独立日常。
 2. 在Codex用`functions.exec`从`ALL_TOOLS`查找`automation_update`的实际工具名/参数说明（当前为`mcp__codex_app__automation_update`），再调用`tools.<实际工具名>`。工具不可用即停止本次续排，不能改TOML/SQLite代替。
-3. update参数包含`mode="update"`、id、kind、name、prompt、status、rrule、model、reasoningEffort、executionEnvironment、projectId；从现有配置转换reasoning_effort/execution_environment/target.project_id，保留其他已配置字段。name可显示排期日期；prompt只保留目标和现役入口。轮次、实种路径、计划、计数写CURRENT，不再复制到prompt。ACTIVE/PAUSED按两轮边界设置，不从旧prompt照搬历史批次。
+3. update参数包含`mode="update"`、id、kind、name、prompt、status、rrule、model、reasoningEffort、executionEnvironment、projectId；从现有配置转换reasoning_effort/execution_environment/target.project_id，保留其他已配置字段。name可显示排期日期；prompt只保留目标和现役入口。轮次、实种路径、计划、计数写CURRENT，不再复制到prompt。ACTIVE/PAUSED按本页当前试验边界设置，不从旧prompt照搬历史批次。
 4. 用Python `datetime`与`zoneinfo.ZoneInfo('Asia/Shanghai')`解析目标时刻，`astimezone(timezone.utc)`得到含跨日的UTC年月日时分秒，再按应用schema生成单次COUNT=1规则；不得只改小时、不改日期。工具返回成功只说明保存，仍须读回。
 5. 用`tomllib`重新读取完整配置；用Python `sqlite3.connect('file:/Users/chat/.codex/sqlite/codex.db?mode=ro', uri=True)`查询`automations`中该id的status/rrule/model/reasoning_effort/next_run_at，以`datetime.fromtimestamp(next_run_at/1000, ZoneInfo('Asia/Shanghai'))`核对目标本地时间。只读连接，不执行UPDATE。ACTIVE必须匹配实际next_run_at；PAUSED为空时仅校验候选规则，不声称未来已排入执行队列。
 6. 读回失败/字段不符时通过同一应用工具暂停该收种任务，报告哪一字段无法确认，不新建重复任务。CURRENT只有读回完成后才记排期已验证；任务保存不等于已实际执行。
 
-现有工具和规则能支持Agent手工编排续排，但连续两轮的完整自然运行尚须验收，进度见Todo。上述能力说明不构成这轮文档审查中的实际调度授权。
+现有工具和规则能支持Agent手工编排续排，但连续运行的完整自然运行尚须验收，进度见Todo。上述能力说明不构成这轮文档审查中的实际调度授权。
 
 ## 定时提示词范围
 
 任务提示词只写本次目标和现役入口；模型/推理档由应用配置保存。阶段、库存、具体命令、避让规则、轮次上限和失败处理已在SOP/CURRENT中的，不在提示词再复制、另加更严格口径或固定旧参数。CURRENT必须直接更新当前实种/当天完成状态，不以顶部追加摘要掩盖下方过期事实；历史记忆不覆盖现役状态。
 
-完整验证计数只计自动完成田内及收尾、下一计划和续排的轮次；人工补完中断轮次可记已收尾，但不冒充自动完整通过。未达到两次仍保持medium；达到后只保存下一候选PAUSED，由用户决定low。
+完整验证计数只计自动完成田内及收尾、下一计划和续排的轮次；人工补完中断轮次可记已收尾，但不冒充自动完整通过。本次各项未满3次仍保持medium；满3次后只保存下一候选PAUSED，由用户决定是否继续。
+
+## 独立日常续排
+
+日常任务按operation-sop的固定日常范围执行，不收种、不购买仓鼠。完整完成并关闭农场、回写当天记录后，将自己的同一任务续排到下一个自然日22:00（Asia/Shanghai），不修改收种任务。使用上节同一automation_update及UTC转换、数据库读回流程；日常任务ID从CURRENT取。每次仍为COUNT=1；未满本次3次测试则ACTIVE，满3次暂停。异常不续排，不补跑错过日期。两个任务临近时遵循现役桌面避让规则，不并行操作桌面。

@@ -72,7 +72,7 @@ python3.13 scripts/farm_harvest_once.py --platform qq --planted-plan ../_sandbox
 | 好友全扫 | 当天尚未完成时，按固定日常顺序运行 `farm_friend_sweep.py`；用户明确再扫时可单独运行 | 当天正常日常已经扫过则默认跳过，不随收菜频次重复扫 |
 | 免费化肥 | 当天未领则 `farm_daily_fertilizer_reward.py`；无需等待田空 | 已领取则跳过 |
 
-种草／放虫当天未确认共享余额归零时，在其它日常后独立运行 `farm_mischief_once.py --execute`；两处灰色0才记完成，访问上限或异常停止不能记为完成。
+种草／放虫当天未确认共享余额归零时，在其它日常后独立运行 `farm_mischief_once.py --execute`；单个或两个可见灰色按钮均确认0才记完成，访问上限或异常停止不能记为完成。
 
 日常命令及完成字段见[工具§3](execution-tools.md#3-日常与仓鼠入口)，种草/放虫以专项SOP的返回字段为准。`CURRENT.md` 记录各项日期、完成轮数/状态。当天若只来过但没有收获，不能把萝卜和每日任务算完成。萝卜使用双肥；实际经验受游戏每日上限影响，不以理论轮数收益代替到账数据。
 
