@@ -36,6 +36,34 @@
 
 排查或人工发送时，写入后先读回输入文件；发送后需要确认实际落地时，读回对应提醒的标题和提醒时间。只找到同名快捷指令、只看到进程启动，均不能证明待办已经创建。
 
+## 终端调用与读回
+
+独立项目没有售后发送封装时，使用Agent的终端工具执行Python写共享文件，再串行运行现有快捷指令。输入标题/时间由当前业务已确认事实提供；不要为验证流程创建真实测试提醒。以下是调用结构，必须先替换占位输入，未替换会在格式校验阶段停止：
+
+```sh
+python3.13 - <<'PY'
+from pathlib import Path
+from datetime import datetime
+import subprocess
+payload = '替换为实际标题｜YYYY-MM-DD HH:mm'
+assert payload.count('｜') == 1 and '\n' not in payload and '\r' not in payload
+title, when = payload.split('｜')
+assert title.strip()
+datetime.strptime(when, '%Y-%m-%d %H:%M')
+path = Path('/Users/chat/WorkBuddy/小爪/data/input.txt')
+path.write_text(payload + '\n', encoding='utf-8')
+assert path.read_text(encoding='utf-8').rstrip('\n') == payload
+result = subprocess.run(['shortcuts', 'run', '创建提醒'], capture_output=True, text=True)
+print(result.stdout)
+if result.returncode:
+    raise RuntimeError(result.stderr or f'shortcuts exit={result.returncode}')
+PY
+```
+
+当前快捷指令成功输出可包含VTODO/VCALENDAR。调用方从**本次返回原文**核对SUMMARY标题、DTSTART/DUE本地日期时间与TZID（或带Z时间换算），保存UID作为已创建证据；不要只看进程退出0。具体业务若要求落地核验，标题/时间/时区均一致才记“已创建并核验”。
+
+返回0但无可核验对象时记录“发送成功、落地未核验”，不是再次创建的理由；非0也可能已经部分写入，不能直接重复发送。本页没有统一的提醒事项只读查询CLI：输出缺失/不一致时保留共享输入和本次输出，报告需人工核查或补查询入口，不切换系统通知、不猜已创建、不自动重试。该限制不影响已经返回完整且匹配VTODO的正常调用。
+
 ## 排查顺序
 
 | 现象 | 检查与处理 |
