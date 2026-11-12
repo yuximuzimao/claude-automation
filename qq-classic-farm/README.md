@@ -21,6 +21,8 @@
 - QQ / 微信统一坐标核对页：工作区根目录 `_sandbox/farm-coordinate-review.html`
 - 用户确认的土地中心、四格映射与坐标层：`data/ui-layout.json`
 - 用户确认的 UI 点、版本限定样本与候选点：`data/ui-anchors.json`
+- 操作分支与收尾：`docs/operation-sop.md`
+- 具体命令、返回值和未实现能力：`docs/execution-tools.md`
 - 稳定玩法事实：`docs/gameplay-rules.md`
 - 种子资料与已知库存：`docs/seed-catalog.md` / `data/seed-catalog.json`
 - 收益、经验、生长阶段与土地升级：`docs/farm-planning-reference.md` / `data/farm-planning-reference.json`
@@ -38,6 +40,7 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 
 田内脚本从已打开、无遮挡、土地无偏移的标准农场首页出发。
 
+- `scripts/farm_inventory.py`：QQ仓库捕获与库存校验回写，AI负责逐张读图，见[库存SOP](docs/inventory-sop.md)。
 - `scripts/farm_window.py`：打开或关闭小程序。QQ 打开复用现有 Swift 入口。
 - `scripts/farm_fertilize_once.py`：检查一键务农和施肥勾选状态，再点普通肥一次；QQ 可选 `--kind organic` 识别有机肥。
 - `scripts/farm_harvest_once.py`：识别手形「一键收获」；混种时使用 `--planted-plan`，通过记录校验和成熟前置确认后，按固定点逐个收四格，再点手形按钮。
@@ -54,35 +57,9 @@ QQ / 微信坐标必须区分 `scene`、`fixed_ui` 和未分类的场景内 UI�
 
 脚本仍保留平台参数，但微信处于封存状态时不得运行微信真机操作。所有真机操作都必须符合当前 Chat 的授权范围。
 
-从本项目目录调用。默认命令只做无点击预检，传入 `--execute` 才发送点击。
+调用工作目录、完整参数、默认模式是否会查窗口、成功返回值与异常处理统一见[操作工具与结果判定](docs/execution-tools.md)，不从一个脚本类推另一个脚本的参数。业务分支与日期资格见操作SOP。
 
-```sh
-python3.13 scripts/farm_window.py open --platform qq --execute
-python3.13 scripts/farm_window.py close --platform qq --execute
-python3.13 scripts/farm_fertilize_once.py --platform qq
-python3.13 scripts/farm_fertilize_once.py --platform qq --execute
-python3.13 scripts/farm_harvest_once.py --platform qq --ordinary-only
-python3.13 scripts/farm_harvest_once.py --platform qq --ordinary-only --execute
-python3.13 scripts/farm_harvest_once.py --platform qq --planted-plan ../_sandbox/本批实种.json --check-plan
-python3.13 scripts/farm_plant_once.py --platform qq --check-plan
-python3.13 scripts/farm_plant_once.py --platform qq --execute
-python3.13 scripts/farm_radish_restock.py
-python3.13 scripts/farm_radish_restock.py --execute
-python3.13 scripts/farm_radish_xp.py
-python3.13 scripts/farm_radish_xp.py --execute
-python3.13 scripts/farm_qq_round.py --field-state mature --harvest-plan ../_sandbox/本批实种.json
-# 实际参数先按 docs/operation-sop.md 选择；默认不重复萝卜和日常
-python3.13 scripts/farm_qq_round.py --field-state mature --harvest-plan ../_sandbox/本批实种.json --execute
-python3.13 scripts/farm_share_once.py
-python3.13 scripts/farm_daily_task_once.py --platform qq
-python3.13 scripts/farm_daily_fertilizer_reward.py --platform qq
-python3.13 scripts/farm_friend_sweep.py --platform qq
-python3.13 scripts/farm_hamster_once.py --platform qq --execute
-```
-
-执行前按当前计划和已知 picker 位置准备好流程。正常固定脚本退出 0 就按动作完成继续，不做例行截图或 Agent 二次验收；脚本明确停止、界面阻断或后续实际发现遗漏时才排错并修流程。
-
-缺少本地 Swift 辅助程序或辅助程序有改动时，先运行：
+缺少本地Swift辅助程序或源码有改动时，只编译对应缺失/变化项；已可用时不每轮重复编译：
 
 ```sh
 mkdir -p _sandbox
@@ -91,6 +68,7 @@ swiftc scripts/farm_click_batch.swift -o _sandbox/farm_click_batch
 swiftc scripts/farm_drag.swift -o _sandbox/farm_drag
 swiftc scripts/farm_home_window.swift -o _sandbox/farm_home_window
 swiftc scripts/farm_path_drag.swift -o _sandbox/farm_path_drag
+swiftc scripts/farm_release_input.swift -o _sandbox/farm_release_input
 ```
 
 按日期与土地状态选择脚本见 [按次操作决策](docs/operation-sop.md)。

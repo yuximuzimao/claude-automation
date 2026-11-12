@@ -11,6 +11,7 @@ from time import sleep
 
 from farm_harvest_once import validate_planted_plan
 from farm_plant_once import read_plan
+from farm_process import ActionCancelled, ActionCleanupError, run_action
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -83,8 +84,14 @@ def main():
         if isinstance(step, tuple):
             sleep(step[1])
             continue
-        result = subprocess.run(step, capture_output=True, text=True, timeout=420)
         name = Path(step[1]).name
+        try:
+            result = run_action(step, timeout=420)
+        except (subprocess.TimeoutExpired, ActionCancelled, ActionCleanupError, OSError) as exc:
+            print(json.dumps({"status": "stopped", "failed_stage": name,
+                              "completed_stages": completed, "reason": str(exc),
+                              "process_group_stopped": True}, ensure_ascii=False))
+            return 2
         if result.returncode:
             print(json.dumps({
                 "status": "stopped",

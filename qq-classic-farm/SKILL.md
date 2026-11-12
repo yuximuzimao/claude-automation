@@ -8,6 +8,10 @@
 4. 选种、库存或种植计划问题读 `docs/seed-catalog.md`、`data/seed-catalog.json`；收益、经验和生长时间计算再读 `docs/farm-planning-reference.md` 与对应 JSON。
 5. 任何种植后的提醒操作，先读工作区根目录 `docs/reminders.md`，复用现有快捷指令。
 
+具体工具、完整参数、成功返回值、异常截图/关闭和未实现入口，统一见 `docs/execution-tools.md`。进入实际操作前按该页区分已具备能力与缺口，不临时选择通用桌面工具替代缺失流程。
+
+用户明确要求定时收种与自动安排下一轮时，先读 `docs/automation-trial.md` 的有界试验规则；当前轮次只见CURRENT。
+
 ## 当前运行边界
 
 - **QQ：保持现有 PC 独立脚本可用。** 按用户当前授权操作；确有需要时可以继续开发 QQ 的独立功能。
@@ -22,12 +26,12 @@
 
 1. **按键精灵口径。** 已验证脚本正常退出 0，就按计划动作成功处理，不做例行截图、不让 Agent 再逐格判断。计划含耗尽补种时由种植脚本连续完成全部段，入口与失败边界见 operation-sop；不再交由Agent选择补种地块。其它明确 `stopped` / 非0、界面阻断或实际遗漏再诊断。
 2. **实种记录写完即验。** 正式种植完成后，保存完整实种记录，立即读回并按 `docs/operation-sop.md`「实种记录的必检规范」校验；不合规当场打回重写，校验通过后再登记CURRENT，不把主校验留到下次操作。
-3. **按计划扣库存。** 正式种植脚本正常完成后，四格特殊种子按计划每颗扣 1；普通种子按计划实际应铺的空格数扣减。白萝卜经验循环正常完成后按 `轮数 × 24` 扣减白萝卜已知库存。更新 `data/seed-catalog.json` 与 `docs/seed-catalog.md`，不为正常轮次重新打开仓库。
+3. **按计划扣库存。** 正式种植脚本正常完成后，四格特殊种子按计划每颗扣 1；普通种子按计划实际应铺的空格数扣减。白萝卜经验循环正常完成后按 `轮数 × 24` 扣减白萝卜已知库存。更新 `data/seed-catalog.json` 与 `docs/seed-catalog.md`，具体工具/字段及重复扣减检查见种子文档“文件回写步骤”，不为正常轮次重新打开仓库。
 4. **白萝卜补货是唯一购买例外。** `farm_radish_restock.py` 正常完成后，按实际完成购买次数 ×99 直接增加白萝卜已知库存；默认 37 次即 +3663，不再为这次补货打开仓库清点。
 5. **补记人工种植。** 如果 `docs/CURRENT.md` 明确记录有一轮用户手动种植尚未入账，则下一次由助手完成正式种植后，把这笔待补差额和本轮差额一起写入，再清掉待补标记。
 6. **其他操作不更新库存。** 收获、施肥、日常、好友互动都不改库存。
-7. **其它新种子才重扫。** 用户购买/获得了萝卜以外的其它种子并明确要求更新库存时，再完整打开仓库「种子」页清点，更新数量与顺序，直接读取值标为 `verified`。
-8. **计算提醒时间。** 先确定本批正式作物预计成熟时刻。若规划底表有可靠的阶段数据，则提醒设在“最后一个非零生长阶段开始”时刻：`成熟时刻 − 最后非零阶段基础秒数 × 对应土地耗时倍率`。若没有可用阶段数据，才回退为成熟前 1 小时。
+7. **其它新种子才重扫。** 仓鼠末尾购买后的库存刷新已经获得用户授权，按 `docs/operation-sop.md`“仓鼠末尾收尾”执行，包括新种子重开后的顺序核对；完整调用及已验收范围见docs/inventory-sop.md，使用farm_inventory捕获、AI读图及apply回写；陌生未建档种子仍需补资料。用户购买/获得了萝卜以外的其它种子并明确要求更新库存时，再完整打开仓库「种子」页清点，更新数量与顺序，直接读取值标为 `verified`。
+8. **计算提醒时间。** 先确定本批正式作物预计成熟时刻。若规划底表有可靠的阶段数据，则提醒设在“最后一个非零生长阶段开始”时刻：`成熟时刻 − 最后非零阶段基础秒数 × 对应土地耗时倍率`。若没有可用阶段数据，才回退为成熟前 1 小时。 自动排期若按用户当前规则改为提前一阶段双肥，介入时间选择见automation-trial、动作顺序见operation-sop§2，提醒随选定介入时间，不在提示词重复定义。
 9. **同批混种。** 统一收菜的一批作物若提醒时刻不同，取最早需要介入的提醒时刻，避免错过任何作物的最后阶段。
 10. **创建并核验提醒。** 按工作区根 `docs/reminders.md` 调用现有「创建提醒」快捷指令，再读回标题和时间。提醒发送失败要明确报告。
 
@@ -48,6 +52,13 @@
 
 | 文件 | 用途 |
 | --- | --- |
+| `docs/inventory-sop.md` | 仓库捕获、AI读图、库存回写与待核标记处理 |
+| `data/.inventory-apply.lock` | 库存文件读改写的本地提交锁；不承担桌面互斥 |
+| `scripts/farm_inventory.py` / `tests/test_inventory.py` | QQ完整库存捕获和校验回写入口及无输入测试 |
+| `assets/ui/warehouse/` | 仓库标题/种子页模板及真实截图来源 |
+| `docs/execution-tools.md` | 具体工具调用、返回判据、诊断/退出与缺失能力 |
+| `docs/automation-trial.md` | 两轮medium自动规划与续排试验边界 |
+| `docs/archive/neat/2026-11-12-continuous-farm-trial.md` | 本阶段收种、库存入口和有限续排试验归档 |
 | `docs/CURRENT.md` | 当前平台状态、最近现场与现行计划 |
 | `data/wechat-live-status.txt` | 微信真机封存开关 |
 | `tasks/todo.md` | QQ 可按需开发的功能与条件性补采 |
@@ -70,6 +81,11 @@
 | `scripts/farm_plant_once.py` | 普通种植与四格混种 |
 | `scripts/farm_radish_restock.py` / `assets/ui/shop/qq-white-radish.png` | QQ 白萝卜月度补货及商店首格识图模板；流程见 `docs/gameplay-rules.md`「白萝卜补货」 |
 | `scripts/farm_radish_xp.py` | QQ 白萝卜 5 轮种植→普通肥→有机肥→收获循环 |
+| `scripts/farm_release_input.swift` | 异常停止后仅释放左键；正常流程不调用 |
+| `scripts/farm_process.py` / `tests/test_process_cleanup.py` | 动作进程组清理与售后扫描启动避让 |
+| `tests/test_open_qq_farm.py` | 开窗入口身份、遮挡和焦点无输入验证 |
+| `data/qq-radish-progress.json` | 运行时每日成功收获萝卜轮数；按需创建 |
+| `data/hamster-inventory-pending.json` | 仓鼠购买后库存核对标记；核清后移除 |
 | `scripts/farm_qq_round.py` | QQ 小程序已打开后的整轮田内串行入口 |
 | `assets/ui/share/` | 分享领取文字模板与来源；点击前拒绝同位置分享按钮 |
 | `scripts/farm_daily_clicks.py` / `tests/test_friend_sweep_and_harvest.py` | 日常共享输入与单/双按钮交互验证 |

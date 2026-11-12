@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import subprocess
 
@@ -50,8 +52,12 @@ def main():
 
     clicks_sent = 0
     reward_seen = False
+    inventory_pending = ROOT / "data/hamster-inventory-pending.json"
+    purchase_attempted = False
     try:
         platform = args.platform
+        if args.execute and inventory_pending.exists():
+            raise ValueError("HAMSTER_INVENTORY_REFRESH_PENDING")
         layout = json.loads((ROOT / "data/ui-layout.json").read_text())
         scenes = json.loads((ROOT / "data/ui-anchors.json").read_text())["fixed_points"]["scenes"]
         merchant = scenes["merchant"]
@@ -77,16 +83,27 @@ def main():
         else:
             click(bubble, 850)
             require_screen(capture, platform, "buy", recognition["buy_roi"])
+            # Persist before purchase: interruption after this point must still
+            # route the Agent to a warehouse refresh, never another blind buy.
+            pending = {"platform": platform, "status": "purchase_pending_verification",
+                       "at": datetime.now(ZoneInfo("Asia/Shanghai")).isoformat()}
+            inventory_pending.write_text(json.dumps(pending, ensure_ascii=False))
+            if json.loads(inventory_pending.read_text()) != pending:
+                raise ValueError("INVENTORY_PENDING_READBACK_FAILED")
+            purchase_attempted = True
             click(buy, 950)
             require_screen(capture, platform, "reward", recognition["reward_roi"])
             reward_seen = True
             click(blank, 450)
             status = "merchant_reward_seen_dismiss_clicked"
-        print(json.dumps({"status": status, "clicks_sent": clicks_sent}))
+        print(json.dumps({"status": status, "clicks_sent": clicks_sent,
+                          "inventory_refresh_required": reward_seen,
+                          "inventory_pending_file": str(inventory_pending) if reward_seen else None}))
         return 0
     except (FertilizerStop, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
         print(json.dumps({"status": "stopped", "reason": str(exc), "clicks_sent": clicks_sent,
-                          "reward_seen": reward_seen}, ensure_ascii=False))
+                          "reward_seen": reward_seen,
+                          "inventory_refresh_required": purchase_attempted or inventory_pending.exists()}, ensure_ascii=False))
         return 2
 
 

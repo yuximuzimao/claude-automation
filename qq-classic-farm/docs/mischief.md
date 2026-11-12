@@ -1,6 +1,6 @@
 # QQ好友种草与放虫
 
-本页维护用户2026-11-10指定的操作流程；当前验收进度见CURRENT/Todo。独立入口为 `scripts/farm_mischief_once.py`，不自动加入日常整轮。
+本页维护用户2026-11-10指定的操作流程；当前验收进度见CURRENT/Todo。独立入口为 `scripts/farm_mischief_once.py`；由操作SOP按日常授权显式接续，`farm_qq_round.py`不会自动包含它。
 
 ## 判定与次数
 
@@ -34,6 +34,8 @@
 
 ## 使用
 
+所有命令在`/Users/chat/claude/qq-classic-farm`执行；先按操作SOP打开农场并完成首页准备。
+
 ```sh
 swiftc scripts/farm_path_drag.swift -o _sandbox/farm_path_drag
 # 无输入计划预览
@@ -47,3 +49,9 @@ python3.13 scripts/farm_mischief_once.py --execute
 正常运行使用 `--execute`，连续访问好友直到共享100次余额用完并识别到灰色双0；不要传 `--max-visits 1`。`--max-visits` 仅为好友访问安全上限，不是应消耗次数。限一位仅用于明确要求的局部调试；访问上限退出表示未完成，不能推断余额或自动重跑。
 
 模板来自用户提供的5张截图，`assets/ui/mischief/sources.json`记录来源序号和裁剪区域。原图仅保存在工作区 `_sandbox/farm-mischief/`。控件识别使用局部形状和颜色共同判断，防止绿色和灰色同形图标混淆。暂不OCR读取全部1–100数值；只严格识别结束所需的灰色双0，其余次数以游戏界面为准。
+
+## 返回结果与完成记录
+
+真机模式只有退出0、`status=completed`、`reason=shared_quota_exhausted`且`shared_remaining=0`才能记当天额度已用完。Agent用文件编辑工具更新CURRENT对应自然日记录；`grass_gestures/bug_gestures/friend_visit`用于排错，不换算实际经验。
+
+`stopped_returned_home`、访问上限或退出2仍是未完成，不能再调一次来“补满”；保留stage、reason、friend_visit和手势数。异常看图用[操作工具§4](execution-tools.md#4-异常看图与安全退出)，离线`--image`可对同一证据复核，不算重放动作。未知菜单没有统一自动修复入口。安全关闭也按工具§4，不直接在好友页继续点种植按钮。

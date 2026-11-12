@@ -1,0 +1,72 @@
+# 两轮自动规划与续排试验
+
+2026-11-11用户授权QQ两轮medium试验；当前轮次/排期见CURRENT。最多自动执行两轮，第1轮成功后续排第2轮ACTIVE；第2轮成功后只保存第3轮候选PAUSED，等待用户决定是否测试low。未完成种植计划/排期校验的旧试跑不计入连续成功次数；实际计数只见CURRENT。固定gpt-6.1-terra、medium，不自行降档，不修改独立日常任务。
+
+## 排期与桌面边界
+
+用户确定当前按售后扫描时刻避让，未来由状态岛负责桌面互斥。不得以尚未接入状态岛/缺少跨项目桌面锁作为本试验必须先建设的条件；不修改工作区通用审查规则。
+
+以实际启动时刻按电脑Asia/Shanghai判断：每次扫描前10分钟至扫描后60分钟的整分钟均禁止启动。08:00扫描时，07:50–09:00禁止，07:49和09:01允许；跨午夜同样处理。这是启动限制，不是07:49启动后到07:50强行中断。售后扫描时刻从现役aftersales-automation/lib/constants.js的SCAN_HOURS只读取得，不复制为另一份配置，不导入/启动售后服务。
+
+排期和实际开窗前均执行 `python3.13 scripts/farm_process.py --at <含时区ISO时间>`；实际开窗前省略--at使用电脑当前时间。实际开窗前allowed_start=false时不开始田内动作；计算未来排期时先按下述提前双肥规则选择时间，再核验。若比原计划晚到且已自然成熟，直接收获不施肥。还应避开用户明确给定的其它任务窗口；未被用户指定的假想桌面占用不自动扩展为整天封锁。显式看到其它任务正在使用桌面或焦点/遮挡冲突仍立即停止，不抢焦点、不重试。
+
+## 工具准备与能力检查
+
+真实动作统一使用[操作工具](execution-tools.md)中的项目CLI，通过Agent终端工具串行调用；不以通用桌面工具替代缺失的库存入口。定时任务开始先读CURRENT与pending，确认本轮必经能力已具备；本轮需要核库时，检查farm_inventory.py及库存SOP可用，按已验收入口执行，不开窗后再临时找工具。本项是能力检查，不改变库存核对要求，也不授权清pending绕过。
+
+时间检查工具：终端运行`python3.13 scripts/farm_process.py`；排期计算时传`--at`及带时区ISO。返回0且allowed_start=true才允许当前启动。返回2且JSON含allowed_start=false/next_allowed_start是检查成功后的正常否定结果，不是动作执行失败。未来排期继续计算提前阶段或顺延候选，不能因此中断提醒、仓鼠检查、关闭等本轮收尾；真实开工遇禁止窗口则不开始田内动作。若reason为配置/时间解析错误则停止，不把缺少时间表当允许。
+
+## 排期选择规则
+
+以实际种植完成记录和底表按Python计算，不用模型心算。依次选择：
+
+1. 正常候选为本批全部作物进入最后非零阶段的时刻，向上取整分钟；可启动则使用一次普通肥收获。
+2. 该时间处于避让窗口时，优先提前到**倒数第二个非零阶段开始**，而不是从当前时钟随意减小时；其时刻为种植基准加尾部两个阶段之前的基础秒数×土地耗时倍率。例如红柚每阶段实际1小时55分12秒，可据此提前一个阶段。候选仍须是未来时刻，且本批作物阶段一致、两次肥料能使待收作物成熟；符合条件并通过时间检查，执行普通肥→有机肥各一次。
+3. 提前候选不可用、已经错过或混种阶段不能证明一致时，再使用正常候选的next_allowed_start顺延并核验，不进一步提前到更早阶段。实际执行晚到时根据当时阶段选择双肥、单肥或自然成熟直接收获，不机械沿用预计肥料次数。
+
+普通收菜提醒与本批最终选定的介入时间同步；已选提前双肥时，不再另建稍后的尾段提醒。未来排期检查只返回“不合适”不会中止本轮安全收尾。工具配置缺失/时间解析异常等仍报告失败，不伪造排期。
+
+## 开工与田内动作
+
+从根AGENTS/CLAUDE、项目SKILL、CURRENT、operation-sop进入。核对当前轮次、实种记录、当日萝卜计数与唯一计划；已完成轮次不重放。原定时任务memory是历史，不覆盖本页。微信封存。先做上述启动时间检查，再开窗→首页prepare，只有ready_for_input=true才继续。
+
+CURRENT或pending要求核清仓鼠购买时，转[操作SOP§6](operation-sop.md#6-仓鼠末尾收尾)及[工具§5](execution-tools.md#5-库存核对入口)。按inventory-sop使用farm_inventory capture、tools.view_image逐张读图和apply；核实顺序后才校验计划、进入田内。不能临时组合点击或改用cua.getState。未建档或读不清的种子仍保留标记、报告缺口，不猜测。当前实种记录不得用下一批计划替代。
+
+整轮命令：`python3.13 scripts/farm_qq_round.py --field-state <tail或mature> --radish-rounds <当天剩余轮数> --harvest-plan <CURRENT完整实种记录绝对路径> --execute`。禁止添加--platform qq及--tasks/--friends/--reward。全部作物已进入尾段选tail；全部自然成熟用mature；倒数第二阶段的双肥分支按operation-sop§2先完成两次施肥，再用mature接续收获。更早阶段不施肥。
+
+萝卜遵循operation-sop的成功轮次口径，以data/qq-radish-progress.json当日已确认成功收获计数为准；历史尚未启用计数文件的当日已完成事实先从CURRENT迁入，不能因文件缺失重做。用户接受未确认成功的一轮不计数，后续最多可能多做一次经验轮；不做自动重试。计数是经验循环完成事实，库存不得据此把不确定种植消耗伪装为精确；失败后核实已消耗部分再记账。有副作用的动作脚本失败、检查工具自身异常、登录/安全提示或记录冲突时停止相关业务流程。只读检查的正常否定结果按其结果分支处理，不套用“任何脚本非0就终止整轮”。整轮与独立萝卜的超时/取消由farm_process清理动作进程组，异常清理后再独立释放鼠标左键并核验；释放失败必须报告，不能声称全部输入状态已清理。AI报告不能代替该清理。
+
+## 收尾顺序
+
+1. 正式种植成功后按操作SOP§1保存完整实种记录，调用工具§2的实种check-plan；库存用seed-catalog“文件回写步骤”，萝卜用操作SOP§7。正常脚本退出0沿用项目口径，不逐格看图。
+2. 通过终端Python按[farm-planning-reference计算工具](farm-planning-reference.md#阶段时间的计算工具)计算阶段；通过[共享提醒SOP](../../docs/reminders.md#终端调用与读回)创建并核验普通Mac提醒。普通提醒取最早介入时刻，统一自动收种先按全部作物尾段的最晚时刻规划；遇避让冲突，按本页“排期选择规则”处理。
+3. **所有本轮田内操作完成后才检查仓鼠**：`farm_hamster_once.py --platform qq --execute`。未发现即继续收尾；已购买必须触发仓库种子数量更新，具体操作与新种子顺序边界唯一见operation-sop。购买前写入pending标记，出现中断不再盲买。仓库更新后不再种植，回首页后关闭并确认farm_closed。
+4. 使用购买后最新库存，按操作SOP§4“制定和校验唯一计划”的Python文件处理及校验入口更新operation-plan.json，不提前扣未来库存。活动种子优先、同批次长一致、优先单种满田；具体种子与数量只读取CURRENT和唯一计划。已有库存数量增加只更新数量；新增种子需处理下一次重开后的顺序核对标记。计划读回核对名称/数量/库存/占地/页槽，并做不带--execute的整轮校验。若新种子可能改变重开顺序，计划标记为待重开核对，下一任务开窗后必须先核对，不把临时末尾顺序称为已验证稳定顺序。
+5. 其它种子选择不明确、活动状态未知、库存更新失败、提醒未核验或关闭失败均不算完整成功、不自动续排。失败保留已完成边界，无自动重试/现场改代码。
+
+## 续排及两轮验收
+
+只有上述收尾完成才通过automation_update更新同一任务qq-11-11-21-13，不创建并行收种任务，不直接改TOML或数据库。保留projectId/local/gpt-6.1-terra/medium；单次COUNT=1。电脑本地目标时间先用farm_process校验，再完整转UTC生成规则，包含跨日；应用排期显示核对电脑本地时刻，提示词只引用目标和现役入口。批次、实种记录、库存、计划和轮次只更新CURRENT及各数据owner；提示词保持目标和入口引用，不复制这些字段，也不继承旧批次命令。
+
+第1轮之后更新第2轮ACTIVE，第2轮之后更新第3轮候选PAUSED。读回实际配置和next_run_at并转换本地时间核对；PAUSED无next_run_at正常，候选规则离线核对，不宣称验证了第3轮真实触发。工具失败或读回不一致则暂停收种并报告，不创建重复任务。
+
+CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒UID、任务ID/时间/状态及成功计数。新种子顺序仅临时确认时该项不能提前记完整通过，待下一次重开核实后补齐；连续两次完整通过再请用户评估low，不自行切换。日常任务保持独立，原每日范围不变；共享开窗保护修复照常生效。
+
+## 自动任务工具调用与读回
+
+本节是Agent调用应用工具的操作方式，不是现役Python脚本。当前没有农场续排CLI/daemon；`farm_qq_round.py`不会替Agent完成这一项。
+
+1. 从CURRENT取收种任务ID，通过终端`python3.13`的`tomllib`读取`/Users/chat/.codex/automations/<id>/automation.toml`，保存完整现有字段；应用侧用`automation_update(mode="view", id=...)`查看。仅更新原收种任务，不触碰独立日常。
+2. 在Codex用`functions.exec`从`ALL_TOOLS`查找`automation_update`的实际工具名/参数说明（当前为`mcp__codex_app__automation_update`），再调用`tools.<实际工具名>`。工具不可用即停止本次续排，不能改TOML/SQLite代替。
+3. update参数包含`mode="update"`、id、kind、name、prompt、status、rrule、model、reasoningEffort、executionEnvironment、projectId；从现有配置转换reasoning_effort/execution_environment/target.project_id，保留其他已配置字段。name可显示排期日期；prompt只保留目标和现役入口。轮次、实种路径、计划、计数写CURRENT，不再复制到prompt。ACTIVE/PAUSED按两轮边界设置，不从旧prompt照搬历史批次。
+4. 用Python `datetime`与`zoneinfo.ZoneInfo('Asia/Shanghai')`解析目标时刻，`astimezone(timezone.utc)`得到含跨日的UTC年月日时分秒，再按应用schema生成单次COUNT=1规则；不得只改小时、不改日期。工具返回成功只说明保存，仍须读回。
+5. 用`tomllib`重新读取完整配置；用Python `sqlite3.connect('file:/Users/chat/.codex/sqlite/codex.db?mode=ro', uri=True)`查询`automations`中该id的status/rrule/model/reasoning_effort/next_run_at，以`datetime.fromtimestamp(next_run_at/1000, ZoneInfo('Asia/Shanghai'))`核对目标本地时间。只读连接，不执行UPDATE。ACTIVE必须匹配实际next_run_at；PAUSED为空时仅校验候选规则，不声称未来已排入执行队列。
+6. 读回失败/字段不符时通过同一应用工具暂停该收种任务，报告哪一字段无法确认，不新建重复任务。CURRENT只有读回完成后才记排期已验证；任务保存不等于已实际执行。
+
+现有工具和规则能支持Agent手工编排续排，但连续两轮的完整自然运行尚须验收，进度见Todo。上述能力说明不构成这轮文档审查中的实际调度授权。
+
+## 定时提示词范围
+
+任务提示词只写本次目标和现役入口；模型/推理档由应用配置保存。阶段、库存、具体命令、避让规则、轮次上限和失败处理已在SOP/CURRENT中的，不在提示词再复制、另加更严格口径或固定旧参数。CURRENT必须直接更新当前实种/当天完成状态，不以顶部追加摘要掩盖下方过期事实；历史记忆不覆盖现役状态。
+
+完整验证计数只计自动完成田内及收尾、下一计划和续排的轮次；人工补完中断轮次可记已收尾，但不冒充自动完整通过。未达到两次仍保持medium；达到后只保存下一候选PAUSED，由用户决定low。

@@ -5,3 +5,8 @@ runs/
 _sandbox/
 /data/operation-plan.json
 /data/operation-plan-next.json
+
+# 本地运行进度与库存提交状态，不进入代码归档
+/data/.inventory-apply.lock
+/data/qq-radish-progress.json
+/data/hamster-inventory-pending.json

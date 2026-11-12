@@ -250,3 +250,67 @@ def test_ordinary_sequence_waits_and_stops_without_retry(monkeypatch):
     with pytest.raises(ValueError,match='input failed'):
         p.plant(fail_on_second,lambda:None,*args)
     assert clicks==[(24,0),(0,100),(23,0)]
+
+
+@pytest.fixture(autouse=True)
+def isolated_radish_progress(tmp_path, monkeypatch):
+    import farm_radish_xp as xp
+    monkeypatch.setattr(xp, 'PROGRESS_PATH', tmp_path/'radish-progress.json')
+
+
+def test_radish_persists_only_successful_harvests(monkeypatch, sample_catalog, capsys):
+    import farm_radish_xp as xp
+    original=xp.radish_plan
+    monkeypatch.setattr(xp,'radish_plan',lambda:original(sample_catalog))
+    monkeypatch.setattr(sys,'argv',['xp','--rounds','5','--execute'])
+    monkeypatch.setattr(xp,'sleep',lambda _:None)
+    harvested=[]
+    def step(script,*args):
+        if script=='farm_harvest_once.py':
+            if len(harvested)==2:raise RuntimeError('third harvest uncertain')
+            harvested.append(True)
+    monkeypatch.setattr(xp,'run_script',step)
+    assert xp.main()==2
+    assert json.loads(xp.PROGRESS_PATH.read_text())['completed_rounds']==2
+    result=json.loads(capsys.readouterr().out)
+    assert result['completed_rounds']==[1,2] and result['failed_stage']=='harvest'
+    calls=[]
+    monkeypatch.setattr(xp,'run_script',lambda script,*args:calls.append(script))
+    assert xp.main()==0
+    assert calls.count('farm_harvest_once.py')==3
+    assert json.loads(xp.PROGRESS_PATH.read_text())['completed_rounds']==5
+
+
+def test_radish_bad_counter_stops_before_actions(monkeypatch,sample_catalog):
+    import farm_radish_xp as xp
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    xp.PROGRESS_PATH.write_text(json.dumps({'date':datetime.now(ZoneInfo('Asia/Shanghai')).date().isoformat(),'completed_rounds':99}))
+    monkeypatch.setattr(sys,'argv',['xp','--rounds','5','--execute'])
+    monkeypatch.setattr(xp,'run_script',lambda *a:pytest.fail('must not click'))
+    assert xp.main()==2
+
+
+def test_hamster_purchase_marks_inventory_and_blocks_repeat(tmp_path, monkeypatch, capsys):
+    import farm_hamster_once as hamster
+    original=hamster.ROOT
+    (tmp_path/'data').mkdir()
+    for name in ['ui-layout.json','ui-anchors.json']:
+        (tmp_path/'data'/name).write_bytes((original/'data'/name).read_bytes())
+    monkeypatch.setattr(hamster,'ROOT',tmp_path)
+    monkeypatch.setattr(sys,'argv',['hamster','--platform','qq','--execute'])
+    monkeypatch.setattr(hamster,'farm_target',lambda *a:(None,{}))
+    monkeypatch.setattr(hamster,'capture_window',lambda *a:None)
+    monkeypatch.setattr(hamster,'detect_hamster',lambda *a:True)
+    monkeypatch.setattr(hamster,'require_screen',lambda *a:None)
+    calls=[]
+    def click(*args,**kwargs):
+        calls.append(1)
+        if len(calls)==2:assert (tmp_path/'data/hamster-inventory-pending.json').exists()
+    monkeypatch.setattr(hamster,'click_batch',click)
+    assert hamster.main()==0
+    result=json.loads(capsys.readouterr().out)
+    assert result['inventory_refresh_required'] is True
+    assert hamster.main()==2
+    assert len(calls)==3
+    assert 'HAMSTER_INVENTORY_REFRESH_PENDING' in capsys.readouterr().out

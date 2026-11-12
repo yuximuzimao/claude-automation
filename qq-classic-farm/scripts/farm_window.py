@@ -147,7 +147,19 @@ def main():
         print(json.dumps({"status": status, "platform": platform}))
         return 0
     except (FertilizerStop, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
-        print(json.dumps({"status": "stopped", "platform": platform, "reason": str(exc)}, ensure_ascii=False))
+        failure = {"status": "stopped", "platform": platform, "reason": str(exc)}
+        if isinstance(exc, (subprocess.CalledProcessError, subprocess.TimeoutExpired)):
+            def readable(value):
+                return value.decode("utf-8", "replace") if isinstance(value, bytes) else (value or "")
+            stdout, stderr = readable(exc.stdout).strip(), readable(exc.stderr).strip()
+            failure.update(command=exc.cmd, child_stdout=stdout, child_stderr=stderr)
+            if isinstance(exc, subprocess.CalledProcessError):
+                failure["child_returncode"] = exc.returncode
+                failure["reason"] = stderr or stdout or str(exc)
+            else:
+                failure["reason"] = "CHILD_PROCESS_TIMEOUT"
+                failure["timeout_seconds"] = exc.timeout
+        print(json.dumps(failure, ensure_ascii=False))
         return 2
 
 

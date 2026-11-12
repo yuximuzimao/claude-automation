@@ -25,3 +25,5 @@
 - neat/2026-11-11-daily-share-quota-fixes.md：收种与提醒、双按钮日常修复、分享返回及领奖防误点、共享100次完整验证、下一计划与NEAT。
 
 - neat/2026-11-11-harvest-and-single-run-tasks.md：自然成熟收种、黄金芽增量、两次单次任务授权与验证边界。
+
+- neat/2026-11-12-continuous-farm-trial.md：定时UTC校正、开窗简化、完整库存入口、计数与进程清理、SOP工具契约、排期正常否定和提前双肥，以及22:35有限续排安排。

@@ -51,7 +51,7 @@ def test_bad_record_stops_round_before_any_subprocess(record, change, monkeypatc
     monkeypatch.setattr(sys, 'argv', ['round', '--field-state', 'tail', '--harvest-plan', str(record), '--execute'])
     def forbidden(*a, **kw):
         pytest.fail('invalid record reached a window/side-effect process')
-    monkeypatch.setattr(round_script.subprocess, 'run', forbidden)
+    monkeypatch.setattr(round_script, 'run_action', forbidden)
     assert round_script.main() == 2
     result=json.loads(capsys.readouterr().out)
     assert result['status']=='rejected_rewrite_required'
@@ -97,7 +97,7 @@ def test_failed_fertilizer_never_reaches_fixed_harvest(record, monkeypatch):
     def fail(command, **kw):
         calls.append(command)
         return SimpleNamespace(returncode=2,stdout='stopped',stderr='')
-    monkeypatch.setattr(round_script.subprocess,'run',fail)
+    monkeypatch.setattr(round_script,'run_action',fail)
     assert round_script.main()==2
     assert len(calls)==1 and 'farm_fertilize_once.py' in calls[0][1]
 
@@ -109,7 +109,7 @@ def test_successful_tail_waits_then_harvests(record,monkeypatch):
         events.append(Path(command[1]).name)
         if 'farm_harvest_once.py' in command[1]: assert '--mature-confirmed' in command
         return SimpleNamespace(returncode=0,stdout='ok',stderr='')
-    monkeypatch.setattr(round_script.subprocess,'run',success)
+    monkeypatch.setattr(round_script,'run_action',success)
     monkeypatch.setattr(round_script,'sleep',lambda seconds:events.append(seconds))
     assert round_script.main()==0
     assert events==['farm_fertilize_once.py',2.2,'farm_harvest_once.py','farm_plant_once.py']

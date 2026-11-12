@@ -21,6 +21,12 @@
 - ../tests/test_home_check.py：首页边界测试。
 - ../tests/check_home_screenshots.py / ../tests/home-screenshot-corpus.json：本地已存截图回放与校验清单。
 
+- automation-trial.md：两轮medium自动规划与续排试验操作边界。
+- inventory-sop.md：QQ仓库捕获、AI读图、库存校验回写的完整操作。
+- ../data/.inventory-apply.lock：库存文件提交锁。
+- ../scripts/farm_inventory.py / ../tests/test_inventory.py：库存入口与测试。
+- ../assets/ui/warehouse/：仓库标题/种子页模板及来源。
+- execution-tools.md：现役工具命令、返回值、诊断/安全退出和库存入口能力边界。
 - operation-sop.md：按次操作决策与脚本组合入口。
 
 - ../scripts/farm_fertilize_once.py：带一键务农和勾选确认的普通肥/QQ 有机肥；右侧肥桶模板 ../assets/ui/fertilizer/qq-organic.png。
@@ -29,6 +35,11 @@
 - ../scripts/farm_plant_once.py：普通种植与四格混种，默认读取唯一计划 ../data/operation-plan.json。
 - ../scripts/farm_radish_restock.py 与 ../assets/ui/shop/qq-white-radish.png：QQ 白萝卜补货与首格识别模板。
 - ../scripts/farm_radish_xp.py：QQ 白萝卜 5 轮 `种植 → 普通肥 → 有机肥 → 收获` 循环。
+- ../scripts/farm_release_input.swift：动作进程组停止后的左键释放清理。
+- ../scripts/farm_process.py / ../tests/test_process_cleanup.py：动作进程组清理与扫描时段启动判定。
+- ../tests/test_open_qq_farm.py：QQ开窗入口无输入保护测试。
+- ../data/qq-radish-progress.json：运行时成功萝卜轮次。
+- ../data/hamster-inventory-pending.json：运行时仓鼠库存核对标记。
 - ../scripts/farm_qq_round.py：QQ 小程序已打开后的整轮田内串联入口。
 - ../scripts/farm_share_once.py：QQ固定联系人分享、领取奖励并关闭分享页；使用条件见gameplay-rules「每日首次分享」。
 - ../assets/ui/share/：领取文字模板及来源。
@@ -61,5 +72,6 @@
 
 ## 历史
 
+- archive/neat/2026-11-12-continuous-farm-trial.md：本阶段有限续排、库存入口及收尾纠偏记录。
 - archive/README.md：阶段归档索引。
 - archive/：已退出当前工作流的历史阶段。
