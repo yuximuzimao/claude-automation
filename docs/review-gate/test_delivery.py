@@ -559,6 +559,73 @@ class DeliveryTests(unittest.TestCase):
             gate._checks_after(prepared, checks)
 
 
+class AssetTests(unittest.TestCase):
+    setUp = DeliveryTests.setUp
+    git = DeliveryTests.git
+    write = DeliveryTests.write
+    claim = DeliveryTests.claim
+
+    def test_asset_requires_version_bound_verification_and_changed_bytes_invalidate(self):
+        self.request['files'].append('farm/template.png')
+        asset = self.repo / 'farm/template.png'
+        asset.write_bytes(b'\x89PNG\x00old')
+        work = gate.capture_work(self.repo, self.request, 'unattended_change')
+        asset.write_bytes(b'\x89PNG\x00new')
+        claim = self.claim('farm/template.png')
+        assessor = lambda _: {'classification':'review_required','reason':'template affects clicks',
+                              'evidence':[], 'runtime_manifest_required':False,'impact_scope_complete':True}
+        prepared = gate.prepare_delivery(self.repo, work, claim, self.policy, assessor,
+                                         lambda _: {'findings':[]})
+        self.assertEqual(prepared['state'], 'waiting_verification')
+        checks = [{'name':'recognition regression','result':'passed','evidence':'fixture images'}]
+        with self.assertRaisesRegex(gate.GateError, '缺少非文本资产'):
+            gate.complete_delivery(self.repo, work, prepared, self.policy, checks, [], assessor)
+        checks[0]['artifacts'] = {'farm/template.png':'0'*64}
+        with self.assertRaisesRegex(gate.GateError, '资产验证与候选版本'):
+            gate.complete_delivery(self.repo, work, prepared, self.policy, checks, [], assessor)
+        checks[0]['artifacts']['farm/template.png'] = gate._worktree(self.repo,'farm/template.png')['sha256']
+        self.assertEqual(gate.complete_delivery(self.repo, work, prepared, self.policy, checks, [], assessor)['state'], 'delivered')
+        asset.write_bytes(b'\x89PNG\x00later')
+        with self.assertRaises(gate.GateError):
+            gate.complete_delivery(self.repo, work, prepared, self.policy, checks, [], assessor)
+
+    def test_new_staged_asset_cannot_hide_behind_old_worktree_verification(self):
+        asset=self.repo/'farm/template.png'
+        asset.write_bytes(b'\x89PNG\x00A')
+        self.git('add','farm/template.png');self.git('commit','-qm','asset A')
+        self.request['base']=self.git('rev-parse','HEAD').strip()
+        self.request['files'].append('farm/template.png')
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        asset.write_bytes(b'\x89PNG\x00B');self.git('add','farm/template.png')
+        asset.write_bytes(b'\x89PNG\x00A')
+        with self.assertRaisesRegex(gate.GateError,'新增暂存资产与工作区版本不同'):
+            gate.create_candidate(self.repo,work,self.claim('farm/template.png'))
+
+    def test_zero_diff_recovery_uses_complete_version_reviewer_prompt(self):
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        claim=self.claim();claim['runtime']=True
+        candidate=gate.create_candidate(self.repo,work,claim)
+        with mock.patch.object(gate,'_codex_json',return_value={'findings':[]}) as invoke:
+            gate.call_reviewer(candidate)
+        prompt=invoke.call_args.args[0]
+        self.assertTrue(prompt.startswith('完整版本审查'))
+        self.assertIn('基线中已有的可达问题也必须报告',prompt)
+        self.assertNotIn('基线中的历史改动只作上下文，不能算作本次交付',prompt)
+
+    def test_asset_context_also_requires_verification(self):
+        asset = self.repo / 'farm/template.png'
+        asset.write_bytes(b'\x89PNG\x00fixed')
+        self.git('add','farm/template.png'); self.git('commit','-qm','template')
+        self.request['base']=self.git('rev-parse','HEAD').strip()
+        self.request['context'].append('farm/template.png')
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        self.write('farm/worker.py','pyautogui.click(1,2)\n')
+        candidate=gate.create_candidate(self.repo,work,self.claim())
+        receipt=gate.review_candidate(self.repo,work,candidate,lambda _: {'findings':[]})
+        with self.assertRaisesRegex(gate.GateError,'缺少非文本资产'):
+            gate.verify_candidate(self.repo,work,candidate,receipt,[],[{'name':'test','result':'passed','evidence':'code only'}])
+
+
 class ConcurrentScopeTests(unittest.TestCase):
     git = DeliveryTests.git
     write = DeliveryTests.write
@@ -592,6 +659,70 @@ class ConcurrentScopeTests(unittest.TestCase):
         reviewer.assert_called_once()
         self.assertEqual(prepared["state"], "waiting_verification")
         return prepared
+
+    def test_project_boundary_does_not_expand_to_unrelated_files(self):
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        self.write('farm/worker.py','pyautogui.click(1,2)\n')
+        claim=self.exclude(self.claim(),'chat')
+        self.write('chat/current.md','concurrent change\n')
+        prepared=self.prepare(work,claim)
+        self.assertEqual(set(prepared['outside_material']), {'chat'})
+        self.assertEqual(set(prepared['outside_material']['chat']['boundary_changes']), {'chat/current.md'})
+        self.write('chat/new.py','unrelated new module\n')
+        gate._check_candidate(self.repo,work,prepared['candidate'])
+        self.write('farm/unregistered.py','unknown same project\n')
+        with self.assertRaisesRegex(gate.GateError,'范围外'):
+            gate._check_candidate(self.repo,work,prepared['candidate'])
+
+    def test_project_boundary_new_reverse_call_requires_scope_reassessment(self):
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        self.write('farm/worker.py','pyautogui.click(1,2)\n')
+        claim=self.exclude(self.claim(),'chat')
+        prepared=self.prepare(work,claim)
+        self.write('chat/runtime.py',"import subprocess\nsubprocess.run(['python3','farm/worker.py'])\n")
+        def assess(material):
+            changed=material['outside_material']['chat']['boundary_changes']
+            self.assertIn('farm/worker.py',changed['chat/runtime.py']['new_file']['text'])
+            return {'classification':'needs_classification','reason':'reverse farm call',
+                    'evidence':[],'runtime_manifest_required':False,'impact_scope_complete':False}
+        with self.assertRaisesRegex(gate.GateError,'最终风险复核未完成'):
+            gate.complete_delivery(self.repo,work,prepared,self.policy,
+                [{'name':'test','result':'passed','evidence':'fixture'}],[],assess)
+
+    def test_committed_boundary_binary_replacement_invalidates_material(self):
+        asset=self.repo/'chat/asset.bin'
+        asset.write_bytes(b'\x00A');self.git('add','chat');self.git('commit','-qm','asset A')
+        self.request['base']=self.git('rev-parse','HEAD').strip()
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        self.write('farm/worker.py','pyautogui.click(1,2)\n')
+        asset.write_bytes(b'\x00B');self.git('add','chat');self.git('commit','-qm','asset B')
+        candidate=gate.create_candidate(self.repo,work,self.exclude(self.claim(),'chat'))
+        material=gate._outside_material(self.repo,work,candidate)
+        asset.write_bytes(b'\x00C');self.git('add','chat');self.git('commit','-qm','asset C')
+        with self.assertRaisesRegex(gate.GateError,'范围外核查期间内容变化'):
+            gate._check_outside_material(self.repo,work,candidate,material)
+
+    def test_large_independent_files_use_small_boundary_diffs(self):
+        for i in range(8):
+            self.write(f'chat/large{i}.txt', 'unchanged line\n' * 45000)
+        self.git('add','chat'); self.git('commit','-qm','large independent fixtures')
+        self.request['base']=self.git('rev-parse','HEAD').strip()
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        self.write('farm/worker.py','pyautogui.click(1,2)\n')
+        for i in range(8):
+            self.write(f'chat/large{i}.txt', 'unchanged line\n' * 45000 + 'new unrelated label\n')
+        candidate=gate.create_candidate(self.repo,work,self.exclude(self.claim(),'chat'))
+        material=gate._outside_material(self.repo,work,candidate)
+        self.assertLess(len(json.dumps(material)), 30000)
+        self.assertEqual(len(material['chat']['boundary_changes']),8)
+        self.assertIn('new unrelated label',json.dumps(material))
+
+    def test_project_boundary_cannot_exclude_registered_dependency(self):
+        self.request['context'].append('chat/current.md')
+        work=gate.capture_work(self.repo,self.request,'unattended_change')
+        self.write('farm/worker.py','changed\n')
+        with self.assertRaisesRegex(gate.GateError,'不能排除'):
+            gate.create_candidate(self.repo,work,self.exclude(self.claim(),'chat'))
 
     def test_unrelated_worktree_then_index_then_commit_preserves_review(self):
         work = gate.capture_work(self.repo, self.request, "unattended_first_run")

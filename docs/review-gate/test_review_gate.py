@@ -127,15 +127,17 @@ class ReviewGateTests(unittest.TestCase):
             with self.subTest(result=result), self.assertRaises(gate.GateError):
                 gate.review_candidate(self.repo, work, candidate, lambda _: result)
 
-    def test_symlink_and_binary_are_refused(self):
+    def test_symlink_refused_binary_fingerprinted(self):
         (self.repo / "link.py").symlink_to(self.repo / "worker.py")
         self.request["files"] = ["link.py"]
         with self.assertRaises(gate.GateError):
             gate.snapshot(self.repo, self.request)
         (self.repo / "binary.py").write_bytes(b"\xff\x00")
         self.request["files"] = ["binary.py"]
-        with self.assertRaises(gate.GateError):
-            gate.snapshot(self.repo, self.request)
+        value = gate.snapshot(self.repo, self.request)["files"]["binary.py"]["worktree"]
+        self.assertEqual(value["kind"], "binary")
+        self.assertEqual(value["size"], 2)
+        self.assertNotIn("text", value)
 
     def test_reviewer_disables_discovered_skill_instructions_and_tools(self):
         def invoke(argv, **kwargs):
