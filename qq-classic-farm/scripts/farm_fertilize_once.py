@@ -12,6 +12,7 @@ import numpy as np
 from PIL import Image
 
 from anchor_locator import load_gray, normalized_cross_correlation
+from farm_level_up import dismiss_level_up
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,10 +43,11 @@ def template_center(region, template, origin, threshold):
     return (origin[0] + x + width / 2, origin[1] + y + height / 2)
 
 
-def fertilize_once(click, locate, land):
+def fertilize_once(click, locate, land, after_work=lambda: None):
     work = locate("work")
     if work is not None:
         click(work, 1000)
+        after_work()
     click(land, 350)
     checked, checkbox, fertilizer = locate("panel")
     if not checked:
@@ -208,7 +210,11 @@ def main():
 
         if args.execute:
             locate = fertilizer_locator(lambda rect: capture_region(canvas, rect), platform, scene["recognition"][platform], args.kind)
-            worked = fertilize_once(click, locate, land)
+            def after_work():
+                if platform == "qq":
+                    dismiss_level_up(lambda rect: capture_region(canvas, rect), click)
+
+            worked = fertilize_once(click, locate, land, after_work)
             result = {"status": "fertilizer_click_sent", "onekey_work_clicked": worked, "kind": args.kind}
         else:
             click_batch(args.click_helper, "--preflight", target, [

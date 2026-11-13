@@ -31,6 +31,7 @@
 - operation-sop.md：按次操作决策与脚本组合入口。
 
 - ../scripts/farm_fertilize_once.py：带一键务农和勾选确认的普通肥/QQ 有机肥；右侧肥桶模板 ../assets/ui/fertilizer/qq-organic.png。
+- ../scripts/farm_level_up.py / ../assets/ui/level-up/ / ../tests/test_level_up.py：QQ 升级提示识别、局部模板和离线回归。
 - ../scripts/farm_harvest_once.py：实种记录校验、四格固定点和手形「一键收获」。
 - ../tests/test_harvest_record.py：记录拒绝、施肥失败停止及固定点点击的无输入测试。
 - ../scripts/farm_plant_once.py：普通种植与四格混种，默认读取唯一计划 ../data/operation-plan.json。

@@ -12,8 +12,9 @@ import numpy as np
 from PIL import Image
 
 from farm_daily_clicks import farm_target, find_point, return_home_point
-from farm_fertilize_once import FertilizerStop, click_batch
+from farm_fertilize_once import FertilizerStop, capture_region, click_batch
 from farm_capture import capture_window
+from farm_level_up import dismiss_level_up
 from farm_process import run_action, ActionCancelled, ActionCleanupError
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -81,7 +82,7 @@ def land_route(layout):
             for v in (range(3,-1,-1) if row%2==0 else range(4))]
 
 
-def sweep(click,inspect,drag,go_home,entry,first_visit,next_points,plot24,progress,limit=100):
+def sweep(click,inspect,drag,go_home,entry,first_visit,next_points,plot24,progress,limit=100,after_gesture=lambda: None):
     click(entry,650);click(first_visit,850)
     last_menu=None
     for index in range(limit):
@@ -95,11 +96,13 @@ def sweep(click,inspect,drag,go_home,entry,first_visit,next_points,plot24,progre
             # Prefer grass. If it is absent but bugs are available, use bugs once.
             if 'grass' in menu['actions']:
                 progress['stage']='drag_grass';drag(menu['actions']['grass']);progress['grass_gestures']+=1
+                after_gesture()
                 progress['stage']='inspect_after_grass';click(plot24,650);menu=inspect();last_menu=menu
                 if menu['state']=='exhausted':go_home();return 'shared_quota_exhausted'
                 if menu['state']=='unknown':raise ValueError('AMBIGUOUS_ACTION_MENU')
             if menu['state']=='actionable' and 'bug' in menu['actions']:
                 progress['stage']='drag_bugs';drag(menu['actions']['bug']);progress['bug_gestures']+=1
+                after_gesture()
                 progress['stage']='inspect_after_bugs';click(plot24,650);last_menu=inspect()
                 if last_menu['state']=='exhausted':go_home();return 'shared_quota_exhausted'
                 if last_menu['state']=='unknown':raise ValueError('AMBIGUOUS_ACTION_MENU')
@@ -161,7 +164,8 @@ def main():
         def home():click(return_home_point(frame,'qq',layout),800)
         reason=sweep(click,inspect,drag,home,find_point(fixed['home']['points'],'qq','friends'),
                      find_point(scenes['friend-list']['views']['first-visit']['points'],'qq','first-visit'),
-                     next_points,path[0],progress,args.max_visits)
+                     next_points,path[0],progress,args.max_visits,
+                     after_gesture=lambda: dismiss_level_up(lambda rect: capture_region(target['frame'], rect), click))
         print(json.dumps({'status':'completed' if reason=='shared_quota_exhausted' else 'stopped_returned_home','reason':reason,'shared_remaining':0 if reason=='shared_quota_exhausted' else None,**progress},ensure_ascii=False))
         return 0 if reason=='shared_quota_exhausted' else 2
     except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError,FertilizerStop,ActionCancelled,ActionCleanupError) as exc:

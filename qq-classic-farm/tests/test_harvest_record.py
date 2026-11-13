@@ -83,11 +83,14 @@ def test_fixed_star_click_only_after_maturity_then_hand(record, monkeypatch):
     argv.append('--mature-confirmed')
     monkeypatch.setattr(harvest,'farm_target',lambda *a:(None,{'frame':{}}))
     monkeypatch.setattr(harvest,'capture_region',lambda *a: pytest.fail('star image captured'))
+    level_checks = []
+    monkeypatch.setattr(harvest, 'dismiss_level_up', lambda *a: level_checks.append(len(clicks)))
     monkeypatch.setattr(harvest,'hand_point',lambda *a:((297,825),.95))
     clicks=[]
     monkeypatch.setattr(harvest,'click_batch',lambda helper,mode,target,actions:clicks.extend(actions))
     monkeypatch.setattr(harvest,'sleep',lambda _:None)
     assert harvest.main()==0
+    assert level_checks == [1, 2]
     assert [(a['x'],a['y']) for a in clicks]==[(338,535),(297,825)]
 
 

@@ -12,6 +12,7 @@ from farm_capture import FarmCapture
 from farm_daily_clicks import farm_target
 from farm_fertilize_once import FertilizerStop, capture_region, click_batch
 from farm_geometry import WindowFrame
+from farm_level_up import dismiss_level_up
 from farm_plant_once import read_plan
 from farm_vision import match_anchor
 
@@ -85,6 +86,7 @@ def main() -> int:
     parser.add_argument("--click-helper", type=Path, default=ROOT / "_sandbox/farm_click_batch")
     args = parser.parse_args()
     special_clicks = 0
+    ordinary_click_sent = False
 
     try:
         platform = args.platform
@@ -119,16 +121,24 @@ def main() -> int:
         def action(point, delay=0):
             return {"x": point[0], "y": point[1], "delay_ms": delay}
 
+        def check_level_up():
+            if platform == 'qq':
+                dismiss_level_up(capture, lambda point, delay: click_batch(
+                    args.click_helper, '--execute', target, [action(point, delay)]))
+
         hand, score = locate_hand()
         result = {"status": "preflight_ok_no_click", "button_score": round(score, 3), "special_plots": plots}
         if args.execute:
             for star in stars:
                 click_batch(args.click_helper, "--execute", target, [action(star, 220)])
                 special_clicks += 1
+                check_level_up()
             if stars:
                 hand, score = locate_hand()
             click_batch(args.click_helper, "--execute", target, [action(hand)])
+            ordinary_click_sent = True
             sleep(HARVEST_SETTLE_SECONDS)
+            check_level_up()
             result.update(status="harvest_click_sent_unverified", button_score=round(score, 3),
                           special_clicks_sent=special_clicks, settle_seconds=HARVEST_SETTLE_SECONDS)
         else:
@@ -137,7 +147,8 @@ def main() -> int:
         return 0
     except (FertilizerStop, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
         print(json.dumps({"status": "rejected_rewrite_required" if args.check_plan else "stopped",
-                          "reason": str(exc), "special_clicks_sent": special_clicks},
+                          "reason": str(exc), "special_clicks_sent": special_clicks,
+                          "ordinary_click_sent": ordinary_click_sent},
                          ensure_ascii=False))
         return 2
 

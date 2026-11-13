@@ -77,6 +77,7 @@
 | `tests/test_home_check.py` / `tests/check_home_screenshots.py` / `tests/home-screenshot-corpus.json` | 首页边界测试与本地历史截图回放清单 |
 | `scripts/farm_window.py` | 小程序开关 |
 | `scripts/farm_fertilize_once.py` / `assets/ui/fertilizer/qq-organic.png` | 普通肥与 QQ 有机肥图片定位 |
+| `scripts/farm_level_up.py` / `assets/ui/level-up/` / `tests/test_level_up.py` | QQ 经验动作后的升级提示局部识别及离线验证 |
 | `scripts/farm_harvest_once.py` | 实种记录离线校验、四格固定点与手形一键收获 |
 | `tests/test_harvest_record.py` | 实种记录前置拒绝、成熟条件及固定点收获的无输入测试 |
 | `scripts/farm_plant_once.py` | 普通种植与四格混种 |

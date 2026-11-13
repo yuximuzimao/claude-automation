@@ -74,8 +74,11 @@ def test_daily_task_resolves_same_dual_button_target(monkeypatch, capsys):
     monkeypatch.setattr(friends, 'read_interaction_target', lambda *a: [257, 820])
     monkeypatch.setattr(daily, 'return_home_point', lambda *a: [550, 840])
     monkeypatch.setattr(daily, 'click_batch', lambda *a: events.extend(a[-1]))
+    level_checks = []
+    monkeypatch.setattr(daily, 'dismiss_level_up', lambda *a: level_checks.append(len(events)))
     assert daily.run_daily('test', task_steps) == 0
     assert [events[2]['x'], events[2]['y']] == [257, 820]
+    assert level_checks == [3]
     assert not any(e['x'] == 297 and e['y'] == 820 for e in events)
     events.clear()
     monkeypatch.setattr(friends, 'read_interaction_target', lambda *a: None)

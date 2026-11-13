@@ -7,8 +7,9 @@ from pathlib import Path
 import subprocess
 
 from farm_capture import capture_window
-from farm_fertilize_once import FertilizerStop, click_batch, farm_canvas
+from farm_fertilize_once import FertilizerStop, capture_region, click_batch, farm_canvas
 from farm_geometry import WindowFrame
+from farm_level_up import dismiss_level_up
 from farm_vision import match_anchor
 
 
@@ -52,7 +53,7 @@ def farm_target(registry_binary, platform, layout):
     return frame, target
 
 
-def run_daily(description, steps_for):
+def run_daily(description, steps_for, *, after_experience=()):
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("--platform", required=True, choices=("qq", "wechat"))
     parser.add_argument("--execute", action="store_true", help="Post clicks. Default is a no-click preflight.")
@@ -69,7 +70,12 @@ def run_daily(description, steps_for):
         frame, target = farm_target(args.registry, platform, layout)
 
         if args.execute:
-            for point, delay in steps:
+            def click(point, delay):
+                x, y = point
+                click_batch(args.click_helper, "--execute", target, [{"x": x, "y": y, "delay_ms": delay}])
+
+            for index, (point, delay) in enumerate(steps):
+                earns_experience = point == "friend-action" or index in after_experience
                 if point == "friend-action":
                     from farm_friend_sweep import read_interaction_target
                     point = read_interaction_target(target, platform, anchors["scenes"]["friend-farm-navigation"])
@@ -77,9 +83,10 @@ def run_daily(description, steps_for):
                         raise ValueError("FRIEND_ACTION_NOT_FOUND")
                 if point is None:
                     point = return_home_point(frame, platform, layout)
-                x, y = point
-                click_batch(args.click_helper, "--execute", target, [{"x": x, "y": y, "delay_ms": delay}])
+                click(point, delay)
                 clicks_sent += 1
+                if earns_experience and platform == "qq":
+                    dismiss_level_up(lambda rect: capture_region(target["frame"], rect), click)
             status = "daily_clicks_sent_unverified"
         else:
             click_batch(args.click_helper, "--preflight", target, [

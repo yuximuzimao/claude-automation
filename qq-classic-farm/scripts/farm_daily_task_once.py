@@ -23,4 +23,4 @@ def task_steps(anchors, platform):
 
 
 if __name__ == "__main__":
-    raise SystemExit(run_daily(__doc__, task_steps))
+    raise SystemExit(run_daily(__doc__, task_steps, after_experience=(6,)))

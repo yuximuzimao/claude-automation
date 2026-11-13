@@ -10,6 +10,7 @@ import subprocess
 from anchor_locator import load_gray
 from farm_daily_clicks import farm_target, find_point, return_home_point
 from farm_fertilize_once import FertilizerStop, capture_region, click_batch, template_center
+from farm_level_up import dismiss_level_up
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,7 +33,7 @@ def read_interaction_target(target, platform, navigation):
     return interaction_target(capture_region(target["frame"], strip), templates, strip[:2])
 
 
-def sweep(click, read_action, go_home, entry, first_visit, next_points, limit=MAX_VISITS):
+def sweep(click, read_action, go_home, entry, first_visit, next_points, limit=MAX_VISITS, after_interaction=lambda: None):
     click(entry, 650)
     click(first_visit, 850)
     interactions = 0
@@ -43,6 +44,7 @@ def sweep(click, read_action, go_home, entry, first_visit, next_points, limit=MA
             return "no_action", interactions
         click(action, 650)
         interactions += 1
+        after_interaction()
         if index + 1 < limit:
             click(next_points[min(index, 2)], 850)
     go_home()
@@ -92,7 +94,12 @@ def main():
             print(json.dumps({"status": "preflight_ok_no_click", "clicks_sent": 0}))
             return 0
 
-        reason, interactions = sweep(click, read_action, go_home, entry, first_visit, next_points)
+        def after_interaction():
+            if platform == 'qq':
+                dismiss_level_up(lambda rect: capture_region(target['frame'], rect), click)
+
+        reason, interactions = sweep(click, read_action, go_home, entry, first_visit, next_points,
+                                     after_interaction=after_interaction)
         status = "return_home_click_sent" if reason == "no_action" else "stopped_return_home_click_sent"
         print(json.dumps({"status": status, "reason": reason, "interaction_clicks": interactions, "clicks_sent": clicks}))
         return 0 if reason == "no_action" else 2
