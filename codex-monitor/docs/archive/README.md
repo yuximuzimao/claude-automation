@@ -14,4 +14,4 @@
 | 2026-07-17 | [invalid-early-project-candidate](./2026-07-17-invalid-early-project-candidate/design.md) | 无效早期任务名不再阻断真实项目归因 |
 | 2026-07-22 | [按轮次归属与 neat 收尾](./2026-07-22-turn-attribution-and-neat-summary.md) | 主目录/CodexPro 工作流按真实项目操作归属，neat 只纠正弱归属 |
 | 2026-11-06 | [Autoloop 适配层与桌面调度运行模型](../../../docs/archive/2026-11-06-autoloop-adapter-runtime-design/README.md) | 第 1、2 阶段架构讨论已确认；第 3 阶段任务入口映射待讨论 |
-| 2026-11-09 | [Status Island 双设备部署与售后职责边界](../../../docs/archive/2026-11-09-status-island-dual-device-design/README.md) | 双设备职责、登录 / Session 同步及账号数据归属已确认；第 3 阶段继续讨论本地浏览器桥接 |
+| 2026-11-09 至 11-13 | [Status Island 双设备部署与通信恢复设计](../../../docs/archive/2026-11-09-status-island-dual-device-design/README.md) | 双设备职责、登录 / Session 同步、方案 B WebSocket、LaunchAgent、心跳、重连、离线提醒和正常恢复规则已确认；下一步讨论指令确认与幂等 |

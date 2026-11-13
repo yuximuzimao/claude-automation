@@ -119,7 +119,7 @@ Status Island 是在原用量监控应用基础上扩展的双设备桌面状态
 
 ## 8. Status Island 规划入口
 
-- 当前状态：第 1、2 阶段架构讨论已确认；第 3 阶段任务入口映射进行中。尚未安装 Autoloop、配置 Tailscale、接入生产任务或修改 UI。
+- 当前状态：第 1、2 阶段架构讨论已确认；第 3 阶段任务入口映射进行中。已确定方案 B（黑苹果主动建立与 Mac mini 的双向 WebSocket 连接）、黑苹果用户级 LaunchAgent、Ping/Pong 30 秒间隔 / 60 秒失效超时、30 / 60 / 120 秒后封顶每 120 秒持续重连；每次重连检查未完成指令、运行中任务和队列，实例 ID 变化或状态证据缺口时执行完整快照核对。登录窗口关闭后仍须用户明确点击「取消」才能释放资源锁。连续离线 10 分钟由黑苹果复用现有快捷指令创建一次提醒，恢复后不自动完成；第一版不建设 HTTP 降级通道。下一步讨论跨设备指令确认与幂等。尚未安装 Autoloop、配置 Tailscale、接入生产任务或修改 UI。
 - 当前待办与下一会话主题见 `tasks/todo.md`；长期方向与 UI 技术边界见 `docs/FUTURE.md`。
 - 双设备部署模型、售后人工 / 自动操作边界和详细恢复点见 [2026-11-09 归档](../../docs/archive/2026-11-09-status-island-dual-device-design/README.md)。
 - 历史讨论：初始开源研究见 `../../docs/archive/2026-11-04-agent-autoloop-status-island/README.md`；第 1、2 阶段讨论见 `../../docs/archive/2026-11-06-autoloop-adapter-runtime-design/README.md`。

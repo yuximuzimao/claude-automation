@@ -15,7 +15,7 @@
 - [2026-11-04-agent-autoloop-status-island/](2026-11-04-agent-autoloop-status-island/README.md) — Agent Autoloop 开源分析、共享桌面串行调度、无人监管自动化对抗性审查，以及将 Codex Monitor 扩展为 Status Island 的用户决定、助手建议和下一阶段设计待办。
 - [2026-11-05-chatgpt-app-external-chrome/](2026-11-05-chatgpt-app-external-chrome/README.md) — ChatGPT 桌面 App 外部 Chrome Native Messaging 注册、Profile 识别修复，以及 Browser 插件读取/接管/DOM 验证；CUA 备用路径和设置页状态保留为未处理边界。
 - [2026-11-06-autoloop-adapter-runtime-design/](2026-11-06-autoloop-adapter-runtime-design/README.md) — Autoloop 适配层与统一桌面调度运行模型的两阶段讨论结论、项目职责边界、队列规则及下一阶段顺序修正。
-- [2026-11-09-status-island-dual-device-design/](2026-11-09-status-island-dual-device-design/README.md) — Status Island 双设备部署模型、黑苹果人工操作与 Mac mini 自动执行分工、售后单一业务服务、Session 同步方向、限时注入许可和下一阶段恢复点。
+- [2026-11-09-status-island-dual-device-design/](2026-11-09-status-island-dual-device-design/README.md) — Status Island 双设备部署模型、黑苹果人工操作与 Mac mini 自动执行分工、售后登录 / Session 同步、方案 B 双向 WebSocket、心跳与自动重连、长期离线提醒及任务恢复规则。
 
 - [2026-11-11-review-gate-concurrent-scope/](2026-11-11-review-gate-concurrent-scope/README.md) — Review Gate 无关并发范围修复：89 项回归、24 项新增用例、两项独立审查 finding 修复及最终空 findings；保留原农场 blocked 证据，不重置 Work。
 - [2026-11-13-scheduling-timezone-standard/](2026-11-13-scheduling-timezone-standard/README.md) — 建立工作区统一定时任务时间规范，复用农场 datetime/zoneinfo 与 next_run_at 读回经验；核验农场现役任务，记录群聊 heartbeat 时区事故与离线边界测试。
