@@ -10,7 +10,7 @@
 
 具体工具、完整参数、成功返回值、异常截图/关闭和未实现入口，统一见 `docs/execution-tools.md`。进入实际操作前按该页区分已具备能力与缺口，不临时选择通用桌面工具替代缺失流程。
 
-用户明确要求定时收种、定时日常或自动安排下一轮时，先读 `docs/automation-trial.md` 的有界试验规则；当前轮次只见CURRENT。
+用户明确要求定时收种、定时日常或自动安排下一轮时，先读 `docs/automation-trial.md` 的有界试验规则；通用时间转换与排期读回唯一 owner 见工作区根 `docs/scheduling.md`；当前轮次只见CURRENT。
 
 ## 当前运行边界
 

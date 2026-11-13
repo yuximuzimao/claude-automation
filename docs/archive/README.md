@@ -18,3 +18,4 @@
 - [2026-11-09-status-island-dual-device-design/](2026-11-09-status-island-dual-device-design/README.md) — Status Island 双设备部署模型、黑苹果人工操作与 Mac mini 自动执行分工、售后单一业务服务、Session 同步方向、限时注入许可和下一阶段恢复点。
 
 - [2026-11-11-review-gate-concurrent-scope/](2026-11-11-review-gate-concurrent-scope/README.md) — Review Gate 无关并发范围修复：89 项回归、24 项新增用例、两项独立审查 finding 修复及最终空 findings；保留原农场 blocked 证据，不重置 Work。
+- [2026-11-13-scheduling-timezone-standard/](2026-11-13-scheduling-timezone-standard/README.md) — 建立工作区统一定时任务时间规范，复用农场 datetime/zoneinfo 与 next_run_at 读回经验；核验农场现役任务，记录群聊 heartbeat 时区事故与离线边界测试。

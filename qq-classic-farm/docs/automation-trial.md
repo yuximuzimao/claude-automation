@@ -46,9 +46,9 @@ CURRENT或pending要求核清仓鼠购买时，转[操作SOP§6](operation-sop.m
 
 ## 续排与验收
 
-只有上述收尾完成才通过automation_update更新同一任务qq-11-11-21-13，不创建并行收种任务，不直接改TOML或数据库。保留projectId/local/gpt-6.1-terra/medium；单次COUNT=1。电脑本地目标时间先用farm_process校验，再完整转UTC生成规则，包含跨日；应用排期显示核对电脑本地时刻，提示词只引用目标和现役入口。批次、实种记录、库存、计划和轮次只更新CURRENT及各数据owner；提示词保持目标和入口引用，不复制这些字段，也不继承旧批次命令。
+只有上述收尾完成才通过automation_update更新同一任务qq-11-11-21-13，不创建并行收种任务，不直接改TOML或数据库。保留projectId/local/gpt-6.1-terra/medium；单次COUNT=1。先用farm_process校验农场业务避让，再按工作区共享[定时任务时间规范](../../docs/scheduling.md)转换并核验实际排期；提示词只引用目标和现役入口。批次、实种记录、库存、计划和轮次只更新CURRENT及各数据owner；提示词保持目标和入口引用，不复制这些字段，也不继承旧批次命令。
 
-收种每轮成功后按本批实际种植时间计算下一轮；本次试验未满3次则更新下一轮ACTIVE，满3次后仅保存下一候选PAUSED。读回实际配置和next_run_at并转换本地时间核对；PAUSED无next_run_at正常，候选规则离线核对，不宣称验证了第3轮真实触发。工具失败或读回不一致则暂停收种并报告，不创建重复任务。
+收种每轮成功后按本批实际种植时间计算下一轮；本次试验未满3次则更新下一轮ACTIVE，满3次后仅保存下一候选PAUSED。时间转换、实际排期读回及PAUSED候选边界统一按工作区共享[定时任务时间规范](../../docs/scheduling.md)执行；本项目的3次试跑、异常不续排和不创建重复任务仍以本页为准。
 
 CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒UID、任务ID/时间/状态及成功计数。新种子顺序仅临时确认时该项不能提前记完整通过，待下一次重开核实后补齐；本次3次完整通过后再请用户评估low，不自行切换。日常任务保持独立，原每日范围不变；共享开窗保护修复照常生效。
 
@@ -59,9 +59,9 @@ CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒U
 1. 从CURRENT取收种任务ID，通过终端`python3.13`的`tomllib`读取`/Users/chat/.codex/automations/<id>/automation.toml`，保存完整现有字段；应用侧用`automation_update(mode="view", id=...)`查看。仅更新原收种任务，不触碰独立日常。
 2. 在Codex用`functions.exec`从`ALL_TOOLS`查找`automation_update`的实际工具名/参数说明（当前为`mcp__codex_app__automation_update`），再调用`tools.<实际工具名>`。工具不可用即停止本次续排，不能改TOML/SQLite代替。
 3. update参数包含`mode="update"`、id、kind、name、prompt、status、rrule、model、reasoningEffort、executionEnvironment、projectId；从现有配置转换reasoning_effort/execution_environment/target.project_id，保留其他已配置字段。name可显示排期日期；prompt只保留目标和现役入口。轮次、实种路径、计划、计数写CURRENT，不再复制到prompt。ACTIVE/PAUSED按本页当前试验边界设置，不从旧prompt照搬历史批次。
-4. 用Python `datetime`与`zoneinfo.ZoneInfo('Asia/Shanghai')`解析目标时刻，`astimezone(timezone.utc)`得到含跨日的UTC年月日时分秒，再按应用schema生成单次COUNT=1规则；不得只改小时、不改日期。工具返回成功只说明保存，仍须读回。
-5. 用`tomllib`重新读取完整配置；用Python `sqlite3.connect('file:/Users/chat/.codex/sqlite/codex.db?mode=ro', uri=True)`查询`automations`中该id的status/rrule/model/reasoning_effort/next_run_at，以`datetime.fromtimestamp(next_run_at/1000, ZoneInfo('Asia/Shanghai'))`核对目标本地时间。只读连接，不执行UPDATE。ACTIVE必须匹配实际next_run_at；PAUSED为空时仅校验候选规则，不声称未来已排入执行队列。
-6. 读回失败/字段不符时通过同一应用工具暂停该收种任务，报告哪一字段无法确认，不新建重复任务。CURRENT只有读回完成后才记排期已验证；任务保存不等于已实际执行。
+4. 目标时间转换、单次COUNT=1规则参数生成及夏令时边界统一按工作区共享[定时任务时间规范](../../docs/scheduling.md)处理；不得心算时区或只改小时。工具返回成功只说明保存，仍须读回。
+5. 创建/更新后按工作区共享[定时任务时间规范](../../docs/scheduling.md)只读核验实际next_run_at；本项目任务ID、配置字段和模型参数仍按上方步骤1—3读回。
+6. 排期不匹配时按共享规范通过官方工具暂停本次新建/修改的收种任务并报告；CURRENT只有读回完成后才记排期已验证，任务保存不等于已实际执行。
 
 现有工具和规则能支持Agent手工编排续排，但连续运行的完整自然运行尚须验收，进度见Todo。上述能力说明不构成这轮文档审查中的实际调度授权。
 
@@ -73,4 +73,4 @@ CURRENT每轮登记实际动作、实种、库存差额、计划校验、提醒U
 
 ## 独立日常续排
 
-日常任务按operation-sop的固定日常范围执行，不收种、不购买仓鼠。完整完成并关闭农场、回写当天记录后，将自己的同一任务续排到下一个自然日22:00（Asia/Shanghai），不修改收种任务。使用上节同一automation_update及UTC转换、数据库读回流程；日常任务ID从CURRENT取。每次仍为COUNT=1；未满本次3次测试则ACTIVE，满3次暂停。异常不续排，不补跑错过日期。两个任务临近时遵循现役桌面避让规则，不并行操作桌面。
+日常任务按operation-sop的固定日常范围执行，不收种、不购买仓鼠。完整完成并关闭农场、回写当天记录后，将自己的同一任务续排到下一个自然日22:00（Asia/Shanghai），不修改收种任务。使用上节同一automation_update；时间转换与数据库读回按工作区共享[定时任务时间规范](../../docs/scheduling.md)执行，日常任务ID从CURRENT取。每次仍为COUNT=1；未满本次3次测试则ACTIVE，满3次暂停。异常不续排，不补跑错过日期。两个任务临近时遵循现役桌面避让规则，不并行操作桌面。

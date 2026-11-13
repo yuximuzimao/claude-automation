@@ -12,6 +12,7 @@
 - ../README.md：项目概览与独立脚本用法。
 - 工作区根 _sandbox/farm-coordinate-review.html：QQ / 微信统一坐标核对页。
 - 工作区根 docs/reminders.md：共享 Mac 提醒事项接入与排查。
+- 工作区根 docs/scheduling.md：定时任务时间转换与排期核验唯一规则。
 
 ## 独立操作
 

@@ -66,6 +66,7 @@ How to apply:
 - Element UI 弹窗/下拉/表格操作坑位 → 两个项目的 `docs/INDEX.md §6`
 - 浏览器自动化通用规范 → memory: `feedback_browser_automation.md`
 - **读 JS 文件 >200行**：禁止直接 Read 全文，必须先 `smart_outline` 定位，再 `smart_unfold` 展开目标函数
+- 定时任务时间设置与排期核验唯一 owner → `docs/scheduling.md`；目标保留完整日期和 IANA 时区，按工具语义转换并读回核验；工具支持 `durable: true` 时创建 cron 必须设置。
 
 ## 并行执行规则
 
