@@ -22,7 +22,7 @@
 - ../tests/test_home_check.py：首页边界测试。
 - ../tests/check_home_screenshots.py / ../tests/home-screenshot-corpus.json：本地已存截图回放与校验清单。
 
-- automation-trial.md：连续medium收种与日常续排试验操作边界。
+- automation-trial.md：收种与日常的有限续排规则。
 - inventory-sop.md：QQ仓库捕获、AI读图、库存校验回写的完整操作。
 - ../data/.inventory-apply.lock：库存文件提交锁。
 - ../scripts/farm_inventory.py / ../tests/test_inventory.py：库存入口与测试。

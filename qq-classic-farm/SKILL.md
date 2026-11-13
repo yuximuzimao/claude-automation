@@ -57,7 +57,7 @@
 | `scripts/farm_inventory.py` / `tests/test_inventory.py` | QQ完整库存捕获和校验回写入口及无输入测试 |
 | `assets/ui/warehouse/` | 仓库标题/种子页模板及真实截图来源 |
 | `docs/execution-tools.md` | 具体工具调用、返回判据、诊断/退出与缺失能力 |
-| `docs/automation-trial.md` | 连续medium自动规划与续排试验边界 |
+| `docs/automation-trial.md` | 收种与日常的有限续排规则 |
 | `docs/archive/neat/2026-11-12-continuous-farm-trial.md` | 本阶段收种、库存入口和有限续排试验归档 |
 | `docs/archive/neat/2026-11-12-daily-zero-review-closeout.md` | 日常灰零、Review收敛及连续试跑阶段归档 |
 | `docs/CURRENT.md` | 当前平台状态、最近现场与现行计划 |
