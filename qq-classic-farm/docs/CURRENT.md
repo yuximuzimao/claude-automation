@@ -4,7 +4,7 @@
 
 ## 平台与最近操作
 
-- QQ：2026-11-16 13:12 按用户授权尝试打开农场，开窗返回 `farm_opened`，但 `farm_home_check.py --live --prepare` 因「牧歌初启」版本公告弹窗返回 `ready_for_input=false`、`state=unknown_or_non_home`。未点击弹窗、未进入仓库或执行田内动作；随后 `farm_window.py close --platform qq --execute` 返回 `farm_closed`。QQ主程序与群聊窗口保留。证据截图见 `_sandbox/qq-farm-unknown-state-20261116-131242-414784.png`。
+- QQ：2026-11-16 13:12 按用户授权尝试打开农场，开窗返回 `farm_opened`，但 `farm_home_check.py --live --prepare` 因「牧歌初启」版本公告弹窗返回 `ready_for_input=false`、`state=unknown_or_non_home`。未点击弹窗、未进入仓库或执行田内动作；随后 `farm_window.py close --platform qq --execute` 返回 `farm_closed`。QQ主程序与群聊窗口保留。证据截图已保存为 `assets/ui/home/qq-update-announcement-reference.png`；处理规则见2026-11-16归档。
 - 微信仍sealed，QQ土地7紫晶/17金，最近确认等级110级。
 
 ## 当前田内实种

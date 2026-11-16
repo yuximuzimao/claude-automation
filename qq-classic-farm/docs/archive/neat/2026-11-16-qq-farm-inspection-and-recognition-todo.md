@@ -6,7 +6,7 @@
 
 - 2026-11-16 13:12（Asia/Shanghai）运行 `farm_process.py`，返回 `allowed_start=true`；激活已运行的 QQ，`farm_window.py open --platform qq --execute` 返回 `farm_opened`。
 - `farm_home_check.py --live --prepare` 返回退出码 2，`ready_for_input=false`、`visual_ready=false`、`state=unknown_or_non_home`。只读截图显示农场首页上覆盖「牧歌初启」版本更新公告弹窗，右上角有关闭控件。该项目目前没有已验收的通用公告/遮罩关闭入口；按现役 SOP 未猜坐标点击，也未继续进入仓库或田内操作。
-- 异常证据截图：工作区根 `_sandbox/qq-farm-unknown-state-20261116-131242-414784.png`。
+- 原始现场截图已保存在项目资产 `assets/ui/home/qq-update-announcement-reference.png`（603×1111，SHA-256 `594f542e00ca22f90a80125bc42de2f57ec6837f6b2ef5fa3739316392a83432`）；工作区根 `_sandbox/qq-farm-unknown-state-20261116-131242-414784.png` 保留原始取证副本。截图底部明确显示「点击空白处关闭」。
 - 随后 `farm_window.py close --platform qq --execute` 返回 `farm_closed`。窗口列表确认 QQ 主窗口和「魔兽世界无限+时光服玩家群」仍在；QQ 主程序未退出。
 - 本轮没有成功进入仓库种子页，没有完成仓库名称/数量全量读取；没有收获、种植、施肥、日常或购买动作。没有修改库存账目、唯一种植计划或白萝卜补货脚本。
 
@@ -25,6 +25,8 @@
 - `scripts/farm_fertilize_once.py` 将控件模板转灰度，在限定 ROI 内计算 NCC 峰值，并按各控件阈值决定是否可点击。例如肥桶约0.90、勾选状态0.90/0.92、提示0.94、一键务农约0.86。
 - `scripts/farm_vision.py` 的 `match_anchor` 复用同一 NCC 算法，结合局部 ROI 和多尺度缩放，用于手形收获等锚点。
 - `scripts/farm_plant_once.py` 也使用 NCC 识别种植栏第一页锚点和四格确认按钮，但目标种子目前仍按计划页槽坐标点击；没有确认所选种子身份的图标识别。
+
+用户确认该弹窗是标准游戏更新公告弹窗；以后若开窗时出现，应点击弹窗下方空白处关闭（不是右上角叉号），再继续检测土地匹配度。拟将开窗检查顺序调整为：先识别该更新弹窗→命中则点击下方空白处关闭→再执行现有土地/首页匹配度检查。本轮只保存截图和记录行为，不修改开窗或首页检测脚本；由下一会话实施。
 
 用户要求将「种植栏种子图标识别方案」列为下一会话优先讨论项。先讨论是否复用种子贴图建立本地、确定性的识别；先用历史截图离线验证，讨论完成前不改真机种植脚本。
 
