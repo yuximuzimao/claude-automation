@@ -1234,6 +1234,10 @@ function renderBody(item, sim, mode) {
     ${sim.decision.aiPowered ? `<span class="ai-badge">🤖 AI</span>` : ''}
   </div>
   <div class="decision-box-reason">${h(sim.decision.reason || '')}</div>
+  ${sim.decision.manualInstructions?.length ? `
+  <ol class="decision-box-instructions">
+    ${sim.decision.manualInstructions.map(instruction => `<li>${h(instruction)}</li>`).join('')}
+  </ol>` : ''}
   ${sim.decision.rulesApplied && sim.decision.rulesApplied.length ? `
   <div class="rules-list">
     ${sim.decision.rulesApplied.map(r => `<span class="rule-item">📖 ${h(r.doc)} §${h(r.section||'')}：${h(r.summary||'')}</span>`).join('')}

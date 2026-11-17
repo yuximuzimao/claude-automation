@@ -61,7 +61,6 @@ entry: cli.js
 | `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
 | `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
 | `docs/automation-policy.md` | 当前自动分支授权、执行前独立证明、统计来源与变更规则 | 查/改自动处理或统计口径时 |
-| `docs/superpowers/archive/README.md` | 已完成历史阶段索引；只用于追溯，不作为当前实施依据 | neat 收尾或需要回溯已完成阶段时 |
 | `lib/server/after-sales-branch-history.js` | 固定售后分支注册表、最近 30 天去重分类和备注脱敏汇总；不同原因、不同最小结果分别累计 | 查分支清单或历史计数时 |
 | `lib/server/after-sales-auto-gate.js` | 当前唯一自动门禁：只允许用户明确授权的最小 `caseId` 自动同意；现开放七天无理由严格精确退回，以及多拍拍错仅退款的全无单未发货、安全物流两项，执行前分别重做事实证明 | 查/改自动执行条件时 |
 | `lib/return-item-proof.js` | 按规格编码严格证明精确退回/多退/少退/次品/未匹配/证据不完整 | 查退货商品核对边界时 |
@@ -123,7 +122,7 @@ entry: cli.js
 |------|------|---------|
 | 退货退款 | `docs/flow-5.1.md` | `inferRefundReturn()` (anchor: inferRefundReturn) |
 | 仅退款（未发货） | `docs/flow-5.2.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
-| 仅退款（已发货） | `docs/flow-5.3.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
+| 仅退款（已发货，含鲸灵无物流但 ERP 已确认发出） | `docs/flow-5.3.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
 | 换货 | `docs/flow-5.4.md` | `inferManualReturnReview()` |
 | 线下换货 | `docs/flow-5.4.md §线下换货` | `inferDecision()` 独立人工分支 |
 
@@ -224,3 +223,8 @@ await cdp.navigate(targetId, 'https://...');
 | 35 | 拒绝取证后固定等 800ms 就判物流弹窗未关闭 | 拒绝流程必须复用 `logistics.js` 的局部关闭能力，禁止在 `reject.js` 自建固定延时或重试整个拒绝操作；关闭失败必须停在拒绝表单之前。轮询与后备边界见 `docs/ops-jingling.md §2.3`。 |
 | 36 | 新增业务动作后只补前端逻辑、漏补对应视觉状态 | 2026-09-05 工单 `100001788353201502945` 命中“换货 + 商家-待商家二次发货”观察分支，`app.js` 已支持 `decision.action='skip'` / “无需处理”，但 `style.css` 未同步定义 `.decision-tag.skip` 与 `.decision-box.skip`，导致该段呈现为异常裸样式。**规则**：新增任何会进入 `renderCard()` / `renderBody()` 的 decision action、status 或推荐动作时，必须同时检查标签、结果框及状态样式是否有完整映射；业务逻辑支持不等于前端展示已完成。修复只补对应 CSS，不改业务分支。 |
 | 37 | 单元测试漏注入平台提醒依赖，污染真实缓存 | Step14 过去在函数尾部直接 `require('../../lib/jl/alerts')`，导致使用“测试店铺”的单测读取真实鲸灵页面并写进 `data/jl-alerts-cache.json`。**规则**：浏览器、平台读取、提醒和生产缓存写入必须由默认依赖装配并允许测试覆盖；测试必须核对关键生产状态文件前后校验值一致。平台提醒缓存还要按 `accounts.json` 校验账号和店铺名，不匹配数据直接失效。 |
+
+## PATHS
+
+- [仅退款物流补传人工分支回归](test/infer/refund-only-unreported-shipment.test.js)，运行方式见 [测试指南 §9](docs/ops-testing.md#9-鲸灵准备发货无物流erp-已确认发出的人工分支)。
+- [历史阶段归档索引](docs/superpowers/archive/README.md)，仅在阶段收尾或回溯证据时读取。

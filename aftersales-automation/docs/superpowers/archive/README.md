@@ -23,5 +23,6 @@
 - [2026-10-21 Mac 提醒事项统一迁移](../../../../docs/archive/2026-10-21-mac-reminders/README.md)：售后通知迁移、小爪共享输入修复、用户接收验证与跨项目提醒约定归档。
 - [2026-11 Agent Autoloop 接入售后操作队列](2026-11-agent-autoloop-migration/neat-handoff.md)：现有操作映射、Autoloop 源码机制、停止/失联安全差异、九项逐项讨论清单和五阶段迁移路线；仅完成审查，未实施。
 - [2026-11-09 浏览器异常诊断与单工单续扫](2026-11-browser-failure-diagnostics/neat-handoff.md)：异常证据、设计取舍、独立审查、回归及服务上线记录。
+- [2026-11-17 仅退款发货物流补传人工分支](2026-11-unreported-shipment/neat-handoff.md)，记录独立识别、待确认卡片、历史样本离线验收及重启结果。
 
 当前生效口径：[自动处理授权与统计口径](../../automation-policy.md)。仍待实施的问题见[待处理问题台账](../../../tasks/todo.md)；退货入库专项待实测见 `../../../../return-inbound/tasks/todo.md`。

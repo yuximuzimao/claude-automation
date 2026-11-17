@@ -101,4 +101,10 @@ node --test test/jl/click-work-order-action.test.js test/jl/process-single-accou
 
 用模拟浏览器和提醒依赖验证诊断关联、原动作不重试、跳过后继续、提醒去重、停止与熔断边界。全量回归前后核对工单队列、账号状态、会话缓存、首页提醒缓存、simulation、执行账本和熔断状态文件。真实提醒落地与后续工单处理结果，只在[待办](../tasks/todo.md#生产观察不主动触发真实业务)记录的自然样本中核对。
 
----
+## 9. 鲸灵准备发货、无物流，ERP 已确认发出的人工分支
+
+```bash
+node --test test/infer/refund-only-unreported-shipment.test.js
+```
+
+使用合成数据回归 [仅退款人工分支](flow-5.3.md#step-3a鲸灵准备发货无物流erp-已确认发出)，通过实际卡片渲染函数核对人工状态、ERP 运单、三步提示及执行入口。经用户明确要求复核历史工单时，只在本地读取已归档采集结果并离线推理、渲染，无需入队、重采、访问鲸灵或写回工单。

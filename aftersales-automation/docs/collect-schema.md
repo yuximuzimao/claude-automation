@@ -61,6 +61,7 @@
 | `subOrders[].id` | string | 是 | 子订单号（纯数字） |
 | `subOrders[].sku` | string | 否 | 商品货号 |
 | `subOrders[].attr1` | string | 否 | 规格属性（颜色/尺寸等） |
+| `subOrders[].logistics` | string | 否 | 鲸灵子订单物流状态原文，来自 `logisticsStatusDesc`，如「准备发货」 |
 | `subOrders[].afterSaleNum` | number | 是 | 申请售后数量（套数） |
 | `gifts` | array | 否 | 赠品子订单列表 |
 | `gifts[].id` | string | 是 | 赠品子订单号 |
@@ -289,6 +290,10 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 - 已自动处理工单仍可携带 `intercept`；页面标记“已自动处理”，但不把自动处理状态当作拦截成功。
 - 旧 simulation 缺少该字段或错误保存为空数组时，读取展示层按已登记的分支规则补齐，不修改原始运行数据。
 - 客户取消或工单消失不生成 `cancel_intercept` 行动；取消状态仍按平台状态分支观察和收口。
+
+## `decision.manualInstructions` 字段（人工操作提示）
+
+可选的 `string[]`，由待确认卡片按顺序展示。仅用于向操作人说明步骤，不作为平台操作入参。现役文案规则见 [flow-5.3 Step 3a](flow-5.3.md#step-3a鲸灵准备发货无物流erp-已确认发出)。
 
 ---
 

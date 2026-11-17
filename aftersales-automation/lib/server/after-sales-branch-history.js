@@ -139,6 +139,10 @@ const BRANCHES = Object.freeze({
     label: '仅退款 / 鲸灵无物流且 ERP 在途 / 等待重查',
     automationStatus: 'manual_only',
   },
+  'refund_only.unreported_shipment.manual': {
+    label: '仅退款 / 鲸灵准备发货且无物流、ERP 已确认发出 / 人工处理',
+    automationStatus: 'manual_only',
+  },
   'refund_only.gift_transit.wait': {
     label: '仅退款 / 主品未发货且赠品在途 / 等待重查',
     automationStatus: 'manual_only',
@@ -266,6 +270,7 @@ const RULE_BRANCHES = Object.freeze({
   '主品退回但赠品未退回→上报人工': 'refund_only.main_returned_gift_not_returned.manual',
   'ERP在途→等待重查': 'refund_only.erp_transit.wait',
   'ERP在途→等待重查，可人工提前拒绝': 'refund_only.erp_transit.wait',
+  '鲸灵准备发货且无物流、ERP 已确认发出→人工处理': 'refund_only.unreported_shipment.manual',
   '赠品在途→等待重查': 'refund_only.gift_transit.wait',
   '赠品在途→等待重查，可人工提前拒绝': 'refund_only.gift_transit.wait',
   '赠品已发货无单号→上报人工': 'refund_only.gift_shipped_no_tracking.manual',

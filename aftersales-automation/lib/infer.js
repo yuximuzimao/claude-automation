@@ -640,6 +640,40 @@ function validateCollectedData(cd, type) {
 }
 
 // ── flow-5.2/5.3 仅退款 ──────────────────────────────────────────
+function findUnreportedShipmentTrackings(cd, ticket, { outcomes }) {
+  const packages = cd.logistics?.packages || [];
+  if (!packages.length || packages.some(pkg =>
+    pkg.error || getPackageTracking(pkg) || ACTUAL_SHIPMENT_RE.test(pkg.text || '')
+      || !(pkg.text || '').split('\n').some(line => line.trim() === '暂无信息')
+  )) return [];
+  if (cd.logistics.closeErrors?.length && ticket.subOrders?.length > 1) return [];
+
+  const preparedOrderIds = new Set((ticket.subOrders || [])
+    .filter(order => order.id && order.logistics === '准备发货')
+    .map(order => String(order.id)));
+  const searches = cd.erpSearches?.length ? cd.erpSearches : [cd.erpSearch];
+  const preparedOrderTrackings = new Set(searches
+    .filter(search => preparedOrderIds.has(String(search?.subOrderId)))
+    .flatMap(search => (search.rows?.rows || []).flatMap(getRowTrackings)));
+  const unreturned = outcomes.filter(item => item.outcome === 'shipped' || item.outcome === 'unknown');
+
+  const erpLogs = cd.erpLogistics?.results || [cd.erpLogistics];
+  const externalLogs = cd.externalLogistics?.results || [];
+  if (!unreturned.length || !preparedOrderTrackings.size) return [];
+  const confirmed = unreturned.every(({ tracking }) => {
+    if (!preparedOrderTrackings.has(tracking)) return false;
+    const texts = erpLogs.filter(log => log?.tracking === tracking).map(log => log.logisticsText || '');
+    const hasShipment = texts.some(text => /已揽收|(?<!未)揽收成功|已收件|已发出|已发往|已离开|(?:^|\n)\s*揽收(?=\s|$)/.test(text));
+    const alreadyHandled = texts.some(text =>
+      /(?<!未)拦截成功|(?<!未)成功拦截/.test(text)
+      || SIGNED_KEYWORDS.some(keyword => text.includes(keyword))
+      || YIZHAN_KEYWORDS.some(keyword => text.includes(keyword))
+    ) || externalLogs.some(log => log.tracking === tracking && ['returned', 'signed', 'yizhan'].includes(log.status));
+    return hasShipment && !alreadyHandled;
+  });
+  return confirmed ? unreturned.map(item => item.tracking) : [];
+}
+
 // 接收显式 ctx，不访问外层变量
 // 见 docs/flow-5.2.md / docs/flow-5.3.md
 function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
@@ -704,6 +738,26 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     if (trackingEvaluation.missingFromErpRows.length > 0) {
       s({ type: 'branch', text: '上报 → 鲸灵存在未包含在ERP行中的快递单号，采集不完整' });
       return fin(escalate('物流采集不完整：鲸灵存在ERP行中未采集到的快递单号，需人工核查'));
+    }
+
+    const unreportedTrackings = findUnreportedShipmentTrackings(cd, ticket, trackingEvaluation);
+    if (unreportedTrackings.length) {
+      const reason = `鲸灵子订单显示「准备发货」，物流显示「暂无信息」。ERP 运单 ${unreportedTrackings.join('、')} 已有揽收或发出记录。`;
+      s({ type: 'branch', text: '鲸灵未显示发货物流，ERP 已确认发出 → 待人工处理' });
+      return fin(escalate(reason, {
+        reasonCode: 'UNREPORTED_SHIPMENT_MANUAL',
+        confidence: 'high',
+        requiresHumanReview: true,
+        autoExecutionBlocked: true,
+        humanTriggeredExecutionAllowed: false,
+        recommendedActionLabel: '人工处理',
+        manualInstructions: [
+          '在 ERP 打开对应运单的物流弹窗，截图作为拒绝凭证。',
+          '拒绝原因选「商品发货中」。给买家的说明：亲，商品已发出，如确认不需要商品可在派件时拒收（生鲜、大件商品等除外）。',
+          '拒绝成功后，须向鲸灵补传发货物流，填写快递公司和运单号。',
+        ],
+        rulesApplied: [{ doc: 'flow-5.3', section: 'Step 3a', summary: '鲸灵准备发货且无物流、ERP 已确认发出→人工处理' }],
+      }));
     }
 
     const hasUnknownTracking = trackingEvaluation.outcomes.some(item => item.outcome === 'unknown');
@@ -2144,7 +2198,14 @@ function inferDecision(sim, queueItem) {
     s({ type: 'read', label: '用户评价指令', value: hint });
     const hintAction = parseHintAction(hint);
     s({ type: 'check', condition: '解析评价指令', result: hintAction ? `→ ${hintAction}` : '未识别' });
-    if (hintAction) {
+    // 物流待补传分支没有系统执行能力，评价指令也不能覆盖人工处理约束。
+    const keepShipmentManual = hintAction && type === '仅退款' && findUnreportedShipmentTrackings(
+      cd, ticket, evaluateRefundOnlyTrackings(cd, [
+        ...getErpRows(cd, 'erpSearch'),
+        ...getErpRows(cd, 'giftErpSearch'),
+      ]),
+    ).length > 0;
+    if (hintAction && !keepShipmentManual) {
       s({ type: 'branch', text: `执行评价指令覆盖 → ${hintAction}` });
       const hintedMerchantFault = MERCHANT_FAULT_REASONS.some(kw => String(ticket.afterSaleReason || '').includes(kw));
       const merchantReturnApplication = hintedMerchantFault
@@ -2184,7 +2245,7 @@ function inferDecision(sim, queueItem) {
       }
       return fin(hintedDecision);
     }
-    s({ type: 'branch', text: '评价指令未识别为操作，继续规则推理' });
+    s({ type: 'branch', text: keepShipmentManual ? '发货物流待补传，评价指令保留人工处理' : '评价指令未识别为操作，继续规则推理' });
   }
 
   // ── 平台终态检测（优先于一切校验）────────────────────────────────

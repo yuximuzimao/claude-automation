@@ -105,7 +105,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 |---------|---------|---------|
 | 退货退款 | subBizType = 退货退款 | `docs/flow-5.1.md` |
 | 仅退款（未发货） | ERP 状态：待审核/待打印 | `docs/flow-5.2.md` |
-| 仅退款（已发货） | ERP 状态：卖家已发货 | `docs/flow-5.3.md` |
+| 仅退款（已发货） | 存在实际揽收或发货物流节点；鲸灵仍显示准备发货时查 Step 3a | [已发货流程](flow-5.3.md) |
 | 换货 | subBizType = 换货 | `docs/flow-5.4.md` |
 | 线下换货 | 售后类别明确为线下换货 | `docs/flow-5.4.md §线下换货` |
 | 需商品对应表/档案V2 | 涉及退货核验时 | `docs/erp-query.md` |
@@ -118,7 +118,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 | 自动处理与统计口径 | 查当前授权分支、执行前门禁或指标来源 | `docs/automation-policy.md` |
 | 其他技术问题 | 先查总入口和常见故障 | `docs/ops-tech.md` |
 
-> ⚠️ 仅退款时，必须先通过 ERP 搜索确认发货状态，再决定走 flow-5.2 还是 flow-5.3。
+> 仅退款先在 ERP 查订单行和运单，再按实际物流节点选择 flow-5.2 或 flow-5.3。
 
 ---
 
@@ -314,7 +314,7 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#49 验证数据=读实时源头**：→ 见全局 CLAUDE.md 浏览器操作约束。
 - `[∞]` **#51 ERP 状态只路由不决策**：ERP 订单状态只区分 flow-5.2/5.3，不直接决策。"交易关闭"≠包裹退回，必须走物流判断。
 - `[∞]` **#52 采集按工单类型分流**：product-match/archive 用于退货退款和普通换货的退回商品核验；仅退款跳过。退货退款和普通换货必须遍历所有主商品子订单，赠品必须使用真实子订单号。线下换货见 [flow-5.4 对应小节](flow-5.4.md#线下换货)。
-- `[∞]` **#53 决策看安全边际（flow-5.3）**：仅退款已发货流程中，剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。注意：flow-5.1 退货退款使用不同阈值（`REMIND_HOURS=12`），直接比较剩余时效，不计算扫描间隔。
+- `[∞]` **#53 通用在途拦截分支看安全边际（flow-5.3 Step 4）**：剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 建议立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。独立的物流补传人工分支见 [flow-5.3 Step 3a](flow-5.3.md#step-3a鲸灵准备发货无物流erp-已确认发出)。flow-5.1 退货退款直接比较剩余时效与 `REMIND_HOURS=12`。
 - `[∞]` **#54 推理文案可核对**：reason 三要素：①根因②无代码变量名③明确建议动作。推理过程中的物流核验必须逐个显示具体物流单号及判定状态；数量只能作为汇总，不能替代单号。ERP、鲸灵和合并去重结果都要保留具体单号。
 - `[∞]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 交叉校验 accountNum 与 accountNote，不一致拒绝。
 - `[已归档]` **#58 旧 collect.js / pipeline 重试路径**：文件仍保留用于历史能力、schema 和少量工具引用，但不再作为 A1/前端采集入口；当前扫描/重采/执行入口走 op-queue 的 A1 安全链路（execScan → processSingleAccountFixedBatch，execReprocessOne/execExecute），禁止把旧 collect.js / pipeline 原样接回。
