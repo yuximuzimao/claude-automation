@@ -29,7 +29,7 @@
 | `data/cart-adds.json` | 解析后的加购数据（运行时生成） | 查看/调试时 |
 | `data/allocation-result.json` | 分配结果中间数据（运行时生成） | 调试算法时 |
 | `docs/page-cart-scraping.md` | 鲸灵 SKU 明细页 → cart-adds.json 的字段、分页和验证契约 | 无 Excel、从页面读取加购数据时 |
-| `docs/archive/README.md` | 历史批次索引；只用于追溯，禁止复用作下一轮输入 | 查历史批次时 |
+| `docs/archive/README.md` | 批次和维护归档索引；只用于追溯，禁止复用作下一轮输入 | 查历史批次或维护验证时 |
 
 ## PATHS（git 变更时同步更新）
 
@@ -60,6 +60,7 @@ sku-calculator/
     operations.md
     page-cart-scraping.md
     archive/README.md
+    archive/<date>-<topic>.md     # 工具维护与验证记录，按 archive/README 导航
     archive/<date>-<topic>/README.md  # 已完成批次事实与报告指纹，按archive/README导航
     archive/<date>-<topic>/neat-audit.md  # 阶段知识审查记录
     archive/<date>-<topic>/knowledge-audit.json  # Markdown完整盘点与评估清单

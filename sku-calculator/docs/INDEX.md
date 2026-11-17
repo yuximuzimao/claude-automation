@@ -7,11 +7,11 @@
 | 需要什么 | 去哪里 |
 |---|---|
 | 人类使用入口、输入方式和输出位置 | [README](../README.md) |
-| 尚未完成事项及ERP命令已知接口缺陷 | [当前待办](../tasks/todo.md) |
+| 尚未完成事项 | [当前待办](../tasks/todo.md) |
 | 库存分配流程、算法、参数、数据契约、ERP接入与完成校验 | [操作手册](operations.md) |
 | 从已打开的鲸灵SKU明细读取加购 | [页面加购读取](page-cart-scraping.md) |
 | 未归类的新发现 | [临时教训](../tasks/lessons.md) |
-| 历史批次与报告指纹 | [归档索引](archive/README.md) |
+| 历史批次、报告指纹与维护验证 | [归档索引](archive/README.md) |
 
 ## 代码与数据位置
 
