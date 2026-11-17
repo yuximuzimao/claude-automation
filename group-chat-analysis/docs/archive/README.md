@@ -12,6 +12,8 @@
 
 ## 阶段归档
 
+- [`neat/2026-11-17-reviewed-reading-batches-20261019-20.md`](neat/2026-11-17-reviewed-reading-batches-20261019-20.md)：10-19、10-20 两批的采集、分析、发布及阅读验收，分阶段计时，含 11-13 已退出的一次性夜间试验。
+
 - `neat/2026-11-03-silver-to-qa-display-projection.md`：不重做Silver清洗，将348/348 Silver正式投影为1034个QA；默认只显示问题+结论+高/中/低，依据折叠，时效性QA独立生命周期并禁止进入长期资料库，QA可局部裁决；旧私密FAQ/HTML预览退役，正式review-live接管展示，316项回归通过。
 - `neat/2026-11-01-complete-silver-knowledge-candidate-conversion.md`：正式基线收敛到348 Silver / 301首次阅读后，将348条Silver全部整理为私密可检索FAQ候选；全量门禁348/348 Silver、1833/1833 canonical facts、1809 evidence refs通过，完成跨批同题/遗漏审查与主领域索引，状态进入`awaiting_user_review`；正式Silver、用户裁决与页面未被私密候选自动改写。
 - `neat/2026-10-28-full-silver-secondary-cleaning.md`：对现有346条Silver做全量二次审计，60条重写/286条保持；资料库与discard均允许内容重构但保留用户裁决，固化具体事实优先、discard不下沉、窄事实保持窄、连续原文窗口不挖相邻闲聊等规则；当前346 Silver / 299首次阅读 / 10资料库 / 44 reviewed states。

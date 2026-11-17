@@ -91,7 +91,7 @@ struct HistoryDateSelector {
         var blocks = try await captureBlocks(targetWindow)
 
         if !isFilterPanelOpen(blocks) {
-            postClick(screenPoint(relative: filterButton, frame: targetWindow.frame))
+            try postClick(screenPoint(relative: filterButton, frame: targetWindow.frame), in: targetWindow)
             blocks = try await waitForBlocks(expectedTitle: expectedTitle) { isFilterPanelOpen($0) }
             guard isFilterPanelOpen(blocks) else {
                 throw HistoryDateSelectorError.filterPanelDidNotOpen
@@ -100,7 +100,7 @@ struct HistoryDateSelector {
 
         if calendarMonth(in: blocks) == nil {
             targetWindow = try await exactHistoryWindow(expectedTitle: expectedTitle)
-            postClick(screenPoint(relative: dateField, frame: targetWindow.frame))
+            try postClick(screenPoint(relative: dateField, frame: targetWindow.frame), in: targetWindow)
             blocks = try await waitForBlocks(expectedTitle: expectedTitle) { calendarMonth(in: $0) != nil }
             guard calendarMonth(in: blocks) != nil else {
                 throw HistoryDateSelectorError.calendarDidNotOpen
@@ -121,7 +121,7 @@ struct HistoryDateSelector {
                     monthBlock: observation.block,
                     frame: targetWindow.frame
                 )
-                postClick(navigationPoint)
+                try postClick(navigationPoint, in: targetWindow)
                 let expected = displayed.advanced(by: step)
                 blocks = try await waitForBlocks(expectedTitle: expectedTitle) {
                     calendarMonth(in: $0) == expected
@@ -143,7 +143,7 @@ struct HistoryDateSelector {
             x: firstColumnCenterX + Double(cell.column) * columnStepX,
             y: firstRowCenterY + Double(cell.row) * rowStepY
         )
-        postClick(screenPoint(relative: cellPoint, frame: targetWindow.frame))
+        try postClick(screenPoint(relative: cellPoint, frame: targetWindow.frame), in: targetWindow)
 
         let slashDate = String(format: "%04d/%02d/%02d", target.year, target.month, target.day)
         blocks = try await waitForBlocks(expectedTitle: expectedTitle) {
@@ -157,7 +157,7 @@ struct HistoryDateSelector {
         }
 
         targetWindow = try await exactHistoryWindow(expectedTitle: expectedTitle)
-        postClick(screenPoint(relative: closeFilter, frame: targetWindow.frame))
+        try postClick(screenPoint(relative: closeFilter, frame: targetWindow.frame), in: targetWindow)
         blocks = try await waitForBlocks(expectedTitle: expectedTitle) { !isFilterPanelOpen($0) }
         guard !isFilterPanelOpen(blocks) else {
             throw HistoryDateSelectorError.filterPanelDidNotClose
@@ -406,7 +406,9 @@ struct HistoryDateSelector {
         )
     }
 
-    private static func postClick(_ point: CGPoint) {
+    @MainActor
+    private static func postClick(_ point: CGPoint, in window: SCWindow) throws {
+        try QQWindowInputGuard.requireExposed(window, at: point)
         let source = CGEventSource(stateID: .hidSystemState)
         CGEvent(
             mouseEventSource: source,
@@ -415,6 +417,7 @@ struct HistoryDateSelector {
             mouseButton: .left
         )?.post(tap: .cghidEventTap)
         usleep(120_000)
+        try QQWindowInputGuard.requireExposed(window, at: point)
         CGEvent(
             mouseEventSource: source,
             mouseType: .leftMouseDown,

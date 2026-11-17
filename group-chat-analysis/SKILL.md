@@ -34,8 +34,12 @@
 | `src/README.md` | 代码模块职责与依赖方向 | 开始实现或调整模块时 |
 | `src/app/run_capture.py` | 唯一正式采集入口；固定页数诊断、`--full`、`--incremental`、`--history-date` 单日历史补采及其 `--background` 长跑启动 | 改采集/恢复 CLI 时 |
 | `src/app/manage_incremental_checkpoint.py` | 从已完成独立 runtime 为下一次 incremental 创建/查看一次性逐群 checkpoint；不操作 QQ | 历史补采比主 anchor 更新时 |
+| `src/app/runtime_deadline.py` | 采集与发布共用的截止检查及限时进程组 | 改运行截止或取消边界时 |
+| `src/analysis/daily_semantic_delta.py` | 已审语义JSON的来源验证、备份journal与确定性应用 | 单日语义产物应用，不代替模型判断 |
+| `src/analysis/reading_batches.py` | 真实release新增QA阅读批、历史及独立已看完 | 本批新增视图与连续日包合批 |
 | `src/app/run_analysis.py` | 已审语义产物的正式发布 runner；工单 hash、质量门禁、staging render、immutable release、原子发布、`analyzed` 推进与回滚 | 改分析发布/恢复时 |
 | `src/app/serve_analysis.py` | 仅监听 `127.0.0.1` 的阅读页面入口；把“没用 / 存资料库”写入正式 reviewed semantic state | 改页面裁决持久化时 |
+| `src/analysis/system_qa_decisions.py` | 独立系统 QA 建议、内容指纹失效与可撤回 override；不写用户已阅 | 改偏自动化归档与判断差异时 |
 | `src/analysis/page_builder.py` / `page_renderer.py` | 正式 Gold/页面构建与渲染；运行数据仍来自 `runtime/` | 改页面投影时 |
 | `src/app/full_capture.py` | 两群首次全量与单群按日期历史补采编排 | 改首次全量/单日历史编排时 |
 | `src/app/incremental_capture.py` | 两群每日增量、强制刷新历史快照与 anchor 停止 | 改增量编排时 |
@@ -44,6 +48,7 @@
 | `src/app/select-history-date.swift` | history-date 模式内部日期定位 CLI 适配器 | 改单日历史定位入口时 |
 | `src/capture/ConversationSwitcher.swift` | 会话 OCR 定位、目标复核、聊天记录 tooltip/窗口门禁 | 改 QQ 群切换安全逻辑时 |
 | `src/capture/HistoryDateSelector.swift` | 日期筛选、月份导航、日期格计算与双重 OCR 复核 | 改 QQ 日期筛选逻辑时 |
+| `src/capture/QQWindowInputGuard.swift` | 开历史与选日期的鼠标输入前台/点位遮挡检查 | 改这两条路径的点击保护时 |
 | `src/capture/` | AX/SCK/Vision/变化检测/dhash/raw 写入 | 改 QQ 捕获与滚动时 |
 | `src/normalize/page_reconstruct.py` | 单页 bbox→消息/fragment/media unknown | 改几何重建时 |
 | `src/normalize/assemble.py` | 同群多页组装与 Schema records | 改跨页组装时 |
@@ -86,9 +91,10 @@
 | `schemas/` | 版本化数据契约 |
 | `docs/rules/` | 跨批次长期规则 |
 | `docs/OPERATING-SOP.md` | 项目唯一任务分类与运行 SOP |
-| `docs/archive/` | 历史方案/阶段归档，默认不加载 |
+| `docs/archive/README.md` | 历史方案及阶段归档索引，按需加载 |
 | `tasks/` | 当前待办（只保留 `todo.md`；临时教训不建空壳文件） |
 | `tests/` | 确定性逻辑、采集适配器与回归验证 |
 | `runtime/` | 私密运行数据；整个目录不进 Git |
 | `runtime/inbox/current.md` | GPT 默认读取的当前分析输入 |
 | `runtime/reports/` | GPT分析结果，本地私密 |
+| `runtime/experiments/` | 隔离的离线试判、评估脚本与结果；不得作为正式裁决来源 |

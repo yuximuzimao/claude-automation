@@ -17,6 +17,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.analysis.first_read_projection import build_first_read_projection
+from src.analysis.reading_batches import ReadingBatchStore
+from src.analysis.system_qa_decisions import apply_system_qa_decisions
+from src.analysis.display_review_decision_store import DisplayReviewDecisionStore
 from src.analysis.knowledge_display_projection import apply_knowledge_display_projection
 from src.analysis.quality import sha256_file
 from src.analysis.reviewed_semantic_state import build_reviewed_semantic_state
@@ -1749,6 +1752,26 @@ def main(argv: list[str] | None = None) -> None:
             display_projection,
         )
 
+    system_path = WORK / "system-qa-decisions-v1.json"
+    overrides_path = WORK / "system-qa-overrides-v1.json"
+    normalized_knowledge = apply_system_qa_decisions(
+        normalized_knowledge,
+        json.loads(system_path.read_text()) if system_path.exists() else None,
+        json.loads(overrides_path.read_text()) if overrides_path.exists() else None,
+    )
+    if KNOWLEDGE_DISPLAY_PROJECTION.exists():
+        human = DisplayReviewDecisionStore(
+            projection_path=KNOWLEDGE_DISPLAY_PROJECTION,
+            decisions_path=WORK / "display-review-decisions-v1.json",
+            now=lambda: "",
+        ).list_decisions()
+        human_by_id = {row["qa_id"]: row for row in human.get("items", [])}
+        for unit in normalized_knowledge:
+            for qa in unit.get("display_qas", []):
+                row = human_by_id.get(qa["qa_id"])
+                if row:
+                    qa["human_decision"] = row["decision"]
+
     silver_component_ids = {
         ref.get("card_id")
         for unit in normalized_knowledge
@@ -1869,7 +1892,7 @@ def main(argv: list[str] | None = None) -> None:
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(
-        build_page_v3(display_cards, blackwords, dossier, normalized_knowledge),
+        build_page_v3(display_cards, blackwords, dossier, normalized_knowledge, ReadingBatchStore(ROOT).snapshot()),
         encoding="utf-8",
     )
 

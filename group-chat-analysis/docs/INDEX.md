@@ -42,6 +42,7 @@
 - `../src/app/manage_incremental_checkpoint.py`：只读已完成独立 runtime，创建/查看下一批 incremental 的一次性逐群 checkpoint；本身不操作 QQ。
 - `../src/app/run_analysis.py`：已审分析产物的正式发布入口；校验 batch/current/canonical/artifact hash，质量门禁通过后 staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`；支持幂等恢复和 release 回滚。
 - `../src/app/serve_analysis.py`：本机 `127.0.0.1` 阅读入口；CSRF/同源门禁下持久化用户“没用 / 存资料库”裁决，不修改 Silver 事实层。
+- `../src/analysis/system_qa_decisions.py`：系统 QA 建议 overlay、指纹失效及独立撤回状态；人工优先。
 - `../src/analysis/page_builder.py` / `page_renderer.py`：正式页面构建/渲染 owner；旧 `runtime/analysis-work` 页面脚本不再作为正式代码入口。
 - `../src/app/swift_sources.py`：正式 Swift target / Swift 纯测试唯一 source manifest。
 - `../src/app/full_capture.py`：两群首次全量与单群按日期历史补采编排；单日 pending-scroll 会先自动重锚定，不重选日期/重开窗口。
@@ -50,6 +51,7 @@
 - `../src/app/open-history.swift`：内部安全打开目标群聊天记录窗口。
 - `../src/app/select-history-date.swift`：history-date 模式内部日期定位适配器。
 - `../src/capture/ConversationSwitcher.swift`：会话 OCR 定位、目标复核、`聊天记录` tooltip 与历史窗口标题门禁。
+- `../src/capture/QQWindowInputGuard.swift`：开历史与选日期共用的鼠标点位保护。
 - `../src/capture/`：AX/SCK/Vision、正文区、滚动/MAD、dhash 视口门禁与 raw 原子写入。
 - `../src/normalize/page_reconstruct.py`：单页 bbox→视觉行→消息/fragment/media unknown。
 - `../src/normalize/assemble.py`：同群连续 capture pages → Schema message records。
@@ -75,6 +77,8 @@
 - `runtime/inbox/current.md`：日常 GPT/CodexPro 唯一默认分析入口。
 - `runtime/history-days/YYYY-MM-DD/`：单日历史补采独立 runtime root；各日自带 raw/messages/inbox/state。
 - `runtime/reports/`：GPT分析结果。
+- `runtime/analysis-work/system-qa-decisions-v1.json` / `system-qa-overrides-v1.json`：系统判断及撤回状态，与人工裁决分离。
+- `runtime/experiments/`：私密离线评估脚本、输入指纹、逐条预测及报告；当前实验状态见 CURRENT，不供页面正式裁决读取。
 - `runtime/state/`：普通 full / incremental 的采集恢复状态。
 - `runtime/diagnostics/`：显式诊断临时产物与当前历史长跑日志；不作为正式数据源。
 
@@ -82,3 +86,10 @@
 
 - `archive/README.md`：历史档案索引。
 - 历史文档只能用于考古，不得覆盖 CURRENT 或 rules。
+
+## 本批新增与分析辅助入口
+
+- `../src/app/runtime_deadline.py`：采集及发布执行的截止检查与限时进程组。
+- `../src/analysis/daily_semantic_delta.py`：已审JSON确定性应用及journal恢复。
+- `../src/analysis/reading_batches.py`：release lineage阅读批与独立seen状态。
+- `runtime/reading-batches/`：本地阅读批快照、current和seen。

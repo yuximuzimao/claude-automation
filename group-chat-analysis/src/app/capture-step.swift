@@ -117,7 +117,8 @@ struct CaptureStepMain {
                 do {
                     try await QQWindowPreparer.prepare(
                         expectedTitle: args.expectedTitle,
-                        geometry: args.geometry
+                        geometry: args.geometry,
+                        reuseExisting: true
                     )
                 } catch let error as WindowPreparationError {
                     fputs("PRE_SCROLL_REJECTED \(error)\n", stderr)

@@ -62,6 +62,16 @@ DERIVED_RELEASE_FILES: dict[str, str] = {
     "reviewed_semantic_state": "runtime/analysis-work/reviewed-semantic-state-v1.json",
 }
 
+DISPLAY_ARTIFACTS = {
+    "display_projection": "runtime/analysis-work/knowledge-display-projection-v1.json",
+    "display_review_decisions": "runtime/analysis-work/display-review-decisions-v1.json",
+    "system_qa_decisions": "runtime/analysis-work/system-qa-decisions-v1.json",
+    "system_qa_overrides": "runtime/analysis-work/system-qa-overrides-v1.json",
+}
+WORK_PACKAGE_ARTIFACTS.update(DISPLAY_ARTIFACTS)
+REQUIRED_ARTIFACTS.update(DISPLAY_ARTIFACTS)
+DERIVED_RELEASE_FILES.update(DISPLAY_ARTIFACTS)
+
 CURRENT_HEADER_RE = re.compile(r"^(batch_id|message_count):\s*(.*)$", re.M)
 
 

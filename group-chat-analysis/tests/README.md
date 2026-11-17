@@ -7,6 +7,7 @@
 可用合成/脱敏 fixture，覆盖：
 
 - Swift `capture-step` / `open-history` / `select-history-date` typecheck、正文区/MAD/dhash/Schema 纯函数回归；
+- 窗口准备复用：实时几何一致跳过写入/布局等待，变化则设置并读回；读取/写入/等待/读回/SCK 失败立即传播，复用路径不绕过 SCK（注入依赖，不操作 QQ）；
 - 安全切群纯门禁：左侧会话唯一候选、目标头部复核、`聊天记录` tooltip 精确确认；
 - 日期筛选纯逻辑：目标日期合法性、Sunday-first 日历行列、跨月偏移；Swift 日期选择器必须 typecheck；
 - bbox 视觉行/消息/fragment 重建与媒体 OCR unknown 降级；
@@ -76,3 +77,8 @@ GPT分析属于后续独立验收，不用“摘要看起来不错”代替采�
 - `tests/test_review_decision_store.py` + `tests/test_analysis_review_server.py`：只允许正式 queue Silver 的用户裁决持久化、幂等/改判、历史 card-only 决策保留，以及 localhost/CSRF/Origin 门禁。
 - 正式自动合并仍必须另外通过独立留出集的语义 precision/recall、错误合并、混合卡 full 误判、动态信息失真等验收；见 `docs/ANALYSIS-DATA-QUALITY-SOP.md`。
 
+
+- `test_system_qa_decisions.py`：系统指纹失效、重复/时效校验、撤回独立持久化、旧页指纹拒绝及真实renderer JavaScript人工优先契约。
+
+- `test_reading_batches.py`：真实lineage新增差集、三日完整切换、旧批留存、seen独立与父Silver冻结上下文。
+- `test_runtime_deadline.py`：时钟回拨、子孙进程组截止保留 pending、过期发布拒绝。

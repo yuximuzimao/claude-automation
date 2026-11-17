@@ -17,10 +17,10 @@
 
 - **Bronze**：QQ 屏幕采集的 durable raw、canonical messages。保留原始文本、时间、群、批次和采集上下文；任何后续清洗不回写原始语义。采集侧依旧由 `capture/normalize/store` 各自 owner 管理。
 - **Topic candidate**：全窗口宽松提取的候选语义索引。它可能包含多个原子命题，不等同一条知识；不允许凭分类/重复度直接删除。
-- **Atomic claim**：每个独立事实或待检验说法有 claim_id、card_id、statement、entity、canonical_question、scope、evidence_type、time、uncertainty、source_ref、transform_version。一个 card 可拆多个 claim；旧 Topic Card 标题/摘要只允许作为检索提示，不能未经原文核对直接复制。历史基线现为 **1689 条 reviewed claims**。
-- **Question Cluster proposal / registry**：proposal 只负责高召回候选，不能自动晋升；经逐条语义审阅后的 Question Cluster 才进入稳定 registry。现役 `question-cluster-registry-current.json` 为 **623 个 reviewed questions / 1689 claims**，历史 v71 仅保留为 bootstrap 快照。
-- **Silver**：人工/规则验证后的独立决策问题，附 full/partial 的证据覆盖、条件、反例、相互冲突的数值以及动态状态；当前正式工作集为 **344 个知识单元 = 335 queue + 9 knowledge**，任何 daily delta 都只能通过 reviewed routing/authoring/publication 更新。
-- **Gold**：供用户首读/资料库/动态专题使用的视图。Gold 表示展示质量，不代表用户终审“有用”。只有用户明确“存资料库”才能进入长期 KB。
+- **Atomic claim**：每个独立事实或待检验说法有 claim_id、card_id、statement、entity、canonical_question、scope、evidence_type、time、uncertainty、source_ref、transform_version。一个 card 可拆多个 claim；旧 Topic Card 标题/摘要只允许作为检索提示，不能未经原文核对直接复制。
+- **Question Cluster proposal / registry**：proposal 只负责高召回候选，不能自动晋升；经逐条语义审阅后的 Question Cluster 才进入稳定 registry。正式入口为 `question-cluster-registry-current.json`。
+- **Silver**：人工/规则验证后的独立决策问题，附 full/partial 的证据覆盖、条件、反例、相互冲突的数值以及动态状态；任何 daily delta 都只能通过 reviewed routing/authoring/publication 更新。
+- **Gold**：供用户首读/资料库/动态专题使用的视图。Gold 表示展示质量，不代表用户终审“有用”。人工裁决与系统去向由展示规则分别定义。
 
 ## 2. 全量分析流水线（按 DAG 顺序）
 
@@ -71,13 +71,9 @@
 7. 初始小簇可使用 all-pairs 显式 review 防止传递误合并；规模扩大后必须固化为 Question Cluster Registry，以 canonical question + inclusion/exclusion boundary 审核新 claim，避免 O(n²) 两两审核。已确认 `different_question` 关系应保留为 cluster boundary / hard negative。
 8. 每次变更先对既有已阅/知识、独立事实、反例、部分覆盖和高风险传闻做回归；回归通过才更新正式分析结果。
 
-## 5. 当前实施状态
+## 5. 实施状态入口
 
-- 已有：Bronze、3442 张宽召回 Topic Card 候选索引、1689 条 reviewed Atomic Claims、623 个 reviewed Question Clusters、344 条正式 Silver、full/partial 证据覆盖、首次阅读/资料库/无限服/黑话展示构建。
-- 本次工程化已完成第一轮端到端验证：来源回填形成 `proposal → semantic review → verified overlay`；语义失真卡进入 quarantine；Atomic claim 已有 calibration/pilot/独立 holdout，并聚合成 reviewed registry。第二批 frozen holdout 中固定词面召回 Top-K 找回 17/17 positive pairs；pilot 固定高分线 precision 65.2% / recall 88.2%，经 semantic review + targeted recall completion 后 question cluster holdout pairwise precision/recall 均为 1.0。该 1.0 只证明当前人工审核流程在此 holdout 上闭环，不代表全量自动模型准确率。
-- Question Cluster Registry 已建立稳定现役入口 `question-cluster-registry-current.json`：历史 v71 仅作 bootstrap 快照，现役 assignment / Silver routing / 页面 / release 全部读取 current；`question_registry_store.py` 以内容 hash 保存不可变快照，并禁止已发布 question/claim 消失、换簇或无 revision history 改问句。
-- 正式发布/回滚已建立：`run_analysis --prepare-work` 固定分析起点，review receipt 固定审阅后的产物，质量门禁通过后 staging render → immutable release → 原子 current 指针 → 最后 `mark_analyzed()`；失败只重跑分析。页面“没用 / 存资料库”由本机 review server 持久化到 reviewed semantic state，不改写 Silver 事实层。
-- 尚待开发/实测：在**真实新 incremental batch** 上把模型语义生产阶段串成稳定 daily work package（新 claim 抽取、Question assignment/bootstrap、Silver/dossier delta），继续扩大独立正反评测集，并跑多次完整手动 E2E 后再讨论无人值守。
+当前计数、验收结果及下一批边界见 [CURRENT](CURRENT.md)。历史留出集和来源回填结果见 [档案索引](archive/README.md)。
 
 ## 6. 运行入口（本项目）
 

@@ -92,6 +92,37 @@ private func testContentRegionIgnoresToolbarWordsInsideMessages() throws {
     try expect(region.contains(midX: 0.10, midY: 0.23), "message containing 表情 must remain inside content")
 }
 
+private func testQQWindowInputGuard() throws {
+    let display = CGRect(x: 0, y: 0, width: 2560, height: 1440)
+    let frame = CGRect(x: 100, y: 100, width: 600, height: 500)
+    let point = CGPoint(x: 400, y: 300)
+    func row(_ id: UInt32, _ pid: Int32, _ rect: CGRect, owner: String = "QQ",
+             layer: Int = 0, alpha: Double = 1) -> [String: Any] {
+        [kCGWindowNumber as String: id, kCGWindowOwnerPID as String: pid,
+         kCGWindowOwnerName as String: owner, kCGWindowLayer as String: layer,
+         kCGWindowAlpha as String: alpha,
+         kCGWindowBounds as String: ["X": rect.minX, "Y": rect.minY,
+                                    "Width": rect.width, "Height": rect.height]]
+    }
+    func allowed(_ rows: [[String: Any]]) -> Bool {
+        QQWindowInputGuard.isExposed(windowID: 5, pid: 10, frame: frame, at: point,
+                                    windows: rows, mainDisplay: display)
+    }
+    let target = row(5, 10, frame)
+    let sameAppCover = row(6, 10, frame)
+    let otherAppCover = row(7, 11, frame, owner: "Another app")
+    try expect(allowed([target, sameAppCover]), "a window behind the target cannot block the point")
+    try expect(!allowed([sameAppCover, target]), "a QQ window covering the target must block input")
+    try expect(!allowed([otherAppCover, target]), "a different app covering the target must block input")
+    try expect(!allowed([sameAppCover]), "a missing target must block input")
+    try expect(!allowed([row(5, 11, frame)]), "window ID must still belong to the verified process")
+    try expect(!allowed([row(5, 10, frame.offsetBy(dx: 10, dy: 0))]), "moved target must reject stale coordinates")
+    try expect(allowed([row(8, 12, frame, alpha: 0), target]), "fully invisible surfaces do not obscure the target")
+    try expect(allowed([row(9, 13, display, owner: "程序坞", layer: 20), target]), "known Dock backing surface passes through")
+    try expect(!allowed([row(9, 13, frame, owner: "程序坞", layer: 20), target]), "a Dock panel at the click point must still block input")
+    try expect(!allowed([row(9, 13, display, owner: "Unknown overlay", layer: 20), target]), "an unknown full-display overlay must still block input")
+}
+
 private func testConversationSwitcherPureGates() throws {
     let blocks = [
         block(0, "魔兽世界2无限国服备战..", x: 0.10, y: 0.48, width: 0.15, height: 0.02),
@@ -114,6 +145,9 @@ private func testConversationSwitcherPureGates() throws {
         QQConversationSwitcher.verifiesTarget(blocks, target: target),
         "selected target must be verified by its stable header text"
     )
+    let plusTarget = QQConversationTarget(groupKey: "plus", conversationPrefix: "演示世界远征+经典服", headerContains: "远征+经典服玩家群", expectedHistoryTitle: "演示世界远征+经典服玩家群")
+    try expect(QQConversationSwitcher.verifiesTarget([block(3, "演示世界远征＋经典服玩家群（123）", x: 0.313, y: 0.914, width: 0.234, height: 0.022)], target: plusTarget), "fullwidth plus in verified header is the same punctuation")
+    try expect(!QQConversationSwitcher.verifiesTarget([block(3, "演示世界远征＋经典服玩家群", x: 0.313, y: 0.45, width: 0.234, height: 0.022)], target: plusTarget), "normalizing punctuation must not accept body text")
     let wrongHeader = QQConversationTarget(
         groupKey: "group-b",
         conversationPrefix: target.conversationPrefix,
@@ -434,13 +468,82 @@ private func testRawWriterPersistsAndRefusesOverwrite() throws {
     }
 }
 
+@MainActor
+private func testWindowPreparationReuse() async throws {
+    let target = WindowTargetGeometry(x: 20, y: 30, width: 900, height: 900)
+    let moved = WindowTargetGeometry(x: 25, y: 30, width: 900, height: 900)
+    let withinTolerance = WindowTargetGeometry(x: 22, y: 28, width: 902, height: 898)
+    for (reuse, initial, expectedEvents) in [
+        (true, target, ["read", "sck"]),
+        (true, withinTolerance, ["read", "sck"]),
+        (true, moved, ["read", "set", "settle", "read", "sck"]),
+        (false, target, ["set", "settle", "read", "sck"])
+    ] {
+        var actual = initial
+        var events: [String] = []
+        try await QQWindowPreparer.prepareGeometry(
+            expected: target, tolerance: 2, reuseExisting: reuse,
+            read: { events.append("read"); return actual },
+            set: { events.append("set"); actual = target },
+            settle: { events.append("settle") },
+            verifySCK: { events.append("sck") }
+        )
+        try expect(events == expectedEvents, "geometry reuse must preserve verification and only skip redundant writes")
+    }
+    // Failure at every boundary must propagate; no further stage may run.
+    for failure in ["read", "set", "settle", "readback", "sck"] {
+        var events: [String] = []
+        var reads = 0
+        do {
+            try await QQWindowPreparer.prepareGeometry(
+                expected: target, tolerance: 2, reuseExisting: true,
+                read: {
+                    reads += 1
+                    let step = reads == 1 ? "read" : "readback"
+                    events.append(step)
+                    if failure == step { throw TestFailure.failed(step) }
+                    return reads == 1 ? moved : target
+                },
+                set: { events.append("set"); if failure == "set" { throw TestFailure.failed("set") } },
+                settle: { events.append("settle"); if failure == "settle" { throw TestFailure.failed("settle") } },
+                verifySCK: { events.append("sck"); if failure == "sck" { throw TestFailure.failed("sck") } }
+            )
+            throw TestFailure.failed("injected failure did not propagate")
+        } catch TestFailure.failed(let message) {
+            try expect(message == failure && events.last == failure, "stop immediately at failed preparation boundary")
+        }
+    }
+    var reachedSCK = false
+    do {
+        try await QQWindowPreparer.prepareGeometry(
+            expected: target, tolerance: 2, reuseExisting: true,
+            read: { moved }, set: {}, settle: {}, verifySCK: { reachedSCK = true }
+        )
+        throw TestFailure.failed("failed geometry write must not be accepted")
+    } catch WindowPreparationError.geometryMismatch {
+        try expect(!reachedSCK, "AX readback mismatch must stop before SCK")
+    }
+    // Even unchanged AX geometry must not bypass SCK failure.
+    do {
+        try await QQWindowPreparer.prepareGeometry(
+            expected: target, tolerance: 2, reuseExisting: true,
+            read: { target }, set: { throw TestFailure.failed("unexpected write") },
+            settle: { throw TestFailure.failed("unexpected wait") },
+            verifySCK: { throw WindowPreparationError.sckWindowNotFound("fixture") }
+        )
+        throw TestFailure.failed("fast path bypassed SCK rejection")
+    } catch WindowPreparationError.sckWindowNotFound { }
+}
+
 @main
 struct CapturePureTestsMain {
     static func main() async {
         do {
+            try await testWindowPreparationReuse()
             try testContentRegion()
             try testContentRegionIgnoresToolbarWordsInsideMessages()
             try testConversationSwitcherPureGates()
+            try testQQWindowInputGuard()
             try testMAD()
             try await testChangeDetectorRejectsReturnToBaseline()
             try await testChangeDetectorAcceptsDelayedStability()

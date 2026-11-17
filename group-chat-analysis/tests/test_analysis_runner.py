@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
@@ -192,6 +193,26 @@ class AnalysisRunnerTests(unittest.TestCase):
         target = self.work / "batches" / "batch-1" / "reviewed-analysis-v1.json"
         write_json_atomic(target, document)
         return target
+
+    def test_history_runtime_publishes_without_touching_main_capture(self) -> None:
+        history = self.runtime / "history-days" / "2026-01-01"
+        for name in ("state", "messages", "inbox"):
+            shutil.copytree(self.runtime / name, history / name)
+        main_state = (self.runtime / "state/batch-state.json").read_bytes()
+        main_messages = (self.runtime / "messages/messages.jsonl").read_bytes()
+        runner = AnalysisRunner(self.root, capture_runtime=history, now=self._now,
+                                quality_executor=self._quality_ok, render_executor=self._render_ok)
+        runner._code_hashes = lambda: {"test": "a" * 64}
+        receipt = self._review_receipt(runner)
+        result = runner.run("batch-1", receipt_path=receipt)
+        self.assertEqual(result["status"], "published")
+        self.assertEqual(BatchStateStore(history / "state/batch-state.json").load()["status"], "analyzed")
+        self.assertEqual((self.runtime / "state/batch-state.json").read_bytes(), main_state)
+        self.assertEqual((self.runtime / "messages/messages.jsonl").read_bytes(), main_messages)
+        work = json.loads(runner._work_package_path("batch-1").read_text())
+        self.assertEqual(work["source"]["capture_runtime"], "runtime/history-days/2026-01-01")
+        with self.assertRaises(AnalysisReleaseError):
+            AnalysisRunner(self.root, capture_runtime=self.root.parent)
 
     def test_work_package_is_idempotent_and_binds_starting_baseline(self) -> None:
         runner = self._runner()

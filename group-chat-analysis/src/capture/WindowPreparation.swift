@@ -81,46 +81,108 @@ struct QQWindowPreparer {
     static func prepare(
         expectedTitle: String,
         geometry: WindowTargetGeometry,
-        tolerance: Double = 2.0
+        tolerance: Double = 2.0,
+        reuseExisting: Bool = false
     ) async throws {
-        let pid = try await activateQQ()
+        // Fresh CLI processes need the AppKit/WindowServer connection even
+        // when foreground reuse skips activateQQ. Otherwise the first SCK
+        // content filter can abort before the pre-scroll viewport capture.
+        _ = NSApplication.shared
+        // Only continuation steps can reuse preparation. Re-read live state in
+        // each process; never trust a cached PID, window or geometry.
+        let pid: pid_t
+        if reuseExisting, isQQForeground(),
+           let qq = NSRunningApplication.runningApplications(
+               withBundleIdentifier: qqBundleID
+           ).first {
+            pid = qq.processIdentifier
+        } else {
+            pid = try await activateQQ()
+        }
         guard AXIsProcessTrusted() else {
             throw WindowPreparationError.accessibilityNotTrusted
         }
 
         let window = try exactWindow(pid: pid, title: expectedTitle)
-        // QQ has a main window and a separate history window. Activating the
-        // app alone may leave the main window above the history window; raise
-        // the exact target window before geometry and SCK checks.
+        let wasFocused = isFocusedWindow(pid: pid, window: window)
         _ = AXUIElementPerformAction(window, kAXRaiseAction as CFString)
-        try requireSettable(window, attribute: kAXPositionAttribute as CFString)
-        try requireSettable(window, attribute: kAXSizeAttribute as CFString)
-
-        try setPoint(
-            window,
-            attribute: kAXPositionAttribute as CFString,
-            point: CGPoint(x: geometry.x, y: geometry.y)
-        )
-        try setSize(
-            window,
-            attribute: kAXSizeAttribute as CFString,
-            size: CGSize(width: geometry.width, height: geometry.height)
-        )
-
-        try await Task.sleep(nanoseconds: 250_000_000)
-        let actual = try readGeometry(window)
-        guard approximatelyEqual(actual.x, geometry.x, tolerance: tolerance),
-              approximatelyEqual(actual.y, geometry.y, tolerance: tolerance),
-              approximatelyEqual(actual.width, geometry.width, tolerance: tolerance),
-              approximatelyEqual(actual.height, geometry.height, tolerance: tolerance) else {
-            throw WindowPreparationError.geometryMismatch(expected: geometry, actual: actual)
+        // QQ can be frontmost while its main window covers the history window.
+        // Preserve settling time when the history window has to be raised.
+        if reuseExisting && !wasFocused {
+            try await Task.sleep(nanoseconds: 150_000_000)
         }
-
-        try await waitForSCKGeometry(
-            expectedTitle: expectedTitle,
+        try await prepareGeometry(
             expected: geometry,
-            tolerance: max(3.0, tolerance)
+            tolerance: tolerance,
+            reuseExisting: reuseExisting,
+            read: { try readGeometry(window) },
+            set: {
+                try requireSettable(window, attribute: kAXPositionAttribute as CFString)
+                try requireSettable(window, attribute: kAXSizeAttribute as CFString)
+                try setPoint(window, attribute: kAXPositionAttribute as CFString,
+                             point: CGPoint(x: geometry.x, y: geometry.y))
+                try setSize(window, attribute: kAXSizeAttribute as CFString,
+                            size: CGSize(width: geometry.width, height: geometry.height))
+            },
+            settle: { try await Task.sleep(nanoseconds: 250_000_000) },
+            verifySCK: {
+                try await waitForSCKGeometry(
+                    expectedTitle: expectedTitle,
+                    expected: geometry,
+                    tolerance: max(3.0, tolerance)
+                )
+            }
         )
+    }
+
+    // Injectable boundary for no-QQ tests of writes, readback and SCK failures.
+    @MainActor
+    static func prepareGeometry(
+        expected: WindowTargetGeometry,
+        tolerance: Double,
+        reuseExisting: Bool,
+        read: () throws -> WindowTargetGeometry,
+        set: () throws -> Void,
+        settle: () async throws -> Void,
+        verifySCK: () async throws -> Void
+    ) async throws {
+        let needsWrite: Bool
+        if reuseExisting {
+            needsWrite = !geometryMatches(try read(), expected, tolerance: tolerance)
+        } else {
+            needsWrite = true
+        }
+        if needsWrite {
+            try set()
+            try await settle()
+            let actual = try read()
+            guard geometryMatches(actual, expected, tolerance: tolerance) else {
+                throw WindowPreparationError.geometryMismatch(expected: expected, actual: actual)
+            }
+        }
+        // AX equality alone is insufficient: keep the independent SCK gate on
+        // every page, including the fast path. Viewport/focus gates run later.
+        try await verifySCK()
+    }
+
+    private static func geometryMatches(
+        _ actual: WindowTargetGeometry,
+        _ expected: WindowTargetGeometry,
+        tolerance: Double
+    ) -> Bool {
+        approximatelyEqual(actual.x, expected.x, tolerance: tolerance) &&
+        approximatelyEqual(actual.y, expected.y, tolerance: tolerance) &&
+        approximatelyEqual(actual.width, expected.width, tolerance: tolerance) &&
+        approximatelyEqual(actual.height, expected.height, tolerance: tolerance)
+    }
+
+    private static func isFocusedWindow(pid: pid_t, window: AXUIElement) -> Bool {
+        var focused: CFTypeRef?
+        let app = AXUIElementCreateApplication(pid)
+        guard AXUIElementCopyAttributeValue(app, kAXFocusedWindowAttribute as CFString,
+                                           &focused) == .success,
+              let focused else { return false }
+        return CFEqual(focused, window)
     }
 
     private static func exactWindow(pid: pid_t, title: String) throws -> AXUIElement {

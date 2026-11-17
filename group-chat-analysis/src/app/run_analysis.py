@@ -14,6 +14,8 @@ import sys
 import tempfile
 from typing import Callable
 
+from src.app.runtime_deadline import check_environment_deadline
+
 from src.analysis.analysis_release import (
     AnalysisReleaseError,
     DERIVED_RELEASE_FILES,
@@ -56,6 +58,7 @@ class AnalysisRunner:
         self,
         project_root: Path,
         *,
+        capture_runtime: Path | None = None,
         now: Now = utc_now,
         quality_executor: QualityExecutor | None = None,
         render_executor: RenderExecutor | None = None,
@@ -68,9 +71,14 @@ class AnalysisRunner:
         self.releases_root = self.analysis_root / "releases"
         self.current_link = self.analysis_root / "current"
         self.report_link = self.runtime / "reports" / "current-analysis"
-        self.state_store = BatchStateStore(self.runtime / "state" / "batch-state.json")
-        self.message_store = MessageStore(self.runtime / "messages" / "messages.jsonl")
-        self.current_inbox = self.runtime / "inbox" / "current.md"
+        self.capture_runtime = (capture_runtime or self.runtime).resolve()
+        try:
+            self.capture_runtime.relative_to(self.runtime)
+        except ValueError as exc:
+            raise AnalysisReleaseError("capture runtime must be inside project runtime") from exc
+        self.state_store = BatchStateStore(self.capture_runtime / "state" / "batch-state.json")
+        self.message_store = MessageStore(self.capture_runtime / "messages" / "messages.jsonl")
+        self.current_inbox = self.capture_runtime / "inbox" / "current.md"
         self.now = now
         self.quality_executor = quality_executor or self._run_quality
         self.render_executor = render_executor or self._run_render
@@ -123,11 +131,13 @@ class AnalysisRunner:
             raise AnalysisReleaseError(
                 "current.md message_count does not match canonical batch records"
             )
+        check_environment_deadline()
         return {
             "batch_id": batch_id,
             "current_sha256": sha256_file(self.current_inbox),
             "message_count": message_count,
             "canonical_batch_sha256": canonical_batch_sha256(records),
+            "capture_runtime": str(self.capture_runtime.relative_to(self.project_root)),
         }
 
     def create_work_package(
@@ -137,6 +147,7 @@ class AnalysisRunner:
         destination: Path | None = None,
         refresh: bool = False,
     ) -> Path:
+        check_environment_deadline()
         resolved, state = self._load_state_for_batch(batch_id)
         if state["status"] != "completed":
             raise AnalysisReleaseError(
@@ -215,6 +226,7 @@ class AnalysisRunner:
         *,
         destination: Path | None = None,
     ) -> Path:
+        check_environment_deadline()
         resolved, state = self._load_state_for_batch(batch_id)
         if state["status"] != "completed":
             raise AnalysisReleaseError("review draft can only be prepared for completed batch")
@@ -264,6 +276,8 @@ class AnalysisRunner:
             "src/analysis/reviewed_semantic_state.py",
             "src/analysis/page_builder.py",
             "src/analysis/page_renderer.py",
+            "src/analysis/system_qa_decisions.py",
+            "src/analysis/knowledge_display_projection.py",
         ]
         return {
             relative: sha256_file(self.project_root / relative)
@@ -580,6 +594,7 @@ class AnalysisRunner:
             raise
 
     def _publish_release(self, run_id: str) -> None:
+        check_environment_deadline()
         ensure_static_symlink(self.report_link, "../analysis/current")
         atomic_symlink(self.current_link, f"releases/{run_id}")
 
@@ -589,6 +604,7 @@ class AnalysisRunner:
         *,
         receipt_path: Path | None = None,
     ) -> dict:
+        check_environment_deadline()
         resolved, state = self._load_state_for_batch(batch_id)
         source = self._source_snapshot(resolved)
 
@@ -655,6 +671,7 @@ class AnalysisRunner:
             result = current[1]
             if result.get("batch_id") != resolved:
                 raise AnalysisReleaseError("current release run_id has wrong batch")
+            check_environment_deadline()
             analyzed = self.state_store.mark_analyzed(
                 resolved,
                 analyzed_at=self.now(),
@@ -818,6 +835,7 @@ class AnalysisRunner:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project-root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--capture-runtime", type=Path, help="completed history-day runtime; knowledge and releases remain in main runtime")
     parser.add_argument("--batch-id")
     parser.add_argument("--receipt", type=Path)
     action = parser.add_mutually_exclusive_group()
@@ -829,7 +847,7 @@ def main() -> int:
     if args.refresh_work and not args.prepare_work:
         parser.error("--refresh-work requires --prepare-work")
 
-    runner = AnalysisRunner(args.project_root)
+    runner = AnalysisRunner(args.project_root, capture_runtime=args.capture_runtime)
     if args.rollback_to:
         result = runner.rollback_to(args.rollback_to)
     elif args.prepare_work:

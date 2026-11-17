@@ -22,7 +22,7 @@ def dossier_evidence_index(dossier: dict) -> dict[str, list[dict]]:
     return index
 
 
-def build_page_v3(cards: list[dict], blackwords: list[dict], dossier: dict, knowledge_units: list[dict]) -> str:
+def build_page_v3(cards: list[dict], blackwords: list[dict], dossier: dict, knowledge_units: list[dict], reading_batches: dict | None = None) -> str:
     component_ids = {
         ref.get("card_id")
         for unit in knowledge_units
@@ -36,6 +36,7 @@ def build_page_v3(cards: list[dict], blackwords: list[dict], dossier: dict, know
     blackword_payload = _json_payload(blackwords)
     dossier_payload = _json_payload(dossier)
     knowledge_payload = _json_payload(knowledge_units)
+    reading_payload = _json_payload(reading_batches or {"current_batch_id": None, "batches": []})
 
     return f'''<!doctype html>
 <html lang="zh-CN">
@@ -47,7 +48,9 @@ def build_page_v3(cards: list[dict], blackwords: list[dict], dossier: dict, know
 :root{{--bg:#f4f6f8;--panel:#fff;--line:#dfe5eb;--ink:#172033;--muted:#6b7586;--soft:#f8fafc;--accent:#243a73;--accent-soft:#edf2ff;--warn:#8a5b13;--warn-soft:#fff8e7;--good:#235f46}}
 *{{box-sizing:border-box}}
 body{{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}}
-button,input{{font:inherit}}
+button,input,select{{font:inherit}}
+.reading-controls{{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}}
+.reading-controls select{{max-width:100%;padding:7px;border:1px solid var(--line);border-radius:7px}}
 .shell{{max-width:1120px;margin:auto;padding:22px 24px 64px}}
 .header{{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}}
 h1{{font-size:21px;margin:0}}
@@ -148,12 +151,20 @@ h1{{font-size:21px;margin:0}}
 <div class="shell">
 <header class="header"><div><h1>群聊情报</h1><div class="sub">看一遍新信息；有用的留下，没用的不再重复。</div></div><div class="header-count">历史候选 {len(cards):,} · 初始待看 {queue_count:,} · 已确认知识 {knowledge_count:,}</div></header>
 <nav class="nav">
-  <button class="active" data-view="new">新信息</button>
+  <button class="active" data-view="reading">本批新增</button>
+  <button data-view="new">新信息</button>
   <button data-view="knowledge">资料库</button>
   <button data-view="infinite">无限服</button>
   <button data-view="slang">黑话</button>
+  <button data-view="differences">判断差异</button>
+  <button data-view="system">归档管理</button>
 </nav>
-<section id="new" class="view active">
+<section id="reading" class="view active">
+  <div class="intro"><h2>本批新增</h2><p>一次只看当前这一批，之前的批次可从历史记录找回。</p></div>
+  <div class="reading-controls"><label for="readingHistory">阅读批次</label><select id="readingHistory"></select><button id="readingSeen" data-reading-seen="">本批已看完</button></div>
+  <div id="readingStatus" class="result" role="status"></div><div id="readingCards"></div>
+</section>
+<section id="new" class="view">
   <div class="intro"><h2>新信息</h2><p>只看第一次值得你扫一眼的内容。旧结论重复出现、单纯可信度升级不会重新占这里。</p></div>
   <input id="newSearch" class="search" placeholder="搜索标题、事实、任务、副本、职业……">
   <div id="newTopics" class="topicbar"></div>
@@ -171,6 +182,8 @@ h1{{font-size:21px;margin:0}}
   <div id="kbResult" class="result"></div>
   <div id="kbCards"></div>
 </section>
+<section id="differences" class="view"><div class="intro"><h2>判断差异</h2><p>只列与你已有选择不同的系统建议。你的选择始终优先。</p></div><div id="differenceCards"></div></section>
+<section id="system" class="view"><div class="intro"><h2>归档管理</h2><p>检索系统处理的内容；撤回后回到新信息，不记为已阅。</p></div><input id="systemSearch" class="search" placeholder="搜索需要恢复的内容"><div id="systemCards"></div></section>
 <section id="infinite" class="view">
   <div class="intro"><h2>无限服</h2><p>把封测阶段的零散观察逐渐拼成对玩家发展、经济和打金机会的完整认知。</p></div>
   <div id="dossier"></div>
@@ -188,11 +201,14 @@ h1{{font-size:21px;margin:0}}
 <script id="blackwordData" type="application/json">{blackword_payload}</script>
 <script id="dossierData" type="application/json">{dossier_payload}</script>
 <script id="knowledgeData" type="application/json">{knowledge_payload}</script>
+<script id="readingData" type="application/json">{reading_payload}</script>
 <script>
 const ALL=JSON.parse(document.getElementById('cardData').textContent);
 const BLACKWORDS=JSON.parse(document.getElementById('blackwordData').textContent);
 const DOSSIER=JSON.parse(document.getElementById('dossierData').textContent||'{{}}');
 const UNITS=JSON.parse(document.getElementById('knowledgeData').textContent||'[]');
+let READING=JSON.parse(document.getElementById('readingData').textContent||'{{}}');
+let selectedReadingBatchId=READING.current_batch_id||'';
 const esc=s=>String(s??'').replace(/[&<>\"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}}[c]));
 const byId=Object.fromEntries(ALL.map(c=>[c.card_id,c]));
 const DOSSIER_COMPONENT_IDS=(DOSSIER.sections||[]).flatMap(s=>(s.signals||[]).flatMap(x=>x.evidence_ids||[])).filter(Boolean);
@@ -223,7 +239,7 @@ function unitDecision(id){{
 }}
 function qaDecision(qa){{
   const key=qa.qa_fingerprint||qa.qa_id||'';
-  return key?localStorage.getItem('gca-display-qa:'+key)||'':''
+  return (key?localStorage.getItem('gca-display-qa:'+key):'')||qa.human_decision||''
 }}
 function inheritedQaDecision(u,qa){{
   const explicit=qaDecision(qa);
@@ -231,7 +247,8 @@ function inheritedQaDecision(u,qa){{
   const parent=unitDecision(u.knowledge_id)||(u.v3_reviewed_decision||'')||(u.initial_state==='knowledge'?'knowledge':'');
   if(parent==='discard')return 'discard';
   if(parent==='knowledge')return qa.lifecycle==='time_bound'?'archive':'knowledge';
-  return ''
+  if(qa.system_suppressed)return '';
+  return qa.system_decision==='defer'?'':(qa.system_decision||'')
 }}
 async function persistUnitDecision(id,value){{
   const api=window.GCA_REVIEW_API;
@@ -286,7 +303,7 @@ function setQaDecision(qaId,value){{
   if(!row)return;
   const key=row.qa.qa_fingerprint||qaId;
   localStorage.setItem('gca-display-qa:'+key,value);
-  renderNew();renderKnowledge();
+  renderNew();renderKnowledge();renderSystemViews();
   void persistQaDecision(qaId,value)
 }}
 async function syncFormalUnitDecisions(){{
@@ -303,7 +320,7 @@ async function syncFormalUnitDecisions(){{
       const fp=u.semantic_fingerprint||item.semantic_fingerprint||'';
       if(fp)localStorage.setItem('gca-semantic:'+fp,item.decision)
     }}
-    renderNew();renderKnowledge()
+    renderNew();renderKnowledge();renderSystemViews()
   }}catch(error){{
     console.error('formal review state sync failed',error)
   }}
@@ -315,13 +332,14 @@ async function syncDisplayQaDecisions(){{
     const response=await fetch('/api/display-review-state',{{credentials:'same-origin',cache:'no-store'}});
     if(!response.ok)throw new Error('HTTP '+response.status);
     const payload=await response.json();
+    for(const row of Object.values(qaById)){{localStorage.removeItem('gca-display-qa:'+row.qa.qa_fingerprint);row.qa.human_decision=''}}
     for(const item of payload.items||[]){{
       const row=qaById[item.qa_id];
-      if(!row)continue;
+      if(!row||item.qa_fingerprint!==row.qa.qa_fingerprint)continue;
       const key=row.qa.qa_fingerprint||item.qa_id;
       localStorage.setItem('gca-display-qa:'+key,item.decision)
     }}
-    renderNew();renderKnowledge()
+    renderNew();renderKnowledge();renderSystemViews()
   }}catch(error){{
     console.error('display QA review state sync failed',error)
   }}
@@ -331,7 +349,7 @@ function isKnowledge(c){{return !COMPONENT_IDS.has(c.card_id)&&(c.v3_knowledge||
 function unitIsQueue(u){{
   if(u.display_projection_status==='hidden_no_value')return false;
   const qas=u.display_qas||[];
-  if(qas.length)return u.v3_first_read_queue&&qas.some(qa=>!inheritedQaDecision(u,qa));
+  if(qas.length)return qas.some(qa=>!inheritedQaDecision(u,qa)&&(u.v3_first_read_queue||qa.system_suppressed));
   return u.v3_first_read_queue&&!unitDecision(u.knowledge_id)
 }}
 function unitIsKnowledge(u){{
@@ -450,7 +468,8 @@ function qaHtml(u,qa,mode){{
       :`<button class="keep" onclick="setQaDecision('${{esc(qa.qa_id)}}','knowledge')">存资料库</button>`;
     actions=`<div class="actions qa-actions"><button onclick="setQaDecision('${{esc(qa.qa_id)}}','discard')">没用</button>${{keep}}</div>`
   }}
-  return `<section class="qa-item" data-qa-id="${{esc(qa.qa_id)}}" data-lifecycle="${{esc(qa.lifecycle||'durable')}}"><div class="qa-head"><span class="qa-confidence ${{esc(qa.confidence||'')}}">${{esc(confidenceLabel)}}</span><span>${{esc(qa.question||'')}}</span></div>${{time}}<div class="qa-answer">${{esc(qa.answer||'')}}</div>${{details}}${{actions}}</section>`
+  if(mode==='knowledge'&&qa.system_decision&&!humanQaDecision(u,qa))actions=`<div class="actions"><button data-system-id="${{esc(qa.qa_id)}}" data-suppressed="true">撤回归档</button></div>`;
+  return `<section class="qa-item" data-qa-id="${{esc(qa.qa_id)}}" data-lifecycle="${{esc(qa.lifecycle||'durable')}}">${{qaHeadingHtml(qa)}}${{time}}<div class="qa-answer">${{esc(qa.answer||'')}}</div>${{details}}${{actions}}</section>`
 }}
 function unitHtml(u,mode){{
   if(u.display_projection_status==='hidden_no_value')return '';
@@ -538,8 +557,88 @@ function renderSlang(){{
   document.getElementById('slangResult').textContent=`显示 ${{rows.length}} / ${{BLACKWORDS.length}}`;
   document.getElementById('slangCards').innerHTML=rows.map(x=>`<article class="slang-card"><h3>${{esc(x.term||'')}}</h3><p>${{esc(x.canonical_meaning||'暂未形成稳定释义')}}</p>${{x.context?`<small>${{esc(x.context)}}</small>`:''}}</article>`).join('')
 }}
+const decisionNames={{knowledge:'资料库',discard:'收起',archive:'阶段记录',defer:'待处理'}};
+function humanQaDecision(u,qa){{
+  const explicit=qaDecision(qa);if(explicit)return explicit;
+  const parent=unitDecision(u.knowledge_id)||u.v3_reviewed_decision||(u.initial_state==='knowledge'?'knowledge':'');
+  return parent==='knowledge'&&qa.lifecycle==='time_bound'?'archive':parent
+}}
+async function toggleSystem(id,suppressed){{
+  const row=qaById[id];if(!row)return;
+  const api=window.GCA_REVIEW_API;
+  if(!api){{alert('请通过本机阅读服务撤回归档');return}}
+  try{{
+    const response=await fetch('/api/system-qa-override',{{method:'POST',credentials:'same-origin',headers:{{'Content-Type':'application/json','X-GCA-CSRF':api.csrf}},body:JSON.stringify({{qa_id:id,suppressed,qa_fingerprint:row.qa.qa_fingerprint}})}});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    const result=await response.json();if(result.qa_fingerprint!==row.qa.qa_fingerprint)throw new Error('内容已变化，请刷新');
+    row.qa.system_suppressed=suppressed;renderNew();renderKnowledge();renderSystemViews()
+  }}catch(error){{alert('撤回保存失败：'+error.message)}}
+}}
+async function syncSystemOverrides(){{
+  if(!window.GCA_REVIEW_API)return;
+  try{{const response=await fetch('/api/system-qa-overrides',{{cache:'no-store'}});if(!response.ok)throw new Error('HTTP '+response.status);const body=await response.json();
+    Object.values(qaById).forEach(r=>r.qa.system_suppressed=false);
+    for(const item of body.items||[]){{const row=qaById[item.qa_id];if(row&&row.qa.qa_fingerprint===item.qa_fingerprint)row.qa.system_suppressed=!!item.suppressed}}
+    renderNew();renderKnowledge();renderSystemViews()
+  }}catch(error){{console.error('system overrides sync failed',error)}}
+}}
+function renderSystemViews(){{
+  const rows=Object.values(qaById).filter(r=>r.qa.system_decision);
+  const differences=rows.filter(r=>{{const human=humanQaDecision(r.unit,r.qa);return human&&human!==r.qa.system_decision}});
+  document.getElementById('differenceCards').innerHTML=`<p class="result">${{differences.length}} 条差异</p>`+differences.map(r=>{{const q=r.qa;return `<article class="unit"><h3>${{esc(q.question)}}</h3><div class="fact">${{esc(q.answer)}}</div><p>你的选择：${{esc(decisionNames[humanQaDecision(r.unit,q)]||humanQaDecision(r.unit,q))}} · 系统建议：${{esc(decisionNames[q.system_decision])}}</p><p>${{esc(q.system_reason)}}</p>${{q.system_gaps?`<p>缺口：${{esc(q.system_gaps)}}</p>`:''}}${{qaEvidenceHtml(q)}}</article>`}}).join('');
+  const term=document.getElementById('systemSearch').value.trim().toLowerCase();
+  const visible=rows.filter(r=>!term||[r.qa.question,r.qa.answer,r.qa.qa_id].join(' ').toLowerCase().includes(term));
+  document.getElementById('systemCards').innerHTML=`<p class="result">${{visible.length}} 条</p>`+visible.map(r=>{{const q=r.qa;const human=humanQaDecision(r.unit,q);const action=human?'沿用你的选择':`<button data-system-id="${{esc(q.qa_id)}}" data-suppressed="${{q.system_suppressed?'false':'true'}}">${{q.system_suppressed?'恢复系统归档':'撤回到新信息'}}</button>`;return `<article class="card"><b>${{esc(q.question)}}</b><div class="fact">${{esc(q.answer)}}</div><div class="actions">${{esc(decisionNames[q.system_decision])}} · ${{action}}</div></article>`}}).join('')
+}}
+function readingContextHtml(qa){{
+  const scope=qa.scope||{{}};
+  const values=[...(qa.topics||[]),...['game_variant','class','class_spec','profession','instance','encounter_context','role','level_context','phase_context'].flatMap(key=>Array.isArray(scope[key])?scope[key]:scope[key]?[scope[key]]:[])];
+  const explicit=[qa.question||'',qa.answer||''].join('');
+  const context=[...new Set(values.filter(value=>typeof value==='string'&&value.trim()&&!explicit.includes(value)))];
+  return context.length?`<div class="card-eyebrow">${{context.map(esc).join(' · ')}}</div>`:'';
+}}
+function qaHeadingHtml(qa){{
+  const label={{high:'高',medium:'中',low:'低'}}[qa.confidence]||'';
+  return `<div class="qa-head"><span class="qa-confidence ${{esc(qa.confidence||'')}}">${{esc(label)}}</span><span>${{esc(qa.question||'')}}</span></div>`;
+}}
+function renderReading(){{
+  const batches=READING.batches||[];
+  if(!batches.some(b=>b.reading_batch_id===selectedReadingBatchId))selectedReadingBatchId=READING.current_batch_id||'';
+  const select=document.getElementById('readingHistory');
+  select.innerHTML=batches.map(b=>{{const days=b.expected_days||[];const label=days.length>1?days[0]+' — '+days[days.length-1]:days[0];return `<option value="${{esc(b.reading_batch_id)}}" ${{b.reading_batch_id===selectedReadingBatchId?'selected':''}}>${{esc(label||b.reading_batch_id)}} · ${{b.qa_count}} 条 · ${{b.seen_at?'已看完':'未看完'}}</option>`}}).join('');
+  const batch=batches.find(b=>b.reading_batch_id===selectedReadingBatchId);
+  const seenButton=document.getElementById('readingSeen');
+  seenButton.dataset.readingSeen=batch?batch.reading_batch_id:'';
+  seenButton.disabled=!batch||!!batch.seen_at;
+  seenButton.textContent=batch&&batch.seen_at?'本批已看完':'标记本批已看完';
+  document.getElementById('readingStatus').textContent=batch?`${{batch.qa_count}} 条新增内容${{batch.seen_at?' · 已看完':''}}`:'暂时没有已发布的阅读批次';
+  document.getElementById('readingCards').innerHTML=!batch?'':!batch.qas.length?'<p class="empty">本批没有新增内容。</p>':batch.qas.map(qa=>{{
+    const sources=(qa.evidence||[]).map(e=>e.detail_file?`<button class="source" data-reading-batch="${{esc(batch.reading_batch_id)}}" data-reading-qa="${{esc(qa.qa_id)}}" data-reading-card="${{esc(e.card_id)}}">${{esc(e.card_id)}} · 查看原文</button>`:esc(e.card_id)).join('<br>');
+    const detail=(sources||qa.verification_note)?`<details><summary>依据 / 核验说明</summary>${{qa.verification_note?`<div class="unit-note">${{esc(qa.verification_note)}}</div>`:''}}<div class="unit-note">${{sources}}</div></details>`:'';
+    const time=qa.lifecycle==='time_bound'?`<div class="qa-time">${{esc(qa.time_context)}}</div>`:'';
+    return `<article class="unit">${{readingContextHtml(qa)}}<section class="qa-item" data-qa-id="${{esc(qa.qa_id)}}" data-lifecycle="${{esc(qa.lifecycle||'durable')}}">${{qaHeadingHtml(qa)}}${{time}}<div class="qa-answer">${{esc(qa.answer)}}</div>${{detail}}</section></article>`;
+  }}).join('');
+}}
+async function syncReading(){{
+  if(!window.GCA_REVIEW_API)return;
+  try{{const response=await fetch('/api/reading-batches',{{credentials:'same-origin',cache:'no-store'}});if(!response.ok)throw new Error('读取失败');READING=await response.json();renderReading()}}
+  catch(error){{document.getElementById('readingStatus').textContent='阅读批次同步失败，请刷新重试。'}}
+}}
+async function markReadingSeen(batchId){{
+  const api=window.GCA_REVIEW_API;
+  if(!api||!api.csrf){{document.getElementById('readingStatus').textContent='请在本机阅读页面标记已看完。';return}}
+  const button=document.getElementById('readingSeen');button.disabled=true;
+  try{{const response=await fetch('/api/reading-batch-seen',{{method:'POST',credentials:'same-origin',headers:{{'Content-Type':'application/json','X-GCA-CSRF':api.csrf}},body:JSON.stringify({{reading_batch_id:batchId}})}});if(!response.ok)throw new Error('保存失败');const result=await response.json();const batch=(READING.batches||[]).find(b=>b.reading_batch_id===batchId);if(batch)batch.seen_at=result.seen_at;renderReading()}}
+  catch(error){{button.disabled=false;document.getElementById('readingStatus').textContent='已看完状态未保存，请重试。'}}
+}}
+document.getElementById('readingHistory').addEventListener('change',event=>{{selectedReadingBatchId=event.target.value;renderReading()}});
+document.addEventListener('click',event=>{{
+  const seen=event.target.closest('[data-reading-seen]');if(seen&&seen.dataset.readingSeen)void markReadingSeen(seen.dataset.readingSeen);
+  const source=event.target.closest('[data-reading-card]');if(source){{const query=new URLSearchParams({{batch_id:source.dataset.readingBatch,qa_id:source.dataset.readingQa,card_id:source.dataset.readingCard}});openSource('/api/reading-evidence?'+query.toString())}}
+}});
 function openSource(href){{document.getElementById('sourceFrame').src=href;document.getElementById('sourceDrawer').classList.add('open');document.getElementById('drawerBackdrop').classList.add('open')}}
 function closeSource(){{document.getElementById('sourceDrawer').classList.remove('open');document.getElementById('drawerBackdrop').classList.remove('open');setTimeout(()=>document.getElementById('sourceFrame').src='about:blank',160)}}
+document.addEventListener('click',event=>{{const button=event.target.closest('[data-system-id]');if(button)void toggleSystem(button.dataset.systemId,button.dataset.suppressed==='true')}});
 document.addEventListener('keydown',e=>{{if(e.key==='Escape')closeSource()}});
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===b.dataset.view));window.scrollTo({{top:0,behavior:'smooth'}})}});
 document.getElementById('newSearch').addEventListener('input',()=>{{newPage=1;renderNew()}});
@@ -547,7 +646,8 @@ document.getElementById('newPrev').onclick=()=>{{newPage--;renderNew();window.sc
 document.getElementById('newNext').onclick=()=>{{newPage++;renderNew();window.scrollTo({{top:150,behavior:'smooth'}})}};
 document.getElementById('kbSearch').addEventListener('input',renderKnowledge);
 document.getElementById('slangSearch').addEventListener('input',renderSlang);
-renderNew();renderKnowledge();renderDossier();renderSlang();void syncFormalUnitDecisions();void syncDisplayQaDecisions();
+document.getElementById('systemSearch').addEventListener('input',renderSystemViews);
+renderReading();void syncReading();renderNew();renderKnowledge();renderDossier();renderSlang();renderSystemViews();void syncFormalUnitDecisions();void syncDisplayQaDecisions();void syncSystemOverrides();
 </script>
 </body>
 </html>'''

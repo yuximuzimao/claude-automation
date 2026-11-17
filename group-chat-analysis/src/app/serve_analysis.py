@@ -10,8 +10,9 @@ from pathlib import Path
 import secrets
 import subprocess
 import sys
+import threading
 from typing import Callable
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 from src.analysis.display_review_decision_store import (
     DisplayReviewDecisionError,
@@ -22,6 +23,9 @@ from src.analysis.review_decision_store import (
     ReviewDecisionStore,
 )
 
+
+from src.analysis.system_qa_decisions import set_system_override
+from src.analysis.reading_batches import ReadingBatchError, ReadingBatchStore
 
 MAX_BODY_BYTES = 16 * 1024
 
@@ -56,6 +60,9 @@ class ReviewApp:
             decisions_path=self.work / "display-review-decisions-v1.json",
             now=now,
         )
+        self.reading_store = ReadingBatchStore(self.project_root)
+        self.now = now
+        self.system_lock = threading.Lock()
         self.render_executor = render_executor or self._render
 
     def _render(self, page: Path, details: Path) -> dict:
@@ -187,6 +194,22 @@ class ReviewHandler(BaseHTTPRequestHandler):
         if self._reject_nonlocal():
             return
         path = urlsplit(self.path).path
+        if path == "/api/reading-batches":
+            try:
+                self._json(200, self.app.reading_store.snapshot())
+            except ReadingBatchError as exc:
+                self._json(409, {"error": "invalid_reading_batch", "message": str(exc)})
+            return
+        if path == "/api/reading-evidence":
+            query = parse_qs(urlsplit(self.path).query)
+            try:
+                evidence = self.app.reading_store.evidence_file(
+                    query.get("batch_id", [""])[0], query.get("qa_id", [""])[0], query.get("card_id", [""])[0]
+                )
+                self._bytes(200, evidence.read_bytes(), "text/html; charset=utf-8")
+            except (ReadingBatchError, OSError) as exc:
+                self._json(404, {"error": "reading_evidence_unavailable", "message": str(exc)})
+            return
         if path == "/api/review-state":
             try:
                 self._json(200, self.app.store.list_formal_decisions())
@@ -198,6 +221,10 @@ class ReviewHandler(BaseHTTPRequestHandler):
                 self._json(200, self.app.display_store.list_decisions())
             except Exception as exc:
                 self._json(500, {"error": type(exc).__name__, "message": str(exc)})
+            return
+        if path == "/api/system-qa-overrides":
+            target = self.app.work / "system-qa-overrides-v1.json"
+            self._json(200, json.loads(target.read_text()) if target.exists() else {"items": []})
             return
         if path in {"/", "/index.html"}:
             try:
@@ -224,8 +251,12 @@ class ReviewHandler(BaseHTTPRequestHandler):
         if self._reject_nonlocal():
             return
         path = urlsplit(self.path).path
-        if path not in {"/api/review-decision", "/api/display-review-decision"}:
+        if path not in {"/api/review-decision", "/api/display-review-decision", "/api/system-qa-override", "/api/reading-batch-seen"}:
             self._json(404, {"error": "not_found"})
+            return
+        origin = self.headers.get("Origin")
+        if path == "/api/reading-batch-seen" and origin and origin != "http://" + (self.headers.get("Host") or ""):
+            self._json(403, {"error": "invalid_origin"})
             return
         if not self._origin_is_local():
             self._json(403, {"error": "invalid_origin"})
@@ -251,6 +282,23 @@ class ReviewHandler(BaseHTTPRequestHandler):
             return
         if not isinstance(body, dict):
             self._json(400, {"error": "json_object_required"})
+            return
+        if path == "/api/reading-batch-seen":
+            try:
+                result = self.app.reading_store.mark_seen(body.get("reading_batch_id"), now=self.app.now())
+                self._json(200, {"status": "seen", **result})
+            except ReadingBatchError as exc:
+                self._json(400, {"error": "invalid_reading_batch", "message": str(exc)})
+            return
+        if path == "/api/system-qa-override":
+            try:
+                with self.app.system_lock:
+                    result = set_system_override(self.app.work, body.get("qa_id"), body.get("suppressed"), body.get("qa_fingerprint"))
+                self._json(200, result)
+            except ValueError as exc:
+                self._json(400, {"error": "invalid_system_override", "message": str(exc)})
+            except Exception as exc:
+                self._json(500, {"error": type(exc).__name__, "message": str(exc)})
             return
         if path == "/api/display-review-decision":
             try:

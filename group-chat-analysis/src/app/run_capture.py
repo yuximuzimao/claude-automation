@@ -13,6 +13,8 @@ import subprocess
 import sys
 from typing import Callable
 
+from src.app.runtime_deadline import Deadline, check_environment_deadline
+
 from src.app.pending_scroll_recovery import raw_pages_same_view, unique_rewind_anchor
 from src.app.swift_sources import CAPTURE_STEP_SOURCES
 from src.normalize.assemble import assemble_capture_pages
@@ -133,6 +135,7 @@ class CaptureRunner:
         new_pages = 0
 
         while True:
+            check_environment_deadline()
             if (
                 self.config.page_count is not None
                 and self._captured_pages(state) >= self.config.page_count
@@ -684,7 +687,9 @@ class CaptureRunner:
         ]
         if previous is not None:
             command.extend(["--previous-raw", str(previous)])
-        result = subprocess.run(command, cwd=self.project_root, check=False)
+        check_environment_deadline()
+        bound = Deadline.from_environment()
+        result = subprocess.run(command, cwd=self.project_root, check=False, timeout=bound.remaining() if bound else None)
         if result.returncode == 10:
             raise CaptureNoChange("verified scroll produced no viewport change")
         if result.returncode == 11:
@@ -813,6 +818,7 @@ def start_history_background(project_root: Path, args: argparse.Namespace) -> tu
 
 
 def main() -> None:
+    check_environment_deadline()
     project_root = Path(__file__).resolve().parents[2]
     args = parse_args()
     try:

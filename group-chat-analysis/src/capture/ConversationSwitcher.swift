@@ -56,6 +56,17 @@ struct QQConversationSwitcher {
     private static let historyTooltipROI = CGRect(x: 0.76, y: 0.18, width: 0.12, height: 0.14)
 
     @MainActor
+    static func diagnoseMain(_ target: QQConversationTarget) async throws {
+        _ = NSApplication.shared
+        let window = try await exactMainSCKWindow()
+        let blocks = try recognizeText(try await capture(window))
+        print("MAIN_FRAME \(window.frame) target_verified=\(verifiesTarget(blocks, target: target))")
+        for block in blocks where block.bbox.y + block.bbox.height / 2 > 0.80 || compact(block.text).contains(compact(target.conversationPrefix)) {
+            print("MAIN_OCR text=\(block.text) bbox=\(block.bbox)")
+        }
+    }
+
+    @MainActor
     static func openHistory(_ target: QQConversationTarget) async throws {
         guard let qq = NSRunningApplication.runningApplications(
             withBundleIdentifier: qqBundleID
@@ -87,7 +98,7 @@ struct QQConversationSwitcher {
                 prefix: target.conversationPrefix
             )
             let candidatePoint = screenPoint(for: candidate.bbox, in: mainWindow.frame)
-            postClick(candidatePoint)
+            try postClick(candidatePoint, in: mainWindow)
             try await Task.sleep(nanoseconds: 500_000_000)
         }
 
@@ -101,13 +112,14 @@ struct QQConversationSwitcher {
             x: selectedWindow.frame.origin.x + historyIconX * selectedWindow.frame.width,
             y: selectedWindow.frame.origin.y + (1.0 - historyIconY) * selectedWindow.frame.height
         )
+        try QQWindowInputGuard.requireExposed(selectedWindow, at: historyPoint)
         postMouseMove(historyPoint)
         try await Task.sleep(nanoseconds: 1_000_000_000)
         let tooltipTexts = try recognizeTooltip(try await capture(selectedWindow))
         guard isVerifiedHistoryTooltip(tooltipTexts) else {
             throw ConversationSwitchError.historyTooltipNotVerified(tooltipTexts)
         }
-        postClick(historyPoint)
+        try postClick(historyPoint, in: selectedWindow)
 
         try await waitForHistoryWindow(exactTitle: target.expectedHistoryTitle)
     }
@@ -357,9 +369,12 @@ struct QQConversationSwitcher {
         )?.post(tap: .cghidEventTap)
     }
 
-    private static func postClick(_ point: CGPoint) {
+    @MainActor
+    private static func postClick(_ point: CGPoint, in window: SCWindow) throws {
+        try QQWindowInputGuard.requireExposed(window, at: point)
         postMouseMove(point)
         usleep(150_000)
+        try QQWindowInputGuard.requireExposed(window, at: point)
         CGEvent(
             mouseEventSource: nil,
             mouseType: .leftMouseDown,
@@ -376,7 +391,8 @@ struct QQConversationSwitcher {
     }
 
     private static func compact(_ text: String) -> String {
-        text.replacingOccurrences(of: " ", with: "")
+        text.replacingOccurrences(of: "＋", with: "+")
+            .replacingOccurrences(of: " ", with: "")
             .replacingOccurrences(of: "\n", with: "")
     }
 }

@@ -26,6 +26,7 @@ src/
 - `app/capture-step.swift`：内部单步 current/scroll/rewind capture；不维护恢复状态。rewind 复用正常滚动稳定门禁，只把滚轮方向改为较新方向，probe 结果只供 Python 重锚定验证。
 - `app/open-history.swift`：安全打开指定群的聊天记录窗口；只调用经过视觉/位置/标题多重门禁的切群适配器。
 - `capture/ConversationSwitcher.swift`：主 QQ 左侧会话 OCR 唯一定位 → 选中后头部复核 → `聊天记录` tooltip 精确确认 → 历史窗口标题精确匹配；任一门禁失败即停止。
+- `capture/QQWindowInputGuard.swift`：开历史与选日期的鼠标发送前置检查，核对 QQ 前台进程、点位最前可见窗口的 ID 与几何。
 - `capture/WindowPreparation.swift`：唯一同标题 AXWindow，设置/读回几何，再等待唯一同标题 SCK frame 稳定；无鼠标拖窗 fallback。
 - `capture/VisionTextRecognizer.swift`：唯一底层 Vision OCR owner；统一识别语言、候选抽取和 `.down` 180° bbox 映射。会话切换、日期选择、正文采集各自保留自己的业务门禁，不再各写一套 `VNRecognizeTextRequest`。
 - `capture/HistoryDateSelector.swift`：日期筛选适配器。筛选按钮/日期字段/收起按钮使用窗口相对固定位置；月份箭头从 OCR 月份标题动态定位；日期格按目标年月计算行列；选中后必须同时 OCR 验证筛选字段和聊天区日期。
@@ -93,3 +94,9 @@ v1 的错误成本不对称：**漏真实消息 > 多保留重复消息**。
 3. 单日历史模式第一份 durable page 前必须完成日期双重 OCR 验证，已有 durable page 的恢复不得重新选日期；
 4. 同一 incomplete batch 恢复时沿用原 batch_id/runtime，不新建批次绕过恢复状态；
 5. full 只有全部目标群 capture_complete 后才能 finalize；history-date 还必须在 finalization 前通过目标日期一致性审计。
+
+- `analysis/system_qa_decisions.py`：只校验/投影模型给出的QA去向，按内容指纹失效，人工优先；独立撤回不写用户已阅。
+
+- `app/runtime_deadline.py`：采集和发布共用的运行截止检查与限时进程组。
+- `analysis/daily_semantic_delta.py`：模型JSON的来源与完整性校验、应用journal；不会自行分类。
+- `analysis/reading_batches.py`：真实release新增QA批次、历史与已看完状态，与人工裁决独立。

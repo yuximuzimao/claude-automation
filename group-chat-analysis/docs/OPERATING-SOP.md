@@ -16,7 +16,7 @@
 | `ANALYSIS_BATCH` | 对 completed `current.md` 做一次正式分析。 | `rules/analysis.md`。 |
 | `ANALYSIS_DESIGN` | 修改分类、价值、可信度、页面、长期追踪、黑话等分析契约。 | 语义边界读 `rules/analysis.md`；Silver→QA 页面展示、置信度与审核粒度读 `rules/presentation.md`。 |
 | `PROMOTION` | 把群聊候选交给魔兽或其它项目核验/保存。 | `rules/analysis.md`；用户确认后进入目标项目自己的 SKILL/SOP。 |
-| `AUTOMATION` | 定时采集、定时分析、失败告警或无人值守编排。 | `rules/capture.md` + `rules/storage.md` + `tests/README.md`。 |
+| `AUTOMATION` | 定时采集、定时分析、失败告警或无人值守编排。 | 先读 `rules/capture.md` 和 `rules/storage.md`；排期及首次无人监管独立审查遵循工作区的[排期规则](../../docs/scheduling.md)及[独立审查规则](../../docs/review-gate/README.md)。 |
 | `PRIVACY_OR_SAFETY` | 权限、QQ 操作范围、模型暴露、Git 私密数据或禁止技术路线。 | `rules/privacy-and-safety.md`。 |
 | `ARCHITECTURE_MIGRATION` | 模块边界、Schema owner 或唯一入口需要改变。 | `ARCHITECTURE.md`，单独制定迁移计划。 |
 
@@ -80,6 +80,26 @@ python3 -m src.app.run_capture --incremental --batch-id <batch_id>
 completed 后进入 `rules/analysis.md`。日常分析只读 `runtime/inbox/current.md`，不从 raw OCR 重猜消息；报告/页面保存到 `runtime/reports/`。群聊内容只生成跨项目候选，用户确认后再进入目标项目独立核验。
 
 分析已经拆成“语义生产”和“确定性发布”两层。语义判断仍由 GPT/Codex 按 analysis owner 完成，任何相似度/召回 proposal 都不能自动晋升；确定性状态机统一从 `python3 -m src.app.run_analysis` 进入。一个 completed batch 先用 `--prepare-work` 冻结 `current.md + canonical + 当前 Question Registry/Silver/已阅/dossier` 起点 hash，语义审阅完成后用 `--prepare-review` 生成 draft receipt 并由审阅者显式改成 `reviewed_analysis_ready`，最后才允许正式发布。发布顺序固定为质量门禁 → staging render → immutable release → 原子 current 指针 → `mark_analyzed()`；任一步失败都不得重新采集或提前推进 analyzed。
+
+单日历史包恢复后也可走同一发布入口：`python3 -m src.app.run_analysis --capture-runtime runtime/history-days/YYYY-MM-DD --batch-id history-YYYYMMDD-full --prepare-work`，后续 `--prepare-review` 与正式发布均带相同 `--capture-runtime`。只把state、messages和current输入切到该日包；知识产物、工单和release仍在主runtime，禁止把日包消息反拼主canonical或手改旧batch。工单source绑定实际capture runtime及输入hash。成功仍以质量门禁、immutable release和该日包analyzed读回为准；任一步失败保留completed源数据，不重新采集。
+
+单日 release 成功后，以发布 JSON 返回的 run ID 更新阅读批：
+
+```bash
+python3 -m src.analysis.reading_batches --reading-batch-id reading-YYYYMMDD \
+  --run-id <run-id> --expected-day YYYY-MM-DD
+python3 -m src.app.serve_analysis
+```
+
+第二条用于启动本机阅读服务。若 8765 已有该项目服务，在项目根目录只重建阅读页：
+
+```bash
+python3 -c 'from pathlib import Path; from src.app.serve_analysis import ReviewApp; ReviewApp(Path.cwd()).rebuild()'
+```
+
+从已有服务读回首页与 `/api/reading-batches`。核对 current 指向本日阅读批、新增 QA 数量与冻结基线差集一致，旧批仍可回看。展示口径见 `rules/presentation.md`。
+
+每批留存采集页数、消息数、采集命令墙钟、语义分析起止、发布及阅读页刷新耗时。缺独立计时的阶段只记可由原始时间戳还原的区间，并标明两端事件与中断包含情况。
 
 ## 6. 恢复原则
 

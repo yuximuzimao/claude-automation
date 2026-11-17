@@ -17,19 +17,19 @@ CAPTURE_LIBRARY_SOURCES: tuple[str, ...] = (
 CONVERSATION_LIBRARY_SOURCES: tuple[str, ...] = (
     "src/capture/CaptureModels.swift",
     "src/capture/VisionTextRecognizer.swift",
+    "src/capture/QQWindowInputGuard.swift",
     "src/capture/ConversationSwitcher.swift",
 )
 
 HISTORY_DATE_LIBRARY_SOURCES: tuple[str, ...] = (
-    "src/capture/CaptureModels.swift",
-    "src/capture/VisionTextRecognizer.swift",
-    "src/capture/ConversationSwitcher.swift",
+    *CONVERSATION_LIBRARY_SOURCES,
     "src/capture/WindowPreparation.swift",
     "src/capture/HistoryDateSelector.swift",
 )
 
 CAPTURE_PURE_LIBRARY_SOURCES: tuple[str, ...] = (
     *CAPTURE_LIBRARY_SOURCES,
+    "src/capture/QQWindowInputGuard.swift",
     "src/capture/ConversationSwitcher.swift",
 )
 

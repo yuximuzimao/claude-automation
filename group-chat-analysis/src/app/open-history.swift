@@ -46,6 +46,10 @@ struct OpenHistoryMain {
     static func main() async {
         do {
             let args = try OpenHistoryArguments.parse(CommandLine.arguments)
+            if CommandLine.arguments.contains("--diagnose") {
+                try await QQConversationSwitcher.diagnoseMain(args.target)
+                return
+            }
             try await QQConversationSwitcher.openHistory(args.target)
             print("HISTORY_READY group=\(args.target.groupKey) title=\(args.target.expectedHistoryTitle)")
         } catch {
