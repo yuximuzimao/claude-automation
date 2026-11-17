@@ -8,3 +8,4 @@
 - [2026-11-10-pdf-audit.md](2026-11-10-pdf-audit.md) — 五本本地教材 PDF 的核验、迁移、质量限制和下一步交接；详细证据以现行 `docs/book-audit.md` 为准。
 - [2026-11-10-learning-plan.md](2026-11-10-learning-plan.md) — 第一阶段教材顺序、学习周期、知识单元和教学方法的确认记录。
 - [2026-11-11-book-processing-pipeline.md](2026-11-11-book-processing-pipeline.md) — 五本教材全章节预处理、DeepSeek 主控、可替换复核模型、单文件交接、文件夹回迁与 Codex 找回规则。
+- [2026-11-17-learning-session-01.md](2026-11-17-learning-session-01.md) — B01-C02 第2章 2.1–2.4 学习进度、理解检查、已确认教学顺序和下次续学位置。
